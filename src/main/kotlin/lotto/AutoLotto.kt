@@ -19,7 +19,8 @@ class AutoLotto {
         return Lotto.from(
             numbers = Lotto.LOTTO_NUMBER_RANGE
                 .shuffled()
-                .take(Lotto.DEFAULT_LOTTO_NUMBER_COUNT),
+                .take(Lotto.LOTTO_NUMBER_COUNT)
+                .toSet(),
         )
     }
 }

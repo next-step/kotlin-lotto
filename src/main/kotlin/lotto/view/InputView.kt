@@ -16,7 +16,7 @@ object InputView {
             .map { it.trim().toInt() }
 
         return Lotto.from(
-            numbers = numbers,
+            numbers = numbers.toSet(),
         )
     }
 

@@ -7,9 +7,8 @@ class ResultLottoNumber private constructor(
     val bonusNumber: Int,
 ) {
     init {
-        val numbers = lotto.numbers + bonusNumber
-        require(numbers.all { it in LOTTO_NUMBER_RANGE }) { "범위를 벗어난 숫자가 있습니다." }
-        require(numbers.distinct().size == TOTAL_LOTTO_NUMBER_COUNT) { "중복된 숫자가 있습니다." }
+        require(bonusNumber in Lotto.LOTTO_NUMBER_RANGE) { "범위를 벗어난 숫자가 있습니다." }
+        require(!this.lotto.numbers.contains(bonusNumber)) { "보너스 번호는 로또 번호와 중복될 수 없습니다." }
     }
 
     fun decideReturn(defaultNumber: Lotto): LottoReturn {
@@ -20,10 +19,7 @@ class ResultLottoNumber private constructor(
     }
 
     companion object {
-        const val TOTAL_LOTTO_NUMBER_COUNT = 7
-        val LOTTO_NUMBER_RANGE = 1..45
-
-        fun from(defaultNumbers: List<Int>, bonusNumber: Int): ResultLottoNumber {
+        fun from(defaultNumbers: Set<Int>, bonusNumber: Int): ResultLottoNumber {
             return ResultLottoNumber(
                 lotto = Lotto.from(defaultNumbers),
                 bonusNumber = bonusNumber,

@@ -51,22 +51,22 @@ class LottoResultTest {
 
     @Test
     fun `수익률 계산 테스트`() {
-        val lastWeekNumber = ResultLottoNumber.from(listOf(1, 2, 3, 4, 5, 6), 7)
+        val lastWeekNumber = ResultLottoNumber.from(setOf(1, 2, 3, 4, 5, 6), 7)
         val lottos = listOf(
-            Lotto.from(listOf(8, 21, 23, 41, 42, 43)),
-            Lotto.from(listOf(3, 5, 11, 16, 32, 38)),
-            Lotto.from(listOf(8, 11, 16, 35, 36, 44)),
-            Lotto.from(listOf(1, 8, 11, 31, 41, 42)),
-            Lotto.from(listOf(13, 14, 16, 38, 42, 45)),
-            Lotto.from(listOf(8, 11, 30, 40, 42, 43)),
-            Lotto.from(listOf(2, 13, 22, 32, 38, 45)),
-            Lotto.from(listOf(23, 25, 33, 36, 39, 41)),
-            Lotto.from(listOf(1, 3, 5, 14, 22, 45)),
-            Lotto.from(listOf(5, 9, 38, 41, 43, 44)),
-            Lotto.from(listOf(2, 8, 9, 18, 19, 21)),
-            Lotto.from(listOf(13, 14, 18, 21, 23, 35)),
-            Lotto.from(listOf(17, 21, 29, 37, 42, 45)),
-            Lotto.from(listOf(3, 8, 27, 30, 35, 44)),
+            Lotto.from(setOf(8, 21, 23, 41, 42, 43)),
+            Lotto.from(setOf(3, 5, 11, 16, 32, 38)),
+            Lotto.from(setOf(8, 11, 16, 35, 36, 44)),
+            Lotto.from(setOf(1, 8, 11, 31, 41, 42)),
+            Lotto.from(setOf(13, 14, 16, 38, 42, 45)),
+            Lotto.from(setOf(8, 11, 30, 40, 42, 43)),
+            Lotto.from(setOf(2, 13, 22, 32, 38, 45)),
+            Lotto.from(setOf(23, 25, 33, 36, 39, 41)),
+            Lotto.from(setOf(1, 3, 5, 14, 22, 45)),
+            Lotto.from(setOf(5, 9, 38, 41, 43, 44)),
+            Lotto.from(setOf(2, 8, 9, 18, 19, 21)),
+            Lotto.from(setOf(13, 14, 18, 21, 23, 35)),
+            Lotto.from(setOf(17, 21, 29, 37, 42, 45)),
+            Lotto.from(setOf(3, 8, 27, 30, 35, 44)),
         )
         val lottoResult = LottoResult.from(
             lottos = lottos,
