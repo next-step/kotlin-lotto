@@ -12,8 +12,8 @@ fun main() {
     val lastWeekBonusNumber = InputView.lastWeekBonusNumber()
     val lottoReturn = LottoResult.from(
         lottos = lottoNumbers,
-        lastWeekResultLottoNumber = ResultLottoNumber.from(
-            defaultNumbers = lastWeekLotto.numbers,
+        lastWeekResultLotto = ResultLotto.from(
+            lotto = lastWeekLotto,
             bonusNumber = lastWeekBonusNumber,
         ),
     )

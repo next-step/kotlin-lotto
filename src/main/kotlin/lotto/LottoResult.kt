@@ -4,7 +4,7 @@ import lotto.enums.LottoReturn
 
 class LottoResult private constructor(
     private val lottos: List<Lotto>,
-    private val lastWeekResultLottoNumber: ResultLottoNumber,
+    private val lastWeekResultLotto: ResultLotto,
     private val lottoReturns: MutableList<LottoReturn>,
 ) {
     private val totalReturnPrice: Int
@@ -25,14 +25,14 @@ class LottoResult private constructor(
     }
 
     private fun List<Lotto>.toLottoReturns(): List<LottoReturn> {
-        return this.map { lastWeekResultLottoNumber.decideReturn(it) }
+        return this.map { lastWeekResultLotto.decideReturn(it) }
     }
 
     companion object {
-        fun from(lottos: List<Lotto>, lastWeekResultLottoNumber: ResultLottoNumber): LottoResult {
+        fun from(lottos: List<Lotto>, lastWeekResultLotto: ResultLotto): LottoResult {
             return LottoResult(
                 lottos = lottos,
-                lastWeekResultLottoNumber = lastWeekResultLottoNumber,
+                lastWeekResultLotto = lastWeekResultLotto,
                 lottoReturns = mutableListOf(),
             ).apply {
                 this.calculate()

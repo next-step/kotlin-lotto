@@ -2,12 +2,11 @@ package lotto
 
 import lotto.enums.LottoReturn
 
-class ResultLottoNumber private constructor(
+class ResultLotto private constructor(
     val lotto: Lotto,
-    val bonusNumber: Int,
+    val bonusNumber: LottoNumber,
 ) {
     init {
-        require(bonusNumber in Lotto.LOTTO_NUMBER_RANGE) { "범위를 벗어난 숫자가 있습니다." }
         require(!this.lotto.numbers.contains(bonusNumber)) { "보너스 번호는 로또 번호와 중복될 수 없습니다." }
     }
 
@@ -19,9 +18,9 @@ class ResultLottoNumber private constructor(
     }
 
     companion object {
-        fun from(defaultNumbers: Set<Int>, bonusNumber: Int): ResultLottoNumber {
-            return ResultLottoNumber(
-                lotto = Lotto.from(defaultNumbers),
+        fun from(lotto: Lotto, bonusNumber: LottoNumber): ResultLotto {
+            return ResultLotto(
+                lotto = lotto,
                 bonusNumber = bonusNumber,
             )
         }

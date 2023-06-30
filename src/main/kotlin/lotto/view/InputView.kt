@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.Lotto
-import lotto.ResultLottoNumber
+import lotto.LottoNumber
 
 object InputView {
     fun purchaseAmount(): Int {
@@ -20,9 +20,9 @@ object InputView {
         )
     }
 
-    fun lastWeekBonusNumber(): Int {
+    fun lastWeekBonusNumber(): LottoNumber {
         println("보너스 볼을 입력해 주세요.")
-        return readln().toInt()
+        return LottoNumber.build(readln().toInt())
     }
 
     private const val DELIMITER = ","

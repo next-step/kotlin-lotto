@@ -28,7 +28,7 @@ class LottoTest {
         val numbers = setOf(10, 2, 31, 4, 5, 26)
         val lotto = Lotto.from(numbers)
 
-        lotto.numbers shouldBe numbers.sorted()
+        lotto.numbers.map { it.value } shouldBe numbers.sorted()
     }
 
     @Test

@@ -51,7 +51,7 @@ class LottoResultTest {
 
     @Test
     fun `수익률 계산 테스트`() {
-        val lastWeekNumber = ResultLottoNumber.from(setOf(1, 2, 3, 4, 5, 6), 7)
+        val lastWeekNumber = ResultLotto.from(Lotto.from(setOf(1, 2, 3, 4, 5, 6)), LottoNumber.build(7))
         val lottos = listOf(
             Lotto.from(setOf(8, 21, 23, 41, 42, 43)),
             Lotto.from(setOf(3, 5, 11, 16, 32, 38)),
@@ -70,7 +70,7 @@ class LottoResultTest {
         )
         val lottoResult = LottoResult.from(
             lottos = lottos,
-            lastWeekResultLottoNumber = lastWeekNumber,
+            lastWeekResultLotto = lastWeekNumber,
         )
 
         val returnPrice = listOf(LottoReturn.FIFTH).sumOf { it.returnPrice }

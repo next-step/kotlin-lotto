@@ -17,7 +17,7 @@ class AutoLotto {
 
     private fun buildAutoNumber(): Lotto {
         return Lotto.from(
-            numbers = Lotto.LOTTO_NUMBER_RANGE
+            numbers = LottoNumber.LOTTO_NUMBER_RANGE
                 .shuffled()
                 .take(Lotto.LOTTO_NUMBER_COUNT)
                 .toSet(),
