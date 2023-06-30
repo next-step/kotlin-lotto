@@ -8,7 +8,14 @@ fun main() {
     val lottoNumbers = AutoLotto().generateNumbers(price)
     ResultView.printLotto(lottoNumbers)
 
-    val lastWeekLottoNumber = InputView.lastWeekLottoNumber()
-    val lottoReturn = LottoResult.from(lottoNumbers, lastWeekLottoNumber)
+    val lastWeekLotto = InputView.lastWeekLottoNumber()
+    val lastWeekBonusNumber = InputView.lastWeekBonusNumber()
+    val lottoReturn = LottoResult.from(
+        lottos = lottoNumbers,
+        lastWeekResultLotto = ResultLotto.from(
+            lotto = lastWeekLotto,
+            bonusNumber = lastWeekBonusNumber,
+        ),
+    )
     ResultView.printReturn(lottoReturn)
 }
