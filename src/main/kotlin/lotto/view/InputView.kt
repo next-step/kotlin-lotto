@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.Lotto
 import lotto.ResultLottoNumber
 
 object InputView {
@@ -8,18 +9,20 @@ object InputView {
         return readln().toInt()
     }
 
-    fun lastWeekLottoNumber(): ResultLottoNumber {
+    fun lastWeekLottoNumber(): Lotto {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        val defaultNumbers = readln()
+        val numbers = readln()
             .split(DELIMITER)
             .map { it.trim().toInt() }
-        println("보너스 볼을 입력해 주세요.")
-        val bonusNumber = readln().toInt()
 
-        return ResultLottoNumber.from(
-            defaultNumbers = defaultNumbers,
-            bonusNumber = bonusNumber,
+        return Lotto.from(
+            numbers = numbers,
         )
+    }
+
+    fun lastWeekBonusNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        return readln().toInt()
     }
 
     private const val DELIMITER = ","
