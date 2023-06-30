@@ -1,8 +1,8 @@
 package lotto.sixFortyFiveNumberLotto
 
 data class SixFortyFiveLottoWinningOutput(
-    val lottoes: SixFortyFiveLottoes,
-    val winningValue: SixFortyFiveWinningLotto,
+    private val lottoes: SixFortyFiveLottoes,
+    private val winningValue: SixFortyFiveWinningLotto,
 ) {
     private val winningResultEnumList: List<SixFortyFiveWinningEnum>
     val winningResultEnumMap: Map<SixFortyFiveWinningEnum, Int>
@@ -27,7 +27,7 @@ data class SixFortyFiveLottoWinningOutput(
         return winningResultEnumMap
     }
 
-    fun getEarningRate(): Double {
+    private fun calcEarningRate(): Double {
         val totalResultPrice = winningResultEnumList.map { it.price }.reduce { acc, count -> acc + count }
         val totalPurchasePrice = lottoes.lottoList.size * SixFortyFiveLotto.LOTTO_PRICE
         return totalResultPrice / totalPurchasePrice.toDouble()
