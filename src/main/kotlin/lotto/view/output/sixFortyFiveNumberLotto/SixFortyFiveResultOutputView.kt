@@ -12,7 +12,7 @@ class SixFortyFiveResultOutputView(lottoList: SixFortyFiveLottoes, winningValue:
     init {
         val lottoWinningOutput = SixFortyFiveLottoWinningOutput(lottoList, winningValue)
         val lottoWinningMap = lottoWinningOutput.winningResultEnumMap
-        val earningRate = lottoWinningOutput.getEarningRate()
+        val earningRate = lottoWinningOutput.earningRate
         var _message = "당첨 통계\n--------\n"
         listOf(
             SixFortyFiveWinningEnum.FIFTH,

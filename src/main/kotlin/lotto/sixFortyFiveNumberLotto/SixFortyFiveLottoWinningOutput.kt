@@ -6,10 +6,12 @@ data class SixFortyFiveLottoWinningOutput(
 ) {
     private val winningResultEnumList: List<SixFortyFiveWinningEnum>
     val winningResultEnumMap: Map<SixFortyFiveWinningEnum, Int>
+    val earningRate: Double
 
     init {
         winningResultEnumList = getWinningResultEnumList()
         winningResultEnumMap = convertWinningResultEnumListToMap()
+        earningRate = calcEarningRate()
     }
 
     private fun getWinningResultEnumList(): List<SixFortyFiveWinningEnum> {
