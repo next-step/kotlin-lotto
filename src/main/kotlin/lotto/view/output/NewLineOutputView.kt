@@ -1,3 +1,7 @@
 package lotto.view.output
 
-class NewLineOutputView : OutputView("")
+class NewLineOutputView {
+    init {
+        println()
+    }
+}
