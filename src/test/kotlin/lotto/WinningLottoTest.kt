@@ -17,7 +17,8 @@ internal class WinningLottoTest : BehaviorSpec({
             val winningLotto = WinningLotto(Lotto.of(listOf(1, 2, 3, 4, 5, 6)), LottoNumber(7))
             val lottoList = listOf(
                 Lotto.of(listOf(1, 2, 3, 4, 5, 6)) to Rank.FIRST,
-                Lotto.of(listOf(1, 2, 3, 4, 5, 7)) to Rank.SECOND,
+                Lotto.of(listOf(1, 2, 3, 4, 5, 7)) to Rank.SECOND_BONUS,
+                Lotto.of(listOf(1, 2, 3, 4, 5, 8)) to Rank.SECOND,
                 Lotto.of(listOf(1, 2, 3, 4, 7, 8)) to Rank.THIRD,
                 Lotto.of(listOf(1, 2, 3, 7, 8, 9)) to Rank.FOURTH,
                 Lotto.of(listOf(1, 2, 7, 8, 9, 10)) to Rank.MISS,
@@ -47,6 +48,23 @@ internal class WinningLottoTest : BehaviorSpec({
                     shouldThrow<IllegalArgumentException> {
                         WinningLotto(Lotto.of(listOf(1, 2, 3, 4, 5, 6)), bonusNumber)
                     }
+                }
+            }
+        }
+
+        When("당첨번호 5개, 보너스가 일치하면") {
+            val winningLotto = WinningLotto(Lotto.of(listOf(1, 2, 3, 4, 5, 6)), LottoNumber(7))
+            val lottos = listOf(
+                Lotto.of(listOf(1, 2, 3, 4, 5, 7)),
+                Lotto.of(listOf(1, 2, 3, 4, 6, 7)),
+                Lotto.of(listOf(1, 2, 3, 5, 6, 7)),
+                Lotto.of(listOf(1, 2, 4, 5, 6, 7)),
+                Lotto.of(listOf(1, 3, 4, 5, 6, 7)),
+                Lotto.of(listOf(2, 3, 4, 5, 6, 7))
+            )
+            Then("IllegalArgumentException 발생") {
+                lottos.forAll { lotto ->
+                    winningLotto.match(lotto) shouldBe Rank.SECOND_BONUS
                 }
             }
         }

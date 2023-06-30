@@ -4,7 +4,11 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
-import lotto.domain.*
+import lotto.domain.Lotto
+import lotto.domain.LottoList
+import lotto.domain.LottoNumber
+import lotto.domain.Rank
+import lotto.domain.WinningLotto
 
 internal class LottoListTest : BehaviorSpec({
 
@@ -14,6 +18,7 @@ internal class LottoListTest : BehaviorSpec({
             val lottos = listOf(
                 Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
                 Lotto.of(listOf(1, 2, 3, 4, 5, 7)),
+                Lotto.of(listOf(1, 2, 3, 4, 5, 8)),
                 Lotto.of(listOf(1, 2, 3, 4, 7, 8)),
                 Lotto.of(listOf(1, 2, 3, 7, 8, 9)),
                 Lotto.of(listOf(1, 2, 7, 8, 9, 10)),

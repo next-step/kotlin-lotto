@@ -14,6 +14,7 @@ internal class LottoResultTest : BehaviorSpec({
                     Rank.FOURTH to 1,
                     Rank.THIRD to 1,
                     Rank.SECOND to 1,
+                    Rank.SECOND_BONUS to 1,
                     Rank.FIRST to 1
                 )
             )
@@ -24,7 +25,7 @@ internal class LottoResultTest : BehaviorSpec({
             }
             Then("getRateOfReturn() 메서드는 총 상금 / 구매 가격을 반환한다.") {
                 val actual = lottoResult.getRateOfReturn()
-                val expect = Rank.values().sumOf { it.prize } / 4000.0
+                val expect = Rank.values().sumOf { it.prize } / 5000.0
                 actual shouldBe expect
             }
         }
@@ -35,6 +36,7 @@ internal class LottoResultTest : BehaviorSpec({
                     Rank.FOURTH to 2,
                     Rank.THIRD to 2,
                     Rank.SECOND to 2,
+                    Rank.SECOND_BONUS to 2,
                     Rank.FIRST to 2
                 )
             )
@@ -45,7 +47,7 @@ internal class LottoResultTest : BehaviorSpec({
             }
             Then("getRateOfReturn() 메서드는 총 상금 / 구매 가격을 반환한다.") {
                 val actual = lottoResult.getRateOfReturn()
-                val expect = Rank.values().sumOf { it.prize } * 2L / 8000.0
+                val expect = Rank.values().sumOf { it.prize } * 2L / 10000.0
                 actual shouldBe expect
             }
         }
