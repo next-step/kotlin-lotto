@@ -4,16 +4,13 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
-import lotto.domain.Lotto
-import lotto.domain.LottoList
-import lotto.domain.Rank
-import lotto.domain.WinningLotto
+import lotto.domain.*
 
 internal class LottoListTest : BehaviorSpec({
 
     Given("LottoList") {
         When("Rank 별로 각 1개씩 일치하는 상활일 때") {
-            val winningLotto = WinningLotto(Lotto.of(listOf(1, 2, 3, 4, 5, 6)))
+            val winningLotto = WinningLotto(Lotto.of(listOf(1, 2, 3, 4, 5, 6)), LottoNumber(7))
             val lottos = listOf(
                 Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
                 Lotto.of(listOf(1, 2, 3, 4, 5, 7)),

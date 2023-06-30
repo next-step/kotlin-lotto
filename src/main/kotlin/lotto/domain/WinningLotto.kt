@@ -1,7 +1,8 @@
 package lotto.domain
 
 class WinningLotto(
-    val lotto: Lotto
+    val lotto: Lotto,
+    val bonusNumber: LottoNumber
 ) {
 
     fun match(newLotto: Lotto): Rank {

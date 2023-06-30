@@ -4,15 +4,16 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
 import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 import lotto.domain.Rank
 import lotto.domain.WinningLotto
 
 internal class WinningLottoTest : BehaviorSpec({
 
     Given("WinningLotto") {
-        val winningLotto = WinningLotto(Lotto.of(listOf(1, 2, 3, 4, 5, 6)))
 
         When("매칭 번호 개수가 각기 다른 로또가 주어졌을 때") {
+            val winningLotto = WinningLotto(Lotto.of(listOf(1, 2, 3, 4, 5, 6)), LottoNumber(7))
             val lottoList = listOf(
                 Lotto.of(listOf(1, 2, 3, 4, 5, 6)) to Rank.FIRST,
                 Lotto.of(listOf(1, 2, 3, 4, 5, 7)) to Rank.SECOND,
@@ -26,6 +27,15 @@ internal class WinningLottoTest : BehaviorSpec({
                 lottoList.forAll { testcase ->
                     winningLotto.match(testcase.first) shouldBe testcase.second
                 }
+            }
+        }
+
+        When("로또 번호와 다른 보너스 번호가 주어지면") {
+            val bonusNumber = LottoNumber(7)
+            val winningLotto = WinningLotto(Lotto.of(listOf(1, 2, 3, 4, 5, 6)), bonusNumber)
+
+            Then("WinningLotto가 생성된다.") {
+                winningLotto.bonusNumber shouldBe bonusNumber
             }
         }
     }

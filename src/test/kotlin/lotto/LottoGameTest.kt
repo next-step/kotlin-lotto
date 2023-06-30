@@ -7,6 +7,7 @@ import io.kotest.matchers.shouldBe
 import lotto.domain.Lotto
 import lotto.domain.LottoGame
 import lotto.domain.LottoList
+import lotto.domain.LottoNumber
 import lotto.domain.WinningLotto
 
 internal class LottoGameTest : BehaviorSpec({
@@ -50,7 +51,7 @@ internal class LottoGameTest : BehaviorSpec({
                 )
             )
             val lottoGame = LottoGame(purchasePrice = 5000, lottoList = lottos)
-            val winningLotto = WinningLotto(Lotto.of(listOf(1, 2, 3, 4, 5, 6)))
+            val winningLotto = WinningLotto(Lotto.of(listOf(1, 2, 3, 4, 5, 6)), LottoNumber(7))
             Then("각 일치 개수, 복권의 개수가 반환된다.") {
                 val actual = lottoGame.getResult(winningLotto)
                 actual.result.values.sum() shouldBe lottoGame.lottoList.size()

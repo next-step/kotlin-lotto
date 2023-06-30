@@ -24,9 +24,15 @@ object InputView {
 
     fun inputWinningLotto(): WinningLotto {
         println(INPUT_PREVIOUS_LOTTO_NUMBER_STRING)
-        val inputNumbers = LottoNumberParser.splitInputLottoNumbers(readln())
+        val winningNumbers = inputWinningNumbers()
+        val bonusNumber = inputBonusNumber()
 
-        return WinningLotto(Lotto.of(inputNumbers))
+        return WinningLotto(Lotto.of(winningNumbers), bonusNumber)
+    }
+
+    private fun inputWinningNumbers(): List<Int> {
+        val inputNumbers = LottoNumberParser.splitInputLottoNumbers(readln())
+        return inputNumbers
     }
 
     fun inputBonusNumber(): LottoNumber {
