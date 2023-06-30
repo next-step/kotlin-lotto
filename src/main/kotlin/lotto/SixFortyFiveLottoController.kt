@@ -12,7 +12,7 @@ import lotto.view.output.sixFortyFiveNumberLotto.SixFortyFiveLottoOutputView
 import lotto.view.output.sixFortyFiveNumberLotto.SixFortyFiveResultOutputView
 
 class SixFortyFiveLottoController(
-    val lottoStore: SixFortyFiveLottoStore = SixFortyFiveLottoStore(),
+    private val lottoStore: SixFortyFiveLottoStore = SixFortyFiveLottoStore(),
 ) {
     fun startBonusLotto() {
         val purchasePrice = LottoPurchasePriceInputView().value
