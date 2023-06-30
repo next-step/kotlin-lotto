@@ -1,13 +1,13 @@
 package lotto
 
 class AutoLotto {
-    fun generateNumbers(money: Int): List<DefaultLottoNumber> {
+    fun generateNumbers(money: Int): List<Lotto> {
         val lottoCount = LottoPrice.getCountFrom(money)
         return issueLottoNumbers(lottoCount)
     }
 
-    private fun issueLottoNumbers(count: Int): List<DefaultLottoNumber> {
-        val resultLottoNumbers = mutableListOf<DefaultLottoNumber>()
+    private fun issueLottoNumbers(count: Int): List<Lotto> {
+        val resultLottoNumbers = mutableListOf<Lotto>()
         repeat(count) {
             resultLottoNumbers.add(buildAutoNumber())
         }
@@ -15,11 +15,11 @@ class AutoLotto {
         return resultLottoNumbers
     }
 
-    private fun buildAutoNumber(): DefaultLottoNumber {
-        return DefaultLottoNumber.from(
-            numbers = DefaultLottoNumber.LOTTO_NUMBER_RANGE
+    private fun buildAutoNumber(): Lotto {
+        return Lotto.from(
+            numbers = Lotto.LOTTO_NUMBER_RANGE
                 .shuffled()
-                .take(DefaultLottoNumber.DEFAULT_LOTTO_NUMBER_COUNT),
+                .take(Lotto.DEFAULT_LOTTO_NUMBER_COUNT),
         )
     }
 }

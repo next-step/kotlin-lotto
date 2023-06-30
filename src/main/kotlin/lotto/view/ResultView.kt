@@ -1,11 +1,11 @@
 package lotto.view
 
-import lotto.DefaultLottoNumber
+import lotto.Lotto
 import lotto.LottoResult
 import lotto.enums.LottoReturn
 
 object ResultView {
-    fun printLotto(resultLottoNumbers: List<DefaultLottoNumber>) {
+    fun printLotto(resultLottoNumbers: List<Lotto>) {
         println("${resultLottoNumbers.size}개를 구매했습니다.")
         resultLottoNumbers.forEach {
             println(it.numbers)

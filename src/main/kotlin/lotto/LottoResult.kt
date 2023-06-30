@@ -3,7 +3,7 @@ package lotto
 import lotto.enums.LottoReturn
 
 class LottoResult private constructor(
-    private val defaultLottoNumbers: List<DefaultLottoNumber>,
+    private val lottos: List<Lotto>,
     private val lastWeekResultLottoNumber: ResultLottoNumber,
     private val lottoReturns: MutableList<LottoReturn>,
 ) {
@@ -11,7 +11,7 @@ class LottoResult private constructor(
         get() = lottoReturns.sumOf { it.returnPrice }
 
     private val totalInputPrice: Int
-        get() = defaultLottoNumbers.size * LottoPrice.PRICE_PER_LOTTO
+        get() = lottos.size * LottoPrice.PRICE_PER_LOTTO
 
     val returnRatio: Double
         get() = totalReturnPrice.toDouble() / totalInputPrice
@@ -21,17 +21,17 @@ class LottoResult private constructor(
     }
 
     private fun calculate() {
-        lottoReturns.addAll(defaultLottoNumbers.toLottoReturns())
+        lottoReturns.addAll(lottos.toLottoReturns())
     }
 
-    private fun List<DefaultLottoNumber>.toLottoReturns(): List<LottoReturn> {
+    private fun List<Lotto>.toLottoReturns(): List<LottoReturn> {
         return this.map { lastWeekResultLottoNumber.decideReturn(it) }
     }
 
     companion object {
-        fun from(defaultLottoNumbers: List<DefaultLottoNumber>, lastWeekResultLottoNumber: ResultLottoNumber): LottoResult {
+        fun from(lottos: List<Lotto>, lastWeekResultLottoNumber: ResultLottoNumber): LottoResult {
             return LottoResult(
-                defaultLottoNumbers = defaultLottoNumbers,
+                lottos = lottos,
                 lastWeekResultLottoNumber = lastWeekResultLottoNumber,
                 lottoReturns = mutableListOf(),
             ).apply {

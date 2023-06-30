@@ -3,18 +3,18 @@ package lotto
 import lotto.enums.LottoReturn
 
 class ResultLottoNumber private constructor(
-    val defaultLottoNumber: DefaultLottoNumber,
+    val lotto: Lotto,
     val bonusNumber: Int,
 ) {
     init {
-        val numbers = defaultLottoNumber.numbers + bonusNumber
+        val numbers = lotto.numbers + bonusNumber
         require(numbers.all { it in LOTTO_NUMBER_RANGE }) { "범위를 벗어난 숫자가 있습니다." }
         require(numbers.distinct().size == TOTAL_LOTTO_NUMBER_COUNT) { "중복된 숫자가 있습니다." }
     }
 
-    fun decideReturn(defaultNumber: DefaultLottoNumber): LottoReturn {
+    fun decideReturn(defaultNumber: Lotto): LottoReturn {
         return LottoReturn.from(
-            matchCount = this.defaultLottoNumber.countMatch(defaultNumber),
+            matchCount = this.lotto.countMatch(defaultNumber),
             bonusMatch = defaultNumber.numbers.contains(this.bonusNumber),
         )
     }
@@ -25,7 +25,7 @@ class ResultLottoNumber private constructor(
 
         fun from(defaultNumbers: List<Int>, bonusNumber: Int): ResultLottoNumber {
             return ResultLottoNumber(
-                defaultLottoNumber = DefaultLottoNumber.from(defaultNumbers),
+                lotto = Lotto.from(defaultNumbers),
                 bonusNumber = bonusNumber,
             )
         }

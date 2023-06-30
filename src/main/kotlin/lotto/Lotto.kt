@@ -1,6 +1,6 @@
 package lotto
 
-class DefaultLottoNumber private constructor(
+class Lotto private constructor(
     val numbers: List<Int>,
 ) {
     init {
@@ -9,7 +9,7 @@ class DefaultLottoNumber private constructor(
         require(numbers.all { it in LOTTO_NUMBER_RANGE }) { "범위를 벗어난 숫자가 있습니다." }
     }
 
-    fun countMatch(other: DefaultLottoNumber): Int {
+    fun countMatch(other: Lotto): Int {
         return this.numbers.count { other.numbers.contains(it) }
     }
 
@@ -17,8 +17,8 @@ class DefaultLottoNumber private constructor(
         const val DEFAULT_LOTTO_NUMBER_COUNT = 6
         val LOTTO_NUMBER_RANGE = 1..45
 
-        fun from(numbers: List<Int>): DefaultLottoNumber {
-            return DefaultLottoNumber(numbers.sorted())
+        fun from(numbers: List<Int>): Lotto {
+            return Lotto(numbers.sorted())
         }
     }
 }
