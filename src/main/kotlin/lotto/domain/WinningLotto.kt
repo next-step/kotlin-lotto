@@ -5,7 +5,7 @@ class WinningLotto(
 ) {
 
     fun match(newLotto: Lotto): Rank {
-        val matchCount = this.lotto.lottoNumbers.count(newLotto.lottoNumbers::contains)
+        val matchCount = lotto.match(newLotto)
         return Rank.of(matchCount)
     }
 }

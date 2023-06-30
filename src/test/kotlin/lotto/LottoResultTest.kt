@@ -2,7 +2,6 @@ package lotto
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.Lotto
 import lotto.domain.LottoResult
 import lotto.domain.Rank
 

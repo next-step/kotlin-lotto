@@ -5,23 +5,30 @@ import lotto.domain.lottoStrategy.NormalLottoStrategy
 
 class LottoGame(
     private val lottoStrategy: LottoStrategy = NormalLottoStrategy,
-    val purchasePrice: Int
+    val purchasePrice: Int,
+    lottoList: LottoList = LottoList(emptyList())
 ) {
-    lateinit var lottoList: LottoList
+    var lottoList: LottoList = lottoList
         private set
 
     init {
         require(purchasePrice % LOTTO_PRICE == 0) { LOTTO_PRICE_NOT_FALL_APART_EXCEPTION }
-        initLottoList()
+        require(lottoList.size() <= purchasePrice / LOTTO_PRICE)
+        initAutoLottoList()
     }
 
-    private fun initLottoList() {
-        val lottoCount = this.purchasePrice / LOTTO_PRICE
-        lottoList = LottoList.of(lottoStrategy, lottoCount)
+    private fun initAutoLottoList() {
+        val lottoCount = this.purchasePrice / LOTTO_PRICE - lottoList.size()
+        val autoLottos = getAutoLottoList(lottoCount)
+
+        this.lottoList + autoLottos
     }
 
-    fun getResult(winningLotto: WinningLotto): LottoResult =
-        lottoList.getResult(winningLotto)
+    private fun getAutoLottoList(lottoCount: Int): LottoList = LottoList.of(lottoStrategy, lottoCount)
+
+    fun getResult(winningLotto: WinningLotto): LottoResult {
+        return lottoList.getResult(winningLotto)
+    }
 
     companion object {
         const val LOTTO_PRICE = 1000

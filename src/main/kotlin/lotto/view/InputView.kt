@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.Lotto
+import lotto.domain.LottoNumbersParser
 import lotto.domain.WinningLotto
 
 object InputView {
@@ -21,7 +22,7 @@ object InputView {
 
     fun inputWinningLotto(): WinningLotto {
         println(INPUT_PREVIOUS_LOTTO_NUMBER_STRING)
-        val inputNumbers = readln()
+        val inputNumbers = LottoNumbersParser.splitInputLottoNumbers(readln())
 
         return WinningLotto(Lotto.of(inputNumbers))
     }
