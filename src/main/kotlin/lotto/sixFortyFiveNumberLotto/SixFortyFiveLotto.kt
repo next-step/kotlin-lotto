@@ -9,6 +9,7 @@ data class SixFortyFiveLotto(
 ) : Lotto {
 
     init {
+        require(numbers.size == LOTTO_NUMBER_COUNT) { ErrorCode.INVALID_SIX_FORTY_FIVE_LOTTO_NUMBER_COUNT.msg }
         val hasDuplicatedNumber = numbers.map { it.value }.distinct().size != numbers.size
         if (hasDuplicatedNumber) throw RuntimeException(ErrorCode.INVALID_SIX_FORTY_FIVE_LOTTO_NUMBER.msg)
     }
