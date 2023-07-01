@@ -6,10 +6,10 @@ class SecondLevelDiscriminator {
         fun checkPrizeLevelIsSecond(
             prizeLevel: PrizeLevel,
             lotteryPaper: LotteryPaper,
-            bonusBall: BonusBall
+            bonusNumber: LottoNumber
         ): PrizeLevel {
             if (checkPrizeLevelIsThird(prizeLevel)) {
-                return checkBonusNumberInLotteryPaper(lotteryPaper, bonusBall)
+                return checkBonusNumberInLotteryPaper(lotteryPaper, bonusNumber)
             }
             return prizeLevel
         }
@@ -18,8 +18,8 @@ class SecondLevelDiscriminator {
             return prizeLevel == PrizeLevel.THIRD
         }
 
-        private fun checkBonusNumberInLotteryPaper(lotteryPaper: LotteryPaper, bonusBall: BonusBall): PrizeLevel {
-            if (lotteryPaper.getLottoNumbers().contains(bonusBall.bonusNumber)) {
+        private fun checkBonusNumberInLotteryPaper(lotteryPaper: LotteryPaper, bonusNumber: LottoNumber): PrizeLevel {
+            if (lotteryPaper.getLottoNumbers().contains(bonusNumber)) {
                 return PrizeLevel.SECOND
             }
             return PrizeLevel.THIRD

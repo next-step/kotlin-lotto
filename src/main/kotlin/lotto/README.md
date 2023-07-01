@@ -21,11 +21,6 @@
 
 - [x] 생성된 로또 번호는 중복이 없다.
 
-* WinningNumber
-
-- [x] 당첨 번호를 입력받아서 당첨번호를 생성한다.
-    - [x] 당첨 번호는 중복이 있으면 안된다. -> WinningNumber(LottoNumber의 메서드 호출)
-
 * LotteryPaperValidator
 
 - [x] 새로 생성한 로또 용지가 이미 존재하면 IllegalArgumentException을 throw한다.
@@ -61,11 +56,14 @@
 
 # 기능 요구사항 구현 체크리스트 - Step3
 
-* BonusBall
+* WinningNumber
 
-- [x] 보너스 볼은 숫자 한개를 가진다.
-- [x] 보너스 볼을 생성할 때 1부터 45사이의 숫자를 값으로 가진다.
-- [x] 보너스 볼은 당첨 번호와 중복되지 않는다.
+- [x] 당첨 번호를 입력받아서 당첨번호를 생성한다.
+    - [x] 당첨 번호는 중복이 있으면 안된다.
+- [x] LottoNumber 타입인 보너스 넘버를 가진다.
+- [x] 보너스 넘버는 생성할 때 1부터 45사이의 숫자를 값으로 가진다.
+- [x] 보너스 넘버는 당첨 번호와 중복되지 않는다.
+
 
 * SecondLevelDiscriminator
 

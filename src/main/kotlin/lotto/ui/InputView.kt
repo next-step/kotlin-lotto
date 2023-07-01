@@ -19,7 +19,7 @@ class InputView {
         return inputText.split(", ").map { LottoNumber(it.toInt()) }
     }
 
-    fun getBonusBall(): LottoNumber {
+    fun getBonusNumber(): LottoNumber {
         println("보너스 볼을 입력해 주세요.")
         return LottoNumber(readln().toInt())
     }

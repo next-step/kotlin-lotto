@@ -64,7 +64,7 @@ class LottoShopMatcherTest {
         )
 
         val purchasedLotteryPapers = PurchasedLotteryPapers(lotteryPaperList)
-        val bonusBall = BonusBall(LottoNumber(10), winningNumber)
+        val bonusBall = LottoNumber(10)
         val countLottoWinner = lottoMatcher.countLottoWinner(
             winningNumber,
             purchasedLotteryPapers,

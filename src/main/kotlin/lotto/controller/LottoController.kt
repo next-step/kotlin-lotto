@@ -1,9 +1,9 @@
 package lotto.controller
 
-import lotto.domain.BonusBall
 import lotto.domain.LotteryPaper
-import lotto.domain.LottoMatcher
+import lotto.domain.LottoNumber
 import lotto.domain.LottoShop
+import lotto.domain.WinningNumber
 import lotto.domain.YieldCalculator
 import lotto.dto.LottoMatchResult
 import lotto.dto.PurchasedLotteryPapers
@@ -22,8 +22,7 @@ class LottoController(
         printLottoNumbers(lottoResponse)
 
         val winningNumber = generateWinningNumber()
-        val generateBonusBall = generateBonusBall(winningNumber)
-        val lottoMatchResponse = matchLottoNumber(winningNumber, lottoResponse, generateBonusBall)
+        val lottoMatchResponse = matchLottoNumber(winningNumber, lottoResponse)
 
         printLottoMatch(lottoMatchResponse)
         printYield(purchasingAmount, lottoMatchResponse)
@@ -41,23 +40,21 @@ class LottoController(
         resultView.printLottoNumbers(purchasedLotteryPapers)
     }
 
-    private fun generateWinningNumber(): LotteryPaper {
-        val winningNumberList = inputView.getWinningNumber()
-        return LotteryPaper(winningNumberList)
+    private fun generateWinningNumber(): WinningNumber {
+        val winningNumberList = LotteryPaper(inputView.getWinningNumber())
+        val generatedBonusNumber = generateBonusNumber()
+        return WinningNumber(winningNumberList, generatedBonusNumber)
     }
 
-    private fun generateBonusBall(winningNumber: LotteryPaper): BonusBall {
-        val inputtedNumber = inputView.getBonusBall()
-        return BonusBall(inputtedNumber, winningNumber)
+    private fun generateBonusNumber(): LottoNumber {
+        return inputView.getBonusNumber()
     }
 
     private fun matchLottoNumber(
-        winningNumber: LotteryPaper,
-        purchasedLotteryPapers: PurchasedLotteryPapers,
-        bonusBall: BonusBall
+        winningNumber: WinningNumber,
+        purchasedLotteryPapers: PurchasedLotteryPapers
     ): LottoMatchResult {
-        val lottoMatcher = LottoMatcher()
-        return lottoMatcher.countLottoWinner(winningNumber, purchasedLotteryPapers, bonusBall)
+        return winningNumber.countLottoWinner(purchasedLotteryPapers)
     }
 
     private fun printLottoMatch(lottoMatchResult: LottoMatchResult) {
