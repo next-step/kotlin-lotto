@@ -1,5 +1,6 @@
 package lotto.view.input
 
+import lotto.ErrorCode
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveNumber
 import lotto.view.output.NewLineOutputView
 
@@ -14,6 +15,10 @@ class SixFortyFiveLottoBonusInputView : InputView<Int, SixFortyFiveNumber>() {
     }
 
     override fun readValue(): Int {
-        return readln().toInt()
+        return runCatching {
+            readln().toInt()
+        }.onFailure {
+            throw IllegalArgumentException(ErrorCode.INVALID_INPUT_INT_VALUE.msg)
+        }.getOrThrow()
     }
 }

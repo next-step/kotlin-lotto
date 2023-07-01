@@ -1,5 +1,6 @@
 package lotto.view.input
 
+import lotto.ErrorCode
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoCount
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoPurchase
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoPurchases
@@ -19,7 +20,12 @@ class SixFortyFiveManualLottoesInputView(count: SixFortyFiveLottoCount) :
     }
 
     override fun readValue(): List<SixFortyFiveNumber> {
-        return readln().split(DELIMITER).map { SixFortyFiveNumber(it.trim().toInt()) }
+        val numberList = runCatching {
+            readln().split(DELIMITER).map { it.trim().toInt() }
+        }.onFailure {
+            throw IllegalArgumentException(ErrorCode.INVALID_SIX_FORTY_FIVE_LOTTO_NUMBER_INPUT_FORMAT.msg)
+        }.getOrThrow()
+        return numberList.map { SixFortyFiveNumber(it) }
     }
 
     private fun makePurchase(): SixFortyFiveLottoPurchase {
