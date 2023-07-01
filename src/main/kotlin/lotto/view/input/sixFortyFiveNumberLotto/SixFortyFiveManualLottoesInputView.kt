@@ -18,7 +18,7 @@ class SixFortyFiveManualLottoesInputView(count: Int) : InputView<List<SixFortyFi
     }
 
     override fun readValue(): List<SixFortyFiveNumber> {
-        return readln().split(DELIMITER).map { SixFortyFiveNumber(it.toInt()) }
+        return readln().split(DELIMITER).map { SixFortyFiveNumber(it.trim().toInt()) }
     }
 
     private fun makePurchase(): SixFortyFiveLottoPurchase {
