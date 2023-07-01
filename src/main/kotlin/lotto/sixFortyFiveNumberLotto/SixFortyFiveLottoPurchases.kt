@@ -11,12 +11,16 @@ class SixFortyFiveLottoPurchases(val value: List<SixFortyFiveLottoPurchase>) {
 
     constructor(vararg purchase: SixFortyFiveLottoPurchase) : this(purchase.toList())
 
+    fun getCount(): SixFortyFiveLottoCount {
+        return SixFortyFiveLottoCount(value.size)
+    }
+
     companion object {
         fun ofAutoFromManual(
-            purchaseCount: Int,
+            purchaseCount: SixFortyFiveLottoCount,
             manualLottoPurchases: SixFortyFiveLottoPurchases,
         ): SixFortyFiveLottoPurchases {
-            val autoLottoCount = purchaseCount - manualLottoPurchases.value.size
+            val autoLottoCount = purchaseCount.value - manualLottoPurchases.value.size
             val autoLottoPurchaseList =
                 (1..autoLottoCount).map { SixFortyFiveLottoPurchase.ofAuto(SixFortyFiveLotto.getNumbers()) }
             return SixFortyFiveLottoPurchases(autoLottoPurchaseList)

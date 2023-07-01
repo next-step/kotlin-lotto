@@ -24,7 +24,7 @@ data class SixFortyFiveLottoWinningOutput(
 
     private fun calcEarningRate(): Double {
         val totalResultPrice = winningResultEnumList.map { it.price }.reduce { acc, count -> acc + count }
-        val totalPurchasePrice = lottoes.getSize() * SixFortyFiveLotto.LOTTO_PRICE
+        val totalPurchasePrice = lottoes.getCount().value * SixFortyFiveLotto.LOTTO_PRICE
         return totalResultPrice / totalPurchasePrice.toDouble()
     }
 }

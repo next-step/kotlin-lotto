@@ -7,8 +7,8 @@ class SixFortyFiveLottoes(private val list: List<SixFortyFiveLotto>) {
         }
     }
 
-    fun getSize(): Int {
-        return list.size
+    fun getCount(): SixFortyFiveLottoCount {
+        return SixFortyFiveLottoCount(list.size)
     }
 
     fun getList(): List<SixFortyFiveLotto> {

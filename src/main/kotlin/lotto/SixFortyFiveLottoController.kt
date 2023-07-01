@@ -9,8 +9,8 @@ import lotto.view.input.SixFortyFiveLottoBonusInputView
 import lotto.view.input.SixFortyFiveLottoLastWinNumInputView
 import lotto.view.input.SixFortyFiveManualLottoCountInputView
 import lotto.view.input.SixFortyFiveManualLottoesInputView
-import lotto.view.output.sixFortyFiveNumberLotto.SixFortyFiveBonusResultOutputView
-import lotto.view.output.sixFortyFiveNumberLotto.SixFortyFiveLottoOutputView
+import lotto.view.output.SixFortyFiveBonusResultOutputView
+import lotto.view.output.SixFortyFiveLottoOutputView
 
 class SixFortyFiveLottoController(
     private val lottoStore: SixFortyFiveLottoStore = SixFortyFiveLottoStore(),
@@ -30,7 +30,7 @@ class SixFortyFiveLottoController(
 
         // 자동+수동 로또들의 purchases를 통한 로또 구매 진행
         val lottoList = lottoStore.purchase(mergedPurchases)
-        SixFortyFiveLottoOutputView(lottoList, autoPurchases.value.size, manualLottoCount)
+        SixFortyFiveLottoOutputView(lottoList, autoPurchases.getCount(), manualLottoCount)
 
         // 지난주 당첨번호 입력
         val lastWinningNumbers = SixFortyFiveLottoLastWinNumInputView().value

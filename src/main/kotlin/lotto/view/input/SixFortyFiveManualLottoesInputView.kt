@@ -1,19 +1,20 @@
 package lotto.view.input.sixFortyFiveNumberLotto
 
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoCount
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoPurchase
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoPurchases
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveNumber
-import lotto.view.input.InputView
 import lotto.view.output.NewLineOutputView
 
-class SixFortyFiveManualLottoesInputView(count: Int) : InputView<List<SixFortyFiveNumber>, SixFortyFiveLottoPurchases>() {
+class SixFortyFiveManualLottoesInputView(count: SixFortyFiveLottoCount) :
+    InputView<List<SixFortyFiveNumber>, SixFortyFiveLottoPurchases>() {
 
     override val message: String = "수동으로 구매할 번호를 입력해주세요."
     override val value: SixFortyFiveLottoPurchases
 
     init {
         renderMessage()
-        value = SixFortyFiveLottoPurchases((1..count).map { makePurchase() })
+        value = SixFortyFiveLottoPurchases((1..count.value).map { makePurchase() })
         NewLineOutputView()
     }
 

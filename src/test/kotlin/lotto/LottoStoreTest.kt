@@ -3,6 +3,7 @@ package lotto
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLotto
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoCount
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoPurchase
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoPurchasePrice
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoPurchases
@@ -41,9 +42,9 @@ class LottoStoreTest {
         val lottoStore = SixFortyFiveLottoStore()
         val purchasePrice = SixFortyFiveLottoPurchasePrice(10000)
         val purchaseLottoCount = lottoStore.getPurchaseCountByPrice(purchasePrice)
-        val manualLottoCount = 3
+        val manualLottoCount = SixFortyFiveLottoCount(3)
         val manualLottoPurchases = SixFortyFiveLottoPurchases(
-            (1..manualLottoCount).map {
+            (1..manualLottoCount.value).map {
                 SixFortyFiveLottoPurchase(
                     SixFortyFiveLottoType.MANUAL,
                     getNumbers(),
@@ -51,12 +52,12 @@ class LottoStoreTest {
             },
         )
 
-        val mergedLottoPurchases = SixFortyFiveLottoPurchases.ofAutoFromManual(purchasePrice, manualLottoPurchases)
+        val mergedLottoPurchases = SixFortyFiveLottoPurchases.ofAutoFromManual(purchaseLottoCount, manualLottoPurchases)
         val lottoes = lottoStore.purchase(mergedLottoPurchases)
 
         with(lottoes.getList()) {
             forEach { lotto -> lotto.shouldBeInstanceOf<SixFortyFiveLotto>() }
-            count { it.type == SixFortyFiveLottoType.AUTO } shouldBe purchaseLottoCount - manualLottoCount
+            count { it.type == SixFortyFiveLottoType.AUTO } shouldBe purchaseLottoCount.value - manualLottoCount.value
         }
     }
 
