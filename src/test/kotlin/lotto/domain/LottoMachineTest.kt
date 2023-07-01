@@ -16,10 +16,26 @@ class LottoMachineTest : FunSpec({
         val expected = 14
 
         // when
-        val lottoTickets = lottoMachine.buyTickets(purchaseAmount)
+        val lottoTickets = lottoMachine.buyTickets(purchaseAmount, emptyList())
 
         // then
         lottoTickets.values shouldHaveSize expected
+    }
+
+    test("구입금액과 수동 로또 리스트를 입력하면 수동 로또와 자동 생성 로또를 함께 반환한다.") {
+        // given
+        val manualNumbers = LottoNumbers(*listOf(1, 2, 3, 4, 5, 6).toIntArray())
+        val autoNumbers = LottoNumbers(* listOf(7, 8, 9, 10, 11, 12).toIntArray())
+        val numberGenerator = FakeNumberGenerator(listOf(1, 2, 3, 4, 5, 6))
+        val lottoMachine = LottoMachine(numberGenerator)
+        val purchaseAmount = 2000
+        val expected = LottoTickets(listOf(manualNumbers, autoNumbers))
+
+        // when
+        val lottoTickets = lottoMachine.buyTickets(purchaseAmount, listOf(manualNumbers))
+
+        // then
+        lottoTickets shouldBe expected
     }
 
     test("로또 1장의 가격(1000)보다 구입 금액이 적다면 IllegalArgumentException 예외가 발생해야 한다.") {
@@ -28,9 +44,9 @@ class LottoMachineTest : FunSpec({
         listOf(1, 500, 900).forAll { purchaseAmount ->
             // when, then
             shouldThrow<IllegalArgumentException> {
-                lottoMachine.buyTickets(purchaseAmount)
+                lottoMachine.buyTickets(purchaseAmount, emptyList())
             }.also {
-                it.message shouldBe "최소 구매 금액은 1000원 입니다. 입력 구매 금액: [$purchaseAmount]"
+                it.message shouldBe "최소 구매 금액은 1000원 입니다. 입력한 구매 금액: [$purchaseAmount]"
             }
         }
     }
@@ -43,7 +59,7 @@ class LottoMachineTest : FunSpec({
         val numberOfTickets = 1
 
         // when
-        val actual = lottoMachine.buyTickets(purchaseAmount)
+        val actual = lottoMachine.buyTickets(purchaseAmount, emptyList())
 
         // then
         actual.values shouldHaveSize numberOfTickets
