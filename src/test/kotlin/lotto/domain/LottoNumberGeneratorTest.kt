@@ -16,5 +16,9 @@ class LottoNumberGeneratorTest : FunSpec({
 
         // then
         actual.values shouldHaveSize size
+        actual.values.map { it.number }
+            .forAll {
+                it.shouldBeInRange(1..45)
+            }
     }
 })
