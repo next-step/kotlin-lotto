@@ -15,7 +15,7 @@ fun inputManualBuy(manualBuyCount: Int): List<String> {
     println("수동으로 구매할 번호를 입력해 주세요")
     val manualBuyNumbers = mutableListOf<String>()
 
-    for (i in 1..manualBuyCount) {
+    repeat((manualBuyCount)) {
         manualBuyNumbers.add(readln())
     }
 
