@@ -4,17 +4,17 @@ class LottoMachine(
     private val lottoNumberGenerator: NumberGenerator = LottoNumberGenerator()
 ) {
 
-    fun buyTickets(purchaseAmount: Int): LottoTickets {
-        require(purchaseAmount >= TICKET_PRICE) { "최소 구매 금액은 1000원 입니다. 입력 구매 금액: [$purchaseAmount]" }
+    fun buyTickets(purchaseAmount: Int, manualLottoNumbers: List<LottoNumbers>): LottoTickets {
+        require(purchaseAmount >= TICKET_PRICE) { "최소 구매 금액은 1000원 입니다. 입력한 구매 금액: [$purchaseAmount]" }
 
-        val numberOfTickets = getNumberOfTickets(purchaseAmount)
+        val numberOfAutoTickets = getTotalNumberOfTickets(purchaseAmount) - manualLottoNumbers.size
 
-        return List(numberOfTickets) {
-            lottoNumberGenerator.generate()
-        }.let { LottoTickets(it) }
+        return List(numberOfAutoTickets) { lottoNumberGenerator.generate() }
+            .run { manualLottoNumbers + this }
+            .let { LottoTickets(it) }
     }
 
-    private fun getNumberOfTickets(purchaseAmount: Int): Int {
+    private fun getTotalNumberOfTickets(purchaseAmount: Int): Int {
         return purchaseAmount / TICKET_PRICE
     }
 
