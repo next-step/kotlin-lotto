@@ -1,4 +1,4 @@
-package lotto.view.input.sixFortyFiveNumberLotto
+package lotto.view.input
 
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoCount
 import lotto.view.output.NewLineOutputView

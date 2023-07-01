@@ -1,8 +1,7 @@
-package lotto.view.input.sixFortyFiveNumberLotto
+package lotto.view.input
 
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLotto
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveNumber
-import lotto.view.input.InputView
 import lotto.view.output.NewLineOutputView
 
 class SixFortyFiveLottoLastWinNumInputView : InputView<List<SixFortyFiveNumber>, SixFortyFiveLotto>() {
