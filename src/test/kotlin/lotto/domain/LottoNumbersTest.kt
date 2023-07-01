@@ -9,6 +9,9 @@ class LottoNumbersTest : FunSpec({
 
     test("요소 사이즈가 6이 아닐 경우, IllegalArgumentException 을 반환한다.") {
         shouldThrow<IllegalArgumentException> { LottoNumbers(1, 2) }
+            .also {
+                it.message shouldBe "로또 사이즈는 $LOTTO_SIZE 입니다. [입력 사이즈: 2]"
+            }
     }
 
     test("입력받은 숫자 리스트와 일치하는 숫자 개수를 반환할 수 있다.") {

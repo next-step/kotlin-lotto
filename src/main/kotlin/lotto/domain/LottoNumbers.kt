@@ -2,7 +2,9 @@ package lotto.domain
 
 data class LottoNumbers(val values: List<LottoNumber>) {
     init {
-        require(values.size == LOTTO_SIZE)
+        require(values.size == LOTTO_SIZE) {
+            "로또 사이즈는 $LOTTO_SIZE 입니다. [입력 사이즈: ${values.size}]"
+        }
     }
 
     constructor(vararg numbers: Int) : this(numbers.map { LottoNumber(it) }.toList())
