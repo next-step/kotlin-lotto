@@ -14,7 +14,7 @@ class SixFortyFiveLottoTest {
     @ParameterizedTest
     @ValueSource(strings = ["1,3,3,7,43,45", "32,35,37,37,44,45", "1,17,29,29,43,44"])
     fun `중복된 숫자를 가지면 에러를 발생합니다`(numberStr: String) {
-        assertThrows<RuntimeException>(ErrorCode.INVALID_SIX_FORTY_FIVE_LOTTO_NUMBER.msg) {
+        assertThrows<RuntimeException>(ErrorCode.INVALID_SIX_FORTY_FIVE_LOTTO_NUMBER_DUPLICATE.msg) {
             Utils.parseNumbersFromStr(numberStr, ',')
         }
     }
