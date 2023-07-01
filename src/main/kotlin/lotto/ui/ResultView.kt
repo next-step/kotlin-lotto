@@ -1,5 +1,6 @@
 package lotto.ui
 
+import lotto.domain.LottoNumber
 import lotto.domain.PrizeLevel
 import lotto.dto.PurchasedLotteryPapers
 
@@ -7,21 +8,21 @@ class ResultView {
     fun printLottoNumbers(purchasedLotteryPapers: PurchasedLotteryPapers) {
         val lotteryPaperList = purchasedLotteryPapers.lotteryPaperList
         lotteryPaperList.forEach {
-            printSingleLottoNumber(it.getLottoNumber())
+            printSingleLottoNumber(it.getLottoNumbers())
         }
         println()
     }
 
-    private fun printSingleLottoNumber(lottoNumber: List<Int>) {
+    private fun printSingleLottoNumber(lottoNumbers: List<LottoNumber>) {
         print("[")
-        lottoNumber.forEachIndexed { index, ints ->
-            print(ints)
-            printIfNotLastIndex(index, lottoNumber)
+        lottoNumbers.forEachIndexed { index, lottoNumber ->
+            print(lottoNumber.lottoNumber)
+            printIfNotLastIndex(index, lottoNumbers)
         }
         println("]")
     }
 
-    private fun printIfNotLastIndex(index: Int, lottoNumber: List<Int>) {
+    private fun printIfNotLastIndex(index: Int, lottoNumber: List<LottoNumber>) {
         if (index != lottoNumber.lastIndex) {
             print(", ")
         }

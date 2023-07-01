@@ -4,7 +4,7 @@ class LotteryPaperFactory(private val lottoNumberGenerationStrategy: LottoNumber
     private val lotteryPaperValidator = LotteryPaperValidator()
 
     fun generateLotteryPaper(lotteryPaperList: List<LotteryPaper>): LotteryPaper {
-        var generatedLottoNumber: List<Int>
+        var generatedLottoNumber: List<LottoNumber>
         var generatedLotteryPaper: LotteryPaper
 
         do {

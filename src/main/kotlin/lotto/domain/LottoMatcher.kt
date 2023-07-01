@@ -10,8 +10,8 @@ class LottoMatcher {
         purchasedLotteryPapers: PurchasedLotteryPapers,
         bonusBall: BonusBall
     ): LottoMatchResult {
-        val winningLottoNumber = winningNumber.getLottoNumber()
-        val matchedCountsMap = getMatchedCount(winningLottoNumber, purchasedLotteryPapers.lotteryPaperList)
+        val winningLottoNumbers = winningNumber.getLottoNumbers()
+        val matchedCountsMap = getMatchedCount(winningLottoNumbers, purchasedLotteryPapers.lotteryPaperList)
 
         val prizeList = matchedCountsMap.map { matchedCount ->
             val eachPrizeLevel = PrizeLevel.fromNumberOfHit(matchedCount.value)
@@ -21,11 +21,11 @@ class LottoMatcher {
     }
 
     private fun getMatchedCount(
-        winningLottoNumber: List<Int>,
+        winningLottoNumber: List<LottoNumber>,
         lotteryPaperList: List<LotteryPaper>
     ): Map<LotteryPaper, Int> {
         return lotteryPaperList.associateWith {
-            LottoNumberComparator.compare(winningLottoNumber, it.getLottoNumber())
+            LottoNumberComparator.compare(winningLottoNumber, it.getLottoNumbers())
         }
     }
 }

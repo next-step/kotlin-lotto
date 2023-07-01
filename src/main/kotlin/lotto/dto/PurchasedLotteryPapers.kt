@@ -13,7 +13,7 @@ data class PurchasedLotteryPapers(val lotteryPaperList: List<LotteryPaper>) {
 
     private fun validateEachLottoPaper() {
         lotteryPaperList.forEach {
-            LotteryPaper.validateLottoNumber(it.getLottoNumber())
+            LotteryPaper.validateLottoNumber(it.getLottoNumbers())
         }
     }
 
