@@ -31,7 +31,6 @@ class LottoMachineTest : FunSpec({
         val purchaseAmount = 2000
         val expected = LottoTickets(listOf(manualNumbers, autoNumbers))
 
-
         // when
         val lottoTickets = lottoMachine.buyTickets(purchaseAmount, listOf(manualNumbers))
 

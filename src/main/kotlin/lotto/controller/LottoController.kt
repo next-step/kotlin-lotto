@@ -1,10 +1,10 @@
 package lotto.controller
 
 import lotto.domain.LottoMachine
-import lotto.domain.WinningTicket
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers.Companion.toNumbers
 import lotto.domain.LottoResult
+import lotto.domain.WinningTicket
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -23,6 +23,7 @@ class LottoController(
         val bonusLottoNumber = LottoNumber(inputView.requestBonusBall())
         val lottoResult = WinningTicket(winningNumbers, bonusLottoNumber).getMatchingResult(lottoTickets)
         val profitRate = lottoResult.calculateProfitRate(purchaseAmount)
+
         printLottoResult(lottoResult, profitRate)
     }
 

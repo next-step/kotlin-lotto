@@ -2,9 +2,7 @@ package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
-import lotto.domain.LottoNumbers.Companion.toNumbers
 import java.lang.IllegalArgumentException
 
 class LottoNumbersTest : FunSpec({
