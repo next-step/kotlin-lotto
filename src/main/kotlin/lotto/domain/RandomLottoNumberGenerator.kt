@@ -2,8 +2,10 @@ package lotto.domain
 
 class RandomLottoNumberGenerator: LottoNumberGenerator {
 
+    private val numberPool = (MIN_NUMBER..MAX_NUMBER).map { it }
+
     override fun generate(): List<Int> {
-        return (MIN_NUMBER..MAX_NUMBER).shuffled().take(LOTTO_NUMBER_COUNT).sorted()
+        return numberPool.shuffled().take(LOTTO_NUMBER_COUNT).sorted()
     }
 
     companion object {

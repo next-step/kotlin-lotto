@@ -6,8 +6,8 @@ class Lotto(
 
     val lottoNumbers: LottoNumbers = lottoNumberGenerator.generate().let { LottoNumbers.of(it) }
 
-    fun matchLottoNumber(lottoMatchNumbers: LottoMatchNumbers): LottoRank {
-        val lottoMatchCount = lottoNumbers.matchNumbers(lottoMatchNumbers)
+    fun matchNumbers(lottoWinningNumbers: LottoWinningNumbers): LottoRank {
+        val lottoMatchCount = lottoWinningNumbers.match(lottoNumbers)
         return LottoRank.getRank(lottoMatchCount)
     }
 

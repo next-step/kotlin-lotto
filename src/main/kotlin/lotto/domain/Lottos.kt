@@ -4,8 +4,8 @@ class Lottos(
     val lottos: List<Lotto>
 ) {
 
-    fun getLottoResult(matchingNumbers: LottoMatchNumbers): LottoResult {
-        val lottoRanks = lottos.map { lotto -> lotto.matchLottoNumber(matchingNumbers) }
+    fun getLottoResult(winningNumbers: LottoWinningNumbers): LottoResult {
+        val lottoRanks = lottos.map { lotto -> lotto.matchNumbers(winningNumbers) }
         return LottoResult(lottoRanks, lottos.size)
     }
 

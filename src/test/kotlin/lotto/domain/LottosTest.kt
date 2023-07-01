@@ -11,10 +11,10 @@ class LottosTest {
         val lottoNumbers = (1..6).map { LottoNumber(it) }
 
         val lottos = Lottos.of(1, FakeLottoNumberGenerator())
-        val lottoMatchNumbers = LottoMatchNumbers.of(lottoNumbers.map { it.number }, 7)
+        val lottoWinningNumbers = LottoWinningNumbers.of(lottoNumbers.map { it.number }, 7)
 
         // when
-        val lottoResult = lottos.getLottoResult(lottoMatchNumbers)
+        val lottoResult = lottos.getLottoResult(lottoWinningNumbers)
 
         // then
         assertThat(lottoResult.getRankCount(LottoRank.FIRST)).isEqualTo(1)

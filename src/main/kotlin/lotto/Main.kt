@@ -1,10 +1,10 @@
 package lotto
 
-import lotto.domain.LottoManager
+import lotto.ui.InputView
+import lotto.ui.OutputView
 
 fun main() {
 
-    val lottoManager = LottoManager()
-    val lottos = lottoManager.buyLotto()
-    lottoManager.getResult(lottos)
+    val lottoController = LottoController(LottoManager(), OutputView(), InputView())
+    lottoController.execute()
 }

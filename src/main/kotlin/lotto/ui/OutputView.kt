@@ -4,7 +4,7 @@ import lotto.domain.LottoRank
 import lotto.domain.LottoResult
 import lotto.domain.Lottos
 
-object OutputView {
+class OutputView {
 
     fun printLottos(lottos: Lottos) {
         println("${lottos.lottos.size}개를 구매했습니다.")
