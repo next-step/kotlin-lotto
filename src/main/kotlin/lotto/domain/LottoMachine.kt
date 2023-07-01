@@ -2,7 +2,7 @@ package lotto.domain
 
 import lotto.dto.PurchasedLotteryPapers
 
-class LottoShop {
+class LottoMachine {
 
     private val lotteryPaperList: MutableList<LotteryPaper> = mutableListOf()
     private val lotteryPaperFactory: LotteryPaperFactory = LotteryPaperFactory(RandomLottoNumberGenerationStrategy())
