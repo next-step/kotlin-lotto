@@ -2,6 +2,7 @@ package lotto.view.input.sixFortyFiveNumberLotto
 
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveNumber
 import lotto.view.input.InputView
+import lotto.view.output.NewLineOutputView
 
 class SixFortyFiveLottoBonusInputView : InputView<Int, SixFortyFiveNumber>() {
     override val message: String = "보너스 볼을 입력해 주세요."
@@ -10,6 +11,7 @@ class SixFortyFiveLottoBonusInputView : InputView<Int, SixFortyFiveNumber>() {
     init {
         renderMessage()
         value = SixFortyFiveNumber(readValue())
+        NewLineOutputView()
     }
 
     override fun readValue(): Int {

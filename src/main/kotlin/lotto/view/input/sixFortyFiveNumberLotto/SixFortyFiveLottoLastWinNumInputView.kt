@@ -16,7 +16,7 @@ class SixFortyFiveLottoLastWinNumInputView : InputView<List<SixFortyFiveNumber>,
     init {
         renderMessage()
         value = SixFortyFiveLotto(readValue())
-        NewLineOutputView().renderMessage()
+        NewLineOutputView()
     }
 
     companion object {
