@@ -22,28 +22,10 @@ class LottoMachineTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["14000", "3000"])
-    fun `입력받은 구입 금액에 맞게 로또를 구매한다`(money: Int) {
-        val buyLottoTicket = lottoMachine.buyLottoTicket(money)
-        lottoMachine.generateLottoNumbers(buyLottoTicket)
-        val purchasedLotteryPapers = lottoMachine.getPurchasedLotteryPapers()
-        val lotteryPaperList = purchasedLotteryPapers.lotteryPaperList
-        Assertions.assertThat(lotteryPaperList).hasSize(buyLottoTicket)
-    }
-
-    @ParameterizedTest
     @ValueSource(strings = ["999", "0", "-1000"])
     fun `구입 금액이 1000원 미만이면 IllegalArgumentException을 throw한다`(money: Int) {
         assertThrows<IllegalArgumentException> {
             lottoMachine.buyLottoTicket(money)
-        }
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = ["0", "-1"])
-    fun `로또 구매갯수가 음수나 0이면 IllegalArgumentException을 throw한다`(numOfLottoPurchases: Int) {
-        assertThrows<IllegalArgumentException> {
-            lottoMachine.generateLottoNumbers(numOfLottoPurchases)
         }
     }
 }

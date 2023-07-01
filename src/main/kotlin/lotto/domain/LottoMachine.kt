@@ -10,15 +10,16 @@ class LottoMachine {
 
     fun buyLottoTicket(money: Int): Int {
         lottoValidator.validateInputMoneyCanBuyLottoTicket(money)
-        return calculateNumberOfLottoTicket(money)
+        val numberOfLottoTicket = calculateNumberOfLottoTicket(money)
+        generateLottoNumbers(numberOfLottoTicket)
+        return numberOfLottoTicket
     }
 
     private fun calculateNumberOfLottoTicket(money: Int): Int {
         return money / LOTTO_TICKET_PRICE
     }
 
-    fun generateLottoNumbers(numOfLottoPurchases: Int) {
-        lottoValidator.validateNumOfLottoPurchases(numOfLottoPurchases)
+    private fun generateLottoNumbers(numOfLottoPurchases: Int) {
         repeat(numOfLottoPurchases) {
             val generatedLottoNumber = lotteryPaperFactory.generateLotteryPaper(lotteryPaperList.toList())
             lotteryPaperList.add(generatedLottoNumber)

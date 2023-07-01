@@ -32,7 +32,6 @@ class LottoController(
         val lottoMachine = LottoMachine()
         val numberOfLottoTicket = lottoMachine.buyLottoTicket(purchasingAmount)
         resultView.printNumberOfLottoTicket(numberOfLottoTicket)
-        lottoMachine.generateLottoNumbers(numberOfLottoTicket)
         return lottoMachine.getPurchasedLotteryPapers()
     }
 
