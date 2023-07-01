@@ -46,11 +46,11 @@ class ResultView {
     }
 
     private fun printEachPrizeLevel(prizeLevel: PrizeLevel, count: Int) {
-        var outputString = "${prizeLevel.numberOfHit}개 일치 (${prizeLevel.prizeMoney}원)"
+        var outputString = "${prizeLevel.numberOfHit}개 일치"
         if (prizeLevel == PrizeLevel.SECOND) {
-            outputString += ", 보너스 볼 일치(30000000원) "
+            outputString += ", 보너스 볼 일치"
         }
-        outputString += "- ${count}개"
+        outputString += " (${prizeLevel.prizeMoney}원) - ${count}개"
         println(outputString)
     }
 
