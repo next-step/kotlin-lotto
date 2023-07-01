@@ -14,18 +14,17 @@ class LottoMatcher {
         val matchedCountsMap = getMatchedCount(winningLottoNumbers, purchasedLotteryPapers.lotteryPaperList)
 
         val prizeList = matchedCountsMap.map { matchedCount ->
-            val eachPrizeLevel = PrizeLevel.fromNumberOfHit(matchedCount.value)
-            SecondLevelDiscriminator.checkPrizeLevelIsSecond(eachPrizeLevel, matchedCount.key, bonusNumber)
+            PrizeLevel.fromNumberOfHit(matchedCount.value, matchedCount.key, bonusNumber)
         }
         return LottoMatchResult(LottoMatchResult.countPrizeLevels(prizeList))
     }
 
     private fun getMatchedCount(
-        winningLottoNumber: List<LottoNumber>,
+        winningLottoNumbers: List<LottoNumber>,
         lotteryPaperList: List<LotteryPaper>
     ): Map<LotteryPaper, Int> {
         return lotteryPaperList.associateWith {
-            LottoNumberComparator.compare(winningLottoNumber, it.getLottoNumbers())
+            LottoNumberComparator.compare(winningLottoNumbers, it.getLottoNumbers())
         }
     }
 }

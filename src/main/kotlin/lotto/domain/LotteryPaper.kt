@@ -21,6 +21,10 @@ class LotteryPaper(private val lottoNumbers: List<LottoNumber>) {
         return lottoNumbers.toList()
     }
 
+    fun hasBonusNumber(bonusNumber: LottoNumber): Boolean {
+        return lottoNumbers.contains(bonusNumber)
+    }
+
     companion object {
         const val NUMBER_OF_LOTTO_DRAWS = 6
 

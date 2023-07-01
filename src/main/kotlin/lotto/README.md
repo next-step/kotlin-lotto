@@ -65,7 +65,7 @@
 - [x] 보너스 넘버는 당첨 번호와 중복되지 않는다.
 
 
-* SecondLevelDiscriminator
+* PrizeLevel
 
 - [x] 3등일때 남은 숫자가 보너스 넘버와 같은지 체크한다.
 - [x] 3등이 아니면 체크하지않는다.
