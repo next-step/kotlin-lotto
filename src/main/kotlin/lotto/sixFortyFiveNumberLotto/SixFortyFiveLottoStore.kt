@@ -7,7 +7,7 @@ class SixFortyFiveLottoStore : LottoStore<SixFortyFiveLottoPurchases, SixFortyFi
         return SixFortyFiveLottoes(purchases.value.map { SixFortyFiveLotto.from(it) })
     }
 
-    fun getPurchaseCountByPrice(price: Int): Int {
-        return price / SixFortyFiveLotto.LOTTO_PRICE
+    fun getPurchaseCountByPrice(price: SixFortyFiveLottoPurchasePrice): Int {
+        return price.value / SixFortyFiveLotto.LOTTO_PRICE
     }
 }

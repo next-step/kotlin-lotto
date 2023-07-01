@@ -4,11 +4,11 @@ import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoPurchases
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoStore
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveWinningLotto
 import lotto.sixFortyFiveNumberLotto.merge
-import lotto.view.input.LottoPurchasePriceInputView
-import lotto.view.input.sixFortyFiveNumberLotto.SixFortyFiveLottoBonusInputView
-import lotto.view.input.sixFortyFiveNumberLotto.SixFortyFiveLottoLastWinNumInputView
-import lotto.view.input.sixFortyFiveNumberLotto.SixFortyFiveManualLottoCountInputView
-import lotto.view.input.sixFortyFiveNumberLotto.SixFortyFiveManualLottoesInputView
+import lotto.view.input.SixFortyFiveLottoPurchasePriceInputView
+import lotto.view.input.SixFortyFiveLottoBonusInputView
+import lotto.view.input.SixFortyFiveLottoLastWinNumInputView
+import lotto.view.input.SixFortyFiveManualLottoCountInputView
+import lotto.view.input.SixFortyFiveManualLottoesInputView
 import lotto.view.output.sixFortyFiveNumberLotto.SixFortyFiveBonusResultOutputView
 import lotto.view.output.sixFortyFiveNumberLotto.SixFortyFiveLottoOutputView
 
@@ -17,7 +17,7 @@ class SixFortyFiveLottoController(
 ) {
     fun start() {
         // 구입금액 입력
-        val purchasePrice = LottoPurchasePriceInputView().value
+        val purchasePrice = SixFortyFiveLottoPurchasePriceInputView().value
         val purchaseCount = lottoStore.getPurchaseCountByPrice(purchasePrice)
 
         // 수동으로 구매할 로또 수 입력 & 수동 로또 purchase 생성

@@ -4,6 +4,7 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLotto
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoPurchase
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoPurchasePrice
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoPurchases
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoStore
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoType
@@ -38,7 +39,7 @@ class LottoStoreTest {
     @Test
     fun `전체 구입 금액에서 수동 로또 수를 제외한 만큼 자동 로또를 생성합니다`() {
         val lottoStore = SixFortyFiveLottoStore()
-        val purchasePrice = 10000
+        val purchasePrice = SixFortyFiveLottoPurchasePrice(10000)
         val purchaseLottoCount = lottoStore.getPurchaseCountByPrice(purchasePrice)
         val manualLottoCount = 3
         val manualLottoPurchases = SixFortyFiveLottoPurchases(

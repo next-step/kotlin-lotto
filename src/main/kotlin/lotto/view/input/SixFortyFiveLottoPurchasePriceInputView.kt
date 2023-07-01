@@ -1,10 +1,11 @@
 package lotto.view.input
 
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoPurchasePrice
 import lotto.view.output.NewLineOutputView
 
-class LottoPurchasePriceInputView : InputView<Int, Int>() {
+class SixFortyFiveLottoPurchasePriceInputView : InputView<Int, SixFortyFiveLottoPurchasePrice>() {
     override val message: String = "구입금액을 입력해 주세요."
-    override val value: Int
+    override val value: SixFortyFiveLottoPurchasePrice
 
     override fun readValue(): Int {
         return readln().toInt()
@@ -12,7 +13,7 @@ class LottoPurchasePriceInputView : InputView<Int, Int>() {
 
     init {
         renderMessage()
-        value = readValue()
+        value = SixFortyFiveLottoPurchasePrice(readValue())
         NewLineOutputView()
     }
 }
