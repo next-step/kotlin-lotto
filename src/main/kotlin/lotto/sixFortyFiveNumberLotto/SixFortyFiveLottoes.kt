@@ -1,6 +1,7 @@
 package lotto.sixFortyFiveNumberLotto
 
-class SixFortyFiveLottoes(private val list: List<SixFortyFiveLotto>) {
+@JvmInline
+value class SixFortyFiveLottoes(private val list: List<SixFortyFiveLotto>) {
     fun getWinningResultEnumList(winningValue: SixFortyFiveWinningLotto): List<SixFortyFiveWinningEnum> {
         return list.map { lotto ->
             SixFortyFiveWinningEnum.valueOf(winningValue.matchCount(lotto.numbers))

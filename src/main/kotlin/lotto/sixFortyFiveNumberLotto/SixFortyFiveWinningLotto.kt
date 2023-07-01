@@ -2,7 +2,7 @@ package lotto.sixFortyFiveNumberLotto
 
 import lotto.ErrorCode
 
-class SixFortyFiveWinningLotto(
+data class SixFortyFiveWinningLotto(
     val lotto: SixFortyFiveLotto,
     private val bonusNumber: SixFortyFiveNumber? = null,
 ) {

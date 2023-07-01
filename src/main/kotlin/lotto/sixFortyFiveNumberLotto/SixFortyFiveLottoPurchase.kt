@@ -1,6 +1,6 @@
 package lotto.sixFortyFiveNumberLotto
 
-class SixFortyFiveLottoPurchase(
+data class SixFortyFiveLottoPurchase(
     val type: SixFortyFiveLottoType,
     val numbers: List<SixFortyFiveNumber>,
 ) {

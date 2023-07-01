@@ -3,7 +3,7 @@ package lotto.sixFortyFiveNumberLotto
 import lotto.ErrorCode
 import lotto.Lotto
 
-class SixFortyFiveLotto(
+data class SixFortyFiveLotto(
     val numbers: List<SixFortyFiveNumber>,
     val type: SixFortyFiveLottoType = SixFortyFiveLottoType.AUTO,
 ) : Lotto {

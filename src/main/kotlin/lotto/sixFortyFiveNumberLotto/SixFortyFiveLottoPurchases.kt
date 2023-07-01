@@ -7,7 +7,8 @@ fun SixFortyFiveLottoPurchases.merge(purchases: SixFortyFiveLottoPurchases) = Si
     ),
 )
 
-class SixFortyFiveLottoPurchases(val value: List<SixFortyFiveLottoPurchase>) {
+@JvmInline
+value class SixFortyFiveLottoPurchases(val value: List<SixFortyFiveLottoPurchase>) {
 
     constructor(vararg purchase: SixFortyFiveLottoPurchase) : this(purchase.toList())
 
