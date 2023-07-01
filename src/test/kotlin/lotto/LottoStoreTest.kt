@@ -1,8 +1,12 @@
 package lotto
 
+import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLotto
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoPurchase
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoPurchases
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoStore
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoType
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveNumber
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveWinningLotto
 import org.junit.jupiter.api.Assertions
@@ -10,13 +14,49 @@ import org.junit.jupiter.api.Test
 
 class LottoStoreTest {
     @Test
-    fun `구매 개수 만큼 로또를 생성합니다`() {
-        val purchaseCount = 3
+    fun `입력받은 숫자들을 통해 수동 로또를 생성합니다`() {
         val lottoStore = SixFortyFiveLottoStore()
+        val manualLottoNumbers = listOf(
+            SixFortyFiveNumber(1),
+            SixFortyFiveNumber(2),
+            SixFortyFiveNumber(3),
+            SixFortyFiveNumber(4),
+            SixFortyFiveNumber(5),
+            SixFortyFiveNumber(6),
+        )
 
-        val lottoes = lottoStore.purchase(purchaseCount)
+        val manualLottoPurchase = SixFortyFiveLottoPurchase.ofManual(manualLottoNumbers)
+        val manualLottoPurchases = SixFortyFiveLottoPurchases(manualLottoPurchase)
+        val lottoes = lottoStore.purchase(manualLottoPurchases)
 
-        lottoes.getList().forEach { lotto -> lotto.shouldBeInstanceOf<SixFortyFiveLotto>() }
+        with(lottoes.getList()) {
+            forEach { lotto -> lotto.shouldBeInstanceOf<SixFortyFiveLotto>() }
+            count { it.type == SixFortyFiveLottoType.MANUAL } shouldBe 1
+        }
+    }
+
+    @Test
+    fun `전체 구입 금액에서 수동 로또 수를 제외한 만큼 자동 로또를 생성합니다`() {
+        val lottoStore = SixFortyFiveLottoStore()
+        val purchasePrice = 10000
+        val purchaseLottoCount = lottoStore.getPurchaseCountByPrice(purchasePrice)
+        val manualLottoCount = 3
+        val manualLottoPurchases = SixFortyFiveLottoPurchases(
+            (1..manualLottoCount).map {
+                SixFortyFiveLottoPurchase(
+                    SixFortyFiveLottoType.MANUAL,
+                    getNumbers(),
+                )
+            },
+        )
+
+        val mergedLottoPurchases = SixFortyFiveLottoPurchases.ofAutoFromManual(purchasePrice, manualLottoPurchases)
+        val lottoes = lottoStore.purchase(mergedLottoPurchases)
+
+        with(lottoes.getList()) {
+            forEach { lotto -> lotto.shouldBeInstanceOf<SixFortyFiveLotto>() }
+            count { it.type == SixFortyFiveLottoType.AUTO } shouldBe purchaseLottoCount - manualLottoCount
+        }
     }
 
     @Test
@@ -42,5 +82,16 @@ class LottoStoreTest {
 
         Assertions.assertEquals(winningResult.countOfMatch, 3)
         Assertions.assertEquals(winningResult.isMatchedBonus, true)
+    }
+
+    private fun getNumbers(): List<SixFortyFiveNumber> {
+        return listOf(
+            SixFortyFiveNumber(1),
+            SixFortyFiveNumber(2),
+            SixFortyFiveNumber(3),
+            SixFortyFiveNumber(4),
+            SixFortyFiveNumber(5),
+            SixFortyFiveNumber(6),
+        )
     }
 }
