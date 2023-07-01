@@ -6,6 +6,9 @@ import java.util.regex.Pattern
 class NumbersGenerator(private val input: String) {
 
     fun generate(): Numbers {
+        if (input.length == 1) {
+            return Numbers(listOf(Number.of(input)))
+        }
         val matcher = CUSTOM_DELIMITER_PATTERN.matcher(input)
         if (matcher.find()) {
             return byCustomDelimiters(matcher)

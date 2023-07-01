@@ -2,6 +2,8 @@ package stringaddcalculator.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 class NumbersGeneratorTest {
     @Test
@@ -30,5 +32,13 @@ class NumbersGeneratorTest {
         val numbers = NumbersGenerator("1,2:3").generate()
         assertThat(numbers)
             .isEqualTo(Numbers(listOf( Number.of("1"), Number.of("2"), Number.of("3"))))
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1", "2", "3"])
+    fun `숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환`(input: String) {
+        val numbers = NumbersGenerator(input).generate()
+        assertThat(numbers)
+            .isEqualTo(Numbers(listOf(Number.of(input))))
     }
 }
