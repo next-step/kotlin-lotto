@@ -18,13 +18,32 @@ class LotteryPaperFactoryTest {
 
         val generatedLotteryPaper = lotteryPaperFactory.generateLotteryPaper(listOf())
 
-        Assertions.assertThat(generatedLotteryPaper.getLottoNumber()).hasSize(6).allMatch { it in 1..45 }
+        Assertions.assertThat(generatedLotteryPaper.getLottoNumbers()).hasSize(6).allMatch { it.lottoNumber in 1..45 }
     }
 
     @Test
     fun `생성된 로또 번호는 중복이 없다`() {
         val lotteryPaperList = listOf(
-            LotteryPaper(listOf(1, 2, 3, 4, 5, 6)), LotteryPaper(listOf(1, 2, 3, 4, 5, 7))
+            LotteryPaper(
+                listOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5),
+                    LottoNumber(6)
+                )
+            ),
+            LotteryPaper(
+                listOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5),
+                    LottoNumber(7)
+                )
+            )
         )
 
         val generatedLotteyPaper = lotteryPaperFactory.generateLotteryPaper(lotteryPaperList)

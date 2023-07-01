@@ -10,27 +10,18 @@ class LotteryPaperTest {
     @ParameterizedTest
     @CsvSource("1,2,3,4,5,6", "2,3,10,43,45,6", delimiter = ',')
     fun `당첨 번호를 입력받아서 당첨번호를 생성한다`(input: String) {
-        val numberList = input.split(',').map { it.toInt() }
+        val numberList = input.split(',').map { LottoNumber(it.toInt()) }
 
         val winningNumber = LotteryPaper(numberList)
-        val winningLottoNumber = winningNumber.getLottoNumber()
+        val winningLottoNumber = winningNumber.getLottoNumbers()
 
         Assertions.assertThat(winningLottoNumber).isEqualTo(numberList)
     }
 
     @ParameterizedTest
-    @CsvSource("46,2,3,4,5,6", "0,2,3,4,5,6", delimiter = ' ')
-    fun `당첨 번호가 1부터 45 사이의 값이 아니면 IllegalArgumentException을 throw한다`(input: String) {
-        val numberList = input.split(',').map { it.toInt() }
-        assertThrows<IllegalArgumentException> {
-            LotteryPaper(numberList)
-        }
-    }
-
-    @ParameterizedTest
     @CsvSource("1,1,3,4,5,6", "45,45,3,4,5,6", delimiter = ' ')
     fun `당첨 번호는 중복이 있으면 안된다`(input: String) {
-        val numberList = input.split(',').map { it.toInt() }
+        val numberList = input.split(',').map { LottoNumber(it.toInt()) }
         assertThrows<IllegalArgumentException> {
             LotteryPaper(numberList)
         }

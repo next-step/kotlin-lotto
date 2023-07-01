@@ -16,18 +16,55 @@ class LottoShopMatcherTest {
 
     @Test
     fun `로또 번호와 당첨 번호를 가지고 당첨 통계를 낸다`() {
-        val lottoNumbers = listOf(1, 2, 3, 4, 5, 6)
+        val numberList = listOf(1, 2, 3, 4, 5, 6)
+        val lottoNumbers = numberList.map { LottoNumber(it) }
         val winningNumber = LotteryPaper(lottoNumbers)
 
         val lotteryPaperList = listOf(
-            LotteryPaper(listOf(1, 2, 3, 4, 5, 6)),
-            LotteryPaper(listOf(2, 3, 4, 5, 6, 7)),
-            LotteryPaper(listOf(3, 4, 5, 6, 7, 8)),
-            LotteryPaper(listOf(4, 5, 6, 7, 8, 9))
+            LotteryPaper(
+                listOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5),
+                    LottoNumber(6)
+                )
+            ),
+            LotteryPaper(
+                listOf(
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5),
+                    LottoNumber(6),
+                    LottoNumber(7),
+                )
+            ),
+            LotteryPaper(
+                listOf(
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5),
+                    LottoNumber(6),
+                    LottoNumber(7),
+                    LottoNumber(8)
+                )
+            ),
+            LotteryPaper(
+                listOf(
+                    LottoNumber(4),
+                    LottoNumber(5),
+                    LottoNumber(6),
+                    LottoNumber(7),
+                    LottoNumber(8),
+                    LottoNumber(9)
+                )
+            )
         )
 
         val purchasedLotteryPapers = PurchasedLotteryPapers(lotteryPaperList)
-        val bonusBall = BonusBall(10, winningNumber)
+        val bonusBall = BonusBall(LottoNumber(10), winningNumber)
         val countLottoWinner = lottoMatcher.countLottoWinner(
             winningNumber,
             purchasedLotteryPapers,

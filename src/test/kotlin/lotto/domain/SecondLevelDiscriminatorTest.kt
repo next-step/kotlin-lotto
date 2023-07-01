@@ -9,9 +9,9 @@ class SecondLevelDiscriminatorTest {
 
     @Test
     fun `3등일때 남은 숫자가 보너스 볼의 숫자와 같은지 체크한다`() {
-        val lottoNumber = listOf(1, 2, 3, 4, 5, 6)
-        val lotteryPaper = LotteryPaper(lottoNumber)
-        val bonusBall = BonusBall(7, lotteryPaper)
+        val lottoNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }
+        val lotteryPaper = LotteryPaper(lottoNumbers)
+        val bonusBall = BonusBall(LottoNumber(7), lotteryPaper)
 
         val actual = SecondLevelDiscriminator.checkPrizeLevelIsSecond(
             prizeLevel = PrizeLevel.THIRD,
@@ -25,9 +25,9 @@ class SecondLevelDiscriminatorTest {
     @ParameterizedTest
     @ValueSource(strings = ["NONE", "FIFTH", "FOURTH", "SECOND", "FIRST"])
     fun `3등이 아니면 체크하지않는다`(prizeLevel: PrizeLevel) {
-        val lottoNumber = listOf(1, 2, 3, 4, 5, 6)
-        val lotteryPaper = LotteryPaper(lottoNumber)
-        val bonusBall = BonusBall(7, lotteryPaper)
+        val lottoNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }
+        val lotteryPaper = LotteryPaper(lottoNumbers)
+        val bonusBall = BonusBall(LottoNumber(7), lotteryPaper)
 
         val actual = SecondLevelDiscriminator.checkPrizeLevelIsSecond(
             prizeLevel = prizeLevel,
