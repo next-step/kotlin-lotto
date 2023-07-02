@@ -31,8 +31,8 @@ object InputView {
         val input: String = readln().replace(" ", "")
         val inputStrings = input.split(REGEX)
             .dropLastWhile { it.isEmpty() }
-            .toTypedArray()
-        return LottoNumbers(inputStrings.map { it.toInt() })
+            .map { it.toInt() }
+        return LottoNumbers(inputStrings)
     }
 
     fun inputBonusNumber(): Int {

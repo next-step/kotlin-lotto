@@ -1,3 +1,4 @@
 package lotto.dto
 
-class LottoNumbers(val lottoNumbers: List<Int>)
+@JvmInline
+value class LottoNumbers(val lottoNumbers: List<Int>)
