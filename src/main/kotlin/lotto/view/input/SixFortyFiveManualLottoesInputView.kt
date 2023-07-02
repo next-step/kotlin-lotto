@@ -2,9 +2,9 @@ package lotto.view.input
 
 import lotto.ErrorCode
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoCount
-import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoPurchase
-import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoPurchases
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveNumber
+import lotto.sixFortyFiveNumberLotto.purchase.SixFortyFiveLottoPurchases
+import lotto.sixFortyFiveNumberLotto.purchase.SixFortyFiveManualLottoPurchase
 import lotto.view.output.NewLineOutputView
 
 class SixFortyFiveManualLottoesInputView(count: SixFortyFiveLottoCount) :
@@ -28,9 +28,9 @@ class SixFortyFiveManualLottoesInputView(count: SixFortyFiveLottoCount) :
         return numberList.map { SixFortyFiveNumber(it) }
     }
 
-    private fun makePurchase(): SixFortyFiveLottoPurchase {
+    private fun makePurchase(): SixFortyFiveManualLottoPurchase {
         val numbers = readValue()
-        return SixFortyFiveLottoPurchase.ofManual(numbers)
+        return SixFortyFiveManualLottoPurchase.of(numbers)
     }
 
     companion object {
