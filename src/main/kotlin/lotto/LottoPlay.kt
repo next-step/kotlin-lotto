@@ -23,8 +23,9 @@ fun main() {
     printLottoNumber(purchasedLottos)
 
     val lastWeekWinningString = LottoVendor.readLastWeekWinningString()
+    val lastWeekBonusNumber = LottoVendor.readLastWeekBonusBallNumber()
     val lastWeekWinningNumbers: List<Int> = toIntList(lastWeekWinningString)
-    purchasedLottos.forEach { it.setLottoPrize(lastWeekWinningNumbers) }
+    purchasedLottos.forEach { it.setLottoPrize(lastWeekWinningNumbers, lastWeekBonusNumber) }
     val winningRatio = LottoPlayResultAnalysis.getWinningRatio(purchaseAmount, purchasedLottos)
     LottoPlayer.printResult(purchasedLottos, winningRatio)
 }
