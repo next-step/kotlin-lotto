@@ -1,7 +1,9 @@
 package lotto.domain
 
-class LottoTicket(numbers: List<Int>) {
-    val lottoNumbers: Set<Int> = numbers.sorted().toSet()
+import lotto.dto.LottoNumbers
+
+class LottoTicket(numbers: LottoNumbers) {
+    val lottoNumbers: Set<Int> = numbers.lottoNumbers.sorted().toSet()
 
     init {
         require(lottoNumbers.count() == SIZE)

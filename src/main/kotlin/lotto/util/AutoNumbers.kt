@@ -1,5 +1,7 @@
 package lotto.util
 
+import lotto.dto.LottoNumbers
+
 interface AutoNumbers {
-    fun generateNumbers(): List<Int>
+    fun generateNumbers(): LottoNumbers
 }

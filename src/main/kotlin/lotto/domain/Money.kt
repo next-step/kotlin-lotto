@@ -12,7 +12,11 @@ value class Money(val value: Int) {
     }
 
     fun countAutoLotto(countManualLotto: Int): Int {
-        return countLotto() - countManualLotto
+        val count = countLotto() - countManualLotto
+        if (count < 0) {
+            throw IllegalArgumentException()
+        }
+        return count
     }
 
     companion object {
