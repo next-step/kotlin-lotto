@@ -42,9 +42,8 @@ class LottoMatchNumbersTest {
 
     @Test
     fun `당첨번호가 6개가 아닌 경우 실패한다`() {
-    // expect
-    Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java)
-        .isThrownBy {
+        // expect
+        Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java).isThrownBy {
             LottoWinningNumbers(
                 LottoNumbersHelper.generate(1, 2, 3, 4, 5, 5),
                 LottoNumber(7)

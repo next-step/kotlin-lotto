@@ -1,10 +1,9 @@
 package lotto.domain
 
 class Lotto(
-    private val lottoNumberGenerator: LottoNumberGenerator,
+    val lottoNumbers: LottoNumbers,
+    val type: LottoType
 ) {
-
-    val lottoNumbers: LottoNumbers = lottoNumberGenerator.generate().let { LottoNumbers.of(it) }
 
     fun matchNumbers(lottoWinningNumbers: LottoWinningNumbers): LottoRank {
         val lottoMatchCount = lottoWinningNumbers.match(lottoNumbers)
@@ -13,5 +12,9 @@ class Lotto(
 
     companion object {
         const val LOTTO_PRICE = 1_000
+
+        fun of(lottoNumberGenerator: LottoNumberGenerator): Lotto {
+            return Lotto(lottoNumberGenerator.generate().let { LottoNumbers.of(it) }, LottoType.AUTO)
+        }
     }
 }

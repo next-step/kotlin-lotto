@@ -9,9 +9,15 @@ class Lottos(
         return LottoResult(lottoRanks, lottos.size)
     }
 
+    fun getLottoCount(type: LottoType): Int {
+        return lottos.count { it.type == type }
+    }
+
     companion object {
-        fun of(lottoCount: Int, lottoNumberGenerator: LottoNumberGenerator): Lottos {
-            return Lottos(List(lottoCount) { Lotto(lottoNumberGenerator) })
+        fun of(autoLottoCount: Int, manualLottoNumbers: List<LottoNumbers>): Lottos {
+            val manualLottos = manualLottoNumbers.map { Lotto(it, LottoType.MANUAL) }
+            val autoLottos = List(autoLottoCount) { Lotto.of(RandomLottoNumberGenerator()) }
+            return Lottos(manualLottos + autoLottos)
         }
     }
 }

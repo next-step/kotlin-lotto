@@ -1,14 +1,13 @@
 package lotto
 
-import lotto.domain.LottoMachine
-import lotto.domain.LottoWinningNumbers
-import lotto.domain.LottoResult
-import lotto.domain.Lottos
+import lotto.domain.*
 
-class LottoManager {
+class LottoManager(
+    private val lottoMachine: LottoMachine
+) {
 
-    fun buyLotto(price: Int): Lottos {
-        return LottoMachine().buy(price)
+    fun buyLottos(manualLottoCount: ManualLottoCount, manualLottoNumbers: List<LottoNumbers>): Lottos {
+        return lottoMachine.buy(manualLottoCount, manualLottoNumbers)
     }
 
     fun getResult(lottos: Lottos, winningNumbers: LottoWinningNumbers): LottoResult {

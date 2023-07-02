@@ -1,6 +1,6 @@
 package lotto.domain
 
-class RandomLottoNumberGenerator: LottoNumberGenerator {
+class RandomLottoNumberGenerator : LottoNumberGenerator {
 
     private val numberPool = (MIN_NUMBER..MAX_NUMBER).map { it }
 

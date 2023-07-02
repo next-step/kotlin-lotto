@@ -11,7 +11,7 @@ class LottoTest {
         val lottoNumbers = FakeLottoNumberGenerator().generate().let { LottoNumbers.of(it) }
         val lottoWinningNumbers = LottoWinningNumbers.of(lottoNumbers.lottoNumbers.map { it.number }, 7)
 
-        val lotto = Lotto(FakeLottoNumberGenerator())
+        val lotto = Lotto.of(FakeLottoNumberGenerator())
 
         // when
         val lottoRank = lotto.matchNumbers(lottoWinningNumbers)

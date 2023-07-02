@@ -11,7 +11,9 @@ class LottoController(
 
     fun execute() {
         val price = inputView.readPrice()
-        val lottos = lottoManager.buyLotto(price)
+        val manualLottoCount = inputView.readManualLottoCount(price)
+        val manualLottoNumbers = inputView.readManualLottoNumbers(manualLottoCount)
+        val lottos = lottoManager.buyLottos(manualLottoCount, manualLottoNumbers)
         outputView.printLottos(lottos)
 
         val winningNumbers = inputView.readWinningAndBonusNumbers()
