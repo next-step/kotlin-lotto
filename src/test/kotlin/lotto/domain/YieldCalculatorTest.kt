@@ -25,9 +25,9 @@ class YieldCalculatorTest {
         )
         val purchasedLotteryPapers = LottoMatchResult(lottoMatchResult)
 
-        val acutal = yieldCalculator.calulateYield(capital, purchasedLotteryPapers)
-        val answer = 0.35
+        val actual = yieldCalculator.calculateYield(capital, purchasedLotteryPapers)
+        val answer = 3.57
 
-        Assertions.assertThat(acutal).isEqualTo(answer)
+        Assertions.assertThat(actual).isEqualTo(answer)
     }
 }

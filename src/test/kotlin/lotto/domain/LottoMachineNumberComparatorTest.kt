@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
-class LottoNumberComparatorTest {
+class LottoMachineNumberComparatorTest {
 
     @ParameterizedTest
     @CsvSource(
@@ -15,8 +15,8 @@ class LottoNumberComparatorTest {
         delimiter = ' '
     )
     fun `두 개의 로또 번호를 입력받아서 같은 갯수가 몇개인지 찾는다`(inputList: String, answer: Int) {
-        val numberList = inputList.split(',').map { it.toInt() }
-        val comparativeList = listOf(1, 2, 3, 4, 5, 6)
+        val numberList = inputList.split(',').map { LottoNumber(it.toInt()) }
+        val comparativeList = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }
         Assertions.assertThat(LottoNumberComparator.compare(numberList, comparativeList))
             .isEqualTo(answer)
     }

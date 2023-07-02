@@ -1,21 +1,20 @@
 package lotto.domain
 
 import lotto.dto.LottoMatchResult
-import java.lang.Math.floor
 
 class YieldCalculator {
 
-    fun calulateYield(capital: Int, lottoMatchResult: LottoMatchResult): Double {
-        val lottoMatchResult = lottoMatchResult.matchLottoResult
+    fun calculateYield(capital: Int, lottoMatchResult: LottoMatchResult): Double {
+        val matchLottoResult = lottoMatchResult.getMatchLottoResult()
         var grossProfit = 0
-        for ((prizeLevel, count) in lottoMatchResult) {
+        for ((prizeLevel, count) in matchLottoResult) {
             grossProfit += prizeLevel.prizeMoney * count
         }
-        val yeild = grossProfit / capital.toDouble()
-        return roundToTwoDecimalPlaces(yeild)
+        val yield = grossProfit / capital.toDouble()
+        return roundToTwoDecimalPlaces(yield)
     }
 
     private fun roundToTwoDecimalPlaces(number: Double): Double {
-        return floor(number * 100) / 100
+        return kotlin.math.floor(number * 100) / 100
     }
 }

@@ -1,5 +1,6 @@
 package lotto.ui
 
+import lotto.domain.LottoNumber
 import lotto.domain.PrizeLevel
 import lotto.dto.PurchasedLotteryPapers
 
@@ -7,20 +8,24 @@ class ResultView {
     fun printLottoNumbers(purchasedLotteryPapers: PurchasedLotteryPapers) {
         val lotteryPaperList = purchasedLotteryPapers.lotteryPaperList
         lotteryPaperList.forEach {
-            printSingleLottoNumber(it.getLottoNumber())
+            printSingleLottoNumber(it.getLottoNumbers())
         }
         println()
     }
 
-    private fun printSingleLottoNumber(lottoNumber: List<Int>) {
+    private fun printSingleLottoNumber(lottoNumbers: List<LottoNumber>) {
         print("[")
-        lottoNumber.forEachIndexed { index, ints ->
-            print(ints)
-            if (index != lottoNumber.lastIndex) {
-                print(", ")
-            }
+        lottoNumbers.forEachIndexed { index, lottoNumber ->
+            print(lottoNumber.lottoNumber)
+            printIfNotLastIndex(index, lottoNumbers)
         }
         println("]")
+    }
+
+    private fun printIfNotLastIndex(index: Int, lottoNumber: List<LottoNumber>) {
+        if (index != lottoNumber.lastIndex) {
+            print(", ")
+        }
     }
 
     fun printNumberOfLottoTicket(numberOfLottoTicket: Int) {
@@ -28,15 +33,25 @@ class ResultView {
     }
 
     fun printMatchLottoNumber(matchLottoNumber: Map<PrizeLevel, Int>) {
+        println()
         println("당첨 통계")
         println("---------")
 
         PrizeLevel.values()
             .filter { it != PrizeLevel.NONE }
             .forEach { prizeLevel ->
-                val count = matchLottoNumber.getValue(prizeLevel)
-                println("${prizeLevel.numberOfHit}개 일치 (${prizeLevel.prizeMoney}원)- ${count}개")
+                val count = matchLottoNumber.getOrDefault(prizeLevel, 0)
+                printEachPrizeLevel(prizeLevel, count)
             }
+    }
+
+    private fun printEachPrizeLevel(prizeLevel: PrizeLevel, count: Int) {
+        var outputString = "${prizeLevel.numberOfHit}개 일치"
+        if (prizeLevel == PrizeLevel.SECOND) {
+            outputString += ", 보너스 볼 일치"
+        }
+        outputString += " (${prizeLevel.prizeMoney}원) - ${count}개"
+        println(outputString)
     }
 
     fun printYield(yield: Double) {
