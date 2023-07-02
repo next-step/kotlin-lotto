@@ -3,7 +3,7 @@ package lotto.sixFortyFiveNumberLotto
 import lotto.ErrorCode
 import lotto.Lotto
 
-data class SixFortyFiveLotto(val numbers: List<SixFortyFiveNumber>) : Lotto {
+class SixFortyFiveLotto(val numbers: List<SixFortyFiveNumber>) : Lotto {
 
     init {
         require(numbers.size == LOTTO_NUMBER_COUNT) { ErrorCode.INVALID_SIX_FORTY_FIVE_LOTTO_NUMBER_COUNT.msg }
