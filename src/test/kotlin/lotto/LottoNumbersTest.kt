@@ -10,14 +10,6 @@ import java.util.stream.Stream
 
 class LottoNumbersTest {
 
-    @Test
-    fun `발급된 로또 번호는 6개여야 한다`() {
-        Assertions.assertThat(
-            LottoNumbers.generate()
-                .numbers
-        ).hasSize(6)
-    }
-
     @ParameterizedTest
     @MethodSource("숫자가 6개가 아닌 로또 번호")
     fun `로또 번호가 6개가 아니라면 throw IllegalStateException`(lottoNumbers: Set<Int>) {

@@ -16,16 +16,10 @@ data class LottoNumbers(
     companion object {
         const val LENGTH = 6
 
-        fun generate(): LottoNumbers {
-            val randomNumbers =
-                DuplicateFreeSequenceGenerator.generate(LottoNumber.MINIMUM, LottoNumber.MAXIMUM, LENGTH)
-            return fromNumbers(randomNumbers)
-        }
-
-        fun fromNumbers(numberSet: Set<Int>): LottoNumbers {
+        fun fromNumbers(numbers: Set<Int>): LottoNumbers {
             return LottoNumbers(
-                numbers = numberSet.map {
-                    LottoNumber.get(it)
+                numbers = numbers.map {
+                    LottoNumber[it]
                 }.toSet()
             )
         }

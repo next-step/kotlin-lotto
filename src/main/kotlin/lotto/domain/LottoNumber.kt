@@ -19,7 +19,7 @@ value class LottoNumber private constructor(val value: Int) {
 
         private val lottoNumberMap = ConcurrentHashMap<Int, LottoNumber>()
 
-        fun get(value: Int): LottoNumber {
+        operator fun get(value: Int): LottoNumber {
             return lottoNumberMap.getOrPut(value) {
                 LottoNumber(value)
             }
