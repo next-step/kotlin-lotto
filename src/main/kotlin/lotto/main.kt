@@ -9,6 +9,8 @@ fun main() {
     val lottoController = LottoController()
 
     val purchaseAmount = lottoController.inputPurchaseAmount()
+    val manualLottoCount = lottoController.inputManualLottoCount()
+
     val lottoTickets = lottoController.purchaseLottoTickets(purchaseAmount)
     val winningNumbers = lottoController.inputWinningNumber()
     val bonusNumber = lottoController.inputBonusNumber()

@@ -25,6 +25,11 @@ class LottoController {
         return inputIO.inputPurchaseAmount()
     }
 
+    fun inputManualLottoCount(): Int {
+        inputView.show(InputMessage.MANUAL_LOTTO_COUNT)
+        return inputIO.inputManualLottoCount()
+    }
+
     fun purchaseLottoTickets(purchaseAmount: Int): List<Lotto> {
         val lottoTickets = lottoStore.purchaseLottoTickets(purchaseAmount)
         resultView.showLottoTicketQuantity(lottoTickets.size)

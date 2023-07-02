@@ -25,4 +25,8 @@ class InputIO {
     fun inputBonusNumber(inputString: String? = readlnOrNull()): LottoNumber {
         return LottoNumber(inputString?.toIntOrNull() ?: 0)
     }
+
+    fun inputManualLottoCount(inputString: String? = readlnOrNull()): Int {
+        return inputString?.toIntOrNull() ?: 0
+    }
 }
