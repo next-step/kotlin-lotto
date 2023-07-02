@@ -7,7 +7,7 @@ import io.kotest.matchers.shouldBe
 import lotto.view.LottoResultMessage
 
 class LottoResultTest : StringSpec({
-    val winningLottoNumbers = WinningLotto(LottoNumbers.from("1,2,3,4,5,6"), LottoNumber(7))
+    val winningLotto = WinningLotto(Lotto.from("1,2,3,4,5,6"), LottoNumber(7))
 
     "각 등수 정상 결과 확인" {
         forAll(
@@ -18,7 +18,7 @@ class LottoResultTest : StringSpec({
             row("1,2,3,7,8,9", LottoRanking.FIFTH),
         ) { lottoNumber, ranking ->
             val lottoRanking = LottoResult().lottoRanking(
-                listOf(LottoNumbers.from(lottoNumber)), winningLottoNumbers
+                Lottos(listOf(Lotto.from(lottoNumber))), winningLotto
             )
             lottoRanking[ranking] shouldBe 1
         }

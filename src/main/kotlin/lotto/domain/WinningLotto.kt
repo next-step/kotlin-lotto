@@ -1,8 +1,8 @@
 package lotto.domain
 
-import lotto.domain.LottoNumbers.Companion.LOTTO_NUMBER_COUNT
+import lotto.domain.Lotto.Companion.LOTTO_NUMBER_COUNT
 
-class WinningLotto(private val winningNumbers: LottoNumbers, private val bonusNumber: LottoNumber) {
+class WinningLotto(private val winningNumbers: Lotto, private val bonusNumber: LottoNumber) {
 
     init {
         require(!winningNumbers.contains(bonusNumber)) {
@@ -10,12 +10,12 @@ class WinningLotto(private val winningNumbers: LottoNumbers, private val bonusNu
         }
     }
 
-    fun correctCount(lottoNumbers: LottoNumbers): Int {
-        lottoNumbers.removeAll(winningNumbers)
-        return LOTTO_NUMBER_COUNT - lottoNumbers.size()
+    fun correctCount(lotto: Lotto): Int {
+        lotto.removeAll(winningNumbers)
+        return LOTTO_NUMBER_COUNT - lotto.size()
     }
 
-    fun matchedBonusBall(lottoNumbers: LottoNumbers): Boolean {
-        return lottoNumbers.contains(bonusNumber)
+    fun matchedBonusBall(lotto: Lotto): Boolean {
+        return lotto.contains(bonusNumber)
     }
 }

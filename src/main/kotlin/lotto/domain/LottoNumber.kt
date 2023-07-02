@@ -1,10 +1,10 @@
 package lotto.domain
 
-class LottoNumber (val value: Int) {
+data class LottoNumber(val value: Int) {
 
     init {
         require(value in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER) {
-            throw IllegalArgumentException("로또 번호는 1 ~ 45 사이여야 합니다.")
+            throw IllegalArgumentException("로또 번호는 $MIN_LOTTO_NUMBER ~ $MAX_LOTTO_NUMBER 사이여야 합니다.")
         }
     }
 

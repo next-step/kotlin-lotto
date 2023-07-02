@@ -11,10 +11,11 @@ enum class LottoRanking(val correctCount: Int, val price: Int) {
     companion object {
         fun lottoRanking(correctCount: Int, matchedBonusBall: Boolean): LottoRanking {
             val lottoRanking = values()
-                .firstOrNull { ranking: LottoRanking -> ranking.correctCount == correctCount } ?: MISS
+                .reversed()
+                .firstOrNull { ranking -> ranking.correctCount == correctCount } ?: MISS
 
-            if (lottoRanking == SECOND && !matchedBonusBall) {
-                return LottoRanking.THIRD
+            if (lottoRanking == THIRD && matchedBonusBall) {
+                return SECOND
             }
 
             return lottoRanking
