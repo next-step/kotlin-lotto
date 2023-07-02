@@ -13,11 +13,16 @@ object LottoVendor {
     }
 
     fun printLottoNumber(purchasedLottos:List<Lotto>) {
-        purchasedLottos.forEach { print(it) }
+        purchasedLottos.forEach { println(it.purchasedLottoNumbers.toString()) }
     }
 
     fun readLastWeekWinningString(): String {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return readLine().toString()
+        return readln()
+    }
+
+    fun readLastWeekBonusBallNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        return readln().toInt()
     }
 }

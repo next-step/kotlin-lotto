@@ -35,7 +35,7 @@ class LottoPlayTest {
     @ParameterizedTest
     @ValueSource(ints = [2])
     fun testNotPrizeAmount(matchingCount: Int) {
-        Assertions.assertThat(LottoPrize.getLottoPrize(matchingCount).prizeAmount).isEqualTo(0)
+        Assertions.assertThat(LottoPrize.getLottoPrize(matchingCount, 0).prizeAmount).isEqualTo(0)
     }
 
     @DisplayName(value = "지난주 당첨 번호와 3개 일치 상금 5000원 ")
@@ -45,7 +45,12 @@ class LottoPlayTest {
         val winningLottoNumber = Lotto()
         val lastWeekWinningLottoNumber = winningLottoNumber.purchasedLottoNumbers.toMutableList()
 
-        Assertions.assertThat(winningLottoNumber.setLottoPrize(lastWeekWinningLottoNumber.subList(0,3)).prizeAmount)
+        Assertions.assertThat(
+            winningLottoNumber.setLottoPrize(
+                lastWeekWinningLottoNumber.subList(0, 3),
+                lastWeekWinningLottoNumber.last() + 1
+            ).prizeAmount
+        )
             .isEqualTo(matchingCount.toLong())
     }
 
@@ -56,7 +61,12 @@ class LottoPlayTest {
         val winningLottoNumber = Lotto()
         val lastWeekWinningLottoNumber = winningLottoNumber.purchasedLottoNumbers.toMutableList()
 
-        Assertions.assertThat(winningLottoNumber.setLottoPrize(lastWeekWinningLottoNumber.subList(0,4)).prizeAmount)
+        Assertions.assertThat(
+            winningLottoNumber.setLottoPrize(
+                lastWeekWinningLottoNumber.subList(0, 4),
+                lastWeekWinningLottoNumber.last() + 1
+            ).prizeAmount
+        )
             .isEqualTo(matchingCount.toLong())
     }
 
@@ -67,7 +77,28 @@ class LottoPlayTest {
         val winningLottoNumber = Lotto()
         val lastWeekWinningLottoNumber = winningLottoNumber.purchasedLottoNumbers.toMutableList()
 
-        Assertions.assertThat(winningLottoNumber.setLottoPrize(lastWeekWinningLottoNumber.subList(0,5)).prizeAmount)
+        Assertions.assertThat(
+            winningLottoNumber.setLottoPrize(
+                lastWeekWinningLottoNumber.subList(0, 5),
+                lastWeekWinningLottoNumber.last() + 1
+            ).prizeAmount
+        )
+            .isEqualTo(matchingCount.toLong())
+    }
+
+    @DisplayName(value = "지난주 당첨 번호와 5개 보너스볼 일치 상금 3000000원")
+    @ParameterizedTest
+    @ValueSource(strings = ["30000000"])
+    fun testBonusPrizeAmount(matchingCount: String) {
+        val winningLottoNumber = Lotto()
+        val lastWeekWinningLottoNumber = winningLottoNumber.purchasedLottoNumbers.toMutableList()
+
+        Assertions.assertThat(
+            winningLottoNumber.setLottoPrize(
+                lastWeekWinningLottoNumber.subList(0, 5),
+                lastWeekWinningLottoNumber.last()
+            ).prizeAmount
+        )
             .isEqualTo(matchingCount.toLong())
     }
 
@@ -77,8 +108,7 @@ class LottoPlayTest {
     fun testFirstPrizeAmount(matchingCount: String) {
         val winningLottoNumber = Lotto()
         val lastWeekWinningLottoNumber = winningLottoNumber.purchasedLottoNumbers.toList()
-        Assertions.assertThat(winningLottoNumber.setLottoPrize(lastWeekWinningLottoNumber).prizeAmount)
+        Assertions.assertThat(winningLottoNumber.setLottoPrize(lastWeekWinningLottoNumber, 1).prizeAmount)
             .isEqualTo(matchingCount.toLong())
     }
-
 }
