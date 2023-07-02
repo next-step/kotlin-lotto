@@ -5,6 +5,7 @@ import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.LottoRank
 import lotto.domain.LottoStatisticService
+import lotto.domain.PurchaseAmount
 import lotto.domain.WinningLotto
 import lotto.domain.dto.ProfitRateRequest
 import lotto.domain.dto.StatisticsRequest
@@ -37,7 +38,7 @@ class LottoStatisticServiceTest {
 
     @Test
     fun `구매 금액과 당첨 결과가 주어지면 수익률을 계산할다`() {
-        val purchaseAmount = 14000
+        val purchaseAmount = PurchaseAmount(14000)
 
         val statistics = listOf(
             LottoRank.FIFTH

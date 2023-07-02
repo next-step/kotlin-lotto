@@ -4,6 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import lotto.domain.Lotto
 import lotto.domain.LottoStore
+import lotto.domain.PurchaseAmount
 import org.junit.jupiter.api.Test
 
 class LottoStoreTest {
@@ -12,7 +13,7 @@ class LottoStoreTest {
     @Test
     fun `구입 금액이 1000원 미만일 시 예외를 리턴한다`() {
         shouldThrow<IllegalArgumentException> {
-            lottoStore.purchaseLottoTickets(999)
+            lottoStore.purchaseLottoTickets(PurchaseAmount(999))
         }
     }
 
@@ -24,6 +25,6 @@ class LottoStoreTest {
             Lotto(arrayOf(1, 2, 3, 4, 5, 6)),
         )
 
-        lottoStore.purchaseLottoTickets(3000) shouldBe lottoTickets
+        lottoStore.purchaseLottoTickets(PurchaseAmount(3000)) shouldBe lottoTickets
     }
 }

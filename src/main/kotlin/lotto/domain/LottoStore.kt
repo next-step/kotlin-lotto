@@ -3,10 +3,8 @@ package lotto.domain
 class LottoStore(
     private val lottoGenerator: LottoGenerator
 ) {
-    fun purchaseLottoTickets(purchaseAmount: Int): List<Lotto> {
-        require(purchaseAmount >= 1000) { AMOUNT_IS_INSUFFICIENT }
-
-        return List(getLottoTicketQuantity(purchaseAmount)) { lottoGenerator.createLotto() }
+    fun purchaseLottoTickets(purchaseAmount: PurchaseAmount): List<Lotto> {
+        return List(getLottoTicketQuantity(purchaseAmount.amount)) { lottoGenerator.createLotto() }
     }
 
     private fun getLottoTicketQuantity(purchaseAmount: Int): Int {
@@ -14,7 +12,6 @@ class LottoStore(
     }
 
     companion object {
-        private const val AMOUNT_IS_INSUFFICIENT = "1000원 이상의 금액을 입력해 주세요"
-        private const val LOTTO_PRICE = 1000
+        const val LOTTO_PRICE = 1000
     }
 }

@@ -6,7 +6,10 @@ import lotto.domain.LottoNumber
 import lotto.domain.LottoRank
 import lotto.domain.LottoStatisticService
 import lotto.domain.LottoStore
+import lotto.domain.ManualLottoCount
+import lotto.domain.PurchaseAmount
 import lotto.domain.dto.ProfitRateRequest
+import lotto.domain.dto.PurchaseLottoRequest
 import lotto.domain.dto.StatisticsRequest
 import lotto.view.InputIO
 import lotto.view.InputMessage
@@ -20,17 +23,25 @@ class LottoController {
     private val lottoStore = LottoStore(AutoLottoGenerator())
     private val resultView = ResultView()
 
-    fun inputPurchaseAmount(): Int {
+    fun inputPurchaseAmount(): PurchaseAmount {
         inputView.show(InputMessage.PURCHASE_AMOUNT)
         return inputIO.inputPurchaseAmount()
     }
 
-    fun inputManualLottoCount(): Int {
+    fun inputManualLottoCount(): ManualLottoCount {
         inputView.show(InputMessage.MANUAL_LOTTO_COUNT)
         return inputIO.inputManualLottoCount()
     }
 
-    fun purchaseLottoTickets(purchaseAmount: Int): List<Lotto> {
+    fun createPurchaseLottoRequest(purchaseAmount: PurchaseAmount, manualLottoCount: ManualLottoCount): PurchaseLottoRequest {
+        return try {
+            PurchaseLottoRequest(purchaseAmount, manualLottoCount)
+        } catch (e: IllegalArgumentException) {
+            this.createPurchaseLottoRequest(purchaseAmount, this.inputManualLottoCount())
+        }
+    }
+
+    fun purchaseLottoTickets(purchaseAmount: PurchaseAmount): List<Lotto> {
         val lottoTickets = lottoStore.purchaseLottoTickets(purchaseAmount)
         resultView.showLottoTicketQuantity(lottoTickets.size)
         resultView.showLottoTickets(lottoTickets)

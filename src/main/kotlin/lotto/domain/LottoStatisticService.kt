@@ -12,7 +12,7 @@ class LottoStatisticService {
 
     fun getProfitRate(req: ProfitRateRequest): Double {
         val totalPrize = req.statistics.sumOf { it.prizeMoney }.toDouble()
-        val profitRate = totalPrize.div(req.purchaseAmount.toDouble())
+        val profitRate = totalPrize.div(req.purchaseAmount.amount.toDouble())
         return round(profitRate * 100) / 100
     }
 }

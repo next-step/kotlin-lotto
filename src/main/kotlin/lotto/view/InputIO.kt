@@ -1,10 +1,24 @@
 package lotto.view
 
 import lotto.domain.LottoNumber
+import lotto.domain.ManualLottoCount
+import lotto.domain.PurchaseAmount
 
 class InputIO {
-    fun inputPurchaseAmount(inputString: String? = readlnOrNull()): Int {
-        return inputString?.toIntOrNull() ?: 0
+    fun inputPurchaseAmount(inputString: String? = readlnOrNull()): PurchaseAmount {
+        return try {
+            PurchaseAmount(inputString?.toIntOrNull() ?: 0)
+        } catch (e: IllegalArgumentException) {
+            this.inputPurchaseAmount()
+        }
+    }
+
+    fun inputManualLottoCount(inputString: String? = readlnOrNull()): ManualLottoCount {
+        return try {
+            ManualLottoCount(inputString?.toIntOrNull() ?: 0)
+        } catch (e: IllegalArgumentException) {
+            this.inputManualLottoCount()
+        }
     }
 
     fun inputWinningNumber(inputString: String? = readlnOrNull()): List<LottoNumber> {
@@ -24,9 +38,5 @@ class InputIO {
 
     fun inputBonusNumber(inputString: String? = readlnOrNull()): LottoNumber {
         return LottoNumber(inputString?.toIntOrNull() ?: 0)
-    }
-
-    fun inputManualLottoCount(inputString: String? = readlnOrNull()): Int {
-        return inputString?.toIntOrNull() ?: 0
     }
 }

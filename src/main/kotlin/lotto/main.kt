@@ -10,6 +10,7 @@ fun main() {
 
     val purchaseAmount = lottoController.inputPurchaseAmount()
     val manualLottoCount = lottoController.inputManualLottoCount()
+    val purchaseLottoRequest = lottoController.createPurchaseLottoRequest(purchaseAmount, manualLottoCount)
 
     val lottoTickets = lottoController.purchaseLottoTickets(purchaseAmount)
     val winningNumbers = lottoController.inputWinningNumber()
