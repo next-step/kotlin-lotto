@@ -36,6 +36,6 @@ class WinningNumbersTest {
         val bonusNumber = LottoNumber.from(6)
 
         shouldThrow<IllegalArgumentException> { WinningNumbers(lottoNumbers, bonusNumber) }
-            .shouldHaveMessage(WinningNumbers.INVALID_BONUS_NUMBER_MESSAGE)
+            .shouldHaveMessage("보너스 번호는 당첨 번호에 포함되지 않은 번호여야 합니다.")
     }
 }

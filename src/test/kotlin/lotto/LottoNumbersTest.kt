@@ -13,7 +13,7 @@ class LottoNumbersTest {
     fun `로또 번호에 중복이 있으면 예외가 발생한다`() {
         val numbers = listOf(1, 2, 3, 4, 5, 5)
         shouldThrow<IllegalArgumentException> { LottoNumbers.from(numbers) }
-            .shouldHaveMessage(LottoNumbers.LOTTO_NUMBERS_DUPLICATE_MESSAGE.format(numbers))
+            .shouldHaveMessage("로또 번호는 중복된 숫자가 존재할 수 없습니다. numbers:[1, 2, 3, 4, 5, 5]")
     }
 
     @Test

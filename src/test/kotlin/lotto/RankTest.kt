@@ -18,7 +18,7 @@ class RankTest {
     @ValueSource(ints = [7, -1])
     fun `일치하는 숫자가 0개에서 6개가 아니라면 예외가 발생한다`(matchedCount: Int) {
         shouldThrow<IllegalArgumentException> { Rank.from(matchedCount, false) }
-            .shouldHaveMessage(Rank.INVALID_MATCHED_COUNT_MESSAGE.format(matchedCount))
+            .shouldHaveMessage("비정상적인 matchedCount입니다. $matchedCount")
     }
 
     @Test
