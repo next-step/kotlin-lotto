@@ -11,7 +11,7 @@ class WinningNumbers(private val lottoNumbers: LottoNumbers, private val bonusNu
 
     fun calculateRank(other: LottoNumbers): Rank {
         val matchedCount = other.match(lottoNumbers)
-        val matchBonus = other.numbers.contains(bonusNumber)
+        val matchBonus = other.contains(bonusNumber)
 
         return Rank.from(matchedCount, matchBonus)
     }

@@ -16,6 +16,10 @@ class LottoNumbers(numbers: List<LottoNumber>) {
         return intersect.size
     }
 
+    fun contains(number: LottoNumber): Boolean {
+        return numbers.contains(number)
+    }
+
     companion object {
         const val SIZE = 6
         const val LOTTO_NUMBERS_INVALID_SIZE_MESSAGE = "로또 번호는 6개의 숫자로 이루어져야 합니다. size:%d"

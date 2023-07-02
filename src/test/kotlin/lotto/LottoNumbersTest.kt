@@ -41,4 +41,12 @@ class LottoNumbersTest {
 
         lottoNumbers1.match(lottoNumbers2) shouldBe 4
     }
+
+    @Test
+    fun `특정 LottoNumber가 LottoNumbers에 포함되어 있는지 알 수 있다`() {
+        val lottoNumbers = LottoNumbers.from(listOf(1, 2, 3, 4, 5, 6))
+
+        lottoNumbers.contains(LottoNumber.from(1)) shouldBe true
+        lottoNumbers.contains(LottoNumber.from(7)) shouldBe false
+    }
 }
