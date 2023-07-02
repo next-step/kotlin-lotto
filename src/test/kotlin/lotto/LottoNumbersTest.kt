@@ -33,4 +33,12 @@ class LottoNumbersTest {
         val lottoNumbers = LottoNumbers.from(listOf(1, 6, 3, 2, 5, 4))
         lottoNumbers.numbers.map { it.number } shouldBe listOf(1, 2, 3, 4, 5, 6)
     }
+
+    @Test
+    fun `LottoNumbers 끼리 얼마나 일치하는지 count를 얻을 수 있다`() {
+        val lottoNumbers1 = LottoNumbers.from(listOf(1, 2, 3, 4, 5, 6))
+        val lottoNumbers2 = LottoNumbers.from(listOf(1, 2, 3, 4, 7, 8))
+
+        lottoNumbers1.match(lottoNumbers2) shouldBe 4
+    }
 }

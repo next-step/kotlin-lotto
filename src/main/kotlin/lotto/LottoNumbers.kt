@@ -11,6 +11,11 @@ class LottoNumbers(numbers: List<LottoNumber>) {
         require(this.numbers.size == numbers.size) { LOTTO_NUMBERS_DUPLICATE_MESSAGE.format(numbers.map { it.number }) }
     }
 
+    fun match(other: LottoNumbers): Int {
+        val intersect = numbers.intersect(other.numbers)
+        return intersect.size
+    }
+
     companion object {
         const val SIZE = 6
         const val LOTTO_NUMBERS_INVALID_SIZE_MESSAGE = "로또 번호는 6개의 숫자로 이루어져야 합니다. size:%d"
