@@ -1,12 +1,12 @@
 package lotto
 
-import lotto.sixFortyFiveNumberLotto.purchase.SixFortyFiveLottoPurchases
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoStore
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveWinningLotto
+import lotto.sixFortyFiveNumberLotto.purchase.SixFortyFiveLottoPurchases
 import lotto.sixFortyFiveNumberLotto.purchase.merge
-import lotto.view.input.SixFortyFiveLottoPurchasePriceInputView
 import lotto.view.input.SixFortyFiveLottoBonusInputView
 import lotto.view.input.SixFortyFiveLottoLastWinNumInputView
+import lotto.view.input.SixFortyFiveLottoPurchasePriceInputView
 import lotto.view.input.SixFortyFiveManualLottoCountInputView
 import lotto.view.input.SixFortyFiveManualLottoesInputView
 import lotto.view.output.SixFortyFiveBonusResultOutputView

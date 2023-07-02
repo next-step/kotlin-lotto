@@ -16,13 +16,12 @@ class SixFortyFiveLotto(val numbers: List<SixFortyFiveNumber>) : Lotto {
         private const val LOTTO_NUMBER_COUNT = 6
         const val LOTTO_PRICE = 1000
 
-        fun ofAuto(): SixFortyFiveLotto {
-            val numbers = LOTTO_NUMBER_RANGE
+        fun getNumbers(count: SixFortyFiveLottoCount = SixFortyFiveLottoCount(LOTTO_NUMBER_COUNT)): List<SixFortyFiveNumber> {
+            return LOTTO_NUMBER_RANGE
                 .map { SixFortyFiveNumber(it) }
                 .shuffled()
-                .take(LOTTO_NUMBER_COUNT)
+                .take(count.value)
                 .sortedBy { it.value }
-            return SixFortyFiveLotto(numbers)
         }
     }
 }
