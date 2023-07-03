@@ -1,7 +1,5 @@
 package lotto.view
 
-import lotto.domain.Lotto
-
 class InputView {
     companion object {
         fun purchaseMoney(): Long {
@@ -9,14 +7,12 @@ class InputView {
             return readln().toLong()
         }
 
-        fun winningLotto(): Lotto {
+        fun winningLotto(): List<Int> {
             println("지난 주 당첨 번호를 입력해 주세요.")
-            return Lotto(
-                readln()
-                    .split(",")
-                    .map { it.toInt() }
-                    .toList(),
-            )
+            return readln()
+                .split(",")
+                .map { it.toInt() }
+                .toList()
         }
     }
 }
