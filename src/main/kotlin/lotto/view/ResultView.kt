@@ -5,8 +5,8 @@ import lotto.domain.LottoNumber
 import lotto.domain.LottoRank
 
 class ResultView {
-    fun showLottoTicketQuantity(lottoTicketQuantity: Int) {
-        println("${lottoTicketQuantity}개를 구매했습니다.")
+    fun showLottoTicketQuantity(autoLottoTicketQuantity: Int, manualLottoTicketQuantity: Int) {
+        println("수동으로 ${manualLottoTicketQuantity}장, 자동으로 ${autoLottoTicketQuantity}장을 구매했습니다.")
     }
 
     fun showLottoTickets(lottoTickets: List<Lotto>) {

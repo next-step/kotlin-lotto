@@ -1,14 +1,27 @@
 package lotto.domain
 
+import lotto.domain.dto.PurchaseLottoRequest
+import lotto.domain.dto.PurchaseLottoResponse
+
 class LottoStore(
     private val lottoGenerator: LottoGenerator
 ) {
-    fun purchaseLottoTickets(purchaseAmount: PurchaseAmount): List<Lotto> {
-        return List(getLottoTicketQuantity(purchaseAmount.amount)) { lottoGenerator.createLotto() }
+    fun purchaseLottoTickets(purchaseLottoRequest: PurchaseLottoRequest): PurchaseLottoResponse {
+        val autoLottoTicketQuantity = getAutoLottoTicketQuantity(
+            purchaseLottoRequest.purchaseAmount.amount,
+            purchaseLottoRequest.manualLottoCount
+        )
+        val autoLottoTickets = List(autoLottoTicketQuantity) { lottoGenerator.createLotto() }
+
+        return PurchaseLottoResponse(
+            autoLottoTicketQuantity,
+            purchaseLottoRequest.manualLottoCount.count,
+            purchaseLottoRequest.manualLottoTickets.tickets.plus(autoLottoTickets)
+        )
     }
 
-    private fun getLottoTicketQuantity(purchaseAmount: Int): Int {
-        return purchaseAmount / LOTTO_PRICE
+    private fun getAutoLottoTicketQuantity(purchaseAmount: Int, manualLottoCount: ManualLottoCount): Int {
+        return (purchaseAmount / LOTTO_PRICE) - manualLottoCount.count
     }
 
     companion object {

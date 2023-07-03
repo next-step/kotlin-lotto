@@ -1,7 +1,6 @@
 package lotto
 
 import lotto.controller.LottoController
-import lotto.domain.WinningLotto
 import lotto.domain.dto.ProfitRateRequest
 import lotto.domain.dto.StatisticsRequest
 
@@ -12,9 +11,9 @@ fun main() {
     val manualLottoCount = lottoController.inputManualLottoCount()
     val manualLottoNumbers = lottoController.inputManualLottoNumbers(manualLottoCount)
 
-    val purchaseLottoRequest = lottoController.createPurchaseLottoRequest(purchaseAmount, manualLottoCount)
+    val purchaseLottoRequest = lottoController.createPurchaseLottoRequest(purchaseAmount, manualLottoCount, manualLottoNumbers)
 
-    val lottoTickets = lottoController.purchaseLottoTickets(purchaseAmount)
+    val lottoTickets = lottoController.purchaseLottoTickets(purchaseLottoRequest)
     val winningLotto = lottoController.inputWinningLotto()
 
     val lottoStatistics = lottoController.getStatistics(
