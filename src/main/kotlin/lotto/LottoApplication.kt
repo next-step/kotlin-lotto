@@ -15,6 +15,7 @@ fun main() {
     println()
 
     val winningLotto = lottoController.inputWinningLotto()
+    val bonusNumber = lottoController.inputBonusNumber()
     println()
 
     val winningStatistics = WinningStatistics.of(lottos, winningLotto)

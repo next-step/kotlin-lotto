@@ -11,4 +11,8 @@ class LottoController {
     fun inputWinningLotto(): Lotto {
         return Lotto(InputView.winningLotto())
     }
+
+    fun inputBonusNumber(): Int {
+        return InputView.bonusNumber()
+    }
 }
