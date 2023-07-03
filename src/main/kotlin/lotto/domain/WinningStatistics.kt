@@ -15,7 +15,7 @@ class WinningStatistics(val winningStatistics: Map<Int, Int>) {
         fun of(lottos: Lottos, winningLotto: Lotto): WinningStatistics {
             return WinningStatistics(
                 lottos.lottos
-                    .map { lotto -> LottoCalculator.countMatch(lotto, winningLotto) }
+                    .map { lotto -> lotto.countMatch(winningLotto) }
                     .groupBy { it }
                     .mapValues { it.value.size },
             )

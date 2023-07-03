@@ -9,6 +9,12 @@ value class Lotto(val numbers: Set<Int>) {
 
     constructor(numbers: List<Int>) : this(numbers.toSet())
 
+    fun countMatch(lotto: Lotto): Int {
+        return numbers
+            .intersect(lotto.numbers)
+            .size
+    }
+
     override fun toString(): String {
         return numbers.joinToString(
             prefix = "[",

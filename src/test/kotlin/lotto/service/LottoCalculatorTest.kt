@@ -14,7 +14,7 @@ class LottoCalculatorTest : FunSpec({
             Pair(Lotto(listOf(1, 2, 3, 4, 5, 6)), Lotto(listOf(7, 8, 9, 10, 11, 12))) to 0,
         ) { (lottoAndWinningLotto, expectedCount) ->
             val (lotto, winningLotto) = lottoAndWinningLotto
-            val matchCount = LottoCalculator.countMatch(lotto, winningLotto)
+            val matchCount = lotto.countMatch(winningLotto)
             matchCount shouldBe expectedCount
         }
     }
