@@ -2,8 +2,7 @@ package lotto.domain
 
 import lotto.dto.PurchasedLotteryPapers
 
-class LottoMachine {
-    private val lotteryPaperFactory: LotteryPaperFactory = LotteryPaperFactory(RandomLottoNumberGenerationStrategy())
+class LottoMachine(private val lotteryPaperFactory: LotteryPaperFactory) {
     private val lottoValidator = LottoValidator()
 
     fun buyLottoTicket(money: Int): PurchasedLotteryPapers {

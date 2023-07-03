@@ -70,5 +70,9 @@
 - [x] 3등일때 남은 숫자가 보너스 넘버와 같은지 체크한다.
 - [x] 3등이 아니면 체크하지않는다.
 
-# 기능 요구사항 - Step4
+# 기능 요구사항 구현 체크리스트 - Step4
+
+* WinningNumber
+
+- [ ] 보너스 숫자가 기존 당첨번호와 중복되면 IllegalArgumentException을 throw한다.
 

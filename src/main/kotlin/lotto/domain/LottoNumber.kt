@@ -21,9 +21,14 @@ class LottoNumber(val lottoNumber: Int) {
     companion object {
         const val MINIMUM_NUMBER = 1
         const val MAXIMUM_NUMBER = 45
-        val LOTTO_NUMBER_BOUNDS = MINIMUM_NUMBER..MAXIMUM_NUMBER
+        private val LOTTO_NUMBER_BOUNDS = MINIMUM_NUMBER..MAXIMUM_NUMBER
         fun validateInLottoNumberBounds(lottoNumber: Int) {
             require(lottoNumber in LOTTO_NUMBER_BOUNDS) { "로또 범위의 숫자만 가능합니다. 입력값을 다시 확인하세요." }
+        }
+
+        fun generateLottoNumberList(): List<LottoNumber> {
+            return (MINIMUM_NUMBER..MAXIMUM_NUMBER)
+                .map { LottoNumber(it) }
         }
     }
 }

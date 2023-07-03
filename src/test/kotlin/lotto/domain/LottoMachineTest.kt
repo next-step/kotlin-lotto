@@ -12,7 +12,7 @@ class LottoMachineTest {
 
     @BeforeEach()
     fun setUp() {
-        lottoMachine = LottoMachine()
+        lottoMachine = LottoMachine(LotteryPaperFactory(RandomLottoNumberGenerationStrategy()))
     }
 
     @ParameterizedTest
