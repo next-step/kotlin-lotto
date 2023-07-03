@@ -33,8 +33,7 @@ class LottoGenerator {
 
         fun generate(): Lotto {
             return Lotto(
-                LOTTO_NUMBER_MIN.rangeTo(LOTTO_NUMBER_MAX)
-                    .toList()
+                (LOTTO_NUMBER_MIN..LOTTO_NUMBER_MAX)
                     .shuffled()
                     .take(LOTTO_NUMBER_COUNT)
                     .sorted(),
