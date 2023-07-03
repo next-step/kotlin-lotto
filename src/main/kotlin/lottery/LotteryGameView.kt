@@ -1,18 +1,21 @@
 package lottery
 
-class LotteryGameView {
+object LotteryGameView {
+
+    private const val NONE_PRIZE_INDEX = 1
     fun printPurchaseMoneyView() {
         println("구입 금액을 입력해 주세요.")
     }
 
     fun printPurchaseLotteryView(number: Int) {
-        println("{$number}개를 구매했습니다.")
+        println("${number}개를 구매했습니다.")
     }
 
     fun printLotteriesNumber(lotteries: Lotteries) {
         lotteries.lotteries.forEach {
             println(it.lotteryNumbers)
         }
+        println()
     }
 
     fun printWinnerLotteryNumber() {
@@ -22,12 +25,12 @@ class LotteryGameView {
     fun printLotteryRankView(lotteryRank: LotteryRank) {
         println("당첨 통계")
         println("---------")
-        lotteryRank.lotteriesRank.forEach { (prize, number) ->
-            println("${prize.correctCount}개 일치 (${prize.rewardMoney}원)- ${number}개")
+        lotteryRank.lotteriesRank.drop(NONE_PRIZE_INDEX).forEach {
+            println("${it.correctCount}개 일치 (${it.rewardMoney}원)- ${it.count}개")
         }
     }
 
-    fun printProfitView(profit: Float) {
-        println("총 수익률은 ${profit}입니다.")
+    fun printProfitView(profit: Double) {
+        println("총 수익률은" + String.format("%.2f", profit) + " 입니다.")
     }
 }
