@@ -20,7 +20,4 @@ class LotteryTest : StringSpec({
     "로또 한장의 금액은 1000원 이다." {
         Lottery.LOTTERY_PRICE shouldBe 1000
     }
-
-    "로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다." {
-    }
 })

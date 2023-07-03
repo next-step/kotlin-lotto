@@ -3,16 +3,6 @@ package lottery
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
-class LotteryGame {
-    lateinit var winningLottery: Lottery
-    fun purchaseAutoLotteries(purchasePrice: Int): Lotteries {
-        return Lotteries.makeAutoLotteries(purchasePrice / Lottery.LOTTERY_PRICE)
-    }
-
-    companion object {
-    }
-}
-
 class LotteryGameTest : StringSpec({
     "로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다." {
         val lotteryGame = LotteryGame()
