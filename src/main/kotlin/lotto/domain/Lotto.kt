@@ -1,7 +1,8 @@
 package lotto.domain
 
-class Lotto(numbers: List<Int>) {
-    val numbers: Set<Int> = numbers.toSet()
+class Lotto(val numbers: Set<Int>) {
+    constructor(numbers: List<Int>) : this(numbers.toSet())
+
     override fun toString(): String {
         return numbers.joinToString(
             prefix = "[",
