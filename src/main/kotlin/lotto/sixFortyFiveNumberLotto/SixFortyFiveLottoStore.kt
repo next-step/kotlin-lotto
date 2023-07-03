@@ -1,13 +1,18 @@
 package lotto.sixFortyFiveNumberLotto
 
 import lotto.LottoStore
+import lotto.sixFortyFiveNumberLotto.purchase.SixFortyFiveLottoPurchases
 
-class SixFortyFiveLottoStore : LottoStore<SixFortyFiveLottoes> {
-    override fun purchase(count: Int): SixFortyFiveLottoes {
-        return SixFortyFiveLottoes((1..count).map { SixFortyFiveLotto.of() })
+class SixFortyFiveLottoStore : LottoStore<SixFortyFiveLottoPurchases, SixFortyFiveLottoes> {
+    override fun purchase(purchases: SixFortyFiveLottoPurchases): SixFortyFiveLottoes {
+        return purchases.value.map { SixFortyFiveLotto(it.getNumbers()) }.toLottoes()
     }
 
-    fun getPurchaseCountByPrice(price: Int): Int {
-        return price / SixFortyFiveLotto.LOTTO_PRICE
+    fun getAutoPurchaseCount(
+        price: SixFortyFiveLottoPurchasePrice,
+        manualPurchaseCount: SixFortyFiveLottoCount,
+    ): SixFortyFiveLottoCount {
+        val value = (price.value / SixFortyFiveLotto.LOTTO_PRICE) - manualPurchaseCount.value
+        return SixFortyFiveLottoCount(value)
     }
 }

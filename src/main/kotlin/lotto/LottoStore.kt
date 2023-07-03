@@ -1,5 +1,5 @@
 package lotto
 
-interface LottoStore<T> {
-    fun purchase(count: Int): T
+interface LottoStore<T, V> {
+    fun purchase(purchases: T): V
 }

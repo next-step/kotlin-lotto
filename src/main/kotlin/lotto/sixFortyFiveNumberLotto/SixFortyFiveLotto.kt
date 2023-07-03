@@ -6,8 +6,9 @@ import lotto.Lotto
 class SixFortyFiveLotto(val numbers: List<SixFortyFiveNumber>) : Lotto {
 
     init {
+        require(numbers.size == LOTTO_NUMBER_COUNT) { ErrorCode.INVALID_SIX_FORTY_FIVE_LOTTO_NUMBER_COUNT.msg }
         val hasDuplicatedNumber = numbers.map { it.value }.distinct().size != numbers.size
-        if (hasDuplicatedNumber) throw RuntimeException(ErrorCode.INVALID_SIX_FORTY_FIVE_LOTTO_NUMBER.msg)
+        require(!hasDuplicatedNumber) { ErrorCode.INVALID_SIX_FORTY_FIVE_LOTTO_NUMBER_DUPLICATE.msg }
     }
 
     companion object {
@@ -15,13 +16,12 @@ class SixFortyFiveLotto(val numbers: List<SixFortyFiveNumber>) : Lotto {
         private const val LOTTO_NUMBER_COUNT = 6
         const val LOTTO_PRICE = 1000
 
-        fun of(): SixFortyFiveLotto {
-            val randomNumbers = LOTTO_NUMBER_RANGE
+        fun getNumbers(count: SixFortyFiveLottoCount = SixFortyFiveLottoCount(LOTTO_NUMBER_COUNT)): List<SixFortyFiveNumber> {
+            return LOTTO_NUMBER_RANGE
                 .map { SixFortyFiveNumber(it) }
                 .shuffled()
-                .take(LOTTO_NUMBER_COUNT)
+                .take(count.value)
                 .sortedBy { it.value }
-            return SixFortyFiveLotto(randomNumbers)
         }
     }
 }

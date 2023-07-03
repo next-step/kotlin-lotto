@@ -1,29 +1,31 @@
-package lotto.view.output.sixFortyFiveNumberLotto
+package lotto.view.output
 
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoWinningOutput
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoes
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveWinningEnum
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveWinningLotto
-import lotto.view.output.OutputView
 
-class SixFortyFiveResultOutputView(lottoList: SixFortyFiveLottoes, winningValue: SixFortyFiveWinningLotto) :
-    OutputView() {
+class SixFortyFiveBonusResultOutputView(
+    lottoList: SixFortyFiveLottoes,
+    winningValue: SixFortyFiveWinningLotto,
+) {
 
     init {
         val lottoWinningOutput = SixFortyFiveLottoWinningOutput(lottoList, winningValue)
         val lottoWinningMap = lottoWinningOutput.winningResultEnumMap
-        val earningRate = lottoWinningOutput.getEarningRate()
-        var _message = "당첨 통계\n--------\n"
+        val earningRate = lottoWinningOutput.earningRate
+        println("당첨 통계\n--------")
         listOf(
             SixFortyFiveWinningEnum.FIFTH,
             SixFortyFiveWinningEnum.FOURTH,
             SixFortyFiveWinningEnum.THIRD,
+            SixFortyFiveWinningEnum.SECOND,
             SixFortyFiveWinningEnum.FIRST,
         ).forEach { winningEnum ->
             val winningEnumCount = lottoWinningMap[winningEnum]
-            _message =
-                _message.plus("${winningEnum.countOfMatch}개 일치 (${winningEnum.price}원) - ${winningEnumCount}개\n")
+            val additionalMessage = if (winningEnum == SixFortyFiveWinningEnum.SECOND) ", 보너스 볼 일치" else ""
+            println("${winningEnum.countOfMatch}개 일치$additionalMessage (${winningEnum.price}원) - ${winningEnumCount}개")
         }
-        message = _message.plus("총 수익률은 $earningRate 입니다.")
+        println("총 수익률은 $earningRate 입니다.")
     }
 }
