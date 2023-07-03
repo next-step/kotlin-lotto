@@ -5,7 +5,7 @@ import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class LottoMachineMatcherTest {
+class LottoMatcherTest {
 
     private lateinit var lottoMatcher: LottoMatcher
 
@@ -18,7 +18,7 @@ class LottoMachineMatcherTest {
     fun `로또 번호와 당첨 번호를 가지고 당첨 통계를 낸다`() {
         val numberList = listOf(1, 2, 3, 4, 5, 6)
         val lottoNumbers = numberList.map { LottoNumber(it) }
-        val winningNumber = LotteryPaper(lottoNumbers)
+        val winningNumber = WinningNumber(LotteryPaper(lottoNumbers), LottoNumber(10))
 
         val lotteryPaperList = listOf(
             LotteryPaper(
@@ -64,11 +64,10 @@ class LottoMachineMatcherTest {
         )
 
         val purchasedLotteryPapers = PurchasedLotteryPapers(lotteryPaperList)
-        val bonusBall = LottoNumber(10)
+
         val countLottoWinner = lottoMatcher.countLottoWinner(
             winningNumber,
-            purchasedLotteryPapers,
-            bonusBall
+            purchasedLotteryPapers
         )
 
         val actual = countLottoWinner.getMatchLottoResult()

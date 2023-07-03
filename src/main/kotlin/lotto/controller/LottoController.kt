@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.domain.LotteryPaper
 import lotto.domain.LottoMachine
+import lotto.domain.LottoMatcher
 import lotto.domain.LottoNumber
 import lotto.domain.WinningNumber
 import lotto.domain.YieldCalculator
@@ -53,7 +54,8 @@ class LottoController(
         winningNumber: WinningNumber,
         purchasedLotteryPapers: PurchasedLotteryPapers
     ): LottoMatchResult {
-        return winningNumber.countLottoWinner(purchasedLotteryPapers)
+        val lottoMatcher = LottoMatcher()
+        return lottoMatcher.countLottoWinner(winningNumber, purchasedLotteryPapers)
     }
 
     private fun printLottoMatch(lottoMatchResult: LottoMatchResult) {

@@ -4,17 +4,18 @@ import lotto.dto.LottoMatchResult
 import lotto.dto.PurchasedLotteryPapers
 
 class LottoMatcher {
+    private val prizeLevelDiscriminator = PrizeLevelDiscriminator()
 
     fun countLottoWinner(
-        winningNumber: LotteryPaper,
+        winningNumber: WinningNumber,
         purchasedLotteryPapers: PurchasedLotteryPapers,
-        bonusNumber: LottoNumber
     ): LottoMatchResult {
-        val winningLottoNumbers = winningNumber.getLottoNumbers()
+        val winningLottoNumbers = winningNumber.winningNumber.getLottoNumbers()
         val matchedCountsMap = getMatchedCount(winningLottoNumbers, purchasedLotteryPapers.lotteryPaperList)
 
         val prizeList = matchedCountsMap.map { matchedCount ->
-            PrizeLevel.fromNumberOfHit(matchedCount.value, matchedCount.key, bonusNumber)
+            val prizeLevel = PrizeLevel.fromNumberOfHit(matchedCount.value)
+            prizeLevelDiscriminator.checkIsThirdLevel(prizeLevel, Pair(matchedCount.key, winningNumber.bonusNumber))
         }
         return LottoMatchResult(LottoMatchResult.countPrizeLevels(prizeList))
     }

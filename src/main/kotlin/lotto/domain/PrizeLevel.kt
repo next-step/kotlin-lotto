@@ -9,13 +9,8 @@ enum class PrizeLevel(val numberOfHit: Int, val prizeMoney: Int, hasBonus: Boole
     FIRST(6, 2_000_000_000);
 
     companion object {
-
-        fun fromNumberOfHit(numberOfHit: Int, lotteryPaper: LotteryPaper, bonusNumber: LottoNumber): PrizeLevel {
-            val prizeLevel = values().firstOrNull { it.numberOfHit == numberOfHit } ?: NONE
-            if (prizeLevel == THIRD && lotteryPaper.hasBonusNumber(bonusNumber)) {
-                return SECOND
-            }
-            return prizeLevel
+        fun fromNumberOfHit(numberOfHit: Int): PrizeLevel {
+            return values().firstOrNull { it.numberOfHit == numberOfHit } ?: NONE
         }
     }
 }

@@ -25,6 +25,7 @@ class LottoMachine {
         }
         return lotteryPaperList.toList()
     }
+
     companion object {
         const val LOTTO_TICKET_PRICE = 1000
     }
