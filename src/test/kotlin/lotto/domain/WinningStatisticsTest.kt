@@ -43,4 +43,15 @@ class WinningStatisticsTest : FunSpec({
             winningStatistics.calculateTotalPrizeMoney() shouldBe expectedTotalPrizeMoney
         }
     }
+
+    context("총 수익률을 계산한다.") {
+        withData(
+            (WinningStatistics(mapOf(1 to 2, 2 to 1, 3 to 1, 4 to 1, 5 to 1, 6 to 2)) to 1000L) to 4_001_555.0,
+            (WinningStatistics(mapOf(1 to 2, 2 to 1, 3 to 1, 4 to 0, 5 to 0, 6 to 0)) to 1000L) to 5.0,
+        ) { (winningStatisticsAndPurchaseMoney, expectedProfitRate) ->
+            val (winningStatistics, purchaseMoney) = winningStatisticsAndPurchaseMoney
+            val profitRate = winningStatistics.calculateProfitRate(purchaseMoney)
+            profitRate shouldBe expectedProfitRate
+        }
+    }
 })

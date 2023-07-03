@@ -11,8 +11,4 @@ object LottoCalculator {
             else -> 0
         }
     }
-
-    fun calculateProfitRate(totalPrizeMoney: Long, purchaseMoney: Long): Double {
-        return totalPrizeMoney.toDouble() / purchaseMoney.toDouble()
-    }
 }

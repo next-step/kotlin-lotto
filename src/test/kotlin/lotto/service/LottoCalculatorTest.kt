@@ -33,16 +33,4 @@ class LottoCalculatorTest : FunSpec({
             money shouldBe expectedMoney
         }
     }
-
-    context("총 수익률을 계산한다.") {
-        withData(
-            Pair(10000L, 10000L) to 1.0,
-            Pair(10000L, 20000L) to 0.5,
-            Pair(10000L, 30000L) to 0.3333333333333333,
-        ) { (totalPrizeMoneyAndPurchaseMoney, expectedProfitRate) ->
-            val (totalPrizeMoney, purchaseMoney) = totalPrizeMoneyAndPurchaseMoney
-            val profitRate = LottoCalculator.calculateProfitRate(totalPrizeMoney, purchaseMoney)
-            profitRate shouldBe expectedProfitRate
-        }
-    }
 })

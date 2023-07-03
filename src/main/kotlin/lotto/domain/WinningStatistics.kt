@@ -11,6 +11,11 @@ class WinningStatistics(val winningStatistics: Map<Int, Int>) {
             .sum()
     }
 
+    fun calculateProfitRate(purchaseMoney: Long): Double {
+        val totalPrizeMoney = calculateTotalPrizeMoney()
+        return totalPrizeMoney.toDouble() / purchaseMoney.toDouble()
+    }
+
     companion object {
         fun of(lottos: Lottos, winningLotto: Lotto): WinningStatistics {
             return WinningStatistics(
