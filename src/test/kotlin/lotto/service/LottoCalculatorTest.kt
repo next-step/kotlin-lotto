@@ -3,22 +3,9 @@ package lotto.service
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
-import lotto.domain.Lotto
+import lotto.domain.Rank
 
 class LottoCalculatorTest : FunSpec({
-    context("로또의 일치 개수를 확인한다.") {
-        withData(
-            Pair(Lotto(listOf(1, 2, 3, 4, 5, 6)), Lotto(listOf(1, 2, 3, 4, 5, 6))) to 6,
-            Pair(Lotto(listOf(1, 2, 3, 4, 5, 6)), Lotto(listOf(1, 2, 3, 4, 5, 7))) to 5,
-            Pair(Lotto(listOf(1, 2, 3, 4, 5, 6)), Lotto(listOf(1, 2, 3, 4, 7, 8))) to 4,
-            Pair(Lotto(listOf(1, 2, 3, 4, 5, 6)), Lotto(listOf(7, 8, 9, 10, 11, 12))) to 0,
-        ) { (lottoAndWinningLotto, expectedCount) ->
-            val (lotto, winningLotto) = lottoAndWinningLotto
-            val matchCount = lotto.countMatch(winningLotto)
-            matchCount shouldBe expectedCount
-        }
-    }
-
     context("로또 일치 개수별 당첨금을 확인한다.") {
         withData(
             0 to 0,
@@ -29,8 +16,13 @@ class LottoCalculatorTest : FunSpec({
             5 to 1_500_000,
             6 to 2_000_000_000,
         ) { (matchCount, expectedMoney) ->
-            val money = LottoCalculator.calculatePrizeMoney(matchCount)
+            val money = LottoCalculator.calculatePrizeMoney(Rank.of(matchCount, false))
             money shouldBe expectedMoney
         }
+    }
+
+    context("로또가 5개 일치하고 보너스볼이 일치하면 상금이 30,000,000원이다.") {
+        val money = LottoCalculator.calculatePrizeMoney(Rank.of(5, true))
+        money shouldBe 30_000_000
     }
 })

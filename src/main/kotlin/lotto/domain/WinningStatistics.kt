@@ -2,11 +2,11 @@ package lotto.domain
 
 import lotto.service.LottoCalculator
 
-class WinningStatistics(val winningStatistics: Map<Int, Int>) {
+class WinningStatistics(val winningStatistics: Map<Rank, Int>) {
     fun calculateTotalPrizeMoney(): Long {
         return winningStatistics
-            .map { (matchCount, count) ->
-                LottoCalculator.calculatePrizeMoney(matchCount) * count
+            .map { (rank, count) ->
+                LottoCalculator.calculatePrizeMoney(rank) * count
             }
             .sum()
     }
@@ -20,7 +20,7 @@ class WinningStatistics(val winningStatistics: Map<Int, Int>) {
         fun of(lottos: Lottos, winningLotto: Lotto): WinningStatistics {
             return WinningStatistics(
                 lottos.lottos
-                    .map { lotto -> lotto.countMatch(winningLotto) }
+                    .map { lotto -> Rank.of(lotto.countMatch(winningLotto), lotto.matchBonus(winningLotto)) }
                     .groupBy { it }
                     .mapValues { it.value.size },
             )
