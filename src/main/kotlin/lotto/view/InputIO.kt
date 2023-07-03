@@ -1,8 +1,11 @@
 package lotto.view
 
+import lotto.domain.Lotto
 import lotto.domain.LottoNumber
+import lotto.domain.ManualLotto
 import lotto.domain.ManualLottoCount
 import lotto.domain.PurchaseAmount
+import java.lang.IllegalStateException
 
 class InputIO {
     fun inputPurchaseAmount(inputString: String? = readlnOrNull()): PurchaseAmount {
@@ -21,13 +24,29 @@ class InputIO {
         }
     }
 
-    fun inputWinningNumber(inputString: String? = readlnOrNull()): List<LottoNumber> {
+    fun inputManualLottoNumbers(manualLottoCount: ManualLottoCount): ManualLotto {
+        return ManualLotto(List(manualLottoCount.count) { inputLotto() })
+    }
 
-        if (inputString == null) {
+    private fun inputLotto(): Lotto {
+        return try {
+            Lotto(inputLottoNumber())
+        } catch (e: IllegalArgumentException) {
+            this.inputLotto()
+        }
+    }
+
+    fun inputLottoNumber(inputString: String? = readlnOrNull()): List<LottoNumber> {
+
+        if (inputString.isNullOrEmpty()) {
             return listOf()
         }
 
-        return convertStringToLottoNumbers(inputString)
+        return try {
+            convertStringToLottoNumbers(inputString)
+        } catch (e: IllegalStateException) {
+            this.inputLottoNumber()
+        }
     }
 
     private fun convertStringToLottoNumbers(string: String): List<LottoNumber> {

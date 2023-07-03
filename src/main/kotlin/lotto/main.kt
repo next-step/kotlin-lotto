@@ -10,14 +10,15 @@ fun main() {
 
     val purchaseAmount = lottoController.inputPurchaseAmount()
     val manualLottoCount = lottoController.inputManualLottoCount()
+    val manualLottoNumbers = lottoController.inputManualLottoNumbers(manualLottoCount)
+
     val purchaseLottoRequest = lottoController.createPurchaseLottoRequest(purchaseAmount, manualLottoCount)
 
     val lottoTickets = lottoController.purchaseLottoTickets(purchaseAmount)
-    val winningNumbers = lottoController.inputWinningNumber()
-    val bonusNumber = lottoController.inputBonusNumber()
+    val winningLotto = lottoController.inputWinningLotto()
 
     val lottoStatistics = lottoController.getStatistics(
-        StatisticsRequest(lottoTickets, WinningLotto(winningNumbers, bonusNumber))
+        StatisticsRequest(lottoTickets, winningLotto)
     )
 
     lottoController.showLottoStatistics(lottoStatistics)

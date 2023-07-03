@@ -2,12 +2,13 @@ package lotto.controller
 
 import lotto.domain.AutoLottoGenerator
 import lotto.domain.Lotto
-import lotto.domain.LottoNumber
 import lotto.domain.LottoRank
 import lotto.domain.LottoStatisticService
 import lotto.domain.LottoStore
+import lotto.domain.ManualLotto
 import lotto.domain.ManualLottoCount
 import lotto.domain.PurchaseAmount
+import lotto.domain.WinningLotto
 import lotto.domain.dto.ProfitRateRequest
 import lotto.domain.dto.PurchaseLottoRequest
 import lotto.domain.dto.StatisticsRequest
@@ -33,6 +34,11 @@ class LottoController {
         return inputIO.inputManualLottoCount()
     }
 
+    fun inputManualLottoNumbers(manualLottoCount: ManualLottoCount): ManualLotto {
+        inputView.show(InputMessage.MANUAL_LOTTO_NUMBERS)
+        return inputIO.inputManualLottoNumbers(manualLottoCount)
+    }
+
     fun createPurchaseLottoRequest(purchaseAmount: PurchaseAmount, manualLottoCount: ManualLottoCount): PurchaseLottoRequest {
         return try {
             PurchaseLottoRequest(purchaseAmount, manualLottoCount)
@@ -48,14 +54,14 @@ class LottoController {
         return lottoTickets
     }
 
-    fun inputWinningNumber(): List<LottoNumber> {
+    fun inputWinningLotto(): WinningLotto {
         inputView.show(InputMessage.WINNING_NUMBERS)
-        return inputIO.inputWinningNumber()
-    }
+        val winningLottoNumber = inputIO.inputLottoNumber()
 
-    fun inputBonusNumber(): LottoNumber {
         inputView.show(InputMessage.BONUS_NUMBER)
-        return inputIO.inputBonusNumber()
+        val bonusNumber = inputIO.inputBonusNumber()
+
+        return WinningLotto(winningLottoNumber, bonusNumber)
     }
 
     fun getStatistics(req: StatisticsRequest): List<LottoRank> {
