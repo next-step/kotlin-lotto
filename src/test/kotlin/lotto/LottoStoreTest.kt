@@ -1,30 +1,49 @@
 package lotto
 
 import io.kotest.assertions.throwables.shouldThrow
-import io.kotest.matchers.shouldBe
 import lotto.domain.Lotto
-import lotto.domain.LottoStore
+import lotto.domain.LottoNumber
+import lotto.domain.ManualLottoCount
+import lotto.domain.ManualLottoTickets
 import lotto.domain.PurchaseAmount
+import lotto.domain.dto.PurchaseLottoRequest
 import org.junit.jupiter.api.Test
 
-class LottoStoreTest {
-    private val lottoStore = LottoStore(FixedLottoGenerator())
+private fun Array<Int>.toLotto(): Lotto = Lotto(map(::LottoNumber))
 
+class LottoStoreTest {
     @Test
-    fun `구입 금액이 1000원 미만일 시 예외를 리턴한다`() {
+    fun `1000원 미만의 금액을 입력하면 예외를 리턴한다`() {
         shouldThrow<IllegalArgumentException> {
-            lottoStore.purchaseLottoTickets(PurchaseAmount(999))
+            PurchaseAmount(999)
         }
     }
 
     @Test
-    fun `로또를 구입 금액에 맞는 장 수를 구매한다`() {
-        val lottoTickets = listOf(
-            Lotto(arrayOf(1, 2, 3, 4, 5, 6)),
-            Lotto(arrayOf(1, 2, 3, 4, 5, 6)),
-            Lotto(arrayOf(1, 2, 3, 4, 5, 6)),
+    fun `수동 로또 수에 0보다 작은 값이 들어오면 예외를 리턴한다`() {
+        shouldThrow<IllegalArgumentException> {
+            ManualLottoCount(-3)
+        }
+    }
+
+    @Test
+    fun `수동 로또를 구매할 금액이 부족할 경우 예외를 리턴한다`() {
+        val purchaseAmount = PurchaseAmount(2000)
+        val manualLottoCount = ManualLottoCount(3)
+        val manualLottoTickets = ManualLottoTickets(
+            listOf(
+                arrayOf(1, 2, 3, 4, 5, 6).toLotto(),
+                arrayOf(1, 2, 3, 4, 5, 6).toLotto(),
+                arrayOf(1, 2, 3, 4, 5, 6).toLotto(),
+            )
         )
 
-        lottoStore.purchaseLottoTickets(PurchaseAmount(3000)) shouldBe lottoTickets
+        shouldThrow<IllegalArgumentException> {
+            PurchaseLottoRequest(
+                purchaseAmount,
+                manualLottoCount,
+                manualLottoTickets
+            )
+        }
     }
 }

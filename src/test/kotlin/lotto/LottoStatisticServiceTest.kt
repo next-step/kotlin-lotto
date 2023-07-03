@@ -11,18 +11,20 @@ import lotto.domain.dto.ProfitRateRequest
 import lotto.domain.dto.StatisticsRequest
 import org.junit.jupiter.api.Test
 
+private fun Array<Int>.toLotto(): Lotto = Lotto(map(::LottoNumber))
+
 class LottoStatisticServiceTest {
     private val lottoStatisticService = LottoStatisticService()
 
     @Test
     fun `구매한 로또와 당첨 번호가 주어지면 각 로또의 등수를 확인할 수 있다`() {
         val lottoTickets = listOf(
-            Lotto(arrayOf(11, 12, 13, 14, 15, 16)),
-            Lotto(arrayOf(1, 2, 3, 14, 15, 16)),
-            Lotto(arrayOf(1, 2, 3, 14, 15, 16)),
-            Lotto(arrayOf(1, 2, 3, 4, 15, 16)),
-            Lotto(arrayOf(1, 2, 3, 4, 5, 16)),
-            Lotto(arrayOf(1, 2, 3, 4, 5, 6)),
+            arrayOf(11, 12, 13, 14, 15, 16).toLotto(),
+            arrayOf(1, 2, 3, 14, 15, 16).toLotto(),
+            arrayOf(1, 2, 3, 14, 15, 16).toLotto(),
+            arrayOf(1, 2, 3, 4, 15, 16).toLotto(),
+            arrayOf(1, 2, 3, 4, 5, 16).toLotto(),
+            arrayOf(1, 2, 3, 4, 5, 6).toLotto(),
         )
 
         val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }, LottoNumber(10))
