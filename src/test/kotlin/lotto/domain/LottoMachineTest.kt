@@ -18,7 +18,8 @@ class LottoMachineTest {
     @ParameterizedTest
     @ValueSource(strings = ["14000", "3000"])
     fun `입력받은 구입 금액을 로또 개당 가격으로 나눈 숫자만큼 티켓을 구매한다`(money: Int) {
-        Assertions.assertThat(lottoMachine.buyLottoTicket(money)).isEqualTo(money / LottoMachine.LOTTO_TICKET_PRICE)
+        val actual = lottoMachine.buyLottoTicket(money).lotteryPaperList.size
+        Assertions.assertThat(actual).isEqualTo(money / LottoMachine.LOTTO_TICKET_PRICE)
     }
 
     @ParameterizedTest

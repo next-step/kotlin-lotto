@@ -17,22 +17,22 @@ class LottoController(
 
     fun start() {
         val purchasingAmount = inputView.getPurchasingAmount()
-        val lottoResponse = purchaseLotto(purchasingAmount)
+        val lottoMachine = LottoMachine()
+        val purchasedLotteryPapers = purchaseLotto(purchasingAmount, lottoMachine)
 
-        printLottoNumbers(lottoResponse)
+        printLottoNumbers(purchasedLotteryPapers)
 
         val winningNumber = generateWinningNumber()
-        val lottoMatchResponse = matchLottoNumber(winningNumber, lottoResponse)
+        val lottoMatchResponse = matchLottoNumber(winningNumber, purchasedLotteryPapers)
 
         printLottoMatch(lottoMatchResponse)
         printYield(purchasingAmount, lottoMatchResponse)
     }
 
-    private fun purchaseLotto(purchasingAmount: Int): PurchasedLotteryPapers {
-        val lottoMachine = LottoMachine()
-        val numberOfLottoTicket = lottoMachine.buyLottoTicket(purchasingAmount)
-        resultView.printNumberOfLottoTicket(numberOfLottoTicket)
-        return lottoMachine.getPurchasedLotteryPapers()
+    private fun purchaseLotto(purchasingAmount: Int, lottoMachine: LottoMachine): PurchasedLotteryPapers {
+        val purchasedLotteryPapers = lottoMachine.buyLottoTicket(purchasingAmount)
+        resultView.printNumberOfLottoTicket(purchasedLotteryPapers.lotteryPaperList.size)
+        return purchasedLotteryPapers
     }
 
     private fun printLottoNumbers(purchasedLotteryPapers: PurchasedLotteryPapers) {
