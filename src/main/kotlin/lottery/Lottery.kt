@@ -12,9 +12,17 @@ class Lottery(numbers: Set<LotteryNumber>) {
         return numbers.size != LOTTERY_NUMBER_SIZE
     }
 
+    fun checkRank(numbers: Set<LotteryNumber>): Int {
+        var correctCount = 0
+        numbers.forEach {
+            if (lotteryNumbers.contains(it)) correctCount++
+        }
+        return correctCount
+    }
+
     companion object {
         private val BASE_NUMBERS = (LotteryNumber.MIN_LOTTERY_NUMBER..LotteryNumber.MAX_LOTTERY_NUMBER).toSet()
-        private const val LOTTERY_NUMBER_SIZE = 6
+        const val LOTTERY_NUMBER_SIZE = 6
         const val LOTTERY_PRICE = 1000
         fun makeAutoLottery(): Lottery {
             return Lottery(

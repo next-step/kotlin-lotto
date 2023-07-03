@@ -15,4 +15,8 @@ value class LotteryNumber private constructor(
         const val MAX_LOTTERY_NUMBER = 45
         const val MIN_LOTTERY_NUMBER = 1
     }
+
+    override fun toString(): String {
+        return "$number"
+    }
 }
