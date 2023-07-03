@@ -11,10 +11,10 @@ internal class LottoResultTest : BehaviorSpec({
         When("각 등수마다 1개씩 당첨됐을 때") {
             val lottoResult = LottoResult(
                 mapOf(
+                    Rank.FIFTH to 1,
                     Rank.FOURTH to 1,
                     Rank.THIRD to 1,
                     Rank.SECOND to 1,
-                    Rank.SECOND_BONUS to 1,
                     Rank.FIRST to 1
                 )
             )
@@ -33,10 +33,10 @@ internal class LottoResultTest : BehaviorSpec({
         When("각 등수마다 2개씩 당첨됐을 때") {
             val lottoResult = LottoResult(
                 mapOf(
+                    Rank.FIFTH to 2,
                     Rank.FOURTH to 2,
                     Rank.THIRD to 2,
                     Rank.SECOND to 2,
-                    Rank.SECOND_BONUS to 2,
                     Rank.FIRST to 2
                 )
             )

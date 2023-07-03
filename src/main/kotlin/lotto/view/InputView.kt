@@ -2,7 +2,6 @@ package lotto.view
 
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
-import lotto.domain.LottoNumberParser
 import lotto.domain.WinningLotto
 
 object InputView {

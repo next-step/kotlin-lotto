@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.view
 
 object LottoNumberParser {
     private const val DEFAULT_DELIMITER = ","

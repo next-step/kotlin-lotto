@@ -4,7 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
-import lotto.domain.LottoNumberParser
+import lotto.view.LottoNumberParser
 
 internal class LottoNumbersParserTest : BehaviorSpec({
 

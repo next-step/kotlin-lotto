@@ -35,8 +35,9 @@ object ResultView {
 
     private fun printResultPerRank(rank: Rank, lottoResult: LottoResult) {
         val bonusString = ", 보너스 볼 일치"
-        println("${rank.matchCount}개 일치" +
-                (if (rank == Rank.SECOND_BONUS) bonusString else "") +
+        println(
+            "${rank.matchCount}개 일치" +
+                (if (rank == Rank.SECOND) bonusString else "") +
                 " (${rank.prize}원)- ${lottoResult.result[rank] ?: 0}개"
         )
     }

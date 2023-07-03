@@ -1,12 +1,11 @@
 package lotto
 
 import io.kotest.core.spec.style.BehaviorSpec
-import io.kotest.inspectors.forAll
-import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
 import lotto.domain.Lotto
 import lotto.domain.LottoList
 import lotto.domain.LottoNumber
+import lotto.domain.LottoResult
 import lotto.domain.Rank
 import lotto.domain.WinningLotto
 
@@ -25,9 +24,18 @@ internal class LottoListTest : BehaviorSpec({
             )
             Then("일치하는 번호 수에 맞는 Rank와 개수를 가진 LottoResult가 반환된다.") {
                 val actual = LottoList(lottos).getResult(winningLotto)
-                println(actual.result.keys)
-                actual.result.keys.shouldContainAll(*Rank.values())
-                actual.result.values.forAll { it shouldBe 1 }
+                val expect = LottoResult(
+                    mapOf(
+                        Rank.MISS to 1,
+                        Rank.FIFTH to 1,
+                        Rank.FOURTH to 1,
+                        Rank.THIRD to 1,
+                        Rank.SECOND to 1,
+                        Rank.FIRST to 1
+                    )
+                )
+
+                actual shouldBe expect
             }
         }
     }

@@ -21,7 +21,7 @@ class LottoGame(
         val lottoCount = this.purchasePrice / LOTTO_PRICE - lottoList.size()
         val autoLottos = getAutoLottoList(lottoCount)
 
-        this.lottoList + autoLottos
+        this.lottoList.add(autoLottos)
     }
 
     private fun getAutoLottoList(lottoCount: Int): LottoList = LottoList.of(lottoStrategy, lottoCount)

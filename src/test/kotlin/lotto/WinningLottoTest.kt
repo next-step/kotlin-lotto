@@ -5,7 +5,9 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
 import lotto.domain.Lotto
+import lotto.domain.LottoList
 import lotto.domain.LottoNumber
+import lotto.domain.LottoResult
 import lotto.domain.Rank
 import lotto.domain.WinningLotto
 
@@ -17,10 +19,10 @@ internal class WinningLottoTest : BehaviorSpec({
             val winningLotto = WinningLotto(Lotto.of(listOf(1, 2, 3, 4, 5, 6)), LottoNumber(7))
             val lottoList = listOf(
                 Lotto.of(listOf(1, 2, 3, 4, 5, 6)) to Rank.FIRST,
-                Lotto.of(listOf(1, 2, 3, 4, 5, 7)) to Rank.SECOND_BONUS,
-                Lotto.of(listOf(1, 2, 3, 4, 5, 8)) to Rank.SECOND,
-                Lotto.of(listOf(1, 2, 3, 4, 7, 8)) to Rank.THIRD,
-                Lotto.of(listOf(1, 2, 3, 7, 8, 9)) to Rank.FOURTH,
+                Lotto.of(listOf(1, 2, 3, 4, 5, 7)) to Rank.SECOND,
+                Lotto.of(listOf(1, 2, 3, 4, 5, 8)) to Rank.THIRD,
+                Lotto.of(listOf(1, 2, 3, 4, 7, 8)) to Rank.FOURTH,
+                Lotto.of(listOf(1, 2, 3, 7, 8, 9)) to Rank.FIFTH,
                 Lotto.of(listOf(1, 2, 7, 8, 9, 10)) to Rank.MISS,
                 Lotto.of(listOf(1, 7, 8, 9, 10, 11)) to Rank.MISS,
                 Lotto.of(listOf(7, 8, 9, 10, 11, 12)) to Rank.MISS,
@@ -64,8 +66,37 @@ internal class WinningLottoTest : BehaviorSpec({
             )
             Then("IllegalArgumentException 발생") {
                 lottos.forAll { lotto ->
-                    winningLotto.match(lotto) shouldBe Rank.SECOND_BONUS
+                    winningLotto.match(lotto) shouldBe Rank.SECOND
                 }
+            }
+        }
+
+        When("8개 복권을 포함한 LottoList에 대한 matchAll()") {
+            val winningLotto = WinningLotto(Lotto.of(listOf(1, 2, 3, 4, 5, 6)), LottoNumber(7))
+            val lottos = listOf(
+                Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
+                Lotto.of(listOf(1, 2, 3, 4, 5, 7)),
+                Lotto.of(listOf(1, 2, 3, 4, 5, 8)),
+                Lotto.of(listOf(1, 2, 3, 4, 7, 8)),
+                Lotto.of(listOf(1, 2, 3, 7, 8, 9)),
+                Lotto.of(listOf(1, 2, 7, 8, 9, 10)),
+                Lotto.of(listOf(2, 7, 8, 9, 10, 11)),
+                Lotto.of(listOf(7, 8, 9, 10, 11, 12)),
+            ).let { LottoList(it) }
+            Then("각 결과값에 맞는 LottoResult 반환") {
+                val actual = winningLotto.matchAll(lottos)
+                val expect = LottoResult(
+                    mapOf(
+                        Rank.MISS to 3,
+                        Rank.FIFTH to 1,
+                        Rank.FOURTH to 1,
+                        Rank.THIRD to 1,
+                        Rank.SECOND to 1,
+                        Rank.FIRST to 1
+                    )
+                )
+
+                actual shouldBe expect
             }
         }
     }
