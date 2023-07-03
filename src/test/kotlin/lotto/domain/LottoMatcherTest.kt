@@ -14,55 +14,28 @@ class LottoMatcherTest {
         lottoMatcher = LottoMatcher()
     }
 
+    private fun createPurchasedLotteryPapers(): List<LotteryPaper> {
+        return listOf(
+            createLotteryPaper(1, 2, 3, 4, 5, 6),
+            createLotteryPaper(2, 3, 4, 5, 6, 7),
+            createLotteryPaper(3, 4, 5, 6, 7, 8),
+            createLotteryPaper(4, 5, 6, 7, 8, 9)
+        )
+    }
+
+    private fun createLotteryPaper(vararg numbers: Int): LotteryPaper {
+        return LotteryPaper(numbers.map { LottoNumber(it) })
+    }
+
     @Test
     fun `로또 번호와 당첨 번호를 가지고 당첨 통계를 낸다`() {
+        // given
         val numberList = listOf(1, 2, 3, 4, 5, 6)
         val lottoNumbers = numberList.map { LottoNumber(it) }
         val winningNumber = WinningNumber(LotteryPaper(lottoNumbers), LottoNumber(10))
+        val lotteryPaperList = createPurchasedLotteryPapers()
 
-        val lotteryPaperList = listOf(
-            LotteryPaper(
-                listOf(
-                    LottoNumber(1),
-                    LottoNumber(2),
-                    LottoNumber(3),
-                    LottoNumber(4),
-                    LottoNumber(5),
-                    LottoNumber(6)
-                )
-            ),
-            LotteryPaper(
-                listOf(
-                    LottoNumber(2),
-                    LottoNumber(3),
-                    LottoNumber(4),
-                    LottoNumber(5),
-                    LottoNumber(6),
-                    LottoNumber(7),
-                )
-            ),
-            LotteryPaper(
-                listOf(
-                    LottoNumber(3),
-                    LottoNumber(4),
-                    LottoNumber(5),
-                    LottoNumber(6),
-                    LottoNumber(7),
-                    LottoNumber(8)
-                )
-            ),
-            LotteryPaper(
-                listOf(
-                    LottoNumber(4),
-                    LottoNumber(5),
-                    LottoNumber(6),
-                    LottoNumber(7),
-                    LottoNumber(8),
-                    LottoNumber(9)
-                )
-            )
-        )
-
+        // when
         val purchasedLotteryPapers = PurchasedLotteryPapers(lotteryPaperList)
 
         val countLottoWinner = lottoMatcher.countLottoWinner(
@@ -70,6 +43,7 @@ class LottoMatcherTest {
             purchasedLotteryPapers
         )
 
+        // then
         val actual = countLottoWinner.getMatchLottoResult()
         val answer = mapOf(
             PrizeLevel.FIFTH to 1,

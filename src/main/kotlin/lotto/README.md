@@ -74,5 +74,5 @@
 
 * WinningNumber
 
-- [ ] 보너스 숫자가 기존 당첨번호와 중복되면 IllegalArgumentException을 throw한다.
+- [x] 보너스 숫자가 기존 당첨번호와 중복되면 IllegalArgumentException을 throw한다.
 
