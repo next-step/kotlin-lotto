@@ -1,6 +1,6 @@
 package lottery.domain
 
-enum class LotteryPrize(val correctCount: Int, val rewardMoney: Int, var count: Int = 0) {
+enum class LotteryPrize(val correctCount: Int, val rewardMoney: Int) {
     NONE(0, 0),
     FORTH(3, 5_000),
     THIRD(4, 50_000),

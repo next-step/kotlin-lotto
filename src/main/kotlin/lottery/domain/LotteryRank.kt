@@ -1,13 +1,16 @@
 package lottery.domain
 
 class LotteryRank {
-    val lotteriesRank: List<LotteryPrize> = LotteryPrize.values().toList()
-    fun plusRank(rank: LotteryPrize) = ++lotteriesRank.find { it == rank }!!.count
+    val lotteriesRank = LotteryPrize.values().associateWith { 0 }.toMutableMap()
+
+    fun plusRank(rank: LotteryPrize) {
+        lotteriesRank[rank] = lotteriesRank.getOrDefault(rank, 0) + 1
+    }
+
     fun calculateProfit(money: Int): Double {
-        var total = 0.0
-        lotteriesRank.forEach {
-            total += it.rewardMoney * it.count
-        }
+        val total = lotteriesRank.map { (prize, count) ->
+            prize.rewardMoney * count
+        }.sumOf { it }.toDouble()
         return total / money
     }
 }

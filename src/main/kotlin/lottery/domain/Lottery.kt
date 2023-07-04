@@ -13,11 +13,7 @@ class Lottery(numbers: Set<LotteryNumber>) {
     }
 
     fun checkRank(numbers: Set<LotteryNumber>): Int {
-        var correctCount = 0
-        numbers.forEach {
-            if (lotteryNumbers.contains(it)) correctCount++
-        }
-        return correctCount
+        return numbers.count { it in lotteryNumbers }
     }
 
     companion object {

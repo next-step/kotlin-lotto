@@ -28,8 +28,8 @@ object LotteryGameView {
     fun printLotteryRankView(lotteryRank: LotteryRank) {
         println("당첨 통계")
         println("---------")
-        lotteryRank.lotteriesRank.drop(NONE_PRIZE_INDEX).forEach {
-            println("${it.correctCount}개 일치 (${it.rewardMoney}원)- ${it.count}개")
+        lotteryRank.lotteriesRank.forEach { (prize, count) ->
+            println("${prize.correctCount}개 일치 (${prize.rewardMoney}원)- ${count}개")
         }
     }
 

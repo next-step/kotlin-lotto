@@ -1,10 +1,8 @@
-package lottery
+package lottery.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import lottery.domain.Lottery
-import lottery.domain.LotteryNumber
 
 class LotteryTest : StringSpec({
     "자동 로또 생성을 할 경우의 숫자의 개수는 6개이다." {
