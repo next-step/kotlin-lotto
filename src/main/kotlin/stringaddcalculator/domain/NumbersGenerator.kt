@@ -3,9 +3,9 @@ package stringaddcalculator.domain
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-class NumbersGenerator(private val input: String) {
+class NumbersGenerator {
 
-    fun generate(): Numbers {
+    fun generate(input: String): Numbers {
         if (input.length == 1) {
             return Numbers(listOf(Number.of(input)))
         }
@@ -13,7 +13,7 @@ class NumbersGenerator(private val input: String) {
         if (matcher.find()) {
             return byCustomDelimiters(matcher)
         }
-        return byDefaultDelimiters()
+        return byDefaultDelimiters(input)
     }
 
     private fun byCustomDelimiters(matcher: Matcher): Numbers {
@@ -24,7 +24,7 @@ class NumbersGenerator(private val input: String) {
             .let { Numbers(it) }
     }
 
-    private fun byDefaultDelimiters() = input.split(DEFAULT_DELIMITER_REGEX)
+    private fun byDefaultDelimiters(input: String) = input.split(DEFAULT_DELIMITER_REGEX)
         .map { it.trim() }
         .map { Number.of(it) }
         .let { Numbers(it) }

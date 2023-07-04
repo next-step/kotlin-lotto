@@ -1,6 +1,6 @@
 package stringaddcalculator.domain
 
 fun main(input: String): Int {
-    val numbers = NumbersGenerator(input).generate()
+    val numbers = NumbersGenerator().generate(input)
     return numbers.sum()
 }
