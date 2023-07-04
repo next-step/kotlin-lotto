@@ -7,7 +7,7 @@ class LottoList(
 ) {
     private val _lottos = lottos.toMutableList()
     val lottos: List<Lotto>
-        get() = _lottos
+        get() = _lottos.toList()
 
     fun size(): Int = lottos.size
 
