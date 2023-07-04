@@ -2,6 +2,7 @@ package lottery
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
+import lottery.domain.LotteryNumber
 
 class LotteryNumberTest : StringSpec({
     "로또 숫자의 크기는 1이상 이여야한다." {

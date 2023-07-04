@@ -1,4 +1,4 @@
-package lottery
+package lottery.domain
 
 class LotteryRank {
     val lotteriesRank: List<LotteryPrize> = LotteryPrize.values().toList()

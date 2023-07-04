@@ -1,4 +1,7 @@
-package lottery
+package lottery.view
+
+import lottery.domain.Lotteries
+import lottery.domain.LotteryRank
 
 object LotteryGameView {
 

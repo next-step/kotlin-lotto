@@ -1,4 +1,12 @@
-package lottery
+package lottery.controller
+
+import lottery.domain.Lotteries
+import lottery.domain.Lottery
+import lottery.domain.LotteryNumber
+import lottery.domain.LotteryPrize
+import lottery.domain.LotteryRank
+import lottery.domain.WinningLottery
+import lottery.view.LotteryGameView
 
 class LotteryGame {
     private lateinit var winningLottery: WinningLottery

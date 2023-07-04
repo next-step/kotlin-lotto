@@ -1,4 +1,4 @@
-package lottery
+package lottery.domain
 
 class Lottery(numbers: Set<LotteryNumber>) {
     val lotteryNumbers: Set<LotteryNumber>

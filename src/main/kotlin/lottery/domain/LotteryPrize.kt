@@ -1,4 +1,4 @@
-package lottery
+package lottery.domain
 
 enum class LotteryPrize(val correctCount: Int, val rewardMoney: Int, var count: Int = 0) {
     NONE(0, 0),

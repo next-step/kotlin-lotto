@@ -1,4 +1,4 @@
-package lottery
+package lottery.domain
 
 class Lotteries {
     val lotteries = mutableListOf<Lottery>()
