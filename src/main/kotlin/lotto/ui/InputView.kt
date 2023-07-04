@@ -1,5 +1,6 @@
 package lotto.ui
 
+import lotto.domain.LotteryPaper
 import lotto.domain.LottoNumber
 
 class InputView {
@@ -7,6 +8,22 @@ class InputView {
     fun getPurchasingAmount(): Int {
         println("구입금액을 입력해 주세요.")
         return readln().toInt()
+    }
+
+    fun getManualBuyAmount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        return readln().toInt()
+    }
+
+    fun getManualBuyNumber(manualBuyAmount: Int): List<LotteryPaper> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        val lotteryPaperList = mutableListOf<LotteryPaper>()
+        repeat(manualBuyAmount) {
+            val inputText = readln()
+            val lotteryPaper = LotteryPaper(parseWinningNumberText(inputText))
+            lotteryPaperList.add(lotteryPaper)
+        }
+        return lotteryPaperList.toList()
     }
 
     fun getWinningNumber(): List<LottoNumber> {

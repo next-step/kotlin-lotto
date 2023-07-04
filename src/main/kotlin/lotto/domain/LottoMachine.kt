@@ -1,14 +1,20 @@
 package lotto.domain
 
+import lotto.dto.LottoOrder
 import lotto.dto.PurchasedLotteryPapers
 
 class LottoMachine(private val lotteryPaperFactory: LotteryPaperFactory) {
     private val lottoValidator = LottoValidator()
 
-    fun buyLottoTicket(money: Int): PurchasedLotteryPapers {
-        lottoValidator.validateInputMoneyCanBuyLottoTicket(money)
-        val numberOfLottoTicket = calculateNumberOfLottoTicket(money)
+    fun buyLottoTicket(lottoOrder: LottoOrder): PurchasedLotteryPapers {
+        val (purchasingAmount, manualBuyLotteryPaper) = lottoOrder
+
+        lottoValidator.validateInputMoneyCanBuyLottoTicket(purchasingAmount)
+        val numberOfLottoTicket = calculateNumberOfLottoTicket(purchasingAmount)
+
+        lottoValidator.validateLottoTicket(numberOfLottoTicket, manualBuyLotteryPaper)
         val generatedLottoNumbers = generateLottoNumbers(numberOfLottoTicket)
+
         return PurchasedLotteryPapers(generatedLottoNumbers)
     }
 

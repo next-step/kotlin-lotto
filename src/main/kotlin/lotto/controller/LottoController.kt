@@ -9,6 +9,7 @@ import lotto.domain.RandomLottoNumberGenerationStrategy
 import lotto.domain.WinningNumber
 import lotto.domain.YieldCalculator
 import lotto.dto.LottoMatchResult
+import lotto.dto.LottoOrder
 import lotto.dto.PurchasedLotteryPapers
 import lotto.ui.InputView
 import lotto.ui.ResultView
@@ -19,9 +20,9 @@ class LottoController(
 ) {
 
     fun start() {
-        val purchasingAmount = inputView.getPurchasingAmount()
+        val lottoOrder = getLottoOrder()
         val lottoMachine = LottoMachine(LotteryPaperFactory(RandomLottoNumberGenerationStrategy()))
-        val purchasedLotteryPapers = purchaseLotto(purchasingAmount, lottoMachine)
+        val purchasedLotteryPapers = purchaseLotto(lottoOrder, lottoMachine)
 
         printLottoNumbers(purchasedLotteryPapers)
 
@@ -29,11 +30,18 @@ class LottoController(
         val lottoMatchResponse = matchLottoNumber(winningNumber, purchasedLotteryPapers)
 
         printLottoMatch(lottoMatchResponse)
-        printYield(purchasingAmount, lottoMatchResponse)
+        printYield(lottoOrder.purchasingAmount, lottoMatchResponse)
     }
 
-    private fun purchaseLotto(purchasingAmount: Int, lottoMachine: LottoMachine): PurchasedLotteryPapers {
-        val purchasedLotteryPapers = lottoMachine.buyLottoTicket(purchasingAmount)
+    private fun getLottoOrder(): LottoOrder {
+        val purchasingAmount = inputView.getPurchasingAmount()
+        val manualBuyNumber = inputView.getManualBuyAmount()
+        val manualBuyLotteryPaper = inputView.getManualBuyNumber(manualBuyNumber)
+        return LottoOrder(purchasingAmount, manualBuyLotteryPaper)
+    }
+
+    private fun purchaseLotto(lottoOrder: LottoOrder, lottoMachine: LottoMachine): PurchasedLotteryPapers {
+        val purchasedLotteryPapers = lottoMachine.buyLottoTicket(lottoOrder)
         resultView.printNumberOfLottoTicket(purchasedLotteryPapers.lotteryPaperList.size)
         return purchasedLotteryPapers
     }

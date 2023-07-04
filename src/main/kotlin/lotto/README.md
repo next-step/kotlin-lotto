@@ -76,3 +76,11 @@
 
 - [x] 보너스 숫자가 기존 당첨번호와 중복되면 IllegalArgumentException을 throw한다.
 
+* LottoValidator
+
+- [x] 구입하려는 금액이 로또 1개의 금액보다 작으면 IllegalArgumentException을 throw한다.
+- [x] 구입하는 숫자보다 수동 구매 번호 숫자가 많으면 IllegalArgumentException을 throw한다.
+
+* LottoMachine
+
+- [ ] 
