@@ -20,4 +20,12 @@ class LotteryTest : StringSpec({
     "로또 한장의 금액은 1000원 이다." {
         Lottery.LOTTERY_PRICE shouldBe 1000
     }
+
+    "로또 두개를 비교했을때 맞는 개수를 정확하게 가져와야한다." {
+        val numbers = listOf(1, 2, 3, 4, 5, 6)
+        val winningNumbers = listOf(1, 2, 3, 8, 9, 10)
+        val lottery = Lottery(numbers.map { LotteryNumber.get(it) }.toSet())
+        val winningLottery = WinningLottery(winningNumbers.map { LotteryNumber.get(it) }.toSet())
+        lottery.checkCorrectCount(winningLottery.winningNumbers) shouldBe 3
+    }
 })

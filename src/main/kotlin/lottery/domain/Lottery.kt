@@ -12,7 +12,7 @@ class Lottery(numbers: Set<LotteryNumber>) {
         return numbers.size != LOTTERY_NUMBER_SIZE
     }
 
-    fun checkRank(numbers: Set<LotteryNumber>): Int {
+    fun checkCorrectCount(numbers: Set<LotteryNumber>): Int {
         return numbers.count { it in lotteryNumbers }
     }
 

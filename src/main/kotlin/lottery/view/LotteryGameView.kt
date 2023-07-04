@@ -1,11 +1,11 @@
 package lottery.view
 
 import lottery.domain.Lotteries
+import lottery.domain.LotteryPrize
 import lottery.domain.LotteryRank
 
 object LotteryGameView {
 
-    private const val NONE_PRIZE_INDEX = 1
     fun printPurchaseMoneyView() {
         println("구입 금액을 입력해 주세요.")
     }
@@ -28,7 +28,7 @@ object LotteryGameView {
     fun printLotteryRankView(lotteryRank: LotteryRank) {
         println("당첨 통계")
         println("---------")
-        lotteryRank.lotteriesRank.forEach { (prize, count) ->
+        lotteryRank.lotteriesRank.filter { it.key != LotteryPrize.NONE }.forEach { (prize, count) ->
             println("${prize.correctCount}개 일치 (${prize.rewardMoney}원)- ${count}개")
         }
     }

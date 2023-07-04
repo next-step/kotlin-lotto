@@ -26,8 +26,8 @@ class LotteryGame {
         winningLottery = WinningLottery(numbers.map { LotteryNumber.get(it.toInt()) }.toSet())
 
         purchaseAutoLotteries.lotteries.forEach {
-            val checkRank = it.checkRank(winningLottery.winningNumbers)
-            lotteryRank.plusRank(LotteryPrize.get(checkRank) ?: LotteryPrize.NONE)
+            val correctCount = it.checkCorrectCount(winningLottery.winningNumbers)
+            lotteryRank.plusRank(LotteryPrize.get(correctCount) ?: LotteryPrize.NONE)
         }
         LotteryGameView.printLotteryRankView(lotteryRank)
         LotteryGameView.printProfitView(lotteryRank.calculateProfit(money))
