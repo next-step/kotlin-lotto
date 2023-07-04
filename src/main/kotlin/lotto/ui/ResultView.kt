@@ -57,4 +57,8 @@ class ResultView {
     fun printYield(yield: Double) {
         println("총 수익률은 ${yield}입니다.")
     }
+
+    fun printNextLine() {
+        println()
+    }
 }

@@ -35,8 +35,14 @@ class LottoController(
 
     private fun getLottoOrder(): LottoOrder {
         val purchasingAmount = inputView.getPurchasingAmount()
+        resultView.printNextLine()
+
         val manualBuyNumber = inputView.getManualBuyAmount()
+        resultView.printNextLine()
+
         val manualBuyLotteryPaper = inputView.getManualBuyNumber(manualBuyNumber)
+        resultView.printNextLine()
+
         return LottoOrder(purchasingAmount, manualBuyLotteryPaper)
     }
 

@@ -13,7 +13,7 @@ class LottoMachine(private val lotteryPaperFactory: LotteryPaperFactory) {
         val numberOfLottoTicket = calculateNumberOfLottoTicket(purchasingAmount)
 
         lottoValidator.validateLottoTicket(numberOfLottoTicket, manualBuyLotteryPaper)
-        val generatedLottoNumbers = generateLottoNumbers(numberOfLottoTicket)
+        val generatedLottoNumbers = generateLottoNumbers(numberOfLottoTicket, manualBuyLotteryPaper)
 
         return PurchasedLotteryPapers(generatedLottoNumbers)
     }
@@ -22,9 +22,13 @@ class LottoMachine(private val lotteryPaperFactory: LotteryPaperFactory) {
         return money / LOTTO_TICKET_PRICE
     }
 
-    private fun generateLottoNumbers(numOfLottoPurchases: Int): List<LotteryPaper> {
+    private fun generateLottoNumbers(
+        numOfLottoPurchases: Int,
+        manualBuyLotteryPaper: List<LotteryPaper>
+    ): List<LotteryPaper> {
         val lotteryPaperList: MutableList<LotteryPaper> = mutableListOf()
-        repeat(numOfLottoPurchases) {
+        lotteryPaperList.addAll(manualBuyLotteryPaper)
+        repeat(numOfLottoPurchases - manualBuyLotteryPaper.size) {
             val generatedLottoNumber = lotteryPaperFactory.generateLotteryPaper(lotteryPaperList.toList())
             lotteryPaperList.add(generatedLottoNumber)
         }

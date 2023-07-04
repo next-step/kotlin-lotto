@@ -10,6 +10,7 @@ class LottoTestHelper {
                 createLotteryPaper(4, 5, 6, 7, 8, 9)
             )
         }
+
         private fun createLotteryPaper(vararg numbers: Int): LotteryPaper {
             return LotteryPaper(numbers.map { LottoNumber(it) })
         }
