@@ -1,8 +1,8 @@
 package lotto.domain
 
-class LottoReturnCalculator(private val lottoList: List<LottoNumbers>) {
+class LottoReturnCalculator(private val lottos: List<LottoNumbers>) {
     fun calculate(winningNumbers: LottoWinningNumbers): LottoReturn {
-        return lottoList.map {
+        return lottos.map {
             winningNumbers.numberOfOverlaps(it)
         }
             .groupingBy { it }
@@ -11,7 +11,7 @@ class LottoReturnCalculator(private val lottoList: List<LottoNumbers>) {
     }
 
     private fun Map<Int, Int>.toLottoResults(winningNumbers: LottoWinningNumbers): LottoReturn {
-        val secondCount = lottoList.filter {
+        val secondCount = lottos.filter {
             winningNumbers.isSecondPlace(it)
         }.size
 
@@ -25,5 +25,5 @@ class LottoReturnCalculator(private val lottoList: List<LottoNumbers>) {
         )
     }
 
-    private val paidAmount: Int = lottoList.size * LottoVendingMachine.LOTTO_PRICE
+    private val paidAmount: Int = lottos.size * AutomaticLottoVendingMachine.LOTTO_PRICE
 }

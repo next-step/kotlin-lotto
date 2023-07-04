@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoWinningNumbers
 import org.assertj.core.api.Assertions
@@ -17,14 +18,14 @@ class LottoWinningNumbersTest {
     @ValueSource(ints = [0, 46])
     fun `보너스 번호가 유요한 범위 내의 숫자가 아니라면 throw IllegalArgumentException`(bonusNumber: Int) {
         assertThrows<IllegalArgumentException> {
-            LottoWinningNumbers(LottoNumbers(setOf(1, 2, 3, 4, 5, 6)), bonusNumber)
+            LottoWinningNumbers(LottoNumbers.fromNumbers(setOf(1, 2, 3, 4, 5, 6)), LottoNumber.get(bonusNumber))
         }
     }
 
     @Test
     fun `보너스 번호가 다른 로또 번호와 중복이라면 throw IllegalArgumentException`() {
         assertThrows<IllegalArgumentException> {
-            LottoWinningNumbers(LottoNumbers(setOf(1, 2, 3, 4, 5, 6)), 1)
+            LottoWinningNumbers(LottoNumbers.fromNumbers(setOf(1, 2, 3, 4, 5, 6)), LottoNumber.get(1))
         }
     }
 
@@ -50,16 +51,16 @@ class LottoWinningNumbersTest {
             return Stream.of(
                 Arguments.of(
                     LottoWinningNumbers(
-                        LottoNumbers(setOf(1, 2, 3, 4, 5, 6)), 7
+                        LottoNumbers.fromNumbers(setOf(1, 2, 3, 4, 5, 6)), LottoNumber.get(7)
                     ),
-                    LottoNumbers(setOf(2, 3, 4, 5, 6, 7)),
+                    LottoNumbers.fromNumbers(setOf(2, 3, 4, 5, 6, 7)),
                     true
                 ),
                 Arguments.of(
                     LottoWinningNumbers(
-                        LottoNumbers(setOf(1, 2, 3, 4, 5, 6)), 7
+                        LottoNumbers.fromNumbers(setOf(1, 2, 3, 4, 5, 6)), LottoNumber.get(7)
                     ),
-                    LottoNumbers(setOf(1, 2, 3, 4, 5, 6)),
+                    LottoNumbers.fromNumbers(setOf(1, 2, 3, 4, 5, 6)),
                     false
                 )
             )
@@ -70,23 +71,23 @@ class LottoWinningNumbersTest {
             return Stream.of(
                 Arguments.of(
                     LottoWinningNumbers(
-                        LottoNumbers(setOf(1, 2, 3, 4, 5, 6)), 7
+                        LottoNumbers.fromNumbers(setOf(1, 2, 3, 4, 5, 6)), LottoNumber.get(7)
                     ),
-                    LottoNumbers(setOf(1, 2, 3, 4, 5, 6)),
+                    LottoNumbers.fromNumbers(setOf(1, 2, 3, 4, 5, 6)),
                     6
                 ),
                 Arguments.of(
                     LottoWinningNumbers(
-                        LottoNumbers(setOf(1, 2, 3, 4, 5, 6)), 7
+                        LottoNumbers.fromNumbers(setOf(1, 2, 3, 4, 5, 6)), LottoNumber.get(7)
                     ),
-                    LottoNumbers(setOf(1, 12, 13, 14, 15, 16)),
+                    LottoNumbers.fromNumbers(setOf(1, 12, 13, 14, 15, 16)),
                     1
                 ),
                 Arguments.of(
                     LottoWinningNumbers(
-                        LottoNumbers(setOf(1, 2, 3, 4, 5, 6)), 7
+                        LottoNumbers.fromNumbers(setOf(1, 2, 3, 4, 5, 6)), LottoNumber.get(7)
                     ),
-                    LottoNumbers(setOf(11, 12, 13, 14, 15, 16)),
+                    LottoNumbers.fromNumbers(setOf(11, 12, 13, 14, 15, 16)),
                     0
                 ),
             )
