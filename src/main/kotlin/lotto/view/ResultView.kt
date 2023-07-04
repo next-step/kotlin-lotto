@@ -7,6 +7,7 @@ import lotto.domain.Rank
 
 object ResultView {
     private const val RESULT_SUMMARY = "당첨 통계"
+    private const val LOTTO_LIST_COUNT = "수동으로 %s장, 자동으로 %s개를 구매했습니다."
 
     fun printLottoResult(lottoResult: LottoResult) {
         println(RESULT_SUMMARY)
@@ -15,8 +16,8 @@ object ResultView {
         printRateOfReturn(lottoResult)
     }
 
-    fun printLottos(lottoList: LottoList) {
-        println("${lottoList.size()}개 구매했습니다.")
+    fun printLottos(lottoList: LottoList, manualLottoCount: Int) {
+        println(LOTTO_LIST_COUNT.format(manualLottoCount, lottoList.size() - manualLottoCount))
         lottoList.lottos.forEach { lotto ->
             println(lotto.lottoNumbers.map(LottoNumber::number))
         }
