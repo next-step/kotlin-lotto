@@ -4,17 +4,14 @@ import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 
 object NormalLottoStrategy : LottoStrategy {
-    override val numberRange: IntRange = 1..45
-    override val numberCount: Int = 6
-
-    override fun makeLottoNumbers(): Lotto {
-        val lottos =
-            numberRange
+    override fun makeLotto(): Lotto {
+        val lottoNumbers =
+            LottoNumber.LOTTO_NUMBER_RANGE
                 .shuffled()
-                .take(numberCount)
+                .take(Lotto.LOTTO_SIZE)
                 .sorted()
                 .map { LottoNumber(it) }
 
-        return Lotto(lottos)
+        return Lotto(lottoNumbers)
     }
 }

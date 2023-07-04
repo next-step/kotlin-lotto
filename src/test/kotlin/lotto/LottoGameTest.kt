@@ -6,6 +6,8 @@ import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
 import lotto.domain.Lotto
 import lotto.domain.LottoGame
+import lotto.domain.LottoList
+import lotto.domain.LottoNumber
 import lotto.domain.WinningLotto
 
 internal class LottoGameTest : BehaviorSpec({
@@ -39,11 +41,21 @@ internal class LottoGameTest : BehaviorSpec({
         }
 
         When("결과를 출력하면") {
-            val lottoGame = LottoGame(purchasePrice = 10000)
-            val winningLotto = WinningLotto(Lotto.of("1, 2, 3, 4, 5, 6"))
+            val lottos = LottoList(
+                listOf(
+                    Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
+                    Lotto.of(listOf(1, 2, 3, 4, 5, 7)),
+                    Lotto.of(listOf(1, 2, 3, 4, 7, 8)),
+                    Lotto.of(listOf(1, 2, 3, 7, 8, 9)),
+                    Lotto.of(listOf(1, 2, 7, 8, 9, 10))
+                )
+            )
+            val lottoGame = LottoGame(purchasePrice = 5000, lottoList = lottos)
+            val winningLotto = WinningLotto(Lotto.of(listOf(1, 2, 3, 4, 5, 6)), LottoNumber(7))
             Then("각 일치 개수, 복권의 개수가 반환된다.") {
                 val actual = lottoGame.getResult(winningLotto)
                 actual.result.values.sum() shouldBe lottoGame.lottoList.size()
+                actual.result.values.forAll { it shouldBe 1 }
             }
         }
     }

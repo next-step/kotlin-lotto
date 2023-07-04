@@ -5,19 +5,27 @@ enum class Rank(
     val prize: Long
 ) {
     MISS(0, 0),
-    FOURTH(3, 5000),
-    THIRD(4, 50000),
-    SECOND(5, 1500000),
-    FIRST(6, 2000000000);
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000);
 
     companion object {
         private const val MATCH_COUNT_ERROR_MESSAGE = "matchCount는 0이상 6이하만 가능합니다."
-        fun of(matchCount: Int): Rank {
+        fun of(matchCount: Int, isBonus: Boolean = false): Rank {
             require(matchCount in 0..6) { MATCH_COUNT_ERROR_MESSAGE }
 
-            return Rank from matchCount
+            return rank(matchCount, isBonus)
         }
-        private val map = Rank.values().associateBy { it.matchCount }
-        private infix fun from(matchCount: Int): Rank = map[matchCount] ?: MISS
+
+        private fun rank(matchCount: Int, isBonus: Boolean): Rank {
+            if (matchCount == 5) {
+                if (isBonus) return SECOND
+                return THIRD
+            }
+
+            return Rank.values().firstOrNull { it.matchCount == matchCount } ?: MISS
+        }
     }
 }

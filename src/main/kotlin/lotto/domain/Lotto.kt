@@ -4,15 +4,22 @@ data class Lotto(
     val lottoNumbers: List<LottoNumber>
 ) {
     init {
-        require(lottoNumbers.size == 6) { INVALID_LOTTO_SIZE_ERROR_MESSAGE }
+        require(lottoNumbers.size == LOTTO_SIZE) { INVALID_LOTTO_SIZE_ERROR_MESSAGE(lottoNumbers.size) }
     }
 
-    companion object {
-        private const val LOTTO_SIZE = 6
-        private const val INVALID_LOTTO_SIZE_ERROR_MESSAGE = "로또번호는 6개 입니다."
+    fun match(newLotto: Lotto): Int {
+        return this.lottoNumbers.count(newLotto.lottoNumbers::contains)
+    }
 
-        fun of(inputNumbers: String): Lotto {
-            return Lotto(LottoNumbersParser.splitInputLottoNumbers(inputNumbers))
+    fun contain(lottoNumber: LottoNumber): Boolean = lottoNumbers.contains(lottoNumber)
+
+    companion object {
+        const val LOTTO_SIZE = 6
+        private val INVALID_LOTTO_SIZE_ERROR_MESSAGE =
+            { lottoSize: Int -> "로또는 ${LOTTO_SIZE}개의 번호를 가져야 합니다. 현재 ${lottoSize}개 입니다." }
+
+        fun of(inputNumbers: List<Int>): Lotto {
+            return Lotto(inputNumbers.map { LottoNumber(it) })
         }
     }
 }
