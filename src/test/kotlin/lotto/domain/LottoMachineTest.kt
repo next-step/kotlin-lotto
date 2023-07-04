@@ -14,7 +14,7 @@ class LottoMachineTest {
         val lottoNumbers = List(2) { LottoNumbersHelper.generate(1, 2, 3, 4, 5, 6) }
 
         // when
-        val lottos = LottoMachine().buy(manualLottoCount, lottoNumbers)
+        val lottos = LottoMachine(FakeLottoNumberGenerator()).buy(manualLottoCount, lottoNumbers)
 
         // then
         assertThat(lottos.lottos.size).isEqualTo(5)

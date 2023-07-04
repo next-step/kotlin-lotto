@@ -20,6 +20,17 @@ class LottoWinningNumbersTest {
     }
 
     @Test
+    fun `당첨번호와 보너스번호가 겹치는 경우 실패한다`() {
+        // expect
+        assertThatExceptionOfType(IllegalArgumentException::class.java).isThrownBy {
+            LottoWinningNumbers.of(
+                winningNumbers = listOf(1, 2, 3, 4, 5, 6),
+                bonusNumber = 6
+            )
+        }
+    }
+
+    @Test
     fun `LottoMatchCount 를 구하는데 성공한다`() {
         // given
         val lottoWinningNumbers = LottoWinningNumbers.of(
@@ -43,8 +54,8 @@ class LottoWinningNumbersTest {
     fun `보너스 숫자를 포함하는 경우 LottoMatchCount를 구하는데 성공한다`() {
         // given
         val lottoWinningNumbers = LottoWinningNumbers.of(
-                winningNumbers = listOf(1, 2, 3, 4, 5, 6),
-                bonusNumber = 7
+            winningNumbers = listOf(1, 2, 3, 4, 5, 6),
+            bonusNumber = 7
         )
 
         val lottoNumbers = LottoNumbersHelper.generate(1, 2, 3, 4, 7, 10)

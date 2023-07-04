@@ -17,8 +17,8 @@ class LottoNumbers(
             return LottoNumbers(lottoNumbers.map { LottoNumber(it) }.toSet())
         }
 
-        fun of(lottoNumbers: List<Int>, bonusNumber: Int): LottoNumbers {
-            return LottoNumbers((lottoNumbers.map { LottoNumber(it) } + LottoNumber(bonusNumber)).toSet())
+        fun of(winningLottoNumbers: LottoNumbers, bonusNumber: LottoNumber): LottoNumbers {
+            return LottoNumbers((winningLottoNumbers.lottoNumbers.map { it } + bonusNumber).toSet())
         }
     }
 }

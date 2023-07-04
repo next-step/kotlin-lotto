@@ -14,9 +14,13 @@ class Lottos(
     }
 
     companion object {
-        fun of(autoLottoCount: Int, manualLottoNumbers: List<LottoNumbers>): Lottos {
+        fun of(
+            autoLottoCount: Int,
+            manualLottoNumbers: List<LottoNumbers>,
+            lottoNumberGenerator: LottoNumberGenerator
+        ): Lottos {
             val manualLottos = manualLottoNumbers.map { Lotto(it, LottoType.MANUAL) }
-            val autoLottos = List(autoLottoCount) { Lotto.of(RandomLottoNumberGenerator()) }
+            val autoLottos = List(autoLottoCount) { Lotto.of(lottoNumberGenerator) }
             return Lottos(manualLottos + autoLottos)
         }
     }
