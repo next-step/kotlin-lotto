@@ -7,7 +7,7 @@ import lotto.domain.Rank
 
 object ResultView {
     private const val RESULT_SUMMARY = "당첨 통계"
-    private const val LOTTO_LIST_COUNT = "수동으로 %s장, 자동으로 %s개를 구매했습니다."
+    private const val LOTTO_LIST_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다."
 
     fun printLottoResult(lottoResult: LottoResult) {
         println(RESULT_SUMMARY)

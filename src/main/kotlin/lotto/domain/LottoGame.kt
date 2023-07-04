@@ -13,7 +13,7 @@ class LottoGame(
 
     init {
         require(purchasePrice % LOTTO_PRICE == 0) { LOTTO_PRICE_NOT_FALL_APART_EXCEPTION }
-        require(lottoList.size() <= purchasePrice / LOTTO_PRICE)
+        require(lottoList.size() <= purchasePrice / LOTTO_PRICE)  { INVALID_LOTTO_SIZE_EXCEPTION.format(purchasePrice, lottoList.size()) }
         initAutoLottoList()
     }
 
@@ -33,5 +33,6 @@ class LottoGame(
     companion object {
         const val LOTTO_PRICE = 1000
         private const val LOTTO_PRICE_NOT_FALL_APART_EXCEPTION = "로또 개당 가격과 맞지 않는 금액입니다."
+        private const val INVALID_LOTTO_SIZE_EXCEPTION = "구매 가격 %d보다 많은 로또 개수: %d개가 입력됐습니다."
     }
 }
