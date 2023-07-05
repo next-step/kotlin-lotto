@@ -1,12 +1,10 @@
 package lotto.domain
 
-import lotto.service.LottoCalculator
-
 class WinningStatistics(val winningStatistics: Map<Rank, Int>) {
     fun calculateTotalPrizeMoney(): Long {
         return winningStatistics
             .map { (rank, count) ->
-                LottoCalculator.calculatePrizeMoney(rank) * count
+                rank.winningMoney * count
             }
             .sum()
     }

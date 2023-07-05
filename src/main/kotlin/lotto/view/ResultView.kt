@@ -3,7 +3,6 @@ package lotto.view
 import lotto.domain.Lottos
 import lotto.domain.Rank
 import lotto.domain.WinningStatistics
-import lotto.service.LottoCalculator
 
 object ResultView {
     fun printPurchaseLottoNum(lottos: Lottos) {
@@ -29,7 +28,7 @@ object ResultView {
             Rank.SECOND,
             Rank.FIRST,
         ).forEach {
-            val prize = LottoCalculator.calculatePrizeMoney(it)
+            val prize = it.winningMoney
             val matchCount = winningStatistics.winningStatistics[it] ?: 0
             val bonusMessage = if (it == Rank.SECOND) ", 보너스 볼 일치" else " "
             println("${it.countOfMatch}개 일치$bonusMessage(${prize}원)- ${matchCount}개")
