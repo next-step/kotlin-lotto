@@ -9,29 +9,29 @@ class WinningStatisticsTest : FunSpec({
         val lottos = Lottos(
             listOf(
                 // 꽝
-                Lotto(listOf(1, 10, 11, 12, 13, 14)), // 1개
-                Lotto(listOf(1, 10, 11, 12, 13, 14)), // 1개
+                Lotto(1, 10, 11, 12, 13, 14), // 1개
+                Lotto(1, 10, 11, 12, 13, 14), // 1개
 
-                Lotto(listOf(1, 2, 10, 11, 12, 13)), // 2개
+                Lotto(1, 2, 10, 11, 12, 13), // 2개
 
                 // 5등
-                Lotto(listOf(1, 2, 3, 10, 11, 12)), // 3개
+                Lotto(1, 2, 3, 10, 11, 12), // 3개
 
                 // 4등
-                Lotto(listOf(1, 2, 3, 4, 10, 11)), // 4개
+                Lotto(1, 2, 3, 4, 10, 11), // 4개
 
                 // 3등
-                Lotto(listOf(1, 2, 3, 4, 5, 10)), // 5개
+                Lotto(1, 2, 3, 4, 5, 10), // 5개
 
                 // 2등
-                Lotto(listOf(1, 2, 3, 4, 5, 7)), // 5개 + 보너스
+                Lotto(1, 2, 3, 4, 5, 7), // 5개 + 보너스
 
                 // 1등
-                Lotto(listOf(1, 2, 3, 4, 5, 6)), // 6개
-                Lotto(listOf(1, 2, 3, 4, 5, 6)), // 6개
+                Lotto(1, 2, 3, 4, 5, 6), // 6개
+                Lotto(1, 2, 3, 4, 5, 6), // 6개
             ),
         )
-        val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6), 7)
+        val winningLotto = WinningLotto(LottoNumbers(1, 2, 3, 4, 5, 6), 7)
 
         val winningStatistics = WinningStatistics.of(lottos, winningLotto)
 

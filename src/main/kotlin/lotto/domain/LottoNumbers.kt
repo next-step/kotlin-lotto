@@ -1,6 +1,8 @@
 package lotto.domain
 
 class LottoNumbers(val numbers: Set<Int>) {
+    constructor(vararg numbers: Int) : this(numbers.toSet())
+    constructor(numbers: List<Int>) : this(numbers.toSet())
     fun countMatch(lottoNumbers: LottoNumbers): Int {
         return numbers
             .intersect(lottoNumbers.numbers)

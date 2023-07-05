@@ -1,14 +1,9 @@
 package lotto.domain
 
-class Lotto(val numbers: LottoNumbers, val bonusNumber: Int?) {
-
-    constructor(numbers: List<Int>, bonusNumber: Int?) : this(LottoNumbers(numbers.toSet()), bonusNumber)
-    constructor(numbers: List<Int>) : this(LottoNumbers(numbers.toSet()), null)
-    constructor(numbers: Set<Int>, bonusNumber: Int?) : this(LottoNumbers(numbers), bonusNumber)
-
-    fun countMatch(lotto: Lotto): Int {
-        return numbers.countMatch(lotto.numbers)
-    }
+class Lotto(val numbers: LottoNumbers) {
+    constructor(numbers: List<Int>) : this(LottoNumbers(numbers.toSet()))
+    constructor(numbers: Set<Int>) : this(LottoNumbers(numbers))
+    constructor(vararg numbers: Int) : this(LottoNumbers(numbers.toSet()))
 
     override fun toString(): String {
         return numbers.numbers.joinToString(
@@ -16,13 +11,6 @@ class Lotto(val numbers: LottoNumbers, val bonusNumber: Int?) {
             postfix = "]",
             separator = ", ",
         )
-    }
-
-    fun matchBonus(winningLotto: Lotto): Boolean {
-        if (winningLotto.bonusNumber == null) {
-            return false
-        }
-        return numbers.match(winningLotto.bonusNumber)
     }
 
     companion object {
