@@ -1,6 +1,6 @@
 package lotto
 
-class RandomGenerator : LottoNumbersGenerator {
+open class RandomGenerator : LottoNumbersGenerator {
     override fun generate(): LottoNumbers {
         val randomNumbers = LottoNumber.LOTTO_NUMBER_POOL.shuffled().take(LottoNumbers.SIZE)
 
