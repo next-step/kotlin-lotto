@@ -4,7 +4,7 @@ class WinningStatistics(val winningStatistics: Map<Rank, Int>) {
     fun calculateTotalPrizeMoney(): Long {
         return winningStatistics
             .map { (rank, count) ->
-                rank.winningMoney * count
+                rank.times(count)
             }
             .sum()
     }
