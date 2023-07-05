@@ -11,7 +11,7 @@ class WinningStatistics(val winningStatistics: Map<Rank, Int>) {
 
     fun calculateProfitRate(purchaseMoney: Long): Double {
         val totalPrizeMoney = calculateTotalPrizeMoney()
-        return totalPrizeMoney.toDouble() / purchaseMoney.toDouble()
+        return totalPrizeMoney / purchaseMoney.toDouble()
     }
 
     companion object {
