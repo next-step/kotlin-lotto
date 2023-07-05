@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.LottoGame.Companion.GAME_COST
 import lotto.LottoNumber
 import lotto.LottoNumbers
 import lotto.WinningNumbers
@@ -13,7 +14,7 @@ object InputView {
         do {
             val input = receiveString()
             value = input.toIntOrNull()
-        } while (value == null || value < 1000)
+        } while (value == null || value < GAME_COST)
 
         return value
     }
@@ -27,7 +28,13 @@ object InputView {
         return WinningNumbers(lottoNumbers, bonusNumber)
     }
 
-    fun receiveLottoNumbers(): LottoNumbers {
+    fun receiveManualLottoNumbers(manualGameCount: Int): List<LottoNumbers> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+
+        return List(manualGameCount) { receiveLottoNumbers() }
+    }
+
+    private fun receiveLottoNumbers(): LottoNumbers {
         var lottoNumbers: LottoNumbers?
 
         do {
@@ -42,7 +49,13 @@ object InputView {
         return lottoNumbers
     }
 
-    fun receiveBonusNumber(): LottoNumber {
+    fun receiveManualGameCount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+
+        return receiveInt()
+    }
+
+    private fun receiveBonusNumber(): LottoNumber {
         println("보너스 볼을 입력해 주세요.")
 
         val input = receiveInt()

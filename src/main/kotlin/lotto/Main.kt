@@ -5,12 +5,15 @@ import lotto.view.ResultView
 
 fun main() {
     val purchaseAmount = InputView.receivePurchaseAmount()
-    val gameCount = LottoGame.getGameCount(purchaseAmount)
 
-    ResultView.printGameCount(gameCount)
+    val manualGameCount = InputView.receiveManualGameCount()
+    val autoGameCount = LottoGame.getAutoGameCount(purchaseAmount, manualGameCount)
 
     val randomLottoNumbersGenerator = RandomGenerator()
-    val lottoNumbers = List(gameCount) { randomLottoNumbersGenerator.generate() }
+
+    val manualLottoNumbers = InputView.receiveManualLottoNumbers(manualGameCount)
+    val autoLottoNumbers = List(autoGameCount) { randomLottoNumbersGenerator.generate() }
+    val lottoNumbers = manualLottoNumbers + autoLottoNumbers
 
     ResultView.printAllLottoNumbers(lottoNumbers)
 
