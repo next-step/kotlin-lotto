@@ -21,7 +21,7 @@ class WinningNumbersTest {
         "1,7,8,9,10,11=LOSE",
         "7,8,9,10,11,12=LOSE",
         delimiter = '='
-        )
+    )
     fun `당첨번호를 통해 로또 번호의 Rank 를 구할 수 있다`(text: String, rank: Rank) {
         val numbers = text.splitToIntList()
         val lottoNumbers = LottoNumbers.from(numbers)

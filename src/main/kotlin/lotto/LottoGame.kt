@@ -19,11 +19,5 @@ class LottoGame(private val winningNumbers: WinningNumbers) {
         fun getGameCount(purchaseAmount: Int): Int {
             return purchaseAmount / GAME_COST
         }
-
-        fun generateRandomNumbers(): LottoNumbers {
-            val randomNumbers = LottoNumber.LOTTO_NUMBER_POOL.shuffled().take(LottoNumbers.SIZE)
-
-            return LottoNumbers(randomNumbers)
-        }
     }
 }
