@@ -24,20 +24,13 @@ class LottoShop {
     }
 }
 
-class LottoGenerator {
-
-    companion object {
-        private const val LOTTO_NUMBER_COUNT = 6
-        private const val LOTTO_NUMBER_MIN = 1
-        private const val LOTTO_NUMBER_MAX = 45
-
-        fun generate(): Lotto {
-            return Lotto(
-                (LOTTO_NUMBER_MIN..LOTTO_NUMBER_MAX)
-                    .shuffled()
-                    .take(LOTTO_NUMBER_COUNT)
-                    .sorted(),
-            )
-        }
+object LottoGenerator {
+    fun generate(): Lotto {
+        return Lotto(
+            (Lotto.LOTTO_NUMBER_MIN..Lotto.LOTTO_NUMBER_MAX)
+                .shuffled()
+                .take(Lotto.LOTTO_NUMBER_SIZE)
+                .sorted(),
+        )
     }
 }
