@@ -24,7 +24,7 @@ class LottoTest : FunSpec({
     }
 
     context("로또 번호는 1~45 범위를 갖습니다.") {
-        Lotto(setOf(1, 2, 3, 4, 5, 6), 45).numbers.forEach {
+        Lotto(setOf(1, 2, 3, 4, 5, 6), 45).numbers.numbers.forEach {
             // it이 1~45 범위인지 확인
             (it in 1..45) shouldBe true
         }

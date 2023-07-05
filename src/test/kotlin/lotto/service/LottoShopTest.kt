@@ -20,18 +20,18 @@ class LottoShopTest : FunSpec({
     context("로또번호는 자동으로 생성된다. 숫자는 6개 이고 각 숫자의 범위는 1~45이다.") {
         val lotto = LottoGenerator.generate()
         lotto.numbers.size shouldBe 6
-        lotto.numbers.forEach {
+        lotto.numbers.numbers.forEach {
             it shouldBeInRange 1..45
         }
     }
 
     context("생성된 로또 번호는 중복되지 않는다.") {
         val lotto = LottoGenerator.generate()
-        lotto.numbers.toSet().size shouldBe 6
+        lotto.numbers.numbers.toSet().size shouldBe 6
     }
 
     context("생성된 로또 번호는 오름차순으로 정렬된다.") {
         val lotto = LottoGenerator.generate()
-        lotto.numbers shouldBe lotto.numbers.sorted()
+        lotto.numbers.numbers shouldBe lotto.numbers.numbers.sorted()
     }
 })

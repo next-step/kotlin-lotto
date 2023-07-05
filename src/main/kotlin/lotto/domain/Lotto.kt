@@ -1,22 +1,17 @@
 package lotto.domain
 
-class Lotto(val numbers: Set<Int>, val bonusNumber: Int?) {
-    init {
-        require(numbers.size == LOTTO_NUMBER_SIZE) { "로또 번호는 6개여야 합니다." }
-        require(numbers.all { it in LOTTO_NUMBER_MIN..LOTTO_NUMBER_MAX }) { "로또 번호는 1부터 45 사이여야 합니다." }
-    }
+class Lotto(val numbers: LottoNumbers, val bonusNumber: Int?) {
 
-    constructor(numbers: List<Int>, bonusNumber: Int?) : this(numbers.toSet(), bonusNumber)
-    constructor(numbers: List<Int>) : this(numbers.toSet(), null)
+    constructor(numbers: List<Int>, bonusNumber: Int?) : this(LottoNumbers(numbers.toSet()), bonusNumber)
+    constructor(numbers: List<Int>) : this(LottoNumbers(numbers.toSet()), null)
+    constructor(numbers: Set<Int>, bonusNumber: Int?) : this(LottoNumbers(numbers), bonusNumber)
 
     fun countMatch(lotto: Lotto): Int {
-        return numbers
-            .intersect(lotto.numbers)
-            .size
+        return numbers.countMatch(lotto.numbers)
     }
 
     override fun toString(): String {
-        return numbers.joinToString(
+        return numbers.numbers.joinToString(
             prefix = "[",
             postfix = "]",
             separator = ", ",
@@ -24,8 +19,10 @@ class Lotto(val numbers: Set<Int>, val bonusNumber: Int?) {
     }
 
     fun matchBonus(winningLotto: Lotto): Boolean {
-        numbers.find { it == winningLotto.bonusNumber }?.let { return true }
-        return false
+        if (winningLotto.bonusNumber == null) {
+            return false
+        }
+        return numbers.match(winningLotto.bonusNumber)
     }
 
     companion object {
