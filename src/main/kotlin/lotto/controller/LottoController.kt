@@ -5,8 +5,8 @@ import lotto.domain.Lotto
 import lotto.domain.LottoRank
 import lotto.domain.LottoStatisticService
 import lotto.domain.LottoStore
+import lotto.domain.LottoTickets
 import lotto.domain.ManualLottoCount
-import lotto.domain.ManualLottoTickets
 import lotto.domain.PurchaseAmount
 import lotto.domain.WinningLotto
 import lotto.domain.dto.ProfitRateRequest
@@ -34,12 +34,12 @@ class LottoController {
         return inputIO.inputManualLottoCount()
     }
 
-    fun inputManualLottoNumbers(manualLottoCount: ManualLottoCount): ManualLottoTickets {
+    fun inputManualLottoNumbers(manualLottoCount: ManualLottoCount): LottoTickets {
         inputView.show(InputMessage.MANUAL_LOTTO_NUMBERS)
         return inputIO.inputManualLottoNumbers(manualLottoCount)
     }
 
-    fun createPurchaseLottoRequest(purchaseAmount: PurchaseAmount, manualLottoCount: ManualLottoCount, manualLottoTickets: ManualLottoTickets): PurchaseLottoRequest {
+    fun createPurchaseLottoRequest(purchaseAmount: PurchaseAmount, manualLottoCount: ManualLottoCount, manualLottoTickets: LottoTickets): PurchaseLottoRequest {
         return try {
             PurchaseLottoRequest(purchaseAmount, manualLottoCount, manualLottoTickets)
         } catch (e: IllegalArgumentException) {
@@ -47,7 +47,7 @@ class LottoController {
         }
     }
 
-    fun purchaseLottoTickets(purchaseLottoRequest: PurchaseLottoRequest): List<Lotto> {
+    fun purchaseLottoTickets(purchaseLottoRequest: PurchaseLottoRequest): LottoTickets {
         val purchaseLottoResponse = lottoStore.purchaseLottoTickets(purchaseLottoRequest)
         resultView.showLottoTicketQuantity(purchaseLottoResponse.autoLottoCount, purchaseLottoResponse.manualLottoCount)
         resultView.showLottoTickets(purchaseLottoResponse.lottoTickets)

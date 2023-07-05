@@ -5,6 +5,7 @@ import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.LottoRank
 import lotto.domain.LottoStatisticService
+import lotto.domain.LottoTickets
 import lotto.domain.PurchaseAmount
 import lotto.domain.WinningLotto
 import lotto.domain.dto.ProfitRateRequest
@@ -29,7 +30,7 @@ class LottoStatisticServiceTest {
 
         val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }, LottoNumber(10))
 
-        val req = StatisticsRequest(lottoTickets, winningLotto)
+        val req = StatisticsRequest(LottoTickets(lottoTickets), winningLotto)
         val statistics = lottoStatisticService.getStatistics(req)
 
         statistics.count { it == LottoRank.FIRST } shouldBe 1

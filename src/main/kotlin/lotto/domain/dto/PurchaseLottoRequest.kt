@@ -1,14 +1,14 @@
 package lotto.domain.dto
 
 import lotto.domain.LottoStore
+import lotto.domain.LottoTickets
 import lotto.domain.ManualLottoCount
-import lotto.domain.ManualLottoTickets
 import lotto.domain.PurchaseAmount
 
 class PurchaseLottoRequest(
     val purchaseAmount: PurchaseAmount,
     val manualLottoCount: ManualLottoCount,
-    val manualLottoTickets: ManualLottoTickets,
+    val manualLottoTickets: LottoTickets,
 ) {
     private val maxManualLottoCount = purchaseAmount.amount / LottoStore.LOTTO_PRICE
 

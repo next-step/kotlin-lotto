@@ -2,8 +2,8 @@ package lotto.view
 
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
+import lotto.domain.LottoTickets
 import lotto.domain.ManualLottoCount
-import lotto.domain.ManualLottoTickets
 import lotto.domain.PurchaseAmount
 
 class InputIO {
@@ -23,8 +23,8 @@ class InputIO {
         }
     }
 
-    fun inputManualLottoNumbers(manualLottoCount: ManualLottoCount): ManualLottoTickets {
-        return ManualLottoTickets(List(manualLottoCount.count) { inputLotto() })
+    fun inputManualLottoNumbers(manualLottoCount: ManualLottoCount): LottoTickets {
+        return LottoTickets(List(manualLottoCount.count) { inputLotto() })
     }
 
     private fun inputLotto(): Lotto {

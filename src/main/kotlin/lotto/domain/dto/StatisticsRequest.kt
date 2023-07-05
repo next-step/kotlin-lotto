@@ -1,9 +1,9 @@
 package lotto.domain.dto
 
-import lotto.domain.Lotto
+import lotto.domain.LottoTickets
 import lotto.domain.WinningLotto
 
 data class StatisticsRequest(
-    val lottoTickets: List<Lotto>,
+    val lottoTickets: LottoTickets,
     val winningLotto: WinningLotto
 )
