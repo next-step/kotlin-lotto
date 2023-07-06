@@ -29,6 +29,7 @@ class ResultView {
     }
 
     fun printNumberOfLottoTicket(numberOfLottoTicket: Int) {
+        println()
         println("${numberOfLottoTicket}개를 구매했습니다.")
     }
 
@@ -56,9 +57,5 @@ class ResultView {
 
     fun printYield(yield: Double) {
         println("총 수익률은 ${yield}입니다.")
-    }
-
-    fun printNextLine() {
-        println()
     }
 }
