@@ -1,31 +1,31 @@
 package lotto.domain
 
 import lotto.dto.LottoMatchResult
+import lotto.dto.MatchedCount
 import lotto.dto.PurchasedLotteryPapers
 
 class LottoMatcher {
-    private val prizeLevelDiscriminator = PrizeLevelDiscriminator()
 
     fun countLottoWinner(
         winningNumber: WinningNumber,
         purchasedLotteryPapers: PurchasedLotteryPapers,
     ): LottoMatchResult {
-        val winningLottoNumbers = winningNumber.winningNumber.getLottoNumbers()
-        val matchedCountsMap = getMatchedCount(winningLottoNumbers, purchasedLotteryPapers.lotteryPaperList)
+        val matchedCountList = getMatchedCount(winningNumber, purchasedLotteryPapers.lotteryPaperList)
 
-        val prizeList = matchedCountsMap.map { matchedCount ->
-            val prizeLevel = PrizeLevel.fromNumberOfHit(matchedCount.value)
-            prizeLevelDiscriminator.checkIsThirdLevel(prizeLevel, Pair(matchedCount.key, winningNumber.bonusNumber))
+        val prizeList = matchedCountList.map { matchedCount ->
+            PrizeLevel.proceedLevel(matchedCount.matchedNumber, matchedCount.bonusNumberMatch)
         }
         return LottoMatchResult(LottoMatchResult.countPrizeLevels(prizeList))
     }
 
     private fun getMatchedCount(
-        winningLottoNumbers: List<LottoNumber>,
+        winningNumber: WinningNumber,
         lotteryPaperList: List<LotteryPaper>
-    ): Map<LotteryPaper, Int> {
-        return lotteryPaperList.associateWith {
-            LottoNumberComparator.compare(winningLottoNumbers, it.getLottoNumbers())
+    ): List<MatchedCount> {
+        return lotteryPaperList.map {
+            val matchedNumber = winningNumber.compareLottoNumber(it.getLottoNumbers())
+            val bonusNumberMatch = winningNumber.isBonusNumberMatch(it.getLottoNumbers())
+            MatchedCount(matchedNumber, bonusNumberMatch)
         }
     }
 }

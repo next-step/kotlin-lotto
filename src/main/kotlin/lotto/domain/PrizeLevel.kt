@@ -9,8 +9,18 @@ enum class PrizeLevel(val numberOfHit: Int, val prizeMoney: Int, hasBonus: Boole
     FIRST(6, 2_000_000_000);
 
     companion object {
-        fun fromNumberOfHit(numberOfHit: Int): PrizeLevel {
-            return values().firstOrNull { it.numberOfHit == numberOfHit } ?: NONE
+        fun proceedLevel(numberOfHit: Int, isBonusNumberMatch: Boolean): PrizeLevel {
+            return values().firstOrNull { it.matches(numberOfHit, isBonusNumberMatch) } ?: NONE
+        }
+
+        private fun PrizeLevel.matches(numberOfHit: Int, isBonusNumberMatch: Boolean): Boolean {
+            if (this == SECOND) {
+                return this.numberOfHit == numberOfHit && isBonusNumberMatch
+            }
+            if (this == THIRD) {
+                return this.numberOfHit == numberOfHit && !isBonusNumberMatch
+            }
+            return this.numberOfHit == numberOfHit
         }
     }
 }
