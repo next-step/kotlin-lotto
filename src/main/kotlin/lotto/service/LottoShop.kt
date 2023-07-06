@@ -6,15 +6,15 @@ import lotto.domain.Lottos
 object LottoShop {
     private const val LOTTO_PRICE = 1000
 
-    fun purchase(purchaseMoney: Long, manualPurchaseLottos: Lottos): Lottos {
-        val manualPurchaseMoney = manualPurchaseLottos.size * LOTTO_PRICE
+    fun purchase(purchaseMoney: Long, manualPurchaseLottos: Lottos? = null): Lottos {
+        val manualPurchaseMoney = (manualPurchaseLottos?.size ?: 0) * LOTTO_PRICE
 
         val purchaseCount = purchaseCount(purchaseMoney - manualPurchaseMoney)
 
         return Lottos(
             (1..purchaseCount).map {
                 LottoGenerator.generate()
-            },
+            } + (manualPurchaseLottos?.lottos ?: emptyList()),
         )
     }
 
