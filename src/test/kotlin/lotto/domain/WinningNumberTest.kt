@@ -1,5 +1,6 @@
 package lotto.domain
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -26,5 +27,37 @@ class WinningNumberTest {
         assertThrows<IllegalArgumentException> {
             WinningNumber(lotteryPaper, bonusNumber)
         }
+    }
+
+    @Test
+    fun `로또 번호를 비교해서 몇개 맞았는지 검사한다`() {
+        // given
+        val lotteryPaper = LottoTestHelper.createLotteryPaper(1, 2, 3, 4, 5, 6)
+        val bonusNumber = LottoNumber(7)
+
+        // when
+        val answer = 6
+        val purchasedLottoNumber = LottoTestHelper.createLotteryPaper(1, 2, 3, 4, 5, 6)
+        val winningNumber = WinningNumber(lotteryPaper, bonusNumber)
+
+        // then
+        val actual = winningNumber.compareLottoNumber(purchasedLottoNumber.getLottoNumbers())
+        assertThat(actual).isEqualTo(answer)
+    }
+
+    @Test
+    fun `보너스 숫자가 맞았는지 검사한다`() {
+        // given
+        val lotteryPaper = LottoTestHelper.createLotteryPaper(1, 2, 3, 4, 5, 6)
+        val bonusNumber = LottoNumber(7)
+
+        // when
+        val answer = false
+        val purchasedLottoNumber = LottoTestHelper.createLotteryPaper(1, 2, 3, 4, 5, 6)
+        val winningNumber = WinningNumber(lotteryPaper, bonusNumber)
+
+        // then
+        val actual = winningNumber.isBonusNumberMatch(purchasedLottoNumber.getLottoNumbers())
+        assertThat(actual).isEqualTo(answer)
     }
 }

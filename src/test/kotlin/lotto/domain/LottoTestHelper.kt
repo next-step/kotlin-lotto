@@ -11,7 +11,7 @@ class LottoTestHelper {
             )
         }
 
-        private fun createLotteryPaper(vararg numbers: Int): LotteryPaper {
+        fun createLotteryPaper(vararg numbers: Int): LotteryPaper {
             return LotteryPaper(numbers.map { LottoNumber(it) })
         }
     }
