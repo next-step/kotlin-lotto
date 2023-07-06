@@ -1,7 +1,6 @@
 package lotto.controller
 
 import lotto.domain.AutoLottoGenerator
-import lotto.domain.Lotto
 import lotto.domain.LottoRank
 import lotto.domain.LottoStatisticService
 import lotto.domain.LottoStore

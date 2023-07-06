@@ -16,7 +16,7 @@ class LottoStore(
         return PurchaseLottoResponse(
             autoLottoTicketQuantity,
             purchaseLottoRequest.manualLottoCount.count,
-            LottoTickets(purchaseLottoRequest.manualLottoTickets.lottoTickets.plus(autoLottoTickets))
+            LottoTickets(purchaseLottoRequest.manualLottoTickets.lottoTickets + autoLottoTickets)
         )
     }
 

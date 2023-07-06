@@ -1,15 +1,11 @@
 package lotto
 
 import io.kotest.assertions.throwables.shouldThrow
-import lotto.domain.Lotto
-import lotto.domain.LottoNumber
 import lotto.domain.LottoTickets
 import lotto.domain.ManualLottoCount
 import lotto.domain.PurchaseAmount
 import lotto.domain.dto.PurchaseLottoRequest
 import org.junit.jupiter.api.Test
-
-private fun Array<Int>.toLotto(): Lotto = Lotto(map(::LottoNumber))
 
 class LottoStoreTest {
     @Test
@@ -32,9 +28,9 @@ class LottoStoreTest {
         val manualLottoCount = ManualLottoCount(3)
         val manualLottoTickets = LottoTickets(
             listOf(
-                arrayOf(1, 2, 3, 4, 5, 6).toLotto(),
-                arrayOf(1, 2, 3, 4, 5, 6).toLotto(),
-                arrayOf(1, 2, 3, 4, 5, 6).toLotto(),
+                Lotto(1, 2, 3, 4, 5, 6),
+                Lotto(1, 2, 3, 4, 5, 6),
+                Lotto(1, 2, 3, 4, 5, 6),
             )
         )
 

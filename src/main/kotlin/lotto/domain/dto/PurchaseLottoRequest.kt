@@ -10,9 +10,8 @@ class PurchaseLottoRequest(
     val manualLottoCount: ManualLottoCount,
     val manualLottoTickets: LottoTickets,
 ) {
-    private val maxManualLottoCount = purchaseAmount.amount / LottoStore.LOTTO_PRICE
-
     init {
+        val maxManualLottoCount = purchaseAmount.amount / LottoStore.LOTTO_PRICE
         require(maxManualLottoCount >= manualLottoCount.count) { println("최대 ${maxManualLottoCount}장 구매 가능합니다.") }
     }
 }
