@@ -1,5 +1,6 @@
 package lotto.controller
 
+import lotto.domain.Lotto
 import lotto.domain.LottoNumbers
 import lotto.domain.WinningLotto
 import lotto.view.InputView
@@ -13,8 +14,8 @@ class LottoController {
         return InputView.manualLottoCount()
     }
 
-    fun inputManualLotto(): LottoNumbers {
-        return LottoNumbers(InputView.manualLotto())
+    fun inputManualLotto(): Lotto {
+        return Lotto(LottoNumbers(InputView.manualLotto()))
     }
 
     fun inputWinningLotto(): WinningLotto {
