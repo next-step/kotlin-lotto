@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.dto.LottoMatchResult
 import lotto.dto.PurchasedLotteryPapers
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
@@ -40,6 +41,31 @@ class LottoMatcherTest {
             PrizeLevel.FIRST to 1,
         )
 
+        Assertions.assertThat(actual).isEqualTo(answer)
+    }
+
+
+    @Test
+    fun `로또 등수 리스트를 입력받아서 통계를 낸다`() {
+        // given
+        val listOfPrizeLevel = listOf(
+            PrizeLevel.NONE,
+            PrizeLevel.FOURTH,
+            PrizeLevel.NONE,
+            PrizeLevel.FIRST,
+            PrizeLevel.FIRST,
+            PrizeLevel.SECOND
+        )
+
+        // when
+        val actual = LottoMatchResult.countPrizeLevels(listOfPrizeLevel)
+        val answer = mapOf(
+            PrizeLevel.FIRST to 2,
+            PrizeLevel.SECOND to 1,
+            PrizeLevel.FOURTH to 1
+        )
+
+        // then
         Assertions.assertThat(actual).isEqualTo(answer)
     }
 }
