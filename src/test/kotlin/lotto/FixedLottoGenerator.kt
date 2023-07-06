@@ -6,6 +6,6 @@ import lotto.domain.LottoNumber
 
 class FixedLottoGenerator : LottoGenerator {
     override fun createLotto(): Lotto {
-        return Lotto((1..6).map { LottoNumber(it) })
+        return Lotto((1..6).map { LottoNumber.from(it) })
     }
 }

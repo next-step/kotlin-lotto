@@ -5,7 +5,7 @@ import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import org.junit.jupiter.api.Test
 
-fun Lotto(vararg numbers: Int): Lotto = Lotto(numbers.map(::LottoNumber))
+fun Lotto(vararg numbers: Int): Lotto = Lotto(numbers.map { LottoNumber.from(it) })
 
 class LottoTest {
     @Test

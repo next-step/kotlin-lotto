@@ -51,10 +51,10 @@ class InputIO {
     private fun convertStringToLottoNumbers(string: String): List<LottoNumber> {
         return string.replace(" ", "")
             .split(",")
-            .map { LottoNumber(it.toInt()) }
+            .map { LottoNumber.from(it.toInt()) }
     }
 
     fun inputBonusNumber(inputString: String? = readlnOrNull()): LottoNumber {
-        return LottoNumber(inputString?.toIntOrNull() ?: 0)
+        return LottoNumber.from(inputString?.toIntOrNull() ?: 0)
     }
 }

@@ -25,7 +25,7 @@ class LottoStatisticServiceTest {
             Lotto(1, 2, 3, 4, 5, 6),
         )
 
-        val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }, LottoNumber(10))
+        val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.from(it) }, LottoNumber.from(10))
 
         val req = StatisticsRequest(LottoTickets(lottoTickets), winningLotto)
         val statistics = lottoStatisticService.getStatistics(req)

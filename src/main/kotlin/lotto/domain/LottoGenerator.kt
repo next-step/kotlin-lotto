@@ -13,6 +13,6 @@ class AutoLottoGenerator : LottoGenerator {
         return LottoNumber.NUMBERS.shuffled()
             .subList(0, 6)
             .sorted()
-            .map { LottoNumber(it) }
+            .map { LottoNumber.from(it) }
     }
 }
