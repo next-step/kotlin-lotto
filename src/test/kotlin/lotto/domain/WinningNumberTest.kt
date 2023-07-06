@@ -18,6 +18,8 @@ class WinningNumberTest {
                 LottoNumber(6)
             )
         )
+
+        // when
         val bonusNumber = LottoNumber(6)
 
         // then

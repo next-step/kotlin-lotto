@@ -16,6 +16,7 @@ class YieldCalculatorTest {
 
     @Test
     fun `당첨 통계를 가지고 수익률을 계산한다`() {
+        // given
         val capital = 14000
         val lottoMatchResult = mapOf(
             PrizeLevel.FOURTH to 1,
@@ -25,9 +26,11 @@ class YieldCalculatorTest {
         )
         val purchasedLotteryPapers = LottoMatchResult(lottoMatchResult)
 
+        // when
         val actual = yieldCalculator.calculateYield(capital, purchasedLotteryPapers)
         val answer = 3.57
 
+        // then
         Assertions.assertThat(actual).isEqualTo(answer)
     }
 }

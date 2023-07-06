@@ -15,7 +15,10 @@ class LottoValidatorTest {
 
     @Test
     fun `구입하려는 금액이 로또 1개의 금액보다 작으면 IllegalArgumentException을 throw한다`() {
+        // given
         val money = LottoMachine.LOTTO_TICKET_PRICE - 1
+
+        // then
         assertThrows<IllegalArgumentException> { lottoValidator.validateInputMoneyCanBuyLottoTicket(money) }
     }
 
@@ -24,6 +27,7 @@ class LottoValidatorTest {
         // given
         val manualBuyLotteryPaper = LottoTestHelper.createPurchasedLotteryPapers()
         val numberOfLottoTicket = manualBuyLotteryPaper.size - 1
+
         // then
         assertThrows<IllegalArgumentException> {
             lottoValidator.validateLottoTicket(
@@ -32,6 +36,4 @@ class LottoValidatorTest {
             )
         }
     }
-
-
 }

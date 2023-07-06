@@ -19,15 +19,23 @@ class LottoMachineTest {
     @ParameterizedTest
     @ValueSource(strings = ["14000", "4000"])
     fun `입력받은 구입 금액을 로또 개당 가격으로 나눈 숫자만큼 티켓을 구매한다`(money: Int) {
+        // given
         val lottoOrder = LottoOrder(money, LottoTestHelper.createPurchasedLotteryPapers())
+
+        // when
         val actual = lottoMachine.buyLottoTicket(lottoOrder).lotteryPaperList.size
+
+        // then
         Assertions.assertThat(actual).isEqualTo(money / LottoMachine.LOTTO_TICKET_PRICE)
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["999", "0", "-1000"])
     fun `구입 금액이 1000원 미만이면 IllegalArgumentException을 throw한다`(money: Int) {
+        // given
         val lottoOrder = LottoOrder(money, LottoTestHelper.createPurchasedLotteryPapers())
+
+        // then
         assertThrows<IllegalArgumentException> {
             lottoMachine.buyLottoTicket(lottoOrder)
         }
