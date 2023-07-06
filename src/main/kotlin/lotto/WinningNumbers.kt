@@ -6,9 +6,10 @@ class WinningNumbers(private val lottoNumbers: LottoNumbers, private val bonusNu
     }
 
     fun calculateRank(lottoNumbers: List<LottoNumbers>): LottoResult {
-        return LottoResult(lottoNumbers.map { calculateRank(it) }
-            .groupBy { it }
-            .mapValues { it.value.size }
+        return LottoResult(
+            lottoNumbers.map { calculateRank(it) }
+                .groupBy { it }
+                .mapValues { it.value.size }
         )
     }
 

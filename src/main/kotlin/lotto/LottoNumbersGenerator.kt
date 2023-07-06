@@ -1,5 +1,5 @@
 package lotto
 
-interface LottoNumbersGenerator {
-    fun generate(): LottoNumbers
+class LottoNumbersGenerator(var strategy: LottoNumbersGenerateStrategy) {
+    fun generate(): LottoNumbers = strategy.generate()
 }

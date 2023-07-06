@@ -9,7 +9,7 @@ fun main() {
     val manualGameCount = InputView.receiveManualGameCount()
     val autoGameCount = LottoGame.getAutoGameCount(purchaseAmount, manualGameCount)
 
-    val randomLottoNumbersGenerator = RandomGenerator()
+    val randomLottoNumbersGenerator = LottoNumbersGenerator(RandomStrategy())
 
     val manualLottoNumbers = InputView.receiveManualLottoNumbers(manualGameCount)
     val autoLottoNumbers = List(autoGameCount) { randomLottoNumbersGenerator.generate() }

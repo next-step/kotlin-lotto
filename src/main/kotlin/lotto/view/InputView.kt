@@ -3,6 +3,8 @@ package lotto.view
 import lotto.LottoGame.Companion.GAME_COST
 import lotto.LottoNumber
 import lotto.LottoNumbers
+import lotto.LottoNumbersGenerator
+import lotto.ManualStrategy
 import lotto.WinningNumbers
 
 object InputView {
@@ -40,9 +42,10 @@ object InputView {
         do {
             val input = receiveString()
             val numbers = input.splitToIntList()
+            val lottoNumbersGenerator = LottoNumbersGenerator(ManualStrategy(numbers.map { LottoNumber.from(it) }))
 
             lottoNumbers = runCatching {
-                LottoNumbers.from(numbers)
+                lottoNumbersGenerator.generate()
             }.getOrNull()
         } while (lottoNumbers == null)
 
