@@ -16,14 +16,17 @@ class LotteryPaperValidatorTest {
 
     @Test
     fun `로또 용지에 중복이 생기면 IllegalArgumentException을 throw한다`() {
+        // given
         val numberList = listOf(1, 2, 3, 4, 5, 6)
         val lottoNumbers = numberList.map { LottoNumber(it) }
 
+        // when
         val lotteryPaperList = listOf(
             LotteryPaper(lottoNumbers),
             LotteryPaper(lottoNumbers)
         )
 
+        // then
         assertThrows<IllegalArgumentException> {
             lotteryPaperValidator.validateDuplicateLotteryPaper(lotteryPaperList)
         }
@@ -31,15 +34,17 @@ class LotteryPaperValidatorTest {
 
     @Test
     fun `새로 생성한 로또 용지가 이미 존재하면 IllegalArgumentException을 throw한다`() {
+        // given
         val numberList = listOf(1, 2, 3, 4, 5, 6)
         val lottoNumbers = numberList.map { LottoNumber(it) }
-
         val lotteryPaperList = listOf(
             LotteryPaper(lottoNumbers)
         )
 
+        // when
         val newGeneratedLotteryPaper = LotteryPaper(lottoNumbers)
 
+        // then
         Assertions.assertThat(
             lotteryPaperValidator.isAlreadyExistLotteryPaper(
                 lotteryPaperList,

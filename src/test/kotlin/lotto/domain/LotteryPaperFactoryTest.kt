@@ -17,7 +17,7 @@ class LotteryPaperFactoryTest {
     fun `1부터 45까지 숫자중 6개의 숫자를 선택해서 로또 번호를 생성한다`() {
         // given
         val generatedLotteryPaper = lotteryPaperFactory.generateLotteryPaper(listOf())
-        // when
+        // then
         Assertions.assertThat(generatedLotteryPaper.getLottoNumbers()).hasSize(6).allMatch { it.lottoNumber in 1..45 }
     }
 
