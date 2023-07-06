@@ -11,6 +11,9 @@ fun main() {
     val purchaseMoney = lottoController.inputPurchaseMoney()
 
     val manualLottoCount = lottoController.inputManualLottoCount()
+    println("수동으로 구매할 번호를 입력해 주세요.")
+    val manualLottos = (1..manualLottoCount)
+        .map { lottoController.inputManualLotto() }
 
     val lottos = LottoShop.purchase(purchaseMoney)
     ResultView.printPurchaseLottoNum(lottos)
