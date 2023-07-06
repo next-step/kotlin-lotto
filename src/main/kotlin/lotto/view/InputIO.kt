@@ -11,6 +11,7 @@ class InputIO {
         return try {
             PurchaseAmount(inputString?.toIntOrNull() ?: 0)
         } catch (e: IllegalArgumentException) {
+            println(e.message)
             this.inputPurchaseAmount()
         }
     }
@@ -19,6 +20,7 @@ class InputIO {
         return try {
             ManualLottoCount(inputString?.toIntOrNull() ?: 0)
         } catch (e: IllegalArgumentException) {
+            println(e.message)
             this.inputManualLottoCount()
         }
     }
@@ -31,6 +33,7 @@ class InputIO {
         return try {
             Lotto(inputLottoNumber())
         } catch (e: IllegalArgumentException) {
+            println(e.message)
             this.inputLotto()
         }
     }
@@ -43,7 +46,8 @@ class InputIO {
 
         return try {
             convertStringToLottoNumbers(inputString)
-        } catch (e: IllegalStateException) {
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
             this.inputLottoNumber()
         }
     }
@@ -55,6 +59,11 @@ class InputIO {
     }
 
     fun inputBonusNumber(inputString: String? = readlnOrNull()): LottoNumber {
-        return LottoNumber.from(inputString?.toIntOrNull() ?: 0)
+        return try {
+            LottoNumber.from(inputString?.toIntOrNull() ?: 0)
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            this.inputBonusNumber()
+        }
     }
 }

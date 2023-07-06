@@ -1,10 +1,12 @@
 package lotto.domain
 
+import lotto.view.ExceptionMessage
+
 open class Lotto(
     val numbers: Set<LottoNumber>
 ) {
     init {
-        require(numbers.size == 6) { println("로또 번호에 중복된 번호가 있거나 숫자의 갯수가 6개가 아닙니다.") }
+        require(numbers.size == 6) { ExceptionMessage.DUPLICATE_NUMBER_OR_NOT_SIX.message }
     }
 
     constructor(numbers: List<LottoNumber>) : this(numbers.map { it }.toSet())

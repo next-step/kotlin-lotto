@@ -42,6 +42,7 @@ class LottoController {
         return try {
             PurchaseLottoRequest(purchaseAmount, manualLottoCount, manualLottoTickets)
         } catch (e: IllegalArgumentException) {
+            println(e.message)
             this.createPurchaseLottoRequest(purchaseAmount, this.inputManualLottoCount(), manualLottoTickets)
         }
     }

@@ -1,12 +1,14 @@
 package lotto.domain
 
+import lotto.view.ExceptionMessage
+
 class WinningLotto(
     numbers: List<LottoNumber>,
     private val bonusNumber: LottoNumber
 ) : Lotto(numbers) {
 
     init {
-        require(bonusNumber !in numbers) { "당첨 번호와 중복되는 번호를 입력했습니다." }
+        require(bonusNumber !in numbers) { ExceptionMessage.DUPLICATE_NUMBER_AND_BONUS.message }
     }
 
     fun getLottoRank(lotto: Lotto): LottoRank {

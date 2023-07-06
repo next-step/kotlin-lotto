@@ -1,8 +1,10 @@
 package lotto.domain
 
-data class LottoNumber private constructor(val value: Int) {
+import lotto.view.ExceptionMessage
+
+class LottoNumber private constructor(val value: Int) {
     init {
-        require(value in MINIMUM_NUMBER..MAXIMUM_NUMBER) { println("1~45 사이의 숫자를 입력해 주세요") }
+        require(value in MINIMUM_NUMBER..MAXIMUM_NUMBER) { ExceptionMessage.REQUIRE_NUMBER_RANGE.message }
     }
 
     companion object {
