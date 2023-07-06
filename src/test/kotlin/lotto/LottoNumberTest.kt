@@ -1,18 +1,18 @@
 package lotto
 
 import io.kotest.assertions.throwables.shouldThrow
-import io.kotest.matchers.shouldNotBe
-import org.junit.jupiter.api.Test
+import io.kotest.matchers.shouldBe
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
 class LottoNumberTest {
 
-    @Test
-    fun `숫자를 받아 로또 번호를 생성한다`() {
-        val lottoNumber = LottoNumber(1)
+    @ParameterizedTest
+    @ValueSource(ints = [1, 30, 45])
+    fun `숫자를 받아 로또 번호를 생성한다`(value: Int) {
+        val lottoNumber = LottoNumber(value)
 
-        lottoNumber shouldNotBe null
+        lottoNumber.value shouldBe value
     }
 
     @ParameterizedTest
