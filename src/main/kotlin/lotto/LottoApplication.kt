@@ -9,6 +9,9 @@ fun main() {
     val lottoController = LottoController()
 
     val purchaseMoney = lottoController.inputPurchaseMoney()
+
+    val manualLottoCount = lottoController.inputManualLottoCount()
+
     val lottos = LottoShop.purchase(purchaseMoney)
     ResultView.printPurchaseLottoNum(lottos)
     ResultView.printLottos(lottos)

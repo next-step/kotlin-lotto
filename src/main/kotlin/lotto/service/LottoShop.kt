@@ -3,24 +3,21 @@ package lotto.service
 import lotto.domain.Lotto
 import lotto.domain.Lottos
 
-class LottoShop {
+object LottoShop {
+    private const val LOTTO_PRICE = 1000
 
-    companion object {
-        private const val LOTTO_PRICE = 1000
+    fun purchase(purchaseMoney: Long): Lottos {
+        val purchaseCount = purchaseCount(purchaseMoney)
 
-        fun purchase(purchaseMoney: Long): Lottos {
-            val purchaseCount = purchaseCount(purchaseMoney)
+        return Lottos(
+            (1..purchaseCount).map {
+                LottoGenerator.generate()
+            },
+        )
+    }
 
-            return Lottos(
-                (1..purchaseCount).map {
-                    LottoGenerator.generate()
-                },
-            )
-        }
-
-        private fun purchaseCount(purchaseMoney: Long): Long {
-            return purchaseMoney / LOTTO_PRICE
-        }
+    private fun purchaseCount(purchaseMoney: Long): Long {
+        return purchaseMoney / LOTTO_PRICE
     }
 }
 
