@@ -5,7 +5,7 @@ class LottoNumbers(
 ) {
 
     fun getMatchCount(winningLottoNumbers: LottoNumbers): Int {
-        return winningLottoNumbers.lottoNumbers.intersect(lottoNumbers).size
+        return lottoNumbers.intersect(winningLottoNumbers.lottoNumbers).size
     }
 
     fun containsBonusNumber(bonusNumber: LottoNumber): Boolean {
@@ -13,8 +13,8 @@ class LottoNumbers(
     }
 
     companion object {
-        fun of(lottoNumbers: List<Int>): LottoNumbers {
-            return LottoNumbers(lottoNumbers.map { LottoNumber(it) }.toSet())
+        fun of(lottoNumbers: List<LottoNumber>): LottoNumbers {
+            return LottoNumbers(lottoNumbers.map { it }.toSet())
         }
 
         fun of(winningLottoNumbers: LottoNumbers, bonusNumber: LottoNumber): LottoNumbers {

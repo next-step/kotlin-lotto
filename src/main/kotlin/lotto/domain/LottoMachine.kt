@@ -5,6 +5,8 @@ class LottoMachine(
 ) {
 
     fun buy(manualLottoCount: ManualLottoCount, manualLottoNumbers: List<LottoNumbers>): Lottos {
-        return Lottos.of(manualLottoCount.availableAutoCount, manualLottoNumbers, lottoNumberGenerator)
+        val manualLottos = manualLottoNumbers.map { Lotto(it, LottoType.MANUAL) }
+        val autoLottos = List(manualLottoCount.availableAutoCount) { Lotto.of(lottoNumberGenerator) }
+        return Lottos.of(manualLottos, autoLottos)
     }
 }

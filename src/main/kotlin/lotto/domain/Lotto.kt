@@ -5,7 +5,7 @@ class Lotto(
     val type: LottoType
 ) {
 
-    fun matchNumbers(lottoWinningNumbers: LottoWinningNumbers): LottoRank {
+    fun getLottoRank(lottoWinningNumbers: LottoWinningNumbers): LottoRank {
         val lottoMatchCount = lottoWinningNumbers.match(lottoNumbers)
         return LottoRank.getRank(lottoMatchCount)
     }

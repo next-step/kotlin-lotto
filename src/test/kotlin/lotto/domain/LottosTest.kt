@@ -10,11 +10,12 @@ class LottosTest {
     @Test
     fun `LottoRank 를 구하는데 성공한다`() {
         // given
-        val lottoNumbers = (1..6).map { LottoNumber(it) }
-        val manualLottoNumbers = LottoNumbersHelper.generate(1, 2, 3, 4, 5, 6)
+        val lottoNumbers = LottoNumbersHelper.generate(1, 2, 3, 4, 5, 6)
+        val autoLotto = Lotto(lottoNumbers, LottoType.AUTO)
+        val manualLotto = Lotto(lottoNumbers, LottoType.MANUAL)
 
-        val lottos = Lottos.of(1, listOf(manualLottoNumbers), FakeLottoNumberGenerator())
-        val lottoWinningNumbers = LottoWinningNumbers.of(lottoNumbers.map { it.number }, 7)
+        val lottos = Lottos.of(listOf(autoLotto), listOf(manualLotto))
+        val lottoWinningNumbers = LottoWinningNumbers.of(lottoNumbers.lottoNumbers.map { it.number }, 7)
 
         // when
         val lottoResult = lottos.getLottoResult(lottoWinningNumbers)
@@ -24,9 +25,12 @@ class LottosTest {
     }
 
     @Test
-    fun `자동, 수동 로또 개수를 구하는데 성공한다`() {
+    fun `자동, 수동 로또 개수를 한 개씩 생성한 경우 각 개수는 1이다`() {
         // given
-        val lottos = Lottos.of(2, listOf(LottoNumbersHelper.generate(1, 2, 3, 4, 5, 6)), FakeLottoNumberGenerator())
+        val lottoNumbers = LottoNumbersHelper.generate(1, 2, 3, 4, 5, 6)
+        val autoLotto = Lotto(lottoNumbers, LottoType.AUTO)
+        val manualLotto = Lotto(lottoNumbers, LottoType.MANUAL)
+        val lottos = Lottos.of(listOf(autoLotto), listOf(manualLotto))
 
         // when
         val manualLottoCount = lottos.getLottoCount(LottoType.MANUAL)
@@ -35,7 +39,7 @@ class LottosTest {
         // then
         assertAll({
             assertThat(manualLottoCount).isSameAs(1)
-            assertThat(autoLottoCount).isSameAs(2)
+            assertThat(autoLottoCount).isSameAs(1)
         })
     }
 }

@@ -31,7 +31,7 @@ class LottoWinningNumbersTest {
     }
 
     @Test
-    fun `LottoMatchCount 를 구하는데 성공한다`() {
+    fun `모든 번호가 매칭되고 보너스 번호는 포함하지 않는 경우 매칭 수는 6이고 보너스 번호 포함 여부는 false 이다`() {
         // given
         val lottoWinningNumbers = LottoWinningNumbers.of(
             winningNumbers = listOf(1, 2, 3, 4, 5, 6),
@@ -51,7 +51,7 @@ class LottoWinningNumbersTest {
     }
 
     @Test
-    fun `보너스 숫자를 포함하는 경우 LottoMatchCount를 구하는데 성공한다`() {
+    fun `4개 번호가 매칭되고 보너스 번호를 포함하는 경우 매칭 수는 4이고 보너스 번호 포함 여부는 true 이다`() {
         // given
         val lottoWinningNumbers = LottoWinningNumbers.of(
             winningNumbers = listOf(1, 2, 3, 4, 5, 6),
@@ -65,7 +65,7 @@ class LottoWinningNumbersTest {
 
         // then
         assertAll({
-            assertThat(lottoMatchCount.matchCount).isEqualTo(5)
+            assertThat(lottoMatchCount.matchCount).isEqualTo(4)
             assertThat(lottoMatchCount.containsBonusNumber).isTrue()
         })
     }

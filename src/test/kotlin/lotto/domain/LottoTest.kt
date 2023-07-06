@@ -14,7 +14,7 @@ class LottoTest {
         val lotto = Lotto.of(FakeLottoNumberGenerator())
 
         // when
-        val lottoRank = lotto.matchNumbers(lottoWinningNumbers)
+        val lottoRank = lotto.getLottoRank(lottoWinningNumbers)
 
         // then
         assertThat(lottoRank).isEqualTo(LottoRank.FIRST)

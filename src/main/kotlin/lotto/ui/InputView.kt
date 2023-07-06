@@ -1,5 +1,6 @@
 package lotto.ui
 
+import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoWinningNumbers
 import lotto.domain.ManualLottoCount
@@ -20,8 +21,9 @@ class InputView {
     fun readManualLottoNumbers(manualLottoCount: ManualLottoCount): List<LottoNumbers> {
         println(INPUT_MANUAL_LOTTO_NUMBERS_MESSAGE)
         return List(manualLottoCount.count) {
-            val numbers = readNumbers()
-            LottoNumbers.of(numbers)
+            val lottoNumbers = readNumbers()
+                .map { LottoNumber(it) }
+            LottoNumbers.of(lottoNumbers)
         }
     }
 

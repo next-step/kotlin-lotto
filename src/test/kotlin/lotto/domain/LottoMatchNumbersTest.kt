@@ -9,7 +9,7 @@ import org.junit.jupiter.api.assertAll
 class LottoMatchNumbersTest {
 
     @Test
-    fun `모든 번호가 매칭된 경우`() {
+    fun `모든 번호가 매칭된 경우, 매칭된 건 수는 6이다`() {
         // given
         val lottoNumbers = LottoNumbersHelper.generate(1, 2, 3, 4, 5, 6)
         val lottoMatchNumbers = LottoWinningNumbers.of(lottoNumbers.lottoNumbers.map { it.number }, 7)
@@ -25,9 +25,9 @@ class LottoMatchNumbersTest {
     }
 
     @Test
-    fun `5개 번호와 보너스 번호가 매칭된 경우`() {
+    fun `5개 번호와 보너스 번호가 매칭된 경우, 매칭된 건 수는 4이고 보스너번호 포함여부는 true이다`() {
         // given
-        val lottoNumbers = LottoNumbersHelper.generate(1, 2, 3, 4, 7, 8)
+        val lottoNumbers = LottoNumbersHelper.generate(1, 2, 3, 4, 5, 7)
         val lottoMatchNumbers = LottoWinningNumbers.of((1..6).map { it }, 7)
 
         // when

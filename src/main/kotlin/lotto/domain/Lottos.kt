@@ -5,7 +5,7 @@ class Lottos(
 ) {
 
     fun getLottoResult(winningNumbers: LottoWinningNumbers): LottoResult {
-        val lottoRanks = lottos.map { lotto -> lotto.matchNumbers(winningNumbers) }
+        val lottoRanks = lottos.map { lotto -> lotto.getLottoRank(winningNumbers) }
         return LottoResult(lottoRanks, lottos.size)
     }
 
@@ -15,12 +15,9 @@ class Lottos(
 
     companion object {
         fun of(
-            autoLottoCount: Int,
-            manualLottoNumbers: List<LottoNumbers>,
-            lottoNumberGenerator: LottoNumberGenerator
+            manualLottos: List<Lotto>,
+            autoLottos: List<Lotto>
         ): Lottos {
-            val manualLottos = manualLottoNumbers.map { Lotto(it, LottoType.MANUAL) }
-            val autoLottos = List(autoLottoCount) { Lotto.of(lottoNumberGenerator) }
             return Lottos(manualLottos + autoLottos)
         }
     }
