@@ -2,8 +2,8 @@ package lotto.domain
 
 class RandomLottoNumberGenerationStrategy : LottoNumberGenerationStrategy {
 
-    private var lottoNumberList = LottoNumber.generateLottoNumberList()
+    private var lottoNumberPool: List<LottoNumber> = LottoNumber.generateLottoNumberList()
     override fun generateLottoNumber(): List<LottoNumber> {
-        return lottoNumberList.shuffled().take(LotteryPaper.NUMBER_OF_LOTTO_DRAWS)
+        return lottoNumberPool.shuffled().take(LotteryPaper.NUMBER_OF_LOTTO_DRAWS)
     }
 }
