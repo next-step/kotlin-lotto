@@ -5,8 +5,11 @@ class WinningNumbers(private val lottoNumbers: LottoNumbers, private val bonusNu
         require(!lottoNumbers.numbers.contains(bonusNumber)) { INVALID_BONUS_NUMBER_MESSAGE }
     }
 
-    fun calculateRank(lottoNumbers: List<LottoNumbers>): List<Rank> {
-        return lottoNumbers.map { calculateRank(it) }
+    fun calculateRank(lottoNumbers: List<LottoNumbers>): LottoResult {
+        return LottoResult(lottoNumbers.map { calculateRank(it) }
+            .groupBy { it }
+            .mapValues { it.value.size }
+        )
     }
 
     fun calculateRank(other: LottoNumbers): Rank {

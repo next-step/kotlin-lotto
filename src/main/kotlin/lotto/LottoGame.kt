@@ -2,11 +2,7 @@ package lotto
 
 class LottoGame(private val winningNumbers: WinningNumbers) {
     fun calculate(lottoNumbers: List<LottoNumbers>): LottoResult {
-        return LottoResult(
-            winningNumbers.calculateRank(lottoNumbers)
-                .groupBy { it }
-                .mapValues { it.value.size }
-        )
+        return winningNumbers.calculateRank(lottoNumbers)
     }
 
     fun calculate(lottoNumbers: LottoNumbers): LottoResult {
