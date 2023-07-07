@@ -56,6 +56,6 @@ class LottoTest {
 
         val result = lotto.match(winningLotto)
 
-        result shouldBe 5
+        result shouldBe 6
     }
 }
