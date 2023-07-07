@@ -1,12 +1,12 @@
 package lotto.domain
 
 import lotto.dto.LottoOrder
-import lotto.dto.PurchasedLotteryPapers
+import lotto.dto.LotteryPapers
 
 class LottoMachine(private val lotteryPaperFactory: LotteryPaperFactory) {
     private val lottoValidator = LottoValidator()
 
-    fun buyLottoTicket(lottoOrder: LottoOrder): PurchasedLotteryPapers {
+    fun buyLottoTicket(lottoOrder: LottoOrder): LotteryPapers {
         val (purchasingAmount, manualBuyLotteryPaper) = lottoOrder
 
         lottoValidator.validateInputMoneyCanBuyLottoTicket(purchasingAmount)
@@ -15,7 +15,7 @@ class LottoMachine(private val lotteryPaperFactory: LotteryPaperFactory) {
         lottoValidator.validateLottoTicket(numberOfLottoTicket, manualBuyLotteryPaper)
         val generatedLottoNumbers = generateLottoNumbers(numberOfLottoTicket, manualBuyLotteryPaper)
 
-        return PurchasedLotteryPapers(generatedLottoNumbers)
+        return LotteryPapers(generatedLottoNumbers)
     }
 
     private fun calculateNumberOfLottoTicket(money: Int): Int {

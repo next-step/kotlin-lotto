@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.dto.MatchedCount
+
 class WinningNumber(private val lotteryPaper: LotteryPaper, private val bonusNumber: LottoNumber) {
 
     init {
@@ -23,5 +25,11 @@ class WinningNumber(private val lotteryPaper: LotteryPaper, private val bonusNum
 
     fun isBonusNumberMatch(purchasedLottoNumber: List<LottoNumber>): Boolean {
         return purchasedLottoNumber.contains(bonusNumber)
+    }
+
+    fun matchCount(purchasedLottoNumber: List<LottoNumber>): MatchedCount {
+        val matchedNumber = compareLottoNumber(purchasedLottoNumber)
+        val bonusNumberMatch = isBonusNumberMatch(purchasedLottoNumber)
+        return MatchedCount(matchedNumber, bonusNumberMatch)
     }
 }
