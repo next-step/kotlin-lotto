@@ -1,6 +1,7 @@
 package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -27,6 +28,7 @@ class LottoRankTest {
         )
     }
 
+    @Test
     fun `getRank-매칭수가 5개이고, 보너스 번호를 포함하는 경우 BONUS_SECOND 를 반환한다`() {
         // when
         val lottoRank = LottoRank.getRank(LottoMatchCount(5, true))

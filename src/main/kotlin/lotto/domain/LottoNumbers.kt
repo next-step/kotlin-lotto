@@ -3,17 +3,29 @@ package lotto.domain
 class LottoNumbers(
     val lottoNumbers: Set<LottoNumber>,
 ) {
+
     init {
-        require(lottoNumbers.size == 6) { "로또는 6개 숫자로 구성됩니다." }
+        require(lottoNumbers.size == LOTTO_NUMBERS_SIZE) { "로또번호의 개수가 잘못되었습니다." }
     }
 
-    fun matchNumbers(matchNumbers: LottoMatchNumbers): LottoMatchCount {
-        return matchNumbers.match(lottoNumbers.toList())
+    fun getMatchCount(winningLottoNumbers: LottoNumbers): Int {
+        return lottoNumbers.intersect(winningLottoNumbers.lottoNumbers).size
+    }
+
+    fun containsBonusNumber(bonusNumber: LottoNumber): Boolean {
+        return lottoNumbers.contains(bonusNumber)
     }
 
     companion object {
-        fun of(lottoNumbers: List<Int>): LottoNumbers {
-            return LottoNumbers(lottoNumbers.map { LottoNumber(it) }.toSet())
+
+        private const val LOTTO_NUMBERS_SIZE = 6
+
+        fun of(lottoNumbers: List<LottoNumber>): LottoNumbers {
+            return LottoNumbers(lottoNumbers.map { it }.toSet())
+        }
+
+        fun of(winningLottoNumbers: LottoNumbers, bonusNumber: LottoNumber): LottoNumbers {
+            return LottoNumbers((winningLottoNumbers.lottoNumbers.map { it } + bonusNumber).toSet())
         }
     }
 }

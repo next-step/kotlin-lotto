@@ -1,7 +1,9 @@
 package lotto.domain
 
-class FakeLottoNumberGenerator : LottoNumberGenerator {
-    override fun generate(): List<Int> {
-        return listOf(1, 2, 3, 4, 5, 6)
+class FakeLottoNumberGenerator(
+    private val list: List<LottoNumber> = (1..6).map { LottoNumber(it) }
+) : LottoNumberGenerator {
+    override fun generate(): List<LottoNumber> {
+        return list
     }
 }

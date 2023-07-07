@@ -2,12 +2,15 @@ package lotto.ui
 
 import lotto.domain.LottoRank
 import lotto.domain.LottoResult
+import lotto.domain.LottoType
 import lotto.domain.Lottos
 
-object OutputView {
+class OutputView {
 
     fun printLottos(lottos: Lottos) {
-        println("${lottos.lottos.size}개를 구매했습니다.")
+        val autoLottoCount = lottos.getLottoCount(LottoType.AUTO)
+        val manualLottoCount = lottos.getLottoCount(LottoType.MANUAL)
+        println("수동으로 $manualLottoCount 장, 자동으로$autoLottoCount 장 구매했습니다.")
         lottos.lottos.forEach { lotto ->
             println(lotto.lottoNumbers.lottoNumbers.map { it.number })
         }

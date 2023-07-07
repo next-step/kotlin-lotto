@@ -1,17 +1,12 @@
 package lotto.domain
 
-class LottoMachine {
+class LottoMachine(
+    private val lottoNumberGenerator: LottoNumberGenerator
+) {
 
-    fun buy(price: Int): Lottos {
-        val availableLottoCount = getAvailableLottoCount(price)
-        return generateLotto(availableLottoCount)
-    }
-
-    private fun getAvailableLottoCount(price: Int): Int {
-        return price / Lotto.LOTTO_PRICE
-    }
-
-    private fun generateLotto(availableLottoCount: Int): Lottos {
-        return Lottos.of(availableLottoCount, RandomLottoNumberGenerator())
+    fun buy(manualLottoCount: ManualLottoCount, manualLottoNumbers: List<LottoNumbers>): Lottos {
+        val manualLottos = manualLottoNumbers.map { Lotto(it, LottoType.MANUAL) }
+        val autoLottos = List(manualLottoCount.availableAutoCount) { Lotto.of(lottoNumberGenerator) }
+        return Lottos.of(manualLottos, autoLottos)
     }
 }
