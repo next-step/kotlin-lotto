@@ -40,4 +40,11 @@ class LottoTest {
 
         shouldNotThrowAny { Lotto.from(numbers) }
     }
+
+    @Test
+    fun `번호가 중복된 경우 예외가 발생한다`() {
+        val numbers = listOf(1, 2, 3, 4, 5, 5)
+
+        shouldThrow<IllegalArgumentException> { Lotto.from(numbers) }
+    }
 }
