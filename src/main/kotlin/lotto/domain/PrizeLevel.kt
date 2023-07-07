@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.dto.MatchedCount
+
 enum class PrizeLevel(val numberOfHit: Int, val prizeMoney: Int, hasBonus: Boolean = false) {
     NONE(0, 0),
     FIFTH(3, 5000),
@@ -9,7 +11,8 @@ enum class PrizeLevel(val numberOfHit: Int, val prizeMoney: Int, hasBonus: Boole
     FIRST(6, 2_000_000_000);
 
     companion object {
-        fun proceedLevel(numberOfHit: Int, isBonusNumberMatch: Boolean): PrizeLevel {
+        fun proceedLevel(matchedCount: MatchedCount): PrizeLevel {
+            val (numberOfHit, isBonusNumberMatch) = matchedCount
             return values().firstOrNull { it.matches(numberOfHit, isBonusNumberMatch) } ?: NONE
         }
 
