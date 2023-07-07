@@ -6,7 +6,7 @@ class LottoWinningNumbers(
 ) {
 
     init {
-        require(winningNumbers.lottoNumbers.size == LOTTO_WINNING_NUMBERS_SIZE) { "당첨번호 수가 잘못되었습니다." }
+        require(!winningNumbers.lottoNumbers.contains(bonusNumber)) { "로또번호와 보너스 번호는 중복될 수 없습니다." }
     }
 
     fun match(lottoNumbers: LottoNumbers): LottoMatchCount {
@@ -18,18 +18,7 @@ class LottoWinningNumbers(
 
     companion object {
 
-        private const val LOTTO_WINNING_NUMBERS_SIZE = 6
-        private const val LOTTO_WINNING_AND_BONUS_NUMBERS_SIZE = 7
-
         fun of(winningNumbers: List<Int>, bonusNumber: Int): LottoWinningNumbers {
-
-            require(
-                winningNumbers.size == LOTTO_WINNING_NUMBERS_SIZE &&
-                    setOf(*winningNumbers.toTypedArray() + bonusNumber).toSet().size == LOTTO_WINNING_AND_BONUS_NUMBERS_SIZE
-            ) {
-                "당첨번호와 보너스 번호는 중복될 수 없습니다."
-            }
-
             val lottoBonusNumber = LottoNumber(bonusNumber)
             return LottoWinningNumbers(
                 winningNumbers = LottoNumbers.of(winningNumbers.map { LottoNumber(it) }),

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.assertAll
 class LottoWinningNumbersTest {
 
     @Test
-    fun `당첨번호의 수가 잘못되어 실패한다`() {
+    fun `7개의 번호와 1개의 보너스볼로, 당첨번호를 만들면, 실패한다`() {
         // expect
         assertThatExceptionOfType(IllegalArgumentException::class.java).isThrownBy {
             LottoWinningNumbers.of(
