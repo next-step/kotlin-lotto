@@ -1,6 +1,5 @@
 package lotto.view
 
-import lotto.LottoGame
 import lotto.LottoGameStatistics
 import lotto.LottoNumbers
 import lotto.Rank

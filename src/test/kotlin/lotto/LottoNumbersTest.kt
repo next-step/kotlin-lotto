@@ -13,7 +13,7 @@ class LottoNumbersTest {
     fun `로또 번호에 중복이 있으면 예외가 발생한다`() {
         val numbers = listOf(1, 2, 3, 4, 5, 5)
         shouldThrow<IllegalArgumentException> { LottoNumbers.from(numbers) }
-            .shouldHaveMessage(LottoNumbers.LOTTO_NUMBERS_DUPLICATE_MESSAGE.format(numbers))
+            .shouldHaveMessage("로또 번호는 중복된 숫자가 존재할 수 없습니다. numbers:[1, 2, 3, 4, 5, 5]")
     }
 
     @Test
@@ -32,5 +32,21 @@ class LottoNumbersTest {
     fun `생성된 LottoNumbers의 숫자는 오름차순으로 정렬된다`() {
         val lottoNumbers = LottoNumbers.from(listOf(1, 6, 3, 2, 5, 4))
         lottoNumbers.numbers.map { it.number } shouldBe listOf(1, 2, 3, 4, 5, 6)
+    }
+
+    @Test
+    fun `LottoNumbers 끼리 얼마나 일치하는지 count를 얻을 수 있다`() {
+        val lottoNumbers1 = LottoNumbers.from(listOf(1, 2, 3, 4, 5, 6))
+        val lottoNumbers2 = LottoNumbers.from(listOf(1, 2, 3, 4, 7, 8))
+
+        lottoNumbers1.match(lottoNumbers2) shouldBe 4
+    }
+
+    @Test
+    fun `특정 LottoNumber가 LottoNumbers에 포함되어 있는지 알 수 있다`() {
+        val lottoNumbers = LottoNumbers.from(listOf(1, 2, 3, 4, 5, 6))
+
+        lottoNumbers.contains(LottoNumber.from(1)) shouldBe true
+        lottoNumbers.contains(LottoNumber.from(7)) shouldBe false
     }
 }

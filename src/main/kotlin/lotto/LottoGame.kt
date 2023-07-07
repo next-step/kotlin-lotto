@@ -1,28 +1,23 @@
 package lotto
 
-class LottoGame(val lottoNumbers: List<LottoNumbers>, winningNumbers: WinningNumbers) {
-    val result: LottoResult = LottoResult(winningNumbers.calculateRank(lottoNumbers)
-        .groupBy { it }
-        .mapValues { it.value.size })
+class LottoGame(private val winningNumbers: WinningNumbers) {
+    fun calculate(lottoNumbers: List<LottoNumbers>): LottoResult {
+        return winningNumbers.calculateRank(lottoNumbers)
+    }
 
+    fun calculate(lottoNumbers: LottoNumbers): LottoResult {
+        return calculate(listOf(lottoNumbers))
+    }
 
     companion object {
-        private const val GAME_COST = 1000
+        const val GAME_COST = 1000
+        const val INVALID_MANUAL_GAME_COUNT_MESSAGE = "수동으로 구매할 로또의 금액은 전체 구입 금액 초과할 수 없습니다. purchaseAmount:%d, manualGameCost:%d"
 
-        fun getGameCount(purchaseAmount: Int): Int {
-            return purchaseAmount / GAME_COST
-        }
+        fun getAutoGameCount(purchaseAmount: Int, manualGameCount: Int): Int {
+            val manualGameCost = manualGameCount * GAME_COST
+            require(purchaseAmount >= manualGameCost) { INVALID_MANUAL_GAME_COUNT_MESSAGE.format(purchaseAmount, manualGameCost) }
 
-        fun generateRandomNumbers(): LottoNumbers {
-            val randomNumbers = LottoNumber.LOTTO_NUMBER_POOL.shuffled().take(LottoNumbers.SIZE)
-
-            return LottoNumbers(randomNumbers)
-        }
-
-        fun from(count: Int, winningNumbers: WinningNumbers): LottoGame {
-            val lottoNumbers = List(count) { generateRandomNumbers() }
-
-            return LottoGame(lottoNumbers, winningNumbers)
+            return (purchaseAmount - manualGameCost) / GAME_COST
         }
     }
 }

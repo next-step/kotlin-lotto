@@ -21,7 +21,7 @@ class WinningNumbersTest {
         "1,7,8,9,10,11=LOSE",
         "7,8,9,10,11,12=LOSE",
         delimiter = '='
-        )
+    )
     fun `당첨번호를 통해 로또 번호의 Rank 를 구할 수 있다`(text: String, rank: Rank) {
         val numbers = text.splitToIntList()
         val lottoNumbers = LottoNumbers.from(numbers)
@@ -32,10 +32,10 @@ class WinningNumbersTest {
 
     @Test
     fun `보너스 넘버가 당첨 번호에 포함된 번호면 예외가 발생한다`() {
-        val lottoNumbers = LottoNumbers.from(listOf(1,2,3,4,5,6))
+        val lottoNumbers = LottoNumbers.from(listOf(1, 2, 3, 4, 5, 6))
         val bonusNumber = LottoNumber.from(6)
 
         shouldThrow<IllegalArgumentException> { WinningNumbers(lottoNumbers, bonusNumber) }
-            .shouldHaveMessage(WinningNumbers.INVALID_BONUS_NUMBER_MESSAGE)
+            .shouldHaveMessage("보너스 번호는 당첨 번호에 포함되지 않은 번호여야 합니다.")
     }
 }

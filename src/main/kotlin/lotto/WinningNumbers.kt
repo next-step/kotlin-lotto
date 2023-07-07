@@ -5,14 +5,17 @@ class WinningNumbers(private val lottoNumbers: LottoNumbers, private val bonusNu
         require(!lottoNumbers.numbers.contains(bonusNumber)) { INVALID_BONUS_NUMBER_MESSAGE }
     }
 
-    fun calculateRank(lottoNumbers: List<LottoNumbers>): List<Rank> {
-        return lottoNumbers.map { calculateRank(it) }
+    fun calculateRank(lottoNumbers: List<LottoNumbers>): LottoResult {
+        return LottoResult(
+            lottoNumbers.map { calculateRank(it) }
+                .groupBy { it }
+                .mapValues { it.value.size }
+        )
     }
 
-    fun calculateRank(lottoNumbers: LottoNumbers): Rank {
-        val intersection = this.lottoNumbers.numbers.intersect(lottoNumbers.numbers)
-        val matchedCount = intersection.size
-        val matchBonus = lottoNumbers.numbers.contains(bonusNumber)
+    fun calculateRank(other: LottoNumbers): Rank {
+        val matchedCount = other.match(lottoNumbers)
+        val matchBonus = other.contains(bonusNumber)
 
         return Rank.from(matchedCount, matchBonus)
     }

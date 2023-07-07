@@ -9,8 +9,8 @@ class LottoGameStatisticsTest {
         val purchaseAmount = 10000
         val winningNumbers = WinningNumbers(LottoNumbers.from(listOf(1, 2, 3, 4, 5, 6)), LottoNumber.from(7))
         val lottoNumbers = LottoNumbers.from(listOf(1, 2, 3, 7, 8, 9))
-        val lottoGame = LottoGame(listOf(lottoNumbers), winningNumbers)
-        val result = lottoGame.result
+        val lottoGame = LottoGame(winningNumbers)
+        val result = lottoGame.calculate(lottoNumbers)
 
         val statistics = LottoGameStatistics(purchaseAmount, result)
 
