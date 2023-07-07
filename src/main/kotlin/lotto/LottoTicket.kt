@@ -7,8 +7,7 @@ class LottoTicket(private val lottos: List<Lotto>) {
 
     companion object {
         fun from(lottos: List<List<Int>>): LottoTicket {
-            // TODO
-            return LottoTicket(listOf())
+            return LottoTicket(lottos.map { Lotto.from(it) })
         }
     }
 }
