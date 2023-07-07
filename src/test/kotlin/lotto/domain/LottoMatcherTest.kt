@@ -1,7 +1,7 @@
 package lotto.domain
 
+import lotto.dto.LotteryPapers
 import lotto.dto.LottoMatchResult
-import lotto.dto.PurchasedLotteryPapers
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -15,7 +15,6 @@ class LottoMatcherTest {
         lottoMatcher = LottoMatcher()
     }
 
-
     @Test
     fun `로또 번호와 당첨 번호를 가지고 당첨 통계를 낸다`() {
         // given
@@ -25,11 +24,11 @@ class LottoMatcherTest {
         val lotteryPaperList = LottoTestHelper.createPurchasedLotteryPapers()
 
         // when
-        val purchasedLotteryPapers = PurchasedLotteryPapers(lotteryPaperList)
+        val lotteryPapers = LotteryPapers(lotteryPaperList)
 
         val countLottoWinner = lottoMatcher.countLottoWinner(
             winningNumber,
-            purchasedLotteryPapers
+            lotteryPapers
         )
 
         // then
@@ -43,7 +42,6 @@ class LottoMatcherTest {
 
         Assertions.assertThat(actual).isEqualTo(answer)
     }
-
 
     @Test
     fun `로또 등수 리스트를 입력받아서 통계를 낸다`() {

@@ -10,7 +10,7 @@ import lotto.domain.WinningNumber
 import lotto.domain.YieldCalculator
 import lotto.dto.LottoMatchResult
 import lotto.dto.LottoOrder
-import lotto.dto.PurchasedLotteryPapers
+import lotto.dto.LotteryPapers
 import lotto.ui.InputView
 import lotto.ui.ResultView
 
@@ -43,14 +43,14 @@ class LottoController(
         return LottoOrder(purchasingAmount, manualBuyLotteryPaper)
     }
 
-    private fun purchaseLotto(lottoOrder: LottoOrder, lottoMachine: LottoMachine): PurchasedLotteryPapers {
+    private fun purchaseLotto(lottoOrder: LottoOrder, lottoMachine: LottoMachine): LotteryPapers {
         val purchasedLotteryPapers = lottoMachine.buyLottoTicket(lottoOrder)
         resultView.printNumberOfLottoTicket(purchasedLotteryPapers.lotteryPaperList.size)
         return purchasedLotteryPapers
     }
 
-    private fun printLottoNumbers(purchasedLotteryPapers: PurchasedLotteryPapers) {
-        resultView.printLottoNumbers(purchasedLotteryPapers)
+    private fun printLottoNumbers(lotteryPapers: LotteryPapers) {
+        resultView.printLottoNumbers(lotteryPapers)
     }
 
     private fun generateWinningNumber(): WinningNumber {
@@ -65,10 +65,10 @@ class LottoController(
 
     private fun matchLottoNumber(
         winningNumber: WinningNumber,
-        purchasedLotteryPapers: PurchasedLotteryPapers
+        lotteryPapers: LotteryPapers
     ): LottoMatchResult {
         val lottoMatcher = LottoMatcher()
-        return lottoMatcher.countLottoWinner(winningNumber, purchasedLotteryPapers)
+        return lottoMatcher.countLottoWinner(winningNumber, lotteryPapers)
     }
 
     private fun printLottoMatch(lottoMatchResult: LottoMatchResult) {
