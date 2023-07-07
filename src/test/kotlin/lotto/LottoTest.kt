@@ -1,5 +1,6 @@
 package lotto
 
+import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
 import org.junit.jupiter.api.Test
 
@@ -31,5 +32,12 @@ class LottoTest {
         )
 
         shouldThrow<IllegalArgumentException> { Lotto(numbers) }
+    }
+
+    @Test
+    fun `숫자 목록을 받아 로또를 생성한다`() {
+        val numbers = listOf(1, 2, 3, 4, 5, 6)
+
+        shouldNotThrowAny { Lotto.from(numbers) }
     }
 }

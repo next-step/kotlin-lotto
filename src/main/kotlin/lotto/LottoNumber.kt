@@ -1,7 +1,7 @@
 package lotto
 
 @JvmInline
-value class LottoNumber(val value: Int = 0) {
+value class LottoNumber(val value: Int) {
     init {
         require(value in NUMBER_RANGE) { "${MIN_NUMBER}부터 $MAX_NUMBER 사이의 숫자만 입력할 수 있습니다. [$value]" }
     }

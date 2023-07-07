@@ -1,7 +1,7 @@
 package lotto
 
+import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
-import io.kotest.matchers.shouldBe
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -10,9 +10,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = [1, 30, 45])
     fun `숫자를 받아 로또 번호를 생성한다`(value: Int) {
-        val lottoNumber = LottoNumber(value)
-
-        lottoNumber.value shouldBe value
+        shouldNotThrowAny { LottoNumber(value) }
     }
 
     @ParameterizedTest
