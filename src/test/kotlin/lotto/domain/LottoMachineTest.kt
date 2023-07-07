@@ -20,6 +20,7 @@ class LottoMachineTest {
     @ValueSource(strings = ["14000", "4000"])
     fun `입력받은 구입 금액을 로또 개당 가격으로 나눈 숫자만큼 티켓을 구매한다`(money: Int) {
         // given
+
         val lottoOrder = LottoOrder(money, LottoTestHelper.createPurchasedLotteryPapers())
 
         // when

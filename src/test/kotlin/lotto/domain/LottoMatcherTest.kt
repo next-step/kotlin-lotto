@@ -21,7 +21,7 @@ class LottoMatcherTest {
         val numberList = listOf(1, 2, 3, 4, 5, 6)
         val lottoNumbers = numberList.map { LottoNumber(it) }
         val winningNumber = WinningNumber(LotteryPaper(lottoNumbers), LottoNumber(10))
-        val lotteryPaperList = LottoTestHelper.createPurchasedLotteryPapers()
+        val lotteryPaperList = LottoTestHelper.generateLotteryPaperLists()
 
         // when
         val lotteryPapers = LotteryPapers(lotteryPaperList)

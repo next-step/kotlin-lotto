@@ -25,7 +25,7 @@ class LottoValidatorTest {
     @Test
     fun `구입하는 숫자보다 수동 구매 번호 숫자가 많으면 IllegalArgumentException을 throw한다`() {
         // given
-        val manualBuyLotteryPaper = LottoTestHelper.createPurchasedLotteryPapers()
+        val manualBuyLotteryPaper = LottoTestHelper.generateLotteryPaperLists()
         val numberOfLottoTicket = manualBuyLotteryPaper.size - 1
 
         // then

@@ -8,9 +8,9 @@ import lotto.domain.LottoNumber
 import lotto.domain.RandomLottoNumberGenerationStrategy
 import lotto.domain.WinningNumber
 import lotto.domain.YieldCalculator
+import lotto.dto.LotteryPapers
 import lotto.dto.LottoMatchResult
 import lotto.dto.LottoOrder
-import lotto.dto.LotteryPapers
 import lotto.ui.InputView
 import lotto.ui.ResultView
 
@@ -54,7 +54,8 @@ class LottoController(
     }
 
     private fun generateWinningNumber(): WinningNumber {
-        val winningNumberList = LotteryPaper(inputView.getWinningNumber())
+        val winningNumberText = inputView.getWinningNumber()
+        val winningNumberList = LotteryPaper.parseTextToLotteryPaper(winningNumberText)
         val generatedBonusNumber = generateBonusNumber()
         return WinningNumber(winningNumberList, generatedBonusNumber)
     }

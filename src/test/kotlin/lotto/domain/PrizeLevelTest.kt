@@ -21,7 +21,7 @@ class PrizeLevelTest {
         )
 
         // when
-        val actual = listOfMatchedCount.map { PrizeLevel.proceedLevel(it.matchedNumber, it.bonusNumberMatch) }
+        val actual = listOfMatchedCount.map { PrizeLevel.proceedLevel(it) }
 
         val answer = listOf(
             PrizeLevel.NONE,
