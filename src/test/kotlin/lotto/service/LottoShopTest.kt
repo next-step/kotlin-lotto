@@ -6,6 +6,7 @@ import io.kotest.matchers.ints.shouldBeInRange
 import io.kotest.matchers.shouldBe
 import lotto.domain.LottoGenerator
 import lotto.domain.LottoShop
+import lotto.domain.Lottos
 
 class LottoShopTest : FunSpec({
     context("구입금액 만큼 로또를 구매한다.") {
@@ -14,7 +15,7 @@ class LottoShopTest : FunSpec({
             2000L to 2,
             14000L to 14,
         ) { (purchaseMoney, expectedCount) ->
-            val lottos = LottoShop.purchase(purchaseMoney)
+            val lottos = LottoShop.purchase(purchaseMoney, Lottos(emptyList()))
             lottos.size shouldBe expectedCount
         }
     }
