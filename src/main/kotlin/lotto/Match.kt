@@ -1,7 +1,7 @@
 package lotto
 
 enum class Match(
-    private val count: Int,
+    val count: Int,
     val winningAmount: Int
 ) {
     SIX(6, 2_000_000_000),
