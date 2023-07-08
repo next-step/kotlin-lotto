@@ -23,7 +23,7 @@ object LottoShop {
 object LottoGenerator {
     fun generate(): Lotto {
         return Lotto(
-            (Lotto.LOTTO_NUMBER_MIN..Lotto.LOTTO_NUMBER_MAX)
+            (LottoNumber.LOTTO_NUMBER_MIN..LottoNumber.LOTTO_NUMBER_MAX)
                 .shuffled()
                 .take(Lotto.LOTTO_NUMBER_SIZE)
                 .sorted(),

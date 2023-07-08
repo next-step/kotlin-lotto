@@ -8,9 +8,9 @@ class LottoNumbers(val numbers: Set<LottoNumber>) {
     val size: Int
         get() = numbers.size
 
-    constructor(vararg numbers: Int) : this(numbers.map { LottoNumber(it) }.toSet())
+    constructor(vararg numbers: Int) : this(numbers.map { LottoNumber.from(it) }.toSet())
 
-    constructor(numbers: List<Int>) : this(numbers.map { LottoNumber(it) }.toSet())
+    constructor(numbers: List<Int>) : this(numbers.map { LottoNumber.from(it) }.toSet())
 
     fun countMatch(lottoNumbers: LottoNumbers): Int {
         return numbers
@@ -19,6 +19,6 @@ class LottoNumbers(val numbers: Set<LottoNumber>) {
     }
 
     fun match(number: Int): Boolean {
-        return numbers.contains(LottoNumber(number))
+        return numbers.contains(LottoNumber.from(number))
     }
 }
