@@ -9,7 +9,7 @@ class WinningLotto(val numbers: LottoNumbers, val bonusNumber: Int) {
         return Rank.of(countOfMatch, matchBonus)
     }
 
-    fun countMatch(lotto: Lotto): Int {
+    private fun countMatch(lotto: Lotto): Int {
         return numbers.countMatch(lotto.numbers)
     }
 
