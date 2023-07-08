@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.LottoMachine
 import lotto.ui.InputView
 import lotto.ui.ResultView
 
@@ -15,4 +16,3 @@ fun main() {
     val matches = lottoTicket.match(winningLotto)
     ResultView.printStatistics(matches, money)
 }
-

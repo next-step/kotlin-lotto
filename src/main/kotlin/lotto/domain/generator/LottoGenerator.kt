@@ -1,6 +1,6 @@
-package lotto.generator
+package lotto.domain.generator
 
-import lotto.Lotto
+import lotto.domain.Lotto
 
 fun interface LottoGenerator {
 

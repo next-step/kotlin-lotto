@@ -1,7 +1,7 @@
-package lotto
+package lotto.domain
 
-import lotto.generator.LottoGenerator
-import lotto.generator.RandomLottoGenerator
+import lotto.domain.generator.LottoGenerator
+import lotto.domain.generator.RandomLottoGenerator
 
 class LottoMachine(private val lottoGenerator: LottoGenerator = RandomLottoGenerator()) {
     fun generateTicket(money: Int): LottoTicket {

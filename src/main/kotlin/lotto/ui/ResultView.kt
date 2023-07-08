@@ -1,8 +1,8 @@
 package lotto.ui
 
-import lotto.LottoTicket
-import lotto.Match
-import lotto.MatchResult
+import lotto.domain.LottoTicket
+import lotto.domain.Match
+import lotto.domain.MatchResult
 
 object ResultView {
     fun printPurchasedTicket(lottoTicket: LottoTicket) {

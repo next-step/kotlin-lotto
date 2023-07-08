@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class LottoTicket(val lottos: List<Lotto>) {
     val size: Int

@@ -1,4 +1,4 @@
-package lotto.generator
+package lotto.domain.generator
 
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import org.junit.jupiter.api.Test
