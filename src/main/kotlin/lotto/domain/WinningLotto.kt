@@ -1,8 +1,9 @@
 package lotto.domain
 
 class WinningLotto(val numbers: LottoNumbers, val bonusNumber: Int) {
+    val size: Int
+        get() = numbers.size
 
-    val size = numbers.size
     fun rank(lotto: Lotto): Rank {
         val countOfMatch = countMatch(lotto)
         val matchBonus = matchBonus(lotto)

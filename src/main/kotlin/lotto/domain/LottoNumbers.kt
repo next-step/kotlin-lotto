@@ -3,6 +3,7 @@ package lotto.domain
 class LottoNumbers(val numbers: Set<Int>) {
     constructor(vararg numbers: Int) : this(numbers.toSet())
     constructor(numbers: List<Int>) : this(numbers.toSet())
+
     fun countMatch(lottoNumbers: LottoNumbers): Int {
         return numbers
             .intersect(lottoNumbers.numbers)
@@ -13,7 +14,8 @@ class LottoNumbers(val numbers: Set<Int>) {
         return numbers.contains(number)
     }
 
-    val size: Int = numbers.size
+    val size: Int
+        get() = numbers.size
 
     init {
         require(numbers.size == Lotto.LOTTO_NUMBER_SIZE) { "로또 번호는 6개여야 합니다." }
