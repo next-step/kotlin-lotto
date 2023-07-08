@@ -9,4 +9,8 @@ class LottoMachine(private val lottoGenerator: LottoGenerator = RandomLottoGener
         return List(purchaseCount) { lottoGenerator.get() }
             .run(::LottoTicket)
     }
+
+    fun toWinningLotto(winningNumbers: String): Lotto {
+        TODO()
+    }
 }
