@@ -42,7 +42,7 @@ class LottoTicketTest {
 
         val matches = lottoTicket.match(winningLotto)
 
-        matches shouldBe listOf(Match.SIX, Match.FIVE, Match.FOUR)
+        matches shouldBe MatchResult(listOf(Match.SIX, Match.FIVE, Match.FOUR))
     }
 
     @Test
@@ -57,6 +57,6 @@ class LottoTicketTest {
 
         val matches = lottoTicket.match(winningLotto)
 
-        matches shouldBe listOf()
+        matches shouldBe MatchResult()
     }
 }

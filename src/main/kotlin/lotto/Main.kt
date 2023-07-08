@@ -13,6 +13,6 @@ fun main() {
     val winningLotto = lottoMachine.toWinningLotto(winningNumbers)
 
     val matches = lottoTicket.match(winningLotto)
-    ResultView.printMatchResult(matches)
+    ResultView.printStatistics(matches, money)
 }
 

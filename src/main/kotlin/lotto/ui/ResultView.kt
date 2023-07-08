@@ -2,6 +2,7 @@ package lotto.ui
 
 import lotto.LottoTicket
 import lotto.Match
+import lotto.MatchResult
 
 object ResultView {
     fun printPurchasedTicket(lottoTicket: LottoTicket) {
@@ -13,12 +14,13 @@ object ResultView {
         }
     }
 
-    fun printMatchResult(matches: List<Match>) {
+    fun printStatistics(matchResult: MatchResult, money: Int) {
         println("당첨 통계")
         println("---------")
         Match.values().forEach {
-            println("${it.count}개 일치 (${it.winningAmount}원) - ${matches.count { match -> match == it }}개")
+            println("${it.count}개 일치 (${it.winningAmount}원) - ${matchResult.countOf(it)}개")
         }
+        println("총 수익률은 ${matchResult.rateOfReturn(money)}% 입니다.")
     }
 
 }
