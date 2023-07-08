@@ -1,11 +1,12 @@
 package lotto
 
 import lotto.domain.LottoMachine
+import lotto.domain.Money
 import lotto.ui.InputView
 import lotto.ui.ResultView
 
 fun main() {
-    val money = InputView.requestMoney()
+    val money = Money.from(InputView.requestMoney())
     val lottoMachine = LottoMachine()
     val lottoTicket = lottoMachine.generateTicket(money)
     ResultView.printPurchasedTicket(lottoTicket)

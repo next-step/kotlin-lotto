@@ -10,7 +10,7 @@ class LottoMachineTest {
         val lottoGenerator = generatorWithParameter(listOf(1, 2, 3, 4, 5, 6))
         val lottoMachine = LottoMachine(lottoGenerator)
 
-        val lottoTicket = lottoMachine.generateTicket(1000)
+        val lottoTicket = lottoMachine.generateTicket(Money.from(1000))
 
         lottoTicket shouldBe LottoTicket(listOf(Lotto.from(listOf(1, 2, 3, 4, 5, 6))))
     }
