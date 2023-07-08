@@ -36,4 +36,19 @@ class LottoTicketTest {
 
         matches shouldBe listOf(Match.SIX, Match.FIVE, Match.FOUR)
     }
+
+    @Test
+    fun `당첨 결과가 없으면 빈 리스트를 반환한다`() {
+        val lottos = listOf(
+            listOf(1, 2, 3, 4, 5, 6),
+            listOf(1, 2, 3, 4, 5, 7),
+            listOf(1, 2, 3, 4, 7, 8),
+        )
+        val lottoTicket = LottoTicket.from(lottos)
+        val winningLotto = Lotto.from(listOf(7, 8, 9, 10, 11, 12))
+
+        val matches = lottoTicket.match(winningLotto)
+
+        matches shouldBe listOf()
+    }
 }
