@@ -8,8 +8,6 @@ class LottoNumbers(val numbers: Set<LottoNumber>) {
     val size: Int
         get() = numbers.size
 
-    constructor(vararg numbers: Int) : this(numbers.map { LottoNumber.from(it) }.toSet())
-
     constructor(numbers: List<Int>) : this(numbers.map { LottoNumber.from(it) }.toSet())
 
     fun countMatch(lottoNumbers: LottoNumbers): Int {
