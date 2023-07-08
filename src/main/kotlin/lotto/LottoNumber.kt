@@ -9,6 +9,6 @@ value class LottoNumber(val value: Int) {
     companion object {
         private const val MIN_NUMBER = 1
         private const val MAX_NUMBER = 45
-        private val NUMBER_RANGE = MIN_NUMBER..MAX_NUMBER
+        val NUMBER_RANGE = MIN_NUMBER..MAX_NUMBER
     }
 }
