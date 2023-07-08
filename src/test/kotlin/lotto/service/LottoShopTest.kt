@@ -4,6 +4,8 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withData
 import io.kotest.matchers.ints.shouldBeInRange
 import io.kotest.matchers.shouldBe
+import lotto.domain.LottoGenerator
+import lotto.domain.LottoShop
 
 class LottoShopTest : FunSpec({
     context("구입금액 만큼 로또를 구매한다.") {

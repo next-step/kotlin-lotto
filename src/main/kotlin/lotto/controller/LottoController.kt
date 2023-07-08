@@ -2,10 +2,10 @@ package lotto.controller
 
 import lotto.domain.Lotto
 import lotto.domain.LottoNumbers
+import lotto.domain.LottoShop
 import lotto.domain.Lottos
 import lotto.domain.PurchaseMoney
 import lotto.domain.WinningLotto
-import lotto.service.LottoShop
 import lotto.view.InputView
 
 class LottoController {

@@ -1,7 +1,4 @@
-package lotto.service
-
-import lotto.domain.Lotto
-import lotto.domain.Lottos
+package lotto.domain
 
 object LottoShop {
     private const val LOTTO_PRICE = 1000
