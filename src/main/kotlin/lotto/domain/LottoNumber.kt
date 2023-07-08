@@ -6,6 +6,10 @@ value class LottoNumber private constructor(val number: Int) {
         requireNumberInRange(number)
     }
 
+    override fun toString(): String {
+        return number.toString()
+    }
+
     companion object {
         const val LOTTO_NUMBER_MIN = 1
         const val LOTTO_NUMBER_MAX = 45
