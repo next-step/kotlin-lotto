@@ -15,10 +15,10 @@ class WinningStatistics(val winningStatistics: Map<Rank, Int>) {
     }
 
     companion object {
-        fun of(lottos: Lottos, winningLotto: WinningLotto): WinningStatistics {
+        fun of(lottos: Lottos, winningLotto: (Lotto) -> Rank): WinningStatistics {
             return WinningStatistics(
                 lottos.lottos
-                    .map { lotto -> winningLotto.rank(lotto) }
+                    .map { lotto -> winningLotto(lotto) }
                     .groupBy { it }
                     .mapValues { it.value.size },
             )

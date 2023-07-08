@@ -15,7 +15,7 @@ fun main() {
     val winningLotto = lottoController.inputWinningLotto()
     println()
 
-    val winningStatistics = WinningStatistics.of(lottos, winningLotto)
+    val winningStatistics = WinningStatistics.of(lottos) { lotto -> winningLotto.rank(lotto) }
 
     ResultView.printStatisticsTitle()
     ResultView.printWinningStatistics(winningStatistics)

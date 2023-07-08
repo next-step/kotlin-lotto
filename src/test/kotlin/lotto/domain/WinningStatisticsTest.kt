@@ -33,7 +33,7 @@ class WinningStatisticsTest : FunSpec({
         )
         val winningLotto = WinningLotto(LottoNumbers(1, 2, 3, 4, 5, 6), 7)
 
-        val winningStatistics = WinningStatistics.of(lottos, winningLotto)
+        val winningStatistics = WinningStatistics.of(lottos) { lotto -> winningLotto.rank(lotto) }
 
         winningStatistics.winningStatistics[Rank.MISS] shouldBe 3
         winningStatistics.winningStatistics[Rank.FIFTH] shouldBe 1
