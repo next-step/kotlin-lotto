@@ -1,8 +1,9 @@
 package lotto
 
 class Lotto(private val numbers: List<LottoNumber>) {
-    fun match(lotto: Lotto): Int {
-        return numbers.intersect(lotto.numbers).size
+    fun match(lotto: Lotto): Match? {
+        val matchNumbers = numbers.intersect(lotto.numbers)
+        return Match.from(matchNumbers.size)
     }
 
     init {
