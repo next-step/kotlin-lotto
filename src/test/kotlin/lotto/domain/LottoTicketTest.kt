@@ -31,6 +31,19 @@ class LottoTicketTest {
     }
 
     @Test
+    fun `숫자 목록 숫자만큼 로또를 가진 티켓을 생성한다`() {
+        val lottos = listOf(
+            listOf(1, 2, 3, 4, 5, 6),
+            listOf(1, 2, 3, 4, 5, 6),
+            listOf(1, 2, 3, 4, 5, 6),
+        )
+
+        val lottoTicket = LottoTicket.from(lottos)
+
+        lottoTicket.countOfLotto shouldBe lottos.size
+    }
+
+    @Test
     fun `당첨 로또를 받아 당첨 결과를 반환한다`() {
         val lottos = listOf(
             listOf(1, 2, 3, 4, 5, 6),

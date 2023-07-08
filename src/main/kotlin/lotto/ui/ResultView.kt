@@ -7,7 +7,7 @@ import lotto.domain.Money
 
 object ResultView {
     fun printPurchasedTicket(lottoTicket: LottoTicket) {
-        println("${lottoTicket.size} 개 구매했습니다")
+        println("${lottoTicket.countOfLotto} 개 구매했습니다")
         lottoTicket.lottos.map { lotto ->
             lotto.numbers.map { it.value }
         }.forEach {

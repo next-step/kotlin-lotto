@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoTicket(val lottos: List<Lotto>) {
-    val size: Int
+    val countOfLotto: Int
         get() = lottos.size
 
     init {
