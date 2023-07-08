@@ -21,10 +21,6 @@ class LotteryPaper(private val lottoNumbers: List<LottoNumber>) {
         return lottoNumbers.toList()
     }
 
-    fun hasBonusNumber(bonusNumber: LottoNumber): Boolean {
-        return lottoNumbers.contains(bonusNumber)
-    }
-
     companion object {
         const val NUMBER_OF_LOTTO_DRAWS = 6
 
@@ -36,6 +32,11 @@ class LotteryPaper(private val lottoNumbers: List<LottoNumber>) {
             require(lottoNumber.toSet().size == lottoNumber.size) {
                 "로또 숫자는 중복되면 안됩니다. 입력값을 다시 확인하세요."
             }
+        }
+
+        fun parseTextToLotteryPaper(text: String): LotteryPaper {
+            val lottoNumbers = text.split(", ").map { LottoNumber(it.toInt()) }
+            return LotteryPaper(lottoNumbers)
         }
     }
 }

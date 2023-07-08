@@ -1,13 +1,11 @@
 package lotto.domain
 
-import lotto.dto.LottoMatchResult
-import lotto.dto.PurchasedLotteryPapers
+import lotto.dto.MatchedCount
 
-class WinningNumber(private val winningNumber: LotteryPaper, private val bonusNumber: LottoNumber) {
-    private val lottoMatcher = LottoMatcher()
+class WinningNumber(private val lotteryPaper: LotteryPaper, private val bonusNumber: LottoNumber) {
 
     init {
-        validateBonusNumber(bonusNumber, winningNumber.getLottoNumbers())
+        validateBonusNumber(bonusNumber, lotteryPaper.getLottoNumbers())
     }
 
     private fun validateBonusNumber(bonusNumber: LottoNumber, answerNumbers: List<LottoNumber>) {
@@ -21,7 +19,17 @@ class WinningNumber(private val winningNumber: LotteryPaper, private val bonusNu
         require(!answerNumbers.contains(bonusNumber)) { "보너스 숫자는 기존 당첨 숫자와 중복되면 안됩니다." }
     }
 
-    fun countLottoWinner(purchasedLotteryPapers: PurchasedLotteryPapers): LottoMatchResult {
-        return lottoMatcher.countLottoWinner(winningNumber, purchasedLotteryPapers, bonusNumber)
+    fun compareLottoNumber(purchasedLottoNumber: List<LottoNumber>): Int {
+        return lotteryPaper.getLottoNumbers().toSet().intersect(purchasedLottoNumber.toSet()).size
+    }
+
+    fun isBonusNumberMatch(purchasedLottoNumber: List<LottoNumber>): Boolean {
+        return purchasedLottoNumber.contains(bonusNumber)
+    }
+
+    fun matchCount(purchasedLottoNumber: List<LottoNumber>): MatchedCount {
+        val matchedNumber = compareLottoNumber(purchasedLottoNumber)
+        val bonusNumberMatch = isBonusNumberMatch(purchasedLottoNumber)
+        return MatchedCount(matchedNumber, bonusNumberMatch)
     }
 }

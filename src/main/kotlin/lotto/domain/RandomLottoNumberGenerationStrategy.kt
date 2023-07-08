@@ -1,10 +1,9 @@
 package lotto.domain
 
 class RandomLottoNumberGenerationStrategy : LottoNumberGenerationStrategy {
+
+    private var lottoNumberPool: List<LottoNumber> = LottoNumber.generateLottoNumberList()
     override fun generateLottoNumber(): List<LottoNumber> {
-        return (LottoNumber.MINIMUM_NUMBER..LottoNumber.MAXIMUM_NUMBER)
-            .map { LottoNumber(it) }
-            .shuffled()
-            .take(LotteryPaper.NUMBER_OF_LOTTO_DRAWS)
+        return lottoNumberPool.shuffled().take(LotteryPaper.NUMBER_OF_LOTTO_DRAWS)
     }
 }

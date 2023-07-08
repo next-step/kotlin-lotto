@@ -3,7 +3,7 @@ package lotto.dto
 import lotto.domain.LotteryPaper
 import lotto.domain.LotteryPaperValidator
 
-data class PurchasedLotteryPapers(val lotteryPaperList: List<LotteryPaper>) {
+data class LotteryPapers(val lotteryPaperList: List<LotteryPaper>) {
     private val lotteryPaperValidator = LotteryPaperValidator()
 
     init {

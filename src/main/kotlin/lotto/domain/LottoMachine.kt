@@ -1,34 +1,46 @@
 package lotto.domain
 
-import lotto.dto.PurchasedLotteryPapers
+import lotto.dto.LotteryPapers
+import lotto.dto.LottoOrder
 
-class LottoMachine {
-
-    private val lotteryPaperList: MutableList<LotteryPaper> = mutableListOf()
-    private val lotteryPaperFactory: LotteryPaperFactory = LotteryPaperFactory(RandomLottoNumberGenerationStrategy())
+class LottoMachine(private val lotteryPaperFactory: LotteryPaperFactory) {
     private val lottoValidator = LottoValidator()
 
-    fun buyLottoTicket(money: Int): Int {
-        lottoValidator.validateInputMoneyCanBuyLottoTicket(money)
-        val numberOfLottoTicket = calculateNumberOfLottoTicket(money)
-        generateLottoNumbers(numberOfLottoTicket)
-        return numberOfLottoTicket
+    fun buyLottoTicket(lottoOrder: LottoOrder): LotteryPapers {
+        val (purchasingAmount, manualBuyLotteryPaperText) = lottoOrder
+
+        lottoValidator.validateInputMoneyCanBuyLottoTicket(purchasingAmount)
+        val numberOfLottoTicket = calculateNumberOfLottoTicket(purchasingAmount)
+
+
+        val manualBuyLotteryPaper = generateManualLottoNumbers(manualBuyLotteryPaperText)
+        lottoValidator.validateLottoTicket(numberOfLottoTicket, manualBuyLotteryPaper)
+        val generatedLottoNumbers = generateAutoLottoNumbers(numberOfLottoTicket, manualBuyLotteryPaper)
+
+        return LotteryPapers(generatedLottoNumbers)
     }
 
     private fun calculateNumberOfLottoTicket(money: Int): Int {
         return money / LOTTO_TICKET_PRICE
     }
 
-    private fun generateLottoNumbers(numOfLottoPurchases: Int) {
-        repeat(numOfLottoPurchases) {
-            val generatedLottoNumber = lotteryPaperFactory.generateLotteryPaper(lotteryPaperList.toList())
-            lotteryPaperList.add(generatedLottoNumber)
+    private fun generateManualLottoNumbers(manualBuyLotteryText: List<String>): List<LotteryPaper> {
+        return manualBuyLotteryText.map {
+            LotteryPaper.parseTextToLotteryPaper(it)
         }
     }
 
-    fun getPurchasedLotteryPapers(): PurchasedLotteryPapers {
-        val toList = lotteryPaperList.map { it }.toList()
-        return PurchasedLotteryPapers(toList)
+    private fun generateAutoLottoNumbers(
+        numOfLottoPurchases: Int,
+        manualBuyLotteryPaper: List<LotteryPaper>
+    ): List<LotteryPaper> {
+        val lotteryPaperList: MutableList<LotteryPaper> = mutableListOf()
+        lotteryPaperList.addAll(manualBuyLotteryPaper)
+        repeat(numOfLottoPurchases - manualBuyLotteryPaper.size) {
+            val generatedLottoNumber = lotteryPaperFactory.generateLotteryPaper(lotteryPaperList.toList())
+            lotteryPaperList.add(generatedLottoNumber)
+        }
+        return lotteryPaperList.toList()
     }
 
     companion object {

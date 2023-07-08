@@ -2,11 +2,11 @@ package lotto.ui
 
 import lotto.domain.LottoNumber
 import lotto.domain.PrizeLevel
-import lotto.dto.PurchasedLotteryPapers
+import lotto.dto.LotteryPapers
 
 class ResultView {
-    fun printLottoNumbers(purchasedLotteryPapers: PurchasedLotteryPapers) {
-        val lotteryPaperList = purchasedLotteryPapers.lotteryPaperList
+    fun printLottoNumbers(lotteryPapers: LotteryPapers) {
+        val lotteryPaperList = lotteryPapers.lotteryPaperList
         lotteryPaperList.forEach {
             printSingleLottoNumber(it.getLottoNumbers())
         }
@@ -29,6 +29,7 @@ class ResultView {
     }
 
     fun printNumberOfLottoTicket(numberOfLottoTicket: Int) {
+        println()
         println("${numberOfLottoTicket}개를 구매했습니다.")
     }
 

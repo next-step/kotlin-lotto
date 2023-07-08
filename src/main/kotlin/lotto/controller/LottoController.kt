@@ -1,12 +1,16 @@
 package lotto.controller
 
 import lotto.domain.LotteryPaper
+import lotto.domain.LotteryPaperFactory
 import lotto.domain.LottoMachine
+import lotto.domain.LottoMatcher
 import lotto.domain.LottoNumber
+import lotto.domain.RandomLottoNumberGenerationStrategy
 import lotto.domain.WinningNumber
 import lotto.domain.YieldCalculator
+import lotto.dto.LotteryPapers
 import lotto.dto.LottoMatchResult
-import lotto.dto.PurchasedLotteryPapers
+import lotto.dto.LottoOrder
 import lotto.ui.InputView
 import lotto.ui.ResultView
 
@@ -16,31 +20,42 @@ class LottoController(
 ) {
 
     fun start() {
-        val purchasingAmount = inputView.getPurchasingAmount()
-        val lottoResponse = purchaseLotto(purchasingAmount)
+        val lottoOrder = getLottoOrder()
+        val lottoMachine = LottoMachine(LotteryPaperFactory(RandomLottoNumberGenerationStrategy()))
+        val purchasedLotteryPapers = purchaseLotto(lottoOrder, lottoMachine)
 
-        printLottoNumbers(lottoResponse)
+        printLottoNumbers(purchasedLotteryPapers)
 
         val winningNumber = generateWinningNumber()
-        val lottoMatchResponse = matchLottoNumber(winningNumber, lottoResponse)
+        val lottoMatchResponse = matchLottoNumber(winningNumber, purchasedLotteryPapers)
 
         printLottoMatch(lottoMatchResponse)
-        printYield(purchasingAmount, lottoMatchResponse)
+        printYield(lottoOrder.purchasingAmount, lottoMatchResponse)
     }
 
-    private fun purchaseLotto(purchasingAmount: Int): PurchasedLotteryPapers {
-        val lottoMachine = LottoMachine()
-        val numberOfLottoTicket = lottoMachine.buyLottoTicket(purchasingAmount)
-        resultView.printNumberOfLottoTicket(numberOfLottoTicket)
-        return lottoMachine.getPurchasedLotteryPapers()
+    private fun getLottoOrder(): LottoOrder {
+        val purchasingAmount = inputView.getPurchasingAmount()
+
+        val manualBuyNumber = inputView.getManualBuyAmount()
+
+        val manualBuyLotteryPaper = inputView.getManualBuyNumber(manualBuyNumber)
+
+        return LottoOrder(purchasingAmount, manualBuyLotteryPaper)
     }
 
-    private fun printLottoNumbers(purchasedLotteryPapers: PurchasedLotteryPapers) {
-        resultView.printLottoNumbers(purchasedLotteryPapers)
+    private fun purchaseLotto(lottoOrder: LottoOrder, lottoMachine: LottoMachine): LotteryPapers {
+        val purchasedLotteryPapers = lottoMachine.buyLottoTicket(lottoOrder)
+        resultView.printNumberOfLottoTicket(purchasedLotteryPapers.lotteryPaperList.size)
+        return purchasedLotteryPapers
+    }
+
+    private fun printLottoNumbers(lotteryPapers: LotteryPapers) {
+        resultView.printLottoNumbers(lotteryPapers)
     }
 
     private fun generateWinningNumber(): WinningNumber {
-        val winningNumberList = LotteryPaper(inputView.getWinningNumber())
+        val winningNumberText = inputView.getWinningNumber()
+        val winningNumberList = LotteryPaper.parseTextToLotteryPaper(winningNumberText)
         val generatedBonusNumber = generateBonusNumber()
         return WinningNumber(winningNumberList, generatedBonusNumber)
     }
@@ -51,9 +66,10 @@ class LottoController(
 
     private fun matchLottoNumber(
         winningNumber: WinningNumber,
-        purchasedLotteryPapers: PurchasedLotteryPapers
+        lotteryPapers: LotteryPapers
     ): LottoMatchResult {
-        return winningNumber.countLottoWinner(purchasedLotteryPapers)
+        val lottoMatcher = LottoMatcher()
+        return lottoMatcher.countLottoWinner(winningNumber, lotteryPapers)
     }
 
     private fun printLottoMatch(lottoMatchResult: LottoMatchResult) {

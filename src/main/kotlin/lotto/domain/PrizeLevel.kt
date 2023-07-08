@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.dto.MatchedCount
+
 enum class PrizeLevel(val numberOfHit: Int, val prizeMoney: Int, hasBonus: Boolean = false) {
     NONE(0, 0),
     FIFTH(3, 5000),
@@ -9,13 +11,19 @@ enum class PrizeLevel(val numberOfHit: Int, val prizeMoney: Int, hasBonus: Boole
     FIRST(6, 2_000_000_000);
 
     companion object {
+        fun proceedLevel(matchedCount: MatchedCount): PrizeLevel {
+            val (numberOfHit, isBonusNumberMatch) = matchedCount
+            return values().firstOrNull { it.matches(numberOfHit, isBonusNumberMatch) } ?: NONE
+        }
 
-        fun fromNumberOfHit(numberOfHit: Int, lotteryPaper: LotteryPaper, bonusNumber: LottoNumber): PrizeLevel {
-            val prizeLevel = values().firstOrNull { it.numberOfHit == numberOfHit } ?: NONE
-            if (prizeLevel == THIRD && lotteryPaper.hasBonusNumber(bonusNumber)) {
-                return SECOND
+        private fun PrizeLevel.matches(numberOfHit: Int, isBonusNumberMatch: Boolean): Boolean {
+            if (this == SECOND) {
+                return this.numberOfHit == numberOfHit && isBonusNumberMatch
             }
-            return prizeLevel
+            if (this == THIRD) {
+                return this.numberOfHit == numberOfHit && !isBonusNumberMatch
+            }
+            return this.numberOfHit == numberOfHit
         }
     }
 }

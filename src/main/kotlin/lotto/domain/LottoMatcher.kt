@@ -1,30 +1,29 @@
 package lotto.domain
 
+import lotto.dto.LotteryPapers
 import lotto.dto.LottoMatchResult
-import lotto.dto.PurchasedLotteryPapers
+import lotto.dto.MatchedCount
 
 class LottoMatcher {
 
     fun countLottoWinner(
-        winningNumber: LotteryPaper,
-        purchasedLotteryPapers: PurchasedLotteryPapers,
-        bonusNumber: LottoNumber
+        winningNumber: WinningNumber,
+        lotteryPapers: LotteryPapers,
     ): LottoMatchResult {
-        val winningLottoNumbers = winningNumber.getLottoNumbers()
-        val matchedCountsMap = getMatchedCount(winningLottoNumbers, purchasedLotteryPapers.lotteryPaperList)
+        val matchedCountList = getMatchedCount(winningNumber, lotteryPapers.lotteryPaperList)
 
-        val prizeList = matchedCountsMap.map { matchedCount ->
-            PrizeLevel.fromNumberOfHit(matchedCount.value, matchedCount.key, bonusNumber)
+        val prizeList = matchedCountList.map { matchedCount ->
+            PrizeLevel.proceedLevel(matchedCount)
         }
         return LottoMatchResult(LottoMatchResult.countPrizeLevels(prizeList))
     }
 
     private fun getMatchedCount(
-        winningLottoNumbers: List<LottoNumber>,
+        winningNumber: WinningNumber,
         lotteryPaperList: List<LotteryPaper>
-    ): Map<LotteryPaper, Int> {
-        return lotteryPaperList.associateWith {
-            LottoNumberComparator.compare(winningLottoNumbers, it.getLottoNumbers())
+    ): List<MatchedCount> {
+        return lotteryPaperList.map {
+            winningNumber.matchCount(it.getLottoNumbers())
         }
     }
 }
