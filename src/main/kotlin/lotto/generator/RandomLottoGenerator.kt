@@ -1,7 +1,10 @@
-package lotto
+package lotto.generator
 
-class LottoGenerator {
-    fun get(): Lotto {
+import lotto.Lotto
+import lotto.LottoNumber
+
+class RandomLottoGenerator : LottoGenerator {
+    override fun get(): Lotto {
         return LottoNumber.NUMBER_RANGE
             .shuffled()
             .take(Lotto.LOTTO_NUMBER_SIZE)
@@ -9,5 +12,4 @@ class LottoGenerator {
             .map(::LottoNumber)
             .let(::Lotto)
     }
-
 }
