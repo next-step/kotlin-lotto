@@ -1,23 +1,13 @@
 package lotto
 
 import lotto.controller.LottoController
-import lotto.domain.Lottos
 import lotto.domain.WinningStatistics
-import lotto.service.LottoShop
 import lotto.view.ResultView
 
 fun main() {
     val lottoController = LottoController()
+    val (lottos, purchaseMoney) = lottoController.purchaseLottos()
 
-    val purchaseMoney = lottoController.inputPurchaseMoney()
-
-    val manualLottoCount = lottoController.inputManualLottoCount()
-    println("수동으로 구매할 번호를 입력해 주세요.")
-    val manualPurchaseLottos = (1..manualLottoCount)
-        .map { lottoController.inputManualLotto() }
-        .let { Lottos(it) }
-
-    val lottos = LottoShop.purchase(purchaseMoney, manualPurchaseLottos)
     ResultView.printPurchaseLottoNum(lottos)
     ResultView.printLottos(lottos)
     println()

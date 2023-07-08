@@ -9,9 +9,9 @@ class WinningStatistics(val winningStatistics: Map<Rank, Int>) {
             .sum()
     }
 
-    fun calculateProfitRate(purchaseMoney: Long): Double {
+    fun calculateProfitRate(purchaseMoney: PurchaseMoney): Double {
         val totalPrizeMoney = calculateTotalPrizeMoney()
-        return totalPrizeMoney / purchaseMoney.toDouble()
+        return totalPrizeMoney / purchaseMoney.value.toDouble()
     }
 
     companion object {

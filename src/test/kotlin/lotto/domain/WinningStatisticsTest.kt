@@ -98,7 +98,7 @@ class WinningStatisticsTest : FunSpec({
                 ) to 5.0,
         ) { (winningStatisticsAndPurchaseMoney, expectedProfitRate) ->
             val (winningStatistics, purchaseMoney) = winningStatisticsAndPurchaseMoney
-            val profitRate = winningStatistics.calculateProfitRate(purchaseMoney)
+            val profitRate = winningStatistics.calculateProfitRate(PurchaseMoney(purchaseMoney))
             profitRate shouldBe expectedProfitRate
         }
     }
