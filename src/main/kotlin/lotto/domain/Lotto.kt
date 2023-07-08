@@ -1,9 +1,9 @@
 package lotto.domain
 
 class Lotto(val numbers: LottoNumbers) {
-    constructor(numbers: List<Int>) : this(LottoNumbers(numbers.toSet()))
-    constructor(numbers: Set<Int>) : this(LottoNumbers(numbers))
-    constructor(vararg numbers: Int) : this(LottoNumbers(numbers.toSet()))
+    constructor(numbers: List<Int>) : this(LottoNumbers(numbers.map { LottoNumber(it) }.toSet()))
+    constructor(numbers: Set<Int>) : this(LottoNumbers(numbers.map { LottoNumber(it) }.toSet()))
+    constructor(vararg numbers: Int) : this(LottoNumbers(numbers.map { LottoNumber(it) }.toSet()))
 
     override fun toString(): String {
         return numbers.numbers.joinToString(

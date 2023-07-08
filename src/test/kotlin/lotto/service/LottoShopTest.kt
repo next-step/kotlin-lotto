@@ -21,7 +21,7 @@ class LottoShopTest : FunSpec({
         val lotto = LottoGenerator.generate()
         lotto.numbers.size shouldBe 6
         lotto.numbers.numbers.forEach {
-            it shouldBeInRange 1..45
+            it.number shouldBeInRange 1..45
         }
     }
 
@@ -32,6 +32,6 @@ class LottoShopTest : FunSpec({
 
     context("생성된 로또 번호는 오름차순으로 정렬된다.") {
         val lotto = LottoGenerator.generate()
-        lotto.numbers.numbers shouldBe lotto.numbers.numbers.sorted()
+        lotto.numbers.numbers shouldBe lotto.numbers.numbers.sortedBy { it.number }
     }
 })
