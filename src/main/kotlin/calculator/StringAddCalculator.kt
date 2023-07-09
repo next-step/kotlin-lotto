@@ -1,12 +1,13 @@
 package calculator
 
-class StringAddCalculator {
+class StringAddCalculator(private val stringParser: StringParser = StringParser()) {
     fun calculate(expression: String?): Long {
         if (expression.isNullOrEmpty()) {
             return DEFAULT_VALUE
         }
 
-        return StringParser().parsingNumbers(expression).sum()
+        return stringParser.parsingNumbers(expression)
+            .sum()
     }
 
     companion object {
