@@ -8,11 +8,8 @@ object LottoShop {
 
         val purchaseCount = purchaseCount(purchaseMoney - manualPurchaseMoney)
 
-        return Lottos(
-            (1..purchaseCount).map {
-                LottoGenerator.generate()
-            } + manualPurchaseLottos.lottos,
-        )
+        val autoLottos = Lottos((1..purchaseCount).map { LottoGenerator.generate() })
+        return manualPurchaseLottos + autoLottos
     }
 
     private fun purchaseCount(purchaseMoney: Long): Long {
