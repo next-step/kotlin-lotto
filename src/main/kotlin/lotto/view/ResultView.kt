@@ -13,6 +13,7 @@ object ResultView {
         lottos.lottos.forEach {
             println(it)
         }
+        println()
     }
 
     fun printStatisticsTitle() {

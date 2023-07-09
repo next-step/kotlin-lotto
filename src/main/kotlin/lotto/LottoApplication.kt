@@ -10,7 +10,6 @@ fun main() {
 
     ResultView.printPurchaseLottoNum(lottos)
     ResultView.printLottos(lottos)
-    println()
 
     val winningLotto = lottoController.inputWinningLotto()
     println()
