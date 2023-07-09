@@ -1,7 +1,6 @@
 package lotto
 
 import lotto.controller.LottoController
-import lotto.domain.WinningStatistics
 import lotto.view.ResultView
 
 fun main() {
@@ -14,7 +13,7 @@ fun main() {
     val winningLotto = lottoController.inputWinningLotto()
     println()
 
-    val winningStatistics = WinningStatistics.of(lottos) { lotto -> winningLotto.rank(lotto) }
+    val winningStatistics = lottos.match(winningLotto)
 
     ResultView.printStatisticsTitle()
     ResultView.printWinningStatistics(winningStatistics)

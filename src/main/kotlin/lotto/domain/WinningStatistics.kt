@@ -13,15 +13,4 @@ class WinningStatistics(val winningStatistics: Map<Rank, Int>) {
         val totalPrizeMoney = calculateTotalPrizeMoney()
         return totalPrizeMoney / purchaseMoney.value.toDouble()
     }
-
-    companion object {
-        fun of(lottos: Lottos, winningLotto: (Lotto) -> Rank): WinningStatistics {
-            return WinningStatistics(
-                lottos.lottos
-                    .map { lotto -> winningLotto(lotto) }
-                    .groupBy { it }
-                    .mapValues { it.value.size },
-            )
-        }
-    }
 }
