@@ -10,10 +10,6 @@ class WinningStatistics(private val winningRanks: Ranks) {
             .reduce { acc, ranks -> acc + ranks },
     )
 
-    fun getCountByRank(rank: Rank): Int {
-        return winningCountByRank[rank] ?: 0
-    }
-
     private fun calculateTotalPrizeMoney(): Long {
         return winningRanks.calculateTotalPrizeMoney()
     }
