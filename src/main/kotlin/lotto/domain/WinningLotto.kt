@@ -1,20 +1,20 @@
 package lotto.domain
 
-class WinningLotto(val lottoNumbers: LottoNumbers, val bonusNumber: Int) {
+class WinningLotto(val lotto: Lotto, val bonusNumber: Int) {
     val size: Int
-        get() = lottoNumbers.size
+        get() = lotto.size
 
-    fun rank(lottoNumbers: LottoNumbers): Rank {
-        val countOfMatch = countMatch(lottoNumbers)
-        val matchBonus = matchBonus(lottoNumbers)
+    fun rank(lotto: Lotto): Rank {
+        val countOfMatch = countMatch(lotto)
+        val matchBonus = matchBonus(lotto)
         return Rank.of(countOfMatch, matchBonus)
     }
 
-    private fun countMatch(lottoNumbers: LottoNumbers): Int {
-        return this.lottoNumbers.countMatch(lottoNumbers)
+    private fun countMatch(lotto: Lotto): Int {
+        return this.lotto.countMatch(lotto)
     }
 
-    private fun matchBonus(lottoNumbers: LottoNumbers): Boolean {
-        return lottoNumbers.match(bonusNumber)
+    private fun matchBonus(lotto: Lotto): Boolean {
+        return lotto.match(bonusNumber)
     }
 }

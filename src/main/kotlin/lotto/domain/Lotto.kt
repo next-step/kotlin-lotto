@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoNumbers(val numbers: Set<LottoNumber>) {
+class Lotto(val numbers: Set<LottoNumber>) {
     init {
         require(numbers.size == LOTTO_NUMBERS_SIZE) { "로또 번호는 6개여야 합니다." }
     }
@@ -10,9 +10,9 @@ class LottoNumbers(val numbers: Set<LottoNumber>) {
     val size: Int
         get() = numbers.size
 
-    fun countMatch(lottoNumbers: LottoNumbers): Int {
+    fun countMatch(lotto: Lotto): Int {
         return numbers
-            .intersect(lottoNumbers.numbers)
+            .intersect(lotto.numbers)
             .size
     }
 
