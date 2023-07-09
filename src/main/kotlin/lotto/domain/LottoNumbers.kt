@@ -5,10 +5,10 @@ class LottoNumbers(val numbers: Set<LottoNumber>) {
         require(numbers.size == Lotto.LOTTO_NUMBER_SIZE) { "로또 번호는 6개여야 합니다." }
     }
 
+    constructor(numbers: List<Int>) : this(numbers.map { LottoNumber.from(it) }.toSet())
+
     val size: Int
         get() = numbers.size
-
-    constructor(numbers: List<Int>) : this(numbers.map { LottoNumber.from(it) }.toSet())
 
     fun countMatch(lottoNumbers: LottoNumbers): Int {
         return numbers
