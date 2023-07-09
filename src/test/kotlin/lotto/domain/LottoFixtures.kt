@@ -9,10 +9,6 @@ fun createSimpleLottoNumbers(vararg numbers: Int): LottoNumbers {
     return LottoNumbers(numbers.map { from(it) }.toSet())
 }
 
-fun createSimpleLotto(vararg numbers: Int): Lotto {
-    return Lotto(createSimpleLottoNumbers(*numbers))
-}
-
-fun createSimpleLotto(numbers: Set<Int>): Lotto {
-    return Lotto(createSimpleLottoNumbers(*numbers.toIntArray()))
+fun createSimpleLottoNumbers(numbers: Set<Int>): LottoNumbers {
+    return createSimpleLottoNumbers(*numbers.toIntArray())
 }

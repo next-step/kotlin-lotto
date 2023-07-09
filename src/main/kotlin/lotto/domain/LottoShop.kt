@@ -18,13 +18,11 @@ object LottoShop {
 }
 
 object LottoGenerator {
-    fun generate(): Lotto {
-        return Lotto(
-            (LottoNumber.LOTTO_NUMBER_MIN..LottoNumber.LOTTO_NUMBER_MAX)
-                .shuffled()
-                .take(Lotto.LOTTO_NUMBER_SIZE)
-                .sorted()
-                .let { LottoNumbers(it) },
-        )
+    fun generate(): LottoNumbers {
+        return (LottoNumber.LOTTO_NUMBER_MIN..LottoNumber.LOTTO_NUMBER_MAX)
+            .shuffled()
+            .take(LottoNumbers.LOTTO_NUMBERS_SIZE)
+            .sorted()
+            .let { LottoNumbers(it) }
     }
 }
