@@ -26,7 +26,8 @@ object LottoGenerator {
             (LottoNumber.LOTTO_NUMBER_MIN..LottoNumber.LOTTO_NUMBER_MAX)
                 .shuffled()
                 .take(Lotto.LOTTO_NUMBER_SIZE)
-                .sorted(),
+                .sorted()
+                .let { LottoNumbers(it) },
         )
     }
 }

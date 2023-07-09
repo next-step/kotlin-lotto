@@ -13,7 +13,7 @@ class LottoTest : FunSpec({
             setOf(1, 2, 3, 4, 5, 6, 7) to "로또 번호는 6개여야 합니다.",
         ) { (input, expected) ->
             shouldThrow<IllegalArgumentException> {
-                Lotto(LottoNumbers(input.map { LottoNumber.from(it) }.toSet()))
+                createSimpleLotto(input)
             }.message shouldBe expected
         }
     }
@@ -24,7 +24,7 @@ class LottoTest : FunSpec({
             setOf(1, 2, 3, 4, 5, 0) to "로또 번호는 1부터 45 사이여야 합니다.",
         ) { (input, expected) ->
             shouldThrow<IllegalArgumentException> {
-                Lotto(input)
+                createSimpleLotto(input)
             }.message shouldBe expected
         }
     }

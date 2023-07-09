@@ -1,6 +1,7 @@
 package lotto.domain
 
-class Lottos(val lottos: List<Lotto>) {
+@JvmInline
+value class Lottos(val lottos: List<Lotto>) {
     val size: Int
         get() = lottos.size
 

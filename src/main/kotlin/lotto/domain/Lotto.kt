@@ -1,9 +1,7 @@
 package lotto.domain
 
-class Lotto(val numbers: LottoNumbers) {
-    constructor(numbers: List<Int>) : this(LottoNumbers(numbers.map { LottoNumber.from(it) }.toSet()))
-    constructor(numbers: Set<Int>) : this(LottoNumbers(numbers.map { LottoNumber.from(it) }.toSet()))
-    constructor(vararg numbers: Int) : this(LottoNumbers(numbers.map { LottoNumber.from(it) }.toSet()))
+@JvmInline
+value class Lotto(val numbers: LottoNumbers) {
 
     override fun toString(): String {
         return numbers.numbers.joinToString(

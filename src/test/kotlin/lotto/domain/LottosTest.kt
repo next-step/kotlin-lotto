@@ -8,26 +8,26 @@ class LottosTest : FunSpec({
         val lottos = Lottos(
             listOf(
                 // 꽝
-                Lotto(1, 10, 11, 12, 13, 14), // 1개
-                Lotto(1, 10, 11, 12, 13, 14), // 1개
+                createSimpleLotto(1, 10, 11, 12, 13, 14), // 1개
+                createSimpleLotto(1, 10, 11, 12, 13, 14), // 1개
 
-                Lotto(1, 2, 10, 11, 12, 13), // 2개
+                createSimpleLotto(1, 2, 10, 11, 12, 13), // 2개
 
                 // 5등
-                Lotto(1, 2, 3, 10, 11, 12), // 3개
+                createSimpleLotto(1, 2, 3, 10, 11, 12), // 3개
 
                 // 4등
-                Lotto(1, 2, 3, 4, 10, 11), // 4개
+                createSimpleLotto(1, 2, 3, 4, 10, 11), // 4개
 
                 // 3등
-                Lotto(1, 2, 3, 4, 5, 10), // 5개
+                createSimpleLotto(1, 2, 3, 4, 5, 10), // 5개
 
                 // 2등
-                Lotto(1, 2, 3, 4, 5, 7), // 5개 + 보너스
+                createSimpleLotto(1, 2, 3, 4, 5, 7), // 5개 + 보너스
 
                 // 1등
-                Lotto(1, 2, 3, 4, 5, 6), // 6개
-                Lotto(1, 2, 3, 4, 5, 6), // 6개
+                createSimpleLotto(1, 2, 3, 4, 5, 6), // 6개
+                createSimpleLotto(1, 2, 3, 4, 5, 6), // 6개
             ),
         )
         val winningLotto = WinningLotto(createSimpleLottoNumbers(1, 2, 3, 4, 5, 6), 7)
