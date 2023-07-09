@@ -34,11 +34,11 @@ class LottosTest : FunSpec({
 
         val winningStatistics = lottos.match(winningLotto)
 
-        winningStatistics.winningStatistics[Rank.MISS] shouldBe 3
-        winningStatistics.winningStatistics[Rank.FIFTH] shouldBe 1
-        winningStatistics.winningStatistics[Rank.FOURTH] shouldBe 1
-        winningStatistics.winningStatistics[Rank.THIRD] shouldBe 1
-        winningStatistics.winningStatistics[Rank.SECOND] shouldBe 1
-        winningStatistics.winningStatistics[Rank.FIRST] shouldBe 2
+        winningStatistics.getCountByRank(Rank.MISS) shouldBe 3
+        winningStatistics.getCountByRank(Rank.FIFTH) shouldBe 1
+        winningStatistics.getCountByRank(Rank.FOURTH) shouldBe 1
+        winningStatistics.getCountByRank(Rank.THIRD) shouldBe 1
+        winningStatistics.getCountByRank(Rank.SECOND) shouldBe 1
+        winningStatistics.getCountByRank(Rank.FIRST) shouldBe 2
     }
 })

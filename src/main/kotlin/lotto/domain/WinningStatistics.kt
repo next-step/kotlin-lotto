@@ -1,12 +1,21 @@
 package lotto.domain
 
-class WinningStatistics(val winningStatistics: Map<Rank, Int>) {
-    fun calculateTotalPrizeMoney(): Long {
-        return winningStatistics
-            .map { (rank, count) ->
-                rank.times(count)
-            }
-            .sum()
+class WinningStatistics(private val winningRanks: Ranks) {
+    val winningCountByRank: Map<Rank, Int>
+        get() = winningRanks.ranks.groupingBy { it }.eachCount()
+
+    constructor(winningCountByRank: Map<Rank, Int>) : this(
+        winningCountByRank.map { (rank, count) -> List(count) { rank } }
+            .map { Ranks(it) }
+            .reduce { acc, ranks -> acc + ranks },
+    )
+
+    fun getCountByRank(rank: Rank): Int {
+        return winningCountByRank[rank] ?: 0
+    }
+
+    private fun calculateTotalPrizeMoney(): Long {
+        return winningRanks.calculateTotalPrizeMoney()
     }
 
     fun calculateProfitRate(purchaseMoney: PurchaseMoney): Double {

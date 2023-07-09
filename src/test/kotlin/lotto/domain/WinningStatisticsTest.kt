@@ -5,35 +5,6 @@ import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
 
 class WinningStatisticsTest : FunSpec({
-    context("총 수익금을 계산한다.") {
-        withData(
-            (
-                WinningStatistics(
-                    mapOf(
-                        Rank.MISS to 3,
-                        Rank.FIFTH to 1,
-                        Rank.FOURTH to 1,
-                        Rank.THIRD to 1,
-                        Rank.FIRST to 2,
-                    ),
-                ) to 4_001_555_000L
-                ),
-            (
-                WinningStatistics(
-                    mapOf(
-                        Rank.MISS to 3,
-                        Rank.FIFTH to 1,
-                        Rank.FOURTH to 0,
-                        Rank.THIRD to 0,
-                        Rank.FIRST to 0,
-                    ),
-                ) to 5000L
-                ),
-        ) { (winningStatistics, expectedTotalPrizeMoney) ->
-            winningStatistics.calculateTotalPrizeMoney() shouldBe expectedTotalPrizeMoney
-        }
-    }
-
     context("총 수익률을 계산한다.") {
         withData(
             (
