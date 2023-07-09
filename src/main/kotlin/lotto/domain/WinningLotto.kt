@@ -1,6 +1,6 @@
 package lotto.domain
 
-class WinningLotto(val lotto: Lotto, val bonusNumber: Int) {
+class WinningLotto(val lotto: Lotto, val bonusNumber: LottoNumber) {
     val size: Int
         get() = lotto.size
 

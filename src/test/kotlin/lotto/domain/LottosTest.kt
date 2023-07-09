@@ -30,7 +30,7 @@ class LottosTest : FunSpec({
                 createSimpleLottoNumbers(1, 2, 3, 4, 5, 6), // 6개
             ),
         )
-        val winningLotto = WinningLotto(createSimpleLottoNumbers(1, 2, 3, 4, 5, 6), 7)
+        val winningLotto = WinningLotto(createSimpleLottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber.from(7))
 
         val winningStatistics = lottos.match(winningLotto)
 

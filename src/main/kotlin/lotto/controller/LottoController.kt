@@ -1,6 +1,7 @@
 package lotto.controller
 
 import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 import lotto.domain.LottoShop
 import lotto.domain.Lottos
 import lotto.domain.PurchaseMoney
@@ -21,7 +22,7 @@ class LottoController {
     }
 
     fun inputWinningLotto(): WinningLotto {
-        return WinningLotto(Lotto(InputView.winningLotto()), InputView.bonusNumber())
+        return WinningLotto(Lotto(InputView.winningLotto()), LottoNumber.from(InputView.bonusNumber()))
     }
 
     fun purchaseLottos(): Pair<Lottos, PurchaseMoney> {

@@ -16,8 +16,8 @@ class Lotto(val numbers: Set<LottoNumber>) {
             .size
     }
 
-    fun match(number: Int): Boolean {
-        return numbers.contains(LottoNumber.from(number))
+    fun match(lottoNumber: LottoNumber): Boolean {
+        return numbers.contains(lottoNumber)
     }
 
     override fun toString(): String {
