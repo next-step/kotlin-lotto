@@ -1,14 +1,11 @@
 package lotto.domain
 
 class WinningStatistics(private val winningRanks: Ranks) {
-    val winningCountByRank: Map<Rank, Int>
-        get() = winningRanks.ranks.groupingBy { it }.eachCount()
+    val winningCountByRank: Map<Rank, Int> = calculateWinningCountByRank()
 
-    constructor(winningCountByRank: Map<Rank, Int>) : this(
-        winningCountByRank.map { (rank, count) -> List(count) { rank } }
-            .map { Ranks(it) }
-            .reduce { acc, ranks -> acc + ranks },
-    )
+    private fun calculateWinningCountByRank(): Map<Rank, Int> {
+        return winningRanks.ranks.groupingBy { it }.eachCount()
+    }
 
     private fun calculateTotalPrizeMoney(): Long {
         return winningRanks.calculateTotalPrizeMoney()

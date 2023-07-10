@@ -9,23 +9,29 @@ class WinningStatisticsTest : FunSpec({
         withData(
             (
                 WinningStatistics(
-                    mapOf(
-                        Rank.MISS to 3,
-                        Rank.FIFTH to 1,
-                        Rank.FOURTH to 1,
-                        Rank.THIRD to 1,
-                        Rank.FIRST to 2,
+                    Ranks(
+                        listOf(
+                            Rank.MISS,
+                            Rank.MISS,
+                            Rank.MISS,
+                            Rank.FIFTH,
+                            Rank.FOURTH,
+                            Rank.THIRD,
+                            Rank.FIRST,
+                            Rank.FIRST,
+                        ),
                     ),
                 ) to 1000L
                 ) to 4_001_555.0,
             (
                 WinningStatistics(
-                    mapOf(
-                        Rank.MISS to 3,
-                        Rank.FIFTH to 1,
-                        Rank.FOURTH to 0,
-                        Rank.THIRD to 0,
-                        Rank.FIRST to 0,
+                    Ranks(
+                        listOf(
+                            Rank.MISS,
+                            Rank.MISS,
+                            Rank.MISS,
+                            Rank.FIFTH,
+                        ),
                     ),
                 ) to 1000L
                 ) to 5.0,

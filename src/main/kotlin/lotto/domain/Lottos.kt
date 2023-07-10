@@ -10,9 +10,6 @@ value class Lottos(val lottos: List<Lotto>) {
     }
 
     fun match(winningLotto: WinningLotto): WinningStatistics {
-        return lottos.map { lotto -> winningLotto.rank(lotto) }
-            .groupingBy { it }
-            .eachCount()
-            .let { WinningStatistics(it) }
+        return WinningStatistics(Ranks(lottos.map { lotto -> winningLotto.rank(lotto) }))
     }
 }
