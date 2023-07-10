@@ -4,6 +4,10 @@ import java.math.BigDecimal
 
 @JvmInline
 value class Money(val value: BigDecimal) {
+    fun divide(other: BigDecimal): BigDecimal {
+        return value.divide(other)
+    }
+
     val intValue: Int
         get() = value.toInt()
 
