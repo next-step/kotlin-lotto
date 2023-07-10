@@ -28,7 +28,7 @@ object ResultView {
             Rank.FIRST,
         ).forEach {
             val prize = it.winningMoney
-            val matchCount = winningStatistics.winningCountByRank[it]
+            val matchCount = winningStatistics.winningCountByRank[it] ?: 0
             val bonusMessage = if (it == Rank.SECOND) ", 보너스 볼 일치" else " "
             println("${it.countOfMatch}개 일치$bonusMessage(${prize}원)- ${matchCount}개")
         }
