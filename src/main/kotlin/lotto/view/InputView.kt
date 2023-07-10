@@ -1,7 +1,7 @@
 package lotto.view
 
-import lotto.domain.LottoNumbers
 import lotto.domain.Money
+import lotto.dto.LottoNumbers
 
 object InputView {
     private const val REGEX = ","

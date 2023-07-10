@@ -14,7 +14,7 @@ fun main() {
         LottoTicket(it)
     }
     val autoLottoTickets: List<LottoTicket> = List(money.countAutoLotto(manualLottoCount)) {
-        LottoTicket(RandomNumbers.generateNumbers())
+        RandomNumbers.generateNumbers()
     }
 
     val lottoTickets = LottoTickets(money, manualLottoTickets + autoLottoTickets)
