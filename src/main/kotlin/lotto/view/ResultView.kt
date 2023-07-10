@@ -16,12 +16,10 @@ object ResultView {
         println()
     }
 
-    fun printStatisticsTitle() {
+    fun printWinningStatistics(winningStatistics: WinningStatistics) {
         println("당첨 통계")
         println("---------")
-    }
 
-    fun printWinningStatistics(winningStatistics: WinningStatistics) {
         listOf(
             Rank.FIFTH,
             Rank.FOURTH,

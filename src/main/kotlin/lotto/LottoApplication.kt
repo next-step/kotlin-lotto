@@ -15,8 +15,8 @@ fun main() {
 
     val winningStatistics = lottos.match(winningLotto)
 
-    ResultView.printStatisticsTitle()
     ResultView.printWinningStatistics(winningStatistics)
+
     val profitRate = winningStatistics.calculateProfitRate(purchaseMoney)
     ResultView.printProfitRate(profitRate)
 }
