@@ -1,6 +1,6 @@
 package lotto.util
 
-import lotto.dto.LottoNumbers
+import lotto.domain.LottoNumbers
 
 interface AutoNumbers {
     fun generateNumbers(): LottoNumbers

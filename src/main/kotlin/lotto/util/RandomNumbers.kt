@@ -1,6 +1,6 @@
 package lotto.util
 
-import lotto.dto.LottoNumbers
+import lotto.domain.LottoNumbers
 
 object RandomNumbers : AutoNumbers {
     private const val BOUND = 45

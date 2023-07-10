@@ -3,7 +3,6 @@ package lotto.domain
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
-import lotto.dto.LottoNumbers
 
 class LottoTicketsKoTest : StringSpec({
     val testLottoTicket = LottoTicket(LottoNumbers(listOf(1, 2, 3, 4, 5, 6)))
