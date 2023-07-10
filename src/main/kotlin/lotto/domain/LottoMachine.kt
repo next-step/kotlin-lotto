@@ -12,10 +12,8 @@ class LottoMachine(private val lottoGenerator: LottoGenerator = RandomLottoGener
             .run(::LottoTicket)
     }
 
-    fun toWinningLotto(winningNumbers: String): Lotto {
-        return winningNumbers.split(",")
-            .map { it.trim().toInt() }
-            .let { Lotto.from(it) }
+    fun toWinningLotto(winningNumbers: List<Int>): Lotto {
+        return winningNumbers.let { Lotto.from(it) }
     }
 
     companion object {
