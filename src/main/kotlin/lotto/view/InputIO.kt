@@ -7,13 +7,13 @@ import lotto.domain.ManualLottoCount
 import lotto.domain.PurchaseAmount
 
 class InputIO {
-    tailrec fun inputPurchaseAmount(inputString: String? = readlnOrNull()): PurchaseAmount {
-        return try {
-            PurchaseAmount(inputString?.toIntOrNull() ?: 0)
-        } catch (e: IllegalArgumentException) {
-            println(e.message)
-            inputPurchaseAmount()
-        }
+    tailrec fun inputPurchaseAmount(): PurchaseAmount {
+        val amount: Int = readlnOrNull()?.toIntOrNull() ?: 0
+        return runCatching { PurchaseAmount(amount) }
+            .getOrElse {
+                println(it.message)
+                inputPurchaseAmount()
+            }
     }
 
     fun inputManualLottoCount(inputString: String? = readlnOrNull()): ManualLottoCount {
