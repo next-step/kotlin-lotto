@@ -7,12 +7,12 @@ import lotto.domain.ManualLottoCount
 import lotto.domain.PurchaseAmount
 
 class InputIO {
-    fun inputPurchaseAmount(inputString: String? = readlnOrNull()): PurchaseAmount {
+    tailrec fun inputPurchaseAmount(inputString: String? = readlnOrNull()): PurchaseAmount {
         return try {
             PurchaseAmount(inputString?.toIntOrNull() ?: 0)
         } catch (e: IllegalArgumentException) {
             println(e.message)
-            this.inputPurchaseAmount()
+            inputPurchaseAmount()
         }
     }
 

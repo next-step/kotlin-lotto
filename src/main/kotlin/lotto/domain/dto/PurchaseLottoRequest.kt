@@ -4,7 +4,6 @@ import lotto.domain.LottoStore
 import lotto.domain.LottoTickets
 import lotto.domain.ManualLottoCount
 import lotto.domain.PurchaseAmount
-import lotto.view.ExceptionMessage
 
 class PurchaseLottoRequest(
     val purchaseAmount: PurchaseAmount,
@@ -13,6 +12,10 @@ class PurchaseLottoRequest(
 ) {
     init {
         val maxManualLottoCount = purchaseAmount.amount / LottoStore.LOTTO_PRICE
-        require(maxManualLottoCount >= manualLottoCount.count) { ExceptionMessage.EXCEEDED_MAXIMUM_AVAILABLE_PURCHASES.message }
+        require(maxManualLottoCount >= manualLottoCount.count) { EXCEEDED_MAXIMUM_AVAILABLE_PURCHASES }
+    }
+
+    companion object {
+        private const val EXCEEDED_MAXIMUM_AVAILABLE_PURCHASES = "최대 구매 가능 갯수를 넘었습니다."
     }
 }
