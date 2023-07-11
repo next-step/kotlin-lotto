@@ -2,14 +2,14 @@ package lotto.domain
 
 enum class Rank(
     val count: Int,
-    val winningAmount: Int,
+    val winningAmount: Money,
     val bonusRequired: Boolean = false
 ) {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000, true),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
-    FIFTH(3, 5_000),
+    FIRST(6, 2_000_000_000.toMoney()),
+    SECOND(5, 30_000_000.toMoney(), true),
+    THIRD(5, 1_500_000.toMoney()),
+    FOURTH(4, 50_000.toMoney()),
+    FIFTH(3, 5_000.toMoney()),
     ;
 
     companion object {
@@ -20,4 +20,8 @@ enum class Rank(
             return values().find { it.count == countOfMatch && !it.bonusRequired }
         }
     }
+}
+
+private fun Int.toMoney(): Money {
+    return Money.from(this)
 }

@@ -8,9 +8,6 @@ value class Money(val value: BigDecimal) {
         return value.divide(other)
     }
 
-    val intValue: Int
-        get() = value.toInt()
-
     init {
         require(value >= MIN_VALUE) { "금액은 ${MIN_VALUE}원 이상이어야 합니다. [$value]" }
     }

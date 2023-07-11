@@ -10,14 +10,14 @@ class MatchResultTest {
         val ranks = listOf(Rank.FIFTH)
         val matchResult = MatchResult(ranks)
 
-        matchResult.rateOfReturn(14000) shouldBe 0.35.toBigDecimal()
+        matchResult.rateOfReturn(Money.from(14000)) shouldBe 0.35.toBigDecimal()
     }
 
     @Test
     fun `당첨 결과가 없는 경우 수익률이 0이다`() {
         val matchResult = MatchResult()
 
-        matchResult.rateOfReturn(1000) shouldBe 0.00.toBigDecimal().setScale(2)
+        matchResult.rateOfReturn(Money.from(1000)) shouldBe 0.00.toBigDecimal().setScale(2)
     }
 
     @Test
