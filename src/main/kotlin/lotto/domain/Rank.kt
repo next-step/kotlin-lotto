@@ -9,6 +9,8 @@ enum class Rank(val countOfMatch: Int, val winningMoney: Long) {
     MISS(0, 0),
     ;
 
+    operator fun times(count: Int): Ranks = Ranks(List(count) { this })
+
     companion object {
         fun of(countOfMatch: Int, matchBonus: Boolean): Rank {
             if (countOfMatch == SECOND.countOfMatch && matchBonus) return SECOND

@@ -1,29 +1,18 @@
 package lotto.domain
 
-import lotto.service.LottoCalculator
+class WinningStatistics(private val winningRanks: Ranks) {
+    val winningCountByRank: Map<Rank, Int> = calculateWinningCountByRank()
 
-class WinningStatistics(val winningStatistics: Map<Rank, Int>) {
-    fun calculateTotalPrizeMoney(): Long {
-        return winningStatistics
-            .map { (rank, count) ->
-                LottoCalculator.calculatePrizeMoney(rank) * count
-            }
-            .sum()
+    private fun calculateWinningCountByRank(): Map<Rank, Int> {
+        return winningRanks.ranks.groupingBy { it }.eachCount()
     }
 
-    fun calculateProfitRate(purchaseMoney: Long): Double {
+    private fun calculateTotalPrizeMoney(): Long {
+        return winningRanks.calculateTotalPrizeMoney()
+    }
+
+    fun calculateProfitRate(purchaseMoney: PurchaseMoney): Double {
         val totalPrizeMoney = calculateTotalPrizeMoney()
-        return totalPrizeMoney.toDouble() / purchaseMoney.toDouble()
-    }
-
-    companion object {
-        fun of(lottos: Lottos, winningLotto: Lotto): WinningStatistics {
-            return WinningStatistics(
-                lottos.lottos
-                    .map { lotto -> Rank.of(lotto.countMatch(winningLotto), lotto.matchBonus(winningLotto)) }
-                    .groupBy { it }
-                    .mapValues { it.value.size },
-            )
-        }
+        return totalPrizeMoney / purchaseMoney.value.toDouble()
     }
 }

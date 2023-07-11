@@ -29,7 +29,8 @@
 [x] 총 수익률에 손해, 이익을 표시한다.
 
 ## Step3 - 로또(2등)
-https://edu.nextstep.camp/s/w5G1pCe7/ls/8HMuTNds
+과제: https://edu.nextstep.camp/s/w5G1pCe7/ls/8HMuTNds
+PR: https://github.com/next-step/kotlin-lotto/pull/793
 
 ### 기능 요구사항
 * 2등을 위해 추가 번호를 하나 더 추첨한다.
@@ -38,3 +39,12 @@ https://edu.nextstep.camp/s/w5G1pCe7/ls/8HMuTNds
 ### 기능 목록
 [x] 보너스 볼을 입력받는다.
 [x] 5개 일치하고 보너스 볼 일치 하면 상금이 30,000,000원이다.
+
+## Step4 - 로또(수동)
+https://edu.nextstep.camp/s/w5G1pCe7/ls/hJzXGPdL
+
+### 기능 요구사항
+* [x] 수동으로 구매할 로또 수를 입력받는다.
+* [x] 수동으로 구매할 로또 번호를 입력받는다.
+* [x] 수동으로 구매하고 남은 금액으로 자동로또를 구매한다.
+* [x] 수동으로 구매한 로또 번호와 자동으로 구매한 로또 번호를 합쳐서 출력한다.
