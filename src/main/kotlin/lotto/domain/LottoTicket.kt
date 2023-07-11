@@ -8,8 +8,8 @@ class LottoTicket(val lottos: List<Lotto>) {
         require(lottos.isNotEmpty()) { "로또는 1개 이상 구매해야 합니다." }
     }
 
-    fun match(winningLotto: Lotto): MatchResult {
-        return lottos.mapNotNull { it.match(winningLotto) }
+    fun match(winningLotto: WinningLotto): MatchResult {
+        return lottos.mapNotNull { winningLotto.match(it) }
             .run(::MatchResult)
     }
 

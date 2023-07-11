@@ -52,19 +52,19 @@ class LottoTest {
     @Test
     fun `로또를 비교해서 일치하는 숫자의 개수를 반환한다`() {
         val lotto = Lotto.from(listOf(1, 2, 3, 4, 5, 6))
-        val winningLotto = Lotto.from(listOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = WinningLotto.from(listOf(1, 2, 3, 4, 5, 6), 7)
 
-        val result = lotto.match(winningLotto)
+        val result = winningLotto.match(lotto)
 
-        result shouldBe Match.SIX
+        result shouldBe Rank.FIRST
     }
 
     @Test
     fun `일치하는 숫자가 3개 미만이면 null을 반환한다`() {
         val lotto = Lotto.from(listOf(1, 2, 3, 4, 5, 6))
-        val winningLotto = Lotto.from(listOf(1, 2, 7, 8, 9, 10))
+        val winningLotto = WinningLotto.from(listOf(1, 2, 7, 8, 9, 10), 11)
 
-        val result = lotto.match(winningLotto)
+        val result = winningLotto.match(lotto)
 
         result shouldBe null
     }

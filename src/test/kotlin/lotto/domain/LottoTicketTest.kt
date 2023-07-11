@@ -51,11 +51,11 @@ class LottoTicketTest {
             listOf(1, 2, 3, 4, 7, 8),
         )
         val lottoTicket = LottoTicket.from(lottos)
-        val winningLotto = Lotto.from(listOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = WinningLotto.from(listOf(1, 2, 3, 4, 5, 6), 7)
 
         val matches = lottoTicket.match(winningLotto)
 
-        matches shouldBe MatchResult(listOf(Match.SIX, Match.FIVE, Match.FOUR))
+        matches shouldBe MatchResult(listOf(Rank.FIRST, Rank.SECOND, Rank.FOURTH))
     }
 
     @Test
@@ -66,7 +66,7 @@ class LottoTicketTest {
             listOf(1, 2, 3, 4, 7, 8),
         )
         val lottoTicket = LottoTicket.from(lottos)
-        val winningLotto = Lotto.from(listOf(7, 8, 9, 10, 11, 12))
+        val winningLotto = WinningLotto.from(listOf(7, 8, 9, 10, 11, 12), 13)
 
         val matches = lottoTicket.match(winningLotto)
 

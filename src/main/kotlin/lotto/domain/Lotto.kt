@@ -6,9 +6,12 @@ data class Lotto(val numbers: List<LottoNumber>) {
         require(numbers.distinct().size == LOTTO_NUMBER_SIZE) { "로또 번호는 중복될 수 없습니다. [$numbers]" }
     }
 
-    fun match(lotto: Lotto): Match? {
-        val matchNumbers = numbers.intersect(lotto.numbers)
-        return Match.from(matchNumbers.size)
+    fun match(lotto: Lotto): Int {
+        return numbers.intersect(lotto.numbers).size
+    }
+
+    fun contains(lottoNumber: LottoNumber): Boolean {
+        return numbers.contains(lottoNumber)
     }
 
     companion object {

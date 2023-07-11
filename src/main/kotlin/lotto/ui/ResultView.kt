@@ -1,9 +1,9 @@
 package lotto.ui
 
 import lotto.domain.LottoTicket
-import lotto.domain.Match
 import lotto.domain.MatchResult
 import lotto.domain.Money
+import lotto.domain.Rank
 
 object ResultView {
     fun printPurchasedTicket(lottoTicket: LottoTicket) {
@@ -18,7 +18,7 @@ object ResultView {
     fun printStatistics(matchResult: MatchResult, money: Money) {
         println("당첨 통계")
         println("---------")
-        Match.values().forEach {
+        Rank.values().forEach {
             println("${it.count}개 일치 (${it.winningAmount}원) - ${matchResult.countOf(it)}개")
         }
         val rateOfReturn = matchResult.rateOfReturn(money.intValue)

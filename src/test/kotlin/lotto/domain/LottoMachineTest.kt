@@ -16,11 +16,11 @@ class LottoMachineTest {
     }
 
     @Test
-    fun `당첨 번호를 받아 당첨 로또를 생성한다`() {
+    fun `당첨 번호와 보너스 번호를 받아 당첨 로또를 생성한다`() {
         val lottoMachine = LottoMachine()
 
-        val winningLotto = lottoMachine.toWinningLotto(listOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = lottoMachine.toWinningLotto(listOf(1, 2, 3, 4, 5, 6), 7)
 
-        winningLotto shouldBe Lotto.from(listOf(1, 2, 3, 4, 5, 6))
+        winningLotto shouldBe WinningLotto.from(listOf(1, 2, 3, 4, 5, 6), 7)
     }
 }

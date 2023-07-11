@@ -14,7 +14,8 @@ fun main() {
 
     val winningNumbers = InputView.requestWinningNumbers()
     val numbers = Splitter().toNumbers(winningNumbers)
-    val winningLotto = lottoMachine.toWinningLotto(numbers)
+    val bonusNumber = InputView.requestBonusNumber()
+    val winningLotto = lottoMachine.toWinningLotto(numbers, bonusNumber)
 
     val matches = lottoTicket.match(winningLotto)
     ResultView.printStatistics(matches, money)
