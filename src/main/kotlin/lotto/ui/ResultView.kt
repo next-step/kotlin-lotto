@@ -28,9 +28,9 @@ object ResultView {
 
     private fun printRank(it: Rank, matchResult: MatchResult) {
         if (it == Rank.SECOND) {
-            println("${it.count}개 일치, 보너스 볼 일치 (${it.winningAmount}원) - ${matchResult.countOf(it)}개")
+            println("${it.count}개 일치, 보너스 볼 일치 (${it.winningAmount.value}원) - ${matchResult.countOf(it)}개")
             return
         }
-        println("${it.count}개 일치 (${it.winningAmount}원) - ${matchResult.countOf(it)}개")
+        println("${it.count}개 일치 (${it.winningAmount.value}원) - ${matchResult.countOf(it)}개")
     }
 }
