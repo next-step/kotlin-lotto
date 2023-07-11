@@ -4,17 +4,19 @@ import java.math.BigDecimal
 
 @JvmInline
 value class Money(val value: BigDecimal) {
-    fun divide(other: BigDecimal): BigDecimal {
-        return value.divide(other)
+    fun divide(other: Money): BigDecimal {
+        return value.divide(other.value)
     }
 
-    init {
-        require(value >= MIN_VALUE) { "금액은 ${MIN_VALUE}원 이상이어야 합니다. [$value]" }
+    operator fun compareTo(other: Money): Int {
+        return value.compareTo(other.value)
+    }
+
+    operator fun rem(other: Money): BigDecimal {
+        return value.remainder(other.value)
     }
 
     companion object {
-        private val MIN_VALUE = 1_000.toBigDecimal()
-
         fun from(value: Int): Money {
             return Money(value.toBigDecimal())
         }
