@@ -7,7 +7,7 @@ import lotto.domain.Rank
 
 object ResultView {
     fun printPurchasedTicket(lottoTicket: LottoTicket) {
-        println("${lottoTicket.countOfLotto} 개 구매했습니다")
+        println("수동으로 ${lottoTicket.countOfManualLotto}장, 자동으로 ${lottoTicket.countOfAutoLotto}개 구매했습니다")
         lottoTicket.lottos.map { lotto ->
             lotto.numbers.map { it.value }
         }.forEach {

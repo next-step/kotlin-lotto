@@ -5,8 +5,6 @@ data class LottoTicket(val lottos: List<Lotto>) {
         get() = lottos.count { it.type == LottoType.MANUAL }
     val countOfAutoLotto: Int
         get() = lottos.count { it.type == LottoType.AUTO }
-    val countOfLotto: Int
-        get() = lottos.size
 
     init {
         require(lottos.isNotEmpty()) { "로또는 1개 이상 구매해야 합니다." }
