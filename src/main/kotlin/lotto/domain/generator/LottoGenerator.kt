@@ -1,8 +1,8 @@
 package lotto.domain.generator
 
-import lotto.domain.Lotto
+import lotto.domain.TypeLotto
 
 fun interface LottoGenerator {
 
-    fun get(): Lotto
+    fun get(): TypeLotto
 }

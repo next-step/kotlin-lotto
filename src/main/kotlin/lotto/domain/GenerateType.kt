@@ -1,6 +1,6 @@
 package lotto.domain
 
-enum class LottoType {
+enum class GenerateType {
     AUTO,
     MANUAL,
 }
