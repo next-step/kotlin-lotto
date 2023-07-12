@@ -7,13 +7,17 @@ import lotto.ui.ResultView
 import lotto.util.Splitter
 
 fun main() {
+    val splitter = Splitter()
+
     val money = Money.from(InputView.requestMoney())
+    val manualLottos = InputView.requestManualLottos()
     val lottoMachine = LottoMachine()
-    val lottoTicket = lottoMachine.generateTicket(money)
+    val splitManualLottos = manualLottos.map { splitter.toNumbers(it) }
+    val lottoTicket = lottoMachine.generateTicket2(money, splitManualLottos)
     ResultView.printPurchasedTicket(lottoTicket)
 
     val winningNumbers = InputView.requestWinningNumbers()
-    val numbers = Splitter().toNumbers(winningNumbers)
+    val numbers = splitter.toNumbers(winningNumbers)
     val bonusNumber = InputView.requestBonusNumber()
     val winningLotto = lottoMachine.toWinningLotto(numbers, bonusNumber)
 
