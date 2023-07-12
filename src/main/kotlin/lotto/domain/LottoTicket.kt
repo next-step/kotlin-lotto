@@ -1,6 +1,10 @@
 package lotto.domain
 
 data class LottoTicket(val lottos: List<Lotto>) {
+    val countOfManualLotto: Int
+        get() = lottos.count { it.type == LottoType.MANUAL }
+    val countOfAutoLotto: Int
+        get() = lottos.count { it.type == LottoType.AUTO }
     val countOfLotto: Int
         get() = lottos.size
 
