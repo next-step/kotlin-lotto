@@ -14,9 +14,9 @@ class LottoTicketTest {
     @Test
     fun `로또 티켓은 자동 로또 수와 수동 로또 수를 갖는다`() {
         val lottos = listOf(
-            TypeLotto.of(listOf(1, 2, 3, 4, 5, 6), GenerateType.AUTO),
-            TypeLotto.of(listOf(1, 2, 3, 4, 5, 6), GenerateType.AUTO),
-            TypeLotto.of(listOf(1, 2, 3, 4, 5, 6), GenerateType.MANUAL),
+            Lotto.of(listOf(1, 2, 3, 4, 5, 6), GenerationType.AUTO),
+            Lotto.of(listOf(1, 2, 3, 4, 5, 6), GenerationType.AUTO),
+            Lotto.of(listOf(1, 2, 3, 4, 5, 6), GenerationType.MANUAL),
         )
 
         val lottoTicket = LottoTicket(lottos)
@@ -30,9 +30,9 @@ class LottoTicketTest {
     @Test
     fun `로또 티켓은 당첨 로또를 받아 당첨 결과를 반환한다`() {
         val lottos = listOf(
-            TypeLotto.of(listOf(1, 2, 3, 4, 5, 6), GenerateType.AUTO),
-            TypeLotto.of(listOf(1, 2, 3, 4, 5, 6), GenerateType.AUTO),
-            TypeLotto.of(listOf(1, 2, 3, 4, 5, 7), GenerateType.MANUAL),
+            Lotto.of(listOf(1, 2, 3, 4, 5, 6), GenerationType.AUTO),
+            Lotto.of(listOf(1, 2, 3, 4, 5, 6), GenerationType.AUTO),
+            Lotto.of(listOf(1, 2, 3, 4, 5, 7), GenerationType.MANUAL),
         )
         val lottoTicket = LottoTicket(lottos)
         val winningLotto = WinningLotto.from(listOf(1, 2, 3, 4, 5, 6), 7)

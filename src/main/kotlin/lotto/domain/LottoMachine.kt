@@ -13,7 +13,7 @@ class LottoMachine(private val lottoGenerator: LottoGenerator = RandomLottoGener
         require(money >= MIN_MONEY) { "금액은 ${MIN_MONEY}원 이상이어야 합니다. [${money.value}]" }
         require(money % MONEY_UNIT == BigDecimal.ZERO) { "금액은 ${MONEY_UNIT}원 단위로 입력해야 합니다. [${money.value}]" }
 
-        val manualLottos = lottos.map { TypeLotto.of(it, GenerateType.MANUAL) }
+        val manualLottos = lottos.map { Lotto.of(it, GenerationType.MANUAL) }
         val purchaseCount = money.divide(MONEY_UNIT).toInt()
         val autoLottos = List(purchaseCount - manualLottos.size) { lottoGenerator.get() }
 

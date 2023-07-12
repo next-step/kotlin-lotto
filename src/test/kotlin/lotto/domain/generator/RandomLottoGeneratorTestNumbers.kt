@@ -3,7 +3,7 @@ package lotto.domain.generator
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import org.junit.jupiter.api.Test
 
-class RandomLottoGeneratorTest {
+class RandomLottoGeneratorTestNumbers {
 
     @Test
     fun `랜덤 번호로 로또를 생성한다`() {

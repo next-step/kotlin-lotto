@@ -1,17 +1,17 @@
 package lotto.domain
 
-data class LottoTicket(val typeLottos: List<TypeLotto>) {
+data class LottoTicket(val lottos: List<Lotto>) {
     val countOfManualLotto: Int
-        get() = typeLottos.count { it.type == GenerateType.MANUAL }
+        get() = lottos.count { it.type == GenerationType.MANUAL }
     val countOfAutoLotto: Int
-        get() = typeLottos.count { it.type == GenerateType.AUTO }
+        get() = lottos.count { it.type == GenerationType.AUTO }
 
     init {
-        require(typeLottos.isNotEmpty()) { "로또는 1개 이상 구매해야 합니다." }
+        require(lottos.isNotEmpty()) { "로또는 1개 이상 구매해야 합니다." }
     }
 
     fun match(winningLotto: WinningLotto): MatchResult {
-        return typeLottos.mapNotNull { winningLotto.match(it.lotto) }
+        return lottos.mapNotNull { winningLotto.match(it.lottoNumbers) }
             .run(::MatchResult)
     }
 }
