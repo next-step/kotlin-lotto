@@ -17,6 +17,10 @@ class LottoMachine(private val lottoGenerator: LottoGenerator = RandomLottoGener
         return WinningLotto.from(winningNumbers, bonusNumber)
     }
 
+    fun generateTicket2(money: Money, manualLottos: List<List<Int>>): LottoTicket {
+        TODO("Not yet implemented")
+    }
+
     companion object {
         private val MONEY_UNIT = Money.from(1_000)
         private val MIN_MONEY = Money.from(1_000)
