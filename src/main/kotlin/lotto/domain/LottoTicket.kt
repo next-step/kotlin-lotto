@@ -12,10 +12,4 @@ data class LottoTicket(val lottos: List<Lotto>) {
         return lottos.mapNotNull { winningLotto.match(it) }
             .run(::MatchResult)
     }
-
-    companion object {
-        fun from(lottos: List<List<Int>>): LottoTicket {
-            return LottoTicket(lottos.map { Lotto.of(it) })
-        }
-    }
 }
