@@ -6,16 +6,6 @@ import org.junit.jupiter.api.Test
 
 class LottoMachineTest {
     @Test
-    fun `금액을 받아 로또 티켓을 생성한다`() {
-        val lottoGenerator = generatorWithParameter(listOf(1, 2, 3, 4, 5, 6))
-        val lottoMachine = LottoMachine(lottoGenerator)
-
-        val lottoTicket = lottoMachine.generateTicket(Money.from(1000))
-
-        lottoTicket shouldBe LottoTicket(listOf(Lotto.from(listOf(1, 2, 3, 4, 5, 6))))
-    }
-
-    @Test
     fun `당첨 번호와 보너스 번호를 받아 당첨 로또를 생성한다`() {
         val lottoMachine = LottoMachine()
 
@@ -35,7 +25,7 @@ class LottoMachineTest {
         val lottoMachine = LottoMachine(lottoGenerator)
         val money = Money.from(3000)
 
-        val lottoTicket = lottoMachine.generateTicket2(money, manualLottos)
+        val lottoTicket = lottoMachine.generateTicket(money, manualLottos)
 
         val expectedLottos = manualLottos + listOf(autoLotto)
         lottoTicket shouldBe LottoTicket(expectedLottos.map { Lotto.from(it) })

@@ -10,10 +10,10 @@ fun main() {
     val splitter = Splitter()
 
     val money = Money.from(InputView.requestMoney())
-    val manualLottos = InputView.requestManualLottos()
+    val manualLottoStrs = InputView.requestManualLottos()
     val lottoMachine = LottoMachine()
-    val splitManualLottos = manualLottos.map { splitter.toNumbers(it) }
-    val lottoTicket = lottoMachine.generateTicket2(money, splitManualLottos)
+    val manualLottos = manualLottoStrs.map { splitter.toNumbers(it) }
+    val lottoTicket = lottoMachine.generateTicket(money, manualLottos)
     ResultView.printPurchasedTicket(lottoTicket)
 
     val winningNumbers = InputView.requestWinningNumbers()
