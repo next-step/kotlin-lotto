@@ -20,7 +20,7 @@ data class Lotto(
     companion object {
         const val LOTTO_NUMBER_SIZE = 6
 
-        fun of(numbers: List<Int>, type: LottoType = LottoType.AUTO): Lotto {
+        fun of(numbers: List<Int>, type: LottoType): Lotto {
             return Lotto(numbers.map { LottoNumber(it) }, type)
         }
     }
