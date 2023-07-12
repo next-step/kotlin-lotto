@@ -17,8 +17,15 @@ class LottoMachine(private val lottoGenerator: LottoGenerator = RandomLottoGener
         return WinningLotto.from(winningNumbers, bonusNumber)
     }
 
-    fun generateTicket2(money: Money, manualLottos: List<List<Int>>): LottoTicket {
-        TODO("Not yet implemented")
+    fun generateTicket2(money: Money, lottos: List<List<Int>>): LottoTicket {
+        require(money >= MIN_MONEY) { "금액은 ${MIN_MONEY}원 이상이어야 합니다. [${money.value}]" }
+        require(money % MONEY_UNIT == BigDecimal.ZERO) { "금액은 ${MONEY_UNIT}원 단위로 입력해야 합니다. [${money.value}]" }
+
+        val manualLottos = lottos.map { Lotto.from(it) }
+        val purchaseCount = money.divide(MONEY_UNIT).toInt()
+        val autoLottos = List(purchaseCount - manualLottos.size) { lottoGenerator.get() }
+
+        return LottoTicket(manualLottos + autoLottos)
     }
 
     companion object {

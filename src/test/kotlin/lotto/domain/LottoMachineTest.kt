@@ -37,8 +37,7 @@ class LottoMachineTest {
 
         val lottoTicket = lottoMachine.generateTicket2(money, manualLottos)
 
-        val expectedLottos = manualLottos.toMutableList()
-        expectedLottos.add(autoLotto)
+        val expectedLottos = manualLottos + listOf(autoLotto)
         lottoTicket shouldBe LottoTicket(expectedLottos.map { Lotto.from(it) })
     }
 }
