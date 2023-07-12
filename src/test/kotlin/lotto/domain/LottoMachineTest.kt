@@ -1,5 +1,6 @@
 package lotto.domain
 
+import io.kotest.core.spec.style.shouldSpec
 import io.kotest.matchers.shouldBe
 import lotto.fixture.generatorWithParameter
 import org.junit.jupiter.api.Test
@@ -27,7 +28,9 @@ class LottoMachineTest {
 
         val lottoTicket = lottoMachine.generateTicket(money, manualLottos)
 
-        val expectedLottos = manualLottos + listOf(autoLotto)
-        lottoTicket shouldBe LottoTicket(expectedLottos.map { Lotto.of(it) })
+        shouldSpec {
+            lottoTicket.countOfAutoLotto shouldBe 1
+            lottoTicket.countOfManualLotto shouldBe 2
+        }
     }
 }
