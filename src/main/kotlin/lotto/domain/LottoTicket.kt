@@ -15,7 +15,7 @@ data class LottoTicket(val lottos: List<Lotto>) {
 
     companion object {
         fun from(lottos: List<List<Int>>): LottoTicket {
-            return LottoTicket(lottos.map { Lotto.from(it) })
+            return LottoTicket(lottos.map { Lotto.of(it) })
         }
     }
 }

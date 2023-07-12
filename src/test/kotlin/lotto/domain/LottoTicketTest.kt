@@ -14,9 +14,9 @@ class LottoTicketTest {
     fun `숫자 목록 여러개를 받아 로또 티켓을 생성한다`() {
         val expected = LottoTicket(
             listOf(
-                Lotto.from(listOf(1, 2, 3, 4, 5, 6)),
-                Lotto.from(listOf(1, 2, 3, 4, 5, 6)),
-                Lotto.from(listOf(1, 2, 3, 4, 5, 6)),
+                Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
+                Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
+                Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
             )
         )
         val lottos = listOf(

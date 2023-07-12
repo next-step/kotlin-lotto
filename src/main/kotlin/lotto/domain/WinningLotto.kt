@@ -17,7 +17,7 @@ data class WinningLotto(
     companion object {
         fun from(winningNumbers: List<Int>, bonusNumber: Int): WinningLotto {
             return WinningLotto(
-                Lotto.from(winningNumbers),
+                Lotto.of(winningNumbers),
                 LottoNumber(bonusNumber)
             )
         }
