@@ -20,12 +20,11 @@ enum class Rank(
         }
 
         private fun rank(matchCount: Int, isBonus: Boolean): Rank {
-            if (matchCount == 5) {
-                if (isBonus) return SECOND
-                return THIRD
+            return when {
+                matchCount == 5 && isBonus -> SECOND
+                matchCount == 5 -> THIRD
+                else -> Rank.values().firstOrNull { it.matchCount == matchCount } ?: MISS
             }
-
-            return Rank.values().firstOrNull { it.matchCount == matchCount } ?: MISS
         }
     }
 }

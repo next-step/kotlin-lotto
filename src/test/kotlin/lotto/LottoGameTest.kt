@@ -58,5 +58,43 @@ internal class LottoGameTest : BehaviorSpec({
                 actual.result.values.forAll { it shouldBe 1 }
             }
         }
+
+        When("수동 로또가 전체 가격보다 많으면") {
+            val manualLottos = LottoList(
+                listOf(
+                    Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
+                    Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
+                    Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
+                    Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
+                    Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
+                    Lotto.of(listOf(1, 2, 3, 4, 5, 6))
+                )
+            )
+            val purchasePrice = 5000
+            Then("IllegalArgumentException 발생") {
+                shouldThrow<IllegalArgumentException> {
+                    LottoGame(purchasePrice = purchasePrice, lottoList = manualLottos)
+                }
+            }
+        }
+
+        When("수동 로또가 전체 가격보다 적으면") {
+            val manualLottos = LottoList(
+                listOf(
+                    Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
+                    Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
+                    Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
+                    Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
+                    Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
+                )
+            )
+            val purchasePrice = 10000
+            val lottoGame = LottoGame(purchasePrice = purchasePrice, lottoList = manualLottos)
+            val actual = lottoGame.lottoList.size()
+            val expect = purchasePrice / LottoGame.LOTTO_PRICE
+            Then("나머지 금액만큼 자동 로또 생성") {
+                actual shouldBe expect
+            }
+        }
     }
 })
