@@ -1,16 +1,16 @@
 package lotto.view
 
-import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.LottoRank
+import lotto.domain.LottoTickets
 
 class ResultView {
-    fun showLottoTicketQuantity(lottoTicketQuantity: Int) {
-        println("${lottoTicketQuantity}개를 구매했습니다.")
+    fun showLottoTicketQuantity(autoLottoTicketQuantity: Int, manualLottoTicketQuantity: Int) {
+        println("수동으로 ${manualLottoTicketQuantity}장, 자동으로 ${autoLottoTicketQuantity}장을 구매했습니다.")
     }
 
-    fun showLottoTickets(lottoTickets: List<Lotto>) {
-        lottoTickets.forEach {
+    fun showLottoTickets(lottoTickets: LottoTickets) {
+        lottoTickets.lottoTickets.forEach {
             printLottoNumbers(it.numbers)
         }
     }

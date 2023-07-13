@@ -1,20 +1,30 @@
 package lotto.domain
 
+import lotto.domain.dto.PurchaseLottoRequest
+import lotto.domain.dto.PurchaseLottoResponse
+
 class LottoStore(
     private val lottoGenerator: LottoGenerator
 ) {
-    fun purchaseLottoTickets(purchaseAmount: Int): List<Lotto> {
-        require(purchaseAmount >= 1000) { AMOUNT_IS_INSUFFICIENT }
+    fun purchaseLottoTickets(purchaseLottoRequest: PurchaseLottoRequest): PurchaseLottoResponse {
+        val autoLottoTicketQuantity = getAutoLottoTicketQuantity(
+            purchaseLottoRequest.purchaseAmount.amount,
+            purchaseLottoRequest.manualLottoCount
+        )
+        val autoLottoTickets = List(autoLottoTicketQuantity) { lottoGenerator.createLotto() }
 
-        return List(getLottoTicketQuantity(purchaseAmount)) { lottoGenerator.createLotto() }
+        return PurchaseLottoResponse(
+            autoLottoTicketQuantity,
+            purchaseLottoRequest.manualLottoCount.count,
+            LottoTickets(purchaseLottoRequest.manualLottoTickets.lottoTickets + autoLottoTickets)
+        )
     }
 
-    private fun getLottoTicketQuantity(purchaseAmount: Int): Int {
-        return purchaseAmount / LOTTO_PRICE
+    private fun getAutoLottoTicketQuantity(purchaseAmount: Int, manualLottoCount: ManualLottoCount): Int {
+        return (purchaseAmount / LOTTO_PRICE) - manualLottoCount.count
     }
 
     companion object {
-        private const val AMOUNT_IS_INSUFFICIENT = "1000원 이상의 금액을 입력해 주세요"
-        private const val LOTTO_PRICE = 1000
+        const val LOTTO_PRICE = 1000
     }
 }

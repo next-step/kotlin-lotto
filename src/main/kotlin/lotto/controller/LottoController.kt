@@ -1,12 +1,15 @@
 package lotto.controller
 
 import lotto.domain.AutoLottoGenerator
-import lotto.domain.Lotto
-import lotto.domain.LottoNumber
 import lotto.domain.LottoRank
 import lotto.domain.LottoStatisticService
 import lotto.domain.LottoStore
+import lotto.domain.LottoTickets
+import lotto.domain.ManualLottoCount
+import lotto.domain.PurchaseAmount
+import lotto.domain.WinningLotto
 import lotto.domain.dto.ProfitRateRequest
+import lotto.domain.dto.PurchaseLottoRequest
 import lotto.domain.dto.StatisticsRequest
 import lotto.view.InputIO
 import lotto.view.InputMessage
@@ -20,26 +23,45 @@ class LottoController {
     private val lottoStore = LottoStore(AutoLottoGenerator())
     private val resultView = ResultView()
 
-    fun inputPurchaseAmount(): Int {
+    fun inputPurchaseAmount(): PurchaseAmount {
         inputView.show(InputMessage.PURCHASE_AMOUNT)
         return inputIO.inputPurchaseAmount()
     }
 
-    fun purchaseLottoTickets(purchaseAmount: Int): List<Lotto> {
-        val lottoTickets = lottoStore.purchaseLottoTickets(purchaseAmount)
-        resultView.showLottoTicketQuantity(lottoTickets.size)
-        resultView.showLottoTickets(lottoTickets)
-        return lottoTickets
+    fun inputManualLottoCount(): ManualLottoCount {
+        inputView.show(InputMessage.MANUAL_LOTTO_COUNT)
+        return inputIO.inputManualLottoCount()
     }
 
-    fun inputWinningNumber(): List<LottoNumber> {
+    fun inputManualLottoNumbers(manualLottoCount: ManualLottoCount): LottoTickets {
+        inputView.show(InputMessage.MANUAL_LOTTO_NUMBERS)
+        return inputIO.inputManualLottoNumbers(manualLottoCount)
+    }
+
+    fun createPurchaseLottoRequest(purchaseAmount: PurchaseAmount, manualLottoCount: ManualLottoCount, manualLottoTickets: LottoTickets): PurchaseLottoRequest {
+        return try {
+            PurchaseLottoRequest(purchaseAmount, manualLottoCount, manualLottoTickets)
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            this.createPurchaseLottoRequest(purchaseAmount, this.inputManualLottoCount(), manualLottoTickets)
+        }
+    }
+
+    fun purchaseLottoTickets(purchaseLottoRequest: PurchaseLottoRequest): LottoTickets {
+        val purchaseLottoResponse = lottoStore.purchaseLottoTickets(purchaseLottoRequest)
+        resultView.showLottoTicketQuantity(purchaseLottoResponse.autoLottoCount, purchaseLottoResponse.manualLottoCount)
+        resultView.showLottoTickets(purchaseLottoResponse.lottoTickets)
+        return purchaseLottoResponse.lottoTickets
+    }
+
+    fun inputWinningLotto(): WinningLotto {
         inputView.show(InputMessage.WINNING_NUMBERS)
-        return inputIO.inputWinningNumber()
-    }
+        val winningLottoNumber = inputIO.inputLottoNumber()
 
-    fun inputBonusNumber(): LottoNumber {
         inputView.show(InputMessage.BONUS_NUMBER)
-        return inputIO.inputBonusNumber()
+        val bonusNumber = inputIO.inputBonusNumber()
+
+        return WinningLotto(winningLottoNumber, bonusNumber)
     }
 
     fun getStatistics(req: StatisticsRequest): List<LottoRank> {
