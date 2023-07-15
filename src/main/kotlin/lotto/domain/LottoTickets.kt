@@ -1,19 +1,8 @@
 package lotto.domain
 
 import lotto.dto.WinStats
-import lotto.util.AutoNumbers
-import lotto.util.RandomNumbers
 
-class LottoTickets(private val money: Money) {
-    var lottoTickets: List<LottoTicket> = List(money.countLotto()) {
-        LottoTicket(RandomNumbers.generateNumbers())
-    }
-
-    constructor(money: Money, autoNumbers: AutoNumbers) : this(money) {
-        this.lottoTickets = List(money.countLotto()) {
-            LottoTicket(autoNumbers.generateNumbers())
-        }
-    }
+class LottoTickets(private val money: Money, val lottoTickets: List<LottoTicket>) {
 
     fun getWinStats(winNumbers: LottoTicket, bonus: Int): WinStats {
         val matchMap: Map<WinResult, Int> = lottoTickets.map {

@@ -11,6 +11,14 @@ value class Money(val value: Int) {
         return value / MIN_PRICE
     }
 
+    fun countAutoLotto(countManualLotto: Int): Int {
+        val count = countLotto() - countManualLotto
+        if (count < 0) {
+            throw IllegalArgumentException()
+        }
+        return count
+    }
+
     companion object {
         private const val MIN_PRICE = 1000
         private const val MAX_PRICE = 100000
