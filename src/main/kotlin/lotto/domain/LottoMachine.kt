@@ -6,19 +6,19 @@ import java.math.BigDecimal
 
 class LottoMachine(private val lottoGenerator: LottoGenerator = RandomLottoGenerator()) {
     fun generateTicket(money: Money): LottoTicket {
-        require(money.value % UNIT == BigDecimal.ZERO) { "금액은 ${UNIT}원 단위로 입력해야 합니다. [$money]" }
-        val purchaseCount = (money.value / UNIT).toInt()
+        require(money >= MIN_MONEY) { "금액은 ${MIN_MONEY}원 이상이어야 합니다. [${money.value}]" }
+        require(money % MONEY_UNIT == BigDecimal.ZERO) { "금액은 ${MONEY_UNIT}원 단위로 입력해야 합니다. [${money.value}]" }
+        val purchaseCount = money.divide(MONEY_UNIT).toInt()
         return List(purchaseCount) { lottoGenerator.get() }
             .run(::LottoTicket)
     }
 
-    fun toWinningLotto(winningNumbers: String): Lotto {
-        return winningNumbers.split(",")
-            .map { it.trim().toInt() }
-            .let { Lotto.from(it) }
+    fun toWinningLotto(winningNumbers: List<Int>, bonusNumber: Int): WinningLotto {
+        return WinningLotto.from(winningNumbers, bonusNumber)
     }
 
     companion object {
-        private val UNIT = 1_000.toBigDecimal()
+        private val MONEY_UNIT = Money.from(1_000)
+        private val MIN_MONEY = Money.from(1_000)
     }
 }
