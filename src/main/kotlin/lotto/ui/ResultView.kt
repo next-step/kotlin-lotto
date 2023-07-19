@@ -1,8 +1,8 @@
 package lotto.ui
 
+import lotto.domain.GameMoney
 import lotto.domain.LottoTicket
 import lotto.domain.MatchResult
-import lotto.domain.GameMoney
 import lotto.domain.Rank
 
 object ResultView {
