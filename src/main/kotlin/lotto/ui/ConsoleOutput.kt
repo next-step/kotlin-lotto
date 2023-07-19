@@ -5,8 +5,8 @@ import lotto.domain.LottoTicket
 import lotto.domain.MatchResult
 import lotto.domain.rank.Rank
 
-object ResultView {
-    fun printPurchasedTicket(lottoTicket: LottoTicket) {
+class ConsoleOutput : LottoGameOutput {
+    override fun printPurchasedTicket(lottoTicket: LottoTicket) {
         println("수동으로 ${lottoTicket.countOfManualLotto}장, 자동으로 ${lottoTicket.countOfAutoLotto}개 구매했습니다")
         lottoTicket.lottos.map { lotto ->
             lotto.numbers.map { it.value }
@@ -15,13 +15,13 @@ object ResultView {
         }
     }
 
-    fun printStatistics(matchResult: MatchResult, gameMoney: GameMoney) {
+    override fun printStatistics(matches: MatchResult, gameMoney: GameMoney) {
         println("당첨 통계")
         println("---------")
         Rank.values().forEach {
-            printRank(it, matchResult)
+            printRank(it, matches)
         }
-        val rateOfReturn = matchResult.rateOfReturn(gameMoney)
+        val rateOfReturn = matches.rateOfReturn(gameMoney)
         val benefitOutcome = BenefitOutcome.from(rateOfReturn)
         println("총 수익률은 $rateOfReturn 입니다.(기준이 1이기 때문에 결과적으로 ${benefitOutcome.description}라는 의미임)")
     }
