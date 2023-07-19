@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.rank
 
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.params.ParameterizedTest

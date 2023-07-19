@@ -3,6 +3,7 @@ package lotto.domain
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
+import lotto.domain.rank.Rank
 import org.junit.jupiter.api.Test
 
 class LottoNumbersTest {

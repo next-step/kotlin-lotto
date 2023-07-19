@@ -1,6 +1,7 @@
 package lotto.domain
 
 import io.kotest.matchers.shouldBe
+import lotto.domain.rank.Rank
 import org.junit.jupiter.api.Test
 
 class MatchResultTest {

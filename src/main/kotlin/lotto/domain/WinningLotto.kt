@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.domain.rank.Rank
+
 data class WinningLotto(
     private val lottoNumbers: LottoNumbers,
     private val bonusNumber: LottoNumber

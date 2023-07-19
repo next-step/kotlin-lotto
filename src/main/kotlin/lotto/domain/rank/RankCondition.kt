@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.rank
 
 class RankCondition(val count: Int, private val bonusCondition: BonusCondition) {
     fun match(countOfMatch: Int, bonusMatched: Boolean): Boolean {

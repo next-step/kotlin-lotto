@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.rank
 
 enum class BonusCondition(val match: (Boolean) -> Boolean) {
     NEED_MATCH({ it }),

@@ -1,6 +1,7 @@
-package lotto.domain
+package lotto.domain.rank
 
-import lotto.domain.BonusCondition.*
+import lotto.domain.GameMoney
+import lotto.domain.rank.BonusCondition.*
 
 enum class Rank(
     val winningAmount: GameMoney,

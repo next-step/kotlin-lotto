@@ -3,7 +3,7 @@ package lotto.ui
 import lotto.domain.GameMoney
 import lotto.domain.LottoTicket
 import lotto.domain.MatchResult
-import lotto.domain.Rank
+import lotto.domain.rank.Rank
 
 object ResultView {
     fun printPurchasedTicket(lottoTicket: LottoTicket) {

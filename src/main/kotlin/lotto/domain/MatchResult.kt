@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.domain.rank.Rank
 import java.math.BigDecimal
 import java.math.RoundingMode
 
