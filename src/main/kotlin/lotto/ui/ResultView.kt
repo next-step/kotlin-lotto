@@ -2,7 +2,7 @@ package lotto.ui
 
 import lotto.domain.LottoTicket
 import lotto.domain.MatchResult
-import lotto.domain.Money
+import lotto.domain.GameMoney
 import lotto.domain.Rank
 
 object ResultView {
@@ -15,13 +15,13 @@ object ResultView {
         }
     }
 
-    fun printStatistics(matchResult: MatchResult, money: Money) {
+    fun printStatistics(matchResult: MatchResult, gameMoney: GameMoney) {
         println("당첨 통계")
         println("---------")
         Rank.values().forEach {
             printRank(it, matchResult)
         }
-        val rateOfReturn = matchResult.rateOfReturn(money)
+        val rateOfReturn = matchResult.rateOfReturn(gameMoney)
         val benefitOutcome = BenefitOutcome.from(rateOfReturn)
         println("총 수익률은 $rateOfReturn 입니다.(기준이 1이기 때문에 결과적으로 ${benefitOutcome.description}라는 의미임)")
     }

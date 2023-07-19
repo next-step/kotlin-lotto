@@ -24,9 +24,9 @@ class LottoMachineTest {
         val autoLotto = listOf(1, 2, 3, 4, 5, 6)
         val lottoGenerator = generatorWithParameter(autoLotto)
         val lottoMachine = LottoMachine(lottoGenerator)
-        val money = Money.from(3000)
+        val gameMoney = GameMoney.from(3000)
 
-        val lottoTicket = lottoMachine.generateTicket(money, manualLottos)
+        val lottoTicket = lottoMachine.generateTicket(gameMoney, manualLottos)
 
         shouldSpec {
             lottoTicket.countOfAutoLotto shouldBe 1

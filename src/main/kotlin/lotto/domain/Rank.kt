@@ -2,7 +2,7 @@ package lotto.domain
 
 enum class Rank(
     val count: Int,
-    val winningAmount: Money,
+    val winningAmount: GameMoney,
     val bonusRequired: Boolean = false
 ) {
     FIRST(6, 2_000_000_000.toMoney()),
@@ -22,6 +22,6 @@ enum class Rank(
     }
 }
 
-private fun Int.toMoney(): Money {
-    return Money.from(this)
+private fun Int.toMoney(): GameMoney {
+    return GameMoney.from(this)
 }
