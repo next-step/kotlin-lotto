@@ -1,9 +1,9 @@
 package calculator
 
 import calculator.app.StringCalculator
-import calculator.view.ConsoleView
 import calculator.component.Tokenizer
 import calculator.component.Validator
+import calculator.view.ConsoleView
 
 fun main() {
     val consoleView = ConsoleView()
