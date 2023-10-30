@@ -1,19 +1,19 @@
 package calculator
 
 import calculator.app.StringCalculator
-import calculator.component.ConsolePresenter
+import calculator.view.ConsoleView
 import calculator.component.Tokenizer
 import calculator.component.Validator
 
 fun main() {
-    val consolePresenter = ConsolePresenter()
+    val consoleView = ConsoleView()
     val tokenizer = Tokenizer()
     val validator = Validator()
     val calculator = StringCalculator()
 
-    val input = consolePresenter.inputFormula()
+    val input = consoleView.inputFormula()
     val vInput = validator.validate(input)
     val tokens = tokenizer.tokenize(vInput)
     val result = calculator.calculate(tokens)
-    consolePresenter.outputResult(result)
+    consoleView.outputResult(result)
 }
