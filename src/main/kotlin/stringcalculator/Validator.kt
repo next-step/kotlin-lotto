@@ -2,7 +2,10 @@ package stringcalculator
 
 class Validator {
 
-    fun areAllPositiveNumbers(input: List<String>): Boolean {
-        return input.all { it.toIntOrNull() ?: -1 > 0 }
+    fun ensureAllPositiveNumbers(input: List<String>) = input.forEach { ensurePositiveNumber(it) }
+
+    fun ensurePositiveNumber(it: String) {
+        val number = it.toIntOrNull()
+        require(number != null && number >= 0) { "0보다 큰 숫자 이여야 한다." }
     }
 }

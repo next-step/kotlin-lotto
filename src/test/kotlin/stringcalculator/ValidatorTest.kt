@@ -3,6 +3,7 @@ package stringcalculator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.params.provider.ValueSource
 
 class ValidatorTest {
 
@@ -14,9 +15,35 @@ class ValidatorTest {
         val target = listOf(value1, value2, value3)
 
         // when
-        val result = validator.areAllPositiveNumbers(target)
+        val result = validator.ensureAllPositiveNumbers(target)
 
         // then
         assertThat(result).isEqualTo(expected)
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1", "2", "3"])
+    fun `문자가 0보다 큰 숫자 인이면 예외를 던지지 않는다`(value: String) {
+        // given
+        val validator = Validator()
+
+        // when
+        validator.ensurePositiveNumber(value)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["-1", "-2", "a", "!", " ",""])
+    fun `문자가 0보다 큰 숫자가 아니면 예외를 던진다`(target: String) {
+        // given
+        val validator = Validator()
+
+        // when
+        val result = org.junit.jupiter.api.assertThrows<IllegalArgumentException> {
+            validator.ensurePositiveNumber(target)
+        }
+
+        // then
+        assertThat(result.message).isEqualTo("0보다 큰 숫자 이여야 한다.")
+    }
+
 }
