@@ -1,28 +1,42 @@
 package calculator
 
 class StringAddCalculator {
-    private val delimeters = mutableListOf(",", ":")
+    private val delimiters = mutableListOf(",", ":")
 
     fun add(text: String?): Int {
-        if (text.isNullOrBlank()) {
-            return 0
-        }
+        if (text.isNullOrBlank()) return 0
 
-        val sections = text.split(SECTION_DELEMETER)
-        val numberString: String = if (sections.size > 1) {
-            delimeters.add(sections.first().split(CUSTOM_DELEMETER_HEADER).last())
-            sections.last()
-        } else {
-            sections.first()
-        }
+        setCustomDelimiter(text)
 
-        val numbers = numberString
-            .split(*delimeters.toTypedArray())
-            .map { it.toInt() }
+        val numbers = tokenize(getNumberPart(text))
 
-        numbers.forEach { require(it > 0) }
+        validate(numbers)
 
         return numbers.reduce { a, b -> a + b }
+    }
+
+    private fun setCustomDelimiter(text: String) {
+        val delimiter = text
+            .substringAfter(CUSTOM_DELEMETER_HEADER, "")
+            .substringBefore(SECTION_DELEMETER, "")
+
+        if (delimiter.isNotBlank()) {
+            delimiters.add(delimiter)
+        }
+    }
+
+    private fun getNumberPart(text: String): String {
+        return text.substringAfter(SECTION_DELEMETER)
+    }
+
+    private fun tokenize(text: String): List<Int> {
+        return text
+            .split(*delimiters.toTypedArray())
+            .map { it.toInt() }
+    }
+
+    private fun validate(numbers: List<Int>) {
+        numbers.forEach { require(it > 0) }
     }
 
     companion object {
