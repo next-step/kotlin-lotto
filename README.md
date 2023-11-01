@@ -34,3 +34,5 @@
 - [X] 빈 문자열을 입력 받을 경우, 0을 반환한다.
 - [X] 분리된 문자열을 숫자로 변환한다. = List<String> -> Int
 - [X] 매개 변수의 숫자를 모두 더해 반환한다.
+- [X] 매개 변수의 숫자가 음수일 경우, RuntimeException 예외를 throw 한다.
+- [X] 입력 값 중에 숫자 이외의 값이 들어올 경우, RuntimeException 예외를 throw 한다.

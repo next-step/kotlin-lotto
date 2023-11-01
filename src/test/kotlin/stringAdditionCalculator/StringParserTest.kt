@@ -2,7 +2,6 @@ package stringAdditionCalculator
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -11,12 +10,12 @@ import org.junit.jupiter.params.provider.ValueSource
 
 class StringParserTest {
 
+    private val defaultStringParser: StringParser = StringParser()
+
     @ParameterizedTest
     @ValueSource(strings = ["1,2,3,4,5", "1:2:3:4:5", "1,2:3:4:5", "1:2,3:4:5"])
     fun `문자열을 쉼표 또는 콜론을 구분자를 기준으로 분리한다`(input: String) {
-        val stringParser: StringParser = StringParser()
-
-        val result: List<String> = stringParser.parse(input)
+        val result: List<String> = defaultStringParser.parse(input)
 
         assertThat(result).containsExactly("1", "2", "3", "4", "5")
     }
@@ -53,13 +52,24 @@ class StringParserTest {
 
     @Test
     fun `분리된 문자열을 숫자로 변환한다`() {
-        val stringParser: StringParser = StringParser()
+        val result: List<Int> = defaultStringParser.parseToInt("1,2,3,4,5")
 
-        val result: List<Int> = stringParser.parseToInt("1,2,3,4,5")
+        assertThat(result).isEqualTo(listOf(1, 2, 3, 4, 5))
+    }
 
-        assertAll(
-            { assertThat(result.all { it is Int }).isTrue() },
-            { assertThat(result).isEqualTo(listOf(1, 2, 3, 4, 5)) }
-        )
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2,-3,4,-5", "-1:2:3:4:5", "1,2:3:-4:5"])
+    fun `매개 변수의 숫자가 음수일 경우, RuntimeException 예외를 throw 한다`(input: String) {
+        assertThrows<RuntimeException> {
+            defaultStringParser.parseToInt(input)
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["a,b,c,d,e", "a:b:c:d:e", "a,b:c:d:e", "a:b,c:d:e"])
+    fun `매개 변수의 숫자가 아닌 값이 들어올 경우, RuntimeException 예외를 throw 한다`(input: String) {
+        assertThrows<RuntimeException> {
+            defaultStringParser.parseToInt(input)
+        }
     }
 }
