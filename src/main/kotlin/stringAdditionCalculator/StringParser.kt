@@ -37,5 +37,6 @@ class StringParser(private val separatorList: List<String> = listOf(DEFAULT_SEPA
     companion object {
         private const val DEFAULT_SEPARATOR_COLON: String = ":"
         private const val DEFAULT_SEPARATOR_COMMA: String = ","
+        val DEFAULT_SEPARATOR_LIST: List<String> = listOf(DEFAULT_SEPARATOR_COMMA, DEFAULT_SEPARATOR_COLON)
     }
 }
