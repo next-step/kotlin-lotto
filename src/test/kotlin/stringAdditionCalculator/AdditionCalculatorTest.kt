@@ -4,18 +4,13 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-class AdditionCalculator {
-
-    private val stringParser: StringParser = StringParser()
-
+class AdditionCalculator(private val stringParser: StringParser = StringParser()) {
     fun calculate(input: String): Int {
         if (input.isEmpty()) {
             return 0
         }
 
-        val parseStringList: List<String> = stringParser.parse(input)
-
-        return parseStringList.sumOf { it.toInt() }
+        return stringParser.parseToInt(input).sum()
     }
 }
 
