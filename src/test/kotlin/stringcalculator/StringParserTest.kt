@@ -16,7 +16,7 @@ class StringParserTest {
         val result = stringParser.parse(input, delimiter)
 
         // then
-        val expect = expected.split(',').map { it.toInt() }
+        val expect = expected.split(',')
         assertThat(result).containsAll(expect)
     }
 }
