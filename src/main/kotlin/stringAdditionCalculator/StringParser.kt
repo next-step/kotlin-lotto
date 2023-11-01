@@ -8,6 +8,10 @@ class StringParser(private val separatorList: List<String> = listOf(DEFAULT_SEPA
 
     private fun parseable(input: String): Boolean = this.separatorList.any { input.contains(it) }
 
+    fun parseToInt(input: String): List<Int> {
+        return parse(input).map { it.toInt() }
+    }
+
     fun parse(input: String): List<String> {
         if (!parseable(input)) {
             throw IllegalStateException("${this.separatorList.joinToString(", ")} 중 하나 이상의 구분자가 포함되어야 합니다.")

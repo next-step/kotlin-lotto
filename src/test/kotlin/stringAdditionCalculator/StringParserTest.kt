@@ -1,6 +1,8 @@
 package stringAdditionCalculator
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -47,5 +49,17 @@ class StringParserTest {
         assertThrows<IllegalStateException> {
             stringParser.parse(input)
         }
+    }
+
+    @Test
+    fun `분리된 문자열을 숫자로 변환한다`() {
+        val stringParser: StringParser = StringParser()
+
+        val result: List<Int> = stringParser.parseToInt("1,2,3,4,5")
+
+        assertAll(
+            { assertThat(result.all { it is Int }).isTrue() },
+            { assertThat(result).isEqualTo(listOf(1, 2, 3, 4, 5)) }
+        )
     }
 }
