@@ -2,6 +2,7 @@ package stringcalculator
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
@@ -59,5 +60,29 @@ class StringParserTest {
 
         // then
         assertThat(result).isEqualTo(false)
+    }
+
+    @Test
+    fun `문자열이 커스텀 구분자를 포함하면 커스텀 구분자를 반환한다`() {
+        // given
+        val stringParser = StringParser()
+        val input1 = "//;\n1;2;3"
+        val input2 = "//!\n1!2!3"
+        val input3 = "//@\n1@2@3"
+
+        // when
+        val parsingData1 = stringParser.parseDelimiter(input1)
+        val parsingData2 = stringParser.parseDelimiter(input2)
+        val parsingData3 = stringParser.parseDelimiter(input3)
+
+        // then
+        assertAll(
+            { assertThat(parsingData1.delimiter).isEqualTo(";") },
+            { assertThat(parsingData1.data).isEqualTo("1;2;3") },
+            { assertThat(parsingData2.delimiter).isEqualTo("!") },
+            { assertThat(parsingData2.data).isEqualTo("1!2!3") },
+            { assertThat(parsingData3.delimiter).isEqualTo("@") },
+            { assertThat(parsingData3.data).isEqualTo("1@2@3") }
+        )
     }
 }
