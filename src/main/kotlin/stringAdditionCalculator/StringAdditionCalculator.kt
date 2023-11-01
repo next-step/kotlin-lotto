@@ -1,7 +1,7 @@
 package stringAdditionCalculator
 
 fun main() {
-    val input: String = readlnOrNull() ?: throw IllegalArgumentException("입력 값이 없습니다.")
+    val input: String = readlnOrNull() ?: return println(0)
 
     val customSeparatorList: List<String> = SeparatorParser().extractCustomSeparatorList(input)
 
