@@ -4,25 +4,24 @@ class InputString(
     originalInput: String,
     initialDelimiters: List<String> = listOf(",", ":")
 ) {
-    val input: String
-    val delimiters: List<String>
+    private val input: String
+    private val delimiters: List<String>
 
     init {
         val (customDelimiter, customInput) = extractCustomInput(originalInput)
 
-        this.delimiters = if (customDelimiter.isNotEmpty()) {
-            initialDelimiters + customDelimiter
-        } else {
-            initialDelimiters
-        }
+        this.delimiters = determineDelimiters(initialDelimiters, customDelimiter)
+        this.input = determineInput(customDelimiter, customInput, originalInput)
+    }
 
-        if (customDelimiter.isNotEmpty()) {
-            validate(customInput, customDelimiter)
-            this.input = customInput
-        } else {
-            validate(originalInput)
-            this.input = originalInput
-        }
+    private fun determineDelimiters(initialDelimiters: List<String>, customDelimiter: String): List<String> {
+        return if (customDelimiter.isNotEmpty()) initialDelimiters + customDelimiter else initialDelimiters
+    }
+
+    private fun determineInput(customDelimiter: String, customInput: String, originalInput: String): String {
+        val inputToValidate = if (customDelimiter.isNotEmpty()) customInput else originalInput
+        validate(inputToValidate, customDelimiter)
+        return inputToValidate
     }
 
     private fun extractCustomInput(input: String): Pair<String, String> {
@@ -36,13 +35,8 @@ class InputString(
             throw RuntimeException("문자열 계산기에 음수를 전달할 수 없습니다.")
         }
 
-        val pattern = if (customDelimiter.isNotEmpty()) {
-            """^[0-9,: \t\n\r${Regex.escape(customDelimiter)}]+$""".toRegex()
-        } else {
-            ALLOWED_STRING_CHECK
-        }
-
-        if (!pattern.matches(input)) {
+        val allowedCharacters = """^[0-9,: \t\n\r${Regex.escape(customDelimiter)}]+$"""
+        if (!allowedCharacters.toRegex().matches(input)) {
             throw RuntimeException("문자열 계산기에 쉼표와 콜론 이외의 문자가 들어올 수 없습니다.")
         }
     }
