@@ -10,13 +10,23 @@ class StringAddCalculator {
         if (text.isNullOrEmpty()) {
             return 0
         }
-        
+
         return CUSTOM_DELIMITER_REGEX.find(text)?.let {
             val customDelimiter = it.groupValues[1]
             return it.groupValues[2].split(customDelimiter)
-                .sumOf { it.toInt() }
+                .sumOf {
+                    if (it.toInt() < 0) {
+                        throw RuntimeException()
+                    }
+                    it.toInt()
+                }
         } ?: run {
-            return text.split(TO_REGEX).sumOf { it.toInt() }
+            return text.split(TO_REGEX).sumOf {
+                if (it.toInt() < 0) {
+                    throw RuntimeException()
+                }
+                it.toInt()
+            }
         }
     }
 }
