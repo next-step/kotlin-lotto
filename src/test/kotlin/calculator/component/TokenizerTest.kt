@@ -48,13 +48,8 @@ class TokenizerTest : StringSpec({
         actual shouldContain TokenFixture.TOKEN[55]
     }
 
-    "커스텀 구분자는 문자열 앞 부분의 “//”와 “\\n” 사이에 위치하는 문자를 커스텀 구분자로 사용한다." {
-        // “//;\n1;2;3”과 같이 값을 입력할 경우 커스텀 구분자는 세미콜론(;)이며, 결과 값은 6이 반환되어야 한다
-        TODO()
-    }
-
     "\"//\"와 \"\\n\" 문자 사이에 커스텀 구분자를 지정할 수 있다." {
-        val actual = Tokenizer.tokenize("//;\\n1;2;3").tokens
+        val actual = Tokenizer.tokenize("//;\n1;2;3").tokens
         actual shouldHaveSize 3
         actual shouldContain TokenFixture.TOKEN[1]
         actual shouldContain TokenFixture.TOKEN[2]
