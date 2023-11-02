@@ -1,6 +1,6 @@
 package stringcalculator
 
-class Validator {
+class StringCalculatorNumberValidator {
 
     fun ensureAllPositiveNumbers(input: List<String>) = input.forEach { ensurePositiveNumber(it) }
 

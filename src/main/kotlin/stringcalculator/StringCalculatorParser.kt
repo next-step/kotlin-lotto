@@ -1,6 +1,8 @@
 package stringcalculator
 
-class StringParser(private val validator: Validator = Validator()) {
+class StringCalculatorParser(
+    private val validator: StringCalculatorNumberValidator = StringCalculatorNumberValidator()
+) {
     fun parse(numbersAsString: String, delimiter: String): List<String> {
         return numbersAsString.split(delimiter)
     }
@@ -9,9 +11,10 @@ class StringParser(private val validator: Validator = Validator()) {
         if (hasCustomDelimiter(numbersAsString)) {
             return parse(
                 parseDelimiter(numbersAsString).data, parseDelimiter(numbersAsString).delimiter
-            ).map { validator.ensurePositiveNumber(it);it.toInt() }
+            ).map { validator.ensurePositiveNumber(it); it.toInt() }
         }
-        return numbersAsString.split(*DEFAULT_DELIMITERS).map { validator.ensurePositiveNumber(it);it.toInt() }
+        return numbersAsString.split(*DEFAULT_DELIMITERS)
+            .map { validator.ensurePositiveNumber(it); it.toInt() }
     }
 
     fun hasCustomDelimiter(numbersAsString: String): Boolean {

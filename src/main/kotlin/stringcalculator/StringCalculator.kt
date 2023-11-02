@@ -1,11 +1,11 @@
 package stringcalculator
 
 class StringCalculator(
-    private val stringParser: StringParser
+    private val parser: StringCalculatorParser
 ) {
 
     fun sum(numbersAsString: String): Int {
-        val numbers = stringParser.parse(numbersAsString)
+        val numbers = parser.parse(numbersAsString)
         return numbers.sum()
     }
 }
