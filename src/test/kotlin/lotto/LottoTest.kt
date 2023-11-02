@@ -27,4 +27,9 @@ class LottoTest : FunSpec({
         val lotto = Lotto()
         lotto.numbers.toSet().size shouldBe 6
     }
+
+    test("로또 1장의 숫자는 오름차순으로 정렬되어 있다.") {
+        val lotto = Lotto()
+        lotto.numbers shouldBe lotto.numbers.sorted()
+    }
 })
