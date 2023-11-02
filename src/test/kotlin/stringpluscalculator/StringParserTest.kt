@@ -32,4 +32,17 @@ class StringParserTest : BehaviorSpec({
             }
         }
     }
+
+    Given("문자열 파서는 기본 구분자 외에") {
+        When("커스텀 구분자를") {
+            Then("지정할 수 있다.") {
+                forAll(
+                    row("//;\n1;2;3", listOf("1", "2", "3")),
+                    row("//;\n1;2,3", listOf("1", "2", "3"))
+                ) { input, expected ->
+                    StringParser.parser(input) shouldBe expected
+                }
+            }
+        }
+    }
 })
