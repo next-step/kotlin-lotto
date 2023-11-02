@@ -21,4 +21,9 @@ class OutputView {
 
         println(lines.joinToString("\n"))
     }
+
+    fun printEarningRate(result: List<Prize>, purchased: Int) {
+        val earningRate = result.sumOf { it.prize } / purchased.toDouble()
+        println("총 수익률은 $earningRate 입니다.")
+    }
 }

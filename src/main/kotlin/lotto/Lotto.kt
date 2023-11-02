@@ -20,4 +20,7 @@ fun main() {
 
     // 통계 출력
     OutputView().printResult(lottoManager.getResult())
+
+    // 수익률 출력
+    OutputView().printEarningRate(lottoManager.getResult(), lottoManager.purchased)
 }

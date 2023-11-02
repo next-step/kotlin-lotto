@@ -58,12 +58,13 @@ class LottoManagerTest {
 
     @Test
     fun `추첨 결과물 리스트를 반환한다`() {
-        val manager = LottoManager("1000")
+        val money = "2000"
+        val manager = LottoManager(money)
         manager.setWinningNumbers("1,2,3,4,5,6")
 
         val result = manager.getResult()
         assertThat(result).isInstanceOf(List::class.java)
-        assertThat(result).isNotEmpty()
+        assertThat(result.size).isEqualTo(money.toInt() / LOTTO_PRICE)
         assertThat(result.first()).isInstanceOf(Prize::class.java)
     }
 }
