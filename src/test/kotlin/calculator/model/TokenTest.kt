@@ -10,4 +10,10 @@ class TokenTest : StringSpec({
             Token(-1)
         }
     }
+
+    "0과 양수는 허용됩니다" {
+        (0..9999).forEach {
+            Token(it)
+        }
+    }
 })
