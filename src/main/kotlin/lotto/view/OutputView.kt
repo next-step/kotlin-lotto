@@ -2,6 +2,7 @@ package lotto.view
 
 import lotto.constants.WinningRank
 import lotto.domain.Lottos
+import lotto.domain.RateOfReturn
 
 object OutputView {
 
@@ -27,8 +28,7 @@ object OutputView {
     }
 
     fun printRateOfReturn(inputPrice: Int, winningRankList: List<WinningRank>) {
-        val totalWinningMoney = winningRankList.sumOf { it.money }
-        val rateOfReturn = totalWinningMoney.toDouble() / inputPrice.toDouble()
-        println("총 수익률은 $rateOfReturn%입니다.")
+        val rateOfReturn = RateOfReturn(inputPrice, winningRankList).calculate()
+        println("총 수익률은 ${rateOfReturn}입니다.")
     }
 }
