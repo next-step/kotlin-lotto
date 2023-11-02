@@ -18,21 +18,18 @@ class Calculator(expression: String) {
     }
 
     private fun delimiter(expression: String): Array<String> {
-        if (expression.contains(CUSTOM_DELIMITER_REGEX)) {
-            val result = CUSTOM_DELIMITER_REGEX.findAll(expression).first()
+        if (expression.contains(CUSTOM_DELIMITER)) {
+            val result = CUSTOM_DELIMITER.findAll(expression).first()
             return arrayOf(result.groupValues[1])
         }
         return DEFAULT_DELIMITER
     }
 
     private fun parsedExpression(expression: String): String {
-        if (expression.isBlank()) {
-            return ""
+        if (expression.contains(CUSTOM_DELIMITER)) {
+            return expression.replace(CUSTOM_DELIMITER, "")
         }
-        if (expression.contains(CUSTOM_DELIMITER_REGEX)) {
-            return expression.replace(CUSTOM_DELIMITER_REGEX, "")
-        }
-        return expression
+        return expression.trim()
     }
 
     private fun hasOnlyPositiveNumbers(): Boolean {
@@ -47,7 +44,7 @@ class Calculator(expression: String) {
     }
 
     companion object {
-        private val CUSTOM_DELIMITER_REGEX = Regex("^//(.+)\n")
+        private val CUSTOM_DELIMITER = Regex("^//(.+)\n")
         private val DEFAULT_DELIMITER = arrayOf(",", ":")
     }
 }
