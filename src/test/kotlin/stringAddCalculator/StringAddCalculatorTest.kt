@@ -9,41 +9,12 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
-class StringAddCalculator {
-    fun add(text: String?): Int {
-        var result: Int = 0
-        if (text.isNullOrBlank()) {
-            return result
-        }
-        var list = emptyList<Int>()
-
-        val customSeparator = "\\/\\/(.*?)\\\\n".toRegex().find(text)?.groupValues?.get(1)
-
-        if (text.toIntOrNull() != null) {
-            list = listOf(text.toInt())
-        } else if (customSeparator != null) {
-            val numbers = text.split("\\n")[1]
-            list = numbers.split(customSeparator).map { it.toInt() }
-        } else if (text.contains(',') || text.contains(':')) {
-            list = text.split(',', ':').map { it.toInt() }
-        }
-
-
-        if (list.all { it < 0 }) {
-            throw RuntimeException("This is a runtime exception.")
-        }
-
-
-        return list.sum()
-    }
-}
-
 class StringAddCalculatorTest {
     private lateinit var calculator: StringAddCalculator
 
     @BeforeEach
     fun setUp() {
-        calculator = StringAddCalculator();
+        calculator = StringAddCalculator()
     }
 
     @DisplayName(value = "빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.")

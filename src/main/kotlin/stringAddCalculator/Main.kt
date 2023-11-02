@@ -1,5 +1,0 @@
-package stringAddCalculator
-
-fun main() {
-
-}
