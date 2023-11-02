@@ -1,4 +1,4 @@
-package lotto
+package lotto.constants
 
 enum class Sort {
     ASC,

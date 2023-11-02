@@ -3,6 +3,7 @@ package lotto
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.ints.shouldBeInRange
 import io.kotest.matchers.shouldBe
+import lotto.domain.Lotto
 
 class LottoTest : FunSpec({
 

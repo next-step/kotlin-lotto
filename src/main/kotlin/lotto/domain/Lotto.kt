@@ -1,6 +1,8 @@
-package lotto
+package lotto.domain
 
-class Lotto(val price: Int = LOTTO_PRICE) {
+import lotto.constants.Sort
+
+class Lotto(val price: Int = LottoStore.LOTTO_PRICE) {
     val numbers: List<Int> = lottoNumberShuffle()
         .lottoNumberSort()
 
@@ -19,7 +21,6 @@ class Lotto(val price: Int = LOTTO_PRICE) {
     }
 
     companion object {
-        private const val LOTTO_PRICE = 1000
         private const val LOTTO_NUMBER_SIZE = 6
         private const val LOTTO_NUMBER_MIN = 1
         private const val LOTTO_NUMBER_MAX = 45
