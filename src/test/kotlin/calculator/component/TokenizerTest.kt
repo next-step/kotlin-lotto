@@ -31,8 +31,26 @@ class TokenizerTest : StringSpec({
         actual shouldContain TokenFixture.TOKEN[3]
     }
 
+    "빈 문자열 을 입력하는 경우 비어있는 컬렉션을 반환해야한다" {
+        val actual = Tokenizer.tokenize("")
+        actual shouldHaveSize 0
+    }
+
+    "'0' 문자열 을 입력하는 경우 '0' 원소를 반환해야한다" {
+        val actual = Tokenizer.tokenize("0")
+        actual shouldHaveSize 1
+        actual shouldContain TokenFixture.TOKEN[0]
+    }
+
+    "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다" {
+        val actual = Tokenizer.tokenize("55")
+        actual shouldHaveSize 1
+        actual shouldContain TokenFixture.TOKEN[55]
+    }
+
     "커스텀 구분자는 문자열 앞 부분의 “//”와 “\\n” 사이에 위치하는 문자를 커스텀 구분자로 사용한다." {
         // “//;\n1;2;3”과 같이 값을 입력할 경우 커스텀 구분자는 세미콜론(;)이며, 결과 값은 6이 반환되어야 한다
+        TODO()
     }
 
     "\"//\"와 \"\\n\" 문자 사이에 커스텀 구분자를 지정할 수 있다." {
