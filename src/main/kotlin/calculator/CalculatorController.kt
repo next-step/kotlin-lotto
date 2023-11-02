@@ -8,7 +8,7 @@ import calculator.view.ConsoleView
 fun main() {
     val input = ConsoleView.inputFormula()
     val validatedInput = Validator.validate(input)
-    val tokens = Tokenizer.tokenize(validatedInput)
-    val result = StringCalculator.calculate(tokens)
+    val formula = Tokenizer.tokenize(validatedInput)
+    val result = StringCalculator.calculate(formula)
     ConsoleView.outputResult(result)
 }
