@@ -5,8 +5,9 @@ class StringAddCalculator {
         if (text.isNullOrEmpty()) {
             return 0
         }
-        val tokens = parse(text)
-        return addListElements(tokens)
+        val stringTokens = parse(text)
+        val intTokens = toIntTokens(stringTokens)
+        return intTokens.sum()
     }
 
     private fun parse(text: String): List<String> {
@@ -23,11 +24,11 @@ class StringAddCalculator {
         return text.split(basicRegex)
     }
 
-    private fun addListElements(list: List<String>): Int {
+    private fun toIntTokens(list: List<String>): List<Int> {
         val intTokens = list.map { it.toIntOrNull() ?: throw NumberFormatException("'$it'는 정수로 변환될 수 없습니다.") }
         if (intTokens.any { it < 0 }) {
             throw RuntimeException("음수는 불가능합니다.")
         }
-        return intTokens.sum()
+        return intTokens
     }
 }
