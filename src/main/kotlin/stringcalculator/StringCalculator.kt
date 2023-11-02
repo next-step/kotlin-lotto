@@ -5,22 +5,22 @@ class StringCalculator(
     private val stringParser: StringParser
 ) {
 
-    fun sum(input: String): Int {
-        if (stringParser.hasCustomDelimiter(input)) {
-            return sumWithCustomDelimiter(input)
+    fun sum(numbersAsString: String): Int {
+        if (stringParser.hasCustomDelimiter(numbersAsString)) {
+            return sumWithCustomDelimiter(numbersAsString)
         }
-        return sumWithDefaultDelimiter(input)
+        return sumWithDefaultDelimiter(numbersAsString)
     }
 
-    private fun sumWithCustomDelimiter(input: String): Int {
-        val parseDelimiter = stringParser.parseDelimiter(input)
+    private fun sumWithCustomDelimiter(numbersAsString: String): Int {
+        val parseDelimiter = stringParser.parseDelimiter(numbersAsString)
         val operations = stringParser.parse(parseDelimiter.data, parseDelimiter.delimiter)
         validator.ensureAllPositiveNumbers(operations)
         return sumOfOperations(operations)
     }
 
-    private fun sumWithDefaultDelimiter(input: String): Int {
-        val operations = stringParser.parse(input)
+    private fun sumWithDefaultDelimiter(numbersAsString: String): Int {
+        val operations = stringParser.parse(numbersAsString)
         validator.ensureAllPositiveNumbers(operations)
         return sumOfOperations(operations)
     }
