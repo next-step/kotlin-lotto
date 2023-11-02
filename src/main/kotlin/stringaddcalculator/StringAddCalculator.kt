@@ -5,6 +5,15 @@ class StringAddCalculator {
         if (text.isNullOrEmpty()){
             return 0
         }
-        return text.toInt()
+
+        return parseAdd(text)
+    }
+
+    private fun parseAdd(text: String): Int {
+        val regex = "[,:]".toRegex()
+        return text.split(regex)
+            .toList()
+            .map { it -> it.toInt() }
+            .sum()
     }
 }
