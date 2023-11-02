@@ -6,7 +6,7 @@ object Tokenizer {
     private const val DEFAULT_DELIMITER = ",|:"
 
     fun tokenize(input: String): Formula {
-        if(input.isEmpty()) {
+        if (input.isEmpty()) {
             return Formula.emptyOf()
         }
         Regex(CUSTOM_DELIMITER_SEARCH).find(input)?.let { matchResult ->
