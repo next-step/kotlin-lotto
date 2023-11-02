@@ -12,4 +12,8 @@ fun main() {
     OutputView.printLotto(lottos)
 
     val winningLotto = Lotto(InputView.inputWinningLotto())
+    val winningRanks = lottos.matchLotto(winningLotto)
+
+    OutputView.printWinningResult(winningRanks)
+    OutputView.printRateOfReturn(inputPrice, winningRanks)
 }
