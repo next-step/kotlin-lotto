@@ -1,8 +1,7 @@
-package lotto
+package lotto.domain
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.ints.shouldBeInRange
-import lotto.domain.Lotto
 import lotto.domain.LottoStore.buyLotto
 import lotto.util.shuffleNumber
 

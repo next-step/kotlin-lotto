@@ -1,9 +1,8 @@
-package lotto
+package lotto.domain
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.LottoStore.buyLotto
-import lotto.domain.Lottos
 
 class LottosTest : FunSpec({
     test("구매한 로또 갯수를 확인할 수 있다.") {

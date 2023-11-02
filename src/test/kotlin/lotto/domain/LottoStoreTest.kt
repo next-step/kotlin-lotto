@@ -1,12 +1,10 @@
-package lotto
+package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.ints.shouldBeInRange
 import io.kotest.matchers.shouldBe
 import lotto.constants.WinningRank
-import lotto.domain.Lotto
-import lotto.domain.LottoStore
 import lotto.domain.LottoStore.buyLotto
 
 class LottoStoreTest : FunSpec({
