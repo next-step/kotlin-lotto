@@ -1,6 +1,6 @@
 package calculator.component
 
-class Validator {
+object Validator {
     fun validate(input: String?): String {
 
         TODO()

@@ -6,14 +6,12 @@ import calculator.component.Validator
 import calculator.view.ConsoleView
 
 fun main() {
-    val consoleView = ConsoleView()
-    val tokenizer = Tokenizer()
-    val validator = Validator()
+
     val calculator = StringCalculator()
 
-    val input = consoleView.inputFormula()
-    val vInput = validator.validate(input)
-    val tokens = tokenizer.tokenize(vInput)
+    val input = ConsoleView.inputFormula()
+    val validatedInput = Validator.validate(input)
+    val tokens = Tokenizer.tokenize(validatedInput)
     val result = calculator.calculate(tokens)
-    consoleView.outputResult(result)
+    ConsoleView.outputResult(result)
 }
