@@ -28,7 +28,6 @@ class StudyRegex : StringSpec({
         println(tc3)
         tc3 shouldHaveSize 3
     }
-
 })
 
 fun spliter(input: String): List<String> {

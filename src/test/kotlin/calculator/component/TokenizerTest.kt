@@ -8,7 +8,7 @@ import io.kotest.matchers.collections.shouldHaveSize
 
 class TokenizerTest : StringSpec({
     "콜론(:)은 구분자로 동작 해야 한다" {
-        val actual = Tokenizer.tokenize("1:2:3")
+        val actual = Tokenizer.tokenize("1:2:3").tokens
         actual shouldHaveSize 3
         actual shouldContain TokenFixture.TOKEN[1]
         actual shouldContain TokenFixture.TOKEN[2]
@@ -16,7 +16,7 @@ class TokenizerTest : StringSpec({
     }
 
     "쉼표(,)는 구분자로 동작 해야 한다" {
-        val actual = Tokenizer.tokenize("1,2,3")
+        val actual = Tokenizer.tokenize("1,2,3").tokens
         actual shouldHaveSize 3
         actual shouldContain TokenFixture.TOKEN[1]
         actual shouldContain TokenFixture.TOKEN[2]
@@ -24,7 +24,7 @@ class TokenizerTest : StringSpec({
     }
 
     "구분자를 컴마(,) 이외에 콜론(:)을 동시에 사용할 수 있다" {
-        val actual = Tokenizer.tokenize("1,2:3")
+        val actual = Tokenizer.tokenize("1,2:3").tokens
         actual shouldHaveSize 3
         actual shouldContain TokenFixture.TOKEN[1]
         actual shouldContain TokenFixture.TOKEN[2]
@@ -32,18 +32,18 @@ class TokenizerTest : StringSpec({
     }
 
     "빈 문자열 을 입력하는 경우 비어있는 컬렉션을 반환해야한다" {
-        val actual = Tokenizer.tokenize("")
+        val actual = Tokenizer.tokenize("").tokens
         actual shouldHaveSize 0
     }
 
     "'0' 문자열 을 입력하는 경우 '0' 원소를 반환해야한다" {
-        val actual = Tokenizer.tokenize("0")
+        val actual = Tokenizer.tokenize("0").tokens
         actual shouldHaveSize 1
         actual shouldContain TokenFixture.TOKEN[0]
     }
 
     "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다" {
-        val actual = Tokenizer.tokenize("55")
+        val actual = Tokenizer.tokenize("55").tokens
         actual shouldHaveSize 1
         actual shouldContain TokenFixture.TOKEN[55]
     }
@@ -54,7 +54,7 @@ class TokenizerTest : StringSpec({
     }
 
     "\"//\"와 \"\\n\" 문자 사이에 커스텀 구분자를 지정할 수 있다." {
-        val actual = Tokenizer.tokenize("//;\\n1;2;3")
+        val actual = Tokenizer.tokenize("//;\\n1;2;3").tokens
         actual shouldHaveSize 3
         actual shouldContain TokenFixture.TOKEN[1]
         actual shouldContain TokenFixture.TOKEN[2]

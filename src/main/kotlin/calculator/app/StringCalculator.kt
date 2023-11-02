@@ -1,13 +1,13 @@
 package calculator.app
 
-import calculator.model.Token
+import calculator.component.Formula
 
 object StringCalculator {
-    fun calculate(tokens: ArrayDeque<Token>): Int {
-        if (tokens.isEmpty()) {
+    fun calculate(formula: Formula): Int {
+        if (formula.tokens.isEmpty()) {
             return 0
         }
-        val reduce = tokens
+        val reduce = formula.tokens
             .reduce { i, t -> i.add(t) }
         return reduce.value
     }
