@@ -3,7 +3,7 @@ package calculator.component
 import calculator.model.Token
 
 object Tokenizer {
-    fun tokenize(vInput: String): ArrayDeque<Token> {
+    fun tokenize(input: String): ArrayDeque<Token> {
         TODO()
     }
 }
