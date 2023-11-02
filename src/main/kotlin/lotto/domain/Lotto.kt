@@ -21,7 +21,7 @@ class Lotto(val price: Int = LottoStore.LOTTO_PRICE) {
     }
 
     companion object {
-        private const val LOTTO_NUMBER_SIZE = 6
+        const val LOTTO_NUMBER_SIZE = 6
         private const val LOTTO_NUMBER_MIN = 1
         private const val LOTTO_NUMBER_MAX = 45
     }

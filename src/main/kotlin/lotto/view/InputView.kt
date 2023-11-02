@@ -1,28 +1,48 @@
 package lotto.view
 
+import lotto.domain.Lotto
+import lotto.view.InputView.validateWinningLotto
+
 object InputView {
 
     fun inputPrice(): Int {
         println("구입금액을 입력해 주세요.")
         val price = readln()
-        require(price.isNotBlank()) { BLANK_ERROR_MESSAGE }
         return try {
+            require(price.isNotBlank())
             price.toInt()
         } catch (e: NumberFormatException) {
             println(NUMBER_ERROR_MESSAGE)
+            inputPrice()
+        } catch (e: IllegalArgumentException) {
+            println(BLANK_ERROR_MESSAGE)
             inputPrice()
         }
     }
     fun inputWinningLotto(): List<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val winningLotto = readln()
-        require(winningLotto.isNotBlank()) { BLANK_ERROR_MESSAGE }
+        return parseLottoNumber(winningLotto)
+    }
+
+    private fun parseLottoNumber(input: String): List<Int> {
         return try {
-            winningLotto.split(DELIMITER).map { it.trim().toInt() }
+            require(input.isNotBlank()) { println(BLANK_ERROR_MESSAGE) }
+            input.split(DELIMITER).map { it.trim().toInt() }
+                .validateWinningLotto()
         } catch (e: NumberFormatException) {
             println(NUMBER_ERROR_MESSAGE)
             inputWinningLotto()
+        } catch (e: IllegalArgumentException) {
+            inputWinningLotto()
         }
+    }
+
+    private fun List<Int>.validateWinningLotto(): List<Int> {
+        require(this.size == Lotto.LOTTO_NUMBER_SIZE) {
+            println("당첨 번호는 ${Lotto.LOTTO_NUMBER_SIZE}자리만 입력 가능합니다.")
+        }
+        return this
     }
 
     private const val DELIMITER = ","
