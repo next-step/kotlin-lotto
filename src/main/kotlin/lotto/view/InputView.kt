@@ -1,7 +1,6 @@
 package lotto.view
 
-import lotto.domain.Lotto
-import lotto.view.InputView.validateWinningLotto
+import lotto.domain.LottoStore
 
 object InputView {
 
@@ -40,14 +39,14 @@ object InputView {
     }
 
     private fun List<Int>.validateWinningLotto(): List<Int> {
-        require(this.size == Lotto.LOTTO_NUMBER_SIZE) {
-            println("당첨 번호는 ${Lotto.LOTTO_NUMBER_SIZE}자리만 입력 가능합니다.")
+        require(this.size == LottoStore.LOTTO_NUMBER_SIZE) {
+            println("당첨 번호는 ${LottoStore.LOTTO_NUMBER_SIZE}자리만 입력 가능합니다.")
         }
 
-        require(this.all { it in Lotto.LOTTO_NUMBER_MIN..Lotto.LOTTO_NUMBER_MAX }) {
+        require(this.all { it in LottoStore.LOTTO_NUMBER_MIN..LottoStore.LOTTO_NUMBER_MAX }) {
             println(
-                "당첨 번호는 ${Lotto.LOTTO_NUMBER_MIN}~" +
-                    "${Lotto.LOTTO_NUMBER_MAX}까지의 숫자만 입력 가능합니다."
+                "당첨 번호는 ${LottoStore.LOTTO_NUMBER_MIN}~" +
+                    "${LottoStore.LOTTO_NUMBER_MAX}까지의 숫자만 입력 가능합니다."
             )
         }
 
