@@ -27,7 +27,7 @@ class StringAddCalculator {
 
     private fun addListElements(list: List<String>): Int {
         val intTokens = list.map { it.toIntOrNull() ?: throw NumberFormatException("'$it'는 정수로 변환될 수 없습니다.") }
-        if (intTokens.any { it < 0 }){
+        if (intTokens.any { it < 0 }) {
             throw RuntimeException("음수는 불가능합니다.")
         }
         return list.sumOf { it -> it.toInt() }
