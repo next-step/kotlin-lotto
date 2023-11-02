@@ -11,9 +11,9 @@ class StringAddCalculator {
     }
 
     private fun parse(text: String): List<String> {
-        val customDelimiterGroup = Regex("//(.)\n(.*)").find(text)
         val basicPattern = "[,:]"
 
+        val customDelimiterGroup = Regex("//(.)\n(.*)").find(text)
         customDelimiterGroup?.let {
             val customDelimiter = it.groupValues[1]
             val customRegex = "[$basicPattern$customDelimiter]".toRegex()
