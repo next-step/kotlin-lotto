@@ -21,6 +21,6 @@ class StringCalculatorTest : StringSpec({
 
     "비어있는 컬렉션을 받은 경우 0 을 반환해야한다" {
         TODO()
-        println("빈 문자열 입력에 대한 0 반환 책임과 역할은 계산기가 담당한다")
+        println("@설계 : 빈 문자열 입력에 대한 0 반환 책임과 역할은 계산기가 담당한다")
     }
 })
