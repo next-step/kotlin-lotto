@@ -1,12 +1,12 @@
 package lotto.view
 
-import lotto.domain.Lotto
+import lotto.domain.Lottos
 
 object OutputView {
 
-    fun printLotto(lottos: List<Lotto>) {
-        println("로또 ${lottos.size}개를 구매했습니다.")
-        lottos.forEach {
+    fun printLotto(lottos: Lottos) {
+        println("로또 ${lottos.getLottoCount()}개를 구매했습니다.")
+        lottos.lottos.forEach {
             println(it.numbers)
         }
     }
