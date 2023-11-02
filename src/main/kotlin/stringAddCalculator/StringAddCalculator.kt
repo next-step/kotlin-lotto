@@ -1,0 +1,4 @@
+package stringAddCalculator
+
+class StringAddCalculator {
+}
