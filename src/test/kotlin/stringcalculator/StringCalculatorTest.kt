@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource
 class StringCalculatorTest {
 
     @ParameterizedTest
-    @CsvSource(value = ["1,2,3:6","1,2;3:6"], delimiter = ':')
+    @CsvSource(value = ["1,2,3:6", "1,2;3:6"], delimiter = ':')
     fun `커스텀 구분자 없을 때 쉼표 또는 콜론을 구분자로 문자열을 분리하여 숫자들의 합을 구한다`(target: String, expected: Int) {
         // given
         val stringCalculator = StringCalculator(Validator(), NumberSumCalculator(), StringParser())

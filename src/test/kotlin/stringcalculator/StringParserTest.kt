@@ -33,7 +33,7 @@ class StringParserTest {
         val result = stringParser.parse(input)
 
         // then
-        assertThat(result).containsExactly("1","2","3")
+        assertThat(result).containsExactly("1", "2", "3")
     }
 
     @Test

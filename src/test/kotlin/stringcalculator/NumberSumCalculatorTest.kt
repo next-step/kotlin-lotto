@@ -36,4 +36,3 @@ class NumberSumCalculatorTest {
         assertThat(result).isEqualTo(55)
     }
 }
-
