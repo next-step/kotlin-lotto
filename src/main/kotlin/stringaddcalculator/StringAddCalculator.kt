@@ -28,6 +28,6 @@ class StringAddCalculator {
         if (intTokens.any { it < 0 }) {
             throw RuntimeException("음수는 불가능합니다.")
         }
-        return list.sumOf { it -> it.toInt() }
+        return intTokens.sum()
     }
 }
