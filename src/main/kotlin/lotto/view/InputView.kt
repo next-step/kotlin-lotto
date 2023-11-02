@@ -19,6 +19,7 @@ object InputView {
             inputPrice()
         }
     }
+
     fun inputWinningLotto(): List<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val winningLotto = readln()
@@ -42,6 +43,18 @@ object InputView {
         require(this.size == Lotto.LOTTO_NUMBER_SIZE) {
             println("당첨 번호는 ${Lotto.LOTTO_NUMBER_SIZE}자리만 입력 가능합니다.")
         }
+
+        require(this.all { it in Lotto.LOTTO_NUMBER_MIN..Lotto.LOTTO_NUMBER_MAX }) {
+            println(
+                "당첨 번호는 ${Lotto.LOTTO_NUMBER_MIN}~" +
+                    "${Lotto.LOTTO_NUMBER_MAX}까지의 숫자만 입력 가능합니다."
+            )
+        }
+
+        require(this.size == this.toSet().size) {
+            println("당첨 번호는 중복되지 않습니다.")
+        }
+
         return this
     }
 
