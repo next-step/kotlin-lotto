@@ -51,6 +51,13 @@ class StringAddCalculatorTest {
         calculator.add(text) shouldBe 6
     }
 
+    @DisplayName(value = "커스텀 구분자와 쉼표 콜론을 모두 사용하여 합을 구할 수 있다")
+    @ParameterizedTest
+    @CsvSource(value = ["'//;\n1;2;3,4:5,6'#21"], delimiter = '#')
+    fun mixedDelimiter(text: String, expected: Int) {
+        calculator.add(text) shouldBe expected
+    }
+
     @Test
     fun `문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다`() {
         val exception = shouldThrow<RuntimeException> {
