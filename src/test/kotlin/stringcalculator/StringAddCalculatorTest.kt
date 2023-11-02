@@ -1,0 +1,3 @@
+package stringcalculator
+
+class StringAddCalculatorTest

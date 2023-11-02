@@ -1,0 +1,3 @@
+package stringaddcalculator
+
+class StringAddCalculator
