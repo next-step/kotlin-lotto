@@ -25,9 +25,9 @@ class StringAddCalculator {
     }
 
     private fun toIntTokens(list: List<String>): List<Int> {
-        val intTokens = list.map { it.toIntOrNull() ?: throw NumberFormatException("'$it'는 정수로 변환될 수 없습니다.") }
+        val intTokens = list.map { it.toIntOrNull() ?: throw RuntimeException("수식을 확인해주세요") }
         if (intTokens.any { it < 0 }) {
-            throw RuntimeException("음수는 불가능합니다.")
+            throw RuntimeException("수식을 확인해주세요")
         }
         return intTokens
     }

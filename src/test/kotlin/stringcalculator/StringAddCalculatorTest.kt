@@ -64,6 +64,15 @@ class StringAddCalculatorTest {
             calculator.add("-1")
         }
 
-        exception.message shouldContain "음수는 불가능"
+        exception.message shouldContain "수식을 확인해주세요"
+    }
+
+    @Test
+    fun `문자열 계산기에 숫자 이외의 값을 전달하는 경우 RuntimeException 예외 처리를 한다`() {
+        val exception = shouldThrow<RuntimeException> {
+            calculator.add("a")
+        }
+
+        exception.message shouldContain "수식을 확인해주세요"
     }
 }
