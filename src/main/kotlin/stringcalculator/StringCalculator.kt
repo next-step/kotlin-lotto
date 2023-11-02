@@ -2,7 +2,6 @@ package stringcalculator
 
 class StringCalculator(
     private val validator: Validator,
-    private val numberSumCalculator: NumberSumCalculator,
     private val stringParser: StringParser
 ) {
 
@@ -14,15 +13,17 @@ class StringCalculator(
     }
 
     private fun sumWithDefaultDelimiter(input: String): Int {
-        val target = stringParser.parse(input)
-        validator.ensureAllPositiveNumbers(target)
-        return numberSumCalculator.sum(target.map { it.toInt() })
+        val operations = stringParser.parse(input)
+        validator.ensureAllPositiveNumbers(operations)
+        return sumOfOperations(operations)
     }
 
     private fun sumWithCustomDelimiter(input: String): Int {
         val parseDelimiter = stringParser.parseDelimiter(input)
-        val target = stringParser.parse(parseDelimiter.data, parseDelimiter.delimiter)
-        validator.ensureAllPositiveNumbers(target)
-        return numberSumCalculator.sum(target.map { it.toInt() })
+        val operations = stringParser.parse(parseDelimiter.data, parseDelimiter.delimiter)
+        validator.ensureAllPositiveNumbers(operations)
+        return sumOfOperations(operations)
     }
+
+    private fun sumOfOperations(operations: List<String>) = operations.sumOf { it.toInt() }
 }

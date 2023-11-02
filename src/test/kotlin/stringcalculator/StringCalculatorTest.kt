@@ -12,7 +12,7 @@ class StringCalculatorTest {
     @CsvSource(value = ["1,2,3:6", "1,2;3:6"], delimiter = ':')
     fun `커스텀 구분자 없을 때 쉼표 또는 콜론을 구분자로 문자열을 분리하여 숫자들의 합을 구한다`(target: String, expected: Int) {
         // given
-        val stringCalculator = StringCalculator(Validator(), NumberSumCalculator(), StringParser())
+        val stringCalculator = StringCalculator(Validator(), StringParser())
 
         // when
         val result = stringCalculator.sum(target)
@@ -24,7 +24,7 @@ class StringCalculatorTest {
     @Test
     fun `커스텀 구준자가 있을 때 커스텀 구분자로 문자열을 분리하여 숫자들의 함들 구한다`() {
         // given
-        val stringCalculator = StringCalculator(Validator(), NumberSumCalculator(), StringParser())
+        val stringCalculator = StringCalculator(Validator(), StringParser())
         val target = "//!\n1!2!3"
         val expected = 6
 
@@ -38,7 +38,7 @@ class StringCalculatorTest {
     @Test
     fun `잘못 입력시 예외를 던진다`() {
         // given
-        val stringCalculator = StringCalculator(Validator(), NumberSumCalculator(), StringParser())
+        val stringCalculator = StringCalculator(Validator(), StringParser())
         val target = "//!\n1!2!-3"
 
         // when
