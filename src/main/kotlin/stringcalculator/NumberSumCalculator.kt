@@ -1,7 +1,7 @@
 package stringcalculator
 
 class NumberSumCalculator {
-    fun sum(target: List<Int>): Int {
-        return target.sum()
+    fun sum(operands: List<Int>): Int {
+        return operands.sum()
     }
 }
