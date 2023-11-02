@@ -1,9 +1,8 @@
 package stringcalculator
 
-import io.kotest.assertions.Expected
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.NullAndEmptySource
@@ -40,5 +39,12 @@ class StringAddCalculatorTest {
     @CsvSource(value = ["1,2:3#6", "1,2:5#8", "3:6:9#18"], delimiter = '#')
     fun `구분자를 쉼표(,) 이외에 콜론을 사용할 수 있다`(text:String, expected: Int) {
         calculator.add(text) shouldBe expected
+    }
+
+    @DisplayName(value = "//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다.")
+    @ParameterizedTest
+    @CsvSource(value = ["'//;\n1;2;3'#6"], delimiter = '#')
+    fun customDelimiter(text: String, expected: Int) {
+        calculator.add(text) shouldBe 6
     }
 }
