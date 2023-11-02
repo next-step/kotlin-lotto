@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.util.Prize
 import lotto.util.StringHandler
 
 class LottoManager(purchased: String) {
@@ -35,6 +36,12 @@ class LottoManager(purchased: String) {
         require(numbers.size == NUMBER_NUM) { "당첨 번호는 ${NUMBER_NUM}개의 숫자여야 합니다." }
 
         winningNumbers.addAll(numbers)
+    }
+
+    fun getResult(): List<Prize> {
+        check(lottoList.isNotEmpty() && winningNumbers.isNotEmpty()) { "로또 발급 및 당첨 번호 입력이 선행되어야 합니다" }
+
+        return Prize.getResult(lottoList, winningNumbers)
     }
 
     companion object {

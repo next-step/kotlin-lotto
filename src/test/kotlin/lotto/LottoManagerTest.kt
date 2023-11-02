@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.LottoManager.Companion.LOTTO_PRICE
+import lotto.util.Prize
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
@@ -45,5 +46,24 @@ class LottoManagerTest {
         assertThatThrownBy { manager.setWinningNumbers(input) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("당첨 번호는 6개의 숫자여야 합니다.")
+    }
+
+    @Test
+    fun `당첨번호 설정 전 결과를 요청하면 Exception을 던진다`() {
+        val manager = LottoManager("1000")
+        assertThatThrownBy { manager.getResult() }
+            .isInstanceOf(IllegalStateException::class.java)
+            .hasMessage("로또 발급 및 당첨 번호 입력이 선행되어야 합니다")
+    }
+
+    @Test
+    fun `추첨 결과물 리스트를 반환한다`() {
+        val manager = LottoManager("1000")
+        manager.setWinningNumbers("1,2,3,4,5,6")
+
+        val result = manager.getResult()
+        assertThat(result).isInstanceOf(List::class.java)
+        assertThat(result).isNotEmpty()
+        assertThat(result.first()).isInstanceOf(Prize::class.java)
     }
 }
