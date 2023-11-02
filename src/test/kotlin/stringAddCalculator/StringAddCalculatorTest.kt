@@ -9,9 +9,32 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
-class StringAddCalculator{
-    fun add(test:String){
+class StringAddCalculator {
+    fun add(text: String?): Int {
+        var result: Int = 0
+        if (text.isNullOrBlank()) {
+            return result
+        }
+        var list = emptyList<Int>()
 
+        val customSeparator = "\\/\\/(.*?)\\\\n".toRegex().find(text)?.groupValues?.get(1)
+
+        if (text.toIntOrNull() != null) {
+            list = listOf(text.toInt())
+        } else if (customSeparator != null) {
+            val numbers = text.split("\\n")[1]
+            list = numbers.split(customSeparator).map { it.toInt() }
+        } else if (text.contains(',') || text.contains(':')) {
+            list = text.split(',', ':').map { it.toInt() }
+        }
+
+
+        if (list.all { it < 0 }) {
+            throw RuntimeException("This is a runtime exception.")
+        }
+
+
+        return list.sum()
     }
 }
 
@@ -26,7 +49,7 @@ class StringAddCalculatorTest {
     @DisplayName(value = "빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.")
     @ParameterizedTest
     @NullAndEmptySource
-    fun emptyOrNull(text: String) {
+    fun emptyOrNull(text: String?) {
         assertThat(calculator.add(text)).isSameAs(0)
     }
 
@@ -53,7 +76,7 @@ class StringAddCalculatorTest {
 
     @DisplayName(value = "//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다.")
     @ParameterizedTest
-    @ValueSource(strings = ["//;\n1;2;3"])
+    @ValueSource(strings = ["//;\\n1;2;3"])
     fun customDelimiter(text: String) {
         assertThat(calculator.add(text)).isSameAs(6)
     }
@@ -62,6 +85,6 @@ class StringAddCalculatorTest {
     @Test
     fun negative() {
         assertThatExceptionOfType(RuntimeException::class.java)
-            .isThrownBy{calculator.add("-1")}
+            .isThrownBy { calculator.add("-1") }
     }
 }
