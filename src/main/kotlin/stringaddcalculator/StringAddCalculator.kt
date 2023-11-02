@@ -5,24 +5,22 @@ class StringAddCalculator {
         if (text.isNullOrEmpty()) {
             return 0
         }
-
-        return parseAdd(text)
+        val tokens = parse(text)
+        return addListElements(tokens)
     }
 
-    private fun parseAdd(text: String): Int {
+    private fun parse(text: String): List<String> {
         val customDelimiterGroup = Regex("//(.)\n(.*)").find(text)
         val basicPattern = "[,:]"
 
         customDelimiterGroup?.let {
             val customDelimiter = it.groupValues[1]
             val customRegex = "[$basicPattern$customDelimiter]".toRegex()
-            val tokens = it.groupValues[2].split(customRegex)
-            return addListElements(tokens)
+            return it.groupValues[2].split(customRegex)
         }
 
         val basicRegex = basicPattern.toRegex()
-        val tokens = text.split(basicRegex)
-        return addListElements(tokens)
+        return text.split(basicRegex)
     }
 
     private fun addListElements(list: List<String>): Int {
