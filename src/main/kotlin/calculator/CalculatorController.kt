@@ -2,13 +2,13 @@ package calculator
 
 import calculator.app.StringCalculator
 import calculator.component.Tokenizer
-import calculator.component.Validator
+import calculator.component.Sanitizer
 import calculator.view.ConsoleView
 
 fun main() {
     val input = ConsoleView.inputFormula()
-    val validatedInput = Validator.validate(input)
-    val formula = Tokenizer.tokenize(validatedInput)
+    val sanitizedInput = Sanitizer.sanitize(input)
+    val formula = Tokenizer.tokenize(sanitizedInput)
     val result = StringCalculator.calculate(formula)
     ConsoleView.outputResult(result)
 }
