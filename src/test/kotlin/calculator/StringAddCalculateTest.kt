@@ -45,9 +45,9 @@ class StringAddCalculateTest: FunSpec({
         }
     }
 
-    context("//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다.") {
+    context("문자 사이에 커스텀 구분자를 지정할 수 있다.") {
         withData(
-            "//;\n1;2;3" to 6,
+            "//@\n1@2@3" to 6,
             "//!\n3!6,7" to 16
         ) { (input, output) ->
             calculator.add(input) shouldBe output
