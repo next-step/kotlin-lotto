@@ -10,4 +10,6 @@ fun main() {
     println(lottoManager.purchased)
     OutputView().printPurchasedAmount(lottoManager.getLottoList().size)
     OutputView().printLottoList(lottoManager.getLottoList())
+
+    lottoManager.setWinningNumbers(InputView().getWinningNumbers())
 }
