@@ -29,13 +29,13 @@ class StringAddCalculatorTest {
         assertThat(calculator.add(text)).isSameAs(Integer.parseInt(text));
     }
 
-//    @DisplayName(value = "숫자 두개를 쉼표(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.")
-//    @ParameterizedTest
-//    @ValueSource(strings = ["1,2"])
-//    fun twoNumbers(text: String) {
-//        assertThat(calculator.add(text)).isSameAs(3);
-//    }
-//
+    @DisplayName(value = "숫자 두개를 쉼표(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.")
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2"])
+    fun twoNumbers(text: String) {
+        assertThat(calculator.add(text)).isSameAs(3);
+    }
+
 //    @DisplayName(value = "구분자를 쉼표(,) 이외에 콜론(:)을 사용할 수 있다.")
 //    @ParameterizedTest
 //    @ValueSource(strings = ["1,2:3"])
