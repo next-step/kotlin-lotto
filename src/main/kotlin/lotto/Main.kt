@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.Lotto
 import lotto.domain.LottoStore
 import lotto.domain.Lottos
 import lotto.view.InputView
@@ -10,5 +11,5 @@ fun main() {
     val lottos = Lottos(LottoStore.buyLottos(inputPrice))
     OutputView.printLotto(lottos)
 
-    InputView.inputWinningLotto()
+    val winningLotto = Lotto(InputView.inputWinningLotto())
 }

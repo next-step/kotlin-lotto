@@ -1,6 +1,8 @@
 package lotto.domain
 
 import lotto.constants.Sort
+import lotto.constants.WinningRank
+import lotto.util.shuffleNumber
 
 object LottoStore {
 
@@ -13,11 +15,13 @@ object LottoStore {
         return(1..lottoCount).map { buyLotto() }
     }
 
+    fun winningRank(lotto: Lotto, winningLotto: Lotto): WinningRank {
+        val matchCount = lotto.matchCount(winningLotto)
+        return WinningRank.of(matchCount)
+    }
+
     private fun lottoNumberShuffle(): List<Int> {
-        return listOf(LOTTO_NUMBER_MIN..LOTTO_NUMBER_MAX)
-            .flatten()
-            .shuffled()
-            .take(LOTTO_NUMBER_SIZE)
+        return shuffleNumber().take(LOTTO_NUMBER_SIZE)
     }
 
     private fun List<Int>.lottoNumberSort(sort: Sort = Sort.ASC): List<Int> {
