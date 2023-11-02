@@ -18,4 +18,9 @@ class StringCalculatorTest : StringSpec({
         val calculate = cal.calculate(Helper.arrayDequeOf(TokenFixture.TOKEN[1], TokenFixture.TOKEN[2]))
         calculate shouldBe 3
     }
+
+    "비어있는 컬렉션을 받은 경우 0 을 반환해야한다" {
+        TODO()
+        println("빈 문자열 입력에 대한 0 반환 책임과 역할은 계산기가 담당한다")
+    }
 })
