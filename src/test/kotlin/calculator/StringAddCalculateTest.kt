@@ -7,7 +7,7 @@ import io.kotest.matchers.shouldBe
 
 class StringAddCalculateTest: FunSpec({
 
-    val calculator = StringAddCalculator(StringSpliterator())
+    val calculator = StringAddCalculator(StringSpliterator(), NegativeNumberValidation())
 
     context("빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.") {
         withData(
@@ -57,6 +57,9 @@ class StringAddCalculateTest: FunSpec({
     context("문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다.") {
         shouldThrow<RuntimeException> {
             calculator.add("-1")
+        }
+        shouldThrow<RuntimeException> {
+            calculator.add("-1:2")
         }
     }
 })
