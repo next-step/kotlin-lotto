@@ -2,31 +2,37 @@ package calculator
 
 import java.util.regex.Pattern
 
-val TO_REGEX: Pattern = Pattern.compile(",|:")
-val CUSTOM_DELIMITER_REGEX: Regex = Regex("//(.)\n(.*)")
+private val TO_REGEX: Pattern = Pattern.compile(",|:")
+private val CUSTOM_DELIMITER_REGEX: Pattern = Pattern.compile("//(.)\n(.*)")
 
 class StringAddCalculator {
+
     fun add(text: String?): Int {
         if (text.isNullOrEmpty()) {
             return 0
         }
 
-        return CUSTOM_DELIMITER_REGEX.find(text)?.let {
-            val customDelimiter = it.groupValues[1]
-            return it.groupValues[2].split(customDelimiter)
-                .sumOf {
-                    if (it.toInt() < 0) {
-                        throw RuntimeException()
-                    }
-                    it.toInt()
-                }
-        } ?: run {
-            return text.split(TO_REGEX).sumOf {
-                if (it.toInt() < 0) {
-                    throw RuntimeException()
-                }
-                it.toInt()
-            }
-        }
+        val (delimiter, realText) = fetchCustomDelimiter(text)
+
+        return realText.split(delimiter)
+            .map { toInt(it) }
+            .sumOf { it }
     }
+
+    private fun toInt(number: String): Int {
+        if (number.toInt() < 0) {
+            throw RuntimeException()
+        }
+        return number.toInt()
+    }
+
+    private fun fetchCustomDelimiter(text: String): CustomDelimiter {
+        val matcher = CUSTOM_DELIMITER_REGEX.matcher(text)
+        if (matcher.find()) {
+            return CustomDelimiter(Pattern.compile(matcher.group(1)), matcher.group(2))
+        }
+        return CustomDelimiter(TO_REGEX, text)
+    }
+
+    private data class CustomDelimiter(val delimiter: Pattern, val text: String)
 }
