@@ -12,15 +12,15 @@ class StringCalculator(
         return sumWithDefaultDelimiter(input)
     }
 
-    private fun sumWithDefaultDelimiter(input: String): Int {
-        val operations = stringParser.parse(input)
+    private fun sumWithCustomDelimiter(input: String): Int {
+        val parseDelimiter = stringParser.parseDelimiter(input)
+        val operations = stringParser.parse(parseDelimiter.data, parseDelimiter.delimiter)
         validator.ensureAllPositiveNumbers(operations)
         return sumOfOperations(operations)
     }
 
-    private fun sumWithCustomDelimiter(input: String): Int {
-        val parseDelimiter = stringParser.parseDelimiter(input)
-        val operations = stringParser.parse(parseDelimiter.data, parseDelimiter.delimiter)
+    private fun sumWithDefaultDelimiter(input: String): Int {
+        val operations = stringParser.parse(input)
         validator.ensureAllPositiveNumbers(operations)
         return sumOfOperations(operations)
     }
