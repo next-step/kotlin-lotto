@@ -29,4 +29,11 @@ class LottoManagerTest {
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("구입 금액은 1000원 단위여야 합니다.")
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1000", "5000"])
+    fun `구입 금액 1000원당 로또 하나를 발급한다`(input: String) {
+        val manager = LottoManager(input)
+        assertThat(manager.getLottoList().size).isEqualTo(input.toInt() / 1000)
+    }
 }
