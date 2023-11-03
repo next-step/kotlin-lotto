@@ -5,14 +5,16 @@ import lotto.constants.Sort
 interface ShuffleNumber {
 
     fun shuffleNumber(): List<Int>
-    fun takeShuffleNumber(takeCount: Int, sort: Sort = Sort.ASC): List<Int> {
-        return shuffleNumber().take(takeCount).numberSort(sort)
+    fun takeShuffleNumber(takeCount: Int, sort: Sort = Sort.ASC): List<LottoNumber> {
+        return shuffleNumber().take(takeCount)
+            .map { LottoNumber(it) }
+            .numberSort(sort)
     }
 
-    private fun List<Int>.numberSort(sort: Sort): List<Int> {
+    private fun List<LottoNumber>.numberSort(sort: Sort): List<LottoNumber> {
         if (sort == Sort.DESC) {
-            return this.sortedDescending()
+            return this.sortedByDescending { it.number }
         }
-        return this.sorted()
+        return this.sortedBy(LottoNumber::number)
     }
 }

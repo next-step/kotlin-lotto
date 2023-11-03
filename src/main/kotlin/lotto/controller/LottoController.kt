@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.domain.Lotto
 import lotto.domain.LottoStore
+import lotto.domain.WinningLotto
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -12,8 +13,9 @@ object LottoController {
         val lottos = LottoStore.buyLottos(inputPrice)
         OutputView.printLotto(lottos)
 
-        val winningLotto = Lotto(InputView.inputWinningLotto())
+        val winningLottoNumber = Lotto(InputView.inputWinningLotto())
         val bonusBall = InputView.inputBonusBall()
+        val winningLotto = WinningLotto(winningLottoNumber, bonusBall)
         val winningRanks = lottos.matchLotto(winningLotto)
 
         OutputView.printWinningResult(winningRanks)

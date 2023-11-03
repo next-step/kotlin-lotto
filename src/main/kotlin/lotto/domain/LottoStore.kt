@@ -1,8 +1,8 @@
 package lotto.domain
 
-import lotto.domain.Lotto.Companion.LOTTO_NUMBER_MAX
-import lotto.domain.Lotto.Companion.LOTTO_NUMBER_MIN
 import lotto.domain.Lotto.Companion.LOTTO_NUMBER_SIZE
+import lotto.domain.LottoNumber.Companion.LOTTO_NUMBER_MAX
+import lotto.domain.LottoNumber.Companion.LOTTO_NUMBER_MIN
 
 object LottoStore : ShuffleNumber {
 

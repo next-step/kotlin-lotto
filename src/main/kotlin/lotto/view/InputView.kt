@@ -1,5 +1,7 @@
 package lotto.view
 
+import lotto.domain.LottoNumber
+
 object InputView {
 
     fun inputPrice(): Int {
@@ -17,17 +19,17 @@ object InputView {
         }
     }
 
-    fun inputWinningLotto(): List<Int> {
+    fun inputWinningLotto(): List<LottoNumber> {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val winningLotto = readln()
         return parseLottoNumber(winningLotto)
     }
-    fun inputBonusBall(): Int {
+    fun inputBonusBall(): LottoNumber {
         println("보너스 볼을 입력해 주세요.")
         val bonusBall = readln()
         return try {
             require(bonusBall.isNotBlank())
-            bonusBall.toInt()
+            LottoNumber(bonusBall.toInt())
         } catch (e: NumberFormatException) {
             println(NUMBER_ERROR_MESSAGE)
             inputBonusBall()
@@ -37,10 +39,10 @@ object InputView {
         }
     }
 
-    private fun parseLottoNumber(input: String): List<Int> {
+    private fun parseLottoNumber(input: String): List<LottoNumber> {
         return try {
             require(input.isNotBlank()) { println(BLANK_ERROR_MESSAGE) }
-            input.split(DELIMITER).map { it.trim().toInt() }
+            input.split(DELIMITER).map { LottoNumber(it.trim().toInt()) }
         } catch (e: NumberFormatException) {
             println(NUMBER_ERROR_MESSAGE)
             inputWinningLotto()
