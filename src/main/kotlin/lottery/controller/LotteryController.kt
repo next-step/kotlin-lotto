@@ -7,6 +7,9 @@ import lottery.view.OutputView
 class LotteryController {
     fun start() {
         val game = LottoGame(InputView.inputAmount())
-        OutputView.printLotteryAmount(game.amount)
+        OutputView.printLotteryAmount(game.quantity)
+
+        game.createLottoNumber()
+        OutputView.printTotalLottery(game.getLottos())
     }
 }

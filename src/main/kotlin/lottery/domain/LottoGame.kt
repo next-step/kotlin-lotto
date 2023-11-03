@@ -1,13 +1,19 @@
 package lottery.domain
 
-import lottery.validator.InputValidator
-
-class LottoGame(price: String) {
-    val amount: Int
+class LottoGame(price: Int) {
+    val quantity: Int
+    private lateinit var lottos: Lottos
 
     init {
-        val inputPrice: Int = InputValidator.validateAmount(price)
-        amount = inputPrice.div(LOTTERY_PRICE)
+        quantity = price.div(LOTTERY_PRICE)
+    }
+
+    fun createLottoNumber() {
+        lottos = Lottos.of(quantity, RandomNumberGenerator())
+    }
+
+    fun getLottos(): List<Lotto> {
+        return lottos.lottos
     }
 
     companion object {
