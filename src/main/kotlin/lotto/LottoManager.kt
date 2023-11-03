@@ -3,24 +3,21 @@ package lotto
 import lotto.util.Prize
 import lotto.util.StringHandler
 
-class LottoManager(purchased: String) {
-    val purchased: Int
+class LottoManager(val purchased: Int) {
     private val lottoList: MutableList<List<Int>> = mutableListOf()
     private val winningNumbers: MutableList<Int> = mutableListOf()
 
     init {
         validateInput(purchased)
-        this.purchased = purchased.toInt()
 
         repeat(this.purchased / LOTTO_PRICE) {
             lottoList.add(generateLotto())
         }
     }
 
-    private fun validateInput(input: String) {
-        StringHandler().checkNonNumExists(input)
-        require(input.toInt() > 0) { "구입 금액은 양의 정수여야 합니다." }
-        require(input.toInt() % LOTTO_PRICE == 0) { "구입 금액은 1000원 단위여야 합니다." }
+    private fun validateInput(input: Int) {
+        require(input > 0) { "구입 금액은 양의 정수여야 합니다." }
+        require(input % LOTTO_PRICE == 0) { "구입 금액은 1000원 단위여야 합니다." }
     }
 
     private fun generateLotto(): List<Int> {

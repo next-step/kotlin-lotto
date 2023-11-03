@@ -7,7 +7,7 @@ fun main() {
     // 구입 금액 입력
     val purchased = InputView().getPurchaseAmount()
 
-    val lottoManager = LottoManager(purchased)
+    val lottoManager = LottoManager(purchased.toInt())
 
     // 구매 개수 출력
     OutputView().printPurchasedAmount(lottoManager.getLottoList().size)
