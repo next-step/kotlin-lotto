@@ -1,5 +1,5 @@
 package calculator
 
-data class ParsedTokens(val tokenList: List<Token>) {
-    val result: Int = tokenList.sumOf { it.number }
+data class PositiveNumberList(val tokenList: List<PositiveNumber>) {
+    val sum: Int = tokenList.sumOf { it.number }
 }
