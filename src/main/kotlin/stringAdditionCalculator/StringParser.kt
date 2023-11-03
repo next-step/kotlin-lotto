@@ -2,7 +2,7 @@ package stringAdditionCalculator
 
 import java.lang.RuntimeException
 
-class StringParser(private val separatorList: List<String> = listOf(DEFAULT_SEPARATOR_COMMA, DEFAULT_SEPARATOR_COLON)) {
+class StringParser(private val separatorList: List<String>) {
 
     init {
         require(separatorList.all { it.isNotEmpty() }) { "구분자가 없습니다.\n빈 문자는 구분자가 될 수 없습니다. 스페이스 공백은 허용합니다." }
@@ -32,11 +32,5 @@ class StringParser(private val separatorList: List<String> = listOf(DEFAULT_SEPA
         }
 
         return parse(input, separatorList.drop(1)).flatMap { parse(it, listOf(separatorList.first())) }
-    }
-
-    companion object {
-        private const val DEFAULT_SEPARATOR_COLON: String = ":"
-        private const val DEFAULT_SEPARATOR_COMMA: String = ","
-        val DEFAULT_SEPARATOR_LIST: List<String> = listOf(DEFAULT_SEPARATOR_COMMA, DEFAULT_SEPARATOR_COLON)
     }
 }

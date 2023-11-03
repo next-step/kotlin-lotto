@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource
 
 class StringParserTest {
 
-    private val defaultStringParser: StringParser = StringParser()
+    private val defaultStringParser: StringParser = StringParser(SeparatorParser.Companion.DEFAULT_SEPARATOR_LIST)
 
     @ParameterizedTest
     @ValueSource(strings = ["1,2,3,4,5", "1:2:3:4:5", "1,2:3:4:5", "1:2,3:4:5"])

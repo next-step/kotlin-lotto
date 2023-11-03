@@ -29,6 +29,6 @@ class SeparatorParserTest {
 
         val result: List<String> = separatorParser.extractCustomSeparatorList("1,2,3,4,5")
 
-        assertThat(result).isEqualTo(StringParser.DEFAULT_SEPARATOR_LIST)
+        assertThat(result).isEqualTo(SeparatorParser.DEFAULT_SEPARATOR_LIST)
     }
 }

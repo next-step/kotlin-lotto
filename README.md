@@ -41,8 +41,8 @@
 
 ### 💻 Step 1, Feedback
 
-* [ ] 1.SeparatorParser.kt
-* [ ] 2.StringParser.kt
+* [X] 1.SeparatorParser.kt
+* [X] 2.StringParser.kt
 
 #### 1. SeparatorParser.kt
 
