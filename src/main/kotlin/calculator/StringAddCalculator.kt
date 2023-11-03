@@ -15,23 +15,25 @@ object StringAddCalculator {
             val customDelimiter = matchResult.groupValues[1]
             val numbers = matchResult.groupValues[2].split(customDelimiter)
 
-            numbers.forEach {
-                val number = it.toIntOrNull()
-                if (number == null || number < 0) {
-                    throw RuntimeException("숫자 이외의 값 또는 음수가 입력될 경우 계산할 수 없습니다.")
-                }
-            }
-            return numbers.sumOf { it.toInt() }
+            return numbers.sumOf { it.toIntIfNonNegative() }
         }
 
         val numbers = text.split(DELIMITERS_REGEX)
 
-        numbers.forEach {
-            val number = it.toIntOrNull()
-            if (number == null || number < 0) {
-                throw RuntimeException("숫자 이외의 값 또는 음수가 입력될 경우 계산할 수 없습니다.")
-            }
+        return numbers.sumOf { it.toIntIfNonNegative() }
+    }
+
+    private fun String.toIntIfNonNegative(): Int {
+        val parsedString = this.toIntOrNull()
+
+        if (parsedString.isNullOrNegative()) {
+            throw RuntimeException("숫자 이외의 값 또는 음수가 입력될 경우 계산할 수 없습니다.")
         }
-        return numbers.sumOf { it.toInt() }
+
+        return parsedString!!
+    }
+
+    private fun Int?.isNullOrNegative(): Boolean {
+        return this == null || this < 0
     }
 }
