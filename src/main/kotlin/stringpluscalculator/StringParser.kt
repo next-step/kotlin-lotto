@@ -1,6 +1,7 @@
 package stringpluscalculator
 
 private const val DEFAULT_DELIMITERS = "[,:]"
+private val inputRegex = Regex("//(.)\n(.*)")
 
 object StringParser {
     fun parser(input: String): List<String> {
@@ -9,7 +10,7 @@ object StringParser {
     }
 
     private fun firstSplit(input: String): List<String> {
-        val result = Regex("//(.)\n(.*)").find(input)
+        val result = inputRegex.find(input)
         var tokens = listOf<String>()
         result?.let {
             val customDelimiter = it.groupValues[1]
