@@ -1,14 +1,15 @@
 package calculator
 
 object StringAddCalculator {
-    private const val DELIMITERS = "[,:]"
+    private val DELIMITERS_REGEX = Regex("[,:]")
+    private val CUSTOM_DELIMITER_MATCH_REGEX = Regex("//(.)\n(.*)")
 
     fun add(text: String?): Int {
         if (text.isNullOrBlank()) {
             return 0
         }
 
-        val customResult = Regex("//(.)\n(.*)").find(text)
+        val customResult = CUSTOM_DELIMITER_MATCH_REGEX.find(text)
 
         customResult?.let { matchResult ->
             val customDelimiter = matchResult.groupValues[1]
@@ -23,7 +24,7 @@ object StringAddCalculator {
             return numbers.sumOf { it.toInt() }
         }
 
-        val numbers = text.split(DELIMITERS.toRegex())
+        val numbers = text.split(DELIMITERS_REGEX)
 
         numbers.forEach {
             val number = it.toIntOrNull()
