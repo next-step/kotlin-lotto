@@ -15,4 +15,6 @@ operator fun Amount.plus(other: Amount) = Amount(this.value + other.value)
 
 operator fun Amount.minus(other: Amount) = Amount(this.value - other.value)
 
-operator fun Amount.div(other: Amount) = Amount(this.value / other.value)
+operator fun Amount.div(other: Amount) = this.value / other.value
+
+operator fun Amount.rem(other: Amount) = this.value % other.value
