@@ -1,9 +1,9 @@
 package lotto.controller
 
-import lotto.dto.LottoNumber
 import lotto.dto.LottoNumberGenerator
+import lotto.dto.LottoNumbers
+import lotto.dto.LottoNumbers.Companion.LOTTO_PRICE
 import lotto.dto.LottoResult
-import lotto.utils.LOTTO_PRICE
 import lotto.view.View
 
 class LottoController {
@@ -17,18 +17,18 @@ class LottoController {
         View.outputResult(money, result)
     }
 
-    private fun buyLotto(money: Int): List<LottoNumber> {
-        val buyLottos = mutableListOf<LottoNumber>()
+    private fun buyLotto(money: Int): List<LottoNumbers> {
+        val buyLottos = mutableListOf<LottoNumbers>()
         for (i in 0 until money / LOTTO_PRICE) {
             buyLottos.add(LottoNumberGenerator.generate())
         }
         return buyLottos
     }
 
-    private fun checkResult(lottos: List<LottoNumber>, winningNumber: LottoNumber): LottoResult {
+    private fun checkResult(lottos: List<LottoNumbers>, winningNumber: LottoNumbers): LottoResult {
         val result = LottoResult()
         lottos.forEach {
-            result.updateExact(it.compare(winningNumber))
+            result.updateExact(it.compareLottoNumbers(winningNumber))
         }
         return result
     }

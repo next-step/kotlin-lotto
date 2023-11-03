@@ -1,24 +1,24 @@
 package lotto.view
 
-import lotto.dto.LottoNumber
+import lotto.dto.LottoNumbers
 import lotto.dto.LottoResult
 
 object View {
     fun inputMoney(): Int {
         println("구입금액을 입력해 주세요.")
-        return readln().toInt()
+        return readln().toIntOrNull() ?: 0
     }
 
-    fun inputWinningNumber(): LottoNumber {
+    fun inputWinningNumber(): LottoNumbers {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return LottoNumber(readln().split(",").map { it.trim().toInt() })
+        return LottoNumbers(readln().split(",").map { it.trim().toInt() })
     }
 
     fun outputBuyCount(count: Int) {
         println("${count}개를 구매했습니다.")
     }
 
-    fun outputBuyLottoNumbers(lottoNumbers: List<LottoNumber>) {
+    fun outputBuyLottoNumbers(lottoNumbers: List<LottoNumbers>) {
         lottoNumbers.forEach {
             println(it.numbers.joinToString(", ", "[", "]"))
         }
