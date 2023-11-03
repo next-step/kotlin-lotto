@@ -58,7 +58,7 @@ class StringAddCalculatorTest {
         }
 
         assertThat(actual).isInstanceOf(RuntimeException::class.java)
-            .hasMessageContaining("숫자 이외의 값 또는 음수가 입력될 경우 계산할 수 없습니다.")
+            .hasMessageContaining("숫자 이외의 값은 계산할 수 없습니다.")
     }
 
     @DisplayName("음수가 입력될 경우 RuntimeException을 던진다")
@@ -71,6 +71,6 @@ class StringAddCalculatorTest {
         }
 
         assertThat(actual).isInstanceOf(RuntimeException::class.java)
-            .hasMessageContaining("숫자 이외의 값 또는 음수가 입력될 경우 계산할 수 없습니다.")
+            .hasMessageContaining("음수는 계산할 수 없습니다.")
     }
 }
