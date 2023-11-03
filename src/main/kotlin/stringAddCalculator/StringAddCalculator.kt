@@ -6,6 +6,6 @@ class StringAddCalculator {
             return 0
         }
 
-        return 0
+        return StringAddCalculatorInput(input).parse().sumOf { it }
     }
 }
