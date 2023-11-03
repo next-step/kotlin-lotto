@@ -9,8 +9,6 @@ object Calculator {
         if (formula.tokens.isEmpty()) {
             return 0
         }
-        val reduce = formula.tokens
-            .reduce { i, t -> i.add(t) }
-        return reduce.value
+        return formula.sum().value
     }
 }
