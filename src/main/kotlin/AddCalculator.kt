@@ -1,4 +1,6 @@
-class AddCalculator {
+object AddCalculator {
+
+    private const val DELIMITERS = ",|:"
 
     fun add(expression: String?): Int {
         require(!expression.isNullOrBlank())
@@ -26,9 +28,5 @@ class AddCalculator {
     private fun nonNegativeNumber(text: String): Int {
         if (text.startsWith("-")) throw RuntimeException()
         return text.toInt()
-    }
-
-    companion object {
-        private const val DELIMITERS = ",|:"
     }
 }
