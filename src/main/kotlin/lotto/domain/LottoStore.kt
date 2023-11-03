@@ -2,10 +2,10 @@ package lotto.domain
 
 object LottoStore : ShuffleNumber {
 
-    fun buyLottos(inputPrice: Int): List<Lotto> {
+    fun buyLottos(inputPrice: Int): Lottos {
         val lottoCount = inputPrice / LOTTO_PRICE
         this.validateLottoBuy(lottoCount)
-        return List(lottoCount) { buyLotto() }
+        return Lottos(List(lottoCount) { buyLotto() })
     }
     override fun shuffleNumber(): List<Int> {
         return listOf(LOTTO_NUMBER_MIN..LOTTO_NUMBER_MAX)
