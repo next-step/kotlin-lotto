@@ -1,4 +1,4 @@
-package calculator.component
+package calculator.model
 
 import calculator.fixture.TokenFixture
 import io.kotest.assertions.throwables.shouldThrow
