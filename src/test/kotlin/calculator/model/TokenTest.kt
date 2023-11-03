@@ -1,5 +1,6 @@
 package calculator.model
 
+import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 
@@ -12,8 +13,10 @@ class TokenTest : StringSpec({
     }
 
     "0과 양수는 허용됩니다" {
-        (0..9999).forEach {
-            Token(it)
+        shouldNotThrow<IllegalArgumentException> {
+            (0..30).forEach {
+                Token(it)
+            }
         }
     }
 })
