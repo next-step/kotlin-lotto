@@ -2,7 +2,7 @@
 
 ## STEP1 (1단계 - 문자열 덧셈 계산기)
 ### 실습 환경 구축
-[자동차 경주 저장소](https://github.com/next-step/kotlin-lotto)를 기반으로 미션을 진행한다. [온라인 코드 리뷰 요청 1단계 문서](https://github.com/next-step/nextstep-docs/blob/master/codereview/review-step1.md)를 참고해 실습 환경을 구축한다.
+[로또 저장소](https://github.com/next-step/kotlin-lotto)를 기반으로 미션을 진행한다. [온라인 코드 리뷰 요청 1단계 문서](https://github.com/next-step/nextstep-docs/blob/master/codereview/review-step1.md)를 참고해 실습 환경을 구축한다.
 1. 미션 시작 버튼을 눌러 미션을 시작한다.
 2. 저장소에 자신의 GitHub 아이디로 된 브랜치가 생성되었는지 확인한다.
 3. 저장소를 자신의 계정으로 Fork 한다.
