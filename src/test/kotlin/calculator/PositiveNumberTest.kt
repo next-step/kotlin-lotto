@@ -5,7 +5,7 @@ import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import kotlin.RuntimeException
 
-class TokenTest {
+class PositiveNumberTest {
     @Test
     fun `토큰이 양수면 Int 값으로 반환한다`() {
         assertThat(PositiveNumber("123").number).isEqualTo(123)
