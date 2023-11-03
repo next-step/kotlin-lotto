@@ -4,8 +4,11 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.params.provider.ValueSource
+import java.util.stream.Stream
 
 class StringCalculatorParserTest {
 
@@ -62,27 +65,31 @@ class StringCalculatorParserTest {
         assertThat(result).isEqualTo(false)
     }
 
-    @Test
-    fun `문자열이 커스텀 구분자를 포함하면 커스텀 구분자를 반환한다`() {
+    @ParameterizedTest
+    @MethodSource("provideNumbersAsString")
+    fun `문자열이 커스텀 구분자를 포함하면 커스텀 구분자를 반환한다`(numbersAsString: String, expectedDelimiter: String, expectedData: String) {
         // given
         val stringCalculatorParser = StringCalculatorParser()
-        val input1 = "//;\n1;2;3"
-        val input2 = "//!\n1!2!3"
-        val input3 = "//@\n1@2@3"
 
         // when
-        val parsingData1 = stringCalculatorParser.parseDelimiter(input1)
-        val parsingData2 = stringCalculatorParser.parseDelimiter(input2)
-        val parsingData3 = stringCalculatorParser.parseDelimiter(input3)
+        val parsingData = stringCalculatorParser.parseDelimiter(numbersAsString)
 
         // then
         assertAll(
-            { assertThat(parsingData1.delimiter).isEqualTo(";") },
-            { assertThat(parsingData1.data).isEqualTo("1;2;3") },
-            { assertThat(parsingData2.delimiter).isEqualTo("!") },
-            { assertThat(parsingData2.data).isEqualTo("1!2!3") },
-            { assertThat(parsingData3.delimiter).isEqualTo("@") },
-            { assertThat(parsingData3.data).isEqualTo("1@2@3") }
+            { assertThat(parsingData.delimiter).isEqualTo(expectedDelimiter) },
+            { assertThat(parsingData.data).isEqualTo(expectedData) },
         )
+    }
+
+    companion object {
+
+        @JvmStatic
+        fun provideNumbersAsString(): Stream<Arguments> {
+            return Stream.of(
+                Arguments.of("//;\n1;2;3", ";", "1;2;3"),
+                Arguments.of("//!\n1!2!3", "!", "1!2!3"),
+                Arguments.of("//@\n1@2@3", "@", "1@2@3")
+            )
+        }
     }
 }
