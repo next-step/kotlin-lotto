@@ -1,6 +1,6 @@
 package lotto.business
 
-class LottoTicketGenerator(private val randomLottoPicker: RandomLottoPicker) {
+class LottoTicketGenerator(private val randomLottoPicker: RandomLottoPicker = RandomLottoPicker()) {
     fun generate(): LottoTicket {
         val lottoNumbers = randomLottoPicker.pick()
         return LottoTicket(lottoNumbers)
