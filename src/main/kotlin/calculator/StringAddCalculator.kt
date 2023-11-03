@@ -10,7 +10,7 @@ object StringAddCalculator {
 
         return Formula(input).getTokens()
             .map { PositiveOperand(it) }
-            .fold(INITIAL_VALUE, PositiveOperand::plus)
+            .fold(INITIAL_VALUE) { acc, positiveOperand -> acc + positiveOperand }
             .toInt()
     }
 }
