@@ -30,12 +30,12 @@ object StringParser {
 
     private fun checkValidInput(parseResult: List<String>) {
         for (element in parseResult) {
-            val parseNum = element.toIntOrNull() ?: throw RuntimeException()
+            val parseNum = element.toIntOrNull() ?: throw IllegalArgumentException("커스텀 구분자 외에는 숫자 이외의 값을 사용할 수는 없습니다. 요소 : $element")
             checkNegative(parseNum)
         }
     }
 
     private fun checkNegative(parseNum: Int) {
-        require(parseNum >= 0) { throw RuntimeException() }
+        require(parseNum >= 0) { throw IllegalArgumentException("음수를 값으로 사용할 수는 없습니다. 요소 : $parseNum") }
     }
 }
