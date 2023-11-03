@@ -1,5 +1,6 @@
 package lotto.util
 
+import lotto.Lotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -7,14 +8,14 @@ class PrizeTest {
 
     @Test
     fun `lotto 리스트와 당첨번호를 이용해 결과정보를 생성한다`() {
-        val winningNum = listOf(1, 2, 3, 4, 5, 6)
+        val winningNum = Lotto(listOf(1, 2, 3, 4, 5, 6))
         val lottoNumbers = listOf(
-            listOf(1, ILLEGAL_NUM, ILLEGAL_NUM, ILLEGAL_NUM, ILLEGAL_NUM, ILLEGAL_NUM),
-            listOf(1, 2, ILLEGAL_NUM, ILLEGAL_NUM, ILLEGAL_NUM, ILLEGAL_NUM),
-            listOf(1, 2, 3, ILLEGAL_NUM, ILLEGAL_NUM, ILLEGAL_NUM),
-            listOf(1, 2, 3, 4, ILLEGAL_NUM, ILLEGAL_NUM),
-            listOf(1, 2, 3, 4, 5, ILLEGAL_NUM),
-            listOf(1, 2, 3, 4, 5, 6)
+            Lotto(listOf(1, ILLEGAL_NUM, ILLEGAL_NUM, ILLEGAL_NUM, ILLEGAL_NUM, ILLEGAL_NUM)),
+            Lotto(listOf(1, 2, ILLEGAL_NUM, ILLEGAL_NUM, ILLEGAL_NUM, ILLEGAL_NUM)),
+            Lotto(listOf(1, 2, 3, ILLEGAL_NUM, ILLEGAL_NUM, ILLEGAL_NUM)),
+            Lotto(listOf(1, 2, 3, 4, ILLEGAL_NUM, ILLEGAL_NUM)),
+            Lotto(listOf(1, 2, 3, 4, 5, ILLEGAL_NUM)),
+            Lotto(listOf(1, 2, 3, 4, 5, 6))
         )
 
         // 1~4등상이 하나씩, 순위권 외 항목이 2개 존재

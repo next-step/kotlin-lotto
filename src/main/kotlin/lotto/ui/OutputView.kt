@@ -1,5 +1,6 @@
 package lotto.ui
 
+import lotto.Lotto
 import lotto.util.Prize
 
 class OutputView {
@@ -7,7 +8,7 @@ class OutputView {
         println("$purchased 개를 구매했습니다.")
     }
 
-    fun printLottoList(lottoList: List<List<Int>>) {
+    fun printLottoList(lottoList: List<Lotto>) {
         lottoList.forEach { println(it) }
     }
 

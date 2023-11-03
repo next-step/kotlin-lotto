@@ -1,27 +1,36 @@
 package lotto
 
-import lotto.ui.InputView
-import lotto.ui.OutputView
+class Lotto(private val numbers: List<Int>) {
+    init {
+        require(numbers.size == NUMBER_NUM) { "로또 번호는 6개여야 합니다." }
+    }
+    constructor () : this(generateLotto())
 
-fun main() {
-    // 구입 금액 입력
-    val purchased = InputView().getPurchaseAmount()
+    fun matches(winningNumbers: Lotto): Int {
+        return numbers.intersect(winningNumbers.toSet()).size
+    }
+    private fun toSet(): Set<Int> {
+        return numbers.toSet()
+    }
 
-    val lottoManager = LottoManager(purchased.toInt())
+    fun isNotEmpty(): Boolean {
+        return numbers.isNotEmpty()
+    }
 
-    // 구매 개수 출력
-    OutputView().printPurchasedAmount(lottoManager.getLottoList().size)
+    override fun toString(): String {
+        return "[${numbers.joinToString(", ")}]"
+    }
 
-    // 로또 발급 및 출력
-    lottoManager.generateLotto()
-    OutputView().printLottoList(lottoManager.getLottoList())
+    companion object {
+        const val NUMBER_NUM = 6
+        private const val MIN_NUMBER = 1
+        private const val MAX_NUMBER = 45
 
-    // 당첨 번호 입력
-    lottoManager.setWinningNumbers(InputView().getWinningNumbers())
-
-    // 통계 출력
-    OutputView().printResult(lottoManager.getResult())
-
-    // 수익률 출력
-    OutputView().printEarningRate(lottoManager.getResult(), lottoManager.purchased)
+        private fun generateLotto(): List<Int> {
+            return (MIN_NUMBER..MAX_NUMBER)
+                .shuffled()
+                .take(NUMBER_NUM)
+                .sorted()
+        }
+    }
 }

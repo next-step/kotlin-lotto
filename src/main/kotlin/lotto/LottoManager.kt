@@ -1,11 +1,10 @@
 package lotto
 
 import lotto.util.Prize
-import lotto.util.StringHandler
 
 class LottoManager(val purchased: Int) {
-    private val lottoList: MutableList<List<Int>> = mutableListOf()
-    private val winningNumbers: MutableList<Int> = mutableListOf()
+    private val lottoList: MutableList<Lotto> = mutableListOf()
+    private lateinit var winningNumbers: Lotto
 
     init {
         validateInput(purchased)
@@ -20,21 +19,16 @@ class LottoManager(val purchased: Int) {
         lottoList.clear()
 
         repeat(this.purchased / LOTTO_PRICE) {
-            lottoList.add(
-                (MIN_NUMBER..MAX_NUMBER).shuffled().take(NUMBER_NUM).sorted()
-            )
+            lottoList.add(Lotto())
         }
     }
 
-    fun getLottoList(): List<List<Int>> {
+    fun getLottoList(): List<Lotto> {
         return lottoList
     }
 
-    fun setWinningNumbers(numbers: String) {
-        val numbers = StringHandler().tokenizeWinningNumbers(numbers)
-        require(numbers.size == NUMBER_NUM) { "당첨 번호는 ${NUMBER_NUM}개의 숫자여야 합니다." }
-
-        winningNumbers.addAll(numbers)
+    fun setWinningNumbers(numbers: Lotto) {
+        winningNumbers = numbers
     }
 
     fun getResult(): List<Prize> {
@@ -45,8 +39,5 @@ class LottoManager(val purchased: Int) {
 
     companion object {
         const val LOTTO_PRICE = 1000
-        const val NUMBER_NUM = 6
-        const val MIN_NUMBER = 1
-        const val MAX_NUMBER = 45
     }
 }

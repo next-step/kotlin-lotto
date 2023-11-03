@@ -34,15 +34,6 @@ class LottoManagerTest {
         assertThat(manager.getLottoList().size).isEqualTo(input / LOTTO_PRICE)
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = ["1,2,3,4", "1,2,3,4,5,6,7"])
-    fun `당첨 번호가 6개가 아닌 경우 Exception을 던진다`(input: String) {
-        val manager = LottoManager(1000)
-        assertThatThrownBy { manager.setWinningNumbers(input) }
-            .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage("당첨 번호는 6개의 숫자여야 합니다.")
-    }
-
     @Test
     fun `당첨번호 설정 전 결과를 요청하면 Exception을 던진다`() {
         val manager = LottoManager(1000)
@@ -56,7 +47,7 @@ class LottoManagerTest {
         val money = 2000
         val manager = LottoManager(money)
         manager.generateLotto()
-        manager.setWinningNumbers("1,2,3,4,5,6")
+        manager.setWinningNumbers(Lotto(listOf(1,2,3,4,5,6)))
 
         val result = manager.getResult()
         assertThat(result).isInstanceOf(List::class.java)
