@@ -11,10 +11,8 @@ object StringPlusCalculator {
     }
 
     private fun plusElements(parseResult: List<String>): Int {
-        var result = 0
-        parseResult.forEach {
-            result += it.toInt()
+        return parseResult.sumOf {
+            it.toInt()
         }
-        return result
     }
 }
