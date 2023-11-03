@@ -22,6 +22,20 @@ object InputView {
         val winningLotto = readln()
         return parseLottoNumber(winningLotto)
     }
+    fun inputBonusBall(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        val bonusBall = readln()
+        return try {
+            require(bonusBall.isNotBlank())
+            bonusBall.toInt()
+        } catch (e: NumberFormatException) {
+            println(NUMBER_ERROR_MESSAGE)
+            inputBonusBall()
+        } catch (e: IllegalArgumentException) {
+            println(BLANK_ERROR_MESSAGE)
+            inputBonusBall()
+        }
+    }
 
     private fun parseLottoNumber(input: String): List<Int> {
         return try {

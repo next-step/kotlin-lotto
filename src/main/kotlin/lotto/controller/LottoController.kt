@@ -13,6 +13,7 @@ object LottoController {
         OutputView.printLotto(lottos)
 
         val winningLotto = Lotto(InputView.inputWinningLotto())
+        val bonusBall = InputView.inputBonusBall()
         val winningRanks = lottos.matchLotto(winningLotto)
 
         OutputView.printWinningResult(winningRanks)
