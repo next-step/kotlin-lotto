@@ -36,4 +36,14 @@ class StringAddCalculatorTest {
 
         assertThat(actual).isEqualTo(6)
     }
+
+    @DisplayName("//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다")
+    @Test
+    fun customDelimiter() {
+        val text = "//;\n1;2;3"
+
+        val actual = StringAddCalculator.add(text)
+
+        assertThat(actual).isEqualTo(6)
+    }
 }
