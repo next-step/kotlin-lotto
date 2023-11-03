@@ -9,7 +9,7 @@ value class Lottos(val lottos: List<Lotto>) {
         return lottos.size
     }
 
-    fun matchLotto(winningLotto: Lotto): List<WinningRank> {
+    fun matchLotto(winningLotto: WinningLotto): List<WinningRank> {
         return lottos.map { it.winningRank(winningLotto) }
     }
 }

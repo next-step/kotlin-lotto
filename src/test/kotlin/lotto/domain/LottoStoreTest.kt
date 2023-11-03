@@ -9,7 +9,7 @@ class LottoStoreTest : FunSpec({
     test("입력 받은 금액만큼 로또를 구입할 수 있다.") {
         val inputPrice = 1000
         val lottos = LottoStore.buyLottos(inputPrice)
-        lottos.size shouldBe 1
+        lottos.getLottoCount() shouldBe 1
     }
 
     test("입력받은 금액이 로또 가격보다 낮으면 구매할 수 없다.") {

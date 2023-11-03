@@ -1,27 +1,33 @@
 package lotto.domain
 
 import lotto.constants.WinningRank
-import lotto.domain.LottoStore.LOTTO_NUMBER_SIZE
 
-@JvmInline
-value class Lotto(val numbers: List<Int>) {
+class Lotto(val lottoNumbers: LottoNumbers) {
 
     init {
-        validateLottoNumber()
+        validateLotto()
     }
 
-    private fun validateLottoNumber() {
-        require(numbers.size == LOTTO_NUMBER_SIZE) {
+    fun winningRank(winningLotto: WinningLotto): WinningRank {
+        val (matchCount, bonusMatchCount) = match(winningLotto)
+        if (matchCount == 5) return WinningRank.of(matchCount, bonusMatchCount)
+        return WinningRank.of(matchCount)
+    }
+
+    private fun match(winningLotto: WinningLotto): Pair<Int, Boolean> {
+        return Pair(
+            lottoNumbers.matchNumbersCount(winningLotto.lottoNumbers),
+            lottoNumbers.matchNumbers(winningLotto.bonusNumber)
+        )
+    }
+
+    private fun validateLotto() {
+        require(lottoNumbers.numbers.size == LOTTO_NUMBER_SIZE) {
             "로또는 ${LOTTO_NUMBER_SIZE}개의 숫자만 가질 수 있습니다."
         }
     }
 
-    fun matchCount(winningLotto: Lotto): Int {
-        return numbers.filter { winningLotto.numbers.contains(it) }.size
-    }
-
-    fun winningRank(winningLotto: Lotto): WinningRank {
-        val matchCount = matchCount(winningLotto)
-        return WinningRank.of(matchCount)
+    companion object {
+        const val LOTTO_NUMBER_SIZE = 6
     }
 }

@@ -1,16 +1,18 @@
 package lotto.domain
 
+import lotto.domain.Lotto.Companion.LOTTO_NUMBER_SIZE
+import lotto.domain.LottoNumber.Companion.LOTTO_NUMBER_MAX
+import lotto.domain.LottoNumber.Companion.LOTTO_NUMBER_MIN
+
 object LottoStore : ShuffleNumber {
 
-    fun buyLottos(inputPrice: Int): List<Lotto> {
+    fun buyLottos(inputPrice: Int): Lottos {
         val lottoCount = inputPrice / LOTTO_PRICE
         this.validateLottoBuy(lottoCount)
-        return List(lottoCount) { buyLotto() }
+        return Lottos(List(lottoCount) { buyLotto() })
     }
     override fun shuffleNumber(): List<Int> {
-        return listOf(LOTTO_NUMBER_MIN..LOTTO_NUMBER_MAX)
-            .flatten()
-            .shuffled()
+        return LOTTO_POOL.flatten().shuffled()
     }
 
     private fun buyLotto(): Lotto {
@@ -22,7 +24,5 @@ object LottoStore : ShuffleNumber {
     }
 
     private const val LOTTO_PRICE = 1000
-    const val LOTTO_NUMBER_SIZE = 6
-    const val LOTTO_NUMBER_MIN = 1
-    const val LOTTO_NUMBER_MAX = 45
+    private val LOTTO_POOL = listOf(LOTTO_NUMBER_MIN..LOTTO_NUMBER_MAX)
 }
