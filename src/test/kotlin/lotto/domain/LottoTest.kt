@@ -11,12 +11,11 @@ import lotto.domain.LottoStore.takeShuffleNumber
 class LottoTest : FunSpec({
 
     test("로또 1장은 6개의 숫자를 가진다.") {
+        var numbers = listOf(1, 2, 3, 4, 5, 6)
         val lotto = Lotto(takeShuffleNumber(6))
         lotto.numbers.size shouldBe 6
-    }
 
-    test("로또는 6개의 숫자만 가진다.") {
-        val numbers = listOf(1, 2, 3, 4, 5)
+        numbers = listOf(1, 2, 3, 4, 5)
         val exception = shouldThrow<IllegalArgumentException> {
             Lotto(numbers)
         }
@@ -24,15 +23,29 @@ class LottoTest : FunSpec({
     }
 
     test("로또 1장의 숫자는 1부터 45까지의 숫자이다.") {
-        val lotto = Lotto(takeShuffleNumber(6))
+        var numbers = listOf(1, 2, 3, 4, 5, 45)
+        val lotto = Lotto(numbers)
         lotto.numbers.forEach {
             it shouldBeInRange 1..45
         }
+
+        numbers = listOf(1, 2, 3, 4, 5, 46)
+        val exception = shouldThrow<IllegalArgumentException> {
+            Lotto(numbers)
+        }
+        exception.message shouldBe "로또는 1~45의 숫자만 가질 수 있습니다."
     }
 
     test("로또 1장의 숫자는 중복되지 않는다.") {
-        val lotto = Lotto(takeShuffleNumber(6))
+        var numbers = listOf(1, 2, 3, 4, 5, 6)
+        val lotto = Lotto(numbers)
         lotto.numbers.toSet().size shouldBe 6
+
+        numbers = listOf(1, 2, 3, 4, 5, 5)
+        val exception = shouldThrow<IllegalArgumentException> {
+            Lotto(numbers)
+        }
+        exception.message shouldBe "로또는 중복되지 않는 숫자만 가질 수 있습니다."
     }
 
     test("로또 1장의 숫자는 오름차순으로 정렬되어 있다.") {

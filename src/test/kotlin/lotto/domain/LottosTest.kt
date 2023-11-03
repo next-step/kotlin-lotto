@@ -3,7 +3,7 @@ package lotto.domain
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import lotto.constants.WinningRank
-import lotto.domain.LottoStore.LOTTO_NUMBER_SIZE
+import lotto.domain.Lotto.Companion.LOTTO_NUMBER_SIZE
 import lotto.domain.LottoStore.takeShuffleNumber
 
 class LottosTest : FunSpec({
