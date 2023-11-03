@@ -2,7 +2,7 @@ package calculator.app
 
 import calculator.model.Formula
 
-object StringCalculator {
+object Calculator {
     fun calculate(formula: Formula): Int {
         if (formula.tokens.isEmpty()) {
             return 0
