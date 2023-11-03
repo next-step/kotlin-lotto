@@ -1,31 +1,27 @@
 package lottery.domain
 
-import io.kotest.assertions.throwables.shouldThrow
-import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
-import lottery.validator.InputValidator
+import org.assertj.core.api.Assertions.assertThatThrownBy
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
-class LottoGameTest : DescribeSpec({
-    describe("로또 게임을 진행하여") {
-        context("입력 받은 로또 금액이") {
-            val purchaseAmount = 1000
-            it("${purchaseAmount}원 이상이면 구매가 가능하다") {
-                val game = LottoGame(purchaseAmount)
+class LottoGameTest {
+    @ParameterizedTest(name = "구매 금액 {0}원을 입력하면 로또 {1}장이 생성된다")
+    @CsvSource("999,0", "1000,1", "1001,1", "3500,3")
+    @DisplayName("로또 구입 금액을 입력받아 로또 구매 장수를 생성한다")
+    fun lottoGameInit(price: String, amount: Int) {
+        val lottoGame = LottoGame(price)
 
-                game.amount shouldBe purchaseAmount
-            }
-
-            it("${purchaseAmount}원 보다 적으면 구매 장수는 0장이다") {
-                val game = LottoGame(purchaseAmount)
-
-                // TODO("구매 장수를 검증한다")
-            }
-
-            it("숫자가 아니면 구매가 불가능하다") {
-                shouldThrow<IllegalArgumentException> {
-                    InputValidator.validateAmount("lotto")
-                }
-            }
-        }
+        lottoGame.amount shouldBe amount
     }
-})
+
+    @Test
+    @DisplayName("로또 구입 금액이 숫자가 아니면 구매가 불가능하다")
+    fun validateAmount() {
+        assertThatThrownBy {
+            LottoGame("lotto")
+        }.isInstanceOf(IllegalArgumentException::class.java)
+    }
+}
