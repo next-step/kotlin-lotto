@@ -3,7 +3,6 @@ package lotto.util
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-const val ILLEGAL_NUM = 50
 class PrizeTest {
 
     @Test
@@ -47,5 +46,9 @@ class PrizeTest {
         assertThat(Prize.countResult(result, 4)).isEqualTo(1)
         assertThat(Prize.countResult(result, 3)).isEqualTo(1)
         assertThat(Prize.countResult(result, -1)).isEqualTo(2)
+    }
+
+    companion object {
+        const val ILLEGAL_NUM = 50
     }
 }
