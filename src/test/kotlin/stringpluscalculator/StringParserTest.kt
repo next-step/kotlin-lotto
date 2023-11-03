@@ -41,6 +41,8 @@ class StringParserTest : BehaviorSpec({
                 forAll(
                     row("?,2,3"),
                     row("-1,2,3"),
+                    row("가,2,3"),
+                    row("//;\n가;2,3")
                 ) { input ->
                     shouldThrow<RuntimeException> {
                         StringParser.parser(input)
