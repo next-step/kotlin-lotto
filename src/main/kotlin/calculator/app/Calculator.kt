@@ -1,9 +1,11 @@
 package calculator.app
 
-import calculator.model.Formula
+import calculator.model.Tokenizer
 
 object Calculator {
-    fun calculate(formula: Formula): Int {
+
+    fun calculate(input: String): Int {
+        val formula = Tokenizer.tokenize(input)
         if (formula.tokens.isEmpty()) {
             return 0
         }
