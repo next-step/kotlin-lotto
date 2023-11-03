@@ -36,8 +36,6 @@ object StringParser {
     }
 
     private fun checkNegative(parseNum: Int) {
-        if (parseNum < 0) {
-            throw RuntimeException()
-        }
+        require(parseNum >= 0) { throw RuntimeException() }
     }
 }
