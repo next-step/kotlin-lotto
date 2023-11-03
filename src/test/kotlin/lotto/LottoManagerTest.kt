@@ -30,6 +30,7 @@ class LottoManagerTest {
     @ValueSource(ints = [1000, 5000])
     fun `구입 금액 1000원당 로또 하나를 발급한다`(input: Int) {
         val manager = LottoManager(input)
+        manager.generateLotto()
         assertThat(manager.getLottoList().size).isEqualTo(input / LOTTO_PRICE)
     }
 
@@ -54,6 +55,7 @@ class LottoManagerTest {
     fun `추첨 결과물 리스트를 반환한다`() {
         val money = 2000
         val manager = LottoManager(money)
+        manager.generateLotto()
         manager.setWinningNumbers("1,2,3,4,5,6")
 
         val result = manager.getResult()

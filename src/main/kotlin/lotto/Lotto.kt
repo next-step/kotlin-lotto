@@ -12,7 +12,8 @@ fun main() {
     // 구매 개수 출력
     OutputView().printPurchasedAmount(lottoManager.getLottoList().size)
 
-    // 발급된 로또 출력
+    // 로또 발급 및 출력
+    lottoManager.generateLotto()
     OutputView().printLottoList(lottoManager.getLottoList())
 
     // 당첨 번호 입력

@@ -9,10 +9,6 @@ class LottoManager(val purchased: Int) {
 
     init {
         validateInput(purchased)
-
-        repeat(this.purchased / LOTTO_PRICE) {
-            lottoList.add(generateLotto())
-        }
     }
 
     private fun validateInput(input: Int) {
@@ -20,8 +16,14 @@ class LottoManager(val purchased: Int) {
         require(input % LOTTO_PRICE == 0) { "구입 금액은 1000원 단위여야 합니다." }
     }
 
-    private fun generateLotto(): List<Int> {
-        return (MIN_NUMBER..MAX_NUMBER).shuffled().take(NUMBER_NUM).sorted()
+    fun generateLotto() {
+        lottoList.clear()
+
+        repeat(this.purchased / LOTTO_PRICE) {
+            lottoList.add(
+                (MIN_NUMBER..MAX_NUMBER).shuffled().take(NUMBER_NUM).sorted()
+            )
+        }
     }
 
     fun getLottoList(): List<List<Int>> {
