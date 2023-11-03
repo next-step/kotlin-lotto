@@ -1,6 +1,4 @@
-package calculator.component
-
-import calculator.model.Token
+package calculator.model
 
 data class Formula(
     val tokens: ArrayDeque<Token>

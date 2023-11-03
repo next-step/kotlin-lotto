@@ -1,7 +1,7 @@
 package calculator
 
 import calculator.app.StringCalculator
-import calculator.component.Tokenizer
+import calculator.model.Tokenizer
 import calculator.view.ConsoleView
 
 fun main() {

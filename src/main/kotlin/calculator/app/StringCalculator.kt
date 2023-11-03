@@ -1,6 +1,6 @@
 package calculator.app
 
-import calculator.component.Formula
+import calculator.model.Formula
 
 object StringCalculator {
     fun calculate(formula: Formula): Int {

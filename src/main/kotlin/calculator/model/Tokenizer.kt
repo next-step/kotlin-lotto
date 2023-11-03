@@ -1,4 +1,4 @@
-package calculator.component
+package calculator.model
 
 object Tokenizer {
 
