@@ -6,7 +6,9 @@ private val inputRegex = Regex("//(.)\n(.*)")
 object StringParser {
     fun parser(input: String): List<String> {
         val tokens = splitWithCustomDelimiter(input)
-        return splitWithDefaultDelimiter(tokens, input)
+        val parseResult = splitWithDefaultDelimiter(tokens, input)
+        checkValidInput(parseResult)
+        return parseResult
     }
 
     private fun splitWithCustomDelimiter(input: String): List<String> {
@@ -24,5 +26,18 @@ object StringParser {
             return input.split(DEFAULT_DELIMITERS.toRegex())
         }
         return tokens.filter { it.isNotBlank() }.flatMap { it.split(DEFAULT_DELIMITERS.toRegex()) }
+    }
+
+    private fun checkValidInput(parseResult: List<String>) {
+        for (element in parseResult) {
+            val parseNum = element.toIntOrNull() ?: throw RuntimeException()
+            checkNegative(parseNum)
+        }
+    }
+
+    private fun checkNegative(parseNum: Int) {
+        if (parseNum < 0) {
+            throw RuntimeException()
+        }
     }
 }

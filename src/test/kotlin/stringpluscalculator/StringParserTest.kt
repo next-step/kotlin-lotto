@@ -1,9 +1,11 @@
 package stringpluscalculator
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
+import java.lang.RuntimeException
 
 class StringParserTest : BehaviorSpec({
 
@@ -28,6 +30,21 @@ class StringParserTest : BehaviorSpec({
                     row("//;\n1;2,3", listOf("1", "2", "3"))
                 ) { input, expected ->
                     StringParser.parser(input) shouldBe expected
+                }
+            }
+        }
+    }
+
+    Given("숫자 이외의 값 또는 음수가 주어지면") {
+        When("문자열 파서는") {
+            Then("예외를 발생한다.") {
+                forAll(
+                    row("?,2,3"),
+                    row("-1,2,3"),
+                ) { input ->
+                    shouldThrow<RuntimeException> {
+                        StringParser.parser(input)
+                    }
                 }
             }
         }
