@@ -1,7 +1,7 @@
 package calculator
 
 object StringAddCalculator {
-    private const val DELIMITERS = ",|:"
+    private const val DELIMITERS = "[,:]"
 
     fun add(text: String?): Int {
         if (text.isNullOrBlank()) {
