@@ -1,8 +1,13 @@
 package calculator
 
 import calculator.model.Operands
+import calculator.view.InputView
 
 class StringAddCalculator {
+    fun execute() {
+        add(InputView.inputExpression())
+    }
+
     fun add(input: String?): Int {
         return if (input.isNullOrEmpty()) ZERO else Operands.from(makeOperands(input)).calculate()
     }
@@ -21,4 +26,9 @@ class StringAddCalculator {
         private val CUSTOM_DELIMITER = "//(.)\n(.*)".toRegex()
         private const val ZERO = 0
     }
+}
+
+fun main() {
+    val calculator = StringAddCalculator()
+    calculator.execute()
 }
