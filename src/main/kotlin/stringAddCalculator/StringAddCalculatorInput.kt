@@ -6,6 +6,6 @@ class StringAddCalculatorInput(private val input: String) {
             return listOf()
         }
 
-        return input.split(",").map { it.toInt() }
+        return input.split(Regex("[,:]")).map { it.toInt() }
     }
 }

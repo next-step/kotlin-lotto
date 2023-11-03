@@ -8,8 +8,22 @@ import stringAddCalculator.StringAddCalculatorInput
 
 class StringAddCalculatorInputTest {
     @ParameterizedTest
-    @CsvSource(value = ["1,2,3:1,2,3"], delimiter = ':')
-    fun `","를 구분자로 활용하여 문자열을 파싱`(
+    @CsvSource(value = ["1,2,3?1,2,3"], delimiter = '?')
+    fun `콤마를 구분자로 활용하여 문자열을 파싱`(
+        text: String,
+        @ConvertWith(IntegerListConverter::class) expected: List<Int>
+    ) {
+        val input = StringAddCalculatorInput(input = text)
+
+        val parsedInput = input.parse()
+
+        assertEquals(expected.count(), parsedInput.count())
+        expected.forEachIndexed { i, e -> assertEquals(e, parsedInput[i]) }
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = ["1:2:3?1,2,3"], delimiter = '?')
+    fun `콜론을 구분자로 활용하여 문자열을 파싱`(
         text: String,
         @ConvertWith(IntegerListConverter::class) expected: List<Int>
     ) {
