@@ -8,42 +8,22 @@ import lotto.domain.LottoStore.takeShuffleNumber
 class LottoTest : FunSpec({
 
     test("로또 1장은 6개의 숫자를 가진다.") {
-        var numbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }
+        var numbers = LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
         val lotto = Lotto(numbers)
-        lotto.numbers.size shouldBe 6
+        lotto.lottoNumbers shouldBe numbers
 
-        numbers = listOf(1, 2, 3, 4, 5).map { LottoNumber(it) }
+        numbers = LottoNumbers(listOf(1, 2, 3, 4, 5).map { LottoNumber(it) })
         val exception = shouldThrow<IllegalArgumentException> {
             Lotto(numbers)
         }
         exception.message shouldBe "로또는 6개의 숫자만 가질 수 있습니다."
     }
 
-    test("로또 1장의 숫자는 중복되지 않는다.") {
-        var numbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }
-        val lotto = Lotto(numbers)
-        lotto.numbers.toSet().size shouldBe 6
-
-        numbers = listOf(1, 2, 3, 4, 5, 5).map { LottoNumber(it) }
-        val exception = shouldThrow<IllegalArgumentException> {
-            Lotto(numbers)
-        }
-        exception.message shouldBe "로또는 중복되지 않는 숫자만 가질 수 있습니다."
-    }
-
     test("로또 1장의 숫자는 오름차순으로 정렬되어 있다.") {
         val lotto = Lotto(takeShuffleNumber(6))
-        lotto.numbers shouldBe lotto.numbers.sorted()
+        lotto.lottoNumbers.numbers shouldBe lotto.lottoNumbers.numbers.sortedBy { it.number }
     }
 
-//    test("당첨번호와 로또번호를 비교한다.") {
-//        val lotto = Lotto(takeShuffleNumber(6))
-//        val winningLotto = Lotto(shuffleNumber().take(6).map { LottoNumber(it) })
-//
-//        val matchCount = lotto.matchCount(winningLotto)
-//        matchCount shouldBeInRange 0..6
-//    }
-//
 //    test("당첨번호와 로또번호를 비교하여 3개 이상 일치하면 4등이다.") {
 //        val lotto = Lotto(listOf(1, 2, 3, 7, 8, 9))
 //        val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))

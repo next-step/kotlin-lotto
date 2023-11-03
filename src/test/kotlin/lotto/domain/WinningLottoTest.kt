@@ -9,7 +9,7 @@ class WinningLottoTest : FunSpec({
     test("보너스볼은 당첨번호와 중복될수 없다.") {
         val exception = shouldThrow<IllegalArgumentException> {
             WinningLotto(
-                Lotto(
+                LottoNumbers(
                     listOf(1, 2, 3, 4, 5, 6)
                         .map { LottoNumber(it) }
                 ),

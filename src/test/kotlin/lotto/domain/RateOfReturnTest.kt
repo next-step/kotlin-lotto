@@ -9,8 +9,8 @@ class RateOfReturnTest : FunSpec({
         val inputPrice = 14000
         val lottos = LottoStore.buyLottos(inputPrice)
         val winningNumber = LottoStore.takeShuffleNumber(7)
-        val winningLottoNumber = Lotto(winningNumber.subList(0, 6))
-        val bonusBall = winningNumber.last()
+        val bonusBall = winningNumber.numbers.last()
+        val winningLottoNumber = LottoNumbers(winningNumber.numbers.take(6))
         val winningLotto = WinningLotto(winningLottoNumber, bonusBall)
         val winningResult = lottos.matchLotto(winningLotto)
         val rateOfReturn = RateOfReturn(inputPrice, winningResult).calculate()
