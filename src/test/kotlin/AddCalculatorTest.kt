@@ -52,5 +52,4 @@ class AddCalculatorTest {
             AddCalculator.add(expression)
         }
     }
-
 }
