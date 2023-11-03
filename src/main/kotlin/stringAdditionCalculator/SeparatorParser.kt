@@ -7,9 +7,9 @@ class SeparatorParser {
             return null
         }
 
-        val matchList: MatchResult? = CUSTOM_SEPARATOR_REGEX.find(input)
+        val matchList: MatchResult = CUSTOM_SEPARATOR_REGEX.find(input) ?: return null
 
-        return matchList?.groupValues?.get(1)
+        return matchList.groupValues[1]
     }
 
     fun extractCustomSeparatorList(input: String): List<String> = extractCustomSeparator(input)?.split(",") ?: StringParser.Companion.DEFAULT_SEPARATOR_LIST
