@@ -20,8 +20,8 @@ class StringAddCalculator {
     }
 
     private fun toInt(number: String): Int {
-        if (number.toInt() < 0) {
-            throw RuntimeException()
+        require(number.toInt() >= 0) {
+            "음수는 계산기에 사용할 수 없습니다."
         }
         return number.toInt()
     }
