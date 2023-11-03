@@ -1,18 +1,15 @@
 package calculator
 
-data class PositiveOperand(val value: String) {
+data class PositiveOperand(val value: Int) {
 
     init {
-        require(value.toIntOrNull() != null) { "숫자가 아닙니다." }
-        require(value.toInt() >= MIN_VALUE) { "음수는 사용할 수 없습니다." }
+        require(value >= MIN_VALUE) { "음수는 사용할 수 없습니다." }
     }
-
-    fun toInt(): Int = value.toInt()
 
     companion object {
         private const val MIN_VALUE = 0
+        val ZERO = PositiveOperand(MIN_VALUE)
     }
 }
 
-operator fun PositiveOperand.plus(other: PositiveOperand) =
-    PositiveOperand((this.toInt() + other.toInt()).toString())
+operator fun PositiveOperand.plus(other: PositiveOperand) = PositiveOperand(this.value + other.value)
