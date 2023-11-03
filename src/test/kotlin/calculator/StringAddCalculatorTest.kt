@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.NullSource
 import org.junit.jupiter.params.provider.ValueSource
 
 class StringAddCalculatorTest {
-    @DisplayName("공백 문자열 또는 null을 입력할 경우 0을 반환한다")
+    @DisplayName("공백 문자열 또는 null이 입력될 경우 0을 반환한다")
     @ParameterizedTest
     @NullSource @ValueSource(strings = ["", " "])
     fun blankOrNull(text: String?) {
@@ -17,7 +17,7 @@ class StringAddCalculatorTest {
         assertThat(actual).isEqualTo(0)
     }
 
-    @DisplayName("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다")
+    @DisplayName("숫자 하나가 입력될 경우 해당 숫자를 반환한다")
     @Test
     fun oneNumber() {
         val text = "1"
@@ -27,7 +27,7 @@ class StringAddCalculatorTest {
         assertThat(actual).isEqualTo(1)
     }
 
-    @DisplayName("쉼표 또는 콜론을 구분자로 가지는 문자열을 입력하면 구분자를 기준으로 분리한 숫자의 합을 반환한다")
+    @DisplayName("쉼표 또는 콜론을 구분자로 가지는 문자열이 입력될 경우 구분자를 기준으로 분리한 숫자의 합을 반환한다")
     @Test
     fun delimiter() {
         val text = "1,2:3"
@@ -37,7 +37,7 @@ class StringAddCalculatorTest {
         assertThat(actual).isEqualTo(6)
     }
 
-    @DisplayName("//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다")
+    @DisplayName("//와 \\n 문자 사이에 커스텀 구분자를 지정할 경우 커스텀 구분자를 기준으로 분리한 숫자의 합을 반환한다")
     @Test
     fun customDelimiter() {
         val text = "//;\n1;2;3"
