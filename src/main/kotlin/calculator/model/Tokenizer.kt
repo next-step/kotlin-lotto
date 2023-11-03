@@ -29,11 +29,7 @@ object Tokenizer {
     }
 
     private fun requireNumericString(input: String): Int {
-        require(isNumeric(input)) { "입력된 문자열 [$input] 숫자로 변환할 수 없습니다" }
-        return input.toInt()
-    }
-
-    private fun isNumeric(input: String): Boolean {
-        return input.toIntOrNull() != null
+        return input.toIntOrNull()
+            ?: throw IllegalArgumentException("입력된 문자열 [$input] 숫자로 변환할 수 없습니다")
     }
 }
