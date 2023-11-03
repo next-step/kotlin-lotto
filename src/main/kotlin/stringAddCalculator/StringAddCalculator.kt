@@ -2,47 +2,39 @@ package stringAddCalculator
 
 import java.util.LinkedList
 
-class StringAddCalculator {
+object StringAddCalculator {
+    private const val ZERO = 0
+    private const val LENGTH_IS_ONE = 1
+    private const val CUSTOM_SEPARATOR_PREFIX = "//"
 
     fun add(text: String?): Int {
         return when {
-            text.isNullOrEmpty() -> 0
-            text.length == 1 -> oneNumberAdd(text)
-            text.startsWith("//") -> customAdd(text)
+            text.isNullOrEmpty() -> ZERO
+            text.length == LENGTH_IS_ONE -> oneNumberAdd(text)
+            text.startsWith(CUSTOM_SEPARATOR_PREFIX) -> customAdd(text)
             else -> regularAdd(text)
         }
     }
 
     private fun oneNumberAdd(text: String): Int {
-        validateTokens(LinkedList(listOf(text)))
-        return text.toInt()
+        return Token(tokens = LinkedList(listOf(text))).toInt()
     }
 
     private fun customAdd(text: String): Int {
         val tokens: List<String> = customTokenizer(text)
-        validateTokens(tokens)
-        return tokens.sumOf { it.toInt() }
+        return Token(tokens = tokens).sumOf()
     }
 
     private fun regularAdd(text: String): Int {
         val tokens = text.split(",|:".toRegex())
-        validateTokens(tokens)
-        return tokens.sumOf { it.toInt() }
+        return Token(tokens = tokens).sumOf()
     }
 
     private fun customTokenizer(text: String): List<String> {
-        val result = Regex("//(.)\n(.*)").find(text)
-        result!!.let {
-            val customDelimiter = it.groupValues[1]
+        val result = Regex("//(.)\n(.*)").find(text) ?: throw RuntimeException()
+        result.let {
+            val (customDelimiter, groupValues) = it.destructured
             return it.groupValues[2].split(customDelimiter)
-        }
-    }
-
-    private fun validateTokens(tokens: List<String>) {
-        tokens.forEach {
-            if (it.toInt() < 0) {
-                throw RuntimeException()
-            }
         }
     }
 }
