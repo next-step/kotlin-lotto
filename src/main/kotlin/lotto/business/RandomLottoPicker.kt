@@ -1,8 +1,8 @@
 package lotto.business
 
 class RandomLottoPicker {
-    fun pick(): List<Int> {
-        return lottoNumbers.shuffled().take(LOTTO_NUMBER_COUNT)
+    fun pick(): List<LottoNumber> {
+        return lottoNumbers.shuffled().take(LOTTO_NUMBER_COUNT).map { LottoNumber(it) }
     }
 
     companion object {

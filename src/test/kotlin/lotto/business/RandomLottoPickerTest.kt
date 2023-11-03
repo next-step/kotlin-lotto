@@ -7,7 +7,7 @@ import org.junit.jupiter.api.assertAll
 class RandomLottoPickerTest {
 
     @Test
-    fun `랜덤한 로또 번호를 생성한다`() {
+    fun `서로 다른 랜덤한 로또 번호를 6개 생성한다`() {
         // given
         val randomLottoPicker = RandomLottoPicker()
 
@@ -17,7 +17,7 @@ class RandomLottoPickerTest {
         // then
         assertAll(
             { assertThat(result).hasSize(6) },
-            { assertThat(result).allMatch { it in 1..45 } }
+            { assertThat(result).doesNotHaveDuplicates() }
         )
     }
 }
