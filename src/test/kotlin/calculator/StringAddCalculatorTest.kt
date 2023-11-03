@@ -1,5 +1,6 @@
 package calculator
 
+import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -45,5 +46,31 @@ class StringAddCalculatorTest {
         val actual = StringAddCalculator.add(text)
 
         assertThat(actual).isEqualTo(6)
+    }
+
+    @DisplayName("숫자 이외의 값이 입력될 경우 RuntimeException을 던진다")
+    @Test
+    fun noNumber() {
+        val text = "a"
+
+        val actual = Assertions.catchThrowable {
+            StringAddCalculator.add(text)
+        }
+
+        assertThat(actual).isInstanceOf(RuntimeException::class.java)
+            .hasMessageContaining("숫자 이외의 값 또는 음수가 입력될 경우 계산할 수 없습니다.")
+    }
+
+    @DisplayName("음수가 입력될 경우 RuntimeException을 던진다")
+    @Test
+    fun negative() {
+        val text = "-1"
+
+        val actual = Assertions.catchThrowable {
+            StringAddCalculator.add(text)
+        }
+
+        assertThat(actual).isInstanceOf(RuntimeException::class.java)
+            .hasMessageContaining("숫자 이외의 값 또는 음수가 입력될 경우 계산할 수 없습니다.")
     }
 }
