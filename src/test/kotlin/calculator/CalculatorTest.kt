@@ -1,32 +1,64 @@
 package calculator
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
-//    - [ ] 계산기에 입력 받은 문자열이 빈 문자열이거나 null 일 경우 0을 반환한다.
-//    - (“”)으로 입력 받은 경우 0을 반환한다.
-//    - (null)으로 입력 받은 경우 0을 반환한다.
-//    - [ ] 계산기에 입력 받은 문자열은 구분자를 (“,”, “:”) 포함 할 수 있다.
-//    - 구분자가 없고 숫자 1개만 존재 할 경우 숫자 1개를 반환한다.
-//    - (“3”)으로 입력 받은 경우 3을 반환한다.
-//    - 구분자가 없고 아무 숫자도 없을 경우 0을 반환한다.
-//    - (“3:5,5”)으로 입력 받은 경우 13을 반환한다.
-//    - [ ] 계산기에 입력 받은 문자열 앞에 (“//”)가 존재 하는 경우 (“//”) 뒤에 오는 문자를 커스텀 구분자로 사용한다.
-//    - (“///\n3\n3”)으로 입력 받은 경우 예외를 던진다.
-//    - (“//\n3\n3”)으로 입력 받은 경우 6을 반환한다.
-//    - [ ] 계산기에 입력 받은 문자열에 구분자로 나눠진 항들은 숫자로만 이루어져야한다.
-//    - (“3:5a5”)으로 입력 받은 경우 예외를 던진다.
-//    - (“//\n3ㅁ3”)으로 입력 받은 경우 예외를 던진다.
-//    - [ ] 계산기에 입력 받은 문자열에 구분자로 나눠진 항들은 0이상 100 이하의 정수여야한다. (임의로 지정)
-//    - (“300:5,5”)으로 입력 받은 경우 예외를 던진다.
-//    - (“-1:5,5”)으로 입력 받은 경우 예외를 던진다.
-//    - (“0:5,5”)으로 입력 받은 경우 10을 반환한다.
+class CalculatorTest : FunSpec({
 
-class CalculatorTest: FunSpec ({
-
-    test("계산기에 입력 받은 문자열이 빈 문자열이거나 null 일 경우 0을 반환한다.") {
+    test("계산기에 입력받은 문자열이 빈 문자열이거나 null 일 경우 0을 반환한다.") {
         Calculator.calculate(null) shouldBe 0
         Calculator.calculate("") shouldBe 0
     }
-})
 
+    test("계산기에 입력받은 문자열이 “3”일 경우 3을 반환한다.") {
+        Calculator.calculate("3") shouldBe 3
+    }
+
+    test("계산기에 입력받은 문자열이 “3:5,5”일 경우 13을 반환한다.") {
+        Calculator.calculate("3:5,5") shouldBe 13
+    }
+
+    test("계산기에 입력받은 문자열이 “//\n3;3”일 경우 예외를 던진다.") {
+        shouldThrow<IllegalArgumentException> {
+            Calculator.calculate("///\\n3\\n3")
+        }
+    }
+
+    test("계산기에 입력받은 문자열이 “//;\n3;3”일 경우 6을 반환한다.") {
+        Calculator.calculate("//;\n3;3") shouldBe 6
+    }
+
+    test("계산기에 입력받은 문자열이 “3:5,a”일 경우 예외를 던진다.") {
+        shouldThrow<IllegalArgumentException> {
+            Calculator.calculate("3:5,a")
+        }
+    }
+
+    test("계산기에 입력받은 문자열이 “//;\\n3;a”일 경우 예외를 던진다.") {
+        shouldThrow<IllegalArgumentException> {
+            Calculator.calculate("//;\\n3;a")
+        }
+    }
+
+    test("계산기에 입력받은 문자열이 “300:5,5”일 경우 예외를 던진다.") {
+        shouldThrow<IllegalArgumentException> {
+            Calculator.calculate("300:5,5")
+        }
+    }
+
+    test("계산기에 입력받은 문자열이 “100:5,5”일 경우 예외를 던진다.") {
+        Calculator.calculate("100:5,5") shouldBe 110
+    }
+
+    test("계산기에 입력받은 문자열이 “-1:5,5”일 경우 예외를 던진다.") {
+        shouldThrow<IllegalArgumentException> {
+            Calculator.calculate("-1:5,5")
+        }
+    }
+
+    test("계산기에 입력받은 문자열이 “0:5,5”일 경우 예외를 던진다.") {
+        Calculator.calculate("0:5,5") shouldBe 10
+    }
+
+})
