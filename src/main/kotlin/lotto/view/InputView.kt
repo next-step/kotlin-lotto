@@ -1,7 +1,5 @@
 package lotto.view
 
-import lotto.domain.LottoStore
-
 object InputView {
 
     fun inputPrice(): Int {
@@ -29,32 +27,12 @@ object InputView {
         return try {
             require(input.isNotBlank()) { println(BLANK_ERROR_MESSAGE) }
             input.split(DELIMITER).map { it.trim().toInt() }
-                .validateWinningLotto()
         } catch (e: NumberFormatException) {
             println(NUMBER_ERROR_MESSAGE)
             inputWinningLotto()
         } catch (e: IllegalArgumentException) {
             inputWinningLotto()
         }
-    }
-
-    private fun List<Int>.validateWinningLotto(): List<Int> {
-        require(this.size == LottoStore.LOTTO_NUMBER_SIZE) {
-            println("당첨 번호는 ${LottoStore.LOTTO_NUMBER_SIZE}자리만 입력 가능합니다.")
-        }
-
-        require(this.all { it in LottoStore.LOTTO_NUMBER_MIN..LottoStore.LOTTO_NUMBER_MAX }) {
-            println(
-                "당첨 번호는 ${LottoStore.LOTTO_NUMBER_MIN}~" +
-                    "${LottoStore.LOTTO_NUMBER_MAX}까지의 숫자만 입력 가능합니다."
-            )
-        }
-
-        require(this.size == this.toSet().size) {
-            println("당첨 번호는 중복되지 않습니다.")
-        }
-
-        return this
     }
 
     private const val DELIMITER = ","
