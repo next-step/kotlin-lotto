@@ -13,6 +13,10 @@ value class LottoNumber(val number: Int) {
         }
     }
 
+    override fun toString(): String {
+        return number.toString()
+    }
+
     companion object {
         const val LOTTO_NUMBER_MIN = 1
         const val LOTTO_NUMBER_MAX = 45

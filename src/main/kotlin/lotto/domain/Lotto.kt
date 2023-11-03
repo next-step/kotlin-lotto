@@ -9,12 +9,16 @@ class Lotto(val lottoNumbers: LottoNumbers) {
     }
 
     fun winningRank(winningLotto: WinningLotto): WinningRank {
-        val matchCount = matchCount(winningLotto)
+        val (matchCount, bonusMatchCount) = match(winningLotto)
+        if (matchCount == 5) return WinningRank.of(matchCount, bonusMatchCount)
         return WinningRank.of(matchCount)
     }
 
-    private fun matchCount(winningLotto: WinningLotto): Int {
-        return lottoNumbers.matchNumbers(winningLotto.lottoNumbers)
+    private fun match(winningLotto: WinningLotto): Pair<Int, Boolean> {
+        return Pair(
+            lottoNumbers.matchNumbersCount(winningLotto.lottoNumbers),
+            lottoNumbers.matchNumbers(winningLotto.bonusNumber)
+        )
     }
 
     private fun validateLotto() {
