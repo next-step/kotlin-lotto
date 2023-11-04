@@ -8,7 +8,7 @@ class LottoWinningNumbersExtractor {
             .let { return LottoWinningNumbers(it) }
     }
 
-    private fun checkStringIsInt(it: String) = it.toIntOrNull() ?: throw IllegalArgumentException("당첨 번호는 숫자여야 합니다.")
+    private fun checkStringIsInt(it: String) = it.trim().toIntOrNull() ?: throw IllegalArgumentException("당첨 번호는 숫자여야 합니다.")
 
     companion object {
         const val LOTTO_WINNING_NUMBERS_DELIMITER = ","

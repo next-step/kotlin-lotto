@@ -5,7 +5,7 @@ import lotto.business.ProfitRate
 
 object LotteryStatisticsPrinter {
     fun print(lotteryStatistics: LotteryStatistics, profitRate: ProfitRate) {
-        println("통계")
+        println("당첨 통계")
         println("---------")
         println("3개 일치 (5000원) - ${lotteryStatistics.treeMatchCount}개")
         println("4개 일치 (50000원) - ${lotteryStatistics.fourMatchCount}개")

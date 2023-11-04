@@ -23,7 +23,8 @@ class LottoTicketManager(
             .let { PrizeResults(it) }
     }
 
-    fun buyLotto(receivedAmount: ReceivedAmount) {
+    fun buyLotto(receivedAmount: ReceivedAmount): List<LottoTicket> {
         addAll(ticketBookingSystem.buyLotto(receivedAmount))
+        return tickets
     }
 }

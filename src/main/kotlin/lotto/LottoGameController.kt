@@ -8,6 +8,7 @@ import lotto.business.ReceivedAmount
 import lotto.business.TicketBookingSystem
 import lotto.view.LotteryStatisticsPrinter
 import lotto.view.LottoInputHandler
+import lotto.view.LottoPurchaseSummaryPrinter
 
 class LottoGameController(
     private val lottoWinningNumbersExtractor: LottoWinningNumbersExtractor,
@@ -16,7 +17,8 @@ class LottoGameController(
 ) {
     fun run() {
         val receivedAmount = ReceivedAmount(LottoInputHandler.inputPurchaseAmount())
-        lottoTicketManager.buyLotto(receivedAmount)
+        val lottoTickets = lottoTicketManager.buyLotto(receivedAmount)
+        LottoPurchaseSummaryPrinter.print(lottoTickets)
         val winningNumbers = lottoWinningNumbersExtractor.extract(LottoInputHandler.inputWinningNumbers())
         val prizeResults = lottoTicketManager.compilePrizeResults(winningNumbers)
         val lotteryStatistics = lotteryStatisticsGenerator.generate(prizeResults)
