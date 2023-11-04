@@ -1,5 +1,6 @@
 package calculator
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.params.ParameterizedTest
@@ -17,18 +18,25 @@ class StringCalculator {
 
         val matchText = CUSTOM_DELIMITER.matcher(text)
         if (matchText.find()) {
-            val delimiter = matchText.group(1)
-            return matchText.group(2).split(delimiter)
-                .sumOf { it.toInt() }
+            return matchText.group(2).split(matchText.group(1))
+                .map { convertToInt(it) }
+                .sumOf { it }
         }
 
         return text.split(DEFAULT_DELIMITER)
-            .sumOf { it.toInt() }
+            .map { convertToInt(it) }
+            .sumOf { it }
+    }
+
+    private fun convertToInt(numberText: String): Int {
+        require(numberText.toInt() >= 0) { ERROR_MESSAGE }
+        return numberText.toInt()
     }
 
     companion object {
         private val DEFAULT_DELIMITER: Pattern = Pattern.compile(",|:")
         private val CUSTOM_DELIMITER: Pattern = Pattern.compile("//(.)\n(.*)")
+        private const val ERROR_MESSAGE: String = "음수는 입력할 수 없습니다."
     }
 }
 
@@ -69,6 +77,14 @@ class StringCalculatorTest {
     @MethodSource("getCustomDelimiterData")
     fun `커스텀 구분자를 지정할 수 있다`(input: String, expected: Int) {
         calculator.inputText(input) shouldBe expected
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["-1,2", "2,-3", "//;\n-1;2;3"])
+    fun `음수를 전달할 경우 예외가 발생한다`(input: String) {
+        shouldThrow<IllegalArgumentException> {
+            calculator.inputText(input)
+        }
     }
 
     companion object {
