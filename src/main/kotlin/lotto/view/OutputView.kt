@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.model.LottoStatistics
+import lotto.model.LottoWinners
 import lotto.model.Round
 
 object OutputView {
@@ -15,7 +15,7 @@ object OutputView {
         TODO("Not yet implemented")
     }
 
-    fun presentPrizes(s: LottoStatistics) {
+    fun presentPrizes(s: LottoWinners) {
         "당첨 통계\n" +
             "---------\n" +
             "3개 일치 (5000원)- 1개\n" +
