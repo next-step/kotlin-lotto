@@ -18,14 +18,14 @@ object Calculator {
         return calculate(list)
     }
 
-    private fun getRegexWithCustomDelimiter(customDelimiter: String) = "([${SPLIT_REGEX + customDelimiter}])".toRegex()
-
     private fun checkCustomDelimiter(express: String): String =
         if (express.startsWith(CUSTOM_DELIMITER_START_WITH)) {
             express.getOrNull(CUSTOM_DELIMITER_INDEX).toString()
         } else {
             EMPTY_STRING
         }
+
+    private fun getRegexWithCustomDelimiter(customDelimiter: String) = "([${SPLIT_REGEX + customDelimiter}])".toRegex()
 
     /**
      * CustomDelimiter 가 존재 안하면 기존 express,
