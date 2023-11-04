@@ -3,9 +3,9 @@ package lotto.service
 import lotto.domain.Lotto
 
 object LottoIssueService {
-    fun issue(purchasePrice: Int): List<Lotto> {
-        val purchaseAmount = purchasePrice / Lotto.PRICE
+    fun issue(purchaseAmount: Int): List<Lotto> {
+        val purchaseCount = purchaseAmount / Lotto.PRICE
 
-        return List(purchaseAmount) { Lotto() }
+        return List(purchaseCount) { Lotto() }
     }
 }
