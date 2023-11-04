@@ -6,6 +6,6 @@ data class Lotto(val numbers: List<LottoNumber>) {
     }
 
     companion object {
-        private const val LOTTO_COUNT = 6
+        const val LOTTO_COUNT = 6
     }
 }
