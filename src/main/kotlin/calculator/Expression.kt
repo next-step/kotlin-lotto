@@ -27,10 +27,10 @@ class Expression(
     }
 
     fun split(): List<Int> {
-        if (hasSymbol()) {
+        if (hasSymbol() && !hasCustomSymbol()) {
             return splitBySymbol()
         }
-        TODO("Not yet implemented")
+        return splitByCustomSymbol()
     }
 
     private fun hasSymbol(): Boolean {
@@ -40,8 +40,24 @@ class Expression(
 
     private fun splitBySymbol(): List<Int> {
         val numbers = text.split("$COMMA|$COLON".toRegex())
-        return numbers.map {
-            Expression(it).toInt()
-        }
+        return toPositiveNumbers(numbers)
+    }
+
+    private fun hasCustomSymbol(): Boolean {
+        val symbols = listOf(FORWARD_SLASH, NEW_LINE_CHARACTER)
+        return symbols.all { text.contains(it) }
+    }
+
+    private fun splitByCustomSymbol(): List<Int> {
+        val result = Regex("$FORWARD_SLASH(.)$NEW_LINE_CHARACTER(.*)").find(text)
+        return result?.let {
+            val customDelimiter = it.groupValues[1]
+            val numbers = it.groupValues[2].split(customDelimiter)
+            toPositiveNumbers(numbers)
+        } ?: throw RuntimeException("잘못된 수식입니다.")
+    }
+
+    private fun toPositiveNumbers(numbers: List<String>) = numbers.map {
+        Expression(it).toInt()
     }
 }
