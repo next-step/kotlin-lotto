@@ -6,21 +6,36 @@ import lotto.domain.LottoNumber.Companion.LOTTO_NUMBER_MIN
 
 object LottoStore : ShuffleNumber {
 
-    fun buyLottos(inputPrice: Int): Lottos {
-        val lottoCount = inputPrice / LOTTO_PRICE
-        this.validateLottoBuy(lottoCount)
-        return Lottos(List(lottoCount) { buyLotto() })
+    fun buyLottos(inputPrice: Int, manualLottoNumbers: List<LottoNumbers>): Lottos {
+        val manualLottoCount = manualLottoNumbers.size
+        val remainPrice = getRemainPrice(inputPrice, manualLottoCount)
+        val autoLottoCount = remainPrice / LOTTO_PRICE
+        this.validateLottoBuy(autoLottoCount)
+        return Lottos(
+            List(autoLottoCount) { buyLotto() },
+            manualLottoNumbers.map { Lotto(it) }
+        )
     }
+
     override fun shuffleNumber(): List<LottoNumber> {
         return LOTTO_POOL.shuffled()
     }
 
-    private fun buyLotto(): Lotto {
-        return Lotto(takeShuffleNumber(LOTTO_NUMBER_SIZE))
+    private fun buyLotto(
+        lottoNumbers: LottoNumbers =
+            takeShuffleNumber(LOTTO_NUMBER_SIZE)
+    ): Lotto {
+        return Lotto(lottoNumbers)
     }
 
     private fun validateLottoBuy(lottoCount: Int) {
         require(lottoCount > 0) { "로또를 구매할 수 없습니다." }
+    }
+
+    private fun getRemainPrice(inputPrice: Int, manualLottoCount: Int): Int {
+        val manualPrice = manualLottoCount * LOTTO_PRICE
+        require(inputPrice >= manualPrice) { "로또를 구매할 수 없습니다." }
+        return inputPrice - manualPrice
     }
 
     private const val LOTTO_PRICE = 1000

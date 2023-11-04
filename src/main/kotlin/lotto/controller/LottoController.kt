@@ -12,7 +12,7 @@ object LottoController {
         val inputPrice = InputView.inputPrice()
         val manualLottoCount = InputView.inputManualLottoCount()
         val manualLottos = InputView.inputManualLotto(manualLottoCount)
-        val lottos = LottoStore.buyLottos(inputPrice)
+        val lottos = LottoStore.buyLottos(inputPrice, manualLottos)
         OutputView.printLotto(lottos)
 
         val winningLottoNumber = LottoNumbers(InputView.inputWinningLotto())

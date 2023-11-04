@@ -7,15 +7,11 @@ import lotto.domain.Lotto.Companion.LOTTO_NUMBER_SIZE
 import lotto.domain.LottoStore.takeShuffleNumber
 
 class LottosTest : FunSpec({
-    test("구매한 로또 갯수를 확인할 수 있다.") {
-        val lottoList = List(3) { Lotto(takeShuffleNumber(LOTTO_NUMBER_SIZE)) }
-        val lottos = Lottos(lottoList)
-        lottos.getLottoCount() shouldBe lottoList.size
-    }
 
     test("당첨번호와 로또번호를 비교하여 당첨 결과를 확인할 수 있다.") {
-        val lottoList = List(3) { Lotto(takeShuffleNumber(LOTTO_NUMBER_SIZE)) }
-        val lottos = Lottos(lottoList)
+        val autoLottoList = List(3) { Lotto(takeShuffleNumber(LOTTO_NUMBER_SIZE)) }
+        val manualLottoList = List(2) { Lotto(LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })) }
+        val lottos = Lottos(autoLottoList, manualLottoList)
         val winningNumber = LottoStore.takeShuffleNumber(7)
         val bonusBall = winningNumber.numbers.last()
         val winningLottoNumber = LottoNumbers(winningNumber.numbers.take(6))
