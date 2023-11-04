@@ -20,9 +20,10 @@ class AddRequestSpec : FunSpec({
 
     context("구분자로 숫자 리스트 생성") {
         withData(
-            nameFn = { "쉼표(,)를 구분자로 문자열 ${it.first}가 숫자리스트${it.second}로 변환된다" },
+            nameFn = { "기본 구분자(쉼표(,), 콜론(:))로 문자열 ${it.first}가 숫자리스트${it.second}로 변환된다" },
             "1,2" to listOf(1, 2),
-            "2,3,4" to listOf(2,3,4),
+            "1:2" to listOf(1, 2),
+            "1,2:3" to listOf(1, 2, 3)
         ) {
             val result = AddRequest.from(it.first)
 
