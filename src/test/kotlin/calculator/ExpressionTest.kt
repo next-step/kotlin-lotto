@@ -21,15 +21,15 @@ class ExpressionTest : StringSpec({
     }
 
     "주어진 문자열을 숫자로 반환한다" {
-        Expression("1").toInt() shouldBe 1
+        Expression("1").toPositiveInt() shouldBe 1
     }
 
     "숫자로만 이루어지지 않은 수식에 대해 숫자로 반환하려고 하면 예외가 발생한다." {
-        shouldThrowWithMessage<RuntimeException>("숫자가 아닙니다.") { Expression("1,").toInt() }
+        shouldThrowWithMessage<RuntimeException>("숫자가 아닙니다.") { Expression("1,").toPositiveInt() }
     }
 
     "주어진 문자열이 음수면 예외가 발생한다." {
-        shouldThrowWithMessage<RuntimeException>("음수는 입력할 수 없습니다.") { Expression("-1").toInt() }
+        shouldThrowWithMessage<RuntimeException>("음수는 입력할 수 없습니다.") { Expression("-1").toPositiveInt() }
     }
 
     "쉼표(,)와 콜론(:) 구분자를 가지고 있는 수식에 대해, 구분자를 기준으로 숫자를 분리한다." {

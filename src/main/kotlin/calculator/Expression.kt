@@ -14,7 +14,7 @@ class Expression(
         return symbols.none { text.contains(it) }
     }
 
-    fun toInt(): Int {
+    fun toPositiveInt(): Int {
         val number = text.toIntOrNull() ?: throw RuntimeException("숫자가 아닙니다.")
         validateMinusNumber(number)
         return number
@@ -58,6 +58,6 @@ class Expression(
     }
 
     private fun toPositiveNumbers(numbers: List<String>) = numbers.map {
-        Expression(it).toInt()
+        Expression(it).toPositiveInt()
     }
 }

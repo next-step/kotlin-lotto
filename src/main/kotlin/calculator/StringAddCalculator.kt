@@ -9,7 +9,7 @@ object StringAddCalculator {
 
         val expression = Expression(text)
         if (expression.isNumber()) {
-            return expression.toInt()
+            return expression.toPositiveInt()
         }
 
         val numbers = expression.split()
