@@ -3,9 +3,9 @@ package lotto.domain
 private const val LOTTO_PRICE = 1000
 
 object LottoVendingMachine {
-    fun generate(input: Int): List<Lotto> {
-        val amount = input / LOTTO_PRICE
+    fun generate(amount: Int): List<Lotto> {
+        val count = amount / LOTTO_PRICE
         val lottoNumbers = LottoNumbers()
-        return (1..amount).map { lottoNumbers.generate() }
+        return (1..count).map { lottoNumbers.generate() }
     }
 }
