@@ -8,9 +8,9 @@ import lotto.view.OutputView
 
 fun main() {
     val amount: Int = InputView.purchaseAmount(LottoApp.priceOfGame())
-    val transactionRound = LottoApp.transaction(amount)
-    OutputView.presetRound(transactionRound)
+    val round = LottoApp.transaction(amount)
+    OutputView.presetRound(round)
     val winningNumbers: WinningNumbers = InputView.drawing()
-    val s: LottoStatistics = transactionRound.winnerStatistics(winningNumbers)
+    val s: LottoStatistics = round.winnerStatistics(winningNumbers)
     OutputView.presentPrizes(s)
 }
