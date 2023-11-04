@@ -4,7 +4,7 @@ import lotto.domain.LottoNumber
 
 object LottoNumberGenerator {
 
-    fun generate(vararg numbers: Int): List<LottoNumber> {
-        return numbers.map { LottoNumber(it) }
+    fun generate(vararg numbers: Int): Set<LottoNumber> {
+        return numbers.map { LottoNumber(it) }.toSet()
     }
 }

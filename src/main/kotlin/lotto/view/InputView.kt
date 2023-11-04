@@ -18,6 +18,6 @@ object InputView {
         println("지난 주 당첨 번호를 입력해 주세요.")
         return readln().split(WINNING_NUMBER_DELIMITER)
             .map { LottoNumber(it.trim().toInt()) }
-            .let { LottoWinningNumber(LottoNumbers(it)) }
+            .let { LottoWinningNumber(LottoNumbers(it.toSet())) }
     }
 }

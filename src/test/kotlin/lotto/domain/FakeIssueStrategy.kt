@@ -6,6 +6,6 @@ object FakeIssueStrategy : IssueStrategy {
 
     override fun issue(): LottoNumbers {
         issueCount++
-        return LottoNumbers((issueCount..(issueCount + 5)).map { LottoNumber(it) })
+        return LottoNumbers((issueCount..(issueCount + 5)).map { LottoNumber(it) }.toSet())
     }
 }

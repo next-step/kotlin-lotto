@@ -17,7 +17,7 @@ object RandomIssueStrategy : IssueStrategy {
             val randomValue = (RANDOM_MIN_VALUE..RANDOM_MAX_VALUE).random()
             uniqueNumbers.add(randomValue)
         }
-        return LottoNumbers(uniqueNumbers.map { LottoNumber(it) })
+        return LottoNumbers(uniqueNumbers.map { LottoNumber(it) }.toSet())
     }
 }
 
