@@ -2,7 +2,7 @@ package lotto.app
 
 import lotto.model.Round
 
-object Lotto {
+object LottoApp {
     private const val PRICE_OF_GAME = 1000
 
     fun transaction(gameCount: Int): Round {
