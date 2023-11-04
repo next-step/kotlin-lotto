@@ -59,4 +59,9 @@ class StringAddCalculatorTest {
     fun `숫자 이외의 값을 전달할 경우 RuntimeException 발생한다`() {
         assertThrows<RuntimeException> { (calculator.calculate("1,a,3")) }
     }
+
+    @Test
+    fun `커스터 구분자가 -인 경우에도 계산이 된다`() {
+        assertThat(calculator.calculate("//-\n1-2-3")).isEqualTo(6)
+    }
 }

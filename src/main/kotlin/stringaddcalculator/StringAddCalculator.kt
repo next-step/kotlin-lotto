@@ -3,8 +3,8 @@ package stringaddcalculator
 class StringAddCalculator {
     fun calculate(input: String?): Int {
         val validInput = input.takeUnless { it.isNullOrBlank() } ?: return 0
-        NEGATIVE_NUMBER_REGEX.takeIf { it.containsMatchIn(validInput) }?.let { throw RuntimeException("음수는 입력할 수 없습니다.") }
         val numbers: List<Int> = getIntegersFromInput(validInput)
+        numbers.firstOrNull { it < 0 }?.let { throw RuntimeException("음수는 입력할 수 없습니다.") }
         return numbers.sum()
     }
 
@@ -18,7 +18,6 @@ class StringAddCalculator {
         }
 
     companion object {
-        private val NEGATIVE_NUMBER_REGEX = "-\\d+".toRegex()
         private val CUSTOM_DELIMITER_REGEX: Regex = "//(.)\\n(.+)".toRegex()
         private val DEFAULT_DELIMITERS = arrayOf(",", ":")
     }
