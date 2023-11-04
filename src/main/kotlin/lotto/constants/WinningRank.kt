@@ -3,7 +3,7 @@ package lotto.constants
 enum class WinningRank(
     val count: Int,
     val money: Int,
-    private val matchBonus: Boolean = false,
+    val matchBonus: Boolean = false,
     val find: (Int, Boolean) -> Boolean = { a, b -> count == a && matchBonus == b }
 ) {
     FIRST(6, 2_000_000_000),

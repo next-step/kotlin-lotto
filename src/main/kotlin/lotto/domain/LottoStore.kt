@@ -10,7 +10,7 @@ object LottoStore : ShuffleNumber {
         val manualLottoCount = manualLottoNumbers.size
         val remainPrice = getRemainPrice(inputPrice, manualLottoCount)
         val autoLottoCount = remainPrice / LOTTO_PRICE
-        this.validateLottoBuy(autoLottoCount)
+        if (remainPrice > 0) this.validateLottoBuy(autoLottoCount)
         return Lottos(
             List(autoLottoCount) { buyLotto() },
             manualLottoNumbers.map { Lotto(it) }

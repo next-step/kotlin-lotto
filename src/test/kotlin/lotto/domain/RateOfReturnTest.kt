@@ -1,11 +1,11 @@
 package lotto.domain
 
-import io.kotest.core.spec.style.FunSpec
+import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.doubles.shouldBeGreaterThanOrEqual
 
-class RateOfReturnTest : FunSpec({
+class RateOfReturnTest : BehaviorSpec({
 
-    test("수익률을 계산한다.") {
+    given("입력금액이 주어졌을 때") {
         val inputPrice = 14000
         val lottos = LottoStore.buyLottos(inputPrice, emptyList())
         val winningNumber = LottoStore.takeShuffleNumber(7)
@@ -13,7 +13,11 @@ class RateOfReturnTest : FunSpec({
         val winningLottoNumber = LottoNumbers(winningNumber.numbers.take(6))
         val winningLotto = WinningLotto(winningLottoNumber, bonusBall)
         val winningResult = lottos.matchLotto(winningLotto)
-        val rateOfReturn = RateOfReturn(inputPrice, winningResult).calculate()
-        rateOfReturn shouldBeGreaterThanOrEqual 0.0
+        `when`("수익률을 계산한다.") {
+            val rateOfReturn = RateOfReturn(inputPrice, winningResult).calculate()
+            then("수익률은 0.0이상이다.") {
+                rateOfReturn shouldBeGreaterThanOrEqual 0.0
+            }
+        }
     }
 })
