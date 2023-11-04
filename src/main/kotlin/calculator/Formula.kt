@@ -2,11 +2,11 @@ package calculator
 
 class Formula(formula: String?) {
 
+    private lateinit var operand: List<Operand>
+
     init {
         makeFormula(formula ?: "0")
     }
-
-    private lateinit var operand: List<Operand>
 
     fun calculate(): Int {
         return operand.sumOf { it.getValue() }
