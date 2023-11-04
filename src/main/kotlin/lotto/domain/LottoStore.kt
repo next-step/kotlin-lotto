@@ -29,16 +29,17 @@ object LottoStore : ShuffleNumber {
     }
 
     private fun validateLottoBuy(lottoCount: Int) {
-        require(lottoCount > 0) { "로또를 구매할 수 없습니다." }
+        require(lottoCount > 0) { LOTTO_BUY_ERROR_MESSAGE }
     }
 
     private fun getRemainPrice(inputPrice: Int, manualLottoCount: Int): Int {
         val manualPrice = manualLottoCount * LOTTO_PRICE
-        require(inputPrice >= manualPrice) { "로또를 구매할 수 없습니다." }
+        require(inputPrice >= manualPrice) { LOTTO_BUY_ERROR_MESSAGE }
         return inputPrice - manualPrice
     }
 
     private const val LOTTO_PRICE = 1000
+    private const val LOTTO_BUY_ERROR_MESSAGE = "로또를 구매할 수 없습니다."
     private val LOTTO_POOL = listOf(LOTTO_NUMBER_MIN..LOTTO_NUMBER_MAX)
         .flatten()
         .map { LottoNumber(it) }

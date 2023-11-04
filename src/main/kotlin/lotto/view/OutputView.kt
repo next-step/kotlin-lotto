@@ -14,8 +14,8 @@ object OutputView {
     }
 
     fun printWinningResult(winningRankList: List<WinningRank>) {
-        println("당첨 통계")
-        println("---------")
+        println(WINNING_STATISTICS)
+        println(SEPARATOR)
         winningRankList.printWinningResult(WinningRank.FIFTH)
         winningRankList.printWinningResult(WinningRank.FOURTH)
         winningRankList.printWinningResult(WinningRank.THIRD)
@@ -36,4 +36,7 @@ object OutputView {
         val rateOfReturn = RateOfReturn(inputPrice, winningRankList).calculate()
         println("총 수익률은 ${rateOfReturn}입니다.")
     }
+
+    private const val WINNING_STATISTICS = "당첨 통계"
+    private const val SEPARATOR = "---------"
 }
