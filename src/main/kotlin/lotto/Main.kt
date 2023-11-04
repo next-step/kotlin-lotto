@@ -12,4 +12,7 @@ fun main() {
     val lotto = LottoShop().buyLotto(customer)
 
     View.lottoBuyResultPrint(lotto)
+
+    val winningNumbers = View.messagePrintAndGetLine(LottoMessage.INPUT_WINNING_NUMBERS)
+
 }
