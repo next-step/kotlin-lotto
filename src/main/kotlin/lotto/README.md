@@ -21,6 +21,4 @@
 - 로또 번호 (LottoNumber)
 - 로또 당첨번호 (LottoWinningNumber)
 - 로또 결과 (LottoRank)
-    - 일치 개수 (MatchCount)
-    - 수익률 (ReturnRate)
-- 로또 당첨 금액 (LottoWinningAmount)
+    - 수익률 (ProfitRate)

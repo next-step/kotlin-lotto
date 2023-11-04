@@ -11,12 +11,12 @@ class LottoIssuerTest : BehaviorSpec({
         val lottoIssuer = LottoIssuer(ticketAmount, FakeIssueStrategy)
 
         `when`("로또를 발급하면") {
-            val paymentAmount = Amount(1000)
-            val lotto = lottoIssuer.issue(paymentAmount)
+            val purchaseAmount = Amount(1000)
+            val lotto = lottoIssuer.issue(purchaseAmount)
 
             then("1,2,3,4,5,6 로또가 발급된다.") {
-                lotto.size shouldBe 1
-                lotto[0].lottoNumbers.mapIndexed { index, lottoNumber ->
+                lotto.lottos.size shouldBe 1
+                lotto.lottos[0].numbers.mapIndexed { index, lottoNumber ->
                     lottoNumber shouldBe LottoNumber(index + 1)
                 }
             }
@@ -28,30 +28,30 @@ class LottoIssuerTest : BehaviorSpec({
         val lottoIssuer = LottoIssuer(ticketAmount, FakeIssueStrategy)
 
         `when`("1000원 미만 금액을 입력하면") {
-            val paymentAmount = Amount(999)
+            val purchaseAmount = Amount(999)
 
             then("예외가 발생한다.") {
                 shouldThrow<IllegalArgumentException> {
-                    lottoIssuer.issue(paymentAmount)
+                    lottoIssuer.issue(purchaseAmount)
                 }
             }
         }
 
         `when`("1000원을 입력하면") {
-            val paymentAmount = Amount(1000)
+            val purchaseAmount = Amount(1000)
 
             then("로또 1장이 발급된다.") {
-                val numbers = lottoIssuer.issue(paymentAmount)
-                numbers.size shouldBe 1
+                val numbers = lottoIssuer.issue(purchaseAmount)
+                numbers.lottos.size shouldBe 1
             }
         }
 
         `when`("2000원을 입력하면") {
-            val paymentAmount = Amount(2000)
+            val purchaseAmount = Amount(2000)
 
             then("로또 2장이 발급된다.") {
-                val numbers = lottoIssuer.issue(paymentAmount)
-                numbers.size shouldBe 2
+                val numbers = lottoIssuer.issue(purchaseAmount)
+                numbers.lottos.size shouldBe 2
             }
         }
     }

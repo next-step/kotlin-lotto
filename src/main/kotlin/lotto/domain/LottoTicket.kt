@@ -1,6 +1,9 @@
 package lotto.domain
 
-class LottoTicket(val lottoNumbers: List<LottoNumbers>) {
+class LottoTicket(
+    val ticketAmount: Amount,
+    val lottos: List<LottoNumbers>
+) {
 
-    fun matchCount(winningNumber: LottoNumbers): List<Int> = lottoNumbers.map { winningNumber.getMatchCount(it) }
+    fun getMatchCount(winningNumber: LottoNumbers): List<Int> = lottos.map { winningNumber.getMatchCount(it) }
 }

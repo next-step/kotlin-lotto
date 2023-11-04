@@ -13,15 +13,15 @@ data class LottoNumber(val value: Int) {
 }
 
 class LottoNumbers(
-    val lottoNumbers: List<LottoNumber>
+    val numbers: List<LottoNumber>
 ) {
 
     init {
-        require(lottoNumbers.size == LOTTO_NUMBER_SIZE) { "로또 번호는 6개여야 합니다." }
-        require(lottoNumbers.distinct().size == LOTTO_NUMBER_SIZE) { "로또 번호는 중복될 수 없습니다." }
+        require(numbers.size == LOTTO_NUMBER_SIZE) { "로또 번호는 6개여야 합니다." }
+        require(numbers.distinct().size == LOTTO_NUMBER_SIZE) { "로또 번호는 중복될 수 없습니다." }
     }
 
-    fun getMatchCount(it: LottoNumbers): Int = lottoNumbers.intersect(it.lottoNumbers.toSet()).count()
+    fun getMatchCount(it: LottoNumbers): Int = numbers.intersect(it.numbers.toSet()).count()
 
     companion object {
         const val LOTTO_NUMBER_SIZE = 6

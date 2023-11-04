@@ -10,9 +10,15 @@ object RandomIssueStrategy : IssueStrategy {
     private const val RANDOM_MAX_VALUE = LottoNumber.MAX_VALUE
     private const val ISSUE_SIZE = LottoNumbers.LOTTO_NUMBER_SIZE
 
-    override fun issue(): LottoNumbers = List(ISSUE_SIZE) {
-        LottoNumber((RANDOM_MIN_VALUE..RANDOM_MAX_VALUE).random())
-    }.let { LottoNumbers(it) }
+    override fun issue(): LottoNumbers {
+        val uniqueNumbers = mutableSetOf<Int>()
+
+        while (uniqueNumbers.size < ISSUE_SIZE) {
+            val randomValue = (RANDOM_MIN_VALUE..RANDOM_MAX_VALUE).random()
+            uniqueNumbers.add(randomValue)
+        }
+        return LottoNumbers(uniqueNumbers.map { LottoNumber(it) })
+    }
 }
 
 class LottoIssuer(
@@ -20,12 +26,12 @@ class LottoIssuer(
     private val issueStrategy: IssueStrategy
 ) {
 
-    fun issue(paymentAmount: Amount): LottoTicket {
-        require(paymentAmount % ticketAmount == 0) {
+    fun issue(purchaseAmount: Amount): LottoTicket {
+        require(purchaseAmount % ticketAmount == 0) {
             "로또 구입 금액은 로또 한 장의 가격의 배수여야 합니다."
         }
 
-        val issueCount = paymentAmount / ticketAmount
-        return LottoTicket(List(issueCount) { issueStrategy.issue() })
+        val issueCount = purchaseAmount / ticketAmount
+        return LottoTicket(purchaseAmount, List(issueCount) { issueStrategy.issue() })
     }
 }

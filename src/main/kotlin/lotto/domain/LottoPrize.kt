@@ -10,6 +10,7 @@ enum class LottoPrize(val matchingCount: Int, value: Int) {
     val amount: Amount = Amount(value)
 
     companion object {
+        val WINNING_RANK = values().filter { it != MISS }
         fun from(matchingCount: Int): LottoPrize = values().find { it.matchingCount == matchingCount } ?: MISS
     }
 }
