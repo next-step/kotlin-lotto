@@ -3,34 +3,31 @@ package calculator
 object StringAddCalculator {
 
     private val DELIMITER = listOf(",", ":")
+    private val parsingPatternRegex = Regex("//(.)\n(.*)")
 
     fun sum(input: String?): Int {
         if (input.isNullOrBlank()) {
             return 0
         }
-        val (addString, customDelimiter) = parseInputPattern(input)
-        val delimiter = getDelimitersRegex(customDelimiter)
-        val numbers = split(addString, delimiter)
+        val patternToken = parseInputPattern(input)
+        val delimiter = getDelimitersRegex(patternToken.customDelimiter)
+        val numbers = split(patternToken.addStringPattern, delimiter)
         if (hasNegative(numbers)) {
             throw RuntimeException("음수는 입력할 수 없습니다.")
         }
         return sumAll(numbers)
     }
 
-    private fun parseInputPattern(input: String): Pair<String, String?> {
-        var addPattern: String? = null
-        var customDelimiter: String? = null
-        val result = Regex("//(.)\n(.*)").find(input)
-        result?.let {
-            customDelimiter = it.groupValues[1]
-            addPattern = it.groupValues[2]
-        }
-
-        return Pair(addPattern ?: input, customDelimiter)
+    private fun parseInputPattern(input: String): PatternToken {
+        val result = parsingPatternRegex.find(input)
+        return PatternToken(
+            result?.groupValues?.get(2) ?: input,
+            result?.groupValues?.get(1)
+        )
     }
 
     private fun getDelimitersRegex(customDelimiter: String?): Regex {
-        val delimiters = DELIMITER + customDelimiter
+        val delimiters = DELIMITER + (customDelimiter ?: "")
         return delimiters.joinToString("", "[", "]").toRegex()
     }
 

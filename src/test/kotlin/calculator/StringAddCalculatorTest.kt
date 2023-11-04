@@ -95,4 +95,12 @@ class StringAddCalculatorTest {
             StringAddCalculator.sum(input)
         }
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1.2", "1,2.3,5", "//&\n8&2.3"])
+    fun `정수가 아닌 경우 RuntimeException이 발생한다`(input: String) {
+        assertThatExceptionOfType(RuntimeException::class.java).isThrownBy {
+            StringAddCalculator.sum(input)
+        }
+    }
 }
