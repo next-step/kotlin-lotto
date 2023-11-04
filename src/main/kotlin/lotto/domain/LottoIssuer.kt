@@ -20,12 +20,12 @@ class LottoIssuer(
     private val issueStrategy: IssueStrategy
 ) {
 
-    fun issue(paymentAmount: Amount): List<LottoNumbers> {
+    fun issue(paymentAmount: Amount): LottoTicket {
         require(paymentAmount % ticketAmount == 0) {
             "로또 구입 금액은 로또 한 장의 가격의 배수여야 합니다."
         }
 
         val issueCount = paymentAmount / ticketAmount
-        return List(issueCount) { issueStrategy.issue() }
+        return LottoTicket(List(issueCount) { issueStrategy.issue() })
     }
 }

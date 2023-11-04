@@ -21,6 +21,8 @@ class LottoNumbers(
         require(lottoNumbers.distinct().size == LOTTO_NUMBER_SIZE) { "로또 번호는 중복될 수 없습니다." }
     }
 
+    fun getMatchCount(it: LottoNumbers): Int = lottoNumbers.intersect(it.lottoNumbers.toSet()).count()
+
     companion object {
         const val LOTTO_NUMBER_SIZE = 6
     }
