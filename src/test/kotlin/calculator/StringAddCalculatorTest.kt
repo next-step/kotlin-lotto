@@ -1,12 +1,12 @@
 package calculator
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 
 class StringAddCalculatorTest : StringSpec({
-
 
     "빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다." {
         forAll(
@@ -51,6 +51,17 @@ class StringAddCalculatorTest : StringSpec({
             row("10:20,30", 60)
         ) { text, expected ->
             StringAddCalculator.add(text) shouldBe expected
+        }
+    }
+
+    "문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다." {
+        forAll(
+            row("-1"),
+            row("10:-1"),
+            row("10,-10"),
+            row("10:20,-30")
+        ) { text ->
+            shouldThrow<RuntimeException> { StringAddCalculator.add(text) }
         }
     }
 })

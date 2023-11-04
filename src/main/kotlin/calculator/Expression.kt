@@ -15,7 +15,15 @@ class Expression(
     }
 
     fun toInt(): Int {
-        return text.toIntOrNull() ?: throw RuntimeException("숫자가 아닙니다.")
+        val number = text.toIntOrNull() ?: throw RuntimeException("숫자가 아닙니다.")
+        validateMinusNumber(number)
+        return number
+    }
+
+    private fun validateMinusNumber(number: Int) {
+        if (number < 0) {
+            throw RuntimeException("음수는 입력할 수 없습니다.")
+        }
     }
 
     fun split(): List<Int> {
@@ -33,7 +41,7 @@ class Expression(
     private fun splitBySymbol(): List<Int> {
         val numbers = text.split("$COMMA|$COLON".toRegex())
         return numbers.map {
-            it.toIntOrNull() ?: throw RuntimeException("구분자 이외의 값은 숫자여야 합니다.")
+            Expression(it).toInt()
         }
     }
 }
