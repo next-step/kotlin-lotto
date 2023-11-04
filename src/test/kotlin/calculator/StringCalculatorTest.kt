@@ -3,14 +3,17 @@ package calculator
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.NullAndEmptySource
+import org.junit.jupiter.params.provider.ValueSource
 
 class StringCalculator {
     fun inputText(text: String?): Int {
-        if (text.isNullOrEmpty()) {
+        if (text.isNullOrBlank()) {
             return 0
         }
 
-        return 1
+        return text.toInt()
     }
 }
 
@@ -22,13 +25,15 @@ class StringCalculatorTest {
         calculator = StringCalculator()
     }
 
-    @Test
-    fun `문자열 계산기에 빈 문자열을 입력할 경우 0을 반환한다`() {
-        calculator.inputText("") shouldBe 0
+    @ParameterizedTest
+    @NullAndEmptySource
+    fun `빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다`(text: String?) {
+        calculator.inputText(text) shouldBe 0
     }
 
-    @Test
-    fun `문자열 계산기에 null을 입력할 경우 0을 반환한다`() {
-        calculator.inputText(null) shouldBe 0
+    @ParameterizedTest
+    @ValueSource(strings = ["1", "2", "3"])
+    fun `숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다`(text: String) {
+        calculator.inputText(text) shouldBe text.toInt()
     }
 }
