@@ -17,5 +17,4 @@ class StudyKotlinCollection : StringSpec({
         val numbersBackwards = setOf(4, 3, 2, 1)
         println("The sets are equal: ${numbers == numbersBackwards}")
     }
-
 })

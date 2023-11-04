@@ -3,7 +3,7 @@ package lotto.view
 import lotto.model.WinningNumbers
 
 object InputView {
-    fun purchaseAmount(priceOfGame :Int): Int {
+    fun purchaseAmount(priceOfGame: Int): Int {
         "구입금액을 입력해 주세요."
         TODO()
         val n = 14
@@ -14,5 +14,4 @@ object InputView {
         "지난 주 당첨 번호를 입력해 주세요."
         TODO("Not yet implemented")
     }
-
 }
