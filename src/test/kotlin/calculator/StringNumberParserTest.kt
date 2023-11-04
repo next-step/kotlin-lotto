@@ -72,6 +72,25 @@ class StringNumberParserTest : FunSpec({
     }
 
     context("문자열 표현식 분석기 예외 테스트") {
+        test("표현식 형식이 잘못 입력된 경우 RuntimeException") {
+            forAll(
+                row(","),
+                row("1,"),
+                row(",1"),
+                row("//!\\n,"),
+                row("//!\\n1,"),
+                row("//!\\n,1"),
+                row("//\\n"),
+                row("//\\n,"),
+                row("//\\n1,"),
+                row("//\\n,1"),
+            ) { input ->
+                shouldThrow<RuntimeException> {
+                    stringNumberParser.getNumbers(input)
+                }
+            }
+        }
+
         test("잘못된 숫자가 입력된 경우 RuntimeException") {
             forAll(
                 row("-1"),
@@ -87,19 +106,14 @@ class StringNumberParserTest : FunSpec({
             }
         }
 
-        test("기본 구분자가 아닌 구분자가 포함되어있는 경우 RuntimeException") {
-            val input = "1?2"
-
-            shouldThrow<RuntimeException> {
-                stringNumberParser.getNumbers(input)
-            }
-        }
-
-        test("커스텀 구분자가 2글자 이상인 경우 RuntimeException") {
-            val input = """//!!\n"""
-
-            shouldThrow<RuntimeException> {
-                stringNumberParser.getNumbers(input)
+        test("기본 또는 커스텀 구분자가 아닌 구분자가 입력된 경우 RuntimeException") {
+            forAll(
+                row("1?2"),
+                row("//!\\n1?2"),
+            ) { input ->
+                shouldThrow<RuntimeException> {
+                    stringNumberParser.getNumbers(input)
+                }
             }
         }
     }
