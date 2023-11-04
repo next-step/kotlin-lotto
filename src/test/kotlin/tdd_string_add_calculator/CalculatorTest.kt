@@ -35,22 +35,26 @@ class CalculatorTest : StringSpec({
             Calculator.calculate(express)
         }
     }
+
     "음수 값은 runtime exception" {
         val express = "-1:2,3"
         shouldThrow<RuntimeException> {
             Calculator.calculate(express)
         }
     }
+
     "커스텀 계산자를 사용해도 잘 작동한다" {
         val express = "//;\n1;2;3"
         val expected = "6"
         Calculator.calculate(express) shouldBe expected
     }
+
     "2개 값 더하기" {
         val express = "1,2"
         val expected = "3"
         Calculator.calculate(express) shouldBe expected
     }
+    
     "커스텀 계산자로 2개 더하기" {
         val express = "//;\n1;2"
         val expected = "3"
