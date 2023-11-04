@@ -60,4 +60,10 @@ class CalculatorTest : StringSpec({
         val expected = "3"
         Calculator.calculate(express) shouldBe expected
     }
+
+    "하나의 숫자 입력시 하나 반환" {
+        val express = "1"
+        val expected = "1"
+        Calculator.calculate(express) shouldBe expected
+    }
 })
