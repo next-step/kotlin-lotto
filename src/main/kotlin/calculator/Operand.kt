@@ -1,7 +1,5 @@
 package calculator
 
-import java.lang.RuntimeException
-
 class Operand(
     private val value: String
 ) {

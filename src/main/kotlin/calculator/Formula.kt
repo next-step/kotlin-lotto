@@ -8,7 +8,7 @@ class Formula(formula: String?) {
 
     private lateinit var operand: List<Operand>
 
-    fun calculate() : Int{
+    fun calculate(): Int {
         return operand.sumOf { it.getValue() }
     }
 

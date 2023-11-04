@@ -1,10 +1,9 @@
 package calculator
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class FormulaTest{
+class FormulaTest {
     @Test
     fun `첫번째 기본 구분자로 덧셈을 한다`() {
         val formula = Formula("1:2")

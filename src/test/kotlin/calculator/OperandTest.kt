@@ -1,10 +1,10 @@
 package calculator
 
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
-import java.lang.RuntimeException
 
-class OperandTest{
+class OperandTest {
 
     @Test
     fun `피연산자를 가져온다`() {
