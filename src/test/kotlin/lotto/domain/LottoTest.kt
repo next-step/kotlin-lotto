@@ -21,4 +21,22 @@ class LottoTest {
 
         assertThat(actual).hasSize(6)
     }
+
+    @Test
+    fun `로또 번호는 1~45 사이의 숫자이다`() {
+        val lotto = Lotto()
+
+        val actual = lotto.numbers
+
+        assertThat(actual).allMatch { it in (1..45) }
+    }
+
+    @Test
+    fun `로또 번호는 중복될 수 없다`() {
+        val lotto = Lotto()
+
+        val actual = lotto.numbers
+
+        assertThat(actual).hasSameSizeAs(actual.toSet())
+    }
 }
