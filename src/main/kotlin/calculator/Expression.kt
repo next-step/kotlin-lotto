@@ -15,9 +15,25 @@ class Expression(
     }
 
     fun toInt(): Int {
-        if (!isNumber()) {
-            throw RuntimeException("숫자가 아닙니다.")
+        return text.toIntOrNull() ?: throw RuntimeException("숫자가 아닙니다.")
+    }
+
+    fun split(): List<Int> {
+        if (hasSymbol()) {
+            return splitBySymbol()
         }
-        return text.toInt()
+        TODO("Not yet implemented")
+    }
+
+    private fun hasSymbol(): Boolean {
+        val symbols = listOf(COMMA, COLON)
+        return symbols.any { text.contains(it) }
+    }
+
+    private fun splitBySymbol(): List<Int> {
+        val numbers = text.split("$COMMA|$COLON".toRegex())
+        return numbers.map {
+            it.toIntOrNull() ?: throw RuntimeException("구분자 이외의 값은 숫자여야 합니다.")
+        }
     }
 }

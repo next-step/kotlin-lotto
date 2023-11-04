@@ -12,6 +12,8 @@ object StringAddCalculator {
             return expression.toInt()
         }
 
+        val numbers = expression.split()
+        return numbers.sum()
         TODO("Not yet implemented")
     }
 }
