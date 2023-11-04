@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 data class LottoNumbers(
     val numbers: List<LottoNumber> = (LottoNumber.MIN_LOTTO_NUMBER..LottoNumber.MAX_LOTTO_NUMBER).map { LottoNumber(it) }
