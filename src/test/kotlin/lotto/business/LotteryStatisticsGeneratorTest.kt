@@ -28,7 +28,7 @@ class LotteryStatisticsGeneratorTest {
                 lottoTicket6
             )
         )
-        val winningNumbers = lottoWinningNumbers(1,2,3,4,5,6)
+        val winningNumbers = lottoWinningNumbers(1, 2, 3, 4, 5, 6)
         val calculatedResults = lottoTicketManager.compilePrizeResults(winningNumbers)
         val lotteryStatisticsGenerator = LotteryStatisticsGenerator()
 
@@ -44,16 +44,17 @@ class LotteryStatisticsGeneratorTest {
         )
     }
 
-    private fun lottoWinningNumbers(num1: Int,num2: Int,num3: Int,num4: Int,num5: Int,num6: Int) = LottoWinningNumbers(
-        listOf(
-            LottoNumber(num1),
-            LottoNumber(num2),
-            LottoNumber(num3),
-            LottoNumber(num4),
-            LottoNumber(num5),
-            LottoNumber(num6)
+    private fun lottoWinningNumbers(num1: Int, num2: Int, num3: Int, num4: Int, num5: Int, num6: Int) =
+        LottoWinningNumbers(
+            listOf(
+                LottoNumber(num1),
+                LottoNumber(num2),
+                LottoNumber(num3),
+                LottoNumber(num4),
+                LottoNumber(num5),
+                LottoNumber(num6)
+            )
         )
-    )
 
     private fun lottoTicket(num1: Int, num2: Int, num3: Int, num4: Int, num5: Int, num6: Int) = LottoTicket(
         listOf(

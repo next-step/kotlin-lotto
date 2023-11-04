@@ -3,7 +3,7 @@ package lotto.business
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class LottoNumbersSorterTest{
+class LottoNumbersSorterTest {
 
     @Test
     fun `로또 번호를 오름차순으로 정렬한다`() {

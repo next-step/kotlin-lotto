@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
-class LottoWinningNumbersExtractorTest{
+class LottoWinningNumbersExtractorTest {
     @Test
-    fun `입력한 당첨 결과를 파싱한다`(){
+    fun `입력한 당첨 결과를 파싱한다`() {
         // given
         val input = "1,2,3,4,5,6"
         val lottoWinningNumbersExtractor = LottoWinningNumbersExtractor()
@@ -22,7 +22,7 @@ class LottoWinningNumbersExtractorTest{
     }
 
     @Test
-    fun `입력한 당첨 결과가 숫자가 아니면 예외를 던진다`(){
+    fun `입력한 당첨 결과가 숫자가 아니면 예외를 던진다`() {
         // given
         val input = "1,2,3,4,5,6a"
         val lottoWinningNumbersExtractor = LottoWinningNumbersExtractor()

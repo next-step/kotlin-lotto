@@ -5,7 +5,6 @@ import lotto.business.ProfitRate
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import java.io.ByteArrayOutputStream
@@ -38,7 +37,7 @@ class LotteryStatisticsPrinterTest {
         // then
         assertThat(outputStreamCaptor.toString()).isEqualTo(
             """
-            통계
+            당첨 통계
             ---------
             3개 일치 (5000원) - 1개
             4개 일치 (50000원) - 2개

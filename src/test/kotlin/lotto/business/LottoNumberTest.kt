@@ -22,7 +22,7 @@ class LottoNumberTest {
     fun `1보다 작거나 45보다 큰 숫자로 로또 번호를 생성하면 예외를 던진다`(number: Int) {
         // when
         assertThatThrownBy { LottoNumber(number) }
-        // then
+            // then
             .isInstanceOf(IllegalArgumentException::class.java)
             .message().isEqualTo("로또 번호는 1~45 사이의 숫자여야 합니다.")
     }

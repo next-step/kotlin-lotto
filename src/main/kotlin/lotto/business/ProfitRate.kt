@@ -1,6 +1,6 @@
 package lotto.business
 
-data class ProfitRate(val value: Double){
+data class ProfitRate(val value: Double) {
     fun evaluateProfitOrLoss(): String {
         return if (value > BASE) PROFIT else LOSS
     }
