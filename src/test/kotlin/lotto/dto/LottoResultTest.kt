@@ -7,16 +7,18 @@ class LottoResultTest {
     @Test
     fun `로또 결과 생성`() {
         val lottoResult = LottoResult()
-        for (i in 0..3) {
-            lottoResult.updateExact(i)
+        for (price in listOf(LottoPrice.NOT_MATCHED, LottoPrice.ONE_MATCHED, LottoPrice.TWO_MATCHED, LottoPrice.THREE_MATCHED)) {
+            lottoResult.updateExact(price)
         }
-        assertThat(lottoResult.getExact(0)).isEqualTo(1)
-        assertThat(lottoResult.getExact(1)).isEqualTo(1)
-        assertThat(lottoResult.getExact(2)).isEqualTo(1)
-        assertThat(lottoResult.getExact(3)).isEqualTo(1)
-        assertThat(lottoResult.getExact(4)).isEqualTo(0)
-        assertThat(lottoResult.getExact(5)).isEqualTo(0)
-        assertThat(lottoResult.getExact(6)).isEqualTo(0)
+        println(LottoPrice.rankOf())
+        assertThat(lottoResult.getExact(LottoPrice.NOT_MATCHED)).isEqualTo(1)
+        assertThat(lottoResult.getExact(LottoPrice.ONE_MATCHED)).isEqualTo(1)
+        assertThat(lottoResult.getExact(LottoPrice.TWO_MATCHED)).isEqualTo(1)
+        assertThat(lottoResult.getExact(LottoPrice.THREE_MATCHED)).isEqualTo(1)
+        assertThat(lottoResult.getExact(LottoPrice.FOUR_MATCHED)).isEqualTo(0)
+        assertThat(lottoResult.getExact(LottoPrice.FIVE_MATCHED)).isEqualTo(0)
+        assertThat(lottoResult.getExact(LottoPrice.FIVE_MATCHED_WITH_BONUS)).isEqualTo(0)
+        assertThat(lottoResult.getExact(LottoPrice.ALL_MATCHED)).isEqualTo(0)
         assertThat(lottoResult.getRatio(6000)).isEqualTo(5000.0 / 6000.0)
     }
 }
