@@ -12,7 +12,8 @@ class PrizeTest {
     fun `번호 3개가 일치하면 당첨 금액은 5000원이다`() {
         val matchedNumberCount = 3
 
-        val actual = Prize.valueOfOrNull(matchedNumberCount)?.winningAmount
+        val actual = Prize.valueOfOrNull(matchedNumberCount)
+            ?.winningAmount
 
         assertThat(actual).isEqualTo(5000)
     }
@@ -21,7 +22,8 @@ class PrizeTest {
     fun `번호 4개가 일치하면 당첨 금액은 50000원이다`() {
         val matchedNumberCount = 4
 
-        val actual = Prize.valueOfOrNull(matchedNumberCount)?.winningAmount
+        val actual = Prize.valueOfOrNull(matchedNumberCount)
+            ?.winningAmount
 
         assertThat(actual).isEqualTo(50000)
     }
@@ -30,7 +32,8 @@ class PrizeTest {
     fun `번호 5개가 일치하면 당첨 금액은 1500000원이다`() {
         val matchedNumberCount = 5
 
-        val actual = Prize.valueOfOrNull(matchedNumberCount)?.winningAmount
+        val actual = Prize.valueOfOrNull(matchedNumberCount)
+            ?.winningAmount
 
         assertThat(actual).isEqualTo(1500000)
     }
@@ -39,7 +42,8 @@ class PrizeTest {
     fun `번호 6개가 일치하면 당첨 금액은 2000000000원이다`() {
         val matchedNumberCount = 6
 
-        val actual = Prize.valueOfOrNull(matchedNumberCount)?.winningAmount
+        val actual = Prize.valueOfOrNull(matchedNumberCount)
+            ?.winningAmount
 
         assertThat(actual).isEqualTo(2000000000)
     }
