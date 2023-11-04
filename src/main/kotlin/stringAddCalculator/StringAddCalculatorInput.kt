@@ -1,7 +1,5 @@
 package stringAddCalculator
 
-import java.lang.RuntimeException
-
 class StringAddCalculatorInput(private val input: String) {
     fun parse(): List<Int> {
         val customDelimiter = getCustomDelimiter()
