@@ -8,4 +8,5 @@ fun main() {
 
     val lottoList = LottoAuto.createLottoList(count)
     OutputView.print(lottoList)
+    InputView.lastWeekInput()
 }
