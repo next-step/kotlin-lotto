@@ -1,6 +1,6 @@
 package lotto.business
 
-enum class LotteryPrize(private val matchCount: Int, private val prizeAmount: Long) {
+enum class LotteryPrize(private val matchCount: Int, val prizeAmount: Long) {
     NONE(0, 0L),
     THREE_MATCH(3, 5_000L),
     FOUR_MATCH(4, 50_000L),
