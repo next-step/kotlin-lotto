@@ -13,7 +13,7 @@ class StringCalculator {
             return 0
         }
 
-        return text.toInt()
+        return text.split(",").sumOf { it.toInt() }
     }
 }
 
@@ -35,5 +35,12 @@ class StringCalculatorTest {
     @ValueSource(strings = ["1", "2", "3"])
     fun `숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다`(text: String) {
         calculator.inputText(text) shouldBe text.toInt()
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2", "2,3", "3,3"])
+    fun `숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다`(text: String) {
+        val expected = text.split(",").sumOf { it.toInt() }
+        calculator.inputText(text) shouldBe expected
     }
 }
