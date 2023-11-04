@@ -35,7 +35,7 @@ object Calculator {
         express: String,
         customDelimiter: String,
         customDelimiterString: String
-    ): String = if (customDelimiter.isBlank()) express else express.replace(customDelimiterString, "")
+    ): String = if (customDelimiter.isBlank()) express else express.replace(customDelimiterString, EMPTY_STRING)
 
     /**
      * custom delimiter 만 찾기
