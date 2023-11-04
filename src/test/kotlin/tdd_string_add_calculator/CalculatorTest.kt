@@ -1,5 +1,6 @@
 package tdd_string_add_calculator
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
@@ -26,6 +27,13 @@ class CalculatorTest : StringSpec({
         val express = ""
         val expected = "0"
         Calculator.calculate(express) shouldBe expected
+    }
+
+    "숫자 이외의 값은 runtime exception" {
+        val express = "a"
+        shouldThrow<RuntimeException> {
+            Calculator.calculate(express)
+        }
     }
 })
 

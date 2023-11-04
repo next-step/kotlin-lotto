@@ -8,10 +8,10 @@ object Calculator {
 
     private fun calculate(list: List<String>): String =
         runCatching {
-            list.map { it.toInt() }
+            list.map { it.ifBlank { DEFAULT_VALUE }.toInt() }
                 .reduce { acc, i -> acc + i }
                 .toString()
-        }.getOrNull() ?: DEFAULT_VALUE
+        }.getOrElse { throw RuntimeException() }
 
     private val SPLIT_REGEX = "([,:])".toRegex()
     private const val DEFAULT_VALUE = "0"
