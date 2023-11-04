@@ -16,7 +16,6 @@ dependencies {
     testImplementation("io.kotest", "kotest-runner-junit5", "5.7.2")
     testImplementation("io.kotest", "kotest-framework-datatest", "5.7.2")
     testImplementation("io.mockk:mockk:1.9.3")
-
 }
 
 tasks {

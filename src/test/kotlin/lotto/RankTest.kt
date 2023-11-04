@@ -25,7 +25,6 @@ class RankTest : FunSpec({
 
 data class RankSet(val matchCount: Int, val rank: Rank, val prize: Int) : WithDataTestName {
     override fun dataTestName(): String {
-        return "${matchCount}개 일치 시 랭크: ${rank}, 상금: ${prize}원"
+        return "${matchCount}개 일치 시 랭크: $rank, 상금: ${prize}원"
     }
-
 }
