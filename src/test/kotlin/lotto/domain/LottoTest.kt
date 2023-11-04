@@ -50,4 +50,31 @@ class LottoTest : BehaviorSpec({
             }
         }
     }
+
+    Given("숫자를 입력받으면") {
+        val lottoNumbers = listOf(
+            LottoNumber(1),
+            LottoNumber(2),
+            LottoNumber(3),
+            LottoNumber(4),
+            LottoNumber(5),
+            LottoNumber(6)
+        )
+        When("로또는") {
+            val lotto = Lotto(lottoNumbers)
+            Then("입력받은 숫자와 일치하는 로또 넘버를 갖고 있는지 알려준다.") {
+                forAll(
+                    row(1, true),
+                    row(2, true),
+                    row(3, true),
+                    row(4, true),
+                    row(5, true),
+                    row(6, true),
+                    row(7, false),
+                ) { number, expected ->
+                    lotto.contains(number) shouldBe expected
+                }
+            }
+        }
+    }
 })
