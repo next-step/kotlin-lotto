@@ -1,7 +1,7 @@
 package lotto_auto.lotto
 
 object LottoAuto {
-    private fun createLotto(): List<Int> = (1..45).shuffled().subList(0, 6).sorted()
+    private fun createLotto(): List<Int> = (1..45).shuffled().take(6).sorted()
     fun createLottoList(count: Int): List<List<Int>> = (1..count).map {
         createLotto()
     }
@@ -30,10 +30,10 @@ object LottoAuto {
      * match 개수 만큼 금액 으로 변경
      */
     private fun replaceMatchCountToMoney(it: Int) = when (it) {
-        3 -> 5000
-        4 -> 50000
-        5 -> 1500000
-        6 -> 2000000000
+        3 -> 5_000
+        4 -> 50_000
+        5 -> 1_500_000
+        6 -> 2_000_000_000
         else -> 0
     }
 
