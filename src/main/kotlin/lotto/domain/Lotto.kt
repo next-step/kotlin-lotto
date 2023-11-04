@@ -8,7 +8,7 @@ class Lotto {
         .sorted()
 
     companion object {
-        const val PRICE = 1000
+        const val PRICE = 1000L
         private const val NUMBER_COUNT = 6
     }
 }
