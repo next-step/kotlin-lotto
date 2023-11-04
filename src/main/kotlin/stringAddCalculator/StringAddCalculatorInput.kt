@@ -37,6 +37,6 @@ class StringAddCalculatorInput(private val input: String) {
     }
 
     companion object {
-        val DEFAULT_DELIMITERS = listOf(",", ":")
+        private val DEFAULT_DELIMITERS = listOf(",", ":")
     }
 }
