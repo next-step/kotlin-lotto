@@ -66,4 +66,10 @@ class CalculatorTest : StringSpec({
         val expected = "1"
         Calculator.calculate(express) shouldBe expected
     }
+
+    "null 입력시에 0 반환" {
+        val express = null
+        val expected = "0"
+        Calculator.calculate(express) shouldBe expected
+    }
 })
