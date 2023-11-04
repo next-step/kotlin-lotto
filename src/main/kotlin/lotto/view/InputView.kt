@@ -1,22 +1,18 @@
 package lotto.view
 
 import lotto.domain.LottoNumber
+import lotto.domain.PurchasePrice
 
 object InputView {
 
-    fun inputPrice(): Int {
+    fun inputPrice(): PurchasePrice {
         println("구입금액을 입력해 주세요.")
-        val price = readln()
-        return try {
-            require(price.isNotBlank())
-            price.toInt()
-        } catch (e: NumberFormatException) {
-            println(NUMBER_ERROR_MESSAGE)
-            inputPrice()
-        } catch (e: IllegalArgumentException) {
-            println(BLANK_ERROR_MESSAGE)
-            inputPrice()
-        }
+        return PurchasePrice(readln())
+    }
+
+    fun inputManualLottoCount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        return readln().toInt()
     }
 
     fun inputWinningLotto(): List<LottoNumber> {
@@ -24,6 +20,7 @@ object InputView {
         val winningLotto = readln()
         return parseLottoNumber(winningLotto)
     }
+
     fun inputBonusBall(): LottoNumber {
         println("보너스 볼을 입력해 주세요.")
         val bonusBall = readln()
