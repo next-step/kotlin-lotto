@@ -17,4 +17,13 @@ class StringAddCalculatorTest : StringSpec({
             StringAddCalculator.add(text) shouldBe 0
         }
     }
+
+    "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다." {
+        forAll(
+            row("1", 1),
+            row("100", 100)
+        ) { text, expected ->
+            StringAddCalculator.add(text) shouldBe expected
+        }
+    }
 })
