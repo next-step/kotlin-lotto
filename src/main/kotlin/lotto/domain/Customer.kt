@@ -9,10 +9,9 @@ class Customer(money: String) {
     }
 
     companion object {
-        private val isNotBlank: (String) -> Boolean = { it.isNotBlank() }
         private val isDigit: (String) -> Boolean = { it.all { char -> char.isDigit() } }
         private val isDivisibleByThousand: (String) -> Boolean = { it.toInt() % 1000 == 0 }
 
-        private val validations = listOf(isNotBlank, isDigit, isDivisibleByThousand)
+        private val validations = listOf(isDigit, isDivisibleByThousand)
     }
 }
