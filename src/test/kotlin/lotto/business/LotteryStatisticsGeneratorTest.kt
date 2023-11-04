@@ -29,7 +29,7 @@ class LotteryStatisticsGeneratorTest {
             )
         )
         val winningNumbers = lottoWinningNumbers(1,2,3,4,5,6)
-        val calculatedResults = lottoTicketManager.calculateResults(winningNumbers)
+        val calculatedResults = lottoTicketManager.compilePrizeResults(winningNumbers)
         val lotteryStatisticsGenerator = LotteryStatisticsGenerator()
 
         // when

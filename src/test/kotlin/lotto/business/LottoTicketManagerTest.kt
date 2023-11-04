@@ -108,13 +108,13 @@ class LottoTicketManagerTest {
         lottoTicketManager.addAll(tickets)
 
         // when
-        val results = lottoTicketManager.calculateResults(winningNumbers)
+        val prizeResults = lottoTicketManager.compilePrizeResults(winningNumbers)
 
         // then
         assertAll(
-            { assertThat(results).hasSize(2) },
-            { assertThat(results[LotteryPrize.SIX_MATCH]).isEqualTo(1) },
-            { assertThat(results[LotteryPrize.FIVE_MATCH]).isEqualTo(1) }
+            { assertThat(prizeResults.prizeCountMap).hasSize(2) },
+            { assertThat(prizeResults.prizeCountMap[LotteryPrize.SIX_MATCH]).isEqualTo(1) },
+            { assertThat(prizeResults.prizeCountMap[LotteryPrize.FIVE_MATCH]).isEqualTo(1) }
         )
     }
 }

@@ -12,10 +12,11 @@ class LottoTicketManager(private val _tickets: MutableList<LottoTicket> = mutabl
         this._tickets.addAll(tickets)
     }
 
-    fun calculateResults(winningNumbers: LottoWinningNumbers): Map<LotteryPrize, Int> {
+    fun compilePrizeResults(winningNumbers: LottoWinningNumbers): PrizeResults {
         return _tickets.map { it.matchCount(winningNumbers.lottoNumbers) }
             .map { LotteryPrize.getPrize(it) }
             .groupBy { it }
             .mapValues { it.value.size }
+            .let { PrizeResults(it) }
     }
 }
