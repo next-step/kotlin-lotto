@@ -13,7 +13,7 @@ class StringAddCalculatorTest {
 
     @BeforeEach
     fun setUp() {
-        calculator = StringAddCalculator();
+        calculator = StringAddCalculator()
     }
 
     @ParameterizedTest
@@ -42,7 +42,7 @@ class StringAddCalculatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["//;\n1;2;3"])
-    fun `커스텀 구분자를 입력받아 1,2,3 을 더한다` (text: String) {
+    fun `커스텀 구분자를 입력받아 1,2,3 을 더한다`(text: String) {
         assertThat(calculator.add(text) == 6)
     }
 
