@@ -10,44 +10,6 @@ import java.lang.RuntimeException
 class StringNumberParserTest : FunSpec({
     val stringNumberParser = StringNumberParser()
 
-    context("입력 문자열의 커스텀 구분자 추출 테스트") {
-        test("단일 문자 커스텀 구분자 입력 시 정상 반환") {
-            val separator = "!"
-            val input = """//$separator\n"""
-
-            val result = stringNumberParser.getCustomSeparator(input)
-
-            result shouldBe separator
-        }
-
-        test("공백 커스텀 구분자 입력 시 정상 반환") {
-            val separator = " "
-            val input = """//$separator\n"""
-
-            val result = stringNumberParser.getCustomSeparator(input)
-
-            result shouldBe separator
-        }
-
-        test("백 슬래쉬 커스텀 구분자 입력 시 정상 반환") {
-            val separator = "\\"
-            val input = """//$separator\n"""
-
-            val result = stringNumberParser.getCustomSeparator(input)
-
-            result shouldBe separator
-        }
-
-        test("2자 이상 문자 커스텀 구분자 입력 시 null 반환") {
-            val separator = "//"
-            val input = """//$separator\n"""
-
-            val result = stringNumberParser.getCustomSeparator(input)
-
-            result shouldBe null
-        }
-    }
-
     context("문자열 표현식 내 숫자 추출 동작 테스트") {
         test("null, 공백, 빈 문자열을 전달할 경우 0 하나만 포함한 리스트 반환") {
             forAll(

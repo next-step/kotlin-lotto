@@ -13,7 +13,7 @@ class StringNumberParser {
         return getNumbers(stringNumbersExpression, separatorRegex)
     }
 
-    fun getCustomSeparator(input: String): String? {
+    private fun getCustomSeparator(input: String): String? {
         return Regex(CUSTOM_SEPARATOR_PATTERN).find(input)
             ?.groupValues
             ?.get(1)
