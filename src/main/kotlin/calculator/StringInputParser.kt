@@ -18,8 +18,8 @@ object StringInputParser {
 
     private fun splitInput(input: String, customDelimiterMatchResult: MatchResult?): List<String> {
         return if (customDelimiterMatchResult != null) {
-            val customDelimiter = customDelimiterMatchResult.groupValues[1]
-            customDelimiterMatchResult.groupValues[2].split(customDelimiter)
+            val (customDelimiter, inputExceptCustomText) = customDelimiterMatchResult.destructured
+            inputExceptCustomText.split(customDelimiter)
         } else {
             input.split(DELIMITERS_REGEX)
         }
