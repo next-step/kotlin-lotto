@@ -1,10 +1,9 @@
-package stringAddCalculator
+package stringaddcalculator
 
-val isAllPositive = { list: List<Int> ->
+private val isAllPositive = { list: List<Int> ->
     if (list.all { it < 0 }) throw RuntimeException("음수는 허용하지 않습니다.")
     list
 }
-
 class StringAddCalculator {
     fun add(text: String?): Int {
         if (text.isNullOrBlank()) return 0
