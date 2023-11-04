@@ -4,7 +4,10 @@ object InputView {
     fun input(): Int {
         println(ENTER_LOTTO_PRICE)
 
-        val input = readln().toIntOrNull() ?: error(ERROR_TEXT)
+        return readln().toIntOrNull() ?: error(ERROR_TEXT)
+    }
+
+    fun lottoCount(input: Int): Int {
         val lottoCount = transformLottoCountFromInput(input)
         check(lottoCount > MINIMUM_COUNT) { CHECK_MINIMUM_COUNT_TEXT }
 
