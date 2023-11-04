@@ -3,8 +3,11 @@ package calculator
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
+import java.util.regex.Pattern
 
 class StringCalculator {
     fun inputText(text: String?): Int {
@@ -12,7 +15,11 @@ class StringCalculator {
             return 0
         }
 
-        return text.split(",").sumOf { it.toInt() }
+        return text.split(DEFAULT_DELIMITER).sumOf { it.toInt() }
+    }
+
+    companion object {
+        private val DEFAULT_DELIMITER: Pattern = Pattern.compile(",|:")
     }
 }
 
@@ -41,5 +48,28 @@ class StringCalculatorTest {
     fun `숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다`(text: String) {
         val expected = text.split(",").sumOf { it.toInt() }
         calculator.inputText(text) shouldBe expected
+    }
+
+    @ParameterizedTest
+    @MethodSource("getSampleData")
+    fun `컴마 이외에 콜론을 구분자로 사용할 수 있다`(input: String, expected: Int) {
+        calculator.inputText(input) shouldBe expected
+    }
+
+    companion object {
+        @JvmStatic
+        fun getSampleData(): List<Arguments> {
+            return listOf(
+                Arguments.of(
+                    "1,2:3", 6
+                ),
+                Arguments.of(
+                    "2:2:7", 11
+                ),
+                Arguments.of(
+                    "3:1,8", 12
+                )
+            )
+        }
     }
 }
