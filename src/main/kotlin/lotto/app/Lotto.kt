@@ -2,12 +2,14 @@ package lotto.app
 
 import lotto.model.Round
 
-class Lotto {
-    fun transaction(amount: Int): Round {
+object Lotto {
+    private const val PRICE_OF_GAME = 1000
+
+    fun transaction(gameCount: Int): Round {
         TODO("Not yet implemented")
     }
 
     fun priceOfGame(): Int {
-        TODO()
+        return this.PRICE_OF_GAME
     }
 }
