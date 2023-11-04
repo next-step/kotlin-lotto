@@ -2,7 +2,7 @@ package lotto.business
 
 class LottoTicketManager(
     private val _tickets: MutableList<LottoTicket> = mutableListOf(),
-    private val ticketBookingSystem: TicketBookingSystem
+    private val ticketBookingSystem: TicketBookingSystem = TicketBookingSystem(LottoTicketGenerator())
 ) {
     val tickets: List<LottoTicket>
         get() = _tickets

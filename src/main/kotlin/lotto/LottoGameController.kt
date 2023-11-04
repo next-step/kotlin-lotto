@@ -15,12 +15,12 @@ class LottoGameController(
     private val lotteryStatisticsGenerator: LotteryStatisticsGenerator
 ) {
     fun run() {
-        val purchaseAmount = LottoInputHandler.inputPurchaseAmount()
-        lottoTicketManager.buyLotto(ReceivedAmount(purchaseAmount))
+        val receivedAmount = ReceivedAmount(LottoInputHandler.inputPurchaseAmount())
+        lottoTicketManager.buyLotto(receivedAmount)
         val winningNumbers = lottoWinningNumbersExtractor.extract(LottoInputHandler.inputWinningNumbers())
         val prizeResults = lottoTicketManager.compilePrizeResults(winningNumbers)
         val lotteryStatistics = lotteryStatisticsGenerator.generate(prizeResults)
-        val profitRate = prizeResults.calculateProfitRate(ReceivedAmount(purchaseAmount))
+        val profitRate = lotteryStatisticsGenerator.calculateProfitRate(receivedAmount, prizeResults)
         LotteryStatisticsPrinter.print(lotteryStatistics, profitRate)
     }
 }
