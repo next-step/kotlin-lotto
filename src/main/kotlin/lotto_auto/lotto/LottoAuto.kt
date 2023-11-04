@@ -6,6 +6,9 @@ object LottoAuto {
         createLotto()
     }
 
+    /**
+     * 각각 구매한 로또 마다 당첨 번호와 대조 하여 맞은 개수를 판별 합니다.
+     */
     private fun eachLottoMatchCount(
         lottoList: List<List<Int>>,
         lastWeekLottoNumber: List<Int>
