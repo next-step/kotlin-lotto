@@ -11,7 +11,7 @@ object StringInputParser {
 
         return Operands(
             numbers = splitInput.map {
-                it.toIntOrNull() ?: throw RuntimeException("숫자 이외의 값은 계산할 수 없습니다.")
+                requireNotNull(it.toIntOrNull()) { "숫자 이외의 값은 계산할 수 없습니다." }
             },
         )
     }
