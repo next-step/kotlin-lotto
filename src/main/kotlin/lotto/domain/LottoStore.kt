@@ -11,8 +11,8 @@ object LottoStore : ShuffleNumber {
         this.validateLottoBuy(lottoCount)
         return Lottos(List(lottoCount) { buyLotto() })
     }
-    override fun shuffleNumber(): List<Int> {
-        return LOTTO_POOL.flatten().shuffled()
+    override fun shuffleNumber(): List<LottoNumber> {
+        return LOTTO_POOL.shuffled()
     }
 
     private fun buyLotto(): Lotto {
@@ -25,4 +25,6 @@ object LottoStore : ShuffleNumber {
 
     private const val LOTTO_PRICE = 1000
     private val LOTTO_POOL = listOf(LOTTO_NUMBER_MIN..LOTTO_NUMBER_MAX)
+        .flatten()
+        .map { LottoNumber(it) }
 }

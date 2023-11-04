@@ -4,11 +4,10 @@ import lotto.constants.Sort
 
 interface ShuffleNumber {
 
-    fun shuffleNumber(): List<Int>
+    fun shuffleNumber(): List<LottoNumber>
     fun takeShuffleNumber(takeCount: Int, sort: Sort = Sort.ASC): LottoNumbers {
         return LottoNumbers(
             shuffleNumber().take(takeCount)
-                .map { LottoNumber(it) }
                 .numberSort(sort)
         )
     }
