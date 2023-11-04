@@ -2,6 +2,8 @@ package lotto
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.Rank
+import lotto.domain.Ranks
 
 class RanksTest : StringSpec({
     "수익률 계산" {

@@ -1,4 +1,10 @@
-package lotto
+package lotto.controller
+
+import lotto.domain.Lotto
+import lotto.domain.LottoShop
+import lotto.domain.Ranks
+import lotto.view.InputView
+import lotto.view.OutputView
 
 class LottoController(private val lottoShop: LottoShop) {
 

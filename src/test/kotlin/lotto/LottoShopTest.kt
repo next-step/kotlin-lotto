@@ -4,6 +4,9 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldHaveSize
 import io.mockk.every
 import io.mockk.mockk
+import lotto.domain.Lotto
+import lotto.domain.LottoGenerator
+import lotto.domain.LottoShop
 
 class LottoShopTest : FunSpec({
     val generator = mockk<LottoGenerator>()

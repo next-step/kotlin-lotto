@@ -4,6 +4,8 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.WithDataTestName
 import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
+import lotto.domain.Lotto
+import lotto.domain.Rank
 import org.junit.jupiter.api.Assertions.assertThrows
 
 class LottoTest : FunSpec({
