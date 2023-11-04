@@ -35,5 +35,11 @@ class CalculatorTest : StringSpec({
             Calculator.calculate(express)
         }
     }
+    "음수 값은 runtime exception" {
+        val express = "-1:2,3"
+        shouldThrow<RuntimeException> {
+            Calculator.calculate(express)
+        }
+    }
 })
 

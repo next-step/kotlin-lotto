@@ -15,4 +15,5 @@
 - [x] :을 사용해서 덧셈한다.
 - [x] ,와 :을 섞어서 사용해도 잘 더한다.
 - [x] 빈 문자열은 0을 반환한다.
-- [x] 숫자 이외의 값은 RuntimeException을 throw한다.
+- [x] 숫자 이외의 값은 RuntimeException을 throw 한다.
+- [x] 음수의 값은 RuntimeException을 throw 한다.
