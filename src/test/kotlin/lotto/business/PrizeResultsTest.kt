@@ -16,11 +16,12 @@ class PrizeResultsTest{
             )
         )
         val receivedAmount = ReceivedAmount(100000000)
+        val expected = ProfitRate(20.04725)
 
         // when
         val profitRate = prizeResults.calculateProfitRate(receivedAmount)
 
         // then
-        assertThat(profitRate).isEqualTo(20.04725)
+        assertThat(profitRate).isEqualTo(expected)
     }
 }
