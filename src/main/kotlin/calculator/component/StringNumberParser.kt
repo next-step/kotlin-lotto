@@ -1,4 +1,4 @@
-package calculator
+package calculator.component
 
 class StringNumberParser {
     fun getNumbers(expression: String?): List<Int> {

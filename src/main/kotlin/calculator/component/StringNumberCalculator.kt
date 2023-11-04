@@ -1,4 +1,4 @@
-package calculator
+package calculator.component
 
 class StringNumberCalculator(
     private val stringNumberParser: StringNumberParser

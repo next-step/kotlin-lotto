@@ -1,5 +1,6 @@
 package calculator
 
+import calculator.component.StringNumberParser
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.data.blocking.forAll

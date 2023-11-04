@@ -1,5 +1,7 @@
 package calculator
 
+import calculator.component.StringNumberCalculator
+import calculator.component.StringNumberParser
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.data.blocking.forAll
 import io.kotest.data.row

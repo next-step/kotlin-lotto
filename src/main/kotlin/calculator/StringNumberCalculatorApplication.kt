@@ -1,5 +1,8 @@
 package calculator
 
+import calculator.component.StringNumberCalculator
+import calculator.component.StringNumberParser
+
 fun main() {
     val parser = StringNumberParser()
     val calculator = StringNumberCalculator(parser)
