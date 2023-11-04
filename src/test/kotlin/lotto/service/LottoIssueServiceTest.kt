@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 
 class LottoIssueServiceTest {
     @Test
-    fun `로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급한다`() {
+    fun `로또 구입 금액이 주어지면 구입 금액에 해당하는 로또를 발급한다`() {
         val purchaseAmount = 14000L
 
         val actual = LottoIssueService.issue(purchaseAmount)
