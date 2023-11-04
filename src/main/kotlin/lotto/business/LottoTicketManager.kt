@@ -1,6 +1,9 @@
 package lotto.business
 
-class LottoTicketManager(private val _tickets: MutableList<LottoTicket> = mutableListOf()) {
+class LottoTicketManager(
+    private val _tickets: MutableList<LottoTicket> = mutableListOf(),
+    private val ticketBookingSystem: TicketBookingSystem
+) {
     val tickets: List<LottoTicket>
         get() = _tickets
 
@@ -18,5 +21,9 @@ class LottoTicketManager(private val _tickets: MutableList<LottoTicket> = mutabl
             .groupBy { it }
             .mapValues { it.value.size }
             .let { PrizeResults(it) }
+    }
+
+    fun buyLotto(receivedAmount: ReceivedAmount) {
+        addAll(ticketBookingSystem.buyLotto(receivedAmount))
     }
 }

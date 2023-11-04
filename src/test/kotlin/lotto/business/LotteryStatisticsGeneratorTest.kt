@@ -33,7 +33,7 @@ class LotteryStatisticsGeneratorTest {
         val lotteryStatisticsGenerator = LotteryStatisticsGenerator()
 
         // when
-        val lotteryStatistics = lotteryStatisticsGenerator.generateStatistics(calculatedResults)
+        val lotteryStatistics = lotteryStatisticsGenerator.generate(calculatedResults)
 
         // then
         assertAll(

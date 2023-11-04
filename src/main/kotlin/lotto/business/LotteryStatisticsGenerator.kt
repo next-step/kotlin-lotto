@@ -1,7 +1,7 @@
 package lotto.business
 
 class LotteryStatisticsGenerator {
-    fun generateStatistics(prizeResults: PrizeResults): LotteryStatistics {
+    fun generate(prizeResults: PrizeResults): LotteryStatistics {
         val treeMatchCount = prizeResults.prizeCountMap[LotteryPrize.THREE_MATCH] ?: 0
         val fourMatchCount = prizeResults.prizeCountMap[LotteryPrize.FOUR_MATCH] ?: 0
         val fiveMatchCount = prizeResults.prizeCountMap[LotteryPrize.FIVE_MATCH] ?: 0
