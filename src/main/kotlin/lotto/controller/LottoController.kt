@@ -10,7 +10,9 @@ object LottoController {
 
     fun run() {
         val inputPrice = InputView.inputPrice()
-        val lottos = LottoStore.buyLottos(inputPrice.price)
+        val manualLottoCount = InputView.inputManualLottoCount()
+        val manualLottos = InputView.inputManualLotto(manualLottoCount)
+        val lottos = LottoStore.buyLottos(inputPrice)
         OutputView.printLotto(lottos)
 
         val winningLottoNumber = LottoNumbers(InputView.inputWinningLotto())
@@ -19,6 +21,6 @@ object LottoController {
         val winningRanks = lottos.matchLotto(winningLotto)
 
         OutputView.printWinningResult(winningRanks)
-        OutputView.printRateOfReturn(inputPrice.price, winningRanks)
+        OutputView.printRateOfReturn(inputPrice, winningRanks)
     }
 }
