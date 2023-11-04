@@ -39,4 +39,13 @@ class LottoTest {
 
         assertThat(actual).hasSameSizeAs(actual.toSet())
     }
+
+    @Test
+    fun `로또 번호는 오름차순 정렬되어 있다`() {
+        val lotto = Lotto()
+
+        val actual = lotto.numbers
+
+        assertThat(actual).containsExactlyElementsOf(actual.sorted())
+    }
 }

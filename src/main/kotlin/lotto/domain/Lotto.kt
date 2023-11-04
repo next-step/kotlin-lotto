@@ -5,6 +5,7 @@ class Lotto {
     private val totalNumbers: List<Int> = numberRange.shuffled()
 
     val numbers: List<Int> = totalNumbers.take(NUMBER_COUNT)
+        .sorted()
 
     companion object {
         const val PRICE = 1000
