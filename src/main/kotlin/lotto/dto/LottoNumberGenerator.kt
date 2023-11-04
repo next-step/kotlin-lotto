@@ -5,17 +5,9 @@ import lotto.dto.LottoNumbers.Companion.LOTTO_NUMBER_RANGE
 
 object LottoNumberGenerator {
 
-    fun generate(): LottoNumbers {
-        val numbers = mutableListOf<Int>()
-        while (numbers.size < LOTTO_NUMBER_COUNT) {
-            val number = getRandomNumber()
-            if (!numbers.contains(number)) {
-                numbers.add(number)
-            }
-        }
+    private val LOTTO_NUMBER_SEED = LOTTO_NUMBER_RANGE.toList()
 
-        return LottoNumbers(numbers.shuffled())
-    }
-
-    private fun getRandomNumber() = LOTTO_NUMBER_RANGE.random()
+    fun generate(): LottoNumbers = LottoNumbers(
+        LOTTO_NUMBER_SEED.shuffled().subList(0, LOTTO_NUMBER_COUNT)
+    )
 }
