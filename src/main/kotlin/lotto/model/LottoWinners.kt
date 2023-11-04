@@ -1,6 +1,6 @@
 package lotto.model
 
-data class LottoStatistics(
+data class LottoWinners(
     val totalGameCount: Int,
     val countOf5th: Int,
     val countOf4th: Int,

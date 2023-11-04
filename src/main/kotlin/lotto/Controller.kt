@@ -1,7 +1,7 @@
 package lotto
 
 import lotto.app.LottoApp
-import lotto.model.LottoStatistics
+import lotto.model.LottoWinners
 import lotto.model.WinningNumbers
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -11,6 +11,6 @@ fun main() {
     val round = LottoApp.transaction(amount)
     OutputView.presetRound(round)
     val winningNumbers: WinningNumbers = InputView.drawing()
-    val s: LottoStatistics = round.winnerAggregate(winningNumbers)
+    val s: LottoWinners = round.winnerAggregate(winningNumbers)
     OutputView.presentPrizes(s)
 }
