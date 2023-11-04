@@ -21,5 +21,11 @@ class CalculatorTest : StringSpec({
         val expected = "6"
         Calculator.calculate(express) shouldBe expected
     }
+
+    "빈 문자열은 0을 리턴한다" {
+        val express = ""
+        val expected = "0"
+        Calculator.calculate(express) shouldBe expected
+    }
 })
 
