@@ -31,6 +31,4 @@ object LottoFixture {
                 .toSet()
         )
     }
-
-
 }
