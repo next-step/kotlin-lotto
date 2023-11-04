@@ -1,4 +1,4 @@
 package lotto.model
 
-class Lotto {
+class Ticket {
 }
