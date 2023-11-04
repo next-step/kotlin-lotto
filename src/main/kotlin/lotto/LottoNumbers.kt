@@ -24,4 +24,12 @@ class LottoNumbers(createStrategy: CreateStrategy) {
         }
         return true
     }
+
+    fun getContainCount(winningNumbers: WinningNumbers): Int {
+        var count = 0
+        for (number in winningNumbers.winningNumbers) {
+            if (numbers.contains(number)) count++
+        }
+        return count
+    }
 }

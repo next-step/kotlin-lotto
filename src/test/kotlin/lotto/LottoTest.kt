@@ -38,4 +38,56 @@ class LottoTest {
         Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java)
             .isThrownBy { Lotto(LottoNumbers(incorrect)) }
     }
+
+    @Test
+    fun `로또는 당첨 번호랑 3개 일치하면 4등이다`() {
+        val createStrategy = object : CreateStrategy {
+            override fun createNumbers(): List<Int> {
+                return listOf(1, 2, 3, 4, 5, 6)
+            }
+        }
+
+        val lotto = Lotto(LottoNumbers(createStrategy))
+        val winningNumbers = WinningNumbers(listOf(1, 2, 3, 10, 11, 12))
+        Assertions.assertThat(lotto.getLottoResult(winningNumbers)).isEqualTo(LottoRank.FOURTH)
+    }
+
+    @Test
+    fun `로또는 당첨 번호랑 4개 일치하면 3등이다`() {
+        val createStrategy = object : CreateStrategy {
+            override fun createNumbers(): List<Int> {
+                return listOf(1, 2, 3, 4, 5, 6)
+            }
+        }
+
+        val lotto = Lotto(LottoNumbers(createStrategy))
+        val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 11, 12))
+        Assertions.assertThat(lotto.getLottoResult(winningNumbers)).isEqualTo(LottoRank.THIRD)
+    }
+
+    @Test
+    fun `로또는 당첨 번호랑 5개 일치하면 2등이다`() {
+        val createStrategy = object : CreateStrategy {
+            override fun createNumbers(): List<Int> {
+                return listOf(1, 2, 3, 4, 5, 6)
+            }
+        }
+
+        val lotto = Lotto(LottoNumbers(createStrategy))
+        val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5, 12))
+        Assertions.assertThat(lotto.getLottoResult(winningNumbers)).isEqualTo(LottoRank.SECOND)
+    }
+
+    @Test
+    fun `로또는 당첨 번호랑 6개 일치하면 1등이다`() {
+        val createStrategy = object : CreateStrategy {
+            override fun createNumbers(): List<Int> {
+                return listOf(1, 2, 3, 4, 5, 6)
+            }
+        }
+
+        val lotto = Lotto(LottoNumbers(createStrategy))
+        val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5, 6))
+        Assertions.assertThat(lotto.getLottoResult(winningNumbers)).isEqualTo(LottoRank.FIRST)
+    }
 }
