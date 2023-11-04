@@ -11,16 +11,14 @@ class StringAddCalculator {
     }
 
     private fun parse(text: String): List<String> {
-        val basicPattern = "[,:]"
-
         val customDelimiterGroup = Regex("//(.)\n(.*)").find(text)
         customDelimiterGroup?.let {
             val customDelimiter = it.groupValues[1]
-            val customRegex = "[$basicPattern$customDelimiter]".toRegex()
+            val customRegex = "[$BASIC_REGEX$customDelimiter]".toRegex()
             return it.groupValues[2].split(customRegex)
         }
 
-        val basicRegex = basicPattern.toRegex()
+        val basicRegex = BASIC_REGEX.toRegex()
         return text.split(basicRegex)
     }
 
@@ -30,5 +28,9 @@ class StringAddCalculator {
             throw RuntimeException("수식을 확인해주세요")
         }
         return intTokens
+    }
+
+    companion object {
+        private const val BASIC_REGEX = "[,:]"
     }
 }
