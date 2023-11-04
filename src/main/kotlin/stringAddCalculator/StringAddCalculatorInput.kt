@@ -6,11 +6,7 @@ class StringAddCalculatorInput(private val input: String) {
 
         return getIntegerPart().split(Regex("[${DEFAULT_DELIMITERS.joinToString()}$customDelimiter]"))
             .map {
-                try {
-                    convertToInt(it)
-                } catch (e: NumberFormatException) {
-                    throw RuntimeException()
-                }
+                convertToInt(it)
             }
     }
 
