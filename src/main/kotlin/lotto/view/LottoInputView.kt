@@ -1,6 +1,6 @@
 package lotto.view
 
-object InputView {
+object LottoInputView {
     private const val WINNING_NUMBERS_INPUT_DELIMITER = ","
 
     fun readPurchaseAmountInput(): Long {
