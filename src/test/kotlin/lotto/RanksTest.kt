@@ -8,4 +8,10 @@ class RanksTest : StringSpec({
         val ranks = Ranks(listOf(Rank.FOURTH))
         ranks.rateOfReturn(14_000) shouldBe 0.35
     }
+
+    "순위 갯수" {
+        val ranks =
+            Ranks(listOf(Rank.FIRST, Rank.FIRST, Rank.FIRST, Rank.FIRST, Rank.FIRST, Rank.FIRST))
+        ranks.count(Rank.FIRST) shouldBe 6
+    }
 })
