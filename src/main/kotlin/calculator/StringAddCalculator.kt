@@ -6,8 +6,19 @@ class StringAddCalculator {
             return 0
         }
 
-        val numbers = text.split("[,:]".toRegex())
+        val numbers = splitByCustomDelimiter(text)
+            ?: text.split("[,:]".toRegex())
 
         return numbers.sumOf { it.toInt() }
+    }
+
+    private fun splitByCustomDelimiter(text: String): List<String>? {
+        return Regex("//(.*)\n(.*)").find(text)
+            ?.let {
+                val customDelimiter = it.groupValues[1]
+
+                it.groupValues[2].split(customDelimiter)
+            }
+            ?.filter { it.isNotBlank() }
     }
 }
