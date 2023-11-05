@@ -12,8 +12,7 @@ object StringAddCalculator {
         if (input.isNullOrBlank()) {
             return DEFAULT_NUMBER
         }
-        val normalizedInput = Splitter.normalizeForSplit(input, Splitter.getDelimiters(input))
-        val numbers = Splitter.split(normalizedInput)
+        val numbers = Splitter.split(input, Splitter.getDelimiters(input))
         isValidNumbers(numbers)
         return numbers.sumOf { it.toInt() }
     }

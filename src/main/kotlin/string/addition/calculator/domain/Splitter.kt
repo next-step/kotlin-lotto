@@ -4,18 +4,18 @@ object Splitter {
     private const val DEFAULT_DELIMITER = ",|:"
     private const val DELIMITER_SEPARATOR = "|"
     private const val UNIFIED_DELIMITER = ","
-    const val CUSTOM_DELIMITER_PREFIX = "//"
-    const val CUSTOM_DELIMITER_SUFFIX = "\\n"
+    private const val CUSTOM_DELIMITER_PREFIX = "//"
+    private const val CUSTOM_DELIMITER_SUFFIX = "\\n"
     const val DEFAULT_NUMBER = "0"
 
-    fun split(input: String): List<String> {
-        if (input.isBlank()) {
+    fun split(input: String, delimiters: List<String>): List<String> {
+        if (normalizeForSplit(input, delimiters).isBlank()) {
             return listOf(DEFAULT_NUMBER)
         }
-        return input.split(UNIFIED_DELIMITER)
+        return normalizeForSplit(input, delimiters).split(UNIFIED_DELIMITER)
     }
 
-    fun normalizeForSplit(input: String, delimiters: List<String>): String {
+    private fun normalizeForSplit(input: String, delimiters: List<String>): String {
         var normalizedString: String = input
         if (input.startsWith(CUSTOM_DELIMITER_PREFIX) && input.contains(CUSTOM_DELIMITER_SUFFIX)) {
             normalizedString = input.substringAfter(CUSTOM_DELIMITER_SUFFIX)
