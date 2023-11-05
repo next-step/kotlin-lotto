@@ -14,10 +14,6 @@ data class LottoNumbers(val numbers: List<LottoNumber>) {
     }
 
     fun getContainCount(winningNumbers: WinningNumbers): Int {
-        var count = 0
-        for (number in winningNumbers.winningNumbers.numbers) {
-            if (numbers.contains(number)) count++
-        }
-        return count
+        return numbers.intersect(winningNumbers.winningNumbers.numbers.toSet()).size
     }
 }
