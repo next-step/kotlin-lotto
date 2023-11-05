@@ -1,6 +1,7 @@
 package lotto.util
 
 import lotto.Lotto
+import lotto.Lottos
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -17,9 +18,10 @@ class PrizeTest {
         (1..matches).forEach { numbers.add(it) }
         repeat(Lotto.NUMBER_NUM - matches) { numbers.add(ILLEGAL_NUM) }
 
-        // 로또를 생성하고 result가 제대로 생성되었는지 확인한다.
+        // Lottos를 생성하고 result가 제대로 생성되었는지 확인한다.
+        val lottos = Lottos(listOf(Lotto(numbers)))
         val winningNum = Lotto(listOf(1, 2, 3, 4, 5, 6))
-        Prize.getResult(listOf(Lotto(numbers)), winningNum).let {
+        Prize.getResult(lottos, winningNum).let {
             assertThat(Prize.countResult(it, matches)).isEqualTo(1)
         }
     }

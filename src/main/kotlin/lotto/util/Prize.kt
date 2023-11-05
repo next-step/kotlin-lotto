@@ -1,6 +1,7 @@
 package lotto.util
 
 import lotto.Lotto
+import lotto.Lottos
 
 enum class Prize(val prize: Int, val match: Int) {
     FIRST(2000000000, 6),
@@ -12,8 +13,8 @@ enum class Prize(val prize: Int, val match: Int) {
     companion object {
         private val prizeMap = Prize.values().associateBy { it.match }
 
-        fun getResult(lottoList: List<Lotto>, winningNumbers: Lotto): List<Prize> {
-            return lottoList.map {
+        fun getResult(lottos: Lottos, winningNumbers: Lotto): List<Prize> {
+            return lottos.lottoList.map {
                 getPrize(it.matches(winningNumbers))
             }
         }

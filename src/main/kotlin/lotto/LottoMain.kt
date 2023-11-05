@@ -11,11 +11,11 @@ fun main() {
     val lottoManager = LottoManager(purchased.toInt())
 
     // 구매 개수 출력
-    OutputView().printPurchasedAmount(lottoManager.getLottoList().size)
+    OutputView().printPurchasedAmount(lottoManager.lottoAmount)
 
     // 로또 발급 및 출력
-    lottoManager.generateLotto()
-    OutputView().printLottoList(lottoManager.getLottoList())
+    lottoManager.generateLottos()
+    OutputView().printLottoList(lottoManager.lottos.lottoList)
 
     // 당첨 번호 입력
     val winningNumbers = InputView().getWinningNumbers()
