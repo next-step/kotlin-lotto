@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.controller.EndLottoRequest
 import lotto.controller.LottoController
 import lotto.controller.PurchaseRequest
 import lotto.view.InputView
@@ -9,9 +10,19 @@ class LottoRunner(
     private val controller: LottoController = LottoController()
 ) {
     fun run() {
+        purchaseLotto()
+        createWinningNumbers()
+    }
+
+    private fun purchaseLotto() {
         val input = InputView.getPurchaseInput()
         val response = controller.purchase(PurchaseRequest.from(input))
         OutputView.drawPurchaseOutput(response)
+    }
+
+    private fun createWinningNumbers() {
+        val input = InputView.getWinningNumbersInput()
+        EndLottoRequest.from(input)
     }
 }
 
