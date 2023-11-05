@@ -22,7 +22,7 @@ class LottoRunner(
 
     private fun createWinningNumbers() {
         val input = InputView.getWinningNumbersInput()
-        EndLottoRequest.from(input)
+        controller.end(EndLottoRequest.from(input))
     }
 }
 
