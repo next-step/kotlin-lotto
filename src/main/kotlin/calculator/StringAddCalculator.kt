@@ -9,14 +9,15 @@ class StringAddCalculator {
             return 0
         }
 
-        if (text.contains('-')) {
-            throw RuntimeException()
-        }
-
         val splits = splitByCustomDelimiter(text)
             ?: splitByDefaultDelimiter(text)
 
         val numbers = splits.map { it.toInt() }
+
+        val hasNegativeNumber = numbers.any { it < 0 }
+        if (hasNegativeNumber) {
+            throw RuntimeException()
+        }
 
         return numbers.sum()
     }
