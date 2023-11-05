@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 
 class LottoListTest {
     @Test
-    fun getResult() {
+    fun `로또 리스트의 getResult가 잘 작동한다`() {
         val lottoList = LottoList(
             listOf(
                 Lotto(LottoNumbers(1, 2, 3, 4, 5, 6)),
