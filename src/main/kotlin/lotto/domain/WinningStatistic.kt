@@ -8,5 +8,6 @@ class WinningStatistic(
 
     val profitRate: Double = totalWinningAmount / purchaseAmount.toDouble()
 
-    val countPerPrize: Map<Prize, Int> = prizes.groupingBy { it }.eachCount()
+    val countPerPrize: Map<Prize, Int> = prizes.groupingBy { it }
+        .eachCount()
 }
