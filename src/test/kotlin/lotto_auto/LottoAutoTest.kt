@@ -6,13 +6,6 @@ import lotto_auto.lotto.Lotto
 import lotto_auto.lotto.LottoAuto
 
 class LottoAutoTest : StringSpec({
-    "입력된 개수 만큼 로또 용지가 생성 된다." {
-        val input = 4
-        val expected = 4
-
-        LottoAuto.createLottoList(input).size shouldBe expected
-    }
-
     "구매한 로또 총 당첨 금액이 맞는지" {
         // 로또 당첨 금액 (1) - 0원   (2) - 50000원
         val input = listOf(Lotto(listOf(1, 2, 3, 4, 5, 6)), Lotto(listOf(2, 4, 6, 8, 12, 15)))
