@@ -16,7 +16,7 @@
 - 금액 (Amount)
     - 구입 금액
     - 판매 금액
-- 로또 발급 (LottoIssuer)
+- 로또 발급 (LottoIssuer) 
     - 발급 전략 (IssueStrategy)
 - 로또 티켓 (LottoTicket)
 - 로또 번호 (LottoNumber)

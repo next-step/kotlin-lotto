@@ -1,9 +1,9 @@
 package lotto.domain
 
-class LottoWinningNumber(private val lottoNumbers: LottoNumbers) {
+class LottoWinningNumber(private val numbers: LottoNumbers, private val bonusNumber: LottoNumber) {
 
-    fun evaluateRank(lottoTicket: LottoTicket): LottoRank {
-        val matchingCount = lottoTicket.getMatchCount(lottoNumbers)
-        return LottoRank(matchingCount, lottoTicket.ticketAmount)
-    }
+    fun evaluateMatchResult(lottoNumbers: LottoNumbers): MatchResult = MatchResult(
+        count = lottoNumbers.getMatchCount(numbers),
+        matchBonus = lottoNumbers.contains(bonusNumber)
+    )
 }
