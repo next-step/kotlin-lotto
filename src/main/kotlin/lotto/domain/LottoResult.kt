@@ -1,6 +1,5 @@
 package lotto.domain
 
-import java.text.DecimalFormat
 import kotlin.math.floor
 
 data class LottoResult(

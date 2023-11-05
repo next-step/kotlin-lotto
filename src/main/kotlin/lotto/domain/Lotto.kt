@@ -1,6 +1,6 @@
 package lotto.domain
 
-class Lotto (
+class Lotto(
     val lines: List<List<Int>>
 ) {
     fun getAllSameNumberCount(numbers: List<Int>): List<Int> =

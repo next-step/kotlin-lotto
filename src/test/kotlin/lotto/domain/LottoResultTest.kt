@@ -2,7 +2,6 @@ package lotto.domain
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
-import kotlin.math.floor
 
 class LottoResultTest : BehaviorSpec({
 

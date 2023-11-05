@@ -2,7 +2,7 @@ package lotto.domain
 
 class LottoShop {
 
-    fun buyLotto(customer: Customer):Lotto {
+    fun buyLotto(customer: Customer): Lotto {
         val lines = mutableListOf<List<Int>>()
         repeat(getQuantity(customer.money)) {
             lines.add(LottoNumber.generate())

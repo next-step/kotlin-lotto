@@ -1,5 +1,5 @@
 package calculator
 
 fun interface NumberValidation {
-    fun check(input: Int) : Boolean
+    fun check(input: Int): Boolean
 }

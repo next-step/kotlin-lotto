@@ -2,7 +2,7 @@ package calculator
 
 import java.lang.RuntimeException
 
-class StringToIntConverter: Converter<String, Int> {
+class StringToIntConverter : Converter<String, Int> {
 
     override fun convert(input: String): Int =
         runCatching { input.toInt() }

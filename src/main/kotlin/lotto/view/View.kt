@@ -3,8 +3,8 @@ package lotto.view
 import lotto.domain.Customer
 import lotto.domain.Lotto
 import lotto.domain.LottoMessage
-import lotto.domain.LottoResult
 import lotto.domain.LottoRank
+import lotto.domain.LottoResult
 import java.lang.IllegalArgumentException
 
 object View {

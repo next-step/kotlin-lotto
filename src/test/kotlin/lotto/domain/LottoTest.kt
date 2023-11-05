@@ -17,7 +17,7 @@ class LottoTest : BehaviorSpec({
             }
             Then("각 라인의 숫자는 정렬되어 있다.") {
                 fun isSorted(list: List<Int>): Boolean {
-                    for(index in 0 until list.size - 1) {
+                    for (index in 0 until list.size - 1) {
                         if (list[index] > list[index + 1]) return false
                     }
                     return true
@@ -30,10 +30,10 @@ class LottoTest : BehaviorSpec({
     Given("로또에 추첨 번호가 주어지면") {
         val lotto = Lotto(
             listOf(
-                listOf(1,2,3,4,5,6),
-                listOf(1,2,3,4,5,7),
-                listOf(1,2,3,4,7,8),
-                listOf(1,2,3,7,8,9),
+                listOf(1, 2, 3, 4, 5, 6),
+                listOf(1, 2, 3, 4, 5, 7),
+                listOf(1, 2, 3, 4, 7, 8),
+                listOf(1, 2, 3, 7, 8, 9),
             )
         )
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)

@@ -34,11 +34,11 @@ class LottoMachineTest : BehaviorSpec({
         When("복권 기계에 구매한 로또를 전달하면") {
             val lotto = Lotto(
                 listOf(
-                    listOf(1,2,3,4,5,6),
-                    listOf(1,2,3,4,5,7),
-                    listOf(1,2,3,4,7,8),
-                    listOf(1,2,3,7,8,9),
-                    listOf(1,2,3,7,8,9)
+                    listOf(1, 2, 3, 4, 5, 6),
+                    listOf(1, 2, 3, 4, 5, 7),
+                    listOf(1, 2, 3, 4, 7, 8),
+                    listOf(1, 2, 3, 7, 8, 9),
+                    listOf(1, 2, 3, 7, 8, 9)
                 )
             )
             val lottoRanks = LottoMachine(winningNumbers).checkLottoResult(lotto)
