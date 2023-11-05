@@ -3,28 +3,24 @@ package lotto.util
 import lotto.Lotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 class PrizeTest {
 
-    @Test
-    fun `lotto 리스트와 당첨번호를 이용해 결과정보를 생성한다`() {
-        val winningNum = Lotto(listOf(1, 2, 3, 4, 5, 6))
-        val lottoNumbers = listOf(
-            Lotto(listOf(1, ILLEGAL_NUM, ILLEGAL_NUM, ILLEGAL_NUM, ILLEGAL_NUM, ILLEGAL_NUM)),
-            Lotto(listOf(1, 2, ILLEGAL_NUM, ILLEGAL_NUM, ILLEGAL_NUM, ILLEGAL_NUM)),
-            Lotto(listOf(1, 2, 3, ILLEGAL_NUM, ILLEGAL_NUM, ILLEGAL_NUM)),
-            Lotto(listOf(1, 2, 3, 4, ILLEGAL_NUM, ILLEGAL_NUM)),
-            Lotto(listOf(1, 2, 3, 4, 5, ILLEGAL_NUM)),
-            Lotto(listOf(1, 2, 3, 4, 5, 6))
-        )
+    @ParameterizedTest
+    @ValueSource(ints = [0, 1, 2, 3, 4, 5, 6])
+    fun `lotto 리스트와 당첨번호를 이용해 결과정보를 생성한다`(matches: Int) {
+        val numbers = mutableListOf<Int>()
 
-        // 1~4등상이 하나씩, 순위권 외 항목이 2개 존재
-        Prize.getResult(lottoNumbers, winningNum).let {
-            assertThat(Prize.countResult(it, 6)).isEqualTo(1)
-            assertThat(Prize.countResult(it, 5)).isEqualTo(1)
-            assertThat(Prize.countResult(it, 4)).isEqualTo(1)
-            assertThat(Prize.countResult(it, 3)).isEqualTo(1)
-            assertThat(Prize.countResult(it, -1)).isEqualTo(2)
+        // 테스트용 로또 생성. matches 만큼 당첨번호를 추가한다.
+        (1..matches).forEach { numbers.add(it) }
+        repeat(Lotto.NUMBER_NUM - matches) { numbers.add(ILLEGAL_NUM) }
+
+        // 로또를 생성하고 result가 제대로 생성되었는지 확인한다.
+        val winningNum = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        Prize.getResult(listOf(Lotto(numbers)), winningNum).let {
+            assertThat(Prize.countResult(it, matches)).isEqualTo(1)
         }
     }
 
@@ -39,14 +35,14 @@ class PrizeTest {
         assertThat(Prize.getPrize(0)).isEqualTo(Prize.NO_PRIZE)
     }
 
-    @Test
-    fun `당첨 등급 카운트`() {
-        val result = listOf(Prize.FIRST, Prize.SECOND, Prize.THIRD, Prize.FOURTH, Prize.NO_PRIZE, Prize.NO_PRIZE)
-        assertThat(Prize.countResult(result, 6)).isEqualTo(1)
-        assertThat(Prize.countResult(result, 5)).isEqualTo(1)
-        assertThat(Prize.countResult(result, 4)).isEqualTo(1)
-        assertThat(Prize.countResult(result, 3)).isEqualTo(1)
-        assertThat(Prize.countResult(result, -1)).isEqualTo(2)
+    @ParameterizedTest
+    @ValueSource(ints = [0, 1, 2, 3, 4, 5, 6])
+    fun `당첨 등급 카운트`(matches: Int) {
+        // 검증에 쓸 result 리스트 생성
+        val result = mutableListOf(Prize.FIRST, Prize.SECOND, Prize.THIRD, Prize.FOURTH, Prize.NO_PRIZE)
+
+        // 상금 카운트 검증
+        assertThat(Prize.countResult(result, matches)).isEqualTo(1)
     }
 
     companion object {
