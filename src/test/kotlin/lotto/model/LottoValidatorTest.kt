@@ -2,7 +2,6 @@ package lotto.model
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
-import org.junit.jupiter.api.Assertions.*
 
 class LottoValidatorTest : BehaviorSpec({
     Given("티켓 3개 리스트, 당첨 번호") {
