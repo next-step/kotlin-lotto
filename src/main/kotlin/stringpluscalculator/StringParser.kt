@@ -36,6 +36,6 @@ object StringParser {
     }
 
     private fun checkNegative(parseNum: Int) {
-        require(parseNum >= 0) { throw IllegalArgumentException("음수를 값으로 사용할 수는 없습니다. 요소 : $parseNum") }
+        require(parseNum >= 0) { "음수를 값으로 사용할 수는 없습니다. 요소 : $parseNum" }
     }
 }
