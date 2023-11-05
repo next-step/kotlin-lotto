@@ -13,10 +13,10 @@ class StringAddCalculator {
             it.groupValues[2].split(customDelimiter)
         } ?: split
 
-        return calculateWithNegativeCheck(numbers.map { it.toInt() })
+        return checkNegativeNumbers(numbers.map { it.toInt() })
     }
 
-    private fun calculateWithNegativeCheck(numbers: List<Int>): Int {
+    private fun checkNegativeNumbers(numbers: List<Int>): Int {
         val negativeNumbers = numbers.filter { it < 0 }
         if (negativeNumbers.isNotEmpty()) throw RuntimeException("음수 입력되었습니다!!!!")
 
