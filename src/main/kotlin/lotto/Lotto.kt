@@ -1,7 +1,8 @@
 package lotto
 
 import lotto.model.Ticket
+import lotto.view.InputView
 
 fun main() {
-    Ticket(4, 1..5)
+    LottoOrganizer().start()
 }
