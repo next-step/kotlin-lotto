@@ -9,14 +9,21 @@ object NumberExtractor {
 
     fun extract(text: String): PositiveNums {
         val result = PARSER_RULE.find(text)
-        val delimiter = result?.groupValues?.get(1)
 
-        val tokens = when (delimiter) {
-            null -> text.split(STD_DELIMITER)
-            else -> result.groupValues[2].split(delimiter)
+        val tokens = if (result != null) {
+            val customDelimiter = result.groupValues[1]
+            result.groupValues[2].split(customDelimiter)
+        } else {
+            text.split(STD_DELIMITER)
         }
 
-        return tokens
+        val numberTokens = try {
+            tokens.map { it.toInt() }
+        } catch (e: NumberFormatException) {
+            throw IllegalArgumentException("숫자만 extract 가능합니다.")
+        }
+
+        return numberTokens
             .map { PositiveNum(it) }
             .let { PositiveNums(it) }
     }

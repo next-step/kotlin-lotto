@@ -1,10 +1,10 @@
 package calculator.dto
 
 @JvmInline
-value class PositiveNum(val value: String) {
+value class PositiveNum(val value: Int) {
 
     init {
-        require(value.toInt() >= POSITIVE_THRESHOLD) { "음수는 입력할 수 없습니다." }
+        require(value >= POSITIVE_THRESHOLD) { "음수는 입력할 수 없습니다." }
     }
 
     companion object {
