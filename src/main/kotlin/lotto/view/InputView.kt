@@ -3,17 +3,30 @@ package lotto.view
 class InputView(private val maxTryCount: Int = DEFAULT_MAX_TRY_COUNT) {
 
     fun readLineNumber(question: String?, count: Int = 0): Int {
-        try {
+        return try {
             val input: String = readLine(question, count)
 
             if (input.toIntOrNull() == null) {
                 throw IllegalArgumentException("숫자를 입력해주세요.")
             }
 
-            return input.toInt()
+            input.toInt()
         } catch (notNumberException: IllegalArgumentException) {
             println(notNumberException.message)
-            return this.readLineNumber(question, count + 1)
+            this.readLineNumber(question, count + 1)
+        }
+    }
+
+    fun readLineNumberList(question: String?, count: Int = 0): List<Int> {
+        return try {
+            val input: String = readLine(question, count)
+
+            input.split(", ").map {
+                it.toIntOrNull() ?: throw IllegalArgumentException("숫자를 입력해주세요.")
+            }
+        } catch (notNumberException: IllegalArgumentException) {
+            println(notNumberException.message)
+            this.readLineNumberList(question, count + 1)
         }
     }
 
@@ -27,13 +40,13 @@ class InputView(private val maxTryCount: Int = DEFAULT_MAX_TRY_COUNT) {
             println(question)
         }
 
-        try {
-            return readlnOrNull() ?: throw IllegalArgumentException("입력값이 없습니다.")
+        return try {
+            readlnOrNull() ?: throw IllegalArgumentException("입력값이 없습니다.")
         } catch (wrongInputException: IllegalArgumentException) {
             println(wrongInputException.message)
 
             if (count < this.maxTryCount) {
-                return this.readLine(question, count + 1)
+                this.readLine(question, count + 1)
             } else {
                 throw IllegalStateException("입력 횟수를 초과하였습니다.")
             }
