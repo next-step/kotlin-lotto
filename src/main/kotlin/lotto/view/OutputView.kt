@@ -2,7 +2,7 @@ package lotto.view
 
 import lotto.constants.WinningRank
 import lotto.domain.Lottos
-import lotto.domain.RateOfReturn
+import lotto.domain.WinningRanks
 
 object OutputView {
 
@@ -13,27 +13,26 @@ object OutputView {
         }
     }
 
-    fun printWinningResult(winningRankList: List<WinningRank>) {
+    fun printWinningResult(winningMap: Map<WinningRank, Int>) {
         println(WINNING_STATISTICS)
         println(SEPARATOR)
-        winningRankList.printWinningResult(WinningRank.FIFTH)
-        winningRankList.printWinningResult(WinningRank.FOURTH)
-        winningRankList.printWinningResult(WinningRank.THIRD)
-        winningRankList.printWinningResult(WinningRank.SECOND)
-        winningRankList.printWinningResult(WinningRank.FIRST)
+        printWinningRanks(winningMap, WinningRank.FIFTH)
+        printWinningRanks(winningMap, WinningRank.FOURTH)
+        printWinningRanks(winningMap, WinningRank.THIRD)
+        printWinningRanks(winningMap, WinningRank.SECOND)
+        printWinningRanks(winningMap, WinningRank.FIRST)
     }
 
-    private fun List<WinningRank>.printWinningResult(targetWinningRank: WinningRank) {
-        val count = this.filter { it == targetWinningRank }.size
-        if (targetWinningRank == WinningRank.SECOND) {
-            println("${targetWinningRank.count}개 일치, 보너스 볼 일치(${targetWinningRank.money}원)- ${count}개")
-            return
+    private fun printWinningRanks(winningMap: Map<WinningRank, Int>, printWinningRank: WinningRank) {
+        val winningCount = winningMap[printWinningRank] ?: 0
+        if (printWinningRank == WinningRank.SECOND) {
+            return println("${printWinningRank.count}개 일치, 보너스 볼 일치(${printWinningRank.money}원)- ${winningCount}개")
         }
-        println("${targetWinningRank.count}개 일치 (${targetWinningRank.money}원)- ${count}개")
+        println("${printWinningRank.count}개 일치 (${printWinningRank.money}원)- ${winningCount}개")
     }
 
-    fun printRateOfReturn(inputPrice: Int, winningRankList: List<WinningRank>) {
-        val rateOfReturn = RateOfReturn(inputPrice, winningRankList).calculate()
+    fun printRateOfReturn(inputPrice: Int, winningRanks: WinningRanks) {
+        val rateOfReturn = winningRanks.calculateRateOfReturn(inputPrice)
         println("총 수익률은 ${rateOfReturn}입니다.")
     }
 

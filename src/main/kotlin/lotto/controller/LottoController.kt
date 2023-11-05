@@ -20,7 +20,7 @@ object LottoController {
         val winningLotto = WinningLotto(winningLottoNumber, bonusBall)
         val winningRanks = lottos.matchLotto(winningLotto)
 
-        OutputView.printWinningResult(winningRanks)
+        OutputView.printWinningResult(winningRanks.winningRankGroupBy())
         OutputView.printRateOfReturn(inputPrice.price, winningRanks)
     }
 }

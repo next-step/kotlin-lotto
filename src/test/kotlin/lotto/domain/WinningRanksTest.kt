@@ -3,7 +3,7 @@ package lotto.domain
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.doubles.shouldBeGreaterThanOrEqual
 
-class RateOfReturnTest : BehaviorSpec({
+class WinningRanksTest : BehaviorSpec({
 
     given("입력금액이 주어졌을 때") {
         val inputPrice = 14000
@@ -14,7 +14,7 @@ class RateOfReturnTest : BehaviorSpec({
         val winningLotto = WinningLotto(winningLottoNumber, bonusBall)
         val winningResult = lottos.matchLotto(winningLotto)
         `when`("수익률을 계산한다.") {
-            val rateOfReturn = RateOfReturn(inputPrice, winningResult).calculate()
+            val rateOfReturn = winningResult.calculateRateOfReturn(inputPrice)
             then("수익률은 0.0이상이다.") {
                 rateOfReturn shouldBeGreaterThanOrEqual 0.0
             }
