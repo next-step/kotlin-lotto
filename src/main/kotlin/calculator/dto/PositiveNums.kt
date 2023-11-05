@@ -1,7 +1,11 @@
 package calculator.dto
 
 data class PositiveNums(val positiveNums: List<PositiveNum>) {
-    fun sum(): Int {
-        return positiveNums.sumOf { it.value }
+    fun sum(): PositiveNum {
+        return PositiveNum(positiveNums.sumOf { it.value })
+    }
+
+    fun size(): Int {
+        return positiveNums.size
     }
 }

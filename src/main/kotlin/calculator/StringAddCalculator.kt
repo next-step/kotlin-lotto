@@ -1,13 +1,14 @@
 package calculator
 
 import calculator.NumberExtractor.extract
+import calculator.dto.PositiveNum
 
 object StringAddCalculator {
     private const val RETURN_VALUE = 0
 
-    fun add(text: String?): Int {
+    fun add(text: String?): PositiveNum {
         if (text.isNullOrEmpty()) {
-            return RETURN_VALUE
+            return PositiveNum(RETURN_VALUE)
         }
 
         val tokens = extract(text)
