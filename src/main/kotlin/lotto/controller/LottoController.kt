@@ -5,7 +5,6 @@ import lotto.domain.Bank
 import lotto.domain.LottoAccountant
 import lotto.domain.LottoManager
 import lotto.domain.LottoSpec
-import lotto.domain.TicketCount
 import lotto.domain.WinningNumbers
 
 class LottoController(
@@ -14,7 +13,8 @@ class LottoController(
 ) {
     fun purchase(request: PurchaseRequest): PurchaseResponse {
         val amount = Amount(request.amount)
-        val tickets = lottoManager.createTicket(TicketCount.from(amount))
+        val ticketCount = LottoAccountant.calculateTicketCount(amount)
+        val tickets = lottoManager.createTicket(ticketCount)
         bank.save(amount)
         return PurchaseResponse(tickets)
     }

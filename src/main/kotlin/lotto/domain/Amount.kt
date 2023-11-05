@@ -13,6 +13,12 @@ value class Amount(
 
     operator fun times(count: Int): Amount =
         Amount(value * count)
+
+    operator fun div(other: Amount): Int =
+        value / other.value
+
+    operator fun rem(other: Amount): Int =
+        value % other.value
 }
 
 
