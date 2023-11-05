@@ -11,7 +11,7 @@ class StringAddCalculator {
         }
 
         val splits = splitByCustomDelimiter(text)
-            ?: text.split("[,:]".toRegex())
+            ?: splitByDefaultDelimiter(text)
 
         val numbers = splits.map { it.toInt() }
 
@@ -26,5 +26,9 @@ class StringAddCalculator {
                 it.groupValues[2].split(customDelimiter)
             }
             ?.filter { it.isNotBlank() }
+    }
+
+    private fun splitByDefaultDelimiter(text: String): List<String> {
+        return text.split("[,:]".toRegex())
     }
 }
