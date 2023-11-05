@@ -4,7 +4,8 @@ class StringAddCalculator {
         if (text.isEmpty()) {
             return 0
         }
+        val numbers = text.split("[,|:]".toRegex())
 
-        return text.toInt()
+        return numbers.sumOf { it.toInt() }
     }
 }
