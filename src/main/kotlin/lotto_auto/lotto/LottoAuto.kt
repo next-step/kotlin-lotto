@@ -40,11 +40,13 @@ class LottoAuto(
     }
 
     fun matchCountList(): List<Int> {
-        val three = eachLottoMatchCount().count { it == 3 }
-        val four = eachLottoMatchCount().count { it == 4 }
-        val five = eachLottoMatchCount().count { it == 5 }
-        val six = eachLottoMatchCount().count { it == 6 }
-        return listOf(three, four, five, six)
+        return eachLottoMatchCount().filter { it > 2 }.let { matchList ->
+            val three = matchList.count { it == 3 }
+            val four = matchList.count { it == 4 }
+            val five = matchList.count { it == 5 }
+            val six = matchList.count { it == 6 }
+            listOf(three, four, five, six)
+        }
     }
 
     fun earningRate(sumOfWonLotto: Int, inputAmount: Int): Float {
