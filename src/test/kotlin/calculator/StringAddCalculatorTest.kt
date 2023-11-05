@@ -13,7 +13,7 @@ class StringAddCalculatorTest {
 
     @BeforeEach
     fun setUp() {
-        calculator = StringAddCalculator()
+        calculator = StringAddCalculator
     }
 
     @ParameterizedTest
