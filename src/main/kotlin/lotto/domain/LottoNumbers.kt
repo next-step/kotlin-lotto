@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 data class LottoNumbers(val numbers: List<LottoNumber>) {
     constructor(vararg numbers: Int) : this(numbers.map { LottoNumber(it) })

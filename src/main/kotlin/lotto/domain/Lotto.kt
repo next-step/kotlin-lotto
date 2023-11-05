@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 data class Lotto(val strategy: CreateStrategy) {
     constructor(lottoNumbers: LottoNumbers) : this(object : CreateStrategy {

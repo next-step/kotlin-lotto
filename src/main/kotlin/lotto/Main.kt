@@ -1,6 +1,8 @@
-package lotto.view
+package lotto
 
-import lotto.LottoBooth
+import lotto.domain.LottoBooth
+import lotto.view.InputView
+import lotto.view.ResultView
 
 fun main() {
     val purchaseAmount = InputView.getPurchaseAmount()

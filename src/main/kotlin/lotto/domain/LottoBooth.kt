@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 object LottoBooth {
     private const val LOTTO_PRICE = 1000

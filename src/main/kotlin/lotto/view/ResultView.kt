@@ -1,9 +1,9 @@
 package lotto.view
 
-import lotto.LottoList
-import lotto.LottoRank
-import lotto.LottoResultList
-import lotto.Money
+import lotto.domain.LottoList
+import lotto.domain.LottoRank
+import lotto.domain.LottoResultList
+import lotto.domain.Money
 
 object ResultView {
     fun printLottoList(lottoList: LottoList) {

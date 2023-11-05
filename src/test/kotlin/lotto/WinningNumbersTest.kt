@@ -1,5 +1,7 @@
 package lotto
 
+import lotto.domain.LottoNumbers
+import lotto.domain.WinningNumbers
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import java.lang.IllegalArgumentException

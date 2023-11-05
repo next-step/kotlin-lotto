@@ -1,5 +1,7 @@
 package lotto
 
+import lotto.domain.LottoRank
+import lotto.domain.LottoResultList
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

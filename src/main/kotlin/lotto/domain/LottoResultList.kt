@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 data class LottoResultList(val resultList: List<LottoRank>) {
     fun count(rank: LottoRank) = resultList.count { it == rank }

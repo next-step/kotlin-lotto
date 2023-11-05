@@ -1,9 +1,9 @@
 package lotto.view
 
-import lotto.LottoNumber
-import lotto.LottoNumbers
-import lotto.Money
-import lotto.WinningNumbers
+import lotto.domain.LottoNumber
+import lotto.domain.LottoNumbers
+import lotto.domain.Money
+import lotto.domain.WinningNumbers
 
 object InputView {
     fun getPurchaseAmount(): Money {

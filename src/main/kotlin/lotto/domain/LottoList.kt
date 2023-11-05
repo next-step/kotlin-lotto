@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 data class LottoList(val lottoList: List<Lotto>) {
     val size = lottoList.size
