@@ -1,8 +1,6 @@
 package lotto
 
-class LottoNumbers(createStrategy: CreateStrategy) {
-    val numbers: List<Int> = createStrategy.createNumbers()
-
+class LottoNumbers(val numbers: List<Int>) {
     init {
         require(numbers.size == 6) {
             "number size must be 6"

@@ -14,7 +14,7 @@ class LottoTest {
             }
         }
         Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java)
-            .isThrownBy { Lotto(LottoNumbers(incorrect)) }
+            .isThrownBy { Lotto(incorrect) }
     }
 
     @Test
@@ -25,7 +25,7 @@ class LottoTest {
             }
         }
         Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java)
-            .isThrownBy { Lotto(LottoNumbers(incorrect)) }
+            .isThrownBy { Lotto(incorrect) }
     }
 
     @Test
@@ -36,7 +36,7 @@ class LottoTest {
             }
         }
         Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java)
-            .isThrownBy { Lotto(LottoNumbers(incorrect)) }
+            .isThrownBy { Lotto(incorrect) }
     }
 
     @Test
@@ -47,7 +47,7 @@ class LottoTest {
             }
         }
 
-        val lotto = Lotto(LottoNumbers(createStrategy))
+        val lotto = Lotto(createStrategy)
         val winningNumbers = WinningNumbers(listOf(1, 2, 3, 10, 11, 12))
         Assertions.assertThat(lotto.getLottoResult(winningNumbers)).isEqualTo(LottoRank.FOURTH)
     }
@@ -60,7 +60,7 @@ class LottoTest {
             }
         }
 
-        val lotto = Lotto(LottoNumbers(createStrategy))
+        val lotto = Lotto(createStrategy)
         val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 11, 12))
         Assertions.assertThat(lotto.getLottoResult(winningNumbers)).isEqualTo(LottoRank.THIRD)
     }
@@ -73,7 +73,7 @@ class LottoTest {
             }
         }
 
-        val lotto = Lotto(LottoNumbers(createStrategy))
+        val lotto = Lotto(createStrategy)
         val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5, 12))
         Assertions.assertThat(lotto.getLottoResult(winningNumbers)).isEqualTo(LottoRank.SECOND)
     }
@@ -86,7 +86,7 @@ class LottoTest {
             }
         }
 
-        val lotto = Lotto(LottoNumbers(createStrategy))
+        val lotto = Lotto(createStrategy)
         val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5, 6))
         Assertions.assertThat(lotto.getLottoResult(winningNumbers)).isEqualTo(LottoRank.FIRST)
     }

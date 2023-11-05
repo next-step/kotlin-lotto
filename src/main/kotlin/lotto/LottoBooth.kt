@@ -5,6 +5,6 @@ object LottoBooth {
 
     fun publishLottos(money: Money, strategy: CreateStrategy = RandomStrategy()): LottoList {
         val lottoCount = money.amount / LOTTO_PRICE
-        return LottoList(List(lottoCount) { Lotto(LottoNumbers(strategy)) })
+        return LottoList(List(lottoCount) { Lotto(strategy) })
     }
 }
