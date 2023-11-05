@@ -23,5 +23,6 @@ class LottoController(
         val winningNumbers = WinningNumbers.of(request.winningNumbers)
         val result = lottoManager.getResult(winningNumbers)
         val totalPrizeAmount = LottoAccountant.getTotalPrizeAmount(result, LottoSpec.prizesInfo)
+        bank.receivePrize(totalPrizeAmount)
     }
 }
