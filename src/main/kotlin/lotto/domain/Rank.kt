@@ -5,7 +5,7 @@ enum class Rank(val matchCount: Int, val winningMoney: Int) {
     THREE(5, 1_500_000),
     FOURTH(4, 50_000),
     FIFTH(3, 5_000),
-    NONE(-1, 0)
+    OUT_OF_RANK(-1, 0)
     ;
 
     companion object {
@@ -15,7 +15,7 @@ enum class Rank(val matchCount: Int, val winningMoney: Int) {
                 THREE.matchCount -> THREE
                 FOURTH.matchCount -> FOURTH
                 FIFTH.matchCount -> FIFTH
-                else -> NONE
+                else -> OUT_OF_RANK
             }
         }
     }
