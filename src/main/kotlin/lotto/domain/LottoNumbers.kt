@@ -6,7 +6,7 @@ data class LottoNumbers(
     fun generate(): Lotto {
         val lottoNumbers = numbers.shuffled()
             .take(Lotto.LOTTO_COUNT)
-            .sortedBy { it.value }
+            .toSet()
         return Lotto(lottoNumbers)
     }
 }

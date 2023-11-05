@@ -9,16 +9,8 @@ import io.kotest.matchers.shouldBe
 class LottoTest : BehaviorSpec({
 
     Given("서로 다른 6개의 숫자가 주어지면") {
-        val lottoNumbers = listOf(
-            LottoNumber(1),
-            LottoNumber(2),
-            LottoNumber(3),
-            LottoNumber(4),
-            LottoNumber(5),
-            LottoNumber(6)
-        )
         When("로또는") {
-            val lotto = Lotto(lottoNumbers)
+            val lotto = Lotto(1, 2, 3, 4, 5, 6)
             Then("그 수들을 가지는 로또가 생성된다.") {
                 lotto.numbers.size shouldBe 6
             }
@@ -29,19 +21,9 @@ class LottoTest : BehaviorSpec({
         When("로또는") {
             Then("에러를 발생한다.") {
                 forAll(
-                    row(listOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5))),
-                    row(
-                        listOf(
-                            LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5),
-                            LottoNumber(6), LottoNumber(7)
-                        )
-                    ),
-                    row(
-                        listOf(
-                            LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5),
-                            LottoNumber(5)
-                        )
-                    ),
+                    row(listOf(1, 2, 3, 4, 5)),
+                    row(listOf(1, 2, 3, 4, 5, 6, 7)),
+                    row(listOf(1, 2, 3, 4, 5, 5)),
                 ) { numbers ->
                     shouldThrow<IllegalArgumentException> {
                         Lotto(numbers)
@@ -52,16 +34,8 @@ class LottoTest : BehaviorSpec({
     }
 
     Given("숫자를 입력받으면") {
-        val lottoNumbers = listOf(
-            LottoNumber(1),
-            LottoNumber(2),
-            LottoNumber(3),
-            LottoNumber(4),
-            LottoNumber(5),
-            LottoNumber(6)
-        )
         When("로또는") {
-            val lotto = Lotto(lottoNumbers)
+            val lotto = Lotto(1, 2, 3, 4, 5, 6)
             Then("입력받은 숫자와 일치하는 로또 넘버를 갖고 있는지 알려준다.") {
                 forAll(
                     row(1, true),
