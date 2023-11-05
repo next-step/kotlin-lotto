@@ -16,10 +16,10 @@ object ResultView {
     fun printResult(result: LottoResultList, purchaseAmount: Money) {
         println("당첨 통계")
         println("------------")
-        printRankResult(LottoRank.FOURTH, result.fourthNum)
-        printRankResult(LottoRank.THIRD, result.thirdNum)
-        printRankResult(LottoRank.SECOND, result.secondNum)
-        printRankResult(LottoRank.FIRST, result.firstNum)
+        printRankResult(LottoRank.FOURTH, result.count(LottoRank.FOURTH))
+        printRankResult(LottoRank.THIRD, result.count(LottoRank.THIRD))
+        printRankResult(LottoRank.SECOND, result.count(LottoRank.SECOND))
+        printRankResult(LottoRank.FIRST, result.count(LottoRank.FIRST))
         println("총 수익률은 ${result.getProfitRate(purchaseAmount.amount)}입니다.")
     }
 
