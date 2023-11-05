@@ -27,5 +27,5 @@ class Ticket(length: Int? = null, range: IntRange? = null, numbers: List<Int>? =
         }
     }
 
-
+    fun matchCount(winningNumbers: List<Int>) = numbers.intersect(winningNumbers.toSet()).size
 }

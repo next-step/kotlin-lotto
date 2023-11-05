@@ -3,7 +3,6 @@ package lotto.model
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
-import org.junit.jupiter.api.assertThrows
 
 class TicketTest : BehaviorSpec({
     Given("티켓") {
@@ -31,15 +30,16 @@ class TicketTest : BehaviorSpec({
         When("티켓번호가 1, 2, 34, 34, 5, 6인 티켓 생성 했을 때") {
             Then("중복으로 인한 인자 에러가 난다") {
                 shouldThrow<IllegalArgumentException> { Ticket(numbers = listOf(1, 2, 34, 34, 5, 6)) }
+            }
         }
     }
-//    Given("티켓번호가 1, 2, 3, 4, 5, 6인 티켓") {
-//        val ticket = Ticket(numbers = listOf(1, 2, 3, 4, 5, 6))
-//        When("당첨번호가 4, 5, 6, 22, 33, 44일때") {
-//            val matchCount = ticket.matchNumber(listOf(4, 5, 6, 22, 33, 44))
-//            Then("3개의 숫자가 일치") {
-//                matchCount shouldBe 3
-//            }
-//        }
+    Given("티켓번호가 1, 2, 3, 4, 5, 6인 티켓") {
+        val ticket = Ticket(numbers = listOf(1, 2, 3, 4, 5, 6))
+        When("당첨번호가 4, 5, 6, 22, 33, 44일때") {
+            val matchCount = ticket.matchCount(listOf(4, 5, 6, 22, 33, 44))
+            Then("3개의 숫자가 일치") {
+                matchCount shouldBe 3
+            }
+        }
     }
 })
