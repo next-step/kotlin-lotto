@@ -24,7 +24,7 @@ object LottoFixture {
         )
     }
 
-    private fun gameOf(vararg values: Int): Game {
+    fun gameOf(vararg values: Int): Game {
         return Game(
             values
                 .map { LottoNumber(it) }
