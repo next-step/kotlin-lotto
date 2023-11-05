@@ -1,17 +1,14 @@
 package lotto.domain
 
-import io.kotest.assertions.forEachAsClue
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
-import io.kotest.matchers.collections.shouldContain
-import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.ints.shouldBeGreaterThanOrEqual
 import io.kotest.matchers.ints.shouldBeLessThan
 import io.kotest.matchers.ints.shouldBeLessThanOrEqual
 import io.kotest.matchers.shouldBe
 
-class LottoMangerSpec : DescribeSpec({
+class LottoManagerSpec : DescribeSpec({
     describe("로또 생성") {
         forAll(
             row(1..5, 5),
@@ -51,10 +48,43 @@ class LottoMangerSpec : DescribeSpec({
                     }
                     it("티켓의 숫자들은 작은수부터 정렬") {
                         result.forEach { ticket ->
-                            ticket.numbers.zipWithNext { before, next -> before shouldBeLessThan next  }
+                            ticket.numbers.zipWithNext { before, next -> before shouldBeLessThan next }
                         }
                     }
                 }
+            }
+        }
+    }
+
+    describe("로또 결과 조회") {
+        describe("당첨 티켓을 정해둠") {
+            val winningNumbers = LottoMock.createWinningNumbers()
+            val ticketCountByMatchedNumberCount = mapOf(
+                0 to 1,
+                1 to 1,
+                2 to 1,
+                3 to 2,
+                4 to 3,
+                5 to 3,
+                6 to 1
+            )
+            val expect = listOf(
+                LottoResult(3, 2),
+                LottoResult(4, 3),
+                LottoResult(5, 3),
+                LottoResult(6, 1),
+            )
+            val tickets : List<LottoTicket> = ticketCountByMatchedNumberCount.flatMap { (matchedNumberCount, ticketCount) ->
+                List(ticketCount) {
+                    LottoMock.createTicket(winningNumbers, matchedNumberCount)
+                }
+            }
+            val manager = LottoManager(LottoTicketGenerator(), LottoTicketStorage(tickets.toMutableList()))
+
+            val result = manager.getResult(winningNumbers)
+
+            it("티켓 정보와 같은 LottoResult") {
+                result shouldBe expect
             }
         }
     }

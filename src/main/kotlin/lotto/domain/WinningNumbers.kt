@@ -4,6 +4,8 @@ package lotto.domain
 value class WinningNumbers private constructor(
     val value: List<Int>
 ) {
+    fun isInWinningNumbers(number: Int) =
+        value.contains(number)
     companion object {
         fun of(
             numbers: List<Int>,

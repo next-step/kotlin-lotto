@@ -12,7 +12,7 @@ class WinningNumbersSpec : FunSpec({
             row(LottoSpec.NUMBERS_RANGE, LottoSpec.NUMBERS_COUNT),
             row(1..5, 5),
         ) { requiredRange, requiredCount ->
-            val validNumbers = requiredRange.shuffled().take(requiredCount)
+            val validNumbers = LottoMock.createWinningNumbers(requiredRange, requiredCount).value
 
             val result = WinningNumbers.of(validNumbers, requiredRange, requiredCount)
 

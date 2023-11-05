@@ -11,4 +11,8 @@ class LottoManager(
         ticketStorage.save(tickets)
         return tickets
     }
+    fun getResult(winningNumbers: WinningNumbers): List<LottoResult> {
+        val tickets = ticketStorage.getAll()
+        return LottoReferee.createResults(tickets, winningNumbers, LottoSpec.getMinCountToGetPrize())
+    }
 }
