@@ -1,10 +1,23 @@
 package lotto.controller
 
+import lotto.model.LottoInfo
 import lotto.ui.InputView
 
-class LottoController {
+class LottoController(
+    private val inputPurchaseAmount: String,
+) {
 
-    fun getValidatePurchaseAmount(inputPurchaseAmount: String): Int {
+    fun generateMultipleLottoNumbers(): List<LottoInfo> {
+        val lottoInfoList = mutableListOf<LottoInfo>()
+        repeat(getPaidLottoCount()) {
+            lottoInfoList.add(LottoInfo(getRandomGeneratedNumbers()))
+        }
+        return lottoInfoList
+    }
+
+    fun getPaidLottoCount() = getValidatePurchaseAmount() / PURCHASE_AMOUNT_UNIT
+
+    fun getValidatePurchaseAmount(): Int {
         return run {
             val amount = inputPurchaseAmount.toInt()
             require(isValidAmount(amount)) {
@@ -34,4 +47,5 @@ class LottoController {
 
 fun main() {
     val purchaseAmount = InputView.getPurchaseAmount()
+    LottoController(purchaseAmount)
 }
