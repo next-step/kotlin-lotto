@@ -6,10 +6,16 @@ class StringAddCalculator {
             return 0
         }
 
-        val numbers = splitByCustomDelimiter(text)
+        if (text.contains('-')) {
+            throw RuntimeException()
+        }
+
+        val splits = splitByCustomDelimiter(text)
             ?: text.split("[,:]".toRegex())
 
-        return numbers.sumOf { it.toInt() }
+        val numbers = splits.map { it.toInt() }
+
+        return numbers.sum()
     }
 
     private fun splitByCustomDelimiter(text: String): List<String>? {
