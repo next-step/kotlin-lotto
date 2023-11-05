@@ -10,10 +10,11 @@ import io.kotest.matchers.shouldBe
 class CalculatorTest : FunSpec({
     context("문자열 덧셈을 수행한다. withData 사용") {
         val express = listOf("1,2,3", "1:2:3", "1:2,3")
+        val expected = "6"
         withData(
             express
-        ) { a ->
-            Calculator.calculate(a) shouldBe "6"
+        ) { exp ->
+            Calculator.calculate(exp) shouldBe expected
         }
     }
     context(" 문자열 덧셈을 수행한다. forAll을 사용") {
@@ -34,9 +35,9 @@ class CalculatorTest : FunSpec({
 
     context("숫자 이외의 값, 음수는 IllegalStateException") {
         val express = listOf("a", "-1:2,3")
-        withData(express) { express ->
+        withData(express) { exp ->
             shouldThrow<IllegalStateException> {
-                Calculator.calculate(express)
+                Calculator.calculate(exp)
             }
         }
     }
