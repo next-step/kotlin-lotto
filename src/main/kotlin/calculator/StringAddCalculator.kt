@@ -6,7 +6,7 @@ class StringAddCalculator {
             return 0
         }
 
-        val numbers = text.split(",")
+        val numbers = text.split("[,:]".toRegex())
 
         return numbers.sumOf { it.toInt() }
     }
