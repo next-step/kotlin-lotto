@@ -13,12 +13,12 @@ class StringAddCalculator {
 
     private fun splitInputByDelimiter(input: String): List<Int> {
         val findRegex = Regex("//(.)\n(.*)").find(input)
-        val strings = findRegex?.let {
+        val split = findRegex?.let {
             val customDelimiter = it.groupValues[1]
             it.groupValues[2].split(customDelimiter)
         } ?: input.split(DEFAULT_DELIMITER_REGEX)
 
-        return strings.map { it.toInt() }
+        return split.map { it.toInt() }
     }
 
     private fun checkNegativeNumbers(numbers: List<Int>) {
