@@ -2,14 +2,15 @@ package lotto.view
 
 import lotto.domain.ArgumentValidator
 import lotto.domain.ArgumentValidator.Companion.BLANK_ERROR_MESSAGE
+import lotto.domain.InputPrice
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 
 object InputView {
 
-    fun inputPrice(): Int {
+    fun inputPrice(): InputPrice {
         println(INPUT_PRICE_MESSAGE)
-        return ArgumentValidator(readln()).intValue
+        return InputPrice(ArgumentValidator(readln()).intValue)
     }
 
     fun inputManualLottoCount(): Int {

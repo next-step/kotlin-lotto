@@ -10,8 +10,7 @@ class Lotto(val lottoNumbers: LottoNumbers) {
 
     fun winningRank(winningLotto: WinningLotto): WinningRank {
         val (matchCount, bonusMatchCount) = winningLotto.match(lottoNumbers)
-        if (matchCount == 5) return WinningRank.of(matchCount, bonusMatchCount)
-        return WinningRank.of(matchCount)
+        return WinningRank.of(matchCount, bonusMatchCount)
     }
 
     private fun validateLotto() {
