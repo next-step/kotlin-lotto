@@ -8,3 +8,9 @@ plugins {
 
 configureKotlin()
 configureTest()
+
+tasks {
+    test {
+        useJUnitPlatform()
+    }
+}
