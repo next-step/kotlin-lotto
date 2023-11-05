@@ -13,9 +13,7 @@ class StringParser(private val separatorList: List<String>) {
     fun parseToInt(input: String): List<Int> = parse(input).map { it.toInt() }
 
     fun parse(input: String): List<String> {
-        if (!parseable(input)) {
-            throw IllegalStateException("${this.separatorList.joinToString(", ")} 중 하나 이상의 구분자가 포함되어야 합니다.")
-        }
+        require(parseable(input)) { "${this.separatorList.joinToString(", ")} 중 하나 이상의 구분자가 포함되어야 합니다." }
 
         val parseValue: List<String> = parse(input, this.separatorList)
 
