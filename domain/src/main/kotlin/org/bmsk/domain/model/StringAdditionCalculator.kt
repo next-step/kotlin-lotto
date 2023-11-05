@@ -3,22 +3,30 @@ package org.bmsk.domain.model
 class StringAdditionCalculator(private val stringFormula: String) {
 
     fun calculate(): Int {
-        return separateBy().sum()
+        val customSeparators = extractCustomSeparators(stringFormula)
+        return separateBy(customSeparators).sum()
     }
 
-    fun separateBy(additionalSeparators: Separators = Separators(emptyList())): List<Int> {
-        stringFormula.ifBlank { return emptyList() }
-
-        val allSeparators = defaults + additionalSeparators
-
-        return allSeparators.separators.fold(stringFormula) { formula, separator ->
-            formula.replace(separator.value, rest.value)
-        }.split(rest.value).map { it.trim().toInt() }
+    fun separateBy(customSeparators: Separators = Separators(emptyList())): List<Int> {
+        val realStringFormula = if (stringFormula.contains("\n")) {
+            stringFormula.split("\n")[1]
+        } else {
+            stringFormula
+        }
+        realStringFormula.ifBlank { return emptyList() }
+        val allSeparators = defaults.separators + customSeparators.separators
+        val pattern = allSeparators.joinToString("|") { Regex.escape(it.value) }.toRegex()
+        return realStringFormula.split(pattern).map { it.trim().toInt() }
     }
 
-//    private fun findCustomSeparators(): Separators {
-//
-//    }
+    private fun extractCustomSeparators(stringFormula: String): Separators {
+        val result = Regex("//(.)\n(.*)").find(stringFormula)
+        return if (result != null) {
+            Separators(listOf(Separator(result.groupValues[1])))
+        } else {
+            Separators(emptyList())
+        }
+    }
 
     companion object DefaultSeparator {
         private val rest = Separator(",")
