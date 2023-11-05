@@ -1,6 +1,6 @@
 package lotto
 
-enum class LottoWinning(private val correctCount: Int, val reward: Int) {
+enum class LottoWinning(val correctCount: Int, val reward: Int) {
     Nothing(0, 0),
     CorrectThree(3, 5000),
     CorrectFour(4, 50000),
