@@ -4,17 +4,17 @@ object Calculator {
     fun calculate(originalExpress: String?): String {
         val express = originalExpress ?: DEFAULT_VALUE
         val customDelimiter = getCustomDelimiterFromExpress(express)
-        val newRegex = getRegexWithCustomDelimiter(customDelimiter)
+        val regexWithCustomDelimiter = getRegexWithCustomDelimiter(customDelimiter)
         val customDelimiterString = getCustomDelimiterString(
             express = express,
             customDelimiter = customDelimiter
         )
-        val newExpress = getNewExpress(
+        val finalExpressWithCustomDelimiter = getNewExpress(
             express = express,
             customDelimiter = customDelimiter,
             customDelimiterString = customDelimiterString
         )
-        val list = newExpress.split(newRegex)
+        val list = finalExpressWithCustomDelimiter.split(regexWithCustomDelimiter)
         return calculate(list)
     }
 
