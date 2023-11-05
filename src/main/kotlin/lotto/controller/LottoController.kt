@@ -14,11 +14,21 @@ class LottoController {
         }
     }
 
+    fun getRandomGeneratedNumbers(): List<Int> {
+        return getRandomLottoNumbers().sorted()
+    }
+
+    private fun getRandomLottoNumbers() = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER).shuffled().take(LOTTO_NUMBER_COUNT)
+
     private fun isValidAmount(amount: Int) = amount >= MINIMUM_PURCHASE_AMOUNT && amount % PURCHASE_AMOUNT_UNIT == 0
 
     companion object {
         private const val MINIMUM_PURCHASE_AMOUNT = 1000
         private const val PURCHASE_AMOUNT_UNIT = 1000
+
+        const val LOTTO_NUMBER_COUNT = 6
+        private const val MAX_LOTTO_NUMBER = 45
+        private const val MIN_LOTTO_NUMBER = 1
     }
 }
 
