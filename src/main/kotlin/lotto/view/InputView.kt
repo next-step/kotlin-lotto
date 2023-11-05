@@ -3,31 +3,39 @@ package lotto.view
 class InputView(private val maxTryCount: Int = DEFAULT_MAX_TRY_COUNT) {
 
     fun readLineNumber(question: String?, count: Int = 0): Int {
-        return try {
+        val inputResult: Result<Int> = runCatching {
             val input: String = readLine(question, count)
 
-            if (input.toIntOrNull() == null) {
-                throw IllegalArgumentException("숫자를 입력해주세요.")
-            }
+            require(input.toIntOrNull() != null) { "숫자를 입력해주세요." }
 
-            input.toInt()
-        } catch (notNumberException: IllegalArgumentException) {
-            println(notNumberException.message)
-            this.readLineNumber(question, count + 1)
+            return input.toInt()
+        }.onFailure {
+            println(it.message)
+
+            if (it is IllegalArgumentException) {
+                return this.readLineNumber(question, count + 1)
+            }
         }
+
+        return inputResult.getOrThrow()
     }
 
     fun readLineNumberList(question: String?, count: Int = 0): List<Int> {
-        return try {
+        val inputResult: Result<List<Int>> = runCatching {
             val input: String = readLine(question, count)
 
             input.split(", ").map {
                 it.toIntOrNull() ?: throw IllegalArgumentException("숫자를 입력해주세요.")
             }
-        } catch (notNumberException: IllegalArgumentException) {
-            println(notNumberException.message)
-            this.readLineNumberList(question, count + 1)
+        }.onFailure {
+            println(it.message)
+
+            if (it is IllegalArgumentException) {
+                return this.readLineNumberList(question, count + 1)
+            }
         }
+
+        return inputResult.getOrThrow()
     }
 
     private fun readLine(question: String?, count: Int = 0): String {
