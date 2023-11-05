@@ -50,4 +50,6 @@ fun main() {
     val purchaseAmount = InputView.getPurchaseAmount()
     val generatedLottoInfos = LottoController(purchaseAmount).generateMultipleLottoNumbers()
     ResultView.showGeneratedLottoInfos(generatedLottoInfos)
+
+    val latestWinInfo = InputView.getLatestWinInfo()
 }
