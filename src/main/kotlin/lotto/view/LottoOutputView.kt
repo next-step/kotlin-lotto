@@ -19,10 +19,10 @@ object LottoOutputView {
         println("---------")
 
         val countPerPrize = winningStatistic.countPerPrize
-        printWinningResult(Prize.FOURTH, countPerPrize[Prize.FOURTH])
-        printWinningResult(Prize.THIRD, countPerPrize[Prize.THIRD])
-        printWinningResult(Prize.SECOND, countPerPrize[Prize.SECOND])
-        printWinningResult(Prize.FIRST, countPerPrize[Prize.FIRST])
+
+        Prize.values()
+            .reversed()
+            .forEach { printWinningResult(it, countPerPrize[it]) }
 
         println("총 수익률은 ${winningStatistic.profitRate}입니다.")
     }
