@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
-import org.junit.jupiter.params.provider.ValueSource
 import java.util.stream.Stream
 
 class LottoWinningNumbersTest {
@@ -17,8 +16,8 @@ class LottoWinningNumbersTest {
             7
         )
         assertThat(lottoWinningNumbers.lottoNumbers.numbers.size).isEqualTo(6)
-        assertThat(lottoWinningNumbers.lottoNumbers.numbers).contains(1, 2, 3, 4, 5, 6)
-        assertThat(lottoWinningNumbers.bonusNumber).isEqualTo(7)
+        assertThat(lottoWinningNumbers.lottoNumbers).isEqualTo(LottoNumbers(listOf(1, 2, 3, 4, 5, 6)))
+        assertThat(lottoWinningNumbers.bonusNumber).isEqualTo(LottoNumber(7))
     }
 
     @Test
@@ -27,17 +26,6 @@ class LottoWinningNumbersTest {
             LottoWinningNumbers(
                 LottoNumbers(listOf(1, 2, 3, 4, 5, 6)),
                 6
-            )
-        }
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = [0, 46])
-    fun `보너스 번호가 1 ~ 45 범위가 아니면 예외가 발생한다`(bonusNumber: Int) {
-        assertThatIllegalArgumentException().isThrownBy {
-            LottoWinningNumbers(
-                LottoNumbers(listOf(1, 2, 3, 4, 5, 6)),
-                bonusNumber
             )
         }
     }

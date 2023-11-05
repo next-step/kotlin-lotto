@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test
 class LottoNumbersGeneratorTest {
     @Test
     fun `로또 번호 생성`() {
-        val lottoNumber = LottoNumberGenerator.generate()
-        assertThat(lottoNumber.numbers.size == 6)
-        lottoNumber.numbers.forEach {
-            assertThat(it).isBetween(1, 45)
+        val lottoNumbers = LottoNumberGenerator.generate()
+        assertThat(lottoNumbers.numbers.size == 6)
+        lottoNumbers.numbers.forEach {
+            assertThat(it.number).isBetween(1, 45)
         }
     }
 }

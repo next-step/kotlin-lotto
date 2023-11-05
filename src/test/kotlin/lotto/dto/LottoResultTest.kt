@@ -10,7 +10,6 @@ class LottoResultTest {
         for (price in listOf(LottoPrice.NOT_MATCHED, LottoPrice.ONE_MATCHED, LottoPrice.TWO_MATCHED, LottoPrice.THREE_MATCHED)) {
             lottoResult.updateExact(price)
         }
-        println(LottoPrice.rankOf())
         assertThat(lottoResult.getExact(LottoPrice.NOT_MATCHED)).isEqualTo(1)
         assertThat(lottoResult.getExact(LottoPrice.ONE_MATCHED)).isEqualTo(1)
         assertThat(lottoResult.getExact(LottoPrice.TWO_MATCHED)).isEqualTo(1)
