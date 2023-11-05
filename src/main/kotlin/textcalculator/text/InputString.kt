@@ -25,8 +25,9 @@ class InputString(
     }
 
     private fun extractCustomInput(input: String): Pair<String, String> {
-        return CUSTOM_DELIMITER_CHECK.find(input)?.let {
-            it.groupValues[1] to it.groupValues[2]
+        return CUSTOM_DELIMITER_CHECK.find(input)?.let { matchResult ->
+            val (delimiter, token) = matchResult.destructured
+            delimiter to token
         } ?: ("" to input)
     }
 
