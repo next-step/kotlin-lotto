@@ -5,10 +5,10 @@ import lotto.domain.LottoCalculator
 import lotto.domain.LottoMachine
 import lotto.domain.LottoRank
 import lotto.view.InputView
+import lotto.view.OutputView
 
 fun main() {
     val inputView: InputView = InputView()
-
     val buyingPrice: Int = inputView.readLineNumber("구입금액을 입력해 주세요.")
 
     val lottoMachine: LottoMachine = LottoMachine()
@@ -23,6 +23,7 @@ fun main() {
     val lottoRankList: List<LottoRank> = lottoList.map { lottoMachine.getLottoRank(it, winningLotto) }
 
     val lottoCalculator: LottoCalculator = LottoCalculator()
-    lottoRankList.forEach(::println)
-    println(lottoCalculator.calculateReturnOnInvestment(lottoRankList, buyingPrice.toDouble()))
+    val outputView: OutputView = OutputView()
+
+    outputView.printResult(lottoRankList, lottoCalculator.calculateReturnOnInvestment(lottoRankList, buyingPrice.toDouble()))
 }
