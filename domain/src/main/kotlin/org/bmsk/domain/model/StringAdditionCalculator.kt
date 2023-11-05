@@ -2,8 +2,12 @@ package org.bmsk.domain.model
 
 class StringAdditionCalculator(private val stringFormula: String) {
 
+    fun calculate(): Int {
+        return separateBy().sum()
+    }
+
     fun separateBy(additionalSeparators: Separators = Separators(emptyList())): List<Int> {
-        if (stringFormula == "") return emptyList()
+        stringFormula.ifBlank { return emptyList() }
 
         val allSeparators = defaults + additionalSeparators
 
@@ -11,6 +15,10 @@ class StringAdditionCalculator(private val stringFormula: String) {
             formula.replace(separator.value, rest.value)
         }.split(rest.value).map { it.trim().toInt() }
     }
+
+//    private fun findCustomSeparators(): Separators {
+//
+//    }
 
     companion object DefaultSeparator {
         private val rest = Separator(",")
