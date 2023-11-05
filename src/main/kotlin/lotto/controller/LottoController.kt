@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.model.LottoInfo
 import lotto.ui.InputView
+import lotto.ui.ResultView
 
 class LottoController(
     private val inputPurchaseAmount: String,
@@ -47,5 +48,6 @@ class LottoController(
 
 fun main() {
     val purchaseAmount = InputView.getPurchaseAmount()
-    LottoController(purchaseAmount)
+    val generatedLottoInfos = LottoController(purchaseAmount).generateMultipleLottoNumbers()
+    ResultView.showGeneratedLottoInfos(generatedLottoInfos)
 }
