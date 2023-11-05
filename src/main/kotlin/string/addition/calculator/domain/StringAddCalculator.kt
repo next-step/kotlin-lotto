@@ -13,11 +13,11 @@ object StringAddCalculator {
             return DEFAULT_NUMBER
         }
         val numbers = Splitter.split(input, Splitter.getDelimiters(input))
-        isValidNumbers(numbers)
+        throwIfNumbersInvalid(numbers)
         return numbers.sumOf { it.toInt() }
     }
 
-    private fun isValidNumbers(numbers: List<String>) {
+    private fun throwIfNumbersInvalid(numbers: List<String>) {
         require(numbers.all { it.toIntOrNull() != null }) { CONTAIN_NOT_NUMBER_MESSAGE }
         require(numbers.all { it.toInt() >= 0 }) { NEGATIVE_NUMBER_MESSAGE }
     }
