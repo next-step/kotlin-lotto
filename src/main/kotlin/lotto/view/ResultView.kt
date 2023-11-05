@@ -3,6 +3,7 @@ package lotto.view
 import lotto.LottoList
 import lotto.LottoRank
 import lotto.LottoResultList
+import lotto.Money
 
 object ResultView {
     fun printLottoList(lottoList: LottoList) {
@@ -12,14 +13,14 @@ object ResultView {
         }
     }
 
-    fun printResult(result: LottoResultList, purchaseAmount: Int) {
+    fun printResult(result: LottoResultList, purchaseAmount: Money) {
         println("당첨 통계")
         println("------------")
         printRankResult(LottoRank.FOURTH, result.fourthNum)
         printRankResult(LottoRank.THIRD, result.thirdNum)
         printRankResult(LottoRank.SECOND, result.secondNum)
         printRankResult(LottoRank.FIRST, result.firstNum)
-        println("총 수익률은 ${result.getProfitRate(purchaseAmount)}입니다.")
+        println("총 수익률은 ${result.getProfitRate(purchaseAmount.amount)}입니다.")
     }
 
     private fun printRankResult(rank: LottoRank, count: Int) {
