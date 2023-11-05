@@ -1,11 +1,14 @@
 package lotto_auto.lotto
 
-object LottoAuto {
+class LottoAuto(
+    private val lottoList: List<Lotto>,
+    private val lastWeekLottoNumber: Lotto,
+) {
     /**
      * 구매한 로또 총 당첨 금액
      */
-    fun sumOfWonLottoList(lottoList: List<Lotto>, lastWeekLottoNumber: Lotto): Int {
-        return eachLottoMatchCount(lottoList, lastWeekLottoNumber).sumOf {
+    fun sumOfWonLottoList(): Int {
+        return eachLottoMatchCount().sumOf {
             replaceMatchCountToMoney(it)
         }
     }
@@ -13,10 +16,7 @@ object LottoAuto {
     /**
      * 각각 구매한 로또 마다 당첨 번호와 대조 하여 맞은 개수를 판별 합니다.
      */
-    private fun eachLottoMatchCount(
-        lottoList: List<Lotto>,
-        lastWeekLottoNumber: Lotto
-    ): List<Int> {
+    private fun eachLottoMatchCount(): List<Int> {
         return lottoList.map { myLotto ->
             lastWeekLottoNumber.number.mapNotNull {
                 if (myLotto.number.contains(it)) it else null
@@ -35,11 +35,11 @@ object LottoAuto {
         else -> 0
     }
 
-    fun matchCountList(lottoList: List<Lotto>, lastWeekLottoNumber: Lotto): List<Int> {
-        val three = eachLottoMatchCount(lottoList, lastWeekLottoNumber).count { it == 3 }
-        val four = eachLottoMatchCount(lottoList, lastWeekLottoNumber).count { it == 4 }
-        val five = eachLottoMatchCount(lottoList, lastWeekLottoNumber).count { it == 5 }
-        val six = eachLottoMatchCount(lottoList, lastWeekLottoNumber).count { it == 6 }
+    fun matchCountList(): List<Int> {
+        val three = eachLottoMatchCount().count { it == 3 }
+        val four = eachLottoMatchCount().count { it == 4 }
+        val five = eachLottoMatchCount().count { it == 5 }
+        val six = eachLottoMatchCount().count { it == 6 }
         return listOf(three, four, five, six)
     }
 

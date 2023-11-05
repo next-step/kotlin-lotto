@@ -10,9 +10,10 @@ class LottoAutoTest : StringSpec({
         // 로또 당첨 금액 (1) - 0원   (2) - 50000원
         val input = listOf(Lotto(listOf(1, 2, 3, 4, 5, 6)), Lotto(listOf(2, 4, 6, 8, 12, 15)))
         val winningLotto = Lotto(listOf(3, 6, 9, 12, 15, 18))
+        val lottoAuto = LottoAuto(input, winningLotto)
         val expected = 5000
 
-        LottoAuto.sumOfWonLottoList(input, winningLotto) shouldBe expected
+        lottoAuto.sumOfWonLottoList() shouldBe expected
     }
 
     "matchCountList 함수가 3,4,5,6개 맞은 순서를 잘 나타내는지" {
@@ -25,13 +26,26 @@ class LottoAutoTest : StringSpec({
         val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         // 순서대로 3,4,5,6개 맞아서 리스트에 1,1,1,1가 저장됨
         val expected = listOf(1, 1, 1, 1)
-        LottoAuto.matchCountList(input, winningLotto) shouldBe expected
+        val lottoAuto = LottoAuto(input, winningLotto)
+
+        lottoAuto.matchCountList() shouldBe expected
     }
 
     "구매 금액 대비 당첨 금액의 비율이 맞는지" {
-        val resultSum = 5000
-        val inputAmount = 14000
-        val expected = 5000.toFloat() / 14000.toFloat()
-        LottoAuto.earningRate(resultSum, inputAmount) shouldBe expected
+        val input = listOf(
+            Lotto(listOf(1, 2, 3, 4, 5, 6)),
+            Lotto(listOf(7, 8, 9, 10, 11, 12)),
+            Lotto(listOf(13, 14, 15, 16, 17, 18)),
+            Lotto(listOf(19, 20, 21, 22, 23, 24)),
+            Lotto(listOf(25, 26, 27, 28, 29, 30))
+        )
+        // 5개 샀고, 1번 로또가 4개 당첨 되어 5 만원
+        val winningLotto = Lotto(listOf(1, 2, 3, 4, 31, 32))
+        val inputAmount = 5000
+        val resultSum = 50000
+        val expected = resultSum.toFloat() / inputAmount.toFloat()
+        val lottoAuto = LottoAuto(input, winningLotto)
+
+        lottoAuto.earningRate(resultSum, inputAmount) shouldBe expected
     }
 })
