@@ -1,21 +1,11 @@
 package lotto.domain
 
 class Lotto (
-    private val money: Int
-) {
     val lines: List<List<Int>>
+) {
+    fun getAllSameNumberCount(numbers: List<Int>): List<Int> =
+        lines.map { it.getSameNumberCount(numbers) }.toList()
 
-    init {
-        val generateLines = mutableListOf<List<Int>>()
-        repeat(getQuantity()) {
-            generateLines.add(LottoNumber.generate())
-        }
-        lines = generateLines
-    }
-
-    private fun getQuantity(): Int = money / LOTTO_FEE
-
-    companion object {
-        const val LOTTO_FEE: Int = 1_000
-    }
+    private fun List<Int>.getSameNumberCount(numbers: List<Int>) =
+        this.count { numbers.contains(it) }
 }

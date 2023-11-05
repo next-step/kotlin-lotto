@@ -11,6 +11,14 @@ class LottoMachine(
         this.winningNumbers = getParsedWinningNumbers(winningNumbers)
     }
 
+    fun checkLottoResult(lotto: Lotto): LottoResult {
+        val lottoResult  = lotto.getAllSameNumberCount(winningNumbers)
+            .mapNotNull { LottoRank.of(it) }
+            .groupingBy { it }
+            .fold(0) { acc, _ -> acc + 1 }
+        return LottoResult(lottoResult)
+    }
+
     private fun getParsedWinningNumbers(numbers: String): List<Int> {
         val result = numbers.split(", ").mapNotNull { it.toIntOrNull() }
         if(result.size != 6) {
