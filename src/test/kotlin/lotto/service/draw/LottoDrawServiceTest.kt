@@ -1,6 +1,6 @@
 @file:Suppress("NonAsciiCharacters")
 
-package lotto.service
+package lotto.service.draw
 
 import io.mockk.every
 import io.mockk.junit5.MockKExtension

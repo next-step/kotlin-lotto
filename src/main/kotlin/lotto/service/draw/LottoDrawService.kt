@@ -1,4 +1,4 @@
-package lotto.service
+package lotto.service.draw
 
 import lotto.domain.Prize
 import lotto.domain.WinningStatistic

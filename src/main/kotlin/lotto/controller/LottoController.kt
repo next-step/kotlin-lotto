@@ -1,8 +1,8 @@
 package lotto.controller
 
-import lotto.service.LottoDrawService
-import lotto.service.LottoDrawSpec
-import lotto.service.LottoIssueService
+import lotto.service.draw.LottoDrawService
+import lotto.service.draw.LottoDrawSpec
+import lotto.service.issue.LottoIssueService
 import lotto.view.LottoInputView
 import lotto.view.LottoOutputView
 

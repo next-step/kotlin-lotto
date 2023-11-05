@@ -1,6 +1,6 @@
 @file:Suppress("NonAsciiCharacters")
 
-package lotto.service
+package lotto.service.issue
 
 import lotto.domain.Lotto
 import org.assertj.core.api.Assertions.assertThat
