@@ -32,17 +32,12 @@ class CalculatorTest : FunSpec({
         Calculator.calculate(express) shouldBe expected
     }
 
-    context("숫자 이외의 값은 runtime exception") {
-        val express = "a"
-        shouldThrow<RuntimeException> {
-            Calculator.calculate(express)
-        }
-    }
-
-    context("음수 값은 runtime exception") {
-        val express = "-1:2,3"
-        shouldThrow<RuntimeException> {
-            Calculator.calculate(express)
+    context("숫자 이외의 값, 음수는 IllegalStateException") {
+        val express = listOf("a", "-1:2,3")
+        withData(express) { express ->
+            shouldThrow<IllegalStateException> {
+                Calculator.calculate(express)
+            }
         }
     }
 

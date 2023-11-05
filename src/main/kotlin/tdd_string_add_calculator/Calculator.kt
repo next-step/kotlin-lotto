@@ -50,7 +50,7 @@ object Calculator {
                 validateNumberIsNegativeNumber(number)
             }.reduce { acc, i -> acc + i }
                 .toString()
-        }.getOrElse { throw RuntimeException() }
+        }.getOrElse { error(NOT_SUPPORTED_TEXT) }
     }
 
     private fun changeLettersToNumber(it: String): Int = it.ifBlank { DEFAULT_VALUE }.toInt()
@@ -66,4 +66,5 @@ object Calculator {
     private const val LAST_SUBSTRING_RANGE = 3
     private const val SPLIT_REGEX = ",:"
     private const val DEFAULT_VALUE = "0"
+    private const val NOT_SUPPORTED_TEXT = "적절하지 않은 문자가 들어왔습니다."
 }
