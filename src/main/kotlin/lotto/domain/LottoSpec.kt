@@ -2,8 +2,8 @@ package lotto.domain
 
 object LottoSpec {
     const val NUMBERS_COUNT = 6
-    val PRICE = Amount(1000)
     val NUMBERS_RANGE = 1..45
+    val PRICE = Amount(1000)
     val prizesInfo : List<WinningPrize> = listOf(
         WinningPrize(3, Amount(5000)),
         WinningPrize(4, Amount(50000)),

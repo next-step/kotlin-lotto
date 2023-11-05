@@ -19,10 +19,11 @@ class LottoController(
         return PurchaseResponse(tickets)
     }
 
-    fun end(request: EndLottoRequest) {
+    fun end(request: EndLottoRequest): EndLottoResponse {
         val winningNumbers = WinningNumbers.of(request.winningNumbers)
         val result = lottoManager.getResult(winningNumbers)
         val totalPrizeAmount = LottoAccountant.getTotalPrizeAmount(result, LottoSpec.prizesInfo)
-        bank.receivePrize(totalPrizeAmount)
+        val earningRate = bank.receivePrize(totalPrizeAmount)
+        return EndLottoResponse(earningRate)
     }
 }
