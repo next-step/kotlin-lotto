@@ -3,7 +3,6 @@ package lotto.controller
 import lotto.domain.Amount
 import lotto.domain.Bank
 import lotto.domain.LottoManager
-import lotto.domain.LottoSpec
 import lotto.domain.TicketCount
 import lotto.domain.WinningNumbers
 
