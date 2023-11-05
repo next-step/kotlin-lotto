@@ -20,10 +20,10 @@ class LottoResultListTest {
             )
         )
 
-        assertThat(lottoResultList.firstNum).isEqualTo(1)
-        assertThat(lottoResultList.secondNum).isEqualTo(2)
-        assertThat(lottoResultList.thirdNum).isEqualTo(1)
-        assertThat(lottoResultList.fourthNum).isEqualTo(3)
+        assertThat(lottoResultList.count(LottoRank.FIRST)).isEqualTo(1)
+        assertThat(lottoResultList.count(LottoRank.SECOND)).isEqualTo(2)
+        assertThat(lottoResultList.count(LottoRank.THIRD)).isEqualTo(1)
+        assertThat(lottoResultList.count(LottoRank.FOURTH)).isEqualTo(3)
     }
 
     @Test

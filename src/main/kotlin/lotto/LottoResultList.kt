@@ -1,15 +1,15 @@
 package lotto
 
-class LottoResultList(resultList: List<LottoRank>) {
-    val firstNum = resultList.count { it == LottoRank.FIRST }
-    val secondNum = resultList.count { it == LottoRank.SECOND }
-    val thirdNum = resultList.count { it == LottoRank.THIRD }
-    val fourthNum = resultList.count { it == LottoRank.FOURTH }
+data class LottoResultList(val resultList: List<LottoRank>) {
+    fun count(rank: LottoRank) = resultList.count { it == rank }
 
-    private val prizeMoney = firstNum * LottoRank.FIRST.money +
-            secondNum * LottoRank.SECOND.money +
-            thirdNum * LottoRank.THIRD.money +
-            fourthNum * LottoRank.FOURTH.money
+    private val prizeMoney = run {
+        var total = 0
+        for (rank in LottoRank.values()) {
+            total += count(rank) * rank.money
+        }
+        total
+    }
 
     fun getProfitRate(buy: Int): Float {
         return prizeMoney / buy.toFloat()
