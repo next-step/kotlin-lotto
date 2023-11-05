@@ -1,10 +1,10 @@
 package lotto.domain
 
 import lotto.domain.Lotto.Companion.LOTTO_NUMBER_SIZE
-import lotto.domain.LottoNumber.Companion.LOTTO_NUMBER_MAX
-import lotto.domain.LottoNumber.Companion.LOTTO_NUMBER_MIN
 
-object LottoStore : ShuffleNumber {
+object LottoStore {
+
+    private val lottoNumberGenerator = LottoNumberGenerator { LOTTO_POOL.shuffled() }
 
     fun buyLottos(inputPrice: Int, manualLottoNumbers: List<LottoNumbers>): Lottos {
         val manualLottoCount = manualLottoNumbers.size
@@ -17,13 +17,9 @@ object LottoStore : ShuffleNumber {
         )
     }
 
-    override fun shuffleNumber(): List<LottoNumber> {
-        return LOTTO_POOL.shuffled()
-    }
-
     private fun buyLotto(
         lottoNumbers: LottoNumbers =
-            takeShuffleNumber(LOTTO_NUMBER_SIZE)
+            lottoNumberGenerator.takeShuffleNumber(LOTTO_POOL, LOTTO_NUMBER_SIZE)
     ): Lotto {
         return Lotto(lottoNumbers)
     }
@@ -40,7 +36,7 @@ object LottoStore : ShuffleNumber {
 
     private const val LOTTO_PRICE = 1000
     private const val LOTTO_BUY_ERROR_MESSAGE = "로또를 구매할 수 없습니다."
-    private val LOTTO_POOL = listOf(LOTTO_NUMBER_MIN..LOTTO_NUMBER_MAX)
+    private val LOTTO_POOL = listOf(LottoNumber.LOTTO_NUMBER_MIN..LottoNumber.LOTTO_NUMBER_MAX)
         .flatten()
         .map { LottoNumber(it) }
 }
