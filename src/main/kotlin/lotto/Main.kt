@@ -18,4 +18,5 @@ fun main() {
     val lottoResult = LottoMachine(winningNumbers).checkLottoResult(lotto)
 
     View.lottoRankStatisticsPrint(lottoResult)
+    View.lottoRateOfReturnPrint(lottoResult, customer)
 }

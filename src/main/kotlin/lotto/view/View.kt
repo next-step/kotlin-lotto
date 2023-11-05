@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.Customer
 import lotto.domain.Lotto
 import lotto.domain.LottoMessage
 import lotto.domain.LottoResult
@@ -40,4 +41,7 @@ object View {
         return Triple(rank.sameCount, rank.amount, quantity)
     }
 
+    fun lottoRateOfReturnPrint(lottoResult: LottoResult, customer: Customer) {
+        print(LottoMessage.PRINT_LOTTO_RATE_OF_RETURN.message.format(lottoResult.getRateOfReturn(customer)))
+    }
 }
