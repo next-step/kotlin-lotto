@@ -1,7 +1,7 @@
 package lotto
 
 data class Lotto(val strategy: CreateStrategy) {
-    val lottoNumbers: LottoNumbers = LottoNumbers(strategy.createNumbers())
+    val lottoNumbers: LottoNumbers = strategy.createNumbers()
     fun getLottoResult(winningNumbers: WinningNumbers): LottoRank {
         return when (lottoNumbers.getContainCount(winningNumbers)) {
             3 -> LottoRank.FOURTH

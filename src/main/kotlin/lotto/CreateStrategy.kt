@@ -1,5 +1,5 @@
 package lotto
 
 interface CreateStrategy {
-    fun createNumbers(): List<Int>
+    fun createNumbers(): LottoNumbers
 }

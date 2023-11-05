@@ -1,5 +1,7 @@
 package lotto.view
 
+import lotto.LottoNumber
+import lotto.LottoNumbers
 import lotto.Money
 import lotto.WinningNumbers
 
@@ -12,6 +14,6 @@ object InputView {
     fun getWinningNumbers(): WinningNumbers {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val line = readln()
-        return WinningNumbers(line.split(", ").map { it.toInt() })
+        return WinningNumbers(LottoNumbers(line.split(", ").map { LottoNumber(it.toInt()) }))
     }
 }
