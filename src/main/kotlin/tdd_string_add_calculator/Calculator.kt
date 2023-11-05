@@ -47,7 +47,7 @@ object Calculator {
         return runCatching {
             list.map { string ->
                 val number = changeLettersToNumber(string)
-                validateNumberIsNegativeNumber(number)
+                requirePositiveNumber(number)
             }.reduce { acc, i -> acc + i }
                 .toString()
         }.getOrElse { error(NOT_SUPPORTED_TEXT) }
@@ -55,8 +55,10 @@ object Calculator {
 
     private fun changeLettersToNumber(it: String): Int = it.ifBlank { DEFAULT_VALUE }.toInt()
 
-    private fun validateNumberIsNegativeNumber(number: Int) =
-        if (number < MINIMUM_NUMBER) throw RuntimeException() else number
+    private fun requirePositiveNumber(number: Int): Int {
+        require(number >= MINIMUM_NUMBER) { error(NOT_SUPPORTED_TEXT) }
+        return number
+    }
 
     private const val EMPTY_STRING = ""
     private const val CUSTOM_DELIMITER_START_WITH = "/"
