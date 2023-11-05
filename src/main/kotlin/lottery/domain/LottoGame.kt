@@ -1,19 +1,18 @@
 package lottery.domain
 
-class LottoGame(price: Int) {
-    val quantity: Int
-    private lateinit var lottos: Lottos
+class LottoGame(val price: Int, numberGenerator: LottoNumberGenerator = RandomNumberGenerator()) {
+    private val lottos: Lottos
 
     init {
-        quantity = price.div(LOTTERY_PRICE)
-    }
-
-    fun createLottoNumber() {
-        lottos = Lottos.of(quantity, RandomNumberGenerator())
+        lottos = Lottos.of(price.div(LOTTERY_PRICE), numberGenerator)
     }
 
     fun getLottos(): List<Lotto> {
         return lottos.lottos
+    }
+
+    fun getRanks(winningLotto: Lotto): Ranks {
+        return Ranks(lottos, winningLotto, price)
     }
 
     companion object {
