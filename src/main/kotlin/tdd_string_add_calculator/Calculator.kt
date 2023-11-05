@@ -3,7 +3,7 @@ package tdd_string_add_calculator
 object Calculator {
     fun calculate(originalExpress: String?): String {
         val express = originalExpress ?: DEFAULT_VALUE
-        val customDelimiter = checkCustomDelimiter(express)
+        val customDelimiter = getCustomDelimiterFromExpress(express)
         val newRegex = getRegexWithCustomDelimiter(customDelimiter)
         val customDelimiterString = getCustomDelimiterString(
             express = express,
@@ -18,7 +18,7 @@ object Calculator {
         return calculate(list)
     }
 
-    private fun checkCustomDelimiter(express: String): String =
+    private fun getCustomDelimiterFromExpress(express: String): String =
         if (express.startsWith(CUSTOM_DELIMITER_START_WITH)) {
             express.getOrNull(CUSTOM_DELIMITER_INDEX).toString()
         } else {
