@@ -1,6 +1,6 @@
 package calculator
 
-import calculator.Parser.parse
+import calculator.NumberExtractor.extract
 
 object StringAddCalculator {
     val PARSER_RULE = Regex("//(.)\n(.*)")
@@ -12,7 +12,7 @@ object StringAddCalculator {
             return RETURN_VALUE
         }
 
-        val tokens = parse(text)
+        val tokens = extract(text)
         return tokens.sum()
     }
 }
