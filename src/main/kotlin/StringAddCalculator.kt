@@ -5,14 +5,24 @@ class StringAddCalculator {
             return 0
         }
 
+        val numbers = splitWithDelimiter(text)
+
+        return numbers.sumOf { toPositiveInt(it) }
+    }
+
+    private fun splitWithDelimiter(text: String): List<String> {
         if (text.matches(Regex("//(.)\n(.*)"))) {
             val customDelimiter = text[2]
-            val numbers = text.substring(4).split(customDelimiter)
-            return numbers.sumOf { it.toInt() }
+            return text.substring(4).split(customDelimiter)
         }
+        return text.split("[,|:]".toRegex())
+    }
 
-        val numbers = text.split("[,|:]".toRegex())
-
-        return numbers.sumOf { it.toInt() }
+    private fun toPositiveInt(text: String): Int {
+        val number = text.toInt()
+        if (number < 0) {
+            throw RuntimeException()
+        }
+        return number
     }
 }
