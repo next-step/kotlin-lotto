@@ -1,6 +1,9 @@
 package calculator
 
 class StringAddCalculator {
+    private val customDelimiterRegex = Regex("//(.*)\n(.*)")
+    private val defaultDelimiterRegex = Regex("[,:]")
+
     fun add(text: String?): Int {
         if (text.isNullOrBlank()) {
             return 0
@@ -19,7 +22,7 @@ class StringAddCalculator {
     }
 
     private fun splitByCustomDelimiter(text: String): List<String>? {
-        return Regex("//(.*)\n(.*)").find(text)
+        return customDelimiterRegex.find(text)
             ?.let {
                 val customDelimiter = it.groupValues[1]
 
@@ -29,6 +32,6 @@ class StringAddCalculator {
     }
 
     private fun splitByDefaultDelimiter(text: String): List<String> {
-        return text.split("[,:]".toRegex())
+        return text.split(defaultDelimiterRegex)
     }
 }
