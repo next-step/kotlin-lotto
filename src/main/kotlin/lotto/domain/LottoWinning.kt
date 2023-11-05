@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 enum class LottoWinning(val correctCount: Int, val reward: Int) {
     Nothing(0, 0),

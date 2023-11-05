@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 object LottoWinningChecker {
     fun check(lottos: List<Lotto>, winningNumbers: List<Int>): List<Lotto> {

@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 private const val LOTTO_MINIMUM_NUMBER = 1
 private const val LOTTO_MAXIMUM_NUMBER = 45

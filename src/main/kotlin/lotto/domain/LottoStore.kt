@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class LottoStore(private val lottoGenerator: LottoGenerator) {
     fun buyLottos(money: Int): List<Lotto> {

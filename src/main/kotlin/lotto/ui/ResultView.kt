@@ -1,7 +1,7 @@
 package lotto.ui
 
-import lotto.Lotto
-import lotto.LottoWinning
+import lotto.domain.Lotto
+import lotto.domain.LottoWinning
 import java.text.DecimalFormat
 
 object ResultView {

@@ -1,6 +1,6 @@
 package lotto.ui
 
-import lotto.Lotto
+import lotto.domain.Lotto
 
 object InputView {
     fun inputMoney(): Int {
