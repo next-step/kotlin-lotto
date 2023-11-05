@@ -23,7 +23,7 @@ object LottoReferee {
     private fun toLottoResult(result: Map<Int, List<LottoTicket>>) = result.map { (matchedNumberCount, tickets) ->
         LottoResult(
             matchedNumberCount = matchedNumberCount,
-            count = tickets.count()
+            ticketCount = tickets.count()
         )
     }
 }
