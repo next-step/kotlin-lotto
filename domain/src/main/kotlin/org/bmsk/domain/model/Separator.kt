@@ -1,20 +1,21 @@
 package org.bmsk.domain.model
 
-data class Separator(val value: String) {
-    fun checkBelongTo(string: String): Boolean {
-        return string.contains(value)
-    }
-}
+data class Separator(val value: String)
 
-data class Separators(val separators: List<Separator>) {
+data class Separators(
+    private val separators: List<Separator>,
+) {
+    private val hashSetSeparators: HashSet<Separator> by lazy { asHashSet() }
 
-    fun checkBelongTo(string: String): Boolean {
-        return separators.all { separator ->
-            string.contains(separator.value)
-        }
+    fun toRegex() = hashSetSeparators.joinToString("|") { Regex.escape(it.value) }.toRegex()
+
+    fun contains(separator: Separator): Boolean {
+        return hashSetSeparators.contains(separator)
     }
 
-    operator fun plus(separators: Separators): Separators {
-        return Separators(separators.separators + this.separators)
+    operator fun plus(other: Separators): Separators {
+        return Separators(other.separators + separators)
     }
+
+    private fun asHashSet(): HashSet<Separator> = separators.toHashSet()
 }
