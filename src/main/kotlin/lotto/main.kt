@@ -6,4 +6,6 @@ fun main() {
     val purchasedLottoList = LottoMachine().purchase(purchaseAmount)
 
     ResultView.showPurchasedLotto(purchasedLottoList)
+
+    val lastWinnerLotto = InputView.getLastWinnerLotto()
 }
