@@ -1,3 +1,5 @@
+import calculator.AddCalculator
+import calculator.DefaultNumberExtractor
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.DisplayName
@@ -34,7 +36,7 @@ class AddCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = ["1,2:3"])
     fun colons(text: String) {
-        assertThat(AddCalculator.add(text)).isSameAs(6)
+        assertThat(DefaultNumberExtractor(text).extractNumbers()).contains(1, 2, 3)
     }
 
     @DisplayName(value = "//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다.")
