@@ -8,6 +8,11 @@ class LottoController(
     private val inputPurchaseAmount: String,
 ) {
 
+    fun countCorrectNumberCount(generatedLottoInfo: LottoInfo, latestWinLottoInfo: LottoInfo): Int {
+        val diff = (generatedLottoInfo.numbers.toSet() - latestWinLottoInfo.numbers.toSet()).size
+        return LOTTO_NUMBER_COUNT - diff
+    }
+
     fun generateMultipleLottoNumbers(): List<LottoInfo> {
         val lottoInfoList = mutableListOf<LottoInfo>()
         repeat(getPaidLottoCount()) {
