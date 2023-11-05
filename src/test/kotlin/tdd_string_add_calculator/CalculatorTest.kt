@@ -1,73 +1,76 @@
 package tdd_string_add_calculator
 
 import io.kotest.assertions.throwables.shouldThrow
-import io.kotest.core.spec.style.StringSpec
+import io.kotest.core.spec.style.FunSpec
+import io.kotest.data.blocking.forAll
+import io.kotest.data.row
+import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
 
-class CalculatorTest : StringSpec({
-    "문자열 안의 값을 ,을 사용하여 덧셈한다." {
-        val express = "1,2,3"
-        val expected = "6"
-        Calculator.calculate(express) shouldBe expected
+class CalculatorTest : FunSpec({
+    context("문자열 덧셈을 수행한다. withData 사용") {
+        val express = listOf("1,2,3", "1:2:3", "1:2,3")
+        withData(
+            express
+        ) { a ->
+            Calculator.calculate(a) shouldBe "6"
+        }
+    }
+    context(" 문자열 덧셈을 수행한다. forAll을 사용") {
+        forAll(
+            row("1,2,3", "6"),
+            row("2:3:4", "9"),
+            row("1:2,4", "7"),
+        ) { express, expected ->
+            Calculator.calculate(express) shouldBe expected
+        }
     }
 
-    "문자열 안의 값을 :을 사용하여 덧셈한다." {
-        val express = "1:2:3"
-        val expected = "6"
-        Calculator.calculate(express) shouldBe expected
-    }
-
-    "문자열 안의 값을 ,과 :을 같이 사용하여 덧셈한다." {
-        val express = "1:2,3"
-        val expected = "6"
-        Calculator.calculate(express) shouldBe expected
-    }
-
-    "빈 문자열은 0을 리턴한다" {
+    context("빈 문자열은 0을 리턴한다") {
         val express = ""
         val expected = "0"
         Calculator.calculate(express) shouldBe expected
     }
 
-    "숫자 이외의 값은 runtime exception" {
+    context("숫자 이외의 값은 runtime exception") {
         val express = "a"
         shouldThrow<RuntimeException> {
             Calculator.calculate(express)
         }
     }
 
-    "음수 값은 runtime exception" {
+    context("음수 값은 runtime exception") {
         val express = "-1:2,3"
         shouldThrow<RuntimeException> {
             Calculator.calculate(express)
         }
     }
 
-    "커스텀 계산자를 사용해도 잘 작동한다" {
+    context("커스텀 계산자를 사용해도 잘 작동한다") {
         val express = "//;\n1;2;3"
         val expected = "6"
         Calculator.calculate(express) shouldBe expected
     }
 
-    "2개 값 더하기" {
+    context("2개 값 더하기") {
         val express = "1,2"
         val expected = "3"
         Calculator.calculate(express) shouldBe expected
     }
-    
-    "커스텀 계산자로 2개 더하기" {
+
+    context("커스텀 계산자로 2개 더하기") {
         val express = "//;\n1;2"
         val expected = "3"
         Calculator.calculate(express) shouldBe expected
     }
 
-    "하나의 숫자 입력시 하나 반환" {
+    context("하나의 숫자 입력시 하나 반환") {
         val express = "1"
         val expected = "1"
         Calculator.calculate(express) shouldBe expected
     }
 
-    "null 입력시에 0 반환" {
+    context("null 입력시에 0 반환") {
         val express = null
         val expected = "0"
         Calculator.calculate(express) shouldBe expected
