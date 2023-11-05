@@ -4,8 +4,8 @@ class InputString(
     originalInput: String,
     initialDelimiters: List<String> = listOf(",", ":")
 ) {
-    private val input: String
-    private val delimiters: List<String>
+    val input: String
+    val delimiters: List<String>
 
     init {
         val (customDelimiter, customInput) = extractCustomInput(originalInput)

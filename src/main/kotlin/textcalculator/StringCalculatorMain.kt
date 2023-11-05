@@ -3,13 +3,8 @@ package textcalculator
 import textcalculator.calculator.Calculator
 import textcalculator.text.InputString
 
-class StringCalculatorMain {
-    companion object {
-        @JvmStatic
-        fun main(args: Array<String>) {
-            startCalculate()
-        }
-    }
+fun main() {
+    startCalculate()
 }
 
 fun startCalculate() {
