@@ -24,6 +24,5 @@ class LottoNumberTest : StringSpec({
         shouldThrow<IllegalArgumentException> {
             LottoNumber(50)
         }
-
     }
 })
