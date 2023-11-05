@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.app.LottoApp
 import lotto.model.LottoWinners
 import lotto.model.Round
 
@@ -16,6 +17,8 @@ object OutputView {
     }
 
     fun presentPrizes(s: LottoWinners) {
+
+        s.earningRate(LottoApp.pricePerGame())
         "당첨 통계\n" +
             "---------\n" +
             "3개 일치 (5000원)- 1개\n" +

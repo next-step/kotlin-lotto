@@ -7,7 +7,7 @@ import lotto.view.InputView
 import lotto.view.OutputView
 
 fun main() {
-    val amount: Int = InputView.purchaseAmount(LottoApp.priceOfGame())
+    val amount: Int = InputView.purchaseAmount(LottoApp.pricePerGame())
     val round = LottoApp.transaction(amount)
     OutputView.presetRound(round)
     val winningNumbers: WinningNumbers = InputView.drawing()

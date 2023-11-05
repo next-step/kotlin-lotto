@@ -8,7 +8,7 @@ data class LottoWinners(
     val countOf1st: Int,
 ) {
 
-    fun earningRate() {
+    fun earningRate(pricePerGame: Int): Double {
         TODO()
     }
 }

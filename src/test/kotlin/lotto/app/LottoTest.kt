@@ -11,6 +11,6 @@ class LottoTest : StringSpec({
     }
 
     "구매할 로또 Game 하나의 가격은 1000 이다" {
-        LottoApp.priceOfGame() shouldBe 1000
+        LottoApp.pricePerGame() shouldBe 1000
     }
 })
