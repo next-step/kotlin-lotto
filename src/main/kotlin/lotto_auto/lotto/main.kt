@@ -7,10 +7,10 @@ fun main() {
     val inputAmount = InputView.input()
     val count = InputView.lottoCount(inputAmount)
 
-    val lottoList = LottoAuto.createLottoList(count)
+    val lottoList = (1..count).map { Lotto() }
     OutputView.print(lottoList)
 
-    val lastWeekLottoNumber = InputView.lastWeekInput()
+    val lastWeekLottoNumber = InputView.lastWeekInput().toLotto()
 
     val sumOfWonLotto = LottoAuto.sumOfWonLottoList(lottoList, lastWeekLottoNumber)
 
