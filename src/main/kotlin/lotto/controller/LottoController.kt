@@ -1,0 +1,27 @@
+package lotto.controller
+
+import lotto.ui.InputView
+
+class LottoController {
+
+    fun getValidatePurchaseAmount(inputPurchaseAmount: String): Int {
+        return run {
+            val amount = inputPurchaseAmount.toInt()
+            require(isValidAmount(amount)) {
+                "구매 금액은 최소 1000원이며, 1000원 단위로 입력되어야 합니다."
+            }
+            amount
+        }
+    }
+
+    private fun isValidAmount(amount: Int) = amount >= MINIMUM_PURCHASE_AMOUNT && amount % PURCHASE_AMOUNT_UNIT == 0
+
+    companion object {
+        private const val MINIMUM_PURCHASE_AMOUNT = 1000
+        private const val PURCHASE_AMOUNT_UNIT = 1000
+    }
+}
+
+fun main() {
+    val purchaseAmount = InputView.getPurchaseAmount()
+}
