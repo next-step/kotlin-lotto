@@ -6,10 +6,15 @@ data class Separator(val value: String) {
     }
 }
 
-data class Separators(private val separators: List<Separator>) {
+data class Separators(val separators: List<Separator>) {
+
     fun checkBelongTo(string: String): Boolean {
         return separators.all { separator ->
             string.contains(separator.value)
         }
+    }
+
+    operator fun plus(separators: Separators): Separators {
+        return Separators(separators.separators + this.separators)
     }
 }
