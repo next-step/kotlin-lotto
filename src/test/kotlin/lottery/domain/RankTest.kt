@@ -25,5 +25,4 @@ class RankTest {
 
         result shouldBe Rank.MISS
     }
-
 }

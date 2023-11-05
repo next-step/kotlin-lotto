@@ -2,8 +2,6 @@ package lottery.domain
 
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
-import lottery.validator.InputValidator
-import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -22,7 +20,7 @@ class LottoGameTest {
     @Test
     @DisplayName("지난 주 당첨 번호를 입력하여 결과 객체를 반환 받는다")
     fun getRanks() {
-        val lottoNumbers = listOf(1,2,3,4,5,6)
+        val lottoNumbers = listOf(1, 2, 3, 4, 5, 6)
         val lottoGame = LottoGame(1000, InputNumberGenerator(lottoNumbers))
         val result = lottoGame.getRanks(Lotto(lottoNumbers))
 
