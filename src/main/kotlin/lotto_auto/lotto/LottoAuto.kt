@@ -21,7 +21,7 @@ object LottoAuto {
     /**
      * 구매한 로또 총 당첨 금액
      */
-    fun resultSum(lottoList: List<List<Int>>, lastWeekLottoNumber: List<Int>): Int =
+    fun sumOfWonLottoList(lottoList: List<List<Int>>, lastWeekLottoNumber: List<Int>): Int =
         eachLottoMatchCount(lottoList, lastWeekLottoNumber).sumOf {
             replaceMatchCountToMoney(it)
         }
@@ -45,5 +45,5 @@ object LottoAuto {
         return listOf(three, four, five, six)
     }
 
-    fun earningRate(resultSum: Int, inputAmount: Int): Float = resultSum.toFloat() / inputAmount.toFloat()
+    fun earningRate(sumOfWonLotto: Int, inputAmount: Int): Float = sumOfWonLotto.toFloat() / inputAmount.toFloat()
 }

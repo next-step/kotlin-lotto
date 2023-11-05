@@ -18,7 +18,7 @@ class LottoAutoTest : StringSpec({
         val winningLotto = listOf(3, 6, 9, 12, 15, 18)
         val expected = 5000
 
-        LottoAuto.resultSum(input, winningLotto) shouldBe expected
+        LottoAuto.sumOfWonLottoList(input, winningLotto) shouldBe expected
     }
 
     "matchCountList 함수가 3,4,5,6개 맞은 순서를 잘 나타내는지" {
