@@ -1,11 +1,13 @@
 package calculator
 
 class StringAddCalculator {
-    fun add(value: String?): Int {
-        if (value.isNullOrBlank()) {
+    fun add(text: String?): Int {
+        if (text.isNullOrBlank()) {
             return 0
         }
 
-        return 0
+        val numbers = text.split(",")
+
+        return numbers.sumOf { it.toInt() }
     }
 }
