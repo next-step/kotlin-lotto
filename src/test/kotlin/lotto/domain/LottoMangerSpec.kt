@@ -1,8 +1,11 @@
 package lotto.domain
 
+import io.kotest.assertions.forEachAsClue
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
+import io.kotest.matchers.collections.shouldContain
+import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.ints.shouldBeGreaterThanOrEqual
 import io.kotest.matchers.ints.shouldBeLessThan
 import io.kotest.matchers.ints.shouldBeLessThanOrEqual
@@ -15,12 +18,18 @@ class LottoMangerSpec : DescribeSpec({
             row(1..45, 6),
         ) { numbersRange, numbersCount ->
             describe("로또 수 범위($numbersRange)와 로또 수 개수($numbersCount)") {
-                val manager = LottoManager(LottoTicketGenerator(numbersRange, numbersCount))
+                val storage = LottoTicketStorage()
+                val manager = LottoManager(LottoTicketGenerator(numbersRange, numbersCount), storage)
                 val count = TicketCount(5)
                 describe("티켓 수${count.value}") {
                     val result = manager.createTicket(count)
                     it("티켓 수${count.value}만큼 티켓이 생성") {
                         result.size shouldBe count.value
+                    }
+                    it("티켓을 저장") {
+                        val stored = storage.getAll()
+                        stored.size shouldBe count.value
+                        stored.map { it.numbers } shouldBe result.map { it.numbers }
                     }
                     it("티켓당 수의 갯수 = 로또 수(${numbersCount})") {
                         result.forEach { ticket ->
