@@ -1,8 +1,7 @@
 package lotto.domain
 
-object LottoStore {
-
-    private val lottoNumberAutoGenerator = LottoNumberAutoGenerator { LOTTO_POOL.shuffled() }
+@JvmInline
+value class LottoStore(private val lottoNumberAutoGenerator: LottoNumberAutoGenerator) {
 
     fun buyLottos(inputPrice: Int, manualLottoNumbers: List<LottoNumbers>): Lottos {
         val manualLottoCount = manualLottoNumbers.size
@@ -32,9 +31,11 @@ object LottoStore {
         return inputPrice - manualPrice
     }
 
-    private const val LOTTO_PRICE = 1000
-    private const val LOTTO_BUY_ERROR_MESSAGE = "로또를 구매할 수 없습니다."
-    private val LOTTO_POOL = listOf(LottoNumber.LOTTO_NUMBER_MIN..LottoNumber.LOTTO_NUMBER_MAX)
-        .flatten()
-        .map { LottoNumber(it) }
+    companion object {
+        private const val LOTTO_PRICE = 1000
+        private const val LOTTO_BUY_ERROR_MESSAGE = "로또를 구매할 수 없습니다."
+        val LOTTO_POOL = listOf(LottoNumber.LOTTO_NUMBER_MIN..LottoNumber.LOTTO_NUMBER_MAX)
+            .flatten()
+            .map { LottoNumber(it) }
+    }
 }
