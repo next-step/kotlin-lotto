@@ -6,8 +6,8 @@ class StringNumberParser {
             return listOf(0)
         }
 
-        val customSeparator = getCustomSeparator(expression)
-        val separatorRegex = getSeparatorRegex(customSeparator)
+        val customSeparator: String? = getCustomSeparator(expression)
+        val separatorRegex: Regex = getSeparatorRegex(customSeparator)
         val stringNumbersExpression = getStringNumbersExpression(expression, customSeparator)
 
         return getNumbers(stringNumbersExpression, separatorRegex)
