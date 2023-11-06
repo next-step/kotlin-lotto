@@ -15,13 +15,13 @@ object StringCalculator {
         val textAfterNewline = matchedResult?.groupValues?.get(2)
 
         if (!customSeparator.isNullOrEmpty() && !textAfterNewline.isNullOrEmpty()) {
-            return calculate(textAfterNewline, DEFAULT_SEPARATOR_COMMA, DEFAULT_SEPARATOR_COLON, customSeparator)
+            return add(textAfterNewline, DEFAULT_SEPARATOR_COMMA, DEFAULT_SEPARATOR_COLON, customSeparator)
         }
 
-        return calculate(input, DEFAULT_SEPARATOR_COMMA, DEFAULT_SEPARATOR_COLON)
+        return add(input, DEFAULT_SEPARATOR_COMMA, DEFAULT_SEPARATOR_COLON)
     }
 
-    private fun calculate(formula: String, vararg separators: String) =
+    private fun add(formula: String, vararg separators: String) =
         formula.split(*separators)
             .sumOf {
                 val number = it.toInt()
