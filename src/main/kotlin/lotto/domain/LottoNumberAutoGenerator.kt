@@ -5,23 +5,25 @@ import lotto.domain.Lotto.Companion.LOTTO_NUMBER_SIZE
 
 class LottoNumberAutoGenerator(private val shuffleNumber: ShuffleNumber) {
 
-    fun takeShuffleNumber(
-        numbers: List<LottoNumber>,
-        sort: Sort = Sort.ASC
-    ): LottoNumbers {
+    fun takeShuffleNumber(sort: Sort = Sort.ASC): LottoNumbers {
         return LottoNumbers(
-            generateLottoNumbers(numbers).take(LOTTO_NUMBER_SIZE)
+            generateLottoNumbers().take(LOTTO_NUMBER_SIZE)
                 .numberSort(sort)
         )
     }
 
-    private fun generateLottoNumbers(numbers: List<LottoNumber>): List<LottoNumber> =
-        shuffleNumber.shuffleNumber(numbers)
+    private fun generateLottoNumbers(): List<LottoNumber> = shuffleNumber.shuffleNumber(LOTTO_POOL)
 
     private fun List<LottoNumber>.numberSort(sort: Sort): List<LottoNumber> {
         if (sort == Sort.DESC) {
             return this.sortedByDescending { it.number }
         }
         return this.sortedBy(LottoNumber::number)
+    }
+
+    companion object {
+        private val LOTTO_POOL = listOf(LottoNumber.LOTTO_NUMBER_MIN..LottoNumber.LOTTO_NUMBER_MAX)
+            .flatten()
+            .map { LottoNumber(it) }
     }
 }

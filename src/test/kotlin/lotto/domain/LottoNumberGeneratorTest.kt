@@ -10,7 +10,7 @@ class LottoNumberGeneratorTest : BehaviorSpec({
 
         `when`("로또 번호를 생성한다.") {
             val lottoNumberAutoGenerator = LottoNumberAutoGenerator { lottoNumbers }
-                .takeShuffleNumber(lottoNumbers)
+                .takeShuffleNumber()
             then("생성된 로또번호를 확인한다.") {
                 lottoNumberAutoGenerator.numbers shouldBe lottoNumbers
             }

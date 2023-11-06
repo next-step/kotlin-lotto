@@ -11,7 +11,7 @@ class WinningRanksTest : BehaviorSpec({
         val lottoNumberAutoGenerator = LottoNumberAutoGenerator { lottoNumbers }
         val lottoStore = LottoStore(lottoNumberAutoGenerator)
         val lottos = lottoStore.buyLottos(inputPrice, emptyList())
-        val winningNumber = lottoNumberAutoGenerator.takeShuffleNumber(lottoNumbers)
+        val winningNumber = lottoNumberAutoGenerator.takeShuffleNumber()
         val bonusBall = LottoNumber(7)
         val winningLotto = WinningLotto(winningNumber, bonusBall)
         val winningResult = lottos.matchLotto(winningLotto)

@@ -16,7 +16,7 @@ value class LottoStore(private val lottoNumberAutoGenerator: LottoNumberAutoGene
 
     private fun buyLotto(
         lottoNumbers: LottoNumbers =
-            lottoNumberAutoGenerator.takeShuffleNumber(LOTTO_POOL)
+            lottoNumberAutoGenerator.takeShuffleNumber()
     ): Lotto {
         return Lotto(lottoNumbers)
     }
@@ -34,8 +34,5 @@ value class LottoStore(private val lottoNumberAutoGenerator: LottoNumberAutoGene
     companion object {
         private const val LOTTO_PRICE = 1000
         private const val LOTTO_BUY_ERROR_MESSAGE = "로또를 구매할 수 없습니다."
-        val LOTTO_POOL = listOf(LottoNumber.LOTTO_NUMBER_MIN..LottoNumber.LOTTO_NUMBER_MAX)
-            .flatten()
-            .map { LottoNumber(it) }
     }
 }
