@@ -1,4 +1,7 @@
-package lotto.dto
+package lotto.domain
+
+import lotto.dto.LottoNumber
+import lotto.dto.LottoPrice
 
 data class LottoWinningNumbers(
     val lottoNumbers: LottoNumbers,

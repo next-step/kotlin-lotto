@@ -1,10 +1,10 @@
 package lotto.controller
 
-import lotto.dto.LottoNumberGenerator
-import lotto.dto.LottoNumbers
-import lotto.dto.LottoNumbers.Companion.LOTTO_PRICE
-import lotto.dto.LottoResult
-import lotto.dto.LottoWinningNumbers
+import lotto.domain.LottoNumberGenerator
+import lotto.domain.LottoNumbers
+import lotto.domain.LottoNumbers.Companion.LOTTO_PRICE
+import lotto.domain.LottoResult
+import lotto.domain.LottoWinningNumbers
 import lotto.view.View
 
 class LottoController {

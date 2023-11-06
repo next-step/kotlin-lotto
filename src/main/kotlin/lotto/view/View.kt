@@ -1,8 +1,9 @@
 package lotto.view
 
-import lotto.dto.LottoNumbers
+import lotto.dto.LottoNumber
+import lotto.domain.LottoNumbers
 import lotto.dto.LottoPrice
-import lotto.dto.LottoResult
+import lotto.domain.LottoResult
 
 object View {
     fun inputMoney(): Int {
@@ -12,7 +13,11 @@ object View {
 
     fun inputWinningNumber(): LottoNumbers {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return LottoNumbers(readln().split(",").map { it.trim().toInt() })
+        return LottoNumbers(
+            readln().split(",").map {
+                LottoNumber(it.trim().toInt())
+            }
+        )
     }
 
     fun inputBonusNumber(): Int {
