@@ -1,31 +1,13 @@
 package lotto_auto.lotto
 
-class LottoAuto(
-    private val lottoList: List<Lotto>,
-    private val lastWeekLottoNumber: Lotto,
-) {
+object LottoAuto {
     /**
      * 구매한 로또 총 당첨 금액
      */
-    fun sumOfWonLottoList(): Int {
-        return eachLottoMatchCount().sumOf {
+    fun sumOfWonLottoList(eachLottoMatchList: List<Int>): Int {
+        return eachLottoMatchList.sumOf {
             replaceMatchCountToMoney(it)
         }
-    }
-
-    /**
-     * 각각 구매한 로또 마다 당첨 번호와 대조 하여 맞은 개수를 판별 합니다.
-     */
-    private fun eachLottoMatchCount(): List<Int> {
-        return lottoList.map { myLotto ->
-            lastWeekLottoNumber.numberList.mapNotNull { number ->
-                if (myLottoNumberContainsNumberOrNull(myLotto, number)) number else null
-            }.count()
-        }
-    }
-
-    private fun myLottoNumberContainsNumberOrNull(myLotto: Lotto, number: Int): Boolean {
-        return myLotto.numberList.contains(number)
     }
 
     /**
@@ -39,8 +21,8 @@ class LottoAuto(
         else -> 0
     }
 
-    fun matchCountList(): List<Int> {
-        return eachLottoMatchCount().filter { it > 2 }.let { matchList ->
+    fun matchCountList(eachLottoMatchList: List<Int>): List<Int> {
+        return eachLottoMatchList.filter { it > 2 }.let { matchList ->
             val three = matchList.count { it == 3 }
             val four = matchList.count { it == 4 }
             val five = matchList.count { it == 5 }
