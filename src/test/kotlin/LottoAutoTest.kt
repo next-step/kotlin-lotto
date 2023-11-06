@@ -7,7 +7,7 @@ import java.lang.IllegalArgumentException
 value class LottoNumber(val value: Int) {
     init {
         require(value in 1..45) {
-            throw IllegalArgumentException("number not in 1..45")
+            throw IllegalArgumentException("Invalid number: number not in 1..45")
         }
     }
 }
@@ -16,7 +16,10 @@ value class LottoNumber(val value: Int) {
 data class LottoNumbers(private val lottoNumberList: List<LottoNumber>) {
     init {
         require(lottoNumberList.size == 6) {
-            throw IllegalArgumentException("lotto numbers should have exact 6 numbers")
+            throw IllegalArgumentException("Invalid size: lotto numbers should have exact 6 numbers: $lottoNumberList")
+        }
+        require(lottoNumberList.toSet().size == 6) {
+            throw IllegalArgumentException("Duplicated number: lotto numbers should not have duplicated number: $lottoNumberList")
         }
     }
 }
@@ -26,14 +29,17 @@ class LottoAutoTest : StringSpec({
         assertThatThrownBy {
             LottoNumber(0)
         }.isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessageContaining("Invalid number")
 
         assertThatThrownBy {
             LottoNumber(50)
         }.isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessageContaining("Invalid number")
 
         assertThatThrownBy {
             LottoNumber(-4)
         }.isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessageContaining("Invalid number")
     }
 
     "lotto ticket should having exact 6 numbers should throw IllegalArgumentException" {
@@ -50,6 +56,7 @@ class LottoAutoTest : StringSpec({
                 )
             )
         }.isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessageContaining("Invalid size")
 
         assertThatThrownBy {
             LottoNumbers(
@@ -62,13 +69,40 @@ class LottoAutoTest : StringSpec({
                 )
             )
         }.isInstanceOf(IllegalArgumentException::class.java)
-    }
-
-    "lotto ticket is 1,000 KRW/EA" {
-
+            .hasMessageContaining("Invalid size")
     }
 
     "lotto ticket with same numbers should throw RuntimeException" {
+        assertThatThrownBy {
+            LottoNumbers(
+                listOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5),
+                    LottoNumber(5),
+                )
+            )
+        }.isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessageContaining("Duplicated number")
+
+        assertThatThrownBy {
+            LottoNumbers(
+                listOf(
+                    LottoNumber(1),
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5),
+                )
+            )
+        }.isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessageContaining("Duplicated number")
+    }
+
+    "lotto ticket is 1,000 KRW/EA" {
 
     }
 
