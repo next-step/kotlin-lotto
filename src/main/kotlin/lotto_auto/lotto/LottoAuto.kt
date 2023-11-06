@@ -18,14 +18,14 @@ class LottoAuto(
      */
     private fun eachLottoMatchCount(): List<Int> {
         return lottoList.map { myLotto ->
-            lastWeekLottoNumber.number.mapNotNull { number ->
+            lastWeekLottoNumber.numberList.mapNotNull { number ->
                 if (myLottoNumberContainsNumberOrNull(myLotto, number)) number else null
             }.count()
         }
     }
 
     private fun myLottoNumberContainsNumberOrNull(myLotto: Lotto, number: Int): Boolean {
-        return myLotto.number.contains(number)
+        return myLotto.numberList.contains(number)
     }
 
     /**
