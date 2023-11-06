@@ -11,7 +11,7 @@ class LottoTicket(lottoNumbers: Set<LottoNumber>) {
         get() = _sortedLottoNumbers
             .map { it.number.toString() }
 
-    fun matchCount(targetLottoNumbers: Set<LottoNumber>): Int {
+    fun matchCount(targetLottoNumbers: List<LottoNumber>): Int {
         return targetLottoNumbers.count(_sortedLottoNumbers::contains)
     }
 

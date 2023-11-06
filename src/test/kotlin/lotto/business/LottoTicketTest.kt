@@ -36,7 +36,7 @@ class LottoTicketTest {
         // given
         val lottoNumber = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }.toSet()
         val lottoTicket = LottoTicket(lottoNumber)
-        val targetLottoNumbers = input.split(",").map { LottoNumber(it.toInt()) }.toSet()
+        val targetLottoNumbers = input.split(",").map { LottoNumber(it.toInt()) }
 
         // when
         val matchCount = lottoTicket.matchCount(targetLottoNumbers)
