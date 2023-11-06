@@ -24,6 +24,6 @@ class LottoMachineTest {
     @CsvSource(value = ["14000, 14", "12000, 12", "1000, 1", "100, 0"])
     fun `로또 발급기는 금액 입력시 구입 가능한 갯수의 로또를 발급한다`(money: Int, expected: Int) {
         val lottos = lottoMachine1000.purchase(money)
-        lottos.lottoList shouldHaveSize  expected
+        lottos.lottoList shouldHaveSize expected
     }
 }
