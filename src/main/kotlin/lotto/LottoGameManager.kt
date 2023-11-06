@@ -7,7 +7,7 @@ import lotto.view.LotteryStatisticsPrinter
 import lotto.view.LottoInputHandler
 import lotto.view.LottoPurchaseSummaryPrinter
 
-class LottoGameController(
+class LottoGameManager(
     private val lottoBookingSystem: LottoBookingSystem
 ) {
     fun run() {
@@ -22,8 +22,8 @@ class LottoGameController(
 }
 
 fun main() {
-    val lottoGameController = LottoGameController(
+    val lottoGameManager = LottoGameManager(
         lottoBookingSystem = LottoBookingSystem()
     )
-    lottoGameController.run()
+    lottoGameManager.run()
 }
