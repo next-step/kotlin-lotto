@@ -35,7 +35,7 @@ class LottoStoreTest : BehaviorSpec({
             val manualLottoNumbers = List(1) { LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }) }
             val lottos = lottoStore.buyLottos(inputPrice, manualLottoNumbers)
             then("자동으로 0개를 구매한다.") {
-                lottos.autoLottos.size shouldBe 0
+                lottos.autoLottoCount() shouldBe 0
             }
         }
     }
@@ -46,7 +46,7 @@ class LottoStoreTest : BehaviorSpec({
             val manualLottoNumbers = List(1) { LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }) }
             val lottos = lottoStore.buyLottos(inputPrice, manualLottoNumbers)
             then("자동으로 1개를 구매한다.") {
-                lottos.autoLottos.size shouldBe 1
+                lottos.autoLottoCount() shouldBe 1
             }
         }
     }

@@ -7,7 +7,7 @@ import lotto.domain.WinningRanks
 object OutputView {
 
     fun printLotto(lottos: Lottos) {
-        println("수동으로 ${lottos.manualLottos.size}장, 자동으로 ${lottos.autoLottos.size}개를 구매했습니다.")
+        println("수동으로 ${lottos.manualLottoCount()}장, 자동으로 ${lottos.autoLottoCount()}개를 구매했습니다.")
         lottos.lottos.forEach { lotto ->
             println(lotto.lottoNumbers)
         }
