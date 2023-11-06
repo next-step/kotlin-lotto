@@ -11,7 +11,7 @@ class LottoTicketManagerTest {
         // given
         val lottoTicketManager = LottoTicketManager()
         val ticket = LottoTicket(
-            listOf(
+            setOf(
                 LottoNumber(1),
                 LottoNumber(2),
                 LottoNumber(3),
@@ -37,7 +37,7 @@ class LottoTicketManagerTest {
         val lottoTicketManager = LottoTicketManager()
         val tickets = listOf(
             LottoTicket(
-                listOf(
+                setOf(
                     LottoNumber(1),
                     LottoNumber(2),
                     LottoNumber(3),
@@ -47,7 +47,7 @@ class LottoTicketManagerTest {
                 )
             ),
             LottoTicket(
-                listOf(
+                setOf(
                     LottoNumber(1),
                     LottoNumber(2),
                     LottoNumber(3),
@@ -75,7 +75,7 @@ class LottoTicketManagerTest {
         val lottoTicketManager = LottoTicketManager()
         val tickets = listOf(
             LottoTicket(
-                listOf(
+                setOf(
                     LottoNumber(1),
                     LottoNumber(2),
                     LottoNumber(3),
@@ -85,7 +85,7 @@ class LottoTicketManagerTest {
                 )
             ),
             LottoTicket(
-                listOf(
+                setOf(
                     LottoNumber(1),
                     LottoNumber(2),
                     LottoNumber(3),
@@ -96,7 +96,7 @@ class LottoTicketManagerTest {
             )
         )
         val winningNumbers = LottoWinningNumbers(
-            listOf(
+            setOf(
                 LottoNumber(1),
                 LottoNumber(2),
                 LottoNumber(3),

@@ -5,6 +5,7 @@ class LottoWinningNumbersExtractor {
         lottoNumbersString.split(LOTTO_WINNING_NUMBERS_DELIMITER)
             .map { checkStringIsInt(it) }
             .map { LottoNumber(it) }
+            .toSet()
             .let { return LottoWinningNumbers(it) }
     }
 

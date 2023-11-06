@@ -12,7 +12,7 @@ class LottoWinningNumbersExtractorTest {
         // given
         val input = "1,2,3,4,5,6"
         val lottoWinningNumbersExtractor = LottoWinningNumbersExtractor()
-        val expectedLottoNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }
+        val expectedLottoNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }.toSet()
 
         // when
         val lottoWinningNumbers = lottoWinningNumbersExtractor.extract(input)
@@ -40,9 +40,9 @@ class LottoWinningNumbersExtractorTest {
     )
     fun `로또번호 리스트를 비교하여 일치하는 갯수를 반환한다`(input: String, expected: Int) {
         // given
-        val lottoNumber = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }
+        val lottoNumber = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }.toSet()
         val lottoTicket = LottoTicket(lottoNumber)
-        val targetLottoNumbers = input.split(",").map { LottoNumber(it.toInt()) }
+        val targetLottoNumbers = input.split(",").map { LottoNumber(it.toInt()) }.toSet()
 
         // when
         val matchCount = lottoTicket.matchCount(targetLottoNumbers)

@@ -1,18 +1,18 @@
 package lotto.business
 
-class LottoTicket(private val _lottoNumbers: List<LottoNumber>) {
-    val lottoNumbers: List<String>
-        get() = _lottoNumbers
-            .sortedBy { it.number }
-            .map { it.number.toString() }
-
-    fun matchCount(targetLottoNumbers: List<LottoNumber>): Int {
-        return targetLottoNumbers.count { this._lottoNumbers.contains(it) }
+class LottoTicket(lottoNumbers: Set<LottoNumber>) {
+    init {
+        require(lottoNumbers.size == LOTTO_NUMBER_SIZE) { "서로 다른 ${LOTTO_NUMBER_SIZE}개 로또 번호 이여야 합니다." }
     }
 
-    init {
-        require(_lottoNumbers.distinct().size == LOTTO_NUMBER_SIZE) { "서로 다른 6개 로또 번호 이여야 합니다." }
-        _lottoNumbers.sortedBy { it.number }
+    private val _sortedLottoNumbers = lottoNumbers.sortedBy { it.number }
+
+    val lottoNumbers: List<String>
+        get() = _sortedLottoNumbers
+            .map { it.number.toString() }
+
+    fun matchCount(targetLottoNumbers: Set<LottoNumber>): Int {
+        return targetLottoNumbers.count(_sortedLottoNumbers::contains)
     }
 
     companion object {
