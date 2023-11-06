@@ -68,13 +68,28 @@ class LottoController(
         const val LOTTO_NUMBER_COUNT = 6
         private const val MAX_LOTTO_NUMBER = 45
         private const val MIN_LOTTO_NUMBER = 1
+
+        val winPrizeMoney = listOf(
+            0,
+            0,
+            0,
+            5000,
+            50000,
+            1500000,
+            2000000000,
+        )
     }
 }
 
 fun main() {
     val purchaseAmount = InputView.getPurchaseAmount()
-    val generatedLottoInfos = LottoController(purchaseAmount).generateMultipleLottoNumbers()
+    val lottoController = LottoController(purchaseAmount)
+    val generatedLottoInfos = lottoController.generateMultipleLottoNumbers()
     ResultView.showGeneratedLottoInfos(generatedLottoInfos)
 
     val latestWinInfo = InputView.getLatestWinInfo()
+    val correctnessInfoList =
+        lottoController.classifyCorrectness(generatedLottoInfos, latestWinInfo, minCorrectnessCountForShow = 3)
+
+    ResultView.showCorrectnessStatistics(correctnessInfoList, minCorrectnessCountForShow = 3)
 }
