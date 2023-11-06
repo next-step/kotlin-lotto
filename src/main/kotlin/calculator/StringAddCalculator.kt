@@ -2,9 +2,9 @@ package calculator
 
 class StringAddCalculator {
     fun add(text: String?): Int {
-        text ?: return 0
+        text ?: return DEFAULT_VALUE
         if (text.isEmpty()) {
-            return 0
+            return DEFAULT_VALUE
         }
 
         val numbers = splitWithDelimiter(text)
@@ -13,7 +13,7 @@ class StringAddCalculator {
     }
 
     private fun splitWithDelimiter(text: String): List<String> {
-        if (text.matches(Regex("//(.)\n(.*)"))) {
+        if (text.matches(CUSTOM_DELIMITER)) {
             val customDelimiter = text[2]
             return text.substring(4).split(customDelimiter)
         }
@@ -22,9 +22,13 @@ class StringAddCalculator {
 
     private fun toPositiveInt(text: String): Int {
         val number = text.toInt()
-        if (number < 0) {
-            throw RuntimeException()
-        }
+        require(number >= MINIMUM_VALUE)
         return number
+    }
+
+    companion object {
+        private const val DEFAULT_VALUE = 0
+        private const val MINIMUM_VALUE = 0
+        private val CUSTOM_DELIMITER = Regex("//(.)\n(.*)")
     }
 }
