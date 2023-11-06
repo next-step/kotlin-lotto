@@ -1,6 +1,9 @@
 package lotto
 
-import lotto.model.*
+import lotto.model.Game
+import lotto.model.LottoNumber
+import lotto.model.Round
+import lotto.model.WinningNumbers
 
 object LottoFixture {
     val game1: Game = gameOf(1, 2, 3, 4, 5, 6)
@@ -13,7 +16,6 @@ object LottoFixture {
     val matched5: WinningNumbers = WinningNumbers(gameOf(2, 3, 4, 5, 6, 37))
     val matched4: WinningNumbers = WinningNumbers(gameOf(3, 4, 5, 6, 37, 38))
     val matched3: WinningNumbers = WinningNumbers(gameOf(4, 5, 6, 37, 38, 39))
-
 
     private fun roundOf(vararg game: Game): Round {
         return Round(
