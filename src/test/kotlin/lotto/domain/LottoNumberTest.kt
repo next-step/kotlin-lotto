@@ -11,7 +11,7 @@ class LottoNumberTest : BehaviorSpec({
     Given("1 ~ 45 사이의 숫자가 주어지면") {
         val value = 1
         When("로또 번호는") {
-            val lottoNumber = LottoNumber(value)
+            val lottoNumber = LottoNumber.from(value)
             Then("그 수를 가지는 로또번호가 생성된다.") {
                 lottoNumber.value shouldBe value
             }
@@ -28,7 +28,7 @@ class LottoNumberTest : BehaviorSpec({
                     row(47),
                 ) { value ->
                     shouldThrow<IllegalArgumentException> {
-                        LottoNumber(value)
+                        LottoNumber.from(value)
                     }
                 }
             }
