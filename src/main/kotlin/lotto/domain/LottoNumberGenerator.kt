@@ -1,8 +1,8 @@
 package lotto.domain
 
+import lotto.domain.LottoNumbers.Companion.LOTTO_NUMBER_COUNT
 import lotto.dto.LottoNumber
 import lotto.dto.LottoNumber.Companion.LOTTO_NUMBER_RANGE
-import lotto.domain.LottoNumbers.Companion.LOTTO_NUMBER_COUNT
 
 object LottoNumberGenerator {
 

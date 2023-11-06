@@ -1,6 +1,6 @@
-package lotto.dto
+package lotto.domain
 
-import lotto.domain.LottoResult
+import lotto.dto.LottoPrice
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -19,6 +19,6 @@ class LottoResultTest {
         assertThat(lottoResult.getExact(LottoPrice.FIVE_MATCHED)).isEqualTo(0)
         assertThat(lottoResult.getExact(LottoPrice.FIVE_MATCHED_WITH_BONUS)).isEqualTo(0)
         assertThat(lottoResult.getExact(LottoPrice.ALL_MATCHED)).isEqualTo(0)
-        assertThat(lottoResult.getRatio(6000)).isEqualTo(5000.0 / 6000.0)
+        assertThat(lottoResult.getPrice()).isEqualTo(5000)
     }
 }

@@ -3,15 +3,13 @@ package lotto.domain
 import lotto.dto.LottoNumber
 import lotto.dto.LottoPrice
 
-data class LottoWinningNumbers(
+class LottoWinningNumbers(
     val lottoNumbers: LottoNumbers,
     val bonusNumber: LottoNumber
 ) {
     init {
         require(bonusNumber !in lottoNumbers.numbers) { "보너스 번호는 당첨 번호와 중복되지 않아야 합니다." }
     }
-
-    constructor(lottoNumbers: LottoNumbers, bonusNumber: Int) : this(lottoNumbers, LottoNumber(bonusNumber))
 
     fun compareLottoNumbers(lottoNumbers: LottoNumbers): LottoPrice {
         val count = lottoNumbers.matchedLottoNumberCount(this.lottoNumbers)

@@ -1,7 +1,7 @@
-package lotto.dto
+package lotto.domain
 
-import lotto.domain.LottoNumbers
-import lotto.domain.LottoWinningNumbers
+import lotto.dto.LottoNumber
+import lotto.dto.LottoPrice
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
@@ -15,7 +15,7 @@ class LottoWinningNumbersTest {
     fun `로또 당첨 번호 생성`() {
         val lottoWinningNumbers = LottoWinningNumbers(
             LottoNumbers(1, 2, 3, 4, 5, 6),
-            7
+            LottoNumber(7)
         )
         assertThat(lottoWinningNumbers.lottoNumbers.numbers.size).isEqualTo(6)
         assertThat(lottoWinningNumbers.lottoNumbers).isEqualTo(LottoNumbers(1, 2, 3, 4, 5, 6))
@@ -27,7 +27,7 @@ class LottoWinningNumbersTest {
         assertThatIllegalArgumentException().isThrownBy {
             LottoWinningNumbers(
                 LottoNumbers(1, 2, 3, 4, 5, 6),
-                6
+                LottoNumber(6)
             )
         }
     }
@@ -35,7 +35,7 @@ class LottoWinningNumbersTest {
     @ParameterizedTest
     @MethodSource("lottoCandidates")
     fun `로또 당첨 번호 비교`(lottoNumbers: LottoNumbers, expected: LottoPrice) {
-        val lottoWinningNumbers = LottoWinningNumbers(LottoNumbers(1, 2, 3, 4, 5, 6), 7)
+        val lottoWinningNumbers = LottoWinningNumbers(LottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber(7))
         assertThat(lottoWinningNumbers.compareLottoNumbers(lottoNumbers)).isEqualTo(expected)
     }
 
