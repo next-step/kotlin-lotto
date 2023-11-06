@@ -10,7 +10,7 @@ class LottoTicketGeneratorTest {
         val lottoTicketGenerator = LottoTicketGenerator(RandomLottoPicker())
 
         // when
-        val lottoTicket = lottoTicketGenerator.generate()
+        val lottoTicket = lottoTicketGenerator.generateSingleTicket()
 
         // then
         assertThat(lottoTicket).isInstanceOf(LottoTicket::class.java)
@@ -22,7 +22,7 @@ class LottoTicketGeneratorTest {
         val lottoTicketGenerator = LottoTicketGenerator(RandomLottoPicker())
 
         // when
-        val lottoTickets = lottoTicketGenerator.generate(3)
+        val lottoTickets = lottoTicketGenerator.generateMultipleTickets(3)
 
         // then
         assertThat(lottoTickets).hasSize(3)
