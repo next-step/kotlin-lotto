@@ -6,7 +6,7 @@ import lotto.LottoFixture
 
 class RoundTest : StringSpec({
     "1등 당첨번호를 입력하면 1등 당첨자를 집계할수 있어야한다" {
-        val actual = LottoFixture.Round.winnerAggregate(LottoFixture.winner1st)
+        val actual = LottoFixture.Round.winnerAggregate(LottoFixture.matched6)
         actual.countOf1st shouldBe 1
         actual.countOf3rd shouldBe 0
         actual.countOf4th shouldBe 0
@@ -14,7 +14,7 @@ class RoundTest : StringSpec({
     }
 
     "3등 당첨번호를 입력하면 1등 당첨자를 집계할수 있어야한다" {
-        val actual = LottoFixture.Round.winnerAggregate(LottoFixture.winner3rd)
+        val actual = LottoFixture.Round.winnerAggregate(LottoFixture.matched5)
         actual.countOf1st shouldBe 0
         actual.countOf3rd shouldBe 1
         actual.countOf4th shouldBe 0
@@ -22,7 +22,7 @@ class RoundTest : StringSpec({
     }
 
     "4등 당첨번호를 입력하면 1등 당첨자를 집계할수 있어야한다" {
-        val actual = LottoFixture.Round.winnerAggregate(LottoFixture.winner4rd)
+        val actual = LottoFixture.Round.winnerAggregate(LottoFixture.matched4)
         actual.countOf1st shouldBe 0
         actual.countOf3rd shouldBe 0
         actual.countOf4th shouldBe 1
@@ -30,7 +30,7 @@ class RoundTest : StringSpec({
     }
 
     "5등 당첨번호를 입력하면 1등 당첨자를 집계할수 있어야한다" {
-        val actual = LottoFixture.Round.winnerAggregate(LottoFixture.winner5rd)
+        val actual = LottoFixture.Round.winnerAggregate(LottoFixture.matched3)
         actual.countOf1st shouldBe 0
         actual.countOf3rd shouldBe 0
         actual.countOf4th shouldBe 0
