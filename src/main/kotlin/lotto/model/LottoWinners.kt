@@ -13,10 +13,10 @@ data class LottoWinners(
     }
 
     companion object {
-        private const val PRIZE_1ST = 2000000000;
-        private const val PRIZE_3RD = 1500000;
-        private const val PRIZE_4th = 50000;
-        private const val PRIZE_5th = 5000;
+        private const val PRIZE_1ST = 2000000000
+        private const val PRIZE_3RD = 1500000
+        private const val PRIZE_4th = 50000
+        private const val PRIZE_5th = 5000
         private const val PRIZE_UNIT = "원"
     }
 }
