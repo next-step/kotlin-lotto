@@ -1,7 +1,7 @@
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import java.lang.IllegalArgumentException
-
 
 @JvmInline
 value class LottoNumber(val value: Int) {
@@ -12,8 +12,7 @@ value class LottoNumber(val value: Int) {
     }
 }
 
-
-data class LottoNumbers(private val lottoNumberList: List<LottoNumber>) {
+data class LottoTicket(private val lottoNumberList: List<LottoNumber>) {
     init {
         require(lottoNumberList.size == 6) {
             throw IllegalArgumentException("Invalid size: lotto numbers should have exact 6 numbers: $lottoNumberList")
@@ -21,6 +20,70 @@ data class LottoNumbers(private val lottoNumberList: List<LottoNumber>) {
         require(lottoNumberList.toSet().size == 6) {
             throw IllegalArgumentException("Duplicated number: lotto numbers should not have duplicated number: $lottoNumberList")
         }
+    }
+}
+
+data class LottoTickets(val lottoTicketList: List<LottoTicket>)
+
+class LottoSimulator(
+    private val inputView: InputView,
+    private val lottoTicketsProvider: LottoTicketsProvider,
+    private val resultView: ResultView,
+) {
+    fun getTicketCount(): Int {
+        val budget = inputView.provideBudget()
+        return budget / 1000
+    }
+
+    fun simulate() {
+        val lottoTickets = lottoTicketsProvider.provideLottoTickets(getTicketCount())
+
+        val winningNumbers = inputView.provideWinningNumbers()
+
+        resultView.printResult(lottoTickets, winningNumbers)
+    }
+}
+
+interface InputView {
+    fun provideBudget(): Int
+
+    fun provideWinningNumbers(): LottoTicket
+}
+
+class MockInputView(
+    private val budget: Int,
+    private val winningNumbers: LottoTicket,
+) : InputView {
+    override fun provideBudget(): Int = budget
+
+    override fun provideWinningNumbers(): LottoTicket = winningNumbers
+}
+
+interface LottoTicketsProvider {
+    fun provideLottoTickets(ticketCount: Int): LottoTickets
+}
+
+class ResultView {
+    fun printResult(lottoTickets: LottoTickets, winningNumbers: LottoTicket) {
+    }
+}
+
+object AutoProvider : LottoTicketsProvider {
+    override fun provideLottoTickets(ticketCount: Int): LottoTickets {
+        val tickets = mutableListOf<LottoTicket>()
+
+        while (tickets.size != ticketCount) {
+            val ticket = LottoTicket(
+                (1..45)
+                    .toMutableList()
+                    .shuffled()
+                    .subList(0, 6)
+                    .map { LottoNumber(it) }
+            )
+            tickets.add(ticket)
+        }
+
+        return LottoTickets(tickets)
     }
 }
 
@@ -44,7 +107,7 @@ class LottoAutoTest : StringSpec({
 
     "lotto ticket should having exact 6 numbers should throw IllegalArgumentException" {
         assertThatThrownBy {
-            LottoNumbers(
+            LottoTicket(
                 listOf(
                     LottoNumber(1),
                     LottoNumber(2),
@@ -59,7 +122,7 @@ class LottoAutoTest : StringSpec({
             .hasMessageContaining("Invalid size")
 
         assertThatThrownBy {
-            LottoNumbers(
+            LottoTicket(
                 listOf(
                     LottoNumber(1),
                     LottoNumber(2),
@@ -74,7 +137,7 @@ class LottoAutoTest : StringSpec({
 
     "lotto ticket with same numbers should throw RuntimeException" {
         assertThatThrownBy {
-            LottoNumbers(
+            LottoTicket(
                 listOf(
                     LottoNumber(1),
                     LottoNumber(2),
@@ -88,7 +151,7 @@ class LottoAutoTest : StringSpec({
             .hasMessageContaining("Duplicated number")
 
         assertThatThrownBy {
-            LottoNumbers(
+            LottoTicket(
                 listOf(
                     LottoNumber(1),
                     LottoNumber(1),
@@ -103,22 +166,87 @@ class LottoAutoTest : StringSpec({
     }
 
     "lotto ticket is 1,000 KRW/EA" {
-
+        LottoSimulator(
+            inputView = MockInputView(
+                budget = 1000,
+                winningNumbers = LottoTicket(
+                    listOf(
+                        LottoNumber(1),
+                        LottoNumber(2),
+                        LottoNumber(3),
+                        LottoNumber(4),
+                        LottoNumber(5),
+                        LottoNumber(6),
+                    )
+                ),
+            ),
+            lottoTicketsProvider = AutoProvider,
+            resultView = ResultView(),
+        ).getTicketCount().shouldBe(1)
     }
 
     "should buy as many lotto tickets as possible with budget" {
+        LottoSimulator(
+            MockInputView(
+                budget = 1001,
+                winningNumbers = LottoTicket(
+                    listOf(
+                        LottoNumber(1),
+                        LottoNumber(2),
+                        LottoNumber(3),
+                        LottoNumber(4),
+                        LottoNumber(5),
+                        LottoNumber(6),
+                    )
+                ),
+            ),
+            lottoTicketsProvider = AutoProvider,
+            resultView = ResultView(),
+        ).getTicketCount().shouldBe(1)
 
+        LottoSimulator(
+            MockInputView(
+                budget = 300,
+                winningNumbers = LottoTicket(
+                    listOf(
+                        LottoNumber(1),
+                        LottoNumber(2),
+                        LottoNumber(3),
+                        LottoNumber(4),
+                        LottoNumber(5),
+                        LottoNumber(6),
+                    )
+                ),
+            ),
+            lottoTicketsProvider = AutoProvider,
+            resultView = ResultView(),
+        ).getTicketCount().shouldBe(0)
+
+        LottoSimulator(
+            MockInputView(
+                budget = 5000,
+                winningNumbers = LottoTicket(
+                    listOf(
+                        LottoNumber(1),
+                        LottoNumber(2),
+                        LottoNumber(3),
+                        LottoNumber(4),
+                        LottoNumber(5),
+                        LottoNumber(6),
+                    )
+                ),
+            ),
+            lottoTicketsProvider = AutoProvider,
+            resultView = ResultView(),
+        ).getTicketCount().shouldBe(5)
     }
 
     "winning numbers with same number should throw IllegalArgumentException" {
-
     }
 
     "winning statistics should show correct win state" {
-
     }
 
     "winning statistics should show correct ROI" {
-
     }
 })
