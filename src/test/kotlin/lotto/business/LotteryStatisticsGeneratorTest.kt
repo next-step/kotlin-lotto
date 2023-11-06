@@ -18,10 +18,9 @@ class LotteryStatisticsGeneratorTest {
         )
         val receivedAmount = ReceivedAmount(100000000)
         val expected = ProfitRate(20.04725)
-        val lotteryStatisticsGenerator = LotteryStatisticsGenerator()
 
         // when
-        val profitRate = lotteryStatisticsGenerator.calculateProfitRate(receivedAmount, prizeResults)
+        val profitRate = prizeResults.calculateProfitRate(receivedAmount)
 
         // then
         assertThat(profitRate).isEqualTo(expected)
