@@ -1,6 +1,7 @@
 package lotto.view
 
-import lotto.business.LotteryStatistics
+import lotto.business.LotteryPrize
+import lotto.business.PrizeResults
 import lotto.business.ProfitRate
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
@@ -28,11 +29,18 @@ class LotteryStatisticsPrinterTest {
     @CsvSource(value = ["0.5, 손해", "2.0, 이익"])
     fun `당첨 통계를 출력한다`(profitRate: Double, profitOrLoss: String) {
         // given
-        val lotteryStatistics = LotteryStatistics(1, 2, 3, 4)
+        val prizeResults = PrizeResults(
+            mapOf(
+                LotteryPrize.THREE_MATCH to 1,
+                LotteryPrize.FOUR_MATCH to 2,
+                LotteryPrize.FIVE_MATCH to 3,
+                LotteryPrize.SIX_MATCH to 4
+            )
+        )
         val profitRate = ProfitRate(profitRate)
 
         // when
-        LotteryStatisticsPrinter.print(lotteryStatistics, profitRate)
+        LotteryStatisticsPrinter.print(prizeResults, profitRate)
 
         // then
         assertThat(outputStreamCaptor.toString()).isEqualTo(
