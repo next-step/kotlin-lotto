@@ -1,14 +1,11 @@
 package lotto.domain
 
-import io.kotest.matchers.shouldBe
-
 object LottoMock {
-    fun createTicket(winningNumbers: WinningNumbers, matchedCount: Int): LottoTicket {
-        val matchedEndIndex = matchedCount - 1
-        val numbers = winningNumbers.value.mapIndexed { index, number ->
-            if (index <= matchedEndIndex) number
-            else number + 1
-        }
+    fun createTicketWithDefaultSpec(winningNumbers: WinningNumbers, matchedCount: Int): LottoTicket {
+        val notMatchedCount = winningNumbers.value.size - matchedCount
+        val notMatchedNumber = (LottoSpec.NUMBERS_RANGE.toSet() - winningNumbers.value.toSet()).shuffled().take(notMatchedCount)
+        val matchedNumber = winningNumbers.value.shuffled().take(matchedCount)
+        val numbers = (notMatchedNumber + matchedNumber).sorted()
         return LottoTicket(numbers)
     }
 

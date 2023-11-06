@@ -76,7 +76,7 @@ class LottoManagerSpec : DescribeSpec({
             )
             val tickets : List<LottoTicket> = ticketCountByMatchedNumberCount.flatMap { (matchedNumberCount, ticketCount) ->
                 List(ticketCount) {
-                    LottoMock.createTicket(winningNumbers, matchedNumberCount)
+                    LottoMock.createTicketWithDefaultSpec(winningNumbers, matchedNumberCount)
                 }
             }
             val manager = LottoManager(LottoTicketGenerator(), LottoTicketStorage(tickets.toMutableList()))

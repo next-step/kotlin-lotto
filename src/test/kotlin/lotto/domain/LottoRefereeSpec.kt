@@ -1,8 +1,6 @@
 package lotto.domain
 
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.data.forAll
-import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 
 class LottoRefereeSpec : FunSpec({
@@ -18,12 +16,12 @@ class LottoRefereeSpec : FunSpec({
             5 to 0,
             6 to 1
         )
-        val tickets : List<LottoTicket> = ticketCountByMatchedNumberCount.flatMap { (matchedNumberCount, ticketCount) ->
+        val tickets: List<LottoTicket> = ticketCountByMatchedNumberCount.flatMap { (matchedNumberCount, ticketCount) ->
             List(ticketCount) {
-                LottoMock.createTicket(winningNumbers, matchedNumberCount)
+                LottoMock.createTicketWithDefaultSpec(winningNumbers, matchedNumberCount)
             }
         }
-        val expect = listOf(LottoResult(3, 5), LottoResult(4, 6),LottoResult(6, 1))
+        val expect = listOf(LottoResult(3, 5), LottoResult(4, 6), LottoResult(6, 1))
 
         val result = LottoReferee.createResults(tickets, winningNumbers, minNumberCountToGetPrize)
 
