@@ -18,7 +18,7 @@ fun main() {
 
     println()
     val winningLottoNumberList: List<Int> = inputView.readLineNumberList("지난 주 당첨 번호를 입력해 주세요.")
-    val winningLotto: Lotto = Lotto(*winningLottoNumberList.toIntArray())
+    val winningLotto: Lotto = Lotto(winningLottoNumberList)
 
     val lottoRankList: List<LottoRank> = lottoList.map { lottoMachine.getLottoRank(it, winningLotto) }
 

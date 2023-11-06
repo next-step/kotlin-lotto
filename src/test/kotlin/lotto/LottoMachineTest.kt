@@ -33,8 +33,11 @@ class LottoMachineTest {
     fun `로또 결과를 얻을 수 있다`(first: Int, second: Int, third: Int, fourth: Int, fifth: Int, sixth: Int, winningFirst: Int, winningSecond: Int, winningThird: Int, winningFourth: Int, winningFifth: Int, winningSixth: Int, expected: LottoRank) {
         val lottoMachine: LottoMachine = LottoMachine()
 
-        val lotto: Lotto = Lotto(first, second, third, fourth, fifth, sixth)
-        val winningLotto: Lotto = Lotto(winningFirst, winningSecond, winningThird, winningFourth, winningFifth, winningSixth)
+        val lottoNumberList: List<Int> = listOf(first, second, third, fourth, fifth, sixth)
+        val lotto: Lotto = Lotto(lottoNumberList)
+
+        val winningNumberList: List<Int> = listOf(winningFirst, winningSecond, winningThird, winningFourth, winningFifth, winningSixth)
+        val winningLotto: Lotto = Lotto(winningNumberList)
 
         val lottoRank: LottoRank = lottoMachine.getLottoRank(lotto, winningLotto)
 

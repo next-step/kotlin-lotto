@@ -6,12 +6,12 @@ class LottoMachine {
     fun buyLottoList(buyingPrice: Int): List<Lotto> {
         val lottoCount: Int = buyingPrice / Lotto.LOTTO_PRICE
 
-        return (0 until lottoCount).map { Lotto(*this.getLottoNumberList()) }
+        return (0 until lottoCount).map { Lotto(this.getLottoNumberList()) }
     }
 
     private fun getLottoNumber(): Int = (Math.random() * Lotto.LOTTO_NUMBER_MAX).toInt() + Lotto.LOTTO_NUMBER_MIN
 
-    private fun getLottoNumberList(): IntArray {
+    private fun getLottoNumberList(): List<Int> {
         val lottoNumberList: MutableList<Int> = mutableListOf()
 
         while (lottoNumberList.size < LOTTO_NUMBER_COUNT_MAX) {
@@ -22,7 +22,7 @@ class LottoMachine {
             }
         }
 
-        return lottoNumberList.toIntArray()
+        return lottoNumberList
     }
 
     fun getLottoRank(lotto: Lotto, winningLotto: Lotto): LottoRank {
