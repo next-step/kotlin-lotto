@@ -1,7 +1,5 @@
 package lotto.domain
 
-import lotto.domain.Lotto.Companion.LOTTO_NUMBER_SIZE
-
 object LottoStore {
 
     private val lottoNumberGenerator = LottoNumberGenerator { LOTTO_POOL.shuffled() }
@@ -19,7 +17,7 @@ object LottoStore {
 
     private fun buyLotto(
         lottoNumbers: LottoNumbers =
-            lottoNumberGenerator.takeShuffleNumber(LOTTO_POOL, LOTTO_NUMBER_SIZE)
+            lottoNumberGenerator.takeShuffleNumber(LOTTO_POOL)
     ): Lotto {
         return Lotto(lottoNumbers)
     }

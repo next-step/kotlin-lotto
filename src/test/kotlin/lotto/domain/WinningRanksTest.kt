@@ -14,10 +14,10 @@ class WinningRanksTest : BehaviorSpec({
 
     given("입력금액이 주어졌을 때") {
         val inputPrice = 14000
-        val lottoNumbers = listOf(1, 2, 3, 4, 5, 6, 7).map { LottoNumber(it) }
+        val lottoNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }
         val lottos = LottoStore.buyLottos(inputPrice, emptyList())
-        val winningNumber = lottoNumberGenerator.takeShuffleNumber(lottoNumbers, Lotto.LOTTO_NUMBER_SIZE)
-        val bonusBall = lottoNumbers.last()
+        val winningNumber = lottoNumberGenerator.takeShuffleNumber(lottoNumbers)
+        val bonusBall = LottoNumber(7)
         val winningLotto = WinningLotto(winningNumber, bonusBall)
         val winningResult = lottos.matchLotto(winningLotto)
         `when`("수익률을 계산한다.") {

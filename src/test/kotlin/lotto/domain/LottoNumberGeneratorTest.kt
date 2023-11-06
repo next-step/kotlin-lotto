@@ -2,7 +2,6 @@ package lotto.domain
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.Lotto.Companion.LOTTO_NUMBER_SIZE
 
 class LottoNumberGeneratorTest : BehaviorSpec({
 
@@ -11,7 +10,7 @@ class LottoNumberGeneratorTest : BehaviorSpec({
 
         `when`("로또 번호를 생성한다.") {
             val lottoNumberGenerator = LottoNumberGenerator { lottoNumbers }
-                .takeShuffleNumber(lottoNumbers, LOTTO_NUMBER_SIZE)
+                .takeShuffleNumber(lottoNumbers)
             then("생성된 로또번호를 확인한다.") {
                 lottoNumberGenerator.numbers shouldBe lottoNumbers
             }

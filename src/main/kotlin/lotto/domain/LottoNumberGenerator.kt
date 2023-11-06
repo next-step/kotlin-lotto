@@ -1,16 +1,16 @@
 package lotto.domain
 
 import lotto.constants.Sort
+import lotto.domain.Lotto.Companion.LOTTO_NUMBER_SIZE
 
 class LottoNumberGenerator(private val shuffleNumber: ShuffleNumber) {
 
     fun takeShuffleNumber(
         numbers: List<LottoNumber>,
-        takeCount: Int,
         sort: Sort = Sort.ASC
     ): LottoNumbers {
         return LottoNumbers(
-            generateLottoNumbers(numbers).take(takeCount)
+            generateLottoNumbers(numbers).take(LOTTO_NUMBER_SIZE)
                 .numberSort(sort)
         )
     }
