@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.collections.shouldContainAll
