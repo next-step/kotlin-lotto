@@ -3,8 +3,6 @@ package stringAddCalculator
 import java.lang.RuntimeException
 
 object Tokenizer {
-    private const val BASE_TOKEN = "0"
-
     fun tokenize(text: String): List<String> {
         return Separator.separateByCustomDelimiter(text) ?: Separator.separate(text)
     }
