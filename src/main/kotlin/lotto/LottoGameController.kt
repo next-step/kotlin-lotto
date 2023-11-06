@@ -1,10 +1,8 @@
 package lotto
 
-import lotto.business.LottoTicketGenerator
 import lotto.business.LottoTicketManager
 import lotto.business.LottoWinningNumbersExtractor
 import lotto.business.ReceivedAmount
-import lotto.business.TicketBookingSystem
 import lotto.view.LotteryStatisticsPrinter
 import lotto.view.LottoInputHandler
 import lotto.view.LottoPurchaseSummaryPrinter
@@ -25,7 +23,7 @@ class LottoGameController(
 
 fun main() {
     val lottoGameController = LottoGameController(
-        lottoTicketManager = LottoTicketManager(ticketBookingSystem = TicketBookingSystem(LottoTicketGenerator()))
+        lottoTicketManager = LottoTicketManager()
     )
     lottoGameController.run()
 }
