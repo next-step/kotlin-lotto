@@ -15,7 +15,7 @@ fun main() {
 
     val purchaseFee = Input.getLine()
     val customer = Customer.of(purchaseFee)
-    val lotto = lottoShop.buyLotto(customer)
+    val lotto = lottoShop.buyLotto(customer.money)
 
     Output.lottoBuyResultPrint(lotto)
     Output.printlnAny(LottoMessage.INPUT_WINNING_NUMBERS)

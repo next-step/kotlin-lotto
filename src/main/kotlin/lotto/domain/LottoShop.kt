@@ -2,8 +2,8 @@ package lotto.domain
 
 class LottoShop {
 
-    fun buyLotto(customer: Customer): Lotto {
-        val lottoNumbers = IntRange(1, getQuantity(customer.money))
+    fun buyLotto(money: Int): Lotto {
+        val lottoNumbers = IntRange(1, getQuantity(money))
             .map { LottoGenerator.generate() }
         return Lotto(lottoNumbers)
     }
