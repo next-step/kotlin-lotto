@@ -3,11 +3,9 @@ package lotto.domain
 class LottoShop {
 
     fun buyLotto(customer: Customer): Lotto {
-        val lines = mutableListOf<List<Int>>()
-        repeat(getQuantity(customer.money)) {
-            lines.add(LottoNumber.generate())
-        }
-        return Lotto(lines)
+        val lottoNumbers = IntRange(1, getQuantity(customer.money))
+            .map { LottoGenerator.generate() }
+        return Lotto(lottoNumbers)
     }
 
     private fun getQuantity(money: Int) = money / LOTTO_FEE
