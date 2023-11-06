@@ -4,7 +4,7 @@ data class LottoNumber(
     val value: Int,
 ) {
     init {
-        require(value in LOWER_LIMIT_VALUE..UPPER_LIMIT_VALUE) { "$LOWER_LIMIT_VALUE 부터 $UPPER_LIMIT_VALUE 사이의 숫자만 허용됩니다" }
+        require(value in LOWER_LIMIT_VALUE..UPPER_LIMIT_VALUE) { "입력한 [$value] 는 허용 범위 $LOWER_LIMIT_VALUE 부터 $UPPER_LIMIT_VALUE 사이의 숫자가 아닙니다" }
     }
 
     companion object {
