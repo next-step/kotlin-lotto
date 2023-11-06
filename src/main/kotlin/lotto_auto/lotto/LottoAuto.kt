@@ -6,29 +6,24 @@ object LottoAuto {
      */
     fun sumOfWonLottoList(eachLottoMatchList: List<Int>): Int {
         return eachLottoMatchList.sumOf {
-            replaceMatchCountToMoney(it)
+            replaceMatchCountToMoney(it).winningAmount
         }
     }
 
     /**
      * match 개수 만큼 금액 으로 변경
      */
-    private fun replaceMatchCountToMoney(it: Int): Int = when (it) {
-        3 -> 5_000
-        4 -> 50_000
-        5 -> 1_500_000
-        6 -> 2_000_000_000
-        else -> 0
+    private fun replaceMatchCountToMoney(matchCount: Int): LottoPrize {
+        return LottoPrize.getLottoPrize(matchCount)
     }
 
-    fun matchCountList(eachLottoMatchList: List<Int>): List<Int> {
-        return eachLottoMatchList.filter { it > 2 }.let { matchList ->
-            val three = matchList.count { it == 3 }
-            val four = matchList.count { it == 4 }
-            val five = matchList.count { it == 5 }
-            val six = matchList.count { it == 6 }
-            listOf(three, four, five, six)
-        }
+    fun matchCountList(eachLottoMatchList: List<LottoPrize>): Map<LottoPrize, Int> {
+        return mapOf(
+            LottoPrize.FOURTH_PRIZE to eachLottoMatchList.count { it == LottoPrize.FOURTH_PRIZE },
+            LottoPrize.THIRD_PRIZE to eachLottoMatchList.count { it == LottoPrize.THIRD_PRIZE },
+            LottoPrize.SECOND_PRIZE to eachLottoMatchList.count { it == LottoPrize.SECOND_PRIZE },
+            LottoPrize.FIRST_PRIZE to eachLottoMatchList.count { it == LottoPrize.FIRST_PRIZE },
+        )
     }
 
     fun earningRate(sumOfWonLotto: Int, inputAmount: Int): Float {

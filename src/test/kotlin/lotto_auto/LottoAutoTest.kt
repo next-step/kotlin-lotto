@@ -4,6 +4,7 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import lotto_auto.lotto.Lotto
 import lotto_auto.lotto.LottoAuto
+import lotto_auto.lotto.LottoPrize
 
 class LottoAutoTest : StringSpec({
     "구매한 로또 총 당첨 금액이 맞는지" {
@@ -24,9 +25,15 @@ class LottoAutoTest : StringSpec({
             Lotto(listOf(1, 2, 3, 4, 5, 6))
         )
         val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
-        // 순서대로 3,4,5,6개 맞아서 리스트에 1,1,1,1가 저장됨
-        val expected = listOf(1, 1, 1, 1)
-        val matchedList = input.map { it.lottoMatchCount(winningLotto) }
+        // 순서대로 3,4,5,6개 맞아서 리스트에 LottoPrize와 함께 1,1,1,1가 저장됨
+        val expected = mapOf(
+            LottoPrize.FOURTH_PRIZE to 1,
+            LottoPrize.THIRD_PRIZE to 1,
+            LottoPrize.SECOND_PRIZE to 1,
+            LottoPrize.FIRST_PRIZE to 1
+        )
+        val matchedList =
+            input.map { it.lottoMatchCount(winningLotto) }.filter { it > 2 }.map { LottoPrize.getLottoPrize(it) }
 
         LottoAuto.matchCountList(matchedList) shouldBe expected
     }

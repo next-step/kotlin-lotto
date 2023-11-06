@@ -1,6 +1,7 @@
 package lotto_auto.ui
 
 import lotto_auto.lotto.Lotto
+import lotto_auto.lotto.LottoPrize
 
 object OutputView {
     fun print(list: List<Lotto>) {
@@ -9,13 +10,13 @@ object OutputView {
         }
     }
 
-    fun showResult(matchResult: List<Int>, earningRate: Float) {
+    fun showResult(matchResult: Map<LottoPrize, Int>, earningRate: Float) {
         println(LOTTO_STAT)
         println("---------")
-        println(MATCH_THREE.format(matchResult.getOrElse(THIRD_INDEX) { DEFAULT_COUNT }))
-        println(MATCH_FOUR.format(matchResult.getOrElse(FOURTH_INDEX) { DEFAULT_COUNT }))
-        println(MATCH_FIVE.format(matchResult.getOrElse(FIFTH_INDEX) { DEFAULT_COUNT }))
-        println(MATCH_SIX.format(matchResult.getOrElse(SIXTH_INDEX) { DEFAULT_COUNT }))
+        println(MATCH_THREE.format(matchResult.getOrDefault(LottoPrize.FOURTH_PRIZE, LottoPrize.NOTHING)))
+        println(MATCH_FOUR.format(matchResult.getOrDefault(LottoPrize.THIRD_PRIZE, LottoPrize.NOTHING)))
+        println(MATCH_FIVE.format(matchResult.getOrDefault(LottoPrize.SECOND_PRIZE, LottoPrize.NOTHING)))
+        println(MATCH_SIX.format(matchResult.getOrDefault(LottoPrize.FIRST_PRIZE, LottoPrize.NOTHING)))
         println(TOTAL_EARNING_RATE.format(earningRate))
     }
 
