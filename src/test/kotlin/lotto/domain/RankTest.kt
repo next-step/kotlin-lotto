@@ -13,7 +13,7 @@ class RankTest : BehaviorSpec({
                 forAll(
                     row(6, false, Rank.FIRST),
                     row(5, true, Rank.SECOND),
-                    row(5, false, Rank.THREE),
+                    row(5, false, Rank.THIRD),
                     row(4, true, Rank.FOURTH),
                     row(4, false, Rank.FOURTH),
                     row(3, true, Rank.FIFTH),

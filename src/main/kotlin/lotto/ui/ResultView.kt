@@ -23,7 +23,7 @@ object ResultView {
         println("---------")
         println("${Rank.FIFTH.matchCount}개 일치 (${Rank.FIFTH.winningMoney}원)- ${lottos.getOrDefault(Rank.FIFTH, 0)}개")
         println("${Rank.FOURTH.matchCount}개 일치 (${Rank.FOURTH.winningMoney}원)- ${lottos.getOrDefault(Rank.FOURTH, 0)}개")
-        println("${Rank.THREE.matchCount}개 일치 (${Rank.THREE.winningMoney}원)- ${lottos.getOrDefault(Rank.THREE, 0)}개")
+        println("${Rank.THIRD.matchCount}개 일치 (${Rank.THIRD.winningMoney}원)- ${lottos.getOrDefault(Rank.THIRD, 0)}개")
         println("${Rank.FIRST.matchCount}개 일치 (${Rank.FIRST.winningMoney}원)- ${lottos.getOrDefault(Rank.FIRST, 0)}개")
     }
 
