@@ -13,6 +13,10 @@ enum class WinningRank(
     MISS(0, 0)
     ;
 
+    fun find(count: Int, matchBonus: Boolean = false): Boolean {
+        return this.count == count && this.matchBonus == matchBonus
+    }
+
     companion object {
         fun of(count: Int, matchBonus: Boolean): WinningRank {
             if (count == SECOND.count) {
@@ -20,9 +24,5 @@ enum class WinningRank(
             }
             return values().find { it.find(count) } ?: MISS
         }
-    }
-
-    fun find(count: Int, matchBonus: Boolean = false): Boolean {
-        return this.count == count && this.matchBonus == matchBonus
     }
 }
