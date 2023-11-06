@@ -18,7 +18,7 @@ class LottoWinningNumbersExtractorTest {
         val lottoWinningNumbers = lottoWinningNumbersExtractor.extract(input)
 
         // then
-        assertThat(lottoWinningNumbers.lottoNumbers).usingRecursiveComparison().isEqualTo(expectedLottoNumbers)
+        assertThat(lottoWinningNumbers.sortedLottoNumbers).usingRecursiveComparison().isEqualTo(expectedLottoNumbers)
     }
 
     @Test
