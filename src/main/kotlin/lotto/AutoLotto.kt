@@ -1,7 +1,7 @@
 package lotto
 
 import lotto.domain.PrizeEvaluator.evaluateTotalPrize
-import lotto.domain.Ticket
+import lotto.dto.Ticket
 import lotto.view.InputView.readNumbers
 import lotto.view.InputView.readPrice
 import lotto.view.OutputView.writeROI

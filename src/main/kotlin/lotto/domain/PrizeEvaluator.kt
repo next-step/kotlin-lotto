@@ -1,6 +1,7 @@
 package lotto.domain
 
 import lotto.domain.enums.RANK
+import lotto.dto.Ticket
 
 
 object PrizeEvaluator {

@@ -2,7 +2,7 @@ package lotto
 
 import lotto.domain.Prize
 import lotto.domain.PrizeEvaluator
-import lotto.domain.Ticket
+import lotto.dto.Ticket
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

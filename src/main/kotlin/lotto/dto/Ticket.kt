@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.dto
 
 class Ticket(private val _numbers: List<Int>) {
     init {
