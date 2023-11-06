@@ -20,7 +20,7 @@ class LottoGameController(
         val lottoTickets = lottoTicketManager.buyLotto(receivedAmount)
         LottoPurchaseSummaryPrinter.print(lottoTickets)
         val winningNumbers = lottoWinningNumbersExtractor.extract(LottoInputHandler.inputWinningNumbers())
-        val prizeResults = lottoTicketManager.compilePrizeResults(winningNumbers)
+        val prizeResults = winningNumbers.compilePrizeResults(lottoTickets)
         val profitRate = lotteryStatisticsGenerator.calculateProfitRate(receivedAmount, prizeResults)
         LotteryStatisticsPrinter.print(prizeResults, profitRate)
     }

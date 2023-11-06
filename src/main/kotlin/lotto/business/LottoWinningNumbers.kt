@@ -11,6 +11,14 @@ class LottoWinningNumbers(lottoNumbers: Set<LottoNumber>) {
         get() = _sortedLottoNumbers
             .map { it }
 
+    fun compilePrizeResults(tickets: List<LottoTicket>): PrizeResults {
+        return tickets.map { it.matchCount(lottoNumbers) }
+            .map { LotteryPrize.getPrize(it) }
+            .groupingBy { it }
+            .eachCount()
+            .let { PrizeResults(it) }
+    }
+
     companion object {
         private const val LOTTO_NUMBER_SIZE = 6
     }
