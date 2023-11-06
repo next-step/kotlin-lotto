@@ -1,17 +1,28 @@
 package lotto.constants
 
-enum class WinningRank(val count: Int, val money: Int, val matchBonus: Boolean) {
-    FIRST(6, 2000000000, false),
-    SECOND(5, 30000000, true),
-    THIRD(5, 1500000, false),
-    FOURTH(4, 50000, false),
-    FIFTH(3, 5000, false),
-    MISS(0, 0, false)
+enum class WinningRank(
+    val count: Int,
+    val money: Int,
+    val matchBonus: Boolean = false
+) {
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000, true),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    MISS(0, 0)
     ;
 
+    fun find(count: Int, matchBonus: Boolean = false): Boolean {
+        return this.count == count && this.matchBonus == matchBonus
+    }
+
     companion object {
-        fun of(count: Int, matchBonus: Boolean = false): WinningRank {
-            return values().find { it.count == count && it.matchBonus == matchBonus } ?: MISS
+        fun of(count: Int, matchBonus: Boolean): WinningRank {
+            if (count == SECOND.count) {
+                return values().find { it.find(count, matchBonus) } ?: MISS
+            }
+            return values().find { it.find(count) } ?: MISS
         }
     }
 }

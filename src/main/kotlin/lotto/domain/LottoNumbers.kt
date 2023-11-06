@@ -21,7 +21,7 @@ value class LottoNumbers(val numbers: List<LottoNumber>) {
 
     private fun validateLottoNumbers() {
         require(numbers.toSet().size == numbers.size) {
-            "로또는 중복되지 않는 숫자만 가질 수 있습니다."
+            DUPLICATE_ERROR_MESSAGE
         }
     }
 
@@ -29,5 +29,6 @@ value class LottoNumbers(val numbers: List<LottoNumber>) {
         private const val SEPARATOR = ", "
         private const val PREFIX = "["
         private const val SUFFIX = "]"
+        private const val DUPLICATE_ERROR_MESSAGE = "로또는 중복되지 않는 숫자만 가질 수 있습니다."
     }
 }

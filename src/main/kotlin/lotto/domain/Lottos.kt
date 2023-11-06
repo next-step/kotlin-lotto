@@ -1,15 +1,16 @@
 package lotto.domain
 
-import lotto.constants.WinningRank
+class Lottos(private val autoLottos: List<Lotto>, private val manualLottos: List<Lotto>) {
 
-@JvmInline
-value class Lottos(val lottos: List<Lotto>) {
+    val lottos: List<Lotto> get() = autoLottos + manualLottos
 
-    fun getLottoCount(): Int {
-        return lottos.size
+    fun matchLotto(winningLotto: WinningLotto): WinningRanks {
+        return WinningRanks(lottos.map { it.winningRank(winningLotto) })
     }
-
-    fun matchLotto(winningLotto: WinningLotto): List<WinningRank> {
-        return lottos.map { it.winningRank(winningLotto) }
+    fun manualLottoCount(): Int {
+        return manualLottos.size
+    }
+    fun autoLottoCount(): Int {
+        return autoLottos.size
     }
 }

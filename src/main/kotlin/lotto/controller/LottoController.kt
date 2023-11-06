@@ -1,5 +1,6 @@
 package lotto.controller
 
+import lotto.domain.LottoNumberAutoGenerator
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoStore
 import lotto.domain.WinningLotto
@@ -10,7 +11,10 @@ object LottoController {
 
     fun run() {
         val inputPrice = InputView.inputPrice()
-        val lottos = LottoStore.buyLottos(inputPrice)
+        val manualLottoCount = InputView.inputManualLottoCount()
+        val manualLottos = InputView.inputManualLotto(manualLottoCount)
+        val lottoStore = LottoStore(LottoNumberAutoGenerator { numbers -> numbers.shuffled() })
+        val lottos = lottoStore.buyLottos(inputPrice.price, manualLottos)
         OutputView.printLotto(lottos)
 
         val winningLottoNumber = LottoNumbers(InputView.inputWinningLotto())
@@ -18,7 +22,7 @@ object LottoController {
         val winningLotto = WinningLotto(winningLottoNumber, bonusBall)
         val winningRanks = lottos.matchLotto(winningLotto)
 
-        OutputView.printWinningResult(winningRanks)
-        OutputView.printRateOfReturn(inputPrice, winningRanks)
+        OutputView.printWinningResult(winningRanks.winningRankGroupBy())
+        OutputView.printRateOfReturn(inputPrice.price, winningRanks)
     }
 }
