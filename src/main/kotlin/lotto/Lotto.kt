@@ -1,6 +1,8 @@
 package lotto
 
 class Lotto {
+    val numbers: List<Int>
+
     constructor() {
         numbers = LOTTO_NUMBER_POOL.shuffled().subList(0, 6)
     }
@@ -12,9 +14,6 @@ class Lotto {
 
         this.numbers = numbers
     }
-
-    var numbers: List<Int>
-        private set
 
     companion object {
         private const val NUMBER_OF_LOTTO_NUMBER = 6

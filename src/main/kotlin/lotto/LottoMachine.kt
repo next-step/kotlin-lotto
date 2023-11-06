@@ -1,6 +1,6 @@
 package lotto
 
-class LottoMachine {
+object LottoMachine {
     fun purchase(
         purchaseAmount: Int
     ): List<Lotto> {
@@ -9,7 +9,5 @@ class LottoMachine {
         return List(size = numberOfLotto) { Lotto() }
     }
 
-    companion object {
-        const val LOTTO_PRICE = 1000
-    }
+    const val LOTTO_PRICE = 1000
 }

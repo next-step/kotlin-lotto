@@ -12,9 +12,7 @@ object ResultView {
     fun showLottoStatResult(lottoStatResult: LottoStatResult) {
         val returnRate = lottoStatResult.getReturnRate()
 
-        println()
-        println("당첨 통계")
-        println("---------")
+        println("\n당첨 통계\n---------")
         println("3개 일치 (${LottoStatResult.FIFTH_PLACE_REWARD}원)- ${lottoStatResult.fifthCount}개")
         println("4개 일치 (${LottoStatResult.FOURTH_PLACE_REWARD}원)- ${lottoStatResult.fourthCount}개")
         println("5개 일치 (${LottoStatResult.THIRD_PLACE_REWARD}원)- ${lottoStatResult.thirdCount}개")

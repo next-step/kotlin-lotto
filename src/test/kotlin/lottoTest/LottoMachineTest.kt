@@ -2,7 +2,6 @@ package lottoTest
 
 import lotto.Lotto
 import lotto.LottoMachine
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -18,11 +17,8 @@ class LottoMachineTest {
         ]
     )
     fun `금액만큼 로또를 구매`(input: Int, expected: Int) {
-        val lottoList: List<Lotto> = LottoMachine().purchase(input)
+        val lottoList: List<Lotto> = LottoMachine.purchase(input)
 
         assertEquals(expected, lottoList.count())
-        lottoList.forEach {
-            assertThat(it).isExactlyInstanceOf(Lotto::class.java)
-        }
     }
 }
