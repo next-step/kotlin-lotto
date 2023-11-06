@@ -12,11 +12,10 @@ fun main() {
 
     val lottoManager = LottoManager(purchased.toInt())
 
-    // 구매 개수 출력
-    Output().printPurchasedAmount(lottoManager.lottoAmount)
-
     // 로또 발급 및 출력
     lottoManager.generateLottos()
+
+    // 발급된 로또 안내 출력
     Output().printLottoList(lottoManager.lottos.lottoList)
 
     // 당첨 번호 입력
@@ -25,9 +24,18 @@ fun main() {
     // 당첨 번호 등록
     Lotto(tokenizeWinningNumbers(winningNumbers)).let { lottoManager.setWinningNumbers(it) }
 
+    // 보너스 번호 입력
+    val bonusNumber = Input().getBonusNumber()
+
+    // 보너스 번호 등록
+    lottoManager.setBonusNumber(bonusNumber.toInt())
+
+    // 당첨 로또 집계
+    lottoManager.aggregate()
+
     // 통계 출력
-    Output().printResult(lottoManager.getResult())
+    Output().printResult(lottoManager.prizes)
 
     // 수익률 출력
-    Output().printEarningRate(lottoManager.getResult(), lottoManager.purchased)
+    Output().printEarningRate(lottoManager.prizes, lottoManager.purchased)
 }

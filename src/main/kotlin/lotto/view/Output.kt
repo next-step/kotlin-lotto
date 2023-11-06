@@ -4,19 +4,22 @@ import lotto.domain.Lotto
 import lotto.domain.Prize
 
 class Output {
-    fun printPurchasedAmount(purchased: Int) {
-        println("$purchased 개를 구매했습니다.")
-    }
-
     fun printLottoList(lottoList: List<Lotto>) {
+        println("${lottoList.size} 개를 구매했습니다.")
         lottoList.forEach { println(it) }
     }
 
     fun printResult(result: List<Prize>) {
         val lines = mutableListOf("당첨 통계", "---------")
 
-        (3..6).forEach {
-            val line = "${it}개 일치 (${Prize.getPrize(it).prize}원)- ${Prize.countResult(result, it)}개"
+        Prize.values().sortedBy { it.prize }.forEach { type ->
+            if (type.prize <= 0) return@forEach
+
+            val line = buildString {
+                append("${type.match}개 일치 ")
+                if (type == Prize.SECOND) append(", 보너스 볼 일치")
+                append("(${type.prize}원) - ${result.count { it == type }}개")
+            }
             lines.add(line)
         }
 

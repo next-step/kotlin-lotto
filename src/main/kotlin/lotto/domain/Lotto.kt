@@ -1,6 +1,6 @@
 package lotto.domain
 
-class Lotto(private val numbers: List<Int>) {
+class Lotto(val numbers: List<Int>) {
     init {
         require(numbers.size == NUMBER_NUM) { "로또 번호는 6개여야 합니다." }
     }
@@ -11,10 +11,6 @@ class Lotto(private val numbers: List<Int>) {
     }
     private fun toSet(): Set<Int> {
         return numbers.toSet()
-    }
-
-    fun isNotEmpty(): Boolean {
-        return numbers.isNotEmpty()
     }
 
     override fun toString(): String {
