@@ -1,7 +1,9 @@
 package lotto
 
+import io.kotest.inspectors.forAll
 import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.ints.shouldBeInRange
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -31,5 +33,12 @@ class LottoTest {
 
         numbers shouldHaveSize distinct.size
         numbers shouldContainAll distinct
+    }
+
+    @Test
+    fun `로또 번호는 1~45 사이의 무작위 수이다`() {
+        lotto.numbers.forAll {
+            it shouldBeInRange 1..45
+        }
     }
 }
