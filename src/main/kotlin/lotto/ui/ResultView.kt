@@ -19,11 +19,13 @@ object ResultView {
     }
 
     fun printResult(lottos: Map<Rank, Int>) {
+        println()
         println("당첨 통계")
         println("---------")
         println("${Rank.FIFTH.matchCount}개 일치 (${Rank.FIFTH.winningMoney}원)- ${lottos.getOrDefault(Rank.FIFTH, 0)}개")
         println("${Rank.FOURTH.matchCount}개 일치 (${Rank.FOURTH.winningMoney}원)- ${lottos.getOrDefault(Rank.FOURTH, 0)}개")
         println("${Rank.THIRD.matchCount}개 일치 (${Rank.THIRD.winningMoney}원)- ${lottos.getOrDefault(Rank.THIRD, 0)}개")
+        println("${Rank.SECOND.matchCount}개 일치, 보너스 볼 일치(${Rank.SECOND.winningMoney}원)- ${lottos.getOrDefault(Rank.SECOND, 0)}개")
         println("${Rank.FIRST.matchCount}개 일치 (${Rank.FIRST.winningMoney}원)- ${lottos.getOrDefault(Rank.FIRST, 0)}개")
     }
 
