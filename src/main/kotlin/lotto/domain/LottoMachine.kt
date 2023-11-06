@@ -9,8 +9,6 @@ class LottoMachine {
         return (0 until lottoCount).map { Lotto(this.getLottoNumberList()) }
     }
 
-    private fun getLottoNumber(): Int = (Math.random() * Lotto.LOTTO_NUMBER_MAX).toInt() + Lotto.LOTTO_NUMBER_MIN
-
     private fun getLottoNumberList(): List<Int> {
         val lottoNumberList: List<Int> = (Lotto.LOTTO_NUMBER_MIN..Lotto.LOTTO_NUMBER_MAX).toList()
 
