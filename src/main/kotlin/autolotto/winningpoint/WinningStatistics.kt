@@ -13,7 +13,7 @@ object WinningStatistics {
     fun calculateStatistics(autoLotto: AutoLotto, winningLotto: WinningLotto): WinningStatistics {
         val statistics = this
         autoLotto.lottos.forEach { lotto ->
-            val (_, winningRank) = lotto.checkWinning(winningNumbers = winningLotto.numbers)
+            val winningRank = lotto.checkWinning(winningNumbers = winningLotto.numbers)
             statistics.recordWinningRank(winningRank)
         }
         return statistics

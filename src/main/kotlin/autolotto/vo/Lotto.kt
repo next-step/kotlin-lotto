@@ -9,9 +9,8 @@ class Lotto(private val originNumbers: List<Int> = listOf()) {
         return (1..45).shuffled().take(6).sorted()
     }
 
-    fun checkWinning(winningNumbers: List<Int>): Pair<Int, WinningRank> {
+    fun checkWinning(winningNumbers: List<Int>): WinningRank {
         val matchCount = numbers.intersect(winningNumbers.toSet()).size
-        val rank = WinningRank.of(matchCount)
-        return Pair(matchCount, rank)
+        return WinningRank.of(matchCount)
     }
 }

@@ -67,10 +67,10 @@ class LottoTest {
         val winningLotto = WinningLotto("1, 2, 3, 4, 5, 7")
 
         // When
-        val (matchCount, _) = lotto.checkWinning(winningLotto.numbers)
+        val rank = lotto.checkWinning(winningLotto.numbers)
 
         // Then
-        matchCount shouldBe 5
+        rank.matchingCount shouldBe 5
     }
 
     @Test
@@ -80,10 +80,10 @@ class LottoTest {
         val winningLotto = WinningLotto("1, 2, 3, 4, 5, 7")
 
         // When
-        val (matchCount, _) = lotto.checkWinning(winningLotto.numbers)
+        val rank = lotto.checkWinning(winningLotto.numbers)
 
         // Then
-        WinningRank.of(matchCount) shouldBe WinningRank.SECOND
+        rank shouldBe WinningRank.SECOND
     }
 
     @Test
@@ -94,13 +94,12 @@ class LottoTest {
         val winningLotto = WinningLotto("1, 2, 3, 4, 5, 6")
 
         // When
-        val (matchCount, winningRank) = lotto.checkWinning(winningLotto.numbers)
+        val rank = lotto.checkWinning(winningLotto.numbers)
         val totalPrice = autoLotto.calculateTotalWinningPrice(winningLotto.numbers)
         val profit = autoLotto.getProfitRate(totalPrice.toDouble())
 
         // Then
-        assertThat(matchCount).isEqualTo(3)
-        assertThat(winningRank).isEqualTo(WinningRank.FOURTH)
+        assertThat(rank).isEqualTo(WinningRank.FOURTH)
         profit shouldBe 5
     }
 
@@ -112,13 +111,12 @@ class LottoTest {
         val winningLotto = WinningLotto("1, 2, 3, 4, 5, 6")
 
         // When
-        val (matchCount, winningRank) = lotto.checkWinning(winningLotto.numbers)
+        val rank = lotto.checkWinning(winningLotto.numbers)
         val totalPrice = autoLotto.calculateTotalWinningPrice(winningLotto.numbers)
         val profit = autoLotto.getProfitRate(totalPrice.toDouble())
 
         // Then
-        assertThat(matchCount).isEqualTo(3)
-        assertThat(winningRank).isEqualTo(WinningRank.FOURTH)
+        assertThat(rank).isEqualTo(WinningRank.FOURTH)
         profit shouldBe 0.35
     }
 }

@@ -16,7 +16,7 @@ class AutoLotto(val price: Long, private val originLottos: List<Lotto> = listOf(
     }
 
     fun calculateTotalWinningPrice(winningNumbers: List<Int>): Long {
-        return lottos.map { it.checkWinning(winningNumbers) }.sumOf { it.second.winningPrice }
+        return lottos.map { it.checkWinning(winningNumbers) }.sumOf { it.winningPrice }
     }
 
     fun getProfitRate(winningPrice: Double): Double {
