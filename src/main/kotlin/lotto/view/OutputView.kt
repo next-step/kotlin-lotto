@@ -16,11 +16,9 @@ object OutputView {
     fun printWinningResult(winningMap: Map<WinningRank, Int>) {
         println(WINNING_STATISTICS)
         println(SEPARATOR)
-        printWinningRanks(winningMap, WinningRank.FIFTH)
-        printWinningRanks(winningMap, WinningRank.FOURTH)
-        printWinningRanks(winningMap, WinningRank.THIRD)
-        printWinningRanks(winningMap, WinningRank.SECOND)
-        printWinningRanks(winningMap, WinningRank.FIRST)
+        WinningRank.values().filter { it != WinningRank.MISS }
+            .sortedDescending()
+            .forEach { printWinningRanks(winningMap, it) }
     }
 
     private fun printWinningRanks(winningMap: Map<WinningRank, Int>, printWinningRank: WinningRank) {
