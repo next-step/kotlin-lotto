@@ -12,13 +12,6 @@ class LottoStore {
     private val resultView: ResultView = ResultView()
     private val lottoMachine: LottoMachine = LottoMachine(1000)
     private val lottoChecker: LottoChecker = LottoChecker()
-
-    private val lotteryAmount: Map<Int, Int> = mapOf(
-        3 to 5000,
-        4 to 50000,
-        5 to 15000000,
-        6 to 2000000000,
-    )
     fun lotto() {
         val money = inputView.getNumbers()
         val lottos = lottoMachine.purchase(money)
@@ -28,7 +21,7 @@ class LottoStore {
 
         val winNumStatistics = lottoChecker.getWinNumStatistics(lottos, winningNumbers)
         println("inputView = $winNumStatistics")
-        resultView.show(winNumStatistics, lotteryAmount)
+        resultView.show(winNumStatistics)
     }
 }
 
