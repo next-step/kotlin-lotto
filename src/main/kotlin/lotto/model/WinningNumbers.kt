@@ -4,7 +4,7 @@ data class WinningNumbers(
     val lottoNumbers: LinkedHashSet<LottoNumber>,
 ) {
     init {
-        require(lottoNumbers.size == 6) {"6개의 숫자가 필요 합니다"}
+        require(lottoNumbers.size == 6) { "6개의 숫자가 필요 합니다" }
         lottoNumbers.sortedWith(compareBy { it.value })
     }
 

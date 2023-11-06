@@ -7,7 +7,7 @@ data class Game(
 
     override fun toString(): String {
         return lottoNumbers.map { it.value }
-                .joinToString(prefix = "[", postfix = "]", separator = ", ")
+            .joinToString(prefix = "[", postfix = "]", separator = ", ")
     }
 
     companion object {
