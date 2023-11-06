@@ -1,6 +1,8 @@
 package lotto.domain
 
-class Lotto(private val numbers: List<Int>) {
+class Lotto(numbers: List<Int>) {
+
+    private val numbers: List<Int> = numbers.sorted()
 
     init {
         require(numbers.all { it in LOTTO_NUMBER_MIN..LOTTO_NUMBER_MAX }) { "로또 번호는 1부터 45까지의 숫자만 가능합니다." }
