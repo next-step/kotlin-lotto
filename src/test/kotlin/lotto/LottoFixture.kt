@@ -12,10 +12,10 @@ object LottoFixture {
     val game4: Game = gameOf(2, 22, 32, 42, 52, 53)
     val Round: Round = roundOf(game1, game2, game3, game4)
 
-    val matched6: WinningNumbers = WinningNumbers(gameOf(1, 2, 3, 4, 5, 6))
-    val matched5: WinningNumbers = WinningNumbers(gameOf(2, 3, 4, 5, 6, 37))
-    val matched4: WinningNumbers = WinningNumbers(gameOf(3, 4, 5, 6, 37, 38))
-    val matched3: WinningNumbers = WinningNumbers(gameOf(4, 5, 6, 37, 38, 39))
+    val matched6: WinningNumbers = winningNumbersOf(1, 2, 3, 4, 5, 6)
+    val matched5: WinningNumbers = winningNumbersOf(2, 3, 4, 5, 6, 37)
+    val matched4: WinningNumbers = winningNumbersOf(3, 4, 5, 6, 37, 38)
+    val matched3: WinningNumbers = winningNumbersOf(4, 5, 6, 37, 38, 39)
 
     private fun roundOf(vararg game: Game): Round {
         return Round(
@@ -30,6 +30,14 @@ object LottoFixture {
             values
                 .map { LottoNumber(it) }
                 .toSet()
+        )
+    }
+
+    private fun winningNumbersOf(vararg values: Int): WinningNumbers {
+        return WinningNumbers(
+            LinkedHashSet(
+                values.map { LottoNumber(it) }
+            )
         )
     }
 }
