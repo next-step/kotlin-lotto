@@ -1,9 +1,9 @@
-package lotto.ui
+package lotto.view
 
-import lotto.Lotto
-import lotto.util.Prize
+import lotto.domain.Lotto
+import lotto.domain.Prize
 
-class OutputView {
+class Output {
     fun printPurchasedAmount(purchased: Int) {
         println("$purchased 개를 구매했습니다.")
     }

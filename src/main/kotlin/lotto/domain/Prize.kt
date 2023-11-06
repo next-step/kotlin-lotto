@@ -1,7 +1,4 @@
-package lotto.util
-
-import lotto.Lotto
-import lotto.Lottos
+package lotto.domain
 
 enum class Prize(val prize: Int, val match: Int) {
     FIRST(2000000000, 6),

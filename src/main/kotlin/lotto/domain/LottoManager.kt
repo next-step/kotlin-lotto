@@ -1,6 +1,4 @@
-package lotto
-
-import lotto.util.Prize
+package lotto.domain
 
 class LottoManager(val purchased: Int) {
     val lottoAmount = purchased / LOTTO_PRICE
