@@ -11,16 +11,7 @@ class CustomerTest : BehaviorSpec({
         When("입력이 정수이고 천원 단위라면") {
             val money = "15000"
             Then("고객이 될 수 있다.") {
-                Customer(money).money shouldBe 15000
-            }
-        }
-
-        When("입력이 정수이지만 천원 단위가 아니라면") {
-            val money = "15001"
-            Then("입력이 잘못됐다는 예외를 던진다.") {
-                shouldThrow<IllegalArgumentException> {
-                    Customer(money)
-                }
+                Customer.of(money).money shouldBe 15000
             }
         }
 
@@ -28,7 +19,7 @@ class CustomerTest : BehaviorSpec({
             val money = "1500a"
             Then("입력이 잘못됐다는 예외를 던진다.") {
                 shouldThrow<IllegalArgumentException> {
-                    Customer(money)
+                    Customer.of(money)
                 }
             }
         }

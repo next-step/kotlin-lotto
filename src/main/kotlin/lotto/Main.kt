@@ -8,9 +8,10 @@ import lotto.view.View
 
 fun main() {
 
+    val lottoShop = LottoShop()
     val purchaseFee = View.messagePrintAndGetLine(LottoMessage.INPUT_PURCHASE_FEE)
-    val customer = Customer(purchaseFee)
-    val lotto = LottoShop().buyLotto(customer)
+    val customer = Customer.of(purchaseFee)
+    val lotto = lottoShop.buyLotto(customer)
 
     View.lottoBuyResultPrint(lotto)
 

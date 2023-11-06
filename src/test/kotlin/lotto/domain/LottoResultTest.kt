@@ -6,7 +6,7 @@ import io.kotest.matchers.shouldBe
 class LottoResultTest : BehaviorSpec({
 
     Given("고객이 로또를 구매한 금액과 로또 결과가 존재한다면") {
-        val customer = Customer("14000")
+        val customer = Customer.of("14000")
         val lottoResult = LottoResult(
             mapOf(
                 LottoRank.FOURTH_PLACE to 1
