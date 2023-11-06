@@ -22,7 +22,7 @@ class LottoController(
     fun end(request: EndLottoRequest): EndLottoResponse {
         val winningNumbers = WinningNumbers.of(request.winningNumbers)
         val result = lottoManager.getResult(winningNumbers)
-        val totalPrizeAmount = LottoAccountant.getTotalPrizeAmount(result, LottoSpec.prizesInfo)
+        val totalPrizeAmount = LottoAccountant.calculateTotalPrize(result, LottoSpec.prizesInfo)
         val earningRate = bank.receivePrize(totalPrizeAmount)
         return EndLottoResponse(earningRate)
     }

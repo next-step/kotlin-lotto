@@ -15,7 +15,7 @@ class LottoResultSpec : FunSpec({
         val ticketCount = 2
         val lottoResult = LottoResult(matchedNumberCount = matchedCount, ticketCount = ticketCount)
 
-        val result = lottoResult.getPrizeAmount(prizesInfo)
+        val result = lottoResult.calculatePrize(prizesInfo)
 
         result.shouldNotBeNull()
         result shouldBe prizeAmount * ticketCount

@@ -4,11 +4,11 @@ object LottoAccountant {
     fun calculateTicketCount(amountToPurchase: Amount, ticketPrice: Amount = LottoSpec.PRICE): TicketCount =
         TicketCount(calculateCount(amountToPurchase, ticketPrice))
 
-    fun getTotalPrizeAmount(
+    fun calculateTotalPrize(
         results: List<LottoResult>,
         prizeInfo: List<WinningPrize>
     ): Amount = results.fold(Amount(0)) { total, result ->
-        total + result.getPrizeAmount(prizeInfo)
+        total + result.calculatePrize(prizeInfo)
     }
 
     private fun calculateCount(amount: Amount, ticketPrice: Amount): Int {

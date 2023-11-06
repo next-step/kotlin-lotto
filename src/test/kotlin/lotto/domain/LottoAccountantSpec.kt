@@ -18,7 +18,7 @@ class LottoAccountantSpec : FunSpec({
                 WinningPrize(matchedCount = 2, Amount(2000)),
             )
 
-            val result = LottoAccountant.getTotalPrizeAmount(lottoResult, prizeInfo)
+            val result = LottoAccountant.calculateTotalPrize(lottoResult, prizeInfo)
 
             result shouldBe Amount(5 * 1000 + 10 * 2000)
         }
