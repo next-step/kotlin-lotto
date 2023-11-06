@@ -12,7 +12,7 @@ object ResultView {
     fun printLottos(lottos: List<Lotto>) {
         println("${lottos.size}개를 구매했습니다.")
         for (lotto in lottos) {
-            val lottoNumbers = lotto.numbers
+            val lottoNumbers = lotto.numbers.sortedBy { it.value }
             println(lottoNumbers.map { it.value }.joinToString(LOTTO_NUMBERS_DELIMITER, LOTTO_NUMBERS_PREFIX, LOTTO_NUMBERS_POSTFIX))
         }
         println()
