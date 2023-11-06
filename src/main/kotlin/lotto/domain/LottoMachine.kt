@@ -12,22 +12,15 @@ class LottoMachine {
     private fun getLottoNumber(): Int = (Math.random() * Lotto.LOTTO_NUMBER_MAX).toInt() + Lotto.LOTTO_NUMBER_MIN
 
     private fun getLottoNumberList(): List<Int> {
-        val lottoNumberList: MutableList<Int> = mutableListOf()
+        val lottoNumberList: List<Int> = (Lotto.LOTTO_NUMBER_MIN..Lotto.LOTTO_NUMBER_MAX).toList()
 
-        while (lottoNumberList.size < LOTTO_NUMBER_COUNT_MAX) {
-            val lottoNumber: Int = this.getLottoNumber()
-
-            if (!lottoNumberList.contains(lottoNumber)) {
-                lottoNumberList.add(lottoNumber)
-            }
-        }
-
-        return lottoNumberList
+        return lottoNumberList.shuffled().subList(LOTTO_NUMBER_COUNT_MIN, LOTTO_NUMBER_COUNT_MAX)
     }
 
     fun getLottoRank(lotto: Lotto, winningLotto: Lotto): LottoRank = LottoRank.findByMatchCount(lotto.getMatchCount(winningLotto))
 
     companion object {
+        private const val LOTTO_NUMBER_COUNT_MIN: Int = 0
         private const val LOTTO_NUMBER_COUNT_MAX: Int = 6
     }
 }
