@@ -2,10 +2,10 @@ package lotto.domain
 
 object FakeIssueStrategy : IssueStrategy {
 
-    private var issueCount = 0
+    private var startNumber = 0
 
     override fun issue(): LottoNumbers {
-        issueCount++
-        return LottoNumbers((issueCount..(issueCount + 5)).map { LottoNumber(it) }.toSet())
+        startNumber++
+        return LottoNumbers((startNumber..(startNumber + 5)).map { LottoNumber(it) }.toSet())
     }
 }

@@ -1,8 +1,8 @@
 package lotto.domain
 
-class LottoRank(matchingCount: List<Int>, private val ticketAmount: Amount) {
+class LottoRank(matchResults: List<MatchResult>, private val ticketAmount: Amount) {
 
-    private val lottoPrizes: List<LottoPrize> = matchingCount.map { LottoPrize.from(it) }
+    private val lottoPrizes: List<LottoPrize> = matchResults.map { it.lottiPrize }
 
     fun getWinningCount(): Map<LottoPrize, Int> = lottoPrizes.groupingBy { it }.eachCount()
 

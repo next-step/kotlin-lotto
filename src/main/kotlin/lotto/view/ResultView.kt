@@ -9,7 +9,8 @@ object ResultView {
     fun writeLottoTicket(lottoTicket: LottoTicket) {
         println("${lottoTicket.lottos.size}개를 구매했습니다.")
         lottoTicket.lottos.forEach {
-            println(it.numbers.map { number -> number.value })
+            println(it.numbers.sortedBy { number -> number.value }
+                .map { number -> number.value })
         }
     }
 

@@ -1,9 +1,12 @@
 package lotto.domain
 
 class LottoTicket(
-    val ticketAmount: Amount,
+    private val ticketAmount: Amount,
     val lottos: List<LottoNumbers>
 ) {
 
-    fun getMatchCount(winningNumber: LottoNumbers): List<Int> = lottos.map { winningNumber.getMatchCount(it) }
+    fun evaluateRank(winningNumber: LottoWinningNumber): LottoRank {
+        val matchResults = lottos.map { winningNumber.evaluateMatchResult(it) }
+        return LottoRank(matchResults, ticketAmount)
+    }
 }

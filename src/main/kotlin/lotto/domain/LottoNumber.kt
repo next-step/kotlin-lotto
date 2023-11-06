@@ -22,6 +22,8 @@ class LottoNumbers(
 
     fun getMatchCount(it: LottoNumbers): Int = numbers.intersect(it.numbers).count()
 
+    fun contains(lottoNumber: LottoNumber): Boolean = numbers.contains(lottoNumber)
+
     companion object {
         const val LOTTO_NUMBER_SIZE = 6
     }
