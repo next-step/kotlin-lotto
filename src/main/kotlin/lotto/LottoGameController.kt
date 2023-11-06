@@ -11,7 +11,6 @@ import lotto.view.LottoInputHandler
 import lotto.view.LottoPurchaseSummaryPrinter
 
 class LottoGameController(
-    private val lottoWinningNumbersExtractor: LottoWinningNumbersExtractor,
     private val lottoTicketManager: LottoTicketManager,
     private val lotteryStatisticsGenerator: LotteryStatisticsGenerator
 ) {
@@ -19,7 +18,7 @@ class LottoGameController(
         val receivedAmount = ReceivedAmount(LottoInputHandler.inputPurchaseAmount())
         val lottoTickets = lottoTicketManager.buyLotto(receivedAmount)
         LottoPurchaseSummaryPrinter.print(lottoTickets)
-        val winningNumbers = lottoWinningNumbersExtractor.extract(LottoInputHandler.inputWinningNumbers())
+        val winningNumbers = LottoWinningNumbersExtractor.extract(LottoInputHandler.inputWinningNumbers())
         val prizeResults = winningNumbers.compilePrizeResults(lottoTickets)
         val profitRate = lotteryStatisticsGenerator.calculateProfitRate(receivedAmount, prizeResults)
         LotteryStatisticsPrinter.print(prizeResults, profitRate)
@@ -28,7 +27,6 @@ class LottoGameController(
 
 fun main() {
     val lottoGameController = LottoGameController(
-        lottoWinningNumbersExtractor = LottoWinningNumbersExtractor(),
         lottoTicketManager = LottoTicketManager(ticketBookingSystem = TicketBookingSystem(LottoTicketGenerator())),
         lotteryStatisticsGenerator = LotteryStatisticsGenerator()
     )

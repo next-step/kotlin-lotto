@@ -11,11 +11,10 @@ class LottoWinningNumbersExtractorTest {
     fun `입력한 당첨 결과를 파싱한다`() {
         // given
         val input = "1,2,3,4,5,6"
-        val lottoWinningNumbersExtractor = LottoWinningNumbersExtractor()
         val expectedLottoNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }.toSet()
 
         // when
-        val lottoWinningNumbers = lottoWinningNumbersExtractor.extract(input)
+        val lottoWinningNumbers = LottoWinningNumbersExtractor.extract(input)
 
         // then
         assertThat(lottoWinningNumbers.sortedLottoNumbers).usingRecursiveComparison().isEqualTo(expectedLottoNumbers)
@@ -25,10 +24,9 @@ class LottoWinningNumbersExtractorTest {
     fun `입력한 당첨 결과가 숫자가 아니면 예외를 던진다`() {
         // given
         val input = "1,2,3,4,5,6a"
-        val lottoWinningNumbersExtractor = LottoWinningNumbersExtractor()
 
         // when, then
-        assertThatThrownBy { lottoWinningNumbersExtractor.extract(input) }
+        assertThatThrownBy { LottoWinningNumbersExtractor.extract(input) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .message().isEqualTo("당첨 번호는 숫자여야 합니다.")
     }
