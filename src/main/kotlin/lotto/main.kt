@@ -8,4 +8,8 @@ fun main() {
     ResultView.showPurchasedLotto(purchasedLottoList)
 
     val lastWinnerLotto = InputView.getLastWinnerLotto()
+
+    val lottoStatResult = LottoStatCalculator(lastWinnerLotto).getStat(purchasedLottoList)
+
+    ResultView.showLottoStatResult(lottoStatResult)
 }
