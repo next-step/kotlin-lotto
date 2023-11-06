@@ -33,6 +33,25 @@ class LottoTest : BehaviorSpec({
         }
     }
 
+    Given("숫자를 입력받으면") {
+        When("로또는") {
+            val lotto = Lotto(1, 2, 3, 4, 5, 6)
+            Then("그 숫자에 해당하는 로또 번호를 갖고 있는지 알려준다.") {
+                forAll(
+                    row(1, true),
+                    row(2, true),
+                    row(3, true),
+                    row(4, true),
+                    row(5, true),
+                    row(6, true),
+                    row(7, false),
+                ) { number, expected ->
+                    lotto.contains(number) shouldBe expected
+                }
+            }
+        }
+    }
+
     Given("다른 로또를 입력받으면") {
         val other = Lotto(1, 2, 3, 7, 8, 9)
         When("로또는") {

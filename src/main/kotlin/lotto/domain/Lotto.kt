@@ -10,7 +10,7 @@ data class Lotto(val numbers: Set<LottoNumber>) {
     constructor(numbers: List<Int>) : this(numbers.map { LottoNumber.from(it) }.toSet())
 
     fun contains(number: Int): Boolean {
-        return numbers.map { it.value }.any { it == number }
+        return LottoNumber.from(number) in numbers
     }
 
     fun matchCount(other: Lotto): Int {
