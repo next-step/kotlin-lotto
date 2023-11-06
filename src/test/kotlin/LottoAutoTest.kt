@@ -12,14 +12,17 @@ value class LottoNumber(val value: Int) {
     }
 }
 
-data class LottoTicket(private val lottoNumberList: List<LottoNumber>) {
+data class LottoTicket(private var _lottoNumberList: List<LottoNumber>) {
+    val lottoNumberList get() = _lottoNumberList
+
     init {
-        require(lottoNumberList.size == 6) {
+        require(_lottoNumberList.size == 6) {
             throw IllegalArgumentException("Invalid size: lotto numbers should have exact 6 numbers: $lottoNumberList")
         }
-        require(lottoNumberList.toSet().size == 6) {
+        require(_lottoNumberList.toSet().size == 6) {
             throw IllegalArgumentException("Duplicated number: lotto numbers should not have duplicated number: $lottoNumberList")
         }
+        _lottoNumberList = _lottoNumberList.sortedBy { it.value }
     }
 }
 
@@ -32,40 +35,123 @@ class LottoSimulator(
 ) {
     fun getTicketCount(): Int {
         val budget = inputView.provideBudget()
-        return budget / 1000
+        return budget / lottoTicketsProvider.provideLottoPrice()
     }
 
-    fun simulate() {
+    fun getTicketPrice(): Int = lottoTicketsProvider.provideLottoPrice() * getTicketCount()
+
+    fun simulate(): LottoResult {
         val lottoTickets = lottoTicketsProvider.provideLottoTickets(getTicketCount())
-
         val winningNumbers = inputView.provideWinningNumbers()
-
-        resultView.printResult(lottoTickets, winningNumbers)
+        val result = resultView.getResult(
+            lottoTickets,
+            winningNumbers,
+            getTicketPrice(),
+            inputView.provideBudget() - getTicketPrice()
+        )
+        resultView.printResult(result)
+        return result
     }
 }
 
 interface InputView {
     fun provideBudget(): Int
 
-    fun provideWinningNumbers(): LottoTicket
+    fun provideWinningNumbers(): WinningNumber
 }
 
 class MockInputView(
     private val budget: Int,
-    private val winningNumbers: LottoTicket,
+    private val winningNumber: WinningNumber,
 ) : InputView {
     override fun provideBudget(): Int = budget
 
-    override fun provideWinningNumbers(): LottoTicket = winningNumbers
+    override fun provideWinningNumbers(): WinningNumber = winningNumber
 }
 
 interface LottoTicketsProvider {
     fun provideLottoTickets(ticketCount: Int): LottoTickets
+
+    fun provideLottoPrice(): Int
 }
 
-class ResultView {
-    fun printResult(lottoTickets: LottoTickets, winningNumbers: LottoTicket) {
+object ResultProvider {
+    fun provideLottoResult(
+        lottoTickets: LottoTickets,
+        winningNumber: WinningNumber,
+        ticketPrice: Int,
+        remainder: Int
+    ): LottoResult {
+        val result = mutableMapOf(
+            (Rank.ThreeHit to 0),
+            (Rank.FourHit to 0),
+            (Rank.FiveHit to 0),
+            (Rank.SixHit to 0),
+        )
+
+        lottoTickets.lottoTicketList.forEach { lottoTicket ->
+            val hitCount = winningNumber.getHitCount(lottoTicket)
+            if (Rank.values().map { it.hitCount }.contains(hitCount)) {
+                val rank = Rank.values().find { it.hitCount == hitCount } ?: return@forEach
+                result[rank]?.plus(1)
+            }
+        }
+
+        var profit = 0
+
+        Rank.values().forEach { rank ->
+            profit += rank.hitCount * rank.prize
+        }
+
+        val profitRate = String.format("%.2f", profit.toDouble() / ticketPrice.toDouble()).toDouble()
+
+        return LottoResult(
+            profit,
+            ticketPrice,
+            remainder,
+            profitRate,
+            result
+        )
     }
+}
+
+data class LottoResult(
+    val profit: Int,
+    val netSpent: Int,
+    val remainder: Int,
+    val profitRate: Double,
+    val rankResult: Map<Rank, Int>
+)
+
+class ResultView(private val resultProvider: ResultProvider = ResultProvider) {
+
+    fun getResult(
+        lottoTickets: LottoTickets,
+        winningNumber: WinningNumber,
+        ticketPrice: Int,
+        remainder: Int
+    ): LottoResult = resultProvider.provideLottoResult(lottoTickets, winningNumber, ticketPrice, remainder)
+
+    fun printResult(lottoResult: LottoResult) {
+
+        var profit = 0
+
+        Rank.values().forEach { rank ->
+            println("${rank.hitCount}개 일치 (${rank.prize}원)- ${lottoResult.rankResult[rank]}개")
+            profit += rank.hitCount * rank.prize
+        }
+
+        val profitRate = String.format("%.2f", profit.toDouble() / lottoResult.netSpent.toDouble()).toDouble()
+
+        println("총 수익률은 $profitRate 입니다.")
+    }
+}
+
+enum class Rank(val hitCount: Int, val prize: Int) {
+    ThreeHit(3, 5_000),
+    FourHit(4, 50_000),
+    FiveHit(5, 1_500_000),
+    SixHit(6, 2_000_000_000),
 }
 
 object AutoProvider : LottoTicketsProvider {
@@ -85,16 +171,32 @@ object AutoProvider : LottoTicketsProvider {
 
         return LottoTickets(tickets)
     }
+
+    override fun provideLottoPrice(): Int = 1000
 }
 
-data class WinningNumber(private val lottoNumberList: List<LottoNumber>) {
+data class WinningNumber(private var _lottoNumberList: List<LottoNumber>) {
+    val lottoNumberList get() = _lottoNumberList
+
     init {
-        require(lottoNumberList.size == 6) {
+        require(_lottoNumberList.size == 6) {
             throw IllegalArgumentException("Invalid Winning number size: winning number should have exact 6 numbers: $lottoNumberList")
         }
-        require(lottoNumberList.toSet().size == 6) {
+        require(_lottoNumberList.toSet().size == 6) {
             throw IllegalArgumentException("Duplicated winning number: winning number should not have duplicated number: $lottoNumberList")
         }
+        _lottoNumberList = _lottoNumberList.sortedBy { it.value }
+    }
+
+    fun getHitCount(lottoTicket: LottoTicket): Int {
+        var hitCount = 0
+
+        lottoTicket.lottoNumberList.forEach {
+            if (lottoNumberList.contains(it)) {
+                hitCount += 1
+            }
+        }
+        return hitCount
     }
 }
 
@@ -180,7 +282,7 @@ class LottoAutoTest : StringSpec({
         LottoSimulator(
             inputView = MockInputView(
                 budget = 1000,
-                winningNumbers = LottoTicket(
+                winningNumber = WinningNumber(
                     listOf(
                         LottoNumber(1),
                         LottoNumber(2),
@@ -199,8 +301,8 @@ class LottoAutoTest : StringSpec({
     "should buy as many lotto tickets as possible with budget" {
         LottoSimulator(
             MockInputView(
-                budget = 1001,
-                winningNumbers = LottoTicket(
+                budget = 1000,
+                winningNumber = WinningNumber(
                     listOf(
                         LottoNumber(1),
                         LottoNumber(2),
@@ -218,7 +320,7 @@ class LottoAutoTest : StringSpec({
         LottoSimulator(
             MockInputView(
                 budget = 300,
-                winningNumbers = LottoTicket(
+                winningNumber = WinningNumber(
                     listOf(
                         LottoNumber(1),
                         LottoNumber(2),
@@ -236,7 +338,7 @@ class LottoAutoTest : StringSpec({
         LottoSimulator(
             MockInputView(
                 budget = 5000,
-                winningNumbers = LottoTicket(
+                winningNumber = WinningNumber(
                     listOf(
                         LottoNumber(1),
                         LottoNumber(2),
@@ -281,6 +383,23 @@ class LottoAutoTest : StringSpec({
     }
 
     "winning statistics should show correct win state" {
+        LottoSimulator(
+            MockInputView(
+                budget = 5000,
+                winningNumber = WinningNumber(
+                    listOf(
+                        LottoNumber(1),
+                        LottoNumber(2),
+                        LottoNumber(3),
+                        LottoNumber(4),
+                        LottoNumber(5),
+                        LottoNumber(6),
+                    )
+                ),
+            ),
+            lottoTicketsProvider = AutoProvider,
+            resultView = ResultView(),
+        ).simulate()
     }
 
     "winning statistics should show correct ROI" {
