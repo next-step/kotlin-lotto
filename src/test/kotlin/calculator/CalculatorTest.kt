@@ -21,7 +21,7 @@ class CalculatorTest : FunSpec({
 
     test("계산기에 입력받은 문자열이 “//\n3;3”일 경우 예외를 던진다.") {
         shouldThrow<IllegalArgumentException> {
-            Calculator.calculate("///\\n3\\n3")
+            Calculator.calculate("//\\n3;n3")
         }
     }
 

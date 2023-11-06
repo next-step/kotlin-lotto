@@ -35,23 +35,20 @@ object Calculator {
 
     private fun setDelimiter(equation: String) {
 
-        delimiterList = if (equation.startsWith(CUSTOM_DELIMITER_START_FLAG)) {
-            require(
-                equation.length >= CUSTOM_DELIMITER_MIN_LENGTH && equation.take(CUSTOM_DELIMITER_MIN_LENGTH)
-                    .contains(CUSTOM_DELIMITER_END_FLAG)
-            )
-            listOf(equation[CUSTOM_DELIMITER_INDEX].toString())
-        } else {
-            listOf(DEFAULT_DELIMITER_1, DEFAULT_DELIMITER_2)
+        if (equation.startsWith(CUSTOM_DELIMITER_START_FLAG)) {
+            require(equation.length >= CUSTOM_DELIMITER_MIN_LENGTH && equation.take(CUSTOM_DELIMITER_MIN_LENGTH).contains(CUSTOM_DELIMITER_END_FLAG))
+            delimiterList = listOf(equation[CUSTOM_DELIMITER_INDEX].toString())
+            return
         }
+
+        delimiterList = listOf(DEFAULT_DELIMITER_1, DEFAULT_DELIMITER_2)
     }
 
     private fun getNumberList(equation: String): List<Int> {
+        var numberTextList = equation.split(*delimiterList.toTypedArray())
 
-        val numberTextList = if (equation.startsWith(CUSTOM_DELIMITER_START_FLAG)) {
-            equation.drop(CUSTOM_DELIMITER_DROP_INDEX).split(*delimiterList.toTypedArray())
-        } else {
-            equation.split(*delimiterList.toTypedArray())
+        if (equation.startsWith(CUSTOM_DELIMITER_START_FLAG)) {
+            numberTextList = equation.drop(CUSTOM_DELIMITER_DROP_INDEX).split(*delimiterList.toTypedArray())
         }
 
         require(numberTextList.all { it.toIntOrNull() != null && it.toInt() >= NUMBER_MIN_VALUE && it.toInt() <= NUMBER_MAX_VALUE })
