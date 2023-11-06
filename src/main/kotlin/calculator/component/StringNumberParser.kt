@@ -53,7 +53,7 @@ class StringNumberParser {
                 .toULong()
                 .toInt()
         } catch (e: Exception) {
-            throw RuntimeException("숫자는 0 또는 자연수만 가능합니다. $stringNumber")
+            throw IllegalArgumentException("숫자는 0 또는 자연수만 가능합니다. $stringNumber")
         }
     }
 
