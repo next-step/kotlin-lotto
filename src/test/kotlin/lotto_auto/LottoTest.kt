@@ -55,4 +55,16 @@ class LottoTest : FunSpec({
             }
         }
     }
+
+    test("보너스 번호를 포함 하고 있지 않는 것을 확인") {
+        val expected = 45
+        val bonusContainedLotto = Lotto(numberList = listOf(1, 2, 3, 4, 5, 6))
+        bonusContainedLotto.isMatchedBonusBall(expected) shouldBe false
+    }
+
+    test("보너스 번호를 포함 하고 있는 것을 확인") {
+        val expected = 45
+        val bonusContainedLotto = Lotto(numberList = listOf(1, 2, 3, 4, 5, 45))
+        bonusContainedLotto.isMatchedBonusBall(expected) shouldBe true
+    }
 })

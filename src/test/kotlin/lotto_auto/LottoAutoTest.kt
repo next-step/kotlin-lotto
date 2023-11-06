@@ -11,8 +11,9 @@ class LottoAutoTest : StringSpec({
         // 로또 당첨 금액 (1) - 0원   (2) - 50000원
         val input = listOf(Lotto(listOf(1, 2, 3, 4, 5, 6)), Lotto(listOf(2, 4, 6, 8, 12, 15)))
         val winningLotto = Lotto(listOf(3, 6, 9, 12, 15, 18))
+        val bonusBallNumber = 33
         val expected = 5000
-        val matchedList = input.map { it.lottoMatchCount(winningLotto) }
+        val matchedList = LottoAuto.matchedLottoCountWithBonusBall(input, winningLotto, bonusBallNumber)
 
         LottoAuto.sumOfWonLottoList(matchedList) shouldBe expected
     }
@@ -27,13 +28,16 @@ class LottoAutoTest : StringSpec({
         val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         // 순서대로 3,4,5,6개 맞아서 리스트에 LottoPrize와 함께 1,1,1,1가 저장됨
         val expected = mapOf(
+            LottoPrize.FIFTH_PRIZE to 1,
             LottoPrize.FOURTH_PRIZE to 1,
             LottoPrize.THIRD_PRIZE to 1,
-            LottoPrize.SECOND_PRIZE to 1,
+            LottoPrize.SECOND_PRIZE to 0,
             LottoPrize.FIRST_PRIZE to 1
         )
+        val bonusBallNumber = 45
+        val eachLottoMatchCount = LottoAuto.matchedLottoCountWithBonusBall(input, winningLotto, bonusBallNumber)
         val matchedList =
-            input.map { it.lottoMatchCount(winningLotto) }.filter { it > 2 }.map { LottoPrize.getLottoPrize(it) }
+            eachLottoMatchCount.map { LottoPrize.getLottoPrize(it.first, it.second) }
 
         LottoAuto.matchCountList(matchedList) shouldBe expected
     }
@@ -49,7 +53,8 @@ class LottoAutoTest : StringSpec({
         // 5개 샀고, 1번 로또가 4개 당첨 되어 5 만원
         val winningLotto = Lotto(listOf(1, 2, 3, 4, 31, 32))
         val inputAmount = 5000
-        val matchedList = input.map { it.lottoMatchCount(winningLotto) }.filter { it > 2 }
+        val bonusBallNumber = 45
+        val matchedList = LottoAuto.matchedLottoCountWithBonusBall(input, winningLotto, bonusBallNumber)
         val resultSum = LottoAuto.sumOfWonLottoList(matchedList)
 
         val expected = resultSum.toFloat() / inputAmount.toFloat()

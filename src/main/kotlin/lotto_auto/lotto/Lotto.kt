@@ -21,6 +21,8 @@ data class Lotto(
         return numberList.contains(number)
     }
 
+    fun isMatchedBonusBall(bonusNumber: Int): Boolean = numberList.contains(bonusNumber)
+
     companion object {
         private const val NUMBER_LIST_COUNT = 6
         private const val COUNT_IS_WRONG = "생성된 로또 번호의 개수가 틀렸습니다"
