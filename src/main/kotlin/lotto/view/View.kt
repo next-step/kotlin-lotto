@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.dto.LottoNumbers
+import lotto.dto.LottoPrice
 import lotto.dto.LottoResult
 
 object View {
@@ -12,6 +13,11 @@ object View {
     fun inputWinningNumber(): LottoNumbers {
         println("지난 주 당첨 번호를 입력해 주세요.")
         return LottoNumbers(readln().split(",").map { it.trim().toInt() })
+    }
+
+    fun inputBonusNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        return readln().toIntOrNull() ?: 0
     }
 
     fun outputBuyCount(count: Int) {
@@ -28,8 +34,8 @@ object View {
     fun outputResult(money: Int, result: LottoResult) {
         println("당첨 통계")
         println("---------")
-        for (i in 3..6) {
-            println("${i}개 일치 (${result.getPrice(i)}원) - ${result.getExact(i)}개")
+        for (rank in LottoPrice.rankOf()) {
+            println("${rank.text} (${rank.price}원) - ${result.getExact(rank)}개")
         }
         println("총 수익률은 %.2f입니다.".format(result.getRatio(money)))
     }

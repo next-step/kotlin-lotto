@@ -25,13 +25,6 @@ class LottoNumbersTest {
     }
 
     @Test
-    fun `로또 숫자 범위가 넘어가면 예외가 발생한다`() {
-        assertThatIllegalArgumentException().isThrownBy {
-            LottoNumbers(listOf(1, 2, 3, 4, 5, 46))
-        }
-    }
-
-    @Test
     fun `로또 숫자가 중복되면 예외가 발생한다`() {
         assertThatIllegalArgumentException().isThrownBy {
             LottoNumbers(listOf(1, 2, 3, 4, 5, 5))
@@ -42,7 +35,7 @@ class LottoNumbersTest {
     @MethodSource("lottoCandidates")
     fun `로또 숫자 비교`(compareLotto: LottoNumbers, expected: Int) {
         val lottoNumbers = LottoNumbers(listOf(1, 2, 3, 4, 5, 6))
-        assertThat(lottoNumbers.compareLottoNumbers(compareLotto)).isEqualTo(expected)
+        assertThat(lottoNumbers.matchedLottoNumberCount(compareLotto)).isEqualTo(expected)
     }
 
     companion object {

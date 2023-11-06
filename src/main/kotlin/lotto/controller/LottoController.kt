@@ -4,6 +4,7 @@ import lotto.dto.LottoNumberGenerator
 import lotto.dto.LottoNumbers
 import lotto.dto.LottoNumbers.Companion.LOTTO_PRICE
 import lotto.dto.LottoResult
+import lotto.dto.LottoWinningNumbers
 import lotto.view.View
 
 class LottoController {
@@ -13,7 +14,8 @@ class LottoController {
         View.outputBuyCount(lottos.size)
         View.outputBuyLottoNumbers(lottos)
         val winningNumber = View.inputWinningNumber()
-        val result = checkResult(lottos, winningNumber)
+        val bonusNumber = View.inputBonusNumber()
+        val result = checkResult(lottos, LottoWinningNumbers(winningNumber, bonusNumber))
         View.outputResult(money, result)
     }
 
@@ -25,10 +27,10 @@ class LottoController {
         return buyLottos
     }
 
-    private fun checkResult(lottos: List<LottoNumbers>, winningNumber: LottoNumbers): LottoResult {
+    private fun checkResult(lottos: List<LottoNumbers>, winningNumber: LottoWinningNumbers): LottoResult {
         val result = LottoResult()
         lottos.forEach {
-            result.updateExact(it.compareLottoNumbers(winningNumber))
+            result.updateExact(winningNumber.compareLottoNumbers(it))
         }
         return result
     }
