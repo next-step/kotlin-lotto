@@ -49,7 +49,9 @@ class LottoAutoTest : StringSpec({
         // 5개 샀고, 1번 로또가 4개 당첨 되어 5 만원
         val winningLotto = Lotto(listOf(1, 2, 3, 4, 31, 32))
         val inputAmount = 5000
-        val resultSum = 50000
+        val matchedList = input.map { it.lottoMatchCount(winningLotto) }.filter { it > 2 }
+        val resultSum = LottoAuto.sumOfWonLottoList(matchedList)
+
         val expected = resultSum.toFloat() / inputAmount.toFloat()
 
         LottoAuto.earningRate(resultSum, inputAmount) shouldBe expected
