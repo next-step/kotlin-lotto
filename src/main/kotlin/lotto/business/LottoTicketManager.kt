@@ -9,10 +9,6 @@ class LottoTicketManager(
     val tickets: List<LottoTicket>
         get() = _tickets.toList()
 
-    fun add(ticket: LottoTicket) {
-        _tickets.add(ticket)
-    }
-
     fun addAll(tickets: List<LottoTicket>) {
         this._tickets.addAll(tickets)
     }

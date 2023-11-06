@@ -7,31 +7,6 @@ import org.junit.jupiter.api.assertAll
 class LottoTicketManagerTest {
 
     @Test
-    fun `로또 티켓을 추가한다`() {
-        // given
-        val lottoTicketManager = LottoTicketManager()
-        val ticket = LottoTicket(
-            setOf(
-                LottoNumber(1),
-                LottoNumber(2),
-                LottoNumber(3),
-                LottoNumber(4),
-                LottoNumber(5),
-                LottoNumber(6)
-            )
-        )
-
-        // when
-        lottoTicketManager.add(ticket)
-
-        // then
-        assertAll(
-            { assertThat(lottoTicketManager.tickets).hasSize(1) },
-            { assertThat(lottoTicketManager.tickets[0]).isEqualTo(ticket) }
-        )
-    }
-
-    @Test
     fun `로또 티켓 리스트를 추가한다`() {
         // given
         val lottoTicketManager = LottoTicketManager()
