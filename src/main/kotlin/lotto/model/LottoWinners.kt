@@ -8,13 +8,13 @@ data class LottoWinners(
     val countOf5th: Int = 0,
 ) {
 
-    fun earningRate(pricePerGame: Int): Pair<Double, String> {
+    fun earningInfo(pricePerGame: Int): Pair<Double, String> {
         val rate = earnAmount().toDouble() / (pricePerGame.toDouble() * totalGameCount)
         return Pair(
             rate,
-            when (rate > 1.toDouble()) {
-                true -> "이익"
-                false -> "손해"
+            when (rate > BENEFIT_LOSS_CROSS_POINT) {
+                true -> BENEFIT_MESSAGE
+                false -> LOSS_MESSAGE
             }
         )
     }
@@ -31,6 +31,8 @@ data class LottoWinners(
         private const val PRIZE_3RD: Int = 1500000
         private const val PRIZE_4th: Int = 50000
         private const val PRIZE_5th: Int = 5000
-        private const val PRIZE_UNIT: String = "원"
+        private const val BENEFIT_LOSS_CROSS_POINT: Double = 1.toDouble()
+        private const val BENEFIT_MESSAGE: String = "이익"
+        private const val LOSS_MESSAGE: String = "손해"
     }
 }
