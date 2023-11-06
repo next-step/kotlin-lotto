@@ -1,3 +1,5 @@
+package calculator
+
 class StringAddCalculator {
     fun add(text: String?): Int {
         text ?: return 0
