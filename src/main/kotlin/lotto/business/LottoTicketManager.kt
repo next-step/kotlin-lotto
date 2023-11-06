@@ -1,11 +1,13 @@
 package lotto.business
 
 class LottoTicketManager(
-    private val _tickets: MutableList<LottoTicket> = mutableListOf(),
+    tickets: List<LottoTicket> = mutableListOf(),
     private val ticketBookingSystem: TicketBookingSystem = TicketBookingSystem(LottoTicketGenerator())
 ) {
+    private val _tickets: MutableList<LottoTicket> = tickets.toMutableList()
+
     val tickets: List<LottoTicket>
-        get() = _tickets
+        get() = _tickets.toList()
 
     fun add(ticket: LottoTicket) {
         _tickets.add(ticket)
