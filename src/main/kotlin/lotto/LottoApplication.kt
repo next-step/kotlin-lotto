@@ -13,7 +13,7 @@ fun main() {
     ResultView.printLottos(lottos)
 
     val inputWinningNumbers = InputView.inputWinningNumbers()
-    val resultCalculator = LottoResultCalculator(Lotto(inputWinningNumbers))
+    val resultCalculator = LottoResultCalculator(Lotto(inputWinningNumbers), 0)
     val result = resultCalculator.calculateResult(lottos)
 
     ResultView.printResult(result)
