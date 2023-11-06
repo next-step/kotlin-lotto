@@ -17,14 +17,13 @@ data class LottoWinners(
                 false -> "손해"
             }
         )
-
     }
 
     private fun earnAmount(): Int {
         return (PRIZE_1ST * countOf1st) +
-                (PRIZE_3RD * countOf3rd) +
-                (PRIZE_4th * countOf4th) +
-                (PRIZE_5th * countOf5th)
+            (PRIZE_3RD * countOf3rd) +
+            (PRIZE_4th * countOf4th) +
+            (PRIZE_5th * countOf5th)
     }
 
     companion object {
