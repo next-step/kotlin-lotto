@@ -3,13 +3,20 @@ package stringAddCalculator
 import java.lang.RuntimeException
 
 object Tokenizer {
-    fun tokenize(text: String): List<String> {
-        return Separator.separateByCustomDelimiter(text) ?: Separator.separate(text)
+    fun tokenize(text: String?): List<String> {
+        if (text.isNullOrBlank()) { return listOf("0") }
+        return  Separator.separateByCustomDelimiter(text) ?: Separator.separate(text)
     }
 
-    fun validatePositive(tokens: List<String>): Boolean {
-        return tokens.all {
-            (it.trim().toIntOrNull()?.let { num -> num >= 0 } ?: throw RuntimeException("구분자를 제외한 입력값은 숫자여야 합니다."))
+    fun validate(tokens: List<String>) {
+        tokens.all {
+            require(it.trim().toIntOrNull() != null) {
+                "구분자를 제외한 입력값은 숫자여야 합니다."
+            }
+            require(it.trim().toInt() >= 0) {
+                "음수는 입력할 수 없습니다."
+            }
+            true
         }
     }
 }
