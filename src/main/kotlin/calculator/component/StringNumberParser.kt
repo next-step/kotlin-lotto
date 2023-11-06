@@ -14,7 +14,7 @@ class StringNumberParser {
     }
 
     private fun getCustomSeparator(input: String): String? {
-        return Regex(CUSTOM_SEPARATOR_PATTERN).find(input)
+        return customSeparatorRegex.find(input)
             ?.groupValues
             ?.get(1)
     }
@@ -60,6 +60,6 @@ class StringNumberParser {
     companion object {
         private const val DEFAULT_SEPARATOR_PATTERN = """,|:"""
         private const val CUSTOM_SEPARATOR_STRING_NUMBERS_SEPARATOR = "\\n"
-        private const val CUSTOM_SEPARATOR_PATTERN = """^//(.)\\n(.*)$"""
+        private val customSeparatorRegex = """^//(.)\\n(.*)$""".toRegex()
     }
 }
