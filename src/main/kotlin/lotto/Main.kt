@@ -9,6 +9,7 @@ import lotto.view.View
 fun main() {
 
     val lottoShop = LottoShop()
+    val lottoMachine = LottoMachine()
     val purchaseFee = View.messagePrintAndGetLine(LottoMessage.INPUT_PURCHASE_FEE)
     val customer = Customer.of(purchaseFee)
     val lotto = lottoShop.buyLotto(customer)
@@ -16,7 +17,7 @@ fun main() {
     View.lottoBuyResultPrint(lotto)
 
     val winningNumbers = View.messagePrintAndGetLine(LottoMessage.INPUT_WINNING_NUMBERS)
-    val lottoResult = LottoMachine(winningNumbers).checkLottoResult(lotto)
+    val lottoResult = lottoMachine.checkLottoResult(lotto, winningNumbers)
 
     View.lottoRankStatisticsPrint(lottoResult)
     View.lottoRateOfReturnPrint(lottoResult, customer)

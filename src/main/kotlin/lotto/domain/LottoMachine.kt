@@ -2,17 +2,11 @@ package lotto.domain
 
 import java.lang.IllegalArgumentException
 
-class LottoMachine(
-    winningNumbers: String
-) {
-    private val winningNumbers: List<Int>
+class LottoMachine{
 
-    init {
-        this.winningNumbers = getParsedWinningNumbers(winningNumbers)
-    }
-
-    fun checkLottoResult(lotto: Lotto): LottoResult {
-        val lottoResult = lotto.getAllSameNumberCount(winningNumbers)
+    fun checkLottoResult(lotto: Lotto, winningNumbers: String): LottoResult {
+        val parsedWinningNumbers = getParsedWinningNumbers(winningNumbers)
+        val lottoResult = lotto.getAllSameNumberCount(parsedWinningNumbers)
             .mapNotNull { LottoRank.of(it) }
             .groupingBy { it }
             .fold(0) { acc, _ -> acc + 1 }
