@@ -2,8 +2,10 @@ package lotto.controller
 
 import lotto.model.CorrectnessInfo
 import lotto.model.LottoInfo
+import lotto.model.getTotalPrizeMoney
 import lotto.ui.InputView
 import lotto.ui.ResultView
+import kotlin.math.round
 
 class LottoController(
     private val inputPurchaseAmount: String,
@@ -22,10 +24,21 @@ class LottoController(
         val correctnessInfoList = mutableListOf<CorrectnessInfo>()
         correctnessArray.forEachIndexed { countOfCorrectness, numsOfLottoInfo ->
             if (countOfCorrectness >= minCorrectnessCountForShow) {
-                correctnessInfoList.add(CorrectnessInfo(countOfCorrectness, numsOfLottoInfo))
+                correctnessInfoList.add(
+                    CorrectnessInfo(
+                        countOfCorrectness,
+                        numsOfLottoInfo,
+                        winPrizeMoney[countOfCorrectness]
+                    )
+                )
             }
         }
         return correctnessInfoList
+    }
+
+    fun calculateEarningRate(prizeMoneyToTake: Long): Double {
+        val paidMoney = getValidatePurchaseAmount()
+        return round(prizeMoneyToTake.toDouble() / paidMoney.toDouble() * 100) / 100
     }
 
     fun countCorrectNumberCount(generatedLottoInfo: LottoInfo, latestWinLottoInfo: LottoInfo): Int {
@@ -90,6 +103,8 @@ fun main() {
     val latestWinInfo = InputView.getLatestWinInfo()
     val correctnessInfoList =
         lottoController.classifyCorrectness(generatedLottoInfos, latestWinInfo, minCorrectnessCountForShow = 3)
-
     ResultView.showCorrectnessStatistics(correctnessInfoList, minCorrectnessCountForShow = 3)
+
+    val earningRate = lottoController.calculateEarningRate(correctnessInfoList.getTotalPrizeMoney())
+    ResultView.showEarningRate(earningRate)
 }

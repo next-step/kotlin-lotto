@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.controller.LottoController.Companion.LOTTO_NUMBER_COUNT
 import lotto.model.LottoInfo
+import lotto.model.getTotalPrizeMoney
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -9,6 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.params.provider.ValueSource
+import kotlin.math.round
 
 class LottoControllerTest {
 
@@ -68,6 +70,32 @@ class LottoControllerTest {
         assertThat(
             correctnessInfo.find { info -> info.correctnessNumCount == 6 }?.correctLottoInfoCount ?: 0
         ).isEqualTo(1)
+    }
+
+    @Test
+    fun `수익률 확인`() {
+        val latestWinLottoInfo = LottoInfo(listOf(1, 2, 3, 4, 5, 6))
+        val generatedInfos = listOf(
+            LottoInfo(listOf(1, 20, 30, 40, 41, 42)), // 1개 일치
+            LottoInfo(listOf(1, 2, 3, 4, 5, 16)), // 5개 일치
+            LottoInfo(listOf(1, 2, 3, 4, 5, 27)), // 5개 일치
+            LottoInfo(listOf(1, 2, 3, 4, 5, 6)), // 6개 일치
+        )
+
+        val paidMoney = 1000
+
+        val lottoController = LottoController(paidMoney.toString())
+
+        val correctnessInfo = lottoController.classifyCorrectness(
+            generatedInfos,
+            latestWinLottoInfo,
+            minCorrectnessCountForShow = 3
+        )
+
+        val prizeMoneyToTake = correctnessInfo.getTotalPrizeMoney()
+        assertThat(lottoController.calculateEarningRate(prizeMoneyToTake)).isEqualTo(
+            round(2003000000.toDouble() / 1000.toDouble() * 100) / 100
+        )
     }
 
     companion object {

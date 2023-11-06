@@ -32,4 +32,8 @@ object ResultView {
             println("${correctnessNumberCount}개 일치 (${LottoController.winPrizeMoney[correctnessNumberCount]}원) - ${count}개")
         }
     }
+
+    fun showEarningRate(earningRate: Double) {
+        println("총 수익률은 ${earningRate}입니다.")
+    }
 }
