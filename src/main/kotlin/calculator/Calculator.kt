@@ -36,7 +36,7 @@ class Calculator(expression: String) {
         return numbers.all { it.matches(Regex("\\d+")) }
     }
 
-    fun exec(): Int {
+    fun sum(): Int {
         if (numbers.isEmpty()) {
             return 0
         }
