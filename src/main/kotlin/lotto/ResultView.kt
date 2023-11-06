@@ -10,6 +10,8 @@ object ResultView {
     }
 
     fun showLottoStatResult(lottoStatResult: LottoStatResult) {
+        val returnRate = lottoStatResult.getReturnRate()
+
         println()
         println("당첨 통계")
         println("---------")
@@ -17,5 +19,6 @@ object ResultView {
         println("4개 일치 (${LottoStatResult.FOURTH_PLACE_REWARD}원)- ${lottoStatResult.fourthCount}개")
         println("5개 일치 (${LottoStatResult.THIRD_PLACE_REWARD}원)- ${lottoStatResult.thirdCount}개")
         println("6개 일치 (${LottoStatResult.FIRST_PLACE_REWARD}원)- ${lottoStatResult.firstCount}개")
+        println("총 수익률은 ${returnRate}입니다.${if (returnRate < 1) "(기준이 1이기 때문에 결과적으로 손해라는 의미임)" else ""}")
     }
 }
