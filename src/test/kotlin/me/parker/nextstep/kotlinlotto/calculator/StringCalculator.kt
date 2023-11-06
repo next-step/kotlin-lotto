@@ -13,11 +13,17 @@ object StringCalculator {
         val textAfterNewline = matchedResult?.groupValues?.get(2)
 
         if (!customSeparator.isNullOrEmpty() && !textAfterNewline.isNullOrEmpty()) {
-            return textAfterNewline.split(DEFAULT_SEPARATOR_COMMA, DEFAULT_SEPARATOR_COLON, customSeparator)
-                .sumOf { it.toInt() }
+            return calculate(textAfterNewline, DEFAULT_SEPARATOR_COMMA, DEFAULT_SEPARATOR_COLON, customSeparator)
         }
 
-        return input.split(DEFAULT_SEPARATOR_COMMA, DEFAULT_SEPARATOR_COLON)
-            .sumOf { it.toInt() }
+        return calculate(input, DEFAULT_SEPARATOR_COMMA, DEFAULT_SEPARATOR_COLON)
     }
+
+    private fun calculate(formula: String, vararg separators: String) =
+        formula.split(*separators)
+            .sumOf {
+                val number = it.toInt()
+                if (number < 0) throw RuntimeException("음수는 입력할 수 없습니다.")
+                number
+            }
 }
