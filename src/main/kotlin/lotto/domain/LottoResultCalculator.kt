@@ -8,7 +8,7 @@ class LottoResultCalculator(private val winningNumbers: Lotto) {
         val result = mutableMapOf<Rank, Int>()
         for (lotto in lottos) {
             val matchCount = winningNumbers.matchCount(lotto)
-            val rank = Rank.from(matchCount)
+            val rank = Rank.from(matchCount, false)
             val lottoCount = result.getOrDefault(rank, 0)
             result.putIfAbsent(rank, lottoCount + 1)
         }
