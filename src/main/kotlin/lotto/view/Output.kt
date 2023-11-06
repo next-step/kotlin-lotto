@@ -5,43 +5,41 @@ import lotto.domain.Lotto
 import lotto.domain.LottoMessage
 import lotto.domain.LottoRank
 import lotto.domain.LottoResult
-import java.lang.IllegalArgumentException
 
-object View {
+object Output {
 
-    fun messagePrintAndGetLine(message: LottoMessage): String {
-        println(message)
-        return getLine()
+    fun printlnAny(message: Any) {
+        println(message.toString())
     }
 
     fun lottoBuyResultPrint(lotto: Lotto) {
-        println(LottoMessage.PRINT_PURCHASE_QUANTITY.message.format(lotto.lines.size))
-        println(lotto.lines.joinToString("\n"))
+        this.printlnAny(LottoMessage.PRINT_PURCHASE_QUANTITY.message.format(lotto.lines.size))
+        this.printlnAny(lotto.lines.joinToString("\n") {
+            it.line.joinToString(", ", "[", "]")
+        })
     }
 
-    private fun getLine() = readlnOrNull() ?: throw IllegalArgumentException("입력하여 주세요.")
+    fun lottoRateOfReturnPrint(lottoResult: LottoResult, customer: Customer) {
+        this.printlnAny(LottoMessage.PRINT_LOTTO_RATE_OF_RETURN.message.format(lottoResult.getRateOfReturn(customer)))
+    }
 
     fun lottoRankStatisticsPrint(lottoResult: LottoResult) {
         val rankStatistics = LottoRank.values()
             .sortedBy { it.amount }
             .joinToString("\n") {
-                val (sameCount, amount, quantity) = getLottoWinnings(it, lottoResult)
+                val (sameCount, amount, quantity) = this.getLottoWinnings(it, lottoResult)
                 LottoMessage.PRINT_LOTTO_RANK.message.format(
                     sameCount,
                     amount,
                     quantity
                 )
             }
-        println(LottoMessage.PRINT_LOTTO_STATISTICS)
-        println(rankStatistics)
+        this.printlnAny(LottoMessage.PRINT_LOTTO_STATISTICS)
+        this.printlnAny(rankStatistics)
     }
 
     private fun getLottoWinnings(rank: LottoRank, lottoResult: LottoResult): Triple<Int, Int, Int> {
         val quantity = lottoResult[rank] ?: 0
         return Triple(rank.sameCount, rank.amount, quantity)
-    }
-
-    fun lottoRateOfReturnPrint(lottoResult: LottoResult, customer: Customer) {
-        print(LottoMessage.PRINT_LOTTO_RATE_OF_RETURN.message.format(lottoResult.getRateOfReturn(customer)))
     }
 }
