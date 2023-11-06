@@ -87,6 +87,17 @@ object AutoProvider : LottoTicketsProvider {
     }
 }
 
+data class WinningNumber(private val lottoNumberList: List<LottoNumber>) {
+    init {
+        require(lottoNumberList.size == 6) {
+            throw IllegalArgumentException("Invalid Winning number size: winning number should have exact 6 numbers: $lottoNumberList")
+        }
+        require(lottoNumberList.toSet().size == 6) {
+            throw IllegalArgumentException("Duplicated winning number: winning number should not have duplicated number: $lottoNumberList")
+        }
+    }
+}
+
 class LottoAutoTest : StringSpec({
     "each lotto ticket number not in 1..45 should throw IllegalArgumentException" {
         assertThatThrownBy {
@@ -105,7 +116,7 @@ class LottoAutoTest : StringSpec({
             .hasMessageContaining("Invalid number")
     }
 
-    "lotto ticket should having exact 6 numbers should throw IllegalArgumentException" {
+    "lotto ticket should have exact 6 numbers else throw IllegalArgumentException" {
         assertThatThrownBy {
             LottoTicket(
                 listOf(
@@ -135,7 +146,7 @@ class LottoAutoTest : StringSpec({
             .hasMessageContaining("Invalid size")
     }
 
-    "lotto ticket with same numbers should throw RuntimeException" {
+    "lotto ticket with same numbers should throw IllegalArgumentException" {
         assertThatThrownBy {
             LottoTicket(
                 listOf(
@@ -241,7 +252,32 @@ class LottoAutoTest : StringSpec({
         ).getTicketCount().shouldBe(5)
     }
 
-    "winning numbers with same number should throw IllegalArgumentException" {
+    "winning number should have exact 6 numbers else throw IllegalArgumentException" {
+        assertThatThrownBy {
+            WinningNumber(
+                listOf(1, 2, 3, 4, 5)
+                    .map { LottoNumber(it) }
+            )
+        }.isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessageContaining("Invalid Winning number size")
+
+        assertThatThrownBy {
+            WinningNumber(
+                listOf(1, 2, 3, 4, 5, 6, 7)
+                    .map { LottoNumber(it) }
+            )
+        }.isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessageContaining("Invalid Winning number size")
+    }
+
+    "winning number with same number should throw IllegalArgumentException" {
+        assertThatThrownBy {
+            WinningNumber(
+                listOf(1, 2, 3, 4, 5, 5)
+                    .map { LottoNumber(it) }
+            )
+        }.isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessageContaining("Duplicated winning number")
     }
 
     "winning statistics should show correct win state" {
