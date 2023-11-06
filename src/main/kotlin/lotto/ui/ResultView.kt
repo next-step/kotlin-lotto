@@ -12,18 +12,20 @@ object ResultView {
     fun printLottos(lottos: List<Lotto>) {
         println("${lottos.size}개를 구매했습니다.")
         for (lotto in lottos) {
-            val lottoNumbers = lotto.numbers
+            val lottoNumbers = lotto.numbers.sortedBy { it.value }
             println(lottoNumbers.map { it.value }.joinToString(LOTTO_NUMBERS_DELIMITER, LOTTO_NUMBERS_PREFIX, LOTTO_NUMBERS_POSTFIX))
         }
         println()
     }
 
     fun printResult(lottos: Map<Rank, Int>) {
+        println()
         println("당첨 통계")
         println("---------")
         println("${Rank.FIFTH.matchCount}개 일치 (${Rank.FIFTH.winningMoney}원)- ${lottos.getOrDefault(Rank.FIFTH, 0)}개")
         println("${Rank.FOURTH.matchCount}개 일치 (${Rank.FOURTH.winningMoney}원)- ${lottos.getOrDefault(Rank.FOURTH, 0)}개")
-        println("${Rank.THREE.matchCount}개 일치 (${Rank.THREE.winningMoney}원)- ${lottos.getOrDefault(Rank.THREE, 0)}개")
+        println("${Rank.THIRD.matchCount}개 일치 (${Rank.THIRD.winningMoney}원)- ${lottos.getOrDefault(Rank.THIRD, 0)}개")
+        println("${Rank.SECOND.matchCount}개 일치, 보너스 볼 일치(${Rank.SECOND.winningMoney}원)- ${lottos.getOrDefault(Rank.SECOND, 0)}개")
         println("${Rank.FIRST.matchCount}개 일치 (${Rank.FIRST.winningMoney}원)- ${lottos.getOrDefault(Rank.FIRST, 0)}개")
     }
 
