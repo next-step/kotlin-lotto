@@ -10,13 +10,13 @@ class WinningRanksTest : BehaviorSpec({
             return numbers.sortedBy { it.number }
         }
     }
-    val lottoNumberGenerator = LottoNumberGenerator(testShuffleNumber)
+    val lottoNumberAutoGenerator = LottoNumberAutoGenerator(testShuffleNumber)
 
     given("입력금액이 주어졌을 때") {
         val inputPrice = 14000
         val lottoNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }
         val lottos = LottoStore.buyLottos(inputPrice, emptyList())
-        val winningNumber = lottoNumberGenerator.takeShuffleNumber(lottoNumbers)
+        val winningNumber = lottoNumberAutoGenerator.takeShuffleNumber(lottoNumbers)
         val bonusBall = LottoNumber(7)
         val winningLotto = WinningLotto(winningNumber, bonusBall)
         val winningResult = lottos.matchLotto(winningLotto)

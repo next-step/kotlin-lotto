@@ -2,7 +2,7 @@ package lotto.domain
 
 object LottoStore {
 
-    private val lottoNumberGenerator = LottoNumberGenerator { LOTTO_POOL.shuffled() }
+    private val lottoNumberAutoGenerator = LottoNumberAutoGenerator { LOTTO_POOL.shuffled() }
 
     fun buyLottos(inputPrice: Int, manualLottoNumbers: List<LottoNumbers>): Lottos {
         val manualLottoCount = manualLottoNumbers.size
@@ -17,7 +17,7 @@ object LottoStore {
 
     private fun buyLotto(
         lottoNumbers: LottoNumbers =
-            lottoNumberGenerator.takeShuffleNumber(LOTTO_POOL)
+            lottoNumberAutoGenerator.takeShuffleNumber(LOTTO_POOL)
     ): Lotto {
         return Lotto(lottoNumbers)
     }

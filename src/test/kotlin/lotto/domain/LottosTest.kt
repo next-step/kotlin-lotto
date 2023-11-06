@@ -8,10 +8,10 @@ class LottosTest : BehaviorSpec({
 
     given("당첨번호와 로또번호를 받는다.") {
         val lottoNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }
-        val lottoNumberGenerator = LottoNumberGenerator { lottoNumbers }
-        val autoLottoList = List(3) { Lotto(lottoNumberGenerator.takeShuffleNumber(lottoNumbers)) }
-        val manualLottoList = List(2) { Lotto(lottoNumberGenerator.takeShuffleNumber(lottoNumbers)) }
-        val winningNumber = lottoNumberGenerator.takeShuffleNumber(lottoNumbers)
+        val lottoNumberAutoGenerator = LottoNumberAutoGenerator { lottoNumbers }
+        val autoLottoList = List(3) { Lotto(lottoNumberAutoGenerator.takeShuffleNumber(lottoNumbers)) }
+        val manualLottoList = List(2) { Lotto(lottoNumberAutoGenerator.takeShuffleNumber(lottoNumbers)) }
+        val winningNumber = lottoNumberAutoGenerator.takeShuffleNumber(lottoNumbers)
         val bonusBall = LottoNumber(7)
         val winningLottoNumber = LottoNumbers(winningNumber.numbers.take(6))
 

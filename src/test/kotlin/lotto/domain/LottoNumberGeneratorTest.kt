@@ -9,10 +9,10 @@ class LottoNumberGeneratorTest : BehaviorSpec({
         val lottoNumbers = (1..6).map { LottoNumber(it) }
 
         `when`("로또 번호를 생성한다.") {
-            val lottoNumberGenerator = LottoNumberGenerator { lottoNumbers }
+            val lottoNumberAutoGenerator = LottoNumberAutoGenerator { lottoNumbers }
                 .takeShuffleNumber(lottoNumbers)
             then("생성된 로또번호를 확인한다.") {
-                lottoNumberGenerator.numbers shouldBe lottoNumbers
+                lottoNumberAutoGenerator.numbers shouldBe lottoNumbers
             }
         }
     }
