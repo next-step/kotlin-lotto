@@ -1,14 +1,13 @@
 package lotto.domain
 
-import kotlin.math.floor
-
-data class LottoResult(
-    private val ranks: Map<LottoRank, Int>
+class LottoResult(
+    private val ranks: Map<LottoRank, Int>,
+    private val rateCalculus: RateCalculus = DefaultRateCalculus()
 ) {
 
     fun getRateOfReturn(customer: Customer): Double {
         val amountSum = this.ranks.map { it.key.amount * it.value }.sumOf { it.toDouble() }
-        return floor((amountSum / customer.money) * 100) / 100.0
+        return rateCalculus.calc(amountSum, customer.money.toDouble())
     }
     operator fun get(lottoWinning: LottoRank) = ranks[lottoWinning]
 }
