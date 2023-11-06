@@ -1,5 +1,6 @@
 package lotto.controller
 
+import lotto.model.CorrectnessInfo
 import lotto.model.LottoInfo
 import lotto.ui.InputView
 import lotto.ui.ResultView
@@ -7,6 +8,25 @@ import lotto.ui.ResultView
 class LottoController(
     private val inputPurchaseAmount: String,
 ) {
+
+    fun classifyCorrectness(
+        generatedInfos: List<LottoInfo>,
+        latestWinLottoInfo: LottoInfo,
+        minCorrectnessCountForShow: Int,
+    ): List<CorrectnessInfo> {
+        val correctnessArray = Array(7) { 0 }
+        generatedInfos.forEach { info ->
+            val countOfCorrectness = countCorrectNumberCount(info, latestWinLottoInfo)
+            correctnessArray[countOfCorrectness]++
+        }
+        val correctnessInfoList = mutableListOf<CorrectnessInfo>()
+        correctnessArray.forEachIndexed { countOfCorrectness, numsOfLottoInfo ->
+            if (countOfCorrectness >= minCorrectnessCountForShow) {
+                correctnessInfoList.add(CorrectnessInfo(countOfCorrectness, numsOfLottoInfo))
+            }
+        }
+        return correctnessInfoList
+    }
 
     fun countCorrectNumberCount(generatedLottoInfo: LottoInfo, latestWinLottoInfo: LottoInfo): Int {
         val diff = (generatedLottoInfo.numbers.toSet() - latestWinLottoInfo.numbers.toSet()).size
