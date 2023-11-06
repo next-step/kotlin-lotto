@@ -14,9 +14,4 @@ object LottoSpec {
     fun getMinCountToGetPrize() = prizesInfo[0].matchedCount
 }
 
-data class WinningPrize(
-    val matchedCount: Int,
-    val amount: Amount,
-)
-
 
