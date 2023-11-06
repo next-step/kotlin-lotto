@@ -8,8 +8,7 @@ import io.kotest.matchers.shouldBe
 class StringAddCalculateTest : FunSpec({
 
     val calculator = StringAddCalculator(
-        NegativeNumberValidation(),
-        StringToIntConverter()
+        NegativeNumberValidation()
     )
 
     context("빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.") {
