@@ -25,18 +25,7 @@ class LottoMachine {
         return lottoNumberList
     }
 
-    fun getLottoRank(lotto: Lotto, winningLotto: Lotto): LottoRank {
-        val lottoNumberList: List<Int> = lotto.getLottoNumberList()
-        val winningLottoNumberList: List<Int> = winningLotto.getLottoNumberList()
-        var matchCount: Int = 0
-        for (idx in 0 until LOTTO_NUMBER_COUNT_MAX) {
-            if (lottoNumberList[idx] == winningLottoNumberList[idx]) {
-                matchCount++
-            }
-        }
-
-        return LottoRank.findByMatchCount(matchCount)
-    }
+    fun getLottoRank(lotto: Lotto, winningLotto: Lotto): LottoRank = LottoRank.findByMatchCount(lotto.getMatchCount(winningLotto))
 
     companion object {
         private const val LOTTO_NUMBER_COUNT_MAX: Int = 6

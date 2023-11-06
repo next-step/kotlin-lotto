@@ -12,6 +12,8 @@ class Lotto(numbers: List<Int>) {
 
     fun getLottoNumberList(): List<Int> = this.numbers
 
+    fun getMatchCount(lotto: Lotto): Int = this.numbers.intersect(lotto.getLottoNumberList().toSet()).size
+
     companion object {
         const val LOTTO_PRICE: Int = 1000
         const val LOTTO_NUMBER_MIN: Int = 1

@@ -29,6 +29,16 @@ class LottoTest {
     }
 
     @Test
+    fun `로또 번호가 겹치는 것을 반환`() {
+        val firstLotto: Lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val secondLotto: Lotto = Lotto(listOf(1, 2, 3, 4, 5, 7))
+
+        val matchCount: Int = firstLotto.getMatchCount(secondLotto)
+
+        assertThat(matchCount).isEqualTo(5)
+    }
+
+    @Test
     fun `로또 번호는 1부터 45까지의 숫자만 가능하다`() {
         assertThatThrownBy { Lotto(listOf(1, 2, 3, 4, 5, 46)) }
             .isInstanceOf(IllegalArgumentException::class.java)
