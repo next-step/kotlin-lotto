@@ -28,6 +28,16 @@ class LottoTest {
         assertThat(actual).isEqualTo(Statistics(mapOf(3 to 1)))
     }
 
+    @Test
+    fun `로또 번호 4개 일치 통계 추출`() {
+        val expectLottos = (0 until 1).map { _ -> Lotto(1, 2, 3, 4, 5, 6) }
+        val sut = LottoMachine(lottoGenerator(expectLottos), 1000)
+
+        val actual = sut.issueStatistics(Lotto(1, 2, 3, 4, 8, 9))
+
+        assertThat(actual).isEqualTo(Statistics(mapOf(4 to 1)))
+    }
+
     private fun lottoGenerator(lottos: List<Lotto>): LottoGenerator {
         val expectedLotto = lottos.iterator()
         return LottoGenerator { expectedLotto.next() }
