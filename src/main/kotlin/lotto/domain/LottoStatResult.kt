@@ -2,26 +2,24 @@ package lotto.domain
 
 import kotlin.math.round
 
-data class LottoStatResult(
-    val firstCount: Int,
-    val secondCount: Int,
-    val thirdCount: Int,
-    val fourthCount: Int,
-    val fifthCount: Int,
-    val purchaseAmount: Int,
+class LottoStatResult(
+    lottoStat: Map<Rank, Int> = mapOf(
+        *Rank.values().map { it to 0 }.toTypedArray()
+    )
 ) {
+    private val lottoStat = lottoStat.toMutableMap()
+
+    fun getCount(rank: Rank): Int = lottoStat[rank] ?: 0
+
+    fun addCount(rank: Rank) {
+        lottoStat[rank] = getCount(rank) + 1
+    }
 
     fun getReturnRate(): Double {
-        return round(
-            (firstCount * FIRST_PLACE_REWARD + secondCount * SECOND_PLACE_REWARD + thirdCount * THIRD_PLACE_REWARD + fourthCount * FOURTH_PLACE_REWARD + fifthCount * FIFTH_PLACE_REWARD) / purchaseAmount.toDouble() * 100
-        ) / 100
+        val totalReward = lottoStat.toList().fold(0) { fold, next -> fold + (next.first.winningMoney * next.second) }
+
+        return round(totalReward / (getCountOfLotto() * LottoMachine.LOTTO_PRICE).toDouble() * 100) / 100
     }
 
-    companion object {
-        const val FIRST_PLACE_REWARD = 2000000000
-        const val SECOND_PLACE_REWARD = 30000000
-        const val THIRD_PLACE_REWARD = 1500000
-        const val FOURTH_PLACE_REWARD = 50000
-        const val FIFTH_PLACE_REWARD = 5000
-    }
+    private fun getCountOfLotto(): Int = lottoStat.map { it.value }.sum()
 }

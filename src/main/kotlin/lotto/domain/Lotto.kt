@@ -4,7 +4,7 @@ class Lotto {
     val numbers: List<Int>
 
     constructor() {
-        numbers = LOTTO_NUMBER_POOL.shuffled().subList(0, 6)
+        numbers = LOTTO_NUMBER_POOL.shuffled().subList(0, 6).sorted()
     }
 
     constructor(numbers: List<Int>) {
@@ -12,7 +12,7 @@ class Lotto {
         require(numbers.distinct().count() == NUMBER_OF_LOTTO_NUMBER)
         require(numbers.all { it in (MIN_LOTTO_NUMBER) until MAX_LOTTO_NUMBER + 1 })
 
-        this.numbers = numbers
+        this.numbers = numbers.sorted()
     }
 
     companion object {

@@ -2,6 +2,7 @@ package lotto.view
 
 import lotto.domain.Lotto
 import lotto.domain.LottoStatResult
+import lotto.domain.Rank
 
 object ResultView {
     fun showPurchasedLotto(lottoList: List<Lotto>) {
@@ -16,10 +17,9 @@ object ResultView {
         val returnRate = lottoStatResult.getReturnRate()
 
         println("\n당첨 통계\n---------")
-        println("3개 일치 (${LottoStatResult.FIFTH_PLACE_REWARD}원)- ${lottoStatResult.fifthCount}개")
-        println("4개 일치 (${LottoStatResult.FOURTH_PLACE_REWARD}원)- ${lottoStatResult.fourthCount}개")
-        println("5개 일치 (${LottoStatResult.THIRD_PLACE_REWARD}원)- ${lottoStatResult.thirdCount}개")
-        println("6개 일치 (${LottoStatResult.FIRST_PLACE_REWARD}원)- ${lottoStatResult.firstCount}개")
+        Rank.values().filter { it.countOfMatch > 0 }.forEach { it ->
+            println("${it.countOfMatch}개 일치 (${it.winningMoney}원)- ${lottoStatResult.getCount(it)}개")
+        }
         println("총 수익률은 ${returnRate}입니다.${if (returnRate < 1) "(기준이 1이기 때문에 결과적으로 손해라는 의미임)" else ""}")
     }
 }
