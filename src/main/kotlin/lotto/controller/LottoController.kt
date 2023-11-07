@@ -16,4 +16,7 @@ fun main() {
     val lottoNumberProvider = LottoNumberProvider()
     val lotto = lottoNumberProvider.getLotto(lottoTryCount)
     OutputView.printLottoList(lotto)
+
+    OutputView.printJackpotNumber()
+    val jackpotNumbers = InputView.inputJackpotNumber()
 }

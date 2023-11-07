@@ -13,4 +13,11 @@ object InputView {
             throw IllegalArgumentException(EXPECT_NUMBER_MESSAGE.message)
         }
     }
+
+    fun inputJackpotNumber(): String {
+        val jackpotNumber = readlnOrNull()
+        require(!jackpotNumber.isNullOrEmpty()) { EMPTY_INPUT_MESSAGE }
+
+        return jackpotNumber
+    }
 }

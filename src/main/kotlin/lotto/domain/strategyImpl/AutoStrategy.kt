@@ -6,7 +6,13 @@ import lotto.domain.strategy.DrawStrategy
 class AutoStrategy : DrawStrategy {
 
     override fun draw(): Lotto {
-        val lottoNumbers = (1..45).toList().shuffled()
-        return Lotto(lottoNumbers.subList(0, 6).sorted())
+        val lottoNumbers = (LOTTO_FIRST_NUMBER..LOTTO_LAST_NUMBER).toList().shuffled()
+        return Lotto(lottoNumbers.take(LOTTO_NUMBER_COUNT).sorted())
+    }
+
+    companion object {
+        private const val LOTTO_FIRST_NUMBER = 1
+        private const val LOTTO_LAST_NUMBER = 45
+        private const val LOTTO_NUMBER_COUNT = 6
     }
 }
