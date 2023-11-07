@@ -6,8 +6,8 @@ class LottoMachine(lottoGenerator: LottoGenerator, money: Int) {
     val issuedLottos = (0 until money.issueLottoSize()).map { lottoGenerator.generate() }
 
     fun issueStatistics(winningLotto: Lotto): Statistics {
-        val matchedCount = issuedLottos[0].matchedCount(winningLotto)
-        return Statistics(mapOf(matchedCount to 1))
+        val statistics = issuedLottos.groupingBy { it.matchedCount(winningLotto) }.eachCount()
+        return Statistics(statistics)
     }
 }
 
