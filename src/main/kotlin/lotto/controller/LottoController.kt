@@ -19,4 +19,7 @@ fun main() {
 
     OutputView.printJackpotNumber()
     val jackpotNumbers = InputView.inputJackpotNumber()
+
+    OutputView.printLottoStatistics()
+    OutputView.printLine()
 }

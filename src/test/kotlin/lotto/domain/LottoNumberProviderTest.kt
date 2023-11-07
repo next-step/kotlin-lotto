@@ -5,9 +5,10 @@ import org.junit.jupiter.api.Test
 
 class LottoNumberProviderTest {
 
+    private val lottoNumberProvider = LottoNumberProvider()
+
     @Test
     fun `lottoTryCount 만큼 Lotto 가 만들어 진다`() {
-        val lottoNumberProvider = LottoNumberProvider()
         val lottoList = lottoNumberProvider.getLotto(LOTTO_TRY_COUNT)
         assertEquals(4, lottoList.size)
     }
