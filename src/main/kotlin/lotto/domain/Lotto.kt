@@ -7,6 +7,7 @@ class Lotto(
     init {
         validateCount()
         validateDuplication()
+        numbers.sorted()
     }
 
     private fun validateCount() {
@@ -24,4 +25,8 @@ class Lotto(
     companion object {
         const val LOTTO_COUNT = 6
     }
+}
+
+fun Lotto.matchCount(other: Lotto): Int {
+    return numbers.intersect(other.numbers.toSet()).size
 }
