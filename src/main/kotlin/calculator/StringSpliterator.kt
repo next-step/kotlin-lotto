@@ -1,26 +1,19 @@
 package calculator
 
-class StringSpliterator: Spliterator<String> {
+object StringSpliterator : Spliterator<String> {
 
-    private val symbols = listOf(",", ":")
-
-    override fun split(value: String): List<String> {
-        val separated = customizeSeparator.find(value)?.let {
-            val separator = it.groupValues[1]
-            val split = it.groupValues[2].split(separator)
-            split
-        } ?: listOf(value)
-        return parse(separated, 0)
+    private const val DELIMITER = 1
+    private const val CONTENT = 2
+    private val customizeDelimiter = "^//(.)\\n(.*)".toRegex()
+    private val defaultDelimiter = "[,:]".toRegex()
+    private val splitCustomizeDelimiter: (String) -> List<String> = { input ->
+        customizeDelimiter.matchEntire(input)?.let { match ->
+            val delimiter = match.groupValues[DELIMITER]
+            match.groupValues[CONTENT].split(delimiter)
+        } ?: listOf(input)
     }
-
-    private tailrec fun parse(input: List<String>, index: Int): List<String> {
-        return if (index < symbols.size) parse(symbolParse(input, symbols[index]), index + 1)
-            else input
+    private val splitDefaultDelimiter: (List<String>) -> List<String> = { input ->
+        input.flatMap { it.split(defaultDelimiter) }
     }
-
-    private fun symbolParse(input: List<String>, symbol: String): List<String> = input.flatMap { it.split(symbol) }
-
-    companion object {
-        private val customizeSeparator = "^//(.)\\n(.*)".toRegex()
-    }
+    override fun split(value: String): List<String> = splitDefaultDelimiter(splitCustomizeDelimiter(value))
 }
