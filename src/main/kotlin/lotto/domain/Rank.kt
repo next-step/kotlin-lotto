@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 enum class Rank(val countOfMatch: Int, val winningMoney: Int) {
     FIRST(6, 2_000_000_000),
@@ -10,11 +10,11 @@ enum class Rank(val countOfMatch: Int, val winningMoney: Int) {
 
     companion object {
         fun valueOf(countOfMatch: Int, matchBonus: Boolean): Rank = when (countOfMatch) {
-            6 -> Rank.FIRST
-            5 -> if (matchBonus) Rank.SECOND else Rank.THIRD
-            4 -> Rank.FOURTH
-            3 -> Rank.FIFTH
-            else -> Rank.MISS
+            6 -> FIRST
+            5 -> if (matchBonus) SECOND else THIRD
+            4 -> FOURTH
+            3 -> FIFTH
+            else -> MISS
         }
     }
 }

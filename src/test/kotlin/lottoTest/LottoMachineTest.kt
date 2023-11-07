@@ -1,7 +1,7 @@
 package lottoTest
 
-import lotto.Lotto
-import lotto.LottoMachine
+import lotto.domain.Lotto
+import lotto.domain.LottoMachine
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource

@@ -1,4 +1,7 @@
-package lotto
+package lotto.view
+
+import lotto.domain.Lotto
+import lotto.domain.WinningLotto
 
 object InputView {
     fun getPurchaseAmount(): Int {
@@ -16,7 +19,6 @@ object InputView {
 
         return WinningLotto(lotto, getBonusNumber())
     }
-
 
     private fun getBonusNumber(): Int {
         println("보너스 볼을 입력해 주세요.")

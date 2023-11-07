@@ -1,10 +1,10 @@
 package lottoTest
 
-import lotto.Lotto
-import lotto.LottoMachine
-import lotto.LottoStatCalculator
-import lotto.LottoStatResult
-import lotto.WinningLotto
+import lotto.domain.Lotto
+import lotto.domain.LottoMachine
+import lotto.domain.LottoStatCalculator
+import lotto.domain.LottoStatResult
+import lotto.domain.WinningLotto
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
