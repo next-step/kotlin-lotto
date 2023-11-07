@@ -3,13 +3,11 @@ package lotto.domain
 import lotto.util.NumberGenerator
 
 class Lottos(
-    buyingPrice: LottoBuyingPrice,
+    val buyingPrice: LottoBuyingPrice,
     lottoNumberGenerator: NumberGenerator,
 ) {
 
     private val _lottos: MutableList<Lotto> = mutableListOf()
-    val lottos: List<Lotto>
-        get() = _lottos
 
     init {
         val lottoCount = buyingPrice.divide(LOTTO_PRICE)
@@ -18,6 +16,15 @@ class Lottos(
             val lotto = Lotto(lottoNumbers)
             _lottos.add(lotto)
         }
+    }
+
+    fun getChange(): Int {
+        val lottoCount = _lottos.size
+        return buyingPrice.minus(lottoCount.times(LOTTO_PRICE))
+    }
+
+    fun getLottoCount(): Int {
+        return _lottos.size
     }
 
     companion object {

@@ -2,7 +2,7 @@ package lotto.domain
 
 @JvmInline
 value class LottoBuyingPrice(
-    val value: Int
+    private val value: Int
 ) {
 
     init {
@@ -11,8 +11,12 @@ value class LottoBuyingPrice(
         }
     }
 
-    fun divide(lottoPrice: Int): Int {
-        return value / lottoPrice
+    fun divide(value: Int): Int {
+        return this.value.div(value)
+    }
+
+    fun minus(value: Int): Int {
+        return this.value.minus(value)
     }
 
     companion object {

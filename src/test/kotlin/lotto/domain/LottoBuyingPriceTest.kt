@@ -28,4 +28,17 @@ class LottoBuyingPriceTest : StringSpec({
         // then
         result shouldBe 2
     }
+
+    "입력받은 값을 뺀다" {
+        // given
+        val price = 2000
+        val lottoPrice = 1000
+        val lottoBuyingPrice = LottoBuyingPrice(price)
+
+        // when
+        val result = lottoBuyingPrice.minus(lottoPrice)
+
+        // then
+        result shouldBe 1000
+    }
 })
