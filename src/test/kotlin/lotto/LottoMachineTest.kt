@@ -10,7 +10,7 @@ class LottoMachineTest {
     @ParameterizedTest
     @CsvSource(value = ["1000, 1", "13000, 13", "123441, 123"])
     fun `입력 금액 만큼 로또 생성`(money: Int, expectSize: Int) {
-        val expectLottos = (0 until expectSize).map { _ -> Lotto() }
+        val expectLottos = (0 until expectSize).map { _ -> Lotto(1, 2, 3, 4, 5, 6) }
         val sut = LottoMachine(lottoGenerator(expectLottos), money)
 
         val actualLottos = sut.issuedLottos
@@ -32,7 +32,7 @@ class LottoMachineTest {
 
         val actual = sut.issueStatistics(Lotto(1, 2, 3, 4, 5, 6))
 
-        assertThat(actual).isEqualTo(Statistics(6 to 2, 5 to 1, 4 to 1, 3 to 2))
+        assertThat(actual).isEqualTo(Statistics(6000, 6 to 2, 5 to 1, 4 to 1, 3 to 2))
     }
 
     private fun lottoGenerator(lottos: List<Lotto>): LottoGenerator {

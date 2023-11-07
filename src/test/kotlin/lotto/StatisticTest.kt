@@ -12,6 +12,6 @@ class StatisticTest {
 
         val actual = sut.profit
 
-        assertThat(actual).isEqualTo(BigDecimal("0.5"))
+        assertThat(actual).isEqualByComparingTo(BigDecimal("0.5"))
     }
 }
