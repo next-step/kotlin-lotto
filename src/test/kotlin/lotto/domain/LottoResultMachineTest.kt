@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
-internal class LottoResultCheckerTest {
+internal class LottoResultMachineTest {
     private val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
     @ParameterizedTest
@@ -15,7 +15,7 @@ internal class LottoResultCheckerTest {
         val expectedPrize = lottoAndPrizePair.second
 
         // when
-        val lottoResult = LottoResultChecker.checkWinningLotto(winningLotto, lotto)
+        val lottoResult = LottoResultMachine.checkWinningLotto(winningLotto, lotto)
 
         // then
         assertThat(lottoResult.prize).isEqualTo(expectedPrize)
