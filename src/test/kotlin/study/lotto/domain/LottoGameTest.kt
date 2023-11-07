@@ -10,12 +10,12 @@ class LottoGameTest {
     fun `earningsRate 계산이 올바르게 수행된다`() {
         val lottos = Lottos(
             listOf(
-                Lotto.generate(listOf(1, 2, 3, 10, 20, 30)),
-                Lotto.generate(listOf(1, 2, 3, 4, 20, 30)),
-                Lotto.generate(listOf(40, 41, 42, 43, 44, 45))
+                Lotto.generate(LottoNumber.listOf(1, 2, 3, 10, 20, 30)),
+                Lotto.generate(listOf(1, 2, 3, 4, 20, 30).map(::LottoNumber)),
+                Lotto.generate(listOf(40, 41, 42, 43, 44, 45).map(::LottoNumber))
             )
         )
-        val winningLotto = Lotto.generate(listOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = Lotto.generate(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))
         val purchaseAmount = 3000
 
         val result = lottoGame.calculateResult(lottos, winningLotto)
@@ -28,12 +28,12 @@ class LottoGameTest {
     fun `statistics 계산이 올바르게 수행된다`() {
         val lottos = Lottos(
             listOf(
-                Lotto.generate(listOf(1, 2, 3, 10, 20, 30)),
-                Lotto.generate(listOf(1, 2, 3, 4, 20, 30)),
-                Lotto.generate(listOf(40, 41, 42, 43, 44, 45))
+                Lotto.generate(listOf(1, 2, 3, 10, 20, 30).map(::LottoNumber)),
+                Lotto.generate(listOf(1, 2, 3, 4, 20, 30).map(::LottoNumber)),
+                Lotto.generate(listOf(40, 41, 42, 43, 44, 45).map(::LottoNumber))
             )
         )
-        val winningLotto = Lotto.generate(listOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = Lotto.generate(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))
 
         val result = lottoGame.calculateResult(lottos, winningLotto)
         val expectedStatistics = mapOf(
