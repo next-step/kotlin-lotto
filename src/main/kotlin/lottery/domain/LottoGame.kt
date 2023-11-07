@@ -1,6 +1,6 @@
 package lottery.domain
 
-class LottoGame(val price: Int, private val lottos: Lottos) {
+class LottoGame(private val price: Int, private val lottos: Lottos) {
 
     constructor(price: Int, numberGenerator: LottoNumberGenerator = RandomNumberGenerator()) : this(
         price,
