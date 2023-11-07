@@ -1,8 +1,12 @@
 package lotto.model
 
-class LottoGenerator {
+import lotto.collection.LottoNumber
+import lotto.collection.LottoTicket
 
-    companion object {
-        fun generateTickets(count: Int, ticketLength: Int, ticketRange: IntRange) = List(count) { Ticket(ticketLength, ticketRange) }
+object LottoGenerator {
+    private fun getLottoNumbers (range: IntRange) = (range).shuffled().take(LottoTicket.NUMBER_COUNT).map { LottoNumber(it) }
+
+    fun generateTickets(ticketCount: Int) = List(ticketCount) {
+        LottoTicket(getLottoNumbers(LottoNumber.NUMBER_RANGE))
     }
 }

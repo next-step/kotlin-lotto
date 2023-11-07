@@ -1,11 +1,11 @@
 package lotto.view
 
 import lotto.model.ProfitCalculator
-import lotto.model.Ticket
+import lotto.collection.LottoTicket
 
 object ResultView {
-    fun renderTickets(tickets: List<Ticket>) {
-        tickets.forEach { println(it.numbers) }
+    fun renderTickets(lottoTickets: List<LottoTicket>) {
+        lottoTickets.forEach { println(it.numbers) }
     }
 
     fun renderResults(ticketPrice: Int, results: List<Int>, winningMoney: List<Int>) {
