@@ -9,10 +9,11 @@ object Splitter {
     const val DEFAULT_NUMBER = "0"
 
     fun split(input: String, delimiters: List<String>): List<String> {
-        if (normalizeForSplit(input, delimiters).isBlank()) {
+        val normalizeForSplit = normalizeForSplit(input, delimiters)
+        if (normalizeForSplit.isBlank()) {
             return listOf(DEFAULT_NUMBER)
         }
-        return normalizeForSplit(input, delimiters).split(UNIFIED_DELIMITER)
+        return normalizeForSplit.split(UNIFIED_DELIMITER)
     }
 
     private fun normalizeForSplit(input: String, delimiters: List<String>): String {
