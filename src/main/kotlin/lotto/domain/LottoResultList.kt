@@ -11,7 +11,7 @@ data class LottoResultList(val resultList: List<LottoRank>) {
         total
     }
 
-    fun getProfitRate(buy: Int): Float {
-        return prizeMoney / buy.toFloat()
+    fun getProfitRate(purchase: Money): Float {
+        return prizeMoney / purchase.amount.toFloat()
     }
 }

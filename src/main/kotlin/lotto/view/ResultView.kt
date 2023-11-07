@@ -34,7 +34,7 @@ object ResultView {
         for (rank in ranks) {
             printRankResult(rank, result.count(rank))
         }
-        println("총 수익률은 ${result.getProfitRate(purchaseAmount.amount)}입니다.")
+        println("총 수익률은 ${result.getProfitRate(purchaseAmount)}입니다.")
     }
 
     private fun printRankResult(rank: LottoRank, count: Int) {
