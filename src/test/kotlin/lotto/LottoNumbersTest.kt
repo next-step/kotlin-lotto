@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 
 class LottoNumbersTest {
     @Test
-    fun `getContainCount가 잘 작동한다`() {
+    fun `로또 번호와 당첨 번호와 비교해서 알맞는 일치 개수를 반환한다`() {
         val lottoNumbers = LottoNumbers(1, 2, 3, 4, 5, 6)
         val bonusNumber = LottoNumber(7)
 
@@ -23,14 +23,19 @@ class LottoNumbersTest {
     }
 
     @Test
-    fun `isMatchBonus 메소드가 잘 작동한다`() {
+    fun `보너스 번호가 로또 번호 안에 있다면 true를 반환한다`() {
+        val bonusNumber = LottoNumber(7)
+        val winningNumbers = WinningNumbers(LottoNumbers(1, 2, 3, 4, 5, 6), bonusNumber)
+        val lottoNumbers = LottoNumbers(1, 2, 3, 4, 5, 7)
+        assertThat(lottoNumbers.isMatchBonus(winningNumbers)).isEqualTo(true)
+    }
+
+    @Test
+    fun `보너스 번호가 lottoNumbers에 없다면 false 반환한다`() {
         val bonusNumber = LottoNumber(7)
 
         val lottoNumbers = LottoNumbers(1, 2, 3, 4, 5, 6)
         val winningNumbers = WinningNumbers(LottoNumbers(1, 2, 3, 4, 5, 6), bonusNumber)
         assertThat(lottoNumbers.isMatchBonus(winningNumbers)).isEqualTo(false)
-
-        val lottoNumbers2 = LottoNumbers(1, 2, 3, 4, 5, 7)
-        assertThat(lottoNumbers2.isMatchBonus(winningNumbers)).isEqualTo(true)
     }
 }
