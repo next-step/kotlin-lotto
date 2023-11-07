@@ -11,6 +11,10 @@ value class LottoBuyingPrice(
         }
     }
 
+    fun divide(lottoPrice: Int): Int {
+        return value / lottoPrice
+    }
+
     companion object {
         private const val LOTTO_PRICE = 1000
     }
