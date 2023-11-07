@@ -1,5 +1,6 @@
 package lotto.controller
 
+import lotto.domain.LottoJackpotManager
 import lotto.domain.LottoNumberProvider
 import lotto.domain.LottoPurchaseManager
 import lotto.view.InputView
@@ -18,8 +19,12 @@ fun main() {
     OutputView.printLottoList(lotto)
 
     OutputView.printJackpotNumber()
-    val jackpotNumbers = InputView.inputJackpotNumber()
+    val inputNumber = InputView.inputJackpotNumber()
+    val lottoJackpotManager = LottoJackpotManager()
+    val jackpotNumbers = lottoJackpotManager.splitLottoNumber(inputNumber)
 
     OutputView.printLottoStatistics()
     OutputView.printLine()
+    val findJackpotLotto = lottoJackpotManager.findJackpotLotto(jackpotNumbers, lotto)
+    OutputView.printResult(findJackpotLotto)
 }

@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.JackpotLevel
 import lotto.domain.Lotto
 
 object OutputView {
@@ -9,6 +10,7 @@ object OutputView {
     private const val ENTER_JACKPOT_NUMBER = "지난 주 당첨 번호를 입력해 주세요."
     private const val LOTTO_STATISTICS = "당첨 통계"
     private const val LINE = "---------"
+    private const val SHOW_LOTTO_COUNT = 3
 
     fun printEnterMoney() = println(ENTER_MONEY)
     fun printLottoCount(count: String) = println(count + LOTTO_COUNT)
@@ -18,5 +20,14 @@ object OutputView {
 
     fun printLottoList(lotto: List<Lotto>) {
         lotto.forEach { println(it.lotto) }
+    }
+
+    fun printResult(findJackpotLotto: List<JackpotLevel>) {
+        JackpotLevel.values()
+            .filter { it.matchCount >= SHOW_LOTTO_COUNT }
+            .forEach { jackpotLevel ->
+                val count = findJackpotLotto.count { it == jackpotLevel }
+                println("${jackpotLevel.matchCount}개 일치 (${jackpotLevel.price}원)- ${count}개")
+            }
     }
 }
