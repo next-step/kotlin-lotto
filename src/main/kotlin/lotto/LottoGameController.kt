@@ -2,12 +2,14 @@ package lotto
 
 import lotto.domain.Lotto
 import lotto.domain.LottoFactory
-import lotto.domain.LottoResultChecker
+import lotto.domain.LottoResultMachine
 import lotto.view.InputView
+import lotto.view.OutputView
 
 fun main() {
-    val money = InputView.enterMoney()
-    val lottoList = LottoFactory.buyLotto(money)
+    val inputMoney = InputView.enterMoney()
+    val lottoList = LottoFactory.buyLotto(inputMoney)
     val winningLotto = Lotto(InputView.enterWinningLotto())
-    val lottoResultList = lottoList.map { LottoResultChecker.checkWinningLotto(winningLotto, it) }
+    val lottoResultMap = lottoList.map { LottoResultMachine.checkWinningLotto(winningLotto, it) }.groupBy { it.prize }
+    OutputView.printLottoResult(lottoResultMap)
 }
