@@ -17,11 +17,11 @@ class LottoAutoTest : StringSpec({
         LottoAuto.sumOfWonLottoList(matchedList) shouldBe expected
     }
 
-    "matchCountList 함수가 3,4,5,6개 맞은 순서를 잘 나타내는지" {
+    "matchCountList 함수가 맞은 개수의 리스트를 잘 생산하는지 (1,2,3등을 맞추면 1,2,3등만 맞춘 리스트를 생성 4,5등은 생성x)" {
         val input = listOf(
             Lotto(LottoNumbers(listOf(1, 2, 3, 30, 31, 32))),
             Lotto(LottoNumbers(listOf(1, 2, 3, 4, 30, 31))),
-            Lotto(LottoNumbers(listOf(1, 2, 3, 4, 5, 31))),
+            Lotto(LottoNumbers(listOf(1, 2, 3, 4, 5, 45))),
             Lotto(LottoNumbers(listOf(1, 2, 3, 4, 5, 6)))
         )
         val bonusBallNumber = 45
@@ -30,8 +30,7 @@ class LottoAutoTest : StringSpec({
         val expected = mapOf(
             LottoPrize.FIFTH_PRIZE to 1,
             LottoPrize.FOURTH_PRIZE to 1,
-            LottoPrize.THIRD_PRIZE to 1,
-            LottoPrize.SECOND_PRIZE to 0,
+            LottoPrize.SECOND_PRIZE to 1,
             LottoPrize.FIRST_PRIZE to 1
         )
         val eachLottoMatchCount = LottoAuto.matchedLottoCountWithBonusBall(input, winningLotto)
