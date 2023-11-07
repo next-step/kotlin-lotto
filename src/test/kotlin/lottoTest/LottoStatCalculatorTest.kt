@@ -42,6 +42,23 @@ class LottoStatCalculatorTest {
                     )
                 ),
                 Arguments.of(
+                    WinningLotto(
+                        lotto = Lotto(listOf(1, 2, 3, 4, 5, 6)),
+                        bonusNumber = 45
+                    ),
+                    listOf(
+                        Lotto(numbers = listOf(1, 2, 3, 4, 5, 45)),
+                    ),
+                    LottoStatResult(
+                        firstCount = 0,
+                        secondCount = 1,
+                        thirdCount = 0,
+                        fourthCount = 0,
+                        fifthCount = 0,
+                        purchaseAmount = 1 * LottoMachine.LOTTO_PRICE,
+                    )
+                ),
+                Arguments.of(
                     WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6)), bonusNumber = 45),
                     listOf(
                         Lotto(numbers = listOf(1, 2, 3, 4, 5, 6)),
