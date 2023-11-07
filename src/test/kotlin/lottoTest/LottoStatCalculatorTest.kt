@@ -4,6 +4,7 @@ import lotto.Lotto
 import lotto.LottoMachine
 import lotto.LottoStatCalculator
 import lotto.LottoStatResult
+import lotto.WinningLotto
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -13,7 +14,7 @@ class LottoStatCalculatorTest {
 
     @ParameterizedTest
     @MethodSource("generateLottoStatArguments")
-    fun `당첨 통계 계산`(winningLotto: Lotto, input: List<Lotto>, expected: LottoStatResult) {
+    fun `당첨 통계 계산`(winningLotto: WinningLotto, input: List<Lotto>, expected: LottoStatResult) {
         val lottoStatCalculator = LottoStatCalculator(winningLotto)
 
         assertEquals(expected, lottoStatCalculator.getStat(input))
@@ -24,12 +25,16 @@ class LottoStatCalculatorTest {
         fun generateLottoStatArguments(): List<Arguments> {
             return listOf(
                 Arguments.of(
-                    Lotto(numbers = listOf(1, 2, 3, 4, 5, 6)),
+                    WinningLotto(
+                        lotto = Lotto(listOf(1, 2, 3, 4, 5, 6)),
+                        bonusNumber = 45
+                    ),
                     listOf(
                         Lotto(numbers = listOf(4, 5, 6, 10, 11, 12)),
                     ),
                     LottoStatResult(
                         firstCount = 0,
+                        secondCount = 0,
                         thirdCount = 0,
                         fourthCount = 0,
                         fifthCount = 1,
@@ -37,7 +42,7 @@ class LottoStatCalculatorTest {
                     )
                 ),
                 Arguments.of(
-                    Lotto(numbers = listOf(1, 2, 3, 4, 5, 6)),
+                    WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6)), bonusNumber = 45),
                     listOf(
                         Lotto(numbers = listOf(1, 2, 3, 4, 5, 6)),
                         Lotto(numbers = listOf(1, 2, 3, 4, 5, 7)),
@@ -45,6 +50,7 @@ class LottoStatCalculatorTest {
                     ),
                     LottoStatResult(
                         firstCount = 1,
+                        secondCount = 0,
                         thirdCount = 1,
                         fourthCount = 1,
                         fifthCount = 0,

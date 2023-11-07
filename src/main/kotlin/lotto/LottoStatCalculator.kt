@@ -1,12 +1,13 @@
 package lotto
 
-class LottoStatCalculator(private val winningLotto: Lotto) {
+class LottoStatCalculator(private val winningLotto: WinningLotto) {
 
     fun getStat(lottos: List<Lotto>): LottoStatResult {
 
         return lottos.fold(
             LottoStatResult(
                 firstCount = 0,
+                secondCount = 0,
                 thirdCount = 0,
                 fourthCount = 0,
                 fifthCount = 0,
@@ -27,7 +28,7 @@ class LottoStatCalculator(private val winningLotto: Lotto) {
         lotto: Lotto
     ): Int {
         return lotto.numbers.fold(0) { prev, i ->
-            if (winningLotto.numbers.contains(i)) prev + 1
+            if (winningLotto.lotto.numbers.contains(i)) prev + 1
             else prev
         }
     }
