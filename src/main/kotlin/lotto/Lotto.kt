@@ -1,7 +1,16 @@
 package lotto
 
-class Lotto(vararg numbers: Int) {
+class Lotto(private vararg val numbers: Int) {
     fun match(lotto: Lotto): Int {
-        return 3
+        var count = 0
+        for (n in numbers) {
+            for (o in lotto.numbers) {
+                if (n == o) {
+                    count++
+                    continue
+                }
+            }
+        }
+        return count
     }
 }
