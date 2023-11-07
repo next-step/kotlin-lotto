@@ -1,25 +1,18 @@
 package lotto
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 class LottoTest {
 
-    @Test
-    fun `로또 1개 생성`() {
+    @ParameterizedTest
+    @CsvSource(value = ["1000, 1", "13000, 13", "123441, 123"])
+    fun `입력 금액 만큼 로또 생성`(money: Int, expect: Int) {
         val sut = LottoMachine()
 
-        val actual = sut.create()
+        val actual = sut.create(money)
 
-        assertThat(actual).hasSize(1)
-    }
-
-    @Test
-    fun `입력 금액 만큼 로또 생성`() {
-        val sut = LottoMachine()
-
-        val actual = sut.create(13000)
-
-        assertThat(actual).hasSize(13)
+        assertThat(actual).hasSize(expect)
     }
 }
