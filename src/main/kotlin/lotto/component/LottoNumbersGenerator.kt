@@ -1,12 +1,11 @@
 package lotto.component
 
 import lotto.model.LottoNumbers
+import lotto.utils.shuffleAndTake
 
 class LottoNumbersGenerator {
     fun generate(): LottoNumbers {
-        val numbers = NUMBER_POOL.shuffled()
-            .subList(0, LOTTO_NUMBER_LENGTH)
-            .sorted()
+        val numbers = shuffleAndTake(NUMBER_POOL, LOTTO_NUMBER_LENGTH, sort=true)
 
         return LottoNumbers(numbers)
     }
