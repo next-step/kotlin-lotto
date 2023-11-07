@@ -10,7 +10,7 @@ class LottoStore {
     private val inputView: InputView = InputView()
     private val userInterface: UserInterface = UserInterface()
     private val resultView: ResultView = ResultView()
-    private val lottoMachine: LottoMachine = LottoMachine(1000)
+    private val lottoMachine: LottoMachine = LottoMachine()
     private val lottoChecker: LottoChecker = LottoChecker()
     fun lotto() {
         val money = inputView.getNumbers()

@@ -12,11 +12,11 @@ class LottoMachineTest {
 
     @BeforeEach
     fun setUp() {
-        lottoMachine1000 = LottoMachine(1000)
+        lottoMachine1000 = LottoMachine()
     }
 
     @Test
-    fun `로또 1 장의 가격은 1000원이다`() {
+    fun `로또 1 장의 기본 가격은 1000원이다`() {
         lottoMachine1000.lottoPrice shouldBe 1000
     }
 
