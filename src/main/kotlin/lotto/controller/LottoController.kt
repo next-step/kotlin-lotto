@@ -12,24 +12,19 @@ class LottoController(
     private var tickets: LottoTickets? = null,
 ) {
     fun purchase(request: PurchaseRequest): PurchaseResponse =
-         Amount(request.amount).purchase(LottoSpec.PRICE)
+        Amount(request.amount).purchase(LottoSpec.PRICE)
             .runForCount { ticketGenerator.create() }
             .save()
             .let(::PurchaseResponse)
 
     fun end(request: EndLottoRequest): EndLottoResponse {
         val purchaseTickets = tickets ?: throw IllegalArgumentException("티켓이 저장되지 않았습니다")
-        val prize = purchaseTickets
+        return purchaseTickets
             .determinePrize(WinningNumbers.of(request.winningNumbers), LottoSpec.NUMBERS_COUNT)
             .calculateTotalPrize(LottoSpec.prizesInfo)
-        val earningRate = prize.calculateEarningRate(purchaseTickets.calculatePrice(LottoSpec.PRICE))
-        return EndLottoResponse(earningRate)
+            .calculateEarningRate(purchaseTickets.calculatePrice(LottoSpec.PRICE))
+            .let(::EndLottoResponse)
     }
-
-
-    private fun doPurchase(amount: Int) = Amount(amount).purchase(LottoSpec.PRICE)
-        .runForCount { ticketGenerator.create() }
-        .save()
 
     private fun List<LottoTicket>.save(): LottoTickets =
         LottoTickets(this).also { tickets = it }
