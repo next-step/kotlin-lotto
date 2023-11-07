@@ -13,6 +13,8 @@ fun main() {
     val lastWeekLottoNumber = InputView.lastWeekInput().toLotto()
     val eachLottoMatchCount = lottoList.map { it.lottoMatchCount(lastWeekLottoNumber) }.filter { it > 2 }
 
+    val bonusBallNumber = InputView.bonusBallInput()
+
     val sumOfWonLotto = LottoAuto.sumOfWonLottoList(eachLottoMatchCount)
 
     val resultRate: Float = LottoAuto.earningRate(sumOfWonLotto, inputAmount)

@@ -32,6 +32,12 @@ object InputView {
         }.getOrNull() ?: error(ERROR_TEXT)
     }
 
+    fun bonusBallInput(): Int {
+        println(ENTER_THE_BONUS_NUMBER)
+        val bonusBallNumber = readln()
+        return kotlin.runCatching { bonusBallNumber.toInt() }.getOrNull() ?: error(ERROR_TEXT)
+    }
+
     private const val ENTER_LOTTO_PRICE = "구입금액을 입력해 주세요."
     private const val ERROR_TEXT = "올바른 숫자를 입력 해주세요"
     private const val MINIMUM_COUNT = 0
@@ -39,5 +45,6 @@ object InputView {
     private const val BUY_COUNT = "개를 구매했습니다."
     private const val THOUSAND_WON = 1000
     private const val ENTER_LAST_WEEK_LOTTO_NUMBER = "지난 주 당첨 번호를 입력해 주세요."
+    private const val ENTER_THE_BONUS_NUMBER = "보너스 볼을 입력해 주세요."
     private const val DELIMITER = ','
 }
