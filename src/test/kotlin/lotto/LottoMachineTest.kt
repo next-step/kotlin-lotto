@@ -19,16 +19,20 @@ class LottoMachineTest {
     }
 
     @Test
-    fun `여러개의 로또 동일 등수 통계 추출`() {
+    fun `여러 개의 로또 통계 추출`() {
         val expectLottos = listOf(
             Lotto(1, 2, 3, 4, 5, 6),
-            Lotto(1, 2, 3, 4, 5, 6)
+            Lotto(1, 2, 3, 4, 5, 6),
+            Lotto(1, 2, 3, 4, 5, 7),
+            Lotto(1, 2, 3, 4, 7, 8),
+            Lotto(1, 2, 3, 7, 8, 9),
+            Lotto(1, 2, 3, 7, 8, 9),
         )
-        val sut = LottoMachine(lottoGenerator(expectLottos), 2000)
+        val sut = LottoMachine(lottoGenerator(expectLottos), 6000)
 
-        val actual = sut.issueStatistics(Lotto(1, 2, 3, 4, 5, 7))
+        val actual = sut.issueStatistics(Lotto(1, 2, 3, 4, 5, 6))
 
-        assertThat(actual).isEqualTo(Statistics(mapOf(5 to 2)))
+        assertThat(actual).isEqualTo(Statistics(mapOf(6 to 2, 5 to 1, 4 to 1, 3 to 2)))
     }
 
     private fun lottoGenerator(lottos: List<Lotto>): LottoGenerator {
