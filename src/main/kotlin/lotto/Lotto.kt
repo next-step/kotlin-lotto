@@ -1,5 +1,4 @@
 package lotto
 
-class Lotto {
-
+class Lotto(vararg numbers: Int) {
 }

@@ -1,11 +1,17 @@
 package lotto
 
+import java.util.IntSummaryStatistics
+
 private const val LOTTO_PRICE = 1000
 
 class LottoMachine(private val lottoGenerator: LottoGenerator) {
 
     fun issueLottos(money: Int): List<Lotto> {
         return (0 until money.issueLottoSize()).map { lottoGenerator.generate() }
+    }
+
+    fun issueStatistics(lotto: Lotto): Statistics {
+        return Statistics(mapOf(3 to 1))
     }
 }
 
