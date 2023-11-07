@@ -2,8 +2,8 @@ package lottery.domain
 
 import io.kotest.matchers.shouldBe
 import lottery.validator.InputValidator
-import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class InputValidatorTest {
 
@@ -17,15 +17,15 @@ class InputValidatorTest {
 
     @Test
     fun `지난 주 당첨 번호가 하나라도 숫자가 아니면 오류를 반환한다`() {
-        Assertions.assertThatThrownBy {
+        assertThrows<IllegalArgumentException> {
             InputValidator.validateWinningNumbers("a,2,3,4,5,6")
-        }.isInstanceOf(IllegalArgumentException::class.java)
+        }
     }
 
     @Test
     fun `지난 주 당첨 번호가 하나라도 음수 번호를 가지면 오류를 반환한다`() {
-        Assertions.assertThatThrownBy {
+        assertThrows<IllegalArgumentException>  {
             InputValidator.validateWinningNumbers("-1,2,3,4,5,6")
-        }.isInstanceOf(IllegalArgumentException::class.java)
+        }
     }
 }
