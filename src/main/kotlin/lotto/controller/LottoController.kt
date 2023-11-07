@@ -1,28 +1,19 @@
 package lotto.controller
 
-import lotto.service.draw.LottoDrawService
-import lotto.service.draw.LottoDrawSpec
-import lotto.service.issue.LottoIssueService
+import lotto.domain.LottoShop
+import lotto.domain.PurchasedLottos
 import lotto.view.LottoInputView
 import lotto.view.LottoOutputView
 
 object LottoController {
     fun handle() {
         val purchaseAmount = LottoInputView.readPurchaseAmountInput()
-
-        val lottos = LottoIssueService.issue(purchaseAmount)
-
-        LottoOutputView.printLottoOutput(lottos.size, lottos)
+        val lottos = LottoShop.purchaseLottos(purchaseAmount)
+        val purchasedLottos = PurchasedLottos(lottos, purchaseAmount)
+        LottoOutputView.printLottoOutput(purchasedLottos)
 
         val winningNumbers = LottoInputView.readWinningNumbersInput()
-
-        val lottoDrawSpec = LottoDrawSpec(
-            lottos = lottos,
-            winningNumbers = winningNumbers,
-            purchaseAmount = purchaseAmount,
-        )
-        val winningStatistic = LottoDrawService.draw(lottoDrawSpec)
-
+        val winningStatistic = purchasedLottos.draw(winningNumbers)
         LottoOutputView.printWinningStatistic(winningStatistic)
     }
 }

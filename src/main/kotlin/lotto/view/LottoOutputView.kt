@@ -1,16 +1,16 @@
 package lotto.view
 
-import lotto.domain.Lotto
 import lotto.domain.Prize
+import lotto.domain.PurchasedLottos
 import lotto.domain.WinningStatistic
 
 object LottoOutputView {
-    fun printLottoOutput(purchaseCount: Int, lottos: List<Lotto>) {
-        println("${purchaseCount}개를 구매했습니다.")
+    fun printLottoOutput(purchasedLottos: PurchasedLottos) {
+        println("${purchasedLottos.lottos.size}개를 구매했습니다.")
 
-        lottos.forEach {
-            println(it.numbers)
-        }
+        purchasedLottos.lottos
+            .forEach { println(it.numbers) }
+
         println()
     }
 

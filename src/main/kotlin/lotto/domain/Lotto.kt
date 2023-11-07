@@ -1,22 +1,20 @@
 package lotto.domain
 
-class Lotto {
-    private val numberRange: IntRange = (MIN_NUMBER..MAX_NUMBER)
-    private val totalNumbers: List<Int> = numberRange.shuffled()
+class Lotto(
+    val numbers: List<LottoNumber>,
+) {
+    init {
+        require(numbers.size == NUMBER_COUNT) { "Lotto numbers should be $NUMBER_COUNT numbers." }
+    }
 
-    val numbers: List<Int> = totalNumbers.take(NUMBER_COUNT)
-        .sorted()
-
-    fun getMatchedNumberCount(winningNumbers: List<Int>): Int {
+    fun getMatchedNumberCount(winningNumbers: WinningNumbers): Int {
         return numbers.toSet()
-            .intersect(winningNumbers.toSet())
+            .intersect(winningNumbers.numbers.toSet())
             .count()
     }
 
     companion object {
         const val PRICE = 1000L
-        private const val NUMBER_COUNT = 6
-        private const val MIN_NUMBER = 1
-        private const val MAX_NUMBER = 45
+        const val NUMBER_COUNT = 6
     }
 }

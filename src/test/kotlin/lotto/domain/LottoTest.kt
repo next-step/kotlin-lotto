@@ -3,6 +3,7 @@
 package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.catchThrowable
 import org.junit.jupiter.api.Test
 
 class LottoTest {
@@ -15,37 +16,56 @@ class LottoTest {
 
     @Test
     fun `로또 1장이 가지고 있는 번호는 6개이다`() {
-        val lotto = Lotto()
+        val actual = Lotto.NUMBER_COUNT
 
-        val actual = lotto.numbers
-
-        assertThat(actual).hasSize(6)
+        assertThat(actual).isEqualTo(6)
     }
 
     @Test
-    fun `로또 번호는 1~45 사이의 숫자이다`() {
-        val lotto = Lotto()
+    fun `로또 번호가 6개의 숫자가 아니면 IllegalArgumentException이 발생한다`() {
+        val lottoNumbers = listOf(
+            LottoNumber(1),
+            LottoNumber(2),
+            LottoNumber(3),
+            LottoNumber(4),
+            LottoNumber(5),
+            LottoNumber(6),
+            LottoNumber(7),
+        )
 
-        val actual = lotto.numbers
+        val actual = catchThrowable {
+            Lotto(lottoNumbers)
+        }
 
-        assertThat(actual).allMatch { it in (1..45) }
+        assertThat(actual).isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessageContaining("Lotto numbers should be 6 numbers.")
     }
 
     @Test
-    fun `로또 번호는 중복될 수 없다`() {
-        val lotto = Lotto()
+    fun `지난주 당첨 번호가 주어지면 일치하는 숫자 수를 반환한다`() {
+        val lotto = Lotto(
+            listOf(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(6),
+            )
+        )
+        val winningNumbers = WinningNumbers(
+            listOf(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(7),
+            )
+        )
 
-        val actual = lotto.numbers
+        val actual = lotto.getMatchedNumberCount(winningNumbers)
 
-        assertThat(actual).hasSameSizeAs(actual.toSet())
-    }
-
-    @Test
-    fun `로또 번호는 오름차순 정렬되어 있다`() {
-        val lotto = Lotto()
-
-        val actual = lotto.numbers
-
-        assertThat(actual).containsExactlyElementsOf(actual.sorted())
+        assertThat(actual).isEqualTo(5)
     }
 }
