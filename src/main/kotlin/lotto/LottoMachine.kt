@@ -1,7 +1,5 @@
 package lotto
 
-import java.util.IntSummaryStatistics
-
 private const val LOTTO_PRICE = 1000
 
 class LottoMachine(private val lottoGenerator: LottoGenerator) {
@@ -11,7 +9,9 @@ class LottoMachine(private val lottoGenerator: LottoGenerator) {
     }
 
     fun issueStatistics(lotto: Lotto): Statistics {
-        return Statistics(mapOf(3 to 1))
+        val issueLotto = issueLottos(1000).get(0)
+        val rank = issueLotto.match(lotto)
+        return Statistics(mapOf(rank to 1))
     }
 }
 
