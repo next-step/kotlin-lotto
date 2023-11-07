@@ -25,11 +25,11 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("로또 객체는 당첨 번호 정보를 가지는 로또 객체를 받아 매칭 결과를 반환한다")
+    @DisplayName("로또 객체는 당첨 번호 정보를 가지는 로또 객체를 받아 일치하는 숫자 갯수를 반환한다")
     fun getMatchResult() {
         val lottoNumbers = listOf(1, 2, 3, 4, 5, 6)
         val lotto = Lotto(lottoNumbers)
 
-        lotto.getMatchResult(lotto.copy()) shouldBe lottoNumbers
+        lotto.getMatchResult(lotto.copy()) shouldBe 6
     }
 }

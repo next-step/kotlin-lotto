@@ -4,7 +4,7 @@ data class Lottos(
     val lottos: List<Lotto>
 ) {
     fun matchLottos(winningLotto: Lotto): List<Rank> {
-        return lottos.map { Rank.of(it.getMatchResult(winningLotto).size) }
+        return lottos.map { Rank.of(it.getMatchResult(winningLotto)) }
     }
 
     companion object {
