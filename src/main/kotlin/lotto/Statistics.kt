@@ -9,6 +9,8 @@ data class Statistics(private val money: Int = 1000, private val statistics: Map
     constructor(money: Int, vararg pairs: Pair<Int, Int>): this(money, mapOf(*pairs))
 
     private fun totalProfit(): BigDecimal {
-        return BigDecimal("5000").multiply(BigDecimal(statistics.getOrDefault(3, 0)))
+        return BigDecimal("5000").multiply(BigDecimal(statistics.getOrDefault(3, 0))).add(
+            BigDecimal("50000").multiply(BigDecimal(statistics.getOrDefault(4, 0)))
+        )
     }
 }
