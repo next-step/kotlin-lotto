@@ -3,14 +3,18 @@ package lotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 import java.lang.IllegalArgumentException
 
 class LottoTest {
 
-    @Test
-    fun `잘못된 숫자 갯수로 로또 생성 시 예외 발생`() {
+    @ParameterizedTest
+    @ValueSource(ints = [5, 7])
+    fun `잘못된 숫자 갯수로 로또 생성 시 예외 발생`(size: Int) {
         assertThrows<IllegalArgumentException> {
-            Lotto(1, 2, 3, 4, 5)
+            val numbers = (0 until size).toList().toIntArray()
+            Lotto(*numbers)
         }
     }
 
