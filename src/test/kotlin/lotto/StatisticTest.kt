@@ -40,4 +40,14 @@ class StatisticTest {
 
         assertThat(actual).isEqualByComparingTo("200000".toBigDecimal())
     }
+
+    @Test
+    fun `통계가 가지고 있는 등수 갯수를 조회한다`() {
+        val sut = Statistics(10000, 6 to 1, 5 to 2, 4 to 12, 3 to 23)
+
+        assertThat(sut.countOf(6)).isEqualTo(1)
+        assertThat(sut.countOf(5)).isEqualTo(2)
+        assertThat(sut.countOf(4)).isEqualTo(12)
+        assertThat(sut.countOf(3)).isEqualTo(23)
+    }
 }
