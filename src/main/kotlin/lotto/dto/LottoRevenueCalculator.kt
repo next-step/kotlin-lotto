@@ -11,15 +11,18 @@ class LottoRevenueCalculator(private val matchResult: LottoMatchResult) {
     private fun calculateRevenue(): Double {
         var revenue = 0.0
         for (match in 3..6) {
-            val count = matchResult.getMatchCount(match)
-            revenue += when (match) {
-                3 -> LottoConstants.PRIZE_MATCH_3.toDouble() * count
-                4 -> LottoConstants.PRIZE_MATCH_4.toDouble() * count
-                5 -> LottoConstants.PRIZE_MATCH_5.toDouble() * count
-                6 -> LottoConstants.PRIZE_MATCH_6.toDouble() * count
-                else -> 0.0
-            }
+            revenue += calculatePrizeForMatch(match) * matchResult.getMatchCount(match)
         }
         return revenue
+    }
+
+    private fun calculatePrizeForMatch(match: Int): Double {
+        return when (match) {
+            3 -> LottoConstants.PRIZE_MATCH_3.toDouble()
+            4 -> LottoConstants.PRIZE_MATCH_4.toDouble()
+            5 -> LottoConstants.PRIZE_MATCH_5.toDouble()
+            6 -> LottoConstants.PRIZE_MATCH_6.toDouble()
+            else -> 0.0
+        }
     }
 }

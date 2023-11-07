@@ -4,7 +4,6 @@ import lotto.domain.LottoConstants
 import lotto.domain.LottoMachine
 import lotto.dto.LottoMatchResult
 import lotto.dto.LottoRevenueCalculator
-import lotto.view.InputView
 import lotto.view.ResultView
 
 fun main() {
