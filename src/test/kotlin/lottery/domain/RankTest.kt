@@ -11,7 +11,7 @@ class RankTest {
     @ParameterizedTest
     @EnumSource(Rank::class)
     @DisplayName("매칭 횟수에 따라 순위가 결정된다")
-    fun matchResult(rank: Rank) {
+    fun `매칭 횟수에 따라 순위가 결정된다`(rank: Rank) {
         val result = Rank.of(rank.countOfMatch)
 
         result shouldBe rank
@@ -19,8 +19,7 @@ class RankTest {
 
     @ParameterizedTest
     @ValueSource(ints = [0, 1, 2])
-    @DisplayName("3개 미만인 경우 미당첨이다")
-    fun mismatchResult(countOfMatch: Int) {
+    fun `매치 개수가 3개 미만인 경우 미당첨이다`(countOfMatch: Int) {
         val result = Rank.of(countOfMatch)
 
         result shouldBe Rank.MISS
