@@ -31,7 +31,7 @@ class LottoMachineTest {
             Lotto(7, 8, 9, 10, 11, 12),
             Lotto(7, 8, 9, 10, 11, 12),
         )
-        val money = 6000
+        val money = expectLottos.size * LOTTO_PRICE
         val sut = LottoMachine(lottoGenerator(expectLottos), money)
 
         val actual = sut.issueStatistics(Lotto(1, 2, 3, 4, 5, 6))
@@ -43,6 +43,7 @@ class LottoMachineTest {
         assertThat(actual.countOf(5)).isEqualTo(1)
         assertThat(actual.countOf(4)).isEqualTo(1)
         assertThat(actual.countOf(3)).isEqualTo(2)
+        assertThat(actual.countOf(0)).isEqualTo(2)
     }
 
     private fun lottoGenerator(lottos: List<Lotto>): LottoGenerator {

@@ -1,6 +1,7 @@
 package lotto
 
-class Lotto(private vararg val numbers: Int) {
+class Lotto(vararg numbers: Int) {
+    val numbers: List<Int> = numbers.toList()
 
     init {
         require(numbers.distinct().size == 6) { "로또는 유일한 숫자 6개로 구성해야합니다." }
@@ -8,5 +9,12 @@ class Lotto(private vararg val numbers: Int) {
 
     fun matchedCount(other: Lotto): Int {
         return numbers.filter { it in other.numbers }.size
+    }
+
+    companion object {
+        fun random(): Lotto {
+            val randomNumbers = (0..45).shuffled().subList(0, 6).toList().toIntArray()
+            return Lotto(*randomNumbers)
+        }
     }
 }
