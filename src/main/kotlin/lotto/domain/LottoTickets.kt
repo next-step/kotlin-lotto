@@ -1,18 +1,22 @@
 package lotto.domain
 
-object LottoReferee {
-    fun createResults(
-        tickets: List<LottoTicket>,
+class LottoTickets (
+    val tickets: List<LottoTicket>,
+) {
+    fun determinePrize(
         winningNumbers: WinningNumbers,
-        minMatchedCountToGetPrize: Int,
-    ): List<LottoResult> {
-        val result = groupTicketByMatchedNumberCount(tickets, winningNumbers)
+        minMatchedCountToGetPrize: Int = LottoSpec.getMinCountToGetPrize(),
+    ): LottoResults {
+        val result = groupTicketByMatchedNumberCount(winningNumbers)
         val winningResult = filterWinningResult(result, minMatchedCountToGetPrize)
-        return toLottoResult(winningResult)
+        return toLottoResults(winningResult)
     }
 
+    fun calculatePrice(ticketPrice: Amount) = ticketPrice * tickets.size
+
+    fun count(): Int = tickets.size
+
     private fun groupTicketByMatchedNumberCount(
-        tickets: List<LottoTicket>,
         winningNumbers: WinningNumbers
     ): Map<Int, List<LottoTicket>> =
         tickets.groupBy { ticket -> ticket.countMatched(winningNumbers) }
@@ -20,10 +24,10 @@ object LottoReferee {
     private fun filterWinningResult(result: Map<Int, List<LottoTicket>>, minMatchedNumberCountToGetPrize: Int) =
         result.filter { (matchedNumberCount, _) ->  minMatchedNumberCountToGetPrize <= matchedNumberCount }
 
-    private fun toLottoResult(result: Map<Int, List<LottoTicket>>) = result.map { (matchedNumberCount, tickets) ->
+    private fun toLottoResults(result: Map<Int, List<LottoTicket>>) = result.map { (matchedNumberCount, tickets) ->
         LottoResult(
             matchedNumberCount = matchedNumberCount,
             ticketCount = tickets.count()
         )
-    }
+    }.let(::LottoResults)
 }

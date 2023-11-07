@@ -10,12 +10,14 @@ object OutputView {
 
 
     fun drawPurchaseOutput(response: PurchaseResponse) {
-        drawPurchaseCount(response.tickets.size)
-        drawTickets(response.tickets)
+        val tickets = response.tickets
+        drawPurchaseCount(tickets.count())
+        drawTickets(tickets.tickets)
     }
 
     fun drawEarningRateOutput(response: EndLottoResponse) {
-        val lossMessage = if(response.isLoss()) "손해" else "손해가 아니"
+        val rate = response.earningRate
+        val lossMessage = if(rate.isLoss()) "손해" else "손해가 아니"
         println(EARNING_RATE_MSG.format(response.earningRate, lossMessage))
     }
 

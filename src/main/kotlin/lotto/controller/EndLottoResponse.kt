@@ -1,7 +1,7 @@
 package lotto.controller
 
+import lotto.domain.EarningRate
+
 class EndLottoResponse(
-    val earningRate: Double
-) {
-    fun isLoss(): Boolean = earningRate < 1
-}
+    val earningRate: EarningRate
+)

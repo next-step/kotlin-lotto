@@ -9,6 +9,12 @@ object LottoMock {
         return LottoTicket(numbers)
     }
 
+    fun createTickets(numberRange: IntRange = LottoSpec.NUMBERS_RANGE, numberCount: Int = LottoSpec.NUMBERS_COUNT) =
+        createNumbers(numberRange, numberCount).let(::LottoTicket)
+
     fun createWinningNumbers(numberRange: IntRange = LottoSpec.NUMBERS_RANGE, numberCount: Int = LottoSpec.NUMBERS_COUNT) =
-        WinningNumbers.of(numberRange.shuffled().take(numberCount).sorted(), numberRange, numberCount)
+        WinningNumbers.of(createNumbers(numberRange, numberCount), numberRange, numberCount)
+
+    private fun createNumbers(numberRange: IntRange = LottoSpec.NUMBERS_RANGE, numberCount: Int = LottoSpec.NUMBERS_COUNT) =
+        numberRange.shuffled().take(numberCount).sorted()
 }
