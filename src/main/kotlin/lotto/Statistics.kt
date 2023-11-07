@@ -20,7 +20,8 @@ data class Statistics(private val money: Int, private val statistics: Map<Int, I
         private val PRIZES = mapOf(
             3 to BigDecimal("5000"),
             4 to BigDecimal("50000"),
-            5 to BigDecimal("1500000")
+            5 to BigDecimal("1500000"),
+            6 to BigDecimal("2000000000")
         )
     }
 }
