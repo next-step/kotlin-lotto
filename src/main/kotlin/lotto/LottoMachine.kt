@@ -1,9 +1,11 @@
 package lotto
 
+private const val LOTTO_PRICE = 1000
+
 class LottoMachine {
 
-    fun create(money: Int = 1000): List<Any> {
-        val size = money / 1000
+    fun create(money: Int): List<Any> {
+        val size = money / LOTTO_PRICE
         return (0 until size).map { it }
     }
 }
