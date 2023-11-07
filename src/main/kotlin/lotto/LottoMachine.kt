@@ -2,15 +2,11 @@ package lotto
 
 private const val LOTTO_PRICE = 1000
 
-class LottoMachine(private val lottoGenerator: LottoGenerator) {
-
-    fun issueLottos(money: Int): List<Lotto> {
-        return (0 until money.issueLottoSize()).map { lottoGenerator.generate() }
-    }
+class LottoMachine(lottoGenerator: LottoGenerator, money: Int) {
+    val issuedLottos = (0 until money.issueLottoSize()).map { lottoGenerator.generate() }
 
     fun issueStatistics(lotto: Lotto): Statistics {
-        val issueLotto = issueLottos(1000).get(0)
-        val rank = issueLotto.match(lotto)
+        val rank = issuedLottos[0].match(lotto)
         return Statistics(mapOf(rank to 1))
     }
 }

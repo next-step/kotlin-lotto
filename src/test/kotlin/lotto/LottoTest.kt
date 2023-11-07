@@ -13,7 +13,7 @@ class LottoTest {
         val expectLottos = (0 until expectSize).map { _ -> Lotto() }
         val sut = LottoMachine(lottoGenerator(expectLottos), money)
 
-        val actualLottos = sut.issuedLottos()
+        val actualLottos = sut.issuedLottos
 
         assertThat(actualLottos).isEqualTo(expectLottos)
     }
