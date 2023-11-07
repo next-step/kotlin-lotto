@@ -1,6 +1,6 @@
 package lotto.component
 
-class LottoNumberGenerator {
+class LottoNumbersGenerator {
     fun generate(): List<Int> {
         return NUMBER_POOL.shuffled()
             .subList(0, LOTTO_NUMBER_LENGTH)

@@ -5,16 +5,16 @@ import io.kotest.matchers.comparables.shouldBeLessThan
 import io.kotest.matchers.shouldBe
 
 class LottoNumberGeneratorTest : FunSpec({
-    val lottoNumberGenerator = LottoNumberGenerator()
+    val lottoNumbersGenerator = LottoNumbersGenerator()
 
     test("로또 번호 생성 시 6자리 번호가 포함되어있는 경우 성공") {
-        val result = lottoNumberGenerator.generate()
+        val result = lottoNumbersGenerator.generate()
 
-        result.size shouldBe LottoNumberGenerator.LOTTO_NUMBER_LENGTH
+        result.size shouldBe LottoNumbersGenerator.LOTTO_NUMBER_LENGTH
     }
 
     test("로또 번호 생성 시 정렬되어있는 경우 성공") {
-        val result = lottoNumberGenerator.generate()
+        val result = lottoNumbersGenerator.generate()
 
         result.windowed(2, 1)
             .forEach {
