@@ -4,7 +4,7 @@ class LottoGame(val price: Int, private val lottos: Lottos) {
 
     constructor(price: Int, numberGenerator: LottoNumberGenerator = RandomNumberGenerator()) : this(
         price,
-        Lottos.of(price.div(LOTTERY_PRICE), numberGenerator)
+        Lottos(price.div(LOTTERY_PRICE), numberGenerator)
     )
 
     fun getLottos(): List<Lotto> {
