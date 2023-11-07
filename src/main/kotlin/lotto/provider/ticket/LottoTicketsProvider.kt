@@ -2,8 +2,8 @@ package lotto.provider.ticket
 
 import lotto.domain.LottoTickets
 
-interface LottoTicketsProvider {
-    fun provideLottoTickets(ticketCount: Int): LottoTickets
+abstract class LottoTicketsProvider {
+    abstract fun provideLottoTickets(ticketCount: Int): LottoTickets
 
-    fun provideLottoPrice(): Int
+    fun provideLottoPrice() = 1000
 }

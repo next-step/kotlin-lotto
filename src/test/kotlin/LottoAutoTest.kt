@@ -4,7 +4,9 @@ import lotto.LottoSimulator
 import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
 import lotto.domain.WinningNumber
+import lotto.provider.budget.MockBudgetProvider
 import lotto.provider.ticket.AutoProvider
+import lotto.provider.winningnumber.MockWinningNumberProvider
 import lotto.view.MockInputView
 import lotto.view.ResultView
 import org.assertj.core.api.Assertions.assertThatThrownBy
@@ -91,15 +93,17 @@ class LottoAutoTest : StringSpec({
     "lotto ticket is 1,000 KRW/EA" {
         LottoSimulator(
             inputView = MockInputView(
-                budget = 1000,
-                winningNumber = WinningNumber(
-                    listOf(
-                        LottoNumber(1),
-                        LottoNumber(2),
-                        LottoNumber(3),
-                        LottoNumber(4),
-                        LottoNumber(5),
-                        LottoNumber(6),
+                budgetProvider = MockBudgetProvider(1000),
+                winningNumberProvider = MockWinningNumberProvider(
+                    WinningNumber(
+                        listOf(
+                            LottoNumber(1),
+                            LottoNumber(2),
+                            LottoNumber(3),
+                            LottoNumber(4),
+                            LottoNumber(5),
+                            LottoNumber(6),
+                        )
                     )
                 ),
             ),
@@ -111,15 +115,17 @@ class LottoAutoTest : StringSpec({
     "should buy as many lotto tickets as possible with budget" {
         LottoSimulator(
             MockInputView(
-                budget = 1000,
-                winningNumber = WinningNumber(
-                    listOf(
-                        LottoNumber(1),
-                        LottoNumber(2),
-                        LottoNumber(3),
-                        LottoNumber(4),
-                        LottoNumber(5),
-                        LottoNumber(6),
+                budgetProvider = MockBudgetProvider(1000),
+                winningNumberProvider = MockWinningNumberProvider(
+                    WinningNumber(
+                        listOf(
+                            LottoNumber(1),
+                            LottoNumber(2),
+                            LottoNumber(3),
+                            LottoNumber(4),
+                            LottoNumber(5),
+                            LottoNumber(6),
+                        )
                     )
                 ),
             ),
@@ -129,15 +135,17 @@ class LottoAutoTest : StringSpec({
 
         LottoSimulator(
             MockInputView(
-                budget = 300,
-                winningNumber = WinningNumber(
-                    listOf(
-                        LottoNumber(1),
-                        LottoNumber(2),
-                        LottoNumber(3),
-                        LottoNumber(4),
-                        LottoNumber(5),
-                        LottoNumber(6),
+                budgetProvider = MockBudgetProvider(300),
+                winningNumberProvider = MockWinningNumberProvider(
+                    WinningNumber(
+                        listOf(
+                            LottoNumber(1),
+                            LottoNumber(2),
+                            LottoNumber(3),
+                            LottoNumber(4),
+                            LottoNumber(5),
+                            LottoNumber(6),
+                        )
                     )
                 ),
             ),
@@ -147,15 +155,17 @@ class LottoAutoTest : StringSpec({
 
         LottoSimulator(
             MockInputView(
-                budget = 5000,
-                winningNumber = WinningNumber(
-                    listOf(
-                        LottoNumber(1),
-                        LottoNumber(2),
-                        LottoNumber(3),
-                        LottoNumber(4),
-                        LottoNumber(5),
-                        LottoNumber(6),
+                budgetProvider = MockBudgetProvider(5000),
+                winningNumberProvider = MockWinningNumberProvider(
+                    WinningNumber(
+                        listOf(
+                            LottoNumber(1),
+                            LottoNumber(2),
+                            LottoNumber(3),
+                            LottoNumber(4),
+                            LottoNumber(5),
+                            LottoNumber(6),
+                        )
                     )
                 ),
             ),
@@ -195,15 +205,17 @@ class LottoAutoTest : StringSpec({
     "winning statistics should show correct win state" {
         LottoSimulator(
             MockInputView(
-                budget = 5000,
-                winningNumber = WinningNumber(
-                    listOf(
-                        LottoNumber(1),
-                        LottoNumber(2),
-                        LottoNumber(3),
-                        LottoNumber(4),
-                        LottoNumber(5),
-                        LottoNumber(6),
+                budgetProvider = MockBudgetProvider(5000),
+                winningNumberProvider = MockWinningNumberProvider(
+                    WinningNumber(
+                        listOf(
+                            LottoNumber(1),
+                            LottoNumber(2),
+                            LottoNumber(3),
+                            LottoNumber(4),
+                            LottoNumber(5),
+                            LottoNumber(6),
+                        )
                     )
                 ),
             ),

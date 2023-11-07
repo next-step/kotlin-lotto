@@ -4,7 +4,7 @@ import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
 
-object AutoProvider : LottoTicketsProvider {
+object AutoProvider : LottoTicketsProvider() {
     override fun provideLottoTickets(ticketCount: Int): LottoTickets {
         val tickets = mutableListOf<LottoTicket>()
 
@@ -21,6 +21,4 @@ object AutoProvider : LottoTicketsProvider {
 
         return LottoTickets(tickets)
     }
-
-    override fun provideLottoPrice(): Int = 1000
 }
