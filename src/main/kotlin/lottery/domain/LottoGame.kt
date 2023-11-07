@@ -1,11 +1,11 @@
 package lottery.domain
 
-class LottoGame(val price: Int, numberGenerator: LottoNumberGenerator = RandomNumberGenerator()) {
-    private val lottos: Lottos
+class LottoGame(val price: Int, private val lottos: Lottos) {
 
-    init {
-        lottos = Lottos.of(price.div(LOTTERY_PRICE), numberGenerator)
-    }
+    constructor(price: Int, numberGenerator: LottoNumberGenerator = RandomNumberGenerator()) : this(
+        price,
+        Lottos.of(price.div(LOTTERY_PRICE), numberGenerator)
+    )
 
     fun getLottos(): List<Lotto> {
         return lottos.lottos
