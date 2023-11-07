@@ -1,6 +1,6 @@
 package lotto.domain
 
-data class LottoNumber(val value: Int) {
+class LottoNumber private constructor(val value: Int) {
     init {
         require(value in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER) { "로또 번호는 $MIN_LOTTO_NUMBER ~ $MAX_LOTTO_NUMBER 사이의 숫자만 가능합니다." }
     }
@@ -14,5 +14,24 @@ data class LottoNumber(val value: Int) {
         fun from(value: Int): LottoNumber {
             return lottoNumberPool.getOrDefault(value, LottoNumber(value))
         }
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as LottoNumber
+
+        if (value != other.value) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return value
+    }
+
+    override fun toString(): String {
+        return "LottoNumber(value=$value)"
     }
 }
