@@ -18,8 +18,8 @@ data class WinningNumber(private var _lottoNumberList: List<LottoNumber>) {
     fun getHitCount(lottoTicket: LottoTicket): Int {
         var hitCount = 0
 
-        lottoTicket.lottoNumberList.forEach {
-            if (lottoNumberList.contains(it)) {
+        lottoTicket.lottoNumberList.forEach { number ->
+            if (_lottoNumberList.map { it.value }.contains(number.value)) {
                 hitCount += 1
             }
         }

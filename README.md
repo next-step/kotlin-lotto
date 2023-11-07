@@ -19,5 +19,5 @@
 - [x] should buy as many lotto tickets as possible with budget 
 - [x] winning number should have exact 6 numbers else throw IllegalArgumentException
 - [x] winning number with same number should throw IllegalArgumentException
-- [ ] winning statistics should show correct win state
+- [x] winning statistics should calculate correct profit
 - [ ] winning statistics should show correct ROI

@@ -1,7 +1,7 @@
 package lotto.domain
 
 data class LottoResult(
-    val profit: Int,
+    val profit: Long,
     val netSpent: Int,
     val remainder: Int,
     val profitRate: Double,

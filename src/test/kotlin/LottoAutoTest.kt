@@ -3,9 +3,12 @@ import io.kotest.matchers.shouldBe
 import lotto.LottoSimulator
 import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
+import lotto.domain.LottoTickets
 import lotto.domain.WinningNumber
 import lotto.provider.budget.MockBudgetProvider
-import lotto.provider.ticket.AutoProvider
+import lotto.provider.ticket.AutoTicketProvider
+import lotto.provider.ticket.ManualTicketProvideStrategy
+import lotto.provider.ticket.MockTicketProvider
 import lotto.provider.winningnumber.MockWinningNumberProvider
 import lotto.view.MockInputView
 import lotto.view.ResultView
@@ -106,8 +109,8 @@ class LottoAutoTest : StringSpec({
                         )
                     )
                 ),
+                lottoTicketsProvider = AutoTicketProvider,
             ),
-            lottoTicketsProvider = AutoProvider,
             resultView = ResultView(),
         ).getTicketCount().shouldBe(1)
     }
@@ -128,8 +131,8 @@ class LottoAutoTest : StringSpec({
                         )
                     )
                 ),
+                lottoTicketsProvider = AutoTicketProvider
             ),
-            lottoTicketsProvider = AutoProvider,
             resultView = ResultView(),
         ).getTicketCount().shouldBe(1)
 
@@ -148,8 +151,8 @@ class LottoAutoTest : StringSpec({
                         )
                     )
                 ),
+                lottoTicketsProvider = AutoTicketProvider,
             ),
-            lottoTicketsProvider = AutoProvider,
             resultView = ResultView(),
         ).getTicketCount().shouldBe(0)
 
@@ -168,8 +171,8 @@ class LottoAutoTest : StringSpec({
                         )
                     )
                 ),
+                lottoTicketsProvider = AutoTicketProvider,
             ),
-            lottoTicketsProvider = AutoProvider,
             resultView = ResultView(),
         ).getTicketCount().shouldBe(5)
     }
@@ -202,7 +205,7 @@ class LottoAutoTest : StringSpec({
             .hasMessageContaining("Duplicated winning number")
     }
 
-    "winning statistics should show correct win state" {
+    "winning statistics should calculate correct profit" {
         LottoSimulator(
             MockInputView(
                 budgetProvider = MockBudgetProvider(5000),
@@ -218,10 +221,18 @@ class LottoAutoTest : StringSpec({
                         )
                     )
                 ),
+                lottoTicketsProvider = MockTicketProvider(
+                    ManualTicketProvideStrategy(
+                        LottoTickets(
+                            listOf(
+                                LottoTicket(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
+                            )
+                        )
+                    )
+                ),
             ),
-            lottoTicketsProvider = AutoProvider,
             resultView = ResultView(),
-        ).simulate()
+        ).simulate().profit.shouldBe(2_000_000_000)
     }
 
     "winning statistics should show correct ROI" {
