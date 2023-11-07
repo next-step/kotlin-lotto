@@ -1,10 +1,14 @@
 package lotto.component
 
+import lotto.model.LottoNumbers
+
 class LottoNumbersGenerator {
-    fun generate(): List<Int> {
-        return NUMBER_POOL.shuffled()
+    fun generate(): LottoNumbers {
+        val numbers = NUMBER_POOL.shuffled()
             .subList(0, LOTTO_NUMBER_LENGTH)
             .sorted()
+
+        return LottoNumbers(numbers)
     }
 
     companion object {
