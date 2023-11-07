@@ -2,7 +2,7 @@ package lotto.ui
 
 import lotto.domain.LotteryPrizeAmount
 
-class ResultView {
+object ResultView {
     fun show(statistics: Map<Int, Int>) {
         println("당첨 통계")
         for (i in 3..6) {

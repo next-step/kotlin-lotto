@@ -2,7 +2,7 @@ package lotto.ui
 
 import lotto.domain.Lottos
 
-class UserInterface {
+object UserInterface {
 
     fun showNumbers(lottos: Lottos) {
         val lottoList = lottos.lottoList
