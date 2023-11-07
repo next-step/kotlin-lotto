@@ -11,12 +11,18 @@ object OutputView {
     private const val LOTTO_STATISTICS = "당첨 통계"
     private const val LINE = "---------"
     private const val SHOW_LOTTO_COUNT = 3
+    private const val ROI = "총 수익률은 %.2f입니다."
 
     fun printEnterMoney() = println(ENTER_MONEY)
     fun printLottoCount(count: String) = println(count + LOTTO_COUNT)
     fun printJackpotNumber() = println(ENTER_JACKPOT_NUMBER)
     fun printLottoStatistics() = println(LOTTO_STATISTICS)
     fun printLine() = println(LINE)
+
+    fun printROI(roi: Double) {
+        val message = ROI.format(roi)
+        println(message)
+    }
 
     fun printLottoList(lotto: List<Lotto>) {
         lotto.forEach { println(it.lotto) }

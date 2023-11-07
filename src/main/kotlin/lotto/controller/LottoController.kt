@@ -3,6 +3,7 @@ package lotto.controller
 import lotto.domain.LottoJackpotManager
 import lotto.domain.LottoNumberProvider
 import lotto.domain.LottoPurchaseManager
+import lotto.domain.LottoRoiManager
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -26,5 +27,9 @@ fun main() {
     OutputView.printLottoStatistics()
     OutputView.printLine()
     val findJackpotLotto = lottoJackpotManager.findJackpotLotto(jackpotNumbers, lotto)
+
+    val totalIncome = LottoRoiManager.getTotalIncome(findJackpotLotto)
+    val roi = LottoRoiManager.calculateROI(totalIncome, money)
     OutputView.printResult(findJackpotLotto)
+    OutputView.printROI(roi)
 }
