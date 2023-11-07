@@ -4,8 +4,11 @@ private const val LOTTO_PRICE = 1000
 
 class LottoMachine(private val lottoGenerator: LottoGenerator) {
 
-    fun create(money: Int): List<Any> {
-        val size = money / LOTTO_PRICE
-        return (0 until size).map { lottoGenerator.generate() }
+    fun issueLottos(money: Int): List<Lotto> {
+        return (0 until money.issueLottoSize()).map { lottoGenerator.generate() }
     }
+}
+
+private fun Int.issueLottoSize(): Int {
+    return this / LOTTO_PRICE
 }
