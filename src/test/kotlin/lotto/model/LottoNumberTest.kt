@@ -7,7 +7,7 @@ import io.kotest.matchers.shouldBe
 
 class LottoNumberTest : FunSpec({
     test("로또 번호와 당점 번호 비교 후 일치하는 번호를 정상 반환하는지 테스트") {
-        val winningLottoNumber = LottoNumber(
+        val winningLottoNumbers = LottoNumbers(
             listOf(1, 2, 3, 4, 5, 6)
         )
 
@@ -19,9 +19,9 @@ class LottoNumberTest : FunSpec({
             row(listOf(1, 2, 3, 4, 5, 1), 5),
             row(listOf(1, 2, 3, 4, 5, 6), 6),
         ) { numbers, answer ->
-            val lottoNumber = LottoNumber(numbers)
+            val lottoNumbers = LottoNumbers(numbers)
 
-            val result = lottoNumber.match(winningLottoNumber)
+            val result = lottoNumbers.match(winningLottoNumbers)
 
             result shouldBe answer
         }
