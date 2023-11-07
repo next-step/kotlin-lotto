@@ -12,8 +12,8 @@ data class Statistics(private val money: Int, private val statistics: Map<Int, I
     private fun totalProfit(): BigDecimal {
         return statistics.keys.map {
             val prize = PRIZES[it] ?: BigDecimal.ZERO
-            val quantity = statistics[it] ?: 0
-            prize.multiply(BigDecimal(quantity))
+            val quantity = countOf(it).toBigDecimal()
+            prize.multiply(quantity)
         }.reduce(BigDecimal::add)
     }
 
