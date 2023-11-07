@@ -1,6 +1,7 @@
 package lotto
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
@@ -15,6 +16,19 @@ class LottoMachineTest {
         val actualLottos = sut.issuedLottos
 
         assertThat(actualLottos).isEqualTo(expectLottos)
+    }
+
+    @Test
+    fun `여러개의 로또 동일 등수 통계 추출`() {
+        val expectLottos = listOf(
+            Lotto(1, 2, 3, 4, 5, 6),
+            Lotto(1, 2, 3, 4, 5, 6)
+        )
+        val sut = LottoMachine(lottoGenerator(expectLottos), 2000)
+
+        val actual = sut.issueStatistics(Lotto(1, 2, 3, 4, 5, 7))
+
+        assertThat(actual).isEqualTo(Statistics(mapOf(5 to 2)))
     }
 
     private fun lottoGenerator(lottos: List<Lotto>): LottoGenerator {
