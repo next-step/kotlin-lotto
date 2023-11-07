@@ -6,7 +6,7 @@ import lotto_auto.lotto.LottoPrize
 object OutputView {
     fun print(list: List<Lotto>) {
         list.forEach {
-            println(it.numberList.numbers)
+            println(it.numberList.lottoNumbers)
         }
     }
 

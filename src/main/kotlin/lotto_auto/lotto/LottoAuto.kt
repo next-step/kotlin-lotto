@@ -3,26 +3,25 @@ package lotto_auto.lotto
 object LottoAuto {
     fun matchedLottoCountWithBonusBall(
         lottoList: List<Lotto>,
-        lastWeekLottoNumber: Lotto,
-        bonusBallNumber: Int
-    ): List<Pair<Int, Boolean>> {
+        lastWeekLottoNumber: WinningLotto,
+    ): List<Pair<LottoPrize, Boolean>> {
         return lottoList
-            .map { it.lottoMatchCount(lastWeekLottoNumber) to it.isMatchedBonusBall(bonusBallNumber) }
+            .map { it.lottoMatchCount(lastWeekLottoNumber) to it.isMatchedBonusBall(lastWeekLottoNumber.bonusNumber) }
     }
 
     /**
      * 구매한 로또 총 당첨 금액
      */
-    fun sumOfWonLottoList(eachLottoMatchList: List<Pair<Int, Boolean>>): Int {
+    fun sumOfWonLottoList(eachLottoMatchList: List<Pair<LottoPrize, Boolean>>): Int {
         return eachLottoMatchList.sumOf {
-            replaceMatchCountToMoney(it.first, it.second).winningAmount
+            lottoPrizeWithMatchCountAndBonusMatched(it.first.matchCount, it.second).winningAmount
         }
     }
 
     /**
-     * match 개수 만큼 금액 으로 변경
+     * match 개수 만큼 LottoPrize로 변경
      */
-    private fun replaceMatchCountToMoney(matchCount: Int, bonusMatched: Boolean): LottoPrize {
+    private fun lottoPrizeWithMatchCountAndBonusMatched(matchCount: Int, bonusMatched: Boolean): LottoPrize {
         return LottoPrize.getLottoPrize(matchCount, bonusMatched)
     }
 

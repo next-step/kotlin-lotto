@@ -1,11 +1,11 @@
 package lotto_auto.lotto
 
 data class LottoNumbers(
-    val numbers: List<Int>
+    val lottoNumbers: List<Int>
 ) {
     init {
-        require(numbers.toSet().count() == NUMBER_LIST_COUNT) { COUNT_IS_WRONG }
-        require(numbers.count { it < MIN_NUMBER || it > MAX_NUMBER } < NUMBER_COUNT_NOT_IN_RAGE) { NUMBER_NOT_IN_RANGE }
+        require(lottoNumbers.toSet().count() == NUMBER_LIST_COUNT) { COUNT_IS_WRONG }
+        require(lottoNumbers.count { it < MIN_NUMBER || it > MAX_NUMBER } < NUMBER_COUNT_NOT_IN_RAGE) { NUMBER_NOT_IN_RANGE }
     }
 
     companion object {
@@ -18,4 +18,4 @@ data class LottoNumbers(
     }
 }
 
-fun List<Int>.toLottoNumbers() = LottoNumbers(numbers = this)
+fun List<Int>.toLottoNumbers() = LottoNumbers(lottoNumbers = this)

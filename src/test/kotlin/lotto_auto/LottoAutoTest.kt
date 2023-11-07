@@ -2,20 +2,17 @@ package lotto_auto
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import lotto_auto.lotto.Lotto
-import lotto_auto.lotto.LottoAuto
-import lotto_auto.lotto.LottoNumbers
-import lotto_auto.lotto.LottoPrize
+import lotto_auto.lotto.*
 
 class LottoAutoTest : StringSpec({
     "구매한 로또 총 당첨 금액이 맞는지" {
         // 로또 당첨 금액 (1) - 0원   (2) - 50000원
         val input =
             listOf(Lotto(LottoNumbers(listOf(1, 2, 3, 4, 5, 6))), Lotto(LottoNumbers(listOf(2, 4, 6, 8, 12, 15))))
-        val winningLotto = Lotto(LottoNumbers(listOf(3, 6, 9, 12, 15, 18)))
         val bonusBallNumber = 33
+        val winningLotto = listOf(3, 6, 9, 12, 15, 18).toWinningLotto(bonusBallNumber)
         val expected = 5000
-        val matchedList = LottoAuto.matchedLottoCountWithBonusBall(input, winningLotto, bonusBallNumber)
+        val matchedList = LottoAuto.matchedLottoCountWithBonusBall(input, winningLotto)
 
         LottoAuto.sumOfWonLottoList(matchedList) shouldBe expected
     }
@@ -27,7 +24,8 @@ class LottoAutoTest : StringSpec({
             Lotto(LottoNumbers(listOf(1, 2, 3, 4, 5, 31))),
             Lotto(LottoNumbers(listOf(1, 2, 3, 4, 5, 6)))
         )
-        val winningLotto = Lotto(LottoNumbers(listOf(1, 2, 3, 4, 5, 6)))
+        val bonusBallNumber = 45
+        val winningLotto = listOf(1, 2, 3, 4, 5, 6).toWinningLotto(bonusBallNumber)
         // 순서대로 3,4,5,6개 맞아서 리스트에 LottoPrize와 함께 1,1,1,1가 저장됨
         val expected = mapOf(
             LottoPrize.FIFTH_PRIZE to 1,
@@ -36,10 +34,9 @@ class LottoAutoTest : StringSpec({
             LottoPrize.SECOND_PRIZE to 0,
             LottoPrize.FIRST_PRIZE to 1
         )
-        val bonusBallNumber = 45
-        val eachLottoMatchCount = LottoAuto.matchedLottoCountWithBonusBall(input, winningLotto, bonusBallNumber)
+        val eachLottoMatchCount = LottoAuto.matchedLottoCountWithBonusBall(input, winningLotto)
         val matchedList =
-            eachLottoMatchCount.map { LottoPrize.getLottoPrize(it.first, it.second) }
+            eachLottoMatchCount.map { LottoPrize.getLottoPrize(it.first.matchCount, it.second) }
 
         LottoAuto.matchCountList(matchedList) shouldBe expected
     }
@@ -53,10 +50,10 @@ class LottoAutoTest : StringSpec({
             Lotto(LottoNumbers(listOf(25, 26, 27, 28, 29, 30)))
         )
         // 5개 샀고, 1번 로또가 4개 당첨 되어 5 만원
-        val winningLotto = Lotto(LottoNumbers(listOf(1, 2, 3, 4, 31, 32)))
-        val inputAmount = 5000
         val bonusBallNumber = 45
-        val matchedList = LottoAuto.matchedLottoCountWithBonusBall(input, winningLotto, bonusBallNumber)
+        val winningLotto = listOf(1, 2, 3, 4, 31, 32).toWinningLotto(bonusBallNumber)
+        val inputAmount = 5000
+        val matchedList = LottoAuto.matchedLottoCountWithBonusBall(input, winningLotto)
         val resultSum = LottoAuto.sumOfWonLottoList(matchedList)
 
         val expected = resultSum.toFloat() / inputAmount.toFloat()
