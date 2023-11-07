@@ -18,7 +18,7 @@ object ResultView {
 
         println("\n당첨 통계\n---------")
         Rank.values().filter { it.countOfMatch > 0 }.forEach { it ->
-            println("${it.countOfMatch}개 일치 (${it.winningMoney}원)- ${lottoStatResult.getCount(it)}개")
+            println("${it.countOfMatch}개 일치${if (it.isMatchBonus) ", 보너스 볼 일치" else " "}(${it.winningMoney}원)- ${lottoStatResult.getCount(it)}개")
         }
         println("총 수익률은 ${returnRate}입니다.${if (returnRate < 1) "(기준이 1이기 때문에 결과적으로 손해라는 의미임)" else ""}")
     }
