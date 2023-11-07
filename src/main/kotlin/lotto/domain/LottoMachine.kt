@@ -1,6 +1,8 @@
 package lotto.domain
 
 object LottoMachine {
+    const val LOTTO_PRICE = 1000
+
     fun purchase(
         purchaseAmount: Int
     ): List<Lotto> {
@@ -8,6 +10,4 @@ object LottoMachine {
 
         return List(size = numberOfLotto) { Lotto() }
     }
-
-    const val LOTTO_PRICE = 1000
 }

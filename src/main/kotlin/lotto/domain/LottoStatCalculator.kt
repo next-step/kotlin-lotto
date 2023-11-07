@@ -2,23 +2,25 @@ package lotto.domain
 
 class LottoStatCalculator(private val winningLotto: WinningLotto) {
 
-    fun getStat(lottos: List<Lotto>): LottoStatResult {
+    fun getStat(lottoList: List<Lotto>): LottoStatResult {
 
-        return lottos.fold(
+        return lottoList.fold(
             LottoStatResult(
                 firstCount = 0,
                 secondCount = 0,
                 thirdCount = 0,
                 fourthCount = 0,
                 fifthCount = 0,
-                purchaseAmount = lottos.count() * LottoMachine.LOTTO_PRICE
+                purchaseAmount = lottoList.count() * LottoMachine.LOTTO_PRICE
             )
         ) { prev, lotto ->
             when (compareWithWinningLotto(lotto)) {
                 3 -> prev.copy(fifthCount = prev.fifthCount + 1)
                 4 -> prev.copy(fourthCount = prev.fourthCount + 1)
-                5 -> prev.copy(thirdCount = prev.thirdCount + 1)
+                5 -> if (getIsMatchBonusNumber(lotto)) prev.copy(secondCount = prev.secondCount + 1)
+                else prev.copy(thirdCount = prev.thirdCount + 1)
                 6 -> prev.copy(firstCount = prev.firstCount + 1)
+
                 else -> prev
             }
         }
@@ -32,4 +34,6 @@ class LottoStatCalculator(private val winningLotto: WinningLotto) {
             else prev
         }
     }
+
+    private fun getIsMatchBonusNumber(lotto: Lotto) = lotto.numbers.contains(winningLotto.bonusNumber)
 }
