@@ -2,6 +2,7 @@ package lotto_auto
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
 import lotto_auto.lotto.Lotto
 import lotto_auto.lotto.LottoNumbers
@@ -39,21 +40,15 @@ class LottoTest : FunSpec({
         }
     }
 
-    test("전달된 숫자가 1~45 범위 내에 없습니다.") {
-//        withData(
-//            listOf(1, 2, 3, 4, 5, 46),
-//            listOf(0, 1, 2, 3, 4, 5),
-//        ) { lottoList ->
-//            shouldThrow<IllegalArgumentException> {
-//                Lotto(lottoList)
-//            }
-//        }
-        listOf(
-            listOf(1, 2, 3, 4, 5, 46),
-            listOf(0, 1, 2, 3, 4, 5),
-        ).forEach { lottoNumberList ->
+    context("전달된 숫자가 1~45 범위 내에 없습니다.") {
+        withData(
+            listOf(
+                listOf(1, 2, 3, 4, 5, 46),
+                listOf(0, 1, 2, 3, 4, 5),
+            )
+        ) { lottoList ->
             shouldThrow<IllegalArgumentException> {
-                LottoNumbers(lottoNumberList)
+                LottoNumbers(lottoList)
             }
         }
     }
