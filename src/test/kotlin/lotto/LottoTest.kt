@@ -2,44 +2,42 @@ package lotto
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.CsvSource
 
 class LottoTest {
 
-    @ParameterizedTest
-    @CsvSource(value = ["1000, 1", "13000, 13", "123441, 123"])
-    fun `입력 금액 만큼 로또 생성`(money: Int, expectSize: Int) {
-        val expectLottos = (0 until expectSize).map { _ -> Lotto() }
-        val sut = LottoMachine(lottoGenerator(expectLottos), money)
+    @Test
+    fun `로또 번호 3개 일치`() {
+        val sut = Lotto(1, 2, 3, 4, 5, 6)
 
-        val actualLottos = sut.issuedLottos
+        val actual = sut.matchedCount(Lotto(1, 2, 3, 7, 8, 9))
 
-        assertThat(actualLottos).isEqualTo(expectLottos)
+        assertThat(actual).isEqualTo(3)
     }
 
     @Test
-    fun `로또 번호 3개 일치 통계 추출`() {
-        val expectLottos = (0 until 1).map { _ -> Lotto(1, 2, 3, 4, 5, 6) }
-        val sut = LottoMachine(lottoGenerator(expectLottos), 1000)
+    fun `로또 번호 4개 일치`() {
+        val sut = Lotto(1, 2, 3, 4, 5, 6)
 
-        val actual = sut.issueStatistics(Lotto(1, 2, 3, 7, 8, 9))
+        val actual = sut.matchedCount(Lotto(1, 2, 3, 4, 8, 9))
 
-        assertThat(actual).isEqualTo(Statistics(mapOf(3 to 1)))
+        assertThat(actual).isEqualTo(4)
     }
 
     @Test
-    fun `로또 번호 4개 일치 통계 추출`() {
-        val expectLottos = (0 until 1).map { _ -> Lotto(1, 2, 3, 4, 5, 6) }
-        val sut = LottoMachine(lottoGenerator(expectLottos), 1000)
+    fun `로또 번호 5개 일치`() {
+        val sut = Lotto(1, 2, 3, 4, 5, 6)
 
-        val actual = sut.issueStatistics(Lotto(1, 2, 3, 4, 8, 9))
+        val actual = sut.matchedCount(Lotto(1, 2, 3, 4, 5, 9))
 
-        assertThat(actual).isEqualTo(Statistics(mapOf(4 to 1)))
+        assertThat(actual).isEqualTo(5)
     }
 
-    private fun lottoGenerator(lottos: List<Lotto>): LottoGenerator {
-        val expectedLotto = lottos.iterator()
-        return LottoGenerator { expectedLotto.next() }
+    @Test
+    fun `로또 번호 6개 일치`() {
+        val sut = Lotto(1, 2, 3, 4, 5, 6)
+
+        val actual = sut.matchedCount(Lotto(1, 2, 3, 4, 5, 6))
+
+        assertThat(actual).isEqualTo(6)
     }
 }
