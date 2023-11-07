@@ -5,9 +5,9 @@ private const val LOTTO_PRICE = 1000
 class LottoMachine(lottoGenerator: LottoGenerator, money: Int) {
     val issuedLottos = (0 until money.issueLottoSize()).map { lottoGenerator.generate() }
 
-    fun issueStatistics(lotto: Lotto): Statistics {
-        val rank = issuedLottos[0].match(lotto)
-        return Statistics(mapOf(rank to 1))
+    fun issueStatistics(winningLotto: Lotto): Statistics {
+        val matchedCount = issuedLottos[0].matchedCount(winningLotto)
+        return Statistics(mapOf(matchedCount to 1))
     }
 }
 
