@@ -10,4 +10,4 @@
 - [x] matchCount 가 같은 value 가 반환된다
 - [x] matchCount 가 같은 value 를 찾지 못하면 NO_MATCH 를 반환된다
 - [x] lottoList 에서 jackpotNumbers 와 매칭 되는 개수에 해당하는 JackpotLevel 의 value 가 반환 된다
-- [ ] 정상적으로 수익률이 구해진다
+- [x] 정상적으로 수익률이 구해진다
