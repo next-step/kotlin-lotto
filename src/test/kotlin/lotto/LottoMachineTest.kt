@@ -28,6 +28,8 @@ class LottoMachineTest {
             Lotto(1, 2, 3, 4, 7, 8),
             Lotto(1, 2, 3, 7, 8, 9),
             Lotto(1, 2, 3, 7, 8, 9),
+            Lotto(7, 8, 9, 10, 11, 12),
+            Lotto(7, 8, 9, 10, 11, 12),
         )
         val money = 6000
         val sut = LottoMachine(lottoGenerator(expectLottos), money)
@@ -37,6 +39,10 @@ class LottoMachineTest {
         val expectTotalProfit = 4001560000L.toBigDecimal()
         val expectProfitRate = expectTotalProfit.divide(money.toBigDecimal(), 2, RoundingMode.CEILING)
         assertThat(actual.profitRate).isEqualByComparingTo(expectProfitRate)
+        assertThat(actual.countOf(6)).isEqualTo(2)
+        assertThat(actual.countOf(5)).isEqualTo(1)
+        assertThat(actual.countOf(4)).isEqualTo(1)
+        assertThat(actual.countOf(3)).isEqualTo(2)
     }
 
     private fun lottoGenerator(lottos: List<Lotto>): LottoGenerator {
