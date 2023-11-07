@@ -5,12 +5,12 @@ object StringCalculator {
     private const val DEFAULT_SEPARATOR_COMMA = ","
     private const val DEFAULT_SEPARATOR_COLON = ":"
 
-    private const val CUSTOM_SEPARATOR_REGEX = "//(.)\n(.*)"
+    private val CUSTOM_SEPARATOR_REGEX = Regex("//(.)\n(.*)")
 
     fun add(input: String): Int {
         if (input.isEmpty()) return 0
 
-        val matchedResult = Regex(CUSTOM_SEPARATOR_REGEX).find(input)
+        val matchedResult = CUSTOM_SEPARATOR_REGEX.find(input)
         val customSeparator = matchedResult?.groupValues?.get(1)
         val textAfterNewline = matchedResult?.groupValues?.get(2)
 
