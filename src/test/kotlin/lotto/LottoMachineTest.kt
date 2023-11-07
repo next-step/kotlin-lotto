@@ -29,8 +29,8 @@ class LottoMachineTest {
     }
 
     @ParameterizedTest
-    @CsvSource("1,2,3,4,5,6,1,2,3,4,5,7,SECOND", "1,2,3,4,5,6,1,2,3,4,7,8,THIRD", "1,2,3,4,5,6,1,2,3,7,8,9,FOURTH", "1,2,3,4,5,6,1,2,7,8,9,10,MISS")
-    fun `로또 결과를 얻을 수 있다`(first: Int, second: Int, third: Int, fourth: Int, fifth: Int, sixth: Int, winningFirst: Int, winningSecond: Int, winningThird: Int, winningFourth: Int, winningFifth: Int, winningSixth: Int, expected: LottoRank) {
+    @CsvSource("1,2,3,4,5,6,1,2,3,4,5,7,SECOND_WITH_BONUS,6", "1,2,3,4,5,6,1,2,3,4,7,8,THIRD,10", "1,2,3,4,5,6,1,2,3,7,8,9,FOURTH,10", "1,2,3,4,5,6,1,2,7,8,9,10,MISS,10")
+    fun `로또 결과를 얻을 수 있다`(first: Int, second: Int, third: Int, fourth: Int, fifth: Int, sixth: Int, winningFirst: Int, winningSecond: Int, winningThird: Int, winningFourth: Int, winningFifth: Int, winningSixth: Int, expected: LottoRank, bonusNumber: Int) {
         val lottoMachine: LottoMachine = LottoMachine()
 
         val lottoNumberList: List<Int> = listOf(first, second, third, fourth, fifth, sixth)
@@ -39,7 +39,7 @@ class LottoMachineTest {
         val winningNumberList: List<Int> = listOf(winningFirst, winningSecond, winningThird, winningFourth, winningFifth, winningSixth)
         val winningLotto: Lotto = Lotto(winningNumberList)
 
-        val lottoRank: LottoRank = lottoMachine.getLottoRank(lotto, winningLotto)
+        val lottoRank: LottoRank = lottoMachine.getLottoRank(lotto, winningLotto, bonusNumber)
 
         assertThat(lottoRank).isEqualTo(expected)
     }

@@ -7,6 +7,8 @@ class Lotto(inputNumbers: List<Int>) {
     init {
         require(numbers.all { it in LOTTO_NUMBER_MIN..LOTTO_NUMBER_MAX }) { "로또 번호는 1부터 45까지의 숫자만 가능합니다." }
 
+        require(numbers.size == NUMBER_COUNT_MAX) { "로또 번호는 6개만 가능합니다." }
+
         require(numbers.distinct().size == numbers.size) { "로또 번호는 중복될 수 없습니다." }
     }
 
@@ -16,5 +18,7 @@ class Lotto(inputNumbers: List<Int>) {
         const val LOTTO_PRICE: Int = 1000
         const val LOTTO_NUMBER_MIN: Int = 1
         const val LOTTO_NUMBER_MAX: Int = 45
+        const val NUMBER_COUNT_MIN: Int = 0
+        const val NUMBER_COUNT_MAX: Int = 6
     }
 }

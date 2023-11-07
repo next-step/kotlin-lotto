@@ -12,13 +12,14 @@ class LottoMachine {
     private fun getLottoNumberList(): List<Int> {
         val lottoNumberList: List<Int> = (Lotto.LOTTO_NUMBER_MIN..Lotto.LOTTO_NUMBER_MAX).toList()
 
-        return lottoNumberList.shuffled().subList(LOTTO_NUMBER_COUNT_MIN, LOTTO_NUMBER_COUNT_MAX)
+        return lottoNumberList.shuffled().subList(Lotto.NUMBER_COUNT_MIN, Lotto.NUMBER_COUNT_MAX)
     }
 
-    fun getLottoRank(lotto: Lotto, winningLotto: Lotto): LottoRank = LottoRank.findByMatchCount(lotto.getMatchCount(winningLotto))
+    fun getLottoRank(lotto: Lotto, winningLotto: Lotto, bonusNumber: Int): LottoRank {
+        require(bonusNumber in Lotto.LOTTO_NUMBER_MIN..Lotto.LOTTO_NUMBER_MAX) { "보너스 번호는 1부터 45까지의 숫자만 가능합니다." }
 
-    companion object {
-        private const val LOTTO_NUMBER_COUNT_MIN: Int = 0
-        private const val LOTTO_NUMBER_COUNT_MAX: Int = 6
+        val lottoRank: LottoRank = LottoRank.findByMatchCount(lotto.getMatchCount(winningLotto))
+
+        return if (lottoRank == LottoRank.SECOND && lotto.numbers.contains(bonusNumber)) LottoRank.SECOND_WITH_BONUS else lottoRank
     }
 }
