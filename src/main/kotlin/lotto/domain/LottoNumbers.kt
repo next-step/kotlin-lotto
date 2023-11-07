@@ -16,4 +16,8 @@ data class LottoNumbers(val numbers: List<LottoNumber>) {
     fun getContainCount(winningNumbers: WinningNumbers): Int {
         return numbers.intersect(winningNumbers.winningNumbers.numbers.toSet()).size
     }
+
+    fun isMatchBonus(winningNumbers: WinningNumbers): Boolean {
+        return numbers.contains(winningNumbers.bonusNumber)
+    }
 }

@@ -33,14 +33,17 @@ class LottoResultListTest {
         val lottoResultListNone = LottoResultList(listOf(LottoRank.NONE))
         assertThat(lottoResultListNone.getProfitRate(1000)).isEqualTo(0f)
 
+        val lottoResultListFifth = LottoResultList(listOf(LottoRank.FIFTH))
+        assertThat(lottoResultListFifth.getProfitRate(1000)).isEqualTo(5f)
+
         val lottoResultListFourth = LottoResultList(listOf(LottoRank.FOURTH))
-        assertThat(lottoResultListFourth.getProfitRate(1000)).isEqualTo(5f)
+        assertThat(lottoResultListFourth.getProfitRate(1000)).isEqualTo(50f)
 
         val lottoResultListThird = LottoResultList(listOf(LottoRank.THIRD))
-        assertThat(lottoResultListThird.getProfitRate(1000)).isEqualTo(50f)
+        assertThat(lottoResultListThird.getProfitRate(1000)).isEqualTo(1_500f)
 
         val lottoResultListSecond = LottoResultList(listOf(LottoRank.SECOND))
-        assertThat(lottoResultListSecond.getProfitRate(1000)).isEqualTo(1_500f)
+        assertThat(lottoResultListSecond.getProfitRate(1000)).isEqualTo(30_000f)
 
         val lottoResultListFirst = LottoResultList(listOf(LottoRank.FIRST))
         assertThat(lottoResultListFirst.getProfitRate(1000)).isEqualTo(2_000_000f)
