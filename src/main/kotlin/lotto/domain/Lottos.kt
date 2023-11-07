@@ -7,24 +7,26 @@ class Lottos(
     lottoNumberGenerator: NumberGenerator,
 ) {
 
-    private val _lottos: MutableList<Lotto> = mutableListOf()
+    private val _values: MutableList<Lotto> = mutableListOf()
+    val values: List<Lotto>
+        get() = _values
 
     init {
         val lottoCount = buyingPrice.divide(LOTTO_PRICE)
         for (i in 0 until lottoCount) {
             val lottoNumbers = lottoNumberGenerator.generate(lottoCount)
             val lotto = Lotto(lottoNumbers)
-            _lottos.add(lotto)
+            _values.add(lotto)
         }
     }
 
     fun getChange(): Int {
-        val lottoCount = _lottos.size
+        val lottoCount = _values.size
         return buyingPrice.minus(lottoCount.times(LOTTO_PRICE))
     }
 
     fun getLottoCount(): Int {
-        return _lottos.size
+        return _values.size
     }
 
     companion object {
