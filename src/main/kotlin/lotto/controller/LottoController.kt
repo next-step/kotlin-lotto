@@ -16,6 +16,8 @@ class LottoController {
             val lottos = createLottos(buyingPrice)
             val change = lottos.getChange()
             OutputView.printLottos(lottos, change)
+
+            val winningLotto = InputView.readWinningLotto()
         }
 
         private fun createLottos(buyingPrice: LottoBuyingPrice): LottoStorage {
