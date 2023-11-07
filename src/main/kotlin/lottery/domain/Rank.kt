@@ -13,5 +13,7 @@ enum class Rank(val countOfMatch: Int, val winningMoney: Int) {
                 it.countOfMatch == countOfMatch
             } ?: MISS
         }
+
+        fun getWinningRanks() = (Rank.values().toList() - MISS)
     }
 }

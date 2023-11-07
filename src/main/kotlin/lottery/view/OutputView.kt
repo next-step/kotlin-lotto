@@ -23,7 +23,7 @@ object OutputView {
 
     fun printResult(ranks: Ranks) {
         println(WINNING_STATISTICS_MESSAGE)
-        (Rank.values().toList() - Rank.MISS).forEach {
+        Rank.getWinningRanks().forEach {
             println(String.format(PRINT_RESULT_MESSAGE, it.countOfMatch, it.winningMoney, ranks.rank.count { rank -> rank == it }))
         }
         print(String.format(PRINT_RATE_OF_RETURN_MESSAGE, ranks.calculateProfitabilityRatio()))
