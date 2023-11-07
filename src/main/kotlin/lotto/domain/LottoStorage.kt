@@ -14,7 +14,7 @@ class LottoStorage(
     init {
         val lottoCount = buyingPrice.divide(LOTTO_PRICE)
         for (i in 0 until lottoCount) {
-            val lottoNumbers = lottoNumberGenerator.generate(lottoCount)
+            val lottoNumbers = lottoNumberGenerator.generate(Lotto.LOTTO_COUNT)
             val lotto = Lotto(lottoNumbers)
             _lottos.add(lotto)
         }
