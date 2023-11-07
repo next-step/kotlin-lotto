@@ -32,7 +32,7 @@ class LottoMachineTest {
 
         val actual = sut.issueStatistics(Lotto(1, 2, 3, 4, 5, 6))
 
-        assertThat(actual).isEqualTo(Statistics(mapOf(6 to 2, 5 to 1, 4 to 1, 3 to 2)))
+        assertThat(actual).isEqualTo(Statistics(6 to 2, 5 to 1, 4 to 1, 3 to 2))
     }
 
     private fun lottoGenerator(lottos: List<Lotto>): LottoGenerator {
