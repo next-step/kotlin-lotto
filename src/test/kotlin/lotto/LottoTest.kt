@@ -13,5 +13,13 @@ class LottoTest {
 
         assertThat(actual).hasSize(1)
     }
-    
+
+    @Test
+    fun `입력 금액 만큼 로또 생성`() {
+        val sut = LottoMachine()
+
+        val actual = sut.create(13000)
+
+        assertThat(actual).hasSize(13)
+    }
 }
