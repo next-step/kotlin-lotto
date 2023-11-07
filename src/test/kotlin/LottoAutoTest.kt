@@ -236,5 +236,32 @@ class LottoAutoTest : StringSpec({
     }
 
     "winning statistics should show correct ROI" {
+        LottoSimulator(
+            MockInputView(
+                budgetProvider = MockBudgetProvider(5000),
+                winningNumberProvider = MockWinningNumberProvider(
+                    WinningNumber(
+                        listOf(
+                            LottoNumber(1),
+                            LottoNumber(2),
+                            LottoNumber(3),
+                            LottoNumber(4),
+                            LottoNumber(5),
+                            LottoNumber(6),
+                        )
+                    )
+                ),
+                lottoTicketsProvider = MockTicketProvider(
+                    ManualTicketProvideStrategy(
+                        LottoTickets(
+                            listOf(
+                                LottoTicket(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
+                            )
+                        )
+                    )
+                ),
+            ),
+            resultView = ResultView(),
+        ).simulate().profitRate.shouldBe(400_000)
     }
 })
