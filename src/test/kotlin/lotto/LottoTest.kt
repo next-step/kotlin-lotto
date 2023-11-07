@@ -19,6 +19,13 @@ class LottoTest {
     }
 
     @Test
+    fun `중복된 숫자로 로또 생성 시 예외 발생`() {
+        assertThrows<IllegalArgumentException> {
+            Lotto(1, 2, 3, 4, 5, 1)
+        }
+    }
+
+    @Test
     fun `로또 번호 3개 일치`() {
         val sut = Lotto(1, 2, 3, 4, 5, 6)
 
