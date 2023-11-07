@@ -1,4 +1,4 @@
-package stringAddCalculator
+package stringaddcalculator
 
 import java.lang.RuntimeException
 

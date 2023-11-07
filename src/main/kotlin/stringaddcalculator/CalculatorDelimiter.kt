@@ -1,4 +1,4 @@
-package stringAddCalculator
+package stringaddcalculator
 
 @JvmInline
 value class CalculatorDelimiter(val value: String?) {

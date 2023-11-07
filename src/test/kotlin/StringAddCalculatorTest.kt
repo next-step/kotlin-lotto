@@ -1,7 +1,7 @@
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import org.assertj.core.api.Assertions
-import stringAddCalculator.StringAddCalculator
+import stringaddcalculator.StringAddCalculator
 import java.lang.RuntimeException
 
 class StringAddCalculatorTest : StringSpec({
