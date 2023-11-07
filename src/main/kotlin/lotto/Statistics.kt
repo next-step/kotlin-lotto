@@ -2,7 +2,7 @@ package lotto
 
 import java.math.BigDecimal
 
-data class Statistics(private val money: Int = 1000, private val statistics: Map<Int, Int>) {
+data class Statistics(private val money: Int, private val statistics: Map<Int, Int>) {
     val profitRate: BigDecimal
         get() = totalProfit().divide(BigDecimal(money))
 
@@ -20,6 +20,7 @@ data class Statistics(private val money: Int = 1000, private val statistics: Map
         private val PRIZES = mapOf(
             3 to BigDecimal("5000"),
             4 to BigDecimal("50000"),
+            5 to BigDecimal("1500000")
         )
     }
 }
