@@ -6,20 +6,20 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import lotto.util.NumberGenerator
 
-class LottosTest : StringSpec({
+class LottoStorageTest : StringSpec({
 
     "로또 구입 금액을 입력받으면 구입할 수 있는 개수만큼 로또를 생성한다" {
         // given
         val buyingPrice = LottoBuyingPrice(2000)
 
         // when
-        val lottos = Lottos(
+        val lottoStorage = LottoStorage(
             buyingPrice = buyingPrice,
             lottoNumberGenerator = createFakeNumberGenerator()
         )
 
         // then
-        lottos.getLottoCount() shouldBe 2
+        lottoStorage.getLottoCount() shouldBe 2
     }
 
     "로또 구입 금액을 바탕으로 거스름돈을 반환한다." {
@@ -31,13 +31,13 @@ class LottosTest : StringSpec({
             val buyingPrice = LottoBuyingPrice(price)
 
             // when
-            val lottos = Lottos(
+            val lottoStorage = LottoStorage(
                 buyingPrice = buyingPrice,
                 lottoNumberGenerator = createFakeNumberGenerator()
             )
 
             // then
-            lottos.getChange() shouldBe expectedChange
+            lottoStorage.getChange() shouldBe expectedChange
         }
     }
 })

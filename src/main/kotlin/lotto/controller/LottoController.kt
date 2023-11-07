@@ -1,7 +1,7 @@
 package lotto.controller
 
 import lotto.domain.LottoBuyingPrice
-import lotto.domain.Lottos
+import lotto.domain.LottoStorage
 import lotto.util.LottoNumberGenerator
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -18,8 +18,8 @@ class LottoController {
             OutputView.printLottos(lottos, change)
         }
 
-        private fun createLottos(buyingPrice: LottoBuyingPrice): Lottos {
-            return Lottos(
+        private fun createLottos(buyingPrice: LottoBuyingPrice): LottoStorage {
+            return LottoStorage(
                 buyingPrice = buyingPrice,
                 lottoNumberGenerator = LottoNumberGenerator
             )
