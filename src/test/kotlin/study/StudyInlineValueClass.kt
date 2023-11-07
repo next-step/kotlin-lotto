@@ -5,6 +5,8 @@ import io.kotest.core.spec.style.StringSpec
 class StudyInlineValueClass : StringSpec({
 
     "InlineValueClass 의 정의와 선언" {
+        println("참고 : https://kotlinlang.org/docs/inline-classes.html")
+
         val password = Password("i am password")
         println("인라인 클래스는 이렇게 보임 [$password]")
         println("런타임에 실제로 실체화(instantiation)가 일어나지 않음")// No actual instantiation of class 'Password' happens
