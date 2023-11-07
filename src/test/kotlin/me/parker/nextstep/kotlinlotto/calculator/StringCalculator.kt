@@ -30,10 +30,5 @@ object StringCalculator {
     }
 
     private fun add(formula: String, vararg separators: String) =
-        formula.split(*separators)
-            .sumOf {
-                val number = it.toInt()
-                if (number < 0) throw RuntimeException("음수는 입력할 수 없습니다.")
-                number
-            }
+        formula.split(*separators).sumOf { OperandNumber(it).value }
 }
