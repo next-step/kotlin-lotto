@@ -9,7 +9,7 @@ class ListUtilsTest : FunSpec({
         val n = 6
         val sort = true
 
-        val result = shuffleAndTake(input, n, sort=sort)
+        val result = shuffleAndTake(input, n, sort = sort)
 
         result.windowed(2, 1)
             .forEach {

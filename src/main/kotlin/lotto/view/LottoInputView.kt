@@ -1,12 +1,14 @@
 package lotto.view
 
+import lotto.component.Lotto
 import lotto.model.LottoInput
 
 class LottoInputView {
     fun getInput(): LottoInput {
-        val purchaseAccount = getPurchaseAccount()
+        val purchaseAccount: Int = getPurchaseAccount()
+        val lottoTicketCount: Int = getLottoTicketCount(purchaseAccount)
 
-        return LottoInput(purchaseAccount)
+        return LottoInput(lottoTicketCount)
     }
 
     private fun getInput(message: String): String? {
@@ -23,5 +25,15 @@ class LottoInputView {
         }
 
         return purchaseAccount
+    }
+
+    private fun getLottoTicketCount(purchaseAccount: Int, lottoPrice: Int = Lotto.LOTTO_PRICE): Int {
+        val lottoTicketCount = purchaseAccount / lottoPrice
+
+        require(lottoTicketCount > 0) {
+            "로또를 구매할 수 없습니다. (로또 가격: $lottoPrice)"
+        }
+
+        return lottoTicketCount
     }
 }
