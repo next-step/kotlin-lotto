@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 class LottoNumberProviderTest {
 
     @Test
-    fun `lottoTryCount 만큼 Lotto 가 만들어진다`() {
+    fun `lottoTryCount 만큼 Lotto 가 만들어 진다`() {
         val lottoNumberProvider = LottoNumberProvider()
         val lottoList = lottoNumberProvider.getLotto(LOTTO_TRY_COUNT)
         assertEquals(4, lottoList.size)
