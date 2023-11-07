@@ -9,12 +9,16 @@ class LottoTest {
     @ParameterizedTest
     @CsvSource(value = ["1000, 1", "13000, 13", "123441, 123"])
     fun `입력 금액 만큼 로또 생성`(money: Int, expectSize: Int) {
-        val expectedLotto = (0 until expectSize).map { _ -> Lotto() }.iterator()
-        val lottoGenerator = LottoGenerator { expectedLotto.next() }
-        val sut = LottoMachine(lottoGenerator)
+        val expectLottos = (0 until expectSize).map { _ -> Lotto() }
+        val sut = LottoMachine(lottoGenerator(expectLottos))
 
         val actual = sut.create(money)
 
-        assertThat(actual).hasSize(expectSize)
+        assertThat(actual).isEqualTo(expectLottos)
+    }
+
+    private fun lottoGenerator(lottos: List<Lotto>): LottoGenerator {
+        val expectedLotto = lottos.iterator()
+        return LottoGenerator { expectedLotto.next() }
     }
 }
