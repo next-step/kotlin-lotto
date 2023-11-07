@@ -13,11 +13,11 @@ object OutputView {
     fun showResult(matchResult: Map<LottoPrize, Int>, earningRate: Float) {
         println(LOTTO_STAT)
         println("---------")
-        println(MATCH_THREE.format(matchResult.getOrDefault(LottoPrize.FIFTH_PRIZE, LottoPrize.MISS)))
-        println(MATCH_FOUR.format(matchResult.getOrDefault(LottoPrize.FOURTH_PRIZE, LottoPrize.MISS)))
-        println(MATCH_FIVE.format(matchResult.getOrDefault(LottoPrize.THIRD_PRIZE, LottoPrize.MISS)))
-        println(MATCH_FIVE_WITH_BONUS.format(matchResult.getOrDefault(LottoPrize.SECOND_PRIZE, LottoPrize.MISS)))
-        println(MATCH_SIX.format(matchResult.getOrDefault(LottoPrize.FIRST_PRIZE, LottoPrize.MISS)))
+        println(MATCH_THREE.format(matchResult.getOrDefault(LottoPrize.FIFTH_PRIZE, LottoPrize.MISS.winningAmount)))
+        println(MATCH_FOUR.format(matchResult.getOrDefault(LottoPrize.FOURTH_PRIZE, LottoPrize.MISS.winningAmount)))
+        println(MATCH_FIVE.format(matchResult.getOrDefault(LottoPrize.THIRD_PRIZE, LottoPrize.MISS.winningAmount)))
+        println(MATCH_FIVE_WITH_BONUS.format(matchResult.getOrDefault(LottoPrize.SECOND_PRIZE, LottoPrize.MISS.winningAmount)))
+        println(MATCH_SIX.format(matchResult.getOrDefault(LottoPrize.FIRST_PRIZE, LottoPrize.MISS.winningAmount)))
         println(TOTAL_EARNING_RATE.format(earningRate))
     }
 

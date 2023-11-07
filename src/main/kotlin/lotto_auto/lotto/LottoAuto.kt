@@ -26,13 +26,7 @@ object LottoAuto {
     }
 
     fun matchCountList(eachLottoMatchList: List<LottoPrize>): Map<LottoPrize, Int> {
-        return mapOf(
-            LottoPrize.FIFTH_PRIZE to eachLottoMatchList.count { it == LottoPrize.FIFTH_PRIZE },
-            LottoPrize.FOURTH_PRIZE to eachLottoMatchList.count { it == LottoPrize.FOURTH_PRIZE },
-            LottoPrize.THIRD_PRIZE to eachLottoMatchList.count { it == LottoPrize.THIRD_PRIZE },
-            LottoPrize.SECOND_PRIZE to eachLottoMatchList.count { it == LottoPrize.SECOND_PRIZE },
-            LottoPrize.FIRST_PRIZE to eachLottoMatchList.count { it == LottoPrize.FIRST_PRIZE },
-        )
+        return eachLottoMatchList.groupingBy { it }.eachCount()
     }
 
     fun earningRate(sumOfWonLotto: Int, inputAmount: Int): Float {
