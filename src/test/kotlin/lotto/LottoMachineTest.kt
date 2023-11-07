@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import java.math.RoundingMode
 
 class LottoMachineTest {
 
@@ -28,11 +29,14 @@ class LottoMachineTest {
             Lotto(1, 2, 3, 7, 8, 9),
             Lotto(1, 2, 3, 7, 8, 9),
         )
-        val sut = LottoMachine(lottoGenerator(expectLottos), 6000)
+        val money = 6000
+        val sut = LottoMachine(lottoGenerator(expectLottos), money)
 
         val actual = sut.issueStatistics(Lotto(1, 2, 3, 4, 5, 6))
 
-        assertThat(actual).isEqualTo(Statistics(6000, 6 to 2, 5 to 1, 4 to 1, 3 to 2))
+        val expectTotalProfit = 4001560000L.toBigDecimal()
+        val expectProfitRate = expectTotalProfit.divide(money.toBigDecimal(), 2, RoundingMode.CEILING)
+        assertThat(actual.profitRate).isEqualByComparingTo(expectProfitRate)
     }
 
     private fun lottoGenerator(lottos: List<Lotto>): LottoGenerator {

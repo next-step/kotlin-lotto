@@ -1,10 +1,11 @@
 package lotto
 
 import java.math.BigDecimal
+import java.math.RoundingMode
 
 data class Statistics(private val money: Int, private val statistics: Map<Int, Int>) {
     val profitRate: BigDecimal
-        get() = totalProfit().divide(BigDecimal(money))
+        get() = totalProfit().divide(money.toBigDecimal(), 2, RoundingMode.CEILING)
 
     constructor(money: Int, vararg pairs: Pair<Int, Int>): this(money, mapOf(*pairs))
 
@@ -18,10 +19,10 @@ data class Statistics(private val money: Int, private val statistics: Map<Int, I
 
     companion object {
         private val PRIZES = mapOf(
-            3 to BigDecimal("5000"),
-            4 to BigDecimal("50000"),
-            5 to BigDecimal("1500000"),
-            6 to BigDecimal("2000000000")
+            3 to "5000".toBigDecimal(),
+            4 to "50000".toBigDecimal(),
+            5 to "1500000".toBigDecimal(),
+            6 to "2000000000".toBigDecimal(),
         )
     }
 }

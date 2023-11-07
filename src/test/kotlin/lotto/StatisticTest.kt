@@ -2,7 +2,6 @@ package lotto
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import java.math.BigDecimal
 
 class StatisticTest {
 
@@ -12,7 +11,7 @@ class StatisticTest {
 
         val actual = sut.profitRate
 
-        assertThat(actual).isEqualByComparingTo(BigDecimal("0.5"))
+        assertThat(actual).isEqualByComparingTo("0.5".toBigDecimal())
     }
 
     @Test
@@ -21,7 +20,7 @@ class StatisticTest {
 
         val actual = sut.profitRate
 
-        assertThat(actual).isEqualByComparingTo(BigDecimal("10"))
+        assertThat(actual).isEqualByComparingTo("10".toBigDecimal())
     }
 
     @Test
@@ -30,7 +29,7 @@ class StatisticTest {
 
         val actual = sut.profitRate
 
-        assertThat(actual).isEqualByComparingTo(BigDecimal("450"))
+        assertThat(actual).isEqualByComparingTo("450".toBigDecimal())
     }
 
     @Test
@@ -39,6 +38,6 @@ class StatisticTest {
 
         val actual = sut.profitRate
 
-        assertThat(actual).isEqualByComparingTo(BigDecimal("200000"))
+        assertThat(actual).isEqualByComparingTo("200000".toBigDecimal())
     }
 }
