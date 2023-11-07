@@ -1,5 +1,7 @@
 package lotto.view
 
+import lotto.domain.Lotto
+
 object OutputView {
 
     private const val ENTER_MONEY = "구입금액을 입력해 주세요."
@@ -7,4 +9,7 @@ object OutputView {
 
     fun printEnterMoney() = println(ENTER_MONEY)
     fun printLottoCount(count: String) = println(count + LOTTO_COUNT)
+    fun printLottoList(lotto: List<Lotto>) {
+        lotto.forEach { println(it.lotto) }
+    }
 }
