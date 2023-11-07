@@ -18,14 +18,14 @@ class LottoTest {
     fun `로또 번호를 가져올 수 있다`() {
         val lotto: Lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
-        assertThat(lotto.getLottoNumberList()).containsExactly(1, 2, 3, 4, 5, 6)
+        assertThat(lotto.numbers).containsExactly(1, 2, 3, 4, 5, 6)
     }
 
     @Test
     fun `로또 번호는 정렬되어 있다`() {
         val lotto: Lotto = Lotto(listOf(6, 5, 4, 3, 2, 1))
 
-        assertThat(lotto.getLottoNumberList()).containsExactly(1, 2, 3, 4, 5, 6)
+        assertThat(lotto.numbers).containsExactly(1, 2, 3, 4, 5, 6)
     }
 
     @Test

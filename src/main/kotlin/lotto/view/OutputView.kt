@@ -6,18 +6,18 @@ import lotto.domain.LottoRank
 class OutputView {
     fun printResult(lottoRankList: List<LottoRank>, returnOnInvestment: Double) {
         println()
-        println("당첨 통계")
+        println(WINNING_STATISTICS)
         printDownToDashLine()
 
         LottoRank.values().filter { it != LottoRank.MISS }.reversed().forEach {
             printMatchCount(it.matchCount, it.winningMoney, lottoRankList.count { lottoRank -> lottoRank == it })
         }
 
-        println("총 수익률은 $returnOnInvestment%입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)\n")
+        println(RETURN_ON_INVESTMENT.replace("%s", returnOnInvestment.toString()))
     }
 
     fun printLottoNumberList(lottoList: List<Lotto>) {
-        lottoList.forEach { println(it.getLottoNumberList()) }
+        lottoList.forEach { println(it.numbers) }
         println()
     }
 
@@ -33,7 +33,7 @@ class OutputView {
     companion object {
         private const val DASH_LINE = "---------"
         private const val WINNING_STATISTICS = "당첨 통계"
-        private const val RETURN_ON_INVESTMENT = "총 수익률은 %s입니다."
+        private const val RETURN_ON_INVESTMENT = "총 수익률은 %s입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)"
         private const val MATCH_COUNT = "%d개 일치 (%d원)- %d개"
     }
 }
