@@ -17,6 +17,10 @@ data class Statistics(private val money: Int, private val statistics: Map<Int, I
         }.reduce(BigDecimal::add)
     }
 
+    fun countOf(rank: Int): Int {
+        return statistics[rank] ?: 0
+    }
+
     companion object {
         private val PRIZES = mapOf(
             3 to "5000".toBigDecimal(),
