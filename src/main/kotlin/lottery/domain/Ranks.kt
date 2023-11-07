@@ -7,11 +7,11 @@ class Ranks(lottos: Lottos, winningLotto: Lotto, private val price: Int) {
         rank = lottos.matchLottos(winningLotto)
     }
 
-    fun rateOfReturn(): Double {
+    fun calculateProfitabilityRatio(): Double {
         return rank.sumOf { it.winningMoney }.div(price.toDouble())
     }
 
-    fun isBenefit() = rateOfReturn() >= JUDGMENT_CRITERIA
+    fun isProfitable() = calculateProfitabilityRatio() >= JUDGMENT_CRITERIA
 
     companion object {
         private const val JUDGMENT_CRITERIA = 1

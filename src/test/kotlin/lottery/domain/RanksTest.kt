@@ -39,6 +39,6 @@ class RanksTest {
 
         val ranks = Ranks(userLotto, winningLotto, 1000)
 
-        ranks.isBenefit() shouldBe true
+        ranks.isProfitable() shouldBe true
     }
 }
