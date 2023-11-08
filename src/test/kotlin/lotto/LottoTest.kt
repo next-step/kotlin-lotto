@@ -13,7 +13,7 @@ class LottoTest {
     }
 
     @Test
-    fun `로또는 1~49 사이의 숫자들이다`() {
+    fun `로또는 1~45 사이의 숫자들이다`() {
         Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java)
             .isThrownBy { ManualLotto(LottoNumbers(0, 1, 2, 3, 4, 5)) }
     }
