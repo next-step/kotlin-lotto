@@ -21,12 +21,21 @@ class LottoStorage(
     }
 
     fun getChange(): Int {
-        val lottoCount = _lottos.size
+        val lottoCount = lottos.size
         return buyingPrice.minus(lottoCount.times(LOTTO_PRICE))
     }
 
     fun getLottoCount(): Int {
-        return _lottos.size
+        return lottos.size
+    }
+
+    fun getResult(winningLotto: Lotto): LottoResult {
+        val lottoResult = LottoResult()
+        lottos.forEach {
+            val matchCount = it.matchCount(winningLotto)
+            lottoResult.add(matchCount)
+        }
+        return lottoResult
     }
 
     companion object {

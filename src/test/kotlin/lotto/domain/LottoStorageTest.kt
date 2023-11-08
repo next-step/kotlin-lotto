@@ -13,10 +13,7 @@ class LottoStorageTest : StringSpec({
         val buyingPrice = LottoBuyingPrice(2000)
 
         // when
-        val lottoStorage = LottoStorage(
-            buyingPrice = buyingPrice,
-            lottoNumberGenerator = createFakeNumberGenerator()
-        )
+        val lottoStorage = createLottoStorage(buyingPrice)
 
         // then
         lottoStorage.getLottoCount() shouldBe 2
@@ -31,16 +28,37 @@ class LottoStorageTest : StringSpec({
             val buyingPrice = LottoBuyingPrice(price)
 
             // when
-            val lottoStorage = LottoStorage(
-                buyingPrice = buyingPrice,
-                lottoNumberGenerator = createFakeNumberGenerator()
-            )
+            val lottoStorage = createLottoStorage(buyingPrice)
 
             // then
             lottoStorage.getChange() shouldBe expectedChange
         }
     }
+
+    "로또 당첨 번호를 받아 당첨 결과를 반환한다." {
+        // given
+        val lottoStorage = createLottoStorage(LottoBuyingPrice(2000))
+        val winningLotto = Lotto(listOf(2, 3, 6, 7, 8, 9))
+
+        // when
+        val lottoResult = lottoStorage.getResult(winningLotto)
+
+        // then
+        lottoResult.result shouldBe mutableMapOf(
+            LottoMatchCount.THREE to 2,
+            LottoMatchCount.FOUR to 0,
+            LottoMatchCount.FIVE to 0,
+            LottoMatchCount.SIX to 0,
+        )
+    }
 })
+
+private fun createLottoStorage(buyingPrice: LottoBuyingPrice): LottoStorage {
+    return LottoStorage(
+        buyingPrice = buyingPrice,
+        lottoNumberGenerator = createFakeNumberGenerator()
+    )
+}
 
 private fun createFakeNumberGenerator() = object : NumberGenerator {
     override fun generate(count: Int): List<Int> {
