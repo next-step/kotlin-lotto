@@ -8,7 +8,7 @@ data class Lottos(val lottos: List<Lotto>) {
         }
     )
 
-    fun matchLottos(winningLotto: Lotto): List<Rank> {
-        return lottos.map { Rank.of(it.getMatchResult(winningLotto)) }
+    fun matchLottos(winningLotto: WinningLotto): List<Rank> {
+        return lottos.map { Rank.of(winningLotto.getMatchResult(it), winningLotto.getBonusMatchResult(it)) }
     }
 }

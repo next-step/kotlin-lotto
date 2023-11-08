@@ -11,7 +11,7 @@ class LottoGame(private val price: Int, private val lottos: Lottos) {
         return lottos.lottos
     }
 
-    fun getRanks(winningLotto: Lotto): Ranks {
+    fun getRanks(winningLotto: WinningLotto): Ranks {
         return Ranks(lottos, winningLotto, price)
     }
 
