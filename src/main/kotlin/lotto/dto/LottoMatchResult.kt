@@ -2,8 +2,10 @@ package lotto.dto
 
 import lotto.domain.LottoTicket
 
-class LottoMatchResult(private val tickets: List<LottoTicket>, private val winningNumbers: Set<Int>) {
+class LottoMatchResult(private val tickets: List<LottoTicket>, private val winningNumbers: Set<Int>, private val bonusBall: Int) {
     private val matchCount = mutableMapOf<Int, Int>()
+    var bonusMatchCount = 0
+        private set
 
     init {
         calculateMatchCount()
@@ -14,9 +16,16 @@ class LottoMatchResult(private val tickets: List<LottoTicket>, private val winni
     }
 
     private fun calculateMatchCount() {
-        for (ticket in tickets) {
-            val count = ticket.getMatchingNumbersCount(winningNumbers)
-            matchCount[count] = matchCount.getOrDefault(count, 0) + 1
+        tickets.forEach { ticket ->
+            incrementMatchCount(ticket)
+        }
+    }
+
+    private fun incrementMatchCount(ticket: LottoTicket) {
+        val count = ticket.getMatchingNumbersCount(winningNumbers)
+        when {
+            count == 5 && ticket.containsBonusBall(bonusBall) -> bonusMatchCount++
+            else -> matchCount[count] = matchCount.getOrDefault(count, 0) + 1
         }
     }
 }

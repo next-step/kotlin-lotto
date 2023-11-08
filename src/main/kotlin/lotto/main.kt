@@ -15,8 +15,10 @@ fun main() {
     ResultView.showTickets(tickets)
     // 지난 주 당첨 번호를 입력받습니다.
     val winningNumbers = InputView.getWinningNumbers()
+    // 보너스 볼을 입력받습니다.
+    val bonusBall = InputView.getBonusBall()
     // 당첨 결과를 계산합니다.
-    val matchResult = LottoMatchResult(tickets, winningNumbers)
+    val matchResult = LottoMatchResult(tickets, winningNumbers, bonusBall)
     ResultView.showStatistics(matchResult)
     // 총 구입 금액을 계산합니다.
     val purchaseAmount = tickets.size * LottoConstants.TICKET_PRICE.toDouble()

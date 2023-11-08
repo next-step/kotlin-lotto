@@ -1,6 +1,8 @@
 package lotto.domain
 
+import lotto.enum.Rank
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
@@ -31,5 +33,25 @@ class LottoTicketTest {
         val expectedNumbers = listOf(1, 2, 3, 4, 5, 6)
         val ticket = LottoTicket(expectedNumbers)
         assertEquals(expectedNumbers, ticket.getNumbers(), "로또 티켓의 번호가 정확해야 합니다.")
+    }
+
+    @Test
+    @DisplayName("보너스 볼 일치 여부 확인")
+    fun `보너스 볼이 티켓에 포함되어 있는지 확인`() {
+        val ticket = LottoTicket(listOf(1, 2, 3, 4, 5, 7))
+        val bonusBall = 7
+        assertTrue(ticket.containsBonusBall(bonusBall), "보너스 볼이 티켓에 포함되어 있어야 합니다.")
+    }
+
+    @Test
+    @DisplayName("2등 당첨 확인")
+    fun `5개의 당첨 번호와 보너스 볼 일치 시 2등 당첨을 확인`() {
+        // 보너스 볼을 포함하지 않는 5개의 일치하는 번호와 하나의 불일치 번호를 티켓에 넣습니다.
+        val ticket = LottoTicket(listOf(1, 2, 3, 4, 5, 8))
+        // 5개의 일치하는 번호와 다른 번호 하나를 당첨 번호로 설정합니다.
+        val winningNumbers = setOf(1, 2, 3, 4, 5, 7)
+        val bonusBall = 8 // 이 번호는 티켓에 있고, 당첨 번호에는 없어야 합니다.
+        val matchResult = ticket.getMatchResult(winningNumbers, bonusBall)
+        assertEquals(Rank.SECOND, matchResult, "5개의 당첨 번호와 보너스 볼 일치 시 2등에 해당해야 합니다.")
     }
 }

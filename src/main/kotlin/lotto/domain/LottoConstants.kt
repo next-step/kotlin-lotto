@@ -9,4 +9,5 @@ object LottoConstants {
     const val NUMBER_RANGE_START = 1
     const val NUMBER_RANGE_END = 45
     const val NUMBERS_PER_TICKET = 6
+    const val PRIZE_MATCH_5_BONUS = 30_000_000
 }

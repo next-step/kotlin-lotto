@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.enum.Rank
+
 class LottoTicket(private val numbers: List<Int>) {
 
     init {
@@ -11,6 +13,16 @@ class LottoTicket(private val numbers: List<Int>) {
 
     fun getNumbers(): List<Int> {
         return numbers
+    }
+
+    fun getMatchResult(winningNumbers: Set<Int>, bonusBall: Int): Rank {
+        val matchCount = getMatchingNumbersCount(winningNumbers)
+        val matchBonus = containsBonusBall(bonusBall)
+        return Rank.valueOf(matchCount, matchBonus)
+    }
+
+    fun containsBonusBall(bonusBall: Int): Boolean {
+        return numbers.contains(bonusBall)
     }
 
     private fun validateNumbers(numbers: List<Int>) {
