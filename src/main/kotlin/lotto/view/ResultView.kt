@@ -15,16 +15,7 @@ object ResultView {
     }
 
     private fun printLottoNumbers(numbers: List<LottoNumber>) {
-        print("[")
-        numbers.forEachIndexed { index, number ->
-            print(number.number)
-            printComma(index == numbers.size - 1)
-        }
-        println("]")
-    }
-
-    private fun printComma(isLast: Boolean) {
-        if (!isLast) print(", ")
+        println("[${numbers.joinToString { it.number.toString() }}]")
     }
 
     fun printResult(result: LottoResultList, purchaseAmount: Money) {
