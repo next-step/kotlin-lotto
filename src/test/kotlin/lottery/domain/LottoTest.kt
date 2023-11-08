@@ -20,12 +20,4 @@ class LottoTest {
 
         lotto.lottoNumber.size shouldBe 6
     }
-
-    @Test
-    fun `로또 객체는 당첨 번호 정보를 가지는 로또 객체를 받아 일치하는 숫자 갯수를 반환한다`() {
-        val lottoNumbers = listOf(1, 2, 3, 4, 5, 6)
-        val lotto = Lotto(lottoNumbers)
-
-        lotto.getMatchResult(lotto.copy()) shouldBe 6
-    }
 }

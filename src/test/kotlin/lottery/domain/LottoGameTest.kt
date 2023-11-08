@@ -18,8 +18,9 @@ class LottoGameTest {
     @Test
     fun `지난 주 당첨 번호를 입력하여 결과 객체를 반환 받는다`() {
         val lottoNumbers = listOf(1, 2, 3, 4, 5, 6)
+        val bonusNumber = 7
         val lottoGame = LottoGame(1000, InputNumberGenerator(lottoNumbers))
-        val result = lottoGame.getRanks(Lotto(lottoNumbers))
+        val result = lottoGame.getRanks(WinningLotto(Lotto(lottoNumbers), bonusNumber))
 
         result.shouldBeInstanceOf<Ranks>()
     }
