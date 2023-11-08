@@ -1,11 +1,11 @@
 package stringAddCalculator
 
-import java.lang.RuntimeException
-
 object Tokenizer {
     fun tokenize(text: String?): List<String> {
-        if (text.isNullOrBlank()) { return listOf("0") }
-        return  Separator.separateByCustomDelimiter(text) ?: Separator.separate(text)
+        if (text.isNullOrBlank()) {
+            return listOf("0")
+        }
+        return Separator.separateByCustomDelimiter(text) ?: Separator.separate(text)
     }
 
     fun validate(tokens: List<String>) {
