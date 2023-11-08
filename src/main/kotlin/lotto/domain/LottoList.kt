@@ -5,7 +5,7 @@ data class LottoList(val lottoList: List<Lotto>) {
     fun getResult(winningNumbers: WinningNumbers): LottoResultList {
         val result = mutableListOf<LottoRank>()
         for (lotto in lottoList) {
-            result.add(lotto.getLottoResult(winningNumbers))
+            result.add(LottoRank.of(winningNumbers, lotto.lottoNumbers))
         }
         return LottoResultList(result)
     }

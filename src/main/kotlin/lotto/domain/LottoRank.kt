@@ -9,16 +9,25 @@ enum class LottoRank(val containCount: Int, val money: Int) {
     NONE(0, 0);
 
     companion object {
-        fun of(containCount: Int, matchBonus: Boolean): LottoRank =
-            when (containCount) {
+        fun of(winningNumbers: WinningNumbers, lottoNumbers: LottoNumbers): LottoRank =
+            when (getMatchingCount(winningNumbers.winningNumbers, lottoNumbers)) {
                 3 -> FIFTH
                 4 -> FOURTH
                 5 -> {
-                    if (matchBonus) SECOND
+                    if (isBonusMatched(lottoNumbers, winningNumbers.bonusNumber)) SECOND
                     else THIRD
                 }
+
                 6 -> FIRST
                 else -> NONE
             }
+
+        private fun getMatchingCount(winningNumbers: LottoNumbers, lottoNumbers: LottoNumbers): Int {
+            return lottoNumbers.numbers.intersect(winningNumbers.numbers.toSet()).size
+        }
+
+        private fun isBonusMatched(lottoNumbers: LottoNumbers, bonusNumber: LottoNumber): Boolean {
+            return lottoNumbers.numbers.contains(bonusNumber)
+        }
     }
 }
