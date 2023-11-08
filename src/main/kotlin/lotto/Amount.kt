@@ -10,4 +10,8 @@ value class Amount(val value: Int) {
     companion object {
         private const val UNIT_AMOUNT = 1000
     }
+
+    fun divide(divisor: Int): Int {
+        return value.div(divisor)
+    }
 }
