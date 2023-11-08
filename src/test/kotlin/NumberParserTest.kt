@@ -1,3 +1,4 @@
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.data.row
 import io.kotest.datatest.withData
@@ -16,6 +17,17 @@ class NumberParserTest : FunSpec({
             val numberParser = NumberParser()
             val actual = numberParser.parseNumbers(input)
             actual shouldBe output
+        }
+    }
+
+    context("문자열 파서에 숫자 이외의 값이 전달되면 RuntimeException 예외를 던진다") {
+        withData(
+            "1,A",
+            "1:A",
+            "1,2:!"
+        ) { input ->
+            val numberParser = NumberParser()
+            shouldThrow<RuntimeException> { numberParser.parseNumbers(input) }
         }
     }
 })
