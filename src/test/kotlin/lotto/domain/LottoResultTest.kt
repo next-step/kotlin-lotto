@@ -14,10 +14,10 @@ class LottoResultTest : StringSpec({
 
             // then
             lottoResult.result shouldBe mapOf(
-                LottoResult.LottoWinningCount.THREE to 0,
-                LottoResult.LottoWinningCount.FOUR to 0,
-                LottoResult.LottoWinningCount.FIVE to 0,
-                LottoResult.LottoWinningCount.SIX to 0,
+                LottoResult.Rank.THREE to 0,
+                LottoResult.Rank.FOUR to 0,
+                LottoResult.Rank.FIVE to 0,
+                LottoResult.Rank.SIX to 0,
             )
         }
     }
@@ -31,7 +31,7 @@ class LottoResultTest : StringSpec({
             lottoResult.add(count)
 
             // then
-            val lottoMatchCount = LottoResult.LottoWinningCount.of(count)
+            val lottoMatchCount = LottoResult.Rank.of(count)
             lottoResult.result[lottoMatchCount] shouldBe 1
         }
     }

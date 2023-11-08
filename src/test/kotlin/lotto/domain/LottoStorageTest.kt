@@ -45,10 +45,10 @@ class LottoStorageTest : StringSpec({
 
         // then
         lottoResult.result shouldBe mutableMapOf(
-            LottoResult.LottoWinningCount.THREE to 2,
-            LottoResult.LottoWinningCount.FOUR to 0,
-            LottoResult.LottoWinningCount.FIVE to 0,
-            LottoResult.LottoWinningCount.SIX to 0,
+            LottoResult.Rank.THREE to 2,
+            LottoResult.Rank.FOUR to 0,
+            LottoResult.Rank.FIVE to 0,
+            LottoResult.Rank.SIX to 0,
         )
         lottoResult.earningRate shouldBe 5.0
     }

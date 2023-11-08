@@ -36,14 +36,14 @@ object OutputView {
     }
 
     private fun createStatisticMessage(
-        result: Map<LottoResult.LottoWinningCount, Int>
+        result: Map<LottoResult.Rank, Int>
     ): String {
-        val winningCounts = LottoResult.LottoWinningCount.values()
-        val matchMessage = winningCounts.joinToString(separator = System.lineSeparator()) { count ->
-            val matchCount = result[count]
+        val lottoRanks = LottoResult.Rank.values()
+        val matchMessage = lottoRanks.joinToString(separator = System.lineSeparator()) { rank ->
+            val matchCount = result[rank]
             String.format(
                 MATCH_MESSAGE_FORMAT.trimIndent(),
-                count.count, count.winningMoney, matchCount ?: 0
+                rank.countOfMatch, rank.winningMoney, matchCount ?: 0
             )
         }
         return System.lineSeparator() + String.format(WINNING_STATISTICS_MESSAGE_FORMAT.trimIndent(), matchMessage)

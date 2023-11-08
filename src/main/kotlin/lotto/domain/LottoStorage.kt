@@ -44,7 +44,7 @@ class LottoStorage(
     }
 
     data class LottoMatchResult(
-        val result: Map<LottoResult.LottoWinningCount, Int>,
+        val result: Map<LottoResult.Rank, Int>,
         val earningRate: Double,
     )
 }

@@ -1,38 +1,38 @@
 package lotto.domain
 
 class LottoResult(
-    private val _result: MutableMap<LottoWinningCount, Int> = mutableMapOf()
+    private val _result: MutableMap<Rank, Int> = mutableMapOf()
 ) {
-    val result: Map<LottoWinningCount, Int>
+    val result: Map<Rank, Int>
         get() = _result.toMap()
 
     init {
-        _result[LottoWinningCount.THREE] = 0
-        _result[LottoWinningCount.FOUR] = 0
-        _result[LottoWinningCount.FIVE] = 0
-        _result[LottoWinningCount.SIX] = 0
+        _result[Rank.THREE] = 0
+        _result[Rank.FOUR] = 0
+        _result[Rank.FIVE] = 0
+        _result[Rank.SIX] = 0
     }
 
     fun add(matchCount: Int) {
-        if (LottoWinningCount.isNotWinningCount(matchCount)) {
+        if (Rank.isNotWinningRank(matchCount)) {
             return
         }
-        val winningCount = LottoWinningCount.of(matchCount)
-        val originalResult = _result[winningCount] ?: return
-        _result[winningCount] = originalResult.plus(1)
+        val rank = Rank.of(matchCount)
+        val originalCount = _result[rank] ?: return
+        _result[rank] = originalCount.plus(1)
     }
 
     fun calculateEarningRate(buyingPrice: LottoBuyingPrice): Double {
-        val earningMoney = result.map { (winningCount, _) ->
-            val winningMoney = winningCount.winningMoney
-            val matchCount = result[winningCount] ?: 0
+        val earningMoney = result.map { (rank, _) ->
+            val winningMoney = rank.winningMoney
+            val matchCount = result[rank] ?: 0
             winningMoney.times(matchCount).toLong()
         }.sum()
         return earningMoney.toDouble().div(buyingPrice.value)
     }
 
-    enum class LottoWinningCount(
-        val count: Int,
+    enum class Rank(
+        val countOfMatch: Int,
         val winningMoney: Int
     ) {
         THREE(3, 5_000),
@@ -42,12 +42,12 @@ class LottoResult(
         ;
 
         companion object {
-            fun of(matchCount: Int): LottoWinningCount {
-                return values().first { it.count == matchCount }
+            fun of(matchCount: Int): Rank {
+                return values().first { it.countOfMatch == matchCount }
             }
 
-            fun isNotWinningCount(matchCount: Int): Boolean {
-                return matchCount < THREE.count || matchCount > SIX.count
+            fun isNotWinningRank(matchCount: Int): Boolean {
+                return matchCount < THREE.countOfMatch || matchCount > SIX.countOfMatch
             }
         }
     }
