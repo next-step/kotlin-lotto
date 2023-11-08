@@ -10,7 +10,7 @@ class RanksTest {
         val lottoNumbers = listOf(1, 2, 3, 4, 5, 6)
         val userLotto = Lottos(1, InputNumberGenerator(lottoNumbers))
         val bonusNumber = 7
-        val winningLotto = WinningLotto(Lotto(lottoNumbers), bonusNumber)
+        val winningLotto = WinningLotto.of(lottoNumbers, bonusNumber)
 
         val ranks = Ranks(userLotto, winningLotto, 1000)
 
@@ -22,7 +22,7 @@ class RanksTest {
         val lottoNumbers = listOf(1, 2, 3, 4, 5, 6)
         val userLotto = Lottos(1, InputNumberGenerator(lottoNumbers))
         val bonusNumber = 7
-        val winningLotto = WinningLotto(Lotto(lottoNumbers), bonusNumber)
+        val winningLotto = WinningLotto.of(lottoNumbers, bonusNumber)
 
         val ranks = Ranks(userLotto, winningLotto, 1000)
 
@@ -34,7 +34,7 @@ class RanksTest {
         val lottoNumbers = listOf(1, 2, 3, 4, 5, 6)
         val userLotto = Lottos(1, InputNumberGenerator(lottoNumbers))
         val bonusNumber = 7
-        val winningLotto = WinningLotto(Lotto(lottoNumbers), bonusNumber)
+        val winningLotto = WinningLotto.of(lottoNumbers, bonusNumber)
 
         val ranks = Ranks(userLotto, winningLotto, 1000)
 
