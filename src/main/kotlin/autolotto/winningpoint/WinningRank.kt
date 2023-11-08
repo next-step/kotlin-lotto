@@ -13,5 +13,9 @@ enum class WinningRank(val matchingCount: Int, val winningPrice: Long) {
             return values().find { it.matchingCount == matchingCount }
                 ?: NOTHING
         }
+
+        fun isWinningRank(matchingCount: Int): Boolean {
+            return matchingCount >= 3
+        }
     }
 }

@@ -13,7 +13,7 @@ object ResultView {
         println("당첨 통계")
         println("---------")
         WinningRank.values().forEach { rank ->
-            if (rank != WinningRank.NOTHING) {
+            if (WinningRank.isWinningRank(rank.matchingCount)) {
                 println("${rank.matchingCount}개 일치 (${rank.winningPrice}원) - ${statistics.getCount(rank)}개")
             }
         }
