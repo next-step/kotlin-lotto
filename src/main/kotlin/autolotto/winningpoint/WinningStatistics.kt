@@ -4,22 +4,14 @@ import autolotto.vo.AutoLotto
 import autolotto.vo.WinningLotto
 
 object WinningStatistics {
-    private val countMap = mutableMapOf<WinningRank, Int>().withDefault { 0 }
-
-    fun getCount(rank: WinningRank): Int {
-        return countMap.getValue(rank)
-    }
-
-    fun calculateStatistics(autoLotto: AutoLotto, winningLotto: WinningLotto): WinningStatistics {
-        val statistics = this
-        autoLotto.lottos.forEach { lotto ->
+    fun calculateStatistics(autoLotto: AutoLotto, winningLotto: WinningLotto): Map<WinningRank, Int> {
+        return autoLotto.lottos.fold(initialCountMap()) { countMap, lotto ->
             val winningRank = lotto.checkWinning(winningNumbers = winningLotto.numbers)
-            statistics.recordWinningRank(winningRank)
+            countMap.toMutableMap().apply {
+                this[winningRank] = this.getOrDefault(winningRank, 0) + 1
+            }.toMap()
         }
-        return statistics
     }
 
-    private fun recordWinningRank(rank: WinningRank) {
-        countMap[rank] = countMap.getValue(rank) + 1
-    }
+    private fun initialCountMap(): Map<WinningRank, Int> = WinningRank.values().associateWith { 0 }
 }

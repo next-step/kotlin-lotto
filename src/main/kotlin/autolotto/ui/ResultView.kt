@@ -14,7 +14,7 @@ object ResultView {
         println("---------")
         WinningRank.values().forEach { rank ->
             if (WinningRank.isWinningRank(rank.matchingCount)) {
-                println("${rank.matchingCount}개 일치 (${rank.winningPrice}원) - ${statistics.getCount(rank)}개")
+                println("${rank.matchingCount}개 일치 (${rank.winningPrice}원) - ${statistics.getValue(rank)}개")
             }
         }
         val totalWinningPrice = autoLotto.calculateTotalWinningPrice(winningLotto.numbers)
