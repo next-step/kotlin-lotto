@@ -24,11 +24,24 @@ class StringAddCalculatorTest {
         val stringAddCalculator = StringAddCalculator(inputData)
         val splitString = stringAddCalculator.splitInput()
 
-        // when : 문자열의 합을 구한다.
+        // when : 분리된 문자열의 합을 구한다.
         val actual = stringAddCalculator.addString(splitString)
 
         // then : 합한 수를 배출한다.
         assertThat(actual).isEqualTo(expected)
+    }
+
+    @Test
+    fun `빈 문자열 또는 null을 입력했을 때, 문자열의 합을 구한다면, 0을 배출한다`() {
+        // given : 빈 문자열을 입력하고 문자열을 분리한다.
+        val stringAddCalculator = StringAddCalculator(null)
+        val splitString = stringAddCalculator.splitInput()
+
+        // when : 분리된 문자열의 합을 구한다.
+        val actual = stringAddCalculator.addString(splitString)
+
+        // then : 0을 반환한다.
+        assertThat(actual).isEqualTo(0)
     }
 
     companion object {
