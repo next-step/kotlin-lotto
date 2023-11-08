@@ -13,7 +13,7 @@ object InputView {
         println(BUYING_PRICE_MESSAGE)
         val userInput = readlnOrNull()
         validateIsNullOrBlank(userInput)
-        validateNumeric(userInput!!)
+        validateNumeric(userInput!!.trim())
         return LottoBuyingPrice(userInput.toInt())
     }
 

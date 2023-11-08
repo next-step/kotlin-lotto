@@ -10,11 +10,13 @@ object OutputView {
     private const val WINNING_STATISTICS_MESSAGE_FORMAT = """
         당첨 통계
         ---------
-        3개 일치 (5000원)- %d개
-        4개 일치 (50000원)- %d개
-        5개 일치 (1500000원)- %d개
-        6개 일치 (2000000000원)- %d개
+        %s
     """
+    private const val MATCH_MESSAGE_FORMAT = "%d개 일치 (%d원)- %d개"
+    private const val STANDARD_RATE = 1
+    private const val EARNING_RATE_MESSAGE_FORMAT = "총 수익률은 %.2f입니다.(기준이 ${STANDARD_RATE}이기 때문에 결과적으로 %s(이)라는 의미임)"
+    private const val WIN = "이득"
+    private const val LOSE = "손해"
 
     fun printLottos(lottoStorage: LottoStorage, change: Int) {
         val lottoCount = lottoStorage.getLottoCount()
@@ -25,13 +27,35 @@ object OutputView {
         }
     }
 
-    fun printLottoStatistics(lottoResult: LottoResult) {
-        println(
-            String.format(System.lineSeparator() + WINNING_STATISTICS_MESSAGE_FORMAT.trimIndent(),
-            lottoResult.result[LottoResult.LottoMatchCount.THREE],
-            lottoResult.result[LottoResult.LottoMatchCount.FOUR],
-            lottoResult.result[LottoResult.LottoMatchCount.FIVE],
-            lottoResult.result[LottoResult.LottoMatchCount.SIX])
+    fun printLottoResult(lottoMatchResult: LottoStorage.LottoMatchResult) {
+        val statisticsMessage = createStatisticMessage(lottoMatchResult.result)
+        val earningRateMessage = createEarningRateMessage(lottoMatchResult.earningRate)
+
+        println(statisticsMessage)
+        println(earningRateMessage)
+    }
+
+    private fun createStatisticMessage(
+        result: Map<LottoResult.LottoWinningCount, Int>
+    ): String {
+        val winningCounts = LottoResult.LottoWinningCount.values()
+        val matchMessage = winningCounts.joinToString(separator = System.lineSeparator()) { count ->
+            val matchCount = result[count]
+            String.format(
+                MATCH_MESSAGE_FORMAT.trimIndent(),
+                count.count, count.winningMoney, matchCount ?: 0
+            )
+        }
+        return System.lineSeparator() + String.format(WINNING_STATISTICS_MESSAGE_FORMAT.trimIndent(), matchMessage)
+    }
+
+    private fun createEarningRateMessage(
+        earningRate: Double
+    ): String {
+        return String.format(
+            EARNING_RATE_MESSAGE_FORMAT,
+            earningRate,
+            if (earningRate > STANDARD_RATE) WIN else LOSE
         )
     }
 }
