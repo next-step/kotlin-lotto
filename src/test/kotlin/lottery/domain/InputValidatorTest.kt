@@ -21,11 +21,4 @@ class InputValidatorTest {
             InputValidator.validateWinningNumbers("a,2,3,4,5,6")
         }
     }
-
-    @Test
-    fun `지난 주 당첨 번호가 하나라도 음수 번호를 가지면 오류를 반환한다`() {
-        assertThrows<IllegalArgumentException> {
-            InputValidator.validateWinningNumbers("-1,2,3,4,5,6")
-        }
-    }
 }

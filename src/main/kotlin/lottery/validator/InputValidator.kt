@@ -5,12 +5,10 @@ object InputValidator {
     private const val DELIMITER = ","
 
     fun validateWinningNumbers(input: String): List<Int> {
-        val numbers = input.split(DELIMITER).map { it.trim().toIntOrNull() ?: throw IllegalArgumentException(INVALID_WINNING_NUMBERS_EXCEPTION) }
-        numbers.forEach { validateNumberRange(it) }
+        val numbers = input.split(DELIMITER).map {
+            require(it.toIntOrNull() is Int) { INVALID_WINNING_NUMBERS_EXCEPTION }
+            it.toInt()
+        }
         return numbers
-    }
-
-    private fun validateNumberRange(number: Int) {
-        if (number <= 0) throw IllegalArgumentException(INVALID_WINNING_NUMBERS_EXCEPTION)
     }
 }

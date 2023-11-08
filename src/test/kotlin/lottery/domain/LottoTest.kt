@@ -3,6 +3,7 @@ package lottery.domain
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class LottoTest {
 
@@ -20,5 +21,21 @@ class LottoTest {
         val lotto = Lotto.of(lottoNumbers)
 
         lotto.lottoNumber.size shouldBe 6
+    }
+
+    @Test
+    fun `로또 객체는 음수를 로또 번호로 가질 수 없다`() {
+        val lottoNumbers = listOf(-1, 2, 3, 4, 5, 6)
+        assertThrows<IllegalArgumentException> {
+            Lotto.of(lottoNumbers)
+        }
+    }
+
+    @Test
+    fun `로또 객체는 45 이상의 수를 로또 번호로 가질 수 없다`() {
+        val lottoNumbers = listOf(1, 2, 3, 4, 5, 46)
+        assertThrows<IllegalArgumentException> {
+            Lotto.of(lottoNumbers)
+        }
     }
 }
