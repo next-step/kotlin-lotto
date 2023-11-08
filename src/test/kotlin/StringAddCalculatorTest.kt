@@ -57,12 +57,32 @@ class StringAddCalculatorTest {
         assertThat(actual).isEqualTo(5)
     }
 
+    @MethodSource("customDelimiterTestParameter")
+    @ParameterizedTest
+    fun `커스텀 문자열 사용`(inputData: String, expected: List<String>) {
+        // given : //과 \n에 구분자로 사용할 값을 숫자 문자열과 같이 받는다.
+        val stringAddCalculator = StringAddCalculator(inputData)
+
+        // when : 문자열을 나눈다.
+        val actual = stringAddCalculator.splitInput()
+
+        // then : 커스텀 문자열을 기준으로 구분되어 list를 생성한다
+        assertThat(actual).isEqualTo(expected)
+    }
+
     companion object {
         @JvmStatic
         fun addStringTestParameter() = listOf(
             arrayOf("2,3,4", 9),
             arrayOf("2,5:8", 15),
             arrayOf("1:2:7", 10)
+        )
+
+        @JvmStatic
+        fun customDelimiterTestParameter() = listOf(
+            arrayOf("//d\n2d3d4", listOf("2", "3", "4")),
+            arrayOf("//@\n2@5@8", listOf("2", "5", "8")),
+            arrayOf("//_\n1_2_7", listOf("1", "2", "7"))
         )
     }
 }
