@@ -11,8 +11,9 @@ class PrizeTest {
     @Test
     fun `번호 3개가 일치하면 당첨 금액은 5000원이다`() {
         val matchedNumberCount = 3
+        val bonusNumberMatched = false
 
-        val actual = Prize.valueOfOrNull(matchedNumberCount)
+        val actual = Prize.valueOfOrNull(matchedNumberCount, bonusNumberMatched)
             ?.winningAmount
 
         assertThat(actual).isEqualTo(5000)
@@ -21,8 +22,9 @@ class PrizeTest {
     @Test
     fun `번호 4개가 일치하면 당첨 금액은 50000원이다`() {
         val matchedNumberCount = 4
+        val bonusNumberMatched = false
 
-        val actual = Prize.valueOfOrNull(matchedNumberCount)
+        val actual = Prize.valueOfOrNull(matchedNumberCount, bonusNumberMatched)
             ?.winningAmount
 
         assertThat(actual).isEqualTo(50000)
@@ -31,18 +33,31 @@ class PrizeTest {
     @Test
     fun `번호 5개가 일치하면 당첨 금액은 1500000원이다`() {
         val matchedNumberCount = 5
+        val bonusNumberMatched = false
 
-        val actual = Prize.valueOfOrNull(matchedNumberCount)
+        val actual = Prize.valueOfOrNull(matchedNumberCount, bonusNumberMatched)
             ?.winningAmount
 
         assertThat(actual).isEqualTo(1500000)
     }
 
     @Test
+    fun `번호 5개와 보너스 번호가 일치하면 당첨 금액은 30000000원이다`() {
+        val matchedNumberCount = 5
+        val bonusNumberMatched = true
+
+        val actual = Prize.valueOfOrNull(matchedNumberCount, bonusNumberMatched)
+            ?.winningAmount
+
+        assertThat(actual).isEqualTo(30000000)
+    }
+
+    @Test
     fun `번호 6개가 일치하면 당첨 금액은 2000000000원이다`() {
         val matchedNumberCount = 6
+        val bonusNumberMatched = false
 
-        val actual = Prize.valueOfOrNull(matchedNumberCount)
+        val actual = Prize.valueOfOrNull(matchedNumberCount, bonusNumberMatched)
             ?.winningAmount
 
         assertThat(actual).isEqualTo(2000000000)
@@ -51,7 +66,9 @@ class PrizeTest {
     @ParameterizedTest
     @ValueSource(ints = [0, 1, 2])
     fun `번호가 3개보다 적게 일치하면 당첨되지 않아 null을 반환한다`(matchedNumberCount: Int) {
-        val actual = Prize.valueOfOrNull(matchedNumberCount)
+        val bonusNumberMatched = false
+
+        val actual = Prize.valueOfOrNull(matchedNumberCount, bonusNumberMatched)
 
         assertThat(actual).isNull()
     }
