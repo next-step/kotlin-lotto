@@ -4,9 +4,10 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
 class LottoMachineTest : StringSpec({
-    "로또를 생성한다." {
+
+    "돈을 받고 로또를 생성한다." {
         val lottoMachine = LottoMachine(RandomLottoNumberGenerator())
-        val lotto = lottoMachine.generateLotto()
-        lotto.lottoNumbers.size shouldBe Lotto.SIZE
+        val lotto = lottoMachine.generateLotto(Amount(1000))
+        lotto[0].lottoNumbers.size shouldBe Lotto.SIZE
     }
 })

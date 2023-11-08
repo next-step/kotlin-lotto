@@ -1,10 +1,14 @@
 package lotto
 
 class LottoMachine(private val lottoNumberGenerator: LottoNumberGenerator) {
-
-    fun generateLotto(): Lotto {
-        val lottoNumbers = generateLottoNumbers()
-        return Lotto(lottoNumbers)
+    fun generateLotto(amount: Amount): List<Lotto> {
+        val lottoCount = amount.divide(LOTTO_UNIT_PRICE)
+        val lottos = mutableListOf<Lotto>()
+        repeat(lottoCount) {
+            val lottoNumbers = generateLottoNumbers()
+            lottos.add(Lotto(lottoNumbers))
+        }
+        return lottos
     }
 
     private fun generateLottoNumbers(): List<LottoNumber> {
@@ -21,5 +25,9 @@ class LottoMachine(private val lottoNumberGenerator: LottoNumberGenerator) {
             lottoNumber = LottoNumber(lottoNumberGenerator.generate())
         }
         return lottoNumber
+    }
+
+    companion object {
+        private const val LOTTO_UNIT_PRICE = 1_000
     }
 }
