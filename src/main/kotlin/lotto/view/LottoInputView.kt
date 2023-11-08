@@ -17,4 +17,9 @@ object LottoInputView {
             .map { LottoNumber(it.trim().toInt()) }
             .let { WinningNumbers(it) }
     }
+
+    fun readBonusNumberInput(): LottoNumber {
+        println("보너스 볼을 입력해 주세요.")
+        return LottoNumber(readln().toInt())
+    }
 }
