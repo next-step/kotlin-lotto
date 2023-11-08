@@ -2,6 +2,7 @@ package lotto
 
 import lotto.domain.LottoRank
 import lotto.domain.LottoResultList
+import lotto.domain.Money
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -31,21 +32,21 @@ class LottoResultListTest {
     @Test
     fun `로또 결과 리스트는 알맞은 수익률을 계산한다`() {
         val lottoResultListNone = LottoResultList(listOf(LottoRank.NONE))
-        assertThat(lottoResultListNone.getProfitRate(1000)).isEqualTo(0f)
+        assertThat(lottoResultListNone.getProfitRate(Money(1000))).isEqualTo(0f)
 
         val lottoResultListFifth = LottoResultList(listOf(LottoRank.FIFTH))
-        assertThat(lottoResultListFifth.getProfitRate(1000)).isEqualTo(5f)
+        assertThat(lottoResultListFifth.getProfitRate(Money(1000))).isEqualTo(5f)
 
         val lottoResultListFourth = LottoResultList(listOf(LottoRank.FOURTH))
-        assertThat(lottoResultListFourth.getProfitRate(1000)).isEqualTo(50f)
+        assertThat(lottoResultListFourth.getProfitRate(Money(1000))).isEqualTo(50f)
 
         val lottoResultListThird = LottoResultList(listOf(LottoRank.THIRD))
-        assertThat(lottoResultListThird.getProfitRate(1000)).isEqualTo(1_500f)
+        assertThat(lottoResultListThird.getProfitRate(Money(1000))).isEqualTo(1_500f)
 
         val lottoResultListSecond = LottoResultList(listOf(LottoRank.SECOND))
-        assertThat(lottoResultListSecond.getProfitRate(1000)).isEqualTo(30_000f)
+        assertThat(lottoResultListSecond.getProfitRate(Money(1000))).isEqualTo(30_000f)
 
         val lottoResultListFirst = LottoResultList(listOf(LottoRank.FIRST))
-        assertThat(lottoResultListFirst.getProfitRate(1000)).isEqualTo(2_000_000f)
+        assertThat(lottoResultListFirst.getProfitRate(Money(1000))).isEqualTo(2_000_000f)
     }
 }
