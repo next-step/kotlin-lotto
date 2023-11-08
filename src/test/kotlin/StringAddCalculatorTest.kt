@@ -13,7 +13,7 @@ class StringAddCalculatorTest {
         // when :  쉼표 또는 클론을 구분자로 하여 나눈다
         val actual = stringAddCalculator.splitInput()
 
-        // then :
+        // then : 숫자 리스트를 배출한다.
         assertThat(actual).isEqualTo(listOf("1", "3", "6"))
     }
 
@@ -70,6 +70,18 @@ class StringAddCalculatorTest {
         assertThat(actual).isEqualTo(expected)
     }
 
+    @MethodSource("validationTestParameter")
+    @ParameterizedTest
+    fun `,숫자 이외의 값 혹은 음수가 포함되어 초기화 된다면, RuntimeException가 발생한다`(inputData: String, expected: Exception) {
+        // given :
+
+        // when : 숫자 이외의 값 혹은 음수로 초기화를 시도한다.
+        val actual = runCatching { StringAddCalculator(inputData) }.exceptionOrNull()
+
+        // then : 오류가 발생한다.
+        assertThat(actual).isInstanceOf(expected::class.java)
+    }
+
     companion object {
         @JvmStatic
         fun addStringTestParameter() = listOf(
@@ -83,6 +95,14 @@ class StringAddCalculatorTest {
             arrayOf("//d\n2d3d4", listOf("2", "3", "4")),
             arrayOf("//@\n2@5@8", listOf("2", "5", "8")),
             arrayOf("//_\n1_2_7", listOf("1", "2", "7"))
+        )
+
+        @JvmStatic
+        fun validationTestParameter() = listOf(
+            arrayOf("//d\n2dhd4", RuntimeException("입력값에 숫자 포멧이 아닌 것이 있습니다.")),
+            arrayOf("1,2,3ㅣ3", RuntimeException("입력값에 숫자 포멧이 아닌 것이 있습니다.")),
+            arrayOf("//@\n2@-5@8", RuntimeException("입력값에 음수가 있습니다.")),
+            arrayOf("8:9,0:8:-2", RuntimeException("입력값에 음수가 있습니다."))
         )
     }
 }

@@ -1,5 +1,22 @@
 class StringAddCalculator(private val inputData: String?) {
 
+    init {
+        validation()
+    }
+
+    private fun validation() {
+        val splitData = splitInput()
+        splitData.forEach { checkPositiveNumber(it) }
+    }
+
+    private fun checkPositiveNumber(data: String) {
+        if (data.toIntOrNull() == null) {
+            throw RuntimeException("입력값에 숫자 포멧이 아닌 것이 있습니다.")
+        } else if (data.toInt() < 0) {
+            throw RuntimeException("입력값에 음수가 있습니다.")
+        }
+    }
+
     fun splitInput(): List<String> {
         if (inputData == null) {
             return listOf(STR_ZERO)
@@ -31,6 +48,7 @@ class StringAddCalculator(private val inputData: String?) {
         splitString.forEach { result += it.toInt() }
         return result
     }
+
     companion object {
         private const val CUSTOM_DELIMITER_LINE = 0
         private const val CUSTOM_INPUT_DATA_LINE = 1
