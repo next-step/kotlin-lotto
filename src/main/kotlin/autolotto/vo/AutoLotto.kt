@@ -14,7 +14,7 @@ class AutoLotto(private val price: Long, originLottos: List<Lotto> = listOf()) {
     }
 
     private fun createLottoList(): List<Lotto> {
-        return (1..count).map { Lotto() }
+        return (LOTTO_COUNT_START..count).map { Lotto() }
     }
 
     fun calculateTotalWinningPrice(winningNumbers: List<Int>): Long {
@@ -28,5 +28,6 @@ class AutoLotto(private val price: Long, originLottos: List<Lotto> = listOf()) {
 
     companion object {
         private const val LOTTO_PRICE_PER_ONE = 1000L
+        private const val LOTTO_COUNT_START = 1L
     }
 }
