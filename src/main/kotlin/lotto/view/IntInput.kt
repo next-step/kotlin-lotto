@@ -1,6 +1,6 @@
-package lotto.domain
+package lotto.view
 
-class IntInput(private val text: String) {
+class IntInput(text: String) {
     val input: Int
 
     init {

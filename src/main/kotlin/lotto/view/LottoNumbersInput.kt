@@ -1,4 +1,6 @@
-package lotto.domain
+package lotto.view
+
+import lotto.domain.LottoNumbers
 
 class LottoNumbersInput(text: String) {
     val numbers: LottoNumbers

@@ -1,8 +1,6 @@
 package lotto.view
 
-import lotto.domain.IntInput
 import lotto.domain.LottoNumber
-import lotto.domain.LottoNumbersInput
 import lotto.domain.Money
 import lotto.domain.WinningNumbers
 
