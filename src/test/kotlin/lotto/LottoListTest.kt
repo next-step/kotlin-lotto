@@ -1,6 +1,11 @@
 package lotto
 
-import lotto.domain.*
+import lotto.domain.LottoList
+import lotto.domain.LottoNumber
+import lotto.domain.LottoNumbers
+import lotto.domain.LottoRank
+import lotto.domain.ManualLotto
+import lotto.domain.WinningNumbers
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

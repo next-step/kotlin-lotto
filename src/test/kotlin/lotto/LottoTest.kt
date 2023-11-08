@@ -1,9 +1,12 @@
 package lotto
 
-import lotto.domain.*
+import lotto.domain.LottoNumber
+import lotto.domain.LottoNumbers
+import lotto.domain.LottoRank
+import lotto.domain.ManualLotto
+import lotto.domain.WinningNumbers
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
-import java.lang.IllegalArgumentException
 
 class LottoTest {
     @Test
