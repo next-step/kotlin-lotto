@@ -28,6 +28,12 @@ object LottoOutputView {
     }
 
     private fun printWinningResult(prize: Prize, matchedNumberCount: Int?) {
-        println("${prize.matchedNumberCount}개 일치 (${prize.winningAmount}원)- ${matchedNumberCount ?: 0}개")
+        buildString {
+            append("${prize.matchedNumberCount}개 일치")
+            if (prize === Prize.SECOND) {
+                append(", 보너스 볼 일치")
+            }
+            append(" (${prize.winningAmount}원)- ${matchedNumberCount ?: 0}개")
+        }.run { println(this) }
     }
 }

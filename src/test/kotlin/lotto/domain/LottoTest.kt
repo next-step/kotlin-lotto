@@ -68,4 +68,22 @@ class LottoTest {
 
         assertThat(actual).isEqualTo(5)
     }
+
+    @Test
+    fun `보너스 번호가 주어지면 보너스 번호와 일치하는 번호가 있는지 여부를 반환한다`() {
+        val lottoNumbers = listOf(
+            LottoNumber(1),
+            LottoNumber(2),
+            LottoNumber(3),
+            LottoNumber(4),
+            LottoNumber(5),
+            LottoNumber(6),
+        )
+        val lotto = Lotto(lottoNumbers)
+        val bonusNumber = LottoNumber(3)
+
+        val actual = lotto.isBonusNumberMatch(bonusNumber)
+
+        assertThat(actual).isEqualTo(true)
+    }
 }

@@ -30,13 +30,14 @@ class PurchasedLottosTest {
             )
         )
         val purchasedLottos = PurchasedLottos(listOf(lotto), purchaseAmount)
+        val bonusNumber = LottoNumber(6)
 
-        val actual = purchasedLottos.draw(winningNumbers)
+        val actual = purchasedLottos.draw(winningNumbers, bonusNumber)
 
         assertThat(actual).usingRecursiveComparison()
             .isEqualTo(
                 WinningStatistic(
-                    prizes = listOf(Prize.valueOfOrNull(5)!!),
+                    prizes = listOf(Prize.valueOfOrNull(5, true)!!),
                     purchaseAmount = purchaseAmount,
                 )
             )

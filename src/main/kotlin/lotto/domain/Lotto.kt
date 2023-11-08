@@ -13,6 +13,10 @@ class Lotto(
             .count()
     }
 
+    fun isBonusNumberMatch(bonusNumber: LottoNumber): Boolean {
+        return numbers.contains(bonusNumber)
+    }
+
     companion object {
         const val PRICE = 1000L
         const val NUMBER_COUNT = 6
