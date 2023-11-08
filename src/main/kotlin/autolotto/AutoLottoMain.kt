@@ -2,18 +2,25 @@ package autolotto
 
 import autolotto.ui.InputView
 import autolotto.ui.ResultView
+import autolotto.vo.AutoLotto
+import autolotto.vo.WinningLotto
 
 fun main() {
-    startAutoLotto()
-}
+    while (true) {
+        try {
+            val price = InputView.promptForPrice()
+            val autoLotto = AutoLotto(price)
+            println("로또 ${autoLotto.count}개를 구매했습니다.")
+            autoLotto.lottos.forEach { lotto ->
+                println(lotto.numbers)
+            }
 
-fun startAutoLotto() {
-    try {
-        val autoLotto = InputView.promptForAutoLotto()
-        val winningLotto = InputView.promptForWinningLotto()
-        ResultView.printWinningPoints(autoLotto, winningLotto)
-    } catch (e: Exception) {
-        println(e.message)
-        startAutoLotto()
+            val lastWeekWinningNumbers = InputView.promptForLastWeekWinningNumbers()
+            val winningLotto = WinningLotto(lastWeekWinningNumbers)
+            ResultView.printWinningPoints(autoLotto, winningLotto)
+            break
+        } catch (e: Exception) {
+            println(e.message)
+        }
     }
 }
