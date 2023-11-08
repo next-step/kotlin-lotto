@@ -23,15 +23,7 @@ class LottoTest {
 
     @Test
     fun `로또 번호가 6개의 숫자가 아니면 IllegalArgumentException이 발생한다`() {
-        val lottoNumbers = listOf(
-            LottoNumber(1),
-            LottoNumber(2),
-            LottoNumber(3),
-            LottoNumber(4),
-            LottoNumber(5),
-            LottoNumber(6),
-            LottoNumber(7),
-        )
+        val lottoNumbers = (1..7).map(::LottoNumber)
 
         val actual = catchThrowable {
             Lotto(lottoNumbers)
@@ -44,24 +36,10 @@ class LottoTest {
     @Test
     fun `지난주 당첨 번호가 주어지면 일치하는 숫자 수를 반환한다`() {
         val lotto = Lotto(
-            listOf(
-                LottoNumber(1),
-                LottoNumber(2),
-                LottoNumber(3),
-                LottoNumber(4),
-                LottoNumber(5),
-                LottoNumber(6),
-            )
+            numbers = (1..6).map(::LottoNumber)
         )
         val winningNumbers = WinningNumbers(
-            listOf(
-                LottoNumber(1),
-                LottoNumber(2),
-                LottoNumber(3),
-                LottoNumber(4),
-                LottoNumber(5),
-                LottoNumber(7),
-            )
+            numbers = (2..7).map(::LottoNumber)
         )
 
         val actual = lotto.getMatchedNumberCount(winningNumbers)
@@ -71,15 +49,9 @@ class LottoTest {
 
     @Test
     fun `보너스 번호가 주어지면 보너스 번호와 일치하는 번호가 있는지 여부를 반환한다`() {
-        val lottoNumbers = listOf(
-            LottoNumber(1),
-            LottoNumber(2),
-            LottoNumber(3),
-            LottoNumber(4),
-            LottoNumber(5),
-            LottoNumber(6),
+        val lotto = Lotto(
+            numbers = (1..6).map(::LottoNumber)
         )
-        val lotto = Lotto(lottoNumbers)
         val bonusNumber = LottoNumber(3)
 
         val actual = lotto.isBonusNumberMatch(bonusNumber)
