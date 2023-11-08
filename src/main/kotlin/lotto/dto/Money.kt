@@ -2,13 +2,12 @@ package lotto.dto
 
 import lotto.domain.LottoNumbers.Companion.LOTTO_PRICE
 
-class Money(money: Int) {
+class Money(private val initialMoney: Int) {
 
-    private val initialMoney = money
-    private var remainMoney = money
+    private var remainMoney = initialMoney
 
     init {
-        require(money >= 0) { "로또 구입 금액은 0원 이상이어야 합니다." }
+        require(initialMoney >= 0) { "로또 구입 금액은 0원 이상이어야 합니다." }
     }
 
     fun buyLottos(count: Int) {

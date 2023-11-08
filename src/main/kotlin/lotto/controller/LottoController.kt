@@ -4,12 +4,14 @@ import lotto.domain.LottoNumberGenerator
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoResult
 import lotto.domain.LottoWinningNumbers
+import lotto.dto.ImmutableMoney
+import lotto.dto.LottoNumber
 import lotto.dto.Money
 import lotto.view.View
 
 class LottoController {
     fun run() {
-        val money = View.inputMoney()
+        val money = Money(View.inputMoney())
         val manualLottoNumbers = buyManualLottos(money)
         val autoLottoNumbers = buyAutoLottos(money)
         showBuyLottos(manualLottoNumbers, autoLottoNumbers)
@@ -21,10 +23,31 @@ class LottoController {
         View.outputResult(money, result)
     }
 
+    fun runByImmutableMoney() {
+        val initialMoney = ImmutableMoney.of(View.inputMoney())
+        val manualCount = View.inputManualCount()
+        val autoMoney = initialMoney.buy(manualCount)
+        val manualLottoNumbers = View.inputManualLottoNumbers(manualCount).map {
+            LottoNumbers.from(it)
+        }
+        val autoLottoNumbers = List(autoMoney.buyAll()) {
+            LottoNumberGenerator.generate()
+        }
+        showBuyLottos(manualLottoNumbers, autoLottoNumbers)
+        val winningNumbers = winningNumbers()
+        val result = checkResult(
+            manualLottoNumbers + autoLottoNumbers,
+            winningNumbers
+        )
+        View.outputResultByImmutableMoney(initialMoney, result)
+    }
+
     private fun buyManualLottos(money: Money): List<LottoNumbers> {
         val manualCount = View.inputManualCount()
         money.buyLottos(manualCount)
-        return View.inputManualLottoNumbers(manualCount)
+        return View.inputManualLottoNumbers(manualCount).map {
+            LottoNumbers.from(it)
+        }
     }
 
     private fun buyAutoLottos(money: Money): List<LottoNumbers> {
@@ -49,7 +72,7 @@ class LottoController {
     }
 
     private fun winningNumbers() = LottoWinningNumbers(
-        View.inputWinningNumber(),
-        View.inputBonusNumber()
+        LottoNumbers.from(View.inputWinningNumber()),
+        LottoNumber(View.inputBonusNumber())
     )
 }

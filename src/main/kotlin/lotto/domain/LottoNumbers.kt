@@ -23,5 +23,6 @@ data class LottoNumbers(
     companion object {
         const val LOTTO_NUMBER_COUNT = 6
         const val LOTTO_PRICE = 1000
+        fun from(numbers: List<Int>) = LottoNumbers(numbers.map { LottoNumber(it) })
     }
 }
