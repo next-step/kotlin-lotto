@@ -1,9 +1,14 @@
 package study.lotto.view
 
+import study.lotto.domain.Lottos
+import study.lotto.domain.PrizeGrade
+
 class ResultView {
-    fun displayLottos(lottoNumbersList: List<List<Int>>) {
-        println("${lottoNumbersList.size}개를 구매했습니다.")
-        lottoNumbersList.forEach { println(it) }
+    fun displayLottos(lottos: Lottos) {
+        println("${lottos.size}개를 구매했습니다.")
+        lottos.toList().forEach { lottoNumbers ->
+            println(lottoNumbers.numbers.toList().map { it.number })
+        }
     }
 
     fun displayStatistics(statistics: Map<Int, Int>) {
@@ -15,13 +20,7 @@ class ResultView {
         }
     }
 
-    private fun getPrizeUnit(matchCount: Int) = when (matchCount) {
-        3 -> "5000원"
-        4 -> "50000원"
-        5 -> "1500000원"
-        6 -> "2000000000원"
-        else -> "0원"
-    }
+    private fun getPrizeUnit(matchCount: Int) = PrizeGrade.getPrizeDisplay(matchCount)
 
     fun displayProfitRate(profitRate: Double) {
         val resultMessage = getProfitRateMessage(profitRate)

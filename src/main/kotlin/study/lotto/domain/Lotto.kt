@@ -1,9 +1,6 @@
 package study.lotto.domain
 
-class Lotto private constructor(val numbers: List<LottoNumber>) {
-
-    fun list() = numbers.toList()
-    fun toIntList() = numbers.map { it.number }
+class Lotto constructor(val numbers: LottoNumbers) {
 
     init {
         require(numbers.size == LOTTO_NUMBERS_COUNT) {
@@ -23,9 +20,8 @@ class Lotto private constructor(val numbers: List<LottoNumber>) {
             return LottoNumber.getLottoNumbers()
                 .take(6)
                 .sorted()
+                .let(::LottoNumbers)
                 .let(::Lotto)
         }
-
-        fun generate(numbers: List<LottoNumber>): Lotto = numbers.sorted().let(::Lotto)
     }
 }
