@@ -30,4 +30,15 @@ class NumberParserTest : FunSpec({
             shouldThrow<RuntimeException> { numberParser.parseNumbers(input) }
         }
     }
+
+    context("""문자열 파서에 "//" 과 "\n" 으로 둘러싸인 문자를 전달하는 경우 해당 문자를 구분자로 추가할 수 있다""") {
+        withData(
+            row("//;\n1;2;3", listOf(1, 2, 3)),
+            row("//;\n1,2:3;4", listOf(1, 2, 3, 4))
+        ) { (input, output) ->
+            val numberParser = NumberParser()
+            val actual = numberParser.parseNumbers(input)
+            actual shouldBe output
+        }
+    }
 })
