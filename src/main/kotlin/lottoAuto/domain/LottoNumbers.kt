@@ -9,6 +9,10 @@ class LottoNumbers(private val numbers: List<LottoNumber>) : List<LottoNumber> b
         return numbers.sortedBy { it.number }
     }
 
+    fun matchCount(numbers: List<LottoNumber>): Int {
+        return this.numbers.intersect(numbers.toSet()).size
+    }
+
     companion object {
         const val NUM_OF_LOTTO = 6
     }
