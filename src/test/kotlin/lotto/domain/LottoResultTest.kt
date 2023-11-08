@@ -14,10 +14,10 @@ class LottoResultTest : StringSpec({
 
             // then
             lottoResult.result shouldBe mapOf(
-                LottoMatchCount.THREE to 0,
-                LottoMatchCount.FOUR to 0,
-                LottoMatchCount.FIVE to 0,
-                LottoMatchCount.SIX to 0,
+                LottoResult.LottoWinningCount.THREE to 0,
+                LottoResult.LottoWinningCount.FOUR to 0,
+                LottoResult.LottoWinningCount.FIVE to 0,
+                LottoResult.LottoWinningCount.SIX to 0,
             )
         }
     }
@@ -31,8 +31,22 @@ class LottoResultTest : StringSpec({
             lottoResult.add(count)
 
             // then
-            val lottoMatchCount = LottoMatchCount.of(count)
+            val lottoMatchCount = LottoResult.LottoWinningCount.of(count)
             lottoResult.result[lottoMatchCount] shouldBe 1
         }
+    }
+
+    "구입 금액 대비 수익률을 계산한다." {
+        // given
+        val buyingPrice = LottoBuyingPrice(10_000)
+        val lottoResult = LottoResult().apply {
+            add(3)
+        }
+
+        // when
+        val earningRate = lottoResult.calculateEarningRate(buyingPrice)
+
+        // then
+        earningRate shouldBe 0.5
     }
 })

@@ -1,36 +1,48 @@
 package lotto.domain
 
 class LottoResult(
-    private val _result: MutableMap<LottoMatchCount, Int> = mutableMapOf()
+    private val _result: MutableMap<LottoWinningCount, Int> = mutableMapOf()
 ) {
-    val result: Map<LottoMatchCount, Int>
+    val result: Map<LottoWinningCount, Int>
         get() = _result.toMap()
 
     init {
-        _result[LottoMatchCount.THREE] = 0
-        _result[LottoMatchCount.FOUR] = 0
-        _result[LottoMatchCount.FIVE] = 0
-        _result[LottoMatchCount.SIX] = 0
+        _result[LottoWinningCount.THREE] = 0
+        _result[LottoWinningCount.FOUR] = 0
+        _result[LottoWinningCount.FIVE] = 0
+        _result[LottoWinningCount.SIX] = 0
     }
 
     fun add(matchCount: Int) {
-        if (LottoMatchCount.isNotWinningCount(matchCount)) {
+        if (LottoWinningCount.isNotWinningCount(matchCount)) {
             return
         }
-        val lottoMatchCount = LottoMatchCount.of(matchCount)
-        val originalResult = _result[lottoMatchCount] ?: return
-        _result[lottoMatchCount] = originalResult.plus(1)
+        val winningCount = LottoWinningCount.of(matchCount)
+        val originalResult = _result[winningCount] ?: return
+        _result[winningCount] = originalResult.plus(1)
     }
 
-    enum class LottoMatchCount(private val count: Int) {
-        THREE(3),
-        FOUR(4),
-        FIVE(5),
-        SIX(6)
+    fun calculateEarningRate(buyingPrice: LottoBuyingPrice): Double {
+        val earningMoney = result.map { (winningCount, _) ->
+            val winningMoney = winningCount.winningMoney
+            val matchCount = result[winningCount] ?: 0
+            winningMoney.times(matchCount).toLong()
+        }.sum()
+        return earningMoney.toDouble().div(buyingPrice.value)
+    }
+
+    enum class LottoWinningCount(
+        val count: Int,
+        val winningMoney: Int
+    ) {
+        THREE(3, 5_000),
+        FOUR(4, 50_000),
+        FIVE(5, 1_500_000),
+        SIX(6, 2_000_000_000)
         ;
 
         companion object {
-            fun of(matchCount: Int): LottoMatchCount {
+            fun of(matchCount: Int): LottoWinningCount {
                 return values().first { it.count == matchCount }
             }
 

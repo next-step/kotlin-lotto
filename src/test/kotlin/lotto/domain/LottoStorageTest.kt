@@ -35,7 +35,7 @@ class LottoStorageTest : StringSpec({
         }
     }
 
-    "로또 당첨 번호를 받아 당첨 결과를 반환한다." {
+    "로또 당첨 번호를 받아 로또 결과를 반환한다." {
         // given
         val lottoStorage = createLottoStorage(LottoBuyingPrice(2000))
         val winningLotto = Lotto(listOf(2, 3, 6, 7, 8, 9))
@@ -45,11 +45,12 @@ class LottoStorageTest : StringSpec({
 
         // then
         lottoResult.result shouldBe mutableMapOf(
-            LottoResult.LottoMatchCount.THREE to 2,
-            LottoResult.LottoMatchCount.FOUR to 0,
-            LottoResult.LottoMatchCount.FIVE to 0,
-            LottoResult.LottoMatchCount.SIX to 0,
+            LottoResult.LottoWinningCount.THREE to 2,
+            LottoResult.LottoWinningCount.FOUR to 0,
+            LottoResult.LottoWinningCount.FIVE to 0,
+            LottoResult.LottoWinningCount.SIX to 0,
         )
+        lottoResult.earningRate shouldBe 5.0
     }
 })
 

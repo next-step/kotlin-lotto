@@ -29,16 +29,22 @@ class LottoStorage(
         return lottos.size
     }
 
-    fun getResult(winningLotto: Lotto): LottoResult {
+    fun getResult(winningLotto: Lotto): LottoMatchResult {
         val lottoResult = LottoResult()
         lottos.forEach {
             val matchCount = it.matchCount(winningLotto)
             lottoResult.add(matchCount)
         }
-        return lottoResult
+        val earningRate = lottoResult.calculateEarningRate(buyingPrice)
+        return LottoMatchResult(lottoResult.result, earningRate)
     }
 
     companion object {
         private const val LOTTO_PRICE = 1000
     }
+
+    data class LottoMatchResult(
+        val result: Map<LottoResult.LottoWinningCount, Int>,
+        val earningRate: Double,
+    )
 }

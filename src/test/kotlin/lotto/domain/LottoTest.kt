@@ -37,6 +37,6 @@ class LottoTest : StringSpec({
         val count = lotto.matchCount(otherLotto)
 
         // then
-        count shouldBe 2
+        count shouldBe 3
     }
 })
