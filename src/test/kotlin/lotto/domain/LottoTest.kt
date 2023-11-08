@@ -2,6 +2,8 @@ package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.data.forAll
+import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 
 class LottoTest : StringSpec({
@@ -13,6 +15,17 @@ class LottoTest : StringSpec({
 
             // expected
             shouldThrowWithMessage<IllegalArgumentException>("로또 번호는 6개여야 합니다.") {
+                Lotto(numbers)
+            }
+        }
+    }
+
+    "로또 번호는 1~45 사이의 값이 아니면 예외가 발생한다." {
+        forAll(
+            row(listOf(0, 1, 2, 3, 4, 5)),
+            row(listOf(1, 2, 3, 4, 45, 46)),
+        ) { numbers ->
+            shouldThrowWithMessage<IllegalArgumentException>("로또 번호는 1부터 45 사이 값이어야 합니다.") {
                 Lotto(numbers)
             }
         }
@@ -34,7 +47,7 @@ class LottoTest : StringSpec({
         val otherLotto = Lotto(listOf(2, 5, 6, 7, 8, 10))
 
         // when
-        val count = lotto.matchCount(otherLotto)
+        val count = lotto.calculateMatchCount(otherLotto)
 
         // then
         count shouldBe 3

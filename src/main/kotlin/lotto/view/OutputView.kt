@@ -1,7 +1,9 @@
 package lotto.view
 
-import lotto.domain.LottoResult
-import lotto.domain.LottoStorage
+import lotto.domain.Charge
+import lotto.domain.LottoMatchResult
+import lotto.domain.LottoRank
+import lotto.domain.LottoMachine
 
 object OutputView {
 
@@ -18,36 +20,38 @@ object OutputView {
     private const val WIN = "이득"
     private const val LOSE = "손해"
 
-    fun printLottos(lottoStorage: LottoStorage, change: Int) {
-        val lottoCount = lottoStorage.getLottoCount()
-        println(String.format(BUYING_MESSAGE_FORMAT, lottoCount, change))
-        lottoStorage.lottos.forEach {
+    fun printLottos(lottoMachine: LottoMachine, change: Charge) {
+        println(String.format(BUYING_MESSAGE_FORMAT, lottoMachine.lottoCount.value, change.value))
+        lottoMachine.lottos.forEach {
             val lottoNumbers = it.numbers.joinToString(", ")
             println(String.format(LOTTO_FORMAT, lottoNumbers))
         }
     }
 
-    fun printLottoResult(lottoMatchResult: LottoStorage.LottoMatchResult) {
+    fun printLottoResult(lottoMatchResult: LottoMatchResult) {
         val statisticsMessage = createStatisticMessage(lottoMatchResult.result)
         val earningRateMessage = createEarningRateMessage(lottoMatchResult.earningRate)
-
         println(statisticsMessage)
         println(earningRateMessage)
     }
 
     private fun createStatisticMessage(
-        result: Map<LottoResult.Rank, Int>
+        result: Map<LottoRank, Int>,
     ): String {
-        val lottoRanks = LottoResult.Rank.values()
-        val matchMessage = lottoRanks.joinToString(separator = System.lineSeparator()) { rank ->
+        val lottoRanks = LottoRank.values().filterNot { it.isMiss() }
+        val statisticsMessage = lottoRanks.joinToString(separator = System.lineSeparator()) { rank ->
             val matchCount = result[rank]
-            String.format(
-                MATCH_MESSAGE_FORMAT.trimIndent(),
-                rank.countOfMatch, rank.winningMoney, matchCount ?: 0
-            )
+            createMatchMessage(rank, matchCount)
         }
-        return System.lineSeparator() + String.format(WINNING_STATISTICS_MESSAGE_FORMAT.trimIndent(), matchMessage)
+        return System.lineSeparator() + String.format(WINNING_STATISTICS_MESSAGE_FORMAT.trimIndent(), statisticsMessage)
     }
+
+    private fun createMatchMessage(rank: LottoRank, matchCount: Int?) = String.format(
+        MATCH_MESSAGE_FORMAT.trimIndent(),
+        rank.countOfMatch,
+        rank.winningMoney,
+        matchCount ?: 0
+    )
 
     private fun createEarningRateMessage(
         earningRate: Double
