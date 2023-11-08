@@ -23,7 +23,7 @@ class LottoTest : StringSpec({
     "로또 번호는 1~45 사이의 값이 아니면 예외가 발생한다." {
         forAll(
             row(listOf(0, 1, 2, 3, 4, 5)),
-            row(listOf(1, 2, 3, 4, 45, 46)),
+            row(listOf(1, 2, 3, 4, 45, 46))
         ) { numbers ->
             shouldThrowWithMessage<IllegalArgumentException>("로또 번호는 1부터 45 사이 값이어야 합니다.") {
                 Lotto(numbers)

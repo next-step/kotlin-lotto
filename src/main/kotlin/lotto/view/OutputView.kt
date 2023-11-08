@@ -1,9 +1,9 @@
 package lotto.view
 
 import lotto.domain.Charge
+import lotto.domain.LottoMachine
 import lotto.domain.LottoMatchResult
 import lotto.domain.LottoRank
-import lotto.domain.LottoMachine
 
 object OutputView {
 
@@ -50,16 +50,16 @@ object OutputView {
         MATCH_MESSAGE_FORMAT.trimIndent(),
         rank.countOfMatch,
         rank.winningMoney,
-        matchCount ?: 0
+        matchCount ?: 0,
     )
 
     private fun createEarningRateMessage(
-        earningRate: Double
+        earningRate: Double,
     ): String {
         return String.format(
             EARNING_RATE_MESSAGE_FORMAT,
             earningRate,
-            if (earningRate > STANDARD_RATE) WIN else LOSE
+            if (earningRate > STANDARD_RATE) WIN else LOSE,
         )
     }
 }

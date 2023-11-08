@@ -2,7 +2,7 @@ package lotto.domain
 
 @JvmInline
 value class LottoBuyingPrice(
-    val value: Int
+    val value: Int,
 ) {
 
     init {

@@ -19,4 +19,4 @@ class LottoResultTest : StringSpec({
         // then
         earningRate shouldBe 0.5
     }
-},)
+})

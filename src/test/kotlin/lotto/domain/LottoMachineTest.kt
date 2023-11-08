@@ -28,7 +28,7 @@ class LottoMachineTest : StringSpec({
 
         // then
         lottoResult.result shouldBe mutableMapOf(
-            LottoRank.THREE to 2,
+            LottoRank.THREE to 2
         )
         lottoResult.earningRate shouldBe 5.0
     }

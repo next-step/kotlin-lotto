@@ -1,7 +1,7 @@
 package calculator
 
 class Expression(
-    private val text: String
+    private val text: String,
 ) {
 
     fun isNumber(): Boolean {

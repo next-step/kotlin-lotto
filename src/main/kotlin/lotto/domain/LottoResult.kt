@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoResult(
-    val matchCountByRank: Map<LottoRank, Int>
+    val matchCountByRank: Map<LottoRank, Int>,
 ) {
 
     fun calculateEarningRate(buyingPrice: LottoBuyingPrice): Double {

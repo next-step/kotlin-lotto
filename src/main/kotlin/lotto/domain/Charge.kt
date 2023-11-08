@@ -2,5 +2,5 @@ package lotto.domain
 
 @JvmInline
 value class Charge(
-    val value: Int
+    val value: Int,
 )
