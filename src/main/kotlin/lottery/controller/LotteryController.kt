@@ -1,6 +1,5 @@
 package lottery.controller
 
-import lottery.domain.Lotto
 import lottery.domain.LottoGame
 import lottery.domain.RandomNumberGenerator
 import lottery.domain.WinningLotto
@@ -12,7 +11,7 @@ class LotteryController {
         val game = LottoGame(InputView.inputAmount(), RandomNumberGenerator())
         OutputView.printLotteryInfo(game.getLottos())
 
-        val winningLotto = WinningLotto(Lotto(InputView.inputWinningNumbers()), InputView.inputBonusNumber())
+        val winningLotto = WinningLotto.of(InputView.inputWinningNumbers(), InputView.inputBonusNumber())
         OutputView.printResult(game.getRanks(winningLotto))
     }
 }

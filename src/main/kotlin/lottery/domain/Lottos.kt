@@ -4,7 +4,7 @@ data class Lottos(val lottos: List<Lotto>) {
 
     constructor(quantity: Int, numberGenerator: LottoNumberGenerator) : this(
         List(quantity) {
-            Lotto(numberGenerator.getNumbers())
+            Lotto.of(numberGenerator.getNumbers())
         }
     )
 
