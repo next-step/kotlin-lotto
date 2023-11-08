@@ -13,7 +13,7 @@ class WinningLottoTest {
             val winningLottoNumbers = listOf(1, 2, 3, 4, 5, 6)
             val bonusNumber = 1
 
-            WinningLotto.of(winningLottoNumbers, bonusNumber)
+            WinningLotto(winningLottoNumbers, bonusNumber)
         }
     }
 
@@ -21,7 +21,7 @@ class WinningLottoTest {
     fun `당첨 로또 객체는 당첨 로또와 보너스 번호를 가진다`() {
         val winningLottoNumbers = listOf(1, 2, 3, 4, 5, 6)
         val bonusNumber = 7
-        val lotto = WinningLotto.of(winningLottoNumbers, bonusNumber)
+        val lotto = WinningLotto(winningLottoNumbers, bonusNumber)
 
         lotto.winningLotto.shouldBeInstanceOf<Lotto>()
         lotto.bonusNumber.lottoNumber shouldBe 7
@@ -31,7 +31,7 @@ class WinningLottoTest {
     fun `당첨 로또 객체는 입력받은 로또 객체를 받아 일치하는 숫자 갯수를 반환한다`() {
         val lottoNumbers = listOf(1, 2, 3, 4, 5, 6)
         val bonusNumber = 7
-        val winningLotto = WinningLotto.of(lottoNumbers, bonusNumber)
+        val winningLotto = WinningLotto(lottoNumbers, bonusNumber)
         val userLotto = Lotto.of(lottoNumbers)
 
         winningLotto.getMatchResult(userLotto) shouldBe 6
@@ -41,7 +41,7 @@ class WinningLottoTest {
     fun `당첨 로또 객체는 입력받은 로또 객체를 받아 보너스 번호 일치여부를 반환한다`() {
         val lottoNumbers = listOf(1, 2, 3, 4, 5, 6)
         val bonusNumber = 7
-        val winningLotto = WinningLotto.of(lottoNumbers, bonusNumber)
+        val winningLotto = WinningLotto(lottoNumbers, bonusNumber)
         val userLotto = Lotto.of(lottoNumbers)
 
         winningLotto.getBonusMatchResult(userLotto) shouldBe false

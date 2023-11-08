@@ -20,7 +20,7 @@ class LottoGameTest {
         val lottoNumbers = listOf(1, 2, 3, 4, 5, 6)
         val bonusNumber = 7
         val lottoGame = LottoGame(1000, InputNumberGenerator(lottoNumbers))
-        val result = lottoGame.getRanks(WinningLotto.of(lottoNumbers, bonusNumber))
+        val result = lottoGame.getRanks(WinningLotto(lottoNumbers, bonusNumber))
 
         result.shouldBeInstanceOf<Ranks>()
     }

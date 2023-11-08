@@ -11,7 +11,7 @@ class LotteryController {
         val game = LottoGame(InputView.inputAmount(), RandomNumberGenerator())
         OutputView.printLotteryInfo(game.getLottos())
 
-        val winningLotto = WinningLotto.of(InputView.inputWinningNumbers(), InputView.inputBonusNumber())
+        val winningLotto = WinningLotto(InputView.inputWinningNumbers(), InputView.inputBonusNumber())
         OutputView.printResult(game.getRanks(winningLotto))
     }
 }
