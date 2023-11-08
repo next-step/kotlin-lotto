@@ -1,4 +1,7 @@
-package lotto.dto
+package lotto.domain
+
+import lotto.dto.ImmutableMoney
+import lotto.dto.LottoPrice
 
 class LottoResult {
 
@@ -10,8 +13,7 @@ class LottoResult {
 
     fun getExact(exact: LottoPrice) = result[exact]
 
-    fun getRatio(money: Int): Double {
-        val sum = result.map { it.key.price * it.value }.sum()
-        return sum.toDouble() / money
-    }
+    fun getPrice() = result.map { it.key.price * it.value }.sum()
+
+    fun getROR(initialMoney: ImmutableMoney) = getPrice().toDouble() / initialMoney.money.toDouble()
 }

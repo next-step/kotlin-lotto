@@ -11,8 +11,6 @@ enum class LottoPrice(val matchedCount: Int, val price: Int, val text: String) {
     ALL_MATCHED(6, 2_000_000_000, "6개 일치");
 
     companion object {
-        fun getPrice(matchedCount: Int) = from(matchedCount).price
-
         fun from(matchedCount: Int) = values().find { it.matchedCount == matchedCount } ?: NOT_MATCHED
 
         fun rankOf() = values().filter { it.price != 0 }.sortedBy { it.matchedCount }.toList()

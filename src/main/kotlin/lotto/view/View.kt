@@ -1,8 +1,10 @@
 package lotto.view
 
-import lotto.dto.LottoNumbers
+import lotto.domain.LottoNumbers
+import lotto.domain.LottoResult
+import lotto.dto.ImmutableMoney
 import lotto.dto.LottoPrice
-import lotto.dto.LottoResult
+import lotto.dto.Money
 
 object View {
     fun inputMoney(): Int {
@@ -10,9 +12,13 @@ object View {
         return readln().toIntOrNull() ?: 0
     }
 
-    fun inputWinningNumber(): LottoNumbers {
+    fun inputWinningNumber(): List<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return LottoNumbers(readln().split(",").map { it.trim().toInt() })
+        return readln()
+            .split(",")
+            .map {
+                it.trim().toInt()
+            }
     }
 
     fun inputBonusNumber(): Int {
@@ -20,8 +26,26 @@ object View {
         return readln().toIntOrNull() ?: 0
     }
 
-    fun outputBuyCount(count: Int) {
-        println("${count}개를 구매했습니다.")
+    fun inputManualCount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        return readln().toIntOrNull() ?: 0
+    }
+
+    fun inputManualLottoNumbers(count: Int): List<List<Int>> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        val lottoNumbers = mutableListOf<List<Int>>()
+        repeat(count) {
+            lottoNumbers.add(
+                readln().split(",").map {
+                    it.trim().toInt()
+                }
+            )
+        }
+        return lottoNumbers
+    }
+
+    fun outputBuyCount(manualCount: Int, autoCount: Int) {
+        println("수동으로 ${manualCount}장, 자동으로 ${autoCount}개를 구매했습니다.")
     }
 
     fun outputBuyLottoNumbers(lottoNumbers: List<LottoNumbers>) {
@@ -31,12 +55,21 @@ object View {
         println()
     }
 
-    fun outputResult(money: Int, result: LottoResult) {
+    fun outputResult(money: Money, result: LottoResult) {
+        outputPreResult(result)
+        println("총 수익률은 %.2f입니다.".format(money.getROR(result.getPrice())))
+    }
+
+    fun outputResultByImmutableMoney(money: ImmutableMoney, result: LottoResult) {
+        outputPreResult(result)
+        println("총 수익률은 %.2f입니다.".format(result.getROR(money)))
+    }
+
+    private fun outputPreResult(result: LottoResult) {
         println("당첨 통계")
         println("---------")
         for (rank in LottoPrice.rankOf()) {
             println("${rank.text} (${rank.price}원) - ${result.getExact(rank)}개")
         }
-        println("총 수익률은 %.2f입니다.".format(result.getRatio(money)))
     }
 }

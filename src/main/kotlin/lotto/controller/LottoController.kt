@@ -1,27 +1,58 @@
 package lotto.controller
 
-import lotto.dto.LottoNumberGenerator
-import lotto.dto.LottoNumbers
-import lotto.dto.LottoNumbers.Companion.LOTTO_PRICE
-import lotto.dto.LottoResult
-import lotto.dto.LottoWinningNumbers
+import lotto.domain.LottoNumberGenerator
+import lotto.domain.LottoNumbers
+import lotto.domain.LottoResult
+import lotto.domain.LottoWinningNumbers
+import lotto.dto.ImmutableMoney
+import lotto.dto.LottoNumber
+import lotto.dto.Money
 import lotto.view.View
 
 class LottoController {
     fun run() {
-        val money = View.inputMoney()
-        val lottos = buyLotto(money)
-        View.outputBuyCount(lottos.size)
-        View.outputBuyLottoNumbers(lottos)
-        val winningNumber = View.inputWinningNumber()
-        val bonusNumber = View.inputBonusNumber()
-        val result = checkResult(lottos, LottoWinningNumbers(winningNumber, bonusNumber))
+        val money = Money(View.inputMoney())
+        val manualLottoNumbers = buyManualLottos(money)
+        val autoLottoNumbers = buyAutoLottos(money)
+        showBuyLottos(manualLottoNumbers, autoLottoNumbers)
+        val winningNumbers = winningNumbers()
+        val result = checkResult(
+            manualLottoNumbers + autoLottoNumbers,
+            winningNumbers
+        )
         View.outputResult(money, result)
     }
 
-    private fun buyLotto(money: Int): List<LottoNumbers> {
+    fun runByImmutableMoney() {
+        val initialMoney = ImmutableMoney.of(View.inputMoney())
+        val manualCount = View.inputManualCount()
+        val autoMoney = initialMoney.buy(manualCount)
+        val manualLottoNumbers = View.inputManualLottoNumbers(manualCount).map {
+            LottoNumbers.from(it)
+        }
+        val autoLottoNumbers = List(autoMoney.buyAll()) {
+            LottoNumberGenerator.generate()
+        }
+        showBuyLottos(manualLottoNumbers, autoLottoNumbers)
+        val winningNumbers = winningNumbers()
+        val result = checkResult(
+            manualLottoNumbers + autoLottoNumbers,
+            winningNumbers
+        )
+        View.outputResultByImmutableMoney(initialMoney, result)
+    }
+
+    private fun buyManualLottos(money: Money): List<LottoNumbers> {
+        val manualCount = View.inputManualCount()
+        money.buyLottos(manualCount)
+        return View.inputManualLottoNumbers(manualCount).map {
+            LottoNumbers.from(it)
+        }
+    }
+
+    private fun buyAutoLottos(money: Money): List<LottoNumbers> {
         val buyLottos = mutableListOf<LottoNumbers>()
-        for (i in 0 until money / LOTTO_PRICE) {
+        for (i in 0 until money.buyAllLottos()) {
             buyLottos.add(LottoNumberGenerator.generate())
         }
         return buyLottos
@@ -34,4 +65,14 @@ class LottoController {
         }
         return result
     }
+
+    private fun showBuyLottos(manualLottoNumbers: List<LottoNumbers>, autoLottoNumbers: List<LottoNumbers>) {
+        View.outputBuyCount(manualLottoNumbers.size, autoLottoNumbers.size)
+        View.outputBuyLottoNumbers(autoLottoNumbers)
+    }
+
+    private fun winningNumbers() = LottoWinningNumbers(
+        LottoNumbers.from(View.inputWinningNumber()),
+        LottoNumber(View.inputBonusNumber())
+    )
 }

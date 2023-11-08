@@ -1,4 +1,6 @@
-package lotto.dto
+package lotto.domain
+
+import lotto.dto.LottoNumber
 
 data class LottoNumbers(
     val numbers: List<LottoNumber>
@@ -8,11 +10,7 @@ data class LottoNumbers(
         require(numbers.toSet().size == 6) { "로또 번호는 중복되지 않아야 합니다." }
     }
 
-    constructor(
-        numbers: List<Int>,
-        @Suppress("UNUSED_PARAMETER")
-        notUsed: Any? = null
-    ) : this(numbers.map { LottoNumber(it) })
+    constructor(vararg numbers: Int) : this(numbers.map { LottoNumber(it) })
 
     fun matchedLottoNumberCount(lottoNumbers: LottoNumbers): Int {
         return numbers.intersect(lottoNumbers.numbers.toSet()).count()
@@ -25,5 +23,6 @@ data class LottoNumbers(
     companion object {
         const val LOTTO_NUMBER_COUNT = 6
         const val LOTTO_PRICE = 1000
+        fun from(numbers: List<Int>) = LottoNumbers(numbers.map { LottoNumber(it) })
     }
 }
