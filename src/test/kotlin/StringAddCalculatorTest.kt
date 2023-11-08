@@ -44,6 +44,19 @@ class StringAddCalculatorTest {
         assertThat(actual).isEqualTo(0)
     }
 
+    @Test
+    fun `숫자 하나를 문자열로 입력했을 때, 문자열의 합을 구한다면, 해당 숫자를 배출한다 `() {
+        // given : 숫자 하나를 문자열로 입력한다. "5"
+        val stringAddCalculator = StringAddCalculator("5")
+        val splitString = stringAddCalculator.splitInput()
+
+        // when : 문자열의 합을 구한다.
+        val actual = stringAddCalculator.addString(splitString)
+
+        // then : 입력한 숫자 문자열을 배출한다. 5
+        assertThat(actual).isEqualTo(5)
+    }
+
     companion object {
         @JvmStatic
         fun addStringTestParameter() = listOf(
