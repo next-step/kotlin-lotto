@@ -21,22 +21,22 @@ class LottoResult(
         val originalResult = _result[lottoMatchCount] ?: return
         _result[lottoMatchCount] = originalResult.plus(1)
     }
-}
 
-enum class LottoMatchCount(private val count: Int) {
-    THREE(3),
-    FOUR(4),
-    FIVE(5),
-    SIX(6)
-    ;
+    enum class LottoMatchCount(private val count: Int) {
+        THREE(3),
+        FOUR(4),
+        FIVE(5),
+        SIX(6)
+        ;
 
-    companion object {
-        fun of(matchCount: Int): LottoMatchCount {
-            return values().first { it.count == matchCount }
-        }
+        companion object {
+            fun of(matchCount: Int): LottoMatchCount {
+                return values().first { it.count == matchCount }
+            }
 
-        fun isNotWinningCount(matchCount: Int): Boolean {
-            return matchCount < THREE.count || matchCount > SIX.count
+            fun isNotWinningCount(matchCount: Int): Boolean {
+                return matchCount < THREE.count || matchCount > SIX.count
+            }
         }
     }
 }

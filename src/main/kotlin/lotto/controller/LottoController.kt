@@ -13,14 +13,16 @@ class LottoController {
         @JvmStatic
         fun main(args: Array<String>) {
             val buyingPrice = InputView.readBuyingPrice()
-            val lottos = createLottos(buyingPrice)
-            val change = lottos.getChange()
-            OutputView.printLottos(lottos, change)
+            val lottoStorage = createLottoStorage(buyingPrice)
+            val change = lottoStorage.getChange()
+            OutputView.printLottos(lottoStorage, change)
 
             val winningLotto = InputView.readWinningLotto()
+            val lottoResult = lottoStorage.getResult(winningLotto)
+            OutputView.printLottoStatistics(lottoResult)
         }
 
-        private fun createLottos(buyingPrice: LottoBuyingPrice): LottoStorage {
+        private fun createLottoStorage(buyingPrice: LottoBuyingPrice): LottoStorage {
             return LottoStorage(
                 buyingPrice = buyingPrice,
                 lottoNumberGenerator = LottoNumberGenerator
