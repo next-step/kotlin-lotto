@@ -1,6 +1,6 @@
 package lottery.domain
 
-class Ranks(lottos: Lottos, winningLotto: Lotto, private val price: Int) {
+class Ranks(lottos: Lottos, winningLotto: WinningLotto, private val price: Int) {
     val rank: List<Rank>
 
     init {
