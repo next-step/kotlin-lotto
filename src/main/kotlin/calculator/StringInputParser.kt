@@ -11,15 +11,15 @@ object StringInputParser {
 
         return Operands(
             numbers = splitInput.map {
-                it.toIntOrNull() ?: throw RuntimeException("숫자 이외의 값은 계산할 수 없습니다.")
+                requireNotNull(it.toIntOrNull()) { "숫자 이외의 값은 계산할 수 없습니다." }
             },
         )
     }
 
     private fun splitInput(input: String, customDelimiterMatchResult: MatchResult?): List<String> {
         return if (customDelimiterMatchResult != null) {
-            val customDelimiter = customDelimiterMatchResult.groupValues[1]
-            customDelimiterMatchResult.groupValues[2].split(customDelimiter)
+            val (customDelimiter, inputExceptCustomText) = customDelimiterMatchResult.destructured
+            inputExceptCustomText.split(customDelimiter)
         } else {
             input.split(DELIMITERS_REGEX)
         }
