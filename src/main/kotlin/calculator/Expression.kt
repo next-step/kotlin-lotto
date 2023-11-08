@@ -1,17 +1,11 @@
 package calculator
 
-private const val COMMA = ","
-private const val COLON = ":"
-private const val FORWARD_SLASH = "//"
-private const val NEW_LINE_CHARACTER = "\n"
-
 class Expression(
-    private val text: String
+    private val text: String,
 ) {
 
     fun isNumber(): Boolean {
-        val symbols = listOf(COMMA, COLON, FORWARD_SLASH, NEW_LINE_CHARACTER)
-        return symbols.none { text.contains(it) }
+        return SPECIAL_SYMBOLS.none { text.contains(it) }
     }
 
     fun toPositiveInt(): Int {
@@ -21,35 +15,33 @@ class Expression(
     }
 
     private fun validateMinusNumber(number: Int) {
-        if (number < 0) {
-            throw RuntimeException("음수는 입력할 수 없습니다.")
+        require(number >= 0) {
+            "음수는 입력할 수 없습니다."
         }
     }
 
     fun split(): List<Int> {
-        if (hasSymbol() && !hasCustomSymbol()) {
+        if (hasSymbol() && hasCustomSymbol().not()) {
             return splitBySymbol()
         }
         return splitByCustomSymbol()
     }
 
     private fun hasSymbol(): Boolean {
-        val symbols = listOf(COMMA, COLON)
-        return symbols.any { text.contains(it) }
+        return GENERAL_SYMBOLS.any { text.contains(it) }
     }
 
     private fun splitBySymbol(): List<Int> {
-        val numbers = text.split("$COMMA|$COLON".toRegex())
+        val numbers = text.split(GENERAL_SYMBOL_REGEX)
         return toPositiveNumbers(numbers)
     }
 
     private fun hasCustomSymbol(): Boolean {
-        val symbols = listOf(FORWARD_SLASH, NEW_LINE_CHARACTER)
-        return symbols.all { text.contains(it) }
+        return CUSTOM_SYMBOLS.all { text.contains(it) }
     }
 
     private fun splitByCustomSymbol(): List<Int> {
-        val result = Regex("$FORWARD_SLASH(.)$NEW_LINE_CHARACTER(.*)").find(text)
+        val result = CUSTOM_SYMBOL_REGEX.find(text)
         return result?.let {
             val customDelimiter = it.groupValues[1]
             val numbers = it.groupValues[2].split(customDelimiter)
@@ -59,5 +51,18 @@ class Expression(
 
     private fun toPositiveNumbers(numbers: List<String>) = numbers.map {
         Expression(it).toPositiveInt()
+    }
+
+    companion object {
+        private const val COMMA = ","
+        private const val COLON = ":"
+        private const val FORWARD_SLASH = "//"
+        private const val NEW_LINE_CHARACTER = "\n"
+
+        private val SPECIAL_SYMBOLS = listOf(COMMA, COLON, FORWARD_SLASH, NEW_LINE_CHARACTER)
+        private val GENERAL_SYMBOLS = listOf(COMMA, COLON)
+        private val GENERAL_SYMBOL_REGEX = "$COMMA|$COLON".toRegex()
+        private val CUSTOM_SYMBOLS = listOf(FORWARD_SLASH, NEW_LINE_CHARACTER)
+        private val CUSTOM_SYMBOL_REGEX = Regex("$FORWARD_SLASH(.)$NEW_LINE_CHARACTER(.*)")
     }
 }

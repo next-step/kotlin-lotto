@@ -1,0 +1,5 @@
+root = true
+
+[*.{kt,kts}]
+ij_kotlin_allow_trailing_comma = true
+indent_size = 4

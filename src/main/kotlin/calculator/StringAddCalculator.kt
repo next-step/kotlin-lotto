@@ -2,9 +2,11 @@ package calculator
 
 object StringAddCalculator {
 
+    private const val DEFAULT_RESULT = 0
+
     fun add(text: String?): Int {
         if (text.isNullOrBlank()) {
-            return 0
+            return DEFAULT_RESULT
         }
 
         val expression = Expression(text)

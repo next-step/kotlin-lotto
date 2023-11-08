@@ -14,7 +14,7 @@ class ExpressionTest : StringSpec({
             row("1,", false),
             row(":", false),
             row("//", false),
-            row("\n", false),
+            row("\n", false)
         ) { text, expected ->
             Expression(text).isNumber() shouldBe expected
         }
@@ -56,7 +56,7 @@ class ExpressionTest : StringSpec({
     "쉼표(,)와 콜론(:) 구분자를 가지고 있는 수식에 대해, 구분자를 기준으로 분리 시 음수가 표함되어 있으면 예외가 발생한다." {
         forAll(
             row("1,-10:3"),
-            row("-1:20,30"),
+            row("-1:20,30")
         ) { text ->
             shouldThrowWithMessage<RuntimeException>("음수는 입력할 수 없습니다.") {
                 Expression(text).split()
@@ -76,7 +76,7 @@ class ExpressionTest : StringSpec({
     "숫자 형태가 아니지만 쉼표(,)와 콜론(:) 구분자 없이, 커스텀 구분자도 존재하지 않으면 예외가 발생한다." {
         forAll(
             row("//;10;20;30"),
-            row(";\n10;20"),
+            row(";\n10;20")
         ) { text ->
             shouldThrowWithMessage<RuntimeException>("잘못된 수식입니다.") {
                 Expression(text).split()
@@ -86,7 +86,7 @@ class ExpressionTest : StringSpec({
 
     "정의된 커스텀 구분자가 외에 숫자가 아닌 다른 값이 들어오면 예외가 발생한다" {
         forAll(
-            row("//;\n10?20;30"),
+            row("//;\n10?20;30")
         ) { text ->
             shouldThrowWithMessage<RuntimeException>("숫자가 아닙니다.") {
                 Expression(text).split()
@@ -96,7 +96,7 @@ class ExpressionTest : StringSpec({
 
     "정의된 커스텀 구분자가 외의 숫자가 음수면 예외가 발생한다." {
         forAll(
-            row("//;\n10;-1;30"),
+            row("//;\n10;-1;30")
         ) { text ->
             shouldThrowWithMessage<RuntimeException>("음수는 입력할 수 없습니다.") {
                 Expression(text).split()

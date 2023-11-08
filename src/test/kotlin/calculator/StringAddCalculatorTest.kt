@@ -68,7 +68,7 @@ class StringAddCalculatorTest : StringSpec({
     "//와 \n 문자 사이에 커스텀 구분자를 지정할 수 있다." {
         forAll(
             row("//;\n1;2;3", 6),
-            row("//?\n10?20?30", 60),
+            row("//?\n10?20?30", 60)
         ) { text, expected ->
             StringAddCalculator.add(text) shouldBe expected
         }
