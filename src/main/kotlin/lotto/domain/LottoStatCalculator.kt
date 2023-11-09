@@ -16,10 +16,10 @@ class LottoStatCalculator(private val winningLotto: WinningLotto) {
         lotto: Lotto
     ): Int {
         return lotto.numbers.fold(0) { prev, i ->
-            if (winningLotto.lotto.numbers.contains(i)) prev + 1
+            if (winningLotto.contains(i)) prev + 1
             else prev
         }
     }
 
-    private fun getIsMatchBonusNumber(lotto: Lotto) = lotto.numbers.contains(winningLotto.bonusNumber)
+    private fun getIsMatchBonusNumber(lotto: Lotto) = lotto.contains(winningLotto.bonusNumber)
 }

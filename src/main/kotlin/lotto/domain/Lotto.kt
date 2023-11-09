@@ -4,7 +4,9 @@ class Lotto {
     val numbers: List<Int>
 
     constructor() {
-        numbers = LOTTO_NUMBER_POOL.shuffled().subList(0, 6).sorted()
+        numbers = LOTTO_NUMBER_POOL.shuffled()
+            .take(6)
+            .sorted()
     }
 
     constructor(numbers: List<Int>) {
@@ -14,6 +16,8 @@ class Lotto {
 
         this.numbers = numbers.sorted()
     }
+
+    fun contains(number: Int) = numbers.contains(number)
 
     companion object {
         private const val NUMBER_OF_LOTTO_NUMBER = 6
