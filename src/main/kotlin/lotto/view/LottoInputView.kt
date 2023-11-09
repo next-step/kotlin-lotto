@@ -65,7 +65,7 @@ class LottoInputView(
         }
 
         val lottoNumbers = lottoNumbersString
-            .split(LOTTO_NUMBERS_DELIMITER)
+            .split(LOTTO_NUMBERS_SEPARATOR)
             .map { getLottoNumber(it) }
 
         return WinningNumbers.create(lottoNumbers)
@@ -82,6 +82,6 @@ class LottoInputView(
     }
 
     companion object {
-        private const val LOTTO_NUMBERS_DELIMITER = ", "
+        private const val LOTTO_NUMBERS_SEPARATOR = ", "
     }
 }
