@@ -16,4 +16,12 @@ class LottoNumbers(
     private fun getNumbers(): List<Int> {
         return numbers
     }
+
+    override fun toString(): String {
+        return numbers.joinToString(LOTTO_NUMBERS_DELIMITER)
+    }
+
+    companion object {
+        private const val LOTTO_NUMBERS_DELIMITER = ", "
+    }
 }
