@@ -4,17 +4,22 @@ object LottoAuto {
     fun matchedLottoCountWithBonusBall(
         lottoList: List<Lotto>,
         lastWeekLottoNumber: WinningLotto,
-    ): List<Pair<LottoPrize, Boolean>> {
+    ): List<LottoResult> {
         return lottoList
-            .map { it.lottoPrize(lastWeekLottoNumber) to it.isMatchedBonusBall(lastWeekLottoNumber.bonusNumber) }
+            .map {
+                LottoResult(
+                    it.lottoPrize(lastWeekLottoNumber),
+                    it.isMatchedBonusBall(lastWeekLottoNumber.bonusNumber)
+                )
+            }
     }
 
     /**
      * 구매한 로또 총 당첨 금액
      */
-    fun sumOfWonLottoList(eachLottoMatchList: List<Pair<LottoPrize, Boolean>>): Int {
+    fun sumOfWonLottoList(eachLottoMatchList: List<LottoResult>): Int {
         return eachLottoMatchList.sumOf {
-            lottoPrizeWithMatchCountAndBonusMatched(it.first.matchCount, it.second).winningAmount
+            lottoPrizeWithMatchCountAndBonusMatched(it.lottoPrize.matchCount, it.bonusBallMatched).winningAmount
         }
     }
 

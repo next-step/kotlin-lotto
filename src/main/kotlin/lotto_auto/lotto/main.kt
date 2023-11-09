@@ -20,8 +20,12 @@ fun main() {
 
     val resultRate: Float = LottoAuto.earningRate(sumOfWonLotto, inputAmount)
 
-    val matchCountList =
-        LottoAuto.matchCountList(matchedLottoCountWithBonusBall.map { LottoPrize.getLottoPrize(it.first.matchCount, it.second) })
+    val matchCountList = LottoAuto.matchCountList(matchedLottoCountWithBonusBall.map {
+        LottoPrize.getLottoPrize(
+            it.lottoPrize.matchCount,
+            it.bonusBallMatched
+        )
+    })
 
     val fillDefaultCountMap = LottoPrize.values().associateWith { matchCountList.getOrDefault(it, 0) }
 

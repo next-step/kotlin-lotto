@@ -35,7 +35,7 @@ class LottoAutoTest : StringSpec({
         )
         val eachLottoMatchCount = LottoAuto.matchedLottoCountWithBonusBall(input, winningLotto)
         val matchedList =
-            eachLottoMatchCount.map { LottoPrize.getLottoPrize(it.first.matchCount, it.second) }
+            eachLottoMatchCount.map { LottoPrize.getLottoPrize(it.lottoPrize.matchCount, it.bonusBallMatched) }
 
         LottoAuto.matchCountList(matchedList) shouldBe expected
     }
