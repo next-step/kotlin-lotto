@@ -19,14 +19,25 @@ class RoundTest : StringSpec({
     "6개의 로또 번호가 일치 하면 1등 당첨자로 집계 해야 한다" {
         val actual = round.winnerAggregate(matched6)
         actual.countOfRank(Rank.FIRST) shouldBe 1
+        actual.countOfRank(Rank.SECOND) shouldBe 0
         actual.countOfRank(Rank.THIRD) shouldBe 0
         actual.countOfRank(Rank.FOURTH) shouldBe 0
         actual.countOfRank(Rank.FIFTH) shouldBe 0
     }
 
-    "5개의 로또 번호가 일치 하면 3등 당첨자로 집계 해야 한다" {
+    "5개의 로또 번호가 일치 하고 보너스볼이 일치하면 2등 당첨자로 집계 해야 한다" {
         val actual = round.winnerAggregate(matched5)
         actual.countOfRank(Rank.FIRST) shouldBe 0
+        actual.countOfRank(Rank.SECOND) shouldBe 1
+        actual.countOfRank(Rank.THIRD) shouldBe 0
+        actual.countOfRank(Rank.FOURTH) shouldBe 0
+        actual.countOfRank(Rank.FIFTH) shouldBe 0
+    }
+
+    "5개의 로또 번호가 일치 하고 보너스볼이 일치하지 않으면 3등 당첨자로 집계 해야 한다" {
+        val actual = round.winnerAggregate(matched5)
+        actual.countOfRank(Rank.FIRST) shouldBe 0
+        actual.countOfRank(Rank.SECOND) shouldBe 0
         actual.countOfRank(Rank.THIRD) shouldBe 1
         actual.countOfRank(Rank.FOURTH) shouldBe 0
         actual.countOfRank(Rank.FIFTH) shouldBe 0
@@ -35,6 +46,7 @@ class RoundTest : StringSpec({
     "4개의 로또 번호가 일치 하면 4등 당첨자로 집계 해야 한다" {
         val actual = round.winnerAggregate(matched4)
         actual.countOfRank(Rank.FIRST) shouldBe 0
+        actual.countOfRank(Rank.SECOND) shouldBe 0
         actual.countOfRank(Rank.THIRD) shouldBe 0
         actual.countOfRank(Rank.FOURTH) shouldBe 1
         actual.countOfRank(Rank.FIFTH) shouldBe 0
@@ -43,6 +55,7 @@ class RoundTest : StringSpec({
     "3개의 로또 번호가 일치 하면 5등 당첨자로 집계 해야 한다" {
         val actual = round.winnerAggregate(matched3)
         actual.countOfRank(Rank.FIRST) shouldBe 0
+        actual.countOfRank(Rank.SECOND) shouldBe 0
         actual.countOfRank(Rank.THIRD) shouldBe 0
         actual.countOfRank(Rank.FOURTH) shouldBe 0
         actual.countOfRank(Rank.FIFTH) shouldBe 1
