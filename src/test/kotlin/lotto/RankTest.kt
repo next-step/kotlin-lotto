@@ -10,21 +10,25 @@ class RankTest : FunSpec({
 
     context("랭크 순위, 상금 확인") {
         withData(
-            RankSet(6, Rank.FIRST, 2_000_000_000),
-            RankSet(5, Rank.SECOND, 1_500_000),
-            RankSet(4, Rank.THIRD, 50_000),
-            RankSet(3, Rank.FOURTH, 5_000),
-            RankSet(2, Rank.NO_RANK, 0),
-            RankSet(0, Rank.NO_RANK, 0),
-        ) { (matchCount, rank, prize) ->
-            rank shouldBe Rank.from(matchCount)
+            RankSet(6, false, Rank.FIRST, 2_000_000_000),
+            RankSet(5, true, Rank.SECOND, 30_000_000),
+            RankSet(5, false, Rank.THIRD, 1_500_000),
+            RankSet(4, false, Rank.FOURTH, 50_000),
+            RankSet(3, false, Rank.FIFTH, 5_000),
+            RankSet(2, false, Rank.NO_RANK, 0),
+            RankSet(0, false, Rank.NO_RANK, 0),
+        ) { (matchCount, matchBonus, rank, prize) ->
+            rank shouldBe Rank.from(matchCount, matchBonus)
             prize shouldBe rank.prize
         }
     }
 })
 
-data class RankSet(val matchCount: Int, val rank: Rank, val prize: Int) : WithDataTestName {
+data class RankSet(val matchCount: Int, val matchBonus: Boolean, val rank: Rank, val prize: Int) : WithDataTestName {
     override fun dataTestName(): String {
-        return "${matchCount}개 일치 시 랭크: $rank, 상금: ${prize}원"
+        return if (matchBonus)
+            "${matchCount}개 일치와 보너스 볼 포함시 랭크: $rank, 상금: ${prize}원"
+        else
+            "${matchCount}개 일치와 보너스 볼 미 포함시 랭크: $rank, 상금: ${prize}원"
     }
 }
