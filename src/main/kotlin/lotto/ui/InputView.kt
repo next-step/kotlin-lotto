@@ -32,9 +32,11 @@ object InputView {
         println(INPUT_MANUAL_LOTTO_NUMBER_MESSAGE)
         val lottos = List(count.count) {}
             .map {
-                Lotto(readln()
-                    .split(WINNING_NUMBERS_DELIMITER)
-                    .map { it.toInt() })
+                Lotto(
+                    readln()
+                        .split(WINNING_NUMBERS_DELIMITER)
+                        .map { it.toInt() }
+                )
             }
             .toList()
         return Lottos(lottos)
