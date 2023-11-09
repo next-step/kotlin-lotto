@@ -1,4 +1,6 @@
-class NumberParser(private var delimiters: HashSet<String> = DEFAULT_DELIMITER) {
+package calculator
+
+class Parser(private var delimiters: HashSet<String> = DEFAULT_DELIMITER) {
     fun parseNumbers(text: String?): List<Int> =
         if (text.isNullOrBlank()) {
             listOf(DEFAULT_VALUE)
