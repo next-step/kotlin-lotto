@@ -15,7 +15,7 @@ class WinningLottoTest {
         assertThatThrownBy {
             WinningLotto(lotto, bonusNumber)
         }.isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage("Duplicated number is in !")
+            .hasMessage("Duplicated number is in lotto!")
     }
 
     companion object {

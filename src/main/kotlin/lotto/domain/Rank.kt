@@ -9,12 +9,18 @@ enum class Rank(val countOfMatch: Int, val isMatchBonus: Boolean, val winningMon
     MISS(0, false, 0);
 
     companion object {
-        fun valueOf(countOfMatch: Int, matchBonus: Boolean): Rank = when (countOfMatch) {
-            6 -> FIRST
-            5 -> if (matchBonus) SECOND else THIRD
-            4 -> FOURTH
-            3 -> FIFTH
-            else -> MISS
+        fun valueOf(countOfMatch: Int, matchBonus: Boolean): Rank {
+            val filterWithCountOfMatch = Rank.values()
+                .filter { it.countOfMatch == countOfMatch }
+
+            if (filterWithCountOfMatch.isEmpty()) {
+                return MISS
+            }
+
+            return filterWithCountOfMatch.find {
+                it.isMatchBonus == matchBonus
+            }
+                ?: return filterWithCountOfMatch.first()
         }
     }
 }
