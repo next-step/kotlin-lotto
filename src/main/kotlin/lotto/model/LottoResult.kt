@@ -2,14 +2,23 @@ package lotto.model
 
 import lotto.utils.MatchedCount
 import lotto.utils.TicketCount
+import java.util.TreeMap
 
 class LottoResult(
     val lottoPrizes: List<LottoPrize>,
     val revenueRate: Double
 ) {
-    fun groupLottoPrizesByMatchedCount(): Map<MatchedCount, TicketCount> {
-        return lottoPrizes
+    fun groupWinningTicketsCountByMatchedCount(): TreeMap<MatchedCount, TicketCount> {
+        val source = lottoPrizes
             .groupBy { it.matchedCount }
             .mapValues { it.value.size }
+            .filter { (matchedCount, _) -> matchedCount in validMatchedCounts }
+        val target = validMatchedCounts.associateWith { 0 }
+
+        return TreeMap<MatchedCount, TicketCount>(source + target)
+    }
+
+    companion object {
+        private val validMatchedCounts = (3..6).toList()
     }
 }

@@ -15,27 +15,15 @@ class LottoResultView {
     }
 
     private fun printLottoPrizes(lottoResult: LottoResult) {
-        val grouped: List<Pair<MatchedCount, TicketCount>> = getLottoPrizesByMatchedCount(lottoResult)
+        val grouped = lottoResult.groupWinningTicketsCountByMatchedCount()
 
-        grouped.forEach {
-            val matchedCount = it.first
-            val ticketCount = it.second
-            val prize = LottoPrize.getPrize(matchedCount)
-
-            printLottoPrize(matchedCount, prize, ticketCount)
+        grouped.forEach { (matchedCount, ticketCount) ->
+            printLottoPrize(matchedCount, LottoPrize.getPrize(matchedCount), ticketCount)
         }
     }
 
     private fun printLottoPrize(matchedCount: MatchedCount, prize: Prize, ticketCount: TicketCount) {
         println("${matchedCount}개 일치 (${prize}원)- ${ticketCount}개")
-    }
-
-    private fun getLottoPrizesByMatchedCount(lottoResult: LottoResult): List<Pair<MatchedCount, TicketCount>> {
-        return lottoResult.groupLottoPrizesByMatchedCount()
-            .entries
-            .sortedBy { it.key }
-            .map { Pair(it.key, it.value) }
-            .toList()
     }
 
     private fun printRevenueRate(lottoResult: LottoResult) {
