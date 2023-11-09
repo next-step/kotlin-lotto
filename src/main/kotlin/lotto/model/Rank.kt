@@ -1,9 +1,9 @@
 package lotto.model
 
 enum class Rank(
-    val matchCount: Int,
-    val isRequireBonus: Boolean,
-    val prize: Int,
+    private val matchCount: Int,
+    private val isRequireBonus: Boolean,
+    private val prize: Int,
 ) {
     FIRST(6, false, 2_000_000_000),
     SECOND(5, true, 222222222),
@@ -17,26 +17,17 @@ enum class Rank(
     }
 
     companion object {
-        fun matchCountToRank(matchCount: Int, bouns: Boolean): Rank {
+        fun matchCountToRank(matchCount: Int, bonus: Boolean): Rank {
             if (matchCount < 3) {
                 return BOOM
             }
-            if (matchCount == 3) {
-                return FIFTH
+            if (matchCount == SECOND.matchCount) {
+                return when (bonus == SECOND.isRequireBonus) {
+                    true -> SECOND
+                    false -> THIRD
+                }
             }
-            if (matchCount == 4) {
-                return FOURTH
-            }
-            if (matchCount == 5 && !bouns) {
-                return THIRD
-            }
-            if (matchCount == 5) {
-                return SECOND
-            }
-            if (matchCount == 6) {
-                return FIRST
-            }
-            throw IllegalArgumentException("잘못된 값이 입력 되었습니다")
+            return requireNotNull(Rank.values().firstOrNull { (it.matchCount == matchCount) }) { "잘못된 숫자" }
         }
     }
 }
