@@ -3,13 +3,13 @@ package lotto.domain
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class LottoResultTestLevel {
+class LottoWinningTestLevel {
 
-    private val lottoResult = LottoResult()
+    private val lottoWinning = LottoWinning()
 
     @Test
     fun `입력된 로또 번호를 구분자를 이용해 List 로 만들어 준다`() {
-        val jackpotList = lottoResult.splitLottoNumber(JACKPOT_NUMBERS)
+        val jackpotList = lottoWinning.splitLottoNumber(JACKPOT_NUMBERS).lotto
         val expectedList = LOTTO
 
         assertEquals(expectedList, jackpotList)
@@ -17,11 +17,10 @@ class LottoResultTestLevel {
 
     @Test
     fun `lottoList 에서 jackpotNumbers 와 매칭 되는 개수에 해당하는 JackpotLevel 의 value 가 반환 된다`() {
-        val lotto = Lotto(LOTTO)
-        val jackpotNumbers: List<Int> = LOTTO
-        val lottoList: List<Lotto> = listOf(lotto)
+        val jackpotNumbers = Lotto(LOTTO)
+        val lottoList: List<Lotto> = listOf(jackpotNumbers)
 
-        val findJackpotLotto = lottoResult.findJackpotLotto(jackpotNumbers, lottoList)
+        val findJackpotLotto = lottoWinning.checkLottoWinning(jackpotNumbers, lottoList)
         assertEquals(findJackpotLotto, listOf(JackpotLevel.SIX_MATCH))
     }
 
