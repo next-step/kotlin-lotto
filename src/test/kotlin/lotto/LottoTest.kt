@@ -2,6 +2,8 @@ package lotto
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.inspectors.forAll
+import io.kotest.matchers.ints.shouldBeInRange
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 
@@ -14,5 +16,10 @@ class LottoTest : FunSpec({
 
     test("로또에 적힌 숫자 개수가 6개를 넘는다면 예외가 발생한다.") {
         shouldThrow<IllegalArgumentException> { Lotto(listOf(10, 15, 20, 25, 30, 35, 40)) }
+    }
+
+    test("로또에 적힌 숫자는 1부터 45 사이의 숫자다.") {
+        val lotto = Lotto(listOf(10, 20, 10, 45, 16, 29))
+        lotto.numbers.forAll { it shouldBeInRange (1..45) }
     }
 })
