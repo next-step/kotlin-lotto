@@ -1,10 +1,17 @@
 package lotto.component
 
 import lotto.model.LottoNumbers
+import lotto.model.LottoTicket
 import lotto.utils.shuffleAndTake
 
 class LottoNumbersGenerator {
-    fun generate(): LottoNumbers {
+    fun generate(lottoTicketCount: Int): List<LottoTicket> {
+        return (0 until lottoTicketCount)
+            .map { generate() }
+            .map { LottoTicket(it) }
+    }
+
+    private fun generate(): LottoNumbers {
         val numbers = shuffleAndTake(NUMBER_POOL, LOTTO_NUMBER_LENGTH, sort=true)
 
         return LottoNumbers(numbers)
