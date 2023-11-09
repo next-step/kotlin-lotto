@@ -15,7 +15,7 @@ class LottoResultView {
     }
 
     private fun printLottoPrizes(lottoResult: LottoResult) {
-        val grouped = lottoResult.groupWinningTicketsCountByMatchedCount()
+        val grouped = lottoResult.groupWinningTicketCountByMatchedCount()
 
         grouped.forEach { (matchedCount, ticketCount) ->
             printLottoPrize(matchedCount, LottoPrize.getPrize(matchedCount), ticketCount)

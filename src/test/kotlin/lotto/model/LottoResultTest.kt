@@ -9,7 +9,7 @@ class LottoResultTest : FunSpec({
         val lottoPrizes = listOf(LottoPrize.create(matchedCount))
         val lottoResult = LottoResult(lottoPrizes, 0.0)
 
-        val result = lottoResult.groupWinningTicketsCountByMatchedCount()
+        val result = lottoResult.groupWinningTicketCountByMatchedCount()
 
         result[matchedCount] shouldBe 1
     }
@@ -19,7 +19,7 @@ class LottoResultTest : FunSpec({
         val lottoPrizes = listOf(LottoPrize.create(matchedCount))
         val lottoResult = LottoResult(lottoPrizes, 0.0)
 
-        val result = lottoResult.groupWinningTicketsCountByMatchedCount()
+        val result = lottoResult.groupWinningTicketCountByMatchedCount()
             .values
             .sum()
 
