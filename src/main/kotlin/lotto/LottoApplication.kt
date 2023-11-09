@@ -9,7 +9,10 @@ import lotto.ui.ResultView
 
 fun main() {
     val amount = InputView.inputAmount()
-    val lottos = LottoVendingMachine(RandomLottoGenerator()).generate(amount)
+    val manualLottoCount = InputView.inputManualLottoCount()
+    val manualLottos = InputView.inputManualLottoNumber(manualLottoCount)
+
+    val lottos = LottoVendingMachine(RandomLottoGenerator()).generate(amount, manualLottoCount)
     ResultView.printLottos(lottos)
 
     val inputWinningNumbers = InputView.inputWinningNumbers()
