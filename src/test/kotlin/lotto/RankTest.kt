@@ -17,7 +17,7 @@ class RankTest : FunSpec({
             RankSet(2, Rank.NO_RANK, 0),
             RankSet(0, Rank.NO_RANK, 0),
         ) { (matchCount, rank, prize) ->
-            rank shouldBe Rank.of(matchCount)
+            rank shouldBe Rank.from(matchCount)
             prize shouldBe rank.prize
         }
     }

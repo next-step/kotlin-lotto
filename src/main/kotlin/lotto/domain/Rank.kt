@@ -8,7 +8,7 @@ enum class Rank(val matchCount: Int, val prize: Int) {
     NO_RANK(0, 0);
 
     companion object {
-        fun of(matchCount: Int): Rank {
+        fun from(matchCount: Int): Rank {
             return values().find { it.matchCount == matchCount } ?: NO_RANK
         }
     }

@@ -9,6 +9,6 @@ class Lotto(val numbers: Set<Int>) {
 
     fun match(otherLotto: Lotto): Rank {
         val size = numbers.intersect(otherLotto.numbers).size
-        return Rank.of(size)
+        return Rank.from(size)
     }
 }
