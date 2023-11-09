@@ -6,7 +6,8 @@ import io.kotest.matchers.shouldBe
 class LottoRankTest : ExpectSpec({
 
     expect("일치 개수를 입력하면 당첨금별 카운트를 반환한다.") {
-        val matchResult = LottoPrize.values().map { MatchResult(it.matchingCount, it.includeBonus) }
+        val matchResult =
+            LottoPrize.values().map { MatchResult(it.matchingCount, it == LottoPrize.SECOND) }
         val rank = LottoRank(matchResult, Amount(1000))
 
         val winningCount = rank.getWinningCount()
