@@ -43,7 +43,7 @@ class AutoLottoTest : FunSpec({
 
         // When
         val winningPrice = winningLotto.calculateTotalWinningPrice(lottos)
-        val profitRate = lotto.getProfitRate(winningPrice.toDouble())
+        val profitRate = lotto.getProfitRate(winningPrice)
 
         // Then
         profitRate shouldBe 200000.0

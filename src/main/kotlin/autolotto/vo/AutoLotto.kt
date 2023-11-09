@@ -17,8 +17,8 @@ class AutoLotto(private val price: Long, originLottos: List<Lotto> = listOf()) {
         return (LOTTO_COUNT_START..count).map { Lotto() }
     }
 
-    fun getProfitRate(winningPrice: Double): Double {
-        val profitRate = (winningPrice / this.price)
+    fun getProfitRate(winningPrice: Long): Double {
+        val profitRate = (winningPrice / this.price).toDouble()
         return floor(profitRate * 10) / 100.0
     }
 

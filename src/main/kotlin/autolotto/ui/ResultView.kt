@@ -18,6 +18,6 @@ object ResultView {
             }
         }
         val totalWinningPrice = winningLotto.calculateTotalWinningPrice(lottos = autoLotto.lottos)
-        println("총 수익률은 ${autoLotto.getProfitRate(totalWinningPrice.toDouble())}입니다.")
+        println("총 수익률은 ${autoLotto.getProfitRate(totalWinningPrice)}입니다.")
     }
 }
