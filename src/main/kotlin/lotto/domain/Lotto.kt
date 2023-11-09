@@ -9,5 +9,4 @@ class Lotto(
             val isBonusMatch = it.isContainsBonusNumber(lottoWinningNumber.bonusNumber)
             LottoWinningResult(sameNumberCount, isBonusMatch)
         }
-
 }

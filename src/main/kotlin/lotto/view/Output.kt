@@ -15,9 +15,11 @@ object Output {
 
     fun lottoBuyResultPrint(lotto: Lotto) {
         this.printlnAny(LottoMessage.PRINT_PURCHASE_QUANTITY.message.format(lotto.lines.size))
-        this.printlnAny(lotto.lines.joinToString("\n") {
-            it.line.joinToString(", ", "[", "]")
-        })
+        this.printlnAny(
+            lotto.lines.joinToString("\n") {
+                it.line.joinToString(", ", "[", "]")
+            }
+        )
     }
 
     fun lottoRateOfReturnPrint(lottoResult: LottoWinningReceipt, customer: Customer) {
@@ -40,7 +42,7 @@ object Output {
     }
 
     private fun getPrintRankMessage(bonusRank: Boolean) =
-        if(bonusRank) LottoMessage.PRINT_LOTTO_BONUS_RANK.message
+        if (bonusRank) LottoMessage.PRINT_LOTTO_BONUS_RANK.message
         else LottoMessage.PRINT_LOTTO_RANK.message
 
     private fun getLottoWinnings(rank: LottoRank, lottoReceipt: LottoWinningReceipt): Triple<LottoWinningResult, Int, Int> {

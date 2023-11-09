@@ -11,7 +11,7 @@ class StringAddCalculator(
         else StringSpliterator.split(input).sumOf(::getNumber)
 
     private fun getNumber(string: String): Int = Operand.valueOf(string).let {
-        if(validation.check(it)) throw RuntimeException("음수는 입력하실 수 없습니다.")
+        if (validation.check(it)) throw RuntimeException("음수는 입력하실 수 없습니다.")
         else it
     }
 

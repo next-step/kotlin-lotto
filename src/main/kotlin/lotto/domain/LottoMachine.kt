@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoMachine{
+class LottoMachine {
 
     fun checkLottoResult(lotto: Lotto, winningNumber: LottoWinningNumber): LottoWinningReceipt {
         val lottoResult = lotto.getAllSameNumberCount(winningNumber)

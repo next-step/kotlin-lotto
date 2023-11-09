@@ -2,8 +2,6 @@ package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
-import io.kotest.core.spec.style.FunSpec
-import io.kotest.matchers.shouldBe
 import java.lang.IllegalArgumentException
 
 class LottoWinningNumberTest : BehaviorSpec({
@@ -19,5 +17,4 @@ class LottoWinningNumberTest : BehaviorSpec({
             }
         }
     }
-
 })
