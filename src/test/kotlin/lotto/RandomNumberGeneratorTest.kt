@@ -15,4 +15,9 @@ class RandomNumberGeneratorTest : FunSpec({
         val randomNumberGenerator = RandomNumberGenerator()
         shouldThrow<IllegalArgumentException> { randomNumberGenerator.generateNumber(10, 1, 6) }
     }
+
+    test("랜덤 숫자 생성기의 전달될 숫자A~숫자B 사이의 개수보다 N이 크면 예외가 발생한다.") {
+        val randomNumberGenerator = RandomNumberGenerator()
+        shouldThrow<IllegalArgumentException> { randomNumberGenerator.generateNumber(1, 10, 11) }
+    }
 })
