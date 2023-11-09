@@ -11,9 +11,5 @@ enum class PrizeGrade(val matchCount: Int, val prizeAmount: Long) {
         fun getPrizeAmount(matchCount: Int): Long {
             return values().find { it.matchCount == matchCount }?.prizeAmount ?: 0
         }
-
-        fun getPrizeDisplay(matchCount: Int): String =
-            (values().find { it.matchCount == matchCount } ?: 0)
-                .let { "${it}원" }
     }
 }

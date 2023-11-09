@@ -23,5 +23,10 @@ class Lotto constructor(val numbers: LottoNumbers) {
                 .let(::LottoNumbers)
                 .let(::Lotto)
         }
+
+        fun get(intList: List<Int>) = intList
+            .map(::LottoNumber)
+            .let(::LottoNumbers)
+            .let(::Lotto)
     }
 }

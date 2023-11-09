@@ -5,11 +5,11 @@ class LottoGameResult private constructor(
     val earningsRate: Double,
 ) {
     companion object {
-        fun getResult(lottos: Lottos, winningLotto: Lotto): LottoGameResult {
-            val statistics = buildStatistics(lottos.countMatches(winningLotto))
+        fun getResult(lottoes: Lottoes, winningLotto: Lotto): LottoGameResult {
+            val statistics = buildStatistics(lottoes.countMatches(winningLotto))
             val earningsRate = calculateEarningsRate(
                 calculateTotalPrize(statistics),
-                lottos.size
+                lottoes.size
             )
 
             return LottoGameResult(statistics, earningsRate)
