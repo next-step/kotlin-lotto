@@ -5,9 +5,9 @@ object LottoMachine {
 
     fun purchase(
         purchaseAmount: Int
-    ): List<Lotto> {
+    ): Lottery {
         val numberOfLotto = purchaseAmount / LOTTO_PRICE
 
-        return List(size = numberOfLotto) { Lotto() }
+        return Lottery(List(size = numberOfLotto) { Lotto() })
     }
 }

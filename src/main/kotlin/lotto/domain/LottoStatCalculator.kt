@@ -2,15 +2,14 @@ package lotto.domain
 
 class LottoStatCalculator(private val winningLotto: WinningLotto) {
 
-    fun getStat(lottoList: List<Lotto>): LottoStatResult {
-        val result = LottoStatResult().apply {
-            lottoList.forEach {
-                this.addCount(Rank.valueOf(compareWithWinningLotto(it), getIsMatchBonusNumber(it)))
-            }
-        }
-
-        return result
-    }
+    fun getStat(lottery: Lottery): LottoStatResult = LottoStatResult(
+        lottery.groupingByRank {
+            Rank.valueOf(
+                compareWithWinningLotto(it),
+                getIsMatchBonusNumber(it)
+            )
+        }.eachCount()
+    )
 
     private fun compareWithWinningLotto(
         lotto: Lotto

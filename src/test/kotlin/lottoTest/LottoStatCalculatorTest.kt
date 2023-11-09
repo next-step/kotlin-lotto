@@ -1,5 +1,6 @@
 package lottoTest
 
+import lotto.domain.Lottery
 import lotto.domain.Lotto
 import lotto.domain.LottoStatCalculator
 import lotto.domain.LottoStatResult
@@ -14,7 +15,7 @@ class LottoStatCalculatorTest {
 
     @ParameterizedTest
     @MethodSource("generateLottoStatArguments")
-    fun `당첨 통계 계산`(winningLotto: WinningLotto, input: List<Lotto>, expected: LottoStatResult) {
+    fun `당첨 통계 계산`(winningLotto: WinningLotto, input: Lottery, expected: LottoStatResult) {
         val result = LottoStatCalculator(winningLotto).getStat(input)
 
         Rank.values().forEach {
@@ -31,8 +32,10 @@ class LottoStatCalculatorTest {
                         lotto = Lotto(listOf(1, 2, 3, 4, 5, 6)),
                         bonusNumber = 45
                     ),
-                    listOf(
-                        Lotto(numbers = listOf(4, 5, 6, 10, 11, 12)),
+                    Lottery(
+                        listOf(
+                            Lotto(numbers = listOf(4, 5, 6, 10, 11, 12)),
+                        )
                     ),
                     LottoStatResult(
                         mapOf(
@@ -50,8 +53,10 @@ class LottoStatCalculatorTest {
                         lotto = Lotto(listOf(1, 2, 3, 4, 5, 6)),
                         bonusNumber = 45
                     ),
-                    listOf(
-                        Lotto(numbers = listOf(1, 2, 3, 4, 5, 45)),
+                    Lottery(
+                        listOf(
+                            Lotto(numbers = listOf(1, 2, 3, 4, 5, 45)),
+                        )
                     ),
                     LottoStatResult(
                         mapOf(
@@ -66,10 +71,12 @@ class LottoStatCalculatorTest {
                 ),
                 Arguments.of(
                     WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6)), bonusNumber = 45),
-                    listOf(
-                        Lotto(numbers = listOf(1, 2, 3, 4, 5, 6)),
-                        Lotto(numbers = listOf(1, 2, 3, 4, 5, 7)),
-                        Lotto(numbers = listOf(1, 2, 3, 4, 7, 8)),
+                    Lottery(
+                        listOf(
+                            Lotto(numbers = listOf(1, 2, 3, 4, 5, 6)),
+                            Lotto(numbers = listOf(1, 2, 3, 4, 5, 7)),
+                            Lotto(numbers = listOf(1, 2, 3, 4, 7, 8)),
+                        )
                     ),
                     LottoStatResult(
                         mapOf(
