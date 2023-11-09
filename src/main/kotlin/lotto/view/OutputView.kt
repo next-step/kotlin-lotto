@@ -3,7 +3,6 @@ package lotto.view
 import lotto.app.LottoApp
 import lotto.model.LottoWinners
 import lotto.model.Round
-import lotto.model.incomeStatement
 
 object OutputView {
     fun presetRound(round: Round) {
@@ -25,5 +24,12 @@ object OutputView {
         총 수익률은 ${earningRate.incomeStatement()} 입니다.(기준이 1이기 때문에 결과적으로 ${earningRate.incomeStatement()} 라는 의미임)
             """.trimIndent()
         )
+    }
+}
+
+fun Double.incomeStatement(): String {
+    return when (this >= LottoWinners.BENEFIT_LOSS_CROSS_POINT) {
+        true -> LottoWinners.BENEFIT_MESSAGE
+        false -> LottoWinners.LOSS_MESSAGE
     }
 }
