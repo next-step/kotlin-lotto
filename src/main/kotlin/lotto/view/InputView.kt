@@ -1,5 +1,7 @@
 package lotto.view
 
+import lotto.model.LottoNumber
+import lotto.model.LottoNumbers
 import lotto.model.WinningNumbers
 
 object InputView {
@@ -12,7 +14,9 @@ object InputView {
 
     fun drawing(): WinningNumbers {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        val s = readlnOrNull() ?: ""
-        return WinningNumbers(s)
+        val winningNumbers = LottoNumbers((readlnOrNull() ?: "").split(",").map { it.toInt() })
+        println("보너스 볼을 입력해 주세요.")
+        val bonusNumber = LottoNumber((readlnOrNull() ?: "").toInt())
+        return WinningNumbers(winningNumbers, bonusNumber)
     }
 }

@@ -11,10 +11,10 @@ class RoundTest : StringSpec({
     val game4: Game = Game(LottoNumbers(2, 22, 32, 42, 43, 44))
     val round: Round = Round(listOf(game1, game2, game3, game4))
 
-    val matched6: WinningNumbers = WinningNumbers(LottoNumbers(1, 2, 3, 4, 5, 6))
-    val matched5: WinningNumbers = WinningNumbers(LottoNumbers(2, 3, 4, 5, 6, 37))
-    val matched4: WinningNumbers = WinningNumbers(LottoNumbers(3, 4, 5, 6, 37, 38))
-    val matched3: WinningNumbers = WinningNumbers(LottoNumbers(4, 5, 6, 37, 38, 39))
+    val matched6: WinningNumbers = WinningNumbers(LottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber(22))
+    val matched5: WinningNumbers = WinningNumbers(LottoNumbers(2, 3, 4, 5, 6, 37), LottoNumber(22))
+    val matched4: WinningNumbers = WinningNumbers(LottoNumbers(3, 4, 5, 6, 37, 38), LottoNumber(22))
+    val matched3: WinningNumbers = WinningNumbers(LottoNumbers(4, 5, 6, 37, 38, 39), LottoNumber(22))
 
     "6개의 로또 번호가 일치 하면 1등 당첨자로 집계 해야 한다" {
         val actual = round.winnerAggregate(matched6)
