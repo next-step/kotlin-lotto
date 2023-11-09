@@ -2,6 +2,7 @@ package lotto
 
 import lotto.domain.Lotto
 import lotto.domain.LottoMachine
+import lotto.domain.LottoNumberList
 import lotto.domain.LottoRank
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -33,10 +34,10 @@ class LottoMachineTest {
     fun `로또 결과를 얻을 수 있다`(first: Int, second: Int, third: Int, fourth: Int, fifth: Int, sixth: Int, winningFirst: Int, winningSecond: Int, winningThird: Int, winningFourth: Int, winningFifth: Int, winningSixth: Int, expected: LottoRank, bonusNumber: Int) {
         val lottoMachine: LottoMachine = LottoMachine()
 
-        val lottoNumberList: List<Int> = listOf(first, second, third, fourth, fifth, sixth)
+        val lottoNumberList: LottoNumberList = LottoNumberList(listOf(first, second, third, fourth, fifth, sixth))
         val lotto: Lotto = Lotto(lottoNumberList)
 
-        val winningNumberList: List<Int> = listOf(winningFirst, winningSecond, winningThird, winningFourth, winningFifth, winningSixth)
+        val winningNumberList: LottoNumberList = LottoNumberList(listOf(winningFirst, winningSecond, winningThird, winningFourth, winningFifth, winningSixth))
         val winningLotto: Lotto = Lotto(winningNumberList)
 
         val lottoRank: LottoRank = lottoMachine.getLottoRank(lotto, winningLotto, bonusNumber)

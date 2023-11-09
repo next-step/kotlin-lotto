@@ -17,7 +17,7 @@ class OutputView {
     }
 
     fun printLottoNumberList(lottoList: List<Lotto>) {
-        lottoList.forEach { println(it.numbers) }
+        lottoList.forEach { println(it.getNumberList()) }
         println()
     }
 
