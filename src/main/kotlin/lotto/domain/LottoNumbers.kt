@@ -12,8 +12,4 @@ data class LottoNumbers(val numbers: List<LottoNumber>) {
             "numbers should not contain duplicated number"
         }
     }
-
-    fun getContainCount(winningNumbers: WinningNumbers): Int {
-        return numbers.intersect(winningNumbers.winningNumbers.numbers.toSet()).size
-    }
 }
