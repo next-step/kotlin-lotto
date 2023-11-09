@@ -10,8 +10,8 @@ class LottoTicket(numbers: List<LottoNumber>) {
     private var _numbers: List<LottoNumber> = numbers.toList()
     val numbers: List<LottoNumber> get() = _numbers.toList()
 
-    fun matchCount(winningNumbers: List<Int>) = numbers.intersect(winningNumbers.toSet()).size
     companion object {
         const val NUMBER_COUNT = 6
+        const val TICKET_PRICE = 1000
     }
 }

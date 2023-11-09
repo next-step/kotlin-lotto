@@ -1,21 +1,27 @@
 package lotto.view
 
-import lotto.model.ProfitCalculator
+import lotto.collection.LottoResults
 import lotto.collection.LottoTicket
+import lotto.collection.WinningMoney
+import lotto.model.ProfitCalculator
 
 object ResultView {
-    fun renderTickets(lottoTickets: List<LottoTicket>) {
-        lottoTickets.forEach { println(it.numbers) }
+    fun renderTickets(lottoTickets: List<LottoTicket>): List<LottoTicket> {
+        lottoTickets.forEach { ticket -> println(ticket.numbers.map { it.number }) }
+        return lottoTickets
     }
 
-    fun renderResults(ticketPrice: Int, results: List<Int>, winningMoney: List<Int>) {
+    fun renderTicketCount(ticketCount: Int): Int {
+        println("${ticketCount}개를 구매했습니다.")
+        return ticketCount
+    }
+
+    fun renderResults(lottoResults: LottoResults) {
         println("당첨 통계")
         println("---------")
-        winningMoney.forEachIndexed() { index, money ->
-            if (money > 0) {
-                println("${index}개 일치 (${money}원) - ${results[index]}개")
-            }
+        lottoResults.results.forEach { (key, value) ->
+            println("${key}개 일치 (${WinningMoney.getPrizePerMatch(value)}원) - ${value}개")
         }
-        println("총 수익률은 ${String.format("%.2f", ProfitCalculator.calculate(ticketPrice, results, winningMoney))}입니다.")
+        println("총 수익률은 ${String.format("%.2f", ProfitCalculator.calculate(lottoResults))}입니다.")
     }
 }
