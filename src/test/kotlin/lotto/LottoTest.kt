@@ -54,4 +54,25 @@ class LottoTest : FunSpec({
             lotto.match(winningNumbers) shouldBe expected
         }
     }
+
+    context("당첨 로또에 6개가 아닌 숫자를 전달하면 예외가 발생한다.") {
+        val lotto = Lotto(setOf(10, 15, 20, 25, 30, 35))
+        withData(
+            setOf(10, 15),
+            setOf(10, 15, 20, 25, 29, 29),
+            setOf(10, 15, 20, 25, 30, 35, 40)
+        ) { winningNumbers ->
+            shouldThrow<IllegalArgumentException> { lotto.match(winningNumbers) }
+        }
+    }
+
+    context("일치 개수를 계산할 때, 로또에 1부터 45 외의 숫자를 전달하면 예외가 발생한다.") {
+        val lotto = Lotto(setOf(10, 15, 20, 25, 30, 35))
+        withData(
+            setOf(10, 15, 20, 25, 30, 46),
+            setOf(10, 15, 20, 25, 29, -1),
+        ) { winningNumbers ->
+            shouldThrow<IllegalArgumentException> { lotto.match(winningNumbers) }
+        }
+    }
 })
