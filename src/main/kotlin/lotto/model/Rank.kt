@@ -6,7 +6,7 @@ enum class Rank(
     val prize: Int,
 ) {
     FIRST(6, false, 2_000_000_000),
-    SECOND(5,true,222222222),
+    SECOND(5, true, 222222222),
     THIRD(5, false, 1_500_000),
     FOURTH(4, false, 50_000),
     FIFTH(3, false, 5_000),
@@ -17,21 +17,23 @@ enum class Rank(
     }
 
     companion object {
-        fun matchCountToRank(value: Int): Rank {
-            TODO()
-            if (value < 3) {
+        fun matchCountToRank(matchCount: Int, bouns: Boolean): Rank {
+            if (matchCount < 3) {
                 return BOOM
             }
-            if (value == 3) {
+            if (matchCount == 3) {
                 return FIFTH
             }
-            if (value == 4) {
+            if (matchCount == 4) {
                 return FOURTH
             }
-            if (value == 5) {
+            if (matchCount == 5 && !bouns) {
                 return THIRD
             }
-            if (value == 6) {
+            if (matchCount == 5) {
+                return SECOND
+            }
+            if (matchCount == 6) {
                 return FIRST
             }
             throw IllegalArgumentException("잘못된 값이 입력 되었습니다")

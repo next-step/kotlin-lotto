@@ -23,6 +23,10 @@ data class LottoNumbers(
             .count()
     }
 
+    fun hasBonusNumber(bonusNumber: LottoNumber): Boolean {
+        return values.contains(bonusNumber)
+    }
+
     companion object {
         fun any(): LottoNumbers {
             return LottoNumbers(LottoNumber.any6Numbers())

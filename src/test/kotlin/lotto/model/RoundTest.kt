@@ -7,7 +7,7 @@ class RoundTest : StringSpec({
 
     val game1: Game = Game(LottoNumbers(1, 2, 3, 4, 5, 6))
     val game2: Game = Game(LottoNumbers(7, 8, 9, 10, 11, 12))
-    val game3: Game = Game(LottoNumbers(1, 11, 21, 31, 41, 31, 22))
+    val game3: Game = Game(LottoNumbers(1, 11, 21, 31, 41, 22))
     val game4: Game = Game(LottoNumbers(2, 22, 32, 42, 43, 44))
     val round: Round = Round(listOf(game1, game2, game3, game4))
 
@@ -26,12 +26,14 @@ class RoundTest : StringSpec({
     }
 
     "5개의 로또 번호가 일치 하고 보너스볼이 일치하면 2등 당첨자로 집계 해야 한다" {
-        val actual = round.winnerAggregate(matched5)
+        val r2 = Round(listOf(Game(LottoNumbers(1, 2, 3, 4, 5, 22))))
+        val matched5withBonus: WinningNumbers = WinningNumbers(LottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber(22))
+        val actual = r2.winnerAggregate(matched5withBonus)
         actual.countOfRank(Rank.FIRST) shouldBe 0
-        actual.countOfRank(Rank.SECOND) shouldBe 1
         actual.countOfRank(Rank.THIRD) shouldBe 0
         actual.countOfRank(Rank.FOURTH) shouldBe 0
         actual.countOfRank(Rank.FIFTH) shouldBe 0
+        actual.countOfRank(Rank.SECOND) shouldBe 1
     }
 
     "5개의 로또 번호가 일치 하고 보너스볼이 일치하지 않으면 3등 당첨자로 집계 해야 한다" {
