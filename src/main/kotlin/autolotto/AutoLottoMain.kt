@@ -16,7 +16,8 @@ fun main() {
             }
 
             val lastWeekWinningNumbers = InputView.promptForLastWeekWinningNumbers()
-            val winningLotto = WinningLotto(lastWeekWinningNumbers)
+            val lastWeekBonusNumber = InputView.promptForBonusNumbers()
+            val winningLotto = WinningLotto(lastWeekWinningNumbers, lastWeekBonusNumber)
             ResultView.printWinningPoints(autoLotto, winningLotto)
             break
         } catch (e: Exception) {
