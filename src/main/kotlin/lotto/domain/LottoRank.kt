@@ -1,15 +1,19 @@
 package lotto.domain
 
 enum class LottoRank(
-    val sameCount: Int,
+    val lottoWinningResult: LottoWinningResult,
     val amount: Int
 ) {
-    FIRST_PLACE(6, 2_000_000_000),
-    SECOND_PLACE(5, 1_500_000),
-    THIRD_PLACE(4, 50_000),
-    FOURTH_PLACE(3, 5_000);
+
+    FIRST(LottoWinningResult(6, false), 2_000_000_000),
+    SECOND(LottoWinningResult(5, true), 30_000_000),
+    THIRD(LottoWinningResult(5, false), 1_500_000),
+    FOURTH(LottoWinningResult(4, false), 50_000),
+    FIFTH(LottoWinningResult(3, false), 5_000)
+    ;
 
     companion object {
-        fun of(sameCount: Int) = values().find { it.sameCount == sameCount }
+        fun valueOf(lottoWinningResult: LottoWinningResult) = values()
+            .find { it.lottoWinningResult == lottoWinningResult }
     }
 }

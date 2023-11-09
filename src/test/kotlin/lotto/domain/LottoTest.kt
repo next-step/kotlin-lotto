@@ -23,15 +23,22 @@ class LottoTest : BehaviorSpec({
             listOf(
                 LottoNumber(listOf(1, 2, 3, 4, 5, 6)),
                 LottoNumber(listOf(1, 2, 3, 4, 5, 7)),
-                LottoNumber(listOf(1, 2, 3, 4, 7, 8)),
-                LottoNumber(listOf(1, 2, 3, 7, 8, 9)),
+                LottoNumber(listOf(1, 2, 3, 4, 8, 9)),
+                LottoNumber(listOf(1, 2, 3, 8, 9, 10)),
             )
         )
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
+        val bonusNumber = 7
+        val lottoWinningNumber = LottoWinningNumber(winningNumbers, bonusNumber)
         Then("각 라인별 동일한 번호의 개수 리스트를 반환한다.") {
-            val sameNumberCount = lotto.getAllSameNumberCount(winningNumbers)
+            val sameNumberCount = lotto.getAllSameNumberCount(lottoWinningNumber)
             sameNumberCount.size shouldBe 4
-            sameNumberCount shouldBe listOf(6, 5, 4, 3)
+            sameNumberCount shouldBe listOf(
+                LottoWinningResult(6, false),
+                LottoWinningResult(5, true),
+                LottoWinningResult(4, false),
+                LottoWinningResult(3, false)
+            )
         }
     }
 })

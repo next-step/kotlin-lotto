@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoResult(
+class LottoWinningReceipt(
     private val ranks: Map<LottoRank, Int>,
     private val rateCalculus: RateCalculus = DefaultRateCalculus()
 ) {
@@ -14,7 +14,7 @@ class LottoResult(
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as LottoResult
+        other as LottoWinningReceipt
 
         return ranks == other.ranks
     }
