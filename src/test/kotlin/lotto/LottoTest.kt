@@ -21,13 +21,13 @@ class LottoTest : FunSpec({
         withData(
             TestSet(Lotto(setOf(1, 2, 3, 4, 5, 6)), Lotto(setOf(1, 2, 3, 4, 5, 6)), Rank.FIRST),
             TestSet(Lotto(setOf(1, 2, 3, 4, 5, 6)), Lotto(setOf(1, 2, 3, 4, 5, 7)), Rank.SECOND),
-            TestSet(Lotto(setOf(1, 2, 3, 4, 5, 6)), Lotto(setOf(1, 2, 3, 4, 7, 8)), Rank.THIRD),
-            TestSet(Lotto(setOf(1, 2, 3, 4, 5, 6)), Lotto(setOf(1, 2, 3, 7, 8, 9)), Rank.FOURTH),
-            TestSet(Lotto(setOf(1, 2, 3, 4, 5, 6)), Lotto(setOf(1, 2, 7, 8, 9, 10)), Rank.NO_RANK),
+            TestSet(Lotto(setOf(1, 2, 3, 4, 5, 6)), Lotto(setOf(1, 2, 3, 4, 5, 8)), Rank.THIRD),
+            TestSet(Lotto(setOf(1, 2, 3, 4, 5, 6)), Lotto(setOf(1, 2, 3, 4, 8, 9)), Rank.FOURTH),
+            TestSet(Lotto(setOf(1, 2, 3, 4, 5, 6)), Lotto(setOf(1, 2, 3, 8, 9, 10)), Rank.FIFTH),
             TestSet(Lotto(setOf(1, 2, 3, 4, 5, 6)), Lotto(setOf(1, 7, 8, 9, 10, 11)), Rank.NO_RANK),
             TestSet(Lotto(setOf(1, 2, 3, 4, 5, 6)), Lotto(setOf(7, 8, 9, 10, 11, 12)), Rank.NO_RANK),
         ) { (lotto, otherLotto, result) ->
-            lotto.match(otherLotto) shouldBe result
+            lotto.match(otherLotto, 7) shouldBe result
         }
     }
 })

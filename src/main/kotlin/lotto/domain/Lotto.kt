@@ -7,10 +7,13 @@ class Lotto(val numbers: Set<Int>) {
         }
     }
 
-    fun match(otherLotto: Lotto): Rank {
+    fun match(otherLotto: Lotto, bonusBall:Int): Rank {
         val size = intersect(otherLotto).size
-        return Rank.from(size, true)
+        val matchBonus = otherLotto.contains(bonusBall)
+        return Rank.from(size, matchBonus)
     }
 
     private fun intersect(otherLotto: Lotto) = numbers.intersect(otherLotto.numbers)
+
+    private fun contains(bonusBall: Int) = numbers.contains(bonusBall)
 }
