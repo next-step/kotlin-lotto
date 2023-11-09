@@ -19,10 +19,10 @@ class OutputView {
     fun printResult(ranks: Ranks, payment: Int) {
         println("당첨 통계")
         println("---------")
-        println("3개 일치 (${Rank.FOURTH.prize}원)- ${ranks.count(Rank.FOURTH)}개")
-        println("4개 일치 (${Rank.THIRD.prize}원)- ${ranks.count(Rank.THIRD)}개")
-        println("5개 일치 (${Rank.SECOND.prize}원)- ${ranks.count(Rank.SECOND)}개")
-        println("6개 일치 (${Rank.FIRST.prize}원)- ${ranks.count(Rank.FIRST)}개")
+        println("3개 일치 (${Rank.FOURTH.prize}원)- ${ranks.ranks[Rank.FOURTH]}개")
+        println("4개 일치 (${Rank.THIRD.prize}원)- ${ranks.ranks[Rank.THIRD]}개")
+        println("5개 일치 (${Rank.SECOND.prize}원)- ${ranks.ranks[Rank.SECOND]}개")
+        println("6개 일치 (${Rank.FIRST.prize}원)- ${ranks.ranks[Rank.FIRST]}개")
         println("총 수익률은 ${ranks.rateOfReturn(payment)}입니다. ${hasBenefit(ranks.rateOfReturn(payment))}")
     }
 

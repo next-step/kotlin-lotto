@@ -14,6 +14,6 @@ class RanksTest : StringSpec({
     "순위 갯수" {
         val ranks =
             Ranks(listOf(Rank.FIRST, Rank.FIRST, Rank.FIRST, Rank.FIRST, Rank.FIRST, Rank.FIRST))
-        ranks.count(Rank.FIRST) shouldBe 6
+        ranks.ranks[Rank.FIRST] shouldBe 6
     }
 })
