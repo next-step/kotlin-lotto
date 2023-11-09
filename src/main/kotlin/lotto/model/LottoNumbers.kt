@@ -1,7 +1,7 @@
 package lotto.model
 
 data class LottoNumbers(
-    val values: LinkedHashSet<LottoNumber>,
+    private val values: LinkedHashSet<LottoNumber>,
 ) {
     init {
         require(values.size == 6) { "6개의 원소가 필요하지만 [${values.size}] 의 원소가 입력 되었습니다" }
