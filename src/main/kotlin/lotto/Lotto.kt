@@ -1,6 +1,6 @@
 package lotto
 
-class Lotto(val numbers: List<Int>) {
+class Lotto(val numbers: Set<Int>) {
     init {
         validateLottoNumbers()
     }

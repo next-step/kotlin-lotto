@@ -10,28 +10,32 @@ import io.kotest.matchers.types.shouldBeInstanceOf
 
 class LottoTest : FunSpec({
     test("로또 한 장은 숫자 6개를 가진다.") {
-        val lotto = Lotto(listOf(10, 20, 10, 45, 15, 6))
+        val lotto = Lotto(setOf(10, 20, 17, 45, 15, 6))
         lotto.numbers.size shouldBe 6
-        lotto.numbers.shouldBeInstanceOf<List<Int>>()
+        lotto.numbers.shouldBeInstanceOf<Set<Int>>()
     }
 
     test("로또에 적힌 숫자 개수가 6개를 넘는다면 예외가 발생한다.") {
-        shouldThrow<IllegalArgumentException> { Lotto(listOf(10, 15, 20, 25, 30, 35, 40)) }
+        shouldThrow<IllegalArgumentException> { Lotto(setOf(10, 15, 20, 25, 30, 35, 40)) }
     }
 
     test("로또에 적힌 숫자는 1부터 45 사이의 숫자다.") {
-        val lotto = Lotto(listOf(10, 20, 10, 45, 16, 29))
+        val lotto = Lotto(setOf(10, 20, 17, 45, 16, 29))
         lotto.numbers.forAll { it shouldBeInRange (1..45) }
     }
 
     context("로또에 적힌 숫자가 1부터 45 사이의 숫자가 아니라면 예외가 발생한다.") {
         withData(
-            listOf(0, 10, 20, 30, 35, 40),
-            listOf(1, 20, 30, 40, 15, 46),
-            listOf(1, 20, 30, 40, 15, 70),
-            listOf(-10, 20, 30, 45, 15, 1)
+            setOf(0, 10, 20, 30, 35, 40),
+            setOf(1, 20, 30, 40, 15, 46),
+            setOf(1, 20, 30, 40, 15, 70),
+            setOf(-10, 20, 30, 45, 15, 1)
         ) { numbers ->
             shouldThrow<IllegalArgumentException> { Lotto(numbers) }
         }
+    }
+
+    test("로또에 적힌 숫자가 중복된다면 예외가 발생한다.") {
+        shouldThrow<IllegalArgumentException> { Lotto(setOf(10, 10, 20, 30, 40, 45)) }
     }
 })
