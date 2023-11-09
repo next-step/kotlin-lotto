@@ -14,13 +14,9 @@ enum class Rank(val matchCount: Int, val winningMoney: Int) {
             if (matchCount == SECOND.matchCount && matchBonus) {
                 return SECOND
             }
-            return when (matchCount) {
-                FIRST.matchCount -> FIRST
-                THIRD.matchCount -> THIRD
-                FOURTH.matchCount -> FOURTH
-                FIFTH.matchCount -> FIFTH
-                else -> OUT_OF_RANK
-            }
+            return Rank.values()
+                .filter { it != SECOND }
+                .find { it.matchCount == matchCount } ?: OUT_OF_RANK
         }
     }
 }
