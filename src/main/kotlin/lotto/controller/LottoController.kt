@@ -1,9 +1,9 @@
 package lotto.controller
 
-import lotto.domain.LottoResult
 import lotto.domain.LottoGenerator
-import lotto.domain.LottoShop
+import lotto.domain.LottoResult
 import lotto.domain.LottoRoiCalculator
+import lotto.domain.LottoShop
 import lotto.view.InputView
 import lotto.view.OutputView
 
