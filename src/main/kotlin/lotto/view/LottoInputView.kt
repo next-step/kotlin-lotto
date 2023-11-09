@@ -2,13 +2,15 @@ package lotto.view
 
 import lotto.component.Lotto
 import lotto.model.LottoInput
+import lotto.model.WinningNumbers
 
 class LottoInputView {
     fun getInput(): LottoInput {
         val purchaseAccount: Int = getPurchaseAccount()
         val lottoTicketCount: Int = getLottoTicketCount(purchaseAccount)
+        val winningNumbers: WinningNumbers = getWinningNumbers()
 
-        return LottoInput(lottoTicketCount)
+        return LottoInput(lottoTicketCount, winningNumbers)
     }
 
     private fun getInput(message: String): String? {
@@ -35,5 +37,33 @@ class LottoInputView {
         }
 
         return lottoTicketCount
+    }
+
+    private fun getWinningNumbers(): WinningNumbers {
+        val lottoNumbersString = getInput("지난 주 당첨 번호를 입력해 주세요.")
+
+        require(!lottoNumbersString.isNullOrBlank()) {
+            "로또 번호는 6자리입니다. 콤마와 공백으로 구분된 6자리 숫자를 입력해주세요. 예시: 1, 2, 3, 4, 5, 6"
+        }
+
+        val lottoNumbers = lottoNumbersString
+            .split(LOTTO_NUMBERS_DELIMITER)
+            .map { getLottoNumber(it) }
+
+        return WinningNumbers.create(lottoNumbers)
+    }
+
+    private fun getLottoNumber(lottoNumberString: String): Int {
+        val lottoNumber = lottoNumberString.toIntOrNull()
+
+        require(lottoNumber != null && lottoNumber >= 1 && lottoNumber <= 45) {
+            "로또 번호는 1 이상 45 이하의 자연수입니다."
+        }
+
+        return lottoNumber
+    }
+
+    companion object {
+        private const val LOTTO_NUMBERS_DELIMITER = ", "
     }
 }
