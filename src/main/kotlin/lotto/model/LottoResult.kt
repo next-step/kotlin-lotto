@@ -8,7 +8,7 @@ class LottoResult(
 ) {
     fun groupLottoPrizesByMatchedCount(): Map<MatchedCount, TicketCount> {
         return lottoPrizes
-            .groupBy { it.matchedNumber }
+            .groupBy { it.matchedCount }
             .mapValues { it.value.size }
     }
 }

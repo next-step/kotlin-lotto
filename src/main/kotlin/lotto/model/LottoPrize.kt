@@ -4,7 +4,7 @@ typealias MatchedCount = Int
 typealias Prize = Int
 
 class LottoPrize(
-    val matchedNumber: Int,
+    val matchedCount: Int,
     val prize: Prize
 ) {
     companion object {
@@ -19,10 +19,10 @@ class LottoPrize(
             return prizeMap[matchedCount] ?: 0
         }
 
-        fun create(matchedNumber: Int): LottoPrize {
-            val prize = getPrize(matchedNumber)
+        fun create(matchedCount: Int): LottoPrize {
+            val prize = getPrize(matchedCount)
 
-            return LottoPrize(matchedNumber, prize)
+            return LottoPrize(matchedCount, prize)
         }
     }
 }
