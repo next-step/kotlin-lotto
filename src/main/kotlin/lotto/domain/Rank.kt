@@ -24,4 +24,3 @@ enum class Rank(val matchCount: Int, val winningMoney: Int) {
         }
     }
 }
-
