@@ -5,6 +5,7 @@ import lotto.component.LottoNumbersGenerator
 import lotto.model.LottoInput
 import lotto.model.LottoTicket
 import lotto.model.WinningNumbers
+import lotto.utils.TicketCount
 
 class LottoInputView(
     private val lottoNumbersGenerator: LottoNumbersGenerator = LottoNumbersGenerator()
@@ -14,7 +15,7 @@ class LottoInputView(
         val lottoTicketCount: Int = getLottoTicketCount(purchasePrice)
         val lottoTickets: List<LottoTicket> = getLottoTickets(lottoTicketCount)
 
-        printPurchasedLottoTickets(lottoTickets)
+        printPurchasedLottoTickets(lottoTickets, lottoTicketCount)
 
         val winningNumbers: WinningNumbers = getWinningNumbers()
 
@@ -51,8 +52,8 @@ class LottoInputView(
         return lottoNumbersGenerator.generate(lottoTicketCount)
     }
 
-    private fun printPurchasedLottoTickets(lottoTickets: List<LottoTicket>) {
-        println("로또를 구매했습니다.")
+    private fun printPurchasedLottoTickets(lottoTickets: List<LottoTicket>, lottoTicketCount: TicketCount) {
+        println("${lottoTicketCount}개의 로또를 구매했습니다.")
         lottoTickets.forEach { println(it) }
         println()
     }
