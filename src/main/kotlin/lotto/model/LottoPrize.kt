@@ -1,9 +1,10 @@
 package lotto.model
 
-private typealias MatchedCount = Int
-private typealias Prize = Int
+typealias MatchedCount = Int
+typealias Prize = Int
 
 class LottoPrize(
+    val matchedNumber: Int,
     val prize: Prize
 ) {
     companion object {
@@ -14,10 +15,14 @@ class LottoPrize(
             6 to 2000000000,
         )
 
-        fun create(matchedNumber: Int): LottoPrize {
-            val prize = prizeMap[matchedNumber] ?: 0
+        fun getPrize(matchedCount: MatchedCount): Prize {
+            return prizeMap[matchedCount] ?: 0
+        }
 
-            return LottoPrize(prize)
+        fun create(matchedNumber: Int): LottoPrize {
+            val prize = getPrize(matchedNumber)
+
+            return LottoPrize(matchedNumber, prize)
         }
     }
 }
