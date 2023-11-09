@@ -4,6 +4,8 @@ import lotto.domain.LottoGenerator
 import lotto.domain.LottoRoiCalculator
 import lotto.domain.LottoShop
 import lotto.domain.LottoWinning
+import lotto.dto.JackpotDto
+import lotto.dto.LottoDto
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -17,7 +19,9 @@ fun main() {
 
     val lottoGenerator = LottoGenerator()
     val lottoList = lottoGenerator.getLotto(lottoTryCount)
-    OutputView.printLottoList(lottoList)
+    val lottoDto = lottoList.map { LottoDto(it) }.toList();
+
+    OutputView.printLottoList(lottoDto)
 
     OutputView.printJackpotNumber()
     val inputNumber = InputView.inputJackpotNumber()
@@ -26,10 +30,12 @@ fun main() {
 
     OutputView.printLottoStatistics()
     OutputView.printLine()
-    val findJackpotLotto = lottoWinning.checkLottoWinning(jackpotNumbers, lottoList)
+    val findJackpot = lottoWinning.checkLottoWinning(jackpotNumbers, lottoList)
 
-    val totalIncome = LottoRoiCalculator.getTotalIncome(findJackpotLotto)
+    val totalIncome = LottoRoiCalculator.getTotalIncome(findJackpot)
     val roi = LottoRoiCalculator.calculateROI(totalIncome, money)
-    OutputView.printResult(findJackpotLotto)
+
+    val jackPotDto: List<JackpotDto> = findJackpot.map { JackpotDto(it) }.toList()
+    OutputView.printResult(jackPotDto)
     OutputView.printROI(roi)
 }

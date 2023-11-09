@@ -5,14 +5,6 @@ import lotto.domain.strategyImpl.AutoStrategy
 
 class LottoGenerator(private val drawStrategy: DrawStrategy = AutoStrategy()) {
 
-    private var lottoList: MutableList<Lotto> = mutableListOf()
+    fun getLotto(lottoTryCount: Int): List<Lotto> = List(lottoTryCount) { drawStrategy.draw() }
 
-    fun getLotto(lottoTryCount: Int): List<Lotto> {
-        repeat(lottoTryCount) {
-            val lotto = drawStrategy.draw()
-            lottoList.add(lotto)
-        }
-
-        return lottoList
-    }
 }

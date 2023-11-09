@@ -14,4 +14,6 @@ enum class JackpotLevel(val matchCount: Int, val price: Int) {
             return values().firstOrNull { it.matchCount == matchNumberCount } ?: NO_MATCH
         }
     }
+
+    fun filterMatchingLevel(level:Int) = matchCount >= level
 }
