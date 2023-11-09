@@ -9,7 +9,7 @@ class LottoShopTest : BehaviorSpec({
 
     val lottoShop = LottoShop()
     Given("고객이 3000원의 돈을 가지고 있을 때") {
-        val customer = Customer.of("3000")
+        val customer = Customer.valueOf("3000")
         When("로또를 구매한다면") {
             val lotto = lottoShop.buyLotto(customer.money)
             Then("3개의 라인을 구매한다.") {

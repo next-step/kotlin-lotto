@@ -1,7 +1,5 @@
 package lotto.domain
 
-import java.lang.IllegalArgumentException
-
 class LottoMachine{
 
     fun checkLottoResult(lotto: Lotto, winningNumbers: String): LottoResult {
@@ -14,10 +12,10 @@ class LottoMachine{
     }
 
     private fun getParsedWinningNumbers(numbers: String): List<Int> {
-        val result = numbers.split(", ").mapNotNull { it.toIntOrNull() }
-        if (result.size != 6) {
-            throw IllegalArgumentException("당첨 번호를 ', ' 기준으로 6개의 숫자를 입력하여 주세요.")
+        val parsedNumbers = numbers.split(", ").mapNotNull { it.toIntOrNull() }
+        require(parsedNumbers.size == 6) {
+            "당첨 번호를 ', ' 기준으로 6개의 숫자를 입력하여 주세요."
         }
-        return result
+        return parsedNumbers
     }
 }
