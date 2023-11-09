@@ -13,7 +13,7 @@ class LottoResultCalculatorTest : BehaviorSpec({
         When("당첨 결과 계산기는") {
             val calculator = LottoResultCalculator(winningLotto)
             Then("각 등수 별로 당첨된 개수를 알려준다.") {
-                calculator.calculateResult(listOf(lotto)).shouldContain(Rank.SECOND, 1)
+                calculator.calculateResult(Lottos(listOf(lotto)), Lottos(listOf())).shouldContain(Rank.SECOND, 1)
             }
         }
     }
@@ -26,7 +26,7 @@ class LottoResultCalculatorTest : BehaviorSpec({
         When("당첨 결과 계산기는") {
             val calculator = LottoResultCalculator(winningLotto)
             Then("총 수익률을 계산하여 반환한다.") {
-                calculator.calculateEarningRate(result, 14_000) shouldBe 0.35
+                calculator.calculateEarningRate(result, Amount(14_000)) shouldBe 0.35
             }
         }
     }

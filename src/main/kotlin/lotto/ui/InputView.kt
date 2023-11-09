@@ -1,5 +1,6 @@
 package lotto.ui
 
+import lotto.domain.Amount
 import lotto.domain.Lotto
 import lotto.domain.Lottos
 
@@ -12,9 +13,10 @@ object InputView {
     private const val INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요."
     private const val WINNING_NUMBERS_DELIMITER = ", "
 
-    fun inputAmount(): Int {
+    fun inputAmount(): Amount {
         println(INPUT_AMOUNT_NAME_MESSAGE)
-        return readln().toInt()
+        val amount = readln().toInt()
+        return Amount(amount)
     }
 
     fun inputManualLottoCount(): Int {
