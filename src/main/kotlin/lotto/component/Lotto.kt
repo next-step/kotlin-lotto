@@ -3,14 +3,8 @@ package lotto.component
 import lotto.model.*
 import kotlin.math.round
 
-class Lotto(
-    private val lottoNumbersGenerator: LottoNumbersGenerator
-) {
-
-    fun draw(lottoInput: LottoInput, winningNumbers: WinningNumbers): LottoResult {
-        val lottoTicketCount = lottoInput.lottoTicketCount
-        val lottoTickets = lottoNumbersGenerator.generate(lottoTicketCount)
-
+class Lotto {
+    fun draw(lottoTickets: List<LottoTicket>, winningNumbers: WinningNumbers): LottoResult {
         val lottoPrizes = getLottoPrizes(lottoTickets, winningNumbers)
         val revenueRate = getRevenueRate(lottoTickets, lottoPrizes)
 

@@ -1,6 +1,6 @@
 package lotto.model
 
 data class LottoInput(
-    val lottoTicketCount: Int,
+    val lottoTickets: List<LottoTicket>,
     val winningNumbers: WinningNumbers
 )

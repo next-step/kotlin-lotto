@@ -1,16 +1,24 @@
 package lotto.view
 
 import lotto.component.Lotto
+import lotto.component.LottoNumbersGenerator
 import lotto.model.LottoInput
+import lotto.model.LottoTicket
 import lotto.model.WinningNumbers
 
-class LottoInputView {
+class LottoInputView(
+    private val lottoNumbersGenerator: LottoNumbersGenerator = LottoNumbersGenerator()
+) {
     fun getInput(): LottoInput {
         val purchasePrice: Int = getPurchaseAccount()
         val lottoTicketCount: Int = getLottoTicketCount(purchasePrice)
+        val lottoTickets: List<LottoTicket> = getLottoTickets(lottoTicketCount)
+
+        printPurchasedLottoTickets(lottoTickets)
+
         val winningNumbers: WinningNumbers = getWinningNumbers()
 
-        return LottoInput(lottoTicketCount, winningNumbers)
+        return LottoInput(lottoTickets, winningNumbers)
     }
 
     private fun getInput(message: String): String? {
@@ -37,6 +45,16 @@ class LottoInputView {
         }
 
         return lottoTicketCount
+    }
+
+    private fun getLottoTickets(lottoTicketCount: Int): List<LottoTicket> {
+        return lottoNumbersGenerator.generate(lottoTicketCount)
+    }
+
+    private fun printPurchasedLottoTickets(lottoTickets: List<LottoTicket>) {
+        println("로또를 구매했습니다.")
+        lottoTickets.forEach { println(it) }
+        println()
     }
 
     private fun getWinningNumbers(): WinningNumbers {
