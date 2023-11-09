@@ -1,19 +1,14 @@
 package lottery.domain
 
-data class Lottos(
-    val lottos: List<Lotto>
-) {
-    fun matchLottos(winningLotto: Lotto): List<Rank> {
-        return lottos.map { Rank.of(it.getMatchResult(winningLotto).size) }
-    }
+data class Lottos(val lottos: List<Lotto>) {
 
-    companion object {
-        fun of(quantity: Int, numberGenerator: LottoNumberGenerator): Lottos {
-            return Lottos(
-                List(quantity) {
-                    Lotto(numberGenerator.getNumbers())
-                }
-            )
+    constructor(quantity: Int, numberGenerator: LottoNumberGenerator) : this(
+        List(quantity) {
+            Lotto.of(numberGenerator.getNumbers())
         }
+    )
+
+    fun matchLottos(winningLotto: WinningLotto): List<Rank> {
+        return lottos.map { Rank.of(winningLotto.getMatchResult(it), winningLotto.getBonusMatchResult(it)) }
     }
 }

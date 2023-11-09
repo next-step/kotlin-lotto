@@ -1,35 +1,41 @@
 package lottery.domain
 
 import io.kotest.matchers.shouldBe
-import org.junit.jupiter.api.DisplayName
+import io.kotest.matchers.types.shouldBeInstanceOf
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class LottoTest {
 
     @Test
-    @DisplayName("숫자 6개를 가지는 리스트로 로또 객체를 생성한다")
-    fun lotto_create() {
+    fun `숫자 6개를 가지는 리스트로 로또 객체를 생성한다`() {
         val lottoNumbers = listOf(1, 2, 3, 4, 5, 6)
-        val lotto = Lotto(lottoNumbers)
+        val lotto = Lotto.of(lottoNumbers)
 
-        lotto.lottoNumber shouldBe lottoNumbers
+        lotto.shouldBeInstanceOf<Lotto>()
     }
 
     @Test
-    @DisplayName("로또 객체는 숫자 6개를 가진다")
-    fun lotto_count_six() {
+    fun `로또 객체는 숫자 6개를 가진다`() {
         val lottoNumbers = listOf(1, 2, 3, 4, 5, 6)
-        val lotto = Lotto(lottoNumbers)
+        val lotto = Lotto.of(lottoNumbers)
 
         lotto.lottoNumber.size shouldBe 6
     }
 
     @Test
-    @DisplayName("로또 객체는 당첨 번호 정보를 가지는 로또 객체를 받아 매칭 결과를 반환한다")
-    fun getMatchResult() {
-        val lottoNumbers = listOf(1, 2, 3, 4, 5, 6)
-        val lotto = Lotto(lottoNumbers)
+    fun `로또 객체는 음수를 로또 번호로 가질 수 없다`() {
+        val lottoNumbers = listOf(-1, 2, 3, 4, 5, 6)
+        assertThrows<IllegalArgumentException> {
+            Lotto.of(lottoNumbers)
+        }
+    }
 
-        lotto.getMatchResult(lotto.copy()) shouldBe lottoNumbers
+    @Test
+    fun `로또 객체는 45 이상의 수를 로또 번호로 가질 수 없다`() {
+        val lottoNumbers = listOf(1, 2, 3, 4, 5, 46)
+        assertThrows<IllegalArgumentException> {
+            Lotto.of(lottoNumbers)
+        }
     }
 }
