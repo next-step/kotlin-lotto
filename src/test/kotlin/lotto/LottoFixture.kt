@@ -1,7 +1,7 @@
 package lotto
 
 import lotto.model.Game
-import lotto.model.LottoNumber
+import lotto.model.LottoNumbers
 import lotto.model.Round
 import lotto.model.WinningNumbers
 
@@ -26,18 +26,10 @@ object LottoFixture {
     }
 
     fun gameOf(vararg values: Int): Game {
-        return Game(
-            values
-                .map { LottoNumber(it) }
-                .toSet()
-        )
+        return Game(LottoNumbers(values))
     }
 
     private fun winningNumbersOf(vararg values: Int): WinningNumbers {
-        return WinningNumbers(
-            LinkedHashSet(
-                values.map { LottoNumber(it) }
-            )
-        )
+        return WinningNumbers(LottoNumbers(values))
     }
 }

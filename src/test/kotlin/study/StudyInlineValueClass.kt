@@ -9,7 +9,7 @@ class StudyInlineValueClass : StringSpec({
 
         val password = Password("i am password")
         println("인라인 클래스는 이렇게 보임 [$password]")
-        println("런타임에 실제로 실체화(instantiation)가 일어나지 않음")// No actual instantiation of class 'Password' happens
+        println("런타임에 실제로 실체화(instantiation)가 일어나지 않음") // No actual instantiation of class 'Password' happens
         println("런타임에는 그냥 String 임") // At runtime 'securePassword' contains just 'String'
         """
         그래서 이름이 "인라인" 인게 코드에서만 클래스처럼 동작하고, 실제로는 기본타입임
@@ -39,10 +39,10 @@ class StudyInlineValueClass : StringSpec({
             그러나 때로는 래퍼를 보관해야 하는 경우도 있습니다. 경험상 인라인 클래스는 다른 유형으로 사용될 때마다 boxing됩니다.
         """.trimIndent()
         val f = Fan(42)
-        asInline(f)    // unboxed: used as Foo itself
-        asGeneric(f)   // boxed: used as generic type T
+        asInline(f) // unboxed: used as Foo itself
+        asGeneric(f) // boxed: used as generic type T
         asInterface(f) // boxed: used as type I
-        asNullable(f)  // boxed: used as Foo?, which is different from Foo
+        asNullable(f) // boxed: used as Foo?, which is different from Foo
     }
 
     "참조 동일성" {
@@ -62,10 +62,8 @@ class StudyInlineValueClass : StringSpec({
     }
 })
 
-
 @JvmInline
 value class Password(private val value: String)
-
 
 @JvmInline
 value class Person(private val fullName: String) {
@@ -85,9 +83,6 @@ value class Person(private val fullName: String) {
     }
 }
 
-
-
-
 interface Printable {
     fun prettyPrint(): String
 }
@@ -97,9 +92,8 @@ value class Name(val s: String) : Printable {
     override fun prettyPrint(): String = "Let's $s!"
 }
 
-
 interface Gear {
-    fun action() : String
+    fun action(): String
 }
 
 @JvmInline
@@ -115,11 +109,8 @@ fun asInterface(gear: Gear) {}
 fun asNullable(fan: Fan) {}
 fun <T> id(x: T): T = x
 
-
-//----
-
+// ----
 
 @JvmInline
 value class UserId<T>(val value: T)
 fun compute(s: UserId<String>) {} // compiler generates fun compute-<hashcode>(s: Any?)
-

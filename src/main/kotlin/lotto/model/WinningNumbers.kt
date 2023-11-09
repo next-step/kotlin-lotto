@@ -1,23 +1,17 @@
 package lotto.model
 
 data class WinningNumbers(
-    val lottoNumbers: LinkedHashSet<LottoNumber>,
+    val lottoNumbers: LottoNumbers,
 ) {
-    init {
-        require(lottoNumbers.size == 6) { "6개의 숫자가 필요 합니다" }
-        lottoNumbers.sortedWith(compareBy { it.value })
-    }
 
     fun countOfMatch(game: Game): Int {
-        val linkedHashSet = LinkedHashSet(lottoNumbers)
-        linkedHashSet.addAll(game.lottoNumbers)
-        return 12 - linkedHashSet.size
+        return lottoNumbers.countOfMatchNumbers(game.lottoNumbers)
     }
 
     constructor(input: String) : this(
-        LinkedHashSet(
+        LottoNumbers(
             input.split(",")
-                .map { LottoNumber(it.toInt()) }
+                .map { it.toInt() }
         )
     )
 }
