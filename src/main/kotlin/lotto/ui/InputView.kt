@@ -18,11 +18,13 @@ object InputView {
     }
 
     fun inputManualLottoCount(): Int {
+        println()
         println(INPUT_MANUAL_LOTTO_COUNT_MESSAGE)
         return readln().toInt()
     }
 
     fun inputManualLottoNumber(count: Int): Lottos {
+        println()
         println(INPUT_MANUAL_LOTTO_NUMBER_MESSAGE)
         val lottos = List(count) {}
             .map {

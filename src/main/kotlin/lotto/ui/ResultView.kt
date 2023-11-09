@@ -10,6 +10,7 @@ object ResultView {
     private const val LOTTO_NUMBERS_POSTFIX = "]"
 
     fun printLottos(manualLottos: Lottos, autoLottos: Lottos) {
+        println()
         println("수동으로 ${manualLottos.count()}장, 자동으로 ${autoLottos.count()}개를 구매했습니다.")
         for (lotto in manualLottos.lottos + autoLottos.lottos) {
             val lottoNumbers = lotto.numbers.sortedBy { it.value }
