@@ -32,14 +32,14 @@ data class LottoWinners(
         private const val PRIZE_3RD: Int = 1500000
         private const val PRIZE_4th: Int = 50000
         private const val PRIZE_5th: Int = 5000
-        const val BENEFIT_LOSS_CROSS_POINT: Double = 1.toDouble()
+        const val BENEFIT_LOSS_CROSS_POINT: Double = 1.00
         const val BENEFIT_MESSAGE: String = "이익"
         const val LOSS_MESSAGE: String = "손해"
     }
 }
 
 fun Double.incomeStatement(): String {
-    return when (this > BENEFIT_LOSS_CROSS_POINT) {
+    return when (this >= BENEFIT_LOSS_CROSS_POINT) {
         true -> BENEFIT_MESSAGE
         false -> LOSS_MESSAGE
     }

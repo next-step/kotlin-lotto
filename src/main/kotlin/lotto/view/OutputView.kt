@@ -7,7 +7,6 @@ import lotto.model.incomeStatement
 
 object OutputView {
     fun presetRound(round: Round) {
-
         round.games
             .forEach { println(it) }
     }

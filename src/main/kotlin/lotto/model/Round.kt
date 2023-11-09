@@ -1,7 +1,7 @@
 package lotto.model
 
 data class Round(
-    val games: ArrayDeque<Game>,
+    val games: List<Game> = emptyList(),
 ) {
     fun winnerAggregate(winningNumbers: WinningNumbers): LottoWinners {
         val map = games.map { winningNumbers.countOfMatch(it) }
