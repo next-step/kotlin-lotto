@@ -1,9 +1,11 @@
 package lotto
 
 import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 import lotto.domain.LottoResultCalculator
 import lotto.domain.LottoVendingMachine
 import lotto.domain.RandomLottoGenerator
+import lotto.domain.WinningLotto
 import lotto.ui.InputView
 import lotto.ui.ResultView
 
@@ -14,7 +16,7 @@ fun main() {
 
     val inputWinningNumbers = InputView.inputWinningNumbers()
     val bonusNumber = InputView.inputBonusNumber()
-    val resultCalculator = LottoResultCalculator(Lotto(inputWinningNumbers), bonusNumber)
+    val resultCalculator = LottoResultCalculator(WinningLotto(Lotto(inputWinningNumbers), LottoNumber.from(bonusNumber)))
     val result = resultCalculator.calculateResult(lottos)
 
     ResultView.printResult(result)

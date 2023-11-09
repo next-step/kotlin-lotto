@@ -15,4 +15,15 @@ class WinningLottoTest : BehaviorSpec({
             }
         }
     }
+
+    Given("다른 로또를 입력받으면") {
+        val winningLotto = WinningLotto(Lotto(1, 2, 3, 4, 5, 6), LottoNumber.from(7))
+        val other = Lotto(1, 2, 3, 7, 8, 9)
+        When("당첨 번호는") {
+            val matchCount = winningLotto.matchCount(other)
+            Then("보너스 넘버를 제외하고 겹치는 로또 번호가 몇 개인지 반환한다.") {
+                matchCount shouldBe 3
+            }
+        }
+    }
 })

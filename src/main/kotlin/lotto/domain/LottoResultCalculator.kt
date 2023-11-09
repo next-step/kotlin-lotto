@@ -2,13 +2,13 @@ package lotto.domain
 
 import kotlin.math.floor
 
-class LottoResultCalculator(private val winningNumbers: Lotto, private val bonusNumber: Int) {
+class LottoResultCalculator(private val winningLotto: WinningLotto) {
 
     fun calculateResult(lottos: List<Lotto>): Map<Rank, Int> {
         val result = mutableMapOf<Rank, Int>()
         for (lotto in lottos) {
-            val matchCount = winningNumbers.matchCount(lotto)
-            val matchBonus = lotto.contains(bonusNumber)
+            val matchCount = winningLotto.matchCount(lotto)
+            val matchBonus = lotto.contains(winningLotto.bonusNumber)
             val rank = Rank.from(matchCount, matchBonus)
             val lottoCount = result.getOrDefault(rank, 0)
             result.putIfAbsent(rank, lottoCount + 1)

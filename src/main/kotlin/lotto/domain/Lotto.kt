@@ -9,13 +9,8 @@ data class Lotto(val numbers: Set<LottoNumber>) {
     constructor(vararg numbers: Int) : this(numbers.map { LottoNumber.from(it) }.toSet())
     constructor(numbers: List<Int>) : this(numbers.map { LottoNumber.from(it) }.toSet())
 
-    fun contains(number: Int): Boolean {
-        return LottoNumber.from(number) in numbers
-    }
-
-    fun matchCount(other: Lotto): Int {
-        val otherNumbers = other.numbers
-        return numbers.intersect(otherNumbers).count()
+    fun contains(number: LottoNumber): Boolean {
+        return number in numbers
     }
 
     companion object {
