@@ -2,9 +2,9 @@ package lotto.view
 
 import lotto.model.LottoPrize
 import lotto.model.LottoResult
-import lotto.model.MatchedCount
-import lotto.model.Prize
-import lotto.model.TicketCount
+import lotto.utils.MatchedCount
+import lotto.utils.Prize
+import lotto.utils.TicketCount
 
 class LottoResultView {
     fun printLottoResult(lottoResult: LottoResult) {

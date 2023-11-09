@@ -1,6 +1,7 @@
 package lotto.model
 
-typealias TicketCount = Int
+import lotto.utils.MatchedCount
+import lotto.utils.TicketCount
 
 class LottoResult(
     val lottoPrizes: List<LottoPrize>,
