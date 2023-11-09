@@ -7,7 +7,7 @@ class LottoIssuer(
 
     fun issue(purchaseAmount: Amount): LottoTicket {
         val issueCount = runCatching {
-            purchaseAmount.exchange(ticketAmount).size
+            purchaseAmount.divide(ticketAmount)
         }.onFailure {
             throw IllegalArgumentException("로또 구입 금액은 로또 한 장의 가격의 배수여야 합니다.")
         }.getOrThrow()

@@ -7,11 +7,10 @@ value class Amount(val value: Int) {
         require(value >= MIN_VALUE) { "음수는 사용할 수 없습니다." }
     }
 
-    fun exchange(amount: Amount): List<Amount> {
+    fun divide(amount: Amount): Int {
         require(value % amount.value == 0) { "분배할 수 없는 금액입니다." }
 
-        val splitCount = value / amount.value
-        return List(splitCount) { amount }
+        return value / amount.value
     }
 
     companion object {
@@ -22,5 +21,3 @@ value class Amount(val value: Int) {
 operator fun Amount.plus(other: Amount) = Amount(this.value + other.value)
 
 operator fun Amount.minus(other: Amount) = Amount(this.value - other.value)
-
-operator fun Amount.rem(other: Amount) = this.value % other.value
