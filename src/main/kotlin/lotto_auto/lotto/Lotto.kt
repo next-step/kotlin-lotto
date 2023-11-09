@@ -9,18 +9,18 @@ data class Lotto(
      * ex) 1,2,3,4,5,6 중 1,2,3만 맞았다면 [1,2,3].count()
      */
     fun lottoMatchCount(lastWeekLottoNumber: WinningLotto): LottoPrize {
-        val matchCount =  lastWeekLottoNumber.winningNumbers.lottoNumbers.mapNotNull { number ->
+        val matchCount =  lastWeekLottoNumber.winningNumbers.mapNotNull { number ->
             if (myLottoNumberContainsNumberOrNull(number)) number else null
         }.count()
-        val bonusMatched = numberList.lottoNumbers.contains(lastWeekLottoNumber.bonusNumber)
+        val bonusMatched = numberList.contains(lastWeekLottoNumber.bonusNumber)
         return LottoPrize.getLottoPrize(matchCount, bonusMatched)
     }
 
     private fun myLottoNumberContainsNumberOrNull(number: Int): Boolean {
-        return numberList.lottoNumbers.contains(number)
+        return numberList.contains(number)
     }
 
-    fun isMatchedBonusBall(bonusNumber: Int): Boolean = numberList.lottoNumbers.contains(bonusNumber)
+    fun isMatchedBonusBall(bonusNumber: Int): Boolean = numberList.contains(bonusNumber)
 
     companion object {
         private const val NUMBER_LIST_COUNT = 6
@@ -33,5 +33,3 @@ data class Lotto(
             .toLottoNumbers()
     }
 }
-
-fun List<Int>.toLotto() = Lotto(numberList = this.toLottoNumbers())

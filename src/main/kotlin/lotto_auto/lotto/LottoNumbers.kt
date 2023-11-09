@@ -2,10 +2,10 @@ package lotto_auto.lotto
 
 data class LottoNumbers(
     val lottoNumbers: List<Int>
-) {
+): List<Int> by lottoNumbers {
     init {
-        require(lottoNumbers.toSet().count() == NUMBER_LIST_COUNT) { COUNT_IS_WRONG }
-        require(lottoNumbers.count { it < MIN_NUMBER || it > MAX_NUMBER } < NUMBER_COUNT_NOT_IN_RAGE) { NUMBER_NOT_IN_RANGE }
+        require(toSet().count() == NUMBER_LIST_COUNT) { COUNT_IS_WRONG }
+        require(count { it < MIN_NUMBER || it > MAX_NUMBER } < NUMBER_COUNT_NOT_IN_RAGE) { NUMBER_NOT_IN_RANGE }
     }
 
     companion object {
