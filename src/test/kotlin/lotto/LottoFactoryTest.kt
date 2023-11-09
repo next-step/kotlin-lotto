@@ -16,4 +16,9 @@ class LottoFactoryTest : FunSpec({
         val lotto = generateLottoList().first()
         lotto.numbers.forAll { it shouldBeInRange (1..45) }
     }
+
+    test("로또 생성기는 숫자 N을 입력받아 N개의 로또를 생성한다.") {
+        val lottoList = generateLottoList(10)
+        lottoList.size shouldBe 10
+    }
 })
