@@ -15,7 +15,7 @@ class LottoResult(
             .filter { (matchedCount, _) -> matchedCount in validMatchedCounts }
         val target = validMatchedCounts.associateWith { 0 }
 
-        return TreeMap<MatchedCount, TicketCount>(source + target)
+        return TreeMap<MatchedCount, TicketCount>(target + source)
     }
 
     companion object {
