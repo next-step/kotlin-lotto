@@ -4,20 +4,20 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-class LottoPurchaseManagerTest {
+class LottoShopTest {
 
-    private val lottoPurchaseManager = LottoPurchaseManager()
+    private val lottoShop = LottoShop()
 
     @Test
     fun `입력한 금액에 따라 로또 개수가 출력 된다`() {
-        val lottoCount = lottoPurchaseManager.getLottoCount(MONEY)
+        val lottoCount = lottoShop.getLottoCount(MONEY)
         assertEquals(LOTTO_COUNT, lottoCount)
     }
 
     @Test
     fun `로또는 최소 1개는 사야 한다`() {
         assertThrows<IllegalArgumentException> {
-            lottoPurchaseManager.getLottoCount(100)
+            lottoShop.getLottoCount(100)
         }
     }
 

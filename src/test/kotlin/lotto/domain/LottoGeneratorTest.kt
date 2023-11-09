@@ -3,13 +3,13 @@ package lotto.domain
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class LottoNumberProviderTest {
+class LottoGeneratorTest {
 
-    private val lottoNumberProvider = LottoNumberProvider()
+    private val lottoGenerator = LottoGenerator()
 
     @Test
     fun `lottoTryCount 만큼 Lotto 가 만들어 진다`() {
-        val lottoList = lottoNumberProvider.getLotto(LOTTO_TRY_COUNT)
+        val lottoList = lottoGenerator.getLotto(LOTTO_TRY_COUNT)
         assertEquals(4, lottoList.size)
     }
 

@@ -3,7 +3,7 @@ package lotto.domain
 import lotto.domain.strategy.DrawStrategy
 import lotto.domain.strategyImpl.AutoStrategy
 
-class LottoNumberProvider(private val drawStrategy: DrawStrategy = AutoStrategy()) {
+class LottoGenerator(private val drawStrategy: DrawStrategy = AutoStrategy()) {
 
     private var lottoList: MutableList<Lotto> = mutableListOf()
 

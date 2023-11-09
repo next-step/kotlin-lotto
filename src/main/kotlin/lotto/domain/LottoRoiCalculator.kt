@@ -1,6 +1,6 @@
 package lotto.domain
 
-object LottoRoiManager {
+object LottoRoiCalculator {
 
     fun calculateROI(totalIncome: Number, investMoney: Int): Double {
         return (totalIncome.toDouble() / investMoney)

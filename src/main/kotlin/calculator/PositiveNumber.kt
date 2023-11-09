@@ -1,11 +1,13 @@
 package calculator
 
-object PositiveNumber {
+data class PositiveNumbers(val numbers: List<Int>) {
 
-    private const val NEGATIVE_MESSAGE = "음수 입력되었습니다!!!!"
-
-    fun checkNegativeNumbers(numbers: List<Int>) {
+    fun checkNegativeNumbers() {
         val negativeNumbers = numbers.filter { it < 0 }
-        if (negativeNumbers.isNotEmpty()) throw RuntimeException(NEGATIVE_MESSAGE)
+        require(negativeNumbers.isEmpty()) { throw RuntimeException(NEGATIVE_MESSAGE) }
+    }
+
+    companion object {
+        private const val NEGATIVE_MESSAGE = "음수 입력되었습니다!!!!"
     }
 }
