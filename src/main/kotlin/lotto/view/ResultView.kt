@@ -30,7 +30,6 @@ object ResultView {
     }
 
     private fun showBonusMatchStatistics(matchResult: LottoMatchResult) {
-        // bonusMatchCount는 이미 직접 접근 가능하므로 별도의 메서드 호출이 필요하지 않음
         if (matchResult.bonusMatchCount > 0) {
             val bonusReward = Rank.SECOND.winningMoney
             println("5개 일치, 보너스 볼 일치(${bonusReward}원) - ${matchResult.bonusMatchCount}개")

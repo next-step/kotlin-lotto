@@ -31,6 +31,3 @@ tasks {
         verbose.set(true)
     }
 }
-kotlin {
-    jvmToolchain(17)
-}
