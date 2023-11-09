@@ -23,5 +23,7 @@ fun main() {
     val matchCountList =
         LottoAuto.matchCountList(matchedLottoCountWithBonusBall.map { LottoPrize.getLottoPrize(it.first.matchCount, it.second) })
 
-    OutputView.showResult(matchCountList, resultRate)
+    val fillDefaultCountMap = LottoPrize.values().associateWith { matchCountList.getOrDefault(it, 0) }
+
+    OutputView.showResult(fillDefaultCountMap, resultRate)
 }
