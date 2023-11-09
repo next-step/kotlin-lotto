@@ -1,8 +1,8 @@
 package lotto.domain
 
 class LottoVendingMachine(val lottoGenerator: LottoGenerator) {
-    fun generate(amount: Amount, manualLottoCount: Int): Lottos {
-        val remainingCount = amount.purchasableCount() - manualLottoCount
+    fun generate(amount: Amount, manualLottoCount: Count): Lottos {
+        val remainingCount = amount.purchasableCount() - manualLottoCount.count
         val lottos = List(remainingCount) { lottoGenerator.generate() }
         return Lottos(lottos)
     }

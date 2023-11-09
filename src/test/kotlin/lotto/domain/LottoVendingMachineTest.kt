@@ -8,7 +8,7 @@ class LottoVendingMachineTest : BehaviorSpec({
 
     Given("구입 금액과 수동으로 구매한 로또 수를 넣으면") {
         val amount = Amount(14000)
-        val manualLottoCount = 3
+        val manualLottoCount = Count(3)
         When("로또 자판기는") {
             val lottoVendingMachine = LottoVendingMachine(object : LottoGenerator {
                 override fun generate(): Lotto {

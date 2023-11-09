@@ -1,6 +1,7 @@
 package lotto.ui
 
 import lotto.domain.Amount
+import lotto.domain.Count
 import lotto.domain.Lotto
 import lotto.domain.Lottos
 
@@ -19,16 +20,17 @@ object InputView {
         return Amount(amount)
     }
 
-    fun inputManualLottoCount(): Int {
+    fun inputManualLottoCount(): Count {
         println()
         println(INPUT_MANUAL_LOTTO_COUNT_MESSAGE)
-        return readln().toInt()
+        val count = readln().toInt()
+        return Count(count)
     }
 
-    fun inputManualLottoNumber(count: Int): Lottos {
+    fun inputManualLottoNumber(count: Count): Lottos {
         println()
         println(INPUT_MANUAL_LOTTO_NUMBER_MESSAGE)
-        val lottos = List(count) {}
+        val lottos = List(count.count) {}
             .map {
                 Lotto(readln()
                     .split(WINNING_NUMBERS_DELIMITER)
