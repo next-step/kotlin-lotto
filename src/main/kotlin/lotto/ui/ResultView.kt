@@ -1,6 +1,6 @@
 package lotto.ui
 
-import lotto.domain.Lotto
+import lotto.domain.Lottos
 import lotto.domain.Rank
 
 object ResultView {
@@ -9,9 +9,9 @@ object ResultView {
     private const val LOTTO_NUMBERS_PREFIX = "["
     private const val LOTTO_NUMBERS_POSTFIX = "]"
 
-    fun printLottos(lottos: List<Lotto>) {
-        println("${lottos.size}개를 구매했습니다.")
-        for (lotto in lottos) {
+    fun printLottos(manualLottos: Lottos, autoLottos: Lottos) {
+        println("수동으로 ${manualLottos.count()}장, 자동으로 ${autoLottos.count()}개를 구매했습니다.")
+        for (lotto in manualLottos.lottos + autoLottos.lottos) {
             val lottoNumbers = lotto.numbers.sortedBy { it.value }
             println(lottoNumbers.map { it.value }.joinToString(LOTTO_NUMBERS_DELIMITER, LOTTO_NUMBERS_PREFIX, LOTTO_NUMBERS_POSTFIX))
         }

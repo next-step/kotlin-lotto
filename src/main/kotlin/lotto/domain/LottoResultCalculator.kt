@@ -4,9 +4,9 @@ import kotlin.math.floor
 
 class LottoResultCalculator(private val winningLotto: WinningLotto) {
 
-    fun calculateResult(lottos: List<Lotto>): Map<Rank, Int> {
+    fun calculateResult(manualLottos: Lottos, autoLottos: Lottos): Map<Rank, Int> {
         val result = mutableMapOf<Rank, Int>()
-        for (lotto in lottos) {
+        for (lotto in manualLottos.lottos + autoLottos.lottos) {
             val matchCount = winningLotto.matchCount(lotto)
             val matchBonus = lotto.contains(winningLotto.bonusNumber)
             val rank = Rank.from(matchCount, matchBonus)

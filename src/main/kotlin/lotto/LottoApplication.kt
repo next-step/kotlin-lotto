@@ -12,14 +12,14 @@ fun main() {
     val manualLottoCount = InputView.inputManualLottoCount()
     val manualLottos = InputView.inputManualLottoNumber(manualLottoCount)
 
-    val lottos = LottoVendingMachine(RandomLottoGenerator()).generate(amount, manualLottoCount)
-    ResultView.printLottos(lottos)
+    val autoLottos = LottoVendingMachine(RandomLottoGenerator()).generate(amount, manualLottoCount)
+    ResultView.printLottos(manualLottos, autoLottos)
 
     val inputWinningNumbers = InputView.inputWinningNumbers()
     val bonusNumber = InputView.inputBonusNumber()
     val winningLotto = WinningLotto(inputWinningNumbers, bonusNumber)
     val resultCalculator = LottoResultCalculator(winningLotto)
-    val result = resultCalculator.calculateResult(lottos)
+    val result = resultCalculator.calculateResult(manualLottos, autoLottos)
 
     ResultView.printResult(result)
     val earningRate = resultCalculator.calculateEarningRate(result, amount)

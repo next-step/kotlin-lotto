@@ -17,8 +17,8 @@ class LottoVendingMachineTest : BehaviorSpec({
             })
             val lottos = lottoVendingMachine.generate(input, manualLottoCount)
             Then("수동으로 구매한 후 남은 금액으로 자동 로또를 발급한다.") {
-                lottos.count() shouldBe 11
-                lottos.shouldContain(Lotto(1, 2, 3, 4, 5, 6))
+                lottos.lottos.count() shouldBe 11
+                lottos.lottos.shouldContain(Lotto(1, 2, 3, 4, 5, 6))
             }
         }
     }
