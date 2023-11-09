@@ -21,15 +21,15 @@ class CalculatorTest {
     @Test
     fun `문자를 커스텀 구분자로`() {
         val text = "//;\n1;2;3"
-        val (delimiter, value) = Calculator().getDelimiterAndValue(text)
-        Calculator().sum(value, delimiter).let { result ->
-            assertThat(result).isEqualTo(6)
+        val result = Calculator().getDestructured(text)?.let {
+            Calculator().sum(it.component2(), it.component1())
         }
+        assertThat(result).isEqualTo(6)
     }
 
     @ValueSource(strings = ["//;\n1;2;-3", "1,2,a"])
     @ParameterizedTest
     fun `문자열 계산기에 숫자 이외의 값 또는 음수를 전달`(value: String) {
-        assertThrows(RuntimeException::class.java) { Calculator().excute(value) }
+        assertThrows(RuntimeException::class.java) { Calculator().execute(value) }
     }
 }
