@@ -8,7 +8,7 @@ data class LottoNumbers(
     }
 
     constructor(values: List<Int>) : this(LinkedHashSet(values.map { LottoNumber(it) }.sortedBy { it.value }))
-    constructor(values: IntArray) : this(values.toList())
+    constructor(vararg values: Int) : this(values.toList())
 
     override fun toString(): String {
         return values.map { it.value }

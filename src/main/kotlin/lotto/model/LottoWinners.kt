@@ -17,14 +17,9 @@ data class LottoWinners(
     }
 
     private fun earnAmount(): Int {
-        TODO()
-//        return winningCountBy
-//            .values
-//            .sum()
-//        (PRIZE_1ST * countOf1st) +
-//            (PRIZE_3RD * countOf3rd) +
-//            (PRIZE_4th * countOf4th) +
-//            (PRIZE_5th * countOf5th)
+        return winningCountBy
+            .keys
+            .sumOf { it.totalPrizeOf(winningCountBy.getOrDefault(it, 0)) }
     }
 
     companion object {
