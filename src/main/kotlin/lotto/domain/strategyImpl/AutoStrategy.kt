@@ -5,8 +5,10 @@ import lotto.domain.strategy.DrawStrategy
 
 class AutoStrategy : DrawStrategy {
 
+    private val lottoNumberRange: IntRange = (LOTTO_FIRST_NUMBER..LOTTO_LAST_NUMBER)
+
     override fun draw(): Lotto {
-        val lottoNumbers = (LOTTO_FIRST_NUMBER..LOTTO_LAST_NUMBER).toList().shuffled()
+        val lottoNumbers = lottoNumberRange.toList().shuffled()
         return Lotto(lottoNumbers.take(LOTTO_NUMBER_COUNT).sorted())
     }
 
