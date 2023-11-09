@@ -12,21 +12,19 @@ enum class LottoPrize(val matchCount: Int, val winningAmount: Int) {
         fun getLottoPrize(matchCount: Int, matchBonus: Boolean): LottoPrize {
             return values().find { lottoPrize ->
                 lottoPrize.matchCount == matchCount
-            }?.let {
-                valueOfLottoPrize(it, matchBonus)
+            }?.let { lottoPrize ->
+                valueOfLottoPrize(lottoPrize, matchBonus)
             } ?: MISS
         }
 
-        private fun valueOfLottoPrize(it: LottoPrize, matchBonus: Boolean): LottoPrize {
-            return if (it.matchCount == 5) {
+        private fun valueOfLottoPrize(lottoPrize: LottoPrize, matchBonus: Boolean): LottoPrize =
+            if (lottoPrize.matchCount == 5) {
                 findPrizeWithMatchBonus(matchBonus)
             } else {
-                it
+                lottoPrize
             }
-        }
 
-        private fun findPrizeWithMatchBonus(matchBonus: Boolean): LottoPrize {
-            return if (matchBonus) SECOND_PRIZE else THIRD_PRIZE
-        }
+        private fun findPrizeWithMatchBonus(matchBonus: Boolean): LottoPrize =
+            if (matchBonus) SECOND_PRIZE else THIRD_PRIZE
     }
 }
