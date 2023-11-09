@@ -4,7 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
-import io.kotest.matchers.shouldBe
+import io.kotest.matchers.types.shouldBeSameInstanceAs
 
 class LottoNumberTest : BehaviorSpec({
 
@@ -13,7 +13,7 @@ class LottoNumberTest : BehaviorSpec({
         When("로또 번호는") {
             val lottoNumber = LottoNumber.from(value)
             Then("그 수를 가지는 로또번호가 생성된다.") {
-                lottoNumber.value shouldBe value
+                lottoNumber shouldBeSameInstanceAs LottoNumber.from(value)
             }
         }
     }
