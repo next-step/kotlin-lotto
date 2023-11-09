@@ -1,6 +1,7 @@
 package lotto.component
 
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.doubles.shouldBeGreaterThan
 import io.kotest.matchers.shouldBe
 import lotto.model.*
 
@@ -15,5 +16,6 @@ class LottoTest : FunSpec({
         val result: LottoResult = lotto.draw(lottoTickets, winningNumbers)
 
         result.lottoPrizes.size shouldBe 1
+        result.revenueRate shouldBeGreaterThan -0.0
     }
 })
