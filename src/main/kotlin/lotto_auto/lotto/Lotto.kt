@@ -8,10 +8,10 @@ data class Lotto(
      * 각각 구매한 로또 마다 당첨된 번호만 남겨 맞은 개수를 판별 합니다.
      * ex) 1,2,3,4,5,6 중 1,2,3만 맞았다면 [1,2,3].count()
      */
-    fun lottoMatchCount(lastWeekLottoNumber: WinningLotto): LottoPrize {
-        val matchCount =  lastWeekLottoNumber.winningNumbers.mapNotNull { number ->
-            if (myLottoNumberContainsNumberOrNull(number)) number else null
-        }.count()
+    fun lottoPrize(lastWeekLottoNumber: WinningLotto): LottoPrize {
+        val matchCount = lastWeekLottoNumber.winningNumbers
+            .mapNotNull { number -> if (myLottoNumberContainsNumberOrNull(number)) number else null }
+            .count()
         val bonusMatched = numberList.contains(lastWeekLottoNumber.bonusNumber)
         return LottoPrize.getLottoPrize(matchCount, bonusMatched)
     }

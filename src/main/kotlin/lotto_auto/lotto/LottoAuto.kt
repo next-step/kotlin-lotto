@@ -6,7 +6,7 @@ object LottoAuto {
         lastWeekLottoNumber: WinningLotto,
     ): List<Pair<LottoPrize, Boolean>> {
         return lottoList
-            .map { it.lottoMatchCount(lastWeekLottoNumber) to it.isMatchedBonusBall(lastWeekLottoNumber.bonusNumber) }
+            .map { it.lottoPrize(lastWeekLottoNumber) to it.isMatchedBonusBall(lastWeekLottoNumber.bonusNumber) }
     }
 
     /**
