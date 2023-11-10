@@ -35,12 +35,28 @@ class LottoTest : StringSpec(
             // given
             val lotto = Lotto.from(listOf(1, 2, 3, 4, 5, 6))
             val otherLotto = Lotto.from(listOf(2, 5, 6, 7, 8, 10))
+            val bonusBall = LottoNumber(11)
 
             // when
-            val count = lotto.calculateMatchCount(otherLotto)
+            val count = lotto.calculateMatchCount(otherLotto, bonusBall)
 
             // then
             count shouldBe 3
+        }
+
+        "두 로또 번호 사이의 중복된 개수를 구할 때 보너스 볼이 존재하면 1 추가한 값을 반환한다." {
+            listOf(1, 2, 3, 4, 5, 6).forEach { number ->
+                // given
+                val lotto = Lotto.from(listOf(1, 2, 3, 4, 5, 6))
+                val otherLotto = Lotto.from(listOf(2, 5, 6, 7, 8, 10))
+                val bonusBall = LottoNumber(number)
+
+                // when
+                val count = lotto.calculateMatchCount(otherLotto, bonusBall)
+
+                // then
+                count shouldBe 4
+            }
         }
 
         "보너스 볼을 가지고 있으면 true, 아니면 false를 반환한다." {

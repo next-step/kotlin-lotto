@@ -38,10 +38,10 @@ class LottoMachine private constructor(
 
     private fun getMatchCountByRank(winningLotto: Lotto, bonusBall: LottoNumber): Map<LottoRank, Int> =
         lottos.map {
-            val matchCount = it.calculateMatchCount(winningLotto)
+            val matchCount = it.calculateMatchCount(winningLotto, bonusBall)
             val hasBonusBall = it.hasBonusBall(bonusBall)
-            matchCount to hasBonusBall
-        }.groupingBy { LottoRank.from(it.first, it.second) }
+            LottoRank.from(matchCount, hasBonusBall)
+        }.groupingBy { it }
             .fold(INIT_MATCH_COUNT) { count, _ -> count + 1 }
 
     companion object {
