@@ -8,9 +8,8 @@ object LottoApp {
 
     fun transaction(gameCount: Int): Round {
         return Round(
-            ArrayDeque(
-                (1..gameCount).map { Game.autoTicket() }
-            )
+            (1..gameCount)
+                .map { Game.autoTicket() }
         )
     }
 

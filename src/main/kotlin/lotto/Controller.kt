@@ -11,6 +11,6 @@ fun main() {
     val round = LottoApp.transaction(amount)
     OutputView.presetRound(round)
     val winningNumbers: WinningNumbers = InputView.drawing()
-    val s: LottoWinners = round.winnerAggregate(winningNumbers)
-    OutputView.presentPrizes(s)
+    val lottoWinners: LottoWinners = round.winnerAggregate(winningNumbers)
+    OutputView.presentPrizes(lottoWinners)
 }

@@ -1,6 +1,7 @@
 package lotto.model
 
-data class LottoNumber(
+@JvmInline
+value class LottoNumber(
     val value: Int,
 ) {
     init {
