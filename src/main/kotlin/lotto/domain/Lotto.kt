@@ -13,6 +13,12 @@ data class Lotto(val numbers: Set<LottoNumber>) {
         return number in numbers
     }
 
+    fun calculateMatchCount(other: Lotto): Int {
+        return numbers
+            .intersect(other.numbers)
+            .count()
+    }
+
     companion object {
         const val LOTTO_COUNT = 6
     }

@@ -52,4 +52,14 @@ class LottoTest : BehaviorSpec({
             }
         }
     }
+
+    Given("다른 로또가 입력으로 주어지면") {
+        val other = Lotto(1, 2, 3, 7, 8, 9)
+        When("로또는") {
+            val lotto = Lotto(1, 2, 3, 4, 5, 6)
+            Then("몇 개의 번호가 일치하는지를 반환한다.") {
+                lotto.calculateMatchCount(other) shouldBe 3
+            }
+        }
+    }
 })
