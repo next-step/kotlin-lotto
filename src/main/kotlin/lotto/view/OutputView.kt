@@ -37,7 +37,7 @@ private fun Game.present(): String {
     return this.lottoNumbers.toString()
 }
 
-private fun Double.incomeStatement(): String {
+fun Double.incomeStatement(): String {
     return when (this >= LottoWinners.BENEFIT_LOSS_CROSS_POINT) {
         true -> LottoWinners.BENEFIT_MESSAGE
         false -> LottoWinners.LOSS_MESSAGE
