@@ -1,29 +1,37 @@
 package lotto_auto.lotto
 
 object LottoAuto {
+    fun matchedLottoCountWithBonusBall(
+        lottoList: List<Lotto>,
+        lastWeekLottoNumber: WinningLotto,
+    ): List<LottoResult> {
+        return lottoList
+            .map {
+                LottoResult(
+                    it.lottoPrize(lastWeekLottoNumber),
+                    it.isMatchedBonusBall(lastWeekLottoNumber.bonusNumber)
+                )
+            }
+    }
+
     /**
      * 구매한 로또 총 당첨 금액
      */
-    fun sumOfWonLottoList(eachLottoMatchList: List<Int>): Int {
+    fun sumOfWonLottoList(eachLottoMatchList: List<LottoResult>): Int {
         return eachLottoMatchList.sumOf {
-            replaceMatchCountToMoney(it).winningAmount
+            lottoPrizeWithMatchCountAndBonusMatched(it.lottoPrize.matchCount, it.bonusBallMatched).winningAmount
         }
     }
 
     /**
-     * match 개수 만큼 금액 으로 변경
+     * match 개수 만큼 LottoPrize로 변경
      */
-    private fun replaceMatchCountToMoney(matchCount: Int): LottoPrize {
-        return LottoPrize.getLottoPrize(matchCount)
+    private fun lottoPrizeWithMatchCountAndBonusMatched(matchCount: Int, bonusMatched: Boolean): LottoPrize {
+        return LottoPrize.getLottoPrize(matchCount, bonusMatched)
     }
 
     fun matchCountList(eachLottoMatchList: List<LottoPrize>): Map<LottoPrize, Int> {
-        return mapOf(
-            LottoPrize.FOURTH_PRIZE to eachLottoMatchList.count { it == LottoPrize.FOURTH_PRIZE },
-            LottoPrize.THIRD_PRIZE to eachLottoMatchList.count { it == LottoPrize.THIRD_PRIZE },
-            LottoPrize.SECOND_PRIZE to eachLottoMatchList.count { it == LottoPrize.SECOND_PRIZE },
-            LottoPrize.FIRST_PRIZE to eachLottoMatchList.count { it == LottoPrize.FIRST_PRIZE },
-        )
+        return eachLottoMatchList.groupingBy { it }.eachCount()
     }
 
     fun earningRate(sumOfWonLotto: Int, inputAmount: Int): Float {

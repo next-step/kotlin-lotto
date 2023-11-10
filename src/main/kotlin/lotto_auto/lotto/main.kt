@@ -10,14 +10,24 @@ fun main() {
     val lottoList = (1..count).map { Lotto() }
     OutputView.print(lottoList)
 
-    val lastWeekLottoNumber = InputView.lastWeekInput().toLotto()
-    val eachLottoMatchCount = lottoList.map { it.lottoMatchCount(lastWeekLottoNumber) }.filter { it > 2 }
+    val lastWeekLottoNumber = InputView.lastWeekInput()
+    val bonusBallNumber = InputView.bonusBallInput()
+    val winningLotto = lastWeekLottoNumber.toWinningLotto(bonusBallNumber)
 
-    val sumOfWonLotto = LottoAuto.sumOfWonLottoList(eachLottoMatchCount)
+    val matchedLottoCountWithBonusBall = LottoAuto.matchedLottoCountWithBonusBall(lottoList, winningLotto)
+
+    val sumOfWonLotto = LottoAuto.sumOfWonLottoList(matchedLottoCountWithBonusBall)
 
     val resultRate: Float = LottoAuto.earningRate(sumOfWonLotto, inputAmount)
 
-    val matchCountList = LottoAuto.matchCountList(eachLottoMatchCount.map { LottoPrize.getLottoPrize(it) })
+    val matchCountList = LottoAuto.matchCountList(matchedLottoCountWithBonusBall.map {
+        LottoPrize.getLottoPrize(
+            it.lottoPrize.matchCount,
+            it.bonusBallMatched
+        )
+    })
 
-    OutputView.showResult(matchCountList, resultRate)
+    val fillDefaultCountMap = LottoPrize.values().associateWith { matchCountList.getOrDefault(it, 0) }
+
+    OutputView.showResult(fillDefaultCountMap, resultRate)
 }
