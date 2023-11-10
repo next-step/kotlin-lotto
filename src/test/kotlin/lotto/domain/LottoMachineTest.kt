@@ -24,11 +24,11 @@ class LottoMachineTest : StringSpec({
         val winningLotto = Lotto.from(listOf(2, 3, 6, 7, 8, 9))
 
         // when
-        val lottoResult = lottoMachine.getResult(winningLotto, LottoBuyingPrice(2000))
+        val lottoResult = lottoMachine.getResult(winningLotto, LottoBuyingPrice(2000), bonusBall)
 
         // then
         lottoResult.result shouldBe mutableMapOf(
-            LottoRank.THREE to 2,
+            LottoRank.FIFTH to 2,
         )
         lottoResult.earningRate shouldBe 5.0
     }

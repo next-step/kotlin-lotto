@@ -21,10 +21,10 @@ class LottoRankTest : StringSpec({
             row(0, LottoRank.MISS),
             row(1, LottoRank.MISS),
             row(2, LottoRank.MISS),
-            row(3, LottoRank.THREE),
-            row(4, LottoRank.FOUR),
-            row(5, LottoRank.FIVE),
-            row(6, LottoRank.SIX),
+            row(3, LottoRank.FIFTH),
+            row(4, LottoRank.FOURTH),
+            row(5, LottoRank.THIRD),
+            row(6, LottoRank.FIRST),
         ) { count, rank ->
             LottoRank.from(count) shouldBe rank
         }
