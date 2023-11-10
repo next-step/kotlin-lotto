@@ -30,7 +30,7 @@ class LottoMachineTest {
     @DisplayName("로또 티켓의 번호는 1부터 45 사이여야 한다")
     fun `로또 티켓의 번호는 1부터 45 사이여야 한다`() {
         val ticket = LottoTicket.generate()
-        assertTrue(ticket.getNumbers().all { it in 1..45 })
+        assertTrue(ticket.readOnlyNumbers.all { it in 1..45 })
     }
 
     @DisplayName("번호의 갯수가 부족한 로또 티켓 생성 시 예외 발생")

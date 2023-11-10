@@ -4,8 +4,9 @@ import lotto.domain.LottoTicket
 import lotto.enum.Rank
 
 class LottoMatchResult(private val tickets: List<LottoTicket>, winningTicket: LottoTicket, private val bonusBall: Int) {
+    private val winningNumbers = winningTicket.readOnlyNumbers.toSet()
+    private val rankDeterminer = LottoRankDeterminer()
     private val matchCount = mutableMapOf<Int, Int>()
-    private val winningNumbers = winningTicket.getNumbers().toSet()
     var bonusMatchCount = 0
         private set
 
@@ -16,7 +17,7 @@ class LottoMatchResult(private val tickets: List<LottoTicket>, winningTicket: Lo
     fun determineRank(ticket: LottoTicket): Rank {
         val matchCount = getMatchingNumbersCount(ticket)
         val matchBonus = containsBonusBall(ticket)
-        return Rank.valueOf(matchCount, matchBonus)
+        return rankDeterminer.determineRank(matchCount, matchBonus)
     }
 
     fun getMatchCount(match: Int): Int {
@@ -24,7 +25,7 @@ class LottoMatchResult(private val tickets: List<LottoTicket>, winningTicket: Lo
     }
 
     private fun getMatchingNumbersCount(ticket: LottoTicket): Int {
-        return ticket.getNumbers().intersect(winningNumbers).size
+        return ticket.readOnlyNumbers.intersect(winningNumbers).size
     }
 
     private fun calculateMatchCount() {
@@ -34,7 +35,7 @@ class LottoMatchResult(private val tickets: List<LottoTicket>, winningTicket: Lo
     }
 
     private fun containsBonusBall(ticket: LottoTicket): Boolean {
-        return ticket.getNumbers().contains(bonusBall)
+        return ticket.readOnlyNumbers.contains(bonusBall)
     }
 
     private fun incrementMatchCount(ticket: LottoTicket) {

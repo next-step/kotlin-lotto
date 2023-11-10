@@ -7,7 +7,7 @@ import lotto.enum.Rank
 object ResultView {
     fun showTickets(tickets: List<LottoTicket>) {
         println("${tickets.size}개를 구매했습니다.")
-        tickets.forEach { println(it.getNumbers()) }
+        tickets.forEach { println(it.readOnlyNumbers) }
     }
 
     fun showReturnRate(returnRate: Double) {

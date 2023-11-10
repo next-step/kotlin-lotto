@@ -13,7 +13,7 @@ class LottoTicketTest {
     @DisplayName("당첨 번호와 모두 일치할 때 확인")
     fun `당첨 번호와 모두 일치하는 경우`() {
         val ticket = LottoTicket(listOf(1, 2, 3, 4, 5, 6))
-        val matchResult = createMatchResultWithMockedWinningTicket(ticket.getNumbers())
+        val matchResult = createMatchResultWithMockedWinningTicket(ticket.readOnlyNumbers)
         val rank = matchResult.determineRank(ticket)
         assertEquals(Rank.FIRST, rank, "모든 번호가 일치하면 1등입니다.")
     }
