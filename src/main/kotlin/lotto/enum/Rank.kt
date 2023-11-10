@@ -10,13 +10,13 @@ enum class Rank(val countOfMatch: Int, val winningMoney: Int) {
 
     companion object {
         fun valueOf(countOfMatch: Int, matchBonus: Boolean): Rank {
-            return values().find { rank ->
-                when (rank) {
-                    SECOND -> countOfMatch == 5 && matchBonus
-                    THIRD -> countOfMatch == 5 && !matchBonus
-                    else -> countOfMatch == rank.countOfMatch
-                }
-            } ?: MISS
+            return values().firstOrNull { it.isMatchingRank(countOfMatch, matchBonus) } ?: MISS
+        }
+
+        private fun Rank.isMatchingRank(countOfMatch: Int, matchBonus: Boolean): Boolean {
+            if (this == SECOND && countOfMatch == 5) return matchBonus
+            if (this == THIRD && countOfMatch == 5) return !matchBonus
+            return this.countOfMatch == countOfMatch
         }
     }
 }

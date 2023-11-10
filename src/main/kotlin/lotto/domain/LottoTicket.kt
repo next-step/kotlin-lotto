@@ -6,16 +6,8 @@ class LottoTicket(private val numbers: List<Int>) {
         validateNumbers(numbers)
     }
 
-    fun getMatchingNumbersCount(winningNumbers: Set<Int>): Int {
-        return numbers.intersect(winningNumbers).size
-    }
-
     fun getNumbers(): List<Int> {
         return numbers
-    }
-
-    fun containsBonusBall(bonusBall: Int): Boolean {
-        return numbers.contains(bonusBall)
     }
 
     private fun validateNumbers(numbers: List<Int>) {

@@ -3,8 +3,9 @@ package lotto.dto
 import lotto.domain.LottoTicket
 import lotto.enum.Rank
 
-class LottoMatchResult(private val tickets: List<LottoTicket>, private val winningTicket: LottoTicket, private val bonusBall: Int) {
+class LottoMatchResult(private val tickets: List<LottoTicket>, winningTicket: LottoTicket, private val bonusBall: Int) {
     private val matchCount = mutableMapOf<Int, Int>()
+    private val winningNumbers = winningTicket.getNumbers().toSet()
     var bonusMatchCount = 0
         private set
 
@@ -13,13 +14,17 @@ class LottoMatchResult(private val tickets: List<LottoTicket>, private val winni
     }
 
     fun determineRank(ticket: LottoTicket): Rank {
-        val matchCount = ticket.getMatchingNumbersCount(winningTicket.getNumbers().toSet())
-        val matchBonus = ticket.containsBonusBall(bonusBall)
+        val matchCount = getMatchingNumbersCount(ticket)
+        val matchBonus = containsBonusBall(ticket)
         return Rank.valueOf(matchCount, matchBonus)
     }
 
     fun getMatchCount(match: Int): Int {
         return matchCount.getOrDefault(match, 0)
+    }
+
+    private fun getMatchingNumbersCount(ticket: LottoTicket): Int {
+        return ticket.getNumbers().intersect(winningNumbers).size
     }
 
     private fun calculateMatchCount() {
@@ -28,11 +33,15 @@ class LottoMatchResult(private val tickets: List<LottoTicket>, private val winni
         }
     }
 
+    private fun containsBonusBall(ticket: LottoTicket): Boolean {
+        return ticket.getNumbers().contains(bonusBall)
+    }
+
     private fun incrementMatchCount(ticket: LottoTicket) {
-        val count = ticket.getMatchingNumbersCount(winningTicket.getNumbers().toSet())
-        when {
-            count == 5 && ticket.containsBonusBall(bonusBall) -> bonusMatchCount++
-            else -> matchCount[count] = matchCount.getOrDefault(count, 0) + 1
+        val currentMatchCount = getMatchingNumbersCount(ticket)
+        matchCount[currentMatchCount] = matchCount.getOrDefault(currentMatchCount, 0) + 1
+        if (currentMatchCount == 5 && containsBonusBall(ticket)) {
+            bonusMatchCount++
         }
     }
 }
