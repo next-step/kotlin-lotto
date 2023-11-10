@@ -1,5 +1,9 @@
 # kotlin-lotto
 
+## 미션 피드백 링크
+
+- Step 1 : [https://github.com/next-step/kotlin-lotto/pull/849](https://github.com/next-step/kotlin-lotto/pull/849)
+
 ## 미션 내용
 
 ### STEP 1
@@ -25,10 +29,14 @@
 #### [책임 분리]
 
 - 입력 객체
-    - 유효성 검사
+  - 유효성 검사
 - 계산기 객체
   - 각 숫자들의 총 합 계산
 - 구분자 객체
   - 구분자 저장(관리)
   - 커스텀 구분자 판별
   - 각 구분자를 기준으로 숫자 분리
+
+#### [피드백]
+
+- [x] 입력값 분석 객체의 과도한 역할과 책임을 분리한다.
