@@ -52,7 +52,7 @@
 - [x] WinningMoney enum 을 등수로 생각해보기 - matchCount, prize 둘다 활용
 - [x] IntRange는 고정되어 있지 않나, LottoNumber객체 미리 생성해두는 방식 적용, 랜덤기능 인터페이스로 분리
 - [x] getMatchedList 매서드의 반환 리스트는 무엇인지 명시하기
-- [ ] LottoOrganizer의 책임 생각 해보기 - 주어진 돈을 가지고, 로또를 구매하는 책임은 따로 분리해보면 어떨까요?
+- [x] LottoOrganizer의 책임 생각 해보기 - 주어진 돈을 가지고, 로또를 구매하는 책임은 따로 분리해보면 어떨까요?
 - [x] LottoValidator의 책임 생각 해보기 - winningNumbers, lottoTickets등을 관리하는 책임어떨지
 - [x] scope function 제대로 알고 쓰기
 
