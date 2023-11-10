@@ -3,8 +3,8 @@
 package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.catchThrowable
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class LottoTest {
     @Test
@@ -25,12 +25,11 @@ class LottoTest {
     fun `로또 번호가 6개의 숫자가 아니면 IllegalArgumentException이 발생한다`() {
         val lottoNumbers = (1..7).map(::LottoNumber)
 
-        val actual = catchThrowable {
+        val actual = assertThrows<IllegalArgumentException> {
             Lotto(lottoNumbers)
         }
 
-        assertThat(actual).isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessageContaining("Lotto numbers should be 6 numbers.")
+        assertThat(actual).hasMessageContaining("Lotto numbers should be 6 numbers.")
     }
 
     @Test
