@@ -13,16 +13,23 @@ enum class LottoRank(
     MISS(0, 0)
     ;
 
-    fun isMiss(): Boolean =
+    fun isMiss() =
         this == MISS
+
+    fun isSecond() =
+        this == SECOND
 
     companion object {
 
-        fun from(matchCount: Int): LottoRank {
+        fun from(matchCount: Int, hasBonusBall: Boolean): LottoRank {
             require(matchCount in MISS.winningMatchCount..FIRST.winningMatchCount) {
                 "당첨 번호와 일치하는 개수는 0개 이상, 6개 이하만 가능합니다."
             }
-            return values().firstOrNull { it.winningMatchCount == matchCount } ?: MISS
+            return when {
+                matchCount == SECOND.winningMatchCount && hasBonusBall -> SECOND
+                matchCount == SECOND.winningMatchCount && hasBonusBall.not() -> THIRD
+                else -> values().firstOrNull { it.winningMatchCount == matchCount } ?: MISS
+            }
         }
     }
 }
