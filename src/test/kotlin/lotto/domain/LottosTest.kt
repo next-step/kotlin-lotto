@@ -17,4 +17,10 @@ class LottosTest : StringSpec({
         val bonusBall = 7
         assertEquals(Ranks(listOf(Rank.FIRST)), lottos.match(winningLotto, bonusBall))
     }
+
+    "로또 타입별 갯수 확인" {
+        val lottos = Lottos(listOf(Lotto(setOf(1, 2, 3, 4, 5, 6)), Lotto(setOf(1, 2, 3, 4, 5, 6), LottoType.MANUAL)))
+        assertEquals(1, lottos.getCount(LottoType.AUTO))
+        assertEquals(1, lottos.getCount(LottoType.MANUAL))
+    }
 })

@@ -5,7 +5,7 @@ import lotto.domain.*
 class OutputView {
 
     fun printLottos(lottos: Lottos) {
-        println("${lottos.size}개를 구매했습니다.")
+        println("수동으로 ${lottos.getCount(LottoType.MANUAL)}장, 자동으로 ${lottos.getCount(LottoType.AUTO)}개를 구매했습니다.")
         lottos.lottos.forEach(::printLotto)
         println()
     }
