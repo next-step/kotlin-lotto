@@ -14,4 +14,14 @@ data class LottoResultList(val resultList: List<LottoRank>) {
     fun getProfitRate(purchase: Money): Float {
         return prizeMoney / purchase.amount.toFloat()
     }
+
+    companion object {
+        fun getResult(winningNumbers: WinningNumbers, lottoList: LottoList): LottoResultList {
+            val result = mutableListOf<LottoRank>()
+            for (lotto in lottoList.lottoList) {
+                result.add(LottoRank.of(winningNumbers, lotto.lottoNumbers))
+            }
+            return LottoResultList(result)
+        }
+    }
 }
