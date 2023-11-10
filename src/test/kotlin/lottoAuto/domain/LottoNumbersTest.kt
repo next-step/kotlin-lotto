@@ -20,35 +20,6 @@ class LottoNumbersTest {
     }
 
     @Test
-    fun `getSortedLottoNumbers 함수를 호출할 경우 number 기준으로 정렬된 LottoNumber를 반환한다`() {
-        // given
-        val lottoNumbers = LottoNumbers(
-            listOf(
-                LottoNumber.of(3),
-                LottoNumber.of(2),
-                LottoNumber.of(1),
-                LottoNumber.of(6),
-                LottoNumber.of(5),
-                LottoNumber.of(4)
-            )
-        )
-        val expectedLottoNumbers = listOf(
-            LottoNumber.of(1),
-            LottoNumber.of(2),
-            LottoNumber.of(3),
-            LottoNumber.of(4),
-            LottoNumber.of(5),
-            LottoNumber.of(6)
-        )
-
-        // when
-        val sortedLottoNumbers = lottoNumbers.getSortedLottoNumbers()
-
-        // then
-        assertIterableEquals(expectedLottoNumbers, sortedLottoNumbers)
-    }
-
-    @Test
     fun `두 개의 LottoNumbers에서 중복된 숫자를 카운트한다`() {
         // given
         val lottoNumbers1 = LottoNumbers(
@@ -73,7 +44,7 @@ class LottoNumbersTest {
         )
 
         // when
-        val matchedCount = lottoNumbers1.matchCount(lottoNumbers2)
+        val matchedCount = lottoNumbers1.countSameNumber(lottoNumbers2)
 
         // then
         assertEquals(3, matchedCount)

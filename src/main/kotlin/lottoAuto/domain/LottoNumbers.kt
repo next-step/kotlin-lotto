@@ -1,16 +1,15 @@
 package lottoAuto.domain
 
-class LottoNumbers(private val numbers: List<LottoNumber>) : List<LottoNumber> by numbers {
+data class LottoNumbers(
+    val numbers: List<LottoNumber>
+) {
     init {
         require(numbers.size == NUM_OF_LOTTO_NUMBERS) { "로또 번호는 ${NUM_OF_LOTTO_NUMBERS}개여야 합니다." }
     }
 
-    fun getSortedLottoNumbers(): List<LottoNumber> {
-        return numbers.sortedBy { it.number }
-    }
-
-    fun matchCount(numbers: List<LottoNumber>): Int {
-        return this.numbers.intersect(numbers.toSet()).size
+    fun countSameNumber(lottoNumbers: LottoNumbers): Int {
+        return this.numbers.intersect(
+            lottoNumbers.numbers.toSet()).size
     }
 
     companion object {

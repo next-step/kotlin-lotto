@@ -11,10 +11,6 @@ value class LottoNumber(val number: Int) {
             return LottoNumber(number)
         }
 
-        fun ofRandom(): LottoNumber {
-            return LottoNumber((MIN_NUMBER..MAX_NUMBER).random())
-        }
-
         const val MIN_NUMBER = 1
         const val MAX_NUMBER = 45
     }
