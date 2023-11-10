@@ -39,6 +39,13 @@ object LottoInputView {
     }
 
     fun splitWinningNumber(inputWinningNumber: String): List<String> {
-        return inputWinningNumber.split(',').map { it.trim() }
+        val winningNumberList = inputWinningNumber.split(',').map { it.trim() }
+
+        winningNumberList.forEach {
+            validateNumberFormat(it)
+            validateInteger(it)
+        }
+
+        return winningNumberList
     }
 }

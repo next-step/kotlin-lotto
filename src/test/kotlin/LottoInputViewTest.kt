@@ -30,6 +30,18 @@ class LottoInputViewTest {
         assertThat(actual).isEqualTo(listOf("1","2","3","4","5","8"))
     }
 
+    @Test
+    fun `당첨 번호에 대한 모든 입력 값이 정수가 아닐 때, splitWinningNumber()을 요청하면, 에러를 던진다`() {
+        // given : 정수가 아닌 입력 값을 받는다.
+        val inputWinningNumber = "1,2.8,3,4,5,8"
+
+        // when :  splitWinningNumber()을 요청한다.
+        val actual = runCatching { LottoInputView.splitWinningNumber(inputWinningNumber) }.exceptionOrNull()
+
+        // then : 에러를 던진다.
+        assertThat(actual).isInstanceOf(IllegalArgumentException()::class.java)
+    }
+
     companion object {
         private const val ERR_MSG_NUMBER_FORMAT_EXCEPTION = "입력값에 대한 포멧이 숫자 아닙니다."
         private const val ERR_MSG_INT_FORMAT_EXCEPTION = "입력값에 대한 포멧이 정수가 아닙니다."
