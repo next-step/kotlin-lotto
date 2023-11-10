@@ -9,6 +9,7 @@ object LottoInputView {
     private const val ERR_MSG_MAX_VALUE_EXCEPTION = "최대값 100,000원 이하의 값을 입력해 주세요"
     private const val ERR_MSG_EXCEED_WINNING_NUMBERS_CNT = "당첨 번호 입력 개수를 초과하였습니다."
     private const val ERR_MSG_EXCEED_WINNING_NUMBER_RANGE = "당첨 번호가 기준 값(45)을 초과하였습니다."
+    private const val ERR_MSG_DUPLICATE_WINNING_NUMBER = "중복되는 당첨 번호가 있습니다."
     private const val FLOAT_ZERO = 0f
     private const val INPUT_MIN_VALUE = 1000
     private const val INPUT_MAX_VALUE = 100000
@@ -68,6 +69,13 @@ object LottoInputView {
 
     fun validateWinningNumberRange(winningNumberList: List<Int>) {
         winningNumberList.forEach { checkNumberRange(it) }
+    }
+
+    fun validateDuplicateNumber(winningNumberList: List<Int>) {
+        val winningNumberSet = setOf(winningNumberList)
+        if (winningNumberSet.size != winningNumberList.size) {
+            throw IllegalArgumentException(ERR_MSG_DUPLICATE_WINNING_NUMBER)
+        }
     }
 
     private fun checkNumberRange(number: Int) {
