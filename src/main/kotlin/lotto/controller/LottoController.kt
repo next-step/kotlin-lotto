@@ -7,19 +7,19 @@ import lotto.view.OutputView
 class LottoController(private val lottoShop: LottoShop) {
 
     fun play() {
-        val money = InputView().inputMoney()
+        val money = retry { InputView().inputMoney() }
         val lottos = buyLottos(money)
         OutputView().printLottos(lottos)
-        val winningLotto = InputView().inputWinningLotto()
-        val bonusBall = InputView().inputBonusBall()
+        val winningLotto = retry { InputView().inputWinningLotto() }
+        val bonusBall = retry { InputView().inputBonusBall() }
         val ranks = lottos.match(winningLotto, bonusBall)
         OutputView().printResult(ranks, money)
     }
 
     private fun buyLottos(money: Money): Lottos {
-        val (manualMoney, leftMoney) = getMoney(money)
+        val (manualMoney, leftMoney) = retry { getMoney(money) }
         val autoLottos = buyLotto(leftMoney)
-        val inputManualLotto = InputView().inputManualLotto(manualMoney)
+        val inputManualLotto = retry { InputView().inputManualLotto(manualMoney) }
         return inputManualLotto.merge(autoLottos)
     }
 
@@ -32,5 +32,14 @@ class LottoController(private val lottoShop: LottoShop) {
 
     private fun buyLotto(money: Money): Lottos {
         return Lottos(lottoShop.buy(money))
+    }
+
+    fun <T> retry(operation: () -> T): T {
+        return try {
+            return operation()
+        } catch (e: Exception) {
+            println(e.message)
+            retry(operation)
+        }
     }
 }
