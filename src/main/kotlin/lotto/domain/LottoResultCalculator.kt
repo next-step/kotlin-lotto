@@ -12,7 +12,7 @@ class LottoResultCalculator(private val winningLotto: WinningLotto) {
     }
 
     fun calculateEarningRate(result: Map<Rank, Int>, amount: Amount): Double {
-        val rate = result.map { result.getOrDefault(it.key, 0) * it.key.winningMoney }
+        val rate = result.map { it.key.winningMoney * it.value }
             .sumOf { it.toDouble() }
             .div(amount.amount)
         return floor(rate * 100) / 100
