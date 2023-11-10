@@ -1,10 +1,10 @@
 package lotto
 
 class Lotto(vararg numbers: Int) {
-    val numbers: List<Int> = numbers.toList()
+    val numbers: Set<Int> = numbers.toSet()
 
     init {
-        require(numbers.distinct().size == 6) { "로또는 유일한 숫자 6개로 구성해야합니다." }
+        require(this.numbers.size == 6) { "로또는 유일한 숫자 6개로 구성해야합니다." }
     }
 
     fun matchedCount(other: Lotto): Int {
