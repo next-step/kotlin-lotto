@@ -31,7 +31,7 @@ enum class Rank(
         }
 
         private fun isBoom(matchCount: Int): Boolean {
-            return matchCount <= BOOM.matchCount
+            return matchCount in (0..BOOM.matchCount)
         }
 
         private fun isThird(matchCount: Int, bonus: Boolean): Boolean {
