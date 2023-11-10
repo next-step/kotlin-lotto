@@ -16,6 +16,11 @@ class LottoTest : FunSpec({
         lotto.numbers.shouldBeInstanceOf<Set<Int>>()
     }
 
+    test("로또의 상태를 출력하면 부여받은 숫자 6개를 출력한다.") {
+        val lotto = Lotto(setOf(10, 20, 17, 45, 15, 6))
+        lotto.toString() shouldBe "[10, 20, 17, 45, 15, 6]"
+    }
+
     test("로또에 적힌 숫자 개수가 6개를 넘는다면 예외가 발생한다.") {
         shouldThrow<IllegalArgumentException> { Lotto(setOf(10, 15, 20, 25, 30, 35, 40)) }
     }
