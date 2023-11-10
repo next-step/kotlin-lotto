@@ -8,9 +8,9 @@ object StringAddCalculator {
 
         val tokens = StringAddTokenizer(text).getTokens()
         return tokens.map { token ->
-            StringNumber(token)
+            StringNumber.valueOf(token)
         }.sumOf {
-            it.toInt()
+            it.value
         }
     }
 }

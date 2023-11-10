@@ -12,7 +12,7 @@ class StringNumberTest {
     @ParameterizedTest
     @ValueSource(strings = ["0", "1", "100"])
     fun number(text: String) {
-        assertThat(StringNumber(text).toInt()).isEqualTo(text.toInt())
+        assertThat(StringNumber.valueOf(text).value).isEqualTo(text.toInt())
     }
 
     @DisplayName(value = "문자열로 숫자 이외의 값을 전달하는 경우 RuntimeException 예외를 throw 한다.")
@@ -20,7 +20,7 @@ class StringNumberTest {
     @ValueSource(strings = ["a", "!", ";"])
     fun notNumber(text: String) {
         assertThatThrownBy {
-            StringNumber(text)
+            StringNumber.valueOf(text)
         }.isInstanceOf(RuntimeException::class.java)
             .hasMessageMatching("숫자 이외의 값일 수 없습니다.")
     }
@@ -30,7 +30,7 @@ class StringNumberTest {
     @ValueSource(strings = ["-1", "-100"])
     fun negative(text: String) {
         assertThatThrownBy {
-            StringNumber(text)
+            StringNumber.valueOf(text)
         }.isInstanceOf(RuntimeException::class.java)
             .hasMessageMatching("숫자는 음수일 수 없습니다.")
     }
