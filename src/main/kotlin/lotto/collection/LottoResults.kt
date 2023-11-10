@@ -1,16 +1,19 @@
 package lotto.collection
 
-class LottoResults(matchedList: List<Int>) {
-    var results = mutableMapOf<String, Int>()
+import lotto.collection.LottoTicket.Companion.NUMBER_COUNT
+
+
+class LottoResults(lottoTickets: List<LottoTicket>, winningNumbers: List<LottoNumber>) {
+    var results: MutableMap<Int, Int> = (0..NUMBER_COUNT + 1).associateWith { 0 }.toMutableMap()
         private set
 
     init {
-        require(matchedList.size == LottoTicket.NUMBER_COUNT + 1){"matchedList 는 ${LottoTicket.NUMBER_COUNT + 1}개 여야 합니다"}
-
-        matchedList.forEachIndexed { index, matchedCount ->
-            results["$index"] = matchedCount
+        lottoTickets.forEach { lottoTicket ->
+            getMatchCount(winningNumbers, lottoTicket).let { matchCount -> results[matchCount] = results[matchCount]!! + 1 }
         }
     }
+    private fun getMatchCount(winningNumbers: List<LottoNumber>, lottoTicket: LottoTicket): Int =
+        lottoTicket.numbers.intersect(winningNumbers.toSet()).size
 
 }
 

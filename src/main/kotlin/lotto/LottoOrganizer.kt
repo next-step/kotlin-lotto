@@ -1,9 +1,9 @@
 package lotto
 
 import lotto.collection.LottoNumber
+import lotto.collection.LottoResults
 import lotto.collection.LottoTicket
 import lotto.model.LottoGenerator
-import lotto.model.LottoValidator
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -23,7 +23,7 @@ class LottoOrganizer {
     private fun getTicketCount(): Int = InputView.getPurchasePrice() / LottoTicket.TICKET_PRICE
 
     private val validateTickets = { lottoTickets: List<LottoTicket> ->
-        LottoValidator.validate(
+        LottoResults(
             lottoTickets,
             InputView.getWinningNumbers().map { LottoNumber.from(it) })
     }
