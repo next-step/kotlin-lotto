@@ -10,13 +10,24 @@ class LottoInputViewTest {
     @ParameterizedTest
     fun `잘못된 입력값을 받았을 때, 검증을 거치면, 에러를 던진다`(inputData: String, expected: Exception) {
         // given : 100,000원을 초과한 값을 입력 받는다.
-        val lottoInputViewTest = LottoInputView()
 
         // when : 입력값에 대한 검증을 진행한다.
-        val actual = runCatching { lottoInputViewTest.validateCashInputData(inputData) }.exceptionOrNull()
+        val actual = runCatching { LottoInputView.validateCashInputData(inputData) }.exceptionOrNull()
 
         // then : 에러를 던진다
         assertThat(actual).isInstanceOf(expected::class.java)
+    }
+
+    @Test
+    fun `당첨 번호에 대한 입력 값 받았을 때, splitWinningNumber()을 요청하면, 콤마를 기준으로 구분하여 리스트를 반환한다`() {
+        // given : 당첨 번호를 입력 받는다.
+        val inputWinningNumber = "1,2,3,4,5,8"
+
+        // when : splitWinningNumber()을 요청한다.
+        val actual = LottoInputView.splitWinningNumber(inputWinningNumber)
+
+        // then : 콤마를 기준으로 구분하여 리스트를 반환한다
+        assertThat(actual).isEqualTo(listOf("1","2","3","4","5","8"))
     }
 
     companion object {
