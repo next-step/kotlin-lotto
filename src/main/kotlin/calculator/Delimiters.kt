@@ -15,7 +15,9 @@ class Delimiters {
     }
 
     fun validateInput(input: String) {
-        input.split(*_delimiters.toTypedArray()).forEach { token ->
+        val regex = _delimiters.joinToString("|").toRegex()
+        
+        input.split(regex).forEach { token ->
             validateIsNumeric(token)
         }
     }
