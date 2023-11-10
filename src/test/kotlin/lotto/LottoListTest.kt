@@ -4,6 +4,7 @@ import lotto.domain.LottoList
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoRank
+import lotto.domain.LottoResultList
 import lotto.domain.ManualLotto
 import lotto.domain.WinningNumbers
 import org.assertj.core.api.Assertions.assertThat
@@ -23,7 +24,7 @@ class LottoListTest {
         )
         val winningNumbers = WinningNumbers(LottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber(7))
 
-        val result = lottoList.getResult(winningNumbers)
+        val result = LottoResultList.getResult(winningNumbers, lottoList)
         assertThat(result.count(LottoRank.FIRST)).isEqualTo(1)
         assertThat(result.count(LottoRank.SECOND)).isEqualTo(1)
         assertThat(result.count(LottoRank.THIRD)).isEqualTo(1)
