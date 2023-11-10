@@ -10,7 +10,8 @@ enum class LottoRank(
     THIRD(5, 1_500_000),
     FOURTH(4, 50_000),
     FIFTH(3, 5_000),
-    MISS(0, 0)
+    MISS(0, 0),
+
     ;
 
     fun isMiss() =
@@ -22,13 +23,17 @@ enum class LottoRank(
     companion object {
 
         fun from(matchCount: Int, hasBonusBall: Boolean): LottoRank {
-            require(matchCount in MISS.winningMatchCount..FIRST.winningMatchCount) {
-                "당첨 번호와 일치하는 개수는 0개 이상, 6개 이하만 가능합니다."
-            }
+            validateRange(matchCount)
             return when {
                 matchCount == SECOND.winningMatchCount && hasBonusBall -> SECOND
                 matchCount == SECOND.winningMatchCount && hasBonusBall.not() -> THIRD
                 else -> values().firstOrNull { it.winningMatchCount == matchCount } ?: MISS
+            }
+        }
+
+        private fun validateRange(matchCount: Int) {
+            require(matchCount in MISS.winningMatchCount..FIRST.winningMatchCount) {
+                "당첨 번호와 일치하는 개수는 0개 이상, 6개 이하만 가능합니다."
             }
         }
     }

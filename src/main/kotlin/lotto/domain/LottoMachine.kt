@@ -19,7 +19,7 @@ class LottoMachine private constructor(
     }
 
     fun getLottoTotalPrice(): Price {
-        return Price(lottoCount.times(Lotto.LOTTO_PRICE))
+        return Price(lottoCount.multiply(Lotto.LOTTO_PRICE))
     }
 
     fun getResult(winningLotto: Lotto, buyingPrice: LottoBuyingPrice, bonusBall: LottoNumber): LottoMatchResult {
@@ -37,12 +37,19 @@ class LottoMachine private constructor(
     }
 
     private fun getMatchCountByRank(winningLotto: Lotto, bonusBall: LottoNumber): Map<LottoRank, Int> =
-        lottos.map {
-            val matchCount = it.calculateMatchCount(winningLotto, bonusBall)
-            val hasBonusBall = it.hasBonusBall(bonusBall)
-            LottoRank.from(matchCount, hasBonusBall)
-        }.groupingBy { it }
+        lottos.map { lotto -> createLottoRank(lotto, winningLotto, bonusBall) }
+            .groupingBy { it }
             .fold(INIT_MATCH_COUNT) { count, _ -> count + 1 }
+
+    private fun createLottoRank(
+        lotto: Lotto,
+        winningLotto: Lotto,
+        bonusBall: LottoNumber,
+    ): LottoRank {
+        val matchCount = lotto.calculateMatchCount(winningLotto, bonusBall)
+        val hasBonusBall = lotto.hasBonusBall(bonusBall)
+        return LottoRank.from(matchCount, hasBonusBall)
+    }
 
     companion object {
         private const val INIT_MATCH_COUNT = 0

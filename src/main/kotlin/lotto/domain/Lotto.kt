@@ -8,7 +8,7 @@ class Lotto private constructor(
 
     fun calculateMatchCount(other: Lotto, bonusBall: LottoNumber): Int {
         val matchCount = numbers.intersect(other.numbers).size
-        if (numbers.contains(bonusBall)) {
+        if (hasBonusBall(bonusBall)) {
             return matchCount + 1
         }
         return matchCount

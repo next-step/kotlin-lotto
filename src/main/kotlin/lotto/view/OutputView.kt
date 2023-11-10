@@ -47,12 +47,21 @@ object OutputView {
         val lottoRanks = LottoRank.values()
             .filterNot { it.isMiss() }
             .sortedBy { it.winningMatchCount }
-        val statisticsMessage = lottoRanks.joinToString(separator = System.lineSeparator()) { rank ->
-            val matchCount = result[rank]
-            if (rank.isSecond()) createBonusMatchMessage(rank, matchCount)
-            else createMatchMessage(rank, matchCount)
-        }
+        val statisticsMessage =
+            lottoRanks.joinToString(separator = System.lineSeparator()) { rank -> createMatchMessage(result, rank) }
         return System.lineSeparator() + String.format(WINNING_STATISTICS_MESSAGE_FORMAT.trimIndent(), statisticsMessage)
+    }
+
+    private fun createMatchMessage(
+        result: Map<LottoRank, Int>,
+        rank: LottoRank,
+    ): String {
+        val matchCount = result[rank]
+        return if (rank.isSecond()) {
+            createBonusMatchMessage(rank, matchCount)
+        } else {
+            createMatchMessage(rank, matchCount)
+        }
     }
 
     private fun createMatchMessage(rank: LottoRank, matchCount: Int?) = String.format(

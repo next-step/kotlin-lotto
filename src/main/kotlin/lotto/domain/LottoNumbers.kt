@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoNumbers(
-    private val values: List<LottoNumber>
+    private val values: List<LottoNumber>,
 ) {
 
     init {

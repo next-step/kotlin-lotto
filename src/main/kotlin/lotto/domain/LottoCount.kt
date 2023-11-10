@@ -4,7 +4,6 @@ package lotto.domain
 value class LottoCount(
     val value: Int,
 ) {
-    fun times(other: Int): Int {
-        return value * other
-    }
+    fun multiply(other: Int): Int =
+        value * other
 }

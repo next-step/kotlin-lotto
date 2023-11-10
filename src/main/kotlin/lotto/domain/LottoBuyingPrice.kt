@@ -11,11 +11,9 @@ value class LottoBuyingPrice(
         }
     }
 
-    fun divide(value: Int): Int {
-        return this.value.div(value)
-    }
+    fun divide(value: Int): Int =
+        this.value.div(value)
 
-    fun minus(value: Int): Int {
-        return this.value.minus(value)
-    }
+    fun minus(value: Int): Int =
+        this.value.minus(value)
 }

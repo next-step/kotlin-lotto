@@ -6,10 +6,10 @@ value class LottoNumber(
 ) {
 
     init {
-        validateNumber()
+        validateRange()
     }
 
-    private fun validateNumber() {
+    private fun validateRange() {
         require(value in LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER) {
             "로또 번호는 ${LOTTO_MIN_NUMBER}부터 $LOTTO_MAX_NUMBER 사이 값이어야 합니다."
         }
