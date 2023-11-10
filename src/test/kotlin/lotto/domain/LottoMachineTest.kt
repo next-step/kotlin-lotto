@@ -21,7 +21,7 @@ class LottoMachineTest : StringSpec({
         // given
         val lottoCount = 2
         val lottoMachine = createLottoMachine(lottoCount)
-        val winningLotto = Lotto.from(listOf(2, 3, 6, 7, 8, 9).map { LottoNumber(it) })
+        val winningLotto = Lotto.from(listOf(2, 3, 6, 7, 8, 9))
 
         // when
         val lottoResult = lottoMachine.getResult(winningLotto, LottoBuyingPrice(2000))

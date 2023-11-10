@@ -26,7 +26,7 @@ object InputView {
             validateNumeric(it.trim())
             it.trim().toInt()
         }.let {
-            Lotto.from(it.map { number -> LottoNumber(number) })
+            Lotto.from(it)
         }
     }
 

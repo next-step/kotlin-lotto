@@ -27,7 +27,7 @@ object OutputView {
     }
 
     private fun printLottoNumbers(it: Lotto) {
-        val lottoNumbers = it.numbers
+        val lottoNumbers = it.numbers.sortedValues
             .map { number -> number.value }
             .joinToString(", ")
         println(String.format(LOTTO_FORMAT, lottoNumbers))
