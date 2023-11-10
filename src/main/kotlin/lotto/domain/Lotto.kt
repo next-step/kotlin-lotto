@@ -10,6 +10,9 @@ class Lotto private constructor(
         return numbers.intersect(other.numbers).size
     }
 
+    fun hasBonusBall(number: LottoNumber) =
+        numbers.contains(number)
+
     companion object {
         const val LOTTO_NUMBER_COUNT = 6
         const val LOTTO_PRICE = 1000

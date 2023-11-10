@@ -9,13 +9,14 @@ class LottoNumbers(
         validateDuplication()
     }
 
-    val sortedValues: List<LottoNumber> by lazy {
+    val sortedValues: List<LottoNumber> =
         values.sortedBy { it.value }
-    }
 
-    fun intersect(numbers: LottoNumbers): Set<LottoNumber> {
-        return sortedValues.intersect(numbers.sortedValues.toSet())
-    }
+    fun intersect(numbers: LottoNumbers) =
+        values.intersect(numbers.values.toSet())
+
+    fun contains(number: LottoNumber) =
+        values.contains(number)
 
     private fun validateCount() {
         require(values.size == Lotto.LOTTO_NUMBER_COUNT) {
