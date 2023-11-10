@@ -5,7 +5,7 @@ class Customer(val money: Int) {
     companion object {
         private val isDigit: (String) -> Boolean = { it.all { char -> char.isDigit() } }
 
-        fun of(money: String): Customer {
+        fun valueOf(money: String): Customer {
             require(isDigit(money))
             return Customer(money.toInt())
         }
