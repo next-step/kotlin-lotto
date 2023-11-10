@@ -1,6 +1,6 @@
 package lotto.dto
 
-import lotto.domain.LottoConstants
+import lotto.enum.Rank
 
 class LottoRevenueCalculator(private val matchResult: LottoMatchResult) {
     fun calculateReturnRate(purchaseAmount: Double): Double {
@@ -17,12 +17,7 @@ class LottoRevenueCalculator(private val matchResult: LottoMatchResult) {
     }
 
     private fun calculatePrizeForMatch(match: Int): Double {
-        return when (match) {
-            3 -> LottoConstants.PRIZE_MATCH_3.toDouble()
-            4 -> LottoConstants.PRIZE_MATCH_4.toDouble()
-            5 -> LottoConstants.PRIZE_MATCH_5.toDouble()
-            6 -> LottoConstants.PRIZE_MATCH_6.toDouble()
-            else -> 0.0
-        }
+        val rank = Rank.valueOf(match, match == 5 && matchResult.bonusMatchCount == 1)
+        return rank.winningMoney.toDouble()
     }
 }
