@@ -1,3 +1,6 @@
 package lotto
 
-data class LottoGameResult(val rewards: List<LottoReward>)
+data class LottoGameResult(val totalPrice: Int, val rewards: List<LottoReward>) {
+    fun calculatePerformance(): Double =
+        rewards.getAmount().toDouble() / totalPrice
+}

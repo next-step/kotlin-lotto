@@ -8,7 +8,7 @@ class LottoGameTest : FunSpec({
         val lottoList = listOf(
             Lotto(numbers = setOf(1, 15, 20, 27, 30, 36)),  // 4등
             Lotto(numbers = setOf(10, 16, 20, 25, 30, 40)), // 3등
-            Lotto(numbers = setOf(11, 12, 13, 14, 15, 16)),
+            Lotto(numbers = setOf(11, 12, 13, 14, 15, 16)), // 미당첨
             Lotto(numbers = setOf(10, 15, 20, 25, 30, 40)), // 2등
             Lotto(numbers = setOf(10, 15, 20, 25, 30, 35))  // 1등
         )
@@ -23,9 +23,10 @@ class LottoGameTest : FunSpec({
             lottoGame.winningNumbers shouldBe winningNumbers
         }
 
-        test("로또 게임은 3-6개 일치 로또의 개수를 계산할 수 있다.") {
+        test("3-6개 일치 로또의 개수를 계산할 수 있다.") {
             val expected = LottoGameResult(
-                listOf(
+                totalPrice = 5000,
+                rewards = listOf(
                     LottoReward.FIRST,
                     LottoReward.SECOND,
                     LottoReward.THIRD,
@@ -33,6 +34,10 @@ class LottoGameTest : FunSpec({
                 )
             )
             lottoGame.getResult() shouldBe expected
+        }
+
+        test("로또 게임은 총 수익률을 계산할 수 있다.") {
+            lottoGame.getResult().calculatePerformance() shouldBe 400311
         }
     }
 })
