@@ -33,6 +33,7 @@ class LottoMachineTest {
         assertTrue(ticket.readOnlyNumbers.all { it in 1..45 })
     }
 
+    @Test
     @DisplayName("번호의 갯수가 부족한 로또 티켓 생성 시 예외 발생")
     fun `번호의 갯수가 부족한 로또 티켓 생성 시 예외 발생`() {
         assertThrows<IllegalArgumentException> {
@@ -40,6 +41,7 @@ class LottoMachineTest {
         }
     }
 
+    @Test
     @DisplayName("번호가 중복된 로또 티켓 생성 시 예외 발생")
     fun `번호가 중복된 로또 티켓 생성 시 예외 발생`() {
         assertThrows<IllegalArgumentException> {
@@ -47,6 +49,7 @@ class LottoMachineTest {
         }
     }
 
+    @Test
     @DisplayName("번호 범위를 벗어난 로또 티켓 생성 시 예외 발생")
     fun `번호 범위를 벗어난 로또 티켓 생성 시 예외 발생`() {
         assertThrows<IllegalArgumentException> {
