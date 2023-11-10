@@ -3,6 +3,7 @@ package lotto
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.RandomNumberGenerator
 
 class RandomNumberGeneratorTest : FunSpec({
     test("랜덤 숫자 생성기에 숫자A, 숫자B, N을 전달하면 숫자A ~ 숫자B 숫자를 N개 반환한다.") {

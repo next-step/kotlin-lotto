@@ -8,6 +8,7 @@ import io.kotest.inspectors.forAll
 import io.kotest.matchers.ints.shouldBeInRange
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
+import lotto.domain.Lotto
 
 class LottoTest : FunSpec({
     test("로또 한 장은 숫자 6개를 가진다.") {

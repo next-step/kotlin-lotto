@@ -4,6 +4,7 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.ints.shouldBeInRange
 import io.kotest.matchers.shouldBe
+import lotto.domain.generateLottoList
 
 class LottoFactoryTest : FunSpec({
     test("로또 생성기는 6개의 숫자를 골라 로또 한 장을 생성한다.") {

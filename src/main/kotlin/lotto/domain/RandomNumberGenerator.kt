@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class RandomNumberGenerator : NumberGenerator {
     override fun generateNumber(startNumber: Int, endNumber: Int, count: Int): Set<Int> {

@@ -1,4 +1,6 @@
-package lotto
+package lotto.domain
+
+import lotto.extension.getPrice
 
 class LottoGame(val lottoList: List<Lotto>, val winningNumbers: Set<Int>) {
     fun getResult(): LottoGameResult {

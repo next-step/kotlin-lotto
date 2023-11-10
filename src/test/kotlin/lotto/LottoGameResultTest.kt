@@ -2,6 +2,8 @@ package lotto
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.LottoGameResult
+import lotto.domain.LottoReward
 
 class LottoGameResultTest : FunSpec({
     test("로또 게임의 수익률은 `수익금 / 원금` 으로 계산된다.") {

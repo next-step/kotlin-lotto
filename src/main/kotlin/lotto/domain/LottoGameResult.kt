@@ -1,5 +1,6 @@
-package lotto
+package lotto.domain
 
+import lotto.extension.getAmount
 import java.text.DecimalFormat
 
 data class LottoGameResult(val totalPrice: Int, val rewards: List<LottoReward>) {

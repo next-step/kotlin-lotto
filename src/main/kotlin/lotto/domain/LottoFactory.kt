@@ -1,6 +1,6 @@
 @file:JvmName("LottoFactory")
 
-package lotto
+package lotto.domain
 
 fun generateLottoList(count: Int = 1, numberGenerator: NumberGenerator = RandomNumberGenerator()): List<Lotto> =
     List(count) {

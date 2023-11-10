@@ -1,5 +1,7 @@
 package lotto
 
+import lotto.domain.LottoGame
+import lotto.domain.generateLottoList
 import lotto.view.*
 
 fun main() {

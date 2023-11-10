@@ -2,6 +2,10 @@ package lotto
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.Lotto
+import lotto.domain.LottoGame
+import lotto.domain.LottoGameResult
+import lotto.domain.LottoReward
 
 class LottoGameTest : FunSpec({
     context("로또 게임은") {
