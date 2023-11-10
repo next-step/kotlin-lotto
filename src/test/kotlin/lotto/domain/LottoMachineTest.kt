@@ -21,7 +21,7 @@ class LottoMachineTest : StringSpec({
         // given
         val lottoCount = 2
         val lottoMachine = createLottoMachine(lottoCount)
-        val winningLotto = Lotto(listOf(2, 3, 6, 7, 8, 9).map { LottoNumber(it) })
+        val winningLotto = Lotto.from(listOf(2, 3, 6, 7, 8, 9).map { LottoNumber(it) })
 
         // when
         val lottoResult = lottoMachine.getResult(winningLotto, LottoBuyingPrice(2000))
@@ -42,7 +42,7 @@ private fun createLottoMachine(lottoCount: Int): LottoMachine {
 }
 
 private fun createFakeNumberGenerator() = object : NumberGenerator {
-    override fun generate(count: Int): List<Int> {
+    override fun generate(min: Int, max: Int, count: Int): List<Int> {
         return listOf(1, 2, 3, 4, 5, 6)
     }
 }

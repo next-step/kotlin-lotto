@@ -1,7 +1,7 @@
 package lotto.domain
 
 enum class LottoRank(
-    val countOfMatch: Int,
+    val winningMatchCount: Int,
     val winningMoney: Int,
 ) {
 
@@ -16,8 +16,12 @@ enum class LottoRank(
         this == MISS
 
     companion object {
+
         fun from(matchCount: Int): LottoRank {
-            return values().firstOrNull { it.countOfMatch == matchCount } ?: MISS
+            require(matchCount in MISS.winningMatchCount..SIX.winningMatchCount) {
+                "당첨 번호와 일치하는 개수는 0개 이상, 6개 이하만 가능합니다."
+            }
+            return values().firstOrNull { it.winningMatchCount == matchCount } ?: MISS
         }
     }
 }

@@ -53,7 +53,7 @@ object OutputView {
 
     private fun createMatchMessage(rank: LottoRank, matchCount: Int?) = String.format(
         MATCH_MESSAGE_FORMAT.trimIndent(),
-        rank.countOfMatch,
+        rank.winningMatchCount,
         rank.winningMoney,
         matchCount ?: 0
     )

@@ -13,9 +13,7 @@ class LottoMachine private constructor(
 
     init {
         repeat(lottoCount.value) {
-            val lottoNumbers = lottoNumberGenerator.generate(Lotto.LOTTO_NUMBER_COUNT)
-                .map { LottoNumber(it) }
-            val lotto = Lotto(lottoNumbers)
+            val lotto = Lotto.from(lottoNumberGenerator)
             _lottos.add(lotto)
         }
     }

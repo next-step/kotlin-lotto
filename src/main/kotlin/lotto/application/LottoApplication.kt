@@ -4,7 +4,7 @@ import lotto.domain.Charge
 import lotto.domain.Lotto
 import lotto.domain.LottoBuyingPrice
 import lotto.domain.LottoMachine
-import lotto.util.LottoNumberGenerator
+import lotto.util.RandomRangeNumberGenerator
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -27,7 +27,7 @@ class LottoApplication {
             val lottoCount = buyingPrice.divide(Lotto.LOTTO_PRICE)
             return LottoMachine.of(
                 lottoCount = lottoCount,
-                numberGenerator = LottoNumberGenerator
+                numberGenerator = RandomRangeNumberGenerator
             )
         }
 
