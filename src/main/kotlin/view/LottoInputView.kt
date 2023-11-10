@@ -3,14 +3,24 @@ package view
 class LottoInputView {
 
     fun validateCashInputData(inputData: String) {
+        validateNumberFormat(inputData)
+        validateInteger(inputData)
+        validateInputCashRange(inputData)
+    }
+
+    private fun validateNumberFormat(inputData: String) {
         if (inputData.toIntOrNull() == null) {
             throw IllegalArgumentException(ERR_MSG_NUMBER_FORMAT_EXCEPTION)
         }
+    }
 
+    private fun validateInteger(inputData: String) {
         if (inputData.toFloat() - inputData.toInt() != FLOAT_ZERO) {
             throw IllegalArgumentException(ERR_MSG_INT_FORMAT_EXCEPTION)
         }
+    }
 
+    private fun validateInputCashRange(inputData: String) {
         if (inputData.toInt() < INPUT_MIN_VALUE) {
             throw IllegalArgumentException(ERR_MSG_MIN_VALUE_EXCEPTION)
         }
