@@ -2,10 +2,12 @@ package lotto.lotto_auto
 
 import lotto.lotto.Lotto
 import lotto.lotto.LottoPrize
-import lotto.result.LottoResult
 import lotto.lotto.WinningLotto
+import lotto.result.LottoResult
 
 object LottoAuto {
+
+    fun createAutoLottoList(autoLottoCount: Int) = (1..autoLottoCount).map { Lotto() }
     fun matchedLottoCountWithBonusBall(
         lottoList: List<Lotto>,
         lastWeekLottoNumber: WinningLotto,

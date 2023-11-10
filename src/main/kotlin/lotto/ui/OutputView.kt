@@ -4,7 +4,16 @@ import lotto.lotto.Lotto
 import lotto.lotto.LottoPrize
 
 object OutputView {
-    fun print(list: List<Lotto>) {
+    fun printRequestEnterManualLottoNumber() {
+        println()
+        println(ENTER_MANUAL_LOTTO_NUMBER)
+    }
+
+    fun printTotalLottoCount(manualLottoCount: Int, autoLottoCount: Int) {
+        println(BUY_COUNT.format(manualLottoCount, autoLottoCount))
+    }
+
+    fun printAutoLottoList(list: List<Lotto>) {
         list.forEach {
             println(it.numberList.lottoNumbers)
         }
@@ -34,6 +43,8 @@ object OutputView {
         else -> MATCH_NOTHING
     }
 
+    private const val ENTER_MANUAL_LOTTO_NUMBER = "수동으로 구매할 번호를 입력해 주세요."
+    private const val BUY_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다."
     private const val LOTTO_STAT = "당첨 통계"
     private const val MATCH_NOTHING = "0개 일치"
     private const val MATCH_THREE = "3개 일치 (5000원) - %d개"
