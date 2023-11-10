@@ -1,6 +1,7 @@
 package lotto.model
 
 import lotto.model.LottoTicket.Companion.NUMBER_COUNT
+import java.text.DecimalFormat
 
 
 class LottoResults(lottoTickets: List<LottoTicket>, winningNumbers: List<LottoNumber>) {
@@ -15,5 +16,14 @@ class LottoResults(lottoTickets: List<LottoTicket>, winningNumbers: List<LottoNu
     private fun getMatchCount(winningNumbers: List<LottoNumber>, lottoTicket: LottoTicket): Int =
         lottoTicket.numbers.intersect(winningNumbers.toSet()).size
 
+    fun getProfit(): Double {
+        val ticketCount = results.values.sum()
+
+        val sumOfPrize = results.entries.fold(0) { sum, (key, value) ->
+            sum + value * Prize.getPrizePerMatch(key)
+        }
+
+        return DecimalFormat("#.##").format(sumOfPrize.toDouble() / (LottoTicket.TICKET_PRICE * ticketCount).toDouble()).toDouble()
+    }
 }
 

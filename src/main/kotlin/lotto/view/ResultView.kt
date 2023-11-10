@@ -3,7 +3,6 @@ package lotto.view
 import lotto.model.LottoResults
 import lotto.model.LottoTicket
 import lotto.model.Prize
-import lotto.model.ProfitCalculator
 
 object ResultView {
     fun renderTickets(lottoTickets: List<LottoTicket>) {
@@ -20,6 +19,6 @@ object ResultView {
         lottoResults.results.forEach { (key, value) ->
             println("${key}개 일치 (${Prize.getPrizePerMatch(value)}원) - ${value}개")
         }
-        println("총 수익률은 ${String.format("%.2f", ProfitCalculator.calculate(lottoResults))}입니다.")
+        println("총 수익률은 ${String.format("%.2f", lottoResults.getProfit())}입니다.")
     }
 }
