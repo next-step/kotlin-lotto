@@ -2,7 +2,7 @@ package lotto.domain
 
 import lotto.util.NumberGenerator
 
-class LottoMachine(
+class LottoMachine private constructor(
     val lottoCount: LottoCount,
     lottoNumberGenerator: NumberGenerator,
 ) {
@@ -14,13 +14,14 @@ class LottoMachine(
     init {
         repeat(lottoCount.value) {
             val lottoNumbers = lottoNumberGenerator.generate(Lotto.LOTTO_NUMBER_COUNT)
+                .map { LottoNumber(it) }
             val lotto = Lotto(lottoNumbers)
             _lottos.add(lotto)
         }
     }
 
-    fun getLottoTotalPrice(): Int {
-        return lottoCount.times(Lotto.LOTTO_PRICE)
+    fun getLottoTotalPrice(): Price {
+        return Price(lottoCount.times(Lotto.LOTTO_PRICE))
     }
 
     fun getResult(winningLotto: Lotto, buyingPrice: LottoBuyingPrice): LottoMatchResult {
@@ -30,9 +31,17 @@ class LottoMachine(
         return LottoMatchResult(lottoResult.matchCountByRank, earningRate)
     }
 
-    private fun getMatchCountByRank(winningLotto: Lotto): Map<LottoRank, Int> = lottos.map {
-        it.calculateMatchCount(winningLotto)
-    }.groupingBy {
-        LottoRank.from(it)
-    }.fold(0) { count, _ -> count + 1 }
+    private fun getMatchCountByRank(winningLotto: Lotto): Map<LottoRank, Int> =
+        lottos.map { it.calculateMatchCount(winningLotto) }
+            .groupingBy { LottoRank.from(it) }
+            .fold(INIT_MATCH_COUNT) { count, _ -> count + 1 }
+
+    companion object {
+        private const val INIT_MATCH_COUNT = 0
+
+        fun of(lottoCount: Int, numberGenerator: NumberGenerator): LottoMachine = LottoMachine(
+            lottoCount = LottoCount(lottoCount),
+            lottoNumberGenerator = numberGenerator
+        )
+    }
 }

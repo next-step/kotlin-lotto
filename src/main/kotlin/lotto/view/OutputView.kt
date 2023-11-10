@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.Charge
+import lotto.domain.Lotto
 import lotto.domain.LottoMachine
 import lotto.domain.LottoMatchResult
 import lotto.domain.LottoRank
@@ -22,10 +23,14 @@ object OutputView {
 
     fun printLottos(lottoMachine: LottoMachine, change: Charge) {
         println(String.format(BUYING_MESSAGE_FORMAT, lottoMachine.lottoCount.value, change.value))
-        lottoMachine.lottos.forEach {
-            val lottoNumbers = it.numbers.joinToString(", ")
-            println(String.format(LOTTO_FORMAT, lottoNumbers))
-        }
+        lottoMachine.lottos.forEach { printLottoNumbers(it) }
+    }
+
+    private fun printLottoNumbers(it: Lotto) {
+        val lottoNumbers = it.numbers
+            .map { number -> number.value }
+            .joinToString(", ")
+        println(String.format(LOTTO_FORMAT, lottoNumbers))
     }
 
     fun printLottoResult(lottoMatchResult: LottoMatchResult) {
@@ -50,7 +55,7 @@ object OutputView {
         MATCH_MESSAGE_FORMAT.trimIndent(),
         rank.countOfMatch,
         rank.winningMoney,
-        matchCount ?: 0,
+        matchCount ?: 0
     )
 
     private fun createEarningRateMessage(
@@ -59,7 +64,7 @@ object OutputView {
         return String.format(
             EARNING_RATE_MESSAGE_FORMAT,
             earningRate,
-            if (earningRate > STANDARD_RATE) WIN else LOSE,
+            if (earningRate > STANDARD_RATE) WIN else LOSE
         )
     }
 }

@@ -8,7 +8,7 @@ class LottoResultTest : StringSpec({
         // given
         val buyingPrice = LottoBuyingPrice(10_000)
         val matchCountByRank = mapOf(
-            LottoRank.THREE to 1
+            LottoRank.THREE to 1,
         )
 
         val lottoResult = LottoResult(matchCountByRank)
@@ -19,4 +19,4 @@ class LottoResultTest : StringSpec({
         // then
         earningRate shouldBe 0.5
     }
-})
+},)

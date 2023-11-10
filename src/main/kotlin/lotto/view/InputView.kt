@@ -2,6 +2,7 @@ package lotto.view
 
 import lotto.domain.Lotto
 import lotto.domain.LottoBuyingPrice
+import lotto.domain.LottoNumber
 
 object InputView {
 
@@ -25,12 +26,12 @@ object InputView {
             validateNumeric(it.trim())
             it.trim().toInt()
         }.let {
-            Lotto(it)
+            Lotto(it.map { number -> LottoNumber(number) })
         }
     }
 
     private fun validateIsNullOrBlank(userInput: String?) {
-        require(!userInput.isNullOrBlank()) {
+        require(userInput.isNullOrBlank().not()) {
             "입력값이 존재하지 않습니다."
         }
     }

@@ -14,30 +14,30 @@ class LottoMachineTest : StringSpec({
         val lottoMachine = createLottoMachine(lottoCount)
 
         // then
-        lottoMachine.getLottoTotalPrice() shouldBe 10000
+        lottoMachine.getLottoTotalPrice() shouldBe Price(10000)
     }
 
     "로또 당첨 번호를 받아 로또 결과를 반환한다." {
         // given
         val lottoCount = 2
         val lottoMachine = createLottoMachine(lottoCount)
-        val winningLotto = Lotto(listOf(2, 3, 6, 7, 8, 9))
+        val winningLotto = Lotto(listOf(2, 3, 6, 7, 8, 9).map { LottoNumber(it) })
 
         // when
         val lottoResult = lottoMachine.getResult(winningLotto, LottoBuyingPrice(2000))
 
         // then
         lottoResult.result shouldBe mutableMapOf(
-            LottoRank.THREE to 2
+            LottoRank.THREE to 2,
         )
         lottoResult.earningRate shouldBe 5.0
     }
-})
+},)
 
 private fun createLottoMachine(lottoCount: Int): LottoMachine {
-    return LottoMachine(
-        lottoCount = LottoCount(lottoCount),
-        lottoNumberGenerator = createFakeNumberGenerator()
+    return LottoMachine.of(
+        lottoCount = lottoCount,
+        numberGenerator = createFakeNumberGenerator(),
     )
 }
 
