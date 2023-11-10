@@ -6,7 +6,6 @@ import lotto.view.ResultView
 
 
 class LottoOrganizer {
-
     fun start() {
         val ticketCount = LottoPerson.buyLottoTicket(InputView.getPurchasePrice())
 
