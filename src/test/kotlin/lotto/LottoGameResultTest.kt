@@ -20,4 +20,18 @@ class LottoGameResultTest : FunSpec({
         lottoGameResult.getRewardCount(LottoReward.THIRD) shouldBe 0
         lottoGameResult.getRewardCount(LottoReward.FOURTH) shouldBe 0
     }
+
+    test("로또 게임결과의 상태를 출력하면 등수별 인원수, 총 수익률이 출력된다.") {
+        val lottoGameResult = LottoGameResult(
+            totalPrice = 3000,
+            rewards = listOf(LottoReward.FIRST, LottoReward.SECOND)
+        )
+        lottoGameResult.toString() shouldBe """
+            3개 일치 (5000원) - 0개
+            4개 일치 (50000원) - 0개
+            5개 일치 (1500000원) - 1개
+            6개 일치 (2000000000원) - 1개
+            총 수익률은 667,166.67입니다.
+            """.trimIndent()
+    }
 })
