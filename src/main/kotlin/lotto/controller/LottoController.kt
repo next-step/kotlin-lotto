@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.domain.Lotto
 import lotto.domain.LottoShop
+import lotto.domain.Money
 import lotto.domain.Ranks
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -18,7 +19,7 @@ class LottoController(private val lottoShop: LottoShop) {
         OutputView().printResult(ranks, money)
     }
 
-    private fun buyLotto(money: Int): List<Lotto> {
+    private fun buyLotto(money: Money): List<Lotto> {
         return lottoShop.buy(money)
     }
 

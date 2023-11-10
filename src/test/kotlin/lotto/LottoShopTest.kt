@@ -7,6 +7,7 @@ import io.mockk.mockk
 import lotto.domain.Lotto
 import lotto.domain.LottoGenerator
 import lotto.domain.LottoShop
+import lotto.domain.Money
 
 class LottoShopTest : FunSpec({
     val generator = mockk<LottoGenerator>()
@@ -15,7 +16,7 @@ class LottoShopTest : FunSpec({
         val lottoShop = LottoShop(generator)
 
         test("로또를 구매한다.") {
-            lottoShop.buy(10_500) shouldHaveSize 10
+            lottoShop.buy(Money(10_500)) shouldHaveSize 10
         }
     }
 })

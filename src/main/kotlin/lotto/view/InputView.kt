@@ -1,10 +1,12 @@
 package lotto.view
 
+import lotto.domain.Money
+
 class InputView {
 
-    fun inputMoney(): Int {
+    fun inputMoney(): Money {
         println("구입금액을 입력해 주세요.")
-        return readln().toInt()
+        return Money(readln().toInt())
     }
 
     fun inputWinningLotto(): Set<Int> {

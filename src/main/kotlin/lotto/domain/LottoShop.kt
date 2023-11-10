@@ -1,12 +1,8 @@
 package lotto.domain
 
 class LottoShop(private val lottoGenerator: LottoGenerator) {
-    fun buy(money: Int): List<Lotto> {
-        val lottoCount = money / LOTTO_PRICE
+    fun buy(money: Money): List<Lotto> {
+        val lottoCount = money.count()
         return (1..lottoCount).map { lottoGenerator.generate() }
-    }
-
-    companion object {
-        const val LOTTO_PRICE = 1_000
     }
 }
