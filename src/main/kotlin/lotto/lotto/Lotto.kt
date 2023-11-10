@@ -1,4 +1,4 @@
-package lotto_auto.lotto
+package lotto.lotto
 
 data class Lotto(
     val numberList: LottoNumbers = createLotto(),

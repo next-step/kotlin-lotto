@@ -1,4 +1,4 @@
-package lotto_auto.ui
+package lotto.ui
 
 object InputView {
     fun input(): Int {

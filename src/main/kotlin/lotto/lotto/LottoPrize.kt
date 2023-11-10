@@ -1,4 +1,4 @@
-package lotto_auto.lotto
+package lotto.lotto
 
 enum class LottoPrize(val matchCount: Int, val winningAmount: Int) {
     MISS(0, 0),

@@ -1,7 +1,11 @@
-package lotto_auto.lotto
+package lotto
 
-import lotto_auto.ui.InputView
-import lotto_auto.ui.OutputView
+import lotto.lotto.Lotto
+import lotto.lotto.LottoPrize
+import lotto.lotto.toWinningLotto
+import lotto.lotto_auto.LottoAuto
+import lotto.ui.InputView
+import lotto.ui.OutputView
 
 fun main() {
     val inputAmount = InputView.input()

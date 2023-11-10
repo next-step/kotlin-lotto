@@ -1,9 +1,9 @@
-package lotto_auto
+package lotto
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
-import lotto_auto.lotto.LottoPrize
+import lotto.lotto.LottoPrize
 
 class LottoPrizeTest : FunSpec({
     context("getLottoPrize 함수가 제대로 된 등수를 리턴 한다 (2등 제외)") {

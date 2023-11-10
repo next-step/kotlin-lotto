@@ -1,7 +1,7 @@
-package lotto_auto.ui
+package lotto.ui
 
-import lotto_auto.lotto.Lotto
-import lotto_auto.lotto.LottoPrize
+import lotto.lotto.Lotto
+import lotto.lotto.LottoPrize
 
 object OutputView {
     fun print(list: List<Lotto>) {

@@ -1,8 +1,8 @@
-package lotto_auto
+package lotto
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
-import lotto_auto.ui.InputView
+import lotto.ui.InputView
 
 class InputTest : StringSpec({
     "금액을 입력 하면 갯수가 잘 나온다" {

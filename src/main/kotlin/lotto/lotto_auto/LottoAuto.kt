@@ -1,4 +1,9 @@
-package lotto_auto.lotto
+package lotto.lotto_auto
+
+import lotto.lotto.Lotto
+import lotto.lotto.LottoPrize
+import lotto.result.LottoResult
+import lotto.lotto.WinningLotto
 
 object LottoAuto {
     fun matchedLottoCountWithBonusBall(

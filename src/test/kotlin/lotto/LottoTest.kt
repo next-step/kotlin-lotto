@@ -1,11 +1,11 @@
-package lotto_auto
+package lotto
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
-import lotto_auto.lotto.Lotto
-import lotto_auto.lotto.LottoNumbers
+import lotto.lotto.Lotto
+import lotto.lotto.LottoNumbers
 
 class LottoTest : FunSpec({
     val lotto = Lotto()

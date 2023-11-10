@@ -1,4 +1,6 @@
-package lotto_auto.lotto
+package lotto.result
+
+import lotto.lotto.LottoPrize
 
 data class LottoResult(
     val lottoPrize: LottoPrize,
