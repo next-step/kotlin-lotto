@@ -27,7 +27,7 @@ class LottoInputViewTest {
         val actual = LottoInputView.splitWinningNumber(inputWinningNumber)
 
         // then : 콤마를 기준으로 구분하여 리스트를 반환한다
-        assertThat(actual).isEqualTo(listOf("1","2","3","4","5","8"))
+        assertThat(actual).isEqualTo(listOf("1", "2", "3", "4", "5", "8"))
     }
 
     @Test
@@ -40,6 +40,18 @@ class LottoInputViewTest {
 
         // then : 에러를 던진다.
         assertThat(actual).isInstanceOf(IllegalArgumentException()::class.java)
+    }
+
+    @Test
+    fun `분리된 당첨 번호가 6개를 초과할 때, 검증을 요청하면, 에러를 던진다`() {
+        // given : 6개를 초과하는 당첨번호 리스트를 받는다.
+        val winningNumberList = listOf("1", "2", "3", "4", "5", "8", "16")
+
+        // when : 검증을 한다
+        val actual = runCatching { LottoInputView.validateWinningNumberList(winningNumberList) }.exceptionOrNull()
+
+        // then : 에러를 던진다.
+        assertThat(actual).isInstanceOf(IllegalArgumentException::class.java)
     }
 
     companion object {
