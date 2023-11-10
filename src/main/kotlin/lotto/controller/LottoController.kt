@@ -13,7 +13,7 @@ class LottoController(private val lottoShop: LottoShop) {
         val money = InputView().inputMoney()
         val lottos = buyLotto(money)
         OutputView().printLottos(lottos)
-        val winningLotto = Lotto(InputView().inputWinningLotto())
+        val winningLotto = InputView().inputWinningLotto()
         val bonusBall = InputView().inputBonusBall()
         val ranks = matchLotto(lottos, winningLotto, bonusBall)
         OutputView().printResult(ranks, money)
