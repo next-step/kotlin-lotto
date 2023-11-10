@@ -18,7 +18,7 @@ internal class LottoResultsTest : BehaviorSpec({
                 lottoResults.results shouldBe (0..LottoTicket.NUMBER_COUNT + 1).associateWith { 0 }.toMutableMap().apply { this[6] = 1 }
             }
             Then("수익률은") {
-                lottoResults.getProfit() shouldBe 2000000.0
+                lottoResults.profit shouldBe 2000000.0
             }
         }
     }

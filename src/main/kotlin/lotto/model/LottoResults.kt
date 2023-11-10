@@ -16,7 +16,9 @@ class LottoResults(lottoTickets: List<LottoTicket>, winningNumbers: List<LottoNu
     private fun getMatchCount(winningNumbers: List<LottoNumber>, lottoTicket: LottoTicket): Int =
         lottoTicket.numbers.intersect(winningNumbers.toSet()).size
 
-    fun getProfit(): Double {
+    val profit: Double
+        get() = getProfit()
+    private fun getProfit(): Double {
         val ticketCount = results.values.sum()
 
         val sumOfPrize = results.entries.fold(0) { sum, (key, value) ->

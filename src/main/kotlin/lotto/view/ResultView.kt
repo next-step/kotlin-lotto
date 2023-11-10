@@ -19,6 +19,6 @@ object ResultView {
         lottoResults.results.forEach { (key, value) ->
             println("${key}개 일치 (${Prize.getPrizePerMatch(value)}원) - ${value}개")
         }
-        println("총 수익률은 ${String.format("%.2f", lottoResults.getProfit())}입니다.")
+        println("총 수익률은 ${String.format("%.2f", lottoResults.profit)}입니다.")
     }
 }
