@@ -56,7 +56,7 @@ object OutputView {
         result: Map<LottoRank, Int>,
         rank: LottoRank,
     ): String {
-        val matchCount = result[rank]
+        val matchCount = result[rank] ?: 0
         return if (rank.isSecond()) {
             createBonusMatchMessage(rank, matchCount)
         } else {
@@ -64,18 +64,18 @@ object OutputView {
         }
     }
 
-    private fun createMatchMessage(rank: LottoRank, matchCount: Int?) = String.format(
+    private fun createMatchMessage(rank: LottoRank, matchCount: Int) = String.format(
         MATCH_MESSAGE_FORMAT.trimIndent(),
         rank.winningMatchCount,
         rank.winningMoney,
-        matchCount ?: 0
+        matchCount
     )
 
-    private fun createBonusMatchMessage(rank: LottoRank, matchCount: Int?) = String.format(
+    private fun createBonusMatchMessage(rank: LottoRank, matchCount: Int) = String.format(
         BONUS_BALL_MATCH_MESSAGE_FORMAT.trimIndent(),
         rank.winningMatchCount,
         rank.winningMoney,
-        matchCount ?: 0
+        matchCount
     )
 
     private fun createEarningRateMessage(
