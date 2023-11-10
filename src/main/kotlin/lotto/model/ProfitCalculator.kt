@@ -1,8 +1,5 @@
 package lotto.model
 
-import lotto.collection.LottoResults
-import lotto.collection.LottoTicket
-import lotto.collection.Prize
 import java.text.DecimalFormat
 
 

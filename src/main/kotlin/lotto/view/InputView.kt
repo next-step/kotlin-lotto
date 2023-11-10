@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.collection.LottoTicket
+import lotto.model.LottoTicket
 
 object InputView {
     fun getPurchasePrice(): Int {

@@ -3,8 +3,6 @@ package lotto.model
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
-import lotto.collection.LottoNumber
-import lotto.collection.LottoTicket
 
 class TicketTest : BehaviorSpec({
     Given("티켓") {

@@ -1,4 +1,4 @@
-package lotto.collection
+package lotto.model
 
 
 

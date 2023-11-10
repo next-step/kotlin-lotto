@@ -1,4 +1,4 @@
-package lotto.collection
+package lotto.model
 
 enum class Prize(
     val matched: Int, val prize: Int

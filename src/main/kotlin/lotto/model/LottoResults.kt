@@ -1,6 +1,6 @@
-package lotto.collection
+package lotto.model
 
-import lotto.collection.LottoTicket.Companion.NUMBER_COUNT
+import lotto.model.LottoTicket.Companion.NUMBER_COUNT
 
 
 class LottoResults(lottoTickets: List<LottoTicket>, winningNumbers: List<LottoNumber>) {

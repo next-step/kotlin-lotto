@@ -1,19 +1,17 @@
 package lotto.view
 
-import lotto.collection.LottoResults
-import lotto.collection.LottoTicket
-import lotto.collection.Prize
+import lotto.model.LottoResults
+import lotto.model.LottoTicket
+import lotto.model.Prize
 import lotto.model.ProfitCalculator
 
 object ResultView {
-    fun renderTickets(lottoTickets: List<LottoTicket>): List<LottoTicket> {
+    fun renderTickets(lottoTickets: List<LottoTicket>) {
         lottoTickets.forEach { ticket -> println(ticket.numbers.map { it.number }) }
-        return lottoTickets
     }
 
-    fun renderTicketCount(ticketCount: Int): Int {
+    fun renderTicketCount(ticketCount: Int) {
         println("${ticketCount}개를 구매했습니다.")
-        return ticketCount
     }
 
     fun renderResults(lottoResults: LottoResults) {

@@ -54,7 +54,7 @@
 - [x] getMatchedList 매서드의 반환 리스트는 무엇인지 명시하기
 - [ ] LottoOrganizer의 책임 생각 해보기 - 주어진 돈을 가지고, 로또를 구매하는 책임은 따로 분리해보면 어떨까요?
 - [x] LottoValidator의 책임 생각 해보기 - winningNumbers, lottoTickets등을 관리하는 책임어떨지
-- [ ] scope function 제대로 알고 쓰기
+- [x] scope function 제대로 알고 쓰기
 
 ## 챗 지피티와의 대화
 
@@ -147,7 +147,51 @@ let은 체이닝, 검사 및 처리를 위한 블록을 제공하고, 새로운 
 체크를 할 때 사용합니다. 다른 Scope 함수와 가장 크게 다른 점은 객체를 파라미터로 받아와 처리한다는 점입니다.
 
 모든 스코프 함수는 람다 내의 마지막 표현식을 결과로 반환합니다. apply 와 also를 '값을 설정하는 객체'로 생각하고, let, run, with은 '값을 계산하거나 동작하는 객체'로 생각하면 좀 더 이해하기
-쉽습니다. 추가적으로, this가 필요하면 apply, also, run, with을 사용하고, it이 필요하면 let을 사용하시면 됩니다
+쉽습니다. 추가적으로, this가 필요하면 apply, run, with을 사용하고, it이 필요하면 also, let을 사용하시면 됩니다
+
+
+```kotlin
+class Person {
+    var name: String = ""
+    var age: Int = 0
+}
+
+fun main() {
+    val person = Person()
+
+    // also
+    val result1 = person.also { it.name = "John" }
+    println(result1.name)  // 결과: "John"
+
+    // apply
+    val result2 = person.apply { name = "Doe" }
+    println(result2.name)  // 결과: "Doe"
+
+    // run
+    val result3 = person.run { name = "Kim"; age = 20; "Finished" }
+    println(result3)  // 결과: "Finished"
+
+    // let
+    val result4 = person.let { it.name = "Lee"; it.age = 30; "Complete" }
+    println(result4)  // 결과: "Complete"
+
+    // with
+    val result5 = with(person) { name = "Park"; age = 40; "Done" }
+    println(result5)  // 결과: "Done"
+}
+```
+
+- 정리
+  - with 는 명시적으로 인자를 적용 할때 쓴다. 나머지는 암시적으로 인자가 넘어온다
+  - let run with는 결과 값을 반환하고 apply, also는 인자로 받은 객체를 반환한다
+  - 값계산을 원하면 let run with 사용하고 설정을 원하면 apply, also를 사용한다 
+  - this가 필요하면 apply, run, with을 사용하고, it이 필요하면 also, let을 사용한다
+  - 대표적인 사용규칙
+    - apply는 수신된 객체를 사용하지 않고 초기화하고 그대로 반환할때 사용한다., this사용, 초기화 할때 사용
+    - also는 수신된 객체를 사용하지 않고 초기화도 안하고 그대로 반환할때 사용한다. , it사용, 검증 함수나 print 함수할 때 쓰면 좋을듯
+    - let은 null 체이닝 하거나 단일 지역 변수의 범위를 제한하고 값을 리턴할 때 사용한다, it사용, 체이닝 할때 사용
+    - run은 범위를 제한하고 값을 리턴할때 사용한다 , this사용, 체이닝 할때 사용
+    - with는 인자를 사용할때 사용하고 아무런 리턴을 못한다., this사용, 자체로 끝낼때 사용
 
 ## 궁금한 것 답변해 주신 것
 
