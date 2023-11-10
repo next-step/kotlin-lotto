@@ -4,6 +4,7 @@ object LottoInputView {
 
     private const val ERR_MSG_NUMBER_FORMAT_EXCEPTION = "입력값에 대한 포멧이 숫자 아닙니다."
     private const val ERR_MSG_INT_FORMAT_EXCEPTION = "입력값에 대한 포멧이 정수가 아닙니다."
+    private const val ERR_MSG_NON_POSITIVE_NUMBER_EXCEPTION = "입력 값의 포멧이 양수가 아닙니다."
     private const val ERR_MSG_MIN_VALUE_EXCEPTION = "최소값 1,000원 이상의 값을 입력해 주세요"
     private const val ERR_MSG_MAX_VALUE_EXCEPTION = "최대값 100,000원 이하의 값을 입력해 주세요"
     private const val ERR_MSG_EXCEED_WINNING_NUMBERS_CNT = "당첨 번호 입력 개수를 초과하였습니다."
@@ -41,19 +42,26 @@ object LottoInputView {
         }
     }
 
+    private fun validatePositiveNumber(winningNumber: String) {
+        if (winningNumber.toInt() <= 0) {
+            throw IllegalArgumentException(ERR_MSG_NON_POSITIVE_NUMBER_EXCEPTION)
+        }
+    }
+
     fun splitWinningNumber(inputWinningNumber: String): List<Int> {
         val winningNumberList = inputWinningNumber.split(',').map { it.trim() }
 
         winningNumberList.forEach {
             validateNumberFormat(it)
             validateInteger(it)
+            validatePositiveNumber(it)
         }
 
         return winningNumberList.map { it.toInt() }
     }
 
     fun validateWinningNumberList(winningNumberList: List<Int>) {
-        if(winningNumberList.size > 6) {
+        if (winningNumberList.size > 6) {
             throw IllegalArgumentException(ERR_MSG_EXCEED_WINNING_NUMBERS_CNT)
         }
     }
@@ -63,7 +71,7 @@ object LottoInputView {
     }
 
     private fun checkNumberRange(number: Int) {
-        if(number > INPUT_MAX_WINNING_NUMBER) {
+        if (number > INPUT_MAX_WINNING_NUMBER) {
             throw IllegalArgumentException(ERR_MSG_EXCEED_WINNING_NUMBER_RANGE)
         }
     }

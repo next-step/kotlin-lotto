@@ -31,9 +31,9 @@ class LottoInputViewTest {
     }
 
     @Test
-    fun `당첨 번호에 대한 모든 입력 값이 정수가 아닐 때, splitWinningNumber()을 요청하면, 에러를 던진다`() {
-        // given : 정수가 아닌 입력 값을 받는다.
-        val inputWinningNumber = "1,2.8,3,4,5,8"
+    fun `당첨 번호에 대한 모든 입력 값의 포맷이 양수가 아닐 때, splitWinningNumber()을 요청하면, 에러를 던진다`() {
+        // given : 포맷이 양수가 아닌 입력 값을 받는다.
+        val inputWinningNumber = "1,2a,3,4,5,-8"
 
         // when :  splitWinningNumber()을 요청한다.
         val actual = runCatching { LottoInputView.splitWinningNumber(inputWinningNumber) }.exceptionOrNull()
@@ -45,7 +45,7 @@ class LottoInputViewTest {
     @Test
     fun `분리된 당첨 번호가 6개를 초과할 때, 검증을 요청하면, 에러를 던진다`() {
         // given : 6개를 초과하는 당첨번호 리스트를 받는다.
-        val winningNumberList = listOf(1,2,3,4,5,6,7)
+        val winningNumberList = listOf(1, 2, 3, 4, 5, 6, 7)
 
         // when : 검증을 한다
         val actual = runCatching { LottoInputView.validateWinningNumberList(winningNumberList) }.exceptionOrNull()
@@ -57,7 +57,7 @@ class LottoInputViewTest {
     @Test
     fun `분리된 당첨 번호들의 범위가 1~45가 아닐 때, 검증을 요청하면, 에러를 던진다`() {
         // given : 분리된 당첨번호의 범위가 1~45에 존재하지 않는다.
-        val winningNumberList = listOf(1,2,3,4,5,66)
+        val winningNumberList = listOf(1, 2, 3, 4, 5, 66)
 
         // when : 검증을 한다
         val actual = runCatching { LottoInputView.validateWinningNumberRange(winningNumberList) }.exceptionOrNull()
