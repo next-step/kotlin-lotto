@@ -22,16 +22,26 @@ class LottoMachine private constructor(
         return Price(lottoCount.times(Lotto.LOTTO_PRICE))
     }
 
-    fun getResult(winningLotto: Lotto, buyingPrice: LottoBuyingPrice): LottoMatchResult {
-        val matchCountByRank = getMatchCountByRank(winningLotto)
+    fun getResult(winningLotto: Lotto, buyingPrice: LottoBuyingPrice, bonusBall: LottoNumber): LottoMatchResult {
+        validateBonusBall(winningLotto, bonusBall)
+        val matchCountByRank = getMatchCountByRank(winningLotto, bonusBall)
         val lottoResult = LottoResult(matchCountByRank)
         val earningRate = lottoResult.calculateEarningRate(buyingPrice)
         return LottoMatchResult(lottoResult.matchCountByRank, earningRate)
     }
 
-    private fun getMatchCountByRank(winningLotto: Lotto): Map<LottoRank, Int> =
-        lottos.map { it.calculateMatchCount(winningLotto) }
-            .groupingBy { LottoRank.from(it) }
+    private fun validateBonusBall(winningLotto: Lotto, bonusBall: LottoNumber) {
+        require(winningLotto.hasBonusBall(bonusBall).not()) {
+            "보너스 볼은 당첨 번호와 중복될 수 없습니다."
+        }
+    }
+
+    private fun getMatchCountByRank(winningLotto: Lotto, bonusBall: LottoNumber): Map<LottoRank, Int> =
+        lottos.map {
+            val matchCount = it.calculateMatchCount(winningLotto)
+            val hasBonusBall = it.hasBonusBall(bonusBall)
+            matchCount to hasBonusBall
+        }.groupingBy { LottoRank.from(it.first, it.second) }
             .fold(INIT_MATCH_COUNT) { count, _ -> count + 1 }
 
     companion object {
