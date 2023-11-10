@@ -1,9 +1,11 @@
 package lotto.domain
 
-object LottoShop {
+class LottoShop(
+    private val lottoNumberGenerator: LottoNumberGenerator,
+) {
     fun purchaseLottos(purchaseAmount: Long): List<Lotto> {
         val purchaseCount = (purchaseAmount / Lotto.PRICE).toInt()
 
-        return List(purchaseCount) { Lotto(LottoNumberGenerator.generateNumbers()) }
+        return List(purchaseCount) { Lotto(lottoNumberGenerator.generateNumbers()) }
     }
 }
