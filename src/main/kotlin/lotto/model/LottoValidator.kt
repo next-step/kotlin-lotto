@@ -18,6 +18,6 @@ object LottoValidator {
         return result.toList()
     }
 
-    private fun getMatchCount(winningNumbers: List<LottoNumber>, lottoTicket: LottoTicket) =
+    private fun getMatchCount(winningNumbers: List<LottoNumber>, lottoTicket: LottoTicket): Int =
         lottoTicket.numbers.intersect(winningNumbers.toSet()).size
 }

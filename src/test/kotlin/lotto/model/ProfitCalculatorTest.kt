@@ -13,8 +13,8 @@ class ProfitCalculatorTest : BehaviorSpec({
         )
         When("계산 했을 때") {
             val profit = ProfitCalculator.calculate(lottoResults)
-            Then("수익률은 1.0이다") {
-                profit shouldBe 25.0
+            Then("수익률은 2.5이다") {
+                profit shouldBe 2.5
             }
         }
     }

@@ -1,11 +1,12 @@
 package lotto.collection
 
 @JvmInline
-value class LottoNumber(val number: Int) {
-    init {
-        require(number in NUMBER_RANGE) { "로또 번호는 ${NUMBER_RANGE.first}~${NUMBER_RANGE.last} 사이여야 합니다." }
-    }
+value class LottoNumber private constructor(val number: Int) {
     companion object {
         val NUMBER_RANGE = 1..45
+        private val NUMBERS: Map<Int, LottoNumber> = NUMBER_RANGE.associateWith { LottoNumber(it) }
+
+        fun from(number: Int): LottoNumber = NUMBERS[number]
+            ?: throw IllegalArgumentException("로또 번호는 ${NUMBER_RANGE.first}~${NUMBER_RANGE.last} 사이여야 합니다.")
     }
 }

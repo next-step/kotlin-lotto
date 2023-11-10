@@ -4,9 +4,9 @@ import lotto.collection.LottoNumber
 import lotto.collection.LottoTicket
 
 object LottoGenerator {
-    private fun getLottoNumbers (range: IntRange) = (range).shuffled().take(LottoTicket.NUMBER_COUNT).map { LottoNumber(it) }
+    private fun getLottoNumbers (shuffled: Iterable<Int>.() -> List<Int>) = (LottoNumber.NUMBER_RANGE).shuffled().take(LottoTicket.NUMBER_COUNT).map { LottoNumber.from(it) }
 
-    fun generateTickets(ticketCount: Int) = List(ticketCount) {
-        LottoTicket(getLottoNumbers(LottoNumber.NUMBER_RANGE))
+    fun generateTickets(ticketCount: Int, shuffled: Iterable<Int>.() -> List<Int>): List<LottoTicket> = List(ticketCount) {
+        LottoTicket(getLottoNumbers(shuffled))
     }
 }

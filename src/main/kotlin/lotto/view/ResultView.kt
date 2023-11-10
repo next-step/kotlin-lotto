@@ -2,7 +2,7 @@ package lotto.view
 
 import lotto.collection.LottoResults
 import lotto.collection.LottoTicket
-import lotto.collection.WinningMoney
+import lotto.collection.Prize
 import lotto.model.ProfitCalculator
 
 object ResultView {
@@ -20,7 +20,7 @@ object ResultView {
         println("당첨 통계")
         println("---------")
         lottoResults.results.forEach { (key, value) ->
-            println("${key}개 일치 (${WinningMoney.getPrizePerMatch(value)}원) - ${value}개")
+            println("${key}개 일치 (${Prize.getPrizePerMatch(value)}원) - ${value}개")
         }
         println("총 수익률은 ${String.format("%.2f", ProfitCalculator.calculate(lottoResults))}입니다.")
     }

@@ -11,7 +11,8 @@ import lotto.view.ResultView
 class LottoOrganizer {
 
     fun start() {
-        getTicketCount().let { ResultView.renderTicketCount(it) }.let { LottoGenerator.generateTickets(it) }
+        getTicketCount().let { ResultView.renderTicketCount(it) }
+            .let { LottoGenerator.generateTickets(it) { this.shuffled() } }
             .let { ResultView.renderTickets(it) }.let(validateTickets).let {
                 ResultView.renderResults(
                     it
@@ -24,7 +25,7 @@ class LottoOrganizer {
     private val validateTickets = { lottoTickets: List<LottoTicket> ->
         LottoValidator.validate(
             lottoTickets,
-            InputView.getWinningNumbers().map { LottoNumber(it) })
+            InputView.getWinningNumbers().map { LottoNumber.from(it) })
     }
 
 }
