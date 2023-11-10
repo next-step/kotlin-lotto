@@ -1,15 +1,12 @@
 package lotto.view
 
-import lotto.domain.Lotto
-import lotto.domain.Money
-import lotto.domain.Rank
-import lotto.domain.Ranks
+import lotto.domain.*
 
 class OutputView {
 
-    fun printLottos(lottos: List<Lotto>) {
+    fun printLottos(lottos: Lottos) {
         println("${lottos.size}개를 구매했습니다.")
-        lottos.forEach(::printLotto)
+        lottos.lottos.forEach(::printLotto)
         println()
     }
 
