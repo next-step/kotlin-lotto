@@ -16,6 +16,7 @@ object OutputView {
         %s
     """
     private const val MATCH_MESSAGE_FORMAT = "%d개 일치 (%d원)- %d개"
+    private const val BONUS_BALL_MATCH_MESSAGE_FORMAT = "%d개 일치, 보너스 볼 일치(%d원)- %d개"
     private const val STANDARD_RATE = 1
     private const val EARNING_RATE_MESSAGE_FORMAT = "총 수익률은 %.2f입니다.(기준이 ${STANDARD_RATE}이기 때문에 결과적으로 %s(이)라는 의미임)"
     private const val WIN = "이득"
@@ -43,16 +44,26 @@ object OutputView {
     private fun createStatisticMessage(
         result: Map<LottoRank, Int>,
     ): String {
-        val lottoRanks = LottoRank.values().filterNot { it.isMiss() }
+        val lottoRanks = LottoRank.values()
+            .filterNot { it.isMiss() }
+            .sortedBy { it.winningMatchCount }
         val statisticsMessage = lottoRanks.joinToString(separator = System.lineSeparator()) { rank ->
             val matchCount = result[rank]
-            createMatchMessage(rank, matchCount)
+            if (rank.isSecond()) createBonusMatchMessage(rank, matchCount)
+            else createMatchMessage(rank, matchCount)
         }
         return System.lineSeparator() + String.format(WINNING_STATISTICS_MESSAGE_FORMAT.trimIndent(), statisticsMessage)
     }
 
     private fun createMatchMessage(rank: LottoRank, matchCount: Int?) = String.format(
         MATCH_MESSAGE_FORMAT.trimIndent(),
+        rank.winningMatchCount,
+        rank.winningMoney,
+        matchCount ?: 0
+    )
+
+    private fun createBonusMatchMessage(rank: LottoRank, matchCount: Int?) = String.format(
+        BONUS_BALL_MATCH_MESSAGE_FORMAT.trimIndent(),
         rank.winningMatchCount,
         rank.winningMoney,
         matchCount ?: 0

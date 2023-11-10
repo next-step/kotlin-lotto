@@ -19,7 +19,8 @@ class LottoApplication {
             OutputView.printLottos(lottoMachine, change)
 
             val winningLotto = InputView.readWinningLotto()
-            val lottoMatchResult = lottoMachine.getResult(winningLotto, buyingPrice)
+            val bonusBall = InputView.readBonusBall()
+            val lottoMatchResult = lottoMachine.getResult(winningLotto, buyingPrice, bonusBall)
             OutputView.printLottoResult(lottoMatchResult)
         }
 
