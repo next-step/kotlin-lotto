@@ -1,7 +1,7 @@
 package lotto
 
-import lotto.domain.Lotto
 import lotto.domain.LotteryResult
+import lotto.domain.Lotto
 import lotto.domain.LottoBundle
 import lotto.domain.Purchase
 import lotto.domain.StringSplit
