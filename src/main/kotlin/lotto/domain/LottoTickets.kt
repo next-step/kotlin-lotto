@@ -14,7 +14,8 @@ class LottoTickets(
 
     fun calculatePrice(ticketPrice: Amount) = ticketPrice * tickets.size
 
-    fun count(): Int = tickets.size
+    val count: Int
+        get() = tickets.size
 
     private fun groupTicketByMatchedNumberCount(
         winningNumbers: WinningNumbers

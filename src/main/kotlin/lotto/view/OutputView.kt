@@ -10,7 +10,7 @@ object OutputView {
 
     fun drawPurchaseOutput(response: PurchaseResponse) {
         val tickets = response.tickets
-        drawPurchaseCount(tickets.count())
+        drawPurchaseCount(tickets.count)
         drawTickets(tickets.tickets)
     }
 

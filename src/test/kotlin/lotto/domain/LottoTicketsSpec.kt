@@ -51,7 +51,7 @@ class LottoTicketsSpec : FunSpec({
         val count = 3
         val tickets = LottoTickets(List(count) { LottoMock.createTickets() })
 
-        val result = tickets.count()
+        val result = tickets.count
 
         result shouldBe count
     }
