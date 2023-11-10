@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.FirstMoney
 import lotto.domain.Lotto
 import lotto.domain.LottoType.MANUAL
 import lotto.domain.Lottos
@@ -9,7 +10,7 @@ class InputView {
 
     fun inputMoney(): Money {
         println("구입금액을 입력해 주세요.")
-        return Money(readln().toInt())
+        return FirstMoney(readln().toInt())
     }
 
     fun inputManualLottoCount(): Int {
@@ -17,10 +18,10 @@ class InputView {
         return readln().toInt()
     }
 
-    fun inputManualLotto(manualLottoCount: Int): Lottos {
+    fun inputManualLotto(manualMoney: Money): Lottos {
         println("수동으로 구매할 번호를 입력해 주세요.")
         return Lottos(
-            (1..manualLottoCount).map {
+            (1..manualMoney.count()).map {
                 Lotto(inputLotto(), MANUAL)
             }
         )

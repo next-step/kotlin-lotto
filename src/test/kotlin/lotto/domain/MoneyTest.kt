@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Assertions.*
 
 class MoneyTest : StringSpec({
 
-    "금액은 1000원 이상이여야 한다" {
+    "초기 금액은 1000원 이상이여야 한다" {
         assertThrows(IllegalArgumentException::class.java) {
-            Money(999)
+            FirstMoney(999)
         }
     }
 
