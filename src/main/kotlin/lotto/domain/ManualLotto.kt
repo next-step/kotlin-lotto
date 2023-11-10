@@ -1,5 +1,5 @@
 package lotto.domain
 
-class ManualLotto(manual: LottoNumbers) : Lotto {
-    override val lottoNumbers: LottoNumbers = manual
+class ManualLotto(manualNumbers: LottoNumbers) : Lotto {
+    override val lottoNumbers: LottoNumbers = LottoNumbers.manual(manualNumbers)
 }

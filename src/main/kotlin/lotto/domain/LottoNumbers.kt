@@ -12,4 +12,14 @@ data class LottoNumbers(val numbers: List<LottoNumber>) {
             "numbers should not contain duplicated number"
         }
     }
+
+    companion object {
+        fun random(): LottoNumbers {
+            return LottoNumbers(LottoNumber.randomNumbers())
+        }
+
+        fun manual(manualNumbers: LottoNumbers): LottoNumbers {
+            return LottoNumbers(LottoNumber.manualNumbers(manualNumbers))
+        }
+    }
 }
