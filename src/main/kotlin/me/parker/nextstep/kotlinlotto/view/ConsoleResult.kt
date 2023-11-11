@@ -7,7 +7,9 @@ import me.parker.nextstep.kotlinlotto.domain.LottoTicket
 object ConsoleResult {
     fun outputPurchasedLottoTickets(purchasedLottoTickets: List<LottoTicket>) {
         println("${purchasedLottoTickets.size}개를 구매했습니다.")
-        purchasedLottoTickets.forEach { println(it) }
+        purchasedLottoTickets.forEach {
+            println(it.lottoNumbers.values.joinToString(prefix = "[", postfix = "]"))
+        }
     }
 
     fun outputLottoResult(lottoResult: LottoResult) {

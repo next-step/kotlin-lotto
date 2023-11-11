@@ -9,7 +9,7 @@ class LottoTicket(val lottoNumbers: LottoNumbers) {
     }
 
     override fun toString(): String {
-        return lottoNumbers.values.joinToString(", ", "[", "]")
+        return "LottoTicket(lottoNumbers=$lottoNumbers)"
     }
 
     companion object {
