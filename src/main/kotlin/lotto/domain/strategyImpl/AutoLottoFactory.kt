@@ -8,10 +8,8 @@ class AutoLottoFactory : DrawStrategy {
 
     override fun draw(): Lotto {
         val lottoNumbers = LottoNumber.lottoNumberRange.toList().shuffled()
-
-
         val sortedLotto = lottoNumbers.take(Lotto.LOTTO_NUMBER_COUNT).sorted()
-        sortedLotto.map { LottoNumber(it) }
+        sortedLotto.map { LottoNumber.create(it) }
 
         return Lotto(sortedLotto)
     }
