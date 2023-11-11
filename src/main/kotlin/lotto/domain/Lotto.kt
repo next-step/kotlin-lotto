@@ -12,6 +12,14 @@ class Lotto(private val numberList: List<Int> = generateDefaultRandomNumberList(
         }
     }
 
+    fun getNumberValues(): List<Int> {
+        val numberList = mutableListOf<Int>()
+        numbers.forEach {
+            numberList.add(it.value)
+        }
+        return numberList
+    }
+
     companion object {
         private fun generateDefaultRandomNumberList(): List<Int> {
             val randomNumberMaker: RandomNumberMaker = RandomNumberMaker()
