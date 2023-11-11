@@ -26,7 +26,7 @@ class LottoTest {
     }
 
     @Test
-    fun `로또 번호 3개 일치`() {
+    fun `5등 로또 판정`() {
         val sut = Lotto(1, 2, 3, 4, 5, 6)
 
         val actual = sut.matchedCount(Lotto(1, 2, 3, 7, 8, 9))
@@ -35,7 +35,7 @@ class LottoTest {
     }
 
     @Test
-    fun `로또 번호 4개 일치`() {
+    fun `4등 로또 판정`() {
         val sut = Lotto(1, 2, 3, 4, 5, 6)
 
         val actual = sut.matchedCount(Lotto(1, 2, 3, 4, 8, 9))
@@ -44,7 +44,7 @@ class LottoTest {
     }
 
     @Test
-    fun `로또 번호 5개 일치`() {
+    fun `3등 로또 판정`() {
         val sut = Lotto(1, 2, 3, 4, 5, 6)
 
         val actual = sut.matchedCount(Lotto(1, 2, 3, 4, 5, 9))
@@ -53,7 +53,7 @@ class LottoTest {
     }
 
     @Test
-    fun `로또 번호 6개 일치`() {
+    fun `1등 로또 판정`() {
         val sut = Lotto(1, 2, 3, 4, 5, 6)
 
         val actual = sut.matchedCount(Lotto(1, 2, 3, 4, 5, 6))
