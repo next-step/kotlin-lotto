@@ -69,7 +69,7 @@ class 순수_입력값_추출_테스트 : StringSpec({
             row("""//x\n2x3,9""", "2x3,9"),
             row("""//%%\n63435%%73734,6759:567""", "63435%%73734,6759:567"),
         ) { inputString: String, expect: String ->
-            val 순수_입력값 = DelimiterParser.extractPureInput(inputString)
+            val 순수_입력값 = DelimiterParser.extractInputWithoutDelimiterDeclarations(inputString)
 
             순수_입력값 shouldBe expect
         }
@@ -87,7 +87,7 @@ class 순수_입력값_추출_테스트 : StringSpec({
             row("2,3:9", "2,3:9"),
             row("63435:73734,6759:567", "63435:73734,6759:567"),
         ) { inputString: String, expect: String ->
-            val 순수_입력값 = DelimiterParser.extractPureInput(inputString)
+            val 순수_입력값 = DelimiterParser.extractInputWithoutDelimiterDeclarations(inputString)
 
             순수_입력값 shouldBe expect
         }

@@ -1,17 +1,12 @@
 package calculator
 
-class PositiveNumbers {
-
-    private val numbers: MutableList<Int> = mutableListOf()
-    val values: List<Int>
-        get() = numbers.toList()
-
-    fun add(number: Int) {
-        if (number < POSITIVE_NUMBER_THRESHOLD) {
-            throw RuntimeException("숫자는 0 이상의 양수를 입력해주세요.")
+data class PositiveNumbers(private val numbers: List<Int>) {
+    init {
+        numbers.forEach {
+            require(it >= POSITIVE_NUMBER_THRESHOLD) {
+                "숫자는 0 이상의 양수를 입력해주세요. number: $it"
+            }
         }
-
-        numbers.add(number)
     }
 
     fun sum(): Int {
