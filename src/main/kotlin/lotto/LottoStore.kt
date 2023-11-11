@@ -16,6 +16,7 @@ class LottoStore(
         val userLottos = lottoMachine.sellLotto(userPay)
         outputManager.printSellLottoCount(userLottos)
 
+        val winningNumbers = inputManager.inputWinningNumber()
     }
 
     companion object {

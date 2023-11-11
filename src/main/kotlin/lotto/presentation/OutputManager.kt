@@ -12,5 +12,6 @@ class OutputManager {
         lottos.forEach {
             println(it.getNumbers())
         }
+        println()
     }
 }
