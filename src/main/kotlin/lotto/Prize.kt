@@ -6,4 +6,5 @@ enum class Prize {
     THIRD,
     FOURTH,
     FIFTH,
+    NOTHING,
 }

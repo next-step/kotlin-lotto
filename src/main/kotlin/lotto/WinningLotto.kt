@@ -13,7 +13,7 @@ class WinningLotto(
             4 -> Prize.FOURTH
             5 -> if (other.numbers.contains(bonusNumber)) Prize.SECOND else Prize.THIRD
             6 -> Prize.FIRST
-            else -> Prize.SECOND
+            else -> Prize.NOTHING
         }
     }
 }
