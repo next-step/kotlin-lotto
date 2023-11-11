@@ -1,7 +1,7 @@
 package lotto.ui
 
 object InputView {
-    fun receiveNumbers(): Int {
+    fun receivePurchaseMoney(): Int {
         println("구입금액을 입력해 주세요.")
         val money = readln().toInt()
         return money
