@@ -4,7 +4,7 @@ import lotto.error.ErrorMessage.LOTTO_RANGE_ERROR
 
 class LottoNumber(val number: Int) {
     init {
-        require(lottoNumberRange.contains(number)) { LOTTO_RANGE_ERROR.message}
+        require(lottoNumberRange.contains(number)) { LOTTO_RANGE_ERROR.message }
     }
 
     companion object {
