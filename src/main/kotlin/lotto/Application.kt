@@ -15,5 +15,5 @@ fun main() {
     val lastWinningNumbers = InputView.getLastWinningNumbers()
     val winningLotto = Lotto(lastWinningNumbers.getIntegersAfterSplit(",").map { LottoNumber(it) })
     val lottoResult = LottoResult(userLotto, winningLotto)
-    val profitRate = lottoResult.calculateProfitRate()
+    OutputView.printResult(lottoResult)
 }
