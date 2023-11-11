@@ -1,6 +1,8 @@
 package lotto.domain
 
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.nulls.shouldBeNull
+import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 
 class LottoTicketsSpec : FunSpec({
@@ -8,7 +10,7 @@ class LottoTicketsSpec : FunSpec({
         test("가격이 주어지면 구입한 총 가격이 계산된다") {
             val price = Amount(1000)
             val count = 3
-            val tickets = LottoTickets(List(count) { LottoMock.createTickets() })
+            val tickets = LottoTickets(List(count) { LottoMock.createTicket() })
 
             val result = tickets.calculatePrice(price)
 
@@ -18,7 +20,7 @@ class LottoTicketsSpec : FunSpec({
 
     context("티켓의 수를 센다") {
         val count = 3
-        val tickets = LottoTickets(List(count) { LottoMock.createTickets() })
+        val tickets = LottoTickets(List(count) { LottoMock.createTicket() })
 
         val result = tickets.count
 
@@ -45,6 +47,24 @@ class LottoTicketsSpec : FunSpec({
             val result = tickets determineResultBy winningLotto
 
             result.rankCounts shouldBe expect
+            tickets.result!!.rankCounts shouldBe expect
+        }
+    }
+
+    context("티켓의 결과 조회") {
+        test("티켓의 결과가 생성되었다면 결과 조회") {
+            val tickets = LottoTickets(listOf(LottoMock.createTicket()))
+            tickets.determineResultBy(WinningLotto(LottoTicket(listOf(1, 2, 3, 4, 5, 6)), 7))
+
+            val result = tickets.result
+
+            result.shouldNotBeNull()
+        }
+
+        test("티켓의 결과가 생성되지 않았다면 Null 반환") {
+            val tickets = LottoTickets(listOf(LottoMock.createTicket()))
+
+            tickets.result.shouldBeNull()
         }
     }
 })

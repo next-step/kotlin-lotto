@@ -16,13 +16,12 @@ class LottoController(
             .let(::PurchaseResponse)
 
     fun end(request: EndLottoRequest): EndLottoResponse {
-        val purchaseTickets = purchasedTickets ?: throw IllegalArgumentException("티켓이 저장되지 않았습니다")
-        val winningLotto = WinningLotto(
+        val purchasedTickets = purchasedTickets ?: throw IllegalArgumentException("티켓이 저장되지 않았습니다")
+        WinningLotto(
             winningTicket = LottoTicketGenerator.create(request.winningNumbers),
             bonusNumber = request.bonusNumber
-        )
-        val result = purchaseTickets determineResultBy winningLotto
-        result.totalPrize
+        ).also { purchasedTickets determineResultBy it }
+
         TODO()
     }
 

@@ -14,11 +14,11 @@ object LottoMock {
         }.let(::LottoTicket)
     }
 
+    fun createTicket() =
+        createNumbers().let(::LottoTicket)
+
     private fun createMismatchedNumbers(winningLotto: WinningLotto) =
         (1..45).filterNot { winningLotto.winningTicket.contains(it) || winningLotto.bonusNumber == it }.take(6)
-
-    fun createTickets() =
-        createNumbers().let(::LottoTicket)
 
     private fun createNumbers() =
         (1..45).shuffled().take(6).sorted()
