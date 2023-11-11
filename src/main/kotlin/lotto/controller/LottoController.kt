@@ -19,6 +19,7 @@ class LottoController(
     fun end(request: EndLottoRequest): EndLottoResponse {
         val purchaseTickets = purchasedTickets ?: throw IllegalArgumentException("티켓이 저장되지 않았습니다")
         LottoTicketGenerator.create(request.winningNumbers)
+        LottoTicketGenerator.checkNumber(request.bonusNumber)
         return purchaseTickets
             .determinePrize(WinningNumbers.of(request.winningNumbers), LottoSpec.NUMBERS_COUNT)
             .calculateTotalPrize(LottoSpec.prizesInfo)

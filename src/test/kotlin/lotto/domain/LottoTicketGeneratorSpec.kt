@@ -65,4 +65,28 @@ class LottoTicketGeneratorSpec : FunSpec({
             }
         }
     }
+
+    context("로또 티켓이 될 수 있는 수인지 검증") {
+        test("1부터 45 사이의 숫자라면 해당 숫자가 반환된다") {
+            forAll(
+                row(1),
+                row(13),
+                row(45),
+            ) { number ->
+                val result = LottoTicketGenerator.checkNumber(number)
+
+                result shouldBe number
+            }
+        }
+        test("1보다 작은 숫자라면 에러가 발생한다") {
+            shouldThrow<IllegalArgumentException> {
+                LottoTicketGenerator.checkNumber(0)
+            }
+        }
+        test("45보다 큰 숫자라면 에러가 발생한다") {
+            shouldThrow<IllegalArgumentException> {
+                LottoTicketGenerator.checkNumber(46)
+            }
+        }
+    }
 })
