@@ -25,3 +25,7 @@ value class Amount(
     operator fun rem(other: Amount): Int =
         value % other.value
 }
+
+fun List<Amount>.sum(): Amount = this.fold(Amount(0)) { acc, amount ->
+    acc + amount
+}

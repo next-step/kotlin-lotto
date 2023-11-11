@@ -8,6 +8,8 @@ enum class LottoRank(val winningMoney: Amount, val countOfMatch: Int, val isWith
     FIFTH(Amount(5_000), 3),
     MISS(Amount(0), 0);
 
+    fun calculateTotal(ticketCount: Int): Amount = winningMoney * ticketCount
+
     companion object {
         fun valueOf(countOfMatch: Int, hasMatchedBonus: Boolean): LottoRank =
             entries.firstOrNull { isMatchedRank(it, countOfMatch, hasMatchedBonus) } ?: MISS

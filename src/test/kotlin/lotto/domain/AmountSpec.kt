@@ -33,4 +33,14 @@ class AmountSpec : FunSpec({
             result shouldBe EarningRate(0.35)
         }
     }
+
+    context("총합 계산") {
+        test("Amount 리스트의 총 합이 계산된다") {
+            val amounts = listOf(Amount(1000), Amount(2000), Amount(30000))
+
+            val result = amounts.sum()
+
+            result shouldBe Amount(33000)
+        }
+    }
 })

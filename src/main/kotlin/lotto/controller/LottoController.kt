@@ -22,6 +22,7 @@ class LottoController(
             bonusNumber = request.bonusNumber
         )
         val result = purchaseTickets determineResultBy winningLotto
+        result.totalPrize
         TODO()
     }
 
