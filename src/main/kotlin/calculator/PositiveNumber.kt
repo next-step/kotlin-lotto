@@ -1,10 +1,9 @@
 package calculator
 
-data class PositiveNumbers(val numbers: List<Int>) {
+data class PositiveNumber(val number: Int) {
 
-    fun checkNegativeNumbers() {
-        val negativeNumbers = numbers.filter { it < 0 }
-        require(negativeNumbers.isEmpty()) { throw RuntimeException(NEGATIVE_MESSAGE) }
+    init {
+        require(number > 0) { throw RuntimeException(NEGATIVE_MESSAGE) }
     }
 
     companion object {

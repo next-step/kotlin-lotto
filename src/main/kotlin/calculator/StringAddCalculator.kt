@@ -10,9 +10,7 @@ object StringAddCalculator {
         if (input.isNullOrEmpty()) return EMPTY_RESULT
 
         val numbers = splitInputByDelimiter(input)
-
-        val positiveNumbers = PositiveNumbers(numbers)
-        positiveNumbers.checkNegativeNumbers()
+        numbers.map { PositiveNumber(it) }
 
         return numbers.sum()
     }

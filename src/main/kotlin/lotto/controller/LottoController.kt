@@ -19,7 +19,7 @@ fun main() {
 
     val lottoGenerator = LottoGenerator()
     val lottoList = lottoGenerator.getLotto(lottoTryCount)
-    val lottoDto = lottoList.map { LottoDto(it) }.toList();
+    val lottoDto = lottoList.map { LottoDto(it) }.toList()
 
     OutputView.printLottoList(lottoDto)
 

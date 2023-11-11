@@ -31,7 +31,7 @@ object OutputView {
 
     fun printResult(jackpot: List<JackpotDto>) {
         JackpotLevel.values()
-            .filter { it.filterMatchingLevel(SHOW_LOTTO_COUNT)}
+            .filter { it.filterMatchingLevel(SHOW_LOTTO_COUNT) }
             .forEach { jackpotLevel ->
                 val count = jackpot.count { it.jackpot.contains(jackpotLevel) }
                 println("${jackpotLevel.matchCount}개 일치 (${jackpotLevel.price}원)- ${count}개")
