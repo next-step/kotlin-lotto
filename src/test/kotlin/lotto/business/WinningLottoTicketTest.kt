@@ -77,4 +77,24 @@ class WinningLottoTicketTest {
             )
         )
     }
+
+    @Test
+    fun `보너스 번호가 당첨 번호와 중복이면 예외 발생한다`() {
+        // given
+        val lottoNumbers = setOf(
+            LottoNumber(1),
+            LottoNumber(2),
+            LottoNumber(3),
+            LottoNumber(4),
+            LottoNumber(5),
+            LottoNumber(6)
+        )
+        val winningLottoTicket = WinningLottoTicket(lottoNumbers)
+        val bonusNumber = LottoNumber(6)
+
+        // when, then
+        Assertions.assertThatThrownBy { winningLottoTicket.validateBonusNumber(bonusNumber) }
+            .isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessage("보너스 번호는 당첨 번호와 중복될 수 없습니다.")
+    }
 }
