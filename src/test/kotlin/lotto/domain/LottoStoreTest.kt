@@ -22,6 +22,6 @@ class LottoStoreTest {
 
         val lottos = lottoStore.buyLottos(money)
 
-        assertThat(lottos.size).isEqualTo(lottoCount)
+        assertThat(lottos.value.size).isEqualTo(lottoCount)
     }
 }

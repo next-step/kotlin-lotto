@@ -16,7 +16,8 @@ fun main() {
 
     val winningNumbers = InputView.inputWinningNumbers()
 
-    val checkedLottos = boughtLottos.map { it.match(winningNumbers) }
+    val checkedLottos = boughtLottos.matchAll(winningNumbers)
+    val returnRate = boughtLottos.totalReward() / money.toDouble()
 
-    ResultView.showResult(checkedLottos, money)
+    ResultView.showResult(checkedLottos, returnRate)
 }

@@ -1,15 +1,13 @@
 package lotto.ui
 
-import lotto.domain.Lotto
 import lotto.domain.LottoWinning
+import lotto.domain.Lottos
 import java.text.DecimalFormat
 
 object ResultView {
-    fun showResult(lottos: List<Lotto>, investmentMoney: Int) {
-        val winningLottos = lottos
+    fun showResult(lottos: Lottos, returnRate: Double) {
+        val winningLottos = lottos.value
             .groupBy { it.winning }
-
-        val returnRate = calculateReturnRate(lottos, investmentMoney)
 
         println("당첨 통계")
         println("---------")
@@ -22,14 +20,6 @@ object ResultView {
             }
 
         println("총 수익률은 ${returnRate.roundDecimal()}입니다.")
-    }
-
-    private fun calculateReturnRate(lottos: List<Lotto>, investmentMoney: Int): Double {
-        val totalReward = lottos
-            .map { it.winning }
-            .sumOf { it.reward }
-
-        return totalReward / investmentMoney.toDouble()
     }
 
     private fun Double.roundDecimal(): String {

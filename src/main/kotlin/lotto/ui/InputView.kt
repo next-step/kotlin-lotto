@@ -1,6 +1,6 @@
 package lotto.ui
 
-import lotto.domain.Lotto
+import lotto.domain.Lottos
 
 object InputView {
     fun inputMoney(): Int {
@@ -9,9 +9,9 @@ object InputView {
         return readln().toInt()
     }
 
-    fun showBoughtLottos(lottos: List<Lotto>) {
-        println("${lottos.size}개를 구매했습니다.")
-        lottos.forEach {
+    fun showBoughtLottos(lottos: Lottos) {
+        println("${lottos.value.size}개를 구매했습니다.")
+        lottos.value.forEach {
             println(it.numbers)
         }
     }
