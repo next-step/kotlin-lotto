@@ -12,7 +12,10 @@ class Lotto(vararg numbers: Int) {
     }
 
     fun judge(winningLotto: WinningLotto): Prize {
-        return Prize.SECOND
+        return when(matchedCount(winningLotto.lotto)) {
+            3 -> Prize.FIFTH
+            else -> Prize.SECOND
+        }
     }
 
     companion object {

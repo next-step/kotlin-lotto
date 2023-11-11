@@ -1,5 +1,5 @@
 package lotto
 
-class WinningLotto(lotto: Lotto, bonusNumber: Int) {
+class WinningLotto(val lotto: Lotto, bonusNumber: Int) {
 
 }
