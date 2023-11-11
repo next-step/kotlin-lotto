@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class Lotto(numbers: List<LottoNumber>) {
     val lottoNumbers: List<LottoNumber> = numbers.map { it.copy() }.sortedBy { it.getNumber() }
