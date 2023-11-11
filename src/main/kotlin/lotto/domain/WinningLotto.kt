@@ -10,4 +10,10 @@ data class WinningLotto(
             "보너스 볼과 당첨번호 숫자가 중복됩니다"
         }
     }
+
+    fun rank(ticket: LottoTicket): LottoRank {
+        val matchedCount = winningTicket countMatched ticket
+        val matchesBonus = ticket contains bonusNumber
+        return LottoRank.valueOf(matchedCount, matchesBonus)
+    }
 }

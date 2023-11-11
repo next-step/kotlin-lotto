@@ -28,9 +28,18 @@ class LottoTicketSpec : FunSpec({
             row(6, true),
             row(7, false),
         ) { number, expect ->
-            val result = LottoTicket(numbers).contains(number)
+            val result = LottoTicket(numbers) contains number
 
             result shouldBe expect
         }
+    }
+
+    test("두 티켓의 공통으로 있는 숫자 개수가 계산된다") {
+        val ticekt1 = LottoTicket(listOf(1, 2, 3, 4, 5, 6))
+        val ticekt2 = LottoTicket(listOf(10, 9, 3, 2, 1, 8))
+
+        val result = ticekt1 countMatched ticekt2
+
+        result shouldBe 3
     }
 })
