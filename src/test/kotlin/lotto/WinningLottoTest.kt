@@ -6,6 +6,15 @@ import org.junit.jupiter.api.Test
 class WinningLottoTest {
 
     @Test
+    fun `꽝 로또 판정`() {
+        val sut = WinningLotto(Lotto(1, 2, 7, 8, 9, 10), 11)
+
+        val actual = sut.judge(Lotto(1, 2, 3, 4, 5, 6))
+
+        assertThat(actual).isEqualTo(Prize.NOTHING)
+    }
+
+    @Test
     fun `5등 로또 판정`() {
         val sut = WinningLotto(Lotto(1, 2, 3, 7, 8, 9), 10)
 
