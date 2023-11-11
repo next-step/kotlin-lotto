@@ -5,4 +5,7 @@ data class LottoTicket(
 ) {
     fun countMatched(winningNumbers: WinningNumbers): Int =
         numbers.count { winningNumbers.isInWinningNumbers(it) }
+
+    fun contains(number: Number): Boolean =
+        numbers.contains(number)
 }
