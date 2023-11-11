@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoStore(private val lottoPrice: Int) {
+class LottoMachine(private val lottoPrice: Int) {
     fun sellLotto(pay: Int): List<Lotto> {
         require(pay >= lottoPrice) { SELL_LOTTO_ERROR_MESSAGE }
         return (0 until pay / lottoPrice).map { Lotto(lottoNumberGenerator()) }
