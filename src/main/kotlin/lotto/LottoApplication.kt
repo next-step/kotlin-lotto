@@ -10,7 +10,7 @@ class LottoApplication(
         val lottoMachine = LottoMachine(lottoGenerator(), money)
         resultView.printLottos(lottoMachine.issuedLottos)
         val winningLotto = inputView.inputWinningLotto()
-        val statistics = lottoMachine.issueStatistics(Lotto(*winningLotto.toIntArray()))
+        val statistics = lottoMachine.issueStatistics(winningLotto)
         resultView.printStatistic(statistics)
     }
 

@@ -6,8 +6,11 @@ object InputView {
         return readln().toInt()
     }
 
-    fun inputWinningLotto(): List<Int> {
+    fun inputWinningLotto(): WinningLotto {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return readln().split(",").map { it.trim().toInt() }
+        val lotto = readln().split(",").map { it.trim().toInt() }
+        println("보너스 볼을 입력해 주세요.")
+        val bonusNumber = readln().toInt()
+        return WinningLotto(Lotto(*lotto.toIntArray()), bonusNumber)
     }
 }
