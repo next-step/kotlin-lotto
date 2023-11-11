@@ -7,10 +7,8 @@ import lotto.view.LotteryStatisticsPrinter
 import lotto.view.LottoInputHandler
 import lotto.view.LottoPurchaseSummaryPrinter
 
-class LottoGameManager(
-    private val lottoBookingSystem: LottoBookingSystem
-) {
-    fun run() {
+object LottoGameManager {
+    fun run(lottoBookingSystem: LottoBookingSystem) {
         val receivedAmount = ReceivedAmount(LottoInputHandler.inputPurchaseAmount())
         val lottoTickets = lottoBookingSystem.generateMultipleTickets(receivedAmount.getTicketCount())
         LottoPurchaseSummaryPrinter.print(lottoTickets)
@@ -22,8 +20,6 @@ class LottoGameManager(
 }
 
 fun main() {
-    val lottoGameManager = LottoGameManager(
-        lottoBookingSystem = LottoBookingSystem()
-    )
-    lottoGameManager.run()
+    val lottoBookingSystem = LottoBookingSystem()
+    LottoGameManager.run(lottoBookingSystem)
 }

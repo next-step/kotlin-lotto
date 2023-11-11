@@ -2,7 +2,7 @@ package lotto.business
 
 class PrizeResults(prizeCountMap: Map<LotteryPrize, Int>) {
 
-    private val _prizeCountMap = prizeCountMap.toMutableMap()
+    private val _prizeCountMap: Map<LotteryPrize, Int> = prizeCountMap.toMap()
 
     val prizeCountMap: Map<LotteryPrize, Int>
         get() {
@@ -12,7 +12,7 @@ class PrizeResults(prizeCountMap: Map<LotteryPrize, Int>) {
         }
 
     fun calculateProfitRate(receivedAmount: ReceivedAmount): ProfitRate {
-        val totalPrize = prizeCountMap.map { it.key.prizeAmount * it.value }.sum()
+        val totalPrize = _prizeCountMap.map { it.key.prizeAmount * it.value }.sum()
         return ProfitRate(totalPrize / receivedAmount.amount.toDouble())
     }
 }
