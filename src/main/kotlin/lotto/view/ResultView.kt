@@ -8,11 +8,11 @@ private const val INFORMATION_MESSAGE = """
 ---------"""
 
 fun printLottoList(lottoList: List<Lotto>) {
-    lottoList.forEach { println(it) }
+    lottoList.forEach { println(it.state()) }
     println()
 }
 
 fun printLottoGameResult(lottoGameResult: LottoGameResult) {
     println(INFORMATION_MESSAGE)
-    println(lottoGameResult)
+    println(lottoGameResult.state())
 }
