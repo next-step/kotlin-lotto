@@ -1,9 +1,6 @@
-package lotto.app
+package lotto.model
 
-import lotto.model.Game
-import lotto.model.Round
-
-object LottoApp {
+object Issuer {
     private const val PRICE_PER_GAME = 1000
 
     fun transaction(gameCount: Int): Round {
@@ -14,6 +11,6 @@ object LottoApp {
     }
 
     fun pricePerGame(): Int {
-        return this.PRICE_PER_GAME
+        return PRICE_PER_GAME
     }
 }
