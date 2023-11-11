@@ -11,6 +11,6 @@ class RandomLottoPicker {
         private const val LOTTO_NUMBER_MAX = 45
         private val LOTTO_NUMBERS = (LOTTO_NUMBER_MIN..LOTTO_NUMBER_MAX)
             .map { LottoNumber(it) }
-            .toList()
+            .toSet()
     }
 }

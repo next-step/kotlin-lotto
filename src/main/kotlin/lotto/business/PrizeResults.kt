@@ -2,7 +2,7 @@ package lotto.business
 
 class PrizeResults(prizeCountMap: Map<LotteryPrize, Int>) {
 
-    private val _prizeCountMap: Map<LotteryPrize, Int> = prizeCountMap.toMap()
+    private val _prizeCountMap: Map<LotteryPrize, Int> = prizeCountMap
 
     val prizeCountMap: Map<LotteryPrize, Int>
         get() {
