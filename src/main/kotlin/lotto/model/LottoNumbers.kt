@@ -1,6 +1,7 @@
 package lotto.model
 
-data class LottoNumbers(
+@JvmInline
+value class LottoNumbers(
     private val values: LinkedHashSet<LottoNumber>,
 ) {
     init {

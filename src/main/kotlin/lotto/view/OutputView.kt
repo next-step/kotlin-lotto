@@ -1,7 +1,7 @@
 package lotto.view
 
-import lotto.model.Issuer
 import lotto.model.Game
+import lotto.model.Issuer
 import lotto.model.LottoWinners
 import lotto.model.Rank
 import lotto.model.Round
