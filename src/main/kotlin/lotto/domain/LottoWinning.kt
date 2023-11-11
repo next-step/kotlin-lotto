@@ -8,8 +8,10 @@ enum class LottoWinning(val correctCount: Int, val reward: Int) {
     CorrectSix(6, 2_000_000_000);
 
     companion object {
-        fun of(count: Int): LottoWinning {
-            val correctCount = count.coerceIn(0..6)
+        fun of(correctCount: Int): LottoWinning {
+            require(correctCount in 0..6) {
+                "당첨 번호 수는 0에서 6사이여야 합니다."
+            }
 
             return LottoWinning.values()
                 .firstOrNull { it.correctCount == correctCount }

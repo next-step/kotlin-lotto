@@ -2,6 +2,7 @@ package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -17,17 +18,17 @@ class LottoWinningTest {
     }
 
     @Test
-    fun `당첨된 숫자 개수가 0 보다 낮은 경우는 Nothing 이다`() {
-        val lottoWinning = LottoWinning.of(-1)
-
-        assertThat(lottoWinning).isEqualTo(LottoWinning.Nothing)
+    fun `당첨된 숫자 개수는 0 보다 작을 수 없다`() {
+        assertThrows<IllegalArgumentException> {
+            LottoWinning.of(-1)
+        }
     }
 
     @Test
-    fun `당첨된 숫자 개수가 6 보다 큰 경우는 CorrectSix 이다`() {
-        val lottoWinning = LottoWinning.of(7)
-
-        assertThat(lottoWinning).isEqualTo(LottoWinning.CorrectSix)
+    fun `당첨된 숫자 개수는 6 보다 많을 수 없다`() {
+        assertThrows<IllegalArgumentException> {
+            LottoWinning.of(7)
+        }
     }
 
     companion object {
