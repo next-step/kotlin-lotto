@@ -7,7 +7,7 @@ import lotto.domain.Ranks
 
 class RanksTest : StringSpec({
     "수익률 계산" {
-        val ranks = Ranks(listOf(Rank.FOURTH))
+        val ranks = Ranks(listOf(Rank.FIFTH))
         ranks.rateOfReturn(14_000) shouldBe 0.35
     }
 

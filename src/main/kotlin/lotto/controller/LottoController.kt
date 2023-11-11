@@ -13,15 +13,16 @@ class LottoController(private val lottoShop: LottoShop) {
         val lottos = buyLotto(money)
         OutputView().printLottos(lottos)
         val winningLotto = Lotto(InputView().inputWinningLotto())
-        val ranks = matchLotto(lottos, winningLotto)
+        val bonusBall = InputView().inputBonusBall()
+        val ranks = matchLotto(lottos, winningLotto, bonusBall)
         OutputView().printResult(ranks, money)
     }
 
-    fun buyLotto(money: Int): List<Lotto> {
+    private fun buyLotto(money: Int): List<Lotto> {
         return lottoShop.buy(money)
     }
 
-    fun matchLotto(lottos: List<Lotto>, winningLotto: Lotto): Ranks {
-        return Ranks(lottos.map { it.match(winningLotto) })
+    private fun matchLotto(lottos: List<Lotto>, winningLotto: Lotto, bonusBall: Int): Ranks {
+        return Ranks(lottos.map { it.match(winningLotto, bonusBall) })
     }
 }
