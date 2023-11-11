@@ -4,11 +4,11 @@ import lotto.LottoNumber.MAX_NUMBER
 import lotto.LottoNumber.MIN_NUMBER
 
 class LottoGame {
-    val winningStatusMap = mutableMapOf<LottoRanking, Int>()
+    private val winningStatusMap = mutableMapOf<LottoRanking, Int>()
 
     fun buyLotto(cash: Int): List<Lotto> {
         val lottoList = mutableListOf<Lotto>()
-        val times = cash / 1000
+        val times = cash / GAME_COST
 
         repeat(times) {
             lottoList.add(Lotto(createRandomNumber()))
@@ -33,5 +33,6 @@ class LottoGame {
     companion object {
         private const val SUB_LIST_START_POSITION = 0
         private const val SUB_LIST_LENGTH = 6
+        private const val GAME_COST = 1000
     }
 }
