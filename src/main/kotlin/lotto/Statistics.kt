@@ -11,7 +11,7 @@ data class Statistics(private val money: Int, private val statistics: Map<Rank, 
 
     private fun totalProfit(): BigDecimal {
         return statistics.keys.map {
-            val prize = PRIZES[it] ?: BigDecimal.ZERO
+            val prize = it.prize
             val quantity = countOf(it).toBigDecimal()
             prize.multiply(quantity)
         }.reduce(BigDecimal::add)
@@ -19,15 +19,5 @@ data class Statistics(private val money: Int, private val statistics: Map<Rank, 
 
     fun countOf(rank: Rank): Int {
         return statistics[rank] ?: 0
-    }
-
-    companion object {
-        private val PRIZES = mapOf(
-            Rank.FIFTH to "5000".toBigDecimal(),
-            Rank.FOURTH to "50000".toBigDecimal(),
-            Rank.THIRD to "1500000".toBigDecimal(),
-            Rank.SECOND to "30000000".toBigDecimal(),
-            Rank.FIRST to "2000000000".toBigDecimal(),
-        )
     }
 }
