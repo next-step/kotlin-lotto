@@ -44,4 +44,25 @@ class LottoTest{
             ))
         }
     }
+
+    @Test
+    fun `로또 번호가 일치하는 개수를 구한다`(){
+        val lotto = Lotto(listOf(
+            LottoNumber(1),
+            LottoNumber(2),
+            LottoNumber(3),
+            LottoNumber(4),
+            LottoNumber(5),
+            LottoNumber(6)
+        ))
+        val winningLotto = WinningLotto(Lotto(listOf(
+            LottoNumber(1),
+            LottoNumber(2),
+            LottoNumber(3),
+            LottoNumber(4),
+            LottoNumber(5),
+            LottoNumber(7)
+        )))
+        assertEquals(lotto.getRank(winningLotto), 5)
+    }
 }

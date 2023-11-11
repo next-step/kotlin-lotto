@@ -6,6 +6,10 @@ class LottoMachine(
 ) {
     private val lottos: Lottos = Lottos(buyLotto(money))
 
+    fun getLottoRanks(winningLotto: WinningLotto): Map<LottoRank, Int> {
+        return lottos.getLottoRanks(winningLotto)
+    }
+
     fun getTotalCount(): Int {
         return lottos.getTotalCount()
     }
