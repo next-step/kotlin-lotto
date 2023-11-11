@@ -1,34 +1,34 @@
 package lotto.domain
 
-class Lotto(
-    val numbers: List<Int>,
+import lotto.util.NumberGenerator
+
+class Lotto private constructor(
+    private val numbers: List<LottoNumber>,
 ) {
+
+    val sortedNumbers: List<LottoNumber> =
+        numbers.sortedBy { it.value }
 
     init {
         validateCount()
-        validateNumbers()
         validateDuplication()
-        numbers.sorted()
     }
 
-    fun calculateMatchCount(other: Lotto): Int {
-        return numbers.intersect(other.numbers.toSet()).size
+    fun calculateMatchCount(winningLotto: WinningLotto, hasBonusBall: Boolean): Int {
+        val matchCount = numbers.intersect(winningLotto.getLottoNumbers()).size
+        if (LottoRank.isSecondOrThirdRank(matchCount).not() && hasBonusBall) {
+            return matchCount.inc()
+        }
+        return matchCount
     }
+
+    fun hasBonusBall(number: LottoNumber): Boolean =
+        numbers.contains(number)
 
     private fun validateCount() {
         require(numbers.size == LOTTO_NUMBER_COUNT) {
             "로또 번호는 ${LOTTO_NUMBER_COUNT}개여야 합니다."
         }
-    }
-
-    private fun validateNumbers() {
-        require(numbers.all { isValidNumber(it) }) {
-            "로또 번호는 ${LOTTO_MIN_NUMBER}부터 $LOTTO_MAX_NUMBER 사이 값이어야 합니다."
-        }
-    }
-
-    private fun isValidNumber(number: Int): Boolean {
-        return number in LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER
     }
 
     private fun validateDuplication() {
@@ -38,9 +38,19 @@ class Lotto(
     }
 
     companion object {
-        private const val LOTTO_MIN_NUMBER = 1
-        private const val LOTTO_MAX_NUMBER = 45
-        const val LOTTO_NUMBER_COUNT = 6
+        private const val LOTTO_NUMBER_COUNT = 6
         const val LOTTO_PRICE = 1000
+
+        fun createFromGenerator(lottoNumberGenerator: NumberGenerator<LottoNumber>): Lotto {
+            val lottoNumbers = lottoNumberGenerator.generateNumbers(
+                count = LOTTO_NUMBER_COUNT,
+            )
+            return Lotto(lottoNumbers)
+        }
+
+        fun createFromNumbers(numbers: List<Int>): Lotto {
+            val lottoNumbers = numbers.map { LottoNumber.from(it) }
+            return Lotto(lottoNumbers)
+        }
     }
 }

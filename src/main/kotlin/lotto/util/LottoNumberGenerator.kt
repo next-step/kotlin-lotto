@@ -1,15 +1,14 @@
 package lotto.util
 
-object LottoNumberGenerator : NumberGenerator {
+import lotto.domain.LottoNumber
 
-    private const val MIN = 1
-    private const val MAX = 45
-
-    override fun generate(count: Int): List<Int> {
-        return (MIN..MAX)
-            .toList()
+object LottoNumberGenerator : NumberGenerator<LottoNumber> {
+    override fun generateNumbers(count: Int): List<LottoNumber> {
+        return LottoNumber.getLottoNumbers()
+            .asSequence()
             .shuffled()
             .take(count)
-            .sorted()
+            .sortedBy { it.value }
+            .toList()
     }
 }

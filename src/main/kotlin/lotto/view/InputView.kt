@@ -2,12 +2,14 @@ package lotto.view
 
 import lotto.domain.Lotto
 import lotto.domain.LottoBuyingPrice
+import lotto.domain.LottoNumber
 
 object InputView {
 
     private const val DELIMITER = ","
     private const val BUYING_PRICE_MESSAGE = "구입금액을 입력해 주세요."
     private const val WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요."
+    private const val BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요."
 
     fun readBuyingPrice(): LottoBuyingPrice {
         println(BUYING_PRICE_MESSAGE)
@@ -25,12 +27,20 @@ object InputView {
             validateNumeric(it.trim())
             it.trim().toInt()
         }.let {
-            Lotto(it)
+            Lotto.createFromNumbers(it)
         }
     }
 
+    fun readBonusBall(): LottoNumber {
+        println(BONUS_BALL_MESSAGE)
+        val userInput = readlnOrNull()
+        validateIsNullOrBlank(userInput)
+        validateNumeric(userInput!!.trim())
+        return LottoNumber.from(userInput.trim().toInt())
+    }
+
     private fun validateIsNullOrBlank(userInput: String?) {
-        require(!userInput.isNullOrBlank()) {
+        require(userInput.isNullOrBlank().not()) {
             "입력값이 존재하지 않습니다."
         }
     }
