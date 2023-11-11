@@ -2,8 +2,17 @@ package lotto
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import java.lang.IllegalArgumentException
 
 class WinningLottoTest {
+
+    @Test
+    fun `증복된 숫자로 우승 로또를 생성 시 예외 발생`() {
+        assertThrows<IllegalArgumentException> {
+            WinningLotto(Lotto(1, 2, 3, 4, 5, 6), 6)
+        }
+    }
 
     @Test
     fun `꽝 로또 판정`() {
