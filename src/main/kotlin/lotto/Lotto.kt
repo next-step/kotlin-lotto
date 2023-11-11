@@ -14,6 +14,7 @@ class Lotto(vararg numbers: Int) {
     fun judge(winningLotto: WinningLotto): Prize {
         return when(matchedCount(winningLotto.lotto)) {
             3 -> Prize.FIFTH
+            4 -> Prize.FOURTH
             else -> Prize.SECOND
         }
     }

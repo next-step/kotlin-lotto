@@ -2,6 +2,7 @@ package lotto
 
 enum class Prize {
     SECOND,
-    FIFTH
+    FOURTH,
+    FIFTH,
 
 }
