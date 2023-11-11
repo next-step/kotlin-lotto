@@ -1,15 +1,23 @@
 package lotto
 
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.matchers.collections.shouldContainInOrder
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
-data class Lotto(private val numbers: List<LottoNumber>) {
+class Lotto(numbers: List<LottoNumber>) {
+    val lottoNumbers: List<LottoNumber> = numbers.map { it.copy() }.sortedBy { it.getNumber() }
+
     init {
         require(numbers.size == 6) { INIT_ERROR_MESSAGE }
     }
+
     fun getSize(): Int {
-        return numbers.size
+        return lottoNumbers.size
+    }
+
+    fun getNumbers(): List<LottoNumber> {
+        return lottoNumbers
     }
 
     companion object {
@@ -40,5 +48,32 @@ class LottoNumbersTest {
         shouldThrow<IllegalArgumentException> {
             Lotto(listOf(LottoNumber(1)))
         }
+    }
+
+    @Test
+    fun `로또의 숫자는 정렬되어있다`() {
+        val numbers = listOf(
+            LottoNumber(6),
+            LottoNumber(5),
+            LottoNumber(4),
+            LottoNumber(3),
+            LottoNumber(2),
+            LottoNumber(1),
+        )
+        val orderNumbers = listOf(
+            LottoNumber(1),
+            LottoNumber(2),
+            LottoNumber(3),
+            LottoNumber(4),
+            LottoNumber(5),
+            LottoNumber(6),
+        )
+        val lotto = Lotto(
+            numbers
+        )
+
+        lotto.getNumbers().shouldContainInOrder(
+            orderNumbers
+        )
     }
 }
