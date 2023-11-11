@@ -1,8 +1,12 @@
 package lotto.domain
 
 class WinningLotto(val winningNumbers: List<Int>) {
+    fun match(lotto: Lotto): LotteryPrizeAmount {
+        val userNumbers = lotto.numbers
+        val count = userNumbers.count { lottoNumber ->
+            winningNumbers.contains(lottoNumber.value)
+        }
 
-    fun match(): LotteryPrizeAmount{
-        return LotteryPrizeAmount.FIRST
+        return LotteryPrizeAmount.getWinningPrize(count)
     }
 }
