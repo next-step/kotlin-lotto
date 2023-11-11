@@ -29,8 +29,9 @@ class LottoResultTest {
         )
 
         val lottoResult = LottoResult(listOf(userLotto), winningLotto)
-        assertThat(lottoResult.getLottosOfRank(LottoRank.FIRST)).isNotNull
-        assertThat(lottoResult.getLottosOfRank(LottoRank.FIRST)).contains(userLotto)
+        val first = lottoResult.ranks[LottoRank.FIRST]
+        assertThat(first).isNotNull
+        assertThat(first).contains(userLotto)
     }
 
     @Test

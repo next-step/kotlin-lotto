@@ -5,10 +5,6 @@ import kotlin.math.floor
 class LottoResult(private val userLotto: List<Lotto>, private val winningLotto: Lotto) {
     val ranks: Map<LottoRank, List<Lotto>> = calculateRanks()
 
-    fun getLottosOfRank(rank: LottoRank): List<Lotto> {
-        return ranks[rank] ?: emptyList()
-    }
-
     fun calculateProfitRate(): Double {
         val totalCost = userLotto.size * Lotto.LOTTO_PRICE
         val totalPrize = ranks.entries.sumOf { (rank, lottos) -> lottos.size * rank.prize }
