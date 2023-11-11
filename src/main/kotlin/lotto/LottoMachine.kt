@@ -7,6 +7,11 @@ class LottoMachine(lottoGenerator: LottoGenerator, private val money: Int) {
 
     fun issueStatistics(winningLotto: Lotto): Statistics {
         val statistics = issuedLottos.groupingBy { it.matchedCount(winningLotto) }.eachCount()
+        return Statistics(money, mapOf())
+    }
+
+    fun issueStatistics(winningLotto: WinningLotto): Statistics {
+        val statistics = issuedLottos.groupingBy { winningLotto.judge(it) }.eachCount()
         return Statistics(money, statistics)
     }
 
