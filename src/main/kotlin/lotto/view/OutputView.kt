@@ -35,4 +35,8 @@ object OutputView {
             println("${it.count}개 일치 ${it.prize}원 - ${lottoRanks[it]}개")
         }
     }
+
+    fun printEarningRate(calculateEarningRate: Double) {
+        println("총 수익률은 $calculateEarningRate%입니다.")
+    }
 }

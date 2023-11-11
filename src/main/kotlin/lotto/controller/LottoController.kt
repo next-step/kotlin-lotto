@@ -13,6 +13,8 @@ class LottoController {
 
         OutputView.printRequestInputWinningLotto()
         val winningLotto = WinningLotto(Lotto(InputView.getWinningLottoNumbers().map { LottoNumber(it) }))
-        OutputView.printLottoRanks(lottoMachine.getLottoRanks(winningLotto))
+        val lottoResult = lottoMachine.getLottoResult(winningLotto)
+        OutputView.printLottoRanks(lottoResult.lottoRanks)
+        OutputView.printEarningRate(lottoResult.earningRate)
     }
 }

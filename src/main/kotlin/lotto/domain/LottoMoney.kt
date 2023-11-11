@@ -1,9 +1,9 @@
 package lotto.domain
 
 @JvmInline
-value class LottoMoney (
+value class LottoMoney(
     val value: Int
-){
+) {
     init {
         validateMoney()
     }

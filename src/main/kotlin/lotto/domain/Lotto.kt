@@ -1,8 +1,8 @@
 package lotto.domain
 
-class Lotto (
+class Lotto(
     val numbers: List<LottoNumber>
-){
+) {
     init {
         validateLottoNumbers()
     }
