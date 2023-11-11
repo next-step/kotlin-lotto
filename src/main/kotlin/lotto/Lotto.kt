@@ -8,7 +8,11 @@ class Lotto(vararg numbers: Int) {
     }
 
     fun matchedCount(other: Lotto): Int {
-        return numbers.filter { it in other.numbers }.size
+        return numbers.filter { other.contains(it) }.size
+    }
+
+    fun contains(number: Int): Boolean {
+        return number in numbers
     }
 
     companion object {
