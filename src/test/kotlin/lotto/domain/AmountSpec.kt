@@ -23,15 +23,12 @@ class AmountSpec : FunSpec({
         }
     }
 
-    context("수익률 계산") {
-        test("구매 금액과 비교한 수익률이 계산된다") {
-            val purchaseAmount = Amount(14000)
-            val prizeAmount = Amount(5000)
+    test("금액을 실수로 반환한다") {
+        val amount = Amount(3000)
 
-            val result = prizeAmount.calculateEarningRate(purchaseAmount)
+        val result = amount.toDouble()
 
-            result shouldBe EarningRate(0.35)
-        }
+        result shouldBe 3000
     }
 
     context("총합 계산") {

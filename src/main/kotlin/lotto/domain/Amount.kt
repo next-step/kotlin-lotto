@@ -13,6 +13,9 @@ value class Amount(
         return ((earningRate * 100).toInt() / 100.0).let(::EarningRate)
     }
 
+    fun toDouble(): Double =
+        value.toDouble()
+
     operator fun plus(other: Amount): Amount =
         Amount(value + other.value)
 

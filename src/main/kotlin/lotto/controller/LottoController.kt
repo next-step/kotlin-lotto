@@ -17,12 +17,11 @@ class LottoController(
 
     fun end(request: EndLottoRequest): EndLottoResponse {
         val purchasedTickets = purchasedTickets ?: throw IllegalArgumentException("티켓이 저장되지 않았습니다")
-        WinningLotto(
+        val winningLotto = WinningLotto(
             winningTicket = LottoTicketGenerator.create(request.winningNumbers),
             bonusNumber = request.bonusNumber
-        ).also { purchasedTickets determineResultBy it }
-
-        TODO()
+        )
+        return shop.calculateEarningRatioOf(purchasedTickets, winningLotto).let(::EndLottoResponse)
     }
 
     private fun LottoTickets.save(): LottoTickets =

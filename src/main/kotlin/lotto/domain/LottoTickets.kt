@@ -7,6 +7,7 @@ class LottoTickets(
 
     val count: Int
         get() = tickets.size
+
     var result: LottoResult?
         get() = _result
         private set(value) {
