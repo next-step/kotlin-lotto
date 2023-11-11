@@ -1,6 +1,7 @@
 package lotto.domain
 
 import lotto.domain.dto.WinningResult
+import lotto.domain.dto.WinningResults
 
 class WinningLotto(val winningNumbers: List<Int>) {
     fun match(lotto: Lotto): LotteryPrizeAmount {
@@ -12,7 +13,7 @@ class WinningLotto(val winningNumbers: List<Int>) {
         return LotteryPrizeAmount.getWinningPrize(count)
     }
 
-    fun matchLottosResult(lottos: Lottos): List<WinningResult> {
+    fun matchLottosResult(lottos: Lottos): WinningResults {
         val lottoList = lottos.lottoList
         val statistics = mutableMapOf<LotteryPrizeAmount, Int>()
         val resultList = mutableListOf<WinningResult>()
@@ -27,6 +28,6 @@ class WinningLotto(val winningNumbers: List<Int>) {
                 val result = WinningResult(it.winNum, it.prize, count)
                 resultList.add(result)
             }
-        return resultList
+        return WinningResults(resultList)
     }
 }
