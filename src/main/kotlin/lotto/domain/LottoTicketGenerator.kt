@@ -1,18 +1,15 @@
 package lotto.domain
 
-class LottoTicketGenerator(
-    private val numbersRange: IntRange = LottoSpec.NUMBERS_RANGE,
-    private val numbersCount: Int = LottoSpec.NUMBERS_COUNT,
-) {
-    init {
-        require(numbersRange.count() >= numbersCount) { "로또의 범위의 수 개수 보다 많은 개수를 추출할 수는 없습니다" }
-    }
+object LottoTicketGenerator {
 
     fun create(): LottoTicket {
-        val numbers = numbersRange
+        val numbers = NUMBERS_RANGE
             .shuffled()
-            .take(numbersCount)
+            .take(NUMBERS_COUNT)
             .sorted()
         return LottoTicket(numbers)
     }
+
+    private val NUMBERS_RANGE: IntRange = 1..45
+    private const val NUMBERS_COUNT: Int = 6
 }

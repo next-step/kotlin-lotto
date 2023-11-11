@@ -1,13 +1,12 @@
 package lotto.domain
 
 class LottoShop(
-    private val ticketGenerator: LottoTicketGenerator = LottoTicketGenerator(),
     private val price: Amount = Amount(1000)
 ) {
 
     fun purchase(amount: Amount): LottoTickets =
         List(calculateCount(amount)) {
-            ticketGenerator.create()
+            LottoTicketGenerator.create()
         }.let(::LottoTickets)
 
     private fun calculateCount(amount: Amount): Int {
