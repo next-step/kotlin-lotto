@@ -46,7 +46,7 @@ object OutputView {
     ): String {
         val lottoRanks = LottoRank.values()
             .filterNot { it.isMiss() }
-            .sortedBy { it.getWinningMatchCount() }
+            .sortedBy { it.winningMoney }
         val statisticsMessage =
             lottoRanks.joinToString(separator = System.lineSeparator()) { rank -> createMatchMessage(result, rank) }
         return System.lineSeparator() + String.format(WINNING_STATISTICS_MESSAGE_FORMAT.trimIndent(), statisticsMessage)
@@ -68,19 +68,19 @@ object OutputView {
         MATCH_MESSAGE_FORMAT.trimIndent(),
         rank.getWinningMatchCount(),
         rank.winningMoney,
-        matchCount
+        matchCount,
     )
 
     private fun createBonusMatchMessage(rank: LottoRank, matchCount: Int): String = String.format(
         BONUS_BALL_MATCH_MESSAGE_FORMAT.trimIndent(),
         rank.getWinningMatchCount(),
         rank.winningMoney,
-        matchCount
+        matchCount,
     )
 
     private fun createEarningRateMessage(earningRate: Double): String = String.format(
         EARNING_RATE_MESSAGE_FORMAT,
         earningRate,
-        if (earningRate > STANDARD_RATE) WIN else LOSE
+        if (earningRate > STANDARD_RATE) WIN else LOSE,
     )
 }
