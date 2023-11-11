@@ -27,9 +27,19 @@ class LottoShopTest {
         assertEquals(4, lottoList.size)
     }
 
+    @Test
+    fun `입력된 로또 번호를 구분자를 이용해 List 로 만들어 준다`() {
+        val jackpotList = lottoShop.getJackpotNumbers(JACKPOT_NUMBERS).lotto
+        val expectedList = LOTTO
+
+        assertEquals(expectedList, jackpotList)
+    }
+
     companion object {
         private const val MONEY = 14000
         private const val LOTTO_COUNT = 14
         private const val LOTTO_TRY_COUNT = 4
+        private const val JACKPOT_NUMBERS = "1, 2, 3, 4, 5, 6"
+        private val LOTTO = listOf(1, 2, 3, 4, 5, 6)
     }
 }

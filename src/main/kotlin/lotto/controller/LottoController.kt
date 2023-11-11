@@ -22,12 +22,12 @@ fun main() {
 
     OutputView.printJackpotNumber()
     val inputNumber = InputView.inputJackpotNumber()
-    val lottoWinning = LottoWinning()
-    val jackpotNumbers = lottoWinning.splitLottoNumber(inputNumber)
+    val jackpotNumbers = lottoShop.getJackpotNumbers(inputNumber)
+    val lottoWinning = LottoWinning(jackpotNumbers)
 
     OutputView.printLottoStatistics()
     OutputView.printLine()
-    val findJackpot = lottoWinning.checkLottoWinning(jackpotNumbers, lottoList)
+    val findJackpot = lottoWinning.checkLottoWinning(lottoList)
 
     val totalIncome = LottoRoiCalculator.getTotalIncome(findJackpot)
     val roi = LottoRoiCalculator.calculateROI(totalIncome, money)
