@@ -3,25 +3,31 @@ package calculator
 class StringAddCalculator {
 
     fun add(input: String?): Long {
+        if (input.isNullOrBlank()) return 0
 
-        if (input.isNullOrBlank()) {
-            return 0L
+        val tokens = tokenizeInput(input)
+        return tokens.sumOf { parseToPositiveNumber(it) }
+    }
+
+    private fun tokenizeInput(input: String): List<String> {
+        val customDelimiterMatchResult = Regex("//(.)\n(.*)").find(input)
+
+        return if (customDelimiterMatchResult != null) {
+            val (customDelimiter, numbers) = customDelimiterMatchResult.destructured
+            numbers.split(customDelimiter)
+        } else {
+            input.split(",|:".toRegex())
+        }
+    }
+
+    private fun parseToPositiveNumber(number: String): Long {
+        val parsedNumber = number.toLongOrNull()
+            ?: throw IllegalArgumentException("Invalid number format: $number")
+
+        if (parsedNumber < 0) {
+            throw IllegalArgumentException("Negative numbers not allowed: $parsedNumber")
         }
 
-        val numbers = input.split(",|:".toRegex())
-
-        var result = 0L
-        numbers.forEach {
-
-            val number = it.toLongOrNull()
-
-            if (number == null || number < 0) {
-                throw RuntimeException()
-            }
-
-            result += it.toLong()
-        }
-
-        return result
+        return parsedNumber
     }
 }
