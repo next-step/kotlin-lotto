@@ -17,8 +17,8 @@ internal class StringAdditionValidator {
 
     private fun handleInvalidCharacter(char: Char) {
         when (char) {
-            '-' -> throw RuntimeException("[$char] 음수를 전달하면 안 됩니다.")
-            else -> throw RuntimeException("[$char] 숫자 이외의 값을 전달하면 안 됩니다.")
+            '-' -> throw IllegalArgumentException("[$char] 음수를 전달하면 안 됩니다.")
+            else -> throw IllegalArgumentException("[$char] 숫자 이외의 값을 전달하면 안 됩니다.")
         }
     }
 }

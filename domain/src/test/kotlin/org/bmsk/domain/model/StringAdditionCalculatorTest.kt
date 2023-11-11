@@ -51,12 +51,12 @@ class StringAdditionCalculatorTest : FunSpec({
                 }
             }
             test("//-\\n1:2:-3은 예외가 발생 하지 않는다.") {
-                shouldNotThrowExactly<RuntimeException> {
+                shouldNotThrowExactly<IllegalArgumentException> {
                     StringAdditionCalculator("//-\n1:2:-3")
                 }
             }
             test("\"1, 2, 3\"은 예외가 발생한다.") {
-                shouldThrowExactly<RuntimeException> {
+                shouldThrowExactly<IllegalArgumentException> {
                     StringAdditionCalculator("1, 2, 3")
                 }
             }
