@@ -1,9 +1,6 @@
 package lotto.domain
 
-class Lotto(lotto: List<Int>) {
-
-    var lotto: List<Int> = lotto
-        private set
+class Lotto(val lotto: List<Int>) {
 
     fun getMatchLottoCount(jackpotNumbers: Lotto): Int {
         return lotto.count { jackpotNumbers.lotto.contains(it) }

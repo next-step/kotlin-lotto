@@ -1,6 +1,5 @@
 package lotto.controller
 
-import lotto.domain.LottoGenerator
 import lotto.domain.LottoRoiCalculator
 import lotto.domain.LottoShop
 import lotto.domain.LottoWinning
@@ -14,11 +13,9 @@ fun main() {
     val money = InputView.inputMoney()
 
     val lottoShop = LottoShop()
-    val lottoTryCount = lottoShop.getLottoCount(money)
-    OutputView.printLottoCount(lottoTryCount.toString())
-
-    val lottoGenerator = LottoGenerator()
-    val lottoList = lottoGenerator.getLotto(lottoTryCount)
+    val lottoBuyCount = lottoShop.getLottoBuyCount(money)
+    OutputView.printLottoCount(lottoBuyCount.toString())
+    val lottoList = lottoShop.buyLotto(lottoBuyCount)
     val lottoDto = lottoList.map { LottoDto(it) }.toList()
 
     OutputView.printLottoList(lottoDto)
