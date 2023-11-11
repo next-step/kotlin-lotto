@@ -19,6 +19,12 @@ data class Lotto(
         }
     }
 
+    fun match(winningNumbers: List<Int>): Lotto {
+        val correctCount = winningNumbers.count { numbers.contains(it) }
+
+        return copy(winning = LottoWinning.of(correctCount))
+    }
+
     private fun List<Int>.isSortedNumber(): Boolean {
         return zipWithNext { a, b -> a <= b }.all { it }
     }

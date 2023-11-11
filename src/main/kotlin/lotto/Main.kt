@@ -3,7 +3,6 @@ package lotto
 import lotto.domain.DefaultLottoGenerateStrategy
 import lotto.domain.LottoGenerator
 import lotto.domain.LottoStore
-import lotto.domain.LottoWinningMatcher
 import lotto.ui.InputView
 import lotto.ui.ResultView
 
@@ -17,7 +16,7 @@ fun main() {
 
     val winningNumbers = InputView.inputWinningNumbers()
 
-    val checkedLottos = LottoWinningMatcher.match(boughtLottos, winningNumbers)
+    val checkedLottos = boughtLottos.map { it.match(winningNumbers) }
 
     ResultView.showResult(checkedLottos, money)
 }
