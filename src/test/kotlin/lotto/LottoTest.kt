@@ -38,9 +38,9 @@ class LottoTest {
     fun `4등 로또 판정`() {
         val sut = Lotto(1, 2, 3, 4, 5, 6)
 
-        val actual = sut.matchedCount(Lotto(1, 2, 3, 4, 8, 9))
+        val actual = sut.judge(WinningLotto(Lotto(1, 2, 3, 4, 8, 9), 10))
 
-        assertThat(actual).isEqualTo(4)
+        assertThat(actual).isEqualTo(Prize.FOURTH)
     }
 
     @Test
