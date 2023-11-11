@@ -1,6 +1,6 @@
 package lotto
 
-data class Lotto(private val selectNumberList: List<Int>) {
+data class Lotto(val selectNumberList: List<Int>) {
 
     init {
         selectNumberList.forEach { LottoNumber.validateRange(it) }
