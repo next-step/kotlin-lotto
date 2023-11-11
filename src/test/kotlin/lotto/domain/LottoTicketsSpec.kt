@@ -39,7 +39,7 @@ class LottoTicketsSpec : FunSpec({
         test("가격이 주어지면 구입한 총 가격이 계산된다") {
             val price = Amount(1000)
             val count = 3
-            val tickets = LottoTickets(List(count) { LottoMock.createTickets() } )
+            val tickets = LottoTickets(List(count) { LottoMock.createTickets() })
 
             val result = tickets.calculatePrice(price)
 
@@ -49,7 +49,7 @@ class LottoTicketsSpec : FunSpec({
 
     context("티켓의 수를 센다") {
         val count = 3
-        val tickets = LottoTickets(List(count) { LottoMock.createTickets() } )
+        val tickets = LottoTickets(List(count) { LottoMock.createTickets() })
 
         val result = tickets.count()
 

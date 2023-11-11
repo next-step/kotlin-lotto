@@ -6,6 +6,7 @@ value class WinningNumbers private constructor(
 ) {
     fun isInWinningNumbers(number: Int) =
         value.contains(number)
+
     companion object {
         fun of(
             numbers: List<Int>,
@@ -24,7 +25,7 @@ value class WinningNumbers private constructor(
             }
         }
 
-        private fun checkNumberInRange(number:Int, requiredRange: IntRange) {
+        private fun checkNumberInRange(number: Int, requiredRange: IntRange) {
             require(requiredRange.contains(number)) { "로또 당첨 번호는 $requiredRange 범위 안에 있어야 합니다" }
         }
     }

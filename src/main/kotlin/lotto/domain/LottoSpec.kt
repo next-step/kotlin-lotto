@@ -4,7 +4,7 @@ object LottoSpec {
     const val NUMBERS_COUNT = 6
     val NUMBERS_RANGE = 1..45
     val PRICE = Amount(1000)
-    val prizesInfo : List<WinningPrize> = listOf(
+    val prizesInfo: List<WinningPrize> = listOf(
         WinningPrize(3, Amount(5_000)),
         WinningPrize(4, Amount(5_0000)),
         WinningPrize(5, Amount(1_500_000)),
@@ -13,5 +13,3 @@ object LottoSpec {
 
     fun getMinCountToGetPrize() = prizesInfo[0].matchedCount
 }
-
-

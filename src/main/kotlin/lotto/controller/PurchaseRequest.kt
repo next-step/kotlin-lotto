@@ -1,8 +1,6 @@
 package lotto.controller
 
-import java.lang.IllegalArgumentException
-
-class PurchaseRequest (
+class PurchaseRequest(
     val amount: Int,
 ) {
     companion object {

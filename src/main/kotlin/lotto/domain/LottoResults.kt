@@ -1,7 +1,7 @@
 package lotto.domain
 
 data class LottoResults(
-   val results: List<LottoResult>,
+    val results: List<LottoResult>,
 ) {
     fun calculateTotalPrize(
         prizeInfo: List<WinningPrize> = LottoSpec.prizesInfo

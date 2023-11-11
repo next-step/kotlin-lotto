@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoTickets (
+class LottoTickets(
     val tickets: List<LottoTicket>,
 ) {
     fun determinePrize(
@@ -22,7 +22,7 @@ class LottoTickets (
         tickets.groupBy { ticket -> ticket.countMatched(winningNumbers) }
 
     private fun filterWinningResult(result: Map<Int, List<LottoTicket>>, minMatchedNumberCountToGetPrize: Int) =
-        result.filter { (matchedNumberCount, _) ->  minMatchedNumberCountToGetPrize <= matchedNumberCount }
+        result.filter { (matchedNumberCount, _) -> minMatchedNumberCountToGetPrize <= matchedNumberCount }
 
     private fun toLottoResults(result: Map<Int, List<LottoTicket>>) = result.map { (matchedNumberCount, tickets) ->
         LottoResult(

@@ -1,7 +1,5 @@
 package lotto.view
 
-import java.lang.IllegalArgumentException
-
 object InputView {
     private const val PURCHASE_AMOUNT_QUESTION = "구입금액을 입력해 주세요."
     private const val WINNING_NUMBERS_QUESTION = "지난 주 당첨 번호를 입력해 주세요."
