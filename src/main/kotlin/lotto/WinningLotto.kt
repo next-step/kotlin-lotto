@@ -4,9 +4,9 @@ class WinningLotto(
     private val lotto: Lotto,
     private val bonusNumber: Int
 ) {
-    fun judge(other: Lotto): Prize {
+    fun judge(other: Lotto): Rank {
         val matchedCount = other.matchedCount(lotto)
         val hasBonusNumber = other.contains(bonusNumber)
-        return Prize.find(matchedCount, hasBonusNumber)
+        return Rank.find(matchedCount, hasBonusNumber)
     }
 }

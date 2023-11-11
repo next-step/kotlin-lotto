@@ -11,7 +11,7 @@ class WinningLottoTest {
 
         val actual = sut.judge(Lotto(1, 2, 3, 4, 5, 6))
 
-        assertThat(actual).isEqualTo(Prize.NOTHING)
+        assertThat(actual).isEqualTo(Rank.NOTHING)
     }
 
     @Test
@@ -20,7 +20,7 @@ class WinningLottoTest {
 
         val actual = sut.judge(Lotto(1, 2, 3, 4, 5, 6))
 
-        assertThat(actual).isEqualTo(Prize.FIFTH)
+        assertThat(actual).isEqualTo(Rank.FIFTH)
     }
 
     @Test
@@ -29,7 +29,7 @@ class WinningLottoTest {
 
         val actual = sut.judge(Lotto(1, 2, 3, 4, 5, 6))
 
-        assertThat(actual).isEqualTo(Prize.FOURTH)
+        assertThat(actual).isEqualTo(Rank.FOURTH)
     }
 
     @Test
@@ -38,7 +38,7 @@ class WinningLottoTest {
 
         val actual = sut.judge(Lotto(1, 2, 3, 4, 5, 6))
 
-        assertThat(actual).isEqualTo(Prize.THIRD)
+        assertThat(actual).isEqualTo(Rank.THIRD)
     }
 
     @Test
@@ -47,7 +47,7 @@ class WinningLottoTest {
 
         val actual = sut.judge(Lotto(1, 2, 3, 4, 5, 6))
 
-        assertThat(actual).isEqualTo(Prize.SECOND)
+        assertThat(actual).isEqualTo(Rank.SECOND)
     }
 
     @Test
@@ -56,6 +56,6 @@ class WinningLottoTest {
 
         val actual = sut.judge(Lotto(1, 2, 3, 4, 5, 6))
 
-        assertThat(actual).isEqualTo(Prize.FIRST)
+        assertThat(actual).isEqualTo(Rank.FIRST)
     }
 }

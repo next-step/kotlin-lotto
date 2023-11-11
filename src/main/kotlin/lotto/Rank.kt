@@ -2,7 +2,7 @@ package lotto
 
 import java.util.function.BiPredicate
 
-enum class Prize(val isMatched: BiPredicate<Int, Boolean>) {
+enum class Rank(val isMatched: BiPredicate<Int, Boolean>) {
     FIRST({ count, _ -> count == 6 }),
     SECOND({ count, hasBonusNumber -> count == 5 && hasBonusNumber }),
     THIRD({ count, hasBonsNumber -> count == 5 && !hasBonsNumber }),
@@ -12,7 +12,7 @@ enum class Prize(val isMatched: BiPredicate<Int, Boolean>) {
     ;
 
     companion object {
-        fun find(matchedCount: Int, hasBonusNumber: Boolean): Prize {
+        fun find(matchedCount: Int, hasBonusNumber: Boolean): Rank {
             return values().first { it.isMatched.test(matchedCount, hasBonusNumber) }
         }
     }
