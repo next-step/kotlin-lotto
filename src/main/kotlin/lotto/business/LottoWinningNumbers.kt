@@ -1,17 +1,12 @@
 package lotto.business
 
-class LottoWinningNumbers(override val lottoNumbers: Set<LottoNumber>) : LottoNumberSet {
+class LottoWinningNumbers(lottoNumbers: Set<LottoNumber>) : LottoNumberSet(lottoNumbers) {
     init {
         validateNumbers()
     }
 
-    private val _sortedLottoNumbers = sortedLottoNumbers()
-
-    val sortedLottoNumbers: List<LottoNumber>
-        get() = _sortedLottoNumbers
-
     fun compilePrizeResults(tickets: List<LottoTicket>): PrizeResults {
-        return tickets.map { it.matchCount(_sortedLottoNumbers) }
+        return tickets.map { it.matchCount(sortedLottoNumbers) }
             .map { LotteryPrize.getPrize(it) }
             .groupingBy { it }
             .eachCount()

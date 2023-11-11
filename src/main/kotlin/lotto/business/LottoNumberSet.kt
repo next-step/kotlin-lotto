@@ -1,8 +1,9 @@
 package lotto.business
 
-interface LottoNumberSet {
+abstract class LottoNumberSet(val lottoNumbers: Set<LottoNumber>) {
 
-    val lottoNumbers: Set<LottoNumber>
+    val sortedLottoNumbers
+        get() = this.lottoNumbers.sortedBy { it.number }
 
     fun validateNumbers() {
         require(lottoNumbers.size == LOTTO_NUMBER_SIZE) {
@@ -14,6 +15,3 @@ interface LottoNumberSet {
         const val LOTTO_NUMBER_SIZE = 6
     }
 }
-
-fun LottoNumberSet.sortedLottoNumbers(): List<LottoNumber> =
-    this.lottoNumbers.sortedBy { it.number }
