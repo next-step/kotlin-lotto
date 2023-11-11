@@ -36,7 +36,7 @@ object InputView {
         val userInput = readlnOrNull()
         validateIsNullOrBlank(userInput)
         validateNumeric(userInput!!.trim())
-        return LottoNumber(userInput.trim().toInt())
+        return LottoNumber.from(userInput.trim().toInt())
     }
 
     private fun validateIsNullOrBlank(userInput: String?) {

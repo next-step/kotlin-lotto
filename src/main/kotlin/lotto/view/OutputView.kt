@@ -28,7 +28,7 @@ object OutputView {
     }
 
     private fun printLottoNumbers(it: Lotto) {
-        val lottoNumbers = it.numbers.sortedValues
+        val lottoNumbers = it.sortedNumbers
             .map { number -> number.value }
             .joinToString(", ")
         println(String.format(LOTTO_FORMAT, lottoNumbers))
@@ -46,7 +46,7 @@ object OutputView {
     ): String {
         val lottoRanks = LottoRank.values()
             .filterNot { it.isMiss() }
-            .sortedBy { it.winningMatchCount }
+            .sortedBy { it.getWinningMatchCount() }
         val statisticsMessage =
             lottoRanks.joinToString(separator = System.lineSeparator()) { rank -> createMatchMessage(result, rank) }
         return System.lineSeparator() + String.format(WINNING_STATISTICS_MESSAGE_FORMAT.trimIndent(), statisticsMessage)
@@ -64,27 +64,23 @@ object OutputView {
         }
     }
 
-    private fun createMatchMessage(rank: LottoRank, matchCount: Int) = String.format(
+    private fun createMatchMessage(rank: LottoRank, matchCount: Int): String = String.format(
         MATCH_MESSAGE_FORMAT.trimIndent(),
-        rank.winningMatchCount,
+        rank.getWinningMatchCount(),
         rank.winningMoney,
         matchCount
     )
 
-    private fun createBonusMatchMessage(rank: LottoRank, matchCount: Int) = String.format(
+    private fun createBonusMatchMessage(rank: LottoRank, matchCount: Int): String = String.format(
         BONUS_BALL_MATCH_MESSAGE_FORMAT.trimIndent(),
-        rank.winningMatchCount,
+        rank.getWinningMatchCount(),
         rank.winningMoney,
         matchCount
     )
 
-    private fun createEarningRateMessage(
-        earningRate: Double,
-    ): String {
-        return String.format(
-            EARNING_RATE_MESSAGE_FORMAT,
-            earningRate,
-            if (earningRate > STANDARD_RATE) WIN else LOSE
-        )
-    }
+    private fun createEarningRateMessage(earningRate: Double): String = String.format(
+        EARNING_RATE_MESSAGE_FORMAT,
+        earningRate,
+        if (earningRate > STANDARD_RATE) WIN else LOSE
+    )
 }

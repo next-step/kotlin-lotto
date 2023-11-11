@@ -34,7 +34,7 @@ class LottoTest : StringSpec({
         // given
         val lotto = Lotto.from(listOf(1, 2, 3, 4, 5, 6))
         val otherLotto = Lotto.from(listOf(2, 5, 6, 7, 8, 10))
-        val bonusBall = LottoNumber(11)
+        val bonusBall = LottoNumber.from(11)
 
         // when
         val count = lotto.calculateMatchCount(otherLotto, bonusBall)
@@ -43,18 +43,40 @@ class LottoTest : StringSpec({
         count shouldBe 3
     }
 
-    "두 로또 번호 사이의 중복된 개수를 구할 때 보너스 볼이 존재하면 1 추가한 값을 반환한다." {
+    "두 로또 번호 사이의 중복된 개수를 구할 때 보너스 볼이 존재하지만, 중복된 개수가 5라면 1을 추가하지 않는다." {
         listOf(1, 2, 3, 4, 5, 6).forEach { number ->
             // given
             val lotto = Lotto.from(listOf(1, 2, 3, 4, 5, 6))
-            val otherLotto = Lotto.from(listOf(2, 5, 6, 7, 8, 10))
-            val bonusBall = LottoNumber(number)
+            val otherLotto = Lotto.from(listOf(2, 3, 4, 5, 6, 10))
+            val bonusBall = LottoNumber.from(number)
 
             // when
             val count = lotto.calculateMatchCount(otherLotto, bonusBall)
 
             // then
-            count shouldBe 4
+            count shouldBe 5
+        }
+    }
+
+    "두 로또 번호 사이의 중복된 개수를 구할 때 보너스 볼이 존재하면서, 중복된 개수가 5가 아니라면 1 추가한 값을 반환한다." {
+        forAll(
+            row(listOf(1, 2, 3, 4, 7, 8), 5),
+            row(listOf(1, 2, 3, 7, 8, 9), 4),
+            row(listOf(1, 2, 7, 8, 9, 10), 3),
+            row(listOf(1, 7, 8, 9, 10, 11), 2),
+            row(listOf(7, 8, 9, 10, 11, 12), 1),
+        ) { other, expected ->
+
+            // given
+            val lotto = Lotto.from(listOf(1, 2, 3, 4, 5, 6))
+            val otherLotto = Lotto.from(other)
+            val bonusBall = LottoNumber.from(5)
+
+            // when
+            val actual = lotto.calculateMatchCount(otherLotto, bonusBall)
+
+            // then
+            actual shouldBe expected
         }
     }
 
@@ -65,10 +87,12 @@ class LottoTest : StringSpec({
         ) { number, expected ->
             // given
             val lotto = Lotto.from(listOf(1, 2, 3, 4, 5, 6))
-            val bonusBall = LottoNumber(number)
-
+            val bonusBall = LottoNumber.from(number)
             // when
-            lotto.hasBonusBall(bonusBall) shouldBe expected
+            val actual = lotto.hasBonusBall(bonusBall)
+
+            // then
+            actual shouldBe expected
         }
     }
 },)

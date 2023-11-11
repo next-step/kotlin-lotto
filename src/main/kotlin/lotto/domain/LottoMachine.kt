@@ -18,8 +18,8 @@ class LottoMachine private constructor(
         }
     }
 
-    fun getLottoTotalPrice(): Price {
-        return Price(lottoCount.multiply(Lotto.LOTTO_PRICE))
+    fun getLottoTotalPrice(): LottoPrice {
+        return LottoPrice.getTotalPrice(lottoCount)
     }
 
     fun getResult(winningLotto: Lotto, buyingPrice: LottoBuyingPrice, bonusBall: LottoNumber): LottoMatchResult {

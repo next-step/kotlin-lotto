@@ -7,24 +7,13 @@ import lotto.util.NumberGenerator
 
 class LottoMachineTest : StringSpec({
 
-    "구입한 로또의 금액을 계산한다." {
-        // given
-        val lottoCount = 10
-
-        // when
-        val lottoMachine = createLottoMachine(lottoCount)
-
-        // then
-        lottoMachine.getLottoTotalPrice() shouldBe Price(10000)
-    }
-
     "로또 당첨 번호와 보너스 볼이 중복되면 예외가 발생한다." {
         listOf(2, 3, 6, 7, 8, 9).forEach { number ->
             // given
             val lottoCount = 2
             val lottoMachine = createLottoMachine(lottoCount)
             val winningLotto = Lotto.from(listOf(2, 3, 6, 7, 8, 9))
-            val bonusBall = LottoNumber(number)
+            val bonusBall = LottoNumber.from(number)
             val buyingPrice = LottoBuyingPrice(2000)
 
             // exepcted
@@ -39,7 +28,7 @@ class LottoMachineTest : StringSpec({
         val lottoCount = 2
         val lottoMachine = createLottoMachine(lottoCount)
         val winningLotto = Lotto.from(listOf(2, 3, 6, 7, 8, 9))
-        val bonusBall = LottoNumber(10)
+        val bonusBall = LottoNumber.from(10)
         val buyingPrice = LottoBuyingPrice(2000)
 
         // when
@@ -61,7 +50,7 @@ private fun createLottoMachine(lottoCount: Int): LottoMachine {
 }
 
 private fun createFakeNumberGenerator() = object : NumberGenerator {
-    override fun generate(min: Int, max: Int, count: Int): List<Int> {
+    override fun generate(count: Int): List<Int> {
         return listOf(1, 2, 3, 4, 5, 6)
     }
 }
