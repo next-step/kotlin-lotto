@@ -9,12 +9,6 @@ enum class LottoRank(val matchCount: Int, val prize: Int) {
     ;
 
     companion object {
-        fun getRank(matchCount: Int) = when (matchCount) {
-            6 -> FIRST
-            5 -> SECOND
-            4 -> THIRD
-            3 -> FOURTH
-            else -> MISS
-        }
+        fun getRank(matchCount: Int): LottoRank = values().firstOrNull { it.matchCount == matchCount } ?: MISS
     }
 }
