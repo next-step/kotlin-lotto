@@ -12,6 +12,13 @@ class StringAddCalculator {
 
         var result = 0L
         numbers.forEach {
+
+            val number = it.toLongOrNull()
+
+            if (number == null || number < 0) {
+                throw RuntimeException()
+            }
+
             result += it.toLong()
         }
 
