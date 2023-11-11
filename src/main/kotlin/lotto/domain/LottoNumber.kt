@@ -6,4 +6,8 @@ data class LottoNumber(val number: Int) {
             "로또 숫자는 1부터 45사이의 숫자여야 합니다."
         }
     }
+
+    override fun toString(): String {
+        return number.toString()
+    }
 }

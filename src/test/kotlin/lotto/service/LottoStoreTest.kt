@@ -5,11 +5,6 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class LottoStoreTest {
-    @Test
-    fun `4500원을 지불하면 4장의 로또를 구매할 수 있다`() {
-        val lottoCount = LottoStore.getLottoCount(4500)
-        assertThat(lottoCount).isEqualTo(4)
-    }
 
     @Test
     fun `LottoCounter 에 돈을 지불하면 로또를 구매할 수 있다 (기본 가격은 1000원)`() {
