@@ -7,7 +7,7 @@ class PrizeResults(prizeCountMap: Map<LotteryPrize, Int>) {
     val prizeCountMap: Map<LotteryPrize, Int>
         get() {
             return LotteryPrize.values().associateWith {
-                _prizeCountMap.getOrDefault(it, 0)
+                _prizeCountMap[it] ?: 0
             }
         }
 
