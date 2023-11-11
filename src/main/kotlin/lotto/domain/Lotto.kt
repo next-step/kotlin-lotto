@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.error.ErrorMessage.*
+import lotto.error.ErrorMessage.LOTTO_COUNT_ERROR
 
 class Lotto(val lotto: List<Int>) {
 
