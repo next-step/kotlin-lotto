@@ -5,6 +5,7 @@ class Lotto(vararg numbers: Int) {
 
     init {
         require(this.numbers.size == 6) { "로또는 유일한 숫자 6개로 구성해야합니다." }
+        require(this.numbers.all { it in 1..45 }) { "로또는 1 ~ 45의 숫자로 구성해야합니다." }
     }
 
     fun matchedCount(other: Lotto): Int {
