@@ -19,60 +19,60 @@ class LottoInputViewTest {
     }
 
     @Test
-    fun `당첨 번호에 대한 입력 값 받았을 때, splitWinningNumber()을 요청하면, 콤마를 기준으로 구분하여 리스트를 반환한다`() {
+    fun `정상적인 포맷의 input을 받았을 때, 당첨 번호 리스트를 생성한다면, 콤마를 기준으로 구분하여 리스트를 반환한다`() {
         // given : 당첨 번호를 입력 받는다.
         val inputWinningNumber = "1,2,3,4,5,8"
 
-        // when : splitWinningNumber()을 요청한다.
-        val actual = LottoInputView.splitWinningNumber(inputWinningNumber)
+        // when : 당첨 번호 리스트를 생성한다.
+        val actual = LottoInputView.createWinningNumber(inputWinningNumber)
 
         // then : 콤마를 기준으로 구분하여 리스트를 반환한다
         assertThat(actual).isEqualTo(listOf(1, 2, 3, 4, 5, 8))
     }
 
     @Test
-    fun `당첨 번호에 대한 모든 입력 값의 포맷이 양수가 아닐 때, splitWinningNumber()을 요청하면, 에러를 던진다`() {
-        // given : 포맷이 양수가 아닌 입력 값을 받는다.
-        val inputWinningNumber = "1,2a,3,4,5,-8"
+    fun `숫자가 아닌 값이 포함된 input을 받았을 때, 당첨 번호 리스트를 생성한다면, 에러를 던진다`() {
+        // given : 숫자가 아닌 값이 포함된 input을 받는다.
+        val inputWinningNumber = "1,2a,3,4,5,8"
 
-        // when :  splitWinningNumber()을 요청한다.
-        val actual = runCatching { LottoInputView.splitWinningNumber(inputWinningNumber) }.exceptionOrNull()
+        // when : 당첨 번호 리스트를 생성한다.
+        val actual = runCatching { LottoInputView.createWinningNumber(inputWinningNumber) }.exceptionOrNull()
 
         // then : 에러를 던진다.
         assertThat(actual).isInstanceOf(IllegalArgumentException()::class.java)
     }
 
     @Test
-    fun `분리된 당첨 번호가 6개를 초과할 때, 검증을 요청하면, 에러를 던진다`() {
-        // given : 6개를 초과하는 당첨번호 리스트를 받는다.
-        val winningNumberList = listOf(1, 2, 3, 4, 5, 6, 7)
+    fun `번호가 6개를 초과하는 input을 받았을 때, 당첨 번호 리스트를 생성한다면, 에러를 던진다`() {
+        // given : 6개를 초과하는 당첨번호 input을 받는다.
+        val inputWinningNumber = "1,2,3,4,5,8,30"
 
-        // when : 검증을 한다
-        val actual = runCatching { LottoInputView.validateWinningNumberList(winningNumberList) }.exceptionOrNull()
-
-        // then : 에러를 던진다.
-        assertThat(actual).isInstanceOf(IllegalArgumentException::class.java)
-    }
-
-    @Test
-    fun `분리된 당첨 번호들의 범위가 1~45가 아닐 때, 검증을 요청하면, 에러를 던진다`() {
-        // given : 분리된 당첨번호의 범위가 1~45에 존재하지 않는다.
-        val winningNumberList = listOf(1, 2, 3, 4, 5, 66)
-
-        // when : 검증을 한다
-        val actual = runCatching { LottoInputView.validateWinningNumberRange(winningNumberList) }.exceptionOrNull()
+        // when : 당첨 번호 리스트를 생성한다.
+        val actual = runCatching { LottoInputView.createWinningNumber(inputWinningNumber) }.exceptionOrNull()
 
         // then : 에러를 던진다.
         assertThat(actual).isInstanceOf(IllegalArgumentException::class.java)
     }
 
     @Test
-    fun `등록된 당첨 번호가 중복이 있을 때, 검증을 요청한다면, 에러를 던진다`() {
-        // given : 종복되는 번호 조합을 받는다.
-        val winningNumberList = listOf(1, 2, 2, 4, 5, 6)
+    fun `1~45 범위를 벗어나는 input을 받았을 때, 당첨 번호 리스트를 생성한다면, 에러를 던진다`() {
+        // given : 1 ~ 45 범위를 벗어나는 당청번호 input을 받는다.
+        val inputWinningNumber = "1,2,3,4,5,50"
 
-        // when : 검증을 한다.
-        val actual = runCatching { LottoInputView.validateDuplicateNumber(winningNumberList) }.exceptionOrNull()
+        // when : 당첨 번호 리스트를 생성한다.
+        val actual = runCatching { LottoInputView.createWinningNumber(inputWinningNumber) }.exceptionOrNull()
+
+        // then : 에러를 던진다.
+        assertThat(actual).isInstanceOf(IllegalArgumentException::class.java)
+    }
+
+    @Test
+    fun `중복되는 값을 가진 input을 받았을 때, 당첨 번호 리스트를 생성한다면, 에러를 던진다`() {
+        // given : 종복되는 번호 조합을 가진 당첨번호 input을 받는다.
+        val inputWinningNumber = "1,2,3,4,5,3"
+
+        // when : 당첨 번호 리스트를 생성한다.
+        val actual = runCatching { LottoInputView.createWinningNumber(inputWinningNumber) }.exceptionOrNull()
 
         // then : 에러를 던진다.
         assertThat(actual).isInstanceOf(IllegalArgumentException::class.java)
