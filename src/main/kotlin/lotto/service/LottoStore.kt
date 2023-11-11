@@ -4,10 +4,9 @@ import lotto.domain.Lotto
 import lotto.domain.LottoNumbers
 
 object LottoStore {
-    private const val LOTTO_PRICE = 1000
 
     fun purchase(money: Int): List<Lotto> {
-        val count = money / LOTTO_PRICE
+        val count = money / Lotto.LOTTO_PRICE
         return List(count) { generateRandomLotto() }
     }
 
