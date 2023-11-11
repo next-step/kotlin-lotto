@@ -9,8 +9,8 @@ enum class LotteryPrizeAmount(val winNum: Int, val prize: Int) {
     ;
 
     companion object {
-        fun getWinningPrize(winNum: Int): Int {
-            return values().find { it.winNum == winNum }?.prize ?: 0
+        fun getWinningPrize(winNum: Int): LotteryPrizeAmount {
+            return values().find { it.winNum == winNum } ?: MISS
         }
     }
 }
