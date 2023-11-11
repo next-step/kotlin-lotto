@@ -10,7 +10,7 @@ fun main() {
     val amount: Int = InputView.purchaseAmount(Issuer.pricePerGame())
     val round = Issuer.transaction(amount)
     OutputView.presetRound(round)
-    val winningNumbers: WinningNumbers = InputView.drawing()
+    val winningNumbers: WinningNumbers = InputView.winningNumberDraw()
     val lottoWinners: LottoWinners = round.winnerAggregate(winningNumbers)
     OutputView.presentPrizes(lottoWinners)
 }

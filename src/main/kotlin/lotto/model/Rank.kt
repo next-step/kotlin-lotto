@@ -18,16 +18,15 @@ enum class Rank(
 
     companion object {
         fun of(matchCount: Int, bonus: Boolean): Rank {
-            if (isBoom(matchCount)) {
-                return BOOM
+            """코드적으로는 First 검사 >> Second, Third .. 순서로 검사하는게 자연스럽고 깔끔하게 짤수 있을꺼같은데요,
+            로또의 대부분의 경우는 Boom(꽝) 이기 때문에 대부분의 케이스를 early reautrn 해주고 싶어서 이렇게 작성하였습니다.
+            혹시 성능적인 관점에서 큰 차이가 없을꺼같긴 한데 코드 깔끔함 VS 예상되는 동작 둘중에 어떤걸 선택하는게 좋을까요??"""
+            return when {
+                isBoom(matchCount) -> BOOM
+                isSecond(matchCount, bonus) -> SECOND
+                isThird(matchCount, bonus) -> THIRD
+                else -> countToRank(matchCount)
             }
-            if (isSecond(matchCount, bonus)) {
-                return SECOND
-            }
-            if (isThird(matchCount, bonus)) {
-                return THIRD
-            }
-            return countToRank(matchCount)
         }
 
         private fun isBoom(matchCount: Int): Boolean {

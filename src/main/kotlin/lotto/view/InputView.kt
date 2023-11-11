@@ -12,7 +12,7 @@ object InputView {
         return purchaseGameCount
     }
 
-    fun drawing(): WinningNumbers {
+    fun winningNumberDraw(): WinningNumbers {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val winningNumbers = LottoNumbers((readlnOrNull() ?: "").split(",").map { it.toInt() })
         println("보너스 볼을 입력해 주세요.")
