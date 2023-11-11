@@ -8,18 +8,23 @@ object StringAddCalculator {
 
     fun add(input: String?): Int {
         if (input.isNullOrEmpty()) return EMPTY_RESULT
-        val positiveNumbers = splitInputByDelimiter(input)
+        val numbers = splitInputByDelimiter(input)
+        val positiveNumbers = checkPositiveNumber(numbers)
 
         return positiveNumbers.sumOf { it.number }
     }
 
-    private fun splitInputByDelimiter(input: String): List<PositiveNumber> {
+    private fun checkPositiveNumber(numbers: List<Int>): List<PositiveNumber> {
+        return numbers.map { PositiveNumber(it) }
+    }
+
+    private fun splitInputByDelimiter(input: String): List<Int> {
         val findRegex = Regex(CUSTOM_SEPARATOR_REGEX).find(input)
         val split = findRegex?.let {
             val customDelimiter = it.groupValues[1]
             it.groupValues[2].split(customDelimiter)
         } ?: input.split(DEFAULT_DELIMITER_REGEX)
 
-        return split.map { PositiveNumber(it.toInt()) }
+        return split.map { it.toInt() }
     }
 }
