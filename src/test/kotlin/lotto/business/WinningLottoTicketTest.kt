@@ -62,16 +62,17 @@ class WinningLottoTicketTest {
                 )
             )
         )
+        val bonusNumber = LottoNumber(7)
 
         // when
-        val prizeResults = winningLottoTicket.compilePrizeResults(lottoTickets)
+        val prizeResults = winningLottoTicket.compilePrizeResults(lottoTickets, bonusNumber)
 
         // then
         Assertions.assertThat(prizeResults.prizeCountMap).isEqualTo(
             mapOf(
                 LotteryPrize.FIRST to 1,
-                LotteryPrize.SECOND to 0,
-                LotteryPrize.THIRD to 1,
+                LotteryPrize.SECOND to 1,
+                LotteryPrize.THIRD to 0,
                 LotteryPrize.FOURTH to 1,
                 LotteryPrize.FIFTH to 0,
                 LotteryPrize.MISS to 0

@@ -44,4 +44,19 @@ class LottoTicketTest {
         // then
         assertThat(matchCount).isEqualTo(expected)
     }
+
+    @ParameterizedTest
+    @CsvSource(value = ["1,true", "7,false"])
+    fun `보너스번호 포함여부를 확인한다`(bonusNumber: Int, expected: Boolean) {
+        // given
+        val lottoNumber = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }.toSet()
+        val lottoTicket = LottoTicket(lottoNumber)
+        val targetLottoNumber = LottoNumber(bonusNumber)
+
+        // when
+        val contains = lottoTicket.contains(targetLottoNumber)
+
+        // then
+        assertThat(contains).isEqualTo(expected)
+    }
 }

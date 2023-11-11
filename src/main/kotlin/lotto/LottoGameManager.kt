@@ -16,7 +16,7 @@ object LottoGameManager {
         val winningLottoTicket = LottoWinningTicketExtractor.extract(LottoInputHandler.inputWinningNumbers())
         val bonusNumber = LottoNumber(LottoInputHandler.inputBonusNumber())
         winningLottoTicket.validateBonusNumber(bonusNumber)
-        val prizeResults = winningLottoTicket.compilePrizeResults(lottoTickets)
+        val prizeResults = winningLottoTicket.compilePrizeResults(lottoTickets, bonusNumber)
         val profitRate = prizeResults.calculateProfitRate(receivedAmount)
         LotteryStatisticsPrinter.print(prizeResults, profitRate)
     }

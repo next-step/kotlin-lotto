@@ -5,9 +5,8 @@ class WinningLottoTicket(lottoNumbers: Set<LottoNumber>) : LottoNumberSet(lottoN
         validateNumbers()
     }
 
-    fun compilePrizeResults(tickets: List<LottoTicket>): PrizeResults {
-        return tickets.map { it.matchCount(sortedLottoNumbers) }
-            .map { LotteryPrize.getPrize(it) }
+    fun compilePrizeResults(tickets: List<LottoTicket>, bonusNumber: LottoNumber): PrizeResults {
+        return tickets.map { LotteryPrize.getPrize(it.matchCount(sortedLottoNumbers), it.contains(bonusNumber)) }
             .groupingBy { it }
             .eachCount()
             .let { PrizeResults(it) }
