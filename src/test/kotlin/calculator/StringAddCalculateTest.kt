@@ -64,4 +64,10 @@ class StringAddCalculateTest : FunSpec({
             calculator.add("-1:2")
         }
     }
+
+    context("문자열 계산기에 정수와 구분자가 아닌 입력이 들어온다면 RuntimeException 예외 처리를 한다.") {
+        shouldThrow<RuntimeException> {
+            calculator.add("1:A")
+        }
+    }
 })

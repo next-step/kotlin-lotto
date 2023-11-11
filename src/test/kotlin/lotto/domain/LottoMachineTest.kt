@@ -13,11 +13,11 @@ class LottoMachineTest : BehaviorSpec({
         When("복권 기계에 구매한 로또를 전달하면") {
             val lotto = Lotto(
                 listOf(
-                    LottoNumber(listOf(1, 2, 3, 4, 5, 6)),
-                    LottoNumber(listOf(1, 2, 3, 4, 5, 7)),
-                    LottoNumber(listOf(1, 2, 3, 4, 5, 9)),
-                    LottoNumber(listOf(1, 2, 3, 4, 8, 9)),
-                    LottoNumber(listOf(1, 2, 3, 8, 9, 10))
+                    LottoLine(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber)),
+                    LottoLine(listOf(1, 2, 3, 4, 5, 7).map(::LottoNumber)),
+                    LottoLine(listOf(1, 2, 3, 4, 5, 9).map(::LottoNumber)),
+                    LottoLine(listOf(1, 2, 3, 4, 8, 9).map(::LottoNumber)),
+                    LottoLine(listOf(1, 2, 3, 8, 9, 10).map(::LottoNumber))
                 )
             )
             val lottoRanks = lottoMachine.checkLottoResult(lotto, winningNumber)

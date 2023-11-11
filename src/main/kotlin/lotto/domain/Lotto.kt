@@ -1,7 +1,7 @@
 package lotto.domain
 
 class Lotto(
-    val lines: List<LottoNumber>
+    val lines: List<LottoLine>
 ) {
     fun getAllSameNumberCount(lottoWinningNumber: LottoWinningNumber): List<LottoWinningResult> =
         lines.map {
