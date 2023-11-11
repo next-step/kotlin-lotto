@@ -5,8 +5,9 @@ object Issuer {
 
     fun transaction(gameCount: Int): Round {
         return Round(
-            (1..gameCount)
-                .map { Game.autoTicket() }
+            List(gameCount) {
+                Game.autoTicket()
+            }
         )
     }
 
