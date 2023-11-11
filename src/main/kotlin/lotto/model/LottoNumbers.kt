@@ -29,7 +29,7 @@ value class LottoNumbers(
     }
 
     companion object {
-        fun any(): LottoNumbers {
+        fun random(): LottoNumbers {
             return LottoNumbers(LottoNumber.any6Numbers())
         }
     }

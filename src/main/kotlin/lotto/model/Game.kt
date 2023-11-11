@@ -5,7 +5,7 @@ data class Game(
 ) {
     companion object {
         fun autoTicket(): Game {
-            return Game(LottoNumbers.any())
+            return Game(LottoNumbers.random())
         }
     }
 }
