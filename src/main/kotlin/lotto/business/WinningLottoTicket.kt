@@ -1,6 +1,6 @@
 package lotto.business
 
-class LottoWinningNumbers(lottoNumbers: Set<LottoNumber>) : LottoNumberSet(lottoNumbers) {
+class WinningLottoTicket(lottoNumbers: Set<LottoNumber>) : LottoNumberSet(lottoNumbers) {
     init {
         validateNumbers()
     }

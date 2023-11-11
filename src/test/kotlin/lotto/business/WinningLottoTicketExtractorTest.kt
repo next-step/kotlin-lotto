@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
-class LottoWinningNumbersExtractorTest {
+class WinningLottoTicketExtractorTest {
     @Test
     fun `입력한 당첨 결과를 파싱한다`() {
         // given
@@ -14,7 +14,7 @@ class LottoWinningNumbersExtractorTest {
         val expectedLottoNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }.toSet()
 
         // when
-        val lottoWinningNumbers = LottoWinningNumbersExtractor.extract(input)
+        val lottoWinningNumbers = LottoWinningTicketExtractor.extract(input)
 
         // then
         assertThat(lottoWinningNumbers.sortedLottoNumbers).usingRecursiveComparison().isEqualTo(expectedLottoNumbers)
@@ -26,7 +26,7 @@ class LottoWinningNumbersExtractorTest {
         val input = "1,2,3,4,5,6a"
 
         // when, then
-        assertThatThrownBy { LottoWinningNumbersExtractor.extract(input) }
+        assertThatThrownBy { LottoWinningTicketExtractor.extract(input) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .message().isEqualTo("당첨 번호는 숫자여야 합니다.")
     }
