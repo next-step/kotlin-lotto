@@ -16,12 +16,10 @@ class Formula(formula: String?) {
         if (makeZeroWhenIsBlank(formula)) return
         val result = customDelimiterRegex.find(formula)
 
-        result?.let { matchResult ->
+        operand = result?.let { matchResult ->
             val customDelimiter = matchResult.groupValues[1]
-            operand = matchResult.groupValues[2].split(customDelimiter).map { Operand(it) }
-            return
-        }
-        operand = formula.split(defaultDelimiter).map { Operand(it) }
+            matchResult.groupValues[2].split(customDelimiter).map { Operand(it) }
+        } ?: formula.split(defaultDelimiter).map { Operand(it) }
     }
 
     private fun makeZeroWhenIsBlank(formula: String): Boolean {
