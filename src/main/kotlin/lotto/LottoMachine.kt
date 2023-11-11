@@ -6,7 +6,6 @@ object LottoMachine {
     private const val FOUR = 4
     private const val THREE = 3
 
-
     fun createLotto(numberList: List<Int>): Lotto {
         return Lotto(numberList)
     }

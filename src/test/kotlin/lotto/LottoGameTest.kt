@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 
 class LottoGameTest {
     @Test
-    fun `금액을 입력받았을 때, 로또를 구매한다면, 최대 수량으로 구매를 한다`() {
+    fun `금액을 입력받았다면, 로또를 구매한을 떄, 최대 수량으로 구매를 한다`() {
         // given : 금액을 입력 받는다.
         val cash = 4500
         val lottoGame = LottoGame()
@@ -18,7 +18,7 @@ class LottoGameTest {
     }
 
     @Test
-    fun `로또 구매와 당첨 번호를 입력했을 때, 당첨을 확인 한다면, 당첨 통계를 반환한다`() {
+    fun `로또 구매와 당첨 번호를 입력 했다면, 당첨을 확인을 요청할 때, 당첨 통계를 반환한다`() {
         // given : 로또 구매와 당첨 번호를 입력한다.
         // 2등 - 2개, 3등 - 1개, 4등 - 1개
         val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
