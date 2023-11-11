@@ -24,11 +24,29 @@ class WinningLottoTest {
     }
 
     @Test
+    fun `3등 로또 판정`() {
+        val sut = WinningLotto(Lotto(1, 2, 3, 4, 5, 7), 8)
+
+        val actual = sut.judge(Lotto(1, 2, 3, 4, 5, 6))
+
+        assertThat(actual).isEqualTo(Prize.THIRD)
+    }
+
+    @Test
     fun `2등 로또 판정`() {
         val sut = WinningLotto(Lotto(1, 2, 3, 4, 5, 7), 6)
 
         val actual = sut.judge(Lotto(1, 2, 3, 4, 5, 6))
 
         assertThat(actual).isEqualTo(Prize.SECOND)
+    }
+
+    @Test
+    fun `1등 로또 판정`() {
+        val sut = WinningLotto(Lotto(1, 2, 3, 4, 5, 6), 7)
+
+        val actual = sut.judge(Lotto(1, 2, 3, 4, 5, 6))
+
+        assertThat(actual).isEqualTo(Prize.FIRST)
     }
 }

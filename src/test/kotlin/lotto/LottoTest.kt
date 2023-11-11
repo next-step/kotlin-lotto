@@ -1,6 +1,5 @@
 package lotto
 
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
@@ -23,23 +22,5 @@ class LottoTest {
         assertThrows<IllegalArgumentException> {
             Lotto(1, 2, 3, 4, 5, 1)
         }
-    }
-
-    @Test
-    fun `3등 로또 판정`() {
-        val sut = Lotto(1, 2, 3, 4, 5, 6)
-
-        val actual = sut.matchedCount(Lotto(1, 2, 3, 4, 5, 9))
-
-        assertThat(actual).isEqualTo(5)
-    }
-
-    @Test
-    fun `1등 로또 판정`() {
-        val sut = Lotto(1, 2, 3, 4, 5, 6)
-
-        val actual = sut.matchedCount(Lotto(1, 2, 3, 4, 5, 6))
-
-        assertThat(actual).isEqualTo(6)
     }
 }
