@@ -1,5 +1,5 @@
 package lotto.util
 
-interface NumberGenerator {
-    fun generate(count: Int): List<Int>
+interface NumberGenerator<T> {
+    fun generateNumbers(count: Int): List<T>
 }

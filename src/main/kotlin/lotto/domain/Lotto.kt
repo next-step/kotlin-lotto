@@ -41,11 +41,11 @@ class Lotto private constructor(
         private const val LOTTO_NUMBER_COUNT = 6
         const val LOTTO_PRICE = 1000
 
-        fun createFromGenerator(lottoNumberGenerator: NumberGenerator): Lotto {
-            val lottoNumbers = lottoNumberGenerator.generate(
+        fun createFromGenerator(lottoNumberGenerator: NumberGenerator<LottoNumber>): Lotto {
+            val lottoNumbers = lottoNumberGenerator.generateNumbers(
                 count = LOTTO_NUMBER_COUNT,
             )
-            return createFromNumbers(lottoNumbers)
+            return Lotto(lottoNumbers)
         }
 
         fun createFromNumbers(numbers: List<Int>): Lotto {

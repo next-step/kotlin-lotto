@@ -2,15 +2,13 @@ package lotto.util
 
 import lotto.domain.LottoNumber
 
-object LottoNumberGenerator : NumberGenerator {
-
-    override fun generate(count: Int): List<Int> {
+object LottoNumberGenerator : NumberGenerator<LottoNumber> {
+    override fun generateNumbers(count: Int): List<LottoNumber> {
         return LottoNumber.getLottoNumbers()
             .asSequence()
             .shuffled()
             .take(count)
             .sortedBy { it.value }
-            .map { it.value }
             .toList()
     }
 }

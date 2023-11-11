@@ -20,21 +20,21 @@ class LottoMachineTest : StringSpec({
 
         // then
         lottoResult.result shouldBe mutableMapOf(
-            LottoRank.FIFTH to 2,
+            LottoRank.FIFTH to 2
         )
         lottoResult.earningRate shouldBe 5.0
     }
-},)
+})
 
 private fun createLottoMachine(lottoCount: Int): LottoMachine {
     return LottoMachine.of(
         lottoCount = lottoCount,
-        numberGenerator = createFakeNumberGenerator(),
+        numberGenerator = createFakeNumberGenerator()
     )
 }
 
-private fun createFakeNumberGenerator() = object : NumberGenerator {
-    override fun generate(count: Int): List<Int> {
-        return listOf(1, 2, 3, 4, 5, 6)
+private fun createFakeNumberGenerator() = object : NumberGenerator<LottoNumber> {
+    override fun generateNumbers(count: Int): List<LottoNumber> {
+        return List(6) { LottoNumber.from(it + 1) }
     }
 }
