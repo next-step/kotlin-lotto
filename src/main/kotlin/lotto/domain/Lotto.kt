@@ -14,9 +14,9 @@ class Lotto private constructor(
         validateDuplication()
     }
 
-    fun calculateMatchCount(other: Lotto, bonusBall: LottoNumber): Int {
-        val matchCount = numbers.intersect(other.numbers.toSet()).size
-        if (LottoRank.isSecondOrThirdRank(matchCount).not() && hasBonusBall(bonusBall)) {
+    fun calculateMatchCount(winningLotto: WinningLotto, hasBonusBall: Boolean): Int {
+        val matchCount = numbers.intersect(winningLotto.getLottoNumbers()).size
+        if (LottoRank.isSecondOrThirdRank(matchCount).not() && hasBonusBall) {
             return matchCount.inc()
         }
         return matchCount
@@ -41,14 +41,14 @@ class Lotto private constructor(
         private const val LOTTO_NUMBER_COUNT = 6
         const val LOTTO_PRICE = 1000
 
-        fun from(lottoNumberGenerator: NumberGenerator): Lotto {
+        fun createFromGenerator(lottoNumberGenerator: NumberGenerator): Lotto {
             val lottoNumbers = lottoNumberGenerator.generate(
-                count = LOTTO_NUMBER_COUNT
+                count = LOTTO_NUMBER_COUNT,
             )
-            return from(lottoNumbers)
+            return createFromNumbers(lottoNumbers)
         }
 
-        fun from(numbers: List<Int>): Lotto {
+        fun createFromNumbers(numbers: List<Int>): Lotto {
             val lottoNumbers = numbers.map { LottoNumber.from(it) }
             return Lotto(lottoNumbers)
         }

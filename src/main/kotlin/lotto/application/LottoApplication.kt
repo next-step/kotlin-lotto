@@ -4,6 +4,7 @@ import lotto.domain.Charge
 import lotto.domain.Lotto
 import lotto.domain.LottoBuyingPrice
 import lotto.domain.LottoMachine
+import lotto.domain.WinningLotto
 import lotto.util.LottoNumberGenerator
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -18,9 +19,8 @@ class LottoApplication {
             val change = calculateChange(buyingPrice, lottoMachine)
             OutputView.printLottos(lottoMachine, change)
 
-            val winningLotto = InputView.readWinningLotto()
-            val bonusBall = InputView.readBonusBall()
-            val lottoMatchResult = lottoMachine.getResult(winningLotto, buyingPrice, bonusBall)
+            val winningLotto = createWinningLotto()
+            val lottoMatchResult = lottoMachine.getResult(winningLotto, buyingPrice)
             OutputView.printLottoResult(lottoMatchResult)
         }
 
@@ -35,6 +35,12 @@ class LottoApplication {
         private fun calculateChange(buyingPrice: LottoBuyingPrice, lottoMachine: LottoMachine): Charge {
             val lottoTotalPrice = lottoMachine.getLottoTotalPrice()
             return Charge(buyingPrice.minus(lottoTotalPrice.value))
+        }
+
+        private fun createWinningLotto(): WinningLotto {
+            val winningLottoNumbers = InputView.readWinningLotto()
+            val bonusBall = InputView.readBonusBall()
+            return WinningLotto(winningLottoNumbers, bonusBall)
         }
     }
 }

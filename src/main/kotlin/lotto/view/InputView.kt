@@ -27,7 +27,7 @@ object InputView {
             validateNumeric(it.trim())
             it.trim().toInt()
         }.let {
-            Lotto.from(it)
+            Lotto.createFromNumbers(it)
         }
     }
 
