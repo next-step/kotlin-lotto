@@ -10,6 +10,10 @@ class Lotto(val lottoNumbers: List<LottoNumber>) {
         }
     }
 
+    fun match(anotherLotto: Lotto): Int {
+        return lottoNumbers.count { it in anotherLotto.lottoNumbers }
+    }
+
     companion object {
         private const val LOTTO_NUMBER_COUNT = 6
     }
