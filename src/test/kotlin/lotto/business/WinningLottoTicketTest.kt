@@ -69,11 +69,12 @@ class WinningLottoTicketTest {
         // then
         Assertions.assertThat(prizeResults.prizeCountMap).isEqualTo(
             mapOf(
-                LotteryPrize.SIX_MATCH to 1,
-                LotteryPrize.FIVE_MATCH to 1,
-                LotteryPrize.FOUR_MATCH to 1,
-                LotteryPrize.THREE_MATCH to 0,
-                LotteryPrize.NONE to 0
+                LotteryPrize.FIRST to 1,
+                LotteryPrize.SECOND to 0,
+                LotteryPrize.THIRD to 1,
+                LotteryPrize.FOURTH to 1,
+                LotteryPrize.FIFTH to 0,
+                LotteryPrize.MISS to 0
             )
         )
     }

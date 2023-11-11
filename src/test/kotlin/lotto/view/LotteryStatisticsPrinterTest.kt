@@ -31,10 +31,10 @@ class LotteryStatisticsPrinterTest {
         // given
         val prizeResults = PrizeResults(
             mapOf(
-                LotteryPrize.THREE_MATCH to 1,
-                LotteryPrize.FOUR_MATCH to 2,
-                LotteryPrize.FIVE_MATCH to 3,
-                LotteryPrize.SIX_MATCH to 4
+                LotteryPrize.FIFTH to 1,
+                LotteryPrize.FOURTH to 2,
+                LotteryPrize.THIRD to 3,
+                LotteryPrize.FIRST to 4
             )
         )
         val profitRate = ProfitRate(profitRate)

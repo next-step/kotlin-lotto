@@ -10,10 +10,10 @@ class LotteryStatisticsGeneratorTest {
         // given
         val prizeResults = PrizeResults(
             mapOf(
-                LotteryPrize.THREE_MATCH to 5,
-                LotteryPrize.FOUR_MATCH to 4,
-                LotteryPrize.FIVE_MATCH to 3,
-                LotteryPrize.SIX_MATCH to 1
+                LotteryPrize.FIFTH to 5,
+                LotteryPrize.FOURTH to 4,
+                LotteryPrize.THIRD to 3,
+                LotteryPrize.FIRST to 1
             )
         )
         val receivedAmount = ReceivedAmount(100000000)

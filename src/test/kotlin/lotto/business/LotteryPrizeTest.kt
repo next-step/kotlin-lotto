@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource
 
 class LotteryPrizeTest {
     @ParameterizedTest
-    @CsvSource(value = ["6,SIX_MATCH", "5,FIVE_MATCH", "4,FOUR_MATCH", "3,THREE_MATCH", "2,NONE", "1,NONE", "0,NONE"])
+    @CsvSource(value = ["6,FIRST", "5,THIRD", "4,FOURTH", "3,FIFTH", "2,MISS", "1,MISS", "0,MISS"])
     fun `매칭 개수로 당첨 등수를 구한다`(matchCount: Int, expected: LotteryPrize) {
         // when
         val result = LotteryPrize.getPrize(matchCount)
