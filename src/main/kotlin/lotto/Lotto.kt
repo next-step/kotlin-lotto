@@ -11,14 +11,6 @@ class Lotto(vararg numbers: Int) {
         return numbers.filter { it in other.numbers }.size
     }
 
-    fun judge(winningLotto: WinningLotto): Prize {
-        return when(matchedCount(winningLotto.lotto)) {
-            3 -> Prize.FIFTH
-            4 -> Prize.FOURTH
-            else -> Prize.SECOND
-        }
-    }
-
     companion object {
         fun random(): Lotto {
             val randomNumbers = (0..45).shuffled().subList(0, 6).toList().toIntArray()

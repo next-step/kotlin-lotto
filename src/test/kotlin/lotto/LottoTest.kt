@@ -35,15 +35,6 @@ class LottoTest {
     }
 
     @Test
-    fun `2등 로또 판정`() {
-        val sut = Lotto(1, 2, 3, 4, 5, 6)
-
-        val actual = sut.judge(WinningLotto(Lotto(1, 2, 3, 4, 5, 7), 6))
-
-        assertThat(actual).isEqualTo(Prize.SECOND)
-    }
-
-    @Test
     fun `1등 로또 판정`() {
         val sut = Lotto(1, 2, 3, 4, 5, 6)
 
