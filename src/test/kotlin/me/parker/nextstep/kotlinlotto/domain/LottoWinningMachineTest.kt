@@ -4,9 +4,6 @@ import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.comparables.shouldBeGreaterThan
 import io.kotest.matchers.shouldBe
-import me.parker.nextstep.kotlinlotto.domain.LottoRank
-import me.parker.nextstep.kotlinlotto.domain.LottoTicket
-import me.parker.nextstep.kotlinlotto.domain.LottoWinningMachine
 
 class LottoWinningMachineTest : DescribeSpec({
 
@@ -62,7 +59,7 @@ class LottoWinningMachineTest : DescribeSpec({
                 result.matchCount[LottoRank.THIRD] shouldBe 0
                 result.matchCount[LottoRank.FOURTH] shouldBe 1
                 result.matchCount[LottoRank.MISS] shouldBe 13
-                result.profitRate shouldBeGreaterThan  0.35
+                result.profitRate shouldBeGreaterThan 0.35
             }
 
             it("당첨 결과를 반환 2") {

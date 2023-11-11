@@ -39,6 +39,4 @@ class LottoTicket(val lottoNumbers: LottoNumbers) {
         }
 
     }
-
-
 }

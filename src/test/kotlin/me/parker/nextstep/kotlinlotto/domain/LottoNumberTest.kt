@@ -5,9 +5,6 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.ints.shouldBeInRange
 import io.kotest.matchers.shouldBe
-import me.parker.nextstep.kotlinlotto.domain.LottoNumber
-import me.parker.nextstep.kotlinlotto.domain.ManualLottoNumberGenerationRule
-import me.parker.nextstep.kotlinlotto.domain.RandomLottoNumberGenerationRule
 
 class LottoNumberTest : DescribeSpec({
 

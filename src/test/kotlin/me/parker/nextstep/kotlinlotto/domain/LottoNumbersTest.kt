@@ -2,8 +2,6 @@ package me.parker.nextstep.kotlinlotto.domain
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
-import me.parker.nextstep.kotlinlotto.domain.LottoNumber
-import me.parker.nextstep.kotlinlotto.domain.LottoNumbers
 
 class LottoNumbersTest : DescribeSpec({
 
@@ -35,5 +33,4 @@ class LottoNumbersTest : DescribeSpec({
             }
         }
     }
-}) {
-}
+})

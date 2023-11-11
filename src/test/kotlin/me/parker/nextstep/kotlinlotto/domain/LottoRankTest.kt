@@ -2,7 +2,6 @@ package me.parker.nextstep.kotlinlotto.domain
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
-import me.parker.nextstep.kotlinlotto.domain.LottoRank
 
 class LottoRankTest : DescribeSpec({
 
