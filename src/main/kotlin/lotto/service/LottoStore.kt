@@ -3,7 +3,7 @@ package lotto.service
 import lotto.domain.Lotto
 import lotto.domain.LottoNumbers
 
-object LottoCounter {
+object LottoStore {
     private const val LOTTO_PRICE = 1000
 
     fun getLottoCount(money: Int): Int = money / LOTTO_PRICE
