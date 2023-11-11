@@ -6,7 +6,10 @@ data class WinningNumbers(
 ) {
 
     fun countOfMatchAndHasBonus(game: Game): Pair<Int, Boolean> {
-        val hasBunusNumber = game.lottoNumbers.hasBonusNumber(bonusNumber)
-        return lottoNumbers.countOfMatchNumbers(game.lottoNumbers) to hasBunusNumber
+        val hasBonusNumber = game
+            .lottoNumbers
+            .containNumber(bonusNumber)
+        return lottoNumbers
+            .countOfMatchNumbers(game.lottoNumbers) to hasBonusNumber
     }
 }

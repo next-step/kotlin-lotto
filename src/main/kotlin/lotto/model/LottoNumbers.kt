@@ -24,8 +24,8 @@ value class LottoNumbers(
             .count()
     }
 
-    fun hasBonusNumber(bonusNumber: LottoNumber): Boolean {
-        return values.contains(bonusNumber)
+    fun containNumber(number: LottoNumber): Boolean {
+        return values.contains(number)
     }
 
     companion object {
