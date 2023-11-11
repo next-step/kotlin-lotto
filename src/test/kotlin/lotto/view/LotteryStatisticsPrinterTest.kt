@@ -26,7 +26,7 @@ class LotteryStatisticsPrinterTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = ["0.5, 손해", "2.0, 이익"])
+    @CsvSource(value = ["0.5, 손해", "2.0, 이익이"])
     fun `당첨 통계를 출력한다`(profitRate: Double, profitOrLoss: String) {
         // given
         val prizeResults = PrizeResults(
