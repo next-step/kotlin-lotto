@@ -1,6 +1,8 @@
 package lotto
 
+import lotto.domain.Lotto
 import lotto.domain.LottoMachine
+import lotto.domain.LottoNumber
 import lotto.presentation.InputManager
 import lotto.presentation.OutputManager
 
@@ -9,13 +11,13 @@ class LottoStore(
     private val outputManager: OutputManager
 ) {
     private val lottoMachine: LottoMachine = LottoMachine(LOTTO_PRICE)
+    private lateinit var winningLotto: Lotto
     fun start() {
         val userPay = inputManager.inputPay()
-        outputManager.printUserPay(userPay)
-
         val userLottos = lottoMachine.sellLotto(userPay)
         outputManager.printSellLottoCount(userLottos)
 
+        val winningNumbers = inputManager.inputWinningNumbers()
     }
 
     companion object {
