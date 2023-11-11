@@ -1,14 +1,16 @@
-@file:JvmName("LottoFactory")
-
 package lotto.domain
 
-fun generateLottoList(count: Int = 1, numberGenerator: NumberGenerator = RandomNumberGenerator()): List<Lotto> =
-    List(count) {
-        Lotto(
-            numberGenerator.generateNumber(
-                startNumber = Lotto.LOTTO_START_NUMBER,
-                endNumber = Lotto.LOTTO_END_NUMBER,
-                count = Lotto.LOTTO_NUMBER_SIZE
+object LottoFactory {
+    fun generateLottoList(count: Int, numberGenerator: NumberGenerator = RandomNumberGenerator()): List<Lotto> =
+        List(count) {
+            Lotto(
+                LottoNumbers(
+                    numberGenerator.generateNumbers(
+                        startNumber = LottoNumbers.LOTTO_START_NUMBER,
+                        endNumber = LottoNumbers.LOTTO_END_NUMBER,
+                        count = LottoNumbers.LOTTO_NUMBER_SIZE
+                    )
+                )
             )
-        )
-    }
+        }
+}
