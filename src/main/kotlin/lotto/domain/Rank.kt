@@ -11,17 +11,14 @@ enum class Rank(val matchCount: Int, val winningMoney: Int) {
 
     companion object {
         fun from(matchCount: Int, matchBonus: Boolean): Rank {
-            if (matchCount == SECOND.matchCount && matchBonus) {
-                return SECOND
+            if (matchCount == 5) {
+                return when (matchBonus) {
+                    true -> SECOND
+                    false -> THIRD
+                }
             }
-            return when (matchCount) {
-                FIRST.matchCount -> FIRST
-                THIRD.matchCount -> THIRD
-                FOURTH.matchCount -> FOURTH
-                FIFTH.matchCount -> FIFTH
-                else -> OUT_OF_RANK
-            }
+            return Rank.values()
+                .find { it.matchCount == matchCount } ?: OUT_OF_RANK
         }
     }
 }
-

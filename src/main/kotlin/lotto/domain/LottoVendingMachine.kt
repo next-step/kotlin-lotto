@@ -1,10 +1,13 @@
 package lotto.domain
 
-private const val LOTTO_PRICE = 1000
-
 class LottoVendingMachine(val lottoGenerator: LottoGenerator) {
-    fun generate(amount: Int): List<Lotto> {
-        val count = amount / LOTTO_PRICE
-        return (1..count).map { lottoGenerator.generate() }
+    fun generate(amount: Amount, manualLottoCount: Count): Lottos {
+        val remainingCount = amount.purchasableCount() - manualLottoCount.count
+        val lottos = List(remainingCount) { lottoGenerator.generate() }
+        return Lottos(lottos)
+    }
+
+    companion object {
+        const val LOTTO_PRICE = 1000
     }
 }
