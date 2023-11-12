@@ -1,33 +1,30 @@
 package calculator
 
-class StringAddCalculator {
+object StringAddCalculator {
+
+    private const val EMPTY_RESULT = 0
+    private const val CUSTOM_SEPARATOR_REGEX = "//(.)\n(.*)"
+    private val DEFAULT_DELIMITER_REGEX = ",|:".toRegex()
 
     fun add(input: String?): Int {
         if (input.isNullOrEmpty()) return EMPTY_RESULT
-
         val numbers = splitInputByDelimiter(input)
-        checkNegativeNumbers(numbers)
+        val positiveNumbers = checkPositiveNumber(numbers)
 
-        return numbers.sum()
+        return positiveNumbers.sumOf { it.number }
+    }
+
+    private fun checkPositiveNumber(numbers: List<Int>): List<PositiveNumber> {
+        return numbers.map { PositiveNumber(it) }
     }
 
     private fun splitInputByDelimiter(input: String): List<Int> {
-        val findRegex = Regex("//(.)\n(.*)").find(input)
+        val findRegex = Regex(CUSTOM_SEPARATOR_REGEX).find(input)
         val split = findRegex?.let {
             val customDelimiter = it.groupValues[1]
             it.groupValues[2].split(customDelimiter)
         } ?: input.split(DEFAULT_DELIMITER_REGEX)
 
         return split.map { it.toInt() }
-    }
-
-    private fun checkNegativeNumbers(numbers: List<Int>) {
-        val negativeNumbers = numbers.filter { it < 0 }
-        if (negativeNumbers.isNotEmpty()) throw RuntimeException("음수 입력되었습니다!!!!")
-    }
-
-    companion object {
-        private const val EMPTY_RESULT = 0
-        private val DEFAULT_DELIMITER_REGEX = ",|:".toRegex()
     }
 }
