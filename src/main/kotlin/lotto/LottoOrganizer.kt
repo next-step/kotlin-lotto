@@ -1,26 +1,32 @@
 package lotto
 
-import lotto.model.*
+import lotto.model.LottoGenerator
+import lotto.model.LottoNumber
+import lotto.model.LottoPerson
+import lotto.model.LottoResultBuilder
 import lotto.view.InputView
 import lotto.view.ResultView
 
 
 class LottoOrganizer {
     fun start() {
-        val lottoPerson = LottoPerson(InputView.getPurchasePrice())
-        ResultView.renderTicketCount(lottoPerson.lottoTickets.size)
-        ResultView.renderTickets(lottoPerson.lottoTickets)
+        val lottoPerson = LottoPerson(LottoGenerator)
+        val lottoTickets = lottoPerson.buyLottoTickets(InputView.getPurchasePrice())
+        ResultView.renderTicketCount(lottoTickets.size)
+        ResultView.renderTickets(lottoTickets)
 
         val (winningNumbers, bonusNumber) = InputView.getWinningNumbers()
-        val lottoResults = LottoResults(winningNumbers.map { LottoNumber.from(it) }, LottoNumber.from(bonusNumber))
-        val results = lottoResults.getResults(lottoPerson.lottoTickets.map { it.numbers })
-        val profit = lottoResults.getProfit(results)
+        val lottoResults = LottoResultBuilder.getLottoResults(
+            lottoTickets,
+            winningNumbers.map { LottoNumber.from(it) },
+            LottoNumber.from(bonusNumber)
+        )
 
         ResultView.renderResults(
-            results
+            lottoResults.results
         )
         ResultView.renderProfit(
-            profit
+            lottoResults.profit
         )
     }
 }
