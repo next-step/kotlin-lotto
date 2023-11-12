@@ -1,9 +1,17 @@
 package lotto.domain
 
 data class LottoResult(
-    val rankCounts: Map<LottoRank, Int>
+    val rankCounts: LottoRankCounts,
+    val earningRate: EarningRate,
 ) {
-    val totalPrize by lazy {
-        rankCounts.map { (rank, ticketCount) -> rank.calculateTotal(ticketCount) }.sum()
+    companion object {
+        fun of(winningLotto: WinningLotto, tickets: LottoTickets, ticketPrice: Amount): LottoResult {
+            val rankCounts = tickets determineResultBy winningLotto
+            val earningRate = EarningRate.of(
+                purchasedAmount = tickets.calculatePrice(ticketPrice),
+                earningAmount = rankCounts.totalPrize
+            )
+            return LottoResult(rankCounts, earningRate)
+        }
     }
 }

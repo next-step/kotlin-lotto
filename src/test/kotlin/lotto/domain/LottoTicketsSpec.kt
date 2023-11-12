@@ -1,8 +1,6 @@
 package lotto.domain
 
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.matchers.nulls.shouldBeNull
-import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 
 class LottoTicketsSpec : FunSpec({
@@ -28,7 +26,7 @@ class LottoTicketsSpec : FunSpec({
     }
 
     context("티켓의 결과를 도출") {
-        test("로또 결과가가 생성된다") {
+        test("로또 결과가 생성된다") {
             val winningLotto = WinningLotto(LottoTicket(listOf(1, 2, 3, 4, 5, 6)), 7)
             val expect = mapOf(
                 LottoRank.FIRST to 1,
@@ -47,24 +45,6 @@ class LottoTicketsSpec : FunSpec({
             val result = tickets determineResultBy winningLotto
 
             result.rankCounts shouldBe expect
-            tickets.result!!.rankCounts shouldBe expect
-        }
-    }
-
-    context("티켓의 결과 조회") {
-        test("티켓의 결과가 생성되었다면 결과 조회") {
-            val tickets = LottoTickets(listOf(LottoMock.createTicket()))
-            tickets.determineResultBy(WinningLotto(LottoTicket(listOf(1, 2, 3, 4, 5, 6)), 7))
-
-            val result = tickets.result
-
-            result.shouldNotBeNull()
-        }
-
-        test("티켓의 결과가 생성되지 않았다면 Null 반환") {
-            val tickets = LottoTickets(listOf(LottoMock.createTicket()))
-
-            tickets.result.shouldBeNull()
         }
     }
 })

@@ -21,7 +21,7 @@ class LottoController(
             winningTicket = LottoTicketGenerator.create(request.winningNumbers),
             bonusNumber = request.bonusNumber
         )
-        return shop.calculateEarningRatioOf(purchasedTickets, winningLotto).let(::EndLottoResponse)
+        return shop.receivePrize(purchasedTickets, winningLotto).let(::EndLottoResponse)
     }
 
     private fun LottoTickets.save(): LottoTickets =

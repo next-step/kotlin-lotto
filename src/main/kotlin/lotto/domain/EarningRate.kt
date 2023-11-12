@@ -1,6 +1,7 @@
 package lotto.domain
 
-data class EarningRate(
+@JvmInline
+value class EarningRate(
     val rate: Double,
 ) {
     fun isLoss(): Boolean = rate < 1

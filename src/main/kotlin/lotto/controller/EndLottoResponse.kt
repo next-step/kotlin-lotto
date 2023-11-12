@@ -1,7 +1,7 @@
 package lotto.controller
 
-import lotto.domain.EarningRate
+import lotto.domain.LottoResult
 
 class EndLottoResponse(
-    val earningRate: EarningRate
+    val result: LottoResult,
 )

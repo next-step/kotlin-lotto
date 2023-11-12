@@ -15,9 +15,9 @@ object OutputView {
     }
 
     fun drawEarningRateOutput(response: EndLottoResponse) {
-        val rate = response.earningRate
+        val rate = response.result.earningRate
         val lossMessage = if (rate.isLoss()) "손해" else "손해가 아니"
-        println(EARNING_RATE_MSG.format(response.earningRate, lossMessage))
+        println(EARNING_RATE_MSG.format(response.result.earningRate, lossMessage))
     }
 
     private fun drawPurchaseCount(count: Int) {
