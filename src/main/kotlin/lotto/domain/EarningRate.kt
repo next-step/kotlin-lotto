@@ -2,9 +2,9 @@ package lotto.domain
 
 @JvmInline
 value class EarningRate(
-    val rate: Double,
+    val value: Double,
 ) {
-    fun isLoss(): Boolean = rate < 1
+    fun isLoss(): Boolean = value < 1
 
     companion object {
         fun of(purchasedAmount: Amount, earningAmount: Amount): EarningRate {

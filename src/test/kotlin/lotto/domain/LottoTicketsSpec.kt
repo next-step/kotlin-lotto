@@ -44,7 +44,7 @@ class LottoTicketsSpec : FunSpec({
 
             val result = tickets determineResultBy winningLotto
 
-            result.rankCounts shouldBe expect
+            result.value shouldBe expect
         }
     }
 })
