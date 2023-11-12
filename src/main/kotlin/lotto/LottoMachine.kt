@@ -24,7 +24,7 @@ object LottoMachine {
         }
     }
 
-    fun createWinningRate(cash: Int, winningStatus: MutableMap<LottoRanking, Int>): Float {
+    fun createWinningRate(cash: Int, winningStatus: Map<LottoRanking, Int>): Float {
         val totalPrice = createTotalWinningPrice(winningStatus)
 
         return totalPrice / cash.toFloat()

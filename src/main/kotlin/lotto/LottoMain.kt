@@ -10,11 +10,13 @@ fun main() {
 
     val lottoList = lottoGame.buyLotto(cash.toInt())
 
+    OutputView.showLottoList(lottoList)
+
     val winningNumberList = InputView.inputWinningNumber()
 
     val winningStatus = lottoGame.getWinningStats(winningNumberList, lottoList)
 
-    OutputView.showLottoList(lottoList)
+    val winningRate = LottoMachine.createWinningRate(cash.toInt(), winningStatus)
 
-    OutputView.showWinningStatus(winningStatus)
+    OutputView.showWinningStatus(winningStatus, winningRate)
 }
