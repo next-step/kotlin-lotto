@@ -1,6 +1,6 @@
 package lotto.domain
 
-class Lotto(private val inputNumberList: List<Int>) {
+class Lotto(inputNumberList: List<Int>) {
 
     val numberList: List<Int> = inputNumberList.sorted()
 
