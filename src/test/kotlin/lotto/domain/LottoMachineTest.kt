@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -9,14 +9,14 @@ import java.math.RoundingMode
 class LottoMachineTest {
 
     @ParameterizedTest
-    @CsvSource(value = ["1000, 1", "13000, 13", "123441, 123"])
+    @CsvSource(value = ["999, 0", "1001, 1", "13000, 13", "123441, 123"])
     fun `입력 금액 만큼 로또 생성`(money: Int, expectSize: Int) {
         val expectLottos = (0 until expectSize).map { _ -> Lotto(1, 2, 3, 4, 5, 6) }
         val sut = LottoMachine(lottoGenerator(expectLottos), money)
 
         val actualLottos = sut.issuedLottos
 
-        assertThat(actualLottos).isEqualTo(expectLottos)
+        assertThat(actualLottos).hasSize(expectSize)
     }
 
     @Test

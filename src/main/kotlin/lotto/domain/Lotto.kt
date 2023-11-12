@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class Lotto(vararg numbers: Int) {
     val numbers: Set<Int> = numbers.toSet()

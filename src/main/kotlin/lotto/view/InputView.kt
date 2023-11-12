@@ -1,4 +1,7 @@
-package lotto
+package lotto.view
+
+import lotto.domain.Lotto
+import lotto.domain.WinningLotto
 
 object InputView {
     fun inputMoney(): Int {

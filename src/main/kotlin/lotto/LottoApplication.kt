@@ -1,5 +1,11 @@
 package lotto
 
+import lotto.domain.Lotto
+import lotto.domain.LottoGenerator
+import lotto.domain.LottoMachine
+import lotto.view.InputView
+import lotto.view.ResultView
+
 class LottoApplication(
     private val inputView: InputView,
     private val resultView: ResultView
