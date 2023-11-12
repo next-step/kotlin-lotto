@@ -9,8 +9,11 @@ enum class LottoPrize(val matchCount: Int, val prizeMoney: Int) {
 
     companion object {
         fun getPrize(matchingNumbers: Int): Int {
-            return values().firstOrNull { it.matchCount == matchingNumbers }?.prizeMoney ?: 0
+            return findByNumber(matchingNumbers)?.prizeMoney ?: 0
+        }
+
+        private fun findByNumber(matchingNumbers: Int): LottoPrize? {
+            return values().firstOrNull { it.matchCount == matchingNumbers }
         }
     }
-
 }

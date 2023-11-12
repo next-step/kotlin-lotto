@@ -7,11 +7,12 @@ fun main() {
     val inputView = InputView
     val resultView = ResultView
 
-    val lottoMachine = inputView.inputPurchaseAmount()
+    val lottoNumbers = inputView.inputPurchaseAmount()
+
     val winningNumbers = inputView.inputWinningNumbers()
-    val winningResult = lottoMachine.checkWinningNumbers(winningNumbers)
-    val totalPrize = lottoMachine.calculateTotalPrize(winningResult)
+    val winningResult = LottoMachine.checkWinningNumbers(lottoNumbers, winningNumbers)
+    val totalPrize = LottoMachine.calculateTotalPrize(winningResult)
 
     resultView.printWinningStatistics(winningResult)
-    resultView.printTotalProfitRate(totalPrize, lottoMachine)
+    resultView.printTotalProfitRate(totalPrize, lottoNumbers.size)
 }
