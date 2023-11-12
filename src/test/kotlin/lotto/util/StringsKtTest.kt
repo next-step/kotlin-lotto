@@ -6,7 +6,7 @@ import org.junit.jupiter.api.assertThrows
 
 class StringsKtTest {
     @Test
-    fun `delimiter 로 구분된 String 은 구분자로 구분되어 Integer List 가 나온다 구한다`() {
+    fun `delimiter 로 구분된 String 은 구분자로 구분되어 Integer List 가 나온다`() {
         val input = "1,2,3,4,5"
         val integers = input.getIntegersAfterSplit(",")
         assertThat(integers.size).isEqualTo(5)
