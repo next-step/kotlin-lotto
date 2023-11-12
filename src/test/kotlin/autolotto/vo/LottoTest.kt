@@ -49,7 +49,7 @@ class LottoTest : FunSpec({
         val numbers = lotto.numbers
 
         // Then
-        val sortedNumbers = numbers.map { it.number }.sorted()
+        val sortedNumbers = numbers.map { it.number }.sorted().toList()
         numbers.map { it.number } shouldBe sortedNumbers
     }
 })

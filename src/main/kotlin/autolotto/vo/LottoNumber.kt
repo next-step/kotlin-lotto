@@ -1,6 +1,7 @@
 package autolotto.vo
 
-data class LottoNumber(val number: Int) {
+@JvmInline
+value class LottoNumber(val number: Int) {
     companion object {
         private const val MIN_NUMBER = 1
         private const val MAX_NUMBER = 45
@@ -16,6 +17,10 @@ data class LottoNumber(val number: Int) {
 
         fun of(value: List<String>): List<LottoNumber> {
             return value.map { of(it.trim().toInt()) }
+        }
+
+        fun generateLottoNumbers(): List<LottoNumber> {
+            return NUMBERS.values.shuffled().take(6).sortedBy { it.number }
         }
     }
 
