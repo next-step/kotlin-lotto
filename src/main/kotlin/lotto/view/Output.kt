@@ -1,6 +1,10 @@
 package lotto.view
 
-import lotto.domain.*
+import lotto.domain.Lotto
+import lotto.domain.LottoMessage
+import lotto.domain.LottoPurchase
+import lotto.domain.LottoRank
+import lotto.domain.LottoWinningReceipt
 
 object Output {
 

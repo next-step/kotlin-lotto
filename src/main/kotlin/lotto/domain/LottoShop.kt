@@ -16,5 +16,4 @@ object LottoShop {
 
     private fun makeAutoLottoLine(autoQuantity: Int): List<LottoLine> =
         IntRange(1, autoQuantity).map { LottoLineGenerator.generate() }
-
 }

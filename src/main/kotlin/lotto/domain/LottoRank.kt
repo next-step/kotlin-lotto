@@ -15,10 +15,12 @@ enum class LottoRank(
 
     companion object {
         private fun <WIN, RANK> compose(bonus: (WIN) -> RANK, normal: (WIN) -> RANK): (WIN) -> RANK =
-            { winningResult: WIN -> when(val rank = bonus(winningResult)) {
-                MISS -> normal(winningResult)
-                else -> rank
-            }}
+            { winningResult: WIN ->
+                when (val rank = bonus(winningResult)) {
+                    MISS -> normal(winningResult)
+                    else -> rank
+                } 
+            }
 
         private fun getBonusRank(lottoWinningResult: LottoWinningResult) =
             if (lottoWinningResult.countOfMatch == SECOND.countOfMatch && lottoWinningResult.isBonusRank) SECOND

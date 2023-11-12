@@ -3,7 +3,7 @@ package lotto.domain
 class LottoLine private constructor(
     val line: List<LottoNumber>
 ) {
-    fun getSameNumberCount(winningNumbers : LottoLine) = line.count { winningNumbers.line.contains(it) }
+    fun getSameNumberCount(winningNumbers: LottoLine) = line.count { winningNumbers.line.contains(it) }
     fun isContainsBonusNumber(bonusNumber: LottoNumber) = line.contains(bonusNumber)
 
     companion object {

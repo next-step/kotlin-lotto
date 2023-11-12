@@ -1,6 +1,11 @@
 package lotto
 
-import lotto.domain.*
+import lotto.domain.LottoLine
+import lotto.domain.LottoMachine
+import lotto.domain.LottoMessage
+import lotto.domain.LottoPurchase
+import lotto.domain.LottoShop
+import lotto.domain.LottoWinningNumber
 import lotto.view.Input
 import lotto.view.Output
 
