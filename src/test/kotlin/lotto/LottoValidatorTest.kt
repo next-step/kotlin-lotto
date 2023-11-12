@@ -3,26 +3,10 @@ package lotto
 import io.kotest.matchers.shouldBe
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
-import org.junit.jupiter.api.Test
+import lotto.domain.LottoValidator
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
-
-object LottoValidator {
-    fun validateWinningNumberAndUserLotto(
-        winningNumber: List<LottoNumber>,
-        userLotto: Lotto): Int {
-        val lottoNumber = userLotto.getNumbers()
-        var count: Int = 0
-        lottoNumber.forEach {
-            if (winningNumber.contains(it)) {
-                count++
-            }
-        }
-
-        return count
-    }
-}
 
 class LottoValidatorTest {
 
@@ -38,7 +22,7 @@ class LottoValidatorTest {
             LottoNumber(1),
         )
         val userLotto = Lotto(userLottoNumber)
-        val matchingCount: Int =  LottoValidator.validateWinningNumberAndUserLotto(winningNumber, userLotto)
+        val matchingCount: Int = LottoValidator.validateWinningNumberAndUserLotto(winningNumber, userLotto)
 
         matchingCount shouldBe expected
     }
@@ -55,7 +39,8 @@ class LottoValidatorTest {
                         LottoNumber(3),
                         LottoNumber(2),
                         LottoNumber(1),
-                    ), 6
+                    ),
+                    6
                 ),
                 Arguments.of(
                     listOf(
@@ -65,7 +50,8 @@ class LottoValidatorTest {
                         LottoNumber(3),
                         LottoNumber(2),
                         LottoNumber(1),
-                    ), 5
+                    ),
+                    5
                 ),
                 Arguments.of(
                     listOf(
@@ -75,7 +61,8 @@ class LottoValidatorTest {
                         LottoNumber(3),
                         LottoNumber(2),
                         LottoNumber(1),
-                    ), 4
+                    ),
+                    4
                 ),
                 Arguments.of(
                     listOf(
@@ -85,7 +72,8 @@ class LottoValidatorTest {
                         LottoNumber(3),
                         LottoNumber(2),
                         LottoNumber(1),
-                    ), 3
+                    ),
+                    3
                 ),
                 Arguments.of(
                     listOf(
@@ -95,7 +83,8 @@ class LottoValidatorTest {
                         LottoNumber(10),
                         LottoNumber(2),
                         LottoNumber(1),
-                    ), 2
+                    ),
+                    2
                 )
             )
         }
