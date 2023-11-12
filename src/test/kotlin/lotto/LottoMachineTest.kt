@@ -29,4 +29,21 @@ class LottoMachineTest {
         // then : 당첨 등수를 반환한다.
         assertThat(actual).isEqualTo(LottoRanking.SecondPlace)
     }
+
+    @Test
+    fun `당첨 통계를 입력 받았다면, 당첨 금액 정산 요청을 할때, 총 당첨 금액을 반환한다`() {
+        // given : 당첨 통계를 입력 받는다.
+        val winningStatus = mutableMapOf(
+            LottoRanking.SecondPlace to 2,
+            LottoRanking.ThirdPlace to 1,
+            LottoRanking.FourthPlace to 2,
+            LottoRanking.None to 1
+        )
+
+        // when : 당첨 금액 정산 요청한다.
+        val actual = LottoMachine.createTotalWinningPrice(winningStatus)
+
+        // then : 총 당첨 금액을 반환하다.
+        assertThat(actual).isEqualTo(3060000)
+    }
 }

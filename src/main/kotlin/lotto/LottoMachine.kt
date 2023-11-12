@@ -23,4 +23,20 @@ object LottoMachine {
             else -> LottoRanking.None
         }
     }
+
+    fun createRateOfReturn(cash: Int, winningStatus: Map<LottoRanking, Int>): Float {
+        val totalWinningPrice = 0.1f
+        return 0.4f
+    }
+
+    fun createTotalWinningPrice(winningStatus: Map<LottoRanking, Int>): Int {
+        var totalPrice = 0
+
+        totalPrice += (winningStatus.getOrDefault(LottoRanking.FirstPlace, 0) * LottoRanking.FirstPlace.price)
+        totalPrice += (winningStatus.getOrDefault(LottoRanking.SecondPlace, 0) * LottoRanking.SecondPlace.price)
+        totalPrice += (winningStatus.getOrDefault(LottoRanking.ThirdPlace, 0) * LottoRanking.ThirdPlace.price)
+        totalPrice += (winningStatus.getOrDefault(LottoRanking.FourthPlace, 0) * LottoRanking.FourthPlace.price)
+
+        return totalPrice
+    }
 }
