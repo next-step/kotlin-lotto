@@ -12,6 +12,7 @@ fun main() {
     val userLotto = LottoStore.purchase(purchaseAmount)
     OutputView.printLottos(userLotto)
     val lastWinningNumbers = InputView.getLastWinningNumbers()
+    val bonus = InputView.getBonusBall()
     val winningLotto = Lotto.fromInts(lastWinningNumbers.getIntegersAfterSplit(","))
     val lottoResult = LottoResult(userLotto, winningLotto)
     OutputView.printResult(lottoResult)
