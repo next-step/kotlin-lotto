@@ -2,7 +2,6 @@ package lotto.view
 import lotto.Lotto
 import lotto.LottoRanking
 
-
 object OutputView {
     fun showLottoList(lottoList: List<Lotto>) {
         lottoList.forEach {

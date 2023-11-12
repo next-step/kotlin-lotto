@@ -31,8 +31,9 @@ class LottoMachineTest {
     }
 
     @Test
-    fun `당첨 통계를 입력 받았다면, 당첨 금액 정산 요청을 할때, 총 당첨 금액을 반환한다`() {
-        // given : 당첨 통계를 입력 받는다.
+    fun `구매 금액과 당첨 통계를 받았고, 수익률을 요청한다면, 수익률을 반환한다`() {
+        // given : 구매 금액과 당첨 통계를 받는다.
+        val cash = 6000
         val winningStatus = mutableMapOf(
             LottoRanking.SecondPlace to 2,
             LottoRanking.ThirdPlace to 1,
@@ -40,10 +41,10 @@ class LottoMachineTest {
             LottoRanking.None to 1
         )
 
-        // when : 당첨 금액 정산 요청한다.
-        val actual = LottoMachine.createTotalWinningPrice(winningStatus)
+        // when : 수익률을 요청한다.
+        val winningRate = LottoMachine.createWinningRate(cash, winningStatus)
 
-        // then : 총 당첨 금액을 반환하다.
-        assertThat(actual).isEqualTo(3060000)
+        // then : 수익률을 반환한다.
+        assertThat(winningRate).isEqualTo(510)
     }
 }

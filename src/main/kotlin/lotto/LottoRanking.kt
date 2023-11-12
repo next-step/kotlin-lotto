@@ -5,7 +5,7 @@ sealed class LottoRanking(val matchingNumberCnt: Int, val price: Int) {
     object SecondPlace : LottoRanking(SECOND_PLACE_MATCHING_NUMBER_CNT, SECOND_PLACE_MATCHING_PRICE)
     object ThirdPlace : LottoRanking(THIRD_PLACE_MATCHING_NUMBER_CNT, THIRD_PLACE_MATCHING_PRICE)
     object FourthPlace : LottoRanking(FOURTH_PLACE_MATCHING_NUMBER_CNT, FOURTH_PLACE_MATCHING_PRICE)
-    object None : LottoRanking(NONE_PLACE_MATCHING_NUMBER_CNT , NONE_PLACE_MATCHING_PRICE)
+    object None : LottoRanking(NONE_PLACE_MATCHING_NUMBER_CNT, NONE_PLACE_MATCHING_PRICE)
 
     companion object {
         private const val FIRST_PLACE_MATCHING_NUMBER_CNT = 6

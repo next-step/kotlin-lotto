@@ -24,12 +24,13 @@ object LottoMachine {
         }
     }
 
-    fun createRateOfReturn(cash: Int, winningStatus: Map<LottoRanking, Int>): Float {
-        val totalWinningPrice = 0.1f
-        return 0.4f
+    fun createWinningRate(cash: Int, winningStatus: MutableMap<LottoRanking, Int>): Float {
+        val totalPrice = createTotalWinningPrice(winningStatus)
+
+        return totalPrice / cash.toFloat()
     }
 
-    fun createTotalWinningPrice(winningStatus: Map<LottoRanking, Int>): Int {
+    private fun createTotalWinningPrice(winningStatus: Map<LottoRanking, Int>): Int {
         var totalPrice = 0
 
         totalPrice += (winningStatus.getOrDefault(LottoRanking.FirstPlace, 0) * LottoRanking.FirstPlace.price)
