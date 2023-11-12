@@ -1,9 +1,11 @@
 package stringAddCalculator
 
-class StringAddCalculator {
+object StringAddCalculator {
     fun add(text: String?): Int {
-        val tokens = Tokenizer.tokenize(text)
-        Tokenizer.validate(tokens)
-        return tokens.sumOf { it.trim().toInt() }
+        if (text.isNullOrBlank()) {
+            return 0
+        }
+        val tokens = StringSeparator.separate(text)
+        return tokens.sum()
     }
 }
