@@ -59,7 +59,7 @@ class LottoResultTest {
 
         val lottoResult = LottoResult(listOf(userLotto), winningLotto) // 3개 일치, 4등
         assertThat(lottoResult.calculateProfitRate()).isCloseTo(
-            LottoRank.FOURTH.prize.toDouble() / Lotto.LOTTO_PRICE.toDouble(),
+            LottoRank.FIFTH.prize.toDouble() / Lotto.LOTTO_PRICE.toDouble(),
             Offset.offset(0.01)
         )
     }

@@ -16,7 +16,7 @@ class LottoResult(private val userLotto: List<Lotto>, private val winningLotto: 
     private fun calculateRanks(): Map<LottoRank, List<Lotto>> {
         return userLotto.groupBy { lotto ->
             val matchCount = lotto.match(winningLotto)
-            LottoRank.getRank(matchCount)
+            LottoRank.getRank(matchCount, false)
         }
     }
 }
