@@ -1,6 +1,5 @@
 package lotto.view
 
-import lotto.model.LottoResults
 import lotto.model.LottoTicket
 import lotto.model.Prize
 
@@ -16,8 +15,9 @@ object ResultView {
     fun renderResults(results: Map<Prize, Int>) {
         println("당첨 통계")
         println("---------")
-        results.forEach { (key, value) ->
-            println("${key.matched}개 일치 (${key.prize}원) - ${value}개")
+
+        Prize.values().forEach {
+            println("${it.matched}개 일치${if (it == Prize.SECOND) ", 보너스 볼 일치" else ""} (${it.prize}원) - ${results[it] ?: 0}개")
         }
     }
 
