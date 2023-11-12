@@ -4,14 +4,11 @@ import autolotto.vo.AutoLotto
 import autolotto.vo.WinningLotto
 
 object WinningStatistics {
-    fun calculateStatistics(autoLotto: AutoLotto, winningLotto: WinningLotto): Map<WinningRank, Int> {
-        return autoLotto.lottos.fold(initialCountMap()) { countMap, lotto ->
-            val winningRank = winningLotto.checkWinning(lotto)
-            countMap.toMutableMap().apply {
-                this[winningRank] = this.getOrDefault(winningRank, 0) + 1
-            }.toMap()
-        }
-    }
+    private const val NOT_MATCHING_COUNT = 0
 
-    private fun initialCountMap(): Map<WinningRank, Int> = WinningRank.values().associateWith { 0 }
+    fun calculateStatistics(autoLotto: AutoLotto, winningLotto: WinningLotto): Map<WinningRank, Int> {
+        return autoLotto.lottos.groupingBy { winningLotto.checkWinning(lotto = it) }
+            .eachCount()
+            .withDefault { NOT_MATCHING_COUNT }
+    }
 }
