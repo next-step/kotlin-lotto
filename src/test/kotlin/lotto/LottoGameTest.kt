@@ -39,7 +39,12 @@ class LottoGameTest {
         val winningStats = lottoGame.getWinningStats(winningNumberList, purchaseLottoList)
 
         // then : 당첨 통계를 확인한다.
-        val expect = mutableMapOf(SecondPlace to 2, ThirdPlace to 1, FourthPlace to 2, None to 1)
+        val expect = mutableMapOf(
+            LottoRanking.SecondPlace to 2,
+            LottoRanking.ThirdPlace to 1,
+            LottoRanking.FourthPlace to 2,
+            LottoRanking.None to 1
+        )
         assertThat(winningStats).isEqualTo(expect)
     }
 }

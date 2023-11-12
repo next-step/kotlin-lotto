@@ -37,7 +37,7 @@ class InputViewTest {
         val actual = InputView.splitInputData(inputData)
 
         // then : 리스트를 반환한다.
-        val expect = listOf(1,2,3,4,5,6)
+        val expect = listOf(1, 2, 3, 4, 5, 6)
         assertThat(actual).isEqualTo(expect)
     }
 

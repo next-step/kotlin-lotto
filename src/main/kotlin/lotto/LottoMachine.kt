@@ -16,11 +16,11 @@ object LottoMachine {
         val intersectNumber = winningLottoToSet.intersect(purchaseLottoToSet)
 
         return when (intersectNumber.size) {
-            SIX -> FirstPlace
-            FIVE -> SecondPlace
-            FOUR -> ThirdPlace
-            THREE -> FourthPlace
-            else -> None
+            SIX -> LottoRanking.FirstPlace
+            FIVE -> LottoRanking.SecondPlace
+            FOUR -> LottoRanking.ThirdPlace
+            THREE -> LottoRanking.FourthPlace
+            else -> LottoRanking.None
         }
     }
 }

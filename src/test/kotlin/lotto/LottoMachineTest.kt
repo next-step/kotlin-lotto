@@ -27,6 +27,6 @@ class LottoMachineTest {
         val actual = LottoMachine.checkLotto(winningLotto, purchaseLotto1)
 
         // then : 당첨 등수를 반환한다.
-        assertThat(actual).isEqualTo(SecondPlace)
+        assertThat(actual).isEqualTo(LottoRanking.SecondPlace)
     }
 }
