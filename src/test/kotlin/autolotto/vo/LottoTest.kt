@@ -1,7 +1,7 @@
 package autolotto.vo
 
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.matchers.ints.beInRange
+import io.kotest.matchers.ints.shouldBeInRange
 import io.kotest.matchers.shouldBe
 
 class LottoTest : FunSpec({
@@ -25,7 +25,7 @@ class LottoTest : FunSpec({
 
         // Then
         numbers.forEach {
-            it.number shouldBe beInRange(1..45)
+            it.number shouldBeInRange (1..45)
         }
     }
 
