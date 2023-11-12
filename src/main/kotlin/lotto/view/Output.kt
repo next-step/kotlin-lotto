@@ -1,11 +1,6 @@
 package lotto.view
 
-import lotto.domain.Customer
-import lotto.domain.Lotto
-import lotto.domain.LottoMessage
-import lotto.domain.LottoRank
-import lotto.domain.LottoWinningReceipt
-import lotto.domain.LottoWinningResult
+import lotto.domain.*
 
 object Output {
 
@@ -22,8 +17,8 @@ object Output {
         )
     }
 
-    fun lottoRateOfReturnPrint(lottoResult: LottoWinningReceipt, customer: Customer) {
-        this.printlnAny(LottoMessage.PRINT_LOTTO_RATE_OF_RETURN.message.format(lottoResult.getRateOfReturn(customer)))
+    fun lottoRateOfReturnPrint(lottoResult: LottoWinningReceipt, purchase: LottoPurchase) {
+        this.printlnAny(LottoMessage.PRINT_LOTTO_RATE_OF_RETURN.message.format(lottoResult.getRateOfReturn(purchase)))
     }
 
     fun lottoRankStatisticsPrint(lottoResult: LottoWinningReceipt) {

@@ -10,7 +10,8 @@ enum class LottoMessage(
     PRINT_LOTTO_RANK("%d개 일치 (%d원)- %d개"),
     PRINT_LOTTO_BONUS_RANK("%d개 일치, 보너스 볼 일치(%d원)- %d개"),
     PRINT_LOTTO_RATE_OF_RETURN("총 수익률은 %.2f입니다."),
-    INPUT_BONUS_NUMBER("보너스 볼을 입력해 주세요.")
+    INPUT_BONUS_NUMBER("보너스 볼을 입력해 주세요."),
+    INPUT_MANUAL_PURCHASE_QUANTITY("수동으로 구매할 로또 수를 입력해 주세요.")
     ;
 
     override fun toString(): String = this.message

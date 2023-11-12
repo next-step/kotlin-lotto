@@ -5,10 +5,10 @@ import io.kotest.matchers.shouldBe
 
 class LottoTest : BehaviorSpec({
 
-    Given("고객이 존재하고") {
-        val customer = Customer.valueOf("5000")
-        When("로또 상점에게 로또 구매 요청을 한다면") {
-            val lotto = LottoShop().buyLotto(customer.money)
+    Given("로또를 구매할 정보가 존재하고") {
+        val purchase = LottoPurchase.valueOf("5000")
+        When("로또 상점에 로또 구매 요청을 한다면") {
+            val lotto = LottoShop().buyLotto(purchase)
             Then("금액 천원 단위 만큼 로또를 반환한다.") {
                 lotto.lines.size shouldBe 5
             }
