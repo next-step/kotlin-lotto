@@ -3,6 +3,10 @@ package lotto.domain
 class LottoMachine(private val lottoPrice: Int) {
     private lateinit var winningNumber: List<LottoNumber>
 
+    fun getWinningNumber(): List<LottoNumber> {
+        return winningNumber
+    }
+
     fun setWinningNumber(numbers: List<Int>) {
         this.winningNumber = numbers.map { LottoNumber(it) }
     }

@@ -1,6 +1,10 @@
 package lotto
 
+import lotto.domain.Lotto
 import lotto.domain.LottoMachine
+import lotto.domain.LottoNumber
+import lotto.domain.LottoResult
+import lotto.domain.LottoValidator
 import lotto.presentation.InputManager
 import lotto.presentation.OutputManager
 
@@ -19,6 +23,19 @@ class LottoStore(
         val winningNumbers: List<Int> = inputManager.inputWinningNumber()
         lottoMachine.setWinningNumber(winningNumbers)
 
+        val result = checkLottoResult(userLottos, lottoMachine.getWinningNumber())
+    }
+
+    private fun checkLottoResult(
+        userLottos: List<Lotto>,
+        winningNumber: List<LottoNumber>
+    ): LottoResult {
+        val lottoResult = LottoResult()
+        userLottos.forEach {
+            val matchedNumberCount = LottoValidator.validateWinningNumberAndUserLotto(winningNumber, it)
+            lottoResult.setLottoResult(matchedNumberCount)
+        }
+        return lottoResult
     }
 
     companion object {

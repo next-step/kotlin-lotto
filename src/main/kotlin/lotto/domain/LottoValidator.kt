@@ -5,7 +5,7 @@ object LottoValidator {
         userLotto: Lotto
     ): Int {
         val lottoNumber = userLotto.getNumbers()
-        var count: Int = 0
+        var count = 0
         lottoNumber.forEach {
             if (winningNumber.contains(it)) {
                 count++
