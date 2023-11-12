@@ -3,16 +3,14 @@ package lotto.domain
 class LottoPurchase private constructor(
     val money: Int,
     val autoQuantity: Int,
-    val manualQuantity: Int,
-    val manualLottoLines: List<LottoLine>
+    val manualQuantity: Int
 ) {
     companion object {
         private val isDigit: (String) -> Boolean = { it.all { char -> char.isDigit() } }
 
         fun valueOf(
             money: String,
-            numberOfManualQuantity: String = "0",
-            manualInputLines: List<String> = emptyList()
+            numberOfManualQuantity: String = "0"
         ): LottoPurchase {
             require(isDigit(money) && isDigit(numberOfManualQuantity))
             val manualQuantity = numberOfManualQuantity.toInt()
@@ -25,9 +23,7 @@ class LottoPurchase private constructor(
             require(autoQuantity > LottoShop.ZERO) {
                 "${LottoShop.LOTTO_FEE}원 이상 입력하여 주세요."
             }
-            val manualLottoLines = manualInputLines.map(LottoLine::valueOf)
-
-            return LottoPurchase(purchaseMoney, autoQuantity, manualQuantity, manualLottoLines)
+            return LottoPurchase(purchaseMoney, Math.max(0, autoQuantity - manualQuantity), manualQuantity)
         }
     }
 }

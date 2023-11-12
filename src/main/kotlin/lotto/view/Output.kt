@@ -9,9 +9,9 @@ object Output {
     }
 
     fun lottoBuyResultPrint(lotto: Lotto) {
-        this.printlnAny(LottoMessage.PRINT_PURCHASE_QUANTITY.message.format(lotto.lines.size))
+        this.printlnAny(LottoMessage.PRINT_PURCHASE_QUANTITY.message.format(lotto.autoLines.size))
         this.printlnAny(
-            lotto.lines.joinToString("\n") {
+            lotto.autoLines.joinToString("\n") {
                 it.line.joinToString(", ", "[", "]")
             }
         )

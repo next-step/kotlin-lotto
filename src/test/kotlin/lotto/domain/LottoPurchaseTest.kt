@@ -8,7 +8,7 @@ import java.lang.IllegalArgumentException
 class LottoPurchaseTest : BehaviorSpec({
 
     Given("로또를 구매할 금액이 입력되었을 때") {
-        When("입력이 정수이고 천원 단위라면") {
+        When("입력이 정수이고 로또 최소 금액 이상이라면") {
             val money = "15000"
             Then("생성이 가능합니다.") {
                 LottoPurchase.valueOf(money).money shouldBe 15000

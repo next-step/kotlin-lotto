@@ -8,12 +8,12 @@ class LottoTest : BehaviorSpec({
     Given("로또를 구매할 정보가 존재하고") {
         val purchase = LottoPurchase.valueOf("5000")
         When("로또 상점에 로또 구매 요청을 한다면") {
-            val lotto = LottoShop().buyLotto(purchase)
+            val lotto = LottoShop.buyLotto(purchase)
             Then("금액 천원 단위 만큼 로또를 반환한다.") {
-                lotto.lines.size shouldBe 5
+                lotto.autoLines.size shouldBe 5
             }
             Then("각 라인에는 6개의 숫자가 존재한다.") {
-                lotto.lines.all { it.line.size == 6 }
+                lotto.autoLines.all { it.line.size == 6 }
             }
         }
     }

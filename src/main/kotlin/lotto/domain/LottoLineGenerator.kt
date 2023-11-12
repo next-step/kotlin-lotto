@@ -1,6 +1,6 @@
 package lotto.domain
 
-object LottoGenerator {
+object LottoLineGenerator {
     val LOTTO_NUMBER_RANGE = IntRange(1, 45)
     private val NUMBERS = LOTTO_NUMBER_RANGE.toList()
 
