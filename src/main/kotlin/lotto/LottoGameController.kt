@@ -11,6 +11,6 @@ fun main() {
     val inputMoney = InputView.enterMoney()
     val lottoList = LottoFactory.buyLotto(inputMoney)
     OutputView.buyLotto(lottoList)
-    val winningLotto = WinningLotto(Lotto(InputView.enterWinningLotto()))
+    val winningLotto = WinningLotto(Lotto(InputView.enterWinningLotto()), InputView.enterBonusNumber())
     OutputView.printLottoResult(LottoResult(lottoList, winningLotto))
 }
