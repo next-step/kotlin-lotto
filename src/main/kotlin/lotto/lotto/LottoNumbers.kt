@@ -1,8 +1,8 @@
-package lotto_auto.lotto
+package lotto.lotto
 
 data class LottoNumbers(
     val lottoNumbers: List<Int>
-): List<Int> by lottoNumbers {
+) : List<Int> by lottoNumbers {
     init {
         require(toSet().count() == NUMBER_LIST_COUNT) { COUNT_IS_WRONG }
         require(count { it < MIN_NUMBER || it > MAX_NUMBER } < NUMBER_COUNT_NOT_IN_RAGE) { NUMBER_NOT_IN_RANGE }

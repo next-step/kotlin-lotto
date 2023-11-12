@@ -1,8 +1,12 @@
-package lotto_auto
+package lotto
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import lotto_auto.lotto.*
+import lotto.lotto.Lotto
+import lotto.lotto.LottoNumbers
+import lotto.lotto.LottoPrize
+import lotto.lotto.auto.LottoAuto
+import lotto.lotto.toWinningLotto
 
 class LottoAutoTest : StringSpec({
     "구매한 로또 총 당첨 금액이 맞는지" {
