@@ -12,9 +12,12 @@ class LottoApplication(
 ) {
 
     fun run() {
+        val lottoMachine = LottoMachine(lottoGenerator())
+
         val money = inputView.inputMoney()
-        val lottoMachine = LottoMachine(lottoGenerator(), money)
-        resultView.printLottos(lottoMachine.issuedLottos)
+        lottoMachine.inputMoney(money)
+        resultView.printLottos(lottoMachine.issuedLottos())
+
         val winningLotto = inputView.inputWinningLotto()
         val statistics = lottoMachine.issueStatistics(winningLotto)
         resultView.printStatistic(statistics)
