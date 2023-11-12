@@ -33,5 +33,14 @@ class LottoPurchaseTest : BehaviorSpec({
                 }
             }
         }
+
+        When("로또의 최소 금액을 넘지 않는다면") {
+            val money = "900"
+            Then("예외를 던진다.") {
+                shouldThrow<IllegalArgumentException> {
+                    LottoPurchase.valueOf(money)
+                }
+            }
+        }
     }
 })

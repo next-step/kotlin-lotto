@@ -13,7 +13,10 @@ fun main() {
     Output.printlnAny(LottoMessage.INPUT_MANUAL_PURCHASE_QUANTITY)
     val numberOfManualQuantity = Input.getLine()
 
-    val purchase = LottoPurchase.valueOf(purchaseFee, numberOfManualQuantity)
+    Output.printlnAny(LottoMessage.INPUT_MANUAL_LOTTO_NUMBER)
+    val manualInputLines = (1..numberOfManualQuantity.toInt()).mapTo(mutableListOf()) { Input.getLine() }.toList()
+
+    val purchase = LottoPurchase.valueOf(purchaseFee, numberOfManualQuantity, manualInputLines)
     val lotto = lottoShop.buyLotto(purchase)
 
     Output.lottoBuyResultPrint(lotto)

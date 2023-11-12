@@ -21,15 +21,15 @@ class LottoTest : BehaviorSpec({
     Given("로또에 추첨 번호가 주어지면") {
         val lotto = Lotto(
             listOf(
-                LottoLine(listOf(1, 2, 3, 4, 5, 6).map(LottoNumber::from)),
-                LottoLine(listOf(1, 2, 3, 4, 5, 7).map(LottoNumber::from)),
-                LottoLine(listOf(1, 2, 3, 4, 8, 9).map(LottoNumber::from)),
-                LottoLine(listOf(1, 2, 3, 8, 9, 10).map(LottoNumber::from)),
+                LottoLine.valueOf("1, 2, 3, 4, 5, 6"),
+                LottoLine.valueOf("1, 2, 3, 4, 5, 7"),
+                LottoLine.valueOf("1, 2, 3, 4, 8, 9"),
+                LottoLine.valueOf("1, 2, 3, 8, 9, 10"),
             )
         )
-        val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map(LottoNumber::from)
+        val winningNumbers = "1, 2, 3, 4, 5, 6"
         val bonusNumber = 7
-        val lottoWinningNumber = LottoWinningNumber(LottoLine(winningNumbers), LottoNumber.from(bonusNumber))
+        val lottoWinningNumber = LottoWinningNumber(LottoLine.valueOf(winningNumbers), LottoNumber.from(bonusNumber))
         Then("각 라인별 동일한 번호의 개수 리스트를 반환한다.") {
             val sameNumberCount = lotto.getAllSameNumberCount(lottoWinningNumber)
             sameNumberCount.size shouldBe 4
