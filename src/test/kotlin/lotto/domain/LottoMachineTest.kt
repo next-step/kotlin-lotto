@@ -2,6 +2,10 @@ package lotto.domain
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.number.LottoNumber
+import lotto.domain.number.LottoNumberGenerator
+import lotto.domain.purchase.LottoBuyingPrice
+import lotto.domain.result.LottoRank
 
 class LottoMachineTest : StringSpec({
 

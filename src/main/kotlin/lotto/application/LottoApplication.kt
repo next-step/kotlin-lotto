@@ -1,10 +1,10 @@
 package lotto.application
 
-import lotto.domain.Charge
+import lotto.domain.purchase.Charge
 import lotto.domain.Lotto
-import lotto.domain.LottoBuyingPrice
+import lotto.domain.purchase.LottoBuyingPrice
 import lotto.domain.LottoMachine
-import lotto.domain.RandomLottoLottoNumberGenerator
+import lotto.domain.number.RandomLottoLottoNumberGenerator
 import lotto.domain.WinningLotto
 import lotto.view.InputView
 import lotto.view.OutputView

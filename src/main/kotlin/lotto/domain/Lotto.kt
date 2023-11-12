@@ -1,5 +1,9 @@
 package lotto.domain
 
+import lotto.domain.number.LottoNumber
+import lotto.domain.number.LottoNumberGenerator
+import lotto.domain.result.LottoRank
+
 class Lotto private constructor(
     val numbers: List<LottoNumber>,
 ) {

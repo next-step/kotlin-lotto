@@ -1,4 +1,6 @@
-package lotto.domain
+package lotto.domain.purchase
+
+import lotto.domain.Lotto
 
 @JvmInline
 value class LottoBuyingPrice(

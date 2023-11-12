@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.result
 
 enum class LottoRank(
     val winningMatchCount: List<Int>,

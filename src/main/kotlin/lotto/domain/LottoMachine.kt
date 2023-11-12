@@ -1,5 +1,11 @@
 package lotto.domain
 
+import lotto.domain.number.LottoNumberGenerator
+import lotto.domain.purchase.LottoBuyingPrice
+import lotto.domain.result.LottoMatchResult
+import lotto.domain.result.LottoRank
+import lotto.domain.result.LottoResult
+
 class LottoMachine private constructor(
     val lottoCount: LottoCount,
     lottoNumberGenerator: LottoNumberGenerator,

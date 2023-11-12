@@ -1,8 +1,8 @@
 package lotto.view
 
 import lotto.domain.Lotto
-import lotto.domain.LottoBuyingPrice
-import lotto.domain.LottoNumber
+import lotto.domain.purchase.LottoBuyingPrice
+import lotto.domain.number.LottoNumber
 
 object InputView {
 

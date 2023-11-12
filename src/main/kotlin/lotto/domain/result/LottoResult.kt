@@ -1,4 +1,6 @@
-package lotto.domain
+package lotto.domain.result
+
+import lotto.domain.purchase.LottoBuyingPrice
 
 class LottoResult(
     val matchCountByRank: Map<LottoRank, Int>,

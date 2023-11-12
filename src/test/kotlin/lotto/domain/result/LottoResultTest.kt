@@ -1,7 +1,8 @@
-package lotto.domain
+package lotto.domain.result
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.purchase.LottoBuyingPrice
 
 class LottoResultTest : StringSpec({
 

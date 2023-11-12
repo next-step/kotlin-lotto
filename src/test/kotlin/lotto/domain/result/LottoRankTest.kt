@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.result
 
 import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.core.spec.style.StringSpec
