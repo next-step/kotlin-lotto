@@ -1,6 +1,5 @@
 package lotto.view
 
-import lotto.domain.LottoNumber
 import lotto.error.ErrorMessage.EMPTY_INPUT_MESSAGE
 import lotto.error.ErrorMessage.EXPECT_NUMBER_MESSAGE
 
