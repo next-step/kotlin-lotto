@@ -5,7 +5,7 @@ class LottoTicket(val lottoNumbers: LottoNumbers) {
     fun match(winningLottoTicket: LottoTicket): LottoRank {
         val matchCount = lottoNumbers.values.intersect(winningLottoTicket.lottoNumbers.values.toSet()).size
 
-        return LottoRank.of(matchCount)
+        return LottoRank.of(matchCount, false)
     }
 
     override fun toString(): String {
