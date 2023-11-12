@@ -11,7 +11,7 @@ class Lotto private constructor(val lottoNumbers: List<LottoNumber>) {
     }
 
     fun match(anotherLotto: Lotto): Int {
-        return lottoNumbers.count { it in anotherLotto.lottoNumbers }
+        return lottoNumbers.intersect(anotherLotto.lottoNumbers.toSet()).count()
     }
 
     companion object {
