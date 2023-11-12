@@ -20,5 +20,4 @@ object InputView {
             LottoNumbers(numbers = winningLottoNumbers)
         )
     }
-
 }

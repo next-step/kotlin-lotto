@@ -70,4 +70,3 @@ class LottoTest {
         assertEquals(false, isMatched)
     }
 }
-

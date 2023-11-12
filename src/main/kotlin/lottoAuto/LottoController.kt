@@ -1,6 +1,9 @@
 package lottoAuto
 
-import lottoAuto.domain.*
+import lottoAuto.domain.Lotto
+import lottoAuto.domain.LottoFactory
+import lottoAuto.domain.LottoRanker
+import lottoAuto.domain.LottoStatsEngine
 import lottoAuto.view.InputView
 import lottoAuto.view.OutputView
 
@@ -30,7 +33,6 @@ object LottoController {
         OutputView.printRateOfReturn(purchaseAmount, lottoRanks)
     }
 }
-
 
 fun main() {
     val purchaseAmount = LottoController.getPurchaseAmount()

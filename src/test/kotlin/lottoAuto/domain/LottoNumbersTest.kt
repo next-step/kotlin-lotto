@@ -1,7 +1,6 @@
 package lottoAuto.domain
 
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertIterableEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -13,10 +12,9 @@ class LottoNumbersTest {
 
         assertThrows<IllegalArgumentException> { // then
             LottoNumbers( // when
-                List(numOfLottoNumber) {LottoNumber.of(0)}
+                List(numOfLottoNumber) { LottoNumber.of(0) }
             )
         }
-
     }
 
     @Test

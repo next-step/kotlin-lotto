@@ -1,6 +1,5 @@
 package lottoAuto.domain
 
-import lottoAuto.LottoController
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -62,5 +61,4 @@ class LottoStatsEngineTest {
         assertEquals(4, groupedLottoRanks[LottoRank.FOURTH])
         assertEquals(0, groupedLottoRanks[LottoRank.MISS])
     }
-
 }
