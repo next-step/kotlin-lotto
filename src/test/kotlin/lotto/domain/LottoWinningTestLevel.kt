@@ -16,6 +16,6 @@ class LottoWinningTestLevel {
     }
 
     companion object {
-        private val LOTTO = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        private val LOTTO = Lotto((1..6).map { LottoNumber(it) })
     }
 }

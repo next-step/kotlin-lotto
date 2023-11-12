@@ -40,6 +40,6 @@ class LottoShopTest {
         private const val LOTTO_COUNT = 14
         private const val LOTTO_TRY_COUNT = 4
         private const val JACKPOT_NUMBERS = "1, 2, 3, 4, 5, 6"
-        private val LOTTO = listOf(1, 2, 3, 4, 5, 6)
+        private val LOTTO = (1..6).map { LottoNumber(it) }
     }
 }

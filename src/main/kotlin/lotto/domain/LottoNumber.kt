@@ -2,7 +2,7 @@ package lotto.domain
 
 import lotto.error.ErrorMessage.LOTTO_RANGE_ERROR
 
-class LottoNumber (val number: Int) {
+class LottoNumber(val number: Int) {
     init {
         require(number in lottoNumberRange) { LOTTO_RANGE_ERROR.message }
     }
@@ -10,6 +10,27 @@ class LottoNumber (val number: Int) {
     companion object {
         private const val LOTTO_FIRST_NUMBER = 1
         private const val LOTTO_LAST_NUMBER = 45
-        val lottoNumberRange: IntRange = (LOTTO_FIRST_NUMBER..LOTTO_LAST_NUMBER)
+        private val lottoNumberRange: IntRange = (LOTTO_FIRST_NUMBER..LOTTO_LAST_NUMBER)
+
+        fun getLottoNumbers(): List<LottoNumber> {
+            return lottoNumberRange.toList().shuffled().take(6).sorted().map { LottoNumber(it) }
+        }
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as LottoNumber
+
+        return number == other.number
+    }
+
+    override fun hashCode(): Int {
+        return number
+    }
+
+    override fun toString(): String {
+        return "$number"
     }
 }

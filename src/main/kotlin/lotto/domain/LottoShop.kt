@@ -15,7 +15,7 @@ class LottoShop(private val drawStrategy: DrawStrategy = AutoLottoFactory()) {
     fun buyLotto(lottoBuyCount: Int): List<Lotto> = List(lottoBuyCount) { drawStrategy.draw() }
 
     fun getJackpotNumbers(inputNumber: String, delimiters: String = ", "): Lotto {
-        return Lotto(inputNumber.split(delimiters).map { it.toInt() })
+        return Lotto(inputNumber.split(delimiters).map { LottoNumber(it.toInt()) })
     }
 
     companion object {
