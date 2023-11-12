@@ -1,6 +1,10 @@
 package lotto
 
-import lotto.domain.*
+import lotto.domain.Lotto
+import lotto.domain.LottoCalculator
+import lotto.domain.LottoMachine
+import lotto.domain.LottoRank
+import lotto.domain.LottoRank.Companion.getLottoRank
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -19,6 +23,9 @@ fun main() {
     val bonusNumber: Int = inputView.readLineNumber("보너스 볼을 입력해 주세요.")
     val winningLotto: Lotto = Lotto(winningLottoNumberList)
 
-    val lottoRankList: List<LottoRank> = lottoList.map { lottoMachine.getLottoRank(it, winningLotto, bonusNumber) }
-    outputView.printResult(lottoRankList, lottoCalculator.calculateReturnOnInvestment(lottoRankList, buyingPrice.toDouble()))
+    val lottoRankList: List<LottoRank> = lottoList.map { it.getLottoRank(winningLotto, bonusNumber) }
+    outputView.printResult(
+        lottoRankList,
+        lottoCalculator.calculateReturnOnInvestment(lottoRankList, buyingPrice.toDouble())
+    )
 }

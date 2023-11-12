@@ -9,17 +9,22 @@ enum class LottoRank(val winningMoney: Int, val matchCount: Int) {
     FOURTH(5_000, 3),
     MISS(0, 0);
 
-    fun getLottoRank(lotto: Lotto, winningLotto: Lotto, bonusNumber: Int): LottoRank {
-        require(bonusNumber in Lotto.LOTTO_NUMBER_MIN..Lotto.LOTTO_NUMBER_MAX) { "보너스 번호는 1부터 45까지의 숫자만 가능합니다." }
-
-        val lottoRank: LottoRank = findByMatchCount(lotto.getMatchCount(winningLotto))
-
-        return if (lottoRank == LottoRank.SECOND && lotto.isContainsBonusNumber(bonusNumber)) LottoRank.SECOND_WITH_BONUS else lottoRank
-    }
-
     companion object {
-        fun findByMatchCount(matchCount: Int): LottoRank {
+        private fun findByMatchCount(matchCount: Int): LottoRank {
             return values().find { it.matchCount == matchCount } ?: MISS
+        }
+
+        fun Lotto.getLottoRank(winningLotto: Lotto, bonusNumber: Int): LottoRank {
+            require(bonusNumber in Lotto.LOTTO_NUMBER_MIN..Lotto.LOTTO_NUMBER_MAX) { "보너스 번호는 1부터 45까지의 숫자만 가능합니다." }
+
+            val matchCount: Int = this.getMatchCount(winningLotto)
+            val lottoRank: LottoRank = findByMatchCount(matchCount)
+
+            return if (matchCount == 5) {
+                if (this.isContainsBonusNumber(bonusNumber)) SECOND_WITH_BONUS else SECOND
+            } else {
+                lottoRank
+            }
         }
     }
 }
