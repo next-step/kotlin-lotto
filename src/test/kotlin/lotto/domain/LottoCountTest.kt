@@ -2,6 +2,8 @@ package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.data.forAll
+import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 
 class LottoCountTest : StringSpec({
@@ -38,5 +40,21 @@ class LottoCountTest : StringSpec({
 
         // then
         result shouldBe LottoCount(14)
+    }
+
+    "개수가 0개면 true, 아니면 false를 반환한다." {
+        forAll(
+            row(0, true),
+            row(1, false)
+        ) { count, expected ->
+            // given
+            val lottoCount = LottoCount(count)
+
+            // when
+            val actual = lottoCount.isZero()
+
+            // then
+            actual shouldBe expected
+        }
     }
 })

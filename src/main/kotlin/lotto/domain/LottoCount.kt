@@ -17,6 +17,9 @@ value class LottoCount(
     fun plus(other: LottoCount): LottoCount =
         LottoCount(value + other.value)
 
+    fun isZero(): Boolean =
+        value == LOTTO_MIN_COUNT
+
     companion object {
         private const val LOTTO_MIN_COUNT = 0
     }
