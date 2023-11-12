@@ -5,7 +5,6 @@ import io.kotest.matchers.shouldBe
 
 class LottoMachineTest : BehaviorSpec({
 
-    val lottoMachine = LottoMachine()
     Given("로또 당첨 번호 6개와 보너스 번호가 주어지고") {
         val winningNumbers = "1, 2, 3, 4, 5, 6"
         val bonusNumber = "7"
@@ -13,16 +12,15 @@ class LottoMachineTest : BehaviorSpec({
         When("복권 기계에 구매한 로또를 전달하면") {
             val lotto = Lotto(
                 listOf(
-                    LottoLine(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber)),
-                    LottoLine(listOf(1, 2, 3, 4, 5, 7).map(::LottoNumber)),
-                    LottoLine(listOf(1, 2, 3, 4, 5, 9).map(::LottoNumber)),
-                    LottoLine(listOf(1, 2, 3, 4, 8, 9).map(::LottoNumber)),
-                    LottoLine(listOf(1, 2, 3, 8, 9, 10).map(::LottoNumber))
+                    LottoLine(listOf(1, 2, 3, 4, 5, 6).map(LottoNumber::from)),
+                    LottoLine(listOf(1, 2, 3, 4, 5, 7).map(LottoNumber::from)),
+                    LottoLine(listOf(1, 2, 3, 4, 5, 9).map(LottoNumber::from)),
+                    LottoLine(listOf(1, 2, 3, 4, 8, 9).map(LottoNumber::from)),
+                    LottoLine(listOf(1, 2, 3, 8, 9, 10).map(LottoNumber::from))
                 )
             )
-            val lottoRanks = lottoMachine.checkLottoResult(lotto, winningNumber)
+            val lottoRanks = LottoMachine.checkLottoResult(lotto, winningNumber)
             Then("로또 결과를 반환한다.") {
-                println(lottoRanks)
                 lottoRanks shouldBe LottoWinningReceipt(
                     mapOf(
                         LottoRank.FIRST to 1,

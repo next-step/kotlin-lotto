@@ -6,7 +6,7 @@ class LottoWinningReceipt(
 ) {
 
     fun getRateOfReturn(customer: Customer): Double {
-        val amountSum = this.ranks.map { it.key.amount * it.value }.sumOf { it.toDouble() }
+        val amountSum = this.ranks.map { it.key.winningMoney * it.value }.sumOf { it.toDouble() }
         return rateCalculus.calc(amountSum, customer.money.toDouble())
     }
     operator fun get(lottoWinning: LottoRank) = ranks[lottoWinning]

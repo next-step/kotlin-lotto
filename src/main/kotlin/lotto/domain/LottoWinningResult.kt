@@ -1,6 +1,6 @@
 package lotto.domain
 
 data class LottoWinningResult(
-    val sameCount: Int,
+    val countOfMatch: Int,
     val isBonusRank: Boolean
 )

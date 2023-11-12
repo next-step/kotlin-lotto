@@ -1,19 +1,33 @@
 package lotto.domain
 
 enum class LottoRank(
-    val lottoWinningResult: LottoWinningResult,
-    val amount: Int
+    val countOfMatch: Int,
+    val winningMoney: Int
 ) {
 
-    FIRST(LottoWinningResult(6, false), 2_000_000_000),
-    SECOND(LottoWinningResult(5, true), 30_000_000),
-    THIRD(LottoWinningResult(5, false), 1_500_000),
-    FOURTH(LottoWinningResult(4, false), 50_000),
-    FIFTH(LottoWinningResult(3, false), 5_000)
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    MISS(0, 0)
     ;
 
     companion object {
-        fun valueOf(lottoWinningResult: LottoWinningResult) = values()
-            .find { it.lottoWinningResult == lottoWinningResult }
+        private fun <WIN, RANK> compose(bonus: (WIN) -> RANK, normal: (WIN) -> RANK): (WIN) -> RANK =
+            { winningResult: WIN -> when(val rank = bonus(winningResult)) {
+                MISS -> normal(winningResult)
+                else -> rank
+            }}
+
+        private fun getBonusRank(lottoWinningResult: LottoWinningResult) =
+            if (lottoWinningResult.countOfMatch == SECOND.countOfMatch && lottoWinningResult.isBonusRank) SECOND
+            else MISS
+        private fun getNormalRank(lottoWinningResult: LottoWinningResult) =
+            entries.filter { it != SECOND }
+                .find { it.countOfMatch == lottoWinningResult.countOfMatch } ?: MISS
+
+        fun valueOf(lottoWinningResult: LottoWinningResult): LottoRank =
+            compose(::getBonusRank, ::getNormalRank)(lottoWinningResult)
     }
 }

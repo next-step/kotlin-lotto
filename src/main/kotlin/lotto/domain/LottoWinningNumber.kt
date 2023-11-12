@@ -17,7 +17,7 @@ data class LottoWinningNumber(
             require(bonusNumberToInt != null && bonusNumberToInt > 0) {
                 "보너스 번호는 양수로 입력하여 주세요. "
             }
-            return LottoWinningNumber(LottoLine(parsedNumbers.map(::LottoNumber)), LottoNumber(bonusNumberToInt))
+            return LottoWinningNumber(LottoLine(parsedNumbers.map(LottoNumber::from)), LottoNumber.from(bonusNumberToInt))
         }
     }
 }
