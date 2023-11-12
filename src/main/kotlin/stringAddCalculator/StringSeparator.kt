@@ -4,15 +4,12 @@ object StringSeparator {
     private val BASIC_DELIMITER_PATTERN = Regex("[,:]")
     private val CUSTOM_DELIMITER_PATTERN = Regex("//(.)\n(.*)")
 
-    fun separate(text: String): List<String> {
-        return text.split(BASIC_DELIMITER_PATTERN)
-    }
-
-    fun separateByCustomDelimiter(text: String): List<String>? {
-        val matchResult = CUSTOM_DELIMITER_PATTERN.find(text)
-        return matchResult?.let {
+    fun separate(text: String): Tokens {
+        val customMatchResult = CUSTOM_DELIMITER_PATTERN.find(text)
+        val values = customMatchResult?.let {
             val customDelimiter = it.groupValues[1]
             it.groupValues[2].split(customDelimiter)
-        }
+        } ?: text.split(BASIC_DELIMITER_PATTERN)
+        return Tokens(values.map { Token.of(it) })
     }
 }
