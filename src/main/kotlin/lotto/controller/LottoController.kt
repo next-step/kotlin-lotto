@@ -8,8 +8,10 @@ import lotto.view.LottoOutputView
 object LottoController {
     fun handle() {
         val purchaseAmount = LottoInputView.readPurchaseAmountInput()
-        val purchasedLottos = PurchasedLottos(purchaseAmount, RandomLottoNumberGenerator)
-        LottoOutputView.printLottoOutput(purchasedLottos)
+        val manualLottoCount = LottoInputView.readManualLottoCountInput()
+        val manualLottoNumbers = LottoInputView.readManualLottoNumbersInput(manualLottoCount)
+        val purchasedLottos = PurchasedLottos(purchaseAmount, manualLottoNumbers, RandomLottoNumberGenerator)
+        LottoOutputView.printLottoOutput(purchasedLottos, manualLottoCount)
 
         val winningNumbers = LottoInputView.readWinningNumbersInput()
         val bonusNumber = LottoInputView.readBonusNumberInput()

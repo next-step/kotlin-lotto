@@ -4,11 +4,25 @@ import lotto.domain.LottoNumber
 import lotto.domain.WinningNumbers
 
 object LottoInputView {
+    private const val MANUAL_LOTTO_NUMBERS_INPUT_DELIMITER = ","
     private const val WINNING_NUMBERS_INPUT_DELIMITER = ","
 
     fun readPurchaseAmountInput(): Long {
         println("구입금액을 입력해 주세요.")
         return readln().toLong()
+    }
+
+    fun readManualLottoCountInput(): Int {
+        println("\n수동으로 구매할 로또 수를 입력해 주세요.")
+        return readln().toInt()
+    }
+
+    fun readManualLottoNumbersInput(manualLottoCount: Int): List<List<LottoNumber>> {
+        println("\n수동으로 구매할 번호를 입력해 주세요.")
+        return List(manualLottoCount) {
+            readln().split(MANUAL_LOTTO_NUMBERS_INPUT_DELIMITER)
+                .map { LottoNumber(it.trim().toInt()) }
+        }
     }
 
     fun readWinningNumbersInput(): WinningNumbers {

@@ -2,9 +2,10 @@ package lotto.domain
 
 class PurchasedLottos(
     private val purchaseAmount: Long,
+    manualLottoNumbers: List<List<LottoNumber>>,
     lottoNumberGenerator: LottoNumberGenerator,
 ) {
-    val lottos: List<Lotto> = LottoShop(lottoNumberGenerator).purchaseLottos(purchaseAmount)
+    val lottos: List<Lotto> = LottoShop(lottoNumberGenerator).purchaseLottos(purchaseAmount, manualLottoNumbers)
 
     fun draw(winningNumbers: WinningNumbers, bonusNumber: LottoNumber): WinningStatistic {
         val prizes = lottos.mapNotNull {
