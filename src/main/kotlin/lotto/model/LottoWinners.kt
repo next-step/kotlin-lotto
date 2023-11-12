@@ -24,7 +24,5 @@ data class LottoWinners(
 
     companion object {
         const val BENEFIT_LOSS_CROSS_POINT: Double = 1.00
-        const val BENEFIT_MESSAGE: String = "이익"
-        const val LOSS_MESSAGE: String = "손해"
     }
 }
