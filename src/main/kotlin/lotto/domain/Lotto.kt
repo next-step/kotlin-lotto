@@ -7,8 +7,8 @@ class Lotto(val numbers: List<Int> = (LOTTO_NUMBER_MIN..LOTTO_NUMBER_MAX).toList
         require(numbers.all { it in LOTTO_NUMBER_MIN..LOTTO_NUMBER_MAX }) { "로또 번호는 1~45 사이의 숫자만 가능합니다." }
     }
 
-    fun match(winningLotto: Lotto): Int {
-        return numbers.intersect(winningLotto.numbers.toSet()).size
+    fun match(winningLotto: WinningLotto): Pair<Int, Boolean> {
+        return numbers.intersect(winningLotto.lotto.numbers.toSet()).size to numbers.contains(winningLotto.bonusNumber)
     }
 
     companion object {

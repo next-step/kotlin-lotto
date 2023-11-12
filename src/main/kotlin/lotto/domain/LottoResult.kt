@@ -5,7 +5,8 @@ class LottoResult(private val lottoList: List<Lotto>, private val winningLotto: 
 
     init {
         lottoList.forEach { lotto ->
-            val lottoPrize = LottoPrize.of(lotto.match(winningLotto.lotto))
+            val (matchCount, hasBonus) = lotto.match(winningLotto)
+            val lottoPrize = LottoPrize.of(matchCount, hasBonus)
             prizeCount[lottoPrize] = prizeCount.getOrDefault(lottoPrize, 0) + 1
         }
     }
