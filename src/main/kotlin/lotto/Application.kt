@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.BonusNumber
 import lotto.domain.LottoFactory
 import lotto.domain.LottoGame
 import lotto.domain.LottoNumbers
@@ -12,7 +13,8 @@ fun main() {
     printLottoList(lottoList)
 
     val winningNumbers = LottoNumbers(readWinningNumbers())
-    val lottoGame = LottoGame(lottoList, winningNumbers)
+    val bonusNumber = BonusNumber(readBonusNumber())
+    val lottoGame = LottoGame(lottoList, winningNumbers, bonusNumber)
     val lottoGameResult = lottoGame.getResult()
     printLottoGameResult(lottoGameResult)
 }

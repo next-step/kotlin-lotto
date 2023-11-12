@@ -13,7 +13,8 @@ class LottoGameTest : FunSpec({
             LottoNumbers(setOf(10, 15, 20, 25, 30, 35))  // 1등
         )
         val winningNumbers = LottoNumbers(setOf(10, 15, 20, 25, 30, 35))
-        val lottoGame = LottoGame(lottoList, winningNumbers)
+        val bonusNumber = BonusNumber(13)
+        val lottoGame = LottoGame(lottoList, winningNumbers, bonusNumber)
 
         test("N개의 로또를 가진다.") {
             lottoGame.lottoList.size shouldBe 5
@@ -21,6 +22,10 @@ class LottoGameTest : FunSpec({
 
         test("지난 주 당첨 번호를 가진다.") {
             lottoGame.winningNumbers shouldBe winningNumbers
+        }
+
+        test("보너스 번호를 가진다.") {
+            lottoGame.bonusNumber shouldBe bonusNumber
         }
 
         test("3-6개 일치 로또의 개수를 계산할 수 있다.") {

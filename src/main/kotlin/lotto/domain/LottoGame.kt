@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoGame(val lottoList: List<LottoNumbers>, val winningNumbers: LottoNumbers) {
+class LottoGame(val lottoList: List<LottoNumbers>, val winningNumbers: LottoNumbers, val bonusNumber: BonusNumber) {
     fun getResult(): LottoGameResult {
         val totalPrice = getTotalPrice()
         val rewards = getRewards(winningNumbers)
