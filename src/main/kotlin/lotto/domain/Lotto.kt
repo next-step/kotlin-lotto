@@ -6,8 +6,8 @@ class Lotto(val numbers: List<Int>) {
     }
     constructor () : this(generateLotto())
 
-    fun matches(winningNumbers: Lotto): Int {
-        return numbers.intersect(winningNumbers.toSet()).size
+    fun matches(winningLotto: Lotto): Int {
+        return numbers.intersect(winningLotto.toSet()).size
     }
     private fun toSet(): Set<Int> {
         return numbers.toSet()

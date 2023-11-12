@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoManager(val purchased: Int) {
-    private lateinit var winningNumbers: Lotto
+    private lateinit var winningLotto: Lotto
     private var bonusNumber: Int = -1
     lateinit var prizes: List<Prize>
         private set
@@ -21,8 +21,8 @@ class LottoManager(val purchased: Int) {
         lottos = Lottos(purchased / LOTTO_PRICE)
     }
 
-    fun setWinningNumbers(numbers: Lotto) {
-        winningNumbers = numbers
+    fun setWinningLotto(lotto: Lotto) {
+        winningLotto = lotto
     }
 
     fun setBonusNumber(input: Int) {
@@ -32,15 +32,15 @@ class LottoManager(val purchased: Int) {
 
     private fun validateBonusNumber(num: Int) {
         require(num in 1..45) { "보너스 번호는 1~45 사이의 숫자여야 합니다." }
-        require(num !in winningNumbers.numbers) { "보너스 번호는 당첨 번호와 중복될 수 없습니다." }
+        require(num !in winningLotto.numbers) { "보너스 번호는 당첨 번호와 중복될 수 없습니다." }
     }
 
     fun aggregate() {
         check(this::lottos.isInitialized) { "발급된 로또가 없습니다" }
-        check(this::winningNumbers.isInitialized) { "당첨번호가 설정되지 않았습니다" }
+        check(this::winningLotto.isInitialized) { "당첨번호가 설정되지 않았습니다" }
         check(bonusNumber > 0) { "보너스 번호가 설정되지 않았습니다" }
 
-        prizes = Prize.getResult(lottos, winningNumbers, bonusNumber)
+        prizes = Prize.getResult(lottos, winningLotto, bonusNumber)
     }
 
     companion object {

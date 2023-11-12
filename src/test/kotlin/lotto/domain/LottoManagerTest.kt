@@ -48,7 +48,7 @@ class LottoManagerTest {
         val manager = LottoManager(1000)
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
 
-        manager.setWinningNumbers(Lotto(winningNumbers))
+        manager.setWinningLotto(Lotto(winningNumbers))
         assertThatThrownBy { manager.setBonusNumber(winningNumbers.shuffled().take(1).first()) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("보너스 번호는 당첨 번호와 중복될 수 없습니다.")
@@ -66,7 +66,7 @@ class LottoManagerTest {
             .isInstanceOf(IllegalStateException::class.java)
             .hasMessage("당첨번호가 설정되지 않았습니다")
 
-        manager.setWinningNumbers(Lotto(listOf(1, 2, 3, 4, 5, 6)))
+        manager.setWinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6)))
         assertThatThrownBy { manager.aggregate() }
             .isInstanceOf(IllegalStateException::class.java)
             .hasMessage("보너스 번호가 설정되지 않았습니다")
@@ -80,7 +80,7 @@ class LottoManagerTest {
         val money = 2000
         val manager = LottoManager(money)
         manager.generateLottos()
-        manager.setWinningNumbers(Lotto(listOf(1, 2, 3, 4, 5, 6)))
+        manager.setWinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6)))
         manager.setBonusNumber(7)
         manager.aggregate()
 

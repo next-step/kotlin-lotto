@@ -22,7 +22,7 @@ fun main() {
     val winningNumbers = Input().getWinningNumbers()
 
     // 당첨 번호 등록
-    Lotto(tokenizeWinningNumbers(winningNumbers)).let { lottoManager.setWinningNumbers(it) }
+    Lotto(tokenizeWinningNumbers(winningNumbers)).let { lottoManager.setWinningLotto(it) }
 
     // 보너스 번호 입력
     val bonusNumber = Input().getBonusNumber()

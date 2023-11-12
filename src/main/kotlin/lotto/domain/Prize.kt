@@ -11,13 +11,13 @@ enum class Prize(val prize: Int, val match: Int) {
     companion object {
         private val prizeMap = Prize.values().associateBy { it.match }
 
-        fun getResult(lottos: Lottos, winningNumbers: Lotto, bonus: Int): List<Prize> {
+        fun getResult(lottos: Lottos, winningLotto: Lotto, bonus: Int): List<Prize> {
             return lottos.lottoList.map {
-                getPrize(it, winningNumbers, bonus)
+                getPrize(it, winningLotto, bonus)
             }
         }
-        fun getPrize(lotto: Lotto, winningNumbers: Lotto, bonus: Int): Prize {
-            val matchNum = lotto.matches(winningNumbers)
+        fun getPrize(lotto: Lotto, winningLotto: Lotto, bonus: Int): Prize {
+            val matchNum = lotto.matches(winningLotto)
 
             return if (matchNum == 5) {
                 if (lotto.numbers.contains(bonus)) SECOND else THIRD
