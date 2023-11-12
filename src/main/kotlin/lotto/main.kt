@@ -1,11 +1,10 @@
 package lotto
 
-import lotto.lotto.Lotto
+import lotto.lotto.LottoGenerator
 import lotto.lotto.LottoPrize
-import lotto.lotto.toLottoNumbers
+import lotto.lotto.LottoType
 import lotto.lotto.toWinningLotto
 import lotto.lotto_auto.LottoAuto
-import lotto.lotto_manual.LottoManual
 import lotto.ui.InputView
 import lotto.ui.OutputView
 
@@ -16,8 +15,8 @@ fun main() {
     val autoLottoCount = totalLottoCount - inputManualCount
 
     OutputView.printRequestEnterManualLottoNumber()
-    val manualLottoList = LottoManual.createManualLottoList(inputManualCount)
-    val autoLottoList = LottoAuto.createAutoLottoList(autoLottoCount)
+    val manualLottoList = LottoGenerator.createLottoList(inputManualCount, LottoType.MANUAL)
+    val autoLottoList = LottoGenerator.createLottoList(autoLottoCount, LottoType.AUTO)
 
     OutputView.printTotalLottoCount(inputManualCount, autoLottoCount)
     OutputView.printAutoLottoList(autoLottoList)
