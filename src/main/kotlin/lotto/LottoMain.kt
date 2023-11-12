@@ -23,9 +23,7 @@ fun main() {
     val manualLottoList: MutableList<Lotto> = mutableListOf()
     outputView.nextLinePrint("수동으로 구매할 번호를 입력해 주세요.")
     repeat(manualLottoCount) {
-        val manualLottoNumberList: List<Int> = inputView.readLineNumberList()
-
-        manualLottoList.add(Lotto(manualLottoNumberList))
+        manualLottoList.add(Lotto(inputView.readLineNumberList()))
     }
 
     val lottoList: List<Lotto> = lottoMachine.buyLottoList(remainingMoney)

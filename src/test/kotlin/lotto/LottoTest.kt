@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -18,7 +19,9 @@ class LottoTest {
     fun `로또 번호를 가져올 수 있다`() {
         val lotto: Lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
-        assertThat(lotto.numberList).containsExactly(1, 2, 3, 4, 5, 6)
+        val expectedLotto: List<LottoNumber> = listOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6))
+
+        assertThat(lotto.numberList).containsExactlyElementsOf(expectedLotto)
     }
 
     @Test
@@ -35,14 +38,9 @@ class LottoTest {
     fun `로또 번호는 정렬되어 있다`() {
         val lotto: Lotto = Lotto(listOf(6, 5, 4, 3, 2, 1))
 
-        assertThat(lotto.numberList).containsExactly(1, 2, 3, 4, 5, 6)
-    }
+        val expectedLotto: List<LottoNumber> = listOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6))
 
-    @Test
-    fun `로또 번호는 1부터 45까지의 숫자만 가능하다`() {
-        Assertions.assertThatThrownBy { Lotto(listOf(1, 2, 3, 4, 5, 46)) }
-            .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage("로또 번호는 1부터 45까지의 숫자만 가능합니다.")
+        assertThat(lotto.numberList).containsExactlyElementsOf(expectedLotto)
     }
 
     @Test
