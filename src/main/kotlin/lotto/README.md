@@ -75,8 +75,8 @@
 - [ ] 다른 클래스들의 모든 테스트 케이스를 작성해보면 어떨까요?
 
 ### 4차
-- [ ] LottoGenerator을 LottoPerson생성시점에 주입받으면 어떨까요? 생성에 대한 책임은 LottoGenerator에게 구매에 대한 책임은 LottoPerson에게 위입해보면 어떨까요?
-- [ ] lottoTickets을 내부 프로퍼티로 가질 필요가 있을까요?
+- [x] LottoGenerator을 LottoPerson생성시점에 주입받으면 어떨까요? 생성에 대한 책임은 LottoGenerator에게 구매에 대한 책임은 LottoPerson에게 위입해보면 어떨까요?
+- [x] lottoTickets을 내부 프로퍼티로 가질 필요가 있을까요?
 - [ ] LottoResults의 책임은 무엇일까요? 당첨번호에 대한 책임, 로또 결과에 대한 책임 등 여러책임이 엮여있지는 않은지 고민해보아요!
   - 실제 LottoResults의 구조는 getResults의 리턴값 구조이지않을까요? class LottoResults(private val result:  Map<Prize, Int>)
 - [ ] isBonus에 대한 체크는 Prize내에서 처리되면 어떨까요? 숫자 5는 무엇을 의미할까요? Prize.Second의 matched가 변경된다면 문제가 생기진 않을까요?
