@@ -10,11 +10,13 @@ enum class WinningRank(val matchingCount: Int, val winningPrice: Long, val isBon
     ;
 
     companion object {
+        private val winningRanksByCount: Map<Int, List<WinningRank>> = values().groupBy { it.matchingCount }
+
         fun of(matchingCount: Int, isMatchedBonusNumber: Boolean): WinningRank {
             if(matchingCount == 5) {
-                return values().find { it.matchingCount == matchingCount && it.isBonusNumberNeeded == isMatchedBonusNumber } ?: NOTHING
+                return winningRanksByCount[matchingCount]?.find { it.isBonusNumberNeeded == isMatchedBonusNumber } ?: NOTHING
             }
-            return values().find { it.matchingCount == matchingCount } ?: NOTHING
+            return winningRanksByCount[matchingCount]?.find { it.matchingCount == matchingCount } ?: NOTHING
         }
 
         fun isWinningRank(winningRank: WinningRank): Boolean {
