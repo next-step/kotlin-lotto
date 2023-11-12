@@ -1,7 +1,5 @@
 package lotto.view
 
-import lotto.domain.Lotto
-
 object InputView {
     private const val DELIMITER = ", "
     fun enterMoney(): Int {

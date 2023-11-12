@@ -5,14 +5,14 @@ import lotto.domain.LottoPrize
 import lotto.domain.LottoResult
 
 object OutputView {
-    fun printLottoResult(lottoResultMap: Map<LottoPrize, List<LottoResult>>) {
+    fun printLottoResult(lottoResult: LottoResult) {
         println("당첨 통계")
         println("---------")
-        LottoPrize.values().forEach { prize ->
+        lottoResult.prizeCount.forEach { (prize, count) ->
             if (prize == LottoPrize.MISS) return@forEach
-            println("${prize.matchCount}개 일치 (${prize.prizeMoney}원) - ${lottoResultMap[prize]?.size ?: 0}개")
+            println("${prize.matchCount}개 일치 (${prize.prizeMoney}원) - ${count}개")
         }
-//        println("총 수익률은 ${calculateYield(lottoResultMap)}입니다.")
+        println("총 수익률은 ${lottoResult.calculateYield()}입니다.")
     }
 
     fun buyLotto(lottos: List<Lotto>) {
