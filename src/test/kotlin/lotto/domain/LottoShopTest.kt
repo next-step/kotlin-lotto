@@ -12,7 +12,7 @@ class LottoShopTest : BehaviorSpec({
         When("로또를 구매한다면") {
             val lotto = LottoShop.buyLotto(purchase)
             Then("3개의 자동 라인이 기입된 로또를 반환한다.") {
-                lotto.autoLines.size shouldBe 3
+                lotto.allLines.size shouldBe 3
             }
         }
     }

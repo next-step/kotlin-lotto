@@ -9,13 +9,14 @@ object Output {
     }
 
     fun lottoBuyResultPrint(lotto: Lotto) {
-        this.printlnAny(LottoMessage.PRINT_PURCHASE_QUANTITY.message.format(lotto.autoLines.size))
-        this.printlnAny(
-            lotto.autoLines.joinToString("\n") {
-                it.line.joinToString(", ", "[", "]")
-            }
-        )
+        this.printlnAny(LottoMessage.PRINT_PURCHASE_QUANTITY.message.format(lotto.manualLines.size, lotto.autoLines.size))
+        this.printlnAny(getLottoBuyResult(lotto))
     }
+
+    private fun getLottoBuyResult(lotto: Lotto): String =
+        lotto.allLines.joinToString("\n") {
+            it.line.joinToString(", ", "[", "]")
+        }
 
     fun lottoRateOfReturnPrint(lottoResult: LottoWinningReceipt, purchase: LottoPurchase) {
         this.printlnAny(LottoMessage.PRINT_LOTTO_RATE_OF_RETURN.message.format(lottoResult.getRateOfReturn(purchase)))

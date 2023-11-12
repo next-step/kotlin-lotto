@@ -10,10 +10,10 @@ class LottoTest : BehaviorSpec({
         When("로또 상점에 로또 구매 요청을 한다면") {
             val lotto = LottoShop.buyLotto(purchase)
             Then("금액 천원 단위 만큼 로또를 반환한다.") {
-                lotto.autoLines.size shouldBe 5
+                lotto.allLines.size shouldBe 5
             }
             Then("각 라인에는 6개의 숫자가 존재한다.") {
-                lotto.autoLines.all { it.line.size == 6 }
+                lotto.allLines.all { it.line.size == 6 }
             }
         }
     }
