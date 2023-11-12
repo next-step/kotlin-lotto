@@ -16,7 +16,7 @@ class PrizeTest {
         val actual = Prize.valueOfOrNull(matchedNumberCount, bonusNumberMatched)
             ?.winningAmount
 
-        assertThat(actual).isEqualTo(5000)
+        assertThat(actual).isEqualTo(Won(5000))
     }
 
     @Test
@@ -27,7 +27,7 @@ class PrizeTest {
         val actual = Prize.valueOfOrNull(matchedNumberCount, bonusNumberMatched)
             ?.winningAmount
 
-        assertThat(actual).isEqualTo(50000)
+        assertThat(actual).isEqualTo(Won(50000))
     }
 
     @Test
@@ -38,7 +38,7 @@ class PrizeTest {
         val actual = Prize.valueOfOrNull(matchedNumberCount, bonusNumberMatched)
             ?.winningAmount
 
-        assertThat(actual).isEqualTo(1500000)
+        assertThat(actual).isEqualTo(Won(1500000))
     }
 
     @Test
@@ -49,7 +49,7 @@ class PrizeTest {
         val actual = Prize.valueOfOrNull(matchedNumberCount, bonusNumberMatched)
             ?.winningAmount
 
-        assertThat(actual).isEqualTo(30000000)
+        assertThat(actual).isEqualTo(Won(30000000))
     }
 
     @Test
@@ -60,7 +60,7 @@ class PrizeTest {
         val actual = Prize.valueOfOrNull(matchedNumberCount, bonusNumberMatched)
             ?.winningAmount
 
-        assertThat(actual).isEqualTo(2000000000)
+        assertThat(actual).isEqualTo(Won(2000000000))
     }
 
     @ParameterizedTest

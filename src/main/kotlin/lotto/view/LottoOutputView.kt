@@ -35,7 +35,7 @@ object LottoOutputView {
             if (prize === Prize.SECOND) {
                 append(", 보너스 볼 일치")
             }
-            append(" (${prize.winningAmount}원)- ${matchedNumberCount ?: 0}개")
+            append(" (${prize.winningAmount.amount}원)- ${matchedNumberCount ?: 0}개")
         }.let(::println)
     }
 }

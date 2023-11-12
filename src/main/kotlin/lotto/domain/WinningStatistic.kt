@@ -2,11 +2,11 @@ package lotto.domain
 
 class WinningStatistic(
     prizes: List<Prize>,
-    purchaseAmount: Long,
+    purchaseAmount: Won,
 ) {
-    private val totalWinningAmount: Long = prizes.sumOf { it.winningAmount }
+    private val totalWinningAmount: Long = prizes.sumOf { it.winningAmount.amount }
 
-    val profitRate: Double = totalWinningAmount / purchaseAmount.toDouble()
+    val profitRate: Double = totalWinningAmount / purchaseAmount.amount.toDouble()
 
     val countPerPrize: Map<Prize, Int> = prizes.groupingBy { it }
         .eachCount()

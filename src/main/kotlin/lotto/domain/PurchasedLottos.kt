@@ -1,7 +1,7 @@
 package lotto.domain
 
 class PurchasedLottos(
-    private val purchaseAmount: Long,
+    private val purchaseAmount: Won,
     manualLottoNumbers: List<List<LottoNumber>>,
     lottoNumberGenerator: LottoNumberGenerator,
 ) {

@@ -3,11 +3,11 @@ package lotto.domain
 class LottoShop(
     private val lottoNumberGenerator: LottoNumberGenerator,
 ) {
-    fun purchaseLottos(purchaseAmount: Long, manualLottoNumbers: List<List<LottoNumber>>): List<Lotto> {
+    fun purchaseLottos(purchaseAmount: Won, manualLottoNumbers: List<List<LottoNumber>>): List<Lotto> {
         val manualLottoCount = manualLottoNumbers.size
         val manualLottos = manualLottoNumbers.map(::Lotto)
 
-        val purchaseCount = (purchaseAmount / Lotto.PRICE).toInt()
+        val purchaseCount = (purchaseAmount / Lotto.PRICE).amount.toInt()
 
         require(manualLottoCount <= purchaseCount) { "Not enough money to purchase lotto." }
 

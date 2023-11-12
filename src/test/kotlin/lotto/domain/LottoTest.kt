@@ -11,7 +11,7 @@ class LottoTest {
     fun `로또 1장의 가격은 1000원이다`() {
         val actual = Lotto.PRICE
 
-        assertThat(actual).isEqualTo(1000)
+        assertThat(actual).isEqualTo(Won(1000))
     }
 
     @Test

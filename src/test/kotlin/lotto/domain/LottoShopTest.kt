@@ -9,7 +9,7 @@ import org.junit.jupiter.api.assertThrows
 class LottoShopTest {
     @Test
     fun `로또 구입 금액과 수동 로또 번호가 주어지면, 수동 로또를 발급하고 나머지 금액으로 자동 로또를 발급한다`() {
-        val purchaseAmount = 14000L
+        val purchaseAmount = Won(14000)
         val manualLottoNumbers = (1..6).map(::LottoNumber)
         val autoNumbers = (2..7).toList()
         val lottoNumberGenerator = FakeLottoNumberGenerator(autoNumbers)
@@ -17,7 +17,7 @@ class LottoShopTest {
 
         val actual = lottoShop.purchaseLottos(purchaseAmount, listOf(manualLottoNumbers))
 
-        assertThat(actual).hasSize((purchaseAmount / Lotto.PRICE).toInt())
+        assertThat(actual).hasSize((purchaseAmount / Lotto.PRICE).amount.toInt())
         assertThat(actual.first()).usingRecursiveComparison()
             .isEqualTo(Lotto(manualLottoNumbers))
         assertThat(actual.drop(1)).usingRecursiveFieldByFieldElementComparator()
