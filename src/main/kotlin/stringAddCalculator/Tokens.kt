@@ -1,9 +1,9 @@
 package stringAddCalculator
 
 data class Tokens(
-    val tokens: List<Token>
+    val values: List<Token>
 ) {
     fun sum(): Int {
-        return tokens.sumOf { it.value }
+        return values.sumOf { it.value }
     }
 }
