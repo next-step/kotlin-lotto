@@ -79,9 +79,9 @@
 - [x] lottoTickets을 내부 프로퍼티로 가질 필요가 있을까요?
 - [x] LottoResults의 책임은 무엇일까요? 당첨번호에 대한 책임, 로또 결과에 대한 책임 등 여러책임이 엮여있지는 않은지 고민해보아요!
   - 실제 LottoResults의 구조는 getResults의 리턴값 구조이지않을까요? class LottoResults(private val result:  Map<Prize, Int>)
-- [ ] isBonus에 대한 체크는 Prize내에서 처리되면 어떨까요? 숫자 5는 무엇을 의미할까요? Prize.Second의 matched가 변경된다면 문제가 생기진 않을까요?
-- [ ] groupBy,associateWith 등의 키워드를 활용해봐도 좋을거같네요!
-- [ ] bonus 볼 여부 또한 Prize에서 가지고 있어야할 정보는 아닐까요?
+- [x] isBonus에 대한 체크는 Prize내에서 처리되면 어떨까요? 숫자 5는 무엇을 의미할까요? Prize.Second의 matched가 변경된다면 문제가 생기진 않을까요?
+- [x] groupBy,associateWith 등의 키워드를 활용해봐도 좋을거같네요!
+- [x] bonus 볼 여부 또한 Prize에서 가지고 있어야할 정보는 아닐까요?
 
 ## 챗 지피티와의 대화
 
