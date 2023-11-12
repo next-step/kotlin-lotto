@@ -1,36 +1,26 @@
 package lotto.model
 
-import lotto.model.LottoTicket.Companion.NUMBER_COUNT
-import java.text.DecimalFormat
+class LottoResults(private val winningNumbers: List<LottoNumber>, private val bonusNumber: LottoNumber) {
+    fun getResults(ticketNumbersList: List<List<LottoNumber>>): Map<Prize, Int> =
+        ticketNumbersList.fold(mutableMapOf(), foldPrizeToMatchCountMap).toMap()
 
-
-class LottoResults(lottoTickets: List<LottoTicket>, winningNumbers: List<LottoNumber>) {
-    var results: MutableMap<Int, Int> = (0..NUMBER_COUNT + 1).associateWith { 0 }.toMutableMap()
-        private set
-    val profit: Double
-        get() = getProfit()
-
-    init {
-        lottoTickets.forEach { lottoTicket ->
-            getMatchCount(winningNumbers, lottoTicket).let { matchCount ->
-                results[matchCount] = results[matchCount]!! + 1
-            }
-        }
+    private val foldPrizeToMatchCountMap = { results: MutableMap<Prize, Int>, ticketNumbers: List<LottoNumber> ->
+        val matchCount = getMatchCount(ticketNumbers)
+        val isBonus = matchCount == 5 && ticketNumbers.contains(bonusNumber)
+        val key = Prize.getKeyWithMatched(matchCount, isBonus)
+        results[key] = (results[key] ?: 0) + 1
+        results
     }
 
-    private fun getMatchCount(winningNumbers: List<LottoNumber>, lottoTicket: LottoTicket): Int =
-        lottoTicket.numbers.intersect(winningNumbers.toSet()).size
+    private fun getMatchCount(ticketNumbers: List<LottoNumber>): Int =
+        ticketNumbers.intersect(winningNumbers.toSet()).size
 
-
-    private fun getProfit(): Double {
+    fun getProfit(results: Map<Prize, Int>): Double {
         val ticketCount = results.values.sum()
-
         val sumOfPrize = results.entries.fold(0) { sum, (key, value) ->
-            sum + value * Prize.getPrizePerMatch(key)
+            sum + value * key.prize
         }
-
-        return DecimalFormat("#.##").format(sumOfPrize.toDouble() / (LottoTicket.TICKET_PRICE * ticketCount).toDouble())
-            .toDouble()
+        return sumOfPrize.toDouble() / (LottoTicket.TICKET_PRICE * ticketCount).toDouble()
     }
 }
 
