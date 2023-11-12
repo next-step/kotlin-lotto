@@ -38,4 +38,16 @@ class LottoGameTest : FunSpec({
             lottoGame.getResult(winningNumbers).calculatePerformance() shouldBe 338592.5
         }
     }
+
+    context("로또 게임의 2등 인원을 찾아낼 수 있다.") {
+        val lottoList = listOf(
+            LottoNumbers(setOf(1, 2, 3, 4, 5, 6)),
+            LottoNumbers(setOf(1, 2, 3, 4, 5, 6))
+        )
+        val lottoGame = LottoGame(lottoList)
+        val winningNumbers = WinningNumbers(LottoNumbers(setOf(1, 2, 3, 4, 5, 45)), BonusNumber(6))
+        val lottoGameResult = lottoGame.getResult(winningNumbers)
+        lottoGameResult.rewards[0] shouldBe LottoReward.SECOND
+        lottoGameResult.rewards[1] shouldBe LottoReward.SECOND
+    }
 })
