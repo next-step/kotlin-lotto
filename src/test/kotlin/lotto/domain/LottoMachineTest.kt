@@ -11,8 +11,8 @@ class LottoMachineTest : StringSpec({
 
     "로또 당첨 번호를 받아 로또 결과를 반환한다." {
         // given
-        val lottoCount = 2
-        val lottoMachine = createLottoMachine(lottoCount)
+        val autoLottoCount = 2
+        val lottoMachine = createLottoMachine(autoLottoCount)
         val winningLottoNumbers = Lotto.createFromNumbers(listOf(2, 3, 6, 7, 8, 9))
         val bonusBall = LottoNumber.from(10)
         val buyingPrice = LottoBuyingPrice(2000)
@@ -29,10 +29,11 @@ class LottoMachineTest : StringSpec({
     }
 })
 
-private fun createLottoMachine(lottoCount: Int): LottoMachine {
+private fun createLottoMachine(autoLottoCount: Int): LottoMachine {
     return LottoMachine.of(
-        lottoCount = lottoCount,
-        lottoNumberGenerator = createFakeNumberGenerator()
+        autoLottoCount = autoLottoCount,
+        lottoNumberGenerator = createFakeNumberGenerator(),
+        manualLotto = emptyList()
     )
 }
 

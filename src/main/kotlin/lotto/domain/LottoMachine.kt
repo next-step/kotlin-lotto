@@ -7,23 +7,25 @@ import lotto.domain.result.LottoRank
 import lotto.domain.result.LottoResult
 
 class LottoMachine private constructor(
-    val lottoCount: LottoCount,
+    val autoLottoCount: LottoCount,
     lottoNumberGenerator: LottoNumberGenerator,
+    manualLottos: List<Lotto>,
 ) {
 
     private val _lottos: MutableList<Lotto> = mutableListOf()
+    val manualLottoCount: LottoCount = LottoCount(manualLottos.size)
+
     val lottos: List<Lotto>
         get() = _lottos
 
     init {
-        repeat(lottoCount.value) {
-            val lotto = Lotto.createFromGenerator(lottoNumberGenerator)
-            _lottos.add(lotto)
-        }
+        _lottos.addAll(manualLottos)
+        generateAutoLottos(lottoNumberGenerator)
     }
 
     fun getLottoTotalPrice(): LottoPrice {
-        return LottoPrice.getTotalPrice(lottoCount)
+        val totalLottoCount = autoLottoCount.plus(manualLottoCount)
+        return LottoPrice.getTotalPrice(totalLottoCount)
     }
 
     fun getResult(winningLotto: WinningLotto, buyingPrice: LottoBuyingPrice): LottoMatchResult {
@@ -31,6 +33,13 @@ class LottoMachine private constructor(
         val lottoResult = LottoResult(matchCountByRank)
         val earningRate = lottoResult.calculateEarningRate(buyingPrice)
         return LottoMatchResult(lottoResult.matchCountByRank, earningRate)
+    }
+
+    private fun generateAutoLottos(lottoNumberGenerator: LottoNumberGenerator) {
+        repeat(autoLottoCount.value) {
+            val lotto = Lotto.createFromGenerator(lottoNumberGenerator)
+            _lottos.add(lotto)
+        }
     }
 
     private fun getMatchCountByRank(winningLotto: WinningLotto): Map<LottoRank, Int> =
@@ -50,9 +59,16 @@ class LottoMachine private constructor(
     companion object {
         private const val INIT_MATCH_COUNT = 0
 
-        fun of(lottoCount: Int, lottoNumberGenerator: LottoNumberGenerator): LottoMachine = LottoMachine(
-            lottoCount = LottoCount(lottoCount),
-            lottoNumberGenerator = lottoNumberGenerator
-        )
+        fun of(
+            autoLottoCount: Int,
+            lottoNumberGenerator: LottoNumberGenerator,
+            manualLotto: List<Lotto>,
+        ): LottoMachine {
+            return LottoMachine(
+                autoLottoCount = LottoCount(autoLottoCount),
+                lottoNumberGenerator = lottoNumberGenerator,
+                manualLottos = manualLotto
+            )
+        }
     }
 }
