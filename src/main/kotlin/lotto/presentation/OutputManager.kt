@@ -24,6 +24,10 @@ class OutputManager {
         }
     }
 
+    fun printRevenue(revenue: String) {
+        println("총 수익률은 ${revenue}입니다.")
+    }
+
     companion object {
         private const val START_NUMBER: Int = 3
         private const val END_NUMBER: Int = 7

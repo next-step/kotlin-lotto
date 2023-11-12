@@ -25,6 +25,9 @@ class LottoStore(
 
         val result = checkLottoResult(userLottos, lottoMachine.getWinningNumber())
         outputManager.printResult(result)
+
+        val revenue = result.calcRate(LOTTO_PRICE, userLottos.size)
+        outputManager.printRevenue(revenue)
     }
 
     private fun checkLottoResult(
