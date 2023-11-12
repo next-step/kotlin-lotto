@@ -12,7 +12,7 @@ class StringAddCalculatorTest : StringSpec({
         forAll(
             row(""),
             row("  "),
-            row(null),
+            row(null)
         ) { text ->
             StringAddCalculator.add(text) shouldBe 0
         }
@@ -21,7 +21,7 @@ class StringAddCalculatorTest : StringSpec({
     "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다." {
         forAll(
             row("1", 1),
-            row("100", 100),
+            row("100", 100)
         ) { text, expected ->
             StringAddCalculator.add(text) shouldBe expected
         }
@@ -30,7 +30,7 @@ class StringAddCalculatorTest : StringSpec({
     "숫자 두 개를 쉼표(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다." {
         forAll(
             row("1,2", 3),
-            row("10,20", 30),
+            row("10,20", 30)
         ) { text, expected ->
             StringAddCalculator.add(text) shouldBe expected
         }
@@ -39,7 +39,7 @@ class StringAddCalculatorTest : StringSpec({
     "숫자 두 개를 콜론(:) 구분자로 입력할 경우 두 숫자의 합을 반환한다." {
         forAll(
             row("1:2", 3),
-            row("10:20", 30),
+            row("10:20", 30)
         ) { text, expected ->
             StringAddCalculator.add(text) shouldBe expected
         }
@@ -48,7 +48,7 @@ class StringAddCalculatorTest : StringSpec({
     "쉼표(,)와 콜론(:) 구분자를 혼용하여 입력할 수 있다." {
         forAll(
             row("1,2:3", 6),
-            row("10:20,30", 60),
+            row("10:20,30", 60)
         ) { text, expected ->
             StringAddCalculator.add(text) shouldBe expected
         }
@@ -59,7 +59,7 @@ class StringAddCalculatorTest : StringSpec({
             row("-1"),
             row("10:-1"),
             row("10,-10"),
-            row("10:20,-30"),
+            row("10:20,-30")
         ) { text ->
             shouldThrow<RuntimeException> { StringAddCalculator.add(text) }
         }
@@ -68,9 +68,9 @@ class StringAddCalculatorTest : StringSpec({
     "//와 \n 문자 사이에 커스텀 구분자를 지정할 수 있다." {
         forAll(
             row("//;\n1;2;3", 6),
-            row("//?\n10?20?30", 60),
+            row("//?\n10?20?30", 60)
         ) { text, expected ->
             StringAddCalculator.add(text) shouldBe expected
         }
     }
-},)
+})

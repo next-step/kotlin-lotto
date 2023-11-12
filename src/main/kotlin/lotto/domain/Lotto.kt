@@ -1,13 +1,8 @@
 package lotto.domain
 
-import lotto.util.NumberGenerator
-
 class Lotto private constructor(
-    private val numbers: List<LottoNumber>,
+    val numbers: List<LottoNumber>,
 ) {
-
-    val sortedNumbers: List<LottoNumber> =
-        numbers.sortedBy { it.value }
 
     init {
         validateCount()
@@ -41,15 +36,16 @@ class Lotto private constructor(
         private const val LOTTO_NUMBER_COUNT = 6
         const val LOTTO_PRICE = 1000
 
-        fun createFromGenerator(lottoNumberGenerator: NumberGenerator<LottoNumber>): Lotto {
-            val lottoNumbers = lottoNumberGenerator.generateNumbers(
-                count = LOTTO_NUMBER_COUNT,
+        fun createFromGenerator(lottoNumberGenerator: LottoNumberGenerator): Lotto {
+            val lottoNumbers = lottoNumberGenerator.generate(
+                count = LOTTO_NUMBER_COUNT
             )
             return Lotto(lottoNumbers)
         }
 
         fun createFromNumbers(numbers: List<Int>): Lotto {
             val lottoNumbers = numbers.map { LottoNumber.from(it) }
+                .sortedBy { it.value }
             return Lotto(lottoNumbers)
         }
     }

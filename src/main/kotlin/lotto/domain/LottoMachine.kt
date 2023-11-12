@@ -1,10 +1,8 @@
 package lotto.domain
 
-import lotto.util.NumberGenerator
-
 class LottoMachine private constructor(
     val lottoCount: LottoCount,
-    lottoNumberGenerator: NumberGenerator<LottoNumber>,
+    lottoNumberGenerator: LottoNumberGenerator,
 ) {
 
     private val _lottos: MutableList<Lotto> = mutableListOf()
@@ -46,9 +44,9 @@ class LottoMachine private constructor(
     companion object {
         private const val INIT_MATCH_COUNT = 0
 
-        fun of(lottoCount: Int, numberGenerator: NumberGenerator<LottoNumber>): LottoMachine = LottoMachine(
+        fun of(lottoCount: Int, lottoNumberGenerator: LottoNumberGenerator): LottoMachine = LottoMachine(
             lottoCount = LottoCount(lottoCount),
-            lottoNumberGenerator = numberGenerator,
+            lottoNumberGenerator = lottoNumberGenerator
         )
     }
 }

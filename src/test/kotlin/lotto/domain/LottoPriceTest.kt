@@ -15,4 +15,4 @@ class LottoPriceTest : StringSpec({
         // then
         lottoPrice.value shouldBe 10000
     }
-},)
+})

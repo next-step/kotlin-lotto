@@ -2,7 +2,6 @@ package lotto.domain
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import lotto.util.NumberGenerator
 
 class LottoMachineTest : StringSpec({
 
@@ -29,12 +28,12 @@ class LottoMachineTest : StringSpec({
 private fun createLottoMachine(lottoCount: Int): LottoMachine {
     return LottoMachine.of(
         lottoCount = lottoCount,
-        numberGenerator = createFakeNumberGenerator()
+        lottoNumberGenerator = createFakeNumberGenerator()
     )
 }
 
-private fun createFakeNumberGenerator() = object : NumberGenerator<LottoNumber> {
-    override fun generateNumbers(count: Int): List<LottoNumber> {
+private fun createFakeNumberGenerator() = object : LottoNumberGenerator {
+    override fun generate(count: Int): List<LottoNumber> {
         return List(6) { LottoNumber.from(it + 1) }
     }
 }

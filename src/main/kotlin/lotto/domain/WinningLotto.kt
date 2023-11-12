@@ -10,7 +10,7 @@ class WinningLotto(
     }
 
     fun getLottoNumbers(): Set<LottoNumber> =
-        lotto.sortedNumbers.toSet()
+        lotto.numbers.toSet()
 
     private fun validateBonusBall(winningLotto: Lotto, bonusBall: LottoNumber) {
         require(winningLotto.hasBonusBall(bonusBall).not()) {
