@@ -1,9 +1,9 @@
 package lotto
 
 import io.kotest.assertions.throwables.shouldThrow
-import io.kotest.core.spec.style.FunSpec
 import io.kotest.core.spec.style.StringSpec
-import io.kotest.matchers.shouldBe
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.SoftAssertions.assertSoftly
 
 class LottoNumberTest : StringSpec({
     "로또 번호는 1 ~ 45 사이의 숫자다." {
@@ -17,6 +17,13 @@ class LottoNumberTest : StringSpec({
         }
         shouldThrow<IllegalArgumentException> {
             LottoNumber(46)
+        }
+    }
+
+    "로또 번호가 같은지 체크한다" {
+        assertSoftly {
+            assertThat(LottoNumber(5).isEqualTo(5)).isTrue()
+            assertThat(LottoNumber(5).isEqualTo(4)).isFalse()
         }
     }
 })
