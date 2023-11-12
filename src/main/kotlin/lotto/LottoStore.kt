@@ -24,6 +24,7 @@ class LottoStore(
         lottoMachine.setWinningNumber(winningNumbers)
 
         val result = checkLottoResult(userLottos, lottoMachine.getWinningNumber())
+        outputManager.printResult(result)
     }
 
     private fun checkLottoResult(
