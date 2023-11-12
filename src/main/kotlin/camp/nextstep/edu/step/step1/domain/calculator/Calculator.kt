@@ -1,6 +1,6 @@
-package camp.nextstep.edu.step.domain.calculator
+package camp.nextstep.edu.step.step1.domain.calculator
 
-import camp.nextstep.edu.step.domain.amount.FinalResult
+import camp.nextstep.edu.step.step1.domain.amount.FinalResult
 
 /**
  * @description : 계산식에서 나온 계산식을 토대로 계산을 진행하는 일급 컬렉션

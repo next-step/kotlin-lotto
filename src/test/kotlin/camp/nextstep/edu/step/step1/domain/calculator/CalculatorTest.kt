@@ -1,6 +1,6 @@
-package camp.nextstep.edu.step.domain.calculator
+package camp.nextstep.edu.step.step1.domain.calculator
 
-import camp.nextstep.edu.step.domain.amount.FinalResult
+import camp.nextstep.edu.step.step1.domain.amount.FinalResult
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 

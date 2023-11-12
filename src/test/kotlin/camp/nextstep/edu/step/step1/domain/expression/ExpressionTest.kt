@@ -1,4 +1,4 @@
-package camp.nextstep.edu.step.domain.expression
+package camp.nextstep.edu.step.step1.domain.expression
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
