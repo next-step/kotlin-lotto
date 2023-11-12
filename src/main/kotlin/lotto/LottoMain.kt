@@ -15,7 +15,7 @@ fun main() {
     val lottoList: List<Lotto> = lottoMachine.buyLottoList(buyingPrice)
     outputView.printLottoNumberList(lottoList)
 
-    val winningLottoNumberList: LottoNumberList = LottoNumberList(inputView.readLineNumberList("지난 주 당첨 번호를 입력해 주세요."))
+    val winningLottoNumberList: List<Int> = inputView.readLineNumberList("지난 주 당첨 번호를 입력해 주세요.")
     val bonusNumber: Int = inputView.readLineNumber("보너스 볼을 입력해 주세요.")
     val winningLotto: Lotto = Lotto(winningLottoNumberList)
 

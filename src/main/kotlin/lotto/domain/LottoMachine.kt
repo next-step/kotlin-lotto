@@ -9,12 +9,10 @@ class LottoMachine {
         return (0 until lottoCount).map { Lotto(this.getLottoNumberList()) }
     }
 
-    private fun getLottoNumberList(): LottoNumberList {
+    private fun getLottoNumberList(): List<Int> {
         val lottoAreaList: List<Int> = (Lotto.LOTTO_NUMBER_MIN..Lotto.LOTTO_NUMBER_MAX).toList()
 
-        val shuffledLottoNumberList: List<Int> = lottoAreaList.shuffled().subList(Lotto.NUMBER_COUNT_MIN, Lotto.NUMBER_COUNT_MAX)
-
-        return LottoNumberList(shuffledLottoNumberList)
+        return lottoAreaList.shuffled().subList(Lotto.NUMBER_COUNT_MIN, Lotto.NUMBER_COUNT_MAX)
     }
 
     fun getLottoRank(lotto: Lotto, winningLotto: Lotto, bonusNumber: Int): LottoRank {
@@ -22,6 +20,6 @@ class LottoMachine {
 
         val lottoRank: LottoRank = LottoRank.findByMatchCount(lotto.getMatchCount(winningLotto))
 
-        return if (lottoRank == LottoRank.SECOND && lotto.getNumberList().contains(bonusNumber)) LottoRank.SECOND_WITH_BONUS else lottoRank
+        return if (lottoRank == LottoRank.SECOND && lotto.numberList.contains(bonusNumber)) LottoRank.SECOND_WITH_BONUS else lottoRank
     }
 }
