@@ -1,6 +1,6 @@
 package stringAddCalculator
 
-object Separator {
+object StringSeparator {
     private val BASIC_DELIMITER_PATTERN = Regex("[,:]")
     private val CUSTOM_DELIMITER_PATTERN = Regex("//(.)\n(.*)")
 
