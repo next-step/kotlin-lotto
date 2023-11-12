@@ -6,11 +6,11 @@ import io.kotest.matchers.shouldBe
 class LottoGameTest : FunSpec({
     context("로또 게임은") {
         val lottoList = listOf(
-            Lotto(lottoNumbers = LottoNumbers(setOf(1, 15, 20, 27, 30, 36))),  // 4등
-            Lotto(lottoNumbers = LottoNumbers(setOf(10, 16, 20, 25, 30, 40))), // 3등
-            Lotto(lottoNumbers = LottoNumbers(setOf(11, 12, 13, 14, 15, 16))), // 미당첨
-            Lotto(lottoNumbers = LottoNumbers(setOf(10, 15, 20, 25, 30, 40))), // 2등
-            Lotto(lottoNumbers = LottoNumbers(setOf(10, 15, 20, 25, 30, 35)))  // 1등
+            LottoNumbers(setOf(1, 15, 20, 27, 30, 36)),  // 4등
+            LottoNumbers(setOf(10, 16, 20, 25, 30, 40)), // 3등
+            LottoNumbers(setOf(11, 12, 13, 14, 15, 16)), // 미당첨
+            LottoNumbers(setOf(10, 15, 20, 25, 30, 40)), // 2등
+            LottoNumbers(setOf(10, 15, 20, 25, 30, 35))  // 1등
         )
         val winningNumbers = LottoNumbers(setOf(10, 15, 20, 25, 30, 35))
         val lottoGame = LottoGame(lottoList, winningNumbers)

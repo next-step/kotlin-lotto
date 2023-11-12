@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.domain.Lotto
+import lotto.domain.LottoNumbers
 
 private const val INPUT_PRICE_MESSAGE = "구입금액을 입력해 주세요."
 private const val INPUT_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요."
@@ -19,7 +19,7 @@ fun readWinningNumbers(): Set<Int> {
 }
 
 fun confirmCount(price: Int): Int {
-    val count = price / Lotto.LOTTO_PRICE
+    val count = price / LottoNumbers.LOTTO_PRICE
     println("$count" + CONFIRM_COUNT_MESSAGE)
     return count
 }

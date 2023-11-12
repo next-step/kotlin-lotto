@@ -1,13 +1,12 @@
 package lotto.view
 
-import lotto.domain.Lotto
 import lotto.domain.LottoGameResult
+import lotto.domain.LottoNumbers
 import lotto.domain.LottoReward
 import java.text.DecimalFormat
 
-fun Lotto.state(): String =
-    lottoNumbers.value.toString()
-
+fun LottoNumbers.state(): String =
+    value.toString()
 
 fun LottoGameResult.state(): String {
     val stringBuilder = StringBuilder()
