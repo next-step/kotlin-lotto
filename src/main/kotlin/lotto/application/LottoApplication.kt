@@ -14,7 +14,8 @@ class LottoApplication {
         @JvmStatic
         fun main(args: Array<String>) {
             val buyingPrice = InputView.readBuyingPrice()
-            val lottoMachine = createLottoMachine(buyingPrice)
+            val manualLottos = createManualLottos(buyingPrice)
+            val lottoMachine = createLottoMachine(buyingPrice, manualLottos)
 
             val change = calculateChange(buyingPrice, lottoMachine)
             OutputView.printLottos(lottoMachine, change)
@@ -24,11 +25,18 @@ class LottoApplication {
             OutputView.printLottoResult(lottoMatchResult)
         }
 
-        private fun createLottoMachine(buyingPrice: LottoBuyingPrice): LottoMachine {
-            val lottoCount = buyingPrice.divide(Lotto.LOTTO_PRICE)
+        private fun createManualLottos(buyingPrice: LottoBuyingPrice): List<Lotto> {
+            val manualLottoCount = InputView.readManualLottoCount()
+            buyingPrice.validateManualLottoPurchase(manualLottoCount)
+            return InputView.readManualLottos(manualLottoCount)
+        }
+
+        private fun createLottoMachine(buyingPrice: LottoBuyingPrice, manualLottos: List<Lotto>): LottoMachine {
+            val autoLottoCount = buyingPrice.divide(Lotto.LOTTO_PRICE).minus(manualLottos.size)
             return LottoMachine.of(
-                lottoCount = lottoCount,
-                lottoNumberGenerator = RandomLottoLottoNumberGenerator
+                autoLottoCount = autoLottoCount,
+                lottoNumberGenerator = RandomLottoLottoNumberGenerator,
+                manualLotto = manualLottos
             )
         }
 

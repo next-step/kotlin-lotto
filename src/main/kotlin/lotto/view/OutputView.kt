@@ -8,7 +8,7 @@ import lotto.domain.result.LottoRank
 
 object OutputView {
 
-    private const val BUYING_MESSAGE_FORMAT = "%s개를 구매했습니다. 거스름돈은 %d원입니다."
+    private const val BUYING_MESSAGE_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다. 거스름돈은 %d원입니다."
     private const val LOTTO_FORMAT = "[%s]"
     private const val WINNING_STATISTICS_MESSAGE_FORMAT = """
         당첨 통계
@@ -23,9 +23,18 @@ object OutputView {
     private const val LOSE = "손해"
 
     fun printLottos(lottoMachine: LottoMachine, change: Charge) {
-        println(String.format(BUYING_MESSAGE_FORMAT, lottoMachine.lottoCount.value, change.value))
+        val buyingMessage = createBuyingMessage(lottoMachine, change)
+        println(buyingMessage)
         lottoMachine.lottos.forEach { printLottoNumbers(it) }
     }
+
+    private fun createBuyingMessage(lottoMachine: LottoMachine, change: Charge): String =
+        System.lineSeparator() + String.format(
+            BUYING_MESSAGE_FORMAT,
+            lottoMachine.manualLottoCount.value,
+            lottoMachine.autoLottoCount.value,
+            change.value
+        )
 
     private fun printLottoNumbers(it: Lotto) {
         val lottoNumbers = it.numbers
