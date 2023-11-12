@@ -22,7 +22,8 @@ class LottoGame {
             .subList(SUB_LIST_START_POSITION, SUB_LIST_START_POSITION + SUB_LIST_LENGTH).sorted()
     }
 
-    fun getWinningStats(winningLotto: Lotto, purchaseLottoList: List<Lotto>): Map<LottoRanking, Int> {
+    fun getWinningStats(winningNumberList: List<Int>, purchaseLottoList: List<Lotto>): Map<LottoRanking, Int> {
+        val winningLotto = Lotto(winningNumberList)
         purchaseLottoList.forEach {
             val lottoRanking = LottoMachine.checkLotto(winningLotto, it)
             winningStatusMap[lottoRanking] = winningStatusMap.getOrDefault(lottoRanking, 0) + 1

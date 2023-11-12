@@ -21,7 +21,7 @@ class LottoGameTest {
     fun `로또 구매와 당첨 번호를 입력 했다면, 당첨을 확인을 요청할 때, 당첨 통계를 반환한다`() {
         // given : 로또 구매와 당첨 번호를 입력한다.
         // 2등 - 2개, 3등 - 1개, 4등 - 1개
-        val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val winningNumberList = listOf(1, 2, 3, 4, 5, 6)
 
         val purchaseLotto1 = Lotto(listOf(1, 2, 3, 4, 5, 7))
         val purchaseLotto2 = Lotto(listOf(1, 2, 3, 4, 5, 7))
@@ -36,7 +36,7 @@ class LottoGameTest {
         val lottoGame = LottoGame()
 
         // when : 당첨을 확인을 요청한다.
-        val winningStats = lottoGame.getWinningStats(winningLotto, purchaseLottoList)
+        val winningStats = lottoGame.getWinningStats(winningNumberList, purchaseLottoList)
 
         // then : 당첨 통계를 확인한다.
         val expect = mutableMapOf(SecondPlace to 2, ThirdPlace to 1, FourthPlace to 2, None to 1)
