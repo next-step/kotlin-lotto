@@ -22,7 +22,7 @@ class WinningLotto(input: String, inputBonus: String = "") {
     }
 
     fun checkWinning(lotto: Lotto): WinningRank {
-        val matchCount = lotto.numbers.intersect((this.numbers + this.bonusNumber).toSet()).size
+        val matchCount = lotto.numbers.intersect((this.numbers).toSet()).size
         val matchingBonusNumber = lotto.numbers.contains(this.bonusNumber)
         return WinningRank.from(matchCount, matchingBonusNumber)
     }

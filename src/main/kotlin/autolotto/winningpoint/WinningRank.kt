@@ -1,8 +1,8 @@
 package autolotto.winningpoint
 
-enum class WinningRank(val matchingCount: Int, val winningPrice: Long) {
+enum class WinningRank(val matchingCount: Int, val winningPrice: Long, val isBonusNumberNeeded: Boolean = false) {
     FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
+    SECOND(5, 30_000_000, true),
     THIRD(5, 1_500_000),
     FOURTH(4, 50_000),
     FIFTH(3, 5_000),
@@ -10,9 +10,9 @@ enum class WinningRank(val matchingCount: Int, val winningPrice: Long) {
     ;
 
     companion object {
-        fun from(matchingCount: Int, matchingBonusNumber: Boolean): WinningRank {
-            if (matchingCount == 5) {
-                return if (matchingBonusNumber) SECOND else THIRD
+        fun from(matchingCount: Int, isMatchedBonusNumber: Boolean): WinningRank {
+            if(matchingCount == 5) {
+                return values().find { it.matchingCount == matchingCount && it.isBonusNumberNeeded == isMatchedBonusNumber } ?: NOTHING
             }
             return values().find { it.matchingCount == matchingCount } ?: NOTHING
         }
