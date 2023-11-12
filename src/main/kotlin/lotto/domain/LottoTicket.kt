@@ -10,7 +10,7 @@ class LottoTicket(
     infix fun determineResultBy(winningLotto: WinningLotto): LottoRankCounts =
         createResult(winningLotto)
 
-    fun calculatePrice(ticketPrice: Amount) = ticketPrice * numbers.size
+    infix fun calculateTotalPriceBy(ticketPrice: Amount) = ticketPrice * numbers.size
 
     private fun createResult(winningLotto: WinningLotto) =
         numbers.map { winningLotto.rank(it) }.groupingBy { it }.eachCount().let(::LottoRankCounts)

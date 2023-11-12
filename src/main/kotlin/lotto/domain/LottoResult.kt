@@ -8,8 +8,8 @@ data class LottoResult(
         fun of(winningLotto: WinningLotto, ticket: LottoTicket, ticketPrice: Amount): LottoResult {
             val rankCounts = ticket determineResultBy winningLotto
             val earningRate = EarningRate.of(
-                purchasedAmount = ticket.calculatePrice(ticketPrice),
-                earningAmount = rankCounts.totalPrize
+                purchasedAmount = ticket calculateTotalPriceBy ticketPrice,
+                earningAmount = rankCounts.totalEarningMoney
             )
             return LottoResult(rankCounts, earningRate)
         }

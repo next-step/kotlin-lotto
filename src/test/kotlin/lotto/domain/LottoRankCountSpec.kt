@@ -17,6 +17,6 @@ class LottoRankCountSpec : FunSpec({
         val expect =
             LottoRank.FIRST.winningMoney * 1 + LottoRank.SECOND.winningMoney * 1 + LottoRank.THIRD.winningMoney * 2 + LottoRank.FOURTH.winningMoney * 1 + LottoRank.FIFTH.winningMoney * 1
 
-        result.totalPrize shouldBe expect
+        result.totalEarningMoney shouldBe expect
     }
 })

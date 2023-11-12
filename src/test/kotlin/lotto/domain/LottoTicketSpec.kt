@@ -10,7 +10,7 @@ class LottoTicketSpec : FunSpec({
             val count = 3
             val ticket = LottoTicket(List(count) { LottoMock.createTicket() })
 
-            val result = ticket.calculatePrice(price)
+            val result = ticket.calculateTotalPriceBy(price)
 
             result shouldBe price * count
         }
