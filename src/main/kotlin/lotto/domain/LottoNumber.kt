@@ -8,13 +8,13 @@ data class LottoNumber(
     }
 
     private fun validateLottoNumber() {
-        if (number < MIN_VALUE || number > MAX_VALUE) {
-            throw IllegalArgumentException("로또 번호는 1이상 45이하의 값이어야 합니다.")
+        check(number in MIN_VALUE..MAX_VALUE) {
+            "로또 번호는 1이상 45이하의 값이어야 합니다."
         }
     }
 
     companion object {
-        val MIN_VALUE = 1
-        val MAX_VALUE = 45
+        const val MIN_VALUE = 1
+        const val MAX_VALUE = 45
     }
 }

@@ -19,7 +19,7 @@ value class LottoMoney(
     }
 
     companion object {
-        const val MIN_VALUE = 0
-        const val PRICE = 1000
+        private const val MIN_VALUE = 0
+        private const val PRICE = 1000
     }
 }

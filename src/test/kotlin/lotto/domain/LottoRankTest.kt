@@ -13,18 +13,4 @@ class LottoRankTest {
         assertThat(LottoRank.of(3)).isEqualTo(LottoRank.FOURTH)
         assertThat(LottoRank.of(2)).isEqualTo(LottoRank.MISS)
     }
-
-    @Test
-    fun `LottoRank는 6개를 초과할 수 없다`() {
-        assertThrows(IllegalArgumentException::class.java) {
-            LottoRank.of(7)
-        }
-    }
-
-    @Test
-    fun `LottoRank는 0개 미만일 수 없다`() {
-        assertThrows(IllegalArgumentException::class.java) {
-            LottoRank.of(-1)
-        }
-    }
 }

@@ -9,8 +9,6 @@ enum class LottoRank(val count: Int, val prize: Int) {
 
     companion object {
         fun of(count: Int): LottoRank {
-            if (count > 6) throw IllegalArgumentException("로또 번호는 6개를 초과할 수 없습니다.")
-            if (count < 0) throw IllegalArgumentException("로또 번호는 0개 미만일 수 없습니다.")
             return values().find { it.count == count } ?: MISS
         }
     }

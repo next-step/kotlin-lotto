@@ -16,22 +16,4 @@ class LottoMachineTest {
         val lottoMachine = LottoMachine(LottoMoney(14000), RandomLottoNumbersGenerator)
         assertThat(lottoMachine.getTotalCount()).isEqualTo(14)
     }
-
-    @Test
-    fun `수익률을 계산한다`() {
-        val lottoMachine = LottoMachine(LottoMoney(1000), LottoNumbersGeneratorStub)
-        val winningLotto = WinningLotto(
-            Lotto(
-                listOf(
-                    LottoNumber(1),
-                    LottoNumber(2),
-                    LottoNumber(3),
-                    LottoNumber(7),
-                    LottoNumber(8),
-                    LottoNumber(9)
-                )
-            )
-        )
-        assertThat(lottoMachine.getLottoResult(winningLotto).earningRate).isEqualTo(5.0)
-    }
 }
