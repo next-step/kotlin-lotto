@@ -40,7 +40,6 @@ class LottoTest : FunSpec({
         numbers.distinct().size shouldBe 6
     }
 
-
     test("로또 1장의 숫자는 오름차순으로 정렬되어 있다") {
         // Given
         val lotto = Lotto()
