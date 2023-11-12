@@ -2,7 +2,7 @@ package lotto.view
 
 class InputView(private val maxTryCount: Int = DEFAULT_MAX_TRY_COUNT) {
 
-    fun readLineNumber(question: String?, count: Int = 0): Int {
+    fun readLineNumber(question: String? = null, count: Int = 0): Int {
         val inputResult: Result<Int> = runCatching {
             val input: String = readLine(question, count)
 
@@ -20,7 +20,7 @@ class InputView(private val maxTryCount: Int = DEFAULT_MAX_TRY_COUNT) {
         return inputResult.getOrThrow()
     }
 
-    fun readLineNumberList(question: String?, count: Int = 0): List<Int> {
+    fun readLineNumberList(question: String? = null, count: Int = 0): List<Int> {
         val inputResult: Result<List<Int>> = runCatching {
             val input: String = readLine(question, count)
 

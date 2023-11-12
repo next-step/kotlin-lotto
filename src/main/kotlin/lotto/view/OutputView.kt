@@ -16,6 +16,13 @@ class OutputView {
         println(RETURN_ON_INVESTMENT.format(returnOnInvestment.toString()))
     }
 
+    fun nextLinePrint(message: String) {
+        println()
+        println(message)
+    }
+
+    fun printBuySummary(manualBuyCount: Int, autoBuyCount: Int) = nextLinePrint("수동으로 ${manualBuyCount}장, 자동으로 ${autoBuyCount}개를 구매했습니다.")
+
     fun printLottoNumberList(lottoList: List<Lotto>) {
         lottoList.forEach { println(it.numberList) }
         println()
