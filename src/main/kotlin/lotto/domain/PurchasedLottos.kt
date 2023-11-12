@@ -1,13 +1,17 @@
 package lotto.domain
 
 class PurchasedLottos(
-    val lottos: List<Lotto>,
     private val purchaseAmount: Long,
+    lottoNumberGenerator: LottoNumberGenerator,
 ) {
-    fun draw(winningNumbers: WinningNumbers): WinningStatistic {
+    val lottos: List<Lotto> = LottoShop(lottoNumberGenerator).purchaseLottos(purchaseAmount)
+
+    fun draw(winningNumbers: WinningNumbers, bonusNumber: LottoNumber): WinningStatistic {
         val prizes = lottos.mapNotNull {
             val matchedNumberCount = it.getMatchedNumberCount(winningNumbers)
-            Prize.valueOfOrNull(matchedNumberCount)
+            val bonusNumberMatch = it.isBonusNumberMatch(bonusNumber)
+
+            Prize.valueOfOrNull(matchedNumberCount, bonusNumberMatch)
         }
 
         return WinningStatistic(

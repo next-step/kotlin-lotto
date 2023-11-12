@@ -9,9 +9,14 @@ class LottoShopTest {
     @Test
     fun `로또 구입 금액이 주어지면 구입 금액만큼 로또를 발급한다`() {
         val purchaseAmount = 14000L
+        val numbers = listOf(1, 2, 3, 4, 5, 6)
+        val lottoNumberGenerator = FakeLottoNumberGenerator(numbers)
+        val lottoShop = LottoShop(lottoNumberGenerator)
 
-        val actual = LottoShop.purchaseLottos(purchaseAmount)
+        val actual = lottoShop.purchaseLottos(purchaseAmount)
 
         assertThat(actual).hasSize((purchaseAmount / Lotto.PRICE).toInt())
+        assertThat(actual).usingRecursiveFieldByFieldElementComparator()
+            .containsOnly(Lotto(numbers.map(::LottoNumber)))
     }
 }

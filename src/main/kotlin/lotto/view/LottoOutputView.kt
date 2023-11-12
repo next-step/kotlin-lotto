@@ -9,7 +9,9 @@ object LottoOutputView {
         println("${purchasedLottos.lottos.size}개를 구매했습니다.")
 
         purchasedLottos.lottos
-            .forEach { println(it.numbers) }
+            .forEach { lotto ->
+                println(lotto.numbers.map { it.number })
+            }
 
         println()
     }
@@ -28,6 +30,12 @@ object LottoOutputView {
     }
 
     private fun printWinningResult(prize: Prize, matchedNumberCount: Int?) {
-        println("${prize.matchedNumberCount}개 일치 (${prize.winningAmount}원)- ${matchedNumberCount ?: 0}개")
+        buildString {
+            append("${prize.matchedNumberCount}개 일치")
+            if (prize === Prize.SECOND) {
+                append(", 보너스 볼 일치")
+            }
+            append(" (${prize.winningAmount}원)- ${matchedNumberCount ?: 0}개")
+        }.let(::println)
     }
 }
