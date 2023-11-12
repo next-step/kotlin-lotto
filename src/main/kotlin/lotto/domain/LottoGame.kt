@@ -1,15 +1,17 @@
 package lotto.domain
 
-import lotto.extension.getPrice
-
-class LottoGame(val lottoList: List<Lotto>, val winningNumbers: LottoNumbers) {
+class LottoGame(val lottoList: List<LottoNumbers>, val winningNumbers: LottoNumbers) {
     fun getResult(): LottoGameResult {
-        val totalPrice = lottoList.getPrice()
-        val rewards = lottoList
-            .map { it.lottoNumbers.match(winningNumbers) }
-            .mapNotNull { LottoReward.valueOf(it) }
-            .sorted()
-
+        val totalPrice = getTotalPrice()
+        val rewards = getRewards(winningNumbers)
         return LottoGameResult(totalPrice, rewards)
     }
+
+    private fun getTotalPrice(): Int =
+        lottoList.size * LottoNumbers.LOTTO_PRICE
+
+    private fun getRewards(winningNumbers: LottoNumbers): List<LottoReward> =
+        lottoList.map { it.match(winningNumbers) }
+            .mapNotNull { LottoReward.valueOf(it) }
+            .sorted()
 }

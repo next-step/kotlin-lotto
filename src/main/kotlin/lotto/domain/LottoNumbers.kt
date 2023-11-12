@@ -16,6 +16,7 @@ value class LottoNumbers(val value: Set<Int>) {
     }
 
     companion object {
+        const val LOTTO_PRICE = 1000
         const val LOTTO_NUMBER_SIZE = 6
         const val LOTTO_START_NUMBER = 1
         const val LOTTO_END_NUMBER = 45
