@@ -7,6 +7,15 @@ import autolotto.winningpoint.WinningStatistics
 
 object ResultView {
 
+    fun promptForAutoLotto(price: Long): AutoLotto {
+        val autoLotto = AutoLotto(price)
+        println("로또 ${autoLotto.count}개를 구매했습니다.")
+        autoLotto.lottos.forEach { lotto ->
+            println(lotto.numbers)
+        }
+        return autoLotto
+    }
+
     fun printWinningPoints(autoLotto: AutoLotto, winningLotto: WinningLotto) {
         val statistics = WinningStatistics.calculateStatistics(autoLotto, winningLotto)
 
