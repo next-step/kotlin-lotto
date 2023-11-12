@@ -8,4 +8,8 @@ class LottoRewardTest : FunSpec({
         LottoReward.SECOND.matchCount shouldBe 5
         LottoReward.SECOND.bonusMatch shouldBe true
     }
+
+    test("2등의 당첨 금액은 30000000원이다.") {
+        LottoReward.SECOND.reward shouldBe 30_000_000
+    }
 })
