@@ -1,7 +1,7 @@
 package lotto.controller
 
-import lotto.domain.LottoTickets
+import lotto.domain.LottoTicket
 
 class PurchaseResponse(
-    val tickets: LottoTickets,
+    val ticket: LottoTicket,
 )

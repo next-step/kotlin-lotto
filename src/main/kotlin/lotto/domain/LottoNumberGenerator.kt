@@ -1,20 +1,20 @@
 package lotto.domain
 
-object LottoTicketGenerator {
+object LottoNumberGenerator {
 
-    fun create(): LottoTicket {
+    fun createFrom(): LottoNumber {
         val numbers = NUMBERS_RANGE
             .shuffled()
             .take(NUMBERS_COUNT)
             .sorted()
-        return LottoTicket(numbers)
+        return LottoNumber(numbers)
     }
 
-    fun create(numbers: List<Int>): LottoTicket {
+    fun createFrom(numbers: List<Int>): LottoNumber {
         checkCount(numbers)
         checkUniqueNumbers(numbers)
         checkNumbersRange(numbers)
-        return LottoTicket(numbers.sorted())
+        return LottoNumber(numbers.sorted())
     }
 
     fun checkNumber(number: Int): Int {

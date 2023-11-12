@@ -5,7 +5,7 @@ import lotto.controller.PurchaseResponse
 import lotto.domain.EarningRate
 import lotto.domain.LottoRank
 import lotto.domain.LottoRankCounts
-import lotto.domain.LottoTicket
+import lotto.domain.LottoNumber
 
 object OutputView {
     private const val RESULT_MSG = "당첨 통계"
@@ -16,9 +16,9 @@ object OutputView {
     private const val EARNING_RATE_MSG = "총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 %s라는 의미임)"
 
     fun drawPurchaseOutput(response: PurchaseResponse) {
-        val tickets = response.tickets
-        drawPurchaseCount(tickets.count)
-        drawTickets(tickets.tickets)
+        val ticket = response.ticket
+        drawPurchaseCount(ticket.count)
+        drawNumbers(ticket.numbers)
     }
 
     fun drawEarningRateOutput(response: EndLottoResponse) {
@@ -34,8 +34,8 @@ object OutputView {
         println(PURCHASE_COUNT_MSG.format(count))
     }
 
-    private fun drawTickets(tickets: List<LottoTicket>) {
-        tickets.forEach { println(it.numbers) }
+    private fun drawNumbers(numbers: List<LottoNumber>) {
+        numbers.forEach { println(it.value) }
     }
 
     private fun drawMatchedCount(rankCounts: LottoRankCounts) {

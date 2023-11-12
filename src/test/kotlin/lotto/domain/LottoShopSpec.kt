@@ -12,9 +12,9 @@ class LottoShopSpec : FunSpec({
             val count = 3
             val amount = lottoPLice * 3
 
-            val tickets = shop.purchase(amount)
+            val ticket = shop.purchase(amount)
 
-            tickets.count shouldBe count
+            ticket.count shouldBe count
         }
 
         test("로또의 배수 금액이 아닐 때 구매 실패") {
@@ -29,18 +29,21 @@ class LottoShopSpec : FunSpec({
     context("티켓의 결과를 도출") {
         val lottoPLice = Amount(1000)
         val shop = LottoShop(price = lottoPLice)
-        val winningLotto = WinningLotto(LottoTicket(listOf(1, 2, 3, 4, 5, 6)), 7)
-        val nonMatchedTicket = LottoTicket(listOf(8, 9, 10, 11, 12, 13))
-        val fifthRankTicket = LottoTicket(listOf(1, 2, 3, 43, 44, 45))
-        val secondRankTicket = LottoTicket(listOf(1, 2, 3, 4, 5, 7))
-        val purchasedTickets = List(12) { nonMatchedTicket } + listOf(fifthRankTicket, secondRankTicket)
-        val tickets = LottoTickets(purchasedTickets)
+        val winningLotto = WinningLotto(LottoNumber(listOf(1, 2, 3, 4, 5, 6)), 7)
+        val nonMatchedNumber = LottoNumber(listOf(8, 9, 10, 11, 12, 13))
+        val fifthRankNumber = LottoNumber(listOf(1, 2, 3, 43, 44, 45))
+        val secondRankNumber = LottoNumber(listOf(1, 2, 3, 4, 5, 7))
+        val ticket = LottoTicket(List(12) { nonMatchedNumber } + listOf(fifthRankNumber, secondRankNumber))
 
-        val result = shop.receivePrize(tickets, winningLotto)
+        val result = shop.receivePrize(ticket, winningLotto)
 
 
         test("통계 생성") {
-            result.rankCounts shouldBe mapOf(LottoRank.MISS to 12, LottoRank.SECOND to 1, LottoRank.FIFTH to 1).let(::LottoRankCounts)
+            result.rankCounts shouldBe mapOf(
+                LottoRank.MISS to 12,
+                LottoRank.SECOND to 1,
+                LottoRank.FIFTH to 1
+            ).let(::LottoRankCounts)
         }
 
         test("수익률 계산") {

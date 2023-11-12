@@ -5,10 +5,10 @@ data class LottoResult(
     val earningRate: EarningRate,
 ) {
     companion object {
-        fun of(winningLotto: WinningLotto, tickets: LottoTickets, ticketPrice: Amount): LottoResult {
-            val rankCounts = tickets determineResultBy winningLotto
+        fun of(winningLotto: WinningLotto, ticket: LottoTicket, ticketPrice: Amount): LottoResult {
+            val rankCounts = ticket determineResultBy winningLotto
             val earningRate = EarningRate.of(
-                purchasedAmount = tickets.calculatePrice(ticketPrice),
+                purchasedAmount = ticket.calculatePrice(ticketPrice),
                 earningAmount = rankCounts.totalPrize
             )
             return LottoResult(rankCounts, earningRate)

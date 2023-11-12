@@ -1,11 +1,17 @@
 package lotto.domain
 
-data class LottoTicket(
-    val numbers: List<Int>,
+class LottoTicket(
+    val numbers: List<LottoNumber>,
 ) {
-    infix fun contains(number: Number): Boolean =
-        numbers.contains(number)
 
-    infix fun countMatched(other: LottoTicket) =
-        numbers.count { other contains it }
+    val count: Int
+        get() = numbers.size
+
+    infix fun determineResultBy(winningLotto: WinningLotto): LottoRankCounts =
+        createResult(winningLotto)
+
+    fun calculatePrice(ticketPrice: Amount) = ticketPrice * numbers.size
+
+    private fun createResult(winningLotto: WinningLotto) =
+        numbers.map { winningLotto.rank(it) }.groupingBy { it }.eachCount().let(::LottoRankCounts)
 }

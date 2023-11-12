@@ -2,13 +2,13 @@ package lotto.controller
 
 import lotto.domain.Amount
 import lotto.domain.LottoShop
-import lotto.domain.LottoTicketGenerator
-import lotto.domain.LottoTickets
+import lotto.domain.LottoNumberGenerator
+import lotto.domain.LottoTicket
 import lotto.domain.WinningLotto
 
 class LottoController(
     private val shop: LottoShop = LottoShop(),
-    private var purchasedTickets: LottoTickets? = null,
+    private var purchasedTicket: LottoTicket? = null,
 ) {
     fun purchase(request: PurchaseRequest): PurchaseResponse =
         shop.purchase(Amount(request.amount))
@@ -16,14 +16,14 @@ class LottoController(
             .let(::PurchaseResponse)
 
     fun end(request: EndLottoRequest): EndLottoResponse {
-        val purchasedTickets = purchasedTickets ?: throw IllegalArgumentException("티켓이 저장되지 않았습니다")
+        val purchasedTicket = purchasedTicket ?: throw IllegalArgumentException("티켓이 저장되지 않았습니다")
         val winningLotto = WinningLotto(
-            winningTicket = LottoTicketGenerator.create(request.winningNumbers),
+            winningNumber = LottoNumberGenerator.createFrom(request.winningNumbers),
             bonusNumber = request.bonusNumber
         )
-        return shop.receivePrize(purchasedTickets, winningLotto).let(::EndLottoResponse)
+        return shop.receivePrize(purchasedTicket, winningLotto).let(::EndLottoResponse)
     }
 
-    private fun LottoTickets.save(): LottoTickets =
-        this.also { purchasedTickets = it }
+    private fun LottoTicket.save(): LottoTicket =
+        this.also { purchasedTicket = it }
 }
