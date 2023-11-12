@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-class LottoWinningNumbersTest {
+class WinningLottoTicketTest {
     @ParameterizedTest
     @ValueSource(strings = ["1,2,3,4,5,5", "1,2,3,3,5,7", "1,2,3,4,5"])
     fun `당첨 번호가 중복이면 예외 발생한다`(numbers: String) {
@@ -13,7 +13,7 @@ class LottoWinningNumbersTest {
         val lottoNumbers = numbers.split(",").map { LottoNumber(it.toInt()) }.toSet()
 
         // when, then
-        Assertions.assertThatThrownBy { LottoWinningNumbers(lottoNumbers) }
+        Assertions.assertThatThrownBy { WinningLottoTicket(lottoNumbers) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("서로 다른 6개 로또 번호 이여야 합니다.")
     }
@@ -29,7 +29,7 @@ class LottoWinningNumbersTest {
             LottoNumber(5),
             LottoNumber(6)
         )
-        val lottoWinningNumbers = LottoWinningNumbers(lottoNumbers)
+        val winningLottoTicket = WinningLottoTicket(lottoNumbers)
         val lottoTickets = listOf(
             LottoTicket(
                 setOf(
@@ -62,19 +62,41 @@ class LottoWinningNumbersTest {
                 )
             )
         )
+        val bonusNumber = LottoNumber(7)
 
         // when
-        val prizeResults = lottoWinningNumbers.compilePrizeResults(lottoTickets)
+        val prizeResults = winningLottoTicket.compilePrizeResults(lottoTickets, bonusNumber)
 
         // then
         Assertions.assertThat(prizeResults.prizeCountMap).isEqualTo(
             mapOf(
-                LotteryPrize.SIX_MATCH to 1,
-                LotteryPrize.FIVE_MATCH to 1,
-                LotteryPrize.FOUR_MATCH to 1,
-                LotteryPrize.THREE_MATCH to 0,
-                LotteryPrize.NONE to 0
+                LotteryPrize.FIRST to 1,
+                LotteryPrize.SECOND to 1,
+                LotteryPrize.THIRD to 0,
+                LotteryPrize.FOURTH to 1,
+                LotteryPrize.FIFTH to 0,
+                LotteryPrize.MISS to 0
             )
         )
+    }
+
+    @Test
+    fun `보너스 번호가 당첨 번호와 중복이면 예외 발생한다`() {
+        // given
+        val lottoNumbers = setOf(
+            LottoNumber(1),
+            LottoNumber(2),
+            LottoNumber(3),
+            LottoNumber(4),
+            LottoNumber(5),
+            LottoNumber(6)
+        )
+        val winningLottoTicket = WinningLottoTicket(lottoNumbers)
+        val bonusNumber = LottoNumber(6)
+
+        // when, then
+        Assertions.assertThatThrownBy { winningLottoTicket.validateBonusNumber(bonusNumber) }
+            .isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessage("보너스 번호는 당첨 번호와 중복될 수 없습니다.")
     }
 }

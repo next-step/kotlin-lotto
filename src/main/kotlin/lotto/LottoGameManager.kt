@@ -1,29 +1,28 @@
 package lotto
 
 import lotto.business.LottoBookingSystem
-import lotto.business.LottoWinningNumbersExtractor
+import lotto.business.LottoNumber
+import lotto.business.LottoWinningTicketExtractor
 import lotto.business.ReceivedAmount
 import lotto.view.LotteryStatisticsPrinter
 import lotto.view.LottoInputHandler
 import lotto.view.LottoPurchaseSummaryPrinter
 
-class LottoGameManager(
-    private val lottoBookingSystem: LottoBookingSystem
-) {
-    fun run() {
+object LottoGameManager {
+    fun run(lottoBookingSystem: LottoBookingSystem) {
         val receivedAmount = ReceivedAmount(LottoInputHandler.inputPurchaseAmount())
         val lottoTickets = lottoBookingSystem.generateMultipleTickets(receivedAmount.getTicketCount())
         LottoPurchaseSummaryPrinter.print(lottoTickets)
-        val winningNumbers = LottoWinningNumbersExtractor.extract(LottoInputHandler.inputWinningNumbers())
-        val prizeResults = winningNumbers.compilePrizeResults(lottoTickets)
+        val winningLottoTicket = LottoWinningTicketExtractor.extract(LottoInputHandler.inputWinningNumbers())
+        val bonusNumber = LottoNumber(LottoInputHandler.inputBonusNumber())
+        winningLottoTicket.validateBonusNumber(bonusNumber)
+        val prizeResults = winningLottoTicket.compilePrizeResults(lottoTickets, bonusNumber)
         val profitRate = prizeResults.calculateProfitRate(receivedAmount)
         LotteryStatisticsPrinter.print(prizeResults, profitRate)
     }
 }
 
 fun main() {
-    val lottoGameManager = LottoGameManager(
-        lottoBookingSystem = LottoBookingSystem()
-    )
-    lottoGameManager.run()
+    val lottoBookingSystem = LottoBookingSystem()
+    LottoGameManager.run(lottoBookingSystem)
 }

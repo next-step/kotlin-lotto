@@ -10,4 +10,9 @@ object LottoInputHandler {
         println("지난 주 당첨 번호를 입력해 주세요.")
         return readlnOrNull().let { require(it != null) { "지난 주 당첨 번호는 숫자여야 합니다." }; return it }
     }
+
+    fun inputBonusNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        return readlnOrNull().let { require(it != null && it.toIntOrNull() != null) { "보너스 볼은 숫자여야 합니다." }; return it.toInt() }
+    }
 }

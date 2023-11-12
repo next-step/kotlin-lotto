@@ -1,13 +1,15 @@
 package lotto.business
 
-class LottoTicket(override val lottoNumbers: Set<LottoNumber>) : LottoNumberSet {
+class LottoTicket(lottoNumbers: Set<LottoNumber>) : LottoNumberSet(lottoNumbers) {
     init {
         validateNumbers()
     }
 
-    private val _sortedLottoNumbers = sortedLottoNumbers()
-
     fun matchCount(targetLottoNumbers: List<LottoNumber>): Int {
-        return targetLottoNumbers.count(_sortedLottoNumbers::contains)
+        return targetLottoNumbers.count(sortedLottoNumbers::contains)
+    }
+
+    fun contains(targetLottoNumber: LottoNumber): Boolean {
+        return lottoNumbers.contains(targetLottoNumber)
     }
 }
