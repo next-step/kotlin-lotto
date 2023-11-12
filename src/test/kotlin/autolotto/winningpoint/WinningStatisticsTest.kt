@@ -22,6 +22,6 @@ class WinningStatisticsTest : FunSpec({
         // Then
         statistics.getValue(WinningRank.FIRST) shouldBe 1
         statistics.getValue(WinningRank.NOTHING) shouldBe 1
-        statistics shouldHaveSize 6
+        statistics shouldHaveSize 2
     }
 })

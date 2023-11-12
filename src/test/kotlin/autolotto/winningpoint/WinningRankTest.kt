@@ -1,6 +1,8 @@
 package autolotto.winningpoint
 
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.data.forAll
+import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 
 class WinningRankTest : FunSpec({
@@ -50,5 +52,34 @@ class WinningRankTest : FunSpec({
 
         // Then
         winningRank shouldBe WinningRank.FIRST
+    }
+
+    test("1등인 경우 isWinningRank는 true") {
+        // Given
+        val winningRank = WinningRank.FIRST
+
+        // When
+        val isWinningRank = WinningRank.isWinningRank(winningRank)
+
+        // Then
+        isWinningRank shouldBe true
+    }
+
+    test("Nothing인 경우 isWinningRank는 false") {
+        forAll(
+            row(0),
+            row(1),
+            row(2),
+        ) {
+            matchingCount ->
+            // Given
+            val winningRank = WinningRank.of(matchingCount, false)
+
+            // When
+            val isWinningRank = WinningRank.isWinningRank(winningRank)
+
+            // Then
+            isWinningRank shouldBe false
+        }
     }
 })
