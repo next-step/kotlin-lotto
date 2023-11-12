@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 import lotto.domain.LottoResult
 import lotto.domain.LottoStore
 import lotto.util.getIntegersAfterSplit
@@ -12,8 +13,8 @@ fun main() {
     val userLotto = LottoStore.purchase(purchaseAmount)
     OutputView.printLottos(userLotto)
     val lastWinningNumbers = InputView.getLastWinningNumbers()
-    val bonus = InputView.getBonusBall()
+    val bonusBall = InputView.getBonusBall()
     val winningLotto = Lotto.fromInts(lastWinningNumbers.getIntegersAfterSplit(","))
-    val lottoResult = LottoResult(userLotto, winningLotto)
+    val lottoResult = LottoResult(userLotto, winningLotto, LottoNumber(bonusBall))
     OutputView.printResult(lottoResult)
 }

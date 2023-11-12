@@ -14,6 +14,10 @@ class Lotto private constructor(val lottoNumbers: List<LottoNumber>) {
         return lottoNumbers.intersect(anotherLotto.lottoNumbers.toSet()).count()
     }
 
+    fun containsBonusBall(bonusBall: LottoNumber): Boolean {
+        return lottoNumbers.contains(bonusBall)
+    }
+
     companion object {
         private const val LOTTO_NUMBER_COUNT = 6
         const val LOTTO_PRICE = 1000
