@@ -3,8 +3,8 @@ package lotto
 import lotto.lotto.LottoGenerator
 import lotto.lotto.LottoPrize
 import lotto.lotto.LottoType
+import lotto.lotto.auto.LottoAuto
 import lotto.lotto.toWinningLotto
-import lotto.lotto_auto.LottoAuto
 import lotto.ui.InputView
 import lotto.ui.OutputView
 
@@ -32,12 +32,14 @@ fun main() {
 
     val resultRate: Float = LottoAuto.earningRate(sumOfWonLotto, inputAmount)
 
-    val matchCountList = LottoAuto.matchCountList(matchedLottoCountWithBonusBall.map {
-        LottoPrize.getLottoPrize(
-            it.lottoPrize.matchCount,
-            it.bonusBallMatched
-        )
-    })
+    val matchCountList = LottoAuto.matchCountList(
+        matchedLottoCountWithBonusBall.map {
+            LottoPrize.getLottoPrize(
+                it.lottoPrize.matchCount,
+                it.bonusBallMatched
+            )
+        }
+    )
 
     val fillDefaultCountMap = LottoPrize.values().associateWith { matchCountList.getOrDefault(it, 0) }
 

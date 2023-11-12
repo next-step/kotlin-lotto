@@ -19,9 +19,9 @@ class InputTest : StringSpec({
     }
 
     "수동으로 구매할 로또수를 입력하면, 구입금액에서 나머지 금액은 자동 개수가 나온다" {
-        val input = 3       // 수동 3개 구매
-        val amount = 10000  // 만원
-        val expected = 7    // 자동은 7개
+        val input = 3
+        val amount = 10000
+        val expected = 7
         InputView.calculateTotalLottoCount(amount) - input shouldBe expected
     }
 })

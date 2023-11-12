@@ -1,4 +1,4 @@
-package lotto.result
+package lotto.lotto.result
 
 import lotto.lotto.LottoPrize
 
