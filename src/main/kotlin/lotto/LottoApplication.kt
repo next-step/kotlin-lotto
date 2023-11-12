@@ -11,8 +11,10 @@ import lotto.view.ResultView
 fun main() {
     val purchaseAmount = InputView.readPurchaseAmount()
 
+    val manualLottoNumbers = InputView.readManualLottoNumbers()
+
     val lottoIssuer = LottoIssuer(Amount(1_000), RandomIssueStrategy)
-    val lottoTicket = lottoIssuer.issue(purchaseAmount)
+    val lottoTicket = lottoIssuer.issue(purchaseAmount, manualLottoNumbers)
 
     ResultView.writeLottoTicket(lottoTicket)
 
