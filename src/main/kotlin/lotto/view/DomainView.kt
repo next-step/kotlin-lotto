@@ -3,6 +3,7 @@ package lotto.view
 import lotto.domain.LottoGameResult
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoReward
+import lotto.extension.appendIf
 import java.text.DecimalFormat
 
 fun LottoNumbers.state(): String =
@@ -13,7 +14,9 @@ fun LottoGameResult.state(): String {
     LottoReward.values().reversed().forEach {
         val rewardCount = getRewardCount(it)
         stringBuilder
-            .append("${it.matchCount}개 일치 (${it.reward}원) - ${rewardCount}개")
+            .append("${it.matchCount}개 일치")
+            .appendIf(", 보너스 볼 일치", it.bonusMatch)
+            .append(" (${it.reward}원) - ${rewardCount}개")
             .append("\n")
     }
     val performance = DecimalFormat("#,##0.00").format(calculatePerformance())

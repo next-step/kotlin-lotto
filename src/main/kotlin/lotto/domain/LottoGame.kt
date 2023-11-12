@@ -1,7 +1,7 @@
 package lotto.domain
 
-class LottoGame(val lottoList: List<LottoNumbers>, val winningNumbers: LottoNumbers, val bonusNumber: BonusNumber) {
-    fun getResult(): LottoGameResult {
+class LottoGame(val lottoList: List<LottoNumbers>) {
+    fun getResult(winningNumbers: WinningNumbers): LottoGameResult {
         val totalPrice = getTotalPrice()
         val rewards = getRewards(winningNumbers)
         return LottoGameResult(totalPrice, rewards)
@@ -10,8 +10,8 @@ class LottoGame(val lottoList: List<LottoNumbers>, val winningNumbers: LottoNumb
     private fun getTotalPrice(): Int =
         lottoList.size * LottoNumbers.LOTTO_PRICE
 
-    private fun getRewards(winningNumbers: LottoNumbers): List<LottoReward> =
+    private fun getRewards(winningNumbers: WinningNumbers): List<LottoReward> =
         lottoList.map { it.match(winningNumbers) }
-            .mapNotNull { LottoReward.valueOf(it) }
+            .mapNotNull { LottoReward.valueOf(it.matchCount, it.bonusMatch) }
             .sorted()
 }

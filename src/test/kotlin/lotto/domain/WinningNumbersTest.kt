@@ -3,7 +3,6 @@ package lotto.domain
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import java.lang.RuntimeException
 
 class WinningNumbersTest : FunSpec({
     test("당첨번호는 6자리 번호와 보너스 번호를 갖는다.") {

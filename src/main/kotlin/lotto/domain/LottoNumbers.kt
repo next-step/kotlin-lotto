@@ -6,8 +6,10 @@ value class LottoNumbers(val value: Set<Int>) {
         validateValue(value)
     }
 
-    fun match(winningNumbers: LottoNumbers): Int {
-        return value.count { winningNumbers.value.contains(it) }
+    fun match(winningNumbers: WinningNumbers): LottoMatchResult {
+        val matchCount = value.count { winningNumbers.numbers.value.contains(it) }
+        val bonusMatch = value.contains(winningNumbers.bonusNumber.value)
+        return LottoMatchResult(matchCount, bonusMatch)
     }
 
     private fun validateValue(numbers: Set<Int>) {

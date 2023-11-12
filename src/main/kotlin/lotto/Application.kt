@@ -1,9 +1,6 @@
 package lotto
 
-import lotto.domain.BonusNumber
-import lotto.domain.LottoFactory
-import lotto.domain.LottoGame
-import lotto.domain.LottoNumbers
+import lotto.domain.*
 import lotto.view.*
 
 fun main() {
@@ -12,9 +9,8 @@ fun main() {
     val lottoList = LottoFactory.generateLottoList(count)
     printLottoList(lottoList)
 
-    val winningNumbers = LottoNumbers(readWinningNumbers())
-    val bonusNumber = BonusNumber(readBonusNumber())
-    val lottoGame = LottoGame(lottoList, winningNumbers, bonusNumber)
-    val lottoGameResult = lottoGame.getResult()
+    val winningNumbers = WinningNumbers(LottoNumbers(readWinningNumbers()), BonusNumber(readBonusNumber()))
+    val lottoGame = LottoGame(lottoList)
+    val lottoGameResult = lottoGame.getResult(winningNumbers)
     printLottoGameResult(lottoGameResult)
 }
