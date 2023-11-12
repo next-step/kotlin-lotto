@@ -2,6 +2,10 @@ package autolotto.vo
 
 @JvmInline
 value class LottoNumber(val number: Int) {
+    override fun toString(): String {
+        return number.toString()
+    }
+
     companion object {
         private const val MIN_NUMBER = 1
         private const val MAX_NUMBER = 45
@@ -22,9 +26,5 @@ value class LottoNumber(val number: Int) {
         fun generateLottoNumbers(): List<LottoNumber> {
             return NUMBERS.values.shuffled().take(6).sortedBy { it.number }
         }
-    }
-
-    override fun toString(): String {
-        return number.toString()
     }
 }
