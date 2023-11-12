@@ -9,6 +9,7 @@ value class LottoNumber(val number: Int) {
     companion object {
         private const val MIN_NUMBER = 1
         private const val MAX_NUMBER = 45
+        private const val LOTTO_NUMBER_COUNT = 6
         private val NUMBERS: Map<Int, LottoNumber> = (MIN_NUMBER..MAX_NUMBER).associateWith(::LottoNumber)
 
         fun of(value: Int): LottoNumber {
@@ -24,7 +25,7 @@ value class LottoNumber(val number: Int) {
         }
 
         fun generateLottoNumbers(): List<LottoNumber> {
-            return NUMBERS.values.shuffled().take(6).sortedBy { it.number }
+            return NUMBERS.values.shuffled().take(LOTTO_NUMBER_COUNT).sortedBy { it.number }
         }
     }
 }
