@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.LottoNumber
 import lotto.error.ErrorMessage.EMPTY_INPUT_MESSAGE
 import lotto.error.ErrorMessage.EXPECT_NUMBER_MESSAGE
 
@@ -22,9 +23,9 @@ object InputView {
         return jackpotNumber
     }
 
-    fun inputBonusNumber(): Int {
+    fun inputBonusNumber(): LottoNumber {
         try {
-            return readln().toInt()
+            return LottoNumber(readln().toInt())
         } catch (e: NullPointerException) {
             throw IllegalArgumentException(EMPTY_INPUT_MESSAGE.message)
         } catch (e: NumberFormatException) {
