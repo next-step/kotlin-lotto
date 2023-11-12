@@ -26,7 +26,7 @@ object OutputView {
     }
 
     fun printLottoList(lotto: List<LottoDto>) {
-        lotto.forEach { println(it.lotto) }
+        lotto.forEach { lotto -> println(lotto.lotto.joinToString { "${it.number}" }) }
     }
 
     fun printResult(jackpot: List<JackpotDto>) {

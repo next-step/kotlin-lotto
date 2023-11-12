@@ -17,8 +17,4 @@ value class LottoNumber(val number: Int) {
             return lottoNumberRange.toList().shuffled().take(6).sorted().map { LottoNumber(it) }
         }
     }
-
-    override fun toString(): String {
-        return "$number"
-    }
 }
