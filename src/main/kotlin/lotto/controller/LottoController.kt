@@ -22,6 +22,10 @@ fun main() {
 
     OutputView.printJackpotNumber()
     val inputNumber = InputView.inputJackpotNumber()
+    OutputView.printBonusNumber()
+    val bonusNumber = InputView.inputBonusNumber()
+
+
     val jackpotNumbers = lottoShop.getJackpotNumbers(inputNumber)
     val lottoWinning = LottoWinning(jackpotNumbers)
 
