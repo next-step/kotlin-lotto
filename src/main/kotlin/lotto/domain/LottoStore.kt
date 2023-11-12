@@ -1,7 +1,4 @@
-package lotto.service
-
-import lotto.domain.Lotto
-import lotto.domain.LottoNumbers
+package lotto.domain
 
 object LottoStore {
     fun purchase(money: Int): List<Lotto> {
