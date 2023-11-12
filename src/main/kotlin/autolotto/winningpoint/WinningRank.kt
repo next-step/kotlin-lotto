@@ -10,7 +10,7 @@ enum class WinningRank(val matchingCount: Int, val winningPrice: Long, val isBon
     ;
 
     companion object {
-        fun from(matchingCount: Int, isMatchedBonusNumber: Boolean): WinningRank {
+        fun of(matchingCount: Int, isMatchedBonusNumber: Boolean): WinningRank {
             if(matchingCount == 5) {
                 return values().find { it.matchingCount == matchingCount && it.isBonusNumberNeeded == isMatchedBonusNumber } ?: NOTHING
             }

@@ -10,7 +10,7 @@ class WinningRankTest : FunSpec({
         val matchingBonusNumber = true
 
         // When
-        val winningRank = WinningRank.from(matchingCount, matchingBonusNumber)
+        val winningRank = WinningRank.of(matchingCount, matchingBonusNumber)
 
         // Then
         winningRank shouldBe WinningRank.SECOND
@@ -22,7 +22,7 @@ class WinningRankTest : FunSpec({
         val matchingBonusNumber = false
 
         // When
-        val winningRank = WinningRank.from(matchingCount, matchingBonusNumber)
+        val winningRank = WinningRank.of(matchingCount, matchingBonusNumber)
 
         // Then
         winningRank shouldBe WinningRank.THIRD
@@ -34,7 +34,7 @@ class WinningRankTest : FunSpec({
         val matchingBonusNumber = true
 
         // When
-        val winningRank = WinningRank.from(matchingCount, matchingBonusNumber)
+        val winningRank = WinningRank.of(matchingCount, matchingBonusNumber)
 
         // Then
         winningRank shouldBe WinningRank.FIRST
@@ -46,7 +46,7 @@ class WinningRankTest : FunSpec({
         val matchingBonusNumber = false
 
         // When
-        val winningRank = WinningRank.from(matchingCount, matchingBonusNumber)
+        val winningRank = WinningRank.of(matchingCount, matchingBonusNumber)
 
         // Then
         winningRank shouldBe WinningRank.FIRST
