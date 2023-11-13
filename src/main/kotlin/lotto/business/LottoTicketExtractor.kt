@@ -1,14 +1,18 @@
 package lotto.business
 
-object LottoWinningTicketExtractor {
+object LottoTicketExtractor {
     private const val LOTTO_WINNING_NUMBERS_DELIMITER = ","
 
-    fun extract(lottoNumbersString: String, bonusNumber: LottoNumber): WinningLottoTicket {
+    fun extractLottoTicket(lottoNumbersString: String): LottoTicket {
         lottoNumbersString.split(LOTTO_WINNING_NUMBERS_DELIMITER)
             .map { checkStringIsInt(it) }
             .map { LottoNumber(it) }
             .toSet()
-            .let { return WinningLottoTicket(LottoTicket(it), bonusNumber) }
+            .let { return LottoTicket(it) }
+    }
+
+    fun extractManualTicketNumbers(manualTicketNumbers: List<String>): List<LottoTicket> {
+        return manualTicketNumbers.map(::extractLottoTicket)
     }
 
     private fun checkStringIsInt(it: String) =
