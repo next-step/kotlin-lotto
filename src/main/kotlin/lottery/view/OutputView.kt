@@ -16,16 +16,16 @@ object OutputView {
 
     fun printLotteryInfo(lottos: List<Lotto>) {
         println("${lottos.size}$PRINT_LOTTERY_AMOUNT_MESSAGE")
-        lottos.forEach { println(it.lottoNumber.joinToString(SEPARATOR, PREFIX, POSTFIX)) }
+        lottos.forEach { lotto -> println(PREFIX + lotto.lottoNumber.joinToString { it.lottoNumber.toString() } + POSTFIX) }
         println()
     }
 
     fun printResult(ranks: Ranks) {
         println(WINNING_STATISTICS_MESSAGE)
         Rank.getWinningRanks().forEach {
-            println("${it.countOfMatch}개 일치${if (it.matchBonus) ", 보너스 볼 일치" else " "}(${it.winningMoney}원) - ${ranks.rank.count { rank -> rank == it }}개")
+            println("${it.countOfMatch}개 일치${if (it == Rank.SECOND) ", 보너스 볼 일치" else " "}(${it.winningMoney}원) - ${ranks.rank.count { rank -> rank == it }}개")
         }
-        print(String.format(PRINT_RATE_OF_RETURN_MESSAGE, ranks.calculateProfitabilityRatio()))
-        if (ranks.isProfitable()) println(PRINT_BENEFIT_MESSAGE) else println(PRINT_LOSS_MESSAGE)
+        print(String.format(PRINT_RATE_OF_RETURN_MESSAGE, ranks.profitMargin))
+        if (ranks.isProfitable) println(PRINT_BENEFIT_MESSAGE) else println(PRINT_LOSS_MESSAGE)
     }
 }
