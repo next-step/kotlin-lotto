@@ -10,8 +10,8 @@ class LottoResult(
 ) {
     fun groupWinningTicketCountByMatchedCount(): TreeMap<MatchedCount, TicketCount> {
         val source = lottoPrizes
-            .groupBy { it.matchedCount }
-            .mapValues { it.value.size }
+            .groupingBy { it.matchedCount }
+            .eachCount()
             .filter { (matchedCount, _) -> matchedCount in validMatchedCounts }
         val target = validMatchedCounts.associateWith { 0 }
 
