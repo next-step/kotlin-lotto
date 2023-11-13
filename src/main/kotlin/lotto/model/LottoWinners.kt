@@ -1,8 +1,8 @@
 package lotto.model
 
 data class LottoWinners(
-    val totalGameCount: Int,
-    val winningCountBy: Map<Rank, Int> = emptyMap()
+    private val totalGameCount: Int,
+    private val winningCountBy: Map<Rank, Int> = emptyMap()
 ) {
 
     constructor(totalGameCount: Int, vararg winners: Pair<Rank, Int>) :
