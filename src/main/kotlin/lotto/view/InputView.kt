@@ -1,6 +1,6 @@
 package lotto.view
 class InputView {
-    fun inputPrice(inputType: InputType): Int {
+    fun inputNumber(inputType: InputType): Int {
         println(inputType.question)
         return readln().toInt()
     }
