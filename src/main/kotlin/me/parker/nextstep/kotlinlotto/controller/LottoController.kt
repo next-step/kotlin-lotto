@@ -17,7 +17,11 @@ fun main(args: Array<String>) {
 
     val lastWonLottoNumbers: List<Int> = ConsoleInput.inputLastWonLottoNumbers()
     val wonLottoTicket = LottoTicket.manual(lastWonLottoNumbers)
-    val lottoResult = LottoWinningMachine(wonLottoTicket, purchasedLottoTickets, LottoNumber(10)).result()
+
+    val bonusLottoNumber: Int = ConsoleInput.inputBonusLottoNumber()
+
+    val lottoResult = LottoWinningMachine(wonLottoTicket, purchasedLottoTickets, LottoNumber(bonusLottoNumber))
+        .result()
 
     ConsoleResult.outputLottoResult(lottoResult)
 }
