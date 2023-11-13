@@ -8,6 +8,12 @@ class ResultView {
         println(type.message.format(count))
     }
 
+    fun printLottoList(lottoList: List<Lotto>) {
+        lottoList.forEach {
+            println(it.numbers)
+        }
+    }
+
     fun printResult(amount: Int, lottoList: List<Lotto>) {
         println(INIT_RESULT)
         var totalMoney = 0

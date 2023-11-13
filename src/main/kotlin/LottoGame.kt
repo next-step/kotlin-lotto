@@ -9,7 +9,6 @@ class LottoGame {
             repeat(count) {
                 val lottoRange = (LOTTO_MIN_VALUE..LOTTO_MAX_VALUE).toList()
                 val numbers = lottoRange.shuffled().take(LOTTO_COUNT).sorted()
-                println(numbers)
                 this.add(Lotto(numbers))
             }
         }

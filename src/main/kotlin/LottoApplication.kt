@@ -14,6 +14,7 @@ fun main() {
     resultView.printCount(ResultType.PURCHASE_COUNT, count)
 
     val lottoList = lottoGame.start(count)
+    resultView.printLottoList(lottoList)
 
     val lastNumbers = inputView.inputNumbers(InputType.LAST_WEEK_WINNING_NUMBER)
 
