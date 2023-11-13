@@ -11,12 +11,12 @@ class LottoBookingSystem(
         return LottoTicket(lottoNumbers)
     }
 
-    fun generateMultipleTickets(count: Int): List<LottoTicket> {
-        return (1..count).map { generateSingleTicket() }
+    fun generateMultipleTickets(player: Player): List<LottoTicket> {
+        return (1..player.purchasableCount).map { generateSingleTicket() }
     }
 
-    fun generateManualTickets(count: Int, player: Player): List<LottoTicket> {
-        require(player.purchasableCount >= count) { "구매 가능한 로또 개수보다 많습니다." }
-        return LottoTicketExtractor.extractManualTicketNumbers(LottoInputHandler.inputManualNumbers(count))
+    fun generateManualTickets(manualCount: Int, player: Player): List<LottoTicket> {
+        require(player.purchasableCount >= manualCount) { "구매 가능한 로또 개수보다 많습니다." }
+        return LottoTicketExtractor.extractManualTicketNumbers(LottoInputHandler.inputManualNumbers(manualCount))
     }
 }

@@ -10,9 +10,10 @@ class LottoBookingSystemTest {
     fun `로또 티켓을 개수만큼 생성한다`() {
         // given
         val lottoBookingSystem = LottoBookingSystem()
+        val player = Player(purchasableCount = 3)
 
         // when
-        val lottoTickets = lottoBookingSystem.generateMultipleTickets(3)
+        val lottoTickets = lottoBookingSystem.generateMultipleTickets(player)
 
         // then
         Assertions.assertAll(

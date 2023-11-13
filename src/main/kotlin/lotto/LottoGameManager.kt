@@ -3,6 +3,7 @@ package lotto
 import lotto.business.LottoBookingSystem
 import lotto.business.LottoNumber
 import lotto.business.LottoTicketExtractor
+import lotto.business.Player
 import lotto.business.ReceivedAmount
 import lotto.business.WinningLottoTicket
 import lotto.view.LotteryStatisticsPrinter
@@ -13,7 +14,8 @@ object LottoGameManager {
     fun run() {
         val lottoBookingSystem = LottoBookingSystem()
         val receivedAmount = ReceivedAmount(LottoInputHandler.inputPurchaseAmount())
-        val lottoTickets = lottoBookingSystem.generateMultipleTickets(receivedAmount.getTicketCount())
+        val player = Player(purchasableCount = receivedAmount.getTicketCount())
+        val lottoTickets = lottoBookingSystem.generateMultipleTickets(player)
         LottoPurchaseSummaryPrinter.print(lottoTickets)
         val lottoNumbersString = LottoInputHandler.inputWinningNumbers()
         val firstWinningTicket = LottoTicketExtractor.extractLottoTicket(lottoNumbersString)
