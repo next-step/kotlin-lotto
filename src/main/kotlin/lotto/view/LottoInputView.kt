@@ -3,7 +3,7 @@ package lotto.view
 import lotto.component.Lotto
 import lotto.component.LottoNumbersGenerator
 import lotto.model.LottoInput
-import lotto.model.LottoTicket
+import lotto.model.LottoNumbers
 import lotto.model.WinningNumbers
 import lotto.utils.TicketCount
 
@@ -13,7 +13,7 @@ class LottoInputView(
     fun getInput(): LottoInput {
         val purchasePrice: Int = getPurchaseAccount()
         val lottoTicketCount: Int = getLottoTicketCount(purchasePrice)
-        val lottoTickets: List<LottoTicket> = getLottoTickets(lottoTicketCount)
+        val lottoTickets: List<LottoNumbers> = getLottoTickets(lottoTicketCount)
 
         printPurchasedLottoTickets(lottoTickets, lottoTicketCount)
 
@@ -48,11 +48,11 @@ class LottoInputView(
         return lottoTicketCount
     }
 
-    private fun getLottoTickets(lottoTicketCount: Int): List<LottoTicket> {
+    private fun getLottoTickets(lottoTicketCount: Int): List<LottoNumbers> {
         return lottoNumbersGenerator.generate(lottoTicketCount)
     }
 
-    private fun printPurchasedLottoTickets(lottoTickets: List<LottoTicket>, lottoTicketCount: TicketCount) {
+    private fun printPurchasedLottoTickets(lottoTickets: List<LottoNumbers>, lottoTicketCount: TicketCount) {
         println("${lottoTicketCount}개의 로또를 구매했습니다.")
         lottoTickets.forEach { println(it) }
         println()

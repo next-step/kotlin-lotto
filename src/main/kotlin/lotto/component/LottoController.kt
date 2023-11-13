@@ -10,7 +10,7 @@ class LottoController(
 ) {
     fun run() {
         val input = lottoInputView.getInput()
-        val result = lotto.draw(input.lottoTickets, input.winningNumbers)
+        val result = lotto.draw(input.lottoNumbers, input.winningNumbers)
 
         lottoResultView.printLottoResult(result)
     }
