@@ -13,7 +13,6 @@ class StudyConstructor : StringSpec({
     }
 
     "부 생성자로 취약점을 방어한다" {
-
     }
 })
 
@@ -26,6 +25,5 @@ value class Foo(
 
     fun insideData(): String {
         return data.toString()
-
     }
 }
