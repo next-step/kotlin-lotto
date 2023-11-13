@@ -4,6 +4,6 @@ object LottoBooth {
     const val LOTTO_PRICE = 1000
 
     fun publishLottos(strategy: LottoBuyStrategy): LottoList {
-        return strategy.manualLottoList + List(strategy.autoCount) { AutoLottoCreator().createLotto() }
+        return ManualLottoCreator.createLottoList(*strategy.manualLottoList.toTypedArray()) + AutoLottoCreator.createLottoList(strategy.autoCount)
     }
 }

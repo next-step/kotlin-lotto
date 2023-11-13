@@ -19,7 +19,7 @@ data class LottoNumbers(val numbers: List<LottoNumber>) {
             repeat(6) {
                 randomNumbers.add(LottoNumber.randomNumber(randomNumbers))
             }
-            return LottoNumbers(randomNumbers)
+            return LottoNumbers(randomNumbers.sortedBy { it.number })
         }
 
         fun manual(manualNumbers: LottoNumbers): LottoNumbers {
