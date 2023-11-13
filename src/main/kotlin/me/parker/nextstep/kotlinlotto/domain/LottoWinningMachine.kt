@@ -3,12 +3,12 @@ package me.parker.nextstep.kotlinlotto.domain
 class LottoWinningMachine(
     private val wonLottoTicket: LottoTicket,
     private val boughtLottoTickets: List<LottoTicket>,
-//    private val bonusLottoNumber: LottoNumber
+    private val bonusLottoNumber: LottoNumber
 ) {
     fun result(): LottoResult {
         val rankMatchCounts: MutableMap<LottoRank, Int> = LottoRank.values().associateWithTo(mutableMapOf()) { 0 }
         boughtLottoTickets
-            .map { it.match(wonLottoTicket, LottoNumber(1)) }
+            .map { it.match(wonLottoTicket, bonusLottoNumber) }
             .groupBy { it }
             .mapValues { it.value.size }
             .forEach { (rank, count) ->

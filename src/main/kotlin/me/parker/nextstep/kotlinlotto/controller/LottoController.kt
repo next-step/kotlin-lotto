@@ -1,5 +1,6 @@
 package me.parker.nextstep.kotlinlotto.controller
 
+import me.parker.nextstep.kotlinlotto.domain.LottoNumber
 import me.parker.nextstep.kotlinlotto.domain.LottoTicket
 import me.parker.nextstep.kotlinlotto.domain.LottoWinningMachine
 import me.parker.nextstep.kotlinlotto.view.ConsoleInput
@@ -16,7 +17,7 @@ fun main(args: Array<String>) {
 
     val lastWonLottoNumbers: List<Int> = ConsoleInput.inputLastWonLottoNumbers()
     val wonLottoTicket = LottoTicket.manual(lastWonLottoNumbers)
-    val lottoResult = LottoWinningMachine(wonLottoTicket, purchasedLottoTickets).result()
+    val lottoResult = LottoWinningMachine(wonLottoTicket, purchasedLottoTickets, LottoNumber(10)).result()
 
     ConsoleResult.outputLottoResult(lottoResult)
 }
