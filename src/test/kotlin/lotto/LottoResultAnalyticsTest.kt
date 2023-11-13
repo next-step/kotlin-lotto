@@ -32,4 +32,58 @@ class LottoResultAnalyticsTest : StringSpec({
             winningStatistics.get(LottoRanking.MISS) shouldBe 1
         }
     }
+
+    "로또 10개를 구입할 때 4등 당첨 1번 + 낙첨 9번이면, 수익률은 0.5이다. " {
+        forAll(
+            row(
+                listOf(1, 2, 3, 4, 5, 6),
+                listOf(
+                    LottoTicket(listOf(1, 2, 3, 43, 44, 45)), // 4등 당첨
+                    LottoTicket(listOf(1, 41, 42, 43, 44, 45)), // 낙첨
+                    LottoTicket(listOf(1, 41, 42, 43, 44, 45)), // 낙첨
+                    LottoTicket(listOf(1, 41, 42, 43, 44, 45)), // 낙첨
+                    LottoTicket(listOf(1, 41, 42, 43, 44, 45)), // 낙첨
+                    LottoTicket(listOf(1, 41, 42, 43, 44, 45)), // 낙첨
+                    LottoTicket(listOf(1, 41, 42, 43, 44, 45)), // 낙첨
+                    LottoTicket(listOf(1, 41, 42, 43, 44, 45)), // 낙첨
+                    LottoTicket(listOf(1, 41, 42, 43, 44, 45)), // 낙첨
+                    LottoTicket(listOf(1, 41, 42, 43, 44, 45)), // 낙첨
+                )
+            )
+        ) { winningNumbers: List<Int>, lottoList: List<LottoTicket> ->
+            val winningLotto = WinningLotto(winningNumbers)
+            val lottoTickets = LottoTickets(lottoList)
+            val lottoResultAnalytics = LottoResultAnalytics(winningLotto, lottoTickets)
+
+            val profitRate = lottoResultAnalytics.calculateProfitRate()
+            profitRate shouldBe 0.5
+        }
+    }
+
+    "로또 10개를 구입할 때 3등 당첨 1번 + 낙첨 9번이면, 수익률은 5.0이다. " {
+        forAll(
+            row(
+                listOf(1, 2, 3, 4, 5, 6),
+                listOf(
+                    LottoTicket(listOf(1, 2, 3, 4, 44, 45)), // 3등 당첨
+                    LottoTicket(listOf(1, 41, 42, 43, 44, 45)), // 낙첨
+                    LottoTicket(listOf(1, 41, 42, 43, 44, 45)), // 낙첨
+                    LottoTicket(listOf(1, 41, 42, 43, 44, 45)), // 낙첨
+                    LottoTicket(listOf(1, 41, 42, 43, 44, 45)), // 낙첨
+                    LottoTicket(listOf(1, 41, 42, 43, 44, 45)), // 낙첨
+                    LottoTicket(listOf(1, 41, 42, 43, 44, 45)), // 낙첨
+                    LottoTicket(listOf(1, 41, 42, 43, 44, 45)), // 낙첨
+                    LottoTicket(listOf(1, 41, 42, 43, 44, 45)), // 낙첨
+                    LottoTicket(listOf(1, 41, 42, 43, 44, 45)), // 낙첨
+                )
+            )
+        ) { winningNumbers: List<Int>, lottoList: List<LottoTicket> ->
+            val winningLotto = WinningLotto(winningNumbers)
+            val lottoTickets = LottoTickets(lottoList)
+            val lottoResultAnalytics = LottoResultAnalytics(winningLotto, lottoTickets)
+
+            val profitRate = lottoResultAnalytics.calculateProfitRate()
+            profitRate shouldBe 5.0
+        }
+    }
 })

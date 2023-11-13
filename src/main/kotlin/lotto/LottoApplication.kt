@@ -1,5 +1,6 @@
 package lotto
 
+// main 함수까지 리팩터링 하면 오늘 안에 PR 못 올릴 것 같아서 일단 올립니다ㅠㅠ 더러움 주의입니다!!!
 fun main() {
     // 1: 구입금액 입력 받기
     println("구입금액을 입력해 주세요.")
@@ -28,6 +29,10 @@ fun main() {
             println("${it.key.matchingCount}개 일치 (${it.key.prize}원)- ${it.value}개")
         }
 
-    // Todo 6: 수익률 출력
-
+    // 6: 수익률 출력
+    val profitRate = lottoResultAnalytics.calculateProfitRate()
+    print("총 수익률은 ${profitRate}입니다.")
+    if (profitRate < 1) {
+        println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
+    }
 }
