@@ -1,10 +1,10 @@
 data class Lotto(
     val numbers: List<Int>,
 ) {
-    var matchCount: Int = 0
+    var rank: Rank = Rank.MISS
         private set
 
-    fun match(count: Int) {
-        matchCount = count
+    fun setRank(rank: Rank?) {
+        this.rank = rank ?: Rank.MISS
     }
 }

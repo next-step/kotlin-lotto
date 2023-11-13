@@ -14,11 +14,16 @@ class LottoGame {
         }
     }
 
-    fun result(lottoList: List<Lotto>, lastNumbers: List<Int>) {
+    fun result(lottoList: List<Lotto>, lastNumbers: List<Int>, bonus: Int) {
         lottoList.forEach { lotto ->
             val count = (lotto.numbers + lastNumbers).groupBy { it }.filter { it.value.size > 1 }.count()
-            lotto.match(count)
+            val hasBonus = if (count == 5) hasMatchBonusBall(lotto.numbers, bonus) else false
+            lotto.setRank(Rank.valueOf(count, hasBonus))
         }
+    }
+
+    private fun hasMatchBonusBall(numbers: List<Int>, bonus: Int): Boolean {
+        return numbers.contains(bonus)
     }
 
     companion object {

@@ -8,7 +8,7 @@ fun main() {
     val resultView = ResultView()
     val lottoGame = LottoGame()
 
-    val amount = inputView.inputPrice(InputType.PURCHASE_AMOUNT)
+    val amount = inputView.inputNumber(InputType.PURCHASE_AMOUNT)
     val count = LottoGame().getLottoCount(amount)
 
     resultView.printCount(ResultType.PURCHASE_COUNT, count)
@@ -17,7 +17,8 @@ fun main() {
     resultView.printLottoList(lottoList)
 
     val lastNumbers = inputView.inputNumbers(InputType.LAST_WEEK_WINNING_NUMBER)
+    val bonus = inputView.inputNumber(InputType.BONUS_BALL)
 
-    lottoGame.result(lottoList, lastNumbers)
+    lottoGame.result(lottoList, lastNumbers, bonus)
     resultView.printResult(amount, lottoList)
 }
