@@ -14,4 +14,9 @@ class Player(tickets: List<LottoTicket> = listOf(), purchasableCount: Int) {
         _tickets.add(ticket)
         _purchasableCount -= 1
     }
+
+    fun addTickets(manualTickets: List<LottoTicket>) {
+        _tickets.addAll(manualTickets)
+        _purchasableCount -= manualTickets.size
+    }
 }
