@@ -59,8 +59,8 @@ object OutputView {
         )
 
     private fun getMatchedCountMessageFormat(rank: LottoRank): String = when (rank.isWithBonusMatch) {
-        true -> MATCHED_COUNT_MSG
-        false -> BONUS_MATCHED_COUNT_MSG_
+        true -> BONUS_MATCHED_COUNT_MSG_
+        false -> MATCHED_COUNT_MSG
     }
 
     private fun getMatchedTicketCount(rank: LottoRank, rankCounts: LottoRankCounts): Int =
