@@ -18,6 +18,12 @@ object ConsoleResult {
 
         lottoResult.matchCount.forEach { (rank, count) ->
             if (rank == LottoRank.MISS) return@forEach
+
+            if (rank == LottoRank.SECOND) {
+                println("${rank.matchCount}개 일치, 보너스 볼 일치 (${rank.prize}원)- ${count}개")
+                return@forEach
+            }
+
             println("${rank.matchCount}개 일치 (${rank.prize}원)- ${count}개")
         }
 
