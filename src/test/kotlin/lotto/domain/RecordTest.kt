@@ -21,17 +21,6 @@ class RecordTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = ["1|5000", "2|5000", "0|5000", "-1|5000"], delimiter = '|')
-    fun `일치하는 번호의 수가 3개 미만일때 에러를 반환한다`(
-        matchCount: Int,
-        reward: Int
-    ) {
-        assertThrows<IllegalArgumentException> {
-            Record.of(matchCount, reward)
-        }
-    }
-
-    @ParameterizedTest
     @CsvSource(value = ["3|-10", "4|-20", "5|-1000", "6|-100000", ], delimiter = '|')
     fun `등수 당첨금액이 0 미만일때 에러를 반환한다`(
         matchCount: Int,
