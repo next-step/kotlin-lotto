@@ -1,18 +1,18 @@
 package lotto.view
 
 import lotto.model.Game
-import lotto.model.Issuer
 import lotto.model.LottoWinners
 import lotto.model.Rank
-import lotto.model.Round
+import lotto.model.TicketIssuer
+import lotto.model.Tickets
 
 object OutputView {
-    fun presetRound(round: Round) {
-        println(round.present())
+    fun presetRound(tickets: Tickets) {
+        println(tickets.present())
     }
 
     fun presentPrizes(lottoWinners: LottoWinners) {
-        val earningRate = lottoWinners.earningRate(Issuer.pricePerGame())
+        val earningRate = lottoWinners.earningRate(TicketIssuer.pricePerGame())
 
         println(
             """
@@ -28,7 +28,7 @@ object OutputView {
     }
 }
 
-private fun Round.present(): String {
+private fun Tickets.present(): String {
     return this.games
         .joinToString("\n") { it.present() }
 }

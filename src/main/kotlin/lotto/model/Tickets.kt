@@ -1,7 +1,7 @@
 package lotto.model
 
-data class Round(
-    val games: List<Game> = emptyList(),
+data class Tickets(
+    val games: List<Game> = emptyList()
 ) {
     fun winnerAggregate(winningNumbers: WinningNumbers): LottoWinners {
         val rankAggregated: MutableMap<Rank, Int> = mutableMapOf()
