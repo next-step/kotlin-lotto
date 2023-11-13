@@ -9,8 +9,8 @@ enum class LotteryPrize(private val matchCount: Int, val prizeAmount: Long) {
     FIRST(6, 2_000_000_000L);
 
     companion object {
-        fun getPrize(matchCount: Int, contains: Boolean): LotteryPrize =
-            if (matchCount == THIRD.matchCount && contains) SECOND
+        fun getPrize(matchCount: Int, bonusNumberIncluded: Boolean): LotteryPrize =
+            if (matchCount == THIRD.matchCount && bonusNumberIncluded) SECOND
             else values().find { it.matchCount == matchCount } ?: MISS
     }
 }
