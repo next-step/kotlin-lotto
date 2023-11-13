@@ -2,20 +2,21 @@ package lotto.model
 
 object TicketIssuer {
     private const val PRICE_PER_GAME = 1000
+    private const val DELIMITER = ","
 
-    fun transaction(purchaseGames: PurchaseGames): Tickets {
+    fun transaction(purchaseGames: PurchaseGames): LottoTicket {
         val games = autoIssue(purchaseGames.autoIssueCount())
         val manualIssue = manualIssue(purchaseGames)
-        return Tickets(games + manualIssue)
+        return LottoTicket(games + manualIssue)
     }
 
-    private fun manualIssue(purchaseGames: PurchaseGames): List<Game> {
-        val split = purchaseGames.manualIssueInput.split("\n")
+    fun manualIssue(purchaseGames: PurchaseGames): List<Game> {
+        val split = purchaseGames.manualTicketingInput.split("\n")
         val mutableList = mutableListOf<Game>()
         for (s in split) {
             val game = Game(
                 LottoNumbers(
-                    s.split(", ")
+                    s.split(DELIMITER)
                         .asSequence()
                         .map { it.toInt() }
                         .toList()
