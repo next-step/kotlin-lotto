@@ -5,11 +5,10 @@ data class WinningNumbers(
     val bonusNumber: LottoNumber
 ) {
 
-    fun countOfMatchAndHasBonus(game: Game): Pair<Int, Boolean> {
-        val hasBonusNumber = game
-            .lottoNumbers
-            .containNumber(bonusNumber)
-        return lottoNumbers
-            .countOfMatchNumbers(game.lottoNumbers) to hasBonusNumber
+    fun toRank(game: Game): Rank {
+        return Rank.of(
+            lottoNumbers.numbersIntersections(game.lottoNumbers),
+            game.lottoNumbers.containNumber(bonusNumber)
+        )
     }
 }

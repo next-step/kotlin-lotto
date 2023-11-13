@@ -5,9 +5,8 @@ data class LottoTicket(
 ) {
     fun winnerAggregate(winningNumbers: WinningNumbers): LottoWinners {
         val rankAggregated: MutableMap<Rank, Int> = mutableMapOf()
-        games.map { winningNumbers.countOfMatchAndHasBonus(it) }
-            .asSequence()
-            .map { Rank.of(it.first, it.second) }
+        games.asSequence()
+            .map { winningNumbers.toRank(it) }
             .forEach { rankAggregated[it] = rankAggregated.getOrDefault(it, 0) + 1 }
         return LottoWinners(
             totalGameCount = this.games.size,
