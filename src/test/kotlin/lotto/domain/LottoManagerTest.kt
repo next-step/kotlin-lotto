@@ -1,10 +1,10 @@
 package lotto.domain
 
 import lotto.domain.LottoManager.Companion.LOTTO_PRICE
+import lotto.tokenizeWinningNumbers
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatNoException
 import org.assertj.core.api.Assertions.assertThatThrownBy
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -35,18 +35,10 @@ class LottoManagerTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = [-1, 0, 46])
-    fun `보너스 번호가 숫자 범위를 벗어날 경우 Exception을 던진다`(input: Int) {
+    @ValueSource(strings = ["1,2,3,4,5,6"])
+    fun `보너스 번호가 당첨 번호중 하나와 일치할 경우 Exception을 던진다`(input: String) {
         val manager = LottoManager(1000)
-        assertThatThrownBy { manager.setBonusNumber(input) }
-            .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage("보너스 번호는 1~45 사이의 숫자여야 합니다.")
-    }
-
-    @Test
-    fun `보너스 번호가 당첨 번호중 하나와 일치할 경우 Exception을 던진다`() {
-        val manager = LottoManager(1000)
-        val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
+        val winningNumbers = tokenizeWinningNumbers(input)
 
         manager.setWinningLotto(Lotto(winningNumbers))
         assertThatThrownBy { manager.setBonusNumber(winningNumbers.shuffled().take(1).first()) }
@@ -54,8 +46,9 @@ class LottoManagerTest {
             .hasMessage("보너스 번호는 당첨 번호와 중복될 수 없습니다.")
     }
 
-    @Test
-    fun `로또, 당첨번호, 보너스번호 설정 전 결과 요청시 Exception을 던진다`() {
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2,3,4,5,6"])
+    fun `로또, 당첨번호, 보너스번호 설정 전 결과 요청시 Exception을 던진다`(input: String) {
         val manager = LottoManager(1000)
         assertThatThrownBy { manager.aggregate() }
             .isInstanceOf(IllegalStateException::class.java)
@@ -66,22 +59,23 @@ class LottoManagerTest {
             .isInstanceOf(IllegalStateException::class.java)
             .hasMessage("당첨번호가 설정되지 않았습니다")
 
-        manager.setWinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6)))
+        manager.setWinningLotto(Lotto(tokenizeWinningNumbers(input)))
         assertThatThrownBy { manager.aggregate() }
             .isInstanceOf(IllegalStateException::class.java)
             .hasMessage("보너스 번호가 설정되지 않았습니다")
 
-        manager.setBonusNumber(7)
+        manager.setBonusNumber(LottoNumber.from(7))
         assertThatNoException().isThrownBy { manager.aggregate() }
     }
 
-    @Test
-    fun `추첨 결과물 리스트를 반환한다`() {
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2,3,4,5,6"])
+    fun `추첨 결과물 리스트를 반환한다`(input: String) {
         val money = 2000
         val manager = LottoManager(money)
         manager.generateLottos()
-        manager.setWinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6)))
-        manager.setBonusNumber(7)
+        manager.setWinningLotto(Lotto(tokenizeWinningNumbers(input)))
+        manager.setBonusNumber(LottoNumber.from(7))
         manager.aggregate()
 
         val result = manager.prizes

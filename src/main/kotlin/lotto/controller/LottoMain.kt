@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.domain.Lotto
 import lotto.domain.LottoManager
+import lotto.domain.LottoNumber
 import lotto.tokenizeWinningNumbers
 import lotto.view.Input
 import lotto.view.Output
@@ -28,7 +29,7 @@ fun main() {
     val bonusNumber = Input().getBonusNumber()
 
     // 보너스 번호 등록
-    lottoManager.setBonusNumber(bonusNumber.toInt())
+    lottoManager.setBonusNumber(LottoNumber.from(bonusNumber.toInt()))
 
     // 당첨 로또 집계
     lottoManager.aggregate()
