@@ -1,6 +1,6 @@
 package lotto.model
 
-data class Tickets(
+data class LottoTicket(
     val games: List<Game> = emptyList()
 ) {
     fun winnerAggregate(winningNumbers: WinningNumbers): LottoWinners {

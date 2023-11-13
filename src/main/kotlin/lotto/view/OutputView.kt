@@ -1,14 +1,14 @@
 package lotto.view
 
 import lotto.model.Game
+import lotto.model.LottoTicket
 import lotto.model.LottoWinners
 import lotto.model.Rank
 import lotto.model.TicketIssuer
-import lotto.model.Tickets
 
 object OutputView {
-    fun presetRound(tickets: Tickets) {
-        println(tickets.present())
+    fun presetRound(lottoTicket: LottoTicket) {
+        println(lottoTicket.present())
     }
 
     fun presentPrizes(lottoWinners: LottoWinners) {
@@ -22,13 +22,13 @@ object OutputView {
         4개 일치 (50000원)- ${lottoWinners.countOfRank(Rank.FOURTH)}개
         5개 일치 (1500000원)- ${lottoWinners.countOfRank(Rank.THIRD)}개
         6개 일치 (2000000000원)- ${lottoWinners.countOfRank(Rank.FIRST)}개
-        총 수익률은 ${earningRate.incomeStatement()} 입니다.(기준이 1이기 때문에 결과적으로 ${earningRate.incomeStatement()} 라는 의미임)
+        총 수익률은 $earningRate 입니다.(기준이 1이기 때문에 결과적으로 ${earningRate.incomeStatement()} 라는 의미임)
             """.trimIndent()
         )
     }
 }
 
-private fun Tickets.present(): String {
+private fun LottoTicket.present(): String {
     return this.games
         .joinToString("\n") { it.present() }
 }
