@@ -1,7 +1,7 @@
 package calculator
 
 import calculator.NumberExtractor.extract
-import calculator.dto.PositiveNum
+import calculator.vo.PositiveNum
 
 object StringAddCalculator {
     private const val RETURN_VALUE = 0
