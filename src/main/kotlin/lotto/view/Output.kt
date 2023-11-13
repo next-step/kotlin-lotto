@@ -16,9 +16,9 @@ class Output {
             if (type.prize <= 0) return@forEach
 
             val line = buildString {
-                append("${type.match}개 일치 ")
+                append("${type.match}개 일치")
                 if (type == Prize.SECOND) append(", 보너스 볼 일치")
-                append("(${type.prize}원) - ${result.count { it == type }}개")
+                append(" (${type.prize}원) - ${result.count { it == type }}개")
             }
             lines.add(line)
         }
