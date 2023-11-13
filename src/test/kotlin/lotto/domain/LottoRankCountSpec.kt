@@ -4,19 +4,21 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
 class LottoRankCountSpec : FunSpec({
-    test("로또 결과에 대한 총 상금액을 구한다") {
-        val rankCount = mapOf(
-            LottoRank.FIRST to 1,
-            LottoRank.SECOND to 1,
-            LottoRank.THIRD to 2,
-            LottoRank.FOURTH to 1,
-            LottoRank.FIFTH to 1,
-            LottoRank.MISS to 2,
-        )
-        val result = rankCount.let(::LottoRankCounts)
-        val expect =
-            LottoRank.FIRST.winningMoney * 1 + LottoRank.SECOND.winningMoney * 1 + LottoRank.THIRD.winningMoney * 2 + LottoRank.FOURTH.winningMoney * 1 + LottoRank.FIFTH.winningMoney * 1
+    context("로또 랭킹별 티켓 수에 대한 상금 합산") {
+        test("2등에 한 장이 당첨되었을 경우 당첨금은 30_000_000 이다") {
+            val rankCount = mapOf(LottoRank.SECOND to 1).let(::LottoRankCounts)
 
-        result.totalEarningMoney shouldBe expect
+            rankCount.totalEarningMoney.value shouldBe 30_000_000
+        }
+        test("3등에 한 장이 당첨되었을 경우 당첨금은 1_500_000이다") {
+            val rankCount = mapOf(LottoRank.THIRD to 1).let(::LottoRankCounts)
+
+            rankCount.totalEarningMoney.value shouldBe 1_500_000
+        }
+        test("2등에 한 장, 3등에 두 장이 당첨되었을 경우 당첨금은 2_000_000_000이다") {
+            val rankCount = mapOf(LottoRank.SECOND to 1, LottoRank.THIRD to 2).let(::LottoRankCounts)
+
+            rankCount.totalEarningMoney.value shouldBe 33_000_000
+        }
     }
 })
