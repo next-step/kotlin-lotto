@@ -5,16 +5,12 @@ class LottoNumbers(
 ) {
 
     fun match(target: LottoNumbers): Int {
-        val sourceLottoNumbers = this.getNumbers()
-        val targetLottoNumbers = target.getNumbers().toSet()
+        val sourceLottoNumbers = numbers
+        val targetLottoNumbers = target.numbers.toSet()
 
         return sourceLottoNumbers
             .intersect(targetLottoNumbers)
             .size
-    }
-
-    private fun getNumbers(): List<Int> {
-        return numbers
     }
 
     override fun toString(): String {
