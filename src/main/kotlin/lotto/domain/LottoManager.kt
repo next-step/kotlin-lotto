@@ -39,7 +39,7 @@ class LottoManager(val purchased: Int) {
         check(this::winningLotto.isInitialized) { "당첨번호가 설정되지 않았습니다" }
         check(bonusNumber != null) { "보너스 번호가 설정되지 않았습니다" }
 
-        prizes = Prize.getResult(lottos, winningLotto, bonusNumber!!)
+        prizes = lottos.getResult(winningLotto, bonusNumber!!)
     }
 
     companion object {

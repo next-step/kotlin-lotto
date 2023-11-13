@@ -9,19 +9,12 @@ enum class Prize(val prize: Int, val match: Int) {
     NO_PRIZE(0, -1);
 
     companion object {
-        private const val SECOND_THIRD_MATCH = 5
+        private const val SECOND_THIRD_MATCH_NUM = 5
         private val prizeMap = Prize.values().associateBy { it.match }
 
-        fun getResult(lottos: Lottos, winningLotto: Lotto, bonus: LottoNumber): List<Prize> {
-            return lottos.lottoList.map {
-                getPrize(it, winningLotto, bonus)
-            }
-        }
-        fun getPrize(lotto: Lotto, winningLotto: Lotto, bonus: LottoNumber): Prize {
-            val matchNum = lotto.matches(winningLotto)
-
-            return if (matchNum == SECOND_THIRD_MATCH) {
-                if (lotto.numbers.contains(bonus)) SECOND else THIRD
+        fun getPrize(matchNum: Int, bonus: Boolean): Prize {
+            return if (matchNum == SECOND_THIRD_MATCH_NUM) {
+                if (bonus) SECOND else THIRD
             } else {
                 prizeMap[matchNum] ?: NO_PRIZE
             }

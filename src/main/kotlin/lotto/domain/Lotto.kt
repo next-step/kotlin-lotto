@@ -9,6 +9,11 @@ class Lotto(val numbers: List<LottoNumber>) {
     fun matches(winningLotto: Lotto): Int {
         return numbers.intersect(winningLotto.toSet()).size
     }
+
+    fun contains(num: LottoNumber): Boolean {
+        return numbers.contains(num)
+    }
+
     private fun toSet(): Set<LottoNumber> {
         return numbers.toSet()
     }
