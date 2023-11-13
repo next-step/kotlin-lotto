@@ -34,7 +34,7 @@ class LottosTest {
 
     private fun createLotto(vararg numbers: Int): Lotto {
         return Lotto(
-            numbers.map { LottoNumber(it) }
+            numbers.map { LottoNumber.of(it) }
         )
     }
 }

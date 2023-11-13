@@ -6,6 +6,7 @@ object RandomLottoNumbersGenerator : LottoNumbersGenerator {
             .shuffled()
             .take(count)
             .sorted()
-            .map { LottoNumber(it) }
+            .map { LottoNumber.of(it) }
     }
+
 }
