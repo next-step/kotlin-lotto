@@ -8,11 +8,6 @@ value class Amount(
         require(value >= 0) { "금액은 0보다 크거나 같아야 합니다" }
     }
 
-    fun calculateEarningRate(purchasedAmount: Amount): EarningRate {
-        val earningRate = value.toDouble() / purchasedAmount.value
-        return ((earningRate * 100).toInt() / 100.0).let(::EarningRate)
-    }
-
     fun toDouble(): Double =
         value.toDouble()
 

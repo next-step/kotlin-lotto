@@ -28,7 +28,7 @@ class AmountSpec : FunSpec({
 
         val result = amount.toDouble()
 
-        result shouldBe 3000
+        result shouldBe 3000.toDouble()
     }
 
     context("총합 계산") {
