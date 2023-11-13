@@ -9,10 +9,10 @@ class LottoPrize(
 ) {
     companion object {
         private val prizeMap: Map<MatchedCount, Prize> = mapOf(
-            3 to 5000,
-            4 to 50000,
-            5 to 150000,
-            6 to 2000000000,
+            3 to 5_000,
+            4 to 50_000,
+            5 to 150_000,
+            6 to 2_000_000_000,
         )
 
         fun getPrize(matchedCount: MatchedCount): Prize {
