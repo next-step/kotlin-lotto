@@ -5,9 +5,6 @@ data class Record private constructor(
     val reward: Int,
 ) {
     init {
-        require(matchCount >= 3) {
-            "일치하는 번호의 수는 3개 이상부터 입니다."
-        }
         require(reward >= 0) {
             "각 등수별 당첨금액은 0이하 일 수 없습니다."
         }
