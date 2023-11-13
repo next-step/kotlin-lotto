@@ -1,6 +1,6 @@
 package lotto
 
-data class LottoTicket private constructor(val numbers: List<Int>) {
+data class LottoTicket(val numbers: List<Int>) {
 
     companion object {
         private const val MINIMUM_NUMBER = 1
