@@ -1,9 +1,17 @@
 package lotto
 
-class LottoTickets(ticketQuantity: Int) {
-    val numbers: List<LottoTicket> = List(ticketQuantity) { LottoTicket.generate() }
+class LottoTickets {
+    val values: List<LottoTicket>
+
+    constructor(ticketQuantity: Int) {
+        this.values = List(ticketQuantity) { LottoTicket.generate() }
+    }
+
+    constructor(lottoTickets: List<LottoTicket>) {
+        this.values = lottoTickets
+    }
 
     fun getAllLottoNumbers(): List<List<Int>> {
-        return numbers.map { it.numbers }
+        return values.map { it.numbers }
     }
 }
