@@ -15,11 +15,15 @@ data class LottoNumbers(val numbers: List<LottoNumber>) {
 
     companion object {
         fun random(): LottoNumbers {
-            return LottoNumbers(LottoNumber.randomNumbers())
+            val randomNumbers = mutableListOf<LottoNumber>()
+            repeat(6) {
+                randomNumbers.add(LottoNumber.randomNumber(randomNumbers))
+            }
+            return LottoNumbers(randomNumbers)
         }
 
         fun manual(manualNumbers: LottoNumbers): LottoNumbers {
-            return LottoNumbers(LottoNumber.manualNumbers(manualNumbers))
+            return manualNumbers
         }
     }
 }
