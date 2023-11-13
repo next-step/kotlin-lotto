@@ -1,9 +1,6 @@
 package lotto.business
 
 class WinningLottoTicket(lottoNumbers: Set<LottoNumber>) : LottoNumberSet(lottoNumbers) {
-    init {
-        validateNumbers()
-    }
 
     fun compilePrizeResults(tickets: List<LottoTicket>, bonusNumber: LottoNumber): PrizeResults {
         return tickets.map { LotteryPrize.getPrize(it.matchCount(sortedLottoNumbers), it.contains(bonusNumber)) }
