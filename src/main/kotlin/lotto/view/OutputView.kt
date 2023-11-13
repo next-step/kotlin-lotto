@@ -3,8 +3,8 @@ package lotto.view
 import lotto.model.Game
 import lotto.model.LottoTicket
 import lotto.model.LottoWinners
+import lotto.model.PurchaseGames
 import lotto.model.Rank
-import lotto.model.TicketIssuer
 
 object OutputView {
     fun presetRound(lottoTicket: LottoTicket) {
@@ -12,7 +12,7 @@ object OutputView {
     }
 
     fun presentPrizes(lottoWinners: LottoWinners) {
-        val earningRate = lottoWinners.earningRate(TicketIssuer.pricePerGame())
+        val earningRate = lottoWinners.earningRate(PurchaseGames.priceOfGame())
 
         println(
             """
