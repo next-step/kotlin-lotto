@@ -16,7 +16,7 @@ class LotteryResultTest {
             Lotto.from(listOf(7, 12, 13, 14, 15, 16)),
             Lotto.from(listOf(1, 2, 13, 14, 5, 16)),
             Lotto.from(listOf(41, 42, 43, 14, 15, 16)),
-            Lotto.from(listOf(31, 12, 31, 24, 15, 16)),
+            Lotto.from(listOf(31, 12, 32, 24, 15, 16)),
             Lotto.from(listOf(11, 12, 31, 41, 15, 16)),
         )
         val lotteryResult = LotteryResult.of(winning, userLottos)

@@ -1,10 +1,10 @@
 package lotto.domain
 
 class Lotto private constructor(
-    private val lottoNumbers: List<LottoNumber> = listOf()
+    private val lottoNumbers: Set<LottoNumber> = HashSet()
 ) {
 
-    val lotto: List<LottoNumber> = lottoNumbers
+    val lotto: Set<LottoNumber> = lottoNumbers
 
     fun makeMatchCountByNumbers(winningLotto: Lotto): Int {
         var count = 0
@@ -36,7 +36,7 @@ class Lotto private constructor(
 
             val lottoNumbers = numbers.map {
                 LottoNumber.from(it)
-            }.toList()
+            }.toSet()
 
             return Lotto(lottoNumbers)
         }
