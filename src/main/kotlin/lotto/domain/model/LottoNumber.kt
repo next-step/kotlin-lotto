@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.model
 
 @JvmInline
 value class LottoNumber private constructor(val value: Int) {

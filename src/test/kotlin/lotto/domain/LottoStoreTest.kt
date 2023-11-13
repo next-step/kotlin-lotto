@@ -4,6 +4,8 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
+import lotto.domain.model.Lotto
+import lotto.domain.model.LottoCash
 
 class LottoStoreTest : BehaviorSpec({
     given("로또 구입 금액이 주어지고") {

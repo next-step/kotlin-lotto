@@ -1,9 +1,9 @@
 package lotto
 
-import lotto.domain.Lotto
-import lotto.domain.LottoCash
-import lotto.domain.LottoMatchResult
 import lotto.domain.LottoStore
+import lotto.domain.model.Lotto
+import lotto.domain.model.LottoCash
+import lotto.domain.model.LottoMatchResult
 import lotto.view.InputView
 import lotto.view.ResultView
 

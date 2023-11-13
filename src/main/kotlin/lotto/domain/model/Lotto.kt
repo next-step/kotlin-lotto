@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.model
 
 @JvmInline
 value class Lotto private constructor(private val list: List<LottoNumber>) : List<LottoNumber> by list {

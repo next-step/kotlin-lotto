@@ -1,5 +1,9 @@
 package lotto.domain
 
+import lotto.domain.model.Lotto
+import lotto.domain.model.LottoCash
+import lotto.domain.model.LottoMatchCount
+
 object LottoStore {
     private const val LOTTO_PRICE = 1000
 

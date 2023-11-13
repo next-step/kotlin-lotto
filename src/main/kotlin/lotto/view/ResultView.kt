@@ -1,7 +1,7 @@
 package lotto.view
 
-import lotto.domain.Lotto
-import lotto.domain.LottoMatchResult
+import lotto.domain.model.Lotto
+import lotto.domain.model.LottoMatchResult
 
 object ResultView {
     fun printPurchaseResult(lottos: List<Lotto>) {

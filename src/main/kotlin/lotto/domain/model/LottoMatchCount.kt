@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.model
 
 enum class LottoMatchCount(val reward: Int) {
     THREE(5000),
