@@ -1,9 +1,10 @@
 package lotto.view
 
-import lotto.Lotto
-import lotto.LottoRanking
+import lotto.data.Lotto
+import lotto.data.LottoRanking
 
 object OutputView {
+
     private const val TXT_WINNING_STATS = "당첨 통계"
     private const val TXT_PROFIT_COMMENT = "기준이 1이기 때문에 결과적으로 이득이라는 의미임"
     private const val TXT_LOSS_COMMENT = "기준이 1이기 때문에 결과적으로 손해라는 의미임"

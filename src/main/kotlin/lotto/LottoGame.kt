@@ -1,9 +1,13 @@
 package lotto
 
-import lotto.LottoNumber.MAX_NUMBER
-import lotto.LottoNumber.MIN_NUMBER
+import lotto.data.Lotto
+import lotto.data.LottoNumber.MAX_NUMBER
+import lotto.data.LottoNumber.MIN_NUMBER
+import lotto.data.LottoRanking
+import java.util.TreeSet
 
 class LottoGame {
+
     private val winningStatusMap = mutableMapOf<LottoRanking, Int>()
 
     fun buyLotto(cash: Int): List<Lotto> {
@@ -11,7 +15,9 @@ class LottoGame {
         val times = cash / GAME_COST
 
         repeat(times) {
-            lottoList.add(Lotto(createRandomNumber()))
+            val randomNumberList = TreeSet(createRandomNumber())
+            val lotto = Lotto(randomNumberList)
+            lottoList.add(lotto)
         }
 
         return lottoList
@@ -19,11 +25,11 @@ class LottoGame {
 
     private fun createRandomNumber(): List<Int> {
         return (MIN_NUMBER..MAX_NUMBER).shuffled()
-            .subList(SUB_LIST_START_POSITION, SUB_LIST_START_POSITION + SUB_LIST_LENGTH).sorted()
+            .subList(SUB_LIST_START_POSITION, SUB_LIST_START_POSITION + SUB_LIST_LENGTH)
     }
 
     fun getWinningStats(winningNumberList: List<Int>, purchaseLottoList: List<Lotto>): Map<LottoRanking, Int> {
-        val winningLotto = Lotto(winningNumberList)
+        val winningLotto = Lotto(TreeSet(winningNumberList))
         purchaseLottoList.forEach {
             val lottoRanking = LottoMachine.checkLotto(winningLotto, it)
             winningStatusMap[lottoRanking] = winningStatusMap.getOrDefault(lottoRanking, 0) + 1

@@ -1,13 +1,18 @@
 package lotto
 
+import lotto.data.Lotto
+import lotto.data.LottoRanking
+import java.util.TreeSet
+
 object LottoMachine {
+
     private const val SIX = 6
     private const val FIVE = 5
     private const val FOUR = 4
     private const val THREE = 3
 
     fun createLotto(numberList: List<Int>): Lotto {
-        return Lotto(numberList)
+        return Lotto(TreeSet(numberList))
     }
 
     fun checkLotto(winningLotto: Lotto, purchaseLotto: Lotto): LottoRanking {

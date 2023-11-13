@@ -8,13 +8,13 @@ fun main() {
     val cash = InputView.inputCash()
     val lottoGame = LottoGame()
 
-    val lottoList = lottoGame.buyLotto(cash.toInt())
+    val purchaseLottoList = lottoGame.buyLotto(cash.toInt())
 
-    OutputView.showLottoList(lottoList)
+    OutputView.showLottoList(purchaseLottoList)
 
     val winningNumberList = InputView.inputWinningNumber()
 
-    val winningStatus = lottoGame.getWinningStats(winningNumberList, lottoList)
+    val winningStatus = lottoGame.getWinningStats(winningNumberList, purchaseLottoList)
 
     val winningRate = LottoMachine.createWinningRate(cash.toInt(), winningStatus)
 

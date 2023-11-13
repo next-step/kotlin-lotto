@@ -1,6 +1,7 @@
-package lotto
+package lotto.data
 
 sealed class LottoRanking(val matchingNumberCnt: Int, val price: Int) {
+
     object FirstPlace : LottoRanking(FIRST_PLACE_MATCHING_NUMBER_CNT, FIRST_PLACE_MATCHING_PRICE)
     object SecondPlace : LottoRanking(SECOND_PLACE_MATCHING_NUMBER_CNT, SECOND_PLACE_MATCHING_PRICE)
     object ThirdPlace : LottoRanking(THIRD_PLACE_MATCHING_NUMBER_CNT, THIRD_PLACE_MATCHING_PRICE)

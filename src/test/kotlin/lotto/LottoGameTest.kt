@@ -1,5 +1,7 @@
 package lotto
 
+import lotto.data.Lotto
+import lotto.data.LottoRanking
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -23,12 +25,12 @@ class LottoGameTest {
         // 2등 - 2개, 3등 - 1개, 4등 - 1개
         val winningNumberList = listOf(1, 2, 3, 4, 5, 6)
 
-        val purchaseLotto1 = Lotto(listOf(1, 2, 3, 4, 5, 7))
-        val purchaseLotto2 = Lotto(listOf(1, 2, 3, 4, 5, 7))
-        val purchaseLotto3 = Lotto(listOf(1, 2, 3, 4, 7, 8))
-        val purchaseLotto4 = Lotto(listOf(1, 2, 3, 7, 8, 9))
-        val purchaseLotto5 = Lotto(listOf(1, 2, 6, 7, 8, 9))
-        val purchaseLotto6 = Lotto(listOf(11, 12, 13, 14, 15, 16))
+        val purchaseLotto1 = Lotto(sortedSetOf(1, 2, 3, 4, 5, 7))
+        val purchaseLotto2 = Lotto(sortedSetOf(1, 2, 3, 4, 5, 7))
+        val purchaseLotto3 = Lotto(sortedSetOf(1, 2, 3, 4, 7, 8))
+        val purchaseLotto4 = Lotto(sortedSetOf(1, 2, 3, 7, 8, 9))
+        val purchaseLotto5 = Lotto(sortedSetOf(1, 2, 6, 7, 8, 9))
+        val purchaseLotto6 = Lotto(sortedSetOf(11, 12, 13, 14, 15, 16))
 
         val purchaseLottoList =
             listOf(purchaseLotto1, purchaseLotto2, purchaseLotto3, purchaseLotto4, purchaseLotto5, purchaseLotto6)
