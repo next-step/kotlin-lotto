@@ -19,15 +19,15 @@ class LotteryResultTest {
             Lotto.from(listOf(31, 12, 32, 24, 15, 16)),
             Lotto.from(listOf(11, 12, 31, 41, 15, 16)),
         )
-        val lotteryResult = LotteryResult.of(winning, userLottos)
+        val actual = LotteryResult.from(Rank.records())
 
         // When
-        val actual = lotteryResult.makeRankResult(6000)
+        actual.makeRankResult(6000, winning, userLottos)
 
         // Then
         val expected = makeExpectedRecords()
         assertAll(
-            { assertThat(actual.records).isEqualTo(expected) },
+            { assertThat(actual.rankRecord).isEqualTo(expected) },
             { assertThat(actual.rate).isEqualTo(0.83) },
         )
     }

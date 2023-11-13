@@ -1,29 +1,28 @@
 package lotto.domain
 
-import lotto.enums.Rank
 import kotlin.math.floor
 
 class LotteryResult private constructor(
-    private val winningLotto: Lotto,
-    private val userLottos: List<Lotto> = listOf(),
-    private val rankRecord: List<Record> = listOf(),
+    val rankRecord: List<Record> = listOf(),
 ) {
     var rate: Double = 0.0
-    val records = rankRecord
 
-    fun makeRankResult(amount: Int): LotteryResult {
-        calculateRecords()
+    fun makeRankResult(
+        amount: Int,
+        winningLotto: Lotto,
+        userLottos: List<Lotto>
+    ) {
+        calculateRecords(winningLotto, userLottos)
         calculateRateOfReturn(amount)
-        return this
     }
 
-    private fun calculateRecords() {
+    private fun calculateRecords(winningLotto: Lotto, userLottos: List<Lotto>) {
         userLottos.forEach { lotto ->
-            calculateRecordByLotto(lotto)
+            calculateRecordByLotto(lotto, winningLotto)
         }
     }
 
-    private fun calculateRecordByLotto(lotto: Lotto) {
+    private fun calculateRecordByLotto(lotto: Lotto, winningLotto: Lotto) {
         val matchCount = lotto.makeMatchCountByNumbers(winningLotto)
         rankRecord.forEach {
             it.addCountByRecord(matchCount)
@@ -39,15 +38,10 @@ class LotteryResult private constructor(
 
     companion object {
 
-        fun of(
-            winningLotto: Lotto,
-            userLottos: List<Lotto>,
+        fun from(
+            rankRecord: List<Record>,
         ): LotteryResult {
-            return LotteryResult(
-                winningLotto,
-                userLottos,
-                Rank.records()
-            )
+            return LotteryResult(rankRecord)
         }
     }
 }

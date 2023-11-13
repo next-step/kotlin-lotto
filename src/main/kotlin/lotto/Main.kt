@@ -5,6 +5,7 @@ import lotto.domain.Lotto
 import lotto.domain.LottoBundle
 import lotto.domain.Purchase
 import lotto.domain.StringSplit
+import lotto.enums.Rank
 import lotto.service.AutoNumberCreateStrategy
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -28,9 +29,7 @@ fun main() {
     val winningLotto = Lotto.from(winningNumbers)
 
     // 당첨 통계 출력
-    val rankResult = LotteryResult.of(
-        winningLotto,
-        lottoBundle.bundle
-    ).makeRankResult(purchase.amount)
+    val rankResult = LotteryResult.from(Rank.records())
+    rankResult.makeRankResult(purchase.amount, winningLotto, lottoBundle.bundle)
     OutputView.printLotteryResult(rankResult)
 }

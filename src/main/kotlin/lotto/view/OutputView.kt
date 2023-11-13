@@ -19,7 +19,7 @@ object OutputView {
     fun printLotteryResult(lotteryResult: LotteryResult) {
         println("당첨 통계")
         println("--------")
-        lotteryResult.records.forEach { record ->
+        lotteryResult.rankRecord.forEach { record ->
             println("${record.matchCount}개 일치 (${record.reward}원)- ${record.recordCount}개")
         }
         printRateOfReturn(lotteryResult)
