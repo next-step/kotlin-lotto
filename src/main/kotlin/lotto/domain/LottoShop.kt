@@ -3,9 +3,9 @@ package lotto.domain
 class LottoShop(
     private val lottoNumberGenerator: LottoNumberGenerator,
 ) {
-    fun purchaseLottos(purchaseAmount: Won, manualLottoNumbers: List<List<LottoNumber>>): List<Lotto> {
+    fun purchaseLottos(purchaseAmount: Won, manualLottoNumbers: List<ManualLottoNumbers>): List<Lotto> {
         val manualLottoCount = manualLottoNumbers.size
-        val manualLottos = manualLottoNumbers.map(::Lotto)
+        val manualLottos = manualLottoNumbers.map { Lotto(it.numbers) }
 
         val purchaseCount = (purchaseAmount / Lotto.PRICE).amount.toInt()
 

@@ -2,7 +2,7 @@ package lotto.domain
 
 class PurchasedLottos(
     private val purchaseAmount: Won,
-    manualLottoNumbers: List<List<LottoNumber>>,
+    manualLottoNumbers: List<ManualLottoNumbers>,
     lottoNumberGenerator: LottoNumberGenerator,
 ) {
     val lottos: List<Lotto> = LottoShop(lottoNumberGenerator).purchaseLottos(purchaseAmount, manualLottoNumbers)

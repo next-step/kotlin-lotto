@@ -15,7 +15,7 @@ class LottoShopTest {
         val lottoNumberGenerator = FakeLottoNumberGenerator(autoNumbers)
         val lottoShop = LottoShop(lottoNumberGenerator)
 
-        val actual = lottoShop.purchaseLottos(purchaseAmount, listOf(manualLottoNumbers))
+        val actual = lottoShop.purchaseLottos(purchaseAmount, listOf(ManualLottoNumbers(manualLottoNumbers)))
 
         assertThat(actual).hasSize((purchaseAmount / Lotto.PRICE).amount.toInt())
         assertThat(actual.first()).usingRecursiveComparison()
@@ -27,7 +27,7 @@ class LottoShopTest {
     @Test
     fun `주어진 구입 금액으로 주어진 수만큼의 수동 로또를 구매할 수 없으면 IllegalArgumentException이 발생한다`() {
         val purchaseAmount = Lotto.PRICE
-        val manualLottoNumbers = List(2) { (1..6).map(::LottoNumber) }
+        val manualLottoNumbers = List(2) { ManualLottoNumbers((1..6).map(::LottoNumber)) }
         val autoNumbers = (2..7).toList()
         val lottoNumberGenerator = FakeLottoNumberGenerator(autoNumbers)
         val lottoShop = LottoShop(lottoNumberGenerator)
