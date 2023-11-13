@@ -74,7 +74,8 @@ class LottoTest {
                     LottoNumber.of(5),
                     LottoNumber.of(7)
                 )
-            )
+            ),
+            LottoNumber.of(6)
         )
         assertThat(lotto.getRank(winningLotto)).isEqualTo(LottoRank.SECOND)
     }

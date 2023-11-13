@@ -8,7 +8,8 @@ class Lotto(
     }
 
     fun getRank(winningLotto: WinningLotto): LottoRank {
-        return LottoRank.of(numbers.count { winningLotto.contains(it) })
+        val matchingResult = winningLotto.getMatchingResult(this)
+        return LottoRank.of(matchingResult.count, matchingResult.bonus)
     }
 
     fun contains(lottoNumber: LottoNumber): Boolean {

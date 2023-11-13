@@ -32,7 +32,8 @@ class LottoResultTest {
                         LottoNumber.of(5),
                         LottoNumber.of(6)
                     )
-                )
+                ),
+                LottoNumber.of(7)
             )
         )
         assertThat(lottoResult.getLottoResult().lottoRanks).isEqualTo(

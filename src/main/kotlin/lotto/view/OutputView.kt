@@ -12,6 +12,10 @@ object OutputView {
         println("지난 주 당첨 번호를 입력해 주세요.")
     }
 
+    fun printRequestInputBonusNumber() {
+        println("보너스 볼을 입력해 주세요.")
+    }
+
     fun printBuyingResult(lottos: List<Lotto>) {
         println("${lottos.size}개를 구매했습니다.")
 

@@ -1,9 +1,18 @@
 package lotto.domain
 
 class WinningLotto(
-    val lotto: Lotto,
+    private val lotto: Lotto,
+    private val bonusNumber: LottoNumber
 ) {
-    fun contains(lottoNumber: LottoNumber): Boolean {
-        return lotto.contains(lottoNumber)
+    fun getMatchingResult(lotto: Lotto): MatchingResult {
+        return MatchingResult(
+            lotto.numbers.count { this.lotto.contains(it) },
+            lotto.contains(bonusNumber)
+        )
     }
+
+    data class MatchingResult(
+        val count: Int,
+        val bonus: Boolean
+    )
 }
