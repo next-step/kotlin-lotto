@@ -3,8 +3,7 @@ package lotto.view
 import lotto.domain.Lotto
 import lotto.domain.LottoList
 import lotto.domain.LottoNumber
-import lotto.domain.LottoNumbers
-import lotto.domain.ManualLotto
+import lotto.domain.ManualLottoCreator
 import lotto.domain.Money
 import lotto.domain.WinningNumbers
 
@@ -24,7 +23,8 @@ object InputView {
         println("수동으로 구매할 번호를 입력해 주세요.")
         val list = mutableListOf<Lotto>()
         repeat(count) {
-            list.add(ManualLotto(LottoNumbersInput(readln()).numbers))
+            val numbers = ManualLottoCreator(LottoNumbersInput(readln()).numbers).createLotto()
+            list.add(numbers)
         }
         return LottoList(list)
     }
