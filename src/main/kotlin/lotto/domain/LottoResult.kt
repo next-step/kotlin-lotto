@@ -1,9 +1,8 @@
 package lotto.domain
 
 data class LottoResult(
-    val profit: Long,
+    val lottoProfitResult: LottoProfitResult,
     val netSpent: Int,
-    val remainder: Int,
-    val profitRate: Double,
-    val rankResult: Map<Rank, Int>
-)
+) {
+    val profitRate: Double get() = lottoProfitResult.profitRate
+}

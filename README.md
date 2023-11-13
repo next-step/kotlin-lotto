@@ -20,4 +20,6 @@
 - [x] winning number should have exact 6 numbers else throw IllegalArgumentException
 - [x] winning number with same number should throw IllegalArgumentException
 - [x] winning statistics should calculate correct profit
-- [ ] winning statistics should show correct ROI
+- [x] winning statistics should show correct ROI
+- [x] lotto purchase order should calculate correct total price and remainder
+- [x] lotto profit result should calculate correct profit rate
