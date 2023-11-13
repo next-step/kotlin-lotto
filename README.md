@@ -127,9 +127,33 @@ Enum 클래스를 적용해 프로그래밍을 구현한다.
 
 ### 이전의 피드백 들 중 반영이 되지 않았거나, 애매하거나, 놓친 것들을 리스트업
 ```text
+##) LottoApp(Issuer) 이 무슨 기능을 하는지 잘 이해가 되지 않아요!
+LottoApp에게 어떤 역할을 요청하고 싶은 것인가요? 그렇지 않으면 상수들이 모여있는 유틸리티인가요? 정말 해당 기능을 가지고 있어야할 객체가 따로 있지는 않을까요?
+>> PurchaseGames 으로 일원화 하였습니다
 
+## 지난 자동차 경주 미션에서 랜덤 번호를 발급하는 전략처럼,
+로또 게임을 협력을 통해 만들도록 해보면 어떨까요?
+"로또 게임 발급기" "자동 로또 게임 발급기"
+
+## 가변 컬렉션을 가지고 관리를 하다보면, 위 로직 처럼 상태를 오염시키지 않기 위해 다소 복잡한 처
+WinningNumbers.kt - LinkedHashSet 가변컬렉션임
+LinkedHashSet 은 가변 컬렉션이기 때문에 외부에서의 변경에 취약할 수 있습니다.
+data class의 경우 copy 함수로 인해 생성자를 private으로 만드는 것도 불가능하게 되는데요.
+val values: LinkedHashSet<LottoNumber>
+val lottoNumbers = LottoNumbers(values)
+values.add(...)
+values.add(...)
+values.add(...)
+values.remove(...)
+방어적 복사를 이용해서 안전한 타입으로 만들어 보면 어떨까요?
+
+
+## Set.intersect() 라는 함수를 이용하면 간단하게 일치하는 갯수를 계산
+컬렉션의 intersect() 함수를 찾아보세요. 이름 그대로 교집합의 갯수를 찾아줍니다
+
+## LottoWinners.kt
+이 함수를 이용해서만 접근한다면, winningCountBy 프로퍼티 자체는 private으로 감출 수 있겠네요!
 ```
-- 같은리뷰 두번 주시게 해서 죄송함다.. 제가 놓쳤슴다 ㅠㅠ (Set.intersect())
 
 ### 요구사항
 
