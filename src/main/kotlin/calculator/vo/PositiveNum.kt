@@ -1,4 +1,4 @@
-package calculator.dto
+package calculator.vo
 
 @JvmInline
 value class PositiveNum(val value: Int) {

@@ -1,7 +1,7 @@
 package calculator
 
-import calculator.dto.PositiveNum
-import calculator.dto.PositiveNums
+import calculator.vo.PositiveNum
+import calculator.vo.PositiveNums
 
 object NumberExtractor {
     private val PARSER_RULE = Regex("//(.)\n(.*)")

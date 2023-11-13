@@ -1,4 +1,4 @@
-package calculator.dto
+package calculator.vo
 
 data class PositiveNums(val positiveNums: List<PositiveNum>) {
     fun sum(): PositiveNum {
