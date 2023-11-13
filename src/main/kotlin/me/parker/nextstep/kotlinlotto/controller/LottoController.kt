@@ -6,7 +6,7 @@ import me.parker.nextstep.kotlinlotto.domain.LottoWinningMachine
 import me.parker.nextstep.kotlinlotto.view.ConsoleInput
 import me.parker.nextstep.kotlinlotto.view.ConsoleResult
 
-fun main(args: Array<String>) {
+fun main() {
     val amountOfPurchase: Int = ConsoleInput.inputAmountOfPurchaseLotto()
 
     val purchasedLottoTickets: List<LottoTicket> = List(amountOfPurchase / LottoTicket.PRICE) {
