@@ -26,7 +26,18 @@ class LottoGameTest{
     fun result() {
         val lottoList = listOf(Lotto(listOf(1, 2, 3, 7, 8, 9)))
         val lastNumbers = listOf(1, 2, 3, 4, 5, 6)
-        lottoGame.result(lottoList, lastNumbers)
-        assertThat(lottoList.first().matchCount).isEqualTo(3)
+        val bonus = 10
+        lottoGame.result(lottoList, lastNumbers, bonus)
+        assertThat(lottoList.first().rank).isEqualTo(Rank.FIFTH)
+    }
+
+    @DisplayName(value = "보너스 로또 발급")
+    @Test
+    fun resultBonus() {
+        val lottoList = listOf(Lotto(listOf(1, 2, 3, 4, 5, 9)))
+        val lastNumbers = listOf(1, 2, 3, 4, 5, 6)
+        val bonus = 9
+        lottoGame.result(lottoList, lastNumbers, bonus)
+        assertThat(lottoList.first().rank).isEqualTo(Rank.SECOND)
     }
 }
