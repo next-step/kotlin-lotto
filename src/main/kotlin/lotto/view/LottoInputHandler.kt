@@ -15,4 +15,9 @@ object LottoInputHandler {
         println("보너스 볼을 입력해 주세요.")
         return readlnOrNull().let { require(it != null && it.toIntOrNull() != null) { "보너스 볼은 숫자여야 합니다." }; return it.toInt() }
     }
+
+    fun inputManualTicketCount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        return readlnOrNull().let { require(it != null && it.toIntOrNull() != null) { "수동으로 구매할 로또 수는 숫자여야 합니다." }; return it.toInt() }
+    }
 }
