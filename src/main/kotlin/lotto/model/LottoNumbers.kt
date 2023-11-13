@@ -16,12 +16,10 @@ value class LottoNumbers(
             .joinToString(prefix = "[", postfix = "]", separator = ", ")
     }
 
-    fun countOfMatchNumbers(other: LottoNumbers): Int {
-        return other
-            .values
-            .asSequence()
-            .filter { this.values.contains(it) }
-            .count()
+    fun numbersIntersections(other: LottoNumbers): Int {
+        return other.values
+            .intersect(this.values)
+            .size
     }
 
     fun containNumber(number: LottoNumber): Boolean {
