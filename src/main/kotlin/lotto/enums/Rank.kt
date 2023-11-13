@@ -3,14 +3,14 @@ package lotto.enums
 import lotto.domain.Record
 
 enum class Rank(
-    val matchCount: IntRange,
+    val matchCount: Int,
     val reward: Int,
 ) {
-    FOURTH_RANK(3..3, 5000),
-    THIRD_RANK(4..4, 50000),
-    SECOND_RANK(5..5, 1500000),
-    FIRST_RANK(6..6, 2000000000),
-    NONE_RANK(0..2, 0),
+    FOURTH_RANK(3, 5_000),
+    THIRD_RANK(4, 50_000),
+    SECOND_RANK(5, 1_500_000),
+    FIRST_RANK(6, 2_000_000_000),
+    NONE_RANK(0, 0),
     ;
 
     companion object {
@@ -18,7 +18,7 @@ enum class Rank(
             return values().filter {
                 it != NONE_RANK
             }.map {
-                Record.of(it.matchCount.min(), it.reward)
+                Record.of(it.matchCount, it.reward)
             }
         }
     }
