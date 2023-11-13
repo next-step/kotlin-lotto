@@ -2,7 +2,7 @@ package lotto
 
 import lotto.model.LottoGenerator
 import lotto.model.LottoPerson
-import lotto.model.LottoResultBuilder
+import lotto.model.LottoResultFactory
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -23,17 +23,14 @@ class LottoOrganizer {
         ResultView.renderTickets(lottoTickets)
 
         val (winningNumbers, bonusNumber) = InputView.getWinningNumbers()
-        val lottoResults = LottoResultBuilder.getLottoResults(
-            lottoTickets,
-            winningNumbers,
-            bonusNumber
-        )
+
+        val lottoResult = LottoResultFactory.getLottoResult(lottoTickets, winningNumbers, bonusNumber)
 
         ResultView.renderResults(
-            lottoResults.results
+            lottoResult.results
         )
         ResultView.renderProfit(
-            lottoResults.profit
+            lottoResult.profit
         )
     }
 }

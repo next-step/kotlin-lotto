@@ -1,6 +1,6 @@
 package lotto.model
 
-class LottoResults(val results: Map<Prize, Int> ) {
+class LottoResult(val results: Map<Prize, Int> ) {
 
     val profit
         get() = getLottoProfit()
