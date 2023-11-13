@@ -6,7 +6,7 @@ data class PurchaseGames(
     val manualTicketingInput: String,
 ) {
     init {
-        require(totalGameCount >= manualGameCount) { "금액을 초과하는 수동발권은 불가능합니다" }
+        require(totalGameCount >= manualGameCount) { "총 구매 수량[$totalGameCount]보다 많은 수의 수동 발권 수량[$manualGameCount] 입력은 불가능합니다 " }
         requirePositive(totalGameCount)
         requirePositive(manualGameCount)
         requireTicketString()
@@ -18,10 +18,6 @@ data class PurchaseGames(
 
     private fun requirePositive(input: Int) {
         require(input > 0) { "발권 수량은 양의 정수만 가능 합니다" }
-    }
-
-    fun manualIssueCount(): Int {
-        return this.manualGameCount
     }
 
     fun autoIssueCount(): Int {
