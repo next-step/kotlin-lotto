@@ -1,9 +1,11 @@
 package lotto.business
 
-abstract class LottoNumberSet(val lottoNumbers: Set<LottoNumber>) {
+abstract class LottoNumberSet(lottoNumbers: Set<LottoNumber>) {
 
-    val sortedLottoNumbers
-        get() = this.lottoNumbers.sortedBy { it.number }
+    private val _lottoNumbers: Set<LottoNumber> = lottoNumbers
+
+    val lottoNumbers: List<LottoNumber>
+        get() = _lottoNumbers.sortedBy { it.number }
 
     init {
         require(lottoNumbers.size == LOTTO_NUMBER_SIZE) {
