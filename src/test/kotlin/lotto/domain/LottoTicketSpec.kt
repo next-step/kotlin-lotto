@@ -1,18 +1,25 @@
 package lotto.domain
 
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.data.forAll
+import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 
 class LottoTicketSpec : FunSpec({
     context("로또 가격 계산") {
         test("가격이 주어지면 구입한 총 가격이 계산된다") {
-            val price = Amount(1000)
-            val count = 3
-            val ticket = LottoTicket(List(count) { LottoMock.createTicket() })
+            forAll(
+                row(listOf(LottoNumber(listOf(1, 2, 3, 4, 5, 6))),1000),
+                row(listOf(LottoNumber(listOf(1, 2, 3, 4, 5, 6)), LottoNumber(listOf(2, 3, 4, 5, 6, 7))),2000),
+                row(listOf(LottoNumber(listOf(1, 2, 3, 4, 5, 6)), LottoNumber(listOf(2, 3, 4, 5, 6, 7)), LottoNumber(listOf(3, 4, 5, 6, 7, 8))), 3000),
+            ) { lottoNumbers, expectAmount ->
+                val ticketPrice = Amount(1000)
+                val ticket = LottoTicket(lottoNumbers)
 
-            val result = ticket.calculateTotalPriceBy(price)
+                val result = ticket.calculateTotalPriceBy(ticketPrice)
 
-            result shouldBe price * count
+                result.value shouldBe expectAmount
+            }
         }
     }
 
