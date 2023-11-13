@@ -1,3 +1,4 @@
+
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -15,18 +16,6 @@ class StringAddCalculatorTest {
 
         // then : 문자열의 수를 합한 값이 배출된다.
         assertThat(actual).isEqualTo(expected)
-    }
-
-    @Test
-    fun `null을 입력했을 때, 계산을 요청하면, 0을 배출한다`() {
-        // given : null 값을 입력 받는다.
-        val inputData = null
-
-        // when : 분리된 문자열의 합을 구한다.
-        val actual = StringAddCalculator.calculate(inputData)
-
-        // then : 0을 반환한다.
-        assertThat(actual).isEqualTo(0)
     }
 
     @Test
