@@ -2,7 +2,9 @@ package lotto.dto
 
 import lotto.vo.LottoNumber
 
-data class LottoResult private constructor (val winningNumber: List<LottoNumber>) {
+data class LottoResult private constructor (private val _winningNumber: List<LottoNumber>) {
+    val winningNumber
+        get() = _winningNumber
 
     companion object {
         private const val WINNING_NUMBERS_DELIMITER = ","
