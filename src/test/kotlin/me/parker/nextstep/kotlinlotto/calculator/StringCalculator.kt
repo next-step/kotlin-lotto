@@ -14,19 +14,11 @@ object StringCalculator {
         val customSeparator = matchedResult?.groupValues?.get(1)
         val textAfterNewline = matchedResult?.groupValues?.get(2)
 
-        if (customSeparator.isNotNullOrEmpty() && textAfterNewline.isNotNullOrEmpty()) {
-            return add(
-                textAfterNewline!!,
-                DEFAULT_SEPARATOR_COMMA, DEFAULT_SEPARATOR_COLON,
-                customSeparator!!
-            )
+        if (customSeparator.isNullOrBlank() || textAfterNewline.isNullOrBlank()) {
+            return add(input, DEFAULT_SEPARATOR_COMMA, DEFAULT_SEPARATOR_COLON)
         }
 
-        return add(input, DEFAULT_SEPARATOR_COMMA, DEFAULT_SEPARATOR_COLON)
-    }
-
-    private fun String?.isNotNullOrEmpty(): Boolean {
-        return !this.isNullOrEmpty()
+        return add(textAfterNewline, DEFAULT_SEPARATOR_COMMA, DEFAULT_SEPARATOR_COLON, customSeparator)
     }
 
     private fun add(formula: String, vararg separators: String) =
