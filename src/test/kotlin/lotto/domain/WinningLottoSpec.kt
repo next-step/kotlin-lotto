@@ -29,28 +29,115 @@ class WinningLottoSpec : FunSpec({
         }
     }
 
-    context("Rank 계산") {
-        test("당첨번호와 맞은 개수에 따라 Rank를 계산한") {
-            val winningLotto = WinningLotto(
-                winningNumber = LottoNumber(listOf(1, 2, 3, 4, 5, 6)),
-                bonusNumber = 7,
-            )
+    context("일치하는 개수에 따른 Rank 계산") {
+        val bonusNumber = 7
+        val winningLotto = WinningLotto(
+            winningNumber = LottoNumber(listOf(1, 2, 3, 4, 5, 6)),
+            bonusNumber = bonusNumber,
+        )
+        context("숫자가 하나도 일치하지 않았다면 Rank MISS 반환") {
 
-            forAll(
-                row(mutableListOf(1, 2, 3, 4, 5, 6), LottoRank.FIRST),
-                row(mutableListOf(1, 2, 3, 4, 5, 7), LottoRank.SECOND),
-                row(mutableListOf(1, 2, 3, 4, 5, 45), LottoRank.THIRD),
-                row(mutableListOf(1, 2, 3, 4, 44, 45), LottoRank.FOURTH),
-                row(mutableListOf(1, 2, 3, 43, 44, 45), LottoRank.FIFTH),
-                row(mutableListOf(1, 2, 42, 43, 44, 45), LottoRank.MISS),
-                row(mutableListOf(1, 41, 42, 43, 44, 45), LottoRank.MISS),
-                row(mutableListOf(40, 41, 42, 43, 44, 45), LottoRank.MISS),
-            ) { numbers, expect ->
+            val noneMatchedNumber = LottoNumber(listOf(100, 101, 102, 103, 104, 105))
 
-                val result =  winningLotto.rank(LottoNumber(numbers))
+            val result = winningLotto.rank(noneMatchedNumber)
 
-                result shouldBe expect
-            }
+            result shouldBe LottoRank.MISS
+        }
+
+        test("숫자가 하나도 일치하지 않았다면 보너스 볼이 일치했더라도 Rank MISS 반환") {
+            val noneMatchedNumber = LottoNumber(listOf(100, 101, 102, 103, 104, bonusNumber))
+
+            val result = winningLotto.rank(noneMatchedNumber)
+
+            result shouldBe LottoRank.MISS
+        }
+
+        test("숫자가 1개 일치했다면 Rank MISS 반환") {
+            val noneMatchedNumber = LottoNumber(listOf(1, 101, 102, 103, 104, 105))
+
+            val result = winningLotto.rank(noneMatchedNumber)
+
+            result shouldBe LottoRank.MISS
+        }
+
+        test("숫자가 1개 일치했다면 보너스 볼이 일치했더라도 Rank MISS 반환") {
+            val noneMatchedNumber = LottoNumber(listOf(1, 101, 102, 103, 104, bonusNumber))
+
+            val result = winningLotto.rank(noneMatchedNumber)
+
+            result shouldBe LottoRank.MISS
+        }
+
+        test("숫자가 2개 일치했다면 Rank MISS 반환") {
+            val noneMatchedNumber = LottoNumber(listOf(1, 2, 102, 103, 104, 105))
+
+            val result = winningLotto.rank(noneMatchedNumber)
+
+            result shouldBe LottoRank.MISS
+        }
+
+        test("숫자가 2개 일치했다면 보너스 볼이 일치했더라도 Rank MISS 반환") {
+            val noneMatchedNumber = LottoNumber(listOf(1, 2, 102, 103, 104, bonusNumber))
+
+            val result = winningLotto.rank(noneMatchedNumber)
+
+            result shouldBe LottoRank.MISS
+        }
+
+        test("숫자가 3개 일치했다면 Rank FIFTH 반환") {
+            val noneMatchedNumber = LottoNumber(listOf(1, 2, 3, 103, 104, 105))
+
+            val result = winningLotto.rank(noneMatchedNumber)
+
+            result shouldBe LottoRank.FIFTH
+        }
+
+        test("숫자가 3개 일치했다면 보너스 볼이 일치했더라도 Rank FIFTH 반환") {
+            val noneMatchedNumber = LottoNumber(listOf(1, 2, 3, 103, 104, bonusNumber))
+
+            val result = winningLotto.rank(noneMatchedNumber)
+
+            result shouldBe LottoRank.FIFTH
+        }
+
+        test("숫자가 4개 일치했다면 Rank FOURTH 반환") {
+            val noneMatchedNumber = LottoNumber(listOf(1, 2, 3, 4, 104, 105))
+
+            val result = winningLotto.rank(noneMatchedNumber)
+
+            result shouldBe LottoRank.FOURTH
+        }
+
+        test("숫자가 4개 일치했다면 보너스 볼이 일치했더라도 Rank FOURTH 반환") {
+            val noneMatchedNumber = LottoNumber(listOf(1, 2, 3, 4, 104, bonusNumber))
+
+            val result = winningLotto.rank(noneMatchedNumber)
+
+            result shouldBe LottoRank.FOURTH
+        }
+
+        test("숫자가 5개 일치하고 보너스 볼이 일치하지 않았다면 Rank THIRD 반환") {
+            val noneMatchedNumber = LottoNumber(listOf(1, 2, 3, 4, 5, 105))
+
+            val result = winningLotto.rank(noneMatchedNumber)
+
+            result shouldBe LottoRank.THIRD
+        }
+
+        test("숫자가 5개 일치했다면 보너스 볼이 일치했더라도 Rank SECOND 반환") {
+            val noneMatchedNumber = LottoNumber(listOf(1, 2, 3, 4, 5, bonusNumber))
+
+            val result = winningLotto.rank(noneMatchedNumber)
+
+            result shouldBe LottoRank.SECOND
+        }
+
+        test("숫자가 6개 일치했다면 Rank FIRST 반환") {
+            val noneMatchedNumber = LottoNumber(listOf(1, 2, 3, 4, 5, 6))
+
+            val result = winningLotto.rank(noneMatchedNumber)
+
+            result shouldBe LottoRank.FIRST
         }
     }
 })
