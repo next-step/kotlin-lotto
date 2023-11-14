@@ -24,7 +24,7 @@ fun main() {
     OutputView.printJackpotNumber()
     val inputNumber = InputView.inputJackpotNumber()
     OutputView.printBonusNumber()
-    val bonusNumber = BonusNumberDto(InputView.inputBonusNumber()).lottoNumber
+    val bonusNumber = BonusNumberDto(InputView.inputBonusNumber()).bonusNumber
 
     val jackpotNumbers = lottoShop.generateJackpotNumbers(inputNumber)
     val lottoWinning = LottoWinning(jackpotNumbers, bonusNumber)
