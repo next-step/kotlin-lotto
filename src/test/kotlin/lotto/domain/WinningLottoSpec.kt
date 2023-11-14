@@ -36,7 +36,6 @@ class WinningLottoSpec : FunSpec({
             bonusNumber = bonusNumber,
         )
         context("숫자가 하나도 일치하지 않았다면 Rank MISS 반환") {
-
             val noneMatchedNumber = LottoNumber(listOf(100, 101, 102, 103, 104, 105))
 
             val result = winningLotto.rank(noneMatchedNumber)
@@ -124,7 +123,7 @@ class WinningLottoSpec : FunSpec({
             result shouldBe LottoRank.THIRD
         }
 
-        test("숫자가 5개 일치했다면 보너스 볼이 일치했더라도 Rank SECOND 반환") {
+        test("숫자가 5개 일치하고 보너스 볼이 일치했다면 Rank SECOND 반환") {
             val noneMatchedNumber = LottoNumber(listOf(1, 2, 3, 4, 5, bonusNumber))
 
             val result = winningLotto.rank(noneMatchedNumber)

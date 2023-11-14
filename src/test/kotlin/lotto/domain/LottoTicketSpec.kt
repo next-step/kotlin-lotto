@@ -8,14 +8,16 @@ import io.kotest.matchers.shouldBe
 class LottoTicketSpec : FunSpec({
     val oneToSixLottoNumber = LottoNumber(listOf(1, 2, 3, 4, 5, 6))
 
-    context("로또 가격 계산") {
-        test("가격이 주어지면 구입한 총 가격이 계산된다") {
-            forAll(
-                row(listOf(oneToSixLottoNumber), 1000),
-                row(listOf(oneToSixLottoNumber, oneToSixLottoNumber), 2000),
-                row(listOf(oneToSixLottoNumber, oneToSixLottoNumber, oneToSixLottoNumber), 3000),
-            ) { lottoNumbers, expectAmount ->
-                val ticketPrice = Amount(1000)
+    context("한 장 가격(1_000)이 주어지면 총 장수에 대한 로또 구매 금액 계산") {
+        val ticketPrice = Amount(1000)
+
+        forAll(
+            row(listOf(oneToSixLottoNumber), 1000),
+            row(listOf(oneToSixLottoNumber, oneToSixLottoNumber), 2000),
+            row(listOf(oneToSixLottoNumber, oneToSixLottoNumber, oneToSixLottoNumber), 3000),
+        ) { lottoNumbers, expectAmount ->
+            test("로또를 ${lottoNumbers.size}장 구매했을 때 총 구매 금액 $expectAmount") {
+
                 val ticket = LottoTicket(lottoNumbers)
 
                 val result = ticket.calculateTotalPriceBy(ticketPrice)
@@ -31,7 +33,7 @@ class LottoTicketSpec : FunSpec({
             row(LottoTicket(listOf(oneToSixLottoNumber, oneToSixLottoNumber)), 2),
             row(LottoTicket(listOf(oneToSixLottoNumber, oneToSixLottoNumber, oneToSixLottoNumber)), 3),
         ) { ticket, count ->
-            test("$count 개가 들어 있는 티켓에서 장수를 세면 $count 가 반환된다") {
+            test("${count}장 구매한 티켓에서 장수를 세면 $count 반환") {
                 ticket.count shouldBe count
             }
         }
