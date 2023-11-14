@@ -3,6 +3,7 @@ package lotto.controller
 import lotto.domain.LottoRoiCalculator
 import lotto.domain.LottoShop
 import lotto.domain.LottoWinning
+import lotto.dto.BonusNumberDto
 import lotto.dto.JackpotDto
 import lotto.dto.LottoDto
 import lotto.view.InputView
@@ -23,14 +24,14 @@ fun main() {
     OutputView.printJackpotNumber()
     val inputNumber = InputView.inputJackpotNumber()
     OutputView.printBonusNumber()
-    val bonusNumber = InputView.inputBonusNumber()
+    val bonusNumber = BonusNumberDto(InputView.inputBonusNumber()).lottoNumber
 
     val jackpotNumbers = lottoShop.generateJackpotNumbers(inputNumber)
-    val lottoWinning = LottoWinning(jackpotNumbers)
+    val lottoWinning = LottoWinning(jackpotNumbers, bonusNumber)
 
     OutputView.printLottoStatistics()
     OutputView.printLine()
-    val findJackpot = lottoWinning.checkLottoWinning(lottoList, bonusNumber)
+    val findJackpot = lottoWinning.checkLottoWinning(lottoList)
 
     val totalIncome = LottoRoiCalculator.calculateTotalIncome(findJackpot)
     val roi = LottoRoiCalculator.calculateROI(totalIncome, money)
