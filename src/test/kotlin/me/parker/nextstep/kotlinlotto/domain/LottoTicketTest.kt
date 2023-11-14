@@ -30,7 +30,7 @@ class LottoTicketTest : DescribeSpec({
                 val numbers = listOf(1, 2, 3, 4, 5, 6, 7)
 
                 shouldThrow<IllegalArgumentException> { LottoTicket.manual(numbers) }
-                    .message shouldBe "로또 번호는 6개 까지만 가능합니다."
+                    .message shouldBe "로또 번호는 6 개를 가지고 있어야합니다."
             }
         }
 
@@ -39,7 +39,7 @@ class LottoTicketTest : DescribeSpec({
                 val numbers = listOf(1, 2, 3, 4, 5)
 
                 shouldThrow<IllegalArgumentException> { LottoTicket.manual(numbers) }
-                    .message shouldBe "로또 번호는 6개 까지만 가능합니다."
+                    .message shouldBe "로또 번호는 6 개를 가지고 있어야합니다."
             }
         }
 
