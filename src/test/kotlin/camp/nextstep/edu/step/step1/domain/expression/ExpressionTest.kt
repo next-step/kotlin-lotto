@@ -35,4 +35,18 @@ class ExpressionTest : BehaviorSpec({
         }
     }
 
+    Given("만약, 식에 음수가 포함되어있고") {
+        val expressionRequestWithNegativeNumbers = "1,-2:3"
+
+        When("생성을 요청하면") {
+            val exceptionByNegativeNumber = shouldThrow<RuntimeException> {
+                Expression(value = expressionRequestWithNegativeNumbers)
+            }
+
+            Then("예외가 발생한다.") {
+                exceptionByNegativeNumber shouldBe RuntimeException()
+            }
+        }
+    }
+
 })
