@@ -4,7 +4,7 @@ import lotto.domain.dto.WinningResult
 import lotto.domain.dto.WinningResults
 
 class WinningLotto(private val winningNumbers: List<Int>, private val bonusBall: Int = 0) {
-    val winLotto: Lotto = Lotto(winningNumbers.toSet())
+    private val winLotto: Lotto = Lotto(winningNumbers.toSet())
 
     fun match(lotto: Lotto): LotteryPrizeAmount {
         val userNumbers = lotto.getNumberValues()
