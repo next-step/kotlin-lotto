@@ -58,4 +58,13 @@ class LottoNumbersTest {
             orderNumbers
         )
     }
+
+    @Test
+    fun `data class에서 copy()시 equals 테스트`() {
+        val number1 = LottoNumber(1)
+        val copyNumber1 = number1.copy()
+
+        (number1 == copyNumber1) shouldBe true
+        (number1 == LottoNumber(1)) shouldBe true
+    }
 }
