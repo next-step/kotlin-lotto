@@ -7,12 +7,17 @@ class WinningLotto(private val winningNumbers: List<Int>, private val bonusBall:
     private val winLotto: Lotto = Lotto(winningNumbers.toSet())
 
     fun match(lotto: Lotto): LotteryPrizeAmount {
-        val userNumbers = lotto.getNumberValues()
-        val winningLottoNumbers = winLotto.getNumberValues()
+        val userNumbers = lotto.numbers
+        val winningLottoNumbers = winLotto.numbers
         val count = userNumbers.count {
             winningLottoNumbers.contains(it)
         }
-        val bonusMatch = userNumbers.contains(bonusBall)
+
+        var bonusMatch = false
+        if (bonusBall != NO_BONUS_BALL) {
+            val bonusNumber = LottoNumber.from(bonusBall)
+            bonusMatch = userNumbers.contains(bonusNumber)
+        }
 
         return LotteryPrizeAmount.getWinningPrize(count, bonusMatch)
     }
