@@ -3,6 +3,8 @@ package lotto
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNot
+import io.kotest.matchers.shouldNotBe
 import lotto.domain.LottoMachine
 import org.junit.jupiter.api.Test
 
@@ -31,6 +33,6 @@ class LottoMachineTest {
     @Test
     fun `로또의 숫자는 자동 생성된다`() {
         val userLotto = lottoMachine.sellLotto(1000)
-        userLotto[0].getSize() shouldBe 6
+        userLotto[0] shouldNotBe null
     }
 }

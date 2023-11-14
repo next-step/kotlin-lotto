@@ -7,10 +7,6 @@ class Lotto(numbers: List<LottoNumber>) {
         require(numbers.size == 6) { INIT_ERROR_MESSAGE }
     }
 
-    fun getSize(): Int {
-        return lottoNumbers.size
-    }
-
     fun getNumbers(): List<LottoNumber> {
         return lottoNumbers
     }

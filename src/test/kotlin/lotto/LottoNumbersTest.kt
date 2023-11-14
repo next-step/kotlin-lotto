@@ -22,7 +22,7 @@ class LottoNumbersTest {
             )
         )
 
-        lotto.getSize() shouldBe 6
+        lotto.getNumbers().size shouldBe 6
     }
 
     @Test
