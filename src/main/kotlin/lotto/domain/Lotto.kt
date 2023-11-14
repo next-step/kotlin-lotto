@@ -12,7 +12,7 @@ class Lotto(inputNumberList: List<Int>) {
 
     fun getMatchCount(lotto: Lotto): Int = this.numberList.intersect(lotto.numberList.toSet()).size
 
-    fun isContainsBonusNumber(bonusNumber: LottoNumber): Boolean = this.numberList.contains(bonusNumber)
+    fun isContainsBonusNumber(bonusNumber: LottoNumber): Boolean = this.numberList.any { it == bonusNumber }
 
     companion object {
         const val LOTTO_PRICE: Int = 1000
