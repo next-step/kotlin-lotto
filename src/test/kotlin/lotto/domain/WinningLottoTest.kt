@@ -10,4 +10,11 @@ class WinningLottoTest {
         val lotto = Lotto(setOf(1, 2, 3, 4, 5, 6))
         winningLotto.match(lotto) shouldBe LotteryPrizeAmount.FIRST
     }
+
+    @Test
+    fun `보너스 번호가 주어졌을 때, 2등을 판별할 수 있다`() {
+        val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6), 7)
+        val lotto = Lotto(setOf(1, 2, 3, 4, 5, 7))
+        winningLotto.match(lotto) shouldBe LotteryPrizeAmount.SECOND
+    }
 }

@@ -3,8 +3,12 @@ package lotto.domain
 import lotto.domain.dto.WinningResult
 import lotto.domain.dto.WinningResults
 
-class WinningLotto(val winningNumbers: List<Int>) {
+class WinningLotto(val winningNumbers: List<Int>, val bonusBall: Int = 0) {
     fun match(lotto: Lotto): LotteryPrizeAmount {
+        if (bonusBall != 0){
+            return LotteryPrizeAmount.SECOND
+        }
+
         val userNumbers = lotto.numbers
         val count = userNumbers.count { lottoNumber ->
             winningNumbers.contains(lottoNumber.value)
