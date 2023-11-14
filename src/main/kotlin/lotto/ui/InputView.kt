@@ -14,4 +14,10 @@ object InputView {
             .toList()
             .map { it.toInt() }
     }
+
+    fun receiveBonusBall() : Int {
+        println("보너스 볼을 입력해 주세요.")
+        val bonusBall = readln().toInt()
+        return bonusBall
+    }
 }
