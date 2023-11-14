@@ -14,12 +14,12 @@ enum class Rank(
     ;
 
     companion object {
-        fun records(): List<Record> {
+        fun excludeNoneRankOfRecord(): Set<Record> {
             return values().filter {
                 it != NONE_RANK
             }.map {
                 Record.of(it.matchCount, it.reward)
-            }
+            }.toSet()
         }
     }
 }

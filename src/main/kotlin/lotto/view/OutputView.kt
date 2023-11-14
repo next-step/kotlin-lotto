@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.LotteryResult
+import lotto.domain.Lotto
 import lotto.domain.LottoBundle
 
 object OutputView {
@@ -10,10 +11,15 @@ object OutputView {
     }
 
     fun printPurchaseLottoBundle(lottoBundle: LottoBundle) {
-        lottoBundle.showAllPurchaseLottoNumbers()
-            .forEach {
-                println(it)
-            }
+        lottoBundle.bundle.forEach { lotto ->
+            println(sortByLottoNumbersASC(lotto))
+        }
+    }
+
+    private fun sortByLottoNumbersASC(lotto: Lotto) = lotto.lottoNumbers.map { lottoNumber ->
+        lottoNumber.lottoNumber
+    }.sortedBy {
+        it
     }
 
     fun printLotteryResult(lotteryResult: LotteryResult) {

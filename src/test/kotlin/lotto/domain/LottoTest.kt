@@ -20,13 +20,13 @@ class LottoTest {
 
         // Then
         assertAll(
-            { assertThat(actual.lotto.size).isEqualTo(6) },
-            { assertThat(actual.lotto).contains(LottoNumber.from(givenNumbers[0])) },
-            { assertThat(actual.lotto).contains(LottoNumber.from(givenNumbers[1])) },
-            { assertThat(actual.lotto).contains(LottoNumber.from(givenNumbers[2])) },
-            { assertThat(actual.lotto).contains(LottoNumber.from(givenNumbers[3])) },
-            { assertThat(actual.lotto).contains(LottoNumber.from(givenNumbers[4])) },
-            { assertThat(actual.lotto).contains(LottoNumber.from(givenNumbers[5])) },
+            { assertThat(actual.lottoNumbers.size).isEqualTo(6) },
+            { assertThat(actual.lottoNumbers).contains(LottoNumber.from(givenNumbers[0])) },
+            { assertThat(actual.lottoNumbers).contains(LottoNumber.from(givenNumbers[1])) },
+            { assertThat(actual.lottoNumbers).contains(LottoNumber.from(givenNumbers[2])) },
+            { assertThat(actual.lottoNumbers).contains(LottoNumber.from(givenNumbers[3])) },
+            { assertThat(actual.lottoNumbers).contains(LottoNumber.from(givenNumbers[4])) },
+            { assertThat(actual.lottoNumbers).contains(LottoNumber.from(givenNumbers[5])) },
         )
     }
 

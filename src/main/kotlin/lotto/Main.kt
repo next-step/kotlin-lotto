@@ -27,9 +27,12 @@ fun main() {
         InputView.inputWinningLottoNumbers()
     )
     val winningLotto = Lotto.from(winningNumbers)
-
+    winningLotto.matchCounts(lottoBundle.bundle)
     // 당첨 통계 출력
-    val rankResult = LotteryResult.from(Rank.records())
-    rankResult.makeRankResult(purchase.amount, winningLotto, lottoBundle.bundle)
+    val rankResult = LotteryResult.from(Rank.excludeNoneRankOfRecord())
+    rankResult.makeRankResult(
+        purchase.amount,
+        winningLotto.matchCounts(lottoBundle.bundle)
+    )
     OutputView.printLotteryResult(rankResult)
 }

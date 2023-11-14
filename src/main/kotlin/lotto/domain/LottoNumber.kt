@@ -1,10 +1,8 @@
 package lotto.domain
 
 class LottoNumber private constructor(
-    private val lottoNumber: Int = 0
+    val lottoNumber: Int = 0
 ) {
-    var number = lottoNumber
-        private set
 
     companion object {
         private const val MINIMUM_LOTTO_NUMBER: Int = 1

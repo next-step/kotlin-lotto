@@ -3,22 +3,25 @@ package lotto.domain
 import kotlin.math.floor
 
 class LotteryResult private constructor(
-    val rankRecord: List<Record> = listOf(),
+    val rankRecord: Set<Record>,
 ) {
     var rate: Double = 0.0
 
     fun makeRankResult(
         amount: Int,
-        winningLotto: Lotto,
-        userLottos: List<Lotto>
+        matchCounts: List<Int>,
     ) {
-        calculateRecords(winningLotto, userLottos)
+        calculateRecords(matchCounts)
         calculateRateOfReturn(amount)
     }
 
-    private fun calculateRecords(winningLotto: Lotto, userLottos: List<Lotto>) {
-        userLottos.forEach { lotto ->
-            calculateRecordByLotto(lotto, winningLotto)
+    private fun calculateRecords(matchCounts: List<Int>) {
+        rankRecord.forEach { record ->
+            matchCounts.filter {
+                it == record.matchCount
+            }.forEach {
+                record.addCountByRecord(it)
+            }
         }
     }
 
@@ -39,7 +42,7 @@ class LotteryResult private constructor(
     companion object {
 
         fun from(
-            rankRecord: List<Record>,
+            rankRecord: Set<Record>,
         ): LotteryResult {
             return LotteryResult(rankRecord)
         }
