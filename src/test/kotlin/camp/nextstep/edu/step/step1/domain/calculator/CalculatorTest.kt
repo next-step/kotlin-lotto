@@ -10,7 +10,7 @@ class CalculatorTest : BehaviorSpec({
         val numbers = listOf("1", "2", "3")
 
         When("계산기에 숫자 리스트를 넣으면") {
-            val calculator = Calculator.of(expressions = numbers)
+            val calculator = Calculator(expressions = numbers)
             val result = calculator.calculateExpression()
 
             Then("숫자들의 합을 반환한다.") {
