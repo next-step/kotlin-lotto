@@ -18,7 +18,7 @@ class LottoTest {
     @Test
     fun `로또 번호가 일치하는 횟수를 반환한다`() {
         val lottoList = Lotto((1..6).map { LottoNumber(it) })
-        val matchLottoCount = lotto.getMatchLottoCount(lottoList)
+        val matchLottoCount = lotto.countMatchingNumbers(lottoList)
         assertEquals(6, matchLottoCount)
     }
 

@@ -6,7 +6,7 @@ object LottoRoiCalculator {
         return (totalIncome.toDouble() / investMoney)
     }
 
-    fun getTotalIncome(findJackpotLotto: List<JackpotLevel>): Number {
+    fun calculateTotalIncome(findJackpotLotto: List<JackpotLevel>): Number {
         return findJackpotLotto.sumOf { it.price }
     }
 }

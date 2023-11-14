@@ -17,7 +17,7 @@ class LottoRoiCalculatorTest {
     @Test
     fun `총 수익이 정확하게 반환된다`() {
         val findJackpotLotto: List<JackpotLevel> = listOf(SIX_MATCH, FIVE_MATCH, FOUR_MATCH)
-        val totalIncome = LottoRoiCalculator.getTotalIncome(findJackpotLotto)
+        val totalIncome = LottoRoiCalculator.calculateTotalIncome(findJackpotLotto)
         assertEquals(2001550000, totalIncome)
     }
 

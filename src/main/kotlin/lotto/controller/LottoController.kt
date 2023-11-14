@@ -13,7 +13,7 @@ fun main() {
     val money = InputView.inputMoney()
 
     val lottoShop = LottoShop()
-    val lottoBuyCount = lottoShop.getLottoBuyCount(money)
+    val lottoBuyCount = lottoShop.countBuyLotto(money)
     OutputView.printLottoCount(lottoBuyCount.toString())
     val lottoList = lottoShop.buyLotto(lottoBuyCount)
     val lottoDto = lottoList.map { LottoDto(it) }.toList()
@@ -25,14 +25,14 @@ fun main() {
     OutputView.printBonusNumber()
     val bonusNumber = InputView.inputBonusNumber()
 
-    val jackpotNumbers = lottoShop.getJackpotNumbers(inputNumber)
+    val jackpotNumbers = lottoShop.generateJackpotNumbers(inputNumber)
     val lottoWinning = LottoWinning(jackpotNumbers)
 
     OutputView.printLottoStatistics()
     OutputView.printLine()
     val findJackpot = lottoWinning.checkLottoWinning(lottoList, bonusNumber)
 
-    val totalIncome = LottoRoiCalculator.getTotalIncome(findJackpot)
+    val totalIncome = LottoRoiCalculator.calculateTotalIncome(findJackpot)
     val roi = LottoRoiCalculator.calculateROI(totalIncome, money)
 
     val jackPotDto: List<JackpotDto> = findJackpot.map { JackpotDto(it) }.toList()

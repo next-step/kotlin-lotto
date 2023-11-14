@@ -10,14 +10,14 @@ class LottoShopTest {
 
     @Test
     fun `입력한 금액에 따라 로또 개수가 출력 된다`() {
-        val lottoCount = lottoShop.getLottoBuyCount(MONEY)
+        val lottoCount = lottoShop.countBuyLotto(MONEY)
         assertEquals(LOTTO_COUNT, lottoCount)
     }
 
     @Test
     fun `로또는 최소 1개는 사야 한다`() {
         assertThrows<IllegalArgumentException> {
-            lottoShop.getLottoBuyCount(100)
+            lottoShop.countBuyLotto(100)
         }
     }
 
@@ -29,7 +29,7 @@ class LottoShopTest {
 
     @Test
     fun `입력된 로또 번호를 구분자를 이용해 List 로 만들어 준다`() {
-        val jackpotList = lottoShop.getJackpotNumbers(JACKPOT_NUMBERS).lotto
+        val jackpotList = lottoShop.generateJackpotNumbers(JACKPOT_NUMBERS).lotto
         val expectedList = LOTTO
 
         assertEquals(expectedList, jackpotList)

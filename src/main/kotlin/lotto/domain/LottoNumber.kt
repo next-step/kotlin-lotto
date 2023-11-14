@@ -13,7 +13,7 @@ value class LottoNumber(val number: Int) {
         private const val LOTTO_LAST_NUMBER = 45
         private val lottoNumberRange: IntRange = (LOTTO_FIRST_NUMBER..LOTTO_LAST_NUMBER)
 
-        fun getLottoNumbers(): List<LottoNumber> {
+        fun generateLottoNumbers(): List<LottoNumber> {
             return lottoNumberRange.toList().shuffled().take(6).sorted().map { LottoNumber(it) }
         }
     }

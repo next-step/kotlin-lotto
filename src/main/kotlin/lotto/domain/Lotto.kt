@@ -10,11 +10,11 @@ class Lotto(val lotto: List<LottoNumber>) {
         require(lotto.distinct().size == LOTTO_NUMBER_COUNT) { LOTTO_DUPLICATION_ERROR.message }
     }
 
-    fun getMatchLottoCount(jackpotNumbers: Lotto): Int {
+    fun countMatchingNumbers(jackpotNumbers: Lotto): Int {
         return lotto.count { jackpotNumbers.lotto.contains(it) }
     }
 
-    fun getMatchBonusResult(bonusNumber: LottoNumber): Boolean {
+    fun checkBonusNumberMatch(bonusNumber: LottoNumber): Boolean {
         return lotto.contains(bonusNumber)
     }
 

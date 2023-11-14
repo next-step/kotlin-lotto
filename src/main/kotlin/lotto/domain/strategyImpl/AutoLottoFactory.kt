@@ -7,7 +7,7 @@ import lotto.domain.strategy.DrawStrategy
 class AutoLottoFactory : DrawStrategy {
 
     override fun draw(): Lotto {
-        val lotto = LottoNumber.getLottoNumbers()
+        val lotto = LottoNumber.generateLottoNumbers()
         return Lotto(lotto)
     }
 }

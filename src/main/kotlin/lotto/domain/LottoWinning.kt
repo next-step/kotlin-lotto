@@ -6,8 +6,8 @@ class LottoWinning(private val jackpotNumbers: Lotto) {
 
     fun checkLottoWinning(lottoList: List<Lotto>, bonusNumber: Int): List<JackpotLevel> {
         return lottoList.map {
-            val matchNumberCount = it.getMatchLottoCount(jackpotNumbers)
-            val matchBonus = it.getMatchBonusResult(LottoNumber(bonusNumber))
+            val matchNumberCount = it.countMatchingNumbers(jackpotNumbers)
+            val matchBonus = it.checkBonusNumberMatch(LottoNumber(bonusNumber))
             findMatchingLevel(matchNumberCount, matchBonus)
         }
     }
