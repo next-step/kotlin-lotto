@@ -8,12 +8,16 @@ import me.parker.nextstep.kotlinlotto.view.ConsoleResult
 
 fun main() {
     val amountOfPurchase: Int = ConsoleInput.inputAmountOfPurchaseLotto()
+    val sizeOfManual: Int = ConsoleInput.inputSizeOfManualLotto()
 
-    val purchasedLottoTickets: List<LottoTicket> = List(amountOfPurchase / LottoTicket.PRICE) {
-        LottoTicket.automatic()
-    }
+    ConsoleInput.inputManualLottoNumbers()
+    val sizeOfPurchase = amountOfPurchase / LottoTicket.PRICE
+    val purchasedLottoTickets: List<LottoTicket> = List(sizeOfManual) {
+        val numbers: List<Int> = ConsoleInput.inputLottoNumbers()
+        LottoTicket.manual(numbers)
+    } + List(sizeOfPurchase - sizeOfManual) { LottoTicket.automatic() }
 
-    ConsoleResult.outputPurchasedLottoTickets(purchasedLottoTickets)
+    ConsoleResult.outputPurchasedLottoTickets(sizeOfManual, purchasedLottoTickets)
 
     val lastWonLottoNumbers: List<Int> = ConsoleInput.inputLastWonLottoNumbers()
     val wonLottoTicket = LottoTicket.manual(lastWonLottoNumbers)
