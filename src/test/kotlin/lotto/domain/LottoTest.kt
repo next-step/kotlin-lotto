@@ -10,12 +10,12 @@ class LottoTest {
     fun `로또 번호를 생성한다`() {
         val lotto = Lotto(
             listOf(
-                LottoNumber(1),
-                LottoNumber(2),
-                LottoNumber(3),
-                LottoNumber(4),
-                LottoNumber(5),
-                LottoNumber(6)
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)
             )
         )
         assertThat(lotto.numbers.size).isEqualTo(Lotto.LOTTO_NUMBER_COUNT)
@@ -26,11 +26,11 @@ class LottoTest {
         assertThrows(IllegalArgumentException::class.java) {
             Lotto(
                 listOf(
-                    LottoNumber(1),
-                    LottoNumber(2),
-                    LottoNumber(3),
-                    LottoNumber(4),
-                    LottoNumber(5)
+                    LottoNumber.of(1),
+                    LottoNumber.of(2),
+                    LottoNumber.of(3),
+                    LottoNumber.of(4),
+                    LottoNumber.of(5)
                 )
             )
         }
@@ -41,12 +41,12 @@ class LottoTest {
         assertThrows(IllegalArgumentException::class.java) {
             Lotto(
                 listOf(
-                    LottoNumber(1),
-                    LottoNumber(2),
-                    LottoNumber(3),
-                    LottoNumber(4),
-                    LottoNumber(5),
-                    LottoNumber(5)
+                    LottoNumber.of(1),
+                    LottoNumber.of(2),
+                    LottoNumber.of(3),
+                    LottoNumber.of(4),
+                    LottoNumber.of(5),
+                    LottoNumber.of(5)
                 )
             )
         }
@@ -56,25 +56,26 @@ class LottoTest {
     fun `로또 번호가 일치하는 개수를 구한다`() {
         val lotto = Lotto(
             listOf(
-                LottoNumber(1),
-                LottoNumber(2),
-                LottoNumber(3),
-                LottoNumber(4),
-                LottoNumber(5),
-                LottoNumber(6)
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)
             )
         )
         val winningLotto = WinningLotto(
             Lotto(
                 listOf(
-                    LottoNumber(1),
-                    LottoNumber(2),
-                    LottoNumber(3),
-                    LottoNumber(4),
-                    LottoNumber(5),
-                    LottoNumber(7)
+                    LottoNumber.of(1),
+                    LottoNumber.of(2),
+                    LottoNumber.of(3),
+                    LottoNumber.of(4),
+                    LottoNumber.of(5),
+                    LottoNumber.of(7)
                 )
-            )
+            ),
+            LottoNumber.of(6)
         )
         assertThat(lotto.getRank(winningLotto)).isEqualTo(LottoRank.SECOND)
     }

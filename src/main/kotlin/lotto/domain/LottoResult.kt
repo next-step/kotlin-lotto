@@ -16,12 +16,12 @@ class LottoResult (
             .div(100.0)
     }
 
-    fun getLottoResult(): LottoResult {
+    fun getLottoResult(): LottoResultData {
         val lottoRanks = lottos.getLottoRanks(winningLotto)
-        return LottoResult(lottoRanks, calculateEarningRate(lottoRanks))
+        return LottoResultData(lottoRanks, calculateEarningRate(lottoRanks))
     }
 
-    data class LottoResult(
+    data class LottoResultData(
         val lottoRanks: Map<LottoRank, Int>,
         val earningRate: Double
     )
