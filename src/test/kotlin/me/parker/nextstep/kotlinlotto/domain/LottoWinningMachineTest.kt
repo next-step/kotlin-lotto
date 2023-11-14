@@ -23,8 +23,10 @@ class LottoWinningMachineTest : DescribeSpec({
                     LottoTicket.manual(listOf(34, 35, 36, 37, 38, 39)),
                     LottoTicket.manual(listOf(40, 41, 42, 43, 44, 45))
                 )
+                val bonusLottoNumber = LottoNumber(7)
+
                 shouldNotThrow<Exception> {
-                    LottoWinningMachine(lastWonLottoTicket, boughtLottoTickets)
+                    LottoWinningMachine(lastWonLottoTicket, boughtLottoTickets, bonusLottoNumber)
                 }
             }
         }
@@ -50,23 +52,27 @@ class LottoWinningMachineTest : DescribeSpec({
                     LottoTicket.manual(listOf(17, 21, 29, 37, 42, 45)),
                     LottoTicket.manual(listOf(3, 8, 27, 30, 35, 44)),
                 )
-                val lottoWinningMachine = LottoWinningMachine(lastWonLottoTicket, boughtLottoTickets)
+                val bonusLottoNumber = LottoNumber(7)
+
+                val lottoWinningMachine = LottoWinningMachine(lastWonLottoTicket, boughtLottoTickets, bonusLottoNumber)
 
                 val result = lottoWinningMachine.result()
 
                 result.matchCount[LottoRank.FIRST] shouldBe 0
                 result.matchCount[LottoRank.SECOND] shouldBe 0
                 result.matchCount[LottoRank.THIRD] shouldBe 0
-                result.matchCount[LottoRank.FOURTH] shouldBe 1
+                result.matchCount[LottoRank.FOURTH] shouldBe 0
+                result.matchCount[LottoRank.FIFTH] shouldBe 1
                 result.matchCount[LottoRank.MISS] shouldBe 13
                 result.profitRate shouldBeGreaterThan 0.35
             }
 
-            it("당첨 결과를 반환 2") {
+            it("당첨 결과를 반환 (2등 당첨 포함)") {
                 val lastWonLottoTicket = LottoTicket.manual(listOf(1, 2, 3, 4, 5, 6))
                 val boughtLottoTickets = listOf(
                     LottoTicket.manual(listOf(1, 2, 3, 4, 5, 6)),
                     LottoTicket.manual(listOf(1, 2, 3, 4, 5, 7)),
+                    LottoTicket.manual(listOf(1, 2, 3, 4, 5, 8)),
                     LottoTicket.manual(listOf(1, 2, 3, 4, 8, 9)),
                     LottoTicket.manual(listOf(1, 2, 3, 10, 11, 12)),
                     LottoTicket.manual(listOf(1, 2, 13, 14, 15, 16)),
@@ -76,7 +82,9 @@ class LottoWinningMachineTest : DescribeSpec({
                     LottoTicket.manual(listOf(34, 35, 36, 37, 38, 39)),
                     LottoTicket.manual(listOf(40, 41, 42, 43, 44, 45))
                 )
-                val lottoWinningMachine = LottoWinningMachine(lastWonLottoTicket, boughtLottoTickets)
+                val bonusLottoNumber = LottoNumber(7)
+
+                val lottoWinningMachine = LottoWinningMachine(lastWonLottoTicket, boughtLottoTickets, bonusLottoNumber)
 
                 val result = lottoWinningMachine.result()
 
@@ -84,8 +92,9 @@ class LottoWinningMachineTest : DescribeSpec({
                 result.matchCount[LottoRank.SECOND] shouldBe 1
                 result.matchCount[LottoRank.THIRD] shouldBe 1
                 result.matchCount[LottoRank.FOURTH] shouldBe 1
+                result.matchCount[LottoRank.FIFTH] shouldBe 1
                 result.matchCount[LottoRank.MISS] shouldBe 6
-                result.profitRate shouldBe 200155.5
+                result.profitRate shouldBe 184686.81818181818
             }
         }
     }

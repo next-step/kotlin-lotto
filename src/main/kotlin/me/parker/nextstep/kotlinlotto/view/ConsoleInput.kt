@@ -26,4 +26,16 @@ object ConsoleInput {
         return input.replace(" ", "")
             .split(",").map { it.toInt() }
     }
+
+    fun inputBonusLottoNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+
+        var input: String
+        do {
+            input = readln()
+            if (input.isBlank()) println("보너스 볼 번호는 공백일 수 없습니다. 다시 입력해주세요!")
+        } while (input.isBlank())
+
+        return input.toInt()
+    }
 }
