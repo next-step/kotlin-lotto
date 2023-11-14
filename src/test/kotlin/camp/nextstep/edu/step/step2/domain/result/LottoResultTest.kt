@@ -13,10 +13,10 @@ class LottoResultTest : BehaviorSpec({
 
         When("로또 결과를 생성하면") {
             val lottoResult =
-                LottoResult.of(lottoTotalPrice = totalPrice, lottoResults = matchResult)
+                LottoResult(lottoTotalPrice = totalPrice, lottoResults = matchResult)
 
             Then("로또 결과가 생성된다") {
-                lottoResult shouldBe LottoResult.of(
+                lottoResult shouldBe LottoResult(
                     lottoTotalPrice = 1000,
                     lottoResults = listOf(LottoMatch.of(matchCount = 6))
                 )
@@ -28,8 +28,7 @@ class LottoResultTest : BehaviorSpec({
         val totalPrice = 1000
         val matchResult = listOf(LottoMatch.of(matchCount = 6))
 
-        val lottoResult =
-            LottoResult.of(lottoTotalPrice = totalPrice, lottoResults = matchResult)
+        val lottoResult = LottoResult(lottoTotalPrice = totalPrice, lottoResults = matchResult)
 
         When("로또 통계율 계산을 시도하면") {
             val result = lottoResult.calculateProfitRate()

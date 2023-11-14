@@ -12,10 +12,10 @@ class NumberTest : BehaviorSpec({
         val number = 1
 
         When("생성을 요청하면") {
-            val lottoNumber = Number.of(number)
+            val lottoNumber = Number(number = number)
 
             Then("주어진 숫자가 생성된다") {
-                lottoNumber shouldBe Number.of(1)
+                lottoNumber shouldBe Number(number = 1)
             }
         }
     }
@@ -25,7 +25,7 @@ class NumberTest : BehaviorSpec({
 
         When("생성을 요청하면") {
             val lottoNumber = shouldThrow<java.lang.IllegalArgumentException> {
-                Number.of(number)
+                Number(number = number)
             }
 
             Then("예외가 발생한다") {
