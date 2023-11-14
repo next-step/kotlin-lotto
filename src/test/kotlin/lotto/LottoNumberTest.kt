@@ -17,4 +17,9 @@ class LottoNumberTest {
     fun `로또 번호는 45를 넘을 수 없다`() {
         shouldThrow<IllegalArgumentException> { LottoNumber(46) }
     }
+
+    @Test
+    fun `로또 번호는 음수일 수 없다`() {
+        shouldThrow<IllegalArgumentException> { LottoNumber(-1) }
+    }
 }

@@ -2,7 +2,7 @@ package lotto.domain
 
 data class LottoNumber(private val number: Int) {
     init {
-        require(number <= 45) { ERROR_MESSAGE }
+        require(number in 1..45) { ERROR_MESSAGE }
     }
     fun getNumber(): Int {
         return number
