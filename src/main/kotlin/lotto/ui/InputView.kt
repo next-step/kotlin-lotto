@@ -15,9 +15,12 @@ object InputView {
             .map { it.toInt() }
     }
 
-    fun receiveBonusBall() : Int {
+    fun receiveBonusBall(winningNumber: List<Int>): Int {
         println("보너스 볼을 입력해 주세요.")
         val bonusBall = readln().toInt()
+        if (winningNumber.contains(bonusBall)) {
+            throw IllegalArgumentException("보너스 볼은 당첨 번호 중 하나와 같을 수 없습니다.")
+        }
         return bonusBall
     }
 }

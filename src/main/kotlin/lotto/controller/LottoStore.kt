@@ -17,7 +17,7 @@ class LottoStore {
         showNumbers(lottos)
 
         val winningNumbers = receiveWinningNumber()
-        val bonusBall = receiveBonusBall()
+        val bonusBall = receiveBonusBall(winningNumbers)
 
         val winningLotto = WinningLotto(winningNumbers, bonusBall)
         val matchLottosResult = winningLotto.matchLottosResult(lottos)
