@@ -8,9 +8,9 @@ object OutputView {
     fun printLottoResult(lottoResult: LottoResult) {
         println("당첨 통계")
         println("---------")
-        lottoResult.prizeCount.forEach { (prize, count) ->
-            if (prize == LottoPrize.MISS) return@forEach
-            printPerPrize(prize, count)
+        LottoPrize.values().forEach {
+            if (it == LottoPrize.MISS) return@forEach
+            printPerPrize(it, lottoResult.getPrizeBy(it))
         }
         println("총 수익률은 ${lottoResult.calculateYield()}입니다.")
     }
