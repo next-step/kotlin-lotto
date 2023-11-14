@@ -8,13 +8,13 @@ import io.kotest.matchers.shouldBe
 class StringAddCalculateTest : FunSpec({
 
     val calculator = StringAddCalculator(
-        NegativeNumberValidation()
+        NegativeOperandValidation()
     )
 
     context("빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.") {
         withData(
-            "" to 0,
-            null to 0
+            "" to Operand(0),
+            null to Operand(0)
         ) { (input, output) ->
             calculator.add(input) shouldBe output
         }
@@ -22,8 +22,8 @@ class StringAddCalculateTest : FunSpec({
 
     context("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.") {
         withData(
-            "1" to 1,
-            "2" to 2
+            "1" to Operand(1),
+            "2" to Operand(2)
         ) { (input, output) ->
             calculator.add(input) shouldBe output
         }
@@ -31,8 +31,8 @@ class StringAddCalculateTest : FunSpec({
 
     context("숫자 두개를 쉼표(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.") {
         withData(
-            "1,2" to 3,
-            "1,2,3,4" to 10
+            "1,2" to Operand(3),
+            "1,2,3,4" to Operand(10)
         ) { (input, output) ->
             calculator.add(input) shouldBe output
         }
@@ -40,8 +40,8 @@ class StringAddCalculateTest : FunSpec({
 
     context("구분자를 쉼표(,) 이외에 콜론(:)을 사용할 수 있다.") {
         withData(
-            "1,2:3" to 6,
-            "3:6,7" to 16
+            "1,2:3" to Operand(6),
+            "3:6,7" to Operand(16)
         ) { (input, output) ->
             calculator.add(input) shouldBe output
         }
@@ -49,8 +49,8 @@ class StringAddCalculateTest : FunSpec({
 
     context("문자 사이에 커스텀 구분자를 지정할 수 있다.") {
         withData(
-            "//@\n1@2@3" to 6,
-            "//!\n3!6,7" to 16
+            "//@\n1@2@3" to Operand(6),
+            "//!\n3!6,7" to Operand(16)
         ) { (input, output) ->
             calculator.add(input) shouldBe output
         }
