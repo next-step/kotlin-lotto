@@ -2,13 +2,14 @@ package lotto.domain
 
 import lotto.numbermaker.RandomNumberMaker
 
-class Lotto(private val numberList: List<Int> = generateDefaultRandomNumberList()) {
+class Lotto(private val numberList: Set<Int> = generateDefaultRandomNumberList()) {
     private val _numbers = mutableListOf<LottoNumber>()
 
     val numbers: List<LottoNumber>
         get() = _numbers.toList()
 
     init {
+        validateSetSize()
         numberList.forEach { it ->
             val lottoNumber = LottoNumber.from(it)
             _numbers.add(lottoNumber)
@@ -23,10 +24,17 @@ class Lotto(private val numberList: List<Int> = generateDefaultRandomNumberList(
         return numberList
     }
 
+    private fun validateSetSize() {
+        if (numberList.size != 6) {
+            throw IllegalArgumentException()
+        }
+    }
+
     companion object {
-        private fun generateDefaultRandomNumberList(): List<Int> {
+        private fun generateDefaultRandomNumberList(): Set<Int> {
             val randomNumberMaker: RandomNumberMaker = RandomNumberMaker()
-            return randomNumberMaker.generate()
+            val random6NumList = randomNumberMaker.generate()
+            return random6NumList.toSet()
         }
     }
 }
