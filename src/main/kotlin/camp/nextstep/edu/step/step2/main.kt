@@ -1,8 +1,10 @@
 package camp.nextstep.edu.step.step2
 
+import camp.nextstep.edu.step.step2.domain.lotto.WinningLotto
 import camp.nextstep.edu.step.step2.domain.store.LottoStore
 import camp.nextstep.edu.step.step2.view.InputView
 import camp.nextstep.edu.step.step2.view.OutputView
+import java.util.stream.Collectors
 
 fun main() {
     val inputView = InputView()
@@ -13,16 +15,22 @@ fun main() {
 
     val ticketsNumbers = tickets.createNumbersByLottoTicketAmount()
 
+    val ticketElements = ticketsNumbers.stream()
+        .map { it.getNumberElements() }
+        .collect(Collectors.toList())
+
     outputView.displayTicketsNumbers(
-        lottoTickets = tickets,
-        ticketNumbers = ticketsNumbers
+        ticketsAmount = tickets.lottoTicketAmount,
+        ticketNumbers = ticketElements
     )
 
     val lastWeekWinningNumbers = inputView.inputLastWeekWinningNumbers()
 
     val lottoResult = LottoStore.checkLottoTicketsWinningResult(
-        lottoNumbers = ticketsNumbers,
-        lastWeekNumbers = lastWeekWinningNumbers
+        winningLotto = WinningLotto(
+            userLottoTickets = ticketsNumbers,
+            winningLotto = lastWeekWinningNumbers
+        )
     )
 
     outputView.displayLottoResult(lottoResult = lottoResult)
