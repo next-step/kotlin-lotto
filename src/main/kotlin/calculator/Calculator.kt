@@ -36,7 +36,9 @@ object Calculator {
     private fun setDelimiter(equation: String) {
 
         if (equation.startsWith(CUSTOM_DELIMITER_START_FLAG)) {
-            require(equation.length >= CUSTOM_DELIMITER_MIN_LENGTH && equation.take(CUSTOM_DELIMITER_MIN_LENGTH).contains(CUSTOM_DELIMITER_END_FLAG))
+            require(equation.length >= CUSTOM_DELIMITER_MIN_LENGTH && equation.take(CUSTOM_DELIMITER_MIN_LENGTH).contains(CUSTOM_DELIMITER_END_FLAG)) {
+                "커스텀 구분자를 정확히 입력해야 합니다"
+            }
             delimiterList = listOf(equation[CUSTOM_DELIMITER_INDEX].toString())
             return
         }
@@ -51,7 +53,9 @@ object Calculator {
             numberTextList = equation.drop(CUSTOM_DELIMITER_DROP_INDEX).split(*delimiterList.toTypedArray())
         }
 
-        require(numberTextList.all { it.toIntOrNull() != null && it.toInt() >= NUMBER_MIN_VALUE && it.toInt() <= NUMBER_MAX_VALUE })
+        require(numberTextList.all { it.toIntOrNull() != null && it.toInt() >= NUMBER_MIN_VALUE && it.toInt() <= NUMBER_MAX_VALUE }) {
+            "${NUMBER_MIN_VALUE}이상 ${NUMBER_MAX_VALUE}이하의 숫자를 입력하셔야 합니다."
+        }
 
         return numberTextList.map { it.toInt() }
     }
