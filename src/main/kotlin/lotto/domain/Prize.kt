@@ -2,7 +2,7 @@ package lotto.domain
 
 enum class Prize(
     val matchedNumberCount: Int,
-    val winningAmount: Long,
+    winningAmount: Long,
 ) {
     FIRST(6, 2000000000L),
     SECOND(5, 30000000L),
@@ -10,6 +10,8 @@ enum class Prize(
     FOURTH(4, 50000L),
     FIFTH(3, 5000L),
     ;
+
+    val winningAmount: Won = Won(winningAmount)
 
     companion object {
         private const val ONE_NOT_MATCHED = 5

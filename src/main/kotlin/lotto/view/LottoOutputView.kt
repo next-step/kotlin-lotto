@@ -5,8 +5,8 @@ import lotto.domain.PurchasedLottos
 import lotto.domain.WinningStatistic
 
 object LottoOutputView {
-    fun printLottoOutput(purchasedLottos: PurchasedLottos) {
-        println("${purchasedLottos.lottos.size}개를 구매했습니다.")
+    fun printLottoOutput(purchasedLottos: PurchasedLottos, manualLottoCount: Int) {
+        println("\n수동으로 ${manualLottoCount}장, 자동으로 ${purchasedLottos.lottos.size - manualLottoCount}개를 구매했습니다.")
 
         purchasedLottos.lottos
             .forEach { lotto ->
@@ -35,7 +35,7 @@ object LottoOutputView {
             if (prize === Prize.SECOND) {
                 append(", 보너스 볼 일치")
             }
-            append(" (${prize.winningAmount}원)- ${matchedNumberCount ?: 0}개")
+            append(" (${prize.winningAmount.amount}원)- ${matchedNumberCount ?: 0}개")
         }.let(::println)
     }
 }
