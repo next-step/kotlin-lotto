@@ -1,8 +1,8 @@
 package camp.nextstep.edu.step.step2.domain.result
 
 data class LottoResult(
-    private val lottoTotalPrice: Int,
-    private val lottoResults: List<LottoMatch>
+    val lottoTotalPrice: Int,
+    val lottoResults: List<LottoMatch>
 ) {
 
     init {
@@ -15,12 +15,6 @@ data class LottoResult(
 
     fun getResultCount(lottoMatch: LottoMatch): Int {
         return lottoResults.count { it == lottoMatch }
-    }
-
-    companion object {
-        fun of(lottoTotalPrice: Int, lottoResults: List<LottoMatch>): LottoResult {
-            return LottoResult(lottoTotalPrice, lottoResults)
-        }
     }
 
 }
