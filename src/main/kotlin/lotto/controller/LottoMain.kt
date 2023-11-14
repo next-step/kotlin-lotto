@@ -3,21 +3,29 @@ package lotto.controller
 import lotto.domain.Lotto
 import lotto.domain.LottoManager
 import lotto.domain.LottoNumber
+import lotto.inputToInt
 import lotto.tokenizeWinningNumbers
 import lotto.view.Input
 import lotto.view.Output
 
 fun main() {
     // 구입 금액 입력
-    val purchased = Input().getPurchaseAmount()
+    val purchased = inputToInt(Input().getPurchaseAmount())
 
-    val lottoManager = LottoManager(purchased.toInt())
+    // 수동 구매 개수 입력
+    val manualCount = inputToInt(Input().getManualCount())
 
-    // 로또 발급 및 출력
-    lottoManager.generateLottos()
+    // 로또 매니저 생성
+    val lottoManager = LottoManager(purchased, manualCount)
+
+    // 수동 번호 입력
+    val manualNumbers = Input().getManualNumbers(manualCount)
+
+    // 로또 발급
+    lottoManager.setLottos(manualNumbers.map { Lotto(tokenizeWinningNumbers(it)) })
 
     // 발급된 로또 안내 출력
-    Output().printLottoList(lottoManager.lottos.lottoList)
+    Output().printLottoList(lottoManager.lottos.lottoList, manualCount)
 
     // 당첨 번호 입력
     val winningNumbers = Input().getWinningNumbers()

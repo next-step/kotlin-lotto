@@ -4,8 +4,8 @@ import lotto.domain.Lotto
 import lotto.domain.Prize
 
 class Output {
-    fun printLottoList(lottoList: List<Lotto>) {
-        println("${lottoList.size} 개를 구매했습니다.")
+    fun printLottoList(lottoList: List<Lotto>, manualCount: Int) {
+        println("수동으로 ${manualCount}장, 자동으로 ${lottoList.size - manualCount}장을 구매했습니다.")
         lottoList.forEach { println(it) }
     }
 
