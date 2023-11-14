@@ -3,7 +3,7 @@ package lotto.domain
 import lotto.domain.dto.WinningResult
 import lotto.domain.dto.WinningResults
 
-class WinningLotto(private val winningNumbers: List<Int>, private val bonusBall: Int = 0) {
+class WinningLotto(private val winningNumbers: List<Int>, private val bonusBall: Int = NO_BONUS_BALL) {
     private val winLotto: Lotto = Lotto(winningNumbers.toSet())
 
     fun match(lotto: Lotto): LotteryPrizeAmount {
@@ -33,5 +33,9 @@ class WinningLotto(private val winningNumbers: List<Int>, private val bonusBall:
                 resultList.add(result)
             }
         return WinningResults(resultList)
+    }
+
+    companion object {
+        private const val NO_BONUS_BALL = 0
     }
 }
