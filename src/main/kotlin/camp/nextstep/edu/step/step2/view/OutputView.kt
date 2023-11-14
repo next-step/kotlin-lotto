@@ -1,17 +1,15 @@
 package camp.nextstep.edu.step.step2.view
 
-import camp.nextstep.edu.step.step2.domain.lotto.Numbers
 import camp.nextstep.edu.step.step2.domain.result.LottoMatch
 import camp.nextstep.edu.step.step2.domain.result.LottoResult
-import camp.nextstep.edu.step.step2.domain.store.LottoTickets
 
 class OutputView {
 
-    fun displayTicketsNumbers(lottoTickets: LottoTickets, ticketNumbers: List<Numbers>) {
-        println("${lottoTickets.getLottoTicketAmount()}개를 구매했습니다.")
+    fun displayTicketsNumbers(ticketsAmount: Int, ticketNumbers: List<List<Int>>) {
+        println("${ticketsAmount}개를 구매했습니다.")
 
         for (ticketNumber in ticketNumbers) {
-            println(ticketNumber.getNumberElements())
+            println(ticketNumber)
         }
     }
 
@@ -24,4 +22,5 @@ class OutputView {
         }
         println("총 수익률은 ${lottoResult.calculateProfitRate()}입니다.")
     }
+
 }
