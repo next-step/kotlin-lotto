@@ -3,18 +3,18 @@ package lotto.domain
 import lotto.domain.dto.WinningResult
 import lotto.domain.dto.WinningResults
 
-class WinningLotto(val winningNumbers: List<Int>, val bonusBall: Int = 0) {
+class WinningLotto(private val winningNumbers: List<Int>, private val bonusBall: Int = 0) {
+    val winLotto: Lotto = Lotto(winningNumbers.toSet())
+
     fun match(lotto: Lotto): LotteryPrizeAmount {
-        if (bonusBall != 0){
-            return LotteryPrizeAmount.SECOND
+        val userNumbers = lotto.getNumberValues()
+        val winningLottoNumbers = winLotto.getNumberValues()
+        val count = userNumbers.count {
+            winningLottoNumbers.contains(it)
         }
+        val bonusMatch = userNumbers.contains(bonusBall)
 
-        val userNumbers = lotto.numbers
-        val count = userNumbers.count { lottoNumber ->
-            winningNumbers.contains(lottoNumber.value)
-        }
-
-        return LotteryPrizeAmount.getWinningPrize(count)
+        return LotteryPrizeAmount.getWinningPrize(count, bonusMatch)
     }
 
     fun matchLottosResult(lottos: Lottos): WinningResults {
