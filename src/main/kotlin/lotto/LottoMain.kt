@@ -11,10 +11,10 @@ import lotto.view.OutputView
 fun main() {
     val inputView: InputView = InputView()
     val outputView: OutputView = OutputView()
-    val lottoMachine: LottoMachine = LottoMachine()
     val lottoCalculator: LottoCalculator = LottoCalculator()
 
     val buyingPrice: Int = inputView.readLineNumber("구입금액을 입력해 주세요.")
+    val lottoMachine: LottoMachine = LottoMachine(buyingPrice)
 
     val manualLottoCount: Int = inputView.readLineNumber("수동으로 구매할 로또 수를 입력해 주세요.")
     val remainingMoney: Int = buyingPrice - (manualLottoCount * 1000)
@@ -26,7 +26,7 @@ fun main() {
         manualLottoList.add(Lotto(inputView.readLineNumberList()))
     }
 
-    val lottoList: List<Lotto> = lottoMachine.buyLottoList(remainingMoney)
+    val lottoList: List<Lotto> = lottoMachine.buyLottoList()
     outputView.printBuySummary(manualLottoCount, lottoList.size)
     outputView.printLottoNumberList(lottoList)
 

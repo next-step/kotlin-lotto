@@ -1,10 +1,10 @@
 
 package lotto.domain
 
-class LottoMachine {
+class LottoMachine(private val money: Int = 0) {
 
-    fun buyLottoList(buyingPrice: Int): List<Lotto> {
-        val lottoCount: Int = buyingPrice / Lotto.LOTTO_PRICE
+    fun buyLottoList(): List<Lotto> {
+        val lottoCount: Int = this.money / Lotto.LOTTO_PRICE
 
         return (0 until lottoCount).map { Lotto(this.getLottoNumberList()) }
     }
