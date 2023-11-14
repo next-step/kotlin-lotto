@@ -19,7 +19,7 @@ fun main() {
     val purchase = LottoPurchase.valueOf(purchaseFee, numberOfManualQuantity)
 
     Output.printlnAny(LottoMessage.INPUT_MANUAL_LOTTO_NUMBER)
-    val manualInputLines = (1..purchase.manualQuantity).mapTo(mutableListOf()) { LottoLine.valueOf(Input.getLine()) }.toList()
+    val manualInputLines = (1..purchase.manualQuantity).map { Input.getLine() }
 
     val lotto = LottoShop.buyLotto(purchase, manualInputLines)
 

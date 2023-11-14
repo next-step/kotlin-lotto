@@ -6,14 +6,20 @@ object LottoShop {
     const val ZERO: Int = 0
     fun buyLotto(
         purchase: LottoPurchase,
-        manualLottoLines: List<LottoLine> = emptyList()
+        manualInputLines: List<String> = emptyList()
     ): Lotto {
-        val autoLine = makeAutoLottoLine(purchase.autoQuantity)
-        return Lotto(autoLine, manualLottoLines)
+        val autoLines = makeAutoLottoLine(purchase.autoQuantity)
+        val manualLines = makeManualLottoLine(manualInputLines)
+
+        return Lotto(autoLines, manualLines)
     }
 
     fun getQuantity(money: Int) = money / LOTTO_FEE
 
     private fun makeAutoLottoLine(autoQuantity: Int): List<LottoLine> =
         IntRange(1, autoQuantity).map { LottoLineGenerator.generate() }
+
+    private fun makeManualLottoLine(manualInputLines: List<String>): List<LottoLine> =
+        manualInputLines.map(LottoLine::valueOf)
+
 }
