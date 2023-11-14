@@ -16,11 +16,15 @@ object OutputView {
     }
 
     private fun printPerPrize(prize: LottoPrize, count: Int) {
+        val matchCountMessage = "${prize.matchCount}개 일치"
+        val hasBonusBallMessage = ", 보너스 볼 일치"
+        val prizeMoneyMessage = "(${prize.prizeMoney}원) - ${count}개"
+
         println(
             buildString {
-                append("${prize.matchCount}개 일치")
-                if (prize == LottoPrize.SECOND) append(", 보너스 볼 일치")
-                append(" (${prize.prizeMoney}원) - ${count}개")
+                append(matchCountMessage)
+                if (prize == LottoPrize.SECOND) append(hasBonusBallMessage)
+                append(prizeMoneyMessage)
             }
         )
     }
