@@ -10,19 +10,13 @@ data class Calculator(
 ) {
 
     fun calculateExpression(): FinalResult {
-        var midResult = 0
 
-        for(expression in expressions) {
-         midResult = midResult.plus(expression.toInt())
+        val result = expressions.reduce { midResult, expression ->
+            val result = midResult.toInt() + expression.toInt()
+            result.toString()
         }
 
-        return FinalResult(amount = midResult)
-    }
-
-    companion object {
-        fun of(expressions: List<String>): Calculator {
-            return Calculator(expressions)
-        }
+        return FinalResult(amount = result.toInt())
     }
 
 }
