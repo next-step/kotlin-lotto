@@ -1,21 +1,17 @@
 package calculator
 
-import calculator.Parser.parse
+import calculator.NumberExtractor.extract
+import calculator.vo.PositiveNum
 
-class StringAddCalculator {
+object StringAddCalculator {
+    private const val RETURN_VALUE = 0
 
-    fun add(text: String?): Int {
+    fun add(text: String?): PositiveNum {
         if (text.isNullOrEmpty()) {
-            return RETURN_VALUE
+            return PositiveNum(RETURN_VALUE)
         }
 
-        val tokens = parse(text)
+        val tokens = extract(text)
         return tokens.sum()
-    }
-
-    companion object {
-        val PARSER_RULE = Regex("//(.)\n(.*)")
-        val STD_DELIMITER = Regex("[,:]")
-        const val RETURN_VALUE = 0
     }
 }
