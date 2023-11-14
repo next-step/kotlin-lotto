@@ -1,12 +1,12 @@
 package lotto.domain
 
-class Lotto(
-    val autoLines: List<LottoLine>,
-    val manualLines: List<LottoLine> = emptyList()
+class Lottos(
+    val lines: List<LottoLine>,
+    val autoQuantity: Int,
+    val manualQuantity: Int
 ) {
-    val allLines = autoLines + manualLines
     fun getAllSameNumberCount(lottoWinningNumber: LottoWinningNumber): List<LottoWinningResult> =
-        allLines.map {
+        lines.map {
             val sameNumberCount = it.getSameNumberCount(lottoWinningNumber.winningNumbers)
             val isBonusMatch = it.isContainsBonusNumber(lottoWinningNumber.bonusNumber)
             LottoWinningResult(sameNumberCount, isBonusMatch)

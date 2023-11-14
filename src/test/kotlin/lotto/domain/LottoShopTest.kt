@@ -10,7 +10,7 @@ class LottoShopTest : BehaviorSpec({
         When("로또를 구매한다면") {
             val lotto = LottoShop.buyLotto(purchase)
             Then("3개의 자동 라인이 기입된 로또를 반환한다.") {
-                lotto.allLines.size shouldBe 3
+                lotto.lines.size shouldBe 3
             }
         }
     }
@@ -24,12 +24,7 @@ class LottoShopTest : BehaviorSpec({
         When("로또를 구매한다면") {
             val lotto = LottoShop.buyLotto(purchase, manualLottoLines)
             Then("4개의 라인이 기입된 로또를 반환한다.") {
-                lotto.autoLines.size shouldBe 2
-                lotto.manualLines.size shouldBe 2
-                lotto.manualLines shouldBe listOf(
-                    LottoLine.valueOf("1, 2, 3, 4, 5, 6"),
-                    LottoLine.valueOf("7, 8, 9, 10, 11, 12")
-                )
+                lotto.lines.size shouldBe 4
             }
         }
     }

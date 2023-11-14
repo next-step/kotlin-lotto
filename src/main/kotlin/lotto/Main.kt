@@ -1,6 +1,5 @@
 package lotto
 
-import lotto.domain.LottoLine
 import lotto.domain.LottoMachine
 import lotto.domain.LottoMessage
 import lotto.domain.LottoPurchase

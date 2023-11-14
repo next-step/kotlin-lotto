@@ -7,11 +7,14 @@ object LottoShop {
     fun buyLotto(
         purchase: LottoPurchase,
         manualInputLines: List<String> = emptyList()
-    ): Lotto {
+    ): Lottos {
         val autoLines = makeAutoLottoLine(purchase.autoQuantity)
         val manualLines = makeManualLottoLine(manualInputLines)
-
-        return Lotto(autoLines, manualLines)
+        return Lottos(
+            autoLines + manualLines,
+            purchase.autoQuantity,
+            purchase.manualQuantity
+        )
     }
 
     fun getQuantity(money: Int) = money / LOTTO_FEE
