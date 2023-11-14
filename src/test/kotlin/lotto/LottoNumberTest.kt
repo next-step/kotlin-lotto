@@ -9,8 +9,8 @@ class LottoNumberTest {
 
     @Test
     fun `로또 번호를 생성한다`() {
-        val number = LottoNumber(1)
-        number.getNumber() shouldBe 1
+        val lottoNumber = LottoNumber(1)
+        lottoNumber.number shouldBe 1
     }
 
     @Test

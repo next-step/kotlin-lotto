@@ -1,11 +1,8 @@
 package lotto.domain
 
-data class LottoNumber(private val number: Int) {
+data class LottoNumber(val number: Int) {
     init {
         require(number in 1..45) { ERROR_MESSAGE }
-    }
-    fun getNumber(): Int {
-        return number
     }
 
     override fun toString(): String {

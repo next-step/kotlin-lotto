@@ -1,7 +1,7 @@
 package lotto.domain
 
 class Lotto(numbers: List<LottoNumber>) {
-    private val lottoNumbers: List<LottoNumber> = numbers.map { it.copy() }.sortedBy { it.getNumber() }
+    private val lottoNumbers: List<LottoNumber> = numbers.map { it.copy() }.sortedBy { it.number }
 
     init {
         require(numbers.size == 6) { INIT_ERROR_MESSAGE }
