@@ -1,17 +1,37 @@
 package lotto.view
 
+import lotto.domain.Lotto
 import lotto.domain.LottoPrize
 import lotto.domain.LottoResult
-import lotto.domain.LottoResultMachine.calculateYield
 
 object OutputView {
-    fun printLottoResult(lottoResultMap: Map<LottoPrize, List<LottoResult>>) {
+    fun printLottoResult(lottoResult: LottoResult) {
         println("당첨 통계")
         println("---------")
-        LottoPrize.values().forEach { prize ->
-            if (prize == LottoPrize.MISS) return@forEach
-            println("${prize.matchCount}개 일치 (${prize.prizeMoney}원) - ${lottoResultMap[prize]?.size ?: 0}개")
+        LottoPrize.values().forEach {
+            if (it == LottoPrize.MISS) return@forEach
+            printPerPrize(it, lottoResult.getPrizeBy(it))
         }
-        println("총 수익률은 ${calculateYield(lottoResultMap)}입니다.")
+        println("총 수익률은 ${lottoResult.calculateYield()}입니다.")
+    }
+
+    private fun printPerPrize(prize: LottoPrize, count: Int) {
+        val matchCountMessage = "${prize.matchCount}개 일치"
+        val hasBonusBallMessage = ", 보너스 볼 일치"
+        val prizeMoneyMessage = "(${prize.prizeMoney}원) - ${count}개"
+
+        println(
+            buildString {
+                append(matchCountMessage)
+                if (prize == LottoPrize.SECOND) append(hasBonusBallMessage)
+                append(prizeMoneyMessage)
+            }
+        )
+    }
+
+    fun buyLotto(lottos: List<Lotto>) {
+        println("${lottos.size}개를 구매했습니다.")
+        lottos.forEach { println(it.numbers) }
+        println()
     }
 }
