@@ -11,10 +11,10 @@ enum class LottoPrize(val matchCount: Int, val prizeMoney: Int) {
     companion object {
         fun of(matchCount: Int, hasBonus: Boolean): LottoPrize {
             return when (matchCount) {
-                6 -> FIRST
-                5 -> if (hasBonus) SECOND else THIRD
-                4 -> FOURTH
-                3 -> FIFTH
+                FIRST.matchCount -> FIRST
+                SECOND.matchCount -> if (hasBonus) SECOND else THIRD
+                FOURTH.matchCount -> FOURTH
+                FIFTH.matchCount -> FIFTH
                 else -> MISS
             }
         }
