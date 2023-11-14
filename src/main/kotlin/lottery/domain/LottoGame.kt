@@ -1,22 +1,17 @@
 package lottery.domain
 
-class LottoGame(private val price: Int, private val lottos: Lottos) {
-
-    constructor(price: Int, numberGenerator: LottoNumberGenerator = RandomNumberGenerator()) : this(
-        price,
-        Lottos(price.div(LOTTERY_PRICE), numberGenerator)
-    )
+class LottoGame(private val lottoMoney: LottoMoney, private val lottos: Lottos) {
 
     fun getLottos(): List<Lotto> {
         return lottos.lottos
     }
 
     fun getRanks(winningLotto: WinningLotto): Ranks {
-        return Ranks(lottos, winningLotto, price)
+        return Ranks(lottos, winningLotto, lottoMoney.money)
     }
 
     companion object {
-        private const val LOTTERY_PRICE = 1000
+        const val LOTTERY_PRICE = 1000
         const val LOTTO_MIN_NUMBER = 1
         const val LOTTO_MAX_NUMBER = 45
         const val LOTTO_SIZE = 6
