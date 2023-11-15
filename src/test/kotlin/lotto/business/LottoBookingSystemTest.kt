@@ -10,10 +10,9 @@ class LottoBookingSystemTest {
     fun `로또 티켓을 개수만큼 생성한다`() {
         // given
         val lottoBookingSystem = LottoBookingSystem()
-        val player = Player(receivedAmount = ReceivedAmount(3_000))
 
         // when
-        val lottoTickets = lottoBookingSystem.generateMultipleTickets(player)
+        val lottoTickets = lottoBookingSystem.generateMultipleTickets(3)
 
         // then
         Assertions.assertAll(
@@ -25,11 +24,10 @@ class LottoBookingSystemTest {
     fun `로또 수동 생성 개수가 플레이의 구매수량 보다 많으면 예외가 발생한다`() {
         // given
         val lottoBookingSystem = LottoBookingSystem()
-        val player = Player(receivedAmount = ReceivedAmount(3_000))
 
         // when,then
         assertThatThrownBy {
-            lottoBookingSystem.generateManualTickets(4, player)
+            lottoBookingSystem.generateManualTickets(4, 3)
         }.isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("구매 가능한 로또 개수보다 많습니다.")
     }

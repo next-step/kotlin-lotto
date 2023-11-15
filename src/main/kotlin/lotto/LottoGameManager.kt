@@ -12,9 +12,8 @@ import lotto.view.LottoPurchaseSummaryPrinter
 
 object LottoGameManager {
     fun run() {
-        val lottoBookingSystem = LottoBookingSystem()
         val player = Player(receivedAmount = ReceivedAmount(LottoInputHandler.inputPurchaseAmount()))
-        generateTickets(lottoBookingSystem, player)
+        generateTickets(LottoBookingSystem(), player)
         val winningLottoTicket = generateWinningLottoTicket()
         printLotteryStatistics(winningLottoTicket, player)
     }
@@ -24,9 +23,9 @@ object LottoGameManager {
         player: Player
     ) {
         val manualTicketCount = LottoInputHandler.inputManualTicketCount()
-        val manualTickets = lottoBookingSystem.generateManualTickets(manualTicketCount, player)
-        player.addTickets(manualTickets)
-        val lottoTickets = lottoBookingSystem.generateMultipleTickets(player)
+        player.addTickets(lottoBookingSystem.generateManualTickets(manualTicketCount, player.purchasableCount))
+        val lottoTickets = lottoBookingSystem.generateMultipleTickets(player.purchasableCount)
+        player.addTickets(lottoTickets)
         LottoPurchaseSummaryPrinter.print(manualTicketCount, lottoTickets)
     }
 
