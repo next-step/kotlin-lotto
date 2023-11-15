@@ -11,10 +11,10 @@ fun main() {
     val lastLottoWinningNumbers = ConsoleView.Input.getLottoWinningNumbers()
     val winningLotto = WinningLotto(lastLottoWinningNumbers)
 
-    val lottoResultAnalytics = LottoResultAnalytics(winningLotto, lottoTickets)
-    val winningStatistics = lottoResultAnalytics.calculateWinningStatistics()
+    val lottoResultAnalytics = winningLotto.createResultAnalytics(lottoTickets)
+    val winningStatistics = lottoResultAnalytics.getWinningStatistics()
     ConsoleView.Output.printWinningStatistics(winningStatistics)
 
-    val profitRate = lottoResultAnalytics.calculateProfitRate()
+    val profitRate = lottoResultAnalytics.getProfitRate(lottoTickets.size())
     ConsoleView.Output.printProfitRate(profitRate)
 }

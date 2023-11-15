@@ -22,9 +22,9 @@ class LottoResultAnalyticsTest : StringSpec({
         ) { winningNumbers: List<Int>, lottoList: List<LottoTicket> ->
             val winningLotto = WinningLotto(winningNumbers)
             val lottoTickets = LottoTickets(lottoList)
-            val lottoResultAnalytics = LottoResultAnalytics(winningLotto, lottoTickets)
+            val lottoResultAnalytics = winningLotto.createResultAnalytics(lottoTickets)
 
-            val winningStatistics = lottoResultAnalytics.calculateWinningStatistics()
+            val winningStatistics = lottoResultAnalytics.getWinningStatistics()
             winningStatistics.get(LottoRanking.FIRST) shouldBe 1
             winningStatistics.get(LottoRanking.SECOND) shouldBe 2
             winningStatistics.get(LottoRanking.THIRD) shouldBe 1
@@ -53,9 +53,9 @@ class LottoResultAnalyticsTest : StringSpec({
         ) { winningNumbers: List<Int>, lottoList: List<LottoTicket> ->
             val winningLotto = WinningLotto(winningNumbers)
             val lottoTickets = LottoTickets(lottoList)
-            val lottoResultAnalytics = LottoResultAnalytics(winningLotto, lottoTickets)
+            val lottoResultAnalytics = winningLotto.createResultAnalytics(lottoTickets)
 
-            val profitRate = lottoResultAnalytics.calculateProfitRate()
+            val profitRate = lottoResultAnalytics.getProfitRate(lottoTickets.size())
             profitRate shouldBe 0.5
         }
     }
@@ -80,9 +80,9 @@ class LottoResultAnalyticsTest : StringSpec({
         ) { winningNumbers: List<Int>, lottoList: List<LottoTicket> ->
             val winningLotto = WinningLotto(winningNumbers)
             val lottoTickets = LottoTickets(lottoList)
-            val lottoResultAnalytics = LottoResultAnalytics(winningLotto, lottoTickets)
+            val lottoResultAnalytics = winningLotto.createResultAnalytics(lottoTickets)
 
-            val profitRate = lottoResultAnalytics.calculateProfitRate()
+            val profitRate = lottoResultAnalytics.getProfitRate(lottoTickets.size())
             profitRate shouldBe 5.0
         }
     }
