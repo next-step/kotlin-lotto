@@ -14,8 +14,22 @@ object ConsoleView {
             return readln()
         }
 
+        fun getPurchaseAmount(): Int {
+            val purchaseAmount = getUserInput().toIntOrNull()
+                ?: throw IllegalArgumentException("구입 금액은 숫자로 입력해주세요. ")
+
+            LottoPolicy.validatePurchaseAmount(purchaseAmount)
+
+            return purchaseAmount
+        }
+
         fun printWinningNumbersPrompt() {
             println(RECENT_LOTTO_WINNING_NUMBERS_PROMPT)
+        }
+
+        fun getLottoWinningNumbers(): List<Int> {
+            return getUserInput().split(",")
+                .map { it.trim().toInt() }.sorted()
         }
     }
 
