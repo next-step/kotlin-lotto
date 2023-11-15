@@ -2,21 +2,14 @@ package lotto.domain
 
 import kotlin.math.floor
 
-class LottoResult(private val userLotto: List<Lotto>, private val winningLotto: Lotto, private val bonusBall: LottoNumber) {
-    val ranks: Map<LottoRank, List<Lotto>> = calculateRanks()
+class LottoResult(private val userLottos: Lottos, winningLotto: Lotto, bonusBall: LottoNumber) {
+    val ranks: Map<LottoRank, Lottos> = userLottos.groupByLottoRank(winningLotto, bonusBall)
 
     fun calculateProfitRate(): Double {
-        val totalCost = userLotto.size * Lotto.LOTTO_PRICE
+        val totalCost = userLottos.size * Lotto.LOTTO_PRICE
         val totalPrize = ranks.entries.sumOf { (rank, lottos) -> lottos.size * rank.prize }
 
         val profitRate = totalPrize.toDouble() / totalCost.toDouble()
         return floor(profitRate * 100) / 100
-    }
-
-    private fun calculateRanks(): Map<LottoRank, List<Lotto>> {
-        return userLotto.groupBy { lotto ->
-            val matchCount = lotto.match(winningLotto)
-            LottoRank.getRank(matchCount, lotto.containsBonusBall(bonusBall))
-        }
     }
 }

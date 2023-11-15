@@ -28,10 +28,11 @@ class LottoResultTest {
             )
         )
 
-        val lottoResult = LottoResult(listOf(userLotto), winningLotto, LottoNumber(10))
+        val userLottos = Lottos(listOf(userLotto))
+        val lottoResult = LottoResult(userLottos, winningLotto, LottoNumber(10))
         val first = lottoResult.ranks[LottoRank.FIRST]
         assertThat(first).isNotNull
-        assertThat(first).contains(userLotto)
+        assertThat(first).isEqualTo(userLottos)
     }
 
     @Test
@@ -57,10 +58,11 @@ class LottoResultTest {
             )
         )
 
-        val lottoResult = LottoResult(listOf(userLotto), winningLotto, LottoNumber(6))
+        val userLottos = Lottos(listOf(userLotto))
+        val lottoResult = LottoResult(userLottos, winningLotto, LottoNumber(6))
         val second = lottoResult.ranks[LottoRank.SECOND]
         assertThat(second).isNotNull
-        assertThat(second).contains(userLotto)
+        assertThat(second).isEqualTo(userLottos)
     }
 
     @Test
@@ -86,10 +88,11 @@ class LottoResultTest {
             )
         )
 
-        val lottoResult = LottoResult(listOf(userLotto), winningLotto, LottoNumber(45))
+        val userLottos = Lottos(listOf(userLotto))
+        val lottoResult = LottoResult(userLottos, winningLotto, LottoNumber(45))
         val third = lottoResult.ranks[LottoRank.THIRD]
         assertThat(third).isNotNull
-        assertThat(third).contains(userLotto)
+        assertThat(third).isEqualTo(userLottos)
     }
 
     @Test
@@ -115,7 +118,8 @@ class LottoResultTest {
             )
         )
 
-        val lottoResult = LottoResult(listOf(userLotto), winningLotto, LottoNumber(10)) // 3개 일치, 5등
+        val userLottos = Lottos(listOf(userLotto))
+        val lottoResult = LottoResult(userLottos, winningLotto, LottoNumber(10)) // 3개 일치, 5등
         assertThat(lottoResult.calculateProfitRate()).isCloseTo(
             LottoRank.FIFTH.prize.toDouble() / Lotto.LOTTO_PRICE.toDouble(),
             Offset.offset(0.01)

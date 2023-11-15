@@ -3,9 +3,9 @@ package lotto.domain
 object LottoStore {
     private const val MAX_LOTTO_NUMBER_COUNT = 6
 
-    fun purchase(money: Int): List<Lotto> {
+    fun purchase(money: Int): Lottos {
         val count = money / Lotto.LOTTO_PRICE
-        return List(count) { generateRandomLotto() }
+        return Lottos(List(count) { generateRandomLotto() })
     }
 
     private fun generateRandomLotto(): Lotto {

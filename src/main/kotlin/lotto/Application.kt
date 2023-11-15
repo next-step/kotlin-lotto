@@ -1,9 +1,6 @@
 package lotto
 
-import lotto.domain.Lotto
-import lotto.domain.LottoNumber
-import lotto.domain.LottoResult
-import lotto.domain.LottoStore
+import lotto.domain.*
 import lotto.util.getIntegersAfterSplit
 import lotto.view.InputView
 import lotto.view.OutputView

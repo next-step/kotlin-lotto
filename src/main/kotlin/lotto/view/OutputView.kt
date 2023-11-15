@@ -3,11 +3,12 @@ package lotto.view
 import lotto.domain.Lotto
 import lotto.domain.LottoRank
 import lotto.domain.LottoResult
+import lotto.domain.Lottos
 
 object OutputView {
-    fun printLottos(lottos: List<Lotto>) {
+    fun printLottos(lottos: Lottos) {
         println("${lottos.size}개를 구매했습니다.")
-        lottos.forEach { printLotto(it) }
+        lottos.getLottos().forEach { printLotto(it) }
     }
 
     fun printResult(lottoResult: LottoResult) {
