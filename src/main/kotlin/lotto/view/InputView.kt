@@ -19,4 +19,13 @@ object InputView {
             throw IllegalArgumentException("올바른 당첨번호를 입력해 주세요.")
         }
     }
+
+    fun inputBonusNumber(): Int {
+        try {
+            println("보너스 볼을 입력해 주세요.")
+            return readln().toInt()
+        } catch (e: Exception) {
+            throw IllegalArgumentException("숫자만 입력해 주세요.")
+        }
+    }
 }
