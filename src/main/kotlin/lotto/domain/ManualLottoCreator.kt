@@ -1,15 +1,11 @@
 package lotto.domain
 
-class ManualLottoCreator(private val lottoNumbers: LottoNumbers) : LottoCreator {
-    override fun createLotto(): Lotto = ManualLotto(lottoNumbers)
-
-    companion object {
-        fun createLottoList(vararg lottoNumbers: LottoNumbers): LottoList {
-            val list = mutableListOf<Lotto>()
+class ManualLottoCreator(private vararg val lottoNumbers: LottoNumbers) : LottoCreator {
+    override fun createLottoList(): LottoList = LottoList(
+        buildList {
             for (numbers in lottoNumbers) {
-                list.add(ManualLotto(numbers))
+                add(ManualLotto(numbers))
             }
-            return LottoList(list)
         }
-    }
+    )
 }
