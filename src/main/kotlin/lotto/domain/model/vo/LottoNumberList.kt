@@ -11,6 +11,10 @@ value class LottoNumberList(val numberList: List<LottoNumber>) {
             "로또의 번호를 골라야 합니다."
         }
 
+        require(numberList.size == numberList.distinct().size) {
+            "로또의 번호는 중복되면 안됩니다."
+        }
+
         require(numberList.size == DEFAULT_LOTTO_NUMBER_LIST_LENGTH) {
             "로또의 번호 개수는 ${DEFAULT_LOTTO_NUMBER_LIST_LENGTH}개여야 합니다."
         }

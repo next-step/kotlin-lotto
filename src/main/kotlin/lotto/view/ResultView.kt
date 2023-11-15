@@ -20,7 +20,7 @@ object ResultView {
      * */
     fun drawLottoMatchResult(lottoMatchResultList: List<LottoMatchResult>) {
         lottoMatchResultList.forEach { lottoResult ->
-            println(LOTTO_MATCH_RESULT_DESCRIPTION.format(lottoResult.matchCount.matchCount, lottoResult.prize.prize, lottoResult.ticketCount.ticketCount))
+            println(LOTTO_MATCH_RESULT_DESCRIPTION.format(lottoResult.matchCount.matchCount, lottoResult.prize.prize, lottoResult.winningTicketCount.ticketCount))
         }
     }
 

@@ -66,6 +66,12 @@
   - 구입금액에 "1500" 입력시 예외(IllegalArgumentException)를 던진다.
   - 구입금액에 "10001" 입력시 예외(IllegalArgumentException)를 던진다.
   - 구입금액에 "10000" 입력시 로또를 10개를 가지고 있어야 한다.
+- [x] 로또 번호는 중복되지 않게 1 ~ 45 사이의 숫자로만 만들 수 있다.
+  - 로또에 찍힌 로또 번호들이 [1, 2, 3, 4, 5, 5]일 경우 예외(IllegalArgumentException)를 던진다.
+  - 로또에 찍힌 로또 번호들이 [1, 2, 3, 4, 5, 6, 7]일 경우 예외(IllegalArgumentException)를 던진다.
+  - 로또에 찍힌 로또 번호들이 [0, 2, 3, 4, 5, 6]일 경우 예외(IllegalArgumentException)를 던진다.
+  - 로또에 찍힌 로또 번호들이 [41, 42, 43, 44, 45, 46]일 경우 예외(IllegalArgumentException)를 던진다.
+  - 로또에 [1, 2, 3, 4, 5, 6]의 번호를 찍을 경우 로또에 찍힌 번호들이[1, 2, 3, 4, 5, 6]이여야 한다.
 - [x] 지난 주 당첨 번호는 ", "로 구분되며 중복되지 않은 숫자 6개를 입력해야한다.
   - 지난 주 당첨 번호에 "1, 2, 3, 4, 5" 입력시 예외(IllegalArgumentException)를 던진다.
   - 지난 주 당첨 번호에 "1, 2, 3, 4, 5, 5" 입력시 예외(IllegalArgumentException)를 던진다.
