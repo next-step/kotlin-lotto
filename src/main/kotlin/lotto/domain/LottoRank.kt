@@ -1,19 +1,29 @@
 package lotto.domain
 
 enum class LottoRank(
-    val lottoWinningResult: LottoWinningResult,
-    val amount: Int
+    val countOfMatch: Int,
+    val winningMoney: Int,
+    val findRank: (LottoRank, LottoWinningResult) -> Boolean = isMatchRank
 ) {
 
-    FIRST(LottoWinningResult(6, false), 2_000_000_000),
-    SECOND(LottoWinningResult(5, true), 30_000_000),
-    THIRD(LottoWinningResult(5, false), 1_500_000),
-    FOURTH(LottoWinningResult(4, false), 50_000),
-    FIFTH(LottoWinningResult(3, false), 5_000)
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000 , isBonusRank),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    MISS(0, 0)
     ;
 
     companion object {
-        fun valueOf(lottoWinningResult: LottoWinningResult) = values()
-            .find { it.lottoWinningResult == lottoWinningResult }
+        fun valueOf(lottoWinningResult: LottoWinningResult): LottoRank =
+            entries.find { it.findRank(it, lottoWinningResult) } ?: MISS
     }
+}
+
+private val isBonusRank: (LottoRank, LottoWinningResult) -> Boolean = { lottoRank, lottoWinningResult ->
+    lottoRank == LottoRank.SECOND && lottoRank.countOfMatch == lottoWinningResult.countOfMatch && lottoWinningResult.isBonusRank
+}
+
+private val isMatchRank: (LottoRank, LottoWinningResult) -> Boolean = { lottoRank, lottoWinningResult ->
+    lottoRank.countOfMatch == lottoWinningResult.countOfMatch
 }

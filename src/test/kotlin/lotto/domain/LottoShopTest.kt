@@ -1,30 +1,30 @@
 package lotto.domain
 
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
-import java.lang.IllegalArgumentException
 
 class LottoShopTest : BehaviorSpec({
 
-    val lottoShop = LottoShop()
-    Given("고객이 3000원의 돈을 가지고 있을 때") {
-        val customer = Customer.valueOf("3000")
+    Given("수동 구매는 존재하지 않고 3개의 자동을") {
+        val purchase = LottoPurchase.valueOf("3000")
         When("로또를 구매한다면") {
-            val lotto = lottoShop.buyLotto(customer.money)
-            Then("3개의 라인을 구매한다.") {
+            val lotto = LottoShop.buyLotto(purchase)
+            Then("3개의 자동 라인이 기입된 로또를 반환한다.") {
                 lotto.lines.size shouldBe 3
             }
         }
     }
 
-    Given("고객이 로또를 구매할 최소 금액의 돈을 가지고 있지 않을 때") {
-        val customer = Customer(300)
+    Given("수동 구매 2개, 자동 구매 2개의 구매정보가 존재하고") {
+        val purchase = LottoPurchase.valueOf("4000", "2")
+        val manualLottoLines = listOf(
+            "1, 2, 3, 4, 5, 6",
+            "7, 8, 9, 10, 11, 12"
+        )
         When("로또를 구매한다면") {
-            Then("예외를 던진다.") {
-                shouldThrow<IllegalArgumentException> {
-                    lottoShop.buyLotto(customer.money)
-                }
+            val lotto = LottoShop.buyLotto(purchase, manualLottoLines)
+            Then("4개의 라인이 기입된 로또를 반환한다.") {
+                lotto.lines.size shouldBe 4
             }
         }
     }

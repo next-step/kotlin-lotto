@@ -5,14 +5,19 @@ class LottoWinningReceipt(
     private val rateCalculus: RateCalculus = DefaultRateCalculus()
 ) {
 
-    fun getRateOfReturn(customer: Customer): Double {
-        val amountSum = this.ranks.map { it.key.amount * it.value }.sumOf { it.toDouble() }
-        return rateCalculus.calc(amountSum, customer.money.toDouble())
+    fun getRateOfReturn(purchase: LottoPurchase): Double {
+        val amountSum = this.ranks.map { it.key.winningMoney * it.value }.sumOf { it.toDouble() }
+        val purchaseMoney = purchase.money.toDouble()
+        return rateCalculus.calc(amountSum, purchaseMoney)
     }
     operator fun get(lottoWinning: LottoRank) = ranks[lottoWinning]
     override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
+        if (this === other) {
+            return true
+        }
+        if (javaClass != other?.javaClass) {
+            return false
+        }
 
         other as LottoWinningReceipt
 

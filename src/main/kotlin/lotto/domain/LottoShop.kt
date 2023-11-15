@@ -1,19 +1,28 @@
 package lotto.domain
 
-class LottoShop {
+object LottoShop {
 
-    fun buyLotto(money: Int): Lotto {
-        val quantity = getQuantity(money)
-        require(quantity > ZERO) {
-            "${LOTTO_FEE}원 이상 입력하여 주세요."
-        }
-        return Lotto(IntRange(1, quantity).map { LottoGenerator.generate() })
+    const val LOTTO_FEE: Int = 1_000
+    const val ZERO: Int = 0
+    fun buyLotto(
+        purchase: LottoPurchase,
+        manualInputLines: List<String> = emptyList()
+    ): Lottos {
+        val autoLines = makeAutoLottoLine(purchase.autoQuantity)
+        val manualLines = makeManualLottoLine(manualInputLines)
+        return Lottos(
+            autoLines + manualLines,
+            purchase.autoQuantity,
+            purchase.manualQuantity
+        )
     }
 
-    private fun getQuantity(money: Int) = money / LOTTO_FEE
+    fun getQuantity(money: Int) = money / LOTTO_FEE
 
-    companion object {
-        const val LOTTO_FEE: Int = 1_000
-        const val ZERO: Int = 0
-    }
+    private fun makeAutoLottoLine(autoQuantity: Int): List<LottoLine> =
+        IntRange(1, autoQuantity).map { LottoLine.generate() }
+
+    private fun makeManualLottoLine(manualInputLines: List<String>): List<LottoLine> =
+        manualInputLines.map(LottoLine::valueOf)
+
 }

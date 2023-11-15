@@ -3,19 +3,15 @@ package calculator
 import java.lang.RuntimeException
 
 class StringAddCalculator(
-    private val validation: NumberValidation
+    private val validation: OperandValidation
 ) {
 
-    fun add(input: String?): Int =
-        if (input.isNullOrBlank()) DEFAULT_VALUE
-        else StringSpliterator.split(input).sumOf(::getNumber)
+    fun add(input: String?): Operand =
+        if (input.isNullOrBlank()) Operand.ZERO
+        else StringSpliterator.split(input).map(::toOperand).sum()
 
-    private fun getNumber(string: String): Int = Operand.valueOf(string).let {
+    private fun toOperand(string: String): Operand = Operand.valueOf(string).let {
         if (validation.check(it)) throw RuntimeException("음수는 입력하실 수 없습니다.")
         else it
-    }
-
-    companion object {
-        private const val DEFAULT_VALUE = 0
     }
 }

@@ -1,11 +1,10 @@
 package lotto.view
 
-import lotto.domain.Customer
-import lotto.domain.Lotto
 import lotto.domain.LottoMessage
+import lotto.domain.LottoPurchase
 import lotto.domain.LottoRank
 import lotto.domain.LottoWinningReceipt
-import lotto.domain.LottoWinningResult
+import lotto.domain.Lottos
 
 object Output {
 
@@ -13,27 +12,29 @@ object Output {
         println(message.toString())
     }
 
-    fun lottoBuyResultPrint(lotto: Lotto) {
-        this.printlnAny(LottoMessage.PRINT_PURCHASE_QUANTITY.message.format(lotto.lines.size))
-        this.printlnAny(
-            lotto.lines.joinToString("\n") {
-                it.line.joinToString(", ", "[", "]")
-            }
-        )
+    fun lottoBuyResultPrint(lottos: Lottos) {
+        this.printlnAny(LottoMessage.PRINT_PURCHASE_QUANTITY.format(lottos.autoQuantity, lottos.manualQuantity))
+        this.printlnAny(getLottoBuyResult(lottos))
     }
 
-    fun lottoRateOfReturnPrint(lottoResult: LottoWinningReceipt, customer: Customer) {
-        this.printlnAny(LottoMessage.PRINT_LOTTO_RATE_OF_RETURN.message.format(lottoResult.getRateOfReturn(customer)))
+    private fun getLottoBuyResult(lottos: Lottos): String =
+        lottos.lines.joinToString("\n") {
+            it.line.joinToString(", ", "[", "]")
+        }
+
+    fun lottoRateOfReturnPrint(lottoResult: LottoWinningReceipt, purchase: LottoPurchase) {
+        this.printlnAny(LottoMessage.PRINT_LOTTO_RATE_OF_RETURN.format(lottoResult.getRateOfReturn(purchase)))
     }
 
     fun lottoRankStatisticsPrint(lottoResult: LottoWinningReceipt) {
         val rankStatistics = LottoRank.values()
-            .sortedBy { it.amount }
+            .filter { it != LottoRank.MISS }
+            .sortedBy { it.winningMoney }
             .joinToString("\n") {
-                val (winningResult, amount, quantity) = this.getLottoWinnings(it, lottoResult)
-                getPrintRankMessage(winningResult.isBonusRank).format(
-                    winningResult.sameCount,
-                    amount,
+                val (rank, quantity) = this.getLottoWinningRankAndQuantity(it, lottoResult)
+                getPrintRankMessage(rank).format(
+                    rank.countOfMatch,
+                    rank.winningMoney,
                     quantity
                 )
             }
@@ -41,12 +42,12 @@ object Output {
         this.printlnAny(rankStatistics)
     }
 
-    private fun getPrintRankMessage(bonusRank: Boolean) =
-        if (bonusRank) LottoMessage.PRINT_LOTTO_BONUS_RANK.message
-        else LottoMessage.PRINT_LOTTO_RANK.message
+    private fun getPrintRankMessage(rank: LottoRank) =
+        if (rank == LottoRank.SECOND) LottoMessage.PRINT_LOTTO_BONUS_RANK
+        else LottoMessage.PRINT_LOTTO_RANK
 
-    private fun getLottoWinnings(rank: LottoRank, lottoReceipt: LottoWinningReceipt): Triple<LottoWinningResult, Int, Int> {
+    private fun getLottoWinningRankAndQuantity(rank: LottoRank, lottoReceipt: LottoWinningReceipt): Pair<LottoRank, Int> {
         val quantity = lottoReceipt[rank] ?: 0
-        return Triple(rank.lottoWinningResult, rank.amount, quantity)
+        return Pair(rank, quantity)
     }
 }
