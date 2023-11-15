@@ -27,7 +27,7 @@ value class Lotto private constructor(private val list: List<LottoNumber>) : Lis
 
         fun auto(): Lotto = lottoNumbers
             .shuffled()
-            .subList(0, 6)
+            .take(6)
             .sortedBy {
                 it.value
             }.let {
