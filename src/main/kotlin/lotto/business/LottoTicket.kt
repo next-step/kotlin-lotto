@@ -20,6 +20,10 @@ class LottoTicket(lottoNumbers: Set<LottoNumber>) {
         return lottoNumbers.contains(targetLottoNumber)
     }
 
+    override fun toString(): String {
+        return lottoNumbers.toString()
+    }
+
     companion object {
         const val LOTTO_NUMBER_SIZE = 6
     }
