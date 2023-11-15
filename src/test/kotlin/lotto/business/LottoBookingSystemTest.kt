@@ -10,7 +10,7 @@ class LottoBookingSystemTest {
     fun `로또 티켓을 개수만큼 생성한다`() {
         // given
         val lottoBookingSystem = LottoBookingSystem()
-        val player = Player(purchasedCount = 3)
+        val player = Player(receivedAmount = ReceivedAmount(3_000))
 
         // when
         val lottoTickets = lottoBookingSystem.generateMultipleTickets(player)
@@ -25,7 +25,7 @@ class LottoBookingSystemTest {
     fun `로또 수동 생성 개수가 플레이의 구매수량 보다 많으면 예외가 발생한다`() {
         // given
         val lottoBookingSystem = LottoBookingSystem()
-        val player = Player(purchasedCount = 3)
+        val player = Player(receivedAmount = ReceivedAmount(3_000))
 
         // when,then
         assertThatThrownBy {

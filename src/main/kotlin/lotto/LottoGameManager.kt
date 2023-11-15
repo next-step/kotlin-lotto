@@ -2,7 +2,6 @@ package lotto
 
 import lotto.business.LottoBookingSystem
 import lotto.business.LottoNumber
-import lotto.business.LottoTicket
 import lotto.business.LottoTicketExtractor
 import lotto.business.Player
 import lotto.business.ReceivedAmount
@@ -14,28 +13,21 @@ import lotto.view.LottoPurchaseSummaryPrinter
 object LottoGameManager {
     fun run() {
         val lottoBookingSystem = LottoBookingSystem()
-        val (receivedAmount, player) = receiveAmount()
-        val lottoTickets = generateTickets(lottoBookingSystem, player)
+        val player = Player(receivedAmount = ReceivedAmount(LottoInputHandler.inputPurchaseAmount()))
+        generateTickets(lottoBookingSystem, player)
         val winningLottoTicket = generateWinningLottoTicket()
-        printLotteryStatistics(winningLottoTicket, lottoTickets, receivedAmount)
-    }
-
-    private fun receiveAmount(): Pair<ReceivedAmount, Player> {
-        val receivedAmount = ReceivedAmount(LottoInputHandler.inputPurchaseAmount())
-        val player = Player(purchasedCount = receivedAmount.getTicketCount())
-        return Pair(receivedAmount, player)
+        printLotteryStatistics(winningLottoTicket, player)
     }
 
     private fun generateTickets(
         lottoBookingSystem: LottoBookingSystem,
         player: Player
-    ): List<LottoTicket> {
+    ) {
         val manualTicketCount = LottoInputHandler.inputManualTicketCount()
         val manualTickets = lottoBookingSystem.generateManualTickets(manualTicketCount, player)
         player.addTickets(manualTickets)
         val lottoTickets = lottoBookingSystem.generateMultipleTickets(player)
         LottoPurchaseSummaryPrinter.print(manualTicketCount, lottoTickets)
-        return lottoTickets
     }
 
     private fun generateWinningLottoTicket(): WinningLottoTicket {
@@ -47,11 +39,10 @@ object LottoGameManager {
 
     private fun printLotteryStatistics(
         winningLottoTicket: WinningLottoTicket,
-        lottoTickets: List<LottoTicket>,
-        receivedAmount: ReceivedAmount
+        player: Player
     ) {
-        val prizeResults = winningLottoTicket.compilePrizeResults(lottoTickets)
-        val profitRate = prizeResults.calculateProfitRate(receivedAmount)
+        val prizeResults = winningLottoTicket.compilePrizeResults(player.tickets)
+        val profitRate = prizeResults.calculateProfitRate(player.receivedAmount)
         LotteryStatisticsPrinter.print(prizeResults, profitRate)
     }
 }

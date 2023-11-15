@@ -9,7 +9,7 @@ class PlayerTest {
     @Test
     fun `플레이어는 로또 티켓을 구매할 수 있다`() {
         // given
-        val player = Player(purchasedCount = 5)
+        val player = Player(receivedAmount = ReceivedAmount(5_000))
         val ticket = lottoTicket()
 
         // when
@@ -23,7 +23,7 @@ class PlayerTest {
     @Test
     fun `플레이어는 로또 티켓 리스트로 구매할 수 있다`() {
         // given
-        val player = Player(purchasedCount = 5)
+        val player = Player(receivedAmount = ReceivedAmount(5_000))
         val tickets = lottoTickets()
 
         // when
@@ -78,20 +78,9 @@ class PlayerTest {
     )
 
     @Test
-    fun `플레이어는 초기화 때 구매한 로또 개수는 1개 이상이어야 한다`() {
-        // given
-        val purchasedCount = 0
-
-        // when , then
-        assertThatThrownBy { Player(purchasedCount = purchasedCount) }
-            .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage("구매 가능한 로또 개수는 1개 이상이어야 합니다.")
-    }
-
-    @Test
     fun `플레이어는 구매 가능한 로또 개수보다 많은 로또들을 구매할 수 없다`() {
         // given
-        val player = Player(purchasedCount = 1)
+        val player = Player(receivedAmount = ReceivedAmount(1_000))
         val ticket = lottoTicket()
 
         // when , then
@@ -103,7 +92,7 @@ class PlayerTest {
     @Test
     fun `플레이어는 구매 가능한 로또 개수보다 많은 로또를 구매할 수 없다`() {
         // given
-        val player = Player(purchasedCount = 1)
+        val player = Player(receivedAmount = ReceivedAmount(1_000))
         val ticket = lottoTicket()
         player.addTicket(ticket)
 
@@ -116,7 +105,7 @@ class PlayerTest {
     @Test
     fun `플레이어의 구매 간ㅇ한 로또 개수를 알 수 있다`() {
         // given
-        val player = Player(purchasedCount = 5)
+        val player = Player(receivedAmount = ReceivedAmount(5_000))
         val ticket = lottoTicket()
         player.addTicket(ticket)
 
