@@ -12,20 +12,15 @@ value class Lotto private constructor(private val list: List<LottoNumber>) : Lis
     companion object {
         private const val LOTTO_NUMBER_COUNT = 6
 
-        private val lottoNumberRange = (LottoNumber.LOTTO_NUMBER_START..LottoNumber.LOTTO_NUMBER_END)
-        private val lottoNumbers: List<LottoNumber> = lottoNumberRange.map {
-            LottoNumber(it)
-        }
-
         fun valueOf(numbers: List<Int>): Lotto {
             return numbers.map {
-                LottoNumber(it)
+                LottoNumber.get(it)
             }.let {
                 Lotto(it)
             }
         }
 
-        fun auto(): Lotto = lottoNumbers
+        fun auto(): Lotto = LottoNumber.lottoNumbers
             .shuffled()
             .take(6)
             .sortedBy {

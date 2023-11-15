@@ -13,7 +13,7 @@ class LottoNumberTest : StringSpec({
             row(20),
             row(45),
         ) { number ->
-            LottoNumber(number).value shouldBe number
+            LottoNumber.get(number).value shouldBe number
         }
     }
 
@@ -24,7 +24,7 @@ class LottoNumberTest : StringSpec({
             row(200),
         ) { number ->
             shouldThrowWithMessage<IllegalArgumentException>("로또 숫자의 범위는 1~45 입니다.") {
-                LottoNumber(number)
+                LottoNumber.get(number)
             }
         }
     }

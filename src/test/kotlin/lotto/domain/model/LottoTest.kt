@@ -9,7 +9,7 @@ import io.kotest.matchers.shouldBe
 class LottoTest : StringSpec({
     "로또의 숫자 개수가 6이면 로또를 생성한다." {
         val list = listOf(1, 2, 3, 4, 5, 6)
-        Lotto.valueOf(list) shouldBe list.map { LottoNumber(it) }
+        Lotto.valueOf(list) shouldBe list.map { LottoNumber.get(it) }
     }
 
     "로또의 숫자 개수가 6이 아니면 IllegalArgumentException 예외를 던진다." {
