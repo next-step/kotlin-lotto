@@ -9,9 +9,7 @@ object LottoStore {
 
     fun generateLottosByAuto(cash: LottoCash): List<Lotto> {
         val count = cash.value / LOTTO_PRICE
-        return (1..count).map {
-            Lotto.auto()
-        }
+        return List(count) { Lotto.auto() }
     }
 
     fun checkMatchResult(lottos: List<Lotto>, lastWeekMatchLotto: Lotto): List<LottoMatchCount> {
