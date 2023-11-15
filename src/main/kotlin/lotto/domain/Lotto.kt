@@ -14,14 +14,12 @@ class Lotto(inputNumberList: List<Int>) {
 
     private fun isContainsBonusNumber(bonusNumber: LottoNumber): Boolean = this.numberList.any { it == bonusNumber }
 
-    fun getLottoRank(winningLotto: Lotto, bonusNumber: Int): LottoRank {
-        val bonusLottoNumber = LottoNumber(bonusNumber)
-
+    fun getLottoRank(winningLotto: Lotto, bonusNumber: LottoNumber): LottoRank {
         val matchCount: Int = this.getMatchCount(winningLotto)
         val lottoRank: LottoRank = LottoRank.findByMatchCount(matchCount)
 
         return if (matchCount == 5) {
-            if (this.isContainsBonusNumber(bonusLottoNumber)) LottoRank.SECOND_WITH_BONUS else LottoRank.SECOND
+            if (this.isContainsBonusNumber(bonusNumber)) LottoRank.SECOND_WITH_BONUS else LottoRank.SECOND
         } else {
             lottoRank
         }

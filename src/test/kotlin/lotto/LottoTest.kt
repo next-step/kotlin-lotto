@@ -57,7 +57,7 @@ class LottoTest {
 
     @ParameterizedTest
     @MethodSource("provideLottoNumberList")
-    fun `로또 결과를 얻을 수 있다`(lotto: Lotto, winningLotto: Lotto, expected: LottoRank, bonusNumber: Int) {
+    fun `로또 결과를 얻을 수 있다`(lotto: Lotto, winningLotto: Lotto, expected: LottoRank, bonusNumber: LottoNumber) {
         val lottoResult: LottoRank = lotto.getLottoRank(winningLotto, bonusNumber)
 
         assertThat(lottoResult).isEqualTo(expected)
@@ -67,13 +67,13 @@ class LottoTest {
         @JvmStatic
         fun provideLottoNumberList(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(Lotto(listOf(1, 2, 3, 4, 5, 6)), Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoRank.FIRST, 7),
-                Arguments.of(Lotto(listOf(1, 2, 3, 4, 5, 7)), Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoRank.SECOND_WITH_BONUS, 7),
-                Arguments.of(Lotto(listOf(1, 2, 3, 4, 5, 7)), Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoRank.SECOND, 45),
-                Arguments.of(Lotto(listOf(1, 2, 3, 4, 7, 8)), Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoRank.THIRD, 45),
-                Arguments.of(Lotto(listOf(1, 2, 3, 7, 8, 9)), Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoRank.FOURTH, 45),
-                Arguments.of(Lotto(listOf(1, 2, 7, 8, 9, 10)), Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoRank.MISS, 45),
-                Arguments.of(Lotto(listOf(7, 8, 9, 10, 11, 12)), Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoRank.MISS, 45),
+                Arguments.of(Lotto(listOf(1, 2, 3, 4, 5, 6)), Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoRank.FIRST, LottoNumber(7)),
+                Arguments.of(Lotto(listOf(1, 2, 3, 4, 5, 7)), Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoRank.SECOND_WITH_BONUS, LottoNumber(7)),
+                Arguments.of(Lotto(listOf(1, 2, 3, 4, 5, 7)), Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoRank.SECOND, LottoNumber(45)),
+                Arguments.of(Lotto(listOf(1, 2, 3, 4, 7, 8)), Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoRank.THIRD, LottoNumber(45)),
+                Arguments.of(Lotto(listOf(1, 2, 3, 7, 8, 9)), Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoRank.FOURTH, LottoNumber(45)),
+                Arguments.of(Lotto(listOf(1, 2, 7, 8, 9, 10)), Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoRank.MISS, LottoNumber(45)),
+                Arguments.of(Lotto(listOf(7, 8, 9, 10, 11, 12)), Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoRank.MISS, LottoNumber(45)),
             )
         }
     }

@@ -3,6 +3,7 @@ package lotto
 import lotto.domain.Lotto
 import lotto.domain.LottoCalculator
 import lotto.domain.LottoMachine
+import lotto.domain.LottoNumber
 import lotto.domain.LottoRank
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -25,7 +26,7 @@ fun main() {
 
     val winningLottoNumberList: List<Int> = inputView.readLineNumberList(Message.QUESTION_WINNING_NUMBER)
     val winningLotto: Lotto = Lotto(winningLottoNumberList)
-    val bonusNumber: Int = inputView.readLineNumber(Message.QUESTION_BONUS_NUMBER)
+    val bonusNumber: LottoNumber = LottoNumber(inputView.readLineNumber(Message.QUESTION_BONUS_NUMBER))
 
     val resultLottoList: List<Lotto> = manualLottoList + lottoList
     val lottoRankList: List<LottoRank> = resultLottoList.map { it.getLottoRank(winningLotto, bonusNumber) }
