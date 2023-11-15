@@ -2,7 +2,8 @@ package lotto.domain
 
 import lotto.error.ErrorMessage.LOTTO_RANGE_ERROR
 
-class LottoNumber (val number: Int) {
+@JvmInline
+value class LottoNumber(val number: Int) {
     init {
         require(number in lottoNumberRange) { LOTTO_RANGE_ERROR.message }
     }

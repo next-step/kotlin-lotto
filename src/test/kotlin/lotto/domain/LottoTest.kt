@@ -11,20 +11,28 @@ class LottoTest {
 
     @BeforeEach
     fun setUp() {
-        val lottoList = listOf(1, 2, 3, 4, 5, 6)
+        val lottoList = (1..6).map { LottoNumber(it) }
         lotto = Lotto(lottoList)
     }
 
     @Test
     fun `로또 번호가 일치하는 횟수를 반환한다`() {
-        val jackpotNumberList = Lotto(listOf(1, 2, 3, 4, 5, 6))
-        val matchLottoCount = lotto.getMatchLottoCount(jackpotNumberList)
+        val lottoList = Lotto((1..6).map { LottoNumber(it) })
+        val matchLottoCount = lotto.countMatchingNumbers(lottoList)
         assertEquals(6, matchLottoCount)
     }
 
     @Test
     fun `로또의 개수는 6개이어야 합니다`() {
-        val list = listOf(1, 2, 3, 4, 5)
+        val lottoList = (1..5).map { LottoNumber(it) }
+        assertThrows<IllegalArgumentException> {
+            Lotto(lottoList)
+        }
+    }
+
+    @Test
+    fun `로또 번호는 중복 될 수 없다`() {
+        val list = listOf(1, 2, 3, 4, 5, 5).map { LottoNumber(it) }
         assertThrows<IllegalArgumentException> {
             Lotto(list)
         }

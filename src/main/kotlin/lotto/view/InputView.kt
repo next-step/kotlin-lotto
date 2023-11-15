@@ -21,4 +21,14 @@ object InputView {
 
         return jackpotNumber
     }
+
+    fun inputBonusNumber(): Int {
+        try {
+            return readln().toInt()
+        } catch (e: NullPointerException) {
+            throw IllegalArgumentException(EMPTY_INPUT_MESSAGE.message)
+        } catch (e: NumberFormatException) {
+            throw IllegalArgumentException(EXPECT_NUMBER_MESSAGE.message)
+        }
+    }
 }

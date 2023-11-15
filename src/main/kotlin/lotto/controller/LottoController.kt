@@ -3,6 +3,7 @@ package lotto.controller
 import lotto.domain.LottoRoiCalculator
 import lotto.domain.LottoShop
 import lotto.domain.LottoWinning
+import lotto.dto.BonusNumberDto
 import lotto.dto.JackpotDto
 import lotto.dto.LottoDto
 import lotto.view.InputView
@@ -13,7 +14,7 @@ fun main() {
     val money = InputView.inputMoney()
 
     val lottoShop = LottoShop()
-    val lottoBuyCount = lottoShop.getLottoBuyCount(money)
+    val lottoBuyCount = lottoShop.countBuyLotto(money)
     OutputView.printLottoCount(lottoBuyCount.toString())
     val lottoList = lottoShop.buyLotto(lottoBuyCount)
     val lottoDto = lottoList.map { LottoDto(it) }.toList()
@@ -22,14 +23,17 @@ fun main() {
 
     OutputView.printJackpotNumber()
     val inputNumber = InputView.inputJackpotNumber()
-    val jackpotNumbers = lottoShop.getJackpotNumbers(inputNumber)
-    val lottoWinning = LottoWinning(jackpotNumbers)
+    OutputView.printBonusNumber()
+    val bonusNumber = BonusNumberDto(InputView.inputBonusNumber()).bonusNumber
+
+    val jackpotNumbers = lottoShop.generateJackpotNumbers(inputNumber)
+    val lottoWinning = LottoWinning(jackpotNumbers, bonusNumber)
 
     OutputView.printLottoStatistics()
     OutputView.printLine()
     val findJackpot = lottoWinning.checkLottoWinning(lottoList)
 
-    val totalIncome = LottoRoiCalculator.getTotalIncome(findJackpot)
+    val totalIncome = LottoRoiCalculator.calculateTotalIncome(findJackpot)
     val roi = LottoRoiCalculator.calculateROI(totalIncome, money)
 
     val jackPotDto: List<JackpotDto> = findJackpot.map { JackpotDto(it) }.toList()
