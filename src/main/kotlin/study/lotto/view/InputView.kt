@@ -15,4 +15,12 @@ class InputView {
             ?.mapNotNull { it.trim().toIntOrNull() }
             ?: emptyList()
     }
+
+    fun getBonusNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        return readlnOrNull()
+            ?.trim()
+            ?.toIntOrNull()
+            ?: 0
+    }
 }

@@ -25,9 +25,10 @@ class LottoTest {
     }
 
     @Test
-    fun `당첨 번호와 일치하는 번호의 개수를 올바르게 계산한다`() {
+    fun `당첨 번호와 일치하는 번호의 등급을 올바르게 계산한다`() {
+        val bonusNumber = LottoNumber(10)
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).let(::LottoNumbers))
         val winningNumbers = Lotto(listOf(4, 5, 6, 7, 8, 9).map(::LottoNumber).let(::LottoNumbers))
-        assertEquals(3, lotto.countMatches(winningNumbers))
+        assertEquals(PrizeGrade.GRADE_5, lotto.getPrizeGrade(winningNumbers, bonusNumber))
     }
 }

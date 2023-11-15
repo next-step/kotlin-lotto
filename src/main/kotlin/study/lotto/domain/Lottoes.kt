@@ -1,7 +1,9 @@
 package study.lotto.domain
 
 class Lottoes(private val list: List<Lotto>) : List<Lotto> by list {
-    fun countMatches(winningLotto: Lotto) = list.map { it.countMatches(winningLotto) }
+    fun getPrizes(winningLotto: Lotto, bonusNumber: LottoNumber) = list.map {
+        it.getPrizeGrade(winningLotto, bonusNumber)
+    }
 
     companion object {
         fun buyLottoes(purchaseAmount: Int): Lottoes {

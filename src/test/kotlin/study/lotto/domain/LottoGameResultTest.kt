@@ -16,8 +16,9 @@ class LottoGameResultTest {
         )
         val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).let(::LottoNumbers))
         val purchaseAmount = 3000
+        val bonusNumber = LottoNumber(9)
 
-        val result = LottoGameResult.getResult(lottoes, winningLotto)
+        val result = LottoGameResult.getResult(lottoes, winningLotto, bonusNumber)
         val expectedEarningsRate = (5000 + 50000).toDouble() / purchaseAmount
 
         assertEquals(expectedEarningsRate, result.earningsRate)
@@ -33,13 +34,15 @@ class LottoGameResultTest {
             )
         )
         val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).let(::LottoNumbers))
+        val bonusNumber = LottoNumber(9)
 
-        val result = LottoGameResult.getResult(lottoes, winningLotto)
+        val result = LottoGameResult.getResult(lottoes, winningLotto, bonusNumber)
         val expectedStatistics = mapOf(
-            3 to 1,
-            4 to 1,
-            5 to 0,
-            6 to 0
+            PrizeGrade.GRADE_5 to 1,
+            PrizeGrade.GRADE_4 to 1,
+            PrizeGrade.GRADE_3 to 0,
+            PrizeGrade.GRADE_2 to 0,
+            PrizeGrade.GRADE_1 to 0
         )
 
         assertEquals(expectedStatistics, result.statistics)

@@ -2,6 +2,7 @@ package study.lotto.controller
 
 import study.lotto.domain.Lotto
 import study.lotto.domain.LottoGameResult
+import study.lotto.domain.LottoNumber
 import study.lotto.domain.Lottoes
 import study.lotto.view.InputView
 import study.lotto.view.ResultView
@@ -17,9 +18,12 @@ class LottoController(
         val lastWeekWinningLotto = inputView.getLastWeekWinningNumbers()
             .let(Lotto::get)
 
+        val bonusNumber = inputView.getBonusNumber().let(::LottoNumber)
+
         val lottoResult = LottoGameResult.getResult(
             buyingLottoes,
-            lastWeekWinningLotto
+            lastWeekWinningLotto,
+            bonusNumber
         )
 
         resultView.displayStatistics(lottoResult.statistics)
