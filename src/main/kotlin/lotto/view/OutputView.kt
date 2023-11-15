@@ -2,8 +2,12 @@ package lotto.view
 
 import lotto.domain.Lotto
 import lotto.domain.LottoRank
+import lotto.view.enum.Message
 
 class OutputView {
+
+    private final val messageView: MessageView = MessageView()
+
     fun printResult(lottoRankList: List<LottoRank>, returnOnInvestment: Double) {
         println()
         println(WINNING_STATISTICS)
@@ -16,12 +20,12 @@ class OutputView {
         println(RETURN_ON_INVESTMENT.format(returnOnInvestment.toString()))
     }
 
-    fun nextLinePrint(message: String) {
+    fun nextLinePrint(message: Message, vararg variables: String) {
         println()
-        println(message)
+        println(messageView.getMessage(message, *variables))
     }
 
-    fun printBuySummary(manualBuyCount: Int, autoBuyCount: Int) = nextLinePrint("수동으로 ${manualBuyCount}장, 자동으로 ${autoBuyCount}개를 구매했습니다.")
+    fun printBuySummary(manualBuyCount: Int, autoBuyCount: Int) = nextLinePrint(Message.SUMMARY_BUYING_LOTTO, manualBuyCount.toString(), autoBuyCount.toString())
 
     fun printLottoNumberList(lottoList: List<Lotto>) {
         lottoList.forEach { println(it.numberList) }
