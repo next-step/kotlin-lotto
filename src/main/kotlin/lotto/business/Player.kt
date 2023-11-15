@@ -1,22 +1,25 @@
 package lotto.business
 
-class Player(tickets: List<LottoTicket> = listOf(), purchasableCount: Int) {
+class Player(tickets: List<LottoTicket> = listOf(), val purchasedCount: Int) {
     private var _tickets = tickets.toMutableList()
-    private var _purchasableCount = purchasableCount
+
+    val purchasableCount: Int
+        get() = purchasedCount - tickets.size
 
     val tickets: List<LottoTicket>
         get() = _tickets.toList()
 
-    val purchasableCount: Int
-        get() = _purchasableCount
+    init {
+        require(purchasedCount >= 1) { throw IllegalArgumentException("구매 가능한 로또 개수는 1개 이상이어야 합니다.") }
+    }
 
     fun addTicket(ticket: LottoTicket) {
+        require(purchasableCount >= 1) { throw IllegalArgumentException("더 이상 로또를 구매할 수 없습니다.") }
         _tickets.add(ticket)
-        _purchasableCount -= 1
     }
 
     fun addTickets(manualTickets: List<LottoTicket>) {
+        require(purchasableCount >= manualTickets.size) { throw IllegalArgumentException("더 이상 로또를 구매할 수 없습니다.") }
         _tickets.addAll(manualTickets)
-        _purchasableCount -= manualTickets.size
     }
 }

@@ -14,7 +14,7 @@ object LottoGameManager {
     fun run() {
         val lottoBookingSystem = LottoBookingSystem()
         val receivedAmount = ReceivedAmount(LottoInputHandler.inputPurchaseAmount())
-        val player = Player(purchasableCount = receivedAmount.getTicketCount())
+        val player = Player(purchasedCount = receivedAmount.getTicketCount())
         val manualTicketCount = LottoInputHandler.inputManualTicketCount()
         val manualTickets = lottoBookingSystem.generateManualTickets(manualTicketCount, player)
         player.addTickets(manualTickets)
