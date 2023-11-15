@@ -14,7 +14,7 @@ class LottoStoreTest : BehaviorSpec({
             row(2000),
             row(50000)
         ) { cash ->
-            val lottoCash = LottoCash.valueOf(cash)
+            val lottoCash = LottoCash(cash)
             `when`("로또 1장의 가격이 1000원 이라고 하면") {
                 val lottoPrice = 1000
                 then("로또 구입 금액에 해당하는 로또를 자동 발급할 수 있다.") {

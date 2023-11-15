@@ -5,7 +5,7 @@ import io.kotest.matchers.shouldBe
 
 class LottoMatchResultTest : BehaviorSpec({
     given("로또 구매 금액과 당첨 통계가 주어지고") {
-        val cash = LottoCash.valueOf(14000)
+        val cash = LottoCash(14000)
         val matchList = listOf(
             LottoMatchCount.THREE,
         )

@@ -12,7 +12,7 @@ class LottoCashTest : StringSpec({
             row(1000),
             row(14000),
         ) { number ->
-            LottoCash.valueOf(number).value shouldBe number
+            LottoCash(number).value shouldBe number
         }
     }
 
@@ -22,7 +22,7 @@ class LottoCashTest : StringSpec({
             row(-100000),
         ) { text ->
             shouldThrowWithMessage<IllegalArgumentException>("숫자는 음수일 수 없습니다.") {
-                LottoCash.valueOf(text)
+                LottoCash(text)
             }
         }
     }

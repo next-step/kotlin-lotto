@@ -12,7 +12,7 @@ class LottoApplication {
         @JvmStatic
         fun main(args: Array<String>) {
             val cash = InputView.readCash()
-            val lottoCash = LottoCash.valueOf(cash)
+            val lottoCash = LottoCash(cash)
             val lottos = LottoStore.generateLottosByAuto(lottoCash)
             ResultView.printPurchaseResult(lottos)
 
