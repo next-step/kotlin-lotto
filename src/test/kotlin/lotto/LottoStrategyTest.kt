@@ -14,10 +14,10 @@ class LottoStrategyTest {
             .isThrownBy {
                 LottoBuyStrategy(
                     totalMoney = Money(1000),
-                    ManualLottoCreator.createLottoList(
+                    ManualLottoCreator(
                         LottoNumbers(1, 2, 3, 4, 5, 6),
                         LottoNumbers(1, 2, 3, 4, 5, 6)
-                    )
+                    ).createLottoList()
                 )
             }
     }
@@ -27,10 +27,10 @@ class LottoStrategyTest {
         Assertions.assertThat(
             LottoBuyStrategy(
                 totalMoney = Money(2000),
-                ManualLottoCreator.createLottoList(
+                ManualLottoCreator(
                     LottoNumbers(1, 2, 3, 4, 5, 6),
                     LottoNumbers(1, 2, 3, 4, 5, 6)
-                )
+                ).createLottoList()
             ).autoCount
         ).isEqualTo(0)
     }

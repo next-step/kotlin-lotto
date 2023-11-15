@@ -13,7 +13,7 @@ class LottoBoothTest {
     fun `로또 부스는 로또 구매 전략에 맞는 로또 개수를 제시한다`() {
         val strategy = LottoBuyStrategy(
             Money(10000),
-            ManualLottoCreator.createLottoList(LottoNumbers(1, 2, 3, 4, 5, 6))
+            ManualLottoCreator(LottoNumbers(1, 2, 3, 4, 5, 6)).createLottoList()
         )
         assertThat(LottoBooth.publishLottos(strategy).lottoList.size).isEqualTo(10)
     }
