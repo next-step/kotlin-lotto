@@ -22,12 +22,10 @@ class Lotto private constructor(val lottoNumbers: List<LottoNumber>) {
         private const val LOTTO_NUMBER_COUNT = 6
         const val LOTTO_PRICE = 1000
 
-        fun fromInts(lottoNumbers: List<Int>): Lotto {
-            return Lotto(lottoNumbers.map { LottoNumber(it) })
-        }
+        fun fromInts(lottoNumbers: List<Int>): Lotto = Lotto(lottoNumbers.map { number ->
+            LottoNumbers.LOTTO_NUMBERS.find { it.number == number } ?: LottoNumber(number)
+        })
 
-        fun fromLottoNumbers(lottoNumbers: List<LottoNumber>): Lotto {
-            return Lotto(lottoNumbers)
-        }
+        fun fromLottoNumbers(lottoNumbers: List<LottoNumber>): Lotto = Lotto(lottoNumbers)
     }
 }
