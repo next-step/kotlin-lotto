@@ -8,7 +8,7 @@ import io.kotest.matchers.shouldNotBe
 import lotto.domain.LottoMachine
 import org.junit.jupiter.api.Test
 
-class LottoMachineTest {
+class LottoNumbersMachineTest {
     private val lottoMachine: LottoMachine = LottoMachine(1000)
 
     @Test

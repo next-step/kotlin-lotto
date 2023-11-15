@@ -2,9 +2,9 @@ package lotto.domain
 object LottoValidator {
     fun validateWinningNumberAndUserLotto(
         winningNumber: List<LottoNumber>,
-        userLotto: Lotto
+        userLottoNumbers: LottoNumbers
     ): Int {
-        val lottoNumber = userLotto.getNumbers()
+        val lottoNumber = userLottoNumbers.getNumbers()
         var count = 0
         lottoNumber.forEach {
             if (winningNumber.contains(it)) {

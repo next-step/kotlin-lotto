@@ -3,15 +3,15 @@ package lotto
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.collections.shouldContainInOrder
 import io.kotest.matchers.shouldBe
-import lotto.domain.Lotto
+import lotto.domain.LottoNumbers
 import lotto.domain.LottoNumber
 import org.junit.jupiter.api.Test
 
-class LottoNumbersTest {
+class LottoNumbersNumbersTest {
 
     @Test
     fun `로또는 6개의 로또 번호를 가진다`() {
-        val lotto = Lotto(
+        val lottoNumbers = LottoNumbers(
             listOf(
                 LottoNumber(1),
                 LottoNumber(2),
@@ -22,13 +22,13 @@ class LottoNumbersTest {
             )
         )
 
-        lotto.getNumbers().size shouldBe 6
+        lottoNumbers.getNumbers().size shouldBe 6
     }
 
     @Test
     fun `로또 번호는 6개여야만 한다`() {
         shouldThrow<IllegalArgumentException> {
-            Lotto(listOf(LottoNumber(1)))
+            LottoNumbers(listOf(LottoNumber(1)))
         }
     }
 
@@ -50,11 +50,11 @@ class LottoNumbersTest {
             LottoNumber(5),
             LottoNumber(6),
         )
-        val lotto = Lotto(
+        val lottoNumbers = LottoNumbers(
             numbers
         )
 
-        lotto.getNumbers().shouldContainInOrder(
+        lottoNumbers.getNumbers().shouldContainInOrder(
             orderNumbers
         )
     }

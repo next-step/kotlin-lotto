@@ -5,7 +5,7 @@ import io.kotest.matchers.shouldBe
 import lotto.domain.LottoNumber
 import org.junit.jupiter.api.Test
 
-class LottoNumberTest {
+class LottoNumbersNumberTest {
 
     @Test
     fun `로또 번호를 생성한다`() {

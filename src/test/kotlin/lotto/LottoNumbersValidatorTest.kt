@@ -1,15 +1,14 @@
 package lotto
 
 import io.kotest.matchers.shouldBe
-import lotto.domain.Lotto
+import lotto.domain.LottoNumbers
 import lotto.domain.LottoNumber
 import lotto.domain.LottoValidator
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.CsvSource
-import org.junit.jupiter.params.provider.MethodSource
 
-class LottoValidatorTest {
+class LottoNumbersValidatorTest {
 
     @ParameterizedTest
     @CsvSource(value = [
@@ -25,8 +24,8 @@ class LottoValidatorTest {
             LottoNumber(2),
             LottoNumber(1),
         )
-        val userLotto = Lotto(userLottoNumber.split(",").map { LottoNumber(it.toInt()) })
-        val matchingCount: Int = LottoValidator.validateWinningNumberAndUserLotto(winningNumber, userLotto)
+        val userLottoNumbers = LottoNumbers(userLottoNumber.split(",").map { LottoNumber(it.toInt()) })
+        val matchingCount: Int = LottoValidator.validateWinningNumberAndUserLotto(winningNumber, userLottoNumbers)
 
         matchingCount shouldBe expected
     }
