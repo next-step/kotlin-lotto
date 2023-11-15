@@ -14,12 +14,12 @@ value class Lotto private constructor(private val list: List<LottoNumber>) : Lis
 
         private val lottoNumberRange = (LottoNumber.LOTTO_NUMBER_START..LottoNumber.LOTTO_NUMBER_END)
         private val lottoNumbers: List<LottoNumber> = lottoNumberRange.map {
-            LottoNumber.valueOf(it)
+            LottoNumber(it)
         }
 
         fun valueOf(numbers: List<Int>): Lotto {
             return numbers.map {
-                LottoNumber.valueOf(it)
+                LottoNumber(it)
             }.let {
                 Lotto(it)
             }
