@@ -17,9 +17,10 @@ class LottoRecords(
         recordsByRank: List<Rank>,
         lottoRecord: LottoRecord
     ) {
-        if (recordsByRank.contains(lottoRecord.rank)) {
-            lottoRecord.addQuantity()
+        val matchCount = recordsByRank.count {
+            it == lottoRecord.rank
         }
+        lottoRecord.addQuantityByCount(matchCount)
     }
 
     fun calculateRateOfReturn(amount: Int): Double {
