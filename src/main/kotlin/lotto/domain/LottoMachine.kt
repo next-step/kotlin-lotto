@@ -25,11 +25,10 @@ class LottoMachine(private var amount: Int = 0) {
     }
 
     fun buyManualLottoList(buyCount: Int): List<Lotto> {
-        val manualLottoList: MutableList<Lotto> = mutableListOf()
-
         require(this.amount - (buyCount * Lotto.LOTTO_PRICE) >= 0) { this.messageView.getMessage(Message.LOTTO_PURCHASE_ERROR) }
 
         outputView.nextLinePrint(Message.QUESTION_MANUAL_LOTTO_NUMBER)
+        val manualLottoList: MutableList<Lotto> = mutableListOf()
         repeat(buyCount) {
             manualLottoList.add(this.buyLotto(inputView.readLineNumberList()))
         }
