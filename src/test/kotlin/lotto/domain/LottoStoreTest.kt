@@ -35,8 +35,8 @@ class LottoStoreTest : BehaviorSpec({
         val lastWeekMatchLotto = Lotto.valueOf(listOf(1, 3, 5, 11, 16, 32))
         `when`("당첨 통계를 확인하면") {
             val result = LottoStore.checkMatchResult(lottos, lastWeekMatchLotto)
-            then("3개 이상 일치하여 당첨된 개수는 2이다.") {
-                result.size shouldBe 2
+            then("결과의 수는 로또의 수와 같다.") {
+                result.size shouldBe lottos.size
             }
         }
     }
