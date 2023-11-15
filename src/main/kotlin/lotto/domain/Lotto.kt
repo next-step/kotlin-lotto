@@ -7,12 +7,7 @@ class Lotto(private val numberList: Set<Int> = generateDefaultRandomNumberList()
 
     init {
         validateSetSize()
-        val _numbers = mutableListOf<LottoNumber>()
-        numberList.forEach { it ->
-            val lottoNumber = LottoNumber.from(it)
-            _numbers.add(lottoNumber)
-        }
-        numbers = _numbers.toList()
+        numbers = numberList.map { LottoNumber.from(it) }
     }
 
     fun getNumberValues(): List<Int> {
