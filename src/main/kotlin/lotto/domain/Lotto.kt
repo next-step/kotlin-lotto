@@ -25,12 +25,13 @@ class Lotto(private val numberList: Set<Int> = generateDefaultRandomNumberList()
     }
 
     private fun validateSetSize() {
-        if (numberList.size != 6) {
+        if (numberList.size != DEFAULT_LOTTO_SIZE) {
             throw IllegalArgumentException()
         }
     }
 
     companion object {
+        private const val DEFAULT_LOTTO_SIZE = 6
         private fun generateDefaultRandomNumberList(): Set<Int> {
             val randomNumberMaker: RandomNumberMaker = RandomNumberMaker()
             val random6NumList = randomNumberMaker.generate()
