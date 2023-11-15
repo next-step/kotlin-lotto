@@ -23,6 +23,13 @@ class LottoTest : StringSpec({
         }
     }
 
+    "로또 숫자가 중복된 경우 IllegalArgumentException 예외를 던진다." {
+        val list = listOf(1, 2, 3, 4, 5, 5)
+        shouldThrowWithMessage<IllegalArgumentException>("로또 숫자는 중복될 수 없습니다.") {
+            Lotto.valueOf(list)
+        }
+    }
+
     "자동으로 생성한 로또 번호의 수는 6이다." {
         val lotto = Lotto.auto()
         lotto.size shouldBe 6

@@ -33,6 +33,7 @@
 ### 로또 LottoTest
 - [x] 로또의 숫자 개수가 6이면 로또를 생성한다.
 - [x] 로또의 숫자 개수가 6이 아니면 IllegalArgumentException 예외를 던진다.
+- [x] 로또 숫자가 중복된 경우 IllegalArgumentException 예외를 던진다.
 - [x] 자동으로 생성한 로또 번호의 수는 6이다.
 
 ### 로또 구입 금액 LottoCashTest

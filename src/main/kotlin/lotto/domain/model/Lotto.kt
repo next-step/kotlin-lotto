@@ -7,6 +7,9 @@ value class Lotto private constructor(private val list: List<LottoNumber>) : Lis
         require(list.size == LOTTO_NUMBER_COUNT) {
             "로또의 숫자 개수는 6입니다."
         }
+        require(list.distinct().size == LOTTO_NUMBER_COUNT) {
+            "로또 숫자는 중복될 수 없습니다."
+        }
     }
 
     companion object {
