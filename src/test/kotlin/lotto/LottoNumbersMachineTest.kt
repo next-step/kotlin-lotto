@@ -3,7 +3,6 @@ package lotto
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.shouldNot
 import io.kotest.matchers.shouldNotBe
 import lotto.domain.LottoMachine
 import org.junit.jupiter.api.Test

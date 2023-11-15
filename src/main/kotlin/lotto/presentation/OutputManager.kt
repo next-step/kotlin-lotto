@@ -1,5 +1,6 @@
 package lotto.presentation
 
+import lotto.domain.Lotto
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoResult
 
@@ -8,9 +9,9 @@ class OutputManager {
         println(pay)
     }
 
-    fun printSellLottoCount(lottoNumbers: List<LottoNumbers>) {
-        println("${lottoNumbers.size}개를 구매했습니다.")
-        lottoNumbers.forEach {
+    fun printSellLottoCount(userLottos: List<Lotto>) {
+        println("${userLottos.size}개를 구매했습니다.")
+        userLottos.forEach {
             println(it.getNumbers())
         }
         println()

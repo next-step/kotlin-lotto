@@ -11,9 +11,15 @@ class LottoMachine(private val lottoPrice: Int) {
         this.winningNumber = numbers.map { LottoNumber(it) }
     }
 
-    fun sellLotto(pay: Int): List<LottoNumbers> {
+    fun sellLotto(pay: Int): List<Lotto> {
         require(pay >= lottoPrice) { SELL_LOTTO_ERROR_MESSAGE }
-        return (0 until pay / lottoPrice).map { LottoNumbers(lottoNumberGenerator()) }
+        return createLotto(pay / lottoPrice)
+    }
+
+    private fun createLotto(amount: Int): List<Lotto> {
+       return (0 until amount)
+            .map { LottoNumbers(lottoNumberGenerator()) }
+            .map { Lotto(it) }
     }
 
     private fun lottoNumberGenerator(): List<LottoNumber> {
