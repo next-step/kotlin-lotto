@@ -35,6 +35,10 @@ class Lotto(
         return counts
     }
 
+    fun isMatchBonus(bonusNumber: LottoNumber): Boolean {
+        return lottoNumbers.contains(bonusNumber)
+    }
+
 
     companion object {
 
