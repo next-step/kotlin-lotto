@@ -4,7 +4,6 @@ import lotto.domain.Lotto
 import lotto.domain.LottoCalculator
 import lotto.domain.LottoMachine
 import lotto.domain.LottoRank
-import lotto.domain.LottoRank.Companion.getLottoRank
 import lotto.view.InputView
 import lotto.view.OutputView
 import lotto.view.enum.Message

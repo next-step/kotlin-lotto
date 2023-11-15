@@ -2,9 +2,14 @@ package lotto
 
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
+import lotto.domain.LottoRank
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
+import java.util.stream.Stream
 
 class LottoTest {
 
@@ -48,5 +53,28 @@ class LottoTest {
         Assertions.assertThatThrownBy { Lotto(listOf(1, 2, 3, 4, 5, 5)) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("로또 번호는 중복될 수 없습니다.")
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideLottoNumberList")
+    fun `로또 결과를 얻을 수 있다`(lotto: Lotto, winningLotto: Lotto, expected: LottoRank, bonusNumber: Int) {
+        val lottoResult: LottoRank = lotto.getLottoRank(winningLotto, bonusNumber)
+
+        assertThat(lottoResult).isEqualTo(expected)
+    }
+
+    companion object {
+        @JvmStatic
+        fun provideLottoNumberList(): Stream<Arguments> {
+            return Stream.of(
+                Arguments.of(Lotto(listOf(1, 2, 3, 4, 5, 6)), Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoRank.FIRST, 7),
+                Arguments.of(Lotto(listOf(1, 2, 3, 4, 5, 7)), Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoRank.SECOND_WITH_BONUS, 7),
+                Arguments.of(Lotto(listOf(1, 2, 3, 4, 5, 7)), Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoRank.SECOND, 45),
+                Arguments.of(Lotto(listOf(1, 2, 3, 4, 7, 8)), Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoRank.THIRD, 45),
+                Arguments.of(Lotto(listOf(1, 2, 3, 7, 8, 9)), Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoRank.FOURTH, 45),
+                Arguments.of(Lotto(listOf(1, 2, 7, 8, 9, 10)), Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoRank.MISS, 45),
+                Arguments.of(Lotto(listOf(7, 8, 9, 10, 11, 12)), Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoRank.MISS, 45),
+            )
+        }
     }
 }

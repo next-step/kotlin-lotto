@@ -12,7 +12,20 @@ class Lotto(inputNumberList: List<Int>) {
 
     fun getMatchCount(lotto: Lotto): Int = this.numberList.intersect(lotto.numberList.toSet()).size
 
-    fun isContainsBonusNumber(bonusNumber: LottoNumber): Boolean = this.numberList.any { it == bonusNumber }
+    private fun isContainsBonusNumber(bonusNumber: LottoNumber): Boolean = this.numberList.any { it == bonusNumber }
+
+    fun getLottoRank(winningLotto: Lotto, bonusNumber: Int): LottoRank {
+        val bonusLottoNumber = LottoNumber(bonusNumber)
+
+        val matchCount: Int = this.getMatchCount(winningLotto)
+        val lottoRank: LottoRank = LottoRank.findByMatchCount(matchCount)
+
+        return if (matchCount == 5) {
+            if (this.isContainsBonusNumber(bonusLottoNumber)) LottoRank.SECOND_WITH_BONUS else LottoRank.SECOND
+        } else {
+            lottoRank
+        }
+    }
 
     companion object {
         const val LOTTO_PRICE: Int = 1000
