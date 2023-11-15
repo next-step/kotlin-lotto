@@ -55,7 +55,7 @@ class LottoResultAnalyticsTest : StringSpec({
             val lottoTickets = LottoTickets(lottoList)
             val lottoResultAnalytics = winningLotto.createResultAnalytics(lottoTickets)
 
-            val profitRate = lottoResultAnalytics.getProfitRate(lottoTickets.size())
+            val profitRate = lottoResultAnalytics.getProfitRate(lottoTickets.size() * LottoPolicy.LOTTO_PRICE)
             profitRate shouldBe 0.5
         }
     }
@@ -82,7 +82,7 @@ class LottoResultAnalyticsTest : StringSpec({
             val lottoTickets = LottoTickets(lottoList)
             val lottoResultAnalytics = winningLotto.createResultAnalytics(lottoTickets)
 
-            val profitRate = lottoResultAnalytics.getProfitRate(lottoTickets.size())
+            val profitRate = lottoResultAnalytics.getProfitRate(lottoTickets.size() * LottoPolicy.LOTTO_PRICE)
             profitRate shouldBe 5.0
         }
     }

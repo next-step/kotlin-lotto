@@ -13,6 +13,6 @@ class LottoResultAnalytics(private val rankingsCount: Map<LottoRanking, Int>) {
             (rankingsCount[ranking] ?: 0) * ranking.prize
         }
 
-        return String.format("%.2f", totalPrize.toDouble() / totalInvestment).toDouble()
+        return totalPrize.toDouble() / totalInvestment.toDouble()
     }
 }
