@@ -1,0 +1,45 @@
+package lotto
+
+object ConsoleView {
+
+    object Input {
+        private const val PURCHASE_AMOUNT_PROMPT = "구입 금액을 입력해 주세요."
+        private const val RECENT_LOTTO_WINNING_NUMBERS_PROMPT = "지난 주 당첨 번호를 입력해 주세요."
+
+        fun printPurchaseAmountPrompt() {
+            println(PURCHASE_AMOUNT_PROMPT)
+        }
+
+        fun getUserInput(): String {
+            return readln()
+        }
+
+        fun printWinningNumbersPrompt() {
+            println(RECENT_LOTTO_WINNING_NUMBERS_PROMPT)
+        }
+    }
+
+    object Output {
+        fun printLottoGameResults(lottoTickets: LottoTickets) {
+            println("${lottoTickets.size()}개를 구매했습니다.")
+            lottoTickets.getAllLottoNumbers().forEach { println(it) }
+        }
+
+        fun printWinningStatistics(winningStatistics: Map<LottoRanking, Int>) {
+            println("\n당첨 통계\n---------")
+
+            winningStatistics.filter { it.key != LottoRanking.MISS }
+                .forEach {
+                    println("${it.key.matchingCount}개 일치 (${it.key.prize}원)- ${it.value}개")
+                }
+        }
+
+        fun printProfitRate(profitRate: Double) {
+            print("\n총 수익률은 ${profitRate}입니다.")
+
+            if (profitRate < 1) {
+                println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
+            }
+        }
+    }
+}

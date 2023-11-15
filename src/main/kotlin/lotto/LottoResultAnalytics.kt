@@ -1,6 +1,6 @@
 package lotto
 
-class LottoResultAnalytics(private val winningLotto: WinningLotto, val lottoTickets: LottoTickets) {
+class LottoResultAnalytics(private val winningLotto: WinningLotto, private val lottoTickets: LottoTickets) {
     private val rankingsCount: Map<LottoRanking, Int> = lottoTickets.values
         .map { winningLotto.checkRanking(it) }
         .groupingBy { it }
@@ -8,12 +8,12 @@ class LottoResultAnalytics(private val winningLotto: WinningLotto, val lottoTick
 
     fun calculateWinningStatistics(): Map<LottoRanking, Int> {
         return LottoRanking.values().associateWith {
-            rankingsCount.get(it) ?: 0
+            rankingsCount[it] ?: 0
         }
     }
 
     fun calculateProfitRate(): Double {
-        val totalInvestment = lottoTickets.values.size * LottoGame.LOTTO_PRICE
+        val totalInvestment = lottoTickets.values.size * LottoPolicy.LOTTO_PRICE
         val totalPrize = LottoRanking.values().sumOf { ranking ->
             (rankingsCount[ranking] ?: 0) * ranking.prize
         }
