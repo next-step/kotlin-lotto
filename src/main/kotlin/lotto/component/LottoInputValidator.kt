@@ -25,7 +25,9 @@ class LottoInputValidator {
     }
 
     fun validateLottoNumber(lottoNumber: String?): String {
-        require(!lottoNumber.isNullOrBlank() && lottoNumber.toInt() >= 1 && lottoNumber.toInt() <= 45) {
+        val number = lottoNumber?.toIntOrNull()
+
+        require(number != null && number >= 1 && number <= 45) {
             "로또 번호는 1 이상 45 이하의 자연수입니다."
         }
 
