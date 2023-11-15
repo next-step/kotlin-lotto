@@ -1,5 +1,6 @@
 package org.bmsk.domain.model.lotto
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
@@ -17,5 +18,11 @@ class LottoLotteryTest : FunSpec({
         val lottery = LottoLottery(listOf(1, 2, 3, 4, 5, 6))
 
         lottery.contains(number) shouldBe true
+    }
+
+    test("중복된 숫자로 생성하면 예외를 발생시킨다.") {
+        shouldThrow<IllegalArgumentException> {
+            LottoLottery(listOf(1, 1, 1, 1, 1, 1))
+        }
     }
 })

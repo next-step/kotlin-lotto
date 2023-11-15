@@ -6,6 +6,7 @@ data class LottoLottery(
 ) {
     init {
         require(numbers.size == LOTTO_NUMBER_SIZE)
+        require(numbers.distinct().size == LOTTO_NUMBER_SIZE)
     }
 
     fun sorted(): LottoLottery = copy(numbers = numbers.sorted())
