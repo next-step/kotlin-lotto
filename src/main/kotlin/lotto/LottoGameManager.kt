@@ -2,7 +2,7 @@ package lotto
 
 import lotto.business.LottoBookingSystem
 import lotto.business.LottoNumber
-import lotto.business.LottoTicketExtractor
+import lotto.business.LottoTicketGenerator
 import lotto.business.Player
 import lotto.business.ReceivedAmount
 import lotto.business.WinningLottoTicket
@@ -30,8 +30,8 @@ object LottoGameManager {
     }
 
     private fun generateWinningLottoTicket(): WinningLottoTicket {
-        val lottoNumbersString = LottoInputHandler.inputWinningNumbers()
-        val firstWinningTicket = LottoTicketExtractor.extractLottoTicket(lottoNumbersString)
+        val lottoNumbers = LottoInputHandler.inputWinningNumbers()
+        val firstWinningTicket = LottoTicketGenerator.generate(lottoNumbers)
         val bonusNumber = LottoNumber(LottoInputHandler.inputBonusNumber())
         return WinningLottoTicket(firstWinningTicket, bonusNumber)
     }
