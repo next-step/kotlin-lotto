@@ -8,8 +8,7 @@ class LottoResultAnalytics(private val rankingsCount: Map<LottoRanking, Int>) {
         }
     }
 
-    fun getProfitRate(ticketQuantity: Int): Double {
-        val totalInvestment = ticketQuantity * LottoPolicy.LOTTO_PRICE
+    fun getProfitRate(totalInvestment: Int): Double {
         val totalPrize = LottoRanking.values().sumOf { ranking ->
             (rankingsCount[ranking] ?: 0) * ranking.prize
         }

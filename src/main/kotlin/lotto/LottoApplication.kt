@@ -15,6 +15,7 @@ fun main() {
     val winningStatistics = lottoResultAnalytics.getWinningStatistics()
     ConsoleView.Output.printWinningStatistics(winningStatistics)
 
-    val profitRate = lottoResultAnalytics.getProfitRate(lottoTickets.size())
+    val totalInvestment = lottoTickets.size() * LottoPolicy.LOTTO_PRICE
+    val profitRate = lottoResultAnalytics.getProfitRate(totalInvestment)
     ConsoleView.Output.printProfitRate(profitRate)
 }
