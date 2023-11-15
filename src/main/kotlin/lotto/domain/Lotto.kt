@@ -11,7 +11,7 @@ class Lotto(val numbers: List<LottoNumber>) {
     }
 
     fun contains(num: LottoNumber): Boolean {
-        return numbers.contains(num)
+        return num in numbers
     }
 
     private fun toSet(): Set<LottoNumber> {
