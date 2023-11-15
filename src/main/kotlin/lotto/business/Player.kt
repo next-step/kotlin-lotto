@@ -18,8 +18,8 @@ class Player(tickets: List<LottoTicket> = listOf(), val purchasedCount: Int) {
         _tickets.add(ticket)
     }
 
-    fun addTickets(manualTickets: List<LottoTicket>) {
-        require(purchasableCount >= manualTickets.size) { throw IllegalArgumentException("더 이상 로또를 구매할 수 없습니다.") }
-        _tickets.addAll(manualTickets)
+    fun addTickets(tickets: List<LottoTicket>) {
+        require(purchasableCount >= tickets.size) { throw IllegalArgumentException("더 이상 로또를 구매할 수 없습니다.") }
+        _tickets.addAll(tickets)
     }
 }
