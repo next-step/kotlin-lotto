@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.enums.Rank
 import lotto.service.AutoNumberCreateStrategy
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -41,5 +42,39 @@ class LottoBundleTest {
 
         // Then
         assertThat(actual.bundle.size).isEqualTo(quantity)
+    }
+
+    @Test
+    fun `랭크별 수량을 집계한다`() {
+        // Given
+        val caseOfNumbers = listOf(
+            Numbers(listOf(1, 2, 3, 4, 5, 6)),
+            Numbers(listOf(1, 2, 3, 4, 5, 16)),
+            Numbers(listOf(1, 2, 3, 4, 5, 17)),
+            Numbers(listOf(1, 2, 3, 4, 15, 17)),
+            Numbers(listOf(1, 2, 3, 14, 15, 16)),
+            Numbers(listOf(1, 2, 13, 14, 15, 16)),
+        )
+        val strategyDouble = NumberCreateStrategyDouble(
+            caseOfNumbers
+        )
+        val winningLotto = WinningLotto(
+            Lotto.from(listOf(1, 2, 3, 4, 5, 6)), LottoNumber.from(16)
+        )
+        val bundle = LottoBundle.of(caseOfNumbers.size, strategyDouble)
+
+        // When
+        val actual = bundle.findAllByMatchRanks(winningLotto)
+
+        // Then
+        val expected = listOf(
+            Rank.FIRST_RANK,
+            Rank.SECOND_BONUS_RANK,
+            Rank.SECOND_RANK,
+            Rank.THIRD_RANK,
+            Rank.FOURTH_RANK,
+            Rank.NONE_RANK
+        )
+        assertThat(actual).isEqualTo(expected)
     }
 }

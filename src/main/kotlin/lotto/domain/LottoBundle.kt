@@ -1,21 +1,21 @@
 package lotto.domain
 
+import lotto.enums.Rank
 import lotto.service.NumberCreateStrategy
 
 class LottoBundle(
-    lottos: List<Lotto> = listOf()
+    val bundle: List<Lotto>
 ) {
+    fun findAllByMatchRanks(winningLotto: WinningLotto): List<Rank> {
+        val countAndBonusByRank = mutableListOf<Rank>()
 
-    val bundle: List<Lotto> = lottos
-
-    fun showAllPurchaseLottoNumbers(): List<List<Int>> {
-        return List(bundle.size) { index ->
-            bundle[index].lotto.map { lottoNumber ->
-                lottoNumber.number
-            }.sortedBy {
-                it
-            }
+        bundle.forEach { lotto ->
+            val countByNumbers = lotto.makeMatchCountByNumbers(winningLotto.winningLotto)//0~6개
+            val isHaveBonus = lotto.isMatchBonus(winningLotto.bonusNumber)
+            val findRank = Rank.valueOf(countByNumbers, isHaveBonus)
+            countAndBonusByRank.add(findRank)
         }
+        return countAndBonusByRank
     }
 
     companion object {

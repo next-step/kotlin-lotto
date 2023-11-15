@@ -6,6 +6,7 @@ import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.MethodSource
 
 class LottoTest {
@@ -20,13 +21,13 @@ class LottoTest {
 
         // Then
         assertAll(
-            { assertThat(actual.lotto.size).isEqualTo(6) },
-            { assertThat(actual.lotto).contains(LottoNumber.from(givenNumbers[0])) },
-            { assertThat(actual.lotto).contains(LottoNumber.from(givenNumbers[1])) },
-            { assertThat(actual.lotto).contains(LottoNumber.from(givenNumbers[2])) },
-            { assertThat(actual.lotto).contains(LottoNumber.from(givenNumbers[3])) },
-            { assertThat(actual.lotto).contains(LottoNumber.from(givenNumbers[4])) },
-            { assertThat(actual.lotto).contains(LottoNumber.from(givenNumbers[5])) },
+            { assertThat(actual.lottoNumbers.size).isEqualTo(6) },
+            { assertThat(actual.lottoNumbers).contains(LottoNumber.from(givenNumbers[0])) },
+            { assertThat(actual.lottoNumbers).contains(LottoNumber.from(givenNumbers[1])) },
+            { assertThat(actual.lottoNumbers).contains(LottoNumber.from(givenNumbers[2])) },
+            { assertThat(actual.lottoNumbers).contains(LottoNumber.from(givenNumbers[3])) },
+            { assertThat(actual.lottoNumbers).contains(LottoNumber.from(givenNumbers[4])) },
+            { assertThat(actual.lottoNumbers).contains(LottoNumber.from(givenNumbers[5])) },
         )
     }
 
@@ -67,6 +68,41 @@ class LottoTest {
         assertThrows<IllegalArgumentException> {
             Lotto.from(givenNumbers)
         }
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = ["2:true", "7:false"], delimiter = ':')
+    fun `로또번호중에 보너스번호와 일치하는 경우가 있는지를 반환한다`(
+        bonusNumber: Int,
+        isMatch: Boolean,
+    ) {
+        // Given
+        val givenNumbers = listOf(1, 2, 3, 4, 5, 6)
+        val lotto = Lotto.from(givenNumbers)
+
+        // When
+        val actual = lotto.isMatchBonus(LottoNumber.from(bonusNumber))
+
+        // Then
+        assertThat(actual).isEqualTo(isMatch)
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = ["6:true", "7:false"], delimiter = ':')
+    fun `보너스번호가 로또안에 있는지 반환한다`(
+        number: Int,
+        isMatch: Boolean
+    ) {
+        // Given
+        val givenNumbers = listOf(1, 2, 3, 4, 5, 6)
+        val lotto = Lotto.from(givenNumbers)
+        val bonusNumber = LottoNumber.from(number)
+
+        // When
+        val actual = lotto.isMatchBonus(bonusNumber)
+
+        // Then
+        assertThat(actual).isEqualTo(isMatch)
     }
 
     companion object {
