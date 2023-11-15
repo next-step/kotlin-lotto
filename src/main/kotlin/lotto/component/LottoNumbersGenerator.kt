@@ -4,8 +4,8 @@ import lotto.model.LottoNumbers
 import lotto.utils.shuffleAndTake
 
 class LottoNumbersGenerator {
-    fun generate(lottoTicketCount: Int): List<LottoNumbers> {
-        return (0 until lottoTicketCount)
+    fun generate(lottoNumbersCount: Int): List<LottoNumbers> {
+        return (0 until lottoNumbersCount)
             .map { generate() }
     }
 
