@@ -2,8 +2,6 @@ package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.data.forAll
-import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 
 class AmountSpec : FunSpec({
@@ -25,38 +23,21 @@ class AmountSpec : FunSpec({
         }
     }
 
-    context("수익률 계산") {
-        test("구매 금액과 비교한 수익률이 계산된다") {
-            val purchaseAmount = Amount(14000)
-            val prizeAmount = Amount(5000)
+    test("금액을 실수로 반환한다") {
+        val amount = Amount(3000)
 
-            val result = prizeAmount.calculateEarningRate(purchaseAmount)
+        val result = amount.toDouble()
 
-            result shouldBe EarningRate(0.35)
-        }
+        result shouldBe 3000.toDouble()
     }
 
-    context("상품 구매 수 계산") {
-        test("상품의 배수 금액으로 상품 수가 생성된다") {
-            forAll(
-                row(Amount(1000)),
-                row(LottoSpec.PRICE),
-            ) { productPrice ->
-                val count = 3
-                val amount = productPrice * count
+    context("총합 계산") {
+        test("Amount 리스트의 총 합이 계산된다") {
+            val amounts = listOf(Amount(1000), Amount(2000), Amount(30000))
 
-                val result = amount.purchase(productPrice)
+            val result = amounts.sum()
 
-                result.value shouldBe count
-            }
-        }
-
-        test("상품의 배수 금액이 아닐 경우 상품 수 생성에 실패한다") {
-            val amount = LottoSpec.PRICE + Amount(1)
-
-            shouldThrow<IllegalArgumentException> {
-                amount.purchase(LottoSpec.PRICE)
-            }
+            result shouldBe Amount(33000)
         }
     }
 })

@@ -1,11 +1,17 @@
 package lotto.domain
 
 data class LottoResult(
-    val matchedNumberCount: Int,
-    val ticketCount: Int,
+    val rankCounts: LottoRankCounts,
+    val earningRate: EarningRate,
 ) {
-    fun calculatePrize(prizesInfo: List<WinningPrize> = LottoSpec.prizesInfo): Amount {
-        val prizeInfo = prizesInfo.firstOrNull { it.matchedCount == matchedNumberCount } ?: return Amount(0)
-        return prizeInfo.amount * ticketCount
+    companion object {
+        fun of(winningLotto: WinningLotto, ticket: LottoTicket, ticketPrice: Amount): LottoResult {
+            val rankCounts = ticket determineResultBy winningLotto
+            val earningRate = EarningRate.of(
+                purchasedAmount = ticket calculateTotalPriceBy ticketPrice,
+                earningAmount = rankCounts.totalEarningMoney
+            )
+            return LottoResult(rankCounts, earningRate)
+        }
     }
 }

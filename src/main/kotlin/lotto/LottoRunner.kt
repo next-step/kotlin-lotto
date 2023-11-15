@@ -21,8 +21,9 @@ class LottoRunner(
     }
 
     private fun createWinningNumbers() {
-        val input = InputView.getWinningNumbersInput()
-        val response = controller.end(EndLottoRequest.from(input))
+        val winningNumbers = InputView.getWinningNumbersInput()
+        val bonusNumber = InputView.getBonusNumberInput()
+        val response = controller.end(EndLottoRequest.from(winningNumbers, bonusNumber))
         OutputView.drawEarningRateOutput(response)
     }
 }
