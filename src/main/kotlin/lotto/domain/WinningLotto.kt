@@ -6,6 +6,10 @@ import lotto.domain.dto.WinningResults
 class WinningLotto(private val winningNumbers: List<Int>, private val bonusBall: Int = NO_BONUS_BALL) {
     private val winLotto: Lotto = Lotto(winningNumbers.toSet())
 
+    init {
+        validateBonusBall()
+    }
+
     fun match(lotto: Lotto): LotteryPrizeAmount {
         val userNumbers = lotto.numbers
         val winningLottoNumbers = winLotto.numbers
@@ -38,6 +42,12 @@ class WinningLotto(private val winningNumbers: List<Int>, private val bonusBall:
                 resultList.add(result)
             }
         return WinningResults(resultList)
+    }
+
+    private fun validateBonusBall() {
+        if (winningNumbers.contains(bonusBall)){
+            throw IllegalArgumentException("보너스 볼은 당첨 번호 중 하나와 같을 수 없습니다.")
+        }
     }
 
     companion object {
