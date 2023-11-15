@@ -7,8 +7,8 @@ class LottoRecord(
     quantity: Int = 0,
 ) {
     init {
-        require(quantity > 0) {
-            "등급별 수량은 0이상입니다."
+        require(quantity >= 0) {
+            "등급별 수량은 0이상 입니다."
         }
     }
 
@@ -19,8 +19,8 @@ class LottoRecord(
         return rank.matchCount
     }
 
-    fun addQuantity() {
-        quantity++
+    fun addQuantityByCount(count: Int) {
+        quantity += count
     }
 
     fun reward(): Int {
