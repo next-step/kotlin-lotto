@@ -36,17 +36,17 @@ class StringAdditionCalculatorTest : FunSpec({
 
         context("숫자 이외의 값이나 음수가 전달되는 경우 RuntimeException 예외를 발생시킨다.") {
             test("\"-1,2,3\"은 예외가 발생해야 한다.") {
-                shouldThrowExactly<RuntimeException> {
+                shouldThrowExactly<IllegalArgumentException> {
                     StringAdditionCalculator("-1,2,3")
                 }
             }
             test("\"//;\\n1;2;-3\"은 예외가 발생한다.") {
-                shouldThrowExactly<RuntimeException> {
+                shouldThrowExactly<IllegalArgumentException> {
                     StringAdditionCalculator("//;\n1;2;-3")
                 }
             }
             test("//-\\n1;2;-3은 예외가 발생한다.") {
-                shouldThrowExactly<RuntimeException> {
+                shouldThrowExactly<IllegalArgumentException> {
                     StringAdditionCalculator("//-\n1;2;-3")
                 }
             }
