@@ -45,7 +45,7 @@ class LottoBundleTest {
     }
 
     @Test
-    fun `랭크별 수량을 집계한다`(){
+    fun `랭크별 수량을 집계한다`() {
         // Given
         val caseOfNumbers = listOf(
             Numbers(listOf(1, 2, 3, 4, 5, 6)),

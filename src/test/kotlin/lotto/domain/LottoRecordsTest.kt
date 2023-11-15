@@ -38,7 +38,7 @@ class LottoRecordsTest {
             LottoRecord(Rank.FOURTH_RANK, 0),
             LottoRecord(Rank.THIRD_RANK, 0),
             LottoRecord(Rank.SECOND_RANK, 1),
-            LottoRecord(Rank.SECOND_BONUS_RANK,  2),
+            LottoRecord(Rank.SECOND_BONUS_RANK, 2),
             LottoRecord(Rank.FIRST_RANK, 1),
             LottoRecord(Rank.NONE_RANK, 3),
         )
@@ -48,7 +48,7 @@ class LottoRecordsTest {
     }
 
     @Test
-    fun `총수익률을 반환한다`(){
+    fun `총수익률을 반환한다`() {
         val givenRecords = setOf(
             LottoRecord(Rank.FOURTH_RANK, 1),
             LottoRecord(Rank.THIRD_RANK, 0),
