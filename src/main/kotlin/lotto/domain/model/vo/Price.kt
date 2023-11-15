@@ -10,7 +10,7 @@ value class Price(val price: Int) {
             "로또 가격은 ${MIN_PRICE}~${MAX_PRICE}원 사이여야 합니다."
         }
         require(price % DEFAULT_PRICE == DEFAULT_REMAINDER) {
-            "로또 가격은 ${MIN_PRICE}~${MAX_PRICE}원 사이여야 합니다."
+            "로또 가격을 ${DEFAULT_PRICE}으로 나누었을 때 나머지가 ${DEFAULT_REMAINDER}원이 나와야 합니다."
         }
     }
 

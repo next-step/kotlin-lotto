@@ -1,7 +1,7 @@
 package lotto.domain.model.vo
 
 /**
- * 당첨 로또 티켓 개수
+ * 당첨된 로또 티켓 개수
  * */
 @JvmInline
 value class WinningTicketCount(val ticketCount: Int) {
