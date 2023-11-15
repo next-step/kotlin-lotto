@@ -3,25 +3,22 @@ package lotto.domain
 import lotto.numbermaker.RandomNumberMaker
 
 class Lotto(private val numberList: Set<Int> = generateDefaultRandomNumberList()) {
-    private val _numbers = mutableListOf<LottoNumber>()
-
     val numbers: List<LottoNumber>
-        get() = _numbers.toList()
 
     init {
         validateSetSize()
+        val _numbers = mutableListOf<LottoNumber>()
         numberList.forEach { it ->
             val lottoNumber = LottoNumber.from(it)
             _numbers.add(lottoNumber)
         }
+        numbers = _numbers.toList()
     }
 
     fun getNumberValues(): List<Int> {
-        val numberList = mutableListOf<Int>()
-        _numbers.forEach {
-            numberList.add(it.value)
-        }
-        return numberList
+        return numbers.map {
+            it.value
+        }.toList()
     }
 
     private fun validateSetSize() {
