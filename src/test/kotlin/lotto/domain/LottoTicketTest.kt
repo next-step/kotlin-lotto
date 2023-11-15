@@ -2,7 +2,9 @@ package lotto.domain
 
 import lotto.dto.LottoMatchResult
 import lotto.enum.Rank
+import lotto.`interface`.impl.ManualTicketGenerationStrategy
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
@@ -61,6 +63,14 @@ class LottoTicketTest {
         val matchResult = createMatchResultWithMockedWinningTicket(listOf(1, 2, 3, 4, 5, 7), 8)
         val rank = matchResult.determineRank(ticket)
         assertEquals(Rank.SECOND, rank, "5개의 당첨 번호와 보너스 볼 일치 시 2등에 해당해야 합니다.")
+    }
+
+    @Test
+    @DisplayName("수동 티켓 번호가 올바른 형식인지 검증")
+    fun `수동 티켓 번호가 올바른 형식인지 검증한다`() {
+        val manualNumbers = listOf(1, 2, 3, 4, 5, 6)
+        val ticket = ManualTicketGenerationStrategy(manualNumbers).generate()
+        assertTrue(ticket.readOnlyNumbers == manualNumbers)
     }
 
     private fun createMatchResultWithMockedWinningTicket(winningNumbers: List<Int>, bonusBall: Int = 0): LottoMatchResult {

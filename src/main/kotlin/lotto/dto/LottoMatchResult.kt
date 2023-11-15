@@ -5,7 +5,6 @@ import lotto.enum.Rank
 
 class LottoMatchResult(private val tickets: List<LottoTicket>, winningTicket: LottoTicket, private val bonusBall: Int) {
     private val winningNumbers = winningTicket.readOnlyNumbers.toSet()
-    private val rankDeterminer = LottoRankDeterminer()
     private val matchCount = mutableMapOf<Int, Int>()
     var bonusMatchCount = 0
         private set
@@ -17,7 +16,7 @@ class LottoMatchResult(private val tickets: List<LottoTicket>, winningTicket: Lo
     fun determineRank(ticket: LottoTicket): Rank {
         val matchCount = getMatchingNumbersCount(ticket)
         val matchBonus = containsBonusBall(ticket)
-        return rankDeterminer.determineRank(matchCount, matchBonus)
+        return Rank.valueOf(matchCount, matchBonus)
     }
 
     fun getMatchCount(match: Int): Int {

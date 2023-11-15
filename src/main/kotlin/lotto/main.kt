@@ -9,23 +9,17 @@ import lotto.view.ResultView
 
 fun main() {
     val lottoMachine = LottoMachine(LottoConstants.TICKET_PRICE)
-    // 구입 금액을 입력받습니다.
     val amount = InputView.requestAmount()
-    // 구입 금액에 해당하는 로또 티켓을 발급합니다.
-    val tickets = lottoMachine.generateTickets(amount)
+    val manualTicketCount = InputView.requestManualTicketCount()
+    val manualNumbers = InputView.requestManualNumbers(manualTicketCount)
+    val tickets = lottoMachine.generateTickets(amount, manualNumbers)
     ResultView.showTickets(tickets)
-    // 지난 주 당첨 번호를 입력받습니다.
     val winningNumbers = InputView.requestWinningNumbers()
-    // 보너스 볼을 입력받습니다.
     val bonusBall = InputView.requestBonusBall()
-    // 당첨 번호를 LottoTicket 객체로 변환합니다.
     val winningTicket = LottoTicket(winningNumbers.toList())
-    // 당첨 결과를 계산합니다.
-    val matchResult = LottoMatchResult(tickets, winningTicket, bonusBall)
+    val matchResult = LottoMatchResult(tickets.second, winningTicket, bonusBall)
     ResultView.showStatistics(matchResult)
-    // 총 구입 금액을 계산합니다.
-    val purchaseAmount = tickets.size * LottoConstants.TICKET_PRICE.toDouble()
-    // 수익률을 계산합니다.
+    val purchaseAmount = tickets.second.size * LottoConstants.TICKET_PRICE.toDouble()
     val revenueCalculator = LottoRevenueCalculator(matchResult)
     val returnRate = revenueCalculator.calculateReturnRate(purchaseAmount)
     ResultView.showReturnRate(returnRate)
