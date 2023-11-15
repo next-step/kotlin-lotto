@@ -7,7 +7,7 @@ import lotto.view.OutputView
 
 fun main() {
     val purchaseAmount = InputView.getPurchaseAmount()
-    val userLotto = LottoStore.purchase(purchaseAmount)
+    val userLotto = LottoStore.purchase(purchaseAmount, RandomLottoGenerator())
     OutputView.printLottos(userLotto)
     val lastWinningNumbers = InputView.getLastWinningNumbers()
     val bonusBall = InputView.getBonusBall()
