@@ -9,29 +9,17 @@ import io.kotest.matchers.shouldBe
 class LottoCashTest : StringSpec({
     "로또 구입 금액을 전달하는 경우 숫자로 변환할 수 있다." {
         forAll(
-            row("1000"),
-            row("14000"),
+            row(1000),
+            row(14000),
         ) { number ->
-            LottoCash.valueOf(number).value shouldBe number.toInt()
+            LottoCash.valueOf(number).value shouldBe number
         }
     }
 
-    "문자열로 숫자 이외의 값을 전달하는 경우 IllegalArgumentException 예외를 던진다." {
+    "로또 구입 금액으로 음수를 전달하는 경우 IllegalArgumentException 예외를 던진다." {
         forAll(
-            row("a"),
-            row("i"),
-            row(";"),
-        ) { text ->
-            shouldThrowWithMessage<IllegalArgumentException>("숫자 이외의 값일 수 없습니다.") {
-                LottoCash.valueOf(text)
-            }
-        }
-    }
-
-    "문자열로 음수를 전달하는 경우 IllegalArgumentException 예외를 던진다." {
-        forAll(
-            row("-1000"),
-            row("-100000"),
+            row(-1000),
+            row(-100000),
         ) { text ->
             shouldThrowWithMessage<IllegalArgumentException>("숫자는 음수일 수 없습니다.") {
                 LottoCash.valueOf(text)

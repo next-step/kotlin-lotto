@@ -13,15 +13,5 @@ value class LottoNumber private constructor(val value: Int) {
             }
             return LottoNumber(value)
         }
-
-        fun valueOf(value: String): LottoNumber {
-            require(value.toIntOrNull() != null) {
-                "숫자 이외의 값일 수 없습니다."
-            }
-            require(value.toInt() >= 0) {
-                "숫자는 음수일 수 없습니다."
-            }
-            return valueOf(value.toInt())
-        }
     }
 }

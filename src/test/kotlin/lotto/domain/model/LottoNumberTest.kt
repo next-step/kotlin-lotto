@@ -28,27 +28,4 @@ class LottoNumberTest : StringSpec({
             }
         }
     }
-
-    "문자열로 숫자 이외의 값을 전달하는 경우 IllegalArgumentException 예외를 던진다." {
-        forAll(
-            row("a"),
-            row("i"),
-            row(";"),
-        ) { text ->
-            shouldThrowWithMessage<IllegalArgumentException>("숫자 이외의 값일 수 없습니다.") {
-                LottoNumber.valueOf(text)
-            }
-        }
-    }
-
-    "문자열로 음수를 전달하는 경우 IllegalArgumentException 예외를 던진다." {
-        forAll(
-            row("-1"),
-            row("-45"),
-        ) { text ->
-            shouldThrowWithMessage<IllegalArgumentException>("숫자는 음수일 수 없습니다.") {
-                LottoNumber.valueOf(text)
-            }
-        }
-    }
 })

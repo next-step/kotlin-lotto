@@ -3,6 +3,12 @@ package lotto.domain.model
 @JvmInline
 value class Lotto private constructor(private val list: List<LottoNumber>) : List<LottoNumber> by list {
 
+    init {
+        require(list.size == LOTTO_NUMBER_COUNT) {
+            "로또의 숫자 개수는 6입니다."
+        }
+    }
+
     companion object {
         private const val LOTTO_NUMBER_COUNT = 6
 
@@ -11,22 +17,12 @@ value class Lotto private constructor(private val list: List<LottoNumber>) : Lis
             LottoNumber.valueOf(it)
         }
 
-        fun valueOf(list: List<LottoNumber>): Lotto {
-            require(list.size == LOTTO_NUMBER_COUNT) {
-                "로또의 숫자 개수는 6입니다."
+        fun valueOf(numbers: List<Int>): Lotto {
+            return numbers.map {
+                LottoNumber.valueOf(it)
+            }.let {
+                Lotto(it)
             }
-            return Lotto(list)
-        }
-
-        fun valueOf(numbers: String): Lotto {
-            return numbers.split(",")
-                .map {
-                    it.trim()
-                }.map {
-                    LottoNumber.valueOf(it)
-                }.let {
-                    valueOf(it)
-                }
         }
 
         fun auto(): Lotto = lottoNumbers
@@ -35,7 +31,7 @@ value class Lotto private constructor(private val list: List<LottoNumber>) : Lis
             .sortedBy {
                 it.value
             }.let {
-                valueOf(it)
+                Lotto(it)
             }
     }
 }

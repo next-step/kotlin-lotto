@@ -33,13 +33,11 @@
 ### 로또 LottoTest
 - [x] 로또의 숫자 개수가 6이면 로또를 생성한다.
 - [x] 로또의 숫자 개수가 6이 아니면 IllegalArgumentException 예외를 던진다.
-- [x] 쉼표(,)를 구분자로 하는 문자열로 로또 숫자를 전달하면 로또를 생성한다.
 - [x] 자동으로 생성한 로또 번호의 수는 6이다.
 
 ### 로또 구입 금액 LottoCashTest
 - [x] 로또 구입 금액을 전달하는 경우 숫자로 변환할 수 있다.
-- [x] 문자열로 숫자 이외의 값을 전달하는 경우 IllegalArgumentException 예외를 던진다.
-- [x] 문자열로 음수를 전달하는 경우 IllegalArgumentException 예외를 던진다.
+- [x] 로또 구입 금액으로 음수를 전달하는 경우 IllegalArgumentException 예외를 던진다.
 
 ### 로또 판매점 LottoStoreTest
 - [x] 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
@@ -49,8 +47,6 @@
 ### 로또 숫자 LottoNumberTest
 - [x] 로또 숫자 범위 내의 값을 전달하는 경우 숫자로 변환할 수 있다.
 - [x] 로또 숫자의 범위를 벗어난 경우 IllegalArgumentException 예외를 던진다.
-- [x] 문자열로 숫자 이외의 값을 전달하는 경우 IllegalArgumentException 예외를 던진다.
-- [x] 문자열로 음수를 전달하는 경우 RuntimeException 예외를 던진다.
 
 ### 로또 당첨 통계 LottoMatchResultTest
 - [x] 로또 구매 금액과 당첨 통계가 주어지면 당첨 결과와 수익률을 확인할 수 있다.

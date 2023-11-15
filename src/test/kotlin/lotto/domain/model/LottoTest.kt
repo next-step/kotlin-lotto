@@ -8,37 +8,18 @@ import io.kotest.matchers.shouldBe
 
 class LottoTest : StringSpec({
     "로또의 숫자 개수가 6이면 로또를 생성한다." {
-        val list = listOf(1, 2, 3, 4, 5, 6).map {
-            LottoNumber.valueOf(it)
-        }
-        Lotto.valueOf(list) shouldBe list
+        val list = listOf(1, 2, 3, 4, 5, 6)
+        Lotto.valueOf(list) shouldBe list.map { LottoNumber.valueOf(it) }
     }
 
     "로또의 숫자 개수가 6이 아니면 IllegalArgumentException 예외를 던진다." {
         forAll(
-            row(
-                listOf(1, 2, 3, 4, 5).map {
-                    LottoNumber.valueOf(it)
-                }
-            ),
-            row(
-                listOf(1, 2, 3, 4, 5, 6, 7).map {
-                    LottoNumber.valueOf(it)
-                }
-            )
+            row(listOf(1, 2, 3, 4, 5)),
+            row(listOf(1, 2, 3, 4, 5, 6, 7))
         ) { list ->
             shouldThrowWithMessage<IllegalArgumentException>("로또의 숫자 개수는 6입니다.") {
                 Lotto.valueOf(list)
             }
-        }
-    }
-
-    "쉼표(,)를 구분자로 하는 문자열로 로또 숫자를 전달하면 로또를 생성한다." {
-        forAll(
-            row("1, 2, 3, 4, 5, 6"),
-            row("1, 20, 35, 40, 44, 45"),
-        ) { numbers ->
-            Lotto.valueOf(numbers).map { it.value }.toString() shouldBe "[$numbers]"
         }
     }
 
