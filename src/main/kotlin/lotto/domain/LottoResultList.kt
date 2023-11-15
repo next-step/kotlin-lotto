@@ -17,11 +17,13 @@ data class LottoResultList(val resultList: List<LottoRank>) {
 
     companion object {
         fun getResult(winningNumbers: WinningNumbers, lottoList: LottoList): LottoResultList {
-            val result = mutableListOf<LottoRank>()
-            for (lotto in lottoList.lottoList) {
-                result.add(LottoRank.of(winningNumbers, lotto.lottoNumbers))
-            }
-            return LottoResultList(result)
+            return LottoResultList(
+                buildList {
+                    for (lotto in lottoList.lottoList) {
+                        add(LottoRank.of(winningNumbers, lotto.lottoNumbers))
+                    }
+                }
+            )
         }
     }
 }
