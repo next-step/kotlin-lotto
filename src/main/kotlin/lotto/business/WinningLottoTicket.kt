@@ -1,6 +1,6 @@
 package lotto.business
 
-class WinningLottoTicket(val winningLottoNumbers: LottoTicket, val bonusNumber: LottoNumber) {
+class WinningLottoTicket(private val winningLottoNumbers: LottoTicket, private val bonusNumber: LottoNumber) {
 
     init {
         require(!winningLottoNumbers.contains(bonusNumber)) {
