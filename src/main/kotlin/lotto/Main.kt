@@ -1,11 +1,12 @@
 package lotto
 
-import lotto.domain.LotteryResult
 import lotto.domain.Lotto
 import lotto.domain.LottoBundle
+import lotto.domain.LottoNumber
+import lotto.domain.LottoRecords
 import lotto.domain.Purchase
 import lotto.domain.StringSplit
-import lotto.enums.Rank
+import lotto.domain.WinningLotto
 import lotto.service.AutoNumberCreateStrategy
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -26,13 +27,14 @@ fun main() {
     val winningNumbers = StringSplit.makeNumbersBySplit(
         InputView.inputWinningLottoNumbers()
     )
-    val winningLotto = Lotto.from(winningNumbers)
-    winningLotto.matchCounts(lottoBundle.bundle)
-    // 당첨 통계 출력
-    val rankResult = LotteryResult.from(Rank.excludeNoneRankOfRecord())
-    rankResult.makeRankResult(
-        purchase.amount,
-        winningLotto.matchCounts(lottoBundle.bundle)
+
+    val winningLotto = WinningLotto(
+        Lotto.from(winningNumbers),
+        LottoNumber.from(InputView.inputBonusNumber())
     )
-    OutputView.printLotteryResult(rankResult)
+    val recordsByRank = winningLotto.matchByRank(lottoBundle)
+    val lottoRecords = LottoRecords.fromRank()
+    // 당첨 통계 출력
+    OutputView.printWinningStatistics(lottoRecords.calculateRecords(recordsByRank))
+    OutputView.printRate(lottoRecords.calculateRateOfReturn(purchase.amount))
 }
