@@ -2,8 +2,6 @@ package lotto.domain
 
 class LottoManager(val purchased: Int, private val manualCount: Int) {
     private val lottoCount: Int
-    private lateinit var winningLotto: Lotto
-    private var bonusNumber: LottoNumber? = null
     lateinit var prizes: List<Prize>
         private set
     lateinit var lottos: Lottos
@@ -30,25 +28,14 @@ class LottoManager(val purchased: Int, private val manualCount: Int) {
         lottos = Lottos.createWithMaunals(lottoCount, manuals)
     }
 
-    fun setWinningLotto(lotto: Lotto) {
-        winningLotto = lotto
+    fun validateBonusNumber(winningLotto: Lotto, bonus: LottoNumber) {
+        require(!winningLotto.numbers.contains(bonus)) { "보너스 번호는 당첨 번호와 중복될 수 없습니다." }
     }
 
-    fun setBonusNumber(input: LottoNumber) {
-        validateBonusNumber(input)
-        bonusNumber = input
-    }
-
-    private fun validateBonusNumber(num: LottoNumber) {
-        require(!winningLotto.numbers.contains(num)) { "보너스 번호는 당첨 번호와 중복될 수 없습니다." }
-    }
-
-    fun aggregate() {
+    fun aggregate(winningLotto: Lotto, bonusNumber: LottoNumber) {
         check(this::lottos.isInitialized) { "발급된 로또가 없습니다" }
-        check(this::winningLotto.isInitialized) { "당첨번호가 설정되지 않았습니다" }
-        check(bonusNumber != null) { "보너스 번호가 설정되지 않았습니다" }
 
-        prizes = lottos.getResult(winningLotto, bonusNumber!!)
+        prizes = lottos.getResult(winningLotto, bonusNumber)
     }
 
     companion object {

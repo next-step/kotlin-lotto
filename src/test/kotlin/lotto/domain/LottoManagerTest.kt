@@ -54,33 +54,26 @@ class LottoManagerTest {
     fun `보너스 번호가 당첨 번호중 하나와 일치할 경우 Exception을 던진다`(input: String) {
         val manager = LottoManager(1000, 0)
         val winningNumbers = tokenizeWinningNumbers(input)
+        val bonusNumber = winningNumbers.first()
 
-        manager.setWinningLotto(Lotto(winningNumbers))
-        assertThatThrownBy { manager.setBonusNumber(winningNumbers.shuffled().take(1).first()) }
+        assertThatThrownBy { manager.validateBonusNumber(Lotto(winningNumbers), bonusNumber) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("보너스 번호는 당첨 번호와 중복될 수 없습니다.")
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["1,2,3,4,5,6"])
-    fun `로또, 당첨번호, 보너스번호 설정 전 결과 요청시 Exception을 던진다`(input: String) {
+    fun `로또 설정 전 결과 요청시 Exception을 던진다`(input: String) {
         val manager = LottoManager(1000, 0)
-        assertThatThrownBy { manager.aggregate() }
+        val winningLotto = Lotto(tokenizeWinningNumbers(input))
+        val bonusNumber = LottoNumber.from(7)
+
+        assertThatThrownBy { manager.aggregate(winningLotto, bonusNumber) }
             .isInstanceOf(IllegalStateException::class.java)
             .hasMessage("발급된 로또가 없습니다")
 
         manager.setLottos()
-        assertThatThrownBy { manager.aggregate() }
-            .isInstanceOf(IllegalStateException::class.java)
-            .hasMessage("당첨번호가 설정되지 않았습니다")
-
-        manager.setWinningLotto(Lotto(tokenizeWinningNumbers(input)))
-        assertThatThrownBy { manager.aggregate() }
-            .isInstanceOf(IllegalStateException::class.java)
-            .hasMessage("보너스 번호가 설정되지 않았습니다")
-
-        manager.setBonusNumber(LottoNumber.from(7))
-        assertThatNoException().isThrownBy { manager.aggregate() }
+        assertThatNoException().isThrownBy { manager.aggregate(winningLotto, bonusNumber) }
     }
 
     @ParameterizedTest
@@ -88,10 +81,11 @@ class LottoManagerTest {
     fun `추첨 결과물 리스트를 반환한다`(input: String) {
         val money = 2000
         val manager = LottoManager(money, 0)
+        val winningLotto = Lotto(tokenizeWinningNumbers(input))
+        val bonusNumber = LottoNumber.from(7)
+
         manager.setLottos()
-        manager.setWinningLotto(Lotto(tokenizeWinningNumbers(input)))
-        manager.setBonusNumber(LottoNumber.from(7))
-        manager.aggregate()
+        manager.aggregate(winningLotto, bonusNumber)
 
         val result = manager.prizes
         assertThat(result).isInstanceOf(List::class.java)

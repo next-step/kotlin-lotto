@@ -28,19 +28,22 @@ fun main() {
     Output().printLottoList(lottoManager.lottos.lottoList, manualCount)
 
     // 당첨 번호 입력
-    val winningNumbers = Input().getWinningNumbers()
-
-    // 당첨 번호 등록
-    Lotto(tokenizeWinningNumbers(winningNumbers)).let { lottoManager.setWinningLotto(it) }
+    val winningLotto = Input()
+        .getWinningNumbers()
+        .let { tokenizeWinningNumbers(it) }
+        .let { Lotto(it) }
 
     // 보너스 번호 입력
-    val bonusNumber = Input().getBonusNumber()
+    val bonusNumber = Input()
+        .getBonusNumber()
+        .let { inputToInt(it) }
+        .let { LottoNumber.from(it) }
 
-    // 보너스 번호 등록
-    lottoManager.setBonusNumber(LottoNumber.from(bonusNumber.toInt()))
+    // 보너스 번호 검증
+    lottoManager.validateBonusNumber(winningLotto, bonusNumber)
 
     // 당첨 로또 집계
-    lottoManager.aggregate()
+    lottoManager.aggregate(winningLotto, bonusNumber)
 
     // 통계 출력
     Output().printResult(lottoManager.prizes)
