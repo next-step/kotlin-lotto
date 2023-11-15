@@ -1,16 +1,6 @@
 package lotto.domain
 
 class LottoMachine(private val lottoPrice: Int) {
-    private lateinit var winningNumber: List<LottoNumber>
-
-    fun getWinningNumber(): List<LottoNumber> {
-        return winningNumber
-    }
-
-    fun setWinningNumber(numbers: List<Int>) {
-        this.winningNumber = numbers.map { LottoNumber(it) }
-    }
-
     fun sellLotto(pay: Int): List<Lotto> {
         require(pay >= lottoPrice) { SELL_LOTTO_ERROR_MESSAGE }
         return createLotto(pay / lottoPrice)
