@@ -6,13 +6,17 @@ import lotto.domain.LottoNumber
 import lotto.domain.LottoValidator
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.MethodSource
 
 class LottoValidatorTest {
 
     @ParameterizedTest
-    @MethodSource("getLottoData")
-    fun `전달받은 로또와 당첨 번호를 비교해 일치한 갯수를 반환한다`(userLottoNumber: List<LottoNumber>, expected: Int) {
+    @CsvSource(value = [
+        "1,2,3,4,5,6 = 6",
+        "2,3,4,5,6,7 = 5",
+    ], delimiter = '=')
+    fun `전달받은 로또와 당첨 번호를 비교해 일치한 갯수를 반환한다`(userLottoNumber: String, expected: Int) {
         val winningNumber = listOf(
             LottoNumber(6),
             LottoNumber(5),
@@ -21,7 +25,7 @@ class LottoValidatorTest {
             LottoNumber(2),
             LottoNumber(1),
         )
-        val userLotto = Lotto(userLottoNumber)
+        val userLotto = Lotto(userLottoNumber.split(",").map { LottoNumber(it.toInt()) })
         val matchingCount: Int = LottoValidator.validateWinningNumberAndUserLotto(winningNumber, userLotto)
 
         matchingCount shouldBe expected
