@@ -12,7 +12,7 @@ import lottery.view.OutputView
 
 class LotteryController {
     fun start() {
-        val money = LottoMoney.of(InputView.inputAmount(), InputView.inputManualLottoCount())
+        val money = LottoMoney(money = InputView.inputAmount(), manualLottoCount = InputView.inputManualLottoCount())
         val manualLotto = ManualLottoMachine.createLottos(InputView.inputManualLottoNumbers(money.manualLottoCount))
         val autoLotto = AutoLottoMachine(RandomNumberGenerator()).createLottos(money.autoLottoCount)
         val game = LottoGame(money, Lottos(manualLotto + autoLotto))

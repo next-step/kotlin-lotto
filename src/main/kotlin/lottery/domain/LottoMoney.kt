@@ -7,16 +7,17 @@ data class LottoMoney(
     val manualLottoCount: Int,
     val autoLottoCount: Int,
 ) {
-    companion object {
-        fun of(money: Int, manualLottoCount: Int): LottoMoney {
-            require(money >= manualLottoCount.times(LOTTERY_PRICE)) { INVALID_MANUAL_LOTTO_COUNT_EXCEPTION }
-            return LottoMoney(
-                money = money,
-                manualLottoCount = manualLottoCount,
-                autoLottoCount = money.div(LOTTERY_PRICE).minus(manualLottoCount)
-            )
-        }
+    init {
+        require(money >= manualLottoCount.times(LOTTERY_PRICE)) { INVALID_MANUAL_LOTTO_COUNT_EXCEPTION }
+    }
 
+    constructor(money: Int, manualLottoCount: Int) : this(
+        money,
+        manualLottoCount,
+        autoLottoCount = money.div(LOTTERY_PRICE).minus(manualLottoCount)
+    )
+
+    companion object {
         private const val INVALID_MANUAL_LOTTO_COUNT_EXCEPTION = "구매 가능한 로또 갯수를 초과했습니다"
     }
 }
