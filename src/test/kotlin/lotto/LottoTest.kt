@@ -1,7 +1,5 @@
 package lotto
 
-import lotto.data.Lotto
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.util.TreeSet
 
@@ -13,5 +11,4 @@ class LottoTest {
         val treeSet = TreeSet(numberList)
         println(treeSet)
     }
-
 }

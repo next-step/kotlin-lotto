@@ -3,14 +3,14 @@ package lotto
 import lotto.data.Lotto
 import lotto.data.LottoNumber
 import lotto.data.LottoRanking
+import lotto.data.LottoRanking.FirstPlace
+import lotto.data.LottoRanking.FourthPlace
+import lotto.data.LottoRanking.None
+import lotto.data.LottoRanking.SecondPlace
+import lotto.data.LottoRanking.ThirdPlace
 import java.util.TreeSet
 
 object LottoMachine {
-
-    private const val SIX = 6
-    private const val FIVE = 5
-    private const val FOUR = 4
-    private const val THREE = 3
 
     fun createSelectLotto(lottoNumbers: TreeSet<LottoNumber>): Lotto {
         return Lotto(lottoNumbers)
@@ -22,11 +22,11 @@ object LottoMachine {
         val intersectNumber = winningLottoToSet.intersect(purchaseLottoToSet)
 
         return when (intersectNumber.size) {
-            SIX -> LottoRanking.FirstPlace
-            FIVE -> LottoRanking.SecondPlace
-            FOUR -> LottoRanking.ThirdPlace
-            THREE -> LottoRanking.FourthPlace
-            else -> LottoRanking.None
+            FirstPlace.matchingNumberCnt -> FirstPlace
+            SecondPlace.matchingNumberCnt -> SecondPlace
+            ThirdPlace.matchingNumberCnt -> ThirdPlace
+            FourthPlace.matchingNumberCnt -> FourthPlace
+            else -> None
         }
     }
 
@@ -37,13 +37,6 @@ object LottoMachine {
     }
 
     private fun createTotalWinningPrice(winningStatus: Map<LottoRanking, Int>): Int {
-        var totalPrice = 0
-
-        totalPrice += (winningStatus.getOrDefault(LottoRanking.FirstPlace, 0) * LottoRanking.FirstPlace.price)
-        totalPrice += (winningStatus.getOrDefault(LottoRanking.SecondPlace, 0) * LottoRanking.SecondPlace.price)
-        totalPrice += (winningStatus.getOrDefault(LottoRanking.ThirdPlace, 0) * LottoRanking.ThirdPlace.price)
-        totalPrice += (winningStatus.getOrDefault(LottoRanking.FourthPlace, 0) * LottoRanking.FourthPlace.price)
-
-        return totalPrice
+        return winningStatus.toList().sumOf { it.first.findPrize(it) }
     }
 }

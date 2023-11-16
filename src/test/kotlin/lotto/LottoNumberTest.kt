@@ -34,7 +34,7 @@ class LottoNumberTest {
     @Test
     fun `6개로 구성되지 않는 번호 구성을 받았다면, 로또를 생성했을 때, 오류를 던진다`() {
         // given : 6개로 구성되지 않은 번호 구성을 받는다.
-        val selectNumberList = listOf(1, 2, 3, 4, 5, 6,7)
+        val selectNumberList = listOf(1, 2, 3, 4, 5, 6, 7)
 
         // when : 로또번호를 구성한다.
         val actual = runCatching { LottoNumber.createLottoNumbers(selectNumberList) }.exceptionOrNull()
