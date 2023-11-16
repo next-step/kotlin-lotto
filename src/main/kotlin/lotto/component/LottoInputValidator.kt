@@ -19,7 +19,14 @@ class LottoInputValidator {
 
     fun validateLottoNumbers(lottoNumbers: String?): String {
         require(!lottoNumbers.isNullOrBlank()) {
-            "로또 번호는 6자리입니다. 콤마와 공백으로 구분된 6자리 숫자를 입력해주세요. 예시: 1, 2, 3, 4, 5, 6"
+            "콤마와 공백으로 구분된 6자리 숫자를 입력해주세요. 예시: 1, 2, 3, 4, 5, 6"
+        }
+        return lottoNumbers
+    }
+
+    fun validateLottoNumberCount(lottoNumbers: List<Int>): List<Int> {
+        require(lottoNumbers.size == LOTTO_NUMBER_COUNT) {
+            "로또 번호는 6자리입니다."
         }
         return lottoNumbers
     }
@@ -32,5 +39,9 @@ class LottoInputValidator {
         }
 
         return lottoNumber
+    }
+
+    companion object {
+        private const val LOTTO_NUMBER_COUNT = 6
     }
 }

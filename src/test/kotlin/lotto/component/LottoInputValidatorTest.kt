@@ -29,6 +29,14 @@ class LottoInputValidatorTest : FunSpec({
         }
     }
 
+    test("로또 번호가 6자리가 아닌 경우 IllegalArgumentException 예외 발생 테스트") {
+        val lottoNumbers = listOf(1, 2, 3, 4, 5)
+
+        shouldThrow<IllegalArgumentException> {
+            validator.validateLottoNumberCount(lottoNumbers)
+        }
+    }
+
     test("로또 번호가 숫자가 아닐 경우 IllegalArgumentException 예외 발생 테스트 ") {
         forAll(
             row("a"),

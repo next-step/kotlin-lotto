@@ -24,6 +24,7 @@ class LottoInputFactory(
             .split(LOTTO_NUMBERS_SEPARATOR)
             .map { lottoInputValidator.validateLottoNumber(it) }
             .map { it.toInt() }
+            .run { lottoInputValidator.validateLottoNumberCount(this) }
 
         return WinningNumbers.create(numbers)
     }
