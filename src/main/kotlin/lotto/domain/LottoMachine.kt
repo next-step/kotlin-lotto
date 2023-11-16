@@ -6,7 +6,8 @@ class LottoMachine(val lottoPrice: Int = DEFAULT_LOTTO_PRICE) {
     }
 
     fun purchase(money: Int, manualNumbers: List<Set<Int>>): Lottos {
-        return Lottos((money / lottoPrice))
+        val autoCount = (money / lottoPrice) - manualNumbers.size
+        return Lottos(autoCount, manualNumbers)
     }
 
     companion object {
