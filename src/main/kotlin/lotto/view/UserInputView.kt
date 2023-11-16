@@ -14,8 +14,7 @@ class UserInputView(
 
     override fun provideWinningNumber(): WinningNumber = winningNumberProvider.provide()
 
-    override fun provideLottoTickets(): LottoTickets {
-        val ticketCount = provideTicketCount()
+    override fun provideLottoTickets(ticketCount: Int): LottoTickets {
         val lottoTickets = lottoTicketsProvider.provide(ticketCount)
 
         println("$ticketCount 개를 구매했습니다.")

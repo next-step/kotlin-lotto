@@ -5,9 +5,9 @@ import io.kotest.matchers.shouldBe
 import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
+import lotto.domain.ManualTicketProvideStrategy
 import lotto.domain.WinningNumber
 import lotto.provider.budget.MockBudgetProvider
-import lotto.provider.ticket.ManualTicketProvideStrategy
 import lotto.provider.ticket.MockTicketProvider
 import lotto.provider.winningnumber.MockWinningNumberProvider
 import lotto.view.MockInputView

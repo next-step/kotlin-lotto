@@ -8,7 +8,6 @@ class LottoPurchaseOrderTest : StringSpec({
         val lottoPurchaseOrder = LottoPurchaseOrder(
             budget = 1200,
             ticketPrice = 1000,
-            ticketCount = 1,
         )
 
         lottoPurchaseOrder.totalPrice shouldBe 1000
@@ -16,11 +15,10 @@ class LottoPurchaseOrderTest : StringSpec({
 
         val lottoPurchaseOrder2 = LottoPurchaseOrder(
             budget = 1200,
-            ticketPrice = 1000,
-            ticketCount = 0,
+            ticketPrice = 1000
         )
 
-        lottoPurchaseOrder2.totalPrice shouldBe 0
-        lottoPurchaseOrder2.remainder shouldBe 1200
+        lottoPurchaseOrder2.totalPrice shouldBe 1000
+        lottoPurchaseOrder2.remainder shouldBe 200
     }
 })

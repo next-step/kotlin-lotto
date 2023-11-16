@@ -1,30 +1,29 @@
 package lotto.provider
 
 import lotto.domain.LottoProfitResult
+import lotto.domain.LottoPurchaseOrder
 import lotto.domain.LottoResult
 import lotto.domain.LottoTickets
-import lotto.domain.WinResult
 import lotto.domain.WinningNumber
 
 object LottoResultProvider {
     fun provideLottoResult(
         lottoTickets: LottoTickets,
         winningNumber: WinningNumber,
-        totalTicketPurchasePrice: Int,
-        remainder: Int
+        purchaseOrder: LottoPurchaseOrder,
     ): LottoResult {
-        val winResult = WinResult(lottoTickets, winningNumber)
+        val winResult = winningNumber.getResult(lottoTickets)
         val totalPrize = winResult.totalPrizeWon
 
         val lottoProfitResult = LottoProfitResult(
-            totalTicketPrice = totalTicketPurchasePrice,
+            totalTicketPrice = purchaseOrder.totalPrice,
             totalPrize = totalPrize,
-            remainder = remainder
+            remainder = purchaseOrder.remainder
         )
 
         return LottoResult(
             lottoProfitResult = lottoProfitResult,
-            netSpent = totalTicketPurchasePrice,
+            netSpent = purchaseOrder.totalPrice,
         )
     }
 }

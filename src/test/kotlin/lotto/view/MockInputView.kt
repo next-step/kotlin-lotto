@@ -15,5 +15,5 @@ class MockInputView(
 
     override fun provideWinningNumber(): WinningNumber = winningNumberProvider.provide()
 
-    override fun provideLottoTickets(): LottoTickets = lottoTicketsProvider.provide(provideTicketCount())
+    override fun provideLottoTickets(ticketCount: Int): LottoTickets = lottoTicketsProvider.provide(ticketCount)
 }

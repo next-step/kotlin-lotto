@@ -2,6 +2,7 @@ package lotto
 
 import lotto.domain.LottoPurchaseOrder
 import lotto.domain.LottoResult
+import lotto.domain.LottoTicket
 import lotto.provider.LottoResultProvider
 import lotto.provider.budget.UserInputBudgetProvider
 import lotto.provider.ticket.AutoTicketProvider
@@ -17,15 +18,13 @@ class LottoSimulator(
     fun simulate(): LottoResult {
         val purchaseOrder = LottoPurchaseOrder(
             budget = inputView.provideBudget(),
-            ticketPrice = inputView.provideLottoPrice(),
-            ticketCount = inputView.provideTicketCount(),
+            ticketPrice = LottoTicket.price,
         )
 
         val result = LottoResultProvider.provideLottoResult(
-            lottoTickets = inputView.provideLottoTickets(),
+            lottoTickets = inputView.provideLottoTickets(purchaseOrder.ticketCount),
             winningNumber = inputView.provideWinningNumber(),
-            totalTicketPurchasePrice = purchaseOrder.totalPrice,
-            remainder = purchaseOrder.remainder
+            purchaseOrder = purchaseOrder,
         )
 
         resultView.printResult(result)
