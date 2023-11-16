@@ -15,7 +15,7 @@ class LottoPrizeTest : FunSpec({
             row(5, 150000),
             row(6, 2000000000)
         ) { matchedCount, answer ->
-            val result = LottoPrize.create(matchedCount)
+            val result = LottoPrize.of(matchedCount)
 
             result.prize shouldBe answer
         }
@@ -28,7 +28,7 @@ class LottoPrizeTest : FunSpec({
             row(-1),
             row(7)
         ) { matchedCount ->
-            val result = LottoPrize.create(matchedCount)
+            val result = LottoPrize.of(matchedCount)
 
             result.prize shouldBe answer
         }

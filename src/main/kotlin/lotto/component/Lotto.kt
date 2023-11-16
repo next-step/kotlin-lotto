@@ -14,7 +14,7 @@ class Lotto {
     private fun getLottoPrizes(lottoNumbers: List<LottoNumbers>, winningNumbers: WinningNumbers): List<LottoPrize> {
         return lottoNumbers
             .map { winningNumbers.match(it) }
-            .map { LottoPrize.create(it) }
+            .map { LottoPrize.of(it) }
     }
 
     private fun getRevenueRate(lottoNumbers: List<LottoNumbers>, lottoPrizes: List<LottoPrize>): Double {

@@ -18,7 +18,9 @@ class LottoResultView {
         val grouped = lottoResult.groupWinningTicketCountByMatchedCount()
 
         grouped.forEach { (matchedCount, ticketCount) ->
-            printLottoPrize(matchedCount, LottoPrize.getPrize(matchedCount), ticketCount)
+            val prize = LottoPrize.of(matchedCount)
+
+            printLottoPrize(matchedCount, prize.prize, ticketCount)
         }
     }
 

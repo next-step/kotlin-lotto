@@ -1,28 +1,20 @@
 package lotto.model
 
-import lotto.utils.MatchedCount
 import lotto.utils.Prize
 
-class LottoPrize(
+enum class LottoPrize(
     val matchedCount: Int,
     val prize: Prize
 ) {
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 150_000),
+    THIRD(4, 50_000),
+    FOURTH(3, 5_000),
+    MISS(0, 0);
+
     companion object {
-        private val prizeMap: Map<MatchedCount, Prize> = mapOf(
-            3 to 5_000,
-            4 to 50_000,
-            5 to 150_000,
-            6 to 2_000_000_000,
-        )
-
-        fun getPrize(matchedCount: MatchedCount): Prize {
-            return prizeMap[matchedCount] ?: 0
-        }
-
-        fun create(matchedCount: Int): LottoPrize {
-            val prize = getPrize(matchedCount)
-
-            return LottoPrize(matchedCount, prize)
+        fun of(matchedCount: Int): LottoPrize {
+            return values().find { it.prize == matchedCount } ?: MISS
         }
     }
 }
