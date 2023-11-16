@@ -3,17 +3,18 @@ package lotto
 import lotto.component.*
 import lotto.controller.LottoController
 import lotto.controller.LottoViewController
+import lotto.service.LottoInputService
 import lotto.view.LottoInputView
 import lotto.view.LottoResultView
 
 fun main() {
-    val lottoInputFactory = LottoInputFactory(
+    val lottoInputService = LottoInputService(
         LottoInputValidator(),
         LottoNumbersGenerator()
     )
     val lottoViewController = LottoViewController(
         LottoInputView(),
-        lottoInputFactory,
+        lottoInputService,
         LottoResultView(),
     )
     val lottoController = LottoController(

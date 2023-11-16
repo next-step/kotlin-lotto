@@ -1,9 +1,12 @@
-package lotto.component
+package lotto.service
 
+import lotto.component.Lotto
+import lotto.component.LottoInputValidator
+import lotto.component.LottoNumbersGenerator
 import lotto.model.LottoNumbers
 import lotto.model.WinningNumbers
 
-class LottoInputFactory(
+class LottoInputService(
     private val lottoInputValidator: LottoInputValidator,
     private val lottoNumbersGenerator: LottoNumbersGenerator
 ) {

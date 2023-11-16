@@ -1,6 +1,6 @@
 package lotto.controller
 
-import lotto.component.LottoInputFactory
+import lotto.service.LottoInputService
 import lotto.model.LottoInput
 import lotto.model.LottoNumbers
 import lotto.model.LottoResult
@@ -10,7 +10,7 @@ import lotto.view.LottoResultView
 
 class LottoViewController(
     private val lottoInputView: LottoInputView,
-    private val lottoInputFactory: LottoInputFactory,
+    private val lottoInputService: LottoInputService,
     private val lottoResultView: LottoResultView
 ) {
     fun getLottoInput(): LottoInput {
@@ -32,11 +32,11 @@ class LottoViewController(
     private fun getPurchasePrice(): Int {
         val purchasePrice: String? = lottoInputView.getInput("구입 금액을 입력해주세요.")
 
-        return lottoInputFactory.getPurchasePrice(purchasePrice)
+        return lottoInputService.getPurchasePrice(purchasePrice)
     }
 
     private fun getLottoNumbers(purchasePrice: Int): List<LottoNumbers> {
-        val lottoNumbers: List<LottoNumbers> = lottoInputFactory.getLottoNumbers(purchasePrice)
+        val lottoNumbers: List<LottoNumbers> = lottoInputService.getLottoNumbers(purchasePrice)
 
         lottoInputView.printPurchasedLottoNumbers(lottoNumbers)
 
@@ -46,6 +46,6 @@ class LottoViewController(
     private fun getWinningNumbers(): WinningNumbers {
         val winningNumbers: String? = lottoInputView.getInput("지난 주 당첨 번호를 입력해 주세요.")
 
-        return lottoInputFactory.getWinningNumbers(winningNumbers)
+        return lottoInputService.getWinningNumbers(winningNumbers)
     }
 }
