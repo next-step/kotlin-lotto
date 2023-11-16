@@ -67,7 +67,8 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("provideLotto")
     fun `당첨 번호가 포함되어있으면 Winning 값을 변경해준다`(lotto: Lotto, expectedWinning: LottoWinning) {
-        val checkedLotto = lotto.match(listOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val checkedLotto = lotto.match(winningLotto)
 
         val actualWinning = checkedLotto.winning
 

@@ -19,8 +19,8 @@ data class Lotto(
         }
     }
 
-    fun match(winningNumbers: List<Int>): Lotto {
-        val correctCount = winningNumbers.count { numbers.contains(it) }
+    fun match(winningLotto: Lotto): Lotto {
+        val correctCount = winningLotto.numbers.count { numbers.contains(it) }
 
         return copy(winning = LottoWinning.of(correctCount))
     }

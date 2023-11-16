@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.DefaultLottoGenerateStrategy
+import lotto.domain.Lotto
 import lotto.domain.LottoGenerator
 import lotto.domain.LottoStore
 import lotto.ui.InputView
@@ -14,9 +15,9 @@ fun main() {
     val boughtLottos = store.buyLottos(money)
     InputView.showBoughtLottos(boughtLottos)
 
-    val winningNumbers = InputView.inputWinningNumbers()
+    val winningLotto = Lotto(InputView.inputWinningNumbers())
 
-    val checkedLottos = boughtLottos.matchAll(winningNumbers)
+    val checkedLottos = boughtLottos.matchAll(winningLotto)
     val returnRate = boughtLottos.totalReward() / money.toDouble()
 
     ResultView.showResult(checkedLottos, returnRate)
