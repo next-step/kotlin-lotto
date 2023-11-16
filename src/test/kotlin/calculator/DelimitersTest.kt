@@ -6,6 +6,7 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldInclude
 
 class 유효성_검사_테스트 : StringSpec({
 
@@ -15,7 +16,7 @@ class 유효성_검사_테스트 : StringSpec({
 
             shouldThrow<RuntimeException> {
                 delimiters.validateInput(it)
-            }.message shouldBe "입력 값은 쉼표(,), 콜론(:), 커스텀 구분자를 제외한 나머지 문자는 모두 숫자로 입력해야 합니다."
+            }.message shouldInclude "입력 값은 쉼표(,), 콜론(:), 커스텀 구분자를 제외한 나머지 문자는 모두 숫자로 입력해야 합니다."
         }
     }
 })
@@ -33,7 +34,7 @@ class 양수_숫자_목록_추출_테스트 : BehaviorSpec({
                 val 추출된_양수_숫자_목록 = delimiters.extractPositiveNumbers(inputString)
 
                 Then("구분자를 제외한 숫자를 반환한다.") {
-                    추출된_양수_숫자_목록.values shouldBe expect
+                    추출된_양수_숫자_목록 shouldBe PositiveNumbers(expect)
                 }
             }
         }
@@ -48,7 +49,7 @@ class 양수_숫자_목록_추출_테스트 : BehaviorSpec({
                 val 추출된_양수_숫자_목록 = delimiters.extractPositiveNumbers(inputString)
 
                 Then("구분자를 제외한 숫자를 반환한다.") {
-                    추출된_양수_숫자_목록.values shouldBe expect
+                    추출된_양수_숫자_목록 shouldBe PositiveNumbers(expect)
                 }
             }
         }
@@ -63,7 +64,7 @@ class 양수_숫자_목록_추출_테스트 : BehaviorSpec({
                 val 추출된_양수_숫자_목록 = delimiters.extractPositiveNumbers(inputString)
 
                 Then("구분자를 제외한 숫자를 반환한다.") {
-                    추출된_양수_숫자_목록.values shouldBe expect
+                    추출된_양수_숫자_목록 shouldBe PositiveNumbers(expect)
                 }
             }
         }
@@ -79,11 +80,11 @@ class 양수_숫자_목록_추출_테스트 : BehaviorSpec({
                 row("""//%%\n63435%%73734,6759:567""", listOf(63435, 73734, 6759, 567)),
             ) { inputString: String, expect: List<Int> ->
                 val delimiters = DelimiterParser.extractDelimiters(inputString)
-                val pureInputString = DelimiterParser.extractPureInput(inputString)
+                val pureInputString = DelimiterParser.extractInputWithoutDelimiterDeclarations(inputString)
                 val 추출된_양수_숫자_목록 = delimiters.extractPositiveNumbers(pureInputString)
 
                 Then("구분자를 제외한 숫자를 반환한다.") {
-                    추출된_양수_숫자_목록.values shouldBe expect
+                    추출된_양수_숫자_목록 shouldBe PositiveNumbers(expect)
                 }
             }
         }

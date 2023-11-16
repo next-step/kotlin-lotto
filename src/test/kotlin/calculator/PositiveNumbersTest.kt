@@ -2,17 +2,21 @@ package calculator
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
-import io.kotest.matchers.shouldBe
+import io.kotest.data.forAll
+import io.kotest.data.row
+import io.kotest.matchers.string.shouldInclude
 
-class 숫자_목록_추가_테스트 : StringSpec({
+class PositiveNumbersTest : StringSpec({
 
-    "숫자 목록에 음수를 추가하면, 예외가 발생한다." {
-        listOf(-1, -5, -2, -7, -122, -254).forEach {
-            val 양수_숫자_목록 = PositiveNumbers()
-
-            shouldThrow<RuntimeException> {
-                양수_숫자_목록.add(it)
-            }.message shouldBe "숫자는 0 이상의 양수를 입력해주세요."
+    "숫자 목록에 음수가 존재하면, 예외가 발생한다." {
+        forAll(
+            row(listOf(-1, -5, -2, -7)),
+            row(listOf(-122, -254)),
+            row(listOf(-32, -64))
+        ) { numbers ->
+            shouldThrow<IllegalArgumentException> {
+                PositiveNumbers(numbers)
+            }.message shouldInclude "숫자는 0 이상의 양수를 입력해주세요."
         }
     }
 })
