@@ -13,12 +13,12 @@ fun main() {
 
     val money = InputView.inputMoney()
     val boughtLottos = store.buyLottos(money)
-    InputView.showBoughtLottos(boughtLottos)
+    ResultView.showBoughtLottos(boughtLottos)
 
-    val winningLotto = Lotto(InputView.inputWinningNumbers(), -1)
+    val winningLotto = Lotto(InputView.inputWinningNumbers(), InputView.inputBonusNumber())
 
     val checkedLottos = boughtLottos.matchAll(winningLotto)
-    val returnRate = boughtLottos.totalReward() / money.toDouble()
+    val returnRate = checkedLottos.totalReward() / money.toDouble()
 
     ResultView.showResult(checkedLottos, returnRate)
 }
