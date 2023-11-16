@@ -12,7 +12,7 @@ enum class LottoPrize(
 
     companion object {
         fun of(matchedCount: Int): LottoPrize {
-            return values().find { it.prize == matchedCount } ?: MISS
+            return values().find { it.matchedCount == matchedCount } ?: MISS
         }
     }
 }
