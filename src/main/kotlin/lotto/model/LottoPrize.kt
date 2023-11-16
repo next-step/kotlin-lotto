@@ -1,10 +1,8 @@
 package lotto.model
 
-import lotto.utils.Prize
-
 enum class LottoPrize(
     val matchedCount: Int,
-    val prize: Prize
+    val prize: Int
 ) {
     FIRST(6, 2_000_000_000),
     SECOND(5, 150_000),

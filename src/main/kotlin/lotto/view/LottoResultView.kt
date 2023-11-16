@@ -2,9 +2,6 @@ package lotto.view
 
 import lotto.model.LottoPrize
 import lotto.model.LottoResult
-import lotto.utils.MatchedCount
-import lotto.utils.Prize
-import lotto.utils.TicketCount
 
 class LottoResultView {
     fun printLottoResult(lottoResult: LottoResult) {
@@ -24,7 +21,7 @@ class LottoResultView {
         }
     }
 
-    private fun printLottoPrize(matchedCount: MatchedCount, prize: Prize, ticketCount: TicketCount) {
+    private fun printLottoPrize(matchedCount: Int, prize: Int, ticketCount: Int) {
         println("${matchedCount}개 일치 (${prize}원)- ${ticketCount}개")
     }
 
