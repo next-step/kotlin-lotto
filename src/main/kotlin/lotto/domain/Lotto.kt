@@ -2,13 +2,16 @@ package lotto.domain
 
 import lotto.numbermaker.RandomNumberMaker
 
-class Lotto(private val numberList: Set<Int> = generateDefaultRandomNumberList()) {
-    val numbers: List<LottoNumber>
-
+class Lotto(val numbers: List<LottoNumber>) {
     init {
         validateSetSize()
-        numbers = numberList.map { LottoNumber.from(it) }
     }
+
+    constructor(numberList: Set<Int> = generateDefaultRandomNumberList()) : this(
+        numberList.map {
+            LottoNumber.from(it)
+        }.toList(),
+    )
 
     fun getNumberValues(): List<Int> {
         return numbers.map {
@@ -27,7 +30,7 @@ class Lotto(private val numberList: Set<Int> = generateDefaultRandomNumberList()
     }
 
     private fun validateSetSize() {
-        if (numberList.size != DEFAULT_LOTTO_SIZE) {
+        if (numbers.size != DEFAULT_LOTTO_SIZE) {
             throw IllegalArgumentException()
         }
     }
