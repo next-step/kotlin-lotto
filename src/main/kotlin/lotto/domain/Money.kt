@@ -2,10 +2,13 @@ package lotto.domain
 
 open class Money(val money: Int) {
 
-    fun minus(otherMoney: Money): Money {
-        require(money >= otherMoney.money) {
-            "잔여 금액이 부족합니다."
+    init {
+        require(money >= 0) {
+            "금액은 0원 미만일 수 없습니다."
         }
+    }
+
+    fun minus(otherMoney: Money): Money {
         return Money(money - otherMoney.money)
     }
 

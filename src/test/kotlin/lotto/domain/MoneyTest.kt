@@ -11,6 +11,12 @@ class MoneyTest : StringSpec({
         }
     }
 
+    "금액은 0 원 미만일 수 없다" {
+        assertThrows(IllegalArgumentException::class.java) {
+            FirstMoney(-1)
+        }
+    }
+
     "금액을 입력하면 구입가능 로또 개수를 반환한다" {
         val money = Money(14000)
         assertEquals(14, money.count())
