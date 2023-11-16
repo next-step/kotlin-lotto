@@ -3,14 +3,15 @@ package lotto.domain
 import lotto.domain.dto.WinningResult
 import lotto.domain.dto.WinningResults
 
-class WinningLotto(val winningNumbers: List<Int>) {
-    fun match(lotto: Lotto): LotteryPrizeAmount {
-        val userNumbers = lotto.numbers
-        val count = userNumbers.count { lottoNumber ->
-            winningNumbers.contains(lottoNumber.value)
-        }
+class WinningLotto(private val winLotto: Lotto, private val bonusNumber: LottoNumber) {
+    init {
+        validateBonusBall()
+    }
 
-        return LotteryPrizeAmount.getWinningPrize(count)
+    fun match(userLotto: Lotto): LotteryPrizeAmount {
+        val count = userLotto.countMatchNumber(winLotto)
+        val bonusMatch = userLotto.hasLottoNumber(bonusNumber)
+        return LotteryPrizeAmount.getWinningPrize(count, bonusMatch)
     }
 
     fun matchLottosResult(lottos: Lottos): WinningResults {
@@ -29,5 +30,11 @@ class WinningLotto(val winningNumbers: List<Int>) {
                 resultList.add(result)
             }
         return WinningResults(resultList)
+    }
+
+    private fun validateBonusBall() {
+        if (winLotto.hasLottoNumber(bonusNumber)) {
+            throw IllegalArgumentException("보너스 볼은 당첨 번호 중 하나와 같을 수 없습니다.")
+        }
     }
 }
