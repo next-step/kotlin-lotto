@@ -20,7 +20,7 @@ class StringAddCalculatorParserTest {
     @Test
     fun oneNumber() {
         assertThat(StringAddCalculatorParser.parse("1"))
-            .containsExactly(StringAddCalculatorElement.of("1"))
+            .containsExactly(StringAddCalculatorNumber.of("1"))
     }
 
     @DisplayName(value = "숫자 두개를 쉼표(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.")
@@ -28,8 +28,8 @@ class StringAddCalculatorParserTest {
     fun twoNumbers() {
         assertThat(StringAddCalculatorParser.parse("1,2"))
             .containsExactly(
-                StringAddCalculatorElement.of("1"),
-                StringAddCalculatorElement.of("2")
+                StringAddCalculatorNumber.of("1"),
+                StringAddCalculatorNumber.of("2")
             )
     }
 
@@ -38,9 +38,9 @@ class StringAddCalculatorParserTest {
     fun colons() {
         assertThat(StringAddCalculatorParser.parse("1,2:3"))
             .containsExactly(
-                StringAddCalculatorElement.of("1"),
-                StringAddCalculatorElement.of("2"),
-                StringAddCalculatorElement.of("3")
+                StringAddCalculatorNumber.of("1"),
+                StringAddCalculatorNumber.of("2"),
+                StringAddCalculatorNumber.of("3")
             )
     }
 
@@ -49,9 +49,9 @@ class StringAddCalculatorParserTest {
     fun customDelimiter() {
         assertThat(StringAddCalculatorParser.parse("//;\n1;2;3"))
             .containsExactly(
-                StringAddCalculatorElement.of("1"),
-                StringAddCalculatorElement.of("2"),
-                StringAddCalculatorElement.of("3")
+                StringAddCalculatorNumber.of("1"),
+                StringAddCalculatorNumber.of("2"),
+                StringAddCalculatorNumber.of("3")
             )
     }
 
