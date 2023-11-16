@@ -4,7 +4,7 @@ import study.lotto.domain.Lotto
 import study.lotto.domain.LottoGameResult
 import study.lotto.domain.LottoNumber
 import study.lotto.domain.LottoNumbers
-import study.lotto.domain.Lottoes
+import study.lotto.domain.LottoShop
 import study.lotto.view.InputView
 import study.lotto.view.ResultView
 
@@ -13,7 +13,7 @@ class LottoController(
     private val resultView: ResultView
 ) {
     fun run() {
-        val buyingLottoes = Lottoes.buyLottoes(inputView.getPurchaseAmount())
+        val buyingLottoes = LottoShop.buyLottoes(inputView.getPurchaseAmount())
         resultView.displayLottoes(buyingLottoes)
 
         val lastWeekWinningLotto = inputView.getLastWeekWinningNumbers()

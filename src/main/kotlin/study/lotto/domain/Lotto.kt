@@ -16,7 +16,6 @@ class Lotto constructor(val numbers: LottoNumbers) {
     ]
 
     companion object {
-        const val LOTTO_NUMBERS_COUNT = 6
         const val PRICE_PER_TICKET = 1_000
 
         fun generate(): Lotto {

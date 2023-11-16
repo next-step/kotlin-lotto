@@ -2,7 +2,9 @@ package study.lotto.domain
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class LottoNumbersTest {
     @Test
@@ -48,5 +50,38 @@ class LottoNumbersTest {
             "LottoNumbers size must be equal to ${LottoNumbers.NUMBERS_COUNT}",
             exception.message
         )
+    }
+
+    @Test
+    fun `random 메서드는 6개의 고유한 번호로 이루어진 LottoNumbers를 생성한다`() {
+        val lottoNumbers = LottoNumbers.random()
+
+        assertEquals(6, lottoNumbers.size)
+        assertTrue(lottoNumbers.distinct().size == 6)
+        assertTrue(lottoNumbers.all { it.number in 1..45 })
+    }
+
+    @Test
+    fun `get 메서드는 정수 리스트에서 LottoNumbers를 생성한다`() {
+        val intList = listOf(1, 7, 12, 23, 30, 42)
+        val lottoNumbers = LottoNumbers.get(intList)
+        assertEquals(6, lottoNumbers.size)
+        assertTrue(lottoNumbers.map { it.number } == intList)
+    }
+
+    @Test
+    fun `get 메서드는 리스트 크기가 6이 아닌 경우 예외를 던진다`() {
+        val invalidIntList = listOf(1, 7, 12, 23, 30)
+        assertThrows<IllegalArgumentException> {
+            LottoNumbers.get(invalidIntList)
+        }
+    }
+
+    @Test
+    fun `get 메서드는 중복된 숫자가 있는 경우 예외를 던진다`() {
+        val duplicateIntList = listOf(1, 7, 12, 23, 30, 7)
+        assertThrows<IllegalArgumentException> {
+            LottoNumbers.get(duplicateIntList)
+        }
     }
 }
