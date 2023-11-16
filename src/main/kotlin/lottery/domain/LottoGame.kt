@@ -1,10 +1,16 @@
 package lottery.domain
 
-class LottoGame(private val lottoMoney: LottoMoney, private val lottos: Lottos) {
+class LottoGame(
+    val lottoMoney: LottoMoney,
+    private val lottos: Lottos,
+) {
+    constructor(lottoMoney: LottoMoney, manualLottoMachine: LottoMachine, autoLottoMachine: LottoMachine) : this(
+        lottoMoney = lottoMoney,
+        lottos = Lottos(manualLottoMachine.createLottos(lottoMoney.manualLottoCount) + autoLottoMachine.createLottos(lottoMoney.autoLottoCount)),
+    )
 
-    fun getLottos(): List<Lotto> {
-        return lottos.lottos
-    }
+    val userLottos: List<Lotto>
+        get() = lottos.lottos
 
     fun getRanks(winningLotto: WinningLotto): Ranks {
         return Ranks(lottos, winningLotto, lottoMoney.money)

@@ -7,7 +7,7 @@ class LottoGameTest {
     @Test
     fun `로또 금액과 로또 리스트를 통해 로또 게임을 생성한다`() {
         val lottoMoney = LottoMoney(1000, 0)
-        val lottos = AutoLottoMachine(RandomNumberGenerator()).createLottos(1)
+        val lottos = LottoMachine(RandomNumberGenerator()).createLottos(1)
         val lottoGame = LottoGame(lottoMoney, Lottos(lottos))
 
         lottoGame.shouldBeInstanceOf<LottoGame>()
