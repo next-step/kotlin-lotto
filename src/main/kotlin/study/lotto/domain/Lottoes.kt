@@ -6,7 +6,7 @@ class Lottoes(private val list: List<Lotto>) : List<Lotto> by list {
     }
 
     companion object {
-        fun buyLottoes(purchaseAmount: Int): Lottoes {
+        fun buyLottoes(purchaseAmount: Amount): Lottoes {
             require(purchaseAmount >= 0) {
                 "purchaseAmount must be a positive value"
             }

@@ -13,13 +13,9 @@ enum class PrizeGrade(val matchCount: Int, val prizeAmount: Long, val matchbonus
         operator fun get(matchCount: Int, matchBonusNumber: Boolean): PrizeGrade = when (matchCount) {
             GRADE_5.matchCount -> GRADE_5
             GRADE_4.matchCount -> GRADE_4
-            GRADE_1.matchCount -> GRADE_1
             GRADE_3.matchCount,
-            GRADE_2.matchCount -> if (matchBonusNumber) {
-                GRADE_2
-            } else {
-                GRADE_3
-            }
+            GRADE_2.matchCount -> if (matchBonusNumber) { GRADE_2 } else { GRADE_3 }
+            GRADE_1.matchCount -> GRADE_1
             else -> GRADE_DROP
         }
     }
