@@ -11,7 +11,8 @@ class Lottoes(private val list: List<Lotto>) : List<Lotto> by list {
                 "purchaseAmount must be a positive value"
             }
 
-            val lottoList = (1..(purchaseAmount / Lotto.PRICE_PER_TICKET)).map { Lotto.generate() }
+            val buyLottoesCount = purchaseAmount / Lotto.PRICE_PER_TICKET
+            val lottoList = List(buyLottoesCount) { Lotto.generate() }
             return Lottoes(lottoList)
         }
     }
