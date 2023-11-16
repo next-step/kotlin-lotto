@@ -16,6 +16,12 @@ class Lotto(private val numberList: Set<Int> = generateDefaultRandomNumberList()
         }.toList()
     }
 
+    fun countMatchNumber(winLottoNumbers: List<LottoNumber>): Int {
+        return numbers.count {
+            winLottoNumbers.contains(it)
+        }
+    }
+
     private fun validateSetSize() {
         if (numberList.size != DEFAULT_LOTTO_SIZE) {
             throw IllegalArgumentException()
