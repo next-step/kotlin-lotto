@@ -3,7 +3,7 @@ package lotto.business
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class LottoTicketExtractorTest {
+class LottoTicketGeneratorTest {
     @Test
     fun `입력한 당첨 결과를 파싱한다`() {
         // given
