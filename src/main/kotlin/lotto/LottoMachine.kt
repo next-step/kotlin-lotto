@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.data.Lotto
+import lotto.data.LottoNumber
 import lotto.data.LottoRanking
 import java.util.TreeSet
 
@@ -11,13 +12,13 @@ object LottoMachine {
     private const val FOUR = 4
     private const val THREE = 3
 
-    fun createLotto(numberList: List<Int>): Lotto {
-        return Lotto(TreeSet(numberList))
+    fun createLotto(lottoNumbers: TreeSet<LottoNumber>): Lotto {
+        return Lotto(lottoNumbers)
     }
 
     fun checkLotto(winningLotto: Lotto, purchaseLotto: Lotto): LottoRanking {
-        val winningLottoToSet = winningLotto.selectNumberList.toSet()
-        val purchaseLottoToSet = purchaseLotto.selectNumberList.toSet()
+        val winningLottoToSet = winningLotto.selectNumbers.toSet()
+        val purchaseLottoToSet = purchaseLotto.selectNumbers.toSet()
         val intersectNumber = winningLottoToSet.intersect(purchaseLottoToSet)
 
         return when (intersectNumber.size) {
