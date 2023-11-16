@@ -8,14 +8,11 @@ class StringAddCalculator {
 
         // 커스텀 구분자 있는지 확인
         val result = Regex("//(.)\n(.*)").find(input)
-        result?.let {
+        return result?.let {
             val customDelimiter = it.groupValues[1]
             val tokens = it.groupValues[2].split(customDelimiter)
-            return add(tokens)
-        } 
-
-        val tokens = input.split(",|:".toRegex())
-        return add(tokens)
+            return@let add(tokens)
+        } ?: add(input.split(",|:".toRegex()))
     }
     
     private fun add(numbers: List<String>): Int {
