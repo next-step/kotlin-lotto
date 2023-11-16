@@ -40,7 +40,7 @@ class WinningLotto(private val winningNumbers: List<Int>, private val bonusBall:
     }
 
     private fun validateBonusBall() {
-        if (winningNumbers.contains(bonusBall)){
+        if (winningNumbers.contains(bonusBall)) {
             throw IllegalArgumentException("보너스 볼은 당첨 번호 중 하나와 같을 수 없습니다.")
         }
     }
