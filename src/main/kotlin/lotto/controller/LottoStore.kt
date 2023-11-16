@@ -21,7 +21,7 @@ class LottoStore {
         val manualCount = receiveManualCount()
         val manualNumbers = receiveManualNumbers(manualCount)
 
-        val lottos = lottoMachine.purchase(money)
+        val lottos = lottoMachine.autoPurchase(money)
         showNumbers(lottos, manualCount)
 
         val winningNumbers = receiveWinningNumber()

@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoMachine(val lottoPrice: Int = DEFAULT_LOTTO_PRICE) {
-    fun purchase(money: Int): Lottos {
+    fun autoPurchase(money: Int): Lottos {
         return Lottos(money / lottoPrice)
     }
     companion object {
