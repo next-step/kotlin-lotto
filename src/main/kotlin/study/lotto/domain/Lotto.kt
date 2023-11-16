@@ -28,13 +28,14 @@ class Lotto constructor(val numbers: LottoNumbers) {
         fun generate(): Lotto {
             return LottoNumber.getLottoNumbers()
                 .take(6)
-                .sorted()
+                .toSortedSet()
                 .let(::LottoNumbers)
                 .let(::Lotto)
         }
 
         fun get(intList: List<Int>) = intList
             .map(::LottoNumber)
+            .toSortedSet()
             .let(::LottoNumbers)
             .let(::Lotto)
     }

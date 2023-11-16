@@ -1,6 +1,6 @@
 package study.lotto.domain
 
-class LottoNumbers(private val numbers: List<LottoNumber>) : List<LottoNumber> by numbers {
+class LottoNumbers(private val numbers: Set<LottoNumber>) : Set<LottoNumber> by numbers {
     init {
         require(numbers.isNotEmpty()) {
             "LottoNumbers cannot be empty"

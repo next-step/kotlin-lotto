@@ -30,7 +30,7 @@ class LottoNumberTest {
 
     @Test
     fun `listOf 함수는 주어진 숫자들로 정렬된 로또 번호 리스트 반환`() {
-        val numbers = LottoNumber.listOf(33, 1, 20, 15)
+        val numbers = LottoNumber.setOf(33, 1, 20, 15)
         assertEquals(listOf(1, 15, 20, 33), numbers.map { it.number })
     }
 

@@ -12,8 +12,8 @@ data class LottoNumber(val number: Int) : Comparable<LottoNumber> {
         const val START_NUMBER = 1
         const val LAST_NUMBER = 45
 
-        fun getLottoNumbers() = (START_NUMBER..LAST_NUMBER).shuffled().map(::LottoNumber)
+        fun getLottoNumbers() = (START_NUMBER..LAST_NUMBER).shuffled().map(::LottoNumber).toSet()
 
-        fun listOf(vararg numbers: Int) = numbers.toList().sorted().map(::LottoNumber)
+        fun setOf(vararg numbers: Int) = numbers.map(::LottoNumber).toSortedSet()
     }
 }

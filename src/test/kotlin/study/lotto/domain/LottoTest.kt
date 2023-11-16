@@ -10,7 +10,7 @@ class LottoTest {
     @Test
     fun `Lotto 생성 시 번호가 6개가 아니면 예외를 발생시킨다`() {
         val exception = assertThrows(IllegalArgumentException::class.java) {
-            val invalidNumbers = listOf(1, 2, 3, 4, 5).map(::LottoNumber).let(::LottoNumbers)
+            val invalidNumbers = LottoNumber.setOf(1, 2, 3, 4, 5).let(::LottoNumbers)
             Lotto(invalidNumbers)
         }
 
@@ -19,7 +19,7 @@ class LottoTest {
 
     @Test
     fun `Lotto 생성 시 번호가 올바르면 Lotto 객체를 반환한다`() {
-        val validNumbers = listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).let(::LottoNumbers)
+        val validNumbers = LottoNumber.setOf(1, 2, 3, 4, 5, 6).let(::LottoNumbers)
         val lotto = Lotto(validNumbers)
         assertThat(lotto.numbers).isEqualTo(validNumbers)
     }
@@ -27,8 +27,8 @@ class LottoTest {
     @Test
     fun `당첨 번호와 일치하는 번호의 등급을 올바르게 계산한다`() {
         val bonusNumber = LottoNumber(10)
-        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).let(::LottoNumbers))
-        val winningNumbers = Lotto(listOf(4, 5, 6, 7, 8, 9).map(::LottoNumber).let(::LottoNumbers))
+        val lotto = Lotto(LottoNumber.setOf(1, 2, 3, 4, 5, 6).let(::LottoNumbers))
+        val winningNumbers = Lotto(LottoNumber.setOf(4, 5, 6, 7, 8, 9).let(::LottoNumbers))
         assertEquals(PrizeGrade.GRADE_5, lotto.getPrizeGrade(winningNumbers, bonusNumber))
     }
 }
