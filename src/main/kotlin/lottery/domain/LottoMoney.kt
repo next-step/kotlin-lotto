@@ -3,9 +3,9 @@ package lottery.domain
 import lottery.domain.LottoGame.Companion.LOTTERY_PRICE
 
 data class LottoMoney(
-    val money: Int = 0,
-    val manualLottoCount: Int = 0,
-    val autoLottoCount: Int = 0,
+    val money: Int,
+    val manualLottoCount: Int,
+    val autoLottoCount: Int,
 ) {
     companion object {
         fun of(money: Int, manualLottoCount: Int): LottoMoney {
