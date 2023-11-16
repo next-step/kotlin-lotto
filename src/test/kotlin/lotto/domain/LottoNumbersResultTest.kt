@@ -26,6 +26,6 @@ class LottoNumbersResultTest {
         lottoResult.setLottoResult(3)
         val result = lottoResult.calcRate(lottoPrice, userLottoCount)
 
-        result shouldBe "0.35"
+        result shouldBe 0.35714285714285715
     }
 }

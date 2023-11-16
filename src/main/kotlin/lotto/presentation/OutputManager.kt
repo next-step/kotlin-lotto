@@ -1,9 +1,9 @@
 package lotto.presentation
 
 import lotto.domain.Lotto
-import lotto.domain.LottoNumbers
 import lotto.domain.LottoResult
-import lotto.domain.Revenue
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 class OutputManager {
     fun printUserPay(pay: Int) {
@@ -26,11 +26,13 @@ class OutputManager {
         }
     }
 
-    fun printRevenue(revenue: String) {
+    fun printRevenue(revenue: Double) {
+        DECIMAL_FORMAT.roundingMode = RoundingMode.DOWN
         println("총 수익률은 ${revenue}입니다.")
     }
 
     companion object {
+        private val DECIMAL_FORMAT: DecimalFormat = DecimalFormat("#.##")
         private const val START_NUMBER: Int = 3
         private const val END_NUMBER: Int = 7
         private const val RESULT_MESSAGE: String = "당첨 통계"
