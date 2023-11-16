@@ -11,6 +11,13 @@ class LottoNumbers(private val numbers: Set<LottoNumber>) : Set<LottoNumber> by 
     }
 
     companion object {
+        fun random(): LottoNumbers = (LottoNumber.START_NUMBER..LottoNumber.LAST_NUMBER)
+            .shuffled()
+            .take(NUMBERS_COUNT)
+            .map(::LottoNumber)
+            .toSortedSet()
+            .let(::LottoNumbers)
+
         const val NUMBERS_COUNT = 6
     }
 }

@@ -20,11 +20,7 @@ class Lotto constructor(val numbers: LottoNumbers) {
         const val PRICE_PER_TICKET = 1_000
 
         fun generate(): Lotto {
-            return LottoNumber.getLottoNumbers()
-                .take(6)
-                .toSortedSet()
-                .let(::LottoNumbers)
-                .let(::Lotto)
+            return Lotto(LottoNumbers.random())
         }
 
         fun get(intList: List<Int>) = intList
