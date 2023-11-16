@@ -20,18 +20,16 @@ class LottoGameResult private constructor(
         }
 
         private fun buildStatistics(matchCounts: List<PrizeGrade>): Map<PrizeGrade, Int> {
-            return matchCounts
-                .filter { it.matchCount >= PrizeGrade.GRADE_5.matchCount }
-                .groupingBy { it }
-                .eachCount()
+            val statistics = PrizeGrade.values()
+                .filter { it >= PrizeGrade.GRADE_5 }
+                .associateWith { 0 }
                 .toMutableMap()
-                .apply {
-                    PrizeGrade.values().filter {
-                        it.matchCount >= PrizeGrade.GRADE_5.matchCount
-                    }.forEach {
-                        putIfAbsent(it, 0)
-                    }
-                }
+
+            matchCounts.forEach {
+                statistics.computeIfPresent(it) { _, v -> v + 1 }
+            }
+
+            return statistics
         }
 
         private fun calculateTotalPrize(statistics: Map<PrizeGrade, Int>): Long {
