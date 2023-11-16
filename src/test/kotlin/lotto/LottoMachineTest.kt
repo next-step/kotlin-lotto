@@ -15,7 +15,7 @@ class LottoMachineTest {
         val lottoNumbers = LottoNumber.createLottoNumbers(numberList)
 
         // when : 로또를 생성한다.
-        val actual = LottoMachine.createLotto(lottoNumbers)
+        val actual = LottoMachine.createSelectLotto(lottoNumbers)
         val expect = Lotto(lottoNumbers)
 
         // then : 해당 번호로 로또를 생성한다.

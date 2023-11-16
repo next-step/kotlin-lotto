@@ -12,7 +12,7 @@ object LottoMachine {
     private const val FOUR = 4
     private const val THREE = 3
 
-    fun createLotto(lottoNumbers: TreeSet<LottoNumber>): Lotto {
+    fun createSelectLotto(lottoNumbers: TreeSet<LottoNumber>): Lotto {
         return Lotto(lottoNumbers)
     }
 
