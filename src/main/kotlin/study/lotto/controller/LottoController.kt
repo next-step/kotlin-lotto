@@ -1,22 +1,32 @@
 package study.lotto.controller
 
 import study.lotto.domain.Lotto
-import study.lotto.domain.LottoGame
+import study.lotto.domain.LottoGameResult
+import study.lotto.domain.LottoNumber
+import study.lotto.domain.LottoNumbers
+import study.lotto.domain.LottoShop
 import study.lotto.view.InputView
 import study.lotto.view.ResultView
 
 class LottoController(
     private val inputView: InputView,
-    private val resultView: ResultView,
+    private val resultView: ResultView
 ) {
     fun run() {
-        val lottoGame = LottoGame(inputView.getPurchaseAmount())
-        resultView.displayLottoes(lottoGame.buyingLottoes)
+        val buyingLottoes = LottoShop.buyLottoes(inputView.getPurchaseAmount())
+        resultView.displayLottoes(buyingLottoes)
 
         val lastWeekWinningLotto = inputView.getLastWeekWinningNumbers()
-            .let(Lotto::get)
+            .let(LottoNumbers::get)
+            .let(::Lotto)
 
-        val lottoResult = lottoGame.getResult(lastWeekWinningLotto)
+        val bonusNumber = inputView.getBonusNumber().let(::LottoNumber)
+
+        val lottoResult = LottoGameResult.getResult(
+            buyingLottoes,
+            lastWeekWinningLotto,
+            bonusNumber
+        )
 
         resultView.displayStatistics(lottoResult.statistics)
         resultView.displayProfitRate(lottoResult.earningsRate)

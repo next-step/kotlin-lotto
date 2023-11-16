@@ -1,12 +1,12 @@
 package study.lotto.domain
 
 class LottoGameResult private constructor(
-    val statistics: Map<Int, Int>,
-    val earningsRate: Double,
+    val statistics: Map<PrizeGrade, Int>,
+    val earningsRate: Double
 ) {
     companion object {
-        fun getResult(lottoes: Lottoes, winningLotto: Lotto): LottoGameResult {
-            val statistics = buildStatistics(lottoes.countMatches(winningLotto))
+        fun getResult(lottoes: Lottoes, winningLotto: Lotto, bonusNumber: LottoNumber): LottoGameResult {
+            val statistics = buildStatistics(lottoes.getPrizes(winningLotto, bonusNumber))
             val earningsRate = calculateEarningsRate(
                 calculateTotalPrize(statistics),
                 lottoes.size
@@ -19,20 +19,22 @@ class LottoGameResult private constructor(
             return totalPrize.toDouble() / totalSpent
         }
 
-        private fun buildStatistics(matchCounts: List<Int>): Map<Int, Int> {
-            return matchCounts
-                .filter { it >= PrizeGrade.GRADE_5.matchCount }
-                .groupingBy { it }
-                .eachCount()
+        private fun buildStatistics(matchCounts: List<PrizeGrade>): Map<PrizeGrade, Int> {
+            val statistics = PrizeGrade.values()
+                .filter { it >= PrizeGrade.GRADE_5 }
+                .associateWith { 0 }
                 .toMutableMap()
-                .apply {
-                    (PrizeGrade.GRADE_5.matchCount..PrizeGrade.GRADE_1.matchCount).forEach { putIfAbsent(it, 0) }
-                }
+
+            matchCounts.forEach {
+                statistics.computeIfPresent(it) { _, v -> v + 1 }
+            }
+
+            return statistics
         }
 
-        private fun calculateTotalPrize(statistics: Map<Int, Int>): Long {
-            return statistics.entries.sumOf { (key, value) ->
-                PrizeGrade.getPrizeAmount(key) * value
+        private fun calculateTotalPrize(statistics: Map<PrizeGrade, Int>): Long {
+            return statistics.entries.sumOf { (prizeGrade, matchCount) ->
+                prizeGrade.prizeAmount * matchCount
             }
         }
     }

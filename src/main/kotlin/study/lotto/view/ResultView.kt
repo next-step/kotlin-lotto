@@ -11,16 +11,16 @@ class ResultView {
         }
     }
 
-    fun displayStatistics(statistics: Map<Int, Int>) {
+    fun displayStatistics(statistics: Map<PrizeGrade, Int>) {
         println("당첨 통계")
         println("---------")
-        statistics.toSortedMap().forEach { (matchCount, count) ->
-            val prize = "${getPrizeUnit(matchCount)}원"
-            println("${matchCount}개 일치 ($prize)- ${count}개")
+        statistics.toSortedMap().forEach { (prizeGrade, count) ->
+            val prize = "${prizeGrade.prizeAmount}원"
+            val match = "${prizeGrade.matchCount}개 일치"
+            val bonusMatch = ", 보너스 볼 일치".takeIf { prizeGrade.matchbonusNumber } ?: " "
+            println("$match$bonusMatch ($prize)- ${count}개")
         }
     }
-
-    private fun getPrizeUnit(matchCount: Int) = PrizeGrade.getPrizeAmount(matchCount)
 
     fun displayProfitRate(profitRate: Double) {
         val resultMessage = getProfitRateMessage(profitRate)
