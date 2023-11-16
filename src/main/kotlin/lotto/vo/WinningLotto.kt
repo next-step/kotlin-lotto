@@ -1,6 +1,6 @@
-package autolotto.vo
+package lotto.vo
 
-import autolotto.winningpoint.WinningRank
+import lotto.winningpoint.WinningRank
 
 class WinningLotto(input: String, inputBonus: String = "") {
     val numbers: List<LottoNumber>

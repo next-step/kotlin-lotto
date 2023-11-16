@@ -1,4 +1,4 @@
-package autolotto.ui
+package lotto.ui
 
 object InputView {
     fun promptForPrice(): Long {

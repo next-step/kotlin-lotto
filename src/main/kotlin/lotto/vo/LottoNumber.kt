@@ -1,4 +1,4 @@
-package autolotto.vo
+package lotto.vo
 
 @JvmInline
 value class LottoNumber(val number: Int) {

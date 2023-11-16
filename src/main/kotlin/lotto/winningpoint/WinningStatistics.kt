@@ -1,7 +1,7 @@
-package autolotto.winningpoint
+package lotto.winningpoint
 
-import autolotto.vo.AutoLotto
-import autolotto.vo.WinningLotto
+import lotto.vo.AutoLotto
+import lotto.vo.WinningLotto
 
 object WinningStatistics {
     private const val NOT_MATCHING_COUNT = 0

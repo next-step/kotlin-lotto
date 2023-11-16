@@ -3,6 +3,7 @@ package autolotto.vo
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.ints.shouldBeInRange
 import io.kotest.matchers.shouldBe
+import lotto.vo.Lotto
 
 class LottoTest : FunSpec({
     test("로또는 6개의 번호를 갖는다. ") {

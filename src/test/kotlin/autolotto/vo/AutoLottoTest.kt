@@ -3,6 +3,10 @@ package autolotto.vo
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import lotto.vo.AutoLotto
+import lotto.vo.Lotto
+import lotto.vo.LottoNumber
+import lotto.vo.WinningLotto
 
 class AutoLottoTest : FunSpec({
     test("로또 구입금액을 입력받으면 로또 수량이 결정된다") {

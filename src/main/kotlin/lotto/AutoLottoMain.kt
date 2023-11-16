@@ -1,8 +1,8 @@
-package autolotto
+package lotto
 
-import autolotto.ui.InputView
-import autolotto.ui.ResultView
-import autolotto.vo.WinningLotto
+import lotto.ui.InputView
+import lotto.ui.ResultView
+import lotto.vo.WinningLotto
 
 fun main() {
     while (true) {

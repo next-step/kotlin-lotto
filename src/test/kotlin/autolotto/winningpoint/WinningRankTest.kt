@@ -4,6 +4,7 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
+import lotto.winningpoint.WinningRank
 
 class WinningRankTest : FunSpec({
     test("보너스번호 포함하여 5개 맞췄으면 2등") {

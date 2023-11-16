@@ -1,4 +1,4 @@
-package autolotto.vo
+package lotto.vo
 
 import kotlin.math.floor
 

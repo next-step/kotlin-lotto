@@ -1,9 +1,9 @@
-package autolotto.ui
+package lotto.ui
 
-import autolotto.vo.AutoLotto
-import autolotto.vo.WinningLotto
-import autolotto.winningpoint.WinningRank
-import autolotto.winningpoint.WinningStatistics
+import lotto.vo.AutoLotto
+import lotto.vo.WinningLotto
+import lotto.winningpoint.WinningRank
+import lotto.winningpoint.WinningStatistics
 
 object ResultView {
 
