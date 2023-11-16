@@ -15,7 +15,7 @@ fun main() {
     val boughtLottos = store.buyLottos(money)
     InputView.showBoughtLottos(boughtLottos)
 
-    val winningLotto = Lotto(InputView.inputWinningNumbers())
+    val winningLotto = Lotto(InputView.inputWinningNumbers(), -1)
 
     val checkedLottos = boughtLottos.matchAll(winningLotto)
     val returnRate = boughtLottos.totalReward() / money.toDouble()
