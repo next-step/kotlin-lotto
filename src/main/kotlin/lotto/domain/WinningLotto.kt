@@ -3,7 +3,7 @@ package lotto.domain
 import lotto.domain.dto.WinningResult
 import lotto.domain.dto.WinningResults
 
-class WinningLotto(private val winningNumbers: List<Int>, private val bonusBall: Int = NO_BONUS_BALL) {
+class WinningLotto(private val winningNumbers: List<Int>, private val bonusNumber: LottoNumber) {
     private val winLotto: Lotto = Lotto(winningNumbers.toSet())
 
     init {
@@ -12,12 +12,7 @@ class WinningLotto(private val winningNumbers: List<Int>, private val bonusBall:
 
     fun match(userLotto: Lotto): LotteryPrizeAmount {
         val count = userLotto.countMatchNumber(winLotto.numbers)
-        var bonusMatch = false
-        if (bonusBall != NO_BONUS_BALL) {
-            val bonusNumber = LottoNumber.from(bonusBall)
-            bonusMatch = userLotto.numbers.contains(bonusNumber)
-        }
-
+        val bonusMatch = userLotto.hasLottoNumber(bonusNumber)
         return LotteryPrizeAmount.getWinningPrize(count, bonusMatch)
     }
 
@@ -40,12 +35,8 @@ class WinningLotto(private val winningNumbers: List<Int>, private val bonusBall:
     }
 
     private fun validateBonusBall() {
-        if (winningNumbers.contains(bonusBall)) {
+        if (winLotto.hasLottoNumber(bonusNumber)) {
             throw IllegalArgumentException("보너스 볼은 당첨 번호 중 하나와 같을 수 없습니다.")
         }
-    }
-
-    companion object {
-        private const val NO_BONUS_BALL = 0
     }
 }

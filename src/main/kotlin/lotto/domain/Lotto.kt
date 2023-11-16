@@ -22,6 +22,10 @@ class Lotto(private val numberList: Set<Int> = generateDefaultRandomNumberList()
         }
     }
 
+    fun hasLottoNumber(lottoNumber: LottoNumber): Boolean {
+        return numbers.contains(lottoNumber)
+    }
+
     private fun validateSetSize() {
         if (numberList.size != DEFAULT_LOTTO_SIZE) {
             throw IllegalArgumentException()
