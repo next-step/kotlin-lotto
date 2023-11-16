@@ -3,9 +3,7 @@ package lotto.domain
 import lotto.domain.dto.WinningResult
 import lotto.domain.dto.WinningResults
 
-class WinningLotto(private val winningNumbers: List<Int>, private val bonusNumber: LottoNumber) {
-    private val winLotto: Lotto = Lotto(winningNumbers.toSet())
-
+class WinningLotto(private val winLotto: Lotto, private val bonusNumber: LottoNumber) {
     init {
         validateBonusBall()
     }
