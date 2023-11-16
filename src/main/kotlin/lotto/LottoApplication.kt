@@ -17,9 +17,9 @@ fun main() {
         lottoInputService,
         LottoResultView(),
     )
-    val lottoController = LottoController(
-        Lotto()
-    )
+    val lottoResultAnalyzer = LottoResultAnalyzer()
+    val lotto = Lotto(lottoResultAnalyzer)
+    val lottoController = LottoController(lotto)
 
     val input = lottoViewController.getLottoInput()
     val result = lottoController.run(input)

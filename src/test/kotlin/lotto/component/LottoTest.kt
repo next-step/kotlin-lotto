@@ -6,7 +6,8 @@ import io.kotest.matchers.shouldBe
 import lotto.model.*
 
 class LottoTest : FunSpec({
-    val lotto = Lotto()
+    val analyzer = LottoResultAnalyzer()
+    val lotto = Lotto(analyzer)
 
     test("1장의 로또 입력 시 1개의 당첨 결과 성공 테스트") {
         val numbers = listOf(1, 2, 3, 4, 5, 6)
