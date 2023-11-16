@@ -25,7 +25,8 @@ class LottoManager(val purchased: Int, private val manualCount: Int) {
     }
 
     fun setLottos(manuals: List<Lotto> = emptyList()) {
-        lottos = Lottos.createWithMaunals(lottoCount, manuals)
+        val auto = Lottos.generateLottoList(lottoCount - manualCount)
+        lottos = Lottos(auto + manuals)
     }
 
     fun validateBonusNumber(winningLotto: Lotto, bonus: LottoNumber) {

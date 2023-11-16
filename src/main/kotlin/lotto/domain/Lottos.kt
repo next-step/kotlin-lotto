@@ -8,10 +8,6 @@ class Lottos(val lottoList: List<Lotto>) {
     }
 
     companion object {
-        private fun generateLottoList(amount: Int) = (1..amount).map { Lotto() }
-        fun createWithMaunals(totalAmount: Int, manualLottoList: List<Lotto> = emptyList()): Lottos {
-            val autoLottos = generateLottoList(totalAmount - manualLottoList.size)
-            return Lottos(autoLottos + manualLottoList)
-        }
+        fun generateLottoList(amount: Int) = (1..amount).map { Lotto() }
     }
 }
