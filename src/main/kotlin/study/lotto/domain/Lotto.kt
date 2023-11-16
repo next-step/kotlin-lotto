@@ -22,11 +22,5 @@ class Lotto constructor(val numbers: LottoNumbers) {
         fun generate(): Lotto {
             return Lotto(LottoNumbers.random())
         }
-
-        fun get(intList: List<Int>) = intList
-            .map(::LottoNumber)
-            .toSortedSet()
-            .let(::LottoNumbers)
-            .let(::Lotto)
     }
 }

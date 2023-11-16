@@ -18,6 +18,11 @@ class LottoNumbers(private val numbers: Set<LottoNumber>) : Set<LottoNumber> by 
             .toSortedSet()
             .let(::LottoNumbers)
 
+        fun get(intList: List<Int>) = intList
+            .map(::LottoNumber)
+            .toSortedSet()
+            .let(::LottoNumbers)
+
         const val NUMBERS_COUNT = 6
     }
 }
