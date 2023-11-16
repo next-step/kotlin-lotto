@@ -3,29 +3,28 @@ package stringsumcalculator
 class Calculator {
 
     fun execute(text: String?): Int {
-        return if (text.isNullOrBlank()) {
-            0
-        } else {
-            getDestructured(text)?.let {
-                sum(it.component2(), it.component1())
-            } ?: sum(text, DEFAULT_DELIMITER)
+        if (text.isNullOrBlank()) {
+            return 0
         }
+        return getDestructured(text)?.let { (delimiter, value) ->
+            sum(value, delimiter)
+        } ?: sum(text, DEFAULT_DELIMITER)
     }
 
-    fun getDestructured(text: String): MatchResult.Destructured? {
+    private fun getDestructured(text: String): MatchResult.Destructured? {
         return CUSTOM_SEARCH_PATTERN.find(text)?.destructured
     }
 
     fun sum(value: String, delimiter: String): Int {
         return value.split(delimiter.toRegex()).sumOf {
-            it.toNumber()
+            it.toPositiveNumber()
         }
     }
 
-    private fun String.toNumber(): Int {
+    private fun String.toPositiveNumber(): Int {
         val value = this.toIntOrNull()
         if (value == null || value < 0) {
-            throw RuntimeException()
+            throw RuntimeException("숫자 이외의 값 또는 음수이므로 계산을 할 수 없습니다.")
         }
         return value
     }
