@@ -11,7 +11,7 @@ class WinningLotto(private val winningNumbers: List<Int>, private val bonusNumbe
     }
 
     fun match(userLotto: Lotto): LotteryPrizeAmount {
-        val count = userLotto.countMatchNumber(winLotto.numbers)
+        val count = userLotto.countMatchNumber(winLotto)
         val bonusMatch = userLotto.hasLottoNumber(bonusNumber)
         return LotteryPrizeAmount.getWinningPrize(count, bonusMatch)
     }

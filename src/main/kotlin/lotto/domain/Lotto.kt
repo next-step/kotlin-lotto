@@ -16,9 +16,9 @@ class Lotto(private val numberList: Set<Int> = generateDefaultRandomNumberList()
         }.toList()
     }
 
-    fun countMatchNumber(winLottoNumbers: List<LottoNumber>): Int {
+    fun countMatchNumber(winLotto: Lotto): Int {
         return numbers.count {
-            winLottoNumbers.contains(it)
+            winLotto.hasLottoNumber(it)
         }
     }
 
