@@ -1,3 +1,5 @@
+package lotto
+
 class LottoGame {
 
     fun getLottoCount(amount: Int): Int {
