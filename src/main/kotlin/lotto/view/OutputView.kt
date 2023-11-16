@@ -12,7 +12,7 @@ object OutputView {
 
     fun showLottoList(lottoList: List<Lotto>) {
         lottoList.forEach {
-            println(it.selectNumberList)
+            println(it.selectNumbers)
         }
         println()
     }

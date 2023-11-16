@@ -23,12 +23,12 @@ class LottoNumber private constructor(private val number: Int) : Comparable<Lott
 
         fun createRandomLotto(): TreeSet<LottoNumber> {
             val randomNumberList = (MIN_NUMBER..MAX_NUMBER).shuffled()
-                .subList(SUB_LIST_START_POSITION, SUB_LIST_START_POSITION + LOTTO_NUMBER_LENGTH - 1)
+                .subList(SUB_LIST_START_POSITION, SUB_LIST_START_POSITION + LOTTO_NUMBER_LENGTH)
 
-            return createLottoNumbers(randomNumberList)
+            return TreeSet(randomNumberList.map(::from))
         }
 
-        fun validateDuplication(lottoNumbers: TreeSet<LottoNumber>) {
+        private fun validateDuplication(lottoNumbers: TreeSet<LottoNumber>) {
             require(lottoNumbers.size == LOTTO_NUMBER_LENGTH) { ERR_MSG_OUT_OF_LOTTO_LENGTH }
         }
 
@@ -39,5 +39,9 @@ class LottoNumber private constructor(private val number: Int) : Comparable<Lott
 
     override fun compareTo(other: LottoNumber): Int {
         return this.number.compareTo(other.number)
+    }
+
+    override fun toString(): String {
+        return number.toString()
     }
 }
