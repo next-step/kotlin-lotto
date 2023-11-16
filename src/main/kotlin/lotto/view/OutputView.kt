@@ -3,11 +3,12 @@ package lotto.view
 import lotto.domain.Lotto
 import lotto.domain.LottoRank
 import lotto.domain.LottoResult
+import lotto.domain.Lottos
 
 object OutputView {
-    fun printLottos(lottos: List<Lotto>) {
+    fun printLottos(lottos: Lottos) {
         println("${lottos.size}개를 구매했습니다.")
-        lottos.forEach { printLotto(it) }
+        lottos.getLottos().forEach { printLotto(it) }
     }
 
     fun printResult(lottoResult: LottoResult) {
@@ -28,10 +29,10 @@ object OutputView {
     private fun printRanks(lottoResult: LottoResult) {
         LottoRank.values()
             .filter { it != LottoRank.MISS }
-            .sortedBy { it.matchCount }
+            .sortedBy { it.prize }
             .forEach { rank ->
                 val count = lottoResult.ranks[rank]?.size ?: 0
-                println("${rank.matchCount}개 일치 (${rank.prize}원)- ${count}개")
+                println("${rank.matchCount}개 일치${if (rank.isBonusMatched) ", 보너스 볼 일치" else ""} (${rank.prize}원)- ${count}개")
             }
     }
 }

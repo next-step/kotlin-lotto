@@ -28,10 +28,71 @@ class LottoResultTest {
             )
         )
 
-        val lottoResult = LottoResult(listOf(userLotto), winningLotto)
+        val userLottos = Lottos(listOf(userLotto))
+        val lottoResult = LottoResult(userLottos, winningLotto, LottoNumber(10))
         val first = lottoResult.ranks[LottoRank.FIRST]
         assertThat(first).isNotNull
-        assertThat(first).contains(userLotto)
+        assertThat(first).isEqualTo(userLottos)
+    }
+
+    @Test
+    fun `사용자의 로또와 당첨로또가 5개 일치하고 보너스 볼이 같으면 2등이다`() {
+        val userLotto = Lotto.fromLottoNumbers(
+            listOf(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(6)
+            )
+        )
+        val winningLotto = Lotto.fromLottoNumbers(
+            listOf(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(7)
+            )
+        )
+
+        val userLottos = Lottos(listOf(userLotto))
+        val lottoResult = LottoResult(userLottos, winningLotto, LottoNumber(6))
+        val second = lottoResult.ranks[LottoRank.SECOND]
+        assertThat(second).isNotNull
+        assertThat(second).isEqualTo(userLottos)
+    }
+
+    @Test
+    fun `사용자의 로또와 당첨로또가 5개 일치하고 보너스 볼이 다르면 3등이다`() {
+        val userLotto = Lotto.fromLottoNumbers(
+            listOf(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(6)
+            )
+        )
+        val winningLotto = Lotto.fromLottoNumbers(
+            listOf(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(7)
+            )
+        )
+
+        val userLottos = Lottos(listOf(userLotto))
+        val lottoResult = LottoResult(userLottos, winningLotto, LottoNumber(45))
+        val third = lottoResult.ranks[LottoRank.THIRD]
+        assertThat(third).isNotNull
+        assertThat(third).isEqualTo(userLottos)
     }
 
     @Test
@@ -57,9 +118,10 @@ class LottoResultTest {
             )
         )
 
-        val lottoResult = LottoResult(listOf(userLotto), winningLotto) // 3개 일치, 4등
+        val userLottos = Lottos(listOf(userLotto))
+        val lottoResult = LottoResult(userLottos, winningLotto, LottoNumber(10)) // 3개 일치, 5등
         assertThat(lottoResult.calculateProfitRate()).isCloseTo(
-            LottoRank.FOURTH.prize.toDouble() / Lotto.LOTTO_PRICE.toDouble(),
+            LottoRank.FIFTH.prize.toDouble() / Lotto.LOTTO_PRICE.toDouble(),
             Offset.offset(0.01)
         )
     }

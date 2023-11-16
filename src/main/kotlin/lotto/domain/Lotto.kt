@@ -11,19 +11,21 @@ class Lotto private constructor(val lottoNumbers: List<LottoNumber>) {
     }
 
     fun match(anotherLotto: Lotto): Int {
-        return lottoNumbers.count { it in anotherLotto.lottoNumbers }
+        return lottoNumbers.intersect(anotherLotto.lottoNumbers.toSet()).count()
+    }
+
+    fun containsBonusBall(bonusBall: LottoNumber): Boolean {
+        return lottoNumbers.contains(bonusBall)
     }
 
     companion object {
         private const val LOTTO_NUMBER_COUNT = 6
         const val LOTTO_PRICE = 1000
 
-        fun fromInts(lottoNumbers: List<Int>): Lotto {
-            return Lotto(lottoNumbers.map { LottoNumber(it) })
-        }
+        fun fromInts(lottoNumbers: List<Int>): Lotto = Lotto(lottoNumbers.map { number ->
+            LottoNumbers.LOTTO_NUMBERS.find { it.number == number } ?: LottoNumber(number)
+        })
 
-        fun fromLottoNumbers(lottoNumbers: List<LottoNumber>): Lotto {
-            return Lotto(lottoNumbers)
-        }
+        fun fromLottoNumbers(lottoNumbers: List<LottoNumber>): Lotto = Lotto(lottoNumbers)
     }
 }

@@ -61,7 +61,7 @@ class StringAddCalculatorTest {
     }
 
     @Test
-    fun `커스터 구분자가 -인 경우에도 계산이 된다`() {
+    fun `커스텀 구분자가 -인 경우에도 계산이 된다`() {
         assertThat(calculator.calculate("//-\n1-2-3")).isEqualTo(6)
     }
 }
