@@ -3,6 +3,7 @@ package lotto.presentation
 import lotto.domain.Lotto
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoResult
+import lotto.domain.Revenue
 
 class OutputManager {
     fun printUserPay(pay: Int) {

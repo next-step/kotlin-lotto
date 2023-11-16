@@ -2,18 +2,23 @@ package lotto.domain
 
 import java.math.RoundingMode
 import java.text.DecimalFormat
+import java.util.EnumMap
 
 class LottoResult {
-    private val result: HashMap<Int, Int> = hashMapOf()
+    private val result: EnumMap<Revenue, Int> = EnumMap<Revenue, Int>(Revenue::class.java)
 
     fun setLottoResult(matchedNumberCount: Int) {
         if (matchedNumberCount >= MINIMUM_MATCH_COUNT) {
-            result[matchedNumberCount] = result.getOrDefault(matchedNumberCount, 0) + 1
+            val key = Revenue.of(matchedNumberCount)
+            result[key] = result.getOrDefault(key, 0) + 1
         }
     }
 
     fun getLottoResult(key: Int): Int {
-        return result[key] ?: 0
+        if (key < MINIMUM_MATCH_COUNT) {
+            return 0
+        }
+        return result[Revenue.of(key)] ?: 0
     }
 
     fun calcRate(lottoPrice: Int, userLottoCount: Int): String {
@@ -21,7 +26,8 @@ class LottoResult {
         DECIMAL_FORMAT.roundingMode = RoundingMode.DOWN
         var revenue = 0
         result.keys.forEach {
-            revenue += this.getLottoResult(it) * REVENUE_MAP.getOrDefault(it, 0)
+
+            revenue += this.getLottoResult(it.matchCount) * it.prizeMoney
         }
         val result = revenue / userTotalPay.toDouble()
 
@@ -31,11 +37,5 @@ class LottoResult {
     companion object {
         private const val MINIMUM_MATCH_COUNT: Int = 3
         private val DECIMAL_FORMAT: DecimalFormat = DecimalFormat("#.##")
-        private val REVENUE_MAP: HashMap<Int, Int> = hashMapOf(
-            3 to 5000,
-            4 to 50000,
-            5 to 1500000,
-            6 to 2000000000
-        )
     }
 }
