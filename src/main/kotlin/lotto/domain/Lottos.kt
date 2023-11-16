@@ -1,8 +1,6 @@
 package lotto.domain
 
-class Lottos(val lottos: List<Lotto>, val size: Int) {
-
-    constructor(lottos: List<Lotto>) : this(lottos, lottos.size)
+class Lottos(val lottos: List<Lotto>) : List<Lotto> by lottos {
 
     fun merge(otherLottos: Lottos): Lottos {
         return Lottos(lottos + otherLottos.lottos)
