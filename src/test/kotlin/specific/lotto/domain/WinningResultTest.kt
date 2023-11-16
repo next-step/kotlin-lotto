@@ -18,14 +18,14 @@ class WinningResultTest {
     )
     fun `로또 번호와 당첨 번호가 3개 이상 같으면 당첨이다`(ticketValues: String, winningNumberValues: String) {
         // given
-        val ticket = Ticket(LottoNumber(ticketValues.split("|").map { it.toInt() }))
-        val winningNumber = WinningNumber(LottoNumber(winningNumberValues.split("|").map { it.toInt() }))
+        val ticket = Ticket(NumberCombination(ticketValues.split("|").map { it.toInt() }))
+        val winningNumber = WinningNumber(NumberCombination(winningNumberValues.split("|").map { it.toInt() }))
 
         // when
         val countOfSameNumber = WinningResult.countSameNumber(ticket, winningNumber)
 
         // then
-        when(countOfSameNumber) {
+        when (countOfSameNumber) {
             0, 1, 2 -> assertNull(WinningResult.Rank.getRank(countOfSameNumber))
             else -> assertNotNull(WinningResult.Rank.getRank(countOfSameNumber))
         }
@@ -48,12 +48,12 @@ class WinningResultTest {
     fun `당첨 결과들은 등수별로 집계된다`() {
         // given
         val tickets = listOf<Ticket>(
-            Ticket(LottoNumber(listOf(1, 2, 3, 4, 5, 6))),
-            Ticket(LottoNumber(listOf(1, 2, 3, 4, 5, 12))),
-            Ticket(LottoNumber(listOf(1, 2, 3, 4, 11, 12))),
-            Ticket(LottoNumber(listOf(1, 2, 3, 10, 11, 12))),
+            Ticket(NumberCombination(listOf(1, 2, 3, 4, 5, 6))),
+            Ticket(NumberCombination(listOf(1, 2, 3, 4, 5, 12))),
+            Ticket(NumberCombination(listOf(1, 2, 3, 4, 11, 12))),
+            Ticket(NumberCombination(listOf(1, 2, 3, 10, 11, 12))),
         )
-        val winningNumber = WinningNumber(LottoNumber(listOf(1, 2, 3, 4, 5, 6)))
+        val winningNumber = WinningNumber(NumberCombination(listOf(1, 2, 3, 4, 5, 6)))
 
         // when
         val winningResult = WinningResult(tickets, winningNumber)

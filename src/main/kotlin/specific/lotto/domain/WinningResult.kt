@@ -16,11 +16,10 @@ data class WinningResult(val tickets: List<Ticket>, val winningNumbers: WinningN
         }
         tickets
             .map { countSameNumber(it, winningNumbers) }
-            .map { Rank.getRank(it) }
-            .filterNotNull()
+            .mapNotNull { Rank.getRank(it) }
             .groupBy { it }
             .mapValues { (_, tickets) -> tickets.size }
-            .forEach {(rank, count) -> aggregatedData[rank] = count}
+            .forEach { (rank, count) -> aggregatedData[rank] = count }
         return aggregatedData
     }
 
@@ -36,12 +35,11 @@ data class WinningResult(val tickets: List<Ticket>, val winningNumbers: WinningN
         companion object {
             fun getRank(countOfSameNumber: Int): Rank? =
                 values().firstOrNull { it.countOfSameNumber == countOfSameNumber }
-
         }
     }
 
     companion object {
         fun countSameNumber(ticket: Ticket, winningNumber: WinningNumber) =
-            ticket.lottoNumber.values.intersect(winningNumber.lottoNumber.values).size
+            ticket.numberCombination.numbers.intersect(winningNumber.numberCombination.numbers).size
     }
 }

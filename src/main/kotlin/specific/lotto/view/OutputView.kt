@@ -8,7 +8,7 @@ object OutputView {
     fun printTickets(tickets: List<Ticket>) {
         println("${tickets.size}개를 구매했습니다.")
         tickets.forEach {
-            println(it.lottoNumber.values)
+            println(it.numberCombination.numbers)
         }
     }
 
@@ -22,11 +22,13 @@ object OutputView {
 
     fun printReturnOnInvestment(money: Money, winningResult: WinningResult) {
         val returnOnInvestment = (winningResult.totalPrize.toDouble() / money.principal)
-        println("""
+        println(
+            """
             총 수익률은 ${String.format("%.2f", returnOnInvestment)}입니다.
             (기준이 1이기 때문에 결과적으로 
-            ${if(returnOnInvestment > 1) "이득이라는" else "손해라는"} 
+            ${if (returnOnInvestment > 1) "이득이라는" else "손해라는"} 
             의미임)
-            """.trimIndent().replace("\n", ""))
+            """.trimIndent().replace("\n", "")
+        )
     }
 }

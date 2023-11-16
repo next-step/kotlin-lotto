@@ -4,7 +4,7 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
-class LottoNumberTest {
+class NumberCombinationTest {
 
     @ParameterizedTest
     @CsvSource(
@@ -13,7 +13,7 @@ class LottoNumberTest {
     )
     fun `로또 번호(당첨 번호)는 1~45 중 하나이다, else throw IllegalArgumentException`(values: String) {
         assertThrows<IllegalArgumentException> {
-            LottoNumber(values.split("|").map { it.toInt() })
+            NumberCombination(values.split("|").map { it.toInt() })
         }
     }
 
@@ -24,7 +24,7 @@ class LottoNumberTest {
     )
     fun `로또 번호(당첨 번호)들은 총 6개다, else throw IllegalArgumentException`(values: String) {
         assertThrows<IllegalArgumentException> {
-            LottoNumber(values.split("|").map { it.toInt() })
+            NumberCombination(values.split("|").map { it.toInt() })
         }
     }
 
@@ -35,7 +35,7 @@ class LottoNumberTest {
     )
     fun `로또 번호(당첨 번호)들은 중복되면 안된다, else throw IllegalArgumentException`(values: String) {
         assertThrows<IllegalArgumentException> {
-            LottoNumber(values.split("|").map { it.toInt() })
+            NumberCombination(values.split("|").map { it.toInt() })
         }
     }
 
@@ -46,7 +46,7 @@ class LottoNumberTest {
     )
     fun `로또 번호(당첨 번호)들은 오름차순 정렬되어 있어야 한다, else throw IllegalArgumentException`(values: String) {
         assertThrows<IllegalArgumentException> {
-            LottoNumber(values.split("|").map { it.toInt() })
+            NumberCombination(values.split("|").map { it.toInt() })
         }
     }
 }
