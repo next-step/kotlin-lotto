@@ -2,12 +2,6 @@ package study.lotto.domain
 
 class Lotto constructor(val numbers: LottoNumbers) {
 
-    init {
-        require(numbers.size == LOTTO_NUMBERS_COUNT) {
-            "A Lotto must have exactly 6 numbers, but got ${numbers.size}"
-        }
-    }
-
     private fun countMatches(winningNumbers: Lotto): Int {
         return this.numbers.count(winningNumbers.numbers::contains)
     }
