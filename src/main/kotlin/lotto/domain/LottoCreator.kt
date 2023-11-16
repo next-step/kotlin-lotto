@@ -1,5 +1,5 @@
 package lotto.domain
 
 interface LottoCreator {
-    fun createLotto(): Lotto
+    fun createLottoList(): LottoList
 }

@@ -1,5 +1,11 @@
 package lotto.domain
 
-class ManualLottoCreator(private val lottoNumbers: LottoNumbers) : LottoCreator {
-    override fun createLotto(): Lotto = ManualLotto(lottoNumbers)
+class ManualLottoCreator(private vararg val lottoNumbers: LottoNumbers) : LottoCreator {
+    override fun createLottoList(): LottoList = LottoList(
+        buildList {
+            for (numbers in lottoNumbers) {
+                add(ManualLotto(numbers))
+            }
+        }
+    )
 }

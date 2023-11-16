@@ -6,4 +6,9 @@ data class LottoNumber(val number: Int) {
             "numbers should be between 1 to 45: now is $number"
         }
     }
+
+    companion object {
+        fun randomSixNumber() = LottoNumberFactory.all().shuffled().take(6)
+        fun get(num: Int) = LottoNumberFactory.get(num)
+    }
 }
