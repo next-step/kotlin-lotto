@@ -23,11 +23,11 @@ class LottoController(private val lottoShop: LottoShop) {
         return inputManualLotto.merge(autoLottos)
     }
 
-    private fun getMoney(money: Money): Pair<Money, Money> {
+    private fun getMoney(money: Money): MoneyPair {
         val inputManualLottoCount = InputView().inputManualLottoCount()
         val manualMoney = Money.fromCount(inputManualLottoCount)
         val leftMoney = money.minus(manualMoney)
-        return Pair(manualMoney, leftMoney)
+        return MoneyPair(manualMoney, leftMoney)
     }
 
     private fun buyLotto(money: Money): Lottos {
