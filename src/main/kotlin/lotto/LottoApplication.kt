@@ -9,12 +9,16 @@ fun main() {
         LottoInputValidator(),
         LottoNumbersGenerator()
     )
-    val controller = LottoController(
+    val lottoViewController = LottoViewController(
         LottoInputView(),
         lottoInputFactory,
         LottoResultView(),
+    )
+    val lottoController = LottoController(
         Lotto()
     )
 
-    controller.run()
+    val input = lottoViewController.getLottoInput()
+    val result = lottoController.run(input)
+    lottoViewController.printLottoResult(result)
 }
