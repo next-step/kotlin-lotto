@@ -1,5 +1,6 @@
-package lotto.component
+package lotto.controller
 
+import lotto.component.LottoInputFactory
 import lotto.model.LottoInput
 import lotto.model.LottoNumbers
 import lotto.model.LottoResult
