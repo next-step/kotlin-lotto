@@ -1,7 +1,5 @@
 package lotto.domain
 
-import kotlin.random.Random
-
 data class LottoNumber(val number: Int) {
     init {
         require(number in (1..45)) {
@@ -10,12 +8,7 @@ data class LottoNumber(val number: Int) {
     }
 
     companion object {
-        fun randomNumber(exclude: List<LottoNumber>): LottoNumber {
-            var number: Int
-            do {
-                number = Random.nextInt(45) + 1
-            } while (exclude.contains(LottoNumber(number)))
-            return LottoNumber(number)
-        }
+        fun randomSixNumber() = LottoNumberFactory.all().shuffled().take(6)
+        fun get(num: Int) = LottoNumberFactory.get(num)
     }
 }

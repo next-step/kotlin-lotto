@@ -1,7 +1,7 @@
 package lotto.domain
 
 data class LottoNumbers(val numbers: List<LottoNumber>) {
-    constructor(vararg numbers: Int) : this(numbers.map { LottoNumber(it) })
+    constructor(vararg numbers: Int) : this(numbers.map { LottoNumber.get(it) })
 
     init {
         require(numbers.size == 6) {
@@ -15,11 +15,8 @@ data class LottoNumbers(val numbers: List<LottoNumber>) {
 
     companion object {
         fun random(): LottoNumbers {
-            val randomNumbers = mutableListOf<LottoNumber>()
-            repeat(6) {
-                randomNumbers.add(LottoNumber.randomNumber(randomNumbers))
-            }
-            return LottoNumbers(randomNumbers.sortedBy { it.number })
+            val randomNumbers = LottoNumber.randomSixNumber().sortedBy { it.number }
+            return LottoNumbers(randomNumbers)
         }
 
         fun manual(manualNumbers: LottoNumbers): LottoNumbers {
