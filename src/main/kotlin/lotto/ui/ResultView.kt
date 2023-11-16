@@ -12,11 +12,11 @@ object ResultView {
         println("당첨 통계")
         println("---------")
         LottoWinning.values()
-            .filterNot { it == LottoWinning.Nothing }
+            .filterNot { it == LottoWinning.Miss }
             .forEach { winning ->
                 val winningCount = winningLottos[winning]?.size ?: 0
 
-                println("${winning.correctCount}개 일치 (${winning.reward}원)- ${winningCount}개")
+                println("${winning.countOfMatch}개 일치 (${winning.reward}원)- ${winningCount}개")
             }
 
         println("총 수익률은 ${returnRate.roundDecimal()}입니다.")

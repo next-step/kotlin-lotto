@@ -2,7 +2,7 @@ package lotto.domain
 
 data class Lotto(
     val numbers: List<Int>,
-    val winning: LottoWinning = LottoWinning.Nothing,
+    val winning: LottoWinning = LottoWinning.Miss,
 ) {
     init {
         require(numbers.size == NUMBERS_COUNT) {
@@ -22,7 +22,7 @@ data class Lotto(
     fun match(winningLotto: Lotto): Lotto {
         val correctCount = winningLotto.numbers.count { numbers.contains(it) }
 
-        return copy(winning = LottoWinning.of(correctCount))
+        return copy(winning = LottoWinning.of(correctCount, false))
     }
 
     private fun List<Int>.isSortedNumber(): Boolean {

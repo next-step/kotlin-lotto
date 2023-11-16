@@ -79,10 +79,10 @@ class LottoTest {
         @JvmStatic
         private fun provideLotto(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(Lotto(listOf(1, 2, 3, 10, 11, 12)), LottoWinning.CorrectThree),
-                Arguments.of(Lotto(listOf(1, 2, 3, 4, 11, 12)), LottoWinning.CorrectFour),
-                Arguments.of(Lotto(listOf(1, 2, 3, 4, 5, 12)), LottoWinning.CorrectFive),
-                Arguments.of(Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoWinning.CorrectSix),
+                Arguments.of(Lotto(listOf(1, 2, 3, 10, 11, 12)), LottoWinning.Fifth),
+                Arguments.of(Lotto(listOf(1, 2, 3, 4, 11, 12)), LottoWinning.Fourth),
+                Arguments.of(Lotto(listOf(1, 2, 3, 4, 5, 12)), LottoWinning.Third),
+                Arguments.of(Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoWinning.First),
             )
         }
     }
