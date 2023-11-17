@@ -2,6 +2,7 @@ package lotto
 
 import lotto.business.LottoBookingSystem
 import lotto.business.LottoNumber
+import lotto.business.LottoTicketCounter
 import lotto.business.LottoTicketGenerator
 import lotto.business.Player
 import lotto.business.ReceivedAmount
@@ -12,22 +13,43 @@ import lotto.view.LottoPurchaseSummaryPrinter
 
 object LottoGameManager {
     fun run() {
-        val player = Player(receivedAmount = ReceivedAmount(LottoInputHandler.inputPurchaseAmount()))
-        generateTickets(LottoBookingSystem(), player)
+        val lottoTicketCounter = LottoTicketCounter(ReceivedAmount(LottoInputHandler.inputPurchaseAmount()))
+        val player = Player()
+        generateTickets(LottoBookingSystem(), player, lottoTicketCounter)
         val winningLottoTicket = generateWinningLottoTicket()
-        printLotteryStatistics(winningLottoTicket, player)
+        printLotteryStatistics(winningLottoTicket, player, lottoTicketCounter)
     }
 
     private fun generateTickets(
         lottoBookingSystem: LottoBookingSystem,
-        player: Player
+        player: Player,
+        lottoTicketCounter: LottoTicketCounter
+    ) {
+        generateManualTickets(lottoTicketCounter, player, lottoBookingSystem)
+        generateAutoTickets(lottoBookingSystem, lottoTicketCounter, player)
+    }
+
+    private fun generateManualTickets(
+        lottoTicketCounter: LottoTicketCounter,
+        player: Player,
+        lottoBookingSystem: LottoBookingSystem
     ) {
         val manualTicketCount = LottoInputHandler.inputManualTicketCount()
-        require(player.purchasableCount >= manualTicketCount) { throw IllegalArgumentException("더 이상 로또를 구매할 수 없습니다.") }
+        require(lottoTicketCounter.purchasableCount >= manualTicketCount) { throw IllegalArgumentException("더 이상 로또를 구매할 수 없습니다.") }
         val manualNumbers = LottoInputHandler.inputManualNumbers(manualTicketCount)
         player.addTickets(lottoBookingSystem.generateManualTickets(manualNumbers))
-        val lottoTickets = lottoBookingSystem.generateMultipleTickets(player.purchasableCount)
+        lottoTicketCounter.decreasePurchasableCount(manualTicketCount)
+    }
+
+    private fun generateAutoTickets(
+        lottoBookingSystem: LottoBookingSystem,
+        lottoTicketCounter: LottoTicketCounter,
+        player: Player
+    ) {
+        val lottoTickets = lottoBookingSystem.generateMultipleTickets(lottoTicketCounter.purchasableCount)
         player.addTickets(lottoTickets)
+        val manualTicketCount = lottoTicketCounter.usedTicketCount
+        lottoTicketCounter.decreasePurchasableCount(lottoTicketCounter.purchasableCount)
         LottoPurchaseSummaryPrinter.print(manualTicketCount, lottoTickets)
     }
 
@@ -40,10 +62,11 @@ object LottoGameManager {
 
     private fun printLotteryStatistics(
         winningLottoTicket: WinningLottoTicket,
-        player: Player
+        player: Player,
+        lottoTicketCounter: LottoTicketCounter
     ) {
         val prizeResults = winningLottoTicket.compilePrizeResults(player.tickets)
-        val profitRate = prizeResults.calculateProfitRate(player.receivedAmount)
+        val profitRate = prizeResults.calculateProfitRate(lottoTicketCounter.receivedAmount)
         LotteryStatisticsPrinter.print(prizeResults, profitRate)
     }
 }
