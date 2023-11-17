@@ -1,8 +1,8 @@
 package lotto.domain
 
 import lotto.view.OutputView
-import lotto.vo.LottoNumber
-import lotto.vo.LottoTicket
+import lotto.domain.vo.LottoNumber
+import lotto.domain.vo.LottoTicket
 
 class LottoGenerator {
     var lottoTickets: ArrayList<LottoTicket> = arrayListOf()

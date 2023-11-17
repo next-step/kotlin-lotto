@@ -3,7 +3,7 @@ package lotto
 import lotto.domain.PrizeEvaluator
 import lotto.view.InputView
 import lotto.view.OutputView
-import lotto.vo.LottoTicket
+import lotto.domain.vo.LottoTicket
 
 class AutoLotto
 

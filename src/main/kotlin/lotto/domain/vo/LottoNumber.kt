@@ -1,4 +1,4 @@
-package lotto.vo
+package lotto.domain.vo
 
 @JvmInline
 value class LottoNumber(private val number: Int) : Comparable<LottoNumber> {

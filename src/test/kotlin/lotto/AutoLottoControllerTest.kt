@@ -1,9 +1,9 @@
 package lotto
 
 import lotto.AutoLottoController.getWinningTicket
-import lotto.dto.PurchaseAmount
-import lotto.vo.LottoNumber
-import lotto.vo.LottoTicket
+import lotto.dto.PurchaseAmountDto
+import lotto.domain.vo.LottoNumber
+import lotto.domain.vo.LottoTicket
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
@@ -16,7 +16,7 @@ class AutoLottoControllerTest {
         val inputPrice = 2000
 
         // when
-        val lottoTickets = AutoLottoController.play(PurchaseAmount(inputPrice))
+        val lottoTickets = AutoLottoController.play(PurchaseAmountDto(inputPrice))
 
         // then
         assertEquals(2, lottoTickets.size)
@@ -27,7 +27,7 @@ class AutoLottoControllerTest {
     fun `로또 번호는 1부터 45까지의 숫자 중에서 6개를 랜덤으로 뽑는다`() {
         // given
         val inputPrice = 2000
-        val lottoTickets = AutoLottoController.play(PurchaseAmount(inputPrice))
+        val lottoTickets = AutoLottoController.play(PurchaseAmountDto(inputPrice))
 
         val a = lottoTickets[0]
         println(a)

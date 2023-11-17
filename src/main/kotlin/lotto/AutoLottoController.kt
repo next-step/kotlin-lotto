@@ -1,15 +1,15 @@
 package lotto
 
 import lotto.domain.LottoGenerator
-import lotto.dto.PurchaseAmount
+import lotto.dto.PurchaseAmountDto
 import lotto.view.OutputView.writeSingleOutput
-import lotto.vo.LottoNumber
-import lotto.vo.LottoTicket
+import lotto.domain.vo.LottoNumber
+import lotto.domain.vo.LottoTicket
 
 object AutoLottoController {
     private const val TicketPrice = 1000
 
-    fun play(amount: PurchaseAmount): List<LottoTicket> {
+    fun play(amount: PurchaseAmountDto): List<LottoTicket> {
         val chance = amount.amount / TicketPrice
         writeSingleOutput("$chance 개를 구매했습니다.")
 

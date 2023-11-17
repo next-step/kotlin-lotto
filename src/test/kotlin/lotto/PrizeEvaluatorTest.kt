@@ -2,9 +2,9 @@ package lotto
 
 import lotto.domain.Prize
 import lotto.domain.PrizeEvaluator
-import lotto.dto.PurchaseAmount
-import lotto.vo.LottoNumber
-import lotto.vo.LottoTicket
+import lotto.dto.PurchaseAmountDto
+import lotto.domain.vo.LottoNumber
+import lotto.domain.vo.LottoTicket
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -20,7 +20,7 @@ class PrizeEvaluatorTest {
         val winningLottoTicket = LottoTicket(winningNumber)
 
         // when
-        val prize = PrizeEvaluator.evaluate(userLottoTicket, winningLottoTicket)
+        val prize = userLottoTicket.evaluate(winningLottoTicket)
 
         // then
         assertEquals(Prize(5000), prize)
@@ -36,7 +36,7 @@ class PrizeEvaluatorTest {
         val winningLottoTicket = LottoTicket(winningNumber)
 
         // when
-        val prize = PrizeEvaluator.evaluate(userLottoTicket, winningLottoTicket)
+        val prize = userLottoTicket.evaluate(winningLottoTicket)
 
         // then
         assertEquals(Prize(50000), prize)
@@ -53,7 +53,7 @@ class PrizeEvaluatorTest {
         val winningLottoTicket = LottoTicket(winningNumber)
 
         // when
-        val roi = PrizeEvaluator.calculateROI(userLottoTickets, winningLottoTicket, PurchaseAmount(2000))
+        val roi = PrizeEvaluator.calculateROI(userLottoTickets, winningLottoTicket, PurchaseAmountDto(2000))
 
         // then
         assertEquals(2.5, roi.value)
