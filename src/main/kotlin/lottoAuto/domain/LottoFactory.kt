@@ -10,7 +10,7 @@ object LottoFactory {
     private fun createShuffledLottoNumbers(): List<LottoNumber> {
         return (LottoNumber.MIN_NUMBER..LottoNumber.MAX_NUMBER)
             .shuffled()
-            .take( Lotto.LOTTO_SIZE )
+            .take(Lotto.LOTTO_SIZE)
             .map { it.toLottoNumber() }
     }
 }

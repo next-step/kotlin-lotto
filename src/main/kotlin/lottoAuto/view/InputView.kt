@@ -1,8 +1,5 @@
 package lottoAuto.view
 
-import lottoAuto.domain.LottoNumber.Companion.toLottoNumber
-import lottoAuto.domain.WinningLotto
-
 object InputView {
     fun getPurchaseAmount(): Int {
         println("구입 금액을 입력해 주세요.")

@@ -1,7 +1,13 @@
 package lottoAuto
 
-import lottoAuto.domain.*
+import lottoAuto.domain.Lotto
+import lottoAuto.domain.LottoFactory
+import lottoAuto.domain.LottoNumber
+import lottoAuto.domain.LottoRanker
+import lottoAuto.domain.LottoRank
+import lottoAuto.domain.LottoProfitCalculator
 import lottoAuto.domain.LottoNumber.Companion.toLottoNumber
+import lottoAuto.domain.WinningLotto
 import lottoAuto.view.InputView
 import lottoAuto.view.OutputView
 
@@ -61,7 +67,6 @@ object LottoController {
         val profit = LottoProfitCalculator.calcProfit(purchaseAmount, totalWinningMoney)
         OutputView.printProfitResult(profit.rateOfReturn, profit.resultMsg)
     }
-
 }
 
 fun main() {

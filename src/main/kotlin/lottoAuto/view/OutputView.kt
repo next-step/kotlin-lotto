@@ -1,7 +1,5 @@
 package lottoAuto.view
 
-import lottoAuto.domain.*
-
 object OutputView {
     fun printNumOfLotto(numOfLotto: Int) {
         println("${numOfLotto}개를 구매했습니다.")
@@ -25,6 +23,6 @@ object OutputView {
     }
 
     fun printProfitResult(rateOfReturn: Double, resultMsg: String) {
-        println("총 수익률은 ${rateOfReturn}입니다.(기준이 1이기 때문에 결과적으로 ${resultMsg}(이)라는 의미임)")
+        println("총 수익률은 $rateOfReturn 입니다.(기준이 1이기 때문에 결과적으로 $resultMsg (이)라는 의미임)")
     }
 }

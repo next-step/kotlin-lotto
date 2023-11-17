@@ -1,6 +1,6 @@
 package lottoAuto.domain
 
-data class Lotto (
+data class Lotto(
     val lottoNumbers: List<LottoNumber>
 ) {
     init {
