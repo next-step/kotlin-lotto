@@ -83,6 +83,29 @@
 - [x] groupBy,associateWith 등의 키워드를 활용해봐도 좋을거같네요!
 - [x] bonus 볼 여부 또한 Prize에서 가지고 있어야할 정보는 아닐까요?
 
+### 5차
+- [ ] 파라미터가 3개 이상이라면 책임분리의 신호일수도 있어요!
+  ```kotlin
+  // ASIS
+  val lottoResult = LottoResultFactory.getLottoResult(lottoTickets, winningNumbers, bonusNumber)
+  
+  // TOBE
+  val winningLotto = WinningLotto(winningNumbers, bonusNumber)
+  val lottoResult = winningLotto.getLottoResult(lottoTickets)
+  ```
+- [ ] 기본 값 활용하기
+  ```kotlin
+  enum class Prize(
+      val matched: Int, val prize: Int, val bonus: Boolean = false // 필요한 곳에만 true
+  ```
+- [ ] Prize에서는 List나 LottoNumber를 몰라도 되지않을까요?
+  - getKeyWithMatched의 파라미터처럼 matched, bonus 만 받아와도 좋을거같아요!
+- [ ] Prize의 복잡한 When 문 하나씩 맵핑하는것보다, enum.values, find등의 함수를 활용해보는건 어떨까요?
+- [ ] 보통 2중첩이상의 분기문부터는 가독성도 좋지않고, 실수발생률이 커진다고 합니다! 요구사항을 습관화해보아요!
+- [ ] 결과에 대한 테스트 코드를 구체적으로 작성해보면 어떨까요?  2등, 3등의 케이스도 검증하면좋을거같아요!
+- [ ] Prize 테스트 코드를 작성해보아요!
+- [ ] 구체적인 케이스명을 활용하면 어떨까요?> getLottoResult라는 네이밍은 너무 모호하네요!
+
 ## 챗 지피티와의 대화
 
 ### DDD에서 도메인이 풍부해질수록 단일책임원칙을 위반하는것 아닐까
