@@ -13,11 +13,11 @@ enum class Prize(val prize: Int, val match: Int) {
         private val prizeMap = Prize.values().associateBy { it.match }
 
         fun getPrize(matchNum: Int, bonus: Boolean): Prize {
-            return if (matchNum == SECOND_THIRD_MATCH_NUM) {
-                if (bonus) SECOND else THIRD
-            } else {
-                prizeMap[matchNum] ?: NO_PRIZE
+            if (matchNum == SECOND_THIRD_MATCH_NUM && bonus) {
+                return SECOND
             }
+
+            return prizeMap[matchNum] ?: NO_PRIZE
         }
     }
 }
