@@ -1,9 +1,6 @@
 package lottoAuto.view
 
-import lottoAuto.domain.Lotto
-import lottoAuto.domain.LottoRank
-import lottoAuto.domain.LottoRanks
-import lottoAuto.domain.LottoStatsEngine
+import lottoAuto.domain.*
 
 object OutputView {
     fun printNumOfLotto(numOfLotto: Int) {
@@ -30,12 +27,7 @@ object OutputView {
 
     fun printRateOfReturn(purchaseAmount: Int, lottoRanks: LottoRanks) {
         val totalWinningMoney = lottoRanks.getTotalWinningMoney()
-        val rateOfReturn = LottoStatsEngine.calcRateOfReturn(purchaseAmount, totalWinningMoney)
-        val profitOrNot = when {
-            rateOfReturn > 1.00 -> "이익"
-            rateOfReturn == 1.00 -> "본전"
-            else -> "손해"
-        }
-        println("총 수익률은 ${rateOfReturn}입니다.(기준이 1이기 때문에 결과적으로 ${profitOrNot}(이)라는 의미임)")
+        val profit = LottoProfitCalculator.calcProfit(purchaseAmount, totalWinningMoney)
+        println("총 수익률은 ${profit.rateOfReturn}입니다.(기준이 1이기 때문에 결과적으로 ${profit.resultMsg}(이)라는 의미임)")
     }
 }

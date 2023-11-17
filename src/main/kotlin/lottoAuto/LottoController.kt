@@ -5,6 +5,8 @@ import lottoAuto.view.InputView
 import lottoAuto.view.OutputView
 
 object LottoController {
+    private const val LOTTO_PRICE = 1000
+
     fun getPurchaseAmount(): Int {
         return InputView.getPurchaseAmount()
     }
@@ -14,7 +16,7 @@ object LottoController {
     }
 
     fun createLottoList(purchaseAmount: Int): List<Lotto> {
-        val numOfLotto = LottoStatsEngine.calcNumOfLotto(purchaseAmount)
+        val numOfLotto = purchaseAmount / LOTTO_PRICE
         val lottoList = LottoFactory.create(numOfLotto)
         OutputView.printNumOfLotto(numOfLotto)
         OutputView.printLottoNumbers(lottoList)
@@ -29,6 +31,7 @@ object LottoController {
         OutputView.printLottoStatistics(lottoRanks)
         OutputView.printRateOfReturn(purchaseAmount, lottoRanks)
     }
+
 }
 
 fun main() {
