@@ -41,8 +41,13 @@ object InputView {
     fun purchaseManual(totalPurchaseCount: Int): PurchaseGames {
         println("수동으로 구매할 로또 수를 입력해 주세요.")
         val manualCount: Int = readln().toInt()
+        requireManualCountUpperToTotalCount(totalPurchaseCount, manualCount)
         println("수동으로 구매할 번호를 입력해 주세요.")
-        return PurchaseGames(totalPurchaseCount, manualCount, manualIssue(manualInput(manualCount)))
+        return PurchaseGames(totalPurchaseCount, manualIssue(manualInput(manualCount)))
+    }
+
+    private fun requireManualCountUpperToTotalCount(totalPurchaseCount: Int, manualCount: Int) {
+        require(totalPurchaseCount >= manualCount) { "총 구매 수량[$totalPurchaseCount]보다 많은 수의 수동 발권 수량[$manualCount] 입력은 불가능합니다 " }
     }
 }
 
