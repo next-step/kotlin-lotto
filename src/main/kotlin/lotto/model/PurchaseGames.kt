@@ -1,12 +1,17 @@
 package lotto.model
 
 data class PurchaseGames(
-    val totalGameCount: Int,
+    val totalPurchaseCount: Int,
     val manualIssuedGames: List<Game>,
 ) {
     init {
-        requirePositive(totalGameCount)
+        requireManualCountUpperToTotalCount()
+        requirePositive(totalPurchaseCount)
         requirePositive(manualIssuedGames.size)
+    }
+
+    private fun requireManualCountUpperToTotalCount() {
+        require(totalPurchaseCount >= manualIssuedGames.size) { "총 구매 수량[$totalPurchaseCount]보다 많은 수의 수동 발권 수량[${manualIssuedGames.size}] 입력은 불가능합니다 " }
     }
 
     private fun requirePositive(input: Int) {
@@ -14,7 +19,7 @@ data class PurchaseGames(
     }
 
     private fun autoIssueCount(): Int {
-        return this.totalGameCount - this.manualIssuedGames.size
+        return this.totalPurchaseCount - this.manualIssuedGames.size
     }
 
     private fun autoIssuedGames(): List<Game> {
