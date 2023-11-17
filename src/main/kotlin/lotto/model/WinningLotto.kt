@@ -1,10 +1,8 @@
 package lotto.model
 
-object LottoResultFactory {
+class WinningLotto (private val winningNumbers: List<LottoNumber>, private val bonusNumber: LottoNumber) {
     fun getLottoResult(
-        lottoTickets: List<LottoTicket>,
-        winningNumbers: List<LottoNumber>,
-        bonusNumber: LottoNumber
+        lottoTickets: List<LottoTicket>
     ): LottoResult {
         val results = lottoTickets.fold(mutableMapOf()) { results: MutableMap<Prize, Int>, lottoTicket: LottoTicket ->
             val key = getResultKey(winningNumbers, lottoTicket.numbers, bonusNumber)
@@ -20,7 +18,7 @@ object LottoResultFactory {
         bonusNumber: LottoNumber
     ): Prize {
         val matchCount = getMatchCount(winningNumbers.toIntList(), lottoTicketNumbers.toIntList())
-        val isBonus = Prize.isBonus(matchCount, lottoTicketNumbers, bonusNumber)
+        val isBonus = Prize.isBonus(matchCount, lottoTicketNumbers.contains(bonusNumber))
         return Prize.getKeyWithMatched(matchCount, isBonus)
     }
 

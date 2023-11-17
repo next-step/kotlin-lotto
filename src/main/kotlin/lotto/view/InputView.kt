@@ -28,13 +28,15 @@ object InputView {
 
         val count = readln().toInt()
         var numbersList = emptyList<List<LottoNumber>>()
-        if(count > 0){
-            println("수동으로 구매할 번호를 입력해 주세요.")
-            numbersList = (1..count).map {
-                readln().split(",").map { LottoNumber.from(it.trim().toInt()) }
-            }
+        require(count > 0)
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        numbersList = (1..count).map {
+            inputManualNumber()
         }
-
         return numbersList
+    }
+
+    private fun inputManualNumber(): List<LottoNumber> {
+        return readln().split(",").map { LottoNumber.from(it.trim().toInt()) }
     }
 }
