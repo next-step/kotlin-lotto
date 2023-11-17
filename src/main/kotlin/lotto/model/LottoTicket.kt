@@ -13,4 +13,12 @@ data class LottoTicket(
             rankAggregated
         )
     }
+
+    operator fun plus(other: LottoTicket): LottoTicket {
+        return LottoTicket(this.games + other.games)
+    }
+
+    fun gamesCount(): Int {
+        return this.games.size
+    }
 }

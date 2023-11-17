@@ -11,10 +11,6 @@ data class PurchaseGames(
         requirePositive(manualGameCount)
     }
 
-    fun transaction(): LottoTicket {
-        return LottoTicket(autoIssuedGames() + manualIssuedGames)
-    }
-
     private fun requirePositive(input: Int) {
         require(input > 0) { "발권 수량은 양의 정수만 가능 합니다" }
     }
@@ -25,6 +21,14 @@ data class PurchaseGames(
 
     private fun autoIssuedGames(): List<Game> {
         return List(autoIssueCount()) { Game.autoTicket() }
+    }
+
+    fun manual(): LottoTicket {
+        return LottoTicket(manualIssuedGames)
+    }
+
+    fun auto(): LottoTicket {
+        return LottoTicket(autoIssuedGames())
     }
 
     companion object {

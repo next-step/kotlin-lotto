@@ -26,6 +26,10 @@ object OutputView {
             """.trimIndent()
         )
     }
+
+    fun presentPurchaseInfo(manualTicket: LottoTicket, autoTicket: LottoTicket) {
+        println("수동으로 ${manualTicket.gamesCount()}장, 자동으로 ${autoTicket.gamesCount()}개를 구매했습니다.")
+    }
 }
 
 private fun LottoTicket.present(): String {
