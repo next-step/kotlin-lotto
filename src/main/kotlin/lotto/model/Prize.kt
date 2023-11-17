@@ -14,7 +14,7 @@ enum class Prize(
         fun getKeyWithMatched(matched: Int, bonus: Boolean): Prize =
             Prize.values().find { it.matched == matched && it.bonus == bonus } ?: MISS
 
-        fun isBonus(matched: Int, bonus: Boolean) =
-            matched == SECOND.matched && SECOND.bonus == bonus
+        fun isBonus(matched: Int, bonusNumberMatched: Boolean) =
+            matched == SECOND.matched && SECOND.bonus == bonusNumberMatched
     }
 }
