@@ -1,9 +1,13 @@
 package lottoAuto.domain
 
 data class Lotto (
-    val lottoNumbers: LottoNumbers
+    val lottoNumbers: List<LottoNumber>
 ) {
-    fun match(lotto: Lotto): Boolean {
-        return lottoNumbers.countSameNumber(lotto.lottoNumbers) == LottoNumbers.NUM_OF_LOTTO_NUMBERS
+    init {
+        require(lottoNumbers.size == LOTTO_SIZE) { "로또 번호는 ${LOTTO_SIZE}개여야 합니다." }
+        require(lottoNumbers.distinct().size == LOTTO_SIZE) { "로또 번호는 중복되지 않아야 합니다." }
+    }
+    companion object {
+        const val LOTTO_SIZE = 6
     }
 }

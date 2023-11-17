@@ -36,9 +36,9 @@
 2단계 피드백 반영
 
 - [x] LottoNumber 캐시 
-- [ ] Lotto 클래스 테스트 전용 메서드(match) 제거
-- [ ] LottoNumbers 제거, Lotto를 일급 컬렉션으로 수정
-- [ ] LottoNumber 중복 생성 방지 로직 추가 
+- [x] Lotto 클래스 테스트 전용 메서드(match) 제거
+- [x] LottoNumbers 제거, Lotto를 일급 컬렉션으로 수정
+- [x] LottoNumber 중복 생성 방지 로직 추가 
 - [ ] 클래스명, 메서드명 변경 - 역할과 책임 명확히 드러나도록
 - [ ] LottoNumber 정적 팩토리 메서드 제거, 확장 함수 생성으로 대체
 - [ ] winningLotto 객체 생성 및 당첨 매칭 담당하도록 메서드 구현

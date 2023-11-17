@@ -16,8 +16,6 @@ object InputView {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
         val winningLottoNumbers = readln().split(",").map { LottoNumber.from(it.toInt()) }
         require(winningLottoNumbers.size == LottoNumbers.NUM_OF_LOTTO_NUMBERS) { "당첨 번호는 6개여야 합니다." }
-        return Lotto(
-            LottoNumbers(numbers = winningLottoNumbers)
-        )
+        return Lotto(winningLottoNumbers)
     }
 }

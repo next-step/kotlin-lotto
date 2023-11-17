@@ -11,7 +11,7 @@ object OutputView {
 
     fun printLottoNumbers(lottos: List<Lotto>) {
         lottos.forEach {
-            println(it.lottoNumbers.numbers.map { lottoNumber -> lottoNumber.number })
+            println(it.lottoNumbers.map { lottoNumber -> lottoNumber.number })
         }
     }
 
