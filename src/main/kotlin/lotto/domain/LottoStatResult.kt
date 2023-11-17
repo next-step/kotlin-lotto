@@ -5,13 +5,9 @@ import kotlin.math.round
 class LottoStatResult(
     lottoStat: Map<Rank, Int> = Rank.values().associateBy({ it }, { DEFAULT_COUNT })
 ) {
-    private val lottoStat = lottoStat.toMutableMap()
+    private val lottoStat = lottoStat.toMap()
 
     fun getCount(rank: Rank): Int = lottoStat.getOrDefault(rank, DEFAULT_COUNT)
-
-    fun addCount(rank: Rank) {
-        lottoStat[rank] = getCount(rank) + 1
-    }
 
     fun getReturnRate(): Double {
         val totalReward =
@@ -23,7 +19,7 @@ class LottoStatResult(
     private fun getCountOfLotto(): Int = lottoStat.values.sum()
 
     companion object {
-        const val DEFAULT_COUNT = 0
-        const val DEFAULT_REWARD = 0
+        private const val DEFAULT_COUNT = 0
+        private const val DEFAULT_REWARD = 0
     }
 }

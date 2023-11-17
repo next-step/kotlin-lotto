@@ -5,7 +5,7 @@ class Lotto {
 
     constructor() {
         numbers = LOTTO_NUMBER_POOL.shuffled()
-            .take(6)
+            .take(NUMBER_OF_LOTTO_NUMBER)
             .sorted()
     }
 

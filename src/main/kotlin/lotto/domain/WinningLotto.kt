@@ -9,5 +9,7 @@ class WinningLotto(
         require(!lotto.contains(bonusNumber)) { "Duplicated number is in lotto!" }
     }
 
-    fun contains(number: Int) = lotto.numbers.contains(number)
+    fun getCountOfMatch(lotto: Lotto) = lotto.numbers.count { contains(it) }
+
+    private fun contains(number: Int) = lotto.numbers.contains(number)
 }
