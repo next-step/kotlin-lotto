@@ -1,5 +1,6 @@
 package lotto.domain
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -31,5 +32,18 @@ class LottoTest {
         val lotto = Lotto(setOf(1, 2, 3, 4, 5, 6))
         val lotto2 = Lotto(setOf(1, 2, 3, 4, 5, 7))
         lotto.countMatchNumber(lotto2) shouldBe 5
+    }
+
+    @Test
+    fun `수동으로 로또 번호를 선택할 수 있다`() {
+        val lotto = Lotto(setOf(1, 2, 3, 4, 5, 6))
+        lotto.getNumberValues() shouldBe listOf(1, 2, 3, 4, 5, 6)
+    }
+
+    @Test
+    fun `수동으로 로또 번호를 선택했을 때, 6개를 넘을 수 없다`() {
+        shouldThrow<IllegalArgumentException> {
+            Lotto(setOf(1, 2, 3, 4, 5, 6, 7))
+        }
     }
 }

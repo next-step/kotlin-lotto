@@ -5,6 +5,8 @@ import lotto.domain.LottoMachine
 import lotto.domain.LottoNumber
 import lotto.domain.WinningLotto
 import lotto.ui.InputView.receiveBonusBall
+import lotto.ui.InputView.receiveManualCount
+import lotto.ui.InputView.receiveManualNumbers
 import lotto.ui.InputView.receivePurchaseMoney
 import lotto.ui.InputView.receiveWinningNumber
 import lotto.ui.ResultView
@@ -15,8 +17,12 @@ class LottoStore {
 
     fun lotto() {
         val money = receivePurchaseMoney()
-        val lottos = lottoMachine.purchase(money)
-        showNumbers(lottos)
+
+        val manualCount = receiveManualCount()
+        val manualNumbers = receiveManualNumbers(manualCount)
+
+        val lottos = lottoMachine.purchase(money, manualNumbers)
+        showNumbers(lottos, manualCount)
 
         val winningNumbers = receiveWinningNumber()
         val bonusBall = receiveBonusBall()
