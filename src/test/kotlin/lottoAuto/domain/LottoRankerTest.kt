@@ -14,7 +14,7 @@ class LottoRankerTest {
         val winningLottoNumbers = (4..9).map { it.toLottoNumber() }
 
         // when
-        val ranks = LottoRanker.rank(
+        val lottoRanks = LottoRanker.rank(
             listOf(
                 Lotto(lottoNumbers1),
                 Lotto(lottoNumbers2),
@@ -24,8 +24,8 @@ class LottoRankerTest {
         )
 
         // then
-        assertEquals(LottoRank.FOURTH, ranks[0])
-        assertEquals(LottoRank.FIRST, ranks[1])
-        assertEquals(LottoRank.MISS, ranks[2])
+        assertEquals(LottoRank.FOURTH, lottoRanks.ranks[0])
+        assertEquals(LottoRank.FIRST, lottoRanks.ranks[1])
+        assertEquals(LottoRank.MISS, lottoRanks.ranks[2])
     }
 }

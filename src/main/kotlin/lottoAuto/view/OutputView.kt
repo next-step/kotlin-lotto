@@ -2,6 +2,7 @@ package lottoAuto.view
 
 import lottoAuto.domain.Lotto
 import lottoAuto.domain.LottoRank
+import lottoAuto.domain.LottoRanks
 import lottoAuto.domain.LottoStatsEngine
 
 object OutputView {
@@ -15,10 +16,10 @@ object OutputView {
         }
     }
 
-    fun printLottoStatistics(lottoRanks: List<LottoRank>) {
+    fun printLottoStatistics(lottoRanks: LottoRanks) {
         println("\n당첨 통계")
         println("---------")
-        val lottoRankGroup = LottoStatsEngine.groupByLottoRank(lottoRanks)
+        val lottoRankGroup = lottoRanks.groupByLottoRank()
         lottoRankGroup
             .entries
             .filterNot { it.key == LottoRank.MISS }
@@ -27,8 +28,8 @@ object OutputView {
             }
     }
 
-    fun printRateOfReturn(purchaseAmount: Int, lottoRanks: List<LottoRank>) {
-        val totalWinningMoney = lottoRanks.sumOf { it.winningMoney }
+    fun printRateOfReturn(purchaseAmount: Int, lottoRanks: LottoRanks) {
+        val totalWinningMoney = lottoRanks.getTotalWinningMoney()
         val rateOfReturn = LottoStatsEngine.calcRateOfReturn(purchaseAmount, totalWinningMoney)
         val profitOrNot = when {
             rateOfReturn > 1.00 -> "이익"

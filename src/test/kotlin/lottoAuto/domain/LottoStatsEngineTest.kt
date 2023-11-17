@@ -35,30 +35,4 @@ class LottoStatsEngineTest {
         // then
         assertEquals(expected, rateOfReturn)
     }
-
-    @Test
-    fun `주어진 LottoRank 리스트를 matchCount 필드별로 그룹핑하고 카운트한다`() {
-        // given
-        val lottoRanks = listOf(
-            LottoRank.FIRST,
-            LottoRank.SECOND,
-            LottoRank.SECOND,
-            LottoRank.THIRD,
-            LottoRank.THIRD,
-            LottoRank.THIRD,
-            LottoRank.FOURTH,
-            LottoRank.FOURTH,
-            LottoRank.FOURTH,
-            LottoRank.FOURTH,
-        )
-        // when
-        val groupedLottoRanks = LottoStatsEngine.groupByLottoRank(lottoRanks)
-
-        // then
-        assertEquals(1, groupedLottoRanks[LottoRank.FIRST])
-        assertEquals(2, groupedLottoRanks[LottoRank.SECOND])
-        assertEquals(3, groupedLottoRanks[LottoRank.THIRD])
-        assertEquals(4, groupedLottoRanks[LottoRank.FOURTH])
-        assertEquals(0, groupedLottoRanks[LottoRank.MISS])
-    }
 }

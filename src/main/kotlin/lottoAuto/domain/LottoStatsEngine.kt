@@ -16,11 +16,4 @@ object LottoStatsEngine {
         val rateOfReturn = totalWinningMoney.toDouble() / purchaseAmount.toDouble()
         return floor(rateOfReturn * 100) / 100
     }
-
-    fun groupByLottoRank(lottoRanks: List<LottoRank>): Map<LottoRank, Int> {
-        val lottoRankCountMap = lottoRanks
-            .groupingBy { it }
-            .eachCount()
-        return LottoRank.values().associateWith { lottoRankCountMap.getOrDefault(it, 0) }
-    }
 }

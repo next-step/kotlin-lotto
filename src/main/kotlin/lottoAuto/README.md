@@ -40,6 +40,7 @@
 - [x] LottoNumbers 제거, Lotto를 일급 컬렉션으로 수정
 - [x] LottoNumber 중복 생성 방지 로직 추가 
 - [x] LottoRank from 메서드 시그니처 변경
+- [x] LottoRanks 일급 컬렉션 생성, rank 정보 기반 집계 담당
 - [ ] 클래스명, 메서드명 변경 - 역할과 책임 명확히 드러나도록
 - [x] LottoNumber 정적 팩토리 메서드 제거, 확장 함수 생성으로 대체
 - [x] winningLotto 객체 생성 및 당첨 번호 매칭 담당하도록 메서드 구현
