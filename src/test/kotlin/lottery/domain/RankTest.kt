@@ -12,7 +12,8 @@ class RankTest {
     @EnumSource(Rank::class)
     @DisplayName("매칭 횟수에 따라 순위가 결정된다")
     fun `매칭 횟수에 따라 순위가 결정된다`(rank: Rank) {
-        val result = Rank.of(rank.countOfMatch, rank.matchBonus)
+        val matchBonus = rank == Rank.SECOND
+        val result = Rank.of(rank.countOfMatch, matchBonus)
 
         result shouldBe rank
     }
