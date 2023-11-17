@@ -41,7 +41,7 @@
 - [x] LottoNumber 중복 생성 방지 로직 추가 
 - [x] LottoRank from 메서드 시그니처 변경
 - [ ] 클래스명, 메서드명 변경 - 역할과 책임 명확히 드러나도록
-- [ ] LottoNumber 정적 팩토리 메서드 제거, 확장 함수 생성으로 대체
+- [x] LottoNumber 정적 팩토리 메서드 제거, 확장 함수 생성으로 대체
 - [x] winningLotto 객체 생성 및 당첨 번호 매칭 담당하도록 메서드 구현
 - [ ] LottoStatsEngine 네이밍 변경 및 역할 분리
 - [ ] 모델-뷰 분리 

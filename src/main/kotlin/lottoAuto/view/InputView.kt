@@ -1,7 +1,6 @@
 package lottoAuto.view
 
-import lottoAuto.domain.Lotto
-import lottoAuto.domain.LottoNumber
+import lottoAuto.domain.LottoNumber.Companion.toLottoNumber
 import lottoAuto.domain.WinningLotto
 
 object InputView {
@@ -14,7 +13,7 @@ object InputView {
 
     fun getWinningLotto(): WinningLotto {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
-        val winningLottoNumbers = readln().split(",").map { LottoNumber.from(it.toInt()) }
+        val winningLottoNumbers = readln().split(",").map { it.toInt().toLottoNumber() }
         return WinningLotto(winningLottoNumbers)
     }
 }

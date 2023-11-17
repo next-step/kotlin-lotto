@@ -1,5 +1,6 @@
 package lottoAuto.domain
 
+import lottoAuto.domain.LottoNumber.Companion.toLottoNumber
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.Test
@@ -11,23 +12,23 @@ class WinningLottoTest {
         // given
         val winningLotto = WinningLotto(
             listOf(
-                LottoNumber.from(1),
-                LottoNumber.from(2),
-                LottoNumber.from(3),
-                LottoNumber.from(4),
-                LottoNumber.from(5),
-                LottoNumber.from(6)
+                1.toLottoNumber(),
+                2.toLottoNumber(),
+                3.toLottoNumber(),
+                4.toLottoNumber(),
+                5.toLottoNumber(),
+                6.toLottoNumber()
             )
         )
 
         val lotto = Lotto(
             listOf(
-                LottoNumber.from(1),
-                LottoNumber.from(2),
-                LottoNumber.from(3),
-                LottoNumber.from(4),
-                LottoNumber.from(5),
-                LottoNumber.from(6)
+                1.toLottoNumber(),
+                2.toLottoNumber(),
+                3.toLottoNumber(),
+                4.toLottoNumber(),
+                5.toLottoNumber(),
+                6.toLottoNumber()
             )
         )
 
@@ -43,23 +44,23 @@ class WinningLottoTest {
         // given
         val winningLotto = WinningLotto(
             listOf(
-                LottoNumber.from(1),
-                LottoNumber.from(2),
-                LottoNumber.from(3),
-                LottoNumber.from(4),
-                LottoNumber.from(5),
-                LottoNumber.from(6)
+                1.toLottoNumber(),
+                2.toLottoNumber(),
+                3.toLottoNumber(),
+                4.toLottoNumber(),
+                5.toLottoNumber(),
+                6.toLottoNumber()
             )
         )
 
         val lotto = Lotto(
             listOf(
-                LottoNumber.from(10),
-                LottoNumber.from(20),
-                LottoNumber.from(30),
-                LottoNumber.from(4),
-                LottoNumber.from(5),
-                LottoNumber.from(6)
+                10.toLottoNumber(),
+                20.toLottoNumber(),
+                30.toLottoNumber(),
+                4.toLottoNumber(),
+                5.toLottoNumber(),
+                6.toLottoNumber()
             )
         )
 

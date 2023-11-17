@@ -1,5 +1,6 @@
 package lottoAuto.domain
 
+import lottoAuto.domain.LottoNumber.Companion.toLottoNumber
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -10,7 +11,7 @@ class LottoNumberTest {
         val number = 0
 
         assertThrows<IllegalArgumentException> { // then
-            LottoNumber.from(number) // when
+            number.toLottoNumber() // when
         }
     }
 }
