@@ -4,8 +4,8 @@ import lotto.domain.Lotto
 import lotto.domain.Prize
 
 class Output {
-    fun printLottoList(lottoList: List<Lotto>) {
-        println("${lottoList.size} 개를 구매했습니다.")
+    fun printLottoList(lottoList: List<Lotto>, manualCount: Int) {
+        println("수동으로 ${manualCount}장, 자동으로 ${lottoList.size - manualCount}장을 구매했습니다.")
         lottoList.forEach { println(it) }
     }
 
@@ -16,9 +16,9 @@ class Output {
             if (type.prize <= 0) return@forEach
 
             val line = buildString {
-                append("${type.match}개 일치 ")
+                append("${type.match}개 일치")
                 if (type == Prize.SECOND) append(", 보너스 볼 일치")
-                append("(${type.prize}원) - ${result.count { it == type }}개")
+                append(" (${type.prize}원) - ${result.count { it == type }}개")
             }
             lines.add(line)
         }
