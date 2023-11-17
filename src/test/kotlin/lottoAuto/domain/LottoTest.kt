@@ -9,22 +9,22 @@ class LottoTest {
         // given
         val lottoNumbers1 = LottoNumbers(
             listOf(
-                LottoNumber.of(1),
-                LottoNumber.of(2),
-                LottoNumber.of(3),
-                LottoNumber.of(4),
-                LottoNumber.of(5),
-                LottoNumber.of(6)
+                LottoNumber.from(1),
+                LottoNumber.from(2),
+                LottoNumber.from(3),
+                LottoNumber.from(4),
+                LottoNumber.from(5),
+                LottoNumber.from(6)
             )
         )
         val lottoNumbers2 = LottoNumbers(
             listOf(
-                LottoNumber.of(4),
-                LottoNumber.of(2),
-                LottoNumber.of(6),
-                LottoNumber.of(1),
-                LottoNumber.of(3),
-                LottoNumber.of(5),
+                LottoNumber.from(4),
+                LottoNumber.from(2),
+                LottoNumber.from(6),
+                LottoNumber.from(1),
+                LottoNumber.from(3),
+                LottoNumber.from(5),
             )
         )
         val lotto1 = Lotto(lottoNumbers1)
@@ -42,22 +42,22 @@ class LottoTest {
         // given
         val lottoNumbers1 = LottoNumbers(
             listOf(
-                LottoNumber.of(1),
-                LottoNumber.of(2),
-                LottoNumber.of(3),
-                LottoNumber.of(4),
-                LottoNumber.of(5),
-                LottoNumber.of(6)
+                LottoNumber.from(1),
+                LottoNumber.from(2),
+                LottoNumber.from(3),
+                LottoNumber.from(4),
+                LottoNumber.from(5),
+                LottoNumber.from(6)
             )
         )
         val lottoNumbers2 = LottoNumbers(
             listOf(
-                LottoNumber.of(10),
-                LottoNumber.of(20),
-                LottoNumber.of(30),
-                LottoNumber.of(40),
-                LottoNumber.of(45),
-                LottoNumber.of(45),
+                LottoNumber.from(10),
+                LottoNumber.from(20),
+                LottoNumber.from(30),
+                LottoNumber.from(40),
+                LottoNumber.from(45),
+                LottoNumber.from(45),
             )
         )
         val lotto1 = Lotto(lottoNumbers1)

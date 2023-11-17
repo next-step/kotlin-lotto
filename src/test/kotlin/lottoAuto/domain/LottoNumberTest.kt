@@ -10,7 +10,7 @@ class LottoNumberTest {
         val number = 0
 
         assertThrows<IllegalArgumentException> { // then
-            LottoNumber.of(number) // when
+            LottoNumber.from(number) // when
         }
     }
 }

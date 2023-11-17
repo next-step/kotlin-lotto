@@ -9,7 +9,7 @@ object LottoFactory {
         val numbers = (LottoNumber.MIN_NUMBER..LottoNumber.MAX_NUMBER)
             .shuffled()
             .take(LottoNumbers.NUM_OF_LOTTO_NUMBERS)
-            .map { LottoNumber.of(it) }
+            .map { LottoNumber.from(it) }
         return LottoNumbers(numbers)
     }
 }

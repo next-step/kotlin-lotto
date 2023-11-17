@@ -35,7 +35,7 @@
 
 2단계 피드백 반영
 
-- [ ] LottoNumber 캐시 
+- [x] LottoNumber 캐시 
 - [ ] Lotto 클래스 테스트 전용 메서드(match) 제거
 - [ ] LottoNumbers 제거, Lotto를 일급 컬렉션으로 수정
 - [ ] LottoNumber 중복 생성 방지 로직 추가 
