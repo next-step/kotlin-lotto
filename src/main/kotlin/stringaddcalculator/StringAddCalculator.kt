@@ -1,12 +1,20 @@
-package stringAddCalculator
+package stringaddcalculator
 
 object StringAddCalculator {
+
+    private const val delimiterPattern = "//(.)\n(.*)"
+
     fun evaluate(formula: String?): Int {
         if (formula.isNullOrBlank()) return 0
 
-        val result = Regex("//(.)\n(.*)").find(formula)?.groupValues
+        val result = Regex(delimiterPattern).find(formula)
 
-        val customDelimiter = CalculatorDelimiter(result?.get(1))
+        val customDelimiter = if (result == null) {
+            CalculatorDelimiter(null)
+        } else {
+            val (delimiter, _) = result.destructured
+            CalculatorDelimiter(delimiter)
+        }
 
         val numbers = formula
             .replace("//${customDelimiter.value}\n".toRegex(), "")
