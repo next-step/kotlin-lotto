@@ -2,7 +2,7 @@ package lottoAuto.view
 
 import lottoAuto.domain.Lotto
 import lottoAuto.domain.LottoNumber
-import lottoAuto.domain.LottoNumbers
+import lottoAuto.domain.WinningLotto
 
 object InputView {
     fun getPurchaseAmount(): Int {
@@ -12,10 +12,9 @@ object InputView {
         return purchaseAmount
     }
 
-    fun getWinningLotto(): Lotto {
+    fun getWinningLotto(): WinningLotto {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
         val winningLottoNumbers = readln().split(",").map { LottoNumber.from(it.toInt()) }
-        require(winningLottoNumbers.size == LottoNumbers.NUM_OF_LOTTO_NUMBERS) { "당첨 번호는 6개여야 합니다." }
-        return Lotto(winningLottoNumbers)
+        return WinningLotto(winningLottoNumbers)
     }
 }

@@ -1,9 +1,6 @@
 package lottoAuto
 
-import lottoAuto.domain.Lotto
-import lottoAuto.domain.LottoFactory
-import lottoAuto.domain.LottoRanker
-import lottoAuto.domain.LottoStatsEngine
+import lottoAuto.domain.*
 import lottoAuto.view.InputView
 import lottoAuto.view.OutputView
 
@@ -12,7 +9,7 @@ object LottoController {
         return InputView.getPurchaseAmount()
     }
 
-    fun getWinningLotto(): Lotto {
+    fun getWinningLotto(): WinningLotto {
         return InputView.getWinningLotto()
     }
 
@@ -24,7 +21,7 @@ object LottoController {
         return lottoList
     }
 
-    fun getLottoStats(purchaseAmount: Int, lottoList: List<Lotto>, winningLotto: Lotto) {
+    fun getLottoStats(purchaseAmount: Int, lottoList: List<Lotto>, winningLotto: WinningLotto) {
         val lottoRanks = LottoRanker.rank(
             lottoList,
             winningLotto

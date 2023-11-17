@@ -19,7 +19,7 @@ class LottoRankerTest {
                 Lotto(lottoNumbers2),
                 Lotto(lottoNumbers3)
             ),
-            Lotto(winningLottoNumbers)
+            WinningLotto(winningLottoNumbers)
         )
 
         // then
