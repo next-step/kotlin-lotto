@@ -70,6 +70,14 @@ class LottoNumbersTest {
     }
 
     @Test
+    fun `get 메서드는 정수 Array 에서 LottoNumbers를 생성한다`() {
+        val expected = arrayOf(1, 7, 12, 23, 30, 42)
+        val lottoNumbers = LottoNumbers.get(1, 7, 12, 23, 30, 42)
+        assertEquals(6, lottoNumbers.size)
+        assertTrue(lottoNumbers.map { it.number } == expected.toList())
+    }
+
+    @Test
     fun `get 메서드는 리스트 크기가 6이 아닌 경우 예외를 던진다`() {
         val invalidIntList = listOf(1, 7, 12, 23, 30)
         assertThrows<IllegalArgumentException> {

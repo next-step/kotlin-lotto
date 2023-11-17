@@ -9,12 +9,12 @@ class LottoGameResultTest {
     fun `수익률 계산이 올바르게 수행된다`() {
         val lottoes = Lottoes(
             listOf(
-                Lotto(LottoNumber.setOf(1, 2, 3, 10, 20, 30).let(::LottoNumbers)),
-                Lotto(LottoNumber.setOf(1, 2, 3, 4, 20, 30).let(::LottoNumbers)),
-                Lotto(LottoNumber.setOf(40, 41, 42, 43, 44, 45).let(::LottoNumbers))
+                Lotto(LottoNumbers.get(1, 2, 3, 10, 20, 30)),
+                Lotto(LottoNumbers.get(1, 2, 3, 4, 20, 30)),
+                Lotto(LottoNumbers.get(40, 41, 42, 43, 44, 45))
             )
         )
-        val winningLotto = Lotto(LottoNumber.setOf(1, 2, 3, 4, 5, 6).let(::LottoNumbers))
+        val winningLotto = Lotto(LottoNumbers.get(1, 2, 3, 4, 5, 6))
         val purchaseAmount = 3000
         val bonusNumber = LottoNumber(9)
 
@@ -28,12 +28,12 @@ class LottoGameResultTest {
     fun `올바른 로또 번호 일치 횟수를 반환한다`() {
         val lottoes = Lottoes(
             listOf(
-                Lotto(LottoNumber.setOf(1, 2, 3, 10, 20, 30).let(::LottoNumbers)),
-                Lotto(LottoNumber.setOf(1, 2, 3, 4, 20, 30).let(::LottoNumbers)),
-                Lotto(LottoNumber.setOf(40, 41, 42, 43, 44, 45).let(::LottoNumbers))
+                Lotto(LottoNumbers.get(1, 2, 3, 10, 20, 30)),
+                Lotto(LottoNumbers.get(1, 2, 3, 4, 20, 30)),
+                Lotto(LottoNumbers.get(40, 41, 42, 43, 44, 45))
             )
         )
-        val winningLotto = Lotto(LottoNumber.setOf(1, 2, 3, 4, 5, 6).let(::LottoNumbers))
+        val winningLotto = Lotto(LottoNumbers.get(1, 2, 3, 4, 5, 6))
         val bonusNumber = LottoNumber(9)
 
         val result = LottoGameResult.getResult(lottoes, winningLotto, bonusNumber)

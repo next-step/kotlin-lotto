@@ -22,12 +22,6 @@ class LottoNumberTest {
     }
 
     @Test
-    fun `listOf 함수는 주어진 숫자들로 정렬된 로또 번호 리스트 반환`() {
-        val numbers = LottoNumber.setOf(33, 1, 20, 15)
-        assertEquals(listOf(1, 15, 20, 33), numbers.map { it.number })
-    }
-
-    @Test
     fun `LottoNumber 는 비교를 할 수 있다`() {
         val number1 = LottoNumber(10)
         val number2 = LottoNumber(20)

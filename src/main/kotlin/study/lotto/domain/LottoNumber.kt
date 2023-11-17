@@ -11,7 +11,5 @@ data class LottoNumber(val number: Int) : Comparable<LottoNumber> {
     companion object {
         const val START_NUMBER = 1
         const val LAST_NUMBER = 45
-
-        fun setOf(vararg numbers: Int) = numbers.map(::LottoNumber).toSortedSet()
     }
 }
