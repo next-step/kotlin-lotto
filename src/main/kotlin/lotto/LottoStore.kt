@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.AutoLottoNumberGenerator
 import lotto.domain.LottoMachine
 import lotto.domain.WinningLotto
 import lotto.presentation.InputManager
@@ -9,7 +10,7 @@ class LottoStore(
     private val inputManager: InputManager,
     private val outputManager: OutputManager
 ) {
-    private val lottoMachine: LottoMachine = LottoMachine(LOTTO_PRICE)
+    private val lottoMachine: LottoMachine = LottoMachine(LOTTO_PRICE, AutoLottoNumberGenerator())
     fun start() {
         val userPay = inputManager.inputPay()
         outputManager.printUserPay(userPay)

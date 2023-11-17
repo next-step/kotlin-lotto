@@ -2,13 +2,22 @@ package lotto
 
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.matchers.collections.shouldContainInOrder
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.shouldNotBe
 import lotto.domain.LottoMachine
+import lotto.domain.LottoNumber
 import org.junit.jupiter.api.Test
 
 class LottoNumbersMachineTest {
-    private val lottoMachine: LottoMachine = LottoMachine(1000)
+    private val lottoNumbers: List<LottoNumber> = listOf(
+        LottoNumber(1),
+        LottoNumber(2),
+        LottoNumber(3),
+        LottoNumber(4),
+        LottoNumber(5),
+        LottoNumber(6),
+    )
+    private val lottoMachine: LottoMachine = LottoMachine(1000) { lottoNumbers }
 
     @Test
     fun `로또 한장의 가격은 천원이다`() {
@@ -32,6 +41,6 @@ class LottoNumbersMachineTest {
     @Test
     fun `로또의 숫자는 자동 생성된다`() {
         val userLotto = lottoMachine.sellLotto(1000)
-        userLotto[0] shouldNotBe null
+        userLotto[0].getNumbers() shouldContainInOrder lottoNumbers
     }
 }
