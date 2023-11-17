@@ -23,7 +23,9 @@ object LottoGameManager {
         player: Player
     ) {
         val manualTicketCount = LottoInputHandler.inputManualTicketCount()
-        player.addTickets(lottoBookingSystem.generateManualTickets(manualTicketCount, player.purchasableCount))
+        require(player.purchasableCount >= manualTicketCount) { throw IllegalArgumentException("더 이상 로또를 구매할 수 없습니다.") }
+        val manualNumbers = LottoInputHandler.inputManualNumbers(manualTicketCount)
+        player.addTickets(lottoBookingSystem.generateManualTickets(manualNumbers))
         val lottoTickets = lottoBookingSystem.generateMultipleTickets(player.purchasableCount)
         player.addTickets(lottoTickets)
         LottoPurchaseSummaryPrinter.print(manualTicketCount, lottoTickets)
