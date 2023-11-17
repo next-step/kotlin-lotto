@@ -15,7 +15,7 @@ data class PurchaseGames(
     }
 
     private fun requirePositive(input: Int) {
-        require(input > 0) { "발권 수량은 양의 정수만 가능 합니다" }
+        require(input >= 0) { "발권 수량은 0 또는 양의 정수만 가능 합니다" }
     }
 
     private fun autoIssueCount(): Int {
