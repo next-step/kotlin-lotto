@@ -8,9 +8,9 @@ enum class LottoRank(val matchCount: Int, val winningMoney: Int) {
     FIRST(6, 2_000_000_000);
 
     companion object {
-        fun from(lotto: Lotto, winningLotto: WinningLotto): LottoRank {
+        fun from(matchCount: Int): LottoRank {
             return values().find {
-                it.matchCount == winningLotto.countSameNumber(lotto)
+                it.matchCount == matchCount
             } ?: MISS
         }
     }
