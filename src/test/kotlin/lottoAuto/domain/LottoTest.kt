@@ -1,6 +1,7 @@
 package lottoAuto.domain
 
 import lottoAuto.domain.LottoNumber.Companion.toLottoNumber
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -35,5 +36,26 @@ class LottoTest {
         assertThrows<IllegalArgumentException> { // then
             Lotto(lottoNumbers) // when
         }
+    }
+
+    @Test
+    fun `withBonusNumber 테스트`() {
+        // given
+        val lottoNumbers = listOf(
+            1.toLottoNumber(),
+            2.toLottoNumber(),
+            3.toLottoNumber(),
+            4.toLottoNumber(),
+            5.toLottoNumber(),
+            6.toLottoNumber()
+        )
+
+        // when
+        val withBonus = Lotto(lottoNumbers).withBonusNumber(5.toLottoNumber())
+        val withNoBonus = Lotto(lottoNumbers).withBonusNumber(7.toLottoNumber())
+
+        // then
+        assertEquals(true, withBonus)
+        assertEquals(false, withNoBonus)
     }
 }

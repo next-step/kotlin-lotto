@@ -11,21 +11,26 @@ class LottoRankerTest {
         val lottoNumbers1 = (1..6).map { it.toLottoNumber() }
         val lottoNumbers2 = (4..9).map { it.toLottoNumber() }
         val lottoNumbers3 = (10..15).map { it.toLottoNumber() }
+        val lottoNumbers4 = (3..8).map { it.toLottoNumber() }
         val winningLottoNumbers = (4..9).map { it.toLottoNumber() }
+        val bonusLottoNumber = 8.toLottoNumber()
 
         // when
         val lottoRanks = LottoRanker.rank(
             listOf(
                 Lotto(lottoNumbers1),
                 Lotto(lottoNumbers2),
-                Lotto(lottoNumbers3)
+                Lotto(lottoNumbers3),
+                Lotto(lottoNumbers4)
             ),
-            WinningLotto(winningLottoNumbers)
+            WinningLotto(winningLottoNumbers),
+            bonusLottoNumber
         )
 
         // then
         assertEquals(LottoRank.FOURTH, lottoRanks.ranks[0])
         assertEquals(LottoRank.FIRST, lottoRanks.ranks[1])
         assertEquals(LottoRank.MISS, lottoRanks.ranks[2])
+        assertEquals(LottoRank.BONUS, lottoRanks.ranks[3])
     }
 }

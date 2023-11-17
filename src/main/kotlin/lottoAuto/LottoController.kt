@@ -14,8 +14,13 @@ object LottoController {
 
     fun getWinningLotto(): WinningLotto {
         return WinningLotto(
-            InputView.getWinningLottoNumbers().map { it.toLottoNumber() }
+            InputView.getWinningNumbers().map { it.toLottoNumber() }
         )
+    }
+
+    fun getBonusLottoNumber(): LottoNumber {
+        val bonusNumber = InputView.getBonusNumber()
+        return bonusNumber.toLottoNumber()
     }
 
     fun createLottoList(purchaseAmount: Int): List<Lotto> {
@@ -30,16 +35,25 @@ object LottoController {
         return lottoList
     }
 
-    fun statistics(purchaseAmount: Int, lottoList: List<Lotto>, winningLotto: WinningLotto) {
+    fun statistics(
+        purchaseAmount: Int,
+        lottoList: List<Lotto>,
+        winningLotto: WinningLotto,
+        bonusLottoNumber: LottoNumber
+    ) {
         OutputView.printStatisticsHeader()
         val lottoRanks = LottoRanker.rank(
             lottoList,
-            winningLotto
+            winningLotto,
+            bonusLottoNumber
         )
         val lottoRankGroup = lottoRanks.groupByLottoRank()
         lottoRankGroup
             .entries
             .forEach {
+                if (it.key == LottoRank.BONUS) {
+                    OutputView.printBonusNumberStatistics(it.key.matchCount, it.key.winningMoney, it.value)
+                }
                 OutputView.printLottoStatistics(it.key.matchCount, it.key.winningMoney, it.value)
             }
 
@@ -53,7 +67,8 @@ object LottoController {
 fun main() {
     val purchaseAmount = LottoController.getPurchaseAmount()
     val lottoList = LottoController.createLottoList(purchaseAmount)
-    val winningLottoNumbers = LottoController.getWinningLotto()
+    val winningLotto = LottoController.getWinningLotto()
+    val bonusLottoNumber = LottoController.getBonusLottoNumber()
 
-    LottoController.statistics(purchaseAmount, lottoList, winningLottoNumbers)
+    LottoController.statistics(purchaseAmount, lottoList, winningLotto, bonusLottoNumber)
 }

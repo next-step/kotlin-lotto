@@ -50,11 +50,13 @@
 
 3단계 기능 구현 리스트 
 
-- [ ] 2등을 위한 보너스 넘버 추가 
-  - [ ] LottoRank 도메인 변경
-  - [ ] LottoRank 도메인 테스트 추가
-  - [ ] InputView 변경
-- [ ] 당첨 통계에 2등 정보 추가
-  - [ ] LottoStatsEngine(클래스명 변경 예정) 도메인 변경
-  - [ ] LottoStatsEngine(클래스명 변경 예정) 도메인 테스트 추가
-  - [ ] InputView, OutputView 변경
+- [x] 2등을 위한 보너스 넘버 추가 
+  - [x] Lotto에서 보너스볼 포함 여부 확인 메서드 부여
+  - [x] Lotto에서 보너스볼 포함 여부 확인 메서드 테스트
+  - [x] LottoRank 정적 팩토리 메소드 시그니처 변경
+  - [x] LottoRank 시그니처 변경에 따른 테스트 추가
+  - [x] InputView 변경
+- [x] 당첨 통계에 2등 정보 추가
+  - [x] LottoRanker rank 함수 시그니처 변경 (보너스 번호 받도록)
+  - [x] LottoRanker 함수 시그니처 변경에 따라 테스트 수정
+  - [x] OutputView 변경
