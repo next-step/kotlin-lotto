@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 import lotto.data.Lotto
 import lotto.data.LottoNumber

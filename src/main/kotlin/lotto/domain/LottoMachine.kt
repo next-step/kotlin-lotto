@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 import lotto.data.Lotto
 import lotto.data.LottoNumber
@@ -8,11 +8,10 @@ import lotto.data.LottoRanking.FourthPlace
 import lotto.data.LottoRanking.None
 import lotto.data.LottoRanking.SecondPlace
 import lotto.data.LottoRanking.ThirdPlace
-import java.util.TreeSet
 
 object LottoMachine {
 
-    fun createSelectLotto(lottoNumbers: TreeSet<LottoNumber>): Lotto {
+    fun createSelectLotto(lottoNumbers: LinkedHashSet<LottoNumber>): Lotto {
         return Lotto(lottoNumbers)
     }
 

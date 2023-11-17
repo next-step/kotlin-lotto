@@ -1,7 +1,5 @@
 package lotto.data
 
-import java.util.TreeSet
-
 class LottoNumber private constructor(private val number: Int) : Comparable<LottoNumber> {
 
     companion object {
@@ -14,21 +12,21 @@ class LottoNumber private constructor(private val number: Int) : Comparable<Lott
 
         private val NUMBERS: Map<Int, LottoNumber> = (MIN_NUMBER..MAX_NUMBER).associateWith(::LottoNumber)
 
-        fun createLottoNumbers(numbers: List<Int>): TreeSet<LottoNumber> {
-            val lottoNumbers = TreeSet(numbers.map(::from))
+        fun createLottoNumbers(numbers: List<Int>): LinkedHashSet<LottoNumber> {
+            val lottoNumbers = LinkedHashSet(numbers.map(::from))
             validateDuplication(lottoNumbers)
 
             return lottoNumbers
         }
 
-        fun createRandomLotto(): TreeSet<LottoNumber> {
+        fun createRandomLotto(): LinkedHashSet<LottoNumber> {
             val randomNumberList = (MIN_NUMBER..MAX_NUMBER).shuffled()
                 .subList(SUB_LIST_START_POSITION, SUB_LIST_START_POSITION + LOTTO_NUMBER_LENGTH)
 
-            return TreeSet(randomNumberList.map(::from))
+            return LinkedHashSet(randomNumberList.map(::from))
         }
 
-        private fun validateDuplication(lottoNumbers: TreeSet<LottoNumber>) {
+        private fun validateDuplication(lottoNumbers: LinkedHashSet<LottoNumber>) {
             require(lottoNumbers.size == LOTTO_NUMBER_LENGTH) { ERR_MSG_OUT_OF_LOTTO_LENGTH }
         }
 
