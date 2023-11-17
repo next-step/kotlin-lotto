@@ -1,6 +1,9 @@
 package lotto.domain
 
-class Lotto(val numbers: Set<Int>) {
+class Lotto(val numbers: Set<Int>, val type: LottoType) {
+
+    constructor(numbers: Set<Int>) : this(numbers.toSet(), LottoType.AUTO)
+
     init {
         require(numbers.size == 6) {
             "로또 번호는 6개만 가능합니다."
