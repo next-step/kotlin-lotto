@@ -11,9 +11,8 @@ object InputView {
         return purchaseAmount
     }
 
-    fun getWinningLotto(): WinningLotto {
+    fun getWinningLottoNumbers(): List<Int> {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
-        val winningLottoNumbers = readln().split(",").map { it.toInt().toLottoNumber() }
-        return WinningLotto(winningLottoNumbers)
+        return readln().split(",").map { it.toInt() }
     }
 }

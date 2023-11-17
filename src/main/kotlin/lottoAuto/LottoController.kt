@@ -1,6 +1,7 @@
 package lottoAuto
 
 import lottoAuto.domain.*
+import lottoAuto.domain.LottoNumber.Companion.toLottoNumber
 import lottoAuto.view.InputView
 import lottoAuto.view.OutputView
 
@@ -12,24 +13,39 @@ object LottoController {
     }
 
     fun getWinningLotto(): WinningLotto {
-        return InputView.getWinningLotto()
+        return WinningLotto(
+            InputView.getWinningLottoNumbers().map { it.toLottoNumber() }
+        )
     }
 
     fun createLottoList(purchaseAmount: Int): List<Lotto> {
         val numOfLotto = purchaseAmount / LOTTO_PRICE
-        val lottoList = LottoFactory.create(numOfLotto)
         OutputView.printNumOfLotto(numOfLotto)
-        OutputView.printLottoNumbers(lottoList)
+
+        val lottoList = LottoFactory.create(numOfLotto)
+        lottoList.forEach {
+            val lottoNumbers = it.lottoNumbers.map { lottoNumber -> lottoNumber.number }
+            OutputView.printLottoNumbers(lottoNumbers)
+        }
         return lottoList
     }
 
-    fun getLottoStats(purchaseAmount: Int, lottoList: List<Lotto>, winningLotto: WinningLotto) {
+    fun statistics(purchaseAmount: Int, lottoList: List<Lotto>, winningLotto: WinningLotto) {
+        OutputView.printStatisticsHeader()
         val lottoRanks = LottoRanker.rank(
             lottoList,
             winningLotto
         )
-        OutputView.printLottoStatistics(lottoRanks)
-        OutputView.printRateOfReturn(purchaseAmount, lottoRanks)
+        val lottoRankGroup = lottoRanks.groupByLottoRank()
+        lottoRankGroup
+            .entries
+            .forEach {
+                OutputView.printLottoStatistics(it.key.matchCount, it.key.winningMoney, it.value)
+            }
+
+        val totalWinningMoney = lottoRanks.getTotalWinningMoney()
+        val profit = LottoProfitCalculator.calcProfit(purchaseAmount, totalWinningMoney)
+        OutputView.printProfitResult(profit.rateOfReturn, profit.resultMsg)
     }
 
 }
@@ -37,6 +53,7 @@ object LottoController {
 fun main() {
     val purchaseAmount = LottoController.getPurchaseAmount()
     val lottoList = LottoController.createLottoList(purchaseAmount)
-    val winningLotto = LottoController.getWinningLotto()
-    LottoController.getLottoStats(purchaseAmount, lottoList, winningLotto)
+    val winningLottoNumbers = LottoController.getWinningLotto()
+
+    LottoController.statistics(purchaseAmount, lottoList, winningLottoNumbers)
 }

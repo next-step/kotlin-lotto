@@ -23,7 +23,7 @@ class LottoRanksTest {
     }
 
     @Test
-    fun `LottoRank별로 그룹화하여 카운트`() {
+    fun `LottoRank별로 그룹화하여 카운트하되 MISS인 경우는 제외한다`() {
         // given
         val lottoRanks = LottoRanks(
             listOf(
@@ -36,7 +36,10 @@ class LottoRanksTest {
                 LottoRank.FOURTH,
                 LottoRank.FOURTH,
                 LottoRank.FOURTH,
-                LottoRank.FOURTH
+                LottoRank.FOURTH,
+                LottoRank.MISS,
+                LottoRank.MISS,
+                LottoRank.MISS
             )
         )
 
@@ -48,6 +51,5 @@ class LottoRanksTest {
         assertEquals(2, lottoRankCount[LottoRank.SECOND])
         assertEquals(3, lottoRankCount[LottoRank.THIRD])
         assertEquals(4, lottoRankCount[LottoRank.FOURTH])
-        assertEquals(0, lottoRankCount[LottoRank.MISS])
     }
 }
