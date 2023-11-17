@@ -1,6 +1,6 @@
 package lotto.model
 
-data class PurchaseGames(
+data class LottoPurchaseInfo(
     val totalPurchaseCount: Int,
     val manualIssuedGames: List<Game>,
 ) {
@@ -26,11 +26,11 @@ data class PurchaseGames(
         return List(autoIssueCount()) { Game.autoTicket() }
     }
 
-    fun manual(): LottoTicket {
+    fun lottoTicketManual(): LottoTicket {
         return LottoTicket(manualIssuedGames)
     }
 
-    fun auto(): LottoTicket {
+    fun lottoTicketAuto(): LottoTicket {
         return LottoTicket(autoIssuedGames())
     }
 

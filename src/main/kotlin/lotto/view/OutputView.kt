@@ -3,7 +3,7 @@ package lotto.view
 import lotto.model.Game
 import lotto.model.LottoTicket
 import lotto.model.LottoWinners
-import lotto.model.PurchaseGames
+import lotto.model.LottoPurchaseInfo
 import lotto.model.Rank
 
 object OutputView {
@@ -12,7 +12,7 @@ object OutputView {
     }
 
     fun presentPrizes(lottoWinners: LottoWinners) {
-        val earningRate = lottoWinners.earningRate(PurchaseGames.priceOfGame())
+        val earningRate = lottoWinners.earningRate(LottoPurchaseInfo.priceOfGame())
 
         println(
             """

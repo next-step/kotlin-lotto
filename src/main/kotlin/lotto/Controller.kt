@@ -2,16 +2,16 @@ package lotto
 
 import lotto.model.LottoTicket
 import lotto.model.LottoWinners
-import lotto.model.PurchaseGames
+import lotto.model.LottoPurchaseInfo
 import lotto.model.WinningNumbers
 import lotto.view.InputView
 import lotto.view.OutputView
 
 fun main() {
-    val totalPurchaseCount: Int = InputView.purchaseAmount(PurchaseGames.priceOfGame())
-    val purchaseAmount: PurchaseGames = InputView.purchaseManual(totalPurchaseCount)
-    val manualTicket: LottoTicket = purchaseAmount.manual()
-    val autoTicket: LottoTicket = purchaseAmount.auto()
+    val totalPurchaseCount: Int = InputView.purchaseAmount(LottoPurchaseInfo.priceOfGame())
+    val purchaseAmount: LottoPurchaseInfo = InputView.purchaseManual(totalPurchaseCount)
+    val manualTicket: LottoTicket = purchaseAmount.lottoTicketManual()
+    val autoTicket: LottoTicket = purchaseAmount.lottoTicketAuto()
     OutputView.presentPurchaseInfo(manualTicket, autoTicket)
     val totalTicket: LottoTicket = autoTicket + manualTicket
     OutputView.presetRound(totalTicket)
