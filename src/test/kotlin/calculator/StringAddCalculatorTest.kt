@@ -33,11 +33,11 @@ class StringAddCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["wrong", "$"])
+    @ValueSource(strings = ["안녕", "$", "1,2[3"])
     fun `잘못된 문자열을 입력할 경우 RuntimeException`(text: String) {
         assertThatExceptionOfType(RuntimeException::class.java)
             .isThrownBy { calculator.add(text) }
-            .withMessageMatching("구분자 , 또는 : 를 포함해야 합니다.")
+            .withMessageMatching("숫자와 지정된 구분자만 입력할 수 있습니다.")
     }
 
     @Test
