@@ -19,6 +19,10 @@ class Lotto {
 
     fun contains(number: Int) = numbers.contains(number)
 
+    override fun toString(): String {
+        return "[${numbers.joinToString()}]"
+    }
+
     companion object {
         private const val NUMBER_OF_LOTTO_NUMBER = 6
         const val MIN_LOTTO_NUMBER = 1

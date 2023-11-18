@@ -10,8 +10,8 @@ enum class Rank(val countOfMatch: Int, val isMatchBonus: Boolean, val winningMon
 
     companion object {
         fun valueOf(countOfMatch: Int, matchBonus: Boolean): Rank {
-            val filterWithCountOfMatch = Rank.values()
-                .filter { it.countOfMatch == countOfMatch }
+
+            val filterWithCountOfMatch = filterWithCountOfMatch(countOfMatch)
 
             if (filterWithCountOfMatch.isEmpty()) {
                 return MISS
@@ -22,5 +22,8 @@ enum class Rank(val countOfMatch: Int, val isMatchBonus: Boolean, val winningMon
             }
                 ?: return filterWithCountOfMatch.first()
         }
+
+        private fun filterWithCountOfMatch(countOfMatch: Int) = Rank.values()
+            .filter { it.countOfMatch == countOfMatch }
     }
 }
