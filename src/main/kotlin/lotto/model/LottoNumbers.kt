@@ -40,7 +40,7 @@ class LottoNumbers private constructor(val numbers: List<Int>) {
         }
 
         private fun generate(): LottoNumbers {
-            val numbers = shuffleAndTake(LOTTO_NUMBER_POOL, LOTTO_NUMBERS_LENGTH, sort = true)
+            val numbers = LOTTO_NUMBER_POOL.shuffleAndTake(LOTTO_NUMBERS_LENGTH, sort = true)
 
             return LottoNumbers(numbers)
         }
