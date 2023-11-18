@@ -5,9 +5,10 @@ import specific.lotto.view.OutputView
 
 fun main() {
     val controller = LottoController()
-    val money = controller.makeMoney()
-    val tickets = controller.makeTicket(money)
-    val winningNumber = controller.makeWinningNumber()
+    val money = controller.inputMoney()
+    val tickets = controller.buyTicket(money)
+    val winningNumber = controller.inputWinningSet()
     val winningResult = controller.makeWinningResult(tickets, winningNumber)
-    OutputView.printReturnOnInvestment(money, winningResult)
+    controller.receivePrize(money, winningResult)
+    OutputView.printReturnOnInvestment(money)
 }

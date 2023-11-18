@@ -1,7 +1,6 @@
 package specific.study
 
 import specific.study.Delimiter.Companion.tokenize
-import toIntOrThrow
 
 object StringAddCalculator {
     fun calculate(input: String?): Int {
@@ -16,4 +15,10 @@ object StringAddCalculator {
     private fun String.parse(): List<Int> =
         tokenize()
             .map { it.toIntOrThrow { "cannot convert '${it}' to Int type" } }
+}
+
+private fun String?.toIntOrThrow(lazyMessage: () -> Any): Int {
+    require(!isNullOrBlank()) { lazyMessage }
+    return this.toIntOrNull()
+        ?: throw IllegalArgumentException(lazyMessage().toString())
 }

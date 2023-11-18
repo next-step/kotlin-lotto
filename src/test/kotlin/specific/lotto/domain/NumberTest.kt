@@ -4,11 +4,11 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-class MoneyTest {
+class NumberTest {
     @ParameterizedTest
-    @ValueSource(ints = [-10, -1])
-    fun `돈은 0 또는 양의 정수이다, else throw IllegalArgumentException`(principal: Long) {
+    @ValueSource(ints = [0, 46])
+    fun `로또 번호(당첨 번호)는 1~45 중 하나이다`(value: Int) {
         // given, when, then
-        assertThrows<IllegalArgumentException> { Money(principal) }
+        assertThrows<IllegalArgumentException> { Number(value) }
     }
 }
