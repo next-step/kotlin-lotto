@@ -58,8 +58,13 @@ object ConsoleView {
             println("\n당첨 통계\n---------")
 
             winningStatistics.filter { it.key != LottoRanking.MISS }
-                .forEach {
-                    println("${it.key.matchingCount}개 일치 (${it.key.prize}원)- ${it.value}개")
+                .forEach { (ranking, count) ->
+                    val resultDescription = when (ranking) {
+                        LottoRanking.SECOND -> "5개 일치, 보너스 볼 일치(${ranking.prize}원)"
+                        else -> "${ranking.matchingCount}개 일치 (${ranking.prize}원)"
+                    }
+
+                    println("${resultDescription}- ${count}개")
                 }
         }
 
