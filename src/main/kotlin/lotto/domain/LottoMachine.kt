@@ -2,7 +2,6 @@
 package lotto.domain
 
 import lotto.view.InputView
-import lotto.view.MessageView
 import lotto.view.OutputView
 import lotto.view.enum.Message
 
@@ -10,7 +9,6 @@ class LottoMachine(private var amount: LottoAmount = LottoAmount(0)) {
 
     private final val inputView: InputView = InputView()
     private final val outputView: OutputView = OutputView()
-    private final val messageView: MessageView = MessageView()
 
     fun buyLottoList(): List<Lotto> {
         val lottoCount: Int = amount.getLottoCount()
