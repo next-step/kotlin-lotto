@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class LottoIssuer(
     private val lottoPrice: Long = Lotto.LOTTO_PRICE
