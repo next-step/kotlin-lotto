@@ -3,10 +3,10 @@ package lotto.domain
 import lotto.data.LottoNumber
 
 class RandomLogic : RandomLogicInterface {
-    override fun createRandomLotto(numbers: Map<Int, LottoNumber>): LinkedHashSet<LottoNumber> {
-        val randomNumberList = numbers.values.shuffled()
-            .subList(SUB_LIST_START_POSITION, SUB_LIST_START_POSITION + LOTTO_NUMBER_LENGTH)
-        return LinkedHashSet(randomNumberList)
+
+    override fun createAutoLotto(numbers: Map<Int, LottoNumber>): Set<LottoNumber> {
+
+        return LinkedHashSet(numbers.values.shuffled().subList(SUB_LIST_START_POSITION, LOTTO_NUMBER_LENGTH))
     }
 
     companion object {
