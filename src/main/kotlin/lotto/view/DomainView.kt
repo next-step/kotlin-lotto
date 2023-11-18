@@ -15,7 +15,7 @@ fun LottoGameResult.state(): String {
         val rewardCount = getRewardCount(it)
         stringBuilder
             .append("${it.matchCount}개 일치")
-            .appendIf(", 보너스 볼 일치", it.bonusMatch)
+            .appendIf(", 보너스 볼 일치", it == LottoReward.SECOND)
             .append(" (${it.reward}원) - ${rewardCount}개")
             .append("\n")
     }
