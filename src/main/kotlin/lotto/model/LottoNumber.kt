@@ -17,10 +17,9 @@ value class LottoNumber(
     companion object {
         const val UPPER_LIMIT_VALUE: Int = 46
         const val LOWER_LIMIT_VALUE: Int = 1
-//        private val LOTTO_NUMBERS: List<LottoNumber> = (1..46).map { LottoNumber(it) }
 
         fun of(strategy: LottoNumberStrategy): LottoNumber {
-            return strategy.pick()
+            return LottoNumber(strategy.pick())
         }
     }
 }

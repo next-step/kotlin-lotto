@@ -9,10 +9,9 @@ class LottoNumberRandomWithExceptStrategy(
 
     private val random = Random(System.currentTimeMillis())
 
-    override fun pick(): LottoNumber {
+    override fun pick(): Int {
         return generateSequence { random.nextInt(LottoNumber.LOWER_LIMIT_VALUE, LottoNumber.UPPER_LIMIT_VALUE) }
             .filterNot { it in exceptValues }
-            .map { LottoNumber(it) }
             .first()
     }
 }

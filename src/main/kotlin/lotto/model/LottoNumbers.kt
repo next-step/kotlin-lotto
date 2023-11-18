@@ -36,7 +36,7 @@ value class LottoNumbers private constructor(
         private fun generateNumbersWithStrategy(strategy: LottoNumberStrategy): LinkedHashSet<LottoNumber> {
             val numbers = LinkedHashSet<LottoNumber>()
             while (isEnoughCountOfNumber(numbers)) {
-                numbers.add(strategy.pick())
+                numbers.add(LottoNumber.of(strategy))
             }
             return numbers
         }
