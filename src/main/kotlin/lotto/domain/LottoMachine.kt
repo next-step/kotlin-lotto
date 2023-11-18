@@ -1,13 +1,7 @@
 
 package lotto.domain
 
-import lotto.view.InputView
-import lotto.view.OutputView
-
 class LottoMachine(private var amount: LottoAmount = LottoAmount(0)) {
-
-    private final val inputView: InputView = InputView()
-    private final val outputView: OutputView = OutputView()
 
     fun buyLottoList(): List<Lotto> {
         val lottoCount: Int = amount.getLottoCount()
