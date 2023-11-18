@@ -3,6 +3,7 @@
 ## 미션 피드백 링크
 
 - Step 1 : [https://github.com/next-step/kotlin-lotto/pull/849](https://github.com/next-step/kotlin-lotto/pull/849)
+- Step 2 : [https://github.com/next-step/kotlin-lotto/pull/939](https://github.com/next-step/kotlin-lotto/pull/939)
 
 ## 미션 내용
 
@@ -55,6 +56,10 @@
 
 ### STEP 2
 
+<details>
+<summary>접기/펼치기</summary>
+<div markdown="1">
+
 #### [요구 사항 분석]
 
 - 로또 구입 금액 입력 시 구입 금액에 해당하는 로또 발급
@@ -91,3 +96,28 @@
 #### [피드백]
 
 - [x] 로또 게임(LottoGame) 객체를 제거하고 각 객체의 협력을 정리하기
+- [x] 랜덤 번호 생성 역할을 새로운 객체로 분리한다
+
+</div>
+</details>
+
+<br>
+
+### STEP 3
+
+#### [요구 사항 분석]
+
+- 2등을 위한 보너스 번호(추가 번호) 하나를 더 추첨
+- 당첨 통계에 2등도 추가
+
+#### [기능 목록]
+
+- [ ] 보너스 볼을 추가로 받아 관리한다.
+- [ ] 기본 숫자 5개가 일치할 때 보너스 볼까지 일치하면 2등으로 상금은 3000만원이다.
+- [ ] 기본 숫자 5개가 일치할 때 보너스 볼이 일치하지 않으면 3등으로 상금은 150만원이다.
+
+#### [피드백 반영]
+
+- [ ] 로또 번호를 원시 타입으로 포장한다.
+- [ ] 당첨 번호 목록에 size 제약을 건다.
+- [ ] 일급 컬렉션(LottoTickets)을 의미 있게 사용할 수 있도록 비즈니스 로직을 위임하거나, 제거한다.
