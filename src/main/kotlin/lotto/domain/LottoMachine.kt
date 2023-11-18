@@ -7,6 +7,7 @@ import lotto.data.LottoRanking.FifthPlace
 import lotto.data.LottoRanking.FirstPlace
 import lotto.data.LottoRanking.FourthPlace
 import lotto.data.LottoRanking.None
+import lotto.data.LottoRanking.SecondPlace
 import lotto.data.LottoRanking.ThirdPlace
 import lotto.data.WinningLotto
 
@@ -16,18 +17,19 @@ object LottoMachine {
         return Lotto(lottoNumbers)
     }
 
-    fun createWinningLotto(lottoNumbers: Set<LottoNumber>, bonusLottoNumber: LottoNumber): WinningLotto {
-        return WinningLotto(Lotto(lottoNumbers), bonusLottoNumber)
+    fun createWinningLotto(winningNumbers: List<Int>, bonusLottoNumber: LottoNumber): WinningLotto {
+        val winningLotto = LottoNumber.createLottoNumbers(winningNumbers)
+        return WinningLotto(Lotto(winningLotto), bonusLottoNumber)
     }
 
-    fun checkLotto(purchaseLotto: Lotto, winningLotto: Lotto): LottoRanking {
-        val winningLottoToSet = winningLotto.selectNumbers.toSet()
-        val purchaseLottoToSet = purchaseLotto.selectNumbers.toSet()
-        val intersectNumber = winningLottoToSet.intersect(purchaseLottoToSet)
+    fun checkLotto(purchaseLotto: Lotto, winningLotto: WinningLotto): LottoRanking {
+        val intersectNumber = winningLotto.lotto.selectNumbers.intersect(purchaseLotto.selectNumbers)
 
         return when (intersectNumber.size) {
             FirstPlace.matchingNumberCnt -> FirstPlace
-            ThirdPlace.matchingNumberCnt -> ThirdPlace
+            SecondPlace.matchingNumberCnt, ThirdPlace.matchingNumberCnt -> {
+                checkSecondPlace(purchaseLotto, winningLotto.bonusNumber)
+            }
             FourthPlace.matchingNumberCnt -> FourthPlace
             FifthPlace.matchingNumberCnt -> FifthPlace
             else -> None
@@ -38,6 +40,14 @@ object LottoMachine {
         val totalPrice = createTotalWinningPrice(winningStatus)
 
         return totalPrice / cash.toFloat()
+    }
+
+    private fun checkSecondPlace(purchaseLotto: Lotto, bonusLottoNumber: LottoNumber): LottoRanking {
+        return if (purchaseLotto.selectNumbers.contains(bonusLottoNumber)) {
+            SecondPlace
+        } else {
+            ThirdPlace
+        }
     }
 
     private fun createTotalWinningPrice(winningStatus: Map<LottoRanking, Int>): Int {

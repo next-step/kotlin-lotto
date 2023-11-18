@@ -6,17 +6,22 @@ enum class LottoRanking(val matchingNumberCnt: Int, val price: Int) : Prize {
             return winningStatus.first.price * winningStatus.second
         }
     },
-    SecondPlace(5, 1_500_000) {
+    SecondPlace(5, 30_000_000) {
         override fun findPrize(winningStatus: Pair<LottoRanking, Int>): Int {
             return winningStatus.first.price * winningStatus.second
         }
     },
-    ThirdPlace(4, 50_000) {
+    ThirdPlace(5, 1_500_000) {
         override fun findPrize(winningStatus: Pair<LottoRanking, Int>): Int {
             return winningStatus.first.price * winningStatus.second
         }
     },
-    FourthPlace(3, 5_000) {
+    FourthPlace(4, 50_000) {
+        override fun findPrize(winningStatus: Pair<LottoRanking, Int>): Int {
+            return winningStatus.first.price * winningStatus.second
+        }
+    },
+    FifthPlace(3, 5_000) {
         override fun findPrize(winningStatus: Pair<LottoRanking, Int>): Int {
             return winningStatus.first.price * winningStatus.second
         }

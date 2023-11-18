@@ -1,17 +1,17 @@
 package lotto.domain
 
 import lotto.data.Lotto
-import lotto.data.LottoNumber
 import lotto.data.LottoRanking
+import lotto.data.WinningLotto
 
 object WinningDomain {
 
-    fun checkWinningResult(winningNumberList: List<Int>, purchaseLottoList: List<Lotto>): Map<LottoRanking, Int> {
+    // 보너스 번호 추가.
+    fun checkWinningResult(winningLotto: WinningLotto, purchaseLottoList: List<Lotto>): Map<LottoRanking, Int> {
         val winningStatusMap = mutableMapOf<LottoRanking, Int>()
-        val winningLotto = LottoMachine.createSelectLotto(LottoNumber.createLottoNumbers(winningNumberList))
 
         purchaseLottoList.forEach {
-            val lottoRanking = LottoMachine.checkLotto(winningLotto, it)
+            val lottoRanking = LottoMachine.checkLotto(it, winningLotto)
             winningStatusMap[lottoRanking] = winningStatusMap.getOrDefault(lottoRanking, 0) + 1
         }
         return winningStatusMap

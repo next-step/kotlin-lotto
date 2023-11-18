@@ -3,6 +3,7 @@ package lotto
 import lotto.data.Lotto
 import lotto.data.LottoNumber
 import lotto.data.LottoRanking
+import lotto.domain.LottoMachine
 import lotto.domain.RandomLogic
 import lotto.service.LottoGame
 import org.assertj.core.api.Assertions.assertThat
@@ -27,6 +28,8 @@ class LottoGameTest {
         // given : 로또 구매와 당첨 번호를 입력한다.
         // 2등 - 2개, 3등 - 1개, 4등 - 1개
         val winningNumberList = listOf(1, 2, 3, 4, 5, 6)
+        val bonusNumber = LottoNumber.from(7)
+        val winningLotto = LottoMachine.createWinningLotto(winningNumberList, bonusNumber)
 
         val purchaseLottoNumbers1 = LottoNumber.createLottoNumbers(listOf(1, 2, 3, 4, 5, 7))
         val purchaseLottoNumbers2 = LottoNumber.createLottoNumbers(listOf(1, 2, 3, 4, 5, 7))
@@ -48,13 +51,13 @@ class LottoGameTest {
         val lottoGame = LottoGame(RandomLogic())
 
         // when : 당첨을 확인을 요청한다.
-        val winningStats = lottoGame.getWinningStats(winningNumberList, purchaseLottoList)
+        val winningStats = lottoGame.getWinningStats(winningLotto, purchaseLottoList)
 
         // then : 당첨 통계를 확인한다.
         val expect = mutableMapOf(
             LottoRanking.SecondPlace to 2,
-            LottoRanking.ThirdPlace to 1,
-            LottoRanking.FourthPlace to 2,
+            LottoRanking.FourthPlace to 1,
+            LottoRanking.FifthPlace to 2,
             LottoRanking.None to 1
         )
         assertThat(winningStats).isEqualTo(expect)
