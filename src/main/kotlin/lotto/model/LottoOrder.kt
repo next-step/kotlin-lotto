@@ -2,7 +2,7 @@ package lotto.model
 
 import lotto.model.strategy.LottoNumberStrategy
 
-data class LottoPurchaseInfo(
+data class LottoOrder(
     val totalPurchaseCount: Int,
     val manualIssuedGames: List<Game>,
 ) {

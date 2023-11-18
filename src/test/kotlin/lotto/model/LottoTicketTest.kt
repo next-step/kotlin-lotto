@@ -8,7 +8,7 @@ class LottoTicketTest : StringSpec({
 
     "6개의 로또 번호가 일치 하면 1등 당첨자로 집계 해야 한다" {
         val firstWinningNumbers = listOf(1, 2, 3, 4, 5, 6)
-        val purchasedLottoTicket = LottoPurchaseInfo(
+        val purchasedLottoTicket = LottoOrder(
             20,
             listOf(Game(LottoNumbers(firstWinningNumbers)))
         ).lottoTicketAutoAndManual(LottoNumberRandomWithExceptStrategy(firstWinningNumbers.toSet()))
@@ -24,7 +24,7 @@ class LottoTicketTest : StringSpec({
 
     "5개의 로또 번호가 일치 하고 보너스볼이 일치하면 2등 당첨자로 집계 해야 한다" {
         val secondWinningNumbers = listOf(1, 2, 3, 4, 5, 22)
-        val purchasedLottoTicket = LottoPurchaseInfo(
+        val purchasedLottoTicket = LottoOrder(
             30,
             listOf(Game(LottoNumbers(secondWinningNumbers)))
         ).lottoTicketAutoAndManual(LottoNumberRandomWithExceptStrategy(secondWinningNumbers.toSet()))
@@ -40,7 +40,7 @@ class LottoTicketTest : StringSpec({
 
     "5개의 로또 번호가 일치 하고 보너스볼이 일치하지 않으면 3등 당첨자로 집계 해야 한다" {
         val thirdWinningNumbers = listOf(1, 2, 3, 4, 5, 11)
-        val purchasedLottoTicket = LottoPurchaseInfo(
+        val purchasedLottoTicket = LottoOrder(
             30,
             listOf(Game(LottoNumbers(thirdWinningNumbers)))
         ).lottoTicketAutoAndManual(LottoNumberRandomWithExceptStrategy(thirdWinningNumbers.toSet()))
@@ -56,7 +56,7 @@ class LottoTicketTest : StringSpec({
 
     "4개의 로또 번호가 일치 하면 4등 당첨자로 집계 해야 한다" {
         val fourthWinningNumbers = listOf(1, 2, 3, 4, 12, 11)
-        val purchasedLottoTicket = LottoPurchaseInfo(
+        val purchasedLottoTicket = LottoOrder(
             30,
             listOf(Game(LottoNumbers(fourthWinningNumbers)))
         ).lottoTicketAutoAndManual(LottoNumberRandomWithExceptStrategy(fourthWinningNumbers.toSet()))
@@ -72,7 +72,7 @@ class LottoTicketTest : StringSpec({
 
     "3개의 로또 번호가 일치 하면 5등 당첨자로 집계 해야 한다" {
         val thirdWinningNumbers = listOf(1, 2, 3, 13, 12, 11)
-        val purchasedLottoTicket = LottoPurchaseInfo(
+        val purchasedLottoTicket = LottoOrder(
             30,
             listOf(Game(LottoNumbers(thirdWinningNumbers)))
         ).lottoTicketAutoAndManual(LottoNumberRandomWithExceptStrategy(thirdWinningNumbers.toSet()))
@@ -87,6 +87,6 @@ class LottoTicketTest : StringSpec({
     }
 })
 
-private fun LottoPurchaseInfo.lottoTicketAutoAndManual(strategy: LottoNumberRandomWithExceptStrategy): LottoTicket {
+private fun LottoOrder.lottoTicketAutoAndManual(strategy: LottoNumberRandomWithExceptStrategy): LottoTicket {
     return this.lottoTicketAuto(strategy) + this.lottoTicketManual()
 }

@@ -3,7 +3,7 @@ package lotto.view
 import lotto.model.Game
 import lotto.model.LottoNumber
 import lotto.model.LottoNumbers
-import lotto.model.LottoPurchaseInfo
+import lotto.model.LottoOrder
 import lotto.model.WinningNumbers
 
 object InputView {
@@ -38,12 +38,12 @@ object InputView {
         return WinningNumbers(winningNumbers, bonusNumber)
     }
 
-    fun purchaseManual(totalPurchaseCount: Int): LottoPurchaseInfo {
+    fun purchaseManual(totalPurchaseCount: Int): LottoOrder {
         println("수동으로 구매할 로또 수를 입력해 주세요.")
         val manualCount: Int = readln().toInt()
         requireManualCountUpperToTotalCount(totalPurchaseCount, manualCount)
         println("수동으로 구매할 번호를 입력해 주세요.")
-        return LottoPurchaseInfo(totalPurchaseCount, manualIssue(manualInput(manualCount)))
+        return LottoOrder(totalPurchaseCount, manualIssue(manualInput(manualCount)))
     }
 
     private fun requireManualCountUpperToTotalCount(totalPurchaseCount: Int, manualCount: Int) {
