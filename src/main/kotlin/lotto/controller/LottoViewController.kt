@@ -1,10 +1,10 @@
 package lotto.controller
 
-import lotto.service.LottoInputService
 import lotto.model.LottoInput
 import lotto.model.LottoNumbers
 import lotto.model.LottoResult
 import lotto.model.WinningNumbers
+import lotto.service.LottoInputService
 import lotto.view.LottoInputView
 import lotto.view.LottoResultView
 
@@ -30,7 +30,7 @@ class LottoViewController(
     }
 
     private fun getPurchasePrice(): Int {
-        val purchasePrice: String? = lottoInputView.getInput("구입 금액을 입력해주세요.")
+        val purchasePrice: String? = lottoInputView.getPurchasePrice()
 
         return lottoInputService.getPurchasePrice(purchasePrice)
     }
@@ -44,7 +44,7 @@ class LottoViewController(
     }
 
     private fun getWinningNumbers(): WinningNumbers {
-        val winningNumbers: String? = lottoInputView.getInput("지난 주 당첨 번호를 입력해 주세요.")
+        val winningNumbers: String? = lottoInputView.getWinningNumbers()
 
         return lottoInputService.getWinningNumbers(winningNumbers)
     }
