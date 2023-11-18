@@ -37,33 +37,54 @@ class LottoTicketTest : StringSpec({
         actual.countOfRank(Rank.FOURTH) shouldBe 0
         actual.countOfRank(Rank.FIFTH) shouldBe 0
     }
-//
-//    "5개의 로또 번호가 일치 하고 보너스볼이 일치하지 않으면 3등 당첨자로 집계 해야 한다" {
-//        val actual = lottoTicket.winnerAggregate(matched5)
-//        actual.countOfRank(Rank.FIRST) shouldBe 0
-//        actual.countOfRank(Rank.SECOND) shouldBe 0
-//        actual.countOfRank(Rank.THIRD) shouldBe 1
-//        actual.countOfRank(Rank.FOURTH) shouldBe 0
-//        actual.countOfRank(Rank.FIFTH) shouldBe 0
-//    }
-//
-//    "4개의 로또 번호가 일치 하면 4등 당첨자로 집계 해야 한다" {
-//        val actual = lottoTicket.winnerAggregate(matched4)
-//        actual.countOfRank(Rank.FIRST) shouldBe 0
-//        actual.countOfRank(Rank.SECOND) shouldBe 0
-//        actual.countOfRank(Rank.THIRD) shouldBe 0
-//        actual.countOfRank(Rank.FOURTH) shouldBe 1
-//        actual.countOfRank(Rank.FIFTH) shouldBe 0
-//    }
-//
-//    "3개의 로또 번호가 일치 하면 5등 당첨자로 집계 해야 한다" {
-//        val actual = lottoTicket.winnerAggregate(matched3)
-//        actual.countOfRank(Rank.FIRST) shouldBe 0
-//        actual.countOfRank(Rank.SECOND) shouldBe 0
-//        actual.countOfRank(Rank.THIRD) shouldBe 0
-//        actual.countOfRank(Rank.FOURTH) shouldBe 0
-//        actual.countOfRank(Rank.FIFTH) shouldBe 1
-//    }
+
+    "5개의 로또 번호가 일치 하고 보너스볼이 일치하지 않으면 3등 당첨자로 집계 해야 한다" {
+        val thirdWinningNumbers = listOf(1, 2, 3, 4, 5, 11)
+        val purchasedLottoTicket = LottoPurchaseInfo(
+            30,
+            listOf(Game(LottoNumbers(thirdWinningNumbers)))
+        ).lottoTicketAutoAndManual(LottoNumberRandomWithExceptStrategy(thirdWinningNumbers.toSet()))
+        val winingNumbers = WinningNumbers(LottoNumbers(1, 2, 3, 4, 5, 33), LottoNumber(22))
+        val actual = purchasedLottoTicket.winnerAggregate(winingNumbers)
+
+        actual.countOfRank(Rank.FIRST) shouldBe 0
+        actual.countOfRank(Rank.SECOND) shouldBe 0
+        actual.countOfRank(Rank.THIRD) shouldBe 1
+        actual.countOfRank(Rank.FOURTH) shouldBe 0
+        actual.countOfRank(Rank.FIFTH) shouldBe 0
+    }
+
+    "4개의 로또 번호가 일치 하면 4등 당첨자로 집계 해야 한다" {
+        val fourthWinningNumbers = listOf(1, 2, 3, 4, 12, 11)
+        val purchasedLottoTicket = LottoPurchaseInfo(
+            30,
+            listOf(Game(LottoNumbers(fourthWinningNumbers)))
+        ).lottoTicketAutoAndManual(LottoNumberRandomWithExceptStrategy(fourthWinningNumbers.toSet()))
+        val winingNumbers = WinningNumbers(LottoNumbers(1, 2, 3, 4, 5, 33), LottoNumber(22))
+        val actual = purchasedLottoTicket.winnerAggregate(winingNumbers)
+
+        actual.countOfRank(Rank.FIRST) shouldBe 0
+        actual.countOfRank(Rank.SECOND) shouldBe 0
+        actual.countOfRank(Rank.THIRD) shouldBe 0
+        actual.countOfRank(Rank.FOURTH) shouldBe 1
+        actual.countOfRank(Rank.FIFTH) shouldBe 0
+    }
+
+    "3개의 로또 번호가 일치 하면 5등 당첨자로 집계 해야 한다" {
+        val thirdWinningNumbers = listOf(1, 2, 3, 13, 12, 11)
+        val purchasedLottoTicket = LottoPurchaseInfo(
+            30,
+            listOf(Game(LottoNumbers(thirdWinningNumbers)))
+        ).lottoTicketAutoAndManual(LottoNumberRandomWithExceptStrategy(thirdWinningNumbers.toSet()))
+        val winingNumbers = WinningNumbers(LottoNumbers(1, 2, 3, 4, 5, 33), LottoNumber(22))
+        val actual = purchasedLottoTicket.winnerAggregate(winingNumbers)
+
+        actual.countOfRank(Rank.FIRST) shouldBe 0
+        actual.countOfRank(Rank.SECOND) shouldBe 0
+        actual.countOfRank(Rank.THIRD) shouldBe 0
+        actual.countOfRank(Rank.FOURTH) shouldBe 0
+        actual.countOfRank(Rank.FIFTH) shouldBe 1
+    }
 })
 
 private fun LottoPurchaseInfo.lottoTicketAutoAndManual(strategy: LottoNumberRandomWithExceptStrategy): LottoTicket {
