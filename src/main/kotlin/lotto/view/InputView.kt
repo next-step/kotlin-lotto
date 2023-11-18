@@ -48,14 +48,4 @@ object InputView {
 
         return manualLottoNumber
     }
-
-//    fun inputManualLottoNumbers(manualLottoCount: Int): List<String> {
-//        val manualLottoNumbers = mutableListOf<String>()
-//        for (i in 0 until manualLottoCount) {
-//            val manualLottoNumber = readln()
-//            require(manualLottoNumber.isNotEmpty()) { EMPTY_INPUT_MESSAGE.message }
-//            manualLottoNumbers.add(manualLottoNumber)
-//        }
-//        return manualLottoNumbers
-//    }
 }
