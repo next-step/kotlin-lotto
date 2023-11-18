@@ -1,9 +1,9 @@
 package lotto.view
 
 import lotto.model.Game
+import lotto.model.LottoPurchaseInfo
 import lotto.model.LottoTicket
 import lotto.model.LottoWinners
-import lotto.model.LottoPurchaseInfo
 import lotto.model.Rank
 
 object OutputView {

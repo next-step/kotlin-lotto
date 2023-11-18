@@ -2,6 +2,7 @@ package lotto.model
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import lotto.model.strategy.LottoNumberRandomStrategy
 
 class RoundTest : StringSpec({
 
@@ -17,6 +18,8 @@ class RoundTest : StringSpec({
     val matched3: WinningNumbers = WinningNumbers(LottoNumbers(4, 5, 6, 37, 38, 39), LottoNumber(22))
 
     "6개의 로또 번호가 일치 하면 1등 당첨자로 집계 해야 한다" {
+        val winLottoNumbers: LottoNumbers = LottoNumbers(1, 2, 3, 4, 5, 6)
+        LottoPurchaseInfo(20, emptyList()).lottoTicketAuto(LottoNumberRandomStrategy)
         val actual = lottoTicket.winnerAggregate(matched6)
         actual.countOfRank(Rank.FIRST) shouldBe 1
         actual.countOfRank(Rank.SECOND) shouldBe 0

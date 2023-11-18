@@ -1,11 +1,13 @@
 package lotto.model
 
+import lotto.model.strategy.LottoNumberStrategy
+
 data class Game(
     val lottoNumbers: LottoNumbers,
 ) {
     companion object {
-        fun autoTicket(): Game {
-            return Game(LottoNumbers.random())
+        fun of(strategy: LottoNumberStrategy): Game {
+            return Game(LottoNumbers(strategy))
         }
     }
 }

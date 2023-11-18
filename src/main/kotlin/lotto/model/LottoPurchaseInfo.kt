@@ -1,5 +1,7 @@
 package lotto.model
 
+import lotto.model.strategy.LottoNumberStrategy
+
 data class LottoPurchaseInfo(
     val totalPurchaseCount: Int,
     val manualIssuedGames: List<Game>,
@@ -22,16 +24,16 @@ data class LottoPurchaseInfo(
         return this.totalPurchaseCount - this.manualIssuedGames.size
     }
 
-    private fun autoIssuedGames(): List<Game> {
-        return List(autoIssueCount()) { Game.autoTicket() }
+    private fun autoIssuedGames(strategy: LottoNumberStrategy): List<Game> {
+        return List(autoIssueCount()) { Game.of(strategy) }
     }
 
     fun lottoTicketManual(): LottoTicket {
         return LottoTicket(manualIssuedGames)
     }
 
-    fun lottoTicketAuto(): LottoTicket {
-        return LottoTicket(autoIssuedGames())
+    fun lottoTicketAuto(strategy: LottoNumberStrategy): LottoTicket {
+        return LottoTicket(autoIssuedGames(strategy))
     }
 
     companion object {

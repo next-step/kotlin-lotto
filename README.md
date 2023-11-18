@@ -155,8 +155,9 @@ values.remove(...)
 이 함수를 이용해서만 접근한다면, winningCountBy 프로퍼티 자체는 private으로 감출 수 있겠네요!
 ```
 
-### 요구사항
+### 수정사항
 
 ```text
-
+- PurchaseGames.kt 클래스 수정
+  - transaction() 을 제거하고 lottoTicketManual, lottoTicketAuto 로 수정
 ```

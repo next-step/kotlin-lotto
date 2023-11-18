@@ -4,7 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
-class PurchaseGamesTest : StringSpec({
+class LottoPurchaseInfoTest : StringSpec({
 
     "자동으로 구매한 수량만큼 로또게임이 만들어진다" {
         val actual = LottoPurchaseInfo(2, listOf())
