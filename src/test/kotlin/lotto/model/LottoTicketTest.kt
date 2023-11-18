@@ -2,6 +2,8 @@ package lotto.model
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import lotto.model.issue.LottoIssueMachineAuto
+import lotto.model.issue.LottoIssueMachineManual
 import lotto.model.strategy.LottoNumberRandomWithExceptStrategy
 
 class LottoTicketTest : StringSpec({
@@ -11,7 +13,7 @@ class LottoTicketTest : StringSpec({
         val purchasedLottoTicket = LottoOrder(
             20,
             listOf(Game(LottoNumbers(firstWinningNumbers)))
-        ).lottoTicketAutoAndManual(LottoNumberRandomWithExceptStrategy(firstWinningNumbers.toSet()))
+        ).lottoTicketBuyAutoAndManual(LottoNumberRandomWithExceptStrategy(firstWinningNumbers.toSet()))
         val winingNumbers = WinningNumbers(LottoNumbers(firstWinningNumbers), LottoNumber(7))
         val actual = purchasedLottoTicket.winnerAggregate(winingNumbers)
 
@@ -27,7 +29,7 @@ class LottoTicketTest : StringSpec({
         val purchasedLottoTicket = LottoOrder(
             30,
             listOf(Game(LottoNumbers(secondWinningNumbers)))
-        ).lottoTicketAutoAndManual(LottoNumberRandomWithExceptStrategy(secondWinningNumbers.toSet()))
+        ).lottoTicketBuyAutoAndManual(LottoNumberRandomWithExceptStrategy(secondWinningNumbers.toSet()))
         val winingNumbers = WinningNumbers(LottoNumbers(1, 2, 3, 4, 5, 33), LottoNumber(22))
         val actual = purchasedLottoTicket.winnerAggregate(winingNumbers)
 
@@ -43,7 +45,7 @@ class LottoTicketTest : StringSpec({
         val purchasedLottoTicket = LottoOrder(
             30,
             listOf(Game(LottoNumbers(thirdWinningNumbers)))
-        ).lottoTicketAutoAndManual(LottoNumberRandomWithExceptStrategy(thirdWinningNumbers.toSet()))
+        ).lottoTicketBuyAutoAndManual(LottoNumberRandomWithExceptStrategy(thirdWinningNumbers.toSet()))
         val winingNumbers = WinningNumbers(LottoNumbers(1, 2, 3, 4, 5, 33), LottoNumber(22))
         val actual = purchasedLottoTicket.winnerAggregate(winingNumbers)
 
@@ -59,7 +61,7 @@ class LottoTicketTest : StringSpec({
         val purchasedLottoTicket = LottoOrder(
             30,
             listOf(Game(LottoNumbers(fourthWinningNumbers)))
-        ).lottoTicketAutoAndManual(LottoNumberRandomWithExceptStrategy(fourthWinningNumbers.toSet()))
+        ).lottoTicketBuyAutoAndManual(LottoNumberRandomWithExceptStrategy(fourthWinningNumbers.toSet()))
         val winingNumbers = WinningNumbers(LottoNumbers(1, 2, 3, 4, 5, 33), LottoNumber(22))
         val actual = purchasedLottoTicket.winnerAggregate(winingNumbers)
 
@@ -75,7 +77,7 @@ class LottoTicketTest : StringSpec({
         val purchasedLottoTicket = LottoOrder(
             30,
             listOf(Game(LottoNumbers(thirdWinningNumbers)))
-        ).lottoTicketAutoAndManual(LottoNumberRandomWithExceptStrategy(thirdWinningNumbers.toSet()))
+        ).lottoTicketBuyAutoAndManual(LottoNumberRandomWithExceptStrategy(thirdWinningNumbers.toSet()))
         val winingNumbers = WinningNumbers(LottoNumbers(1, 2, 3, 4, 5, 33), LottoNumber(22))
         val actual = purchasedLottoTicket.winnerAggregate(winingNumbers)
 
@@ -87,6 +89,6 @@ class LottoTicketTest : StringSpec({
     }
 })
 
-private fun LottoOrder.lottoTicketAutoAndManual(strategy: LottoNumberRandomWithExceptStrategy): LottoTicket {
-    return this.lottoTicketAuto(strategy) + this.lottoTicketManual()
+private fun LottoOrder.lottoTicketBuyAutoAndManual(strategy: LottoNumberRandomWithExceptStrategy): LottoTicket {
+    return LottoIssueMachineAuto(strategy).buy(this) + LottoIssueMachineManual.buy(this)
 }

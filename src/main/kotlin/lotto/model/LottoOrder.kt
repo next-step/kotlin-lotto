@@ -1,7 +1,5 @@
 package lotto.model
 
-import lotto.model.strategy.LottoNumberStrategy
-
 data class LottoOrder(
     val totalPurchaseCount: Int,
     val manualIssuedGames: List<Game>,
@@ -18,22 +16,6 @@ data class LottoOrder(
 
     private fun requirePositive(input: Int) {
         require(input >= 0) { "발권 수량은 0 또는 양의 정수만 가능 합니다" }
-    }
-
-    private fun autoIssueCount(): Int {
-        return this.totalPurchaseCount - this.manualIssuedGames.size
-    }
-
-    private fun autoIssuedGames(strategy: LottoNumberStrategy): List<Game> {
-        return List(autoIssueCount()) { Game.of(strategy) }
-    }
-
-    fun lottoTicketManual(): LottoTicket {
-        return LottoTicket(manualIssuedGames)
-    }
-
-    fun lottoTicketAuto(strategy: LottoNumberStrategy): LottoTicket {
-        return LottoTicket(autoIssuedGames(strategy))
     }
 
     companion object {
