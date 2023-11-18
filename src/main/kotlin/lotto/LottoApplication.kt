@@ -5,17 +5,17 @@ import lotto.component.LottoInputValidator
 import lotto.component.LottoResultAnalyzer
 import lotto.controller.LottoController
 import lotto.controller.LottoViewController
-import lotto.service.LottoInputService
+import lotto.component.LottoInputConverter
 import lotto.view.LottoInputView
 import lotto.view.LottoResultView
 
 fun main() {
-    val lottoInputService = LottoInputService(
+    val lottoInputConverter = LottoInputConverter(
         LottoInputValidator()
     )
     val lottoViewController = LottoViewController(
         LottoInputView(),
-        lottoInputService,
+        lottoInputConverter,
         LottoResultView(),
     )
     val lottoResultAnalyzer = LottoResultAnalyzer()

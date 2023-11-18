@@ -1,12 +1,9 @@
-package lotto.service
+package lotto.component
 
-import lotto.component.Lotto
-import lotto.component.LottoInputValidator
-import lotto.component.LottoNumbersGenerator
 import lotto.model.LottoNumbers
 import lotto.model.WinningNumbers
 
-class LottoInputService(
+class LottoInputConverter(
     private val lottoInputValidator: LottoInputValidator
 ) {
     fun getPurchasePrice(purchasePrice: String?): Int {
