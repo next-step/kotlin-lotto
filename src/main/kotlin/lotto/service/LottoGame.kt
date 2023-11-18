@@ -1,12 +1,13 @@
-package lotto.domain
+package lotto.service
 
 import lotto.data.Lotto
 import lotto.data.LottoNumber
 import lotto.data.LottoRanking
+import lotto.domain.LottoMachine
+import lotto.domain.RandomLogicInterface
+import lotto.domain.WinningDomain
 
 class LottoGame(private val randomLogic: RandomLogicInterface) {
-
-    private val winningStatusMap = mutableMapOf<LottoRanking, Int>()
 
     fun buyLotto(cash: Int): List<Lotto> {
         val lottoList = mutableListOf<Lotto>()
@@ -22,14 +23,7 @@ class LottoGame(private val randomLogic: RandomLogicInterface) {
     }
 
     fun getWinningStats(winningNumberList: List<Int>, purchaseLottoList: List<Lotto>): Map<LottoRanking, Int> {
-
-        val winningLotto = LottoMachine.createSelectLotto(LottoNumber.createLottoNumbers(winningNumberList))
-
-        purchaseLottoList.forEach {
-            val lottoRanking = LottoMachine.checkLotto(winningLotto, it)
-            winningStatusMap[lottoRanking] = winningStatusMap.getOrDefault(lottoRanking, 0) + 1
-        }
-        return winningStatusMap
+        return WinningDomain.checkWinningResult(winningNumberList, purchaseLottoList)
     }
 
     companion object {

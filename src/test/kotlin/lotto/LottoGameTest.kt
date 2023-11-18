@@ -3,8 +3,8 @@ package lotto
 import lotto.data.Lotto
 import lotto.data.LottoNumber
 import lotto.data.LottoRanking
-import lotto.domain.LottoGame
 import lotto.domain.RandomLogic
+import lotto.service.LottoGame
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
