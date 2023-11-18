@@ -8,7 +8,7 @@ import lotto.model.WinningNumbers
 
 object InputView {
 
-    const val LOTTO_NUMBER_DELIMITER = ","
+    private const val LOTTO_NUMBER_DELIMITER = ","
     private const val GAME_DELIMITER = "\n"
 
     fun purchaseAmount(priceOfGame: Int): Int {
@@ -19,8 +19,17 @@ object InputView {
     private fun manualIssue(manualTicketingInput: String): List<Game> {
         return manualTicketingInput.split(GAME_DELIMITER)
             .asSequence()
-            .map { it.stringToGame() }
+            .map { stringToGame(it) }
             .toList()
+    }
+
+    private fun stringToGame(input: String): Game {
+        return Game(
+            LottoNumbers(
+                input.split(InputView.LOTTO_NUMBER_DELIMITER)
+                    .map { it.toInt() }
+            )
+        )
     }
 
     private fun manualInput(count: Int): String {
@@ -49,13 +58,4 @@ object InputView {
     private fun requireManualCountUpperToTotalCount(totalPurchaseCount: Int, manualCount: Int) {
         require(totalPurchaseCount >= manualCount) { "총 구매 수량[$totalPurchaseCount]보다 많은 수의 수동 발권 수량[$manualCount] 입력은 불가능합니다 " }
     }
-}
-
-private fun String.stringToGame(): Game {
-    return Game(
-        LottoNumbers(
-            this.split(InputView.LOTTO_NUMBER_DELIMITER)
-                .map { it.toInt() }
-        )
-    )
 }
