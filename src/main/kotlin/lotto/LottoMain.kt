@@ -2,13 +2,14 @@ package lotto
 
 import lotto.domain.LottoGame
 import lotto.domain.LottoMachine
+import lotto.domain.RandomLogic
 import lotto.view.InputView
 import lotto.view.OutputView
 
 fun main() {
 
     val cash = InputView.inputCash()
-    val lottoGame = LottoGame()
+    val lottoGame = LottoGame(RandomLogic())
 
     val purchaseLottoList = lottoGame.buyLotto(cash.toInt())
 

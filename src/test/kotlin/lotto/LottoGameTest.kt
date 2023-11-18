@@ -4,6 +4,7 @@ import lotto.data.Lotto
 import lotto.data.LottoNumber
 import lotto.data.LottoRanking
 import lotto.domain.LottoGame
+import lotto.domain.RandomLogic
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -12,7 +13,7 @@ class LottoGameTest {
     fun `금액을 입력받았다면, 로또를 구매한을 떄, 최대 수량으로 구매를 한다`() {
         // given : 금액을 입력 받는다.
         val cash = 4500
-        val lottoGame = LottoGame()
+        val lottoGame = LottoGame(RandomLogic())
 
         // when : 로또를 구매한다.
         val lottoList = lottoGame.buyLotto(cash)
@@ -44,7 +45,7 @@ class LottoGameTest {
         val purchaseLottoList =
             listOf(purchaseLotto1, purchaseLotto2, purchaseLotto3, purchaseLotto4, purchaseLotto5, purchaseLotto6)
 
-        val lottoGame = LottoGame()
+        val lottoGame = LottoGame(RandomLogic())
 
         // when : 당첨을 확인을 요청한다.
         val winningStats = lottoGame.getWinningStats(winningNumberList, purchaseLottoList)

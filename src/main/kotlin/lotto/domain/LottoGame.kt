@@ -4,7 +4,7 @@ import lotto.data.Lotto
 import lotto.data.LottoNumber
 import lotto.data.LottoRanking
 
-class LottoGame {
+class LottoGame(private val randomLogic: RandomLogicInterface) {
 
     private val winningStatusMap = mutableMapOf<LottoRanking, Int>()
 
@@ -13,7 +13,7 @@ class LottoGame {
         val times = cash / GAME_COST
 
         repeat(times) {
-            val randomLottoNumbers = LottoNumber.createRandomLotto()
+            val randomLottoNumbers = LottoNumber.createRandomLotto(randomLogic)
             val lotto = LottoMachine.createSelectLotto(randomLottoNumbers)
             lottoList.add(lotto)
         }
