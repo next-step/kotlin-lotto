@@ -13,8 +13,13 @@ class LottoRuleTest : StringSpec({
             Pair(listOf(1, 2, 3, 4, 11, 12), Prize.THIRD_PRIZE),
             Pair(listOf(1, 2, 3, 4, 5, 11), Prize.SECOND_PRIZE),
             Pair(listOf(1, 2, 3, 4, 5, 6), Prize.FIRST_PRIZE),
-        ).forEach {
-            assertThat(LottoRule(listOf(1, 2, 3, 4, 5, 6)).calculatePrize(Lotto.from(it.first))).isEqualTo(it.second)
+        ).forEach { pair ->
+            assertThat(
+                LottoRule(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
+                    .calculatePrize(Lotto.from(pair.first))
+            ).isEqualTo(
+                pair.second
+            )
         }
     }
 })
