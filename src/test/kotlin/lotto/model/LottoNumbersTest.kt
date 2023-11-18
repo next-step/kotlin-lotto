@@ -5,7 +5,7 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 
-class LottoNumberTest : FunSpec({
+class LottoNumbersTest : FunSpec({
     test("로또 번호와 당점 번호 비교 후 일치하는 번호를 정상 반환하는지 테스트") {
         val winningLottoNumbers = LottoNumbers.create(
             listOf(1, 2, 3, 4, 5, 6)
