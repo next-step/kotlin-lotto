@@ -3,6 +3,7 @@ package lotto
 import lotto.data.Lotto
 import lotto.data.LottoNumber
 import lotto.data.LottoRanking
+import lotto.data.WinningLotto
 import lotto.domain.LottoMachine
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -32,10 +33,10 @@ class LottoMachineTest {
         val purchaseLotto = Lotto(LottoNumber.createLottoNumbers(purchaseNumberList))
 
         // when : 당첨 여부를 확인을 요청한다.
-        val actual = LottoMachine.checkLotto(winningLotto, purchaseLotto)
+        val actual = LottoMachine.checkLotto(purchaseLotto, winningLotto)
 
         // then : 당첨 등수를 반환한다.
-        assertThat(actual).isEqualTo(LottoRanking.SecondPlace)
+        assertThat(actual).isEqualTo(LottoRanking.ThirdPlace)
     }
 
     @Test
@@ -43,9 +44,9 @@ class LottoMachineTest {
         // given : 구매 금액과 당첨 통계를 받는다.
         val cash = 6000
         val winningStatus = mutableMapOf(
-            LottoRanking.SecondPlace to 2,
-            LottoRanking.ThirdPlace to 1,
-            LottoRanking.FourthPlace to 2,
+            LottoRanking.ThirdPlace to 2,
+            LottoRanking.FourthPlace to 1,
+            LottoRanking.FifthPlace to 2,
             LottoRanking.None to 1
         )
 
@@ -54,5 +55,21 @@ class LottoMachineTest {
 
         // then : 수익률을 반환한다.
         assertThat(winningRate).isEqualTo(510f)
+    }
+
+    @Test
+    fun `당첨 로또와 보너스 번호를 받고, 당첨 로또 번호 생성을 요청할때, 당첨 로또번호가 반환된다`() {
+        // given : 1등 당첨 번호, 보너스 번호
+        val lottoNumber = LottoNumber.createLottoNumbers(listOf(1, 2, 3, 4, 5, 6))
+        val bonusLottoNumber = LottoNumber.from(8)
+
+        // when : 당첨 번호
+        val actual = LottoMachine.createWinningLotto(lottoNumber, bonusLottoNumber)
+
+        // then : 당첨 로또 생성.
+        val lotto = LottoMachine.createSelectLotto(lottoNumber)
+        val expected = WinningLotto(lotto, bonusLottoNumber)
+
+        assertThat(actual).isEqualTo(expected)
     }
 }

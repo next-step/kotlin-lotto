@@ -3,28 +3,33 @@ package lotto.domain
 import lotto.data.Lotto
 import lotto.data.LottoNumber
 import lotto.data.LottoRanking
+import lotto.data.LottoRanking.FifthPlace
 import lotto.data.LottoRanking.FirstPlace
 import lotto.data.LottoRanking.FourthPlace
 import lotto.data.LottoRanking.None
-import lotto.data.LottoRanking.SecondPlace
 import lotto.data.LottoRanking.ThirdPlace
+import lotto.data.WinningLotto
 
 object LottoMachine {
 
-    fun createSelectLotto(lottoNumbers: LinkedHashSet<LottoNumber>): Lotto {
+    fun createSelectLotto(lottoNumbers: Set<LottoNumber>): Lotto {
         return Lotto(lottoNumbers)
     }
 
-    fun checkLotto(winningLotto: Lotto, purchaseLotto: Lotto): LottoRanking {
+    fun createWinningLotto(lottoNumbers: Set<LottoNumber>, bonusLottoNumber: LottoNumber): WinningLotto {
+        return WinningLotto(Lotto(lottoNumbers), bonusLottoNumber)
+    }
+
+    fun checkLotto(purchaseLotto: Lotto, winningLotto: Lotto): LottoRanking {
         val winningLottoToSet = winningLotto.selectNumbers.toSet()
         val purchaseLottoToSet = purchaseLotto.selectNumbers.toSet()
         val intersectNumber = winningLottoToSet.intersect(purchaseLottoToSet)
 
         return when (intersectNumber.size) {
             FirstPlace.matchingNumberCnt -> FirstPlace
-            SecondPlace.matchingNumberCnt -> SecondPlace
             ThirdPlace.matchingNumberCnt -> ThirdPlace
             FourthPlace.matchingNumberCnt -> FourthPlace
+            FifthPlace.matchingNumberCnt -> FifthPlace
             else -> None
         }
     }

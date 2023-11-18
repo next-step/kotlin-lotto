@@ -27,7 +27,7 @@ class LottoNumber private constructor(private val number: Int) : Comparable<Lott
             return lottoCreation.createAutoLotto(NUMBERS)
         }
 
-        private fun from(value: Int): LottoNumber {
+        fun from(value: Int): LottoNumber {
             return NUMBERS[value] ?: throw IllegalArgumentException(ERR_MSG_OUT_OF_LOTTO_RANGE)
         }
     }
