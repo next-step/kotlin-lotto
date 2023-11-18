@@ -17,8 +17,9 @@ object LottoMachine {
         return Lotto(lottoNumbers)
     }
 
-    fun createWinningLotto(winningNumbers: List<Int>, bonusLottoNumber: LottoNumber): WinningLotto {
+    fun createWinningLotto(winningNumbers: List<Int>, bonusNumber: Int): WinningLotto {
         val winningLotto = LottoNumber.createLottoNumbers(winningNumbers)
+        val bonusLottoNumber = LottoNumber.from(bonusNumber)
         return WinningLotto(Lotto(winningLotto), bonusLottoNumber)
     }
 

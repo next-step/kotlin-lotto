@@ -81,14 +81,14 @@ class LottoMachineTest {
         // given : 1등 당첨 번호, 보너스 번호
         val numberList = listOf(1, 2, 3, 4, 5, 6)
         val lottoNumber = LottoNumber.createLottoNumbers(numberList)
-        val bonusLottoNumber = LottoNumber.from(8)
+        val bonusNumber = 8
 
         // when : 당첨 번호
-        val actual = LottoMachine.createWinningLotto(numberList, bonusLottoNumber)
+        val actual = LottoMachine.createWinningLotto(numberList, bonusNumber)
 
         // then : 당첨 로또 생성.
         val lotto = LottoMachine.createSelectLotto(lottoNumber)
-        val expected = WinningLotto(lotto, bonusLottoNumber)
+        val expected = WinningLotto(lotto, LottoNumber.from(bonusNumber))
 
         assertThat(actual).isEqualTo(expected)
     }

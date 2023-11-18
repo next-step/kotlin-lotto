@@ -21,6 +21,13 @@ object InputView {
         return splitInputData(inputData)
     }
 
+    fun inputBonusNumber(): Int {
+        println("보너스 번호를 입력해 주세요.")
+        val inputData = readln()
+        println()
+        return inputData.toInt()
+    }
+
     fun validateCash(inputData: String) {
         validateNumericFormat(inputData)
         validateNumberRange(inputData.toInt())

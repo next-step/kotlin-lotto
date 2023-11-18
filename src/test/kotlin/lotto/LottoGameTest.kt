@@ -28,7 +28,7 @@ class LottoGameTest {
         // given : 로또 구매와 당첨 번호를 입력한다.
         // 2등 - 2개, 3등 - 1개, 4등 - 1개
         val winningNumberList = listOf(1, 2, 3, 4, 5, 6)
-        val bonusNumber = LottoNumber.from(7)
+        val bonusNumber = 7
         val winningLotto = LottoMachine.createWinningLotto(winningNumberList, bonusNumber)
 
         val purchaseLottoNumbers1 = LottoNumber.createLottoNumbers(listOf(1, 2, 3, 4, 5, 7))
