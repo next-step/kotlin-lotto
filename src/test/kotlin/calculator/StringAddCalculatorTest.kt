@@ -34,10 +34,10 @@ class StringAddCalculatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["wrong", "$"])
-    fun `음수 또는 잘못된 문자열을 입력할 경우 RuntimeException`(text: String) {
+    fun `잘못된 문자열을 입력할 경우 RuntimeException`(text: String) {
         assertThatExceptionOfType(RuntimeException::class.java)
             .isThrownBy { calculator.add(text) }
-            .withMessageMatching("잘못된 문자열을 입력할 수 없습니다.")
+            .withMessageMatching("구분자 , 또는 : 를 포함해야 합니다.")
     }
 
     @Test
@@ -45,5 +45,12 @@ class StringAddCalculatorTest {
         assertThatExceptionOfType(RuntimeException::class.java)
             .isThrownBy { calculator.add("-1") }
             .withMessageMatching("음수를 입력할 수 없습니다.")
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2:3"])
+    fun `쉼표 또는 콜론 구분자로 숫자를 입력할 경우 정상적으로 합을 반환한다`(text: String) {
+        val result = calculator.add(text)
+        assertThat(result).isEqualTo(6)
     }
 }
