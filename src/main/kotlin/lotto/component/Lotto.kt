@@ -10,7 +10,7 @@ class Lotto(
 ) {
     fun draw(lottoNumbers: List<LottoNumbers>, winningNumbers: WinningNumbers): LottoResult {
         val lottoPrizes: List<LottoPrize> = getLottoPrizes(lottoNumbers, winningNumbers)
-        val revenueRate: Double = lottoResultAnalyzer.getRevenueRate(lottoNumbers.size, LOTTO_PRICE, lottoPrizes)
+        val revenueRate: Double = lottoResultAnalyzer.getRevenueRate(lottoPrizes)
 
         return LottoResult(lottoPrizes, revenueRate)
     }
