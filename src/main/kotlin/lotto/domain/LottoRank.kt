@@ -11,6 +11,10 @@ enum class LottoRank(val winningMoney: Int, val matchCount: Int) {
 
     companion object {
         fun findByMatchCount(matchCount: Int): LottoRank {
+            if (matchCount == 5) {
+                return SECOND
+            }
+
             return values().find { it.matchCount == matchCount } ?: MISS
         }
     }

@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.Lotto
+import lotto.domain.LottoAmount
 import lotto.domain.LottoMachine
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -11,7 +12,7 @@ class LottoMachineTest {
 
     @Test
     fun `로또를 머신의 돈 만큼 구매할 수 있다`() {
-        val lottoMachine: LottoMachine = LottoMachine(1000)
+        val lottoMachine: LottoMachine = LottoMachine(LottoAmount(1000))
 
         val lottoList: List<Lotto> = lottoMachine.buyLottoList()
 
@@ -20,7 +21,7 @@ class LottoMachineTest {
 
     @Test
     fun `로또를 여러 개 구매할 수 있다`() {
-        val lottoMachine: LottoMachine = LottoMachine(2000)
+        val lottoMachine: LottoMachine = LottoMachine(LottoAmount(2000))
 
         val lottoList: List<Lotto> = lottoMachine.buyLottoList()
 
@@ -29,14 +30,14 @@ class LottoMachineTest {
 
     @Test
     fun `갖고 있는 돈보다 많이 로또를 구매하려 하면 에러가 발생한다`() {
-        val lottoMachine: LottoMachine = LottoMachine(1000)
+        val lottoMachine: LottoMachine = LottoMachine(LottoAmount(1000))
 
         assertThrows<IllegalArgumentException> { lottoMachine.buyManualLottoList(2) }
     }
 
     @Test
     fun `로또를 한 개 구매할 수 있다`() {
-        val lottoMachine: LottoMachine = LottoMachine(1000)
+        val lottoMachine: LottoMachine = LottoMachine(LottoAmount(1000))
 
         assertDoesNotThrow { lottoMachine.buyLotto(listOf(1, 2, 3, 4, 5, 6)) }
     }

@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.Lotto
+import lotto.domain.LottoAmount
 import lotto.domain.LottoCalculator
 import lotto.domain.LottoMachine
 import lotto.domain.LottoNumber
@@ -15,7 +16,7 @@ fun main() {
     val lottoCalculator: LottoCalculator = LottoCalculator()
 
     val buyingPrice: Int = inputView.readLineNumber(Message.QUESTION_MONEY)
-    val lottoMachine: LottoMachine = LottoMachine(buyingPrice)
+    val lottoMachine: LottoMachine = LottoMachine(LottoAmount(buyingPrice))
 
     val manualLottoCount: Int = inputView.readLineNumber(Message.QUESTION_MANUAL_COUNT)
     val manualLottoList: List<Lotto> = lottoMachine.buyManualLottoList(manualLottoCount)

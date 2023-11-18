@@ -15,18 +15,16 @@ class Lotto(inputNumberList: List<Int>) {
     private fun isContainsBonusNumber(bonusNumber: LottoNumber): Boolean = this.numberList.any { it == bonusNumber }
 
     fun getLottoRank(winningLotto: Lotto, bonusNumber: LottoNumber): LottoRank {
-        val matchCount: Int = this.getMatchCount(winningLotto)
-        val lottoRank: LottoRank = LottoRank.findByMatchCount(matchCount)
+        val lottoRank: LottoRank = LottoRank.findByMatchCount(this.getMatchCount(winningLotto))
 
-        return if (matchCount == 5) {
-            if (this.isContainsBonusNumber(bonusNumber)) LottoRank.SECOND_WITH_BONUS else LottoRank.SECOND
-        } else {
-            lottoRank
+        if (lottoRank == LottoRank.SECOND && this.isContainsBonusNumber(bonusNumber)) {
+            return LottoRank.SECOND_WITH_BONUS
         }
+
+        return lottoRank
     }
 
     companion object {
-        const val LOTTO_PRICE: Int = 1000
         const val LOTTO_NUMBER_MIN: Int = 1
         const val LOTTO_NUMBER_MAX: Int = 45
         const val NUMBER_COUNT_MIN: Int = 0
