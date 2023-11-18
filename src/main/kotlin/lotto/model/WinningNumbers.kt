@@ -5,10 +5,10 @@ data class WinningNumbers(
     val bonusNumber: LottoNumber
 ) {
 
-    fun toRank(game: Game): Rank {
+    fun toRank(otherNumber: LottoNumbers): Rank {
         return Rank.of(
-            lottoNumbers.numbersIntersections(game.lottoNumbers),
-            game.lottoNumbers.containNumber(bonusNumber)
+            this.lottoNumbers.numbersIntersections(otherNumber),
+            otherNumber.containNumber(this.bonusNumber)
         )
     }
 }
