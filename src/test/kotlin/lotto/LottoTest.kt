@@ -4,18 +4,25 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.WithDataTestName
 import io.kotest.datatest.withData
+import io.kotest.matchers.ints.shouldBeInRange
 import io.kotest.matchers.shouldBe
 
 class LottoTest : FunSpec({
 
     context("로또 정상 생성") {
-        withData(
-            nameFn = { "lottNumbers : $it" },
-            setOf(1, 2, 3, 4, 5, 6),
-            setOf(45, 4, 10, 22, 1, 2),
-            setOf(45, 44, 43, 42, 41, 40),
-        ) { lottoNumbers ->
-            Lotto(lottoNumbers = lottoNumbers)
+        test("기본 생성자 사용") {
+            val lottoNumbers = setOf(1, 2, 3, 4, 5, 6)
+            val lotto = Lotto(lottoNumbers = lottoNumbers)
+
+            lotto.lottoNumbers shouldBe lottoNumbers
+        }
+
+        test("자동 발급") {
+            val lotto = Lotto.issueByAuto()
+            lotto.lottoNumbers.forEach {
+                it shouldBeInRange Lotto.MIN_LOTTO_NUMBER..Lotto.MAX_LOTTO_NUMBER
+            }
+            lotto.lottoNumbers.size shouldBe Lotto.LOTTO_NUMBER_SIZE
         }
     }
 
