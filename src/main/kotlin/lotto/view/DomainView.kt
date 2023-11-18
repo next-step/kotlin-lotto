@@ -7,7 +7,7 @@ import lotto.extension.appendIf
 import java.text.DecimalFormat
 
 fun LottoNumbers.state(): String =
-    value.toString()
+    value.map { it.value }.toString()
 
 fun LottoGameResult.state(): String {
     val stringBuilder = StringBuilder()

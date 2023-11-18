@@ -1,7 +1,7 @@
 package lotto.domain
 
-data class WinningNumbers(val numbers: LottoNumbers, val bonusNumber: BonusNumber) {
+data class WinningNumbers(val numbers: LottoNumbers, val bonusNumber: LottoNumber) {
     init {
-        require(bonusNumber notIn numbers) { "보너스 번호와 당첨 번호는 중복이 불가능합니다." }
+        require(bonusNumber !in numbers) { "보너스 번호와 당첨 번호는 중복이 불가능합니다." }
     }
 }

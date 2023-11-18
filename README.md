@@ -52,3 +52,20 @@
 - [x] 2등의 조건은 당첨번호 5개 일치 + 보너스 번호 일치이다.
 - [x] 2등의 당첨 금액은 30000000원이다.
 - [x] 로또 게임결과의 상태를 출력하면 2등이 몇명인지 출력된다.
+
+# 학습 내용
+- Operator overloading
+  - [PR](https://github.com/next-step/kotlin-lotto/pull/932)에서 언급된 내용을 [공식문서](https://kotlinlang.org/docs/operator-overloading.html#binary-operations)를 통해 학습
+  - 미리 정의된 연산자 집합에 대한 사용자 지정 구현을 커스텀할 수 있다.
+  - 하단 예제 및 [lottoNumbers](src/main/kotlin/lotto/domain/LottoNumbers.kt)의 `contains`, [WinningNumbers](src/main/kotlin/lotto/domain/WinningNumbers.kt)의 `!in` 참조
+  ```kotlin
+  data class Point(val x:Int, val y:Int)
+  
+  operator fun Point.unaryMinus() = Point(-x, -y)
+  
+  val point = Point(10, 20)
+  
+  fun main() {
+    println(-point) // "Point(x=-10, y=-20)"
+  }
+  ```
