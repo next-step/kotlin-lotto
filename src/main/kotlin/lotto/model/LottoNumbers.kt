@@ -14,10 +14,10 @@ class LottoNumbers private constructor(val numbers: List<Int>) {
 
     companion object {
         private val LOTTO_NUMBER_POOL = (1..45).toList()
-        private const val LOTTO_NUMBERS_LENGTH = 6
+        const val LOTTO_NUMBERS_LENGTH = 6
 
         fun create(numbers: List<Int>): LottoNumbers {
-            require(numbers.size == LOTTO_NUMBERS_LENGTH ) {
+            require(numbers.size == LOTTO_NUMBERS_LENGTH) {
                 "로또 번호는 6개 입니다."
             }
 

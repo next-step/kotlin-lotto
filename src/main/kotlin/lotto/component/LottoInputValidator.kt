@@ -1,5 +1,7 @@
 package lotto.component
 
+import lotto.model.LottoNumbers
+
 class LottoInputValidator {
     fun validatePurchasePrice(purchasePrice: String?): String {
         require(!purchasePrice.isNullOrBlank() && purchasePrice.toInt() > 0) {
@@ -25,7 +27,7 @@ class LottoInputValidator {
     }
 
     fun validateLottoNumberCount(lottoNumbers: List<Int>): List<Int> {
-        require(lottoNumbers.size == LOTTO_NUMBER_COUNT) {
+        require(lottoNumbers.size == LottoNumbers.LOTTO_NUMBERS_LENGTH) {
             "로또 번호는 6자리입니다."
         }
         return lottoNumbers
@@ -39,9 +41,5 @@ class LottoInputValidator {
         }
 
         return lottoNumber
-    }
-
-    companion object {
-        private const val LOTTO_NUMBER_COUNT = 6
     }
 }
