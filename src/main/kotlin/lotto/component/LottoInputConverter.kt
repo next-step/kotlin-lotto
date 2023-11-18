@@ -14,7 +14,7 @@ class LottoInputConverter(
     fun getLottoNumbers(purchasePrice: Int): List<LottoNumbers> {
         val lottoNumbersCount: Int = lottoInputValidator.validateLottoNumbersCount(purchasePrice / Lotto.LOTTO_PRICE)
 
-        return LottoNumbersGenerator.generate(lottoNumbersCount)
+        return LottoNumbers.generate(lottoNumbersCount)
     }
 
     fun getWinningNumbers(winningNumbers: String?): WinningNumbers {

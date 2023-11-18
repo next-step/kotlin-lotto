@@ -9,7 +9,7 @@ class WinningNumbers private constructor(
 
     companion object {
         fun create(numbers: List<Int>): WinningNumbers {
-            val lottoNumbers = LottoNumbers(numbers)
+            val lottoNumbers = LottoNumbers.create(numbers)
 
             return WinningNumbers(lottoNumbers)
         }
