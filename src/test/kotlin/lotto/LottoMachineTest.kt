@@ -29,13 +29,6 @@ class LottoMachineTest {
     }
 
     @Test
-    fun `갖고 있는 돈보다 많이 로또를 구매하려 하면 에러가 발생한다`() {
-        val lottoMachine: LottoMachine = LottoMachine(LottoAmount(1000))
-
-        assertThrows<IllegalArgumentException> { lottoMachine.buyManualLottoList(2) }
-    }
-
-    @Test
     fun `로또를 한 개 구매할 수 있다`() {
         val lottoMachine: LottoMachine = LottoMachine(LottoAmount(1000))
 

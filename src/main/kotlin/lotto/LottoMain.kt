@@ -19,7 +19,12 @@ fun main() {
     val lottoMachine: LottoMachine = LottoMachine(LottoAmount(buyingPrice))
 
     val manualLottoCount: Int = inputView.readLineNumber(Message.QUESTION_MANUAL_COUNT)
-    val manualLottoList: List<Lotto> = lottoMachine.buyManualLottoList(manualLottoCount)
+    val manualLottoList: MutableList<Lotto> = mutableListOf()
+    repeat(manualLottoCount) {
+        val lottoNumberList: List<Int> = inputView.readLineNumberList(Message.QUESTION_MANUAL_LOTTO_NUMBER)
+
+        manualLottoList.add(lottoMachine.buyLotto(lottoNumberList))
+    }
 
     val lottoList: List<Lotto> = lottoMachine.buyLottoList()
     outputView.printBuySummary(manualLottoCount, lottoList.size)
