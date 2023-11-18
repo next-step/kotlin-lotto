@@ -1,5 +1,6 @@
 package lotto.model
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
@@ -24,6 +25,15 @@ class LottoNumbersTest : FunSpec({
             val result = lottoNumbers.match(winningLottoNumbers)
 
             result shouldBe answer
+        }
+    }
+
+    test("로또 번호 생성 시 숫자 개수가 6개가 아닌 경우 IllegalArgumentException 예외 발생 테스트") {
+        forAll(
+            row(listOf(1, 2, 3, 4, 5)),
+            row(listOf(1, 2, 3, 4, 5, 6, 7))
+        ) { numbers ->
+            shouldThrow<IllegalArgumentException> { LottoNumbers.create(numbers) }
         }
     }
 })
