@@ -6,12 +6,6 @@ value class LottoNumbers(val value: Set<LottoNumber>) {
         validateSize()
     }
 
-    fun match(winningNumbers: WinningNumbers): LottoMatchResult {
-        val matchCount = match(winningNumbers.numbers)
-        val bonusMatch = winningNumbers.bonusNumber in value
-        return LottoMatchResult(matchCount, bonusMatch)
-    }
-
     fun match(other: LottoNumbers): Int =
         value.count { it in other }
 

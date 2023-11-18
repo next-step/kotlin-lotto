@@ -11,7 +11,7 @@ class LottoGame(val lottoList: List<LottoNumbers>) {
         lottoList.size * LottoNumbers.LOTTO_PRICE
 
     private fun getRewards(winningNumbers: WinningNumbers): List<LottoReward> =
-        lottoList.map { it.match(winningNumbers) }
+        lottoList.map { winningNumbers.match(it) }
             .mapNotNull { LottoReward.valueOf(it.matchCount, it.bonusMatch) }
             .sorted()
 }
