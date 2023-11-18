@@ -1,8 +1,8 @@
 package lotto.view
 
-import lotto.domain.purchase.Charge
 import lotto.domain.Lotto
 import lotto.domain.LottoMachine
+import lotto.domain.purchase.Charge
 import lotto.domain.result.LottoMatchResult
 import lotto.domain.result.LottoRank
 

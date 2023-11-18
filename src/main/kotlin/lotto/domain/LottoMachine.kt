@@ -3,8 +3,8 @@ package lotto.domain
 import lotto.domain.number.LottoNumberGenerator
 import lotto.domain.purchase.LottoBuyingPrice
 import lotto.domain.result.LottoMatchResult
+import lotto.domain.result.LottoPlayResult
 import lotto.domain.result.LottoRank
-import lotto.domain.result.LottoResult
 
 class LottoMachine private constructor(
     val autoLottoCount: LottoCount,
@@ -13,7 +13,7 @@ class LottoMachine private constructor(
 ) {
 
     private val _lottos: MutableList<Lotto> = mutableListOf()
-    val manualLottoCount: LottoCount = LottoCount(manualLottos.size)
+    val manualLottoCount: LottoCount = LottoCount.from(manualLottos.size)
 
     val lottos: List<Lotto>
         get() = _lottos
@@ -30,7 +30,7 @@ class LottoMachine private constructor(
 
     fun getResult(winningLotto: WinningLotto, buyingPrice: LottoBuyingPrice): LottoMatchResult {
         val matchCountByRank = getMatchCountByRank(winningLotto)
-        val lottoResult = LottoResult(matchCountByRank)
+        val lottoResult = LottoPlayResult(matchCountByRank)
         val earningRate = lottoResult.calculateEarningRate(buyingPrice)
         return LottoMatchResult(lottoResult.matchCountByRank, earningRate)
     }
@@ -65,7 +65,7 @@ class LottoMachine private constructor(
             manualLotto: List<Lotto>,
         ): LottoMachine {
             return LottoMachine(
-                autoLottoCount = LottoCount(autoLottoCount),
+                autoLottoCount = LottoCount.from(autoLottoCount),
                 lottoNumberGenerator = lottoNumberGenerator,
                 manualLottos = manualLotto
             )

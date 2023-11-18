@@ -3,8 +3,14 @@ package lotto.view
 import lotto.domain.Input
 import lotto.domain.Lotto
 import lotto.domain.LottoCount
+import lotto.domain.LottoCountResult
+import lotto.domain.LottoResult
+import lotto.domain.WinningLotto
+import lotto.domain.WinningLottoResult
 import lotto.domain.number.LottoNumber
+import lotto.domain.number.LottoNumberResult
 import lotto.domain.purchase.LottoBuyingPrice
+import lotto.domain.purchase.LottoBuyingPriceResult
 
 object InputView {
 
@@ -20,55 +26,46 @@ object InputView {
         val userInput = readlnOrNull()
         val blankValidationResult = validateIsNullOrBlank(userInput)
         return when (val numberValidationResult = validateNumeric(blankValidationResult)) {
-            is Input.WrongInput -> retry(numberValidationResult.errorMessage, ::readBuyingPrice)
-            is Input.Success -> LottoBuyingPrice(numberValidationResult.data.trim().toInt())
+            is Input.Failure -> retry(numberValidationResult.errorMessage, ::readBuyingPrice)
+            is Input.Success -> createLottoBuyingPrice(numberValidationResult.data)
         }
     }
 
-    fun readManualLottoCount(): LottoCount {
+    fun readManualLottoCount(buyingPrice: LottoBuyingPrice): LottoCount {
         println(System.lineSeparator() + MANUAL_LOTTO_COUNT_MESSAGE)
         val userInput = readlnOrNull()
         val blankValidationResult = validateIsNullOrBlank(userInput)
-        return when (val numberValidationResult = validateNumeric(blankValidationResult)) {
-            is Input.WrongInput -> retry(numberValidationResult.errorMessage, ::readManualLottoCount)
-            is Input.Success -> LottoCount(numberValidationResult.data.trim().toInt())
+        val lottoCount = createNumberLottoCount(blankValidationResult, buyingPrice)
+
+        return when (val priceResult = buyingPrice.validateManualLottoPurchase(lottoCount)) {
+            is LottoBuyingPriceResult.Failure -> retry(priceResult.errorMessage) { readManualLottoCount(buyingPrice) }
+            is LottoBuyingPriceResult.Success -> lottoCount
         }
     }
 
-    fun readManualLottos(lottoCount: LottoCount): List<Lotto> {
-        if (lottoCount.isZero()) {
-            return emptyList()
+    fun readManualLotto(lottoCount: LottoCount, count: Int): Lotto {
+        if (count == 0) {
+            println(System.lineSeparator() + MANUAL_LOTTO_NUMBERS_MESSAGE)
         }
-        println(System.lineSeparator() + MANUAL_LOTTO_NUMBERS_MESSAGE)
-        return List(lottoCount.value) {
-            readManualLotto()
-        }
-    }
-
-    private fun readManualLotto(): Lotto {
-        val userInput = readlnOrNull()
-        return when (val blankValidationResult = validateIsNullOrBlank(userInput)) {
-            is Input.WrongInput -> retry(blankValidationResult.errorMessage, ::readManualLotto)
-            is Input.Success -> createLottoNumbers(blankValidationResult.data)
+        return when (val lottoResult = readSingleLotto()) {
+            is LottoResult.Failure -> retry(lottoResult.errorMessage) { readManualLotto(lottoCount, count) }
+            is LottoResult.Success -> lottoResult.data
         }
     }
 
-    fun readWinningLotto(): Lotto {
+    fun readWinningLottoNumbers(): Lotto {
         println(System.lineSeparator() + WINNING_NUMBERS_MESSAGE)
-        val userInput = readlnOrNull()
-        return when (val blankValidationResult = validateIsNullOrBlank(userInput)) {
-            is Input.WrongInput -> retry(blankValidationResult.errorMessage, ::readManualLotto)
-            is Input.Success -> createLottoNumbers(blankValidationResult.data)
+        return when (val lottoResult = readSingleLotto()) {
+            is LottoResult.Failure -> retry(lottoResult.errorMessage, ::readWinningLottoNumbers)
+            is LottoResult.Success -> lottoResult.data
         }
     }
 
-    fun readBonusBall(): LottoNumber {
-        println(BONUS_BALL_MESSAGE)
-        val userInput = readlnOrNull()
-        val blankValidationResult = validateIsNullOrBlank(userInput)
-        return when (val numberValidationResult = validateNumeric(blankValidationResult)) {
-            is Input.WrongInput -> retry(numberValidationResult.errorMessage, ::readBonusBall)
-            is Input.Success -> LottoNumber.from(numberValidationResult.data.trim().toInt())
+    fun createWinningLotto(winningLottoNumbers: Lotto): WinningLotto {
+        val bonusBall = readBonusBall(winningLottoNumbers)
+        return when (val winningLottoResult = WinningLotto.createResult(winningLottoNumbers, bonusBall)) {
+            is WinningLottoResult.Failure -> retry(winningLottoResult.errorMessage) { createWinningLotto(winningLottoNumbers) }
+            is WinningLottoResult.Success -> winningLottoResult.data
         }
     }
 
@@ -79,65 +76,116 @@ object InputView {
 
     private fun validateIsNullOrBlank(userInput: String?): Input {
         if (userInput.isNullOrBlank()) {
-            return Input.WrongInput("입력값이 존재하지 않습니다.")
+            return Input.Failure("입력값이 존재하지 않습니다.")
         }
         return Input.Success(userInput)
     }
 
     private fun validateNumeric(userInput: Input): Input {
         return when (userInput) {
-            is Input.WrongInput -> userInput
+            is Input.Failure -> userInput
             is Input.Success -> getNumberInput(userInput)
         }
     }
 
     private fun getNumberInput(userInput: Input.Success): Input {
         if (userInput.data.toIntOrNull() == null) {
-            return Input.WrongInput("입력값이 숫자가 아닙니다.")
+            return Input.Failure("입력값이 숫자가 아닙니다.")
         }
         return Input.Success(userInput.data)
     }
 
-    private fun createLottoNumbers(userInput: String): Lotto {
+    private fun createLottoBuyingPrice(userInput: String): LottoBuyingPrice {
+        return when (val buyingPriceResult = LottoBuyingPrice.createResult(userInput.trim().toInt())) {
+            is LottoBuyingPriceResult.Failure -> retry(buyingPriceResult.errorMessage, ::readBuyingPrice)
+            is LottoBuyingPriceResult.Success -> buyingPriceResult.data
+        }
+    }
+
+    private fun createNumberLottoCount(
+        blankValidationResult: Input,
+        buyingPrice: LottoBuyingPrice,
+    ): LottoCount {
+        return when (val numberValidationResult = validateNumeric(blankValidationResult)) {
+            is Input.Failure -> retry(numberValidationResult.errorMessage) { readManualLottoCount(buyingPrice) }
+            is Input.Success -> createLottoCount(numberValidationResult.data, buyingPrice)
+        }
+    }
+
+    private fun createLottoCount(userInput: String, buyingPrice: LottoBuyingPrice): LottoCount {
+        return when (val lottoCountResult = LottoCount.createResult(userInput.trim().toInt())) {
+            is LottoCountResult.Failure -> retry(lottoCountResult.errorMessage) { readManualLottoCount(buyingPrice) }
+            is LottoCountResult.Success -> lottoCountResult.data
+        }
+    }
+
+    private fun readSingleLotto(): LottoResult {
+        val userInput = readlnOrNull()
+        return when (val blankValidationResult = validateIsNullOrBlank(userInput)) {
+            is Input.Failure -> LottoResult.Failure(blankValidationResult.errorMessage)
+            is Input.Success -> createLotto(blankValidationResult.data)
+        }
+    }
+
+    private fun createLotto(validInput: String): LottoResult {
+        return when (val createResult = createLottoNumbers(validInput)) {
+            is LottoResult.Failure -> LottoResult.Failure(createResult.errorMessage)
+            is LottoResult.Success -> createResult
+        }
+    }
+
+    private fun createLottoNumbers(userInput: String): LottoResult {
         val splitInput = userInput.split(DELIMITER).toList()
         val validationResult = splitInput.map {
             val singleInput = Input.Success(it.trim())
             validateSingleNumber(singleInput)
         }
 
-        if (hasWrongInput(validationResult)) {
-            return retryLottoNumbersCreation(validationResult, userInput)
+        if (validationResult.any { it is Input.Failure }) {
+            return createFailLottoResult(validationResult)
         }
-
         return createLottoNumbers(validationResult)
     }
 
     private fun validateSingleNumber(singleInput: Input.Success): Input {
         return when (val numberValidationResult = validateNumeric(singleInput)) {
-            is Input.WrongInput -> numberValidationResult
+            is Input.Failure -> numberValidationResult
             is Input.Success -> Input.Success(numberValidationResult.data.trim())
         }
     }
 
-    private fun hasWrongInput(inputs: List<Input>): Boolean {
-        return inputs.any { it is Input.WrongInput }
-    }
-
-    private fun retryLottoNumbersCreation(
+    private fun createFailLottoResult(
         validationResult: List<Input>,
-        userInput: String,
-    ): Lotto {
+    ): LottoResult {
         val errorMessage = validationResult
-            .filterIsInstance<Input.WrongInput>()
+            .filterIsInstance<Input.Failure>()
             .first()
             .errorMessage
-        return retry(errorMessage) { createLottoNumbers(userInput) }
+        return LottoResult.Failure(errorMessage)
     }
 
-    private fun createLottoNumbers(validationResult: List<Input>): Lotto {
+    private fun createLottoNumbers(validationResult: List<Input>): LottoResult {
         val lottoNumbers = validationResult
             .filterIsInstance<Input.Success>()
             .map { it.data.toInt() }
+
         return Lotto.createFromNumbers(lottoNumbers)
+    }
+
+    private fun readBonusBall(winningLotto: Lotto): LottoNumber {
+        println(BONUS_BALL_MESSAGE)
+        val userInput = readlnOrNull()
+        val blankValidationResult = validateIsNullOrBlank(userInput)
+        return when (val numberValidationResult = validateNumeric(blankValidationResult)) {
+            is Input.Failure -> retry(numberValidationResult.errorMessage) { readBonusBall(winningLotto) }
+            is Input.Success -> createLottoNumber(numberValidationResult.data, winningLotto)
+        }
+    }
+
+    private fun createLottoNumber(number: String, winningLotto: Lotto): LottoNumber {
+        return when (val lottoNumberResult = LottoNumber.createResult(number.trim().toInt())) {
+            is LottoNumberResult.Failure -> retry(lottoNumberResult.errorMessage) { readBonusBall(winningLotto) }
+            is LottoNumberResult.Success -> lottoNumberResult.data
+        }
     }
 }

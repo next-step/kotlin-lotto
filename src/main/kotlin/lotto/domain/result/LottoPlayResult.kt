@@ -2,7 +2,7 @@ package lotto.domain.result
 
 import lotto.domain.purchase.LottoBuyingPrice
 
-class LottoResult(
+class LottoPlayResult(
     val matchCountByRank: Map<LottoRank, Int>,
 ) {
 
