@@ -4,9 +4,11 @@ import lotto.domain.LottoRoiCalculator
 import lotto.domain.LottoShop
 import lotto.domain.LottoWinning
 import lotto.domain.Lottos
+import lotto.domain.strategyImpl.AutoLottoFactory
 import lotto.dto.BonusNumberDto
 import lotto.dto.JackpotDto
 import lotto.dto.LottoDto
+import lotto.dto.LottoPurchaseInfoDto
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -16,18 +18,20 @@ fun main() {
     OutputView.printManualLottoBuyCount()
     val manualLottoBuyCount = InputView.inputManualLottoBuyCount()
     OutputView.printManualLottoNumbers()
-    val lottoShop = LottoShop()
-    val manualLottoNumbers = Lottos(
+    val lottoShop = LottoShop(AutoLottoFactory())
+    val manualLottos = Lottos(
         List(manualLottoBuyCount) { lottoShop.generateLottoNumbers(InputView.inputManualLottoNumbers()) }
     )
 
-    val lottoBuyCount = lottoShop.countBuyLotto(money)
-    OutputView.printLottoCount(lottoBuyCount.toString())
-    val lottoList = lottoShop.buyLotto(lottoBuyCount)
-    val lottoDto = lottoList.lottos.map { LottoDto(it) }.toList()
+    val lottoPurchaseInfo = lottoShop.countBuyLotto(money, manualLottoBuyCount)
+    val lottoPurchaseInfoDto = LottoPurchaseInfoDto(lottoPurchaseInfo)
+    OutputView.printLottoCount(lottoPurchaseInfoDto)
+
+    val autoLottos = lottoShop.buyAutoLotto(lottoPurchaseInfoDto.autoLottoCount)
+    val totalLottos = manualLottos + autoLottos
+    val lottoDto = totalLottos.lottos.map { LottoDto(it) }.toList()
 
     OutputView.printLottoList(lottoDto)
-
     OutputView.printJackpotNumber()
     val inputNumber = InputView.inputJackpotNumber()
     OutputView.printBonusNumber()
@@ -38,7 +42,7 @@ fun main() {
 
     OutputView.printLottoStatistics()
     OutputView.printLine()
-    val findJackpot = lottoWinning.checkLottoWinning(lottoList)
+    val findJackpot = lottoWinning.checkLottoWinning(autoLottos)
 
     val totalIncome = LottoRoiCalculator.calculateTotalIncome(findJackpot)
     val roi = LottoRoiCalculator.calculateROI(totalIncome, money)
