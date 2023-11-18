@@ -4,6 +4,7 @@ import lotto.component.LottoInputConverter
 import lotto.model.LottoNumbers
 import lotto.model.LottoResult
 import lotto.model.WinningNumbers
+import lotto.utils.convertToLottoNumberList
 import lotto.view.LottoInputView
 import lotto.view.LottoResultView
 
@@ -19,21 +20,16 @@ class LottoViewController(
     }
 
     fun getLottoNumbers(purchasePrice: Int): List<LottoNumbers> {
-        val lottoNumbers: List<LottoNumbers> = lottoInputConverter.getLottoNumbers(purchasePrice)
-
-        lottoInputView.printPurchasedLottoNumbers(lottoNumbers)
-
-        return lottoNumbers
+        return lottoInputConverter.getLottoNumbers(purchasePrice)
     }
 
     fun getWinningNumbers(): WinningNumbers {
         val winningNumbers: String? = lottoInputView.getWinningNumbers()
         return lottoInputConverter.getWinningNumbers(winningNumbers)
-
     }
 
     fun printPurchasedLottoNumbers(lottoNumbers: List<LottoNumbers>) {
-        lottoInputView.printPurchasedLottoNumbers(lottoNumbers)
+        lottoInputView.printPurchasedLottoNumbers(lottoNumbers.convertToLottoNumberList())
     }
 
     fun printLottoResult(lottoResult: LottoResult) {

@@ -1,5 +1,7 @@
 package lotto.utils
 
+import lotto.model.LottoNumbers
+
 fun shuffleAndTake(list: List<Int>, n: Int, sort: Boolean = false): List<Int> {
     val shuffled = list
         .shuffled()
@@ -10,4 +12,8 @@ fun shuffleAndTake(list: List<Int>, n: Int, sort: Boolean = false): List<Int> {
     } else {
         shuffled
     }
+}
+
+fun List<LottoNumbers>.convertToLottoNumberList(): List<List<Int>> {
+    return map { it.numbers }
 }
