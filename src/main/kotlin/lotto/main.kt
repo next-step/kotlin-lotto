@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.LottoMachine
+import lotto.domain.LottoStatCalculator
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -11,16 +12,16 @@ fun main() {
 
     val manualLottery = InputView.getManualLotto(count = manualLottoCount)
 
-    val purchasedLottoList = LottoMachine.purchase(
+    val purchasedLottery = LottoMachine.purchase(
         purchaseAmount = purchaseAmount,
         manualLottery = manualLottery
     )
 
-    ResultView.showPurchasedLotto(purchasedLottoList)
+    ResultView.showPurchasedLottery(purchasedLottery)
 
-    // val lastWinnerLotto = InputView.getLastWinnerLotto()
+    val lastWinnerLotto = InputView.getLastWinnerLotto()
 
-    // val lottoStatResult = LottoStatCalculator(lastWinnerLotto).getStat(purchasedLottoList)
+    val lottoStatResult = LottoStatCalculator(lastWinnerLotto).getStat(purchasedLottery.getLottery())
 
-    // ResultView.showLottoStatResult(lottoStatResult)
+    ResultView.showLottoStatResult(lottoStatResult)
 }

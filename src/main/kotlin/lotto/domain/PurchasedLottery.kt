@@ -7,5 +7,5 @@ class PurchasedLottery(
     fun getManualCount(): Int = manualLottery.getCount()
     fun getAutoCount(): Int = autoLottery.getCount()
 
-    fun getLottoList(): List<Lotto> = manualLottery.lottoList + autoLottery.lottoList
+    fun getLottery(): Lottery = Lottery(manualLottery.lottoList + autoLottery.lottoList)
 }

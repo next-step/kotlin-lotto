@@ -8,7 +8,7 @@ object LottoMachine {
         manualLottery: Lottery,
     ): PurchasedLottery {
         val numberOfLotto = purchaseAmount / LOTTO_PRICE
-        val autoLottoCount =numberOfLotto - manualLottery.getCount()
+        val autoLottoCount = numberOfLotto - manualLottery.getCount()
         val autoLottery = Lottery(List(size = autoLottoCount) { Lotto() })
 
         return PurchasedLottery(
