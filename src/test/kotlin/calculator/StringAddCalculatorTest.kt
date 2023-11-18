@@ -53,4 +53,10 @@ class StringAddCalculatorTest {
         val result = calculator.add(text)
         assertThat(result).isEqualTo(6)
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["//;\n1;2;3"])
+    fun customDelimiter(text: String) {
+        assertThat(calculator.add(text)).isSameAs(6);
+    }
 }
