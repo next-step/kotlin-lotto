@@ -24,12 +24,12 @@ class LottoShopTest {
     @Test
     fun `lottoBuyCount 만큼 Lotto 가 만들어 진다`() {
         val lottoList = lottoShop.buyLotto(LOTTO_TRY_COUNT)
-        assertEquals(4, lottoList.size)
+        assertEquals(4, lottoList.lottos.size)
     }
 
     @Test
     fun `입력된 로또 번호를 구분자를 이용해 List 로 만들어 준다`() {
-        val jackpotList = lottoShop.generateJackpotNumbers(JACKPOT_NUMBERS).lotto
+        val jackpotList = lottoShop.generateLottoNumbers(JACKPOT_NUMBERS).lotto
         val expectedList = LOTTO
 
         assertEquals(expectedList, jackpotList)

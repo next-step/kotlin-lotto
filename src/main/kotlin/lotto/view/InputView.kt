@@ -31,4 +31,31 @@ object InputView {
             throw IllegalArgumentException(EXPECT_NUMBER_MESSAGE.message)
         }
     }
+
+    fun inputManualLottoBuyCount(): Int {
+        try {
+            return readln().toInt()
+        } catch (e: NullPointerException) {
+            throw IllegalArgumentException(EMPTY_INPUT_MESSAGE.message)
+        } catch (e: NumberFormatException) {
+            throw IllegalArgumentException(EXPECT_NUMBER_MESSAGE.message)
+        }
+    }
+
+    fun inputManualLottoNumbers(): String {
+        val manualLottoNumber = readln()
+        require(manualLottoNumber.isNotEmpty()) { EMPTY_INPUT_MESSAGE.message }
+
+        return manualLottoNumber
+    }
+
+//    fun inputManualLottoNumbers(manualLottoCount: Int): List<String> {
+//        val manualLottoNumbers = mutableListOf<String>()
+//        for (i in 0 until manualLottoCount) {
+//            val manualLottoNumber = readln()
+//            require(manualLottoNumber.isNotEmpty()) { EMPTY_INPUT_MESSAGE.message }
+//            manualLottoNumbers.add(manualLottoNumber)
+//        }
+//        return manualLottoNumbers
+//    }
 }

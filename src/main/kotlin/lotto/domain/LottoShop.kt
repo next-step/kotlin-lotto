@@ -12,9 +12,9 @@ class LottoShop(private val drawStrategy: DrawStrategy = AutoLottoFactory()) {
         return lottoBuyCount
     }
 
-    fun buyLotto(lottoBuyCount: Int): List<Lotto> = List(lottoBuyCount) { drawStrategy.draw() }
+    fun buyLotto(lottoBuyCount: Int): Lottos = Lottos(List(lottoBuyCount) { drawStrategy.draw() })
 
-    fun generateJackpotNumbers(inputNumber: String, delimiters: String = ", "): Lotto {
+    fun generateLottoNumbers(inputNumber: String, delimiters: String = ", "): Lotto {
         return Lotto(inputNumber.split(delimiters).map { LottoNumber(it.toInt()) })
     }
 
