@@ -7,8 +7,7 @@ import lotto.model.LottoNumbers
 import lotto.model.WinningNumbers
 
 class LottoInputService(
-    private val lottoInputValidator: LottoInputValidator,
-    private val lottoNumbersGenerator: LottoNumbersGenerator
+    private val lottoInputValidator: LottoInputValidator
 ) {
     fun getPurchasePrice(purchasePrice: String?): Int {
         return purchasePrice.run { lottoInputValidator.validatePurchasePrice(this) }
@@ -18,7 +17,7 @@ class LottoInputService(
     fun getLottoNumbers(purchasePrice: Int): List<LottoNumbers> {
         val lottoNumbersCount: Int = lottoInputValidator.validateLottoNumbersCount(purchasePrice / Lotto.LOTTO_PRICE)
 
-        return lottoNumbersGenerator.generate(lottoNumbersCount)
+        return LottoNumbersGenerator.generate(lottoNumbersCount)
     }
 
     fun getWinningNumbers(winningNumbers: String?): WinningNumbers {

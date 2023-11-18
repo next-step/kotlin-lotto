@@ -1,6 +1,8 @@
 package lotto
 
-import lotto.component.*
+import lotto.component.Lotto
+import lotto.component.LottoInputValidator
+import lotto.component.LottoResultAnalyzer
 import lotto.controller.LottoController
 import lotto.controller.LottoViewController
 import lotto.service.LottoInputService
@@ -9,8 +11,7 @@ import lotto.view.LottoResultView
 
 fun main() {
     val lottoInputService = LottoInputService(
-        LottoInputValidator(),
-        LottoNumbersGenerator()
+        LottoInputValidator()
     )
     val lottoViewController = LottoViewController(
         LottoInputView(),
