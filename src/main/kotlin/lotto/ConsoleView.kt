@@ -5,6 +5,7 @@ object ConsoleView {
     object Input {
         private const val PURCHASE_AMOUNT_PROMPT = "구입 금액을 입력해 주세요."
         private const val RECENT_LOTTO_WINNING_NUMBERS_PROMPT = "지난 주 당첨 번호를 입력해 주세요."
+        private const val RECENT_LOTTO_BONUS_NUMBER_PROMPT = "보너스 볼을 입력해 주세요."
 
         fun printPurchaseAmountPrompt() {
             println(PURCHASE_AMOUNT_PROMPT)
@@ -16,7 +17,7 @@ object ConsoleView {
 
         fun getPurchaseAmount(): Int {
             val purchaseAmount = getUserInput().toIntOrNull()
-                ?: throw IllegalArgumentException("구입 금액은 숫자로 입력해주세요. ")
+                ?: throw IllegalArgumentException("구입 금액은 숫자로 입력해주세요.")
 
             LottoPolicy.validatePurchaseAmount(purchaseAmount)
 
@@ -30,6 +31,15 @@ object ConsoleView {
         fun getLottoWinningNumbers(): List<Int> {
             return getUserInput().split(",")
                 .map { it.trim().toInt() }.sorted()
+        }
+
+        fun printBonusNumbersPrompt() {
+            println(RECENT_LOTTO_BONUS_NUMBER_PROMPT)
+        }
+
+        fun getLottoBonusNumber(): Int {
+            return getUserInput().toIntOrNull()
+                ?: throw IllegalArgumentException("보너스 볼은 숫자로 입력해주세요.")
         }
     }
 
