@@ -11,8 +11,6 @@ import lottoAuto.view.InputView
 import lottoAuto.view.OutputView
 
 object LottoController {
-    private const val LOTTO_PRICE = 1000
-
     fun getPurchaseAmount(): Int {
         return InputView.getPurchaseAmount()
     }
@@ -30,10 +28,9 @@ object LottoController {
     }
 
     fun createLottoList(purchaseAmount: Int): List<Lotto> {
-        val numOfLotto = purchaseAmount / LOTTO_PRICE
-        OutputView.printNumOfLotto(numOfLotto)
+        val lottoList = LottoFactory.create(purchaseAmount)
+        OutputView.printNumOfLotto(lottoList.size)
 
-        val lottoList = LottoFactory.create(numOfLotto)
         lottoList.forEach {
             val lottoNumbers = it.lottoNumbers.map { lottoNumber -> lottoNumber.number }
             OutputView.printLottoNumbers(lottoNumbers)

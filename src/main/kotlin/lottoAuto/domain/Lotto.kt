@@ -14,5 +14,6 @@ data class Lotto(
 
     companion object {
         const val LOTTO_SIZE = 6
+        const val LOTTO_PRICE = 1000
     }
 }

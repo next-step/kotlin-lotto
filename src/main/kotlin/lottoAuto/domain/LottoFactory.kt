@@ -2,7 +2,8 @@ package lottoAuto.domain
 
 
 object LottoFactory {
-    fun create(numOfLotto: Int): List<Lotto> {
+    fun create(purchaseAmount: Int): List<Lotto> {
+        val numOfLotto = purchaseAmount / Lotto.LOTTO_PRICE
         return List(numOfLotto) { Lotto(createShuffledLottoNumbers()) }
     }
 
