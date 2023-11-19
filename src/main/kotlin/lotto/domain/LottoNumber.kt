@@ -1,8 +1,9 @@
 package lotto.domain
 
 @JvmInline
-value class LottoNumber(val value: Int) {
+value class LottoNumber(val value: Int?) {
     init {
+        require(value != null) { "로또에는 숫자만 적힐 수 있습니다." }
         require(value in LOTTO_START_NUMBER..LOTTO_END_NUMBER) { "로또에는 1 ~ 45 사이의 숫자만 적힐 수 있습니다" }
     }
 

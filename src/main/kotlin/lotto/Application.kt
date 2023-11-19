@@ -11,14 +11,17 @@ fun main() {
         val lottoManualCount = LottoCount(readManualLottoCount())
         val lottoAutoCount = totalLottoCount - lottoManualCount
 
-        val lottoList = LottoFactory.generateLottoList(lottoAutoCount)
-        printLottoList(lottoList)
+        val lottoManualList = LottoFactory.generateLottoList(readLottoNumbers(lottoManualCount))
+        val lottoAutoList = LottoFactory.generateLottoList(lottoAutoCount)
+        val lottoTotalList = lottoManualList + lottoAutoList
+        printLottoList(lottoManualList)
+        printLottoList(lottoAutoList)
 
         val winningNumbers = WinningNumbers(
             LottoNumbers(readWinningNumbers().map { LottoNumber(it) }.toSet()),
             LottoNumber(readBonusNumber())
         )
-        val lottoGame = LottoGame(lottoList)
+        val lottoGame = LottoGame(lottoTotalList)
         val lottoGameResult = lottoGame.getResult(winningNumbers)
         printLottoGameResult(lottoGameResult)
     } catch (e: IllegalArgumentException) {
