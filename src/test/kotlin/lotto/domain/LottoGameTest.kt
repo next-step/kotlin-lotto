@@ -6,38 +6,132 @@ import io.kotest.matchers.shouldBe
 class LottoGameTest : FunSpec({
     context("로또 게임은") {
         val lottoList = listOf(
-            Lotto(lottoNumbers = LottoNumbers(setOf(1, 15, 20, 27, 30, 36))),  // 4등
-            Lotto(lottoNumbers = LottoNumbers(setOf(10, 16, 20, 25, 30, 40))), // 3등
-            Lotto(lottoNumbers = LottoNumbers(setOf(11, 12, 13, 14, 15, 16))), // 미당첨
-            Lotto(lottoNumbers = LottoNumbers(setOf(10, 15, 20, 25, 30, 40))), // 2등
-            Lotto(lottoNumbers = LottoNumbers(setOf(10, 15, 20, 25, 30, 35)))  // 1등
+            LottoNumbers(
+                setOf(
+                    LottoNumber(1),
+                    LottoNumber(15),
+                    LottoNumber(20),
+                    LottoNumber(27),
+                    LottoNumber(30),
+                    LottoNumber(36)
+                )
+            ),
+            LottoNumbers(
+                setOf(
+                    LottoNumber(10),
+                    LottoNumber(16),
+                    LottoNumber(20),
+                    LottoNumber(25),
+                    LottoNumber(30),
+                    LottoNumber(40)
+                )
+            ),
+            LottoNumbers(
+                setOf(
+                    LottoNumber(11),
+                    LottoNumber(12),
+                    LottoNumber(13),
+                    LottoNumber(14),
+                    LottoNumber(15),
+                    LottoNumber(16)
+                )
+            ),
+            LottoNumbers(
+                setOf(
+                    LottoNumber(10),
+                    LottoNumber(15),
+                    LottoNumber(20),
+                    LottoNumber(25),
+                    LottoNumber(30),
+                    LottoNumber(40)
+                )
+            ),
+            LottoNumbers(
+                setOf(
+                    LottoNumber(10),
+                    LottoNumber(15),
+                    LottoNumber(20),
+                    LottoNumber(25),
+                    LottoNumber(30),
+                    LottoNumber(13)
+                )
+            ),
+            LottoNumbers(
+                setOf(
+                    LottoNumber(10),
+                    LottoNumber(15),
+                    LottoNumber(20),
+                    LottoNumber(25),
+                    LottoNumber(30),
+                    LottoNumber(35)
+                )
+            ),
         )
-        val winningNumbers = LottoNumbers(setOf(10, 15, 20, 25, 30, 35))
-        val lottoGame = LottoGame(lottoList, winningNumbers)
+        val lottoGame = LottoGame(lottoList)
+        val winningNumbers = WinningNumbers(
+            LottoNumbers(
+                setOf(
+                    LottoNumber(10),
+                    LottoNumber(15),
+                    LottoNumber(20),
+                    LottoNumber(25),
+                    LottoNumber(30),
+                    LottoNumber(35)
+                )
+            ), LottoNumber(13)
+        )
 
         test("N개의 로또를 가진다.") {
-            lottoGame.lottoList.size shouldBe 5
-        }
-
-        test("지난 주 당첨 번호를 가진다.") {
-            lottoGame.winningNumbers shouldBe winningNumbers
+            lottoGame.lottoList.size shouldBe 6
         }
 
         test("3-6개 일치 로또의 개수를 계산할 수 있다.") {
             val expected = LottoGameResult(
-                totalPrice = 5000,
+                totalPrice = 6000,
                 rewards = listOf(
                     LottoReward.FIRST,
                     LottoReward.SECOND,
                     LottoReward.THIRD,
-                    LottoReward.FOURTH
+                    LottoReward.FOURTH,
+                    LottoReward.FIFTH
                 )
             )
-            lottoGame.getResult() shouldBe expected
+            lottoGame.getResult(winningNumbers) shouldBe expected
         }
 
         test("로또 게임은 총 수익률을 계산할 수 있다.") {
-            lottoGame.getResult().calculatePerformance() shouldBe 400311
+            lottoGame.getResult(winningNumbers).calculatePerformance() shouldBe 338592.5
         }
+    }
+
+    context("로또 게임의 2등 인원을 찾아낼 수 있다.") {
+        val lottoGame = LottoGame(
+            listOf(
+                LottoNumbers(
+                    setOf(
+                        LottoNumber(1),
+                        LottoNumber(2),
+                        LottoNumber(3),
+                        LottoNumber(4),
+                        LottoNumber(5),
+                        LottoNumber(6)
+                    )
+                )
+            )
+        )
+        val winningNumbers = WinningNumbers(
+            LottoNumbers(
+                setOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5),
+                    LottoNumber(10)
+                )
+            ), LottoNumber(6)
+        )
+        val lottoGameResult = lottoGame.getResult(winningNumbers)
+        lottoGameResult.rewards[0] shouldBe LottoReward.SECOND
     }
 })

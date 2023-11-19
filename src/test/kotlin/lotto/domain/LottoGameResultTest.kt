@@ -2,6 +2,7 @@ package lotto.domain
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import lotto.view.state
 
 class LottoGameResultTest : FunSpec({
     test("로또 게임의 수익률은 `수익금 / 원금` 으로 계산된다.") {
@@ -26,12 +27,13 @@ class LottoGameResultTest : FunSpec({
             totalPrice = 3000,
             rewards = listOf(LottoReward.FIRST, LottoReward.SECOND)
         )
-        lottoGameResult.toString() shouldBe """
+        lottoGameResult.state() shouldBe """
             3개 일치 (5000원) - 0개
             4개 일치 (50000원) - 0개
-            5개 일치 (1500000원) - 1개
+            5개 일치 (1500000원) - 0개
+            5개 일치, 보너스 볼 일치 (30000000원) - 1개
             6개 일치 (2000000000원) - 1개
-            총 수익률은 667,166.67입니다.
+            총 수익률은 676,666.67입니다.
             """.trimIndent()
     }
 })
