@@ -13,7 +13,6 @@ class LottoResultTest {
         val winningLotto = WinningLotto(winningNumbers, bonusNumber)
 
         val lottos = listOf<Lotto>(lotto1)
-        // Act
         val lottoResult = LottoResult.getResult(winningLotto, lottos)
 
         Assertions.assertThat(lottoResult.getProfitRate(1000)).isEqualTo("2000000.0")
