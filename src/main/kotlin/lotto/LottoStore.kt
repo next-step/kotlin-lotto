@@ -18,7 +18,7 @@ class LottoStore(
         val userLottos = lottoMachine.sellLotto(userPay)
         outputManager.printSellLottoCount(userLottos)
 
-        val winningNumbers = WinningLotto.create(inputManager.inputWinningNumber())
+        val winningNumbers = WinningLotto.create(inputManager.inputWinningNumber(), inputManager.inputBonusNumber())
         val result = winningNumbers.match(userLottos)
         outputManager.printResult(result)
 

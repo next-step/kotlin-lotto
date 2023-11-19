@@ -1,6 +1,9 @@
 package lotto.domain
 
-class WinningLotto(val lottoNumbers: LottoNumbers) {
+class WinningLotto(
+    private val lottoNumbers: LottoNumbers,
+    private val bonusNumber: LottoNumber
+) {
     fun getNumbers(): List<LottoNumber> {
         return lottoNumbers.getNumbers()
     }
@@ -22,9 +25,9 @@ class WinningLotto(val lottoNumbers: LottoNumbers) {
     }
 
     companion object {
-        fun create(numbers: List<Int>): WinningLotto {
+        fun create(numbers: List<Int>, bonusNumber: Int): WinningLotto {
             val lottoNumbers = LottoNumbers(numbers.map { LottoNumber(it) })
-            return WinningLotto(lottoNumbers)
+            return WinningLotto(lottoNumbers, LottoNumber(bonusNumber))
         }
     }
 }
