@@ -3,8 +3,6 @@ package lotto.domain
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.collections.shouldContainInOrder
 import io.kotest.matchers.shouldBe
-import lotto.domain.LottoNumbers
-import lotto.domain.LottoNumber
 import org.junit.jupiter.api.Test
 
 class LottoNumbersNumbersTest {

@@ -28,7 +28,6 @@ class WinningLotto(
         return count to lottoNumbers.getNumbers().contains(bonusNumber)
     }
 
-
     companion object {
         fun create(numbers: List<Int>, bonusNumber: Int): WinningLotto {
             val lottoNumbers = LottoNumbers(numbers.map { LottoNumber(it) })
