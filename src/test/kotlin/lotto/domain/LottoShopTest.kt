@@ -24,7 +24,7 @@ class LottoShopTest {
 
     @Test
     fun `lottoBuyCount 만큼 Lotto 가 만들어 진다`() {
-        val lottoList = lottoShop.buyLotto(LOTTO_TRY_COUNT)
+        val lottoList = lottoShop.buyLotto(LOTTO_TRY_COUNT, Lottos(listOf()))
         assertEquals(4, lottoList.lottos.size)
     }
 
@@ -38,7 +38,7 @@ class LottoShopTest {
 
     @Test
     fun `로또 추첨을 하면 6개의 무작위 숫자가 뽑혀야 한다`() {
-        val draw = lottoShop.buyLotto(3)
+        val draw = lottoShop.buyLotto(3, Lottos(listOf()))
         assertEquals(LOTTO_SIZE, draw.lottos.size)
     }
 
