@@ -1,9 +1,5 @@
 package lottoAuto.view
 
-import lottoAuto.domain.Lotto
-import lottoAuto.domain.LottoNumber
-import lottoAuto.domain.LottoNumbers
-
 object InputView {
     fun getPurchaseAmount(): Int {
         println("구입 금액을 입력해 주세요.")
@@ -12,12 +8,13 @@ object InputView {
         return purchaseAmount
     }
 
-    fun getWinningLotto(): Lotto {
+    fun getBonusNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        return readln().toInt()
+    }
+
+    fun getWinningNumbers(): List<Int> {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
-        val winningLottoNumbers = readln().split(",").map { LottoNumber.of(it.toInt()) }
-        require(winningLottoNumbers.size == LottoNumbers.NUM_OF_LOTTO_NUMBERS) { "당첨 번호는 6개여야 합니다." }
-        return Lotto(
-            LottoNumbers(numbers = winningLottoNumbers)
-        )
+        return readln().split(",").map { it.trim().toInt() }
     }
 }

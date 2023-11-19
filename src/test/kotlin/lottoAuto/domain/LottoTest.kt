@@ -2,71 +2,59 @@ package lottoAuto.domain
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class LottoTest {
     @Test
-    fun `동일한 LottoNumber로 구성된 두 개의 로또가 서로 같은지 확인한다`() {
+    fun `로또 번호가 6개가 아닐 경우 로또 생성 시 IllegalArgumentException을 발생시킨다`() {
         // given
-        val lottoNumbers1 = LottoNumbers(
-            listOf(
-                LottoNumber.of(1),
-                LottoNumber.of(2),
-                LottoNumber.of(3),
-                LottoNumber.of(4),
-                LottoNumber.of(5),
-                LottoNumber.of(6)
-            )
+        val lottoNumbers = listOf(
+            1.toLottoNumber(),
+            2.toLottoNumber(),
+            3.toLottoNumber(),
+            4.toLottoNumber(),
+            5.toLottoNumber()
         )
-        val lottoNumbers2 = LottoNumbers(
-            listOf(
-                LottoNumber.of(4),
-                LottoNumber.of(2),
-                LottoNumber.of(6),
-                LottoNumber.of(1),
-                LottoNumber.of(3),
-                LottoNumber.of(5),
-            )
-        )
-        val lotto1 = Lotto(lottoNumbers1)
-        val lotto2 = Lotto(lottoNumbers2)
 
-        // when
-        val isMatched = lotto1.match(lotto2)
-
-        // then
-        assertEquals(true, isMatched)
+        assertThrows<IllegalArgumentException> { // then
+            Lotto(lottoNumbers) // when
+        }
     }
 
     @Test
-    fun `동일하지 않은 번호로 구성된 두 개의 로또가 서로 다른지 확인한다`() {
+    fun `중복된 로또 번호가 들어왔을 경우 IllegalArgumentException을 발생시킨다`() {
         // given
-        val lottoNumbers1 = LottoNumbers(
-            listOf(
-                LottoNumber.of(1),
-                LottoNumber.of(2),
-                LottoNumber.of(3),
-                LottoNumber.of(4),
-                LottoNumber.of(5),
-                LottoNumber.of(6)
-            )
+        val lottoNumbers = listOf(
+            1.toLottoNumber(),
+            1.toLottoNumber(),
+            2.toLottoNumber(),
+            3.toLottoNumber(),
+            4.toLottoNumber()
         )
-        val lottoNumbers2 = LottoNumbers(
-            listOf(
-                LottoNumber.of(10),
-                LottoNumber.of(20),
-                LottoNumber.of(30),
-                LottoNumber.of(40),
-                LottoNumber.of(45),
-                LottoNumber.of(45),
-            )
+
+        assertThrows<IllegalArgumentException> { // then
+            Lotto(lottoNumbers) // when
+        }
+    }
+
+    @Test
+    fun `withSameNumber 테스트`() {
+        // given
+        val lottoNumbers = listOf(
+            1.toLottoNumber(),
+            2.toLottoNumber(),
+            3.toLottoNumber(),
+            4.toLottoNumber(),
+            5.toLottoNumber(),
+            6.toLottoNumber()
         )
-        val lotto1 = Lotto(lottoNumbers1)
-        val lotto2 = Lotto(lottoNumbers2)
 
         // when
-        val isMatched = lotto1.match(lotto2)
+        val withSameNumber = Lotto(lottoNumbers).withSameNumber(5.toLottoNumber())
+        val withNoSameNumber = Lotto(lottoNumbers).withSameNumber(7.toLottoNumber())
 
         // then
-        assertEquals(false, isMatched)
+        assertEquals(true, withSameNumber)
+        assertEquals(false, withNoSameNumber)
     }
 }

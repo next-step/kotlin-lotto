@@ -1,5 +1,7 @@
 package lottoAuto.domain
 
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertSame
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -10,7 +12,22 @@ class LottoNumberTest {
         val number = 0
 
         assertThrows<IllegalArgumentException> { // then
-            LottoNumber.of(number) // when
+            number.toLottoNumber() // when
         }
+    }
+
+    @Test
+    fun `동일한 로또 번호가 주어질 경우 캐싱된 객체를 가져오는지 확인한다`() {
+        // given
+        val number1 = 1
+        val number2 = 1
+
+        // when
+        val lottoNumber1 = number1.toLottoNumber()
+        val lottoNumber2 = number2.toLottoNumber()
+
+        // then
+        assertEquals(lottoNumber1, lottoNumber2)
+        assertSame(lottoNumber1, lottoNumber2)
     }
 }

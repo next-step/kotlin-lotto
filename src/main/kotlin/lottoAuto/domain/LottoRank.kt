@@ -5,12 +5,16 @@ enum class LottoRank(val matchCount: Int, val winningMoney: Int) {
     FOURTH(3, 5_000),
     THIRD(4, 50_000),
     SECOND(5, 1_500_000),
+    BONUS(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
     companion object {
-        fun from(lotto: Lotto, winningLotto: Lotto): LottoRank {
+        fun from(matchCount: Int, withBonus: Boolean = false): LottoRank {
+            if (BONUS.matchCount == matchCount && withBonus) {
+                return BONUS
+            }
             return values().find {
-                it.matchCount == lotto.lottoNumbers.countSameNumber(winningLotto.lottoNumbers)
+                it.matchCount == matchCount
             } ?: MISS
         }
     }
