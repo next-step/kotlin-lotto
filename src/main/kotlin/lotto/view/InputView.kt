@@ -18,13 +18,15 @@ object InputView {
     fun getManualLotto(count: Int): Lottery {
         println("수동으로 구매할 번호를 입력해 주세요.")
 
-        return Lottery(List(count) { _ ->
-            Lotto(
-                readln()
-                    .split(",")
-                    .map { it.trim().toInt() },
-            )
-        })
+        return Lottery(
+            List(count) { _ ->
+                Lotto(
+                    readln()
+                        .split(",")
+                        .map { it.trim().toInt() },
+                )
+            }
+        )
     }
 
     fun getLastWinnerLotto(): WinningLotto {
