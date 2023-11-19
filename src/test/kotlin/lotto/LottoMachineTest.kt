@@ -1,19 +1,16 @@
 package lotto
 
-import io.kotest.core.spec.style.FunSpec
-import io.kotest.matchers.shouldBe
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
-class LottoMachineTest : FunSpec({
-    val lottoMachine = LottoMachine(5000)
+class LottoMachineTest {
 
-    test("구입 금액에 대한 총 로또 발급 갯수를 출력 한 뒤 로또 발급 갯수 확인") {
-        lottoMachine.getCountOfLotto() shouldBe 5
-        lottoMachine.getLottoList().size shouldBe 5
+    @ParameterizedTest
+    @CsvSource(value = ["5000, 5", "14000, 14"])
+    fun `구입금액에 대한 로또를 발급한다`(amount: Int, expectSize: Int) {
+        val lottoNumberGenerator = LottoNumberGenerator()
+        val lottos = LottoMachine.generateLotto(amount, lottoNumberGenerator)
+        assertThat(lottos.size).isEqualTo(expectSize)
     }
-
-    test("로또 수익률 계산") {
-        val totalPrize = 5_000
-        val totalEarning = LottoMachine.calculateTotalEarning(totalPrize, 14)
-        totalEarning shouldBe 0.35
-    }
-})
+}

@@ -1,26 +1,33 @@
 package lotto.view
 
-import lotto.LottoMachine
+import lotto.Lotto
+import lotto.LottoNumber
 import lotto.LottoPrize
+import lotto.LottoResult
 
 object ResultView {
-    fun printWinningStatistics(winningResult: Map<Int, Int>) {
-        println("당첨 통계")
-        println("---------")
+    fun printLottoList(lottos: List<Lotto>) {
+        println("${lottos.size}개를 구매했습니다.")
+        for (lotto in lottos) {
+            printLotto(lotto.lottoNumbers)
+        }
+    }
 
-        val winningResult = buildString {
-            for (matchingNumbers in 3..6) {
-                val count = winningResult[matchingNumbers] ?: 0
-                val prize = LottoPrize.getPrize(matchingNumbers)
-                appendLine("$matchingNumbers 개 일치 ($prize)원- $count 개")
+    private fun printLotto(numbers: List<LottoNumber>) {
+        println("[${numbers.joinToString { it.number.toString() }}]")
+    }
+
+    fun printWinningResult(result: LottoResult, purchaseAmount: Int) {
+        println("당첨 통계")
+        println("------------")
+        val ranks = LottoPrize.values().filter { it != LottoPrize.MISS }
+        for (rank in ranks) {
+            if (rank.prizeMoney == 30000000) {
+                println("${rank.matchCount}개 일치, 보너스 볼 일치 (${rank.prizeMoney}원)- ${result.count(rank)}개")
+            } else {
+                println("${rank.matchCount}개 일치 (${rank.prizeMoney}원)- ${result.count(rank)}개")
             }
         }
-        println(winningResult)
+        println("총 수익률은 ${result.getProfitRate(purchaseAmount)}입니다.")
     }
-
-    fun printTotalProfitRate(totalPrize: Int, amount : Int) {
-        val profitRate = LottoMachine.calculateTotalEarning(totalPrize, amount)
-        println("총 수익률은 $profitRate 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
-    }
-
 }

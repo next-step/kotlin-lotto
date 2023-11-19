@@ -3,16 +3,17 @@ package lotto
 import lotto.view.InputView
 import lotto.view.ResultView
 
+
 fun main() {
-    val inputView = InputView
-    val resultView = ResultView
+    val purchaseAmount = InputView.getPurchaseAmount()
+    val lottoNumberGenerator = LottoNumberGenerator()
+    val lottoList = LottoMachine.generateLotto(purchaseAmount, lottoNumberGenerator)
 
-    val lottoNumbers = inputView.inputPurchaseAmount()
+    ResultView.printLottoList(lottoList)
 
-    val winningNumbers = inputView.inputWinningNumbers()
-    val winningResult = LottoMachine.checkWinningNumbers(lottoNumbers, winningNumbers)
-    val totalPrize = LottoMachine.calculateTotalPrize(winningResult)
+    val winningLotto = InputView.getWinningNumbers()
+    val lottoResult = LottoResult.getResult(winningLotto, lottoList)
 
-    resultView.printWinningStatistics(winningResult)
-    resultView.printTotalProfitRate(totalPrize, lottoNumbers.size)
+    ResultView.printWinningResult(lottoResult, purchaseAmount)
+
 }

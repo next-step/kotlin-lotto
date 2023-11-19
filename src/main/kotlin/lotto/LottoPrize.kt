@@ -1,19 +1,33 @@
 package lotto
 
 enum class LottoPrize(val matchCount: Int, val prizeMoney: Int) {
-    FOURTH_PLACE(3, 5_000),
-    THIRD_PLACE(4, 50_000),
-    SECOND_PLACE(5, 1_500_000),
-    FIRST_PLACE(6, 2_000_000_000),
-    NOTHING(0, 0);
+    MISS(0, 0),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000);
 
     companion object {
-        fun getPrize(matchingNumbers: Int): Int {
-            return findByNumber(matchingNumbers)?.prizeMoney ?: 0
+        private fun getMatchingCount(winningNumbers: Lotto, lottoNumbers: Lotto): Int {
+            return lottoNumbers.lottoNumbers.intersect(winningNumbers.lottoNumbers.toSet()).size
         }
 
-        private fun findByNumber(matchingNumbers: Int): LottoPrize? {
-            return values().firstOrNull { it.matchCount == matchingNumbers }
+        private fun isBonusMatched(lottoNumbers: Lotto, bonusNumber: LottoNumber): Boolean {
+            return lottoNumbers.lottoNumbers.contains(bonusNumber)
         }
+        fun of(winningLotto: WinningLotto, lottoNumbers: Lotto): LottoPrize =
+            when (getMatchingCount(winningLotto.winningNumber, lottoNumbers)) {
+                3 -> FIFTH
+                4 -> FOURTH
+                5 -> {
+                    if (isBonusMatched(lottoNumbers, winningLotto.bonusNumber)) SECOND
+                    else THIRD
+                }
+
+                6 -> FIRST
+                else -> MISS
+            }
+
     }
 }
