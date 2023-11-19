@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-class StringAddCalculatorElementTest {
+class StringAddCalculatorNumberTest {
 
     @DisplayName("문자를 숫자로 변환한다.")
     @Test
@@ -16,7 +16,7 @@ class StringAddCalculatorElementTest {
         val text = "1"
 
         // when
-        val element = StringAddCalculatorElement.of(text)
+        val element = StringAddCalculatorNumber.of(text)
 
         // then
         assertThat(element.number).isEqualTo(1)
@@ -29,7 +29,7 @@ class StringAddCalculatorElementTest {
         // given
 
         // when & then
-        assertThatThrownBy { StringAddCalculatorElement.of(text) }
+        assertThatThrownBy { StringAddCalculatorNumber.of(text) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("숫자가 아닙니다.")
     }
@@ -40,7 +40,7 @@ class StringAddCalculatorElementTest {
         // given
 
         // when & then
-        assertThatThrownBy { StringAddCalculatorElement.of("-1") }
+        assertThatThrownBy { StringAddCalculatorNumber.of("-1") }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("음수는 입력할 수 없습니다.")
     }

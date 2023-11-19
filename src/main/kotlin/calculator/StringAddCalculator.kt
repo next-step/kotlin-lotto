@@ -2,13 +2,13 @@ package calculator
 
 class StringAddCalculator {
     fun calculate(text: String?): Int {
-        val elements = StringAddCalculatorParser.parse(text)
+        val numbers = StringAddCalculatorParser.parse(text)
 
-        if (elements.isEmpty()) {
+        if (numbers.isEmpty()) {
             return NULL_OR_BLANK_RETURN_VALUE
         }
 
-        return elements.sumOf { it.number }
+        return numbers.sumOf { it.number }
     }
 
     companion object {
