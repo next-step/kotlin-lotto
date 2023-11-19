@@ -18,10 +18,6 @@ class Lotto(val lotto: List<LottoNumber>) {
         return lotto.contains(bonusNumber)
     }
 
-    override fun toString(): String {
-        return "Lotto(lotto=$lotto)"
-    }
-
     companion object {
         const val LOTTO_NUMBER_COUNT = 6
     }

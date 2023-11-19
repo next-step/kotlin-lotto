@@ -1,8 +1,6 @@
 package lotto.domain
 
-import lotto.domain.strategy.DrawStrategy
-
-class LottoShop(private val drawStrategy: DrawStrategy) {
+class LottoShop {
 
     fun countBuyLotto(money: Int, manualLottoCount: Int): LottoPurchaseInfo {
         val lottoBuyTotalCount = money.div(LOTTO_PRICE)
@@ -10,7 +8,16 @@ class LottoShop(private val drawStrategy: DrawStrategy) {
         return LottoPurchaseInfo(autoLottoCount, manualLottoCount)
     }
 
-    fun buyAutoLotto(autoLottoBuyCount: Int): Lottos = Lottos(List(autoLottoBuyCount) { drawStrategy.draw() })
+    fun buyLotto(autoLottoBuyCount: Int, manualLottos: Lottos): Lottos {
+        val autoLottos = Lottos(
+            List(autoLottoBuyCount) {
+                val shuffledNumbers = LottoNumber.lottoNumberRange.shuffled().take(Lotto.LOTTO_NUMBER_COUNT)
+                Lotto(shuffledNumbers.map { LottoNumber(it) })
+            }
+        )
+
+        return manualLottos + autoLottos
+    }
 
     fun generateLottoNumbers(inputNumber: String, delimiters: String = ", "): Lotto {
         return Lotto(inputNumber.split(delimiters).map { LottoNumber(it.toInt()) })
