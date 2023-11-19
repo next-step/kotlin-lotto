@@ -14,7 +14,7 @@ class LottoResult {
         if (key < MINIMUM_MATCH_COUNT) {
             return 0
         }
-        return result[Revenue.of(key)] ?: 0
+        return result.getOrDefault(Revenue.of(key), 0)
     }
 
     fun calcRate(lottoPrice: Int, userLottoCount: Int): Double {
