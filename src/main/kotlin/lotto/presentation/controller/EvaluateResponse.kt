@@ -1,6 +1,6 @@
 package lotto.presentation.controller
 
-class EvaluateResponse(
+class EvaluateResponse private constructor(
     val rankResult: List<List<Int>>,
     val earningRate: Double,
 ) {

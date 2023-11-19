@@ -2,7 +2,7 @@ package lotto.presentation.controller
 
 import lotto.domain.LottoStore.Companion.LOTTO_PRICE
 
-class PurchaseRequest(
+class PurchaseRequest private constructor(
     val amount: Int,
 ) {
     companion object {
