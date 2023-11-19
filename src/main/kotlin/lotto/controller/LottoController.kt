@@ -40,7 +40,7 @@ fun main() {
 
     OutputView.printLottoStatistics()
     OutputView.printLine()
-    val findJackpot = lottoWinning.checkLottoWinning(totalLottos)
+    val findJackpot = lottoWinning.checkWinningLottos(totalLottos)
 
     val totalIncome = LottoRoiCalculator.calculateTotalIncome(findJackpot)
     val roi = LottoRoiCalculator.calculateROI(totalIncome, money)
