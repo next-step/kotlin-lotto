@@ -2,5 +2,5 @@ package lotto
 
 interface LottoNumberGenerator {
 
-    fun generate(): Int
+    fun generate(): LottoNumber
 }

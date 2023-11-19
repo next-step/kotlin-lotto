@@ -14,10 +14,10 @@ class LottoRuleTest : StringSpec({
             Pair(listOf(1, 2, 3, 4, 5, 11), Prize.SECOND_PRIZE),
             Pair(listOf(1, 2, 3, 4, 5, 6), Prize.FIRST_PRIZE),
         ).forEach { pair ->
-            LottoRule(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
+            val result = LottoRule(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) })
                 .calculateResult(listOf(Lotto.from(pair.first)))
                 .lottoRanking[pair.second]
-            shouldBe(1)
+            result shouldBe 1
         }
     }
 })

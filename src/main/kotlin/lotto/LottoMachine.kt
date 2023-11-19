@@ -9,7 +9,7 @@ class LottoMachine(private val lottoNumberGenerator: LottoNumberGenerator) {
     private fun generateLottoNumbers(): Set<LottoNumber> {
         val lottoNumbers = mutableSetOf<LottoNumber>()
         while (lottoNumbers.size < Lotto.SIZE) {
-            lottoNumbers.add(LottoNumber(lottoNumberGenerator.generate()))
+            lottoNumbers.add(lottoNumberGenerator.generate())
         }
         return lottoNumbers
     }

@@ -8,23 +8,23 @@ import org.assertj.core.api.SoftAssertions.assertSoftly
 
 class LottoNumberTest : StringSpec({
     "로또 번호는 1 ~ 45 사이의 숫자다." {
-        LottoNumber(1)
-        LottoNumber(45)
+        LottoNumber.of(1)
+        LottoNumber.of(45)
     }
 
     "로또 번호는 1 ~ 45 사이의 숫자가 아니면 예외가 발생한다." {
         shouldThrow<IllegalArgumentException> {
-            LottoNumber(0)
+            LottoNumber.of(0)
         }
         shouldThrow<IllegalArgumentException> {
-            LottoNumber(46)
+            LottoNumber.of(46)
         }
     }
 
     "로또 번호가 같은지 체크한다" {
         assertSoftly {
-            LottoNumber(5) shouldBe LottoNumber(5)
-            LottoNumber(5) shouldNotBe LottoNumber(4)
+            LottoNumber.of(5) shouldBe LottoNumber.of(5)
+            LottoNumber.of(5) shouldNotBe LottoNumber.of(4)
         }
     }
 })
