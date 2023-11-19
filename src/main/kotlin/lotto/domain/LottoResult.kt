@@ -1,9 +1,7 @@
 package lotto.domain
 
-import java.util.EnumMap
-
 class LottoResult {
-    private val result: EnumMap<Revenue, Int> = EnumMap<Revenue, Int>(Revenue::class.java)
+    private val result: MutableMap<Revenue, Int> = Revenue.values().associateWith { DEFAULT_MAP_VALUE }.toMutableMap()
 
     fun setLottoResult(matchedNumberCount: Int) {
         if (matchedNumberCount >= MINIMUM_MATCH_COUNT) {
@@ -31,5 +29,6 @@ class LottoResult {
 
     companion object {
         private const val MINIMUM_MATCH_COUNT: Int = 3
+        private const val DEFAULT_MAP_VALUE: Int = 0
     }
 }
