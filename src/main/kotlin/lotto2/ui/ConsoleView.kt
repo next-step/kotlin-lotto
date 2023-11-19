@@ -64,7 +64,7 @@ object ConsoleView {
                         else -> "${ranking.matchingCount}개 일치 (${ranking.prize}원)"
                     }
 
-                    println("${resultDescription}- ${count}개")
+                    println("resultDescription- ${count}개")
                 }
         }
 
