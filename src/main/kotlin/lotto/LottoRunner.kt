@@ -17,7 +17,7 @@ class LottoRunner(
     private fun purchaseLotto(): Boolean {
         val amount = InputView.getPurchaseAmount() ?: return false
         val manualLottoNumbers = InputView.getManualLottoNumbers() ?: return false
-        val response = controller.purchase(PurchaseRequest.from(amount))
+        val response = controller.purchase(PurchaseRequest(amount, manualLottoNumbers))
         OutputView.drawPurchaseOutput(response)
         return true
     }
