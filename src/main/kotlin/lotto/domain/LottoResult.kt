@@ -17,6 +17,10 @@ class LottoResult {
         return result.getOrDefault(Revenue.of(key), 0)
     }
 
+    fun getLottoRankingMatchCount(key: Revenue): Int {
+        return result.getOrDefault(key, 0)
+    }
+
     fun calcRate(lottoPrice: Int, userLottoCount: Int): Double {
         val userTotalPay = lottoPrice * userLottoCount
         var revenue = 0
