@@ -23,10 +23,10 @@ class LottoRunner private constructor(
     }
 
     private fun evaluateByWinningNumbers() {
-        val input = InputView.getWinningNumbersInput()
-        val input2 = InputView.getBonusNumberInput()
+        val inputWinNumbers = InputView.getWinningNumbersInput()
+        val inputBonusNumber = InputView.getBonusNumberInput()
 
-        val req = EvaluateRequest.from(input, input2)
+        val req = EvaluateRequest.from(inputWinNumbers, inputBonusNumber)
 
         val resp = controller.evaluate(req)
 
