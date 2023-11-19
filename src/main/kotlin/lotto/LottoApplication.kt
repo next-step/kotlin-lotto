@@ -9,8 +9,11 @@ fun main() {
 
     ConsoleView.Input.printWinningNumbersPrompt()
     val lastLottoWinningNumbers = ConsoleView.Input.getLottoWinningNumbers()
-    val winningLotto = WinningLotto(lastLottoWinningNumbers)
 
+    ConsoleView.Input.printBonusNumbersPrompt()
+    val lastLottoBonusNumber = ConsoleView.Input.getLottoBonusNumber()
+
+    val winningLotto = WinningLotto(lastLottoWinningNumbers, lastLottoBonusNumber)
     val lottoResultAnalytics = winningLotto.createResultAnalytics(lottoTickets)
     val winningStatistics = lottoResultAnalytics.getWinningStatistics()
     ConsoleView.Output.printWinningStatistics(winningStatistics)

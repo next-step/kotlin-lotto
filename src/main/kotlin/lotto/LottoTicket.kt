@@ -7,6 +7,10 @@ data class LottoTicket(val numbers: List<Int>) {
         }
     }
 
+    fun isNumberMatched(number: Int): Boolean {
+        return numbers.contains(number)
+    }
+
     companion object {
         fun generate(randomNumber: RandomNumber = LottoRandomNumber): LottoTicket {
             return LottoTicket(randomNumber.generate())

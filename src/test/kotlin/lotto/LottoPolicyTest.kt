@@ -12,6 +12,7 @@ class LottoPolicyTest : StringSpec({
         forAll(
             row(900),
             row(990),
+            row(999),
             row(500)
         ) { purchaseAmount ->
             shouldThrow<IllegalArgumentException> {

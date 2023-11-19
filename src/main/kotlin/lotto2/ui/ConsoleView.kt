@@ -1,4 +1,7 @@
-package lotto
+package lotto2.ui
+
+import lotto2.domain.LottoRanking
+import lotto2.domain.LottoTickets
 
 object ConsoleView {
 
@@ -19,7 +22,7 @@ object ConsoleView {
             val purchaseAmount = getUserInput().toIntOrNull()
                 ?: throw IllegalArgumentException("구입 금액은 숫자로 입력해주세요.")
 
-            LottoPolicy.validatePurchaseAmount(purchaseAmount)
+            LottoInputValidation.validatePurchaseAmount(purchaseAmount)
 
             return purchaseAmount
         }
@@ -46,15 +49,22 @@ object ConsoleView {
     object Output {
         fun printLottoGameResults(lottoTickets: LottoTickets) {
             println("${lottoTickets.size()}개를 구매했습니다.")
-            lottoTickets.getAllLottoNumbers().forEach { println(it) }
+
+            val lottoNumbers = lottoTickets.getAllLottoNumbers()
+            lottoNumbers.forEach { println(it) }
         }
 
         fun printWinningStatistics(winningStatistics: Map<LottoRanking, Int>) {
             println("\n당첨 통계\n---------")
 
             winningStatistics.filter { it.key != LottoRanking.MISS }
-                .forEach {
-                    println("${it.key.matchingCount}개 일치 (${it.key.prize}원)- ${it.value}개")
+                .forEach { (ranking, count) ->
+                    val resultDescription = when (ranking) {
+                        LottoRanking.SECOND -> "5개 일치, 보너스 볼 일치(${ranking.prize}원)"
+                        else -> "${ranking.matchingCount}개 일치 (${ranking.prize}원)"
+                    }
+
+                    println("resultDescription- ${count}개")
                 }
         }
 
