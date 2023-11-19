@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.domain.model.LastWeekMatchLotto
 import lotto.domain.model.Lotto
 import lotto.domain.model.LottoCash
 import lotto.domain.model.Rank
@@ -16,10 +17,11 @@ object LottoStore {
         return List(count) { Lotto.auto() }
     }
 
-    fun checkMatchResult(lottos: List<Lotto>, lastWeekMatchLotto: Lotto): List<Rank> {
+    fun checkMatchResult(lottos: List<Lotto>, lastWeekMatchLotto: LastWeekMatchLotto): List<Rank> {
         return lottos.map { lotto ->
-            val matchCount = lotto.count { lastWeekMatchLotto.contains(it) }
-            Rank.valueOf(matchCount)
+            val matchCount = lotto.count { lastWeekMatchLotto.numbers.contains(it) }
+            val isMatchBonusNumber = lotto.contains(lastWeekMatchLotto.bonusNumber)
+            Rank.valueOf(matchCount, isMatchBonusNumber)
         }
     }
 }

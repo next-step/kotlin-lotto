@@ -18,10 +18,22 @@ class RankTest : StringSpec({
         rank.reward shouldBe 0
     }
 
-    "로또 번호가 6개 일치하면 상금은 2000000000원 이다." {
+    "로또 번호가 5개 일치하고 보너스 볼이 일치하지 않으면 3등이다." {
+        val matchCount = 5
+        val rank = Rank.valueOf(matchCount, isMatchBonusNumber = false)
+        rank shouldBe Rank.THIRD
+    }
+
+    "로또 번호가 5개 일치하고 보너스 볼이 일치하면 2등이다." {
+        val matchCount = 5
+        val rank = Rank.valueOf(matchCount, isMatchBonusNumber = true)
+        rank shouldBe Rank.SECOND
+    }
+
+    "로또 번호가 6개 일치하면 1등이다." {
         val matchCount = 6
         val rank = Rank.valueOf(matchCount)
-        rank.reward shouldBe 2000000000
+        rank shouldBe Rank.FIRST
     }
 
     "로또 번호가 7개 일치하면 IllegalArgumentException 예외가 발생한다." {

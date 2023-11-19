@@ -24,6 +24,10 @@ object ResultView {
     }
 
     private fun Rank.toResultWith(count: (Rank) -> Int): String {
-        return "${matchCount}개 일치 (${reward}원)- ${count(this)}개"
+        return if (this == Rank.SECOND) {
+            "${matchCount}개 일치, 보너스 볼 일치(${reward}원)- ${count(this)}개"
+        } else {
+            "${matchCount}개 일치 (${reward}원)- ${count(this)}개"
+        }
     }
 }
