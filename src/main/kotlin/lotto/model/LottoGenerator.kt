@@ -6,11 +6,15 @@ object LottoGenerator {
             LottoTicket.NUMBER_COUNT
         ).map { LottoNumber.from(it) }
 
-    fun generateTickets(
+    fun generateAutoTickets(
         ticketCount: Int,
-        manualCount: Int,
         shuffled: Iterable<Int>.() -> List<Int>
-    ): List<LottoTicket> = List(ticketCount - manualCount) {
+    ): List<LottoTicket> = List(ticketCount) {
         LottoTicket(numbers = getLottoNumbers(shuffled))
     }
+
+    fun generateManualTickets(
+        manualNumbers: List<List<LottoNumber>>,
+    ): List<LottoTicket> = manualNumbers.map { LottoTicket(it) }
+
 }

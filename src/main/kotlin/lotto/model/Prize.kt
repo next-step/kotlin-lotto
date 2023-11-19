@@ -11,10 +11,7 @@ enum class Prize(
     MISS(0, 0);
 
     companion object {
-        fun getKeyWithMatched(matched: Int, bonus: Boolean): Prize =
-            Prize.values().find { it.matched == matched && it.bonus == bonus } ?: MISS
-
-        fun isBonus(matched: Int, bonusNumberMatched: Boolean) =
-            matched == SECOND.matched && SECOND.bonus == bonusNumberMatched
+        fun getKeyWithMatched(matched: Int, bonusNumberMatched: Boolean): Prize =
+            Prize.values().find { it.matched == matched && it.bonus == bonusNumberMatched } ?: MISS
     }
 }

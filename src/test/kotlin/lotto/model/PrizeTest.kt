@@ -10,22 +10,11 @@ class PrizeTest {
     @MethodSource("provideGetKeyWithMatchedTestParam")
     fun getKeyWithMatchedTest(args: List<Any>) {
         val matched = args[0] as Int
-        val isBonus = args[1] as Boolean
+        val bonusNumberMatched = args[1] as Boolean
         val expectedKey = args[2] as Prize
 
-        val key = Prize.getKeyWithMatched(matched, isBonus)
+        val key = Prize.getKeyWithMatched(matched, bonusNumberMatched)
         key shouldBe expectedKey
-    }
-
-    @ParameterizedTest()
-    @MethodSource("provideIsBonusTestParam")
-    fun isBonusTest(args: List<Any>) {
-        val matched = args[0] as Int
-        val bonusNumberMatched = args[1] as Boolean
-        val expectedResult = args[2] as Boolean
-
-        val result = Prize.isBonus(matched, bonusNumberMatched)
-        result shouldBe expectedResult
     }
 
     companion object {

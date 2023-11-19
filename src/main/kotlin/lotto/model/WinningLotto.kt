@@ -1,6 +1,6 @@
 package lotto.model
 
-class WinningLotto (private val winningNumbers: List<LottoNumber>, private val bonusNumber: LottoNumber) {
+class WinningLotto(private val winningNumbers: List<LottoNumber>, private val bonusNumber: LottoNumber) {
     fun getLottoResult(
         lottoTickets: List<LottoTicket>
     ): LottoResult {
@@ -18,8 +18,7 @@ class WinningLotto (private val winningNumbers: List<LottoNumber>, private val b
         bonusNumber: LottoNumber
     ): Prize {
         val matchCount = getMatchCount(winningNumbers.toIntList(), lottoTicketNumbers.toIntList())
-        val isBonus = Prize.isBonus(matchCount, lottoTicketNumbers.contains(bonusNumber))
-        return Prize.getKeyWithMatched(matchCount, isBonus)
+        return Prize.getKeyWithMatched(matchCount, lottoTicketNumbers.contains(bonusNumber))
     }
 
     private fun getMatchCount(first: List<Int>, second: List<Int>): Int = first.intersect(second.toSet()).size
