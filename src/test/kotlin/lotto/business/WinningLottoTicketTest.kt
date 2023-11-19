@@ -11,9 +11,10 @@ class WinningLottoTicketTest {
     fun `당첨 번호가 중복이면 예외 발생한다`(numbers: String) {
         // given
         val lottoNumbers = numbers.split(",").map { LottoNumber(it.toInt()) }.toSet()
+        val bonusNumber = LottoNumber(7)
 
         // when, then
-        Assertions.assertThatThrownBy { WinningLottoTicket(lottoNumbers) }
+        Assertions.assertThatThrownBy { WinningLottoTicket(LottoTicket(lottoNumbers), bonusNumber) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("서로 다른 6개 로또 번호 이여야 합니다.")
     }
@@ -29,7 +30,8 @@ class WinningLottoTicketTest {
             LottoNumber(5),
             LottoNumber(6)
         )
-        val winningLottoTicket = WinningLottoTicket(lottoNumbers)
+        val bonusNumber = LottoNumber(7)
+        val winningLottoTicket = WinningLottoTicket(LottoTicket(lottoNumbers), bonusNumber)
         val lottoTickets = listOf(
             LottoTicket(
                 setOf(
@@ -62,10 +64,9 @@ class WinningLottoTicketTest {
                 )
             )
         )
-        val bonusNumber = LottoNumber(7)
 
         // when
-        val prizeResults = winningLottoTicket.compilePrizeResults(lottoTickets, bonusNumber)
+        val prizeResults = winningLottoTicket.compilePrizeResults(lottoTickets)
 
         // then
         Assertions.assertThat(prizeResults.prizeCountMap).isEqualTo(
@@ -91,11 +92,10 @@ class WinningLottoTicketTest {
             LottoNumber(5),
             LottoNumber(6)
         )
-        val winningLottoTicket = WinningLottoTicket(lottoNumbers)
         val bonusNumber = LottoNumber(6)
 
         // when, then
-        Assertions.assertThatThrownBy { winningLottoTicket.validateBonusNumber(bonusNumber) }
+        Assertions.assertThatThrownBy { WinningLottoTicket(LottoTicket(lottoNumbers), bonusNumber) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("보너스 번호는 당첨 번호와 중복될 수 없습니다.")
     }

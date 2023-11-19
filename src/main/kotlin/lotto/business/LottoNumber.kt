@@ -12,4 +12,8 @@ value class LottoNumber(val number: Int) {
         private const val LOTTO_NUMBER_MIN = 1
         private const val LOTTO_NUMBER_MAX = 45
     }
+
+    override fun toString(): String {
+        return number.toString()
+    }
 }

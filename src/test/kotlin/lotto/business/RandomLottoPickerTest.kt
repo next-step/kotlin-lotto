@@ -1,5 +1,6 @@
 package lotto.business
 
+import lotto.business.LottoBookingSystem.Companion.LOTTO_NUMBERS
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
@@ -12,7 +13,7 @@ class RandomLottoPickerTest {
         val randomLottoPicker = RandomLottoPicker()
 
         // when
-        val result = randomLottoPicker.pick()
+        val result = randomLottoPicker.pick(LOTTO_NUMBERS, LottoBookingSystem.LOTTO_NUMBER_COUNT)
 
         // then
         assertAll(

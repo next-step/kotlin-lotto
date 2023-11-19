@@ -3,7 +3,7 @@ package lotto.business
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class LotteryStatisticsGeneratorTest {
+class PrizeResultsTest {
 
     @Test
     fun `받은 금액과 비교하여 수익률을 계산한다`() {
