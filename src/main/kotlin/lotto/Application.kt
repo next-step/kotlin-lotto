@@ -8,6 +8,9 @@ fun main() {
         val inputPrice = readPrice()
         val price = Price(inputPrice)
 
+        val inputLottoManualCount = readManualLottoCount()
+        val lottoManualCount = LottoCount(inputLottoManualCount)
+
         val count = confirmCount(price)
         val lottoList = LottoFactory.generateLottoList(count)
         printLottoList(lottoList)
