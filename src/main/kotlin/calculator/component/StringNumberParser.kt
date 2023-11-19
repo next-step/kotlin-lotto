@@ -6,15 +6,15 @@ class StringNumberParser {
             return listOf(0)
         }
 
-        val customSeparator = getCustomSeparator(expression)
-        val separatorRegex = getSeparatorRegex(customSeparator)
+        val customSeparator: String? = getCustomSeparator(expression)
+        val separatorRegex: Regex = getSeparatorRegex(customSeparator)
         val stringNumbersExpression = getStringNumbersExpression(expression, customSeparator)
 
         return getNumbers(stringNumbersExpression, separatorRegex)
     }
 
     private fun getCustomSeparator(input: String): String? {
-        return Regex(CUSTOM_SEPARATOR_PATTERN).find(input)
+        return customSeparatorRegex.find(input)
             ?.groupValues
             ?.get(1)
     }
@@ -53,13 +53,13 @@ class StringNumberParser {
                 .toULong()
                 .toInt()
         } catch (e: Exception) {
-            throw RuntimeException("숫자는 0 또는 자연수만 가능합니다. $stringNumber")
+            throw IllegalArgumentException("숫자는 0 또는 자연수만 가능합니다. $stringNumber")
         }
     }
 
     companion object {
         private const val DEFAULT_SEPARATOR_PATTERN = """,|:"""
         private const val CUSTOM_SEPARATOR_STRING_NUMBERS_SEPARATOR = "\\n"
-        private const val CUSTOM_SEPARATOR_PATTERN = """^//(.)\\n(.*)$"""
+        private val customSeparatorRegex = """^//(.)\\n(.*)$""".toRegex()
     }
 }
