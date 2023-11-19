@@ -7,6 +7,7 @@ import lotto.view.OutputView
 
 fun main() {
     val purchaseAmount = InputView.getPurchaseAmount()
+    val manualCount = InputView.getManualLottoCount()
     val userLotto = LottoStore.purchase(purchaseAmount, RandomLottoGenerator())
     OutputView.printLottos(userLotto)
     val lastWinningNumbers = InputView.getLastWinningNumbers()
