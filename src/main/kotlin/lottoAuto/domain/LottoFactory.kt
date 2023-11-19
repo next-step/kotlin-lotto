@@ -1,6 +1,5 @@
 package lottoAuto.domain
 
-
 object LottoFactory {
     fun create(purchaseAmount: Int): List<Lotto> {
         val numOfLotto = purchaseAmount / Lotto.LOTTO_PRICE

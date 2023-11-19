@@ -15,4 +15,3 @@ enum class LottoProfitMessage(val message: String) {
         }
     }
 }
-

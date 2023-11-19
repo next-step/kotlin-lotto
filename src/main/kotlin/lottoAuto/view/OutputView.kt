@@ -14,14 +14,16 @@ object OutputView {
         println("---------")
     }
 
-    fun printStatistics(matchCount: Int,
-                        winningMoney: Int,
-                        countValue: Int,
-                        isBonusMatch: Boolean) {
+    fun printStatistics(
+        matchCount: Int,
+        winningMoney: Int,
+        countValue: Int,
+        isBonusMatch: Boolean
+    ) {
         if (isBonusMatch) {
-            println("${matchCount}개 일치, 보너스 볼 일치(${winningMoney}원) - ${countValue}개")
+            println("$matchCount 개 일치, 보너스 볼 일치($winningMoney 원) - $countValue 개")
         } else {
-            println("${matchCount}개 일치 (${winningMoney}원) - ${countValue}개")
+            println("$matchCount 개 일치 ($winningMoney 원) - $countValue 개")
         }
     }
 
