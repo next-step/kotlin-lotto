@@ -2,26 +2,30 @@ package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
 
 class LottoShopSpec : FunSpec({
     context("로또 구매") {
-        val lottoPLice = Amount(1000)
-        val shop = LottoShop(price = lottoPLice)
+        val lottoPrice = Amount(1000)
+        val shop = LottoShop(price = lottoPrice)
         val count = 3
-        test("로또 배수(${count}배수) 금액(3_0000)으로 구매") {
+        val manualLottoNumbers =
+            listOf(LottoNumber(listOf(1, 2, 3, 4, 5, 6)), LottoNumber(listOf(11, 12, 13, 14, 15, 16)))
+        test("로또 배수(${count}배수) 금액(3_0000), 수동 로또 번호 $manualLottoNumbers 로 구매") {
             val amount = Amount(3000)
 
-            val ticket = shop.purchase(amount)
+            val ticket = shop.purchase(amount, manualLottoNumbers)
 
             ticket.count shouldBe count
+            ticket.numbers shouldContainAll manualLottoNumbers
         }
 
         test("로또의 배수 금액이 아닐 때(30_001) 구매 실패") {
             val amount = Amount(30001)
 
             shouldThrow<IllegalArgumentException> {
-                shop.purchase(amount)
+                shop.purchase(amount, emptyList())
             }
         }
     }
