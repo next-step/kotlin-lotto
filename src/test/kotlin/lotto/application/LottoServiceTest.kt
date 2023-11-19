@@ -3,6 +3,7 @@ package lotto.application
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.LottoResult
+import lotto.domain.LottoResultMap
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
@@ -92,15 +93,12 @@ class LottoServiceTest {
         val command = MatchWinningLottoCommand(userLottos, winningLotto)
 
         // when
-        val result = lottoService.matchWinningLotto(command)
+        val lottoResultMap = lottoService.matchWinningLotto(command)
 
         // then
-        Assertions.assertThat(result).hasSize(3)
-        Assertions.assertThat(result).contains(
-            LottoResult.MATCH_6_NUMBERS,
-            LottoResult.MATCH_5_NUMBERS,
-            LottoResult.MATCH_4_NUMBERS,
-        )
+        Assertions.assertThat(lottoResultMap.getLottoResultCount(LottoResult.MATCH_6_NUMBERS)).isEqualTo(1)
+        Assertions.assertThat(lottoResultMap.getLottoResultCount(LottoResult.MATCH_5_NUMBERS)).isEqualTo(1)
+        Assertions.assertThat(lottoResultMap.getLottoResultCount(LottoResult.MATCH_4_NUMBERS)).isEqualTo(1)
     }
 
     @DisplayName("수익률을 계산한다")
@@ -119,11 +117,12 @@ class LottoServiceTest {
             LottoResult.NONE,
             LottoResult.NONE,
         )
+        val lottoResultMap = LottoResultMap.of(result)
 
         // when
-        val profitRate = lottoService.calculateProfitRate(result)
+        val profitRate = lottoService.calculateProfitRate(lottoResultMap)
 
         // then
-        Assertions.assertThat(profitRate).isEqualTo(0.5)
+        Assertions.assertThat(profitRate.profitRate).isEqualTo(0.5)
     }
 }

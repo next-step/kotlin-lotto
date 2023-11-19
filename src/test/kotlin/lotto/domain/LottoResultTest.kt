@@ -11,15 +11,17 @@ class LottoResultTest {
 
     @DisplayName("일치하는 숫자에 따라 로또 결과와 당청금을 반환한다")
     @ParameterizedTest
-    @CsvSource(value = [
-        "6, 2_000_000_000",
-        "5, 1_500_000",
-        "4, 50_000",
-        "3, 5_000",
-        "2, 0",
-        "1, 0",
-        "0, 0",
-    ])
+    @CsvSource(
+        value = [
+            "6, 2_000_000_000",
+            "5, 1_500_000",
+            "4, 50_000",
+            "3, 5_000",
+            "2, 0",
+            "1, 0",
+            "0, 0",
+        ]
+    )
     fun resultShouldBeReturn(countOfMatch: Int, price: Int) {
         val lottoResult = LottoResult.of(countOfMatch)
         assertThat(lottoResult.price).isEqualTo(price)

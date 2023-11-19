@@ -22,7 +22,7 @@ class LottoTest {
         assertThat(numbers).isEqualTo(numbers.sortedBy { it.number })
     }
 
-    @DisplayName("당첨 번호와 구매한 로또 번호의 일치 개수를 반환한다")
+    @DisplayName("당첨 번호와 구매한 로또 번호의 일치 개수에 따라 결과를 반환한다")
     @ParameterizedTest
     @CsvSource(
         value = [
@@ -34,8 +34,9 @@ class LottoTest {
             "1,2,3,4,5,6:1,7,8,9,10,11:1",
             "1,2,3,4,5,6:7,8,9,10,11,12:0",
         ],
-        delimiter = ':')
-    fun matchCountTest(winningLottoNumbers: String, userLottoNumbers: String, expected: Int) {
+        delimiter = ':'
+    )
+    fun matchTest(winningLottoNumbers: String, userLottoNumbers: String, expected: Int) {
         // given
         val userLotto = Lotto(userLottoNumbers.split(",").map { LottoNumber(it.toInt()) })
         val winningLotto = Lotto(winningLottoNumbers.split(",").map { LottoNumber(it.toInt()) })
@@ -44,6 +45,6 @@ class LottoTest {
         val actual = userLotto.match(winningLotto)
 
         // then
-        assertThat(actual.countOfMatch).isEqualTo(expected)
+        assertThat(actual).isEqualTo(LottoResult.of(expected))
     }
 }

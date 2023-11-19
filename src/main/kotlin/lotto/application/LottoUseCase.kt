@@ -1,10 +1,11 @@
 package lotto.application
 
 import lotto.domain.Lotto
-import lotto.domain.LottoResult
+import lotto.domain.LottoResultMap
+import lotto.domain.ProfitRate
 
 interface LottoUseCase {
     fun buy(price: Int): List<Lotto>
-    fun matchWinningLotto(command: MatchWinningLottoCommand): List<LottoResult>
-    fun calculateProfitRate(lottos: List<LottoResult>): Double
+    fun matchWinningLotto(command: MatchWinningLottoCommand): LottoResultMap
+    fun calculateProfitRate(lottoResultMap: LottoResultMap): ProfitRate
 }
