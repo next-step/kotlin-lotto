@@ -1,15 +1,10 @@
 package lotto.view
 
-import lotto.domain.LottoNumbers
-import lotto.domain.Price
-
 private const val INPUT_PRICE_MESSAGE = "구입금액을 입력해 주세요."
 private const val INPUT_MANUAL_LOTTO_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요."
 private const val INPUT_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요."
 private const val INPUT_WINNING_NUMBERS_DELIMITER = ", "
 private const val INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요."
-private const val CONFIRM_COUNT_MESSAGE = "개를 구매했습니다."
-
 
 fun readPrice(): Int? {
     println(INPUT_PRICE_MESSAGE)
@@ -29,10 +24,4 @@ fun readWinningNumbers(): Set<Int> {
 fun readBonusNumber(): Int {
     println(INPUT_BONUS_NUMBER_MESSAGE)
     return readln().toInt()
-}
-
-fun confirmCount(price: Price): Int {
-    val count = (price.value ?: 0) / LottoNumbers.LOTTO_PRICE
-    println("$count" + CONFIRM_COUNT_MESSAGE)
-    return count
 }

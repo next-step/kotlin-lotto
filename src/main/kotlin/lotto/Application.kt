@@ -5,14 +5,13 @@ import lotto.view.*
 
 fun main() {
     try {
-        val inputPrice = readPrice()
-        val price = Price(inputPrice)
+        val price = Price(readPrice())
 
-        val inputLottoManualCount = readManualLottoCount()
-        val lottoManualCount = LottoCount(inputLottoManualCount)
+        val totalLottoCount = LottoCount(price)
+        val lottoManualCount = LottoCount(readManualLottoCount())
+        val lottoAutoCount = totalLottoCount - lottoManualCount
 
-        val count = confirmCount(price)
-        val lottoList = LottoFactory.generateLottoList(count)
+        val lottoList = LottoFactory.generateLottoList(lottoAutoCount)
         printLottoList(lottoList)
 
         val winningNumbers = WinningNumbers(
