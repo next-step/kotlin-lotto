@@ -1,6 +1,5 @@
 package lottoAuto.domain
 
-import lottoAuto.domain.LottoNumber.Companion.toLottoNumber
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

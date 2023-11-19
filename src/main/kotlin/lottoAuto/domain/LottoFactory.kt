@@ -1,6 +1,5 @@
 package lottoAuto.domain
 
-import lottoAuto.domain.LottoNumber.Companion.toLottoNumber
 
 object LottoFactory {
     fun create(numOfLotto: Int): List<Lotto> {
