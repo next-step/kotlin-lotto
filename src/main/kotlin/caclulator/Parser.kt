@@ -8,16 +8,18 @@ object Parser {
 
     private val DEFAULT_OPERATOR = arrayOf(",", ":")
 
-    fun parse(input: String?): List<Int> =
-        input?.let { stringExpr ->
-            if (stringExpr.isBlank()) {
-                return emptyList()
-            }
-            if (stringExpr.startsWith(CUSTOM_PREFIX)) {
-                return processCustomOperator(stringExpr)
-            }
-            return makeIntList(stringExpr, DEFAULT_OPERATOR)
-        } ?: emptyList()
+    fun parse(input: String?): List<Int> {
+        if (input == null) {
+            return emptyList()
+        }
+        if (input.isBlank()) {
+            return emptyList()
+        }
+        if (input.startsWith(CUSTOM_PREFIX)) {
+            return processCustomOperator(input)
+        }
+        return makeIntList(input, DEFAULT_OPERATOR)
+    }
 
     private fun processCustomOperator(stringExpr: String): List<Int> =
         stringExpr.split(CUSTOM_POSTFIX)
@@ -32,9 +34,13 @@ object Parser {
         input.split(delimiters = operator)
             .map {
                 val int = it.toInt()
-                if (int < 0) {
-                    throw RuntimeException("음수는 들어올 수 없습니다")
-                }
+                numberValidation(int)
                 int
             }
+
+    private fun numberValidation(number: Int) {
+        if (number < 0) {
+            throw RuntimeException("음수는 들어올 수 없습니다")
+        }
+    }
 }
