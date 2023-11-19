@@ -21,7 +21,7 @@ object InputView {
                 it.trim().toIntOrNull()
             }?.toSet()
 
-        require(winningLottoNumbers != null) { "당첨 번호가 입려되지 않았습니다." }
+        require(winningLottoNumbers != null) { "당첨 번호가 입력되지 않았습니다." }
 
         return winningLottoNumbers
     }

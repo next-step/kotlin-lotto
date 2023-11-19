@@ -8,11 +8,11 @@ fun main() {
     val lottoGame = LottoGame()
     lottoGame.purchaseLotto(InputView.inputPurchaseMoney())
 
-    ResultView.printPurchasedLottos(lottoGame.lottos)
+    ResultView.printPurchasedLottos(lottoGame.lottoTickets)
 
     val winningLottoNumbers = InputView.inputWinningLottoNumbers()
 
     val lottoGameResult = lottoGame.generateLottoGameResult(winningLottoNumbers)
-    ResultView.printWinningStatistics(lottoGameResult.lottoWinningResults)
+    ResultView.printWinningStatistics(lottoGameResult.lottoTicketWinningInfos)
     ResultView.printTotalRateOfReturn(lottoGameResult.totalRateOfReturn)
 }

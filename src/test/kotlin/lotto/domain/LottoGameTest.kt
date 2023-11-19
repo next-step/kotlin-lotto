@@ -18,7 +18,7 @@ class LottoGameTest : FunSpec({
 
         // then
         lottoGame.purchaseMoney shouldBe purchaseMoney
-        lottoGame.lottos shouldNotBe null
+        lottoGame.lottoTickets shouldNotBe null
         lottoGame.generateLottoGameResult(winningLottoNumbers) shouldNotBe null
     }
 
@@ -30,7 +30,7 @@ class LottoGameTest : FunSpec({
 
     test("구매하지 않고 로또를 조회 할 경우 IllegalStateException throw") {
         shouldThrow<IllegalStateException> {
-            LottoGame().lottos
+            LottoGame().lottoTickets
         }
     }
 

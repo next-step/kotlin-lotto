@@ -3,23 +3,19 @@ package lotto.domain
 class LottoGameResult(
     purchaseMoney: Long,
     winningLottoNumbers: Set<Int>,
-    lottos: List<Lotto>,
+    lottoTickets: List<LottoTicket>,
 ) {
-    val lottoWinningResults: List<LottoWinningResult>
+    val lottoTicketWinningInfos: List<LottoTicketWinningInfo>
     val totalRateOfReturn: Double
 
     init {
-        lottoWinningResults = LottoPrize.values().map { lottoPrize ->
-            val winningLottoCount = lottos.filter { it.matchNumberCount(winningLottoNumbers) == lottoPrize.matchCount }.size
-            LottoWinningResult(
-                lottoPrize = lottoPrize,
-                winningLottoCount = winningLottoCount
-            )
+        lottoTicketWinningInfos = LottoPrize.values().map { lottoPrize ->
+            val winningLottoTicketCount = lottoTickets.filter { it.matchNumberCount(winningLottoNumbers) == lottoPrize.matchCount }.size
+            LottoTicketWinningInfo(lottoPrize, winningLottoTicketCount)
         }
 
-        val totalLottoPrizeMoney = lottoWinningResults
+        val totalLottoPrizeMoney = lottoTicketWinningInfos
             .sumOf { it.totalWinningPrizeMoney }
-
         totalRateOfReturn = totalLottoPrizeMoney.toDouble() / purchaseMoney.toDouble()
     }
 }

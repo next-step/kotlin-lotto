@@ -1,11 +1,11 @@
 package lotto.domain
 
-class Lotto(
+class LottoTicket(
     val lottoNumbers: Set<Int>,
 ) {
 
     init {
-        require(lottoNumbers.size == LOTTO_NUMBER_SIZE) { "로또 숫자는 ${LOTTO_NUMBER_SIZE}개입니다." }
+        require(lottoNumbers.size == LOTTO_TICKET_NUMBER_SIZE) { "로또 숫자는 ${LOTTO_TICKET_NUMBER_SIZE}개입니다." }
         lottoNumbers.forEach { checkNumberInRange(it) }
     }
 
@@ -19,21 +19,21 @@ class Lotto(
     }
 
     companion object {
-        const val LOTTO_PRICE = 1_000L
-        const val LOTTO_NUMBER_SIZE = 6
+        const val LOTTO_TICKET_PRICE = 1_000L
+        const val LOTTO_TICKET_NUMBER_SIZE = 6
         const val MIN_LOTTO_NUMBER = 1
         const val MAX_LOTTO_NUMBER = 45
 
-        fun issueByAuto(): Lotto {
+        fun issueByAuto(): LottoTicket {
             val lottoNumbers = generateRandomLottoNumbers()
-            return Lotto(lottoNumbers)
+            return LottoTicket(lottoNumbers)
         }
 
         private fun generateRandomLottoNumbers(): Set<Int> {
             val candidateLottoNumbers = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER).toList()
             return candidateLottoNumbers
                 .shuffled()
-                .take(LOTTO_NUMBER_SIZE)
+                .take(LOTTO_TICKET_NUMBER_SIZE)
                 .toSet()
         }
     }

@@ -5,12 +5,12 @@ import io.kotest.datatest.WithDataTestName
 import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
 
-class LottoIssuerTest : FunSpec({
+class LottoTicketIssuerTest : FunSpec({
 
-    lateinit var lottoIssuer: LottoIssuer
+    lateinit var lottoTicketIssuer: LottoTicketIssuer
 
     beforeTest {
-        lottoIssuer = LottoIssuer()
+        lottoTicketIssuer = LottoTicketIssuer()
     }
 
     context("금액에 맞는 수량만큼 로또를 발급핸다.") {
@@ -21,7 +21,7 @@ class LottoIssuerTest : FunSpec({
             IssueLottoByAutoTestData(2900L, 2),
             IssueLottoByAutoTestData(10000L, 10),
         ) { (money, lottoAmount) ->
-            lottoIssuer.issueLottoByAuto(money).size shouldBe lottoAmount
+            lottoTicketIssuer.issueLottoByAuto(money).size shouldBe lottoAmount
         }
     }
 })
