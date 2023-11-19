@@ -1,22 +1,27 @@
 package lotto.data
 
 enum class LottoRanking(val matchingNumberCnt: Int, val price: Int) : Prize {
-    FirstPlace(6, 2000000000) {
+    FirstPlace(6, 2_000_000_000) {
         override fun findPrize(winningStatus: Pair<LottoRanking, Int>): Int {
             return winningStatus.first.price * winningStatus.second
         }
     },
-    SecondPlace(5, 1500000) {
+    SecondPlace(5, 30_000_000) {
         override fun findPrize(winningStatus: Pair<LottoRanking, Int>): Int {
             return winningStatus.first.price * winningStatus.second
         }
     },
-    ThirdPlace(4, 50000) {
+    ThirdPlace(5, 1_500_000) {
         override fun findPrize(winningStatus: Pair<LottoRanking, Int>): Int {
             return winningStatus.first.price * winningStatus.second
         }
     },
-    FourthPlace(3, 5000) {
+    FourthPlace(4, 50_000) {
+        override fun findPrize(winningStatus: Pair<LottoRanking, Int>): Int {
+            return winningStatus.first.price * winningStatus.second
+        }
+    },
+    FifthPlace(3, 5_000) {
         override fun findPrize(winningStatus: Pair<LottoRanking, Int>): Int {
             return winningStatus.first.price * winningStatus.second
         }
@@ -28,6 +33,6 @@ enum class LottoRanking(val matchingNumberCnt: Int, val price: Int) : Prize {
     };
 }
 
-interface Prize {
+fun interface Prize {
     fun findPrize(winningStatus: Pair<LottoRanking, Int>): Int
 }

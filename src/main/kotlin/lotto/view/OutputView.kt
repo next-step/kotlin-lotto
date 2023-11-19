@@ -21,6 +21,7 @@ object OutputView {
         println(TXT_WINNING_STATS)
         printDivingLine()
 
+        printStatus(LottoRanking.FifthPlace, winningStatus)
         printStatus(LottoRanking.FourthPlace, winningStatus)
         printStatus(LottoRanking.ThirdPlace, winningStatus)
         printStatus(LottoRanking.SecondPlace, winningStatus)
@@ -34,7 +35,11 @@ object OutputView {
         val matchingLottoCnt = winningStatus.getOrDefault(lottoRanking, 0)
         val matchingNumberCnt = lottoRanking.matchingNumberCnt
         val matchingPrice = lottoRanking.price
-        println("{${matchingNumberCnt}개 일치 (${matchingPrice}원)- ${matchingLottoCnt}개}")
+        if (lottoRanking == LottoRanking.SecondPlace) {
+            println("{${matchingNumberCnt}개 일치, 보너스 볼 일치(${matchingPrice}원)- ${matchingLottoCnt}개}")
+        } else {
+            println("{${matchingNumberCnt}개 일치 (${matchingPrice}원)- ${matchingLottoCnt}개}")
+        }
     }
 
     private fun printDivingLine() {
