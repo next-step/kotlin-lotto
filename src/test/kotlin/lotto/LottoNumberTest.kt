@@ -2,7 +2,8 @@ package lotto
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
-import org.assertj.core.api.Assertions.assertThat
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
 import org.assertj.core.api.SoftAssertions.assertSoftly
 
 class LottoNumberTest : StringSpec({
@@ -22,8 +23,8 @@ class LottoNumberTest : StringSpec({
 
     "로또 번호가 같은지 체크한다" {
         assertSoftly {
-            assertThat(LottoNumber(5) == LottoNumber(5)).isTrue()
-            assertThat(LottoNumber(5) == LottoNumber(4)).isFalse()
+            LottoNumber(5) shouldBe LottoNumber(5)
+            LottoNumber(5) shouldNotBe LottoNumber(4)
         }
     }
 })

@@ -1,7 +1,7 @@
 package lotto
 
 import io.kotest.core.spec.style.StringSpec
-import org.assertj.core.api.Assertions.assertThat
+import io.kotest.matchers.shouldBe
 
 class LottoRuleTest : StringSpec({
     "로또 등수를 계산할 수 있다." {
@@ -14,11 +14,10 @@ class LottoRuleTest : StringSpec({
             Pair(listOf(1, 2, 3, 4, 5, 11), Prize.SECOND_PRIZE),
             Pair(listOf(1, 2, 3, 4, 5, 6), Prize.FIRST_PRIZE),
         ).forEach { pair ->
-            assertThat(
-                LottoRule(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
-                    .calculateResult(listOf(Lotto.from(pair.first)))
-                    .lottoRanking[pair.second]
-            ).isOne()
+            LottoRule(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
+                .calculateResult(listOf(Lotto.from(pair.first)))
+                .lottoRanking[pair.second]
+            shouldBe(1)
         }
     }
 })
