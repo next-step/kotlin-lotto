@@ -8,7 +8,7 @@ import io.kotest.matchers.shouldBe
 
 class ParserTest: StringSpec({
 
-    "조건에 알맞게 파싱을 진행해야 한다" {
+    "계산식 파싱(커스텀, 일반, 빈값)을 진행해야 한다" {
         forAll(
             Row2("//;\\n1;2;3", listOf(1, 2, 3)),
             Row2("1:2,3", listOf(1, 2, 3)),
