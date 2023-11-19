@@ -2,15 +2,17 @@ package lotto.view
 
 import lotto.domain.LottoTicket
 import lotto.dto.LottoMatchResult
+import lotto.dto.LottoTicketsResult
+import lotto.dto.TicketCount
 import lotto.enum.Rank
 
 object ResultView {
 
-    fun showTickets(tickets: Pair<Int, List<LottoTicket>>) {
-        val (manualCount, ticketList) = tickets
-        val automaticCount = ticketList.size - manualCount
-        formatPrintln("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualCount, automaticCount)
-        showTicketList(ticketList)
+    fun showTickets(ticketsResult: LottoTicketsResult) {
+        val manualCount = TicketCount(ticketsResult.manualTicketsCount)
+        val automaticCount = TicketCount(ticketsResult.tickets.size - manualCount.count)
+        formatPrintln("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualCount.count, automaticCount.count)
+        showTicketList(ticketsResult.tickets)
     }
 
     private fun showTicketList(tickets: List<LottoTicket>) {

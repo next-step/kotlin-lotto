@@ -1,23 +1,42 @@
 import lotto.domain.LottoConstants
+import lotto.dto.LottoTicketNumbers
+import lotto.dto.PurchaseAmount
 
 object InputView {
 
-    fun requestAmount(): Int {
-        return readValidInt("구입금액을 입력해 주세요.") { it > 0 }
+    fun requestAmount(): PurchaseAmount {
+        println("구입금액을 입력해 주세요.")
+        return generateSequence { readlnOrNull()?.toIntOrNull() }
+            .map { PurchaseAmount(it) }
+            .firstOrNull() ?: throw IllegalArgumentException("유효하지 않은 금액입니다.")
     }
 
     fun requestManualTicketCount(): Int {
         return readValidInt("수동으로 구매할 로또 수를 입력해 주세요.") { it >= 0 }
     }
 
-    fun requestManualNumbers(ticketCount: Int): List<List<Int>> {
+    fun requestManualNumbers(ticketCount: Int): List<LottoTicketNumbers> {
         println("수동으로 구매할 번호를 입력해 주세요.")
         return (1..ticketCount).map {
-            readValidIntSet {
-                it.size == LottoConstants.NUMBERS_PER_TICKET &&
-                    it.all { number -> number in LottoConstants.NUMBER_RANGE_START..LottoConstants.NUMBER_RANGE_END }
-            }.toList().sorted()
+            readValidLottoTicketNumbers()
         }
+    }
+
+    private fun readValidLottoTicketNumbers(): LottoTicketNumbers {
+        while (true) {
+            val input = readlnOrNull()
+            if (input != null && isValidLottoNumbers(input)) {
+                val numbers = input.split(",").mapNotNull { it.trim().toIntOrNull() }.sorted()
+                return LottoTicketNumbers(numbers)
+            }
+            println("유효하지 않은 입력입니다. 다시 입력해 주세요.")
+        }
+    }
+
+    private fun isValidLottoNumbers(input: String): Boolean {
+        val numbers = input.split(",").mapNotNull { it.trim().toIntOrNull() }
+        return numbers.size == LottoConstants.NUMBERS_PER_TICKET &&
+            numbers.all { it in LottoConstants.NUMBER_RANGE_START..LottoConstants.NUMBER_RANGE_END }
     }
 
     fun requestWinningNumbers(): Set<Int> {
@@ -30,21 +49,16 @@ object InputView {
         }
     }
 
-    private fun readValidIntSet(predicate: (Set<Int>) -> Boolean): Set<Int> {
-        return generateSequence { readlnOrNull()?.toWinningNumberSetOrNull() }
-            .firstOrNull(predicate) ?: throw IllegalArgumentException("Invalid input")
-    }
-
     private fun readValidInt(message: String, predicate: (Int) -> Boolean): Int {
         println(message)
         return generateSequence { readlnOrNull()?.toIntOrNull() }
-            .firstOrNull(predicate) ?: throw IllegalArgumentException("Invalid input")
+            .firstOrNull(predicate) ?: throw IllegalArgumentException("옳바르지 않은 입력입니다.")
     }
 
     private fun readValidIntSet(message: String, predicate: (Set<Int>) -> Boolean): Set<Int> {
         println(message)
         return generateSequence { readlnOrNull()?.toWinningNumberSetOrNull() }
-            .firstOrNull(predicate) ?: throw IllegalArgumentException("Invalid input")
+            .firstOrNull(predicate) ?: throw IllegalArgumentException("옳바르지 않은 입력입니다.")
     }
 
     private fun String.toWinningNumberSetOrNull(): Set<Int>? {

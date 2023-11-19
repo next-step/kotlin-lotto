@@ -1,5 +1,8 @@
 package lotto.domain
 
+import lotto.dto.LottoTicketNumbers
+import lotto.dto.ManualLottoTickets
+import lotto.dto.PurchaseAmount
 import lotto.`interface`.impl.ManualTicketGenerationStrategy
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -17,14 +20,14 @@ class LottoMachineTest {
     @DisplayName("1000원으로 구입 시 1장의 티켓을 발급한다")
     fun `1000원으로 구입 시 1장의 티켓을 발급한다`() {
         val tickets = lottoMachine.generateTickets(ticketPrice)
-        assertEquals(1, tickets.second.size)
+        assertEquals(1, tickets.tickets.size)
     }
 
     @Test
     @DisplayName("5000원으로 구입 시 5장의 티켓을 발급한다.")
     fun `5000원으로 구입 시 5장의 티켓을 발급한다`() {
         val tickets = lottoMachine.generateTickets(5 * ticketPrice)
-        assertEquals(5, tickets.second.size)
+        assertEquals(5, tickets.tickets.size)
     }
 
     @Test
@@ -69,10 +72,16 @@ class LottoMachineTest {
     @Test
     @DisplayName("지정된 금액에 맞춰 적절한 수의 수동 및 자동 티켓이 생성되는지 검증")
     fun `주어진 금액에 따라 올바른 수의 수동 및 자동 티켓이 생성된다`() {
-        val manualNumbersList = listOf(listOf(1, 2, 3, 4, 5, 6), listOf(7, 8, 9, 10, 11, 12))
-        val tickets = lottoMachine.generateTickets(7000, manualNumbersList)
-        assertEquals(7, tickets.second.size)
-        assertTrue(tickets.second.take(2).all { it.readOnlyNumbers in manualNumbersList })
-        assertTrue(tickets.second.drop(2).all { it.readOnlyNumbers.all { num -> num in 1..45 } })
+        val manualTicketNumbersList = listOf(
+            LottoTicketNumbers(listOf(1, 2, 3, 4, 5, 6)),
+            LottoTicketNumbers(listOf(7, 8, 9, 10, 11, 12))
+        )
+        val manualLottoTickets = ManualLottoTickets(manualTicketNumbersList.map { LottoTicket(it.numbers) })
+        val purchaseAmount = PurchaseAmount(7000)
+        val tickets = lottoMachine.generateTickets(purchaseAmount.amount, manualLottoTickets)
+
+        assertEquals(7, tickets.tickets.size)
+        assertTrue(tickets.tickets.take(2).all { it.readOnlyNumbers in manualTicketNumbersList.map { it.numbers } })
+        assertTrue(tickets.tickets.drop(2).all { it.readOnlyNumbers.all { num -> num in 1..45 } })
     }
 }
