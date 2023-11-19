@@ -23,14 +23,4 @@ class LottoTest {
             Lotto(1, 2, 3, 4, 5, 1)
         }
     }
-
-    @ParameterizedTest
-    @ValueSource(strings = ["1, 2, 3, 0, 5, 6", "46, 1, 2, 3, 4, 5"])
-    fun `1 ~ 45 이외의 숫자로 로또 생성시 예외 발생`(numbers: String) {
-        val invalidNumbers = numbers.split(",").map { it.trim().toInt() }.toIntArray()
-
-        assertThrows<IllegalArgumentException> {
-            Lotto(*invalidNumbers)
-        }
-    }
 }

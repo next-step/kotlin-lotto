@@ -7,8 +7,12 @@ import lotto.domain.Statistics
 object ResultView {
     fun printLottos(lottos: List<Lotto>) {
         println("${lottos.size}개를 구매했습니다.")
-        lottos.map { it.numbers.joinToString(separator = ", ", prefix = "[", postfix = "]") }
-            .forEach { println(it) }
+        lottos.forEach { printLotto(it) }
+    }
+
+    private fun printLotto(lotto: Lotto) {
+        val lottoText = lotto.numbers.map { it.value }.joinToString(separator = ", ", prefix = "[", postfix = "]")
+        println(lottoText)
     }
 
     fun printStatistic(statistics: Statistics) {
