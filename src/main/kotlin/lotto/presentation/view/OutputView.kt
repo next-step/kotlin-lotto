@@ -14,6 +14,11 @@ object OutputView {
         drawEarningRate(resp.earningRate)
     }
 
+    private const val consoleIndicator = "당첨 통계"
+    private const val consoleBR = "----------------------"
+    private const val consoleTableOutput = "%d개 일치 (%d원)- %d개"
+    private const val consoleEarnRateOutput = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)"
+
     private fun drawPurchaseCount(count: Int) {
         println("$count 개를 구매 했습니다")
     }
@@ -37,9 +42,4 @@ object OutputView {
             .format(earningRate, if (earningRate > 1) "이익" else "손해")
             .also(::println)
     }
-
-    private const val consoleIndicator = "당첨 통계"
-    private const val consoleBR = "----------------------"
-    private const val consoleTableOutput = "%d개 일치 (%d원)- %d개"
-    private const val consoleEarnRateOutput = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)"
 }

@@ -43,6 +43,8 @@ class LottoResult(
         return result
     }
 
+    // TODO-review : 값 객체를 사용하면서 필요한 기능을 확장 함수로 구현했는데요. 사용이 적절한가요?
+    //  해당 클래스에서만 사용되어서 가독성이 떨어지지 않을지, 더 좋은 방법은 없을지 고민입니다!
     private fun Iterable<Amount>.sum() = Amount.of(sumOf { it.value })
     private fun Iterable<RankFrequency>.sum() = RankFrequency.of(sumOf { it.value })
 }

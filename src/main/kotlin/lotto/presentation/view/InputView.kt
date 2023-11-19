@@ -11,7 +11,7 @@ object InputView {
         return readlnOrNull() ?: throw IllegalArgumentException("콘솔 입력을 확인해 주세요.")
     }
 
-    fun getBounsNumberInput(): String {
+    fun getBonusNumberInput(): String {
         println("보너스 볼을 입력해 주세요.")
         return readlnOrNull() ?: throw IllegalArgumentException("콘솔 입력을 확인해 주세요.")
     }

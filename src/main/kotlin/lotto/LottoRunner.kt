@@ -24,7 +24,7 @@ class LottoRunner private constructor(
 
     private fun evaluateByWinningNumbers() {
         val input = InputView.getWinningNumbersInput()
-        val input2 = InputView.getBounsNumberInput()
+        val input2 = InputView.getBonusNumberInput()
 
         val req = EvaluateRequest.from(input, input2)
 
