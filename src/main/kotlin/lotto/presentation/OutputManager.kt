@@ -22,7 +22,7 @@ class OutputManager {
         println(RESULT_MESSAGE)
         println("-------------------------")
         (START_NUMBER until END_NUMBER).forEach {
-            println("${RESULT_MESSAGE_MAP[it]} ${result.getLottoResult(it)}개")
+            println("${RESULT_MESSAGE_MAP[it]} ${result.getLottoRankCount(it)}개")
         }
     }
 

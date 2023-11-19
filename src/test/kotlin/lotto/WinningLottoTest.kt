@@ -25,6 +25,6 @@ class WinningLottoTest {
         val userLottos = listOf(Lotto(userLottoNumbers))
         val result = winningLotto.match(userLottos)
 
-        result.getLottoResult(expected) shouldBe 1
+        result.getLottoRankCount(expected) shouldBe 1
     }
 }

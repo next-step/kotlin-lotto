@@ -10,7 +10,7 @@ class LottoResult {
         }
     }
 
-    fun getLottoResult(key: Int): Int {
+    fun getLottoRankCount(key: Int): Int {
         if (key < MINIMUM_MATCH_COUNT) {
             return 0
         }
@@ -22,7 +22,7 @@ class LottoResult {
         var revenue = 0
         result.keys.forEach {
 
-            revenue += this.getLottoResult(it.matchCount) * it.prizeMoney
+            revenue += this.getLottoRankCount(it.matchCount) * it.prizeMoney
         }
         return revenue / userTotalPay.toDouble()
     }
