@@ -12,6 +12,6 @@ enum class LottoMatchCount(private val matchCount: Int, val reward: Int) {
 
     companion object {
         fun from(matchCount: Int): LottoMatchCount = values().find { it.matchCount == matchCount }
-            ?: throw IllegalArgumentException("로또 숫자의 일치 수는 로또 숫자 수의 범위를 벗어날 수 없습니다.")
+            ?: throw IllegalArgumentException("로또 숫자의 일치 수는 로또 숫자 수의 범위를 벗어날 수 없습니다. matchCount=$matchCount")
     }
 }

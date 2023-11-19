@@ -5,7 +5,7 @@ value class Lotto private constructor(private val set: Set<LottoNumber>) : Set<L
 
     init {
         require(set.size == LOTTO_NUMBER_COUNT) {
-            "로또의 숫자 개수는 6입니다."
+            "로또의 숫자 개수는 6입니다. size=${set.size}"
         }
     }
 

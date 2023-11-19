@@ -26,7 +26,7 @@ class LottoMatchCountTest : StringSpec({
 
     "로또 번호가 7개 일치하면 IllegalArgumentException 예외가 발생한다." {
         val matchCount = 7
-        shouldThrowWithMessage<IllegalArgumentException>("로또 숫자의 일치 수는 로또 숫자 수의 범위를 벗어날 수 없습니다.") {
+        shouldThrowWithMessage<IllegalArgumentException>("로또 숫자의 일치 수는 로또 숫자 수의 범위를 벗어날 수 없습니다. matchCount=$matchCount") {
             LottoMatchCount.from(matchCount)
         }
     }
