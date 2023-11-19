@@ -16,10 +16,9 @@ class LottoRuleTest : StringSpec({
         ).forEach { pair ->
             assertThat(
                 LottoRule(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
-                    .calculatePrize(Lotto.from(pair.first))
-            ).isEqualTo(
-                pair.second
-            )
+                    .calculateResult(listOf(Lotto.from(pair.first)))
+                    .lottoRanking[pair.second]
+            ).isOne()
         }
     }
 })
