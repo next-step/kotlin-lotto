@@ -3,7 +3,6 @@ package lottoAuto
 import lottoAuto.domain.Lotto
 import lottoAuto.domain.LottoFactory
 import lottoAuto.domain.LottoNumber
-import lottoAuto.domain.LottoRanker
 import lottoAuto.domain.LottoRank
 import lottoAuto.domain.LottoProfitCalculator
 import lottoAuto.domain.LottoNumber.Companion.toLottoNumber
@@ -18,9 +17,10 @@ object LottoController {
         return InputView.getPurchaseAmount()
     }
 
-    fun getWinningLotto(): WinningLotto {
+    fun getWinningLotto(bonusLottoNumber: LottoNumber): WinningLotto {
         return WinningLotto(
-            InputView.getWinningNumbers().map { it.toLottoNumber() }
+            winningLottoNumbers = InputView.getWinningNumbers().map { it.toLottoNumber() },
+            bonusLottoNumber = bonusLottoNumber
         )
     }
 
@@ -45,14 +45,9 @@ object LottoController {
         purchaseAmount: Int,
         lottoList: List<Lotto>,
         winningLotto: WinningLotto,
-        bonusLottoNumber: LottoNumber
     ) {
         OutputView.printStatisticsHeader()
-        val lottoRanks = LottoRanker.rank(
-            lottoList,
-            winningLotto,
-            bonusLottoNumber
-        )
+        val lottoRanks = winningLotto.rank(lottoList)
         val lottoRankGroup = lottoRanks.groupByLottoRank()
         lottoRankGroup
             .entries
@@ -72,8 +67,8 @@ object LottoController {
 fun main() {
     val purchaseAmount = LottoController.getPurchaseAmount()
     val lottoList = LottoController.createLottoList(purchaseAmount)
-    val winningLotto = LottoController.getWinningLotto()
     val bonusLottoNumber = LottoController.getBonusLottoNumber()
+    val winningLotto = LottoController.getWinningLotto(bonusLottoNumber)
 
-    LottoController.statistics(purchaseAmount, lottoList, winningLotto, bonusLottoNumber)
+    LottoController.statistics(purchaseAmount, lottoList, winningLotto)
 }

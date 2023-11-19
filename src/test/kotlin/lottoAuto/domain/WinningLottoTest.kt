@@ -2,72 +2,32 @@ package lottoAuto.domain
 
 import lottoAuto.domain.LottoNumber.Companion.toLottoNumber
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.Test
 
 class WinningLottoTest {
 
     @Test
-    fun `로또 당첨을 확인한다`() {
+    fun `주어진 로또 리스트와 당첨 로또를 비교하여 당첨 등수를 반환한다`() {
         // given
+        val bonusLottoNumber = 8.toLottoNumber()
         val winningLotto = WinningLotto(
-            listOf(
-                1.toLottoNumber(),
-                2.toLottoNumber(),
-                3.toLottoNumber(),
-                4.toLottoNumber(),
-                5.toLottoNumber(),
-                6.toLottoNumber()
-            )
+            winningLottoNumbers = (4..9).map { it.toLottoNumber() },
+            bonusLottoNumber = bonusLottoNumber
         )
-
-        val lotto = Lotto(
-            listOf(
-                1.toLottoNumber(),
-                2.toLottoNumber(),
-                3.toLottoNumber(),
-                4.toLottoNumber(),
-                5.toLottoNumber(),
-                6.toLottoNumber()
-            )
+        val lottoList = listOf(
+            Lotto((1..6).map { it.toLottoNumber() }),
+            Lotto((4..9).map { it.toLottoNumber() }),
+            Lotto((10..15).map { it.toLottoNumber() }),
+            Lotto((3..8).map { it.toLottoNumber() })
         )
 
         // when
-        val sameNumberSize = winningLotto.countSameNumber(lotto)
+        val lottoRanks = winningLotto.rank(lottoList)
 
         // then
-        assertEquals(Lotto.LOTTO_SIZE, sameNumberSize)
-    }
-
-    @Test
-    fun `로또 당첨 탈락을 확인한다`() {
-        // given
-        val winningLotto = WinningLotto(
-            listOf(
-                1.toLottoNumber(),
-                2.toLottoNumber(),
-                3.toLottoNumber(),
-                4.toLottoNumber(),
-                5.toLottoNumber(),
-                6.toLottoNumber()
-            )
-        )
-
-        val lotto = Lotto(
-            listOf(
-                10.toLottoNumber(),
-                20.toLottoNumber(),
-                30.toLottoNumber(),
-                4.toLottoNumber(),
-                5.toLottoNumber(),
-                6.toLottoNumber()
-            )
-        )
-
-        // when
-        val sameNumberSize = winningLotto.countSameNumber(lotto)
-
-        // then
-        assertNotEquals(Lotto.LOTTO_SIZE, sameNumberSize)
+        assertEquals(LottoRank.FOURTH, lottoRanks.ranks[0])
+        assertEquals(LottoRank.FIRST, lottoRanks.ranks[1])
+        assertEquals(LottoRank.MISS, lottoRanks.ranks[2])
+        assertEquals(LottoRank.BONUS, lottoRanks.ranks[3])
     }
 }
