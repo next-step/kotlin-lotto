@@ -3,9 +3,9 @@ package lotto.view
 import lotto.controller.EndLottoResponse
 import lotto.controller.PurchaseResponse
 import lotto.domain.EarningRate
+import lotto.domain.LottoNumber
 import lotto.domain.LottoRank
 import lotto.domain.LottoRankCounts
-import lotto.domain.LottoNumber
 
 object OutputView {
     private const val RESULT_MSG = "당첨 통계"
