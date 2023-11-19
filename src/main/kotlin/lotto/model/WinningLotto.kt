@@ -5,7 +5,7 @@ class WinningLotto(private val winningNumbers: List<LottoNumber>, private val bo
         lottoTickets: List<LottoTicket>
     ): LottoResult {
         val results = lottoTickets.fold(mutableMapOf()) { results: MutableMap<Prize, Int>, lottoTicket: LottoTicket ->
-            val key = getResultKey(winningNumbers, lottoTicket.numbers, bonusNumber)
+            val key = getResultKey(winningNumbers)
             results[key] = (results[key] ?: 0) + 1
             results
         }.toMap()
@@ -13,9 +13,7 @@ class WinningLotto(private val winningNumbers: List<LottoNumber>, private val bo
     }
 
     private fun getResultKey(
-        winningNumbers: List<LottoNumber>,
-        lottoTicketNumbers: List<LottoNumber>,
-        bonusNumber: LottoNumber
+        lottoTicketNumbers: List<LottoNumber>
     ): Prize {
         val matchCount = getMatchCount(winningNumbers.toIntList(), lottoTicketNumbers.toIntList())
         return Prize.getKeyWithMatched(matchCount, lottoTicketNumbers.contains(bonusNumber))
