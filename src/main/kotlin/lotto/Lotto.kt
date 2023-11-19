@@ -10,7 +10,8 @@ class Lotto(val lottoNumbers: List<LottoNumber>) {
     }
 
     fun contains(number: Int): Boolean {
-        return lottoNumbers.any { it.isEqualTo(number) }
+        val lottoNumber = LottoNumber(number)
+        return lottoNumbers.any { it == lottoNumber }
     }
 
     fun contains(lottoNumber: LottoNumber): Boolean {

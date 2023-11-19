@@ -22,8 +22,8 @@ class LottoNumberTest : StringSpec({
 
     "로또 번호가 같은지 체크한다" {
         assertSoftly {
-            assertThat(LottoNumber(5).isEqualTo(5)).isTrue()
-            assertThat(LottoNumber(5).isEqualTo(4)).isFalse()
+            assertThat(LottoNumber(5) == LottoNumber(5)).isTrue()
+            assertThat(LottoNumber(5) == LottoNumber(4)).isFalse()
         }
     }
 })
