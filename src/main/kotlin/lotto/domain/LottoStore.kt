@@ -2,7 +2,7 @@ package lotto.domain
 
 import lotto.domain.model.Lotto
 import lotto.domain.model.LottoCash
-import lotto.domain.model.LottoMatchCount
+import lotto.domain.model.Rank
 
 object LottoStore {
     private const val LOTTO_PRICE = 1000
@@ -16,10 +16,10 @@ object LottoStore {
         return List(count) { Lotto.auto() }
     }
 
-    fun checkMatchResult(lottos: List<Lotto>, lastWeekMatchLotto: Lotto): List<LottoMatchCount> {
+    fun checkMatchResult(lottos: List<Lotto>, lastWeekMatchLotto: Lotto): List<Rank> {
         return lottos.map { lotto ->
             val matchCount = lotto.count { lastWeekMatchLotto.contains(it) }
-            LottoMatchCount.from(matchCount)
+            Rank.valueOf(matchCount)
         }
     }
 }

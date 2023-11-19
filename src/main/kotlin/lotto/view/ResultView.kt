@@ -2,6 +2,7 @@ package lotto.view
 
 import lotto.domain.model.Lotto
 import lotto.domain.model.LottoMatchResult
+import lotto.domain.model.Rank
 
 object ResultView {
     fun printPurchaseResult(lottos: List<Lotto>) {
@@ -12,14 +13,17 @@ object ResultView {
         println()
     }
 
-    fun printMatchResult(lottoMatchResult: LottoMatchResult) {
+    fun printLottoMatchResult(lottoMatchResult: LottoMatchResult, rankList: List<Rank>) {
         println()
         println("당첨 통계")
         println("---------")
-        println("3개 일치 (5000원)- ${lottoMatchResult.three}개")
-        println("4개 일치 (50000원)- ${lottoMatchResult.four}개")
-        println("5개 일치 (1500000원)- ${lottoMatchResult.five}개")
-        println("6개 일치 (2000000000원)- ${lottoMatchResult.six}개")
+        rankList.forEach { rank ->
+            println(rank.toResultWith { lottoMatchResult.count(it) })
+        }
         println("총 수익률은 %.2f입니다.".format(lottoMatchResult.totalReturnRatio))
+    }
+
+    private fun Rank.toResultWith(count: (Rank) -> Int): String {
+        return "${matchCount}개 일치 (${reward}원)- ${count(this)}개"
     }
 }

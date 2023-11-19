@@ -4,6 +4,7 @@ import lotto.domain.LottoStore
 import lotto.domain.model.Lotto
 import lotto.domain.model.LottoCash
 import lotto.domain.model.LottoMatchResult
+import lotto.domain.model.Rank
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -23,7 +24,8 @@ class LottoApplication {
             val lastWeekAllMatchLotto = Lotto.valueOf(lastWeekMatchNumbers)
 
             val lottoMatchList = LottoStore.checkMatchResult(lottos, lastWeekAllMatchLotto)
-            ResultView.printMatchResult(LottoMatchResult(lottoCash, lottoMatchList))
+            val rankList = Rank.values().filter { it.reward > 0 }.sortedBy { it.reward }
+            ResultView.printLottoMatchResult(LottoMatchResult(lottoCash, lottoMatchList), rankList)
         }
     }
 }
