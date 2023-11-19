@@ -2,8 +2,12 @@ package lotto.domain
 
 class AutoLottoNumberGenerator : LottoNumberGenerator {
     override fun generateNumber(): List<LottoNumber> {
-        return List(MAX_LOTTO_NUMBER_AMOUNT) { (START_NUMBER..END_NUMBER).random() }
-            .map { LottoNumber(it) }
+        val numberSet = mutableSetOf<Int>()
+        while (numberSet.size < MAX_LOTTO_NUMBER_AMOUNT) {
+            numberSet.add((START_NUMBER..END_NUMBER).random())
+        }
+
+        return numberSet.map { LottoNumber(it) }
     }
 
     companion object {
