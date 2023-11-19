@@ -14,9 +14,9 @@ object OutputView {
     private fun printLottoResult(lottoResult: LottoResult) {
         lottoResult.lottoRanking
             .filter { it.key.amount.value > 0 }
-            .toSortedMap(compareBy { it.sameCount })
+            .toSortedMap(compareBy { it.amount.value })
             .forEach { (prize, count) ->
-                println("${prize.sameCount}개 일치 (${prize.amount.value}원)- ${count}개")
+                println("${prize.sameCounts[0]}개 일치 (${prize.amount.value}원)- ${count}개")
             }
     }
 

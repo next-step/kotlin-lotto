@@ -1,18 +1,16 @@
 package lotto
 
-enum class Prize(val sameCount: Int, val amount: Amount) {
-    NONE_PRIZE(0, Amount(0)),
-    FOURTH_PRIZE(3, Amount(5_000)),
-    THIRD_PRIZE(4, Amount(50_000)),
-    SECOND_PRIZE(5, Amount(1_500_000)),
-    FIRST_PRIZE(6, Amount(2_000_000_000));
+enum class Prize(val sameCounts: List<Int>, val amount: Amount) {
+    NONE_PRIZE(listOf(0, 1, 2), Amount(0)),
+    FOURTH_PRIZE(listOf(3), Amount(5_000)),
+    THIRD_PRIZE(listOf(4), Amount(50_000)),
+    SECOND_PRIZE(listOf(5), Amount(1_500_000)),
+    FIRST_PRIZE(listOf(6), Amount(2_000_000_000));
 
-    companion object Something {
-        private val orderedPrize = values().toList().sortedByDescending { it.sameCount }
+    companion object {
 
         fun fromSameCount(count: Int): Prize {
-            require(FIRST_PRIZE.sameCount >= count) { "최대 일치 수를 초과했습니다." }
-            return orderedPrize.find { it.sameCount <= count } ?: throw IllegalArgumentException("최소 일치 수를 미달했습니다.")
+            return values().find { it.sameCounts.contains(count) } ?: throw IllegalArgumentException("해당하는 등수가 없습니다.")
         }
     }
 }
