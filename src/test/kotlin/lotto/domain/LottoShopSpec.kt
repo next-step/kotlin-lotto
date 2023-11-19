@@ -4,6 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
+import lotto.error.InvalidLottoAmountException
 
 class LottoShopSpec : FunSpec({
     context("로또 구매") {
@@ -24,7 +25,7 @@ class LottoShopSpec : FunSpec({
         test("로또의 배수 금액이 아닐 때(30_001) 구매 실패") {
             val amount = Amount(30001)
 
-            shouldThrow<IllegalArgumentException> {
+            shouldThrow<InvalidLottoAmountException> {
                 shop.purchase(amount, emptyList())
             }
         }

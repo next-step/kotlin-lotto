@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.error.InvalidLottoNumberException
+
 object LottoNumberGenerator {
 
     fun createFrom(): LottoNumber {
@@ -24,11 +26,11 @@ object LottoNumberGenerator {
     }
 
     private fun checkCount(numbers: List<Int>) {
-        require(numbers.count() == NUMBERS_COUNT) { "로또 번호 개수는 ${NUMBERS_COUNT}여야 합니다" }
+        require(numbers.count() == NUMBERS_COUNT) { throw InvalidLottoNumberException("로또 번호 개수는 ${NUMBERS_COUNT}여야 합니다") }
     }
 
     private fun checkUniqueNumbers(numbers: List<Int>) {
-        require(numbers.count() == numbers.distinct().count()) { "로또 번호는 각기 다른 숫자여야 합니다" }
+        require(numbers.count() == numbers.distinct().count()) { throw InvalidLottoNumberException("로또 번호는 각기 다른 숫자여야 합니다") }
     }
 
     private fun checkNumbersRange(numbers: List<Int>) {
@@ -37,11 +39,11 @@ object LottoNumberGenerator {
     }
 
     private fun checkNotBelowMinimum(number: Int) {
-        require(number >= NUMBERS_RANGE.first) { "로또 번호는 최소 수가 ${NUMBERS_RANGE.first} 이상이여야 합니다" }
+        require(number >= NUMBERS_RANGE.first) { throw InvalidLottoNumberException("로또 번호는 최소 수가 ${NUMBERS_RANGE.first} 이상이여야 합니다") }
     }
 
     private fun checkNotOverMaximum(number: Int) {
-        require(number <= NUMBERS_RANGE.last) { "로또 번호는 최대 수가 ${NUMBERS_RANGE.last} 이하여야 합니다" }
+        require(number <= NUMBERS_RANGE.last) { throw InvalidLottoNumberException("로또 번호는 최대 수가 ${NUMBERS_RANGE.last} 이하여야 합니다") }
     }
 
     private val NUMBERS_RANGE: IntRange = 1..45

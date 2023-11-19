@@ -5,10 +5,9 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.collections.shouldContain
-import io.kotest.matchers.ints.shouldBeGreaterThanOrEqual
 import io.kotest.matchers.ints.shouldBeLessThan
-import io.kotest.matchers.ints.shouldBeLessThanOrEqual
 import io.kotest.matchers.shouldBe
+import lotto.error.InvalidLottoNumberException
 
 class LottoNumberGeneratorSpec : FunSpec({
     context("로또 번호 생성") {
@@ -55,7 +54,7 @@ class LottoNumberGeneratorSpec : FunSpec({
                 row(listOf(1, 2, 3, 4, 13, 23, 33)),
                 row(listOf(1, 2, 3, 4, 13)),
             ) { numbers ->
-                shouldThrow<IllegalArgumentException> {
+                shouldThrow<InvalidLottoNumberException> {
                     LottoNumberGenerator.createFrom(numbers)
                 }
             }
@@ -66,14 +65,14 @@ class LottoNumberGeneratorSpec : FunSpec({
                 row(listOf(1, 2, 3, 4, 13, 46)),
                 row(listOf(0, 1, 2, 3, 4, 13)),
             ) { numbers ->
-                shouldThrow<IllegalArgumentException> {
+                shouldThrow<InvalidLottoNumberException> {
                     LottoNumberGenerator.createFrom(numbers)
                 }
             }
         }
 
         test("중복된 숫자가 있으면 로또 번호 생성 불가") {
-            shouldThrow<IllegalArgumentException> {
+            shouldThrow<InvalidLottoNumberException> {
                 LottoNumberGenerator.createFrom(listOf(1, 2, 3, 4, 5, 5))
             }
         }
@@ -92,12 +91,12 @@ class LottoNumberGeneratorSpec : FunSpec({
             }
         }
         test("1보다 작은 숫자라면 에러가 발생한다") {
-            shouldThrow<IllegalArgumentException> {
+            shouldThrow<InvalidLottoNumberException> {
                 LottoNumberGenerator.checkNumber(0)
             }
         }
         test("45보다 큰 숫자라면 에러가 발생한다") {
-            shouldThrow<IllegalArgumentException> {
+            shouldThrow<InvalidLottoNumberException> {
                 LottoNumberGenerator.checkNumber(46)
             }
         }

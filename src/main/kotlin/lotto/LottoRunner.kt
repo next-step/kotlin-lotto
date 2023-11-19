@@ -3,6 +3,7 @@ package lotto
 import lotto.controller.EndLottoRequest
 import lotto.controller.LottoController
 import lotto.controller.PurchaseRequest
+import lotto.controller.PurchaseResponse
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -17,9 +18,16 @@ class LottoRunner(
     private fun purchaseLotto(): Boolean {
         val amount = InputView.getPurchaseAmount() ?: return false
         val manualLottoNumbers = InputView.getManualLottoNumbers() ?: return false
-        val response = controller.purchase(PurchaseRequest(amount, manualLottoNumbers))
-        OutputView.drawPurchaseOutput(response)
-        return true
+        return when(val response = controller.purchase(PurchaseRequest(amount, manualLottoNumbers))) {
+            is PurchaseResponse.Success -> {
+                OutputView.drawPurchaseOutput(response)
+                true
+            }
+            is PurchaseResponse.Error -> {
+                OutputView.drawError(response.message)
+                false
+            }
+        }
     }
 
     private fun createWinningNumbers(): Boolean {

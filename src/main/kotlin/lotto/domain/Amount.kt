@@ -1,11 +1,13 @@
 package lotto.domain
 
+import lotto.error.InvalidAmountException
+
 @JvmInline
 value class Amount(
     val value: Int
 ) {
     init {
-        require(value >= 0) { "금액은 0보다 크거나 같아야 합니다" }
+        require(value >= 0) { throw InvalidAmountException(value) }
     }
 
     fun toDouble(): Double =
