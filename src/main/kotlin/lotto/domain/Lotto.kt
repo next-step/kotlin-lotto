@@ -9,8 +9,8 @@ class Lotto(
         lottoNumbers.forEach { checkNumberInRange(it) }
     }
 
-    fun matchNumberCount(other: Lotto) =
-        lottoNumbers.intersect(other.lottoNumbers).size
+    fun matchNumberCount(winningLottoNumbers: Set<Int>) =
+        lottoNumbers.intersect(winningLottoNumbers).size
 
     private fun checkNumberInRange(number: Int) {
         require(number in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER) {

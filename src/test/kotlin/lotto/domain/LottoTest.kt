@@ -51,17 +51,16 @@ class LottoTest : FunSpec({
         }
     }
 
-    context("로또끼리 몇개의 숫자가 일치하는지 비교할 수 있다.") {
+    context("로또는 당첨번호로부터 몇개의 숫자가 일치하는지 확인할 수 있다.") {
         withData(
             LottoMatchNumberCountTestData(setOf(1, 2, 3, 4, 5, 6), setOf(1, 2, 3, 4, 5, 6), 6),
             LottoMatchNumberCountTestData(setOf(1, 2, 3, 4, 5, 6), setOf(1, 2, 3, 4, 5, 7), 5),
             LottoMatchNumberCountTestData(setOf(10, 20, 30, 40, 41, 42), setOf(10, 2, 3, 4, 5, 6), 1),
             LottoMatchNumberCountTestData(setOf(10, 20, 30, 40, 41, 42), setOf(1, 2, 3, 4, 5, 6), 0),
-        ) { (lottoNumbers1, lottoNumbers2, matchNumberCount) ->
+        ) { (lottoNumbers, winningLottoNumbers, matchNumberCount) ->
 
-            val lotto1 = Lotto(lottoNumbers1)
-            val lotto2 = Lotto(lottoNumbers2)
-            lotto1.matchNumberCount(lotto2) shouldBe matchNumberCount
+            val lotto = Lotto(lottoNumbers)
+            lotto.matchNumberCount(winningLottoNumbers) shouldBe matchNumberCount
         }
     }
 })
