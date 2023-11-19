@@ -8,8 +8,8 @@ data class Lotto(
         require(lottoNumbers.distinct().size == LOTTO_SIZE) { "로또 번호는 중복되지 않아야 합니다." }
     }
 
-    fun withBonusNumber(bonusNumber: LottoNumber): Boolean {
-        return lottoNumbers.contains(bonusNumber)
+    fun withSameNumber(lottoNumber: LottoNumber): Boolean {
+        return lottoNumbers.contains(lottoNumber)
     }
 
     companion object {

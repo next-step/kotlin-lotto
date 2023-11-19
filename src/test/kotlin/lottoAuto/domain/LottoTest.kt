@@ -38,7 +38,7 @@ class LottoTest {
     }
 
     @Test
-    fun `withBonusNumber 테스트`() {
+    fun `withSameNumber 테스트`() {
         // given
         val lottoNumbers = listOf(
             1.toLottoNumber(),
@@ -50,11 +50,11 @@ class LottoTest {
         )
 
         // when
-        val withBonus = Lotto(lottoNumbers).withBonusNumber(5.toLottoNumber())
-        val withNoBonus = Lotto(lottoNumbers).withBonusNumber(7.toLottoNumber())
+        val withSameNumber = Lotto(lottoNumbers).withSameNumber(5.toLottoNumber())
+        val withNoSameNumber = Lotto(lottoNumbers).withSameNumber(7.toLottoNumber())
 
         // then
-        assertEquals(true, withBonus)
-        assertEquals(false, withNoBonus)
+        assertEquals(true, withSameNumber)
+        assertEquals(false, withNoSameNumber)
     }
 }

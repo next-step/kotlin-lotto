@@ -8,7 +8,7 @@ data class WinningLotto(
         val ranks = lottoList.map {
             LottoRank.from(
                 matchCount = this.countSameNumber(it),
-                withBonus = it.withBonusNumber(bonusLottoNumber)
+                withBonus = it.withSameNumber(bonusLottoNumber)
             )
         }
         return LottoRanks(ranks)
