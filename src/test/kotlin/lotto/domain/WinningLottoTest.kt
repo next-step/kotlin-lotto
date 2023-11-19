@@ -1,10 +1,7 @@
-package lotto
+package lotto.domain
 
 import io.kotest.matchers.shouldBe
-import lotto.domain.Lotto
-import lotto.domain.LottoNumber
-import lotto.domain.LottoNumbers
-import lotto.domain.WinningLotto
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
@@ -14,7 +11,7 @@ class WinningLottoTest {
     @CsvSource(
         value = [
             "1,2,3,4,5,6 | 6 | 6",
-            "2,3,4,5,6,7 | 5 | 5",
+            "2,3,4,5,6,7 | 8 | 5",
         ],
         delimiter = '|'
     )
@@ -26,5 +23,25 @@ class WinningLottoTest {
         val result = winningLotto.match(userLottos)
 
         result.getLottoRankCount(expected) shouldBe 1
+    }
+
+    @Test
+    fun `전달받은 로또 5개와 보너스 번호를 비교해 결과를 반환한다`() {
+        val winningNumber = listOf(1, 2, 3, 4, 5, 6)
+        val winningLotto = WinningLotto.create(winningNumber, 7)
+        val userLottoNumbers = LottoNumbers(
+            listOf(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(7),
+            )
+        )
+        val userLottos = listOf(Lotto(userLottoNumbers))
+        val result = winningLotto.match(userLottos)
+
+        result.getLottoRankingMatchCount(Revenue.SECOND) shouldBe 1
     }
 }
