@@ -1,16 +1,8 @@
 package lotto
 
+import lotto.view.InputView
+import lotto.view.ResultView
+
 fun main() {
-    val money = InputView.inputMoney()
-    val lottoMachine = LottoMachine(lottoGenerator(), money)
-    ResultView.printLottos(lottoMachine.issuedLottos)
-    val winningLotto = InputView.inputWinningLotto()
-    val statistics = lottoMachine.issueStatistics(Lotto(*winningLotto.toIntArray()))
-    ResultView.printStatistic(statistics)
+    LottoApplication(InputView, ResultView).run()
 }
-
-fun lottoGenerator(): LottoGenerator {
-    return LottoGenerator { Lotto.random() }
-}
-
-
