@@ -3,6 +3,7 @@ package lotto.controller
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
+import lotto.presentation.controller.EvaluateRequest
 
 class EvaluateRequestSpec : BehaviorSpec({
     given("우승자 번호와 보너스볼 입력값이 주어졌을 때") {
@@ -13,7 +14,7 @@ class EvaluateRequestSpec : BehaviorSpec({
             val result = EvaluateRequest.from(winningNumbersInput, bonusNumberInput)
 
             then("결과 계산 요청이 생성된다.") {
-                result.winningNumbers shouldBe listOf(1, 2, 4)
+                result.winningTicket shouldBe listOf(1, 2, 4)
                 result.bonusNumber shouldBe 5
             }
         }
@@ -33,26 +34,4 @@ class EvaluateRequestSpec : BehaviorSpec({
             }
         }
     }
-
 })
-
-class EvaluateRequest(
-    val winningNumbers: List<Int>,
-    val bonusNumber: Int,
-) {
-
-    companion object {
-        fun from(inputWinNumbers: String, inputBonusNumber: String): EvaluateRequest {
-            val winNumbers = inputWinNumbers
-                .replace(" ", "")
-                .split(",")
-                .map { it.toIntOrNull() ?: throw IllegalArgumentException("우승자 번호는 숫자여야 합니다.") }
-
-            val bonusNumber = inputBonusNumber.toIntOrNull() ?: throw IllegalArgumentException("보너스볼 번호는 숫자여야 합니다.")
-
-            return EvaluateRequest(winNumbers, bonusNumber)
-        }
-    }
-}
-
-
