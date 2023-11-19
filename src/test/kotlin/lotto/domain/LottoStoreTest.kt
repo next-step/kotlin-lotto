@@ -8,6 +8,21 @@ import lotto.domain.model.Lotto
 import lotto.domain.model.LottoCash
 
 class LottoStoreTest : BehaviorSpec({
+    given("로또를 구매할 수 있는 구입 금액이 주어지면") {
+        val cash = 1000
+        val lottoCash = LottoCash(cash)
+        then("로또를 구매할 수 있다.") {
+            LottoStore.isPurchasable(lottoCash) shouldBe true
+        }
+    }
+    given("로또를 구매할 수 없는 구입 금액이 주어지면") {
+        val cash = 500
+        val lottoCash = LottoCash(cash)
+        then("로또를 구매할 수 없다.") {
+            LottoStore.isPurchasable(lottoCash) shouldBe false
+        }
+    }
+
     given("로또 구입 금액이 주어지고") {
         forAll(
             row(1000),
@@ -18,7 +33,7 @@ class LottoStoreTest : BehaviorSpec({
             `when`("로또 1장의 가격이 1000원 이라고 하면") {
                 val lottoPrice = 1000
                 then("로또 구입 금액에 해당하는 로또를 자동 발급할 수 있다.") {
-                    val lottos = LottoStore.generateLottosByAuto(lottoCash)
+                    val lottos = LottoStore.purchaseLottosByAuto(lottoCash)
                     lottos.size shouldBe lottoCash.value / lottoPrice
                 }
             }

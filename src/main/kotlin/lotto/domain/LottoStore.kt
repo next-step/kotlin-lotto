@@ -7,7 +7,11 @@ import lotto.domain.model.LottoMatchCount
 object LottoStore {
     private const val LOTTO_PRICE = 1000
 
-    fun generateLottosByAuto(cash: LottoCash): List<Lotto> {
+    fun isPurchasable(cash: LottoCash): Boolean {
+        return cash.value >= LOTTO_PRICE
+    }
+
+    fun purchaseLottosByAuto(cash: LottoCash): List<Lotto> {
         val count = cash.value / LOTTO_PRICE
         return List(count) { Lotto.auto() }
     }

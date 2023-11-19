@@ -11,9 +11,12 @@ class LottoApplication {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            val cash = InputView.readCash()
-            val lottoCash = LottoCash(cash)
-            val lottos = LottoStore.generateLottosByAuto(lottoCash)
+            var lottoCash: LottoCash
+            do {
+                val cash = InputView.readCash()
+                lottoCash = LottoCash(cash)
+            } while (!LottoStore.isPurchasable(lottoCash))
+            val lottos = LottoStore.purchaseLottosByAuto(lottoCash)
             ResultView.printPurchaseResult(lottos)
 
             val lastWeekMatchNumbers = InputView.readLastWeekMatchNumbers()
