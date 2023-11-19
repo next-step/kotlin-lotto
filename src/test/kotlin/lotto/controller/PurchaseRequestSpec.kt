@@ -5,8 +5,10 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.startWith
+import lotto.domain.LottoStore.Companion.LOTTO_PRICE
+import lotto.presentation.controller.PurchaseRequest
 
-class PurchaseRequestSpec: BehaviorSpec({
+class PurchaseRequestSpec : BehaviorSpec({
     given("구입 금액이 주어졌을 때") {
         val inputAmount = "1000"
 
@@ -14,7 +16,7 @@ class PurchaseRequestSpec: BehaviorSpec({
             val result = PurchaseRequest.from(inputAmount)
 
             then("구입 요청이 생성된다") {
-                result.amount shouldBe 1000
+                result.amount shouldBe LOTTO_PRICE
             }
         }
     }
@@ -43,16 +45,3 @@ class PurchaseRequestSpec: BehaviorSpec({
         }
     }
 })
-
-class PurchaseRequest(
-    val amount: Int,
-) {
-    companion object {
-        const val LOTTO_PRICE = 1_000
-        fun from(inputAmount: String): PurchaseRequest {
-            val amount = inputAmount.toIntOrNull() ?: throw IllegalArgumentException("구입 금액은 정수여야 합니다")
-            require(amount % LOTTO_PRICE == 0) { "구입 금액은 로또 가격의 배수여야 합니다." }
-            return PurchaseRequest(amount)
-        }
-    }
-}
