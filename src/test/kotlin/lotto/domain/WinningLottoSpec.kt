@@ -5,6 +5,8 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
+import lotto.error.InvalidLottoNumberException
+import lotto.error.InvalidWinningLottoException
 
 class WinningLottoSpec : FunSpec({
 
@@ -13,7 +15,7 @@ class WinningLottoSpec : FunSpec({
             WinningLotto(LottoNumber(listOf(1, 2, 3, 4, 5, 6)), 45)
         }
         test("당첨 번호에 보너스 볼이 포함되어 있으면 에러가 발생한다") {
-            shouldThrow<IllegalArgumentException> {
+            shouldThrow<InvalidWinningLottoException> {
                 WinningLotto(LottoNumber(listOf(1, 2, 3, 4, 5, 6)), 6)
             }
         }
@@ -22,7 +24,7 @@ class WinningLottoSpec : FunSpec({
                 row(0),
                 row(46),
             ) { bonusNumber ->
-                shouldThrow<IllegalArgumentException> {
+                shouldThrow<InvalidLottoNumberException> {
                     WinningLotto(LottoNumber(listOf(1, 2, 3, 4, 5, 6)), bonusNumber)
                 }
             }

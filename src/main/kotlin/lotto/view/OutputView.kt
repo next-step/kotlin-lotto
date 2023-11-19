@@ -6,7 +6,6 @@ import lotto.domain.EarningRate
 import lotto.domain.LottoNumber
 import lotto.domain.LottoRank
 import lotto.domain.LottoRankCounts
-import lotto.domain.LottoTicket
 
 object OutputView {
     private const val RESULT_MSG = "당첨 통계"
@@ -23,7 +22,7 @@ object OutputView {
         drawNumbers(ticket.numbers)
     }
 
-    fun drawEarningRateOutput(response: EndLottoResponse) {
+    fun drawEarningRateOutput(response: EndLottoResponse.Success) {
         val result = response.result
         println()
         println(RESULT_MSG)
@@ -32,11 +31,9 @@ object OutputView {
         drawEarningRate(result.earningRate)
     }
 
-
     fun drawError(message: String) {
         println(ERROR_PREFIX + message)
     }
-
 
     private fun drawPurchaseCount(count: Int) {
         println(PURCHASE_COUNT_MSG.format(count))

@@ -48,11 +48,11 @@ object InputView {
     private fun readIntInput(): Int? = readlnOrNull()?.toIntOrNull()
 
     private fun parseLottoNumbers(lottoNumbers: String): List<Int>? =
-            lottoNumbers
-                .split(LOTTO_NUMBER_DELIMITER)
-                .map { it.toIntOrNull() }
-                .takeIf { it.all { it != null } }
-                ?.filterNotNull()
+        lottoNumbers
+            .split(LOTTO_NUMBER_DELIMITER)
+            .map { it.toIntOrNull() }
+            .takeIf { it.all { it != null } }
+            ?.filterNotNull()
 
     private fun getManualLottoCount(): Int? {
         println(MANUAL_LOTTO_COUNT_QUESTION)
@@ -67,7 +67,7 @@ object InputView {
             .takeIf { it.all { it != null } }
             ?.filterNotNull()
             .also {
-                if(it == null) println(MANUAL_LOTTO_NUMBERS_ERROR_MESSAGE)
+                if (it == null) println(MANUAL_LOTTO_NUMBERS_ERROR_MESSAGE)
             }
     }
 }

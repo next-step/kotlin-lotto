@@ -3,6 +3,7 @@ package lotto.controller
 import lotto.domain.Amount
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumberGenerator
+import lotto.domain.LottoResult
 import lotto.domain.LottoShop
 import lotto.domain.LottoTicket
 import lotto.domain.WinningLotto
@@ -22,14 +23,19 @@ class LottoController(
             else throw error
         }
 
-    fun end(request: EndLottoRequest): EndLottoResponse {
-        val purchasedTicket = purchasedTicket ?: throw IllegalArgumentException("티켓이 저장되지 않았습니다")
-        val winningLotto = WinningLotto(
-            winningNumber = LottoNumberGenerator.createFrom(request.winningNumbers),
-            bonusNumber = request.bonusNumber
-        )
-        return shop.receivePrize(purchasedTicket, winningLotto).let(::EndLottoResponse)
-    }
+    fun end(request: EndLottoRequest): EndLottoResponse =
+        runCatching {
+            val purchasedTicket =
+                purchasedTicket ?: return EndLottoResponse.Success(LottoResult.withoutPurchasedTicket())
+            val winningLotto = WinningLotto(
+                winningNumber = LottoNumberGenerator.createFrom(request.winningNumbers),
+                bonusNumber = request.bonusNumber
+            )
+            return shop.receivePrize(purchasedTicket, winningLotto).let(EndLottoResponse::Success)
+        }.getOrElse { error ->
+            if (error is CustomException) EndLottoResponse.Error(error.errorMessage)
+            else throw error
+        }
 
     private fun LottoTicket.save(): LottoTicket =
         this.also { purchasedTicket = it }

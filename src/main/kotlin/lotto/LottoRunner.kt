@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.controller.EndLottoRequest
+import lotto.controller.EndLottoResponse
 import lotto.controller.LottoController
 import lotto.controller.PurchaseRequest
 import lotto.controller.PurchaseResponse
@@ -11,18 +12,19 @@ class LottoRunner(
     private val controller: LottoController = LottoController()
 ) {
     fun run() {
-        if(!purchaseLotto()) return
+        if (!purchaseLotto()) return
         createWinningNumbers()
     }
 
     private fun purchaseLotto(): Boolean {
         val amount = InputView.getPurchaseAmount() ?: return false
         val manualLottoNumbers = InputView.getManualLottoNumbers() ?: return false
-        return when(val response = controller.purchase(PurchaseRequest(amount, manualLottoNumbers))) {
+        return when (val response = controller.purchase(PurchaseRequest(amount, manualLottoNumbers))) {
             is PurchaseResponse.Success -> {
                 OutputView.drawPurchaseOutput(response)
                 true
             }
+
             is PurchaseResponse.Error -> {
                 OutputView.drawError(response.message)
                 false
@@ -33,9 +35,17 @@ class LottoRunner(
     private fun createWinningNumbers(): Boolean {
         val winningNumbers = InputView.getWinningNumbersInput() ?: return false
         val bonusNumber = InputView.getBonusNumberInput() ?: return false
-        val response = controller.end(EndLottoRequest(winningNumbers, bonusNumber))
-        OutputView.drawEarningRateOutput(response)
-        return true
+        return when (val response = controller.end(EndLottoRequest(winningNumbers, bonusNumber))) {
+            is EndLottoResponse.Success -> {
+                OutputView.drawEarningRateOutput(response)
+                true
+            }
+
+            is EndLottoResponse.Error -> {
+                OutputView.drawError(response.message)
+                false
+            }
+        }
     }
 }
 

@@ -2,6 +2,12 @@ package lotto.controller
 
 import lotto.domain.LottoResult
 
-class EndLottoResponse(
-    val result: LottoResult,
-)
+sealed interface EndLottoResponse {
+    data class Success(
+        val result: LottoResult,
+    ) : EndLottoResponse
+
+    data class Error(
+        val message: String,
+    ) : EndLottoResponse
+}

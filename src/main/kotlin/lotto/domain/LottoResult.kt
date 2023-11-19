@@ -13,5 +13,10 @@ data class LottoResult(
             )
             return LottoResult(rankCounts, earningRate)
         }
+
+        fun withoutPurchasedTicket(): LottoResult = LottoResult(
+            LottoRankCounts(emptyMap()),
+            EarningRate(0.00)
+        )
     }
 }
