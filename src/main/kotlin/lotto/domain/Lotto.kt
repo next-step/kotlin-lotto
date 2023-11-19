@@ -21,6 +21,10 @@ class Lotto(numbers: List<LottoNumber>) {
         return numbers.size != numbers.distinct().size
     }
 
+    fun match(winningLotto: Lotto): LottoResult {
+        return LottoResult.of(numbers.count { winningLotto.numbers.contains(it) })
+    }
+
     companion object {
         private const val LOTTO_NUMBER_SIZE = 6
     }
