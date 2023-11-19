@@ -13,7 +13,9 @@ class LottoTest {
     @ValueSource(ints = [5, 7])
     fun `잘못된 숫자 갯수로 로또 생성 시 예외 발생`(size: Int) {
         assertThrows<IllegalArgumentException> {
-            val numbers = (1 .. size).toList().toIntArray()
+            val numbers = (1..size)
+                .toList()
+                .toIntArray()
             Lotto(*numbers)
         }.shouldHaveMessage("로또는 유일한 숫자 6개로 구성해야합니다.")
     }

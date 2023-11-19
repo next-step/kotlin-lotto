@@ -7,7 +7,7 @@ data class Statistics(private val money: Int, private val statistics: Map<Rank, 
     val profitRate: BigDecimal
         get() = totalProfit().divide(money.toBigDecimal(), 2, RoundingMode.CEILING)
 
-    constructor(money: Int, vararg pairs: Pair<Rank, Int>): this(money, mapOf(*pairs))
+    constructor(money: Int, vararg pairs: Pair<Rank, Int>) : this(money, mapOf(*pairs))
 
     private fun totalProfit(): BigDecimal {
         return statistics.keys.map {
