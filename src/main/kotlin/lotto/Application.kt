@@ -14,8 +14,7 @@ fun main() {
         val lottoManualList = LottoFactory.generateLottoList(readLottoNumbers(lottoManualCount))
         val lottoAutoList = LottoFactory.generateLottoList(lottoAutoCount)
         val lottoTotalList = lottoManualList + lottoAutoList
-        printLottoList(lottoManualList)
-        printLottoList(lottoAutoList)
+        printLottoList(lottoManualList, lottoAutoList)
 
         val winningNumbers = WinningNumbers(
             LottoNumbers(readWinningNumbers().map { LottoNumber(it) }.toSet()),
