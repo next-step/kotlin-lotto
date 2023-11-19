@@ -22,7 +22,7 @@ class StringAddCalculator {
 
     private fun toPositiveInt(text: String): Int {
         val number = text.toInt()
-        require(number >= MINIMUM_VALUE)
+        require(number >= MINIMUM_VALUE) { "음수는 입력할 수 없습니다." }
         return number
     }
 
