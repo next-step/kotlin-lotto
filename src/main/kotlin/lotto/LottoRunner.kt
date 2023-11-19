@@ -15,8 +15,9 @@ class LottoRunner(
     }
 
     private fun purchaseLotto() {
-        val input = InputView.getPurchaseInput()
-        val response = controller.purchase(PurchaseRequest.from(input))
+        val amount = InputView.getPurchaseAmount()
+        val manualLottoNumbers = InputView.getManualLottoNumbers() ?: return
+        val response = controller.purchase(PurchaseRequest.from(amount))
         OutputView.drawPurchaseOutput(response)
     }
 
