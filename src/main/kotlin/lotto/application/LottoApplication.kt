@@ -1,11 +1,11 @@
 package lotto.application
 
-import lotto.domain.Charge
 import lotto.domain.Lotto
-import lotto.domain.LottoBuyingPrice
 import lotto.domain.LottoMachine
 import lotto.domain.WinningLotto
-import lotto.util.LottoNumberGenerator
+import lotto.domain.number.RandomLottoLottoNumberGenerator
+import lotto.domain.purchase.Charge
+import lotto.domain.purchase.LottoBuyingPrice
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -14,7 +14,8 @@ class LottoApplication {
         @JvmStatic
         fun main(args: Array<String>) {
             val buyingPrice = InputView.readBuyingPrice()
-            val lottoMachine = createLottoMachine(buyingPrice)
+            val manualLottos = createManualLottos(buyingPrice)
+            val lottoMachine = createLottoMachine(buyingPrice, manualLottos)
 
             val change = calculateChange(buyingPrice, lottoMachine)
             OutputView.printLottos(lottoMachine, change)
@@ -24,11 +25,22 @@ class LottoApplication {
             OutputView.printLottoResult(lottoMatchResult)
         }
 
-        private fun createLottoMachine(buyingPrice: LottoBuyingPrice): LottoMachine {
-            val lottoCount = buyingPrice.divide(Lotto.LOTTO_PRICE)
+        private fun createManualLottos(buyingPrice: LottoBuyingPrice): List<Lotto> {
+            val lottoCount = InputView.readManualLottoCount(buyingPrice)
+            if (lottoCount.isZero()) {
+                return emptyList()
+            }
+            return List(lottoCount.value) {
+                InputView.readManualLotto(lottoCount, it)
+            }
+        }
+
+        private fun createLottoMachine(buyingPrice: LottoBuyingPrice, manualLottos: List<Lotto>): LottoMachine {
+            val autoLottoCount = buyingPrice.divide(Lotto.LOTTO_PRICE).minus(manualLottos.size)
             return LottoMachine.of(
-                lottoCount = lottoCount,
-                numberGenerator = LottoNumberGenerator
+                autoLottoCount = autoLottoCount,
+                lottoNumberGenerator = RandomLottoLottoNumberGenerator,
+                manualLotto = manualLottos
             )
         }
 
@@ -38,9 +50,8 @@ class LottoApplication {
         }
 
         private fun createWinningLotto(): WinningLotto {
-            val winningLottoNumbers = InputView.readWinningLotto()
-            val bonusBall = InputView.readBonusBall()
-            return WinningLotto(winningLottoNumbers, bonusBall)
+            val winningLottoNumbers = InputView.readWinningLottoNumbers()
+            return InputView.createWinningLotto(winningLottoNumbers)
         }
     }
 }

@@ -7,7 +7,7 @@ class LottoPriceTest : StringSpec({
 
     "구입한 로또의 금액을 계산한다." {
         // given
-        val lottoCount = LottoCount(10)
+        val lottoCount = LottoCount.from(10)
 
         // when
         val lottoPrice = LottoPrice.getTotalPrice(lottoCount)
@@ -15,4 +15,4 @@ class LottoPriceTest : StringSpec({
         // then
         lottoPrice.value shouldBe 10000
     }
-},)
+})

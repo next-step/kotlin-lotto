@@ -1,32 +1,45 @@
 package lotto.domain
 
-import lotto.util.NumberGenerator
+import lotto.domain.number.LottoNumberGenerator
+import lotto.domain.purchase.LottoBuyingPrice
+import lotto.domain.result.LottoMatchResult
+import lotto.domain.result.LottoPlayResult
+import lotto.domain.result.LottoRank
 
 class LottoMachine private constructor(
-    val lottoCount: LottoCount,
-    lottoNumberGenerator: NumberGenerator<LottoNumber>,
+    val autoLottoCount: LottoCount,
+    lottoNumberGenerator: LottoNumberGenerator,
+    manualLottos: List<Lotto>,
 ) {
 
     private val _lottos: MutableList<Lotto> = mutableListOf()
+    val manualLottoCount: LottoCount = LottoCount.from(manualLottos.size)
+
     val lottos: List<Lotto>
         get() = _lottos
 
     init {
-        repeat(lottoCount.value) {
-            val lotto = Lotto.createFromGenerator(lottoNumberGenerator)
-            _lottos.add(lotto)
-        }
+        _lottos.addAll(manualLottos)
+        generateAutoLottos(lottoNumberGenerator)
     }
 
     fun getLottoTotalPrice(): LottoPrice {
-        return LottoPrice.getTotalPrice(lottoCount)
+        val totalLottoCount = autoLottoCount.plus(manualLottoCount)
+        return LottoPrice.getTotalPrice(totalLottoCount)
     }
 
     fun getResult(winningLotto: WinningLotto, buyingPrice: LottoBuyingPrice): LottoMatchResult {
         val matchCountByRank = getMatchCountByRank(winningLotto)
-        val lottoResult = LottoResult(matchCountByRank)
+        val lottoResult = LottoPlayResult(matchCountByRank)
         val earningRate = lottoResult.calculateEarningRate(buyingPrice)
         return LottoMatchResult(lottoResult.matchCountByRank, earningRate)
+    }
+
+    private fun generateAutoLottos(lottoNumberGenerator: LottoNumberGenerator) {
+        repeat(autoLottoCount.value) {
+            val lotto = Lotto.createFromGenerator(lottoNumberGenerator)
+            _lottos.add(lotto)
+        }
     }
 
     private fun getMatchCountByRank(winningLotto: WinningLotto): Map<LottoRank, Int> =
@@ -46,9 +59,16 @@ class LottoMachine private constructor(
     companion object {
         private const val INIT_MATCH_COUNT = 0
 
-        fun of(lottoCount: Int, numberGenerator: NumberGenerator<LottoNumber>): LottoMachine = LottoMachine(
-            lottoCount = LottoCount(lottoCount),
-            lottoNumberGenerator = numberGenerator,
-        )
+        fun of(
+            autoLottoCount: Int,
+            lottoNumberGenerator: LottoNumberGenerator,
+            manualLotto: List<Lotto>,
+        ): LottoMachine {
+            return LottoMachine(
+                autoLottoCount = LottoCount.from(autoLottoCount),
+                lottoNumberGenerator = lottoNumberGenerator,
+                manualLottos = manualLotto
+            )
+        }
     }
 }

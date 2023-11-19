@@ -1,14 +1,14 @@
 package lotto.view
 
-import lotto.domain.Charge
 import lotto.domain.Lotto
 import lotto.domain.LottoMachine
-import lotto.domain.LottoMatchResult
-import lotto.domain.LottoRank
+import lotto.domain.purchase.Charge
+import lotto.domain.result.LottoMatchResult
+import lotto.domain.result.LottoRank
 
 object OutputView {
 
-    private const val BUYING_MESSAGE_FORMAT = "%s개를 구매했습니다. 거스름돈은 %d원입니다."
+    private const val BUYING_MESSAGE_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다. 거스름돈은 %d원입니다."
     private const val LOTTO_FORMAT = "[%s]"
     private const val WINNING_STATISTICS_MESSAGE_FORMAT = """
         당첨 통계
@@ -23,12 +23,21 @@ object OutputView {
     private const val LOSE = "손해"
 
     fun printLottos(lottoMachine: LottoMachine, change: Charge) {
-        println(String.format(BUYING_MESSAGE_FORMAT, lottoMachine.lottoCount.value, change.value))
+        val buyingMessage = createBuyingMessage(lottoMachine, change)
+        println(buyingMessage)
         lottoMachine.lottos.forEach { printLottoNumbers(it) }
     }
 
+    private fun createBuyingMessage(lottoMachine: LottoMachine, change: Charge): String =
+        System.lineSeparator() + String.format(
+            BUYING_MESSAGE_FORMAT,
+            lottoMachine.manualLottoCount.value,
+            lottoMachine.autoLottoCount.value,
+            change.value
+        )
+
     private fun printLottoNumbers(it: Lotto) {
-        val lottoNumbers = it.sortedNumbers
+        val lottoNumbers = it.numbers
             .map { number -> number.value }
             .joinToString(", ")
         println(String.format(LOTTO_FORMAT, lottoNumbers))
@@ -44,7 +53,7 @@ object OutputView {
     private fun createStatisticMessage(
         result: Map<LottoRank, Int>,
     ): String {
-        val lottoRanks = LottoRank.values()
+        val lottoRanks = LottoRank.entries
             .filterNot { it.isMiss() }
             .sortedBy { it.winningMoney }
         val statisticsMessage =
@@ -66,21 +75,21 @@ object OutputView {
 
     private fun createMatchMessage(rank: LottoRank, matchCount: Int): String = String.format(
         MATCH_MESSAGE_FORMAT.trimIndent(),
-        rank.getWinningMatchCount(),
+        rank.winningMatchCount[0],
         rank.winningMoney,
-        matchCount,
+        matchCount
     )
 
     private fun createBonusMatchMessage(rank: LottoRank, matchCount: Int): String = String.format(
         BONUS_BALL_MATCH_MESSAGE_FORMAT.trimIndent(),
-        rank.getWinningMatchCount(),
+        rank.winningMatchCount[0],
         rank.winningMoney,
-        matchCount,
+        matchCount
     )
 
     private fun createEarningRateMessage(earningRate: Double): String = String.format(
         EARNING_RATE_MESSAGE_FORMAT,
         earningRate,
-        if (earningRate > STANDARD_RATE) WIN else LOSE,
+        if (earningRate > STANDARD_RATE) WIN else LOSE
     )
 }

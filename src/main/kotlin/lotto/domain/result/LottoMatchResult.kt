@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.result
 
 data class LottoMatchResult(
     val result: Map<LottoRank, Int>,

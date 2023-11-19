@@ -1,20 +1,21 @@
 package lotto.domain
 
-class WinningLotto(
+import lotto.domain.number.LottoNumber
+
+class WinningLotto private constructor(
     val lotto: Lotto,
     val bonusNumber: LottoNumber,
 ) {
 
-    init {
-        validateBonusBall(lotto, bonusNumber)
-    }
-
     fun getLottoNumbers(): Set<LottoNumber> =
-        lotto.sortedNumbers.toSet()
+        lotto.numbers.toSet()
 
-    private fun validateBonusBall(winningLotto: Lotto, bonusBall: LottoNumber) {
-        require(winningLotto.hasBonusBall(bonusBall).not()) {
-            "보너스 볼은 당첨 번호와 중복될 수 없습니다."
+    companion object {
+        fun createResult(lotto: Lotto, bonusNumber: LottoNumber): WinningLottoResult {
+            if (lotto.hasBonusBall(bonusNumber)) {
+                return WinningLottoResult.Failure("보너스 볼은 당첨 번호와 중복될 수 없습니다.")
+            }
+            return WinningLottoResult.Success(WinningLotto(lotto, bonusNumber))
         }
     }
 }

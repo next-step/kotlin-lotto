@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.result
 
 enum class LottoRank(
     val winningMatchCount: List<Int>,
@@ -20,21 +20,18 @@ enum class LottoRank(
     fun isSecond(): Boolean =
         this == SECOND
 
-    fun getWinningMatchCount(): Int =
-        winningMatchCount[0]
-
     companion object {
 
         fun from(matchCount: Int, hasBonusBall: Boolean): LottoRank {
             return when {
                 isSecondOrThirdRank(matchCount) && hasBonusBall -> SECOND
                 isSecondOrThirdRank(matchCount) && hasBonusBall.not() -> THIRD
-                else -> values().firstOrNull { it.winningMatchCount.contains(matchCount) }
+                else -> entries.firstOrNull { it.winningMatchCount.contains(matchCount) }
                     ?: throw IllegalArgumentException("당첨 번호와 일치하는 개수는 ${MISS.winningMatchCount[0]}개 이상, ${FIRST.winningMatchCount[0]}개 이하만 가능합니다.")
             }
         }
 
         fun isSecondOrThirdRank(matchCount: Int): Boolean =
-            SECOND.getWinningMatchCount() == matchCount
+            SECOND.winningMatchCount.contains(matchCount)
     }
 }

@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.result
 
 import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.core.spec.style.StringSpec
@@ -25,9 +25,9 @@ class LottoRankTest : StringSpec({
             row(4, false, LottoRank.FOURTH),
             row(5, false, LottoRank.THIRD),
             row(5, true, LottoRank.SECOND),
-            row(6, false, LottoRank.FIRST),
+            row(6, false, LottoRank.FIRST)
         ) { count, hasBonusBall, expected ->
             LottoRank.from(count, hasBonusBall) shouldBe expected
         }
     }
-},)
+})

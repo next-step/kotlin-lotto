@@ -1,45 +1,56 @@
 package lotto.domain
 
-import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
+import lotto.domain.number.LottoNumber
+import lotto.domain.number.LottoNumberResult
 
 class LottoTest : StringSpec({
 
-    "로또 번호가 6개가 아니면 예외가 발생한다." {
+    "로또 번호가 6개가 아니면 실패를 반환한다." {
         listOf(0, 1, 2, 3, 4, 5).forEach { count ->
             // given
             val numbers = List(count) { 1 }
 
-            // expected
-            shouldThrowWithMessage<IllegalArgumentException>("로또 번호는 6개여야 합니다.") {
-                Lotto.createFromNumbers(numbers)
-            }
+            // when
+            val lottoResult = Lotto.createFromNumbers(numbers)
+
+            // then
+            lottoResult shouldBe LottoResult.Failure("로또 번호는 6개여야 합니다.")
         }
     }
 
-    "로또 번호가 중복이면 예외가 발생한다." {
+    "로또 번호가 중복이면 실패를 반환한다." {
         // given
         val numbers = listOf(1, 1, 2, 3, 4, 5)
 
-        // expected
-        shouldThrowWithMessage<IllegalArgumentException>("로또 번호는 중복되지 않아야 합니다.") {
-            Lotto.createFromNumbers(numbers)
-        }
+        // when
+        val lottoResult = Lotto.createFromNumbers(numbers)
+
+        // then
+        lottoResult shouldBe LottoResult.Failure("로또 번호는 중복되지 않아야 합니다.")
     }
 
     "두 로또 번호 사이의 중복된 개수를 구한다." {
         // given
-        val lotto = Lotto.createFromNumbers(listOf(1, 2, 3, 4, 5, 6))
-        val otherLotto = Lotto.createFromNumbers(listOf(2, 5, 6, 7, 8, 10))
-        val bonusBall = LottoNumber.from(11)
-        val winningLotto = WinningLotto(otherLotto, bonusBall)
+        val lottoResult = Lotto.createFromNumbers(listOf(1, 2, 3, 4, 5, 6))
+        val lotto = lottoResult as LottoResult.Success
+
+        val otherLottoResult = Lotto.createFromNumbers(listOf(2, 5, 6, 7, 8, 10))
+        val otherLotto = otherLottoResult as LottoResult.Success
+
+        val bonusBallResult = LottoNumber.createResult(11)
+        val bonusBall = bonusBallResult as LottoNumberResult.Success
+
+        val winningLottoResult = WinningLotto.createResult(otherLotto.data, bonusBall.data)
+        val winningLotto = winningLottoResult as WinningLottoResult.Success
+
         val hasBonusBall = false
 
         // when
-        val count = lotto.calculateMatchCount(winningLotto, hasBonusBall)
+        val count = lotto.data.calculateMatchCount(winningLotto.data, hasBonusBall)
 
         // then
         count shouldBe 3
@@ -47,14 +58,21 @@ class LottoTest : StringSpec({
 
     "두 로또 번호 사이의 중복된 개수를 구할 때 보너스 볼이 존재하지만, 중복된 개수가 5라면 1을 추가하지 않는다." {
         // given
-        val lotto = Lotto.createFromNumbers(listOf(1, 2, 3, 4, 5, 6))
-        val otherLotto = Lotto.createFromNumbers(listOf(2, 3, 4, 5, 6, 10))
-        val bonusBall = LottoNumber.from(1)
-        val winningLotto = WinningLotto(otherLotto, bonusBall)
+        val lottoResult = Lotto.createFromNumbers(listOf(1, 2, 3, 4, 5, 6))
+        val lotto = lottoResult as LottoResult.Success
+
+        val otherLottoResult = Lotto.createFromNumbers(listOf(2, 3, 4, 5, 6, 10))
+        val otherLotto = otherLottoResult as LottoResult.Success
+
+        val bonusBallResult = LottoNumber.createResult(1)
+        val bonusBall = bonusBallResult as LottoNumberResult.Success
+
+        val winningLottoResult = WinningLotto.createResult(otherLotto.data, bonusBall.data)
+        val winningLotto = winningLottoResult as WinningLottoResult.Success
         val hasBonusBall = true
 
         // when
-        val count = lotto.calculateMatchCount(winningLotto, hasBonusBall)
+        val count = lotto.data.calculateMatchCount(winningLotto.data, hasBonusBall)
 
         // then
         count shouldBe 5
@@ -70,14 +88,21 @@ class LottoTest : StringSpec({
         ) { other, expected ->
 
             // given
-            val lotto = Lotto.createFromNumbers(listOf(1, 2, 3, 4, 5, 6))
-            val otherLotto = Lotto.createFromNumbers(other)
-            val bonusBall = LottoNumber.from(5)
-            val winningLotto = WinningLotto(otherLotto, bonusBall)
+            val lottoResult = Lotto.createFromNumbers(listOf(1, 2, 3, 4, 5, 6))
+            val lotto = lottoResult as LottoResult.Success
+
+            val otherLottoResult = Lotto.createFromNumbers(other)
+            val otherLotto = otherLottoResult as LottoResult.Success
+
+            val lottoNumberResult = LottoNumber.createResult(5)
+            val bonusBall = lottoNumberResult as LottoNumberResult.Success
+
+            val winningLottoResult = WinningLotto.createResult(otherLotto.data, bonusBall.data)
+            val winningLotto = winningLottoResult as WinningLottoResult.Success
             val hasBonusBall = true
 
             // when
-            val actual = lotto.calculateMatchCount(winningLotto, hasBonusBall)
+            val actual = lotto.data.calculateMatchCount(winningLotto.data, hasBonusBall)
 
             // then
             actual shouldBe expected
@@ -90,11 +115,14 @@ class LottoTest : StringSpec({
             row(7, false)
         ) { number, expected ->
             // given
-            val lotto = Lotto.createFromNumbers(listOf(1, 2, 3, 4, 5, 6))
-            val bonusBall = LottoNumber.from(number)
+            val lottoResult = Lotto.createFromNumbers(listOf(1, 2, 3, 4, 5, 6))
+            val lotto = lottoResult as LottoResult.Success
+
+            val lottoNumberResult = LottoNumber.createResult(number)
+            val bonusBall = lottoNumberResult as LottoNumberResult.Success
 
             // when
-            val actual = lotto.hasBonusBall(bonusBall)
+            val actual = lotto.data.hasBonusBall(bonusBall.data)
 
             // then
             actual shouldBe expected
