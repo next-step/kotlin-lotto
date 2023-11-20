@@ -1,20 +1,25 @@
 package lotto.domain
 
-import lotto.domain.strategy.DrawStrategy
-import lotto.domain.strategyImpl.AutoLottoFactory
-import lotto.error.ErrorMessage.MIN_LOTTO_COUNT
+class LottoShop {
 
-class LottoShop(private val drawStrategy: DrawStrategy = AutoLottoFactory()) {
-
-    fun countBuyLotto(money: Int): Int {
-        val lottoBuyCount = money.div(LOTTO_PRICE)
-        require(lottoBuyCount > 0) { MIN_LOTTO_COUNT.message }
-        return lottoBuyCount
+    fun countBuyLotto(money: Int, manualLottoCount: Int): LottoPurchaseInfo {
+        val lottoBuyTotalCount = money.div(LOTTO_PRICE)
+        val autoLottoCount = lottoBuyTotalCount - manualLottoCount
+        return LottoPurchaseInfo(autoLottoCount, manualLottoCount)
     }
 
-    fun buyLotto(lottoBuyCount: Int): List<Lotto> = List(lottoBuyCount) { drawStrategy.draw() }
+    fun buyLotto(autoLottoBuyCount: Int, manualLottos: Lottos): Lottos {
+        val autoLottos = Lottos(
+            List(autoLottoBuyCount) {
+                val shuffledNumbers = LottoNumber.lottoNumberRange.shuffled().take(Lotto.LOTTO_NUMBER_COUNT)
+                Lotto(shuffledNumbers.map { LottoNumber(it) })
+            }
+        )
 
-    fun generateJackpotNumbers(inputNumber: String, delimiters: String = ", "): Lotto {
+        return manualLottos + autoLottos
+    }
+
+    fun generateLottoNumbers(inputNumber: String, delimiters: String = ", "): Lotto {
         return Lotto(inputNumber.split(delimiters).map { LottoNumber(it.toInt()) })
     }
 

@@ -9,9 +9,9 @@ class LottoWinningTestLevel {
 
     @Test
     fun `lottoList 에서 jackpotNumbers 와 매칭 되는 개수에 해당하는 JackpotLevel 의 value 가 반환 된다`() {
-        val lottoList: List<Lotto> = listOf(LOTTO)
+        val lottoList = Lottos(listOf(LOTTO))
 
-        val findJackpotLotto = lottoWinning.checkLottoWinning(lottoList)
+        val findJackpotLotto = lottoWinning.checkWinningLottos(lottoList)
         assertEquals(findJackpotLotto, listOf(JackpotLevel.SIX_MATCH))
     }
 
