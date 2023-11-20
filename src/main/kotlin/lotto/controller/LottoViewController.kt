@@ -5,7 +5,6 @@ import lotto.component.LottoInputValidator
 import lotto.model.LottoNumbers
 import lotto.model.LottoResult
 import lotto.model.WinningNumbers
-import lotto.utils.convertToLottoNumberList
 import lotto.view.LottoInputView
 import lotto.view.LottoResultView
 
@@ -67,6 +66,10 @@ class LottoViewController(
 
     fun printPurchasedLottoNumbers(lottoNumbers: List<LottoNumbers>) {
         lottoInputView.printPurchasedLottoNumbers(lottoNumbers.convertToLottoNumberList())
+    }
+
+    private fun List<LottoNumbers>.convertToLottoNumberList(): List<List<Int>> {
+        return map { it.numbers }
     }
 
     fun printLottoResult(lottoResult: LottoResult) {
