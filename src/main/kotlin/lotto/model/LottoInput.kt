@@ -3,5 +3,5 @@ package lotto.model
 data class LottoInput(
     val lottoNumbers: List<LottoNumbers>,
     val winningNumbers: WinningNumbers,
-    val bonusNumber: Int
+    val bonusNumber: LottoNumber
 )

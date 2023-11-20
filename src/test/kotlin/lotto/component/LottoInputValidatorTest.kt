@@ -4,6 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.data.blocking.forAll
 import io.kotest.data.row
+import lotto.model.LottoNumber
 import lotto.model.WinningNumbers
 
 class LottoInputValidatorTest : FunSpec({
@@ -63,7 +64,7 @@ class LottoInputValidatorTest : FunSpec({
 
     test("보너스 번호가 당첨 번호에 포함되는 경우 IllegalArgumentException 예외 발생 테스트") {
         val winningNumbers = WinningNumbers.create(listOf(1, 2, 3, 4, 5, 6))
-        val bonusNumber = 1
+        val bonusNumber = LottoNumber.from(1)
 
         shouldThrow<IllegalArgumentException> {
             validator.validateBonusNumber(bonusNumber, winningNumbers)

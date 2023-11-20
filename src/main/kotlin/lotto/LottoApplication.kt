@@ -6,6 +6,7 @@ import lotto.component.LottoResultAnalyzer
 import lotto.controller.LottoController
 import lotto.controller.LottoViewController
 import lotto.model.LottoInput
+import lotto.model.LottoNumber
 import lotto.model.LottoNumbers
 import lotto.model.WinningNumbers
 import lotto.view.LottoInputView
@@ -25,7 +26,7 @@ fun main() {
     val lottoNumbers: List<LottoNumbers> = lottoViewController.getLottoNumbers(purchasePrice)
     lottoViewController.printPurchasedLottoNumbers(lottoNumbers)
     val winningNumbers: WinningNumbers = lottoViewController.getWinningNumbers()
-    val bonusNumber: Int = lottoViewController.getBonusNumber(winningNumbers)
+    val bonusNumber: LottoNumber = lottoViewController.getBonusNumber(winningNumbers)
 
     val input = LottoInput(lottoNumbers, winningNumbers, bonusNumber)
     val result = lottoController.run(input)

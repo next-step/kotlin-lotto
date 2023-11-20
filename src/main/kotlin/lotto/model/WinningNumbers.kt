@@ -7,7 +7,7 @@ class WinningNumbers private constructor(
         return lottoNumbers.match(target)
     }
 
-    fun contain(number: Int): Boolean {
+    fun contain(number: LottoNumber): Boolean {
         return lottoNumbers.contain(number)
     }
 

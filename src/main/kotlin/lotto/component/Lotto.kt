@@ -1,14 +1,11 @@
 package lotto.component
 
-import lotto.model.LottoNumbers
-import lotto.model.LottoPrize
-import lotto.model.LottoResult
-import lotto.model.WinningNumbers
+import lotto.model.*
 
 class Lotto(
     private val lottoResultAnalyzer: LottoResultAnalyzer
 ) {
-    fun draw(lottoNumbers: List<LottoNumbers>, winningNumbers: WinningNumbers, bonusNumber: Int): LottoResult {
+    fun draw(lottoNumbers: List<LottoNumbers>, winningNumbers: WinningNumbers, bonusNumber: LottoNumber): LottoResult {
         val lottoPrizes: List<LottoPrize> = getLottoPrizes(lottoNumbers, winningNumbers, bonusNumber)
         val revenueRate: Double = lottoResultAnalyzer.getRevenueRate(lottoPrizes)
 
@@ -18,7 +15,7 @@ class Lotto(
     private fun getLottoPrizes(
         lottoNumbers: List<LottoNumbers>,
         winningNumbers: WinningNumbers,
-        bonusNumber: Int
+        bonusNumber: LottoNumber
     ): List<LottoPrize> {
         return lottoNumbers
             .map {

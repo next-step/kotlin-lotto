@@ -1,5 +1,6 @@
 package lotto.component
 
+import lotto.model.LottoNumber
 import lotto.model.LottoNumbers
 import lotto.model.WinningNumbers
 
@@ -44,7 +45,7 @@ class LottoInputValidator {
         return lottoNumber
     }
 
-    fun validateBonusNumber(bonusNumber: Int, winningNumbers: WinningNumbers): Int {
+    fun validateBonusNumber(bonusNumber: LottoNumber, winningNumbers: WinningNumbers): LottoNumber {
         require(!winningNumbers.contain(bonusNumber)) {
             "보너스 번호는 당첨 번호에 포함될 수 없습니다."
         }

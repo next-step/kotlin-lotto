@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.component.Lotto
 import lotto.component.LottoInputValidator
+import lotto.model.LottoNumber
 import lotto.model.LottoNumbers
 import lotto.model.LottoResult
 import lotto.model.WinningNumbers
@@ -23,7 +24,7 @@ class LottoViewController(
         return convertLottoNumbers(purchasePrice)
     }
 
-    fun getBonusNumber(winningNumbers: WinningNumbers): Int {
+    fun getBonusNumber(winningNumbers: WinningNumbers): LottoNumber {
         val bonusNumber: String? = lottoInputView.getBonusNumber()
 
         return convertBonusNumber(bonusNumber, winningNumbers)
@@ -48,10 +49,11 @@ class LottoViewController(
         return LottoNumbers.generate(lottoNumbersCount)
     }
 
-    private fun convertBonusNumber(bonusNumber: String?, winningNumbers: WinningNumbers): Int {
-        val number = lottoInputValidator
+    private fun convertBonusNumber(bonusNumber: String?, winningNumbers: WinningNumbers): LottoNumber {
+        val number: LottoNumber = lottoInputValidator
             .validateLottoNumber(bonusNumber)
             .toInt()
+            .run { LottoNumber.from(this) }
 
         return lottoInputValidator.validateBonusNumber(number, winningNumbers)
     }
@@ -72,7 +74,11 @@ class LottoViewController(
     }
 
     private fun List<LottoNumbers>.convertToLottoNumberList(): List<List<Int>> {
-        return map { it.numbers }
+        return map { it.numbers.convertToIntList() }
+    }
+
+    private fun List<LottoNumber>.convertToIntList(): List<Int> {
+        return map { it.number }
     }
 
     fun printLottoResult(lottoResult: LottoResult) {
