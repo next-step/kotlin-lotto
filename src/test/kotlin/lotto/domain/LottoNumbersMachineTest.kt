@@ -1,11 +1,9 @@
-package lotto
+package lotto.domain
 
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.collections.shouldContainInOrder
 import io.kotest.matchers.shouldBe
-import lotto.domain.LottoMachine
-import lotto.domain.LottoNumber
 import org.junit.jupiter.api.Test
 
 class LottoNumbersMachineTest {
