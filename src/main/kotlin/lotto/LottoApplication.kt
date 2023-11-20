@@ -25,7 +25,7 @@ fun main() {
     val lottoNumbers: List<LottoNumbers> = lottoViewController.getLottoNumbers(purchasePrice)
     lottoViewController.printPurchasedLottoNumbers(lottoNumbers)
     val winningNumbers: WinningNumbers = lottoViewController.getWinningNumbers()
-    val bonusNumber: Int = lottoViewController.getBonusNumber()
+    val bonusNumber: Int = lottoViewController.getBonusNumber(winningNumbers)
 
     val input = LottoInput(lottoNumbers, winningNumbers, bonusNumber)
     val result = lottoController.run(input)
