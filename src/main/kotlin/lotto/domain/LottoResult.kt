@@ -3,7 +3,7 @@ package lotto.domain
 class LottoResult {
     private val result: MutableMap<Revenue, Int> = Revenue.values().associateWith { DEFAULT_MAP_VALUE }.toMutableMap()
 
-    fun setLottoResult(matchedNumberCount: Int, isMatchBonus: Boolean = false) {
+    fun prepareLottoResult(matchedNumberCount: Int, isMatchBonus: Boolean = false) {
         if (matchedNumberCount >= MINIMUM_MATCH_COUNT) {
             val key = Revenue.of(matchedNumberCount, isMatchBonus)
             result[key] = result.getOrDefault(key, 0) + 1

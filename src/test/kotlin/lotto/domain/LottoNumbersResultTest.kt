@@ -14,7 +14,7 @@ class LottoNumbersResultTest {
     )
     fun `로또 결과는 3개 일치부터 저장한다`(input: Int, expected: Int) {
         val lottoResult = LottoResult()
-        lottoResult.setLottoResult(input)
+        lottoResult.prepareLottoResult(input)
         lottoResult.getLottoRankCount(input) shouldBe expected
     }
 
@@ -23,7 +23,7 @@ class LottoNumbersResultTest {
         val lottoResult = LottoResult()
         val lottoPrice = 1000
         val userLottoCount = 14
-        lottoResult.setLottoResult(3)
+        lottoResult.prepareLottoResult(3)
         val result = lottoResult.calcRate(lottoPrice, userLottoCount)
 
         result shouldBe 0.35714285714285715

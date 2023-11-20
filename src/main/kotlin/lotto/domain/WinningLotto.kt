@@ -13,7 +13,7 @@ class WinningLotto(
         lottos.forEach { lotto ->
             val matchCount = calcMatchCount(lotto.lottoNumbers)
             val isMatchedBonus = calcBonusNumberMatch(lotto.lottoNumbers)
-            lottoResult.setLottoResult(matchCount, isMatchedBonus)
+            lottoResult.prepareLottoResult(matchCount, isMatchedBonus)
         }
         return lottoResult
     }
