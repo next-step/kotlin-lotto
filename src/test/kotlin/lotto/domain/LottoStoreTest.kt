@@ -16,7 +16,7 @@ class LottoStoreTest {
         ]
     )
     fun `로또는 1000원당 한 장을 살 수 있다`(money: Int, lottoCount: Int) {
-        val lottoGenerateStrategy = LottoGenerateStrategy { Lotto(listOf(1, 2, 3, 4, 5, 6), 7) }
+        val lottoGenerateStrategy = LottoGenerateStrategy { Lotto(listOf(1, 2, 3, 4, 5, 6)) }
         val lottoGenerator = LottoGenerator(lottoGenerateStrategy)
         val lottoStore = LottoStore(lottoGenerator)
 

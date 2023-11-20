@@ -1,15 +1,14 @@
 package lotto.domain
 
-data class Lotto(
+class Lotto(
     val numbers: List<Int>,
-    val bonusNumber: Int,
     val winning: LottoWinning = LottoWinning.Miss,
 ) {
     init {
         require(numbers.size == NUMBERS_COUNT) {
             "로또 번호는 항상 ${NUMBERS_COUNT}개 여야 합니다."
         }
-        require(numbers.distinct().size == NUMBERS_COUNT && !numbers.contains(bonusNumber)) {
+        require(numbers.distinct().size == NUMBERS_COUNT) {
             "로또 번호는 중복이 없어야 합니다."
         }
         require(numbers.all { it in MIN_NUMBER..MAX_NUMBER }) {
@@ -20,11 +19,14 @@ data class Lotto(
         }
     }
 
-    fun match(winningLotto: Lotto): Lotto {
-        val correctCount = winningLotto.numbers.count { numbers.contains(it) }
-        val matchBonus = bonusNumber == winningLotto.bonusNumber
+    fun match(winningLotto: WinningLotto): Lotto {
+        val correctCount = winningLotto.lotto.numbers.count { numbers.contains(it) }
+        val matchBonus = numbers.contains(winningLotto.bonusNumber)
 
-        return copy(winning = LottoWinning.of(correctCount, matchBonus))
+        return Lotto(
+            numbers = numbers,
+            winning = LottoWinning.of(correctCount, matchBonus)
+        )
     }
 
     private fun List<Int>.isSortedNumber(): Boolean {

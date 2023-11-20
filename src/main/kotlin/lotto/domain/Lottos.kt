@@ -2,7 +2,7 @@ package lotto.domain
 
 @JvmInline
 value class Lottos(val value: List<Lotto>) {
-    fun matchAll(winningLotto: Lotto): Lottos {
+    fun matchAll(winningLotto: WinningLotto): Lottos {
         val lottos = value.map { it.match(winningLotto) }
 
         return Lottos(lottos)

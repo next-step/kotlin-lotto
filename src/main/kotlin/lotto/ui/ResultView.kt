@@ -8,7 +8,7 @@ object ResultView {
     fun showBoughtLottos(lottos: Lottos) {
         println("${lottos.value.size}개를 구매했습니다.")
         lottos.value.forEach {
-            println("numbers = ${it.numbers}, bonusNumber = ${it.bonusNumber}")
+            println("numbers = ${it.numbers}")
         }
     }
 
