@@ -4,6 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.throwable.shouldHaveMessage
 import lotto.domain.Lotto
 import lotto.domain.WinningLotto
 
@@ -27,7 +28,7 @@ class WinningLottoTest : FunSpec({
             val exception = shouldThrow<IllegalArgumentException> {
                 WinningLotto(lotto, bonusNumber)
             }
-            exception.message shouldBe "Duplicated number is in lotto!"
+            exception shouldHaveMessage "Duplicated number is in lotto!"
         }
     }
 

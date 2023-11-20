@@ -10,7 +10,7 @@ class WinningLotto(
         require(Lotto.MIN_LOTTO_NUMBER <= bonusNumber && bonusNumber <= Lotto.MAX_LOTTO_NUMBER) { "Invalidate bonus number!" }
     }
 
-    fun getCountOfMatch(lotto: Lotto) = lotto.numbers.count { contains(it) }
+    fun getCountOfMatch(targetLotto: Lotto) = targetLotto.numbers.count { contains(it) }
 
     private fun contains(number: Int) = lotto.numbers.contains(number)
 }

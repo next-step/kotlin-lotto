@@ -3,10 +3,8 @@ package lotto.domain
 import kotlin.math.round
 
 class LottoStatResult(
-    lottoStat: Map<Rank, Int> = Rank.values().associateBy({ it }, { DEFAULT_COUNT })
+    private val lottoStat: Map<Rank, Int> = Rank.values().associateBy({ it }, { DEFAULT_COUNT })
 ) {
-    private val lottoStat = lottoStat.toMap()
-
     fun getCount(rank: Rank): Int = lottoStat.getOrDefault(rank, DEFAULT_COUNT)
 
     fun getReturnRate(): Double {

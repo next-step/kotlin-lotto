@@ -2,6 +2,7 @@ package lottoTest
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withData
+import io.kotest.matchers.shouldBe
 import lotto.domain.Lottery
 import lotto.domain.Lotto
 import lotto.domain.LottoStatCalculator
@@ -82,7 +83,7 @@ class LottoStatCalculatorTest : FunSpec({
             val result = LottoStatCalculator(winningLotto).getStat(purchasedLottery.getLottery())
 
             Rank.values().forEach {
-                assertEquals(expected.getCount(it), result.getCount(it))
+                result.getCount(it) shouldBe expected.getCount(it)
             }
         }
     }
