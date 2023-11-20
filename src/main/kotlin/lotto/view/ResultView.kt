@@ -1,6 +1,6 @@
 package lotto.view
 
-import Lotto
+import lotto.Lotto
 
 class ResultView {
 

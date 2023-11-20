@@ -1,3 +1,5 @@
+package lotto
+
 import lotto.view.InputType
 import lotto.view.InputView
 import lotto.view.ResultType

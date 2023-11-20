@@ -1,6 +1,6 @@
 package lotto.view
 
-import Rank
+import lotto.Rank
 
 enum class ResultType(val message: String) {
     PURCHASE_COUNT("%d개를 구매했습니다."),
