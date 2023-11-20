@@ -9,13 +9,18 @@ class WinningLotto(
     }
 
     fun match(lottos: List<Lotto>): LottoResult {
-        val lottoResult = LottoResult()
-        lottos.forEach { lotto ->
-            val matchCount = calcMatchCount(lotto.lottoNumbers)
-            val isMatchedBonus = calcBonusNumberMatch(lotto.lottoNumbers)
-            lottoResult.prepareLottoResult(matchCount, isMatchedBonus)
+        val result = buildMap<Revenue, Int> {
+            lottos.forEach { lotto ->
+                val matchCount = calcMatchCount(lotto.lottoNumbers)
+                if (matchCount >= LottoResult.MINIMUM_MATCH_COUNT) {
+                    val isMatchedBonus = calcBonusNumberMatch(lotto.lottoNumbers)
+                    val key = Revenue.of(matchCount, isMatchedBonus)
+                    this[key] = (this.getOrDefault(key, 0)) + 1
+                }
+            }
         }
-        return lottoResult
+
+        return LottoResult(result.toMap())
     }
 
     private fun calcMatchCount(lottoNumbers: LottoNumbers): Int {

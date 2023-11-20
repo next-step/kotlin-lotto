@@ -1,24 +1,18 @@
 package lotto.domain
 
-class LottoResult {
-    private val result: MutableMap<Revenue, Int> = Revenue.values().associateWith { DEFAULT_MAP_VALUE }.toMutableMap()
-
-    fun prepareLottoResult(matchedNumberCount: Int, isMatchBonus: Boolean = false) {
-        if (matchedNumberCount >= MINIMUM_MATCH_COUNT) {
-            val key = Revenue.of(matchedNumberCount, isMatchBonus)
-            result[key] = result.getOrDefault(key, 0) + 1
-        }
-    }
+class LottoResult(
+    private val result: Map<Revenue, Int>
+) {
 
     fun getLottoRankCount(key: Int): Int {
         if (key < MINIMUM_MATCH_COUNT) {
             return 0
         }
-        return result.getOrDefault(Revenue.of(key), 0)
+        return result.getOrDefault(Revenue.of(key, false), DEFAULT_MAP_VALUE)
     }
 
     fun getLottoRankingMatchCount(key: Revenue): Int {
-        return result.getOrDefault(key, 0)
+        return result.getOrDefault(key, DEFAULT_MAP_VALUE)
     }
 
     fun calcRate(lottoPrice: Int, userLottoCount: Int): Double {
@@ -32,7 +26,7 @@ class LottoResult {
     }
 
     companion object {
-        private const val MINIMUM_MATCH_COUNT: Int = 3
+        const val MINIMUM_MATCH_COUNT: Int = 3
         private const val DEFAULT_MAP_VALUE: Int = 0
     }
 }

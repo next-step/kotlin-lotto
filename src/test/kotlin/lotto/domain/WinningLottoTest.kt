@@ -10,7 +10,7 @@ class WinningLottoTest {
     @ParameterizedTest
     @CsvSource(
         value = [
-            "1,2,3,4,5,6 | 6 | 6",
+            "1,2,3,4,5,6 | 21 | 6",
             "2,3,4,5,6,7 | 8 | 5",
         ],
         delimiter = '|'
@@ -40,7 +40,7 @@ class WinningLottoTest {
             )
         )
         val userLottos = listOf(Lotto(userLottoNumbers))
-        val result = winningLotto.match(userLottos)
+        val result: LottoResult = winningLotto.match(userLottos)
 
         result.getLottoRankingMatchCount(Revenue.SECOND) shouldBe 1
     }
