@@ -7,4 +7,4 @@ import lotto.domain.model.vo.WinningTicketCount
 /**
  * 로또 결과
  * */
-data class LottoMatchResult(val matchCount: MatchCount, val prize: Prize, val winningTicketCount: WinningTicketCount)
+data class LottoMatchResult(val matchCount: MatchCount, val prize: Prize, val winningTicketCount: WinningTicketCount, val isBonusMatch: Boolean)

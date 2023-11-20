@@ -1,7 +1,7 @@
 package lotto.controller
 
 import lotto.domain.LottoCreateMachine
-import lotto.domain.LottoDrawMachine
+import lotto.domain.WinningType
 import lotto.domain.LottoRateOfReturnCalculator
 import lotto.domain.model.vo.BuyPrice
 import lotto.view.InputView
@@ -19,9 +19,10 @@ object LottoController {
         InputView.drawLottoList(lottoList)
 
         val winningNumberText = InputView.getInputValue(InputView.InputType.LAST_WEEK_WINNING_NUMBER)
-        val lottoResultList = LottoDrawMachine.runDrawLottos(winningNumberText, lottoList)
+        val winningBonusNumberText = InputView.getInputValue(InputView.InputType.LAST_WEEK_WINNING_NUMBER_BONUS)
+        val lottoResultList = WinningType.runDrawLottos(winningNumberText, winningBonusNumberText, lottoList)
 
-        ResultView.drawLottoMatchResult(lottoResultList)
+        ResultView.drawLottoMatchResultList(lottoResultList)
 
         val rateOfReturn = LottoRateOfReturnCalculator.rateOfReturn(buyPrice, lottoResultList)
         ResultView.drawLottoMatchResultRateOfReturn(rateOfReturn)

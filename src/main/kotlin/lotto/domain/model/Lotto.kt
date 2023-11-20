@@ -1,5 +1,6 @@
 package lotto.domain.model
 
+import lotto.domain.model.vo.LottoNumber
 import lotto.domain.model.vo.LottoNumbers
 import lotto.domain.model.vo.WinningLottoNumbers
 
@@ -13,6 +14,13 @@ data class Lotto(val lottoNumbers: LottoNumbers) {
      * */
     fun getMatchCount(winningLottoNumbers: WinningLottoNumbers): Int {
         return lottoNumbers.numbers.filter { winningLottoNumbers.winningNumbers.contains(it) }.size
+    }
+
+    /**
+     * 특정 로또 번호가 맞는지 확인
+     * */
+    infix fun getIsMatchNumber(lottoNumber: LottoNumber): Boolean {
+        return lottoNumbers.numbers.contains(lottoNumber)
     }
 
     companion object {
