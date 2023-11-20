@@ -13,8 +13,9 @@ enum class LottoPrize(
 
     companion object {
         fun of(matchedCount: Int, isBonusNumberMatched: Boolean): LottoPrize {
-            if (matchedCount != MATCHED_NUMBER_COUNT_FIVE)
+            if (matchedCount != MATCHED_NUMBER_COUNT_FIVE) {
                 return values().find { it.matchedCount == matchedCount } ?: MISS
+            }
 
             return if (isBonusNumberMatched) { SECOND } else { THIRD }
         }
