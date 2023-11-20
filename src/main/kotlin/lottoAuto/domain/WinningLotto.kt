@@ -1,7 +1,7 @@
 package lottoAuto.domain
 
-data class WinningLotto(
-    val winningLottoNumbers: List<LottoNumber>,
+class WinningLotto(
+    val lotto: Lotto,
     val bonusLottoNumber: LottoNumber
 ) {
     fun rank(lottoList: List<Lotto>): LottoRanks {
@@ -15,7 +15,7 @@ data class WinningLotto(
     }
 
     private fun countSameNumber(lotto: Lotto): Int {
-        return winningLottoNumbers.intersect(
+        return this.lotto.lottoNumbers.intersect(
             lotto.lottoNumbers.toSet()
         ).size
     }

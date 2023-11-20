@@ -21,7 +21,7 @@ object LottoController {
 
     fun getWinningLotto(winningNumbers: List<LottoNumber>, bonusLottoNumber: LottoNumber): WinningLotto {
         return WinningLotto(
-            winningLottoNumbers = winningNumbers,
+            lotto = Lotto(winningNumbers),
             bonusLottoNumber = bonusLottoNumber
         )
     }
