@@ -42,7 +42,8 @@ class LottoViewController(
     }
 
     private fun convertLottoNumbers(purchasePrice: Int): List<LottoNumbers> {
-        val lottoNumbersCount: Int = lottoInputValidator.validateLottoNumbersCount(purchasePrice / Lotto.LOTTO_PRICE)
+        val count: Int = Lotto.purchaseLottoCount(purchasePrice)
+        val lottoNumbersCount: Int = lottoInputValidator.validateLottoNumbersCount(count)
 
         return LottoNumbers.generate(lottoNumbersCount)
     }
