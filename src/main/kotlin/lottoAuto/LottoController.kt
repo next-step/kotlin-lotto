@@ -50,16 +50,7 @@ object LottoController {
         OutputView.printStatisticsHeader()
         val lottoRanks = winningLotto.rank(lottoList)
         val lottoRankGroup = lottoRanks.groupByLottoRank()
-        lottoRankGroup
-            .entries
-            .forEach {
-                OutputView.printStatistics(
-                    matchCount = it.key.matchCount,
-                    winningMoney = it.key.winningMoney,
-                    countValue = it.value,
-                    isBonusMatch = it.key == LottoRank.BONUS
-                )
-            }
+        OutputView.printStatistics(lottoRankGroup)
 
         val totalWinningMoney = lottoRanks.getTotalWinningMoney()
         val profit = LottoProfitCalculator.calcProfit(purchaseAmount, totalWinningMoney)

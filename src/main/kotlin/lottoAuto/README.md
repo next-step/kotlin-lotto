@@ -64,7 +64,7 @@
 4단계 기능 구현 리스트 
 
 - [ ] 3단게 리뷰 반영  
-  - [ ] OutputView.printStatistics 리팩터링
+  - [x] OutputView.printStatistics 리팩터링
   - [ ] WinningLotto 프로퍼티 수정 (Lotto, LottoNumber) 가지도록 수정
   - [ ] winningLottoNumbers 사이즈 제약(6자리) 생성
   - [ ] bonusLottoNumber와 winningLottoNumber 중복 여부 확인 
