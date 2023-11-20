@@ -12,6 +12,10 @@ class LottoNumbers private constructor(val numbers: List<Int>) {
             .size
     }
 
+    fun contain(number: Int): Boolean {
+        return numbers.contains(number)
+    }
+
     companion object {
         private val LOTTO_NUMBER_POOL = (1..45).toList()
         const val LOTTO_NUMBERS_LENGTH = 6

@@ -8,6 +8,6 @@ class LottoController(
     private val lotto: Lotto
 ) {
     fun run(input: LottoInput): LottoResult {
-        return lotto.draw(input.lottoNumbers, input.winningNumbers)
+        return lotto.draw(input.lottoNumbers, input.winningNumbers, input.bonusNumber)
     }
 }

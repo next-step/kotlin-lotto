@@ -31,7 +31,7 @@ fun main() {
     val winningNumbers: WinningNumbers = lottoViewController.getWinningNumbers()
     val bonusNumber: Int = lottoViewController.getBonusNumber()
 
-    val input = LottoInput(lottoNumbers, winningNumbers)
+    val input = LottoInput(lottoNumbers, winningNumbers, bonusNumber)
     val result = lottoController.run(input)
 
     lottoViewController.printLottoResult(result)

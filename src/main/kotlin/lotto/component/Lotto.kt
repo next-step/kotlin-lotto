@@ -8,17 +8,25 @@ import lotto.model.WinningNumbers
 class Lotto(
     private val lottoResultAnalyzer: LottoResultAnalyzer
 ) {
-    fun draw(lottoNumbers: List<LottoNumbers>, winningNumbers: WinningNumbers): LottoResult {
-        val lottoPrizes: List<LottoPrize> = getLottoPrizes(lottoNumbers, winningNumbers)
+    fun draw(lottoNumbers: List<LottoNumbers>, winningNumbers: WinningNumbers, bonusNumber: Int): LottoResult {
+        val lottoPrizes: List<LottoPrize> = getLottoPrizes(lottoNumbers, winningNumbers, bonusNumber)
         val revenueRate: Double = lottoResultAnalyzer.getRevenueRate(lottoPrizes)
 
         return LottoResult(lottoPrizes, revenueRate)
     }
 
-    private fun getLottoPrizes(lottoNumbers: List<LottoNumbers>, winningNumbers: WinningNumbers): List<LottoPrize> {
+    private fun getLottoPrizes(
+        lottoNumbers: List<LottoNumbers>,
+        winningNumbers: WinningNumbers,
+        bonusNumber: Int
+    ): List<LottoPrize> {
         return lottoNumbers
-            .map { winningNumbers.match(it) }
-            .map { LottoPrize.of(it) }
+            .map {
+                val matchedCount: Int = winningNumbers.match(it)
+                val isBonusNumberMatched: Boolean = it.contain(bonusNumber)
+
+                LottoPrize.of(matchedCount, isBonusNumberMatched)
+            }
     }
 
     companion object {
