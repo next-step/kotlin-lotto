@@ -11,21 +11,20 @@ class WinningLotto(
     fun match(lottos: List<Lotto>): LottoResult {
         val lottoResult = LottoResult()
         lottos.forEach { lotto ->
-            val (matchCount, isMatchedBonus) = calcMatchCount(lotto.lottoNumbers)
+            val matchCount = calcMatchCount(lotto.lottoNumbers)
+            val isMatchedBonus = calcBonusNumberMatch(lotto.lottoNumbers)
             lottoResult.setLottoResult(matchCount, isMatchedBonus)
         }
         return lottoResult
     }
 
-    private fun calcMatchCount(lottoNumbers: LottoNumbers): Pair<Int, Boolean> {
-        var count = 0
-        lottoNumbers.getNumbers().forEach { number ->
-            if (getNumbers().contains(number)) {
-                count++
-            }
-        }
+    private fun calcMatchCount(lottoNumbers: LottoNumbers): Int {
 
-        return count to lottoNumbers.getNumbers().contains(bonusNumber)
+        return this.lottoNumbers.getMatchCount(lottoNumbers)
+    }
+
+    private fun calcBonusNumberMatch(lottoNumbers: LottoNumbers): Boolean {
+        return lottoNumbers.getNumbers().contains(bonusNumber)
     }
 
     companion object {

@@ -11,6 +11,12 @@ class LottoNumbers(numbers: List<LottoNumber>) {
         return lottoNumbers
     }
 
+    fun getMatchCount(lottoNumbers: LottoNumbers): Int {
+        return this.lottoNumbers
+            .intersect(lottoNumbers.getNumbers().toSet())
+            .size
+    }
+
     companion object {
         private const val INIT_ERROR_MESSAGE: String = "로또 번호는 6개여야 합니다."
         private const val EXPECTED_LOTTO_NUMBER_SIZE: Int = 6
