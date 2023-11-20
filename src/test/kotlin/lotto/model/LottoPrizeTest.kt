@@ -9,12 +9,17 @@ class LottoPrizeTest : FunSpec({
     test("일치 번호 개수 및 보너스 번호 당첨 여부 별 당첨금 반환 테스트") {
         forAll(
             row(1, false, 0),
+            row(1, true, 0),
             row(2, false, 0),
+            row(2, true, 0),
             row(3, false, 5_000),
+            row(3, true, 5_000),
             row(4, false, 50_000),
+            row(4, true, 50_000),
             row(5, false, 1_500_000),
             row(5, true, 30_000_000),
-            row(6, false, 2_000_000_000)
+            row(6, false, 2_000_000_000),
+            row(6, true, 2_000_000_000)
         ) { matchedCount, isBonusNumberMatched, answer ->
             val result = LottoPrize.of(matchedCount, isBonusNumberMatched)
 
