@@ -23,5 +23,4 @@ class LottoWinningMachine(
 
         return LottoResult(rankMatchCounts, profitRate)
     }
-
 }

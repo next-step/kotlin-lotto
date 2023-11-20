@@ -1,6 +1,6 @@
 package me.parker.nextstep.kotlinlotto.domain
 
-class LottoNumbers(val values: Set<LottoNumber>) {
+data class LottoNumbers(val values: Set<LottoNumber>) {
     init {
         require(values.size == LOTTO_NUMBERS_SIZE) { "로또 번호는 중복되지 않은 $LOTTO_NUMBERS_SIZE 개를 가지고 있어야합니다." }
     }
