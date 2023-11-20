@@ -10,7 +10,6 @@ import lotto.domain.LottoStatResult
 import lotto.domain.PurchasedLottery
 import lotto.domain.Rank
 import lotto.domain.WinningLotto
-import org.junit.jupiter.api.Assertions.assertEquals
 
 data class LottoStatCalculatorTestData(
     val winningLotto: WinningLotto,

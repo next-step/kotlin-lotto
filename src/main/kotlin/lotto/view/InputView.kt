@@ -16,6 +16,10 @@ object InputView {
     }
 
     fun getManualLotto(count: Int): Lottery {
+        if (count == 0) {
+            return Lottery(emptyList())
+        }
+
         println("수동으로 구매할 번호를 입력해 주세요.")
 
         return Lottery(
