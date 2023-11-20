@@ -60,3 +60,18 @@
   - [x] LottoRanker rank 함수 시그니처 변경 (보너스 번호 받도록)
   - [x] LottoRanker 함수 시그니처 변경에 따라 테스트 수정
   - [x] OutputView 변경
+
+4단계 기능 구현 리스트 
+
+- [ ] 3단게 리뷰 반영  
+  - [ ] OutputView.printStatistics 리팩터링
+  - [ ] WinningLotto 프로퍼티 수정 (Lotto, LottoNumber) 가지도록 수정
+  - [ ] winningLottoNumbers 사이즈 제약(6자리) 생성
+  - [ ] bonusLottoNumber와 winningLottoNumber 중복 여부 확인 
+    
+- [ ] 로또 수동 생성 기능 구현
+  - [ ] 사용자가 구매할 로또 수 입력하도록 InputView 기능 추가 
+  - [ ] 사용자가 추첨 번호 직접 입력할 수 있도록 InputView 기능 추가
+  - [ ] 구매한 추천 번호 리스트를 출력하는 OutputView 기능 추가
+  - [ ] 사용자가 입력한 번호를 Lotto 객체로 생성하는 기능 구현
+  - [ ] 로또 수동, 자동 생성 기능 모두 제공하는 LottoFactory 구현
