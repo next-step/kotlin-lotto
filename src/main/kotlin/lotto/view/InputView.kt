@@ -7,7 +7,7 @@ object InputView {
 
         val purchaseMoney = readlnOrNull()?.toLong()
 
-        require(purchaseMoney != null && purchaseMoney >= 0) { "구입금액은 0원보다 커야합니다." }
+        require(purchaseMoney != null) { "구입금액이 입력되지 않았습니다." }
 
         return purchaseMoney
     }

@@ -1,5 +1,6 @@
 package lotto.domain
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.WithDataTestName
 import io.kotest.datatest.withData
@@ -22,6 +23,17 @@ class LottoTicketIssuerTest : FunSpec({
             IssueLottoByAutoTestData(10000L, 10),
         ) { (money, lottoAmount) ->
             lottoTicketIssuer.issueLottoByAuto(money).size shouldBe lottoAmount
+        }
+    }
+
+    context("구입금액이 음수인 경우 IllegalArgumentException throw") {
+        withData(
+            nameFn = { "${it}원" },
+            -10L, -3L, -1L,
+        ) { purchaseMoney ->
+            shouldThrow<IllegalArgumentException> {
+                lottoTicketIssuer.issueLottoByAuto(purchaseMoney)
+            }
         }
     }
 })
