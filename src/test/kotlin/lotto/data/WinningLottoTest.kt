@@ -42,4 +42,17 @@ class WinningLottoTest {
         assertThat(actual1).isTrue()
         assertThat(actual2).isFalse()
     }
+
+    @Test
+    fun `보너스 번호 중복 검증`() {
+        // given : 당첨 번호로 구성된 로또와 이와 중복되는 보너스 번호를 받는다.
+        val lotto = Lotto(LottoNumber.createLottoNumbers(listOf(1, 2, 3, 4, 5, 6)))
+        val bonusLottoNumber = LottoNumber.from(6)
+
+        // when :
+        val actual = runCatching { WinningLotto(lotto, bonusLottoNumber) }.exceptionOrNull()
+
+        // then :
+        assertThat(actual).isInstanceOf(IllegalArgumentException::class.java)
+    }
 }
