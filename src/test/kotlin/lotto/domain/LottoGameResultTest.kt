@@ -7,10 +7,10 @@ class LottoGameResultTest : FunSpec({
 
     test("로또 게임 결과는 등수별 당첨 결과를 갖는다.") {
         val purchaseMoney = 1_000L
-        val winningLottoNumbers = setOf(1, 2, 3, 4, 5, 6)
+        val winningLottoNumbers = LottoNumbers.of(1, 2, 3, 4, 5, 6)
         val lottoTickets = listOf(
-            LottoTicket(setOf(1, 2, 3, 4, 5, 6)),
-            LottoTicket(setOf(10, 20, 30, 4, 5, 6)),
+            LottoTicket.of(1, 2, 3, 4, 5, 6),
+            LottoTicket.of(10, 20, 30, 4, 5, 6),
         )
 
         val lottoGameResult = LottoGameResult(purchaseMoney, winningLottoNumbers, lottoTickets)
@@ -25,8 +25,8 @@ class LottoGameResultTest : FunSpec({
 
     test("로또 게임 결과는 수익률을 갖는다.") {
         val purchaseMoney = 1_000L
-        val winningLottoNumbers = setOf(1, 2, 3, 4, 5, 6)
-        val lottoTickets = listOf(LottoTicket(setOf(1, 2, 3, 4, 5, 6)))
+        val winningLottoNumbers = LottoNumbers.of(1, 2, 3, 4, 5, 6)
+        val lottoTickets = listOf(LottoTicket.of(1, 2, 3, 4, 5, 6))
 
         val lottoGameResult = LottoGameResult(purchaseMoney, winningLottoNumbers, lottoTickets)
 

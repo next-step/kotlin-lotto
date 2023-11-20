@@ -9,8 +9,9 @@ object ResultView {
 
         println("${lottoTickets.size}개를 구매했습니다.")
 
-        lottoTickets.forEach {
-            println(it.lottoNumbers.sorted())
+        lottoTickets.forEach { lottoTicket ->
+            val numbers = lottoTicket.lottoNumbers.lottoNumbers.map { it.number }
+            println(numbers.sorted())
         }
         println()
     }

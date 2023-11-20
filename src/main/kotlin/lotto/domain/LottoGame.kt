@@ -6,7 +6,7 @@ class LottoGame(
 ) {
     var lottoTickets: List<LottoTicket> = lottoTicketIssuer.issueLottoByAuto(purchaseMoney)
 
-    fun generateLottoGameResult(winningLottoNumbers: Set<Int>): LottoGameResult {
+    fun generateLottoGameResult(winningLottoNumbers: LottoNumbers): LottoGameResult {
         return LottoGameResult(
             purchaseMoney = purchaseMoney,
             winningLottoNumbers = winningLottoNumbers,
