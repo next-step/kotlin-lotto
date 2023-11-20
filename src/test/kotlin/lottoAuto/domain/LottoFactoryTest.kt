@@ -1,6 +1,7 @@
 package lottoAuto.domain
 
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
@@ -17,5 +18,15 @@ class LottoFactoryTest {
 
         // then
         assertEquals(expected, lottos.size)
+    }
+
+    @Test
+    fun `수동으로 로또 번호를 입력받을 경우 Lotto를 생성한다`() {
+        // given
+        val manualLottoNumbers = (1..6).map {it.toLottoNumber()}
+        // when
+        val lotto = LottoFactory.create(manualLottoNumbers)
+        // then
+        assertEquals(manualLottoNumbers, lotto.lottoNumbers)
     }
 }

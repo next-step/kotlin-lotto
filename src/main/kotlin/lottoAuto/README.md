@@ -63,7 +63,7 @@
 
 4단계 기능 구현 리스트 
 
-- [ ] 3단게 리뷰 반영  
+- [x] 3단게 리뷰 반영  
   - [x] OutputView.printStatistics 리팩터링
   - [x] WinningLotto는 Lotto를 조합해 생성
     
@@ -71,5 +71,5 @@
   - [ ] 사용자가 구매할 로또 수 입력하도록 InputView 기능 추가 
   - [ ] 사용자가 추첨 번호 직접 입력할 수 있도록 InputView 기능 추가
   - [ ] 구매한 추천 번호 리스트를 출력하는 OutputView 기능 추가
-  - [ ] 사용자가 입력한 번호를 Lotto 객체로 생성하는 기능 구현
+  - [x] 사용자가 입력한 번호를 Lotto 객체로 생성하는 기능 구현
   - [ ] 로또 수동, 자동 생성 기능 모두 제공하는 LottoFactory 구현
