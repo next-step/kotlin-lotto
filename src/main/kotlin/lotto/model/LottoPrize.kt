@@ -12,10 +12,6 @@ enum class LottoPrize(
     MISS(0, 0);
 
     companion object {
-        fun of(matchedCount: Int): LottoPrize {
-            return values().find { it.matchedCount == matchedCount } ?: MISS
-        }
-
         fun of(matchedCount: Int, isBonusNumberMatched: Boolean): LottoPrize {
             if (matchedCount != MATCHED_NUMBER_COUNT_FIVE)
                 return values().find { it.matchedCount == matchedCount } ?: MISS

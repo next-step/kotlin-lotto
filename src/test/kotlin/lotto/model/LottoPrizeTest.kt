@@ -35,17 +35,4 @@ class LottoPrizeTest : FunSpec({
             result.prize shouldBe answer
         }
     }
-
-    test("존재하지 않는 일치 번호 개수 전달 시 당첨금 0원을 반환하는지 테스트") {
-        val answer = 0
-
-        forAll(
-            row(-1),
-            row(7)
-        ) { matchedCount ->
-            val result = LottoPrize.of(matchedCount)
-
-            result.prize shouldBe answer
-        }
-    }
 })
