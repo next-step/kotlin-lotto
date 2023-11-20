@@ -1,24 +1,23 @@
 package lotto.domain.model
 
-import lotto.domain.model.vo.BuyPrice
-import lotto.domain.model.vo.LottoNumberList
-import lotto.domain.model.vo.WinningLottoNumberList
+import lotto.domain.model.vo.LottoNumbers
+import lotto.domain.model.vo.WinningLottoNumbers
 
 /**
  * 로또 객체
  * */
-data class Lotto(val lottoNumberList: LottoNumberList) {
+data class Lotto(val lottoNumbers: LottoNumbers) {
 
     /**
      * 로또 맞은 횟수 반환
      * */
-    fun getMatchCount(winningLottoNumberList: WinningLottoNumberList): Int {
-        return lottoNumberList.numberList.filter { winningLottoNumberList.winningNumberList.contains(it) }.size
+    fun getMatchCount(winningLottoNumbers: WinningLottoNumbers): Int {
+        return lottoNumbers.numbers.filter { winningLottoNumbers.winningNumbers.contains(it) }.size
     }
 
     companion object {
-        fun from(lottoNumberList: List<Int> = LottoNumberList.createPrimitiveLottoNumberList()): Lotto {
-            return Lotto(LottoNumberList.valueOf(lottoNumberList))
+        fun from(lottoNumbers: Set<Int> = LottoNumbers.createPrimitiveLottoNumberList()): Lotto {
+            return Lotto(LottoNumbers.valueOf(lottoNumbers))
         }
     }
 }

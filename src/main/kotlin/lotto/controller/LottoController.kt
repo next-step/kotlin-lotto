@@ -19,7 +19,7 @@ object LottoController {
         InputView.drawLottoList(lottoList)
 
         val winningNumberText = InputView.getInputValue(InputView.InputType.LAST_WEEK_WINNING_NUMBER)
-        val lottoResultList = LottoDrawMachine.runDrawLottoList(winningNumberText, lottoList)
+        val lottoResultList = LottoDrawMachine.runDrawLottos(winningNumberText, lottoList)
 
         ResultView.drawLottoMatchResult(lottoResultList)
 

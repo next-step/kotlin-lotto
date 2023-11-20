@@ -33,7 +33,7 @@ object InputView {
     fun drawLottoList(lottoList: List<Lotto>){
         println(BUY_LOTTO_COUNT_DESCRIPTION.format(lottoList.size))
         lottoList.forEach {
-            println(it.lottoNumberList.numberList)
+            println(it.lottoNumbers.numbers)
         }
         println()
     }

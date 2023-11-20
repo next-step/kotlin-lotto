@@ -12,7 +12,7 @@ value class WinningTicketCount(val ticketCount: Int) {
     }
 
     companion object {
-        private const val MIN_TICKET_COUNT = 0
+        private const val MIN_TICKET_COUNT = -1
 
         fun valueOf(ticketCount: Int) = WinningTicketCount(ticketCount)
     }
