@@ -14,3 +14,7 @@ tasks {
         verbose.set(true)
     }
 }
+
+dependencies {
+    implementation(projects.domain)
+}
