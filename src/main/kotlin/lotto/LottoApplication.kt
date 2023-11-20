@@ -1,7 +1,6 @@
 package lotto
 
 import lotto.component.Lotto
-import lotto.component.LottoInputConverter
 import lotto.component.LottoInputValidator
 import lotto.component.LottoResultAnalyzer
 import lotto.controller.LottoController
@@ -13,12 +12,9 @@ import lotto.view.LottoInputView
 import lotto.view.LottoResultView
 
 fun main() {
-    val lottoInputConverter = LottoInputConverter(
-        LottoInputValidator()
-    )
     val lottoViewController = LottoViewController(
         LottoInputView(),
-        lottoInputConverter,
+        LottoInputValidator(),
         LottoResultView(),
     )
     val lottoResultAnalyzer = LottoResultAnalyzer()
