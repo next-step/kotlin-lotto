@@ -10,7 +10,7 @@ class LottoNumbersTest : DescribeSpec({
     describe("LottoNumbers 생성") {
         context("1 ~ 45 사이의 중복되지 않는 번호로 6개 주입하면") {
             it("정상적으로 LottoNumbers 객체를 생성한다.") {
-                val lottoNumbers = LottoNumbers((1..6).map { LottoNumber(it) })
+                val lottoNumbers = LottoNumbers((1..6).map { LottoNumber(it) }.toSet())
 
                 lottoNumbers.values.size shouldBe 6
                 lottoNumbers.values.forEach { it.number shouldBeInRange 1..45 }
@@ -21,16 +21,16 @@ class LottoNumbersTest : DescribeSpec({
         context("1 ~ 45 사이의 중복이 포함된 번호로 6개 주입하면") {
             it("예외가 발생한다.") {
                 shouldThrow<IllegalArgumentException> {
-                    LottoNumbers(listOf(1, 2, 3, 4, 5, 5).map { LottoNumber(it) })
-                }.message shouldBe "로또 번호는 중복되지 않아야 합니다."
+                    LottoNumbers(listOf(1, 2, 3, 4, 5, 5).map { LottoNumber(it) }.toSet())
+                }.message shouldBe "로또 번호는 중복되지 않은 ${LottoNumbers.LOTTO_NUMBERS_SIZE} 개를 가지고 있어야합니다."
             }
         }
 
         context("1 ~ 45 사이의 번호로 5개 주입하면") {
             it("예외가 발생한다.") {
                 shouldThrow<IllegalArgumentException> {
-                    LottoNumbers(listOf(1, 2, 3, 4, 5).map { LottoNumber(it) })
-                }.message shouldBe "로또 번호는 ${LottoNumbers.LOTTO_NUMBERS_SIZE} 개를 가지고 있어야합니다."
+                    LottoNumbers(listOf(1, 2, 3, 4, 5).map { LottoNumber(it) }.toSet())
+                }.message shouldBe "로또 번호는 중복되지 않은 ${LottoNumbers.LOTTO_NUMBERS_SIZE} 개를 가지고 있어야합니다."
             }
         }
     }
@@ -68,7 +68,7 @@ class LottoNumbersTest : DescribeSpec({
             it("예외가 발생한다.") {
                 shouldThrow<IllegalArgumentException> {
                     LottoNumbers(ManualLottoNumbersGenerationRule(listOf(1, 2, 3, 4, 5, 6, 7)))
-                }.message shouldBe "로또 번호는 ${LottoNumbers.LOTTO_NUMBERS_SIZE} 개를 가지고 있어야합니다."
+                }.message shouldBe "로또 번호는 중복되지 않은 ${LottoNumbers.LOTTO_NUMBERS_SIZE} 개를 가지고 있어야합니다."
             }
         }
 
@@ -76,7 +76,7 @@ class LottoNumbersTest : DescribeSpec({
             it("예외가 발생한다.") {
                 shouldThrow<IllegalArgumentException> {
                     LottoNumbers(ManualLottoNumbersGenerationRule(listOf(1, 2, 3, 4, 5)))
-                }.message shouldBe "로또 번호는 ${LottoNumbers.LOTTO_NUMBERS_SIZE} 개를 가지고 있어야합니다."
+                }.message shouldBe "로또 번호는 중복되지 않은 ${LottoNumbers.LOTTO_NUMBERS_SIZE} 개를 가지고 있어야합니다."
             }
         }
 
@@ -84,7 +84,7 @@ class LottoNumbersTest : DescribeSpec({
             it("예외가 발생한다. (유효한 번호가 아니면 생성되지 않아 개수 예외가 발생함.)") {
                 shouldThrow<IllegalArgumentException> {
                     LottoNumbers(ManualLottoNumbersGenerationRule(listOf(1, 2, 3, 4, 5, 5)))
-                }.message shouldBe "로또 번호는 중복되지 않아야 합니다."
+                }.message shouldBe "로또 번호는 중복되지 않은 ${LottoNumbers.LOTTO_NUMBERS_SIZE} 개를 가지고 있어야합니다."
             }
         }
     }
