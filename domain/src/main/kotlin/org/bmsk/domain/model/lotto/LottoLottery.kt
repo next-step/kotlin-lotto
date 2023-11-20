@@ -13,7 +13,7 @@ data class LottoLottery(
     fun contains(number: Int): Boolean = numbers.contains(number)
 
     companion object {
-        private const val DEFAULT_PRICE = 1000
+        const val DEFAULT_PRICE = 1000
         const val LOTTO_NUMBER_SIZE = 6
     }
 }
