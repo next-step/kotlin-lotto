@@ -26,7 +26,7 @@ class WinningLottoTest {
     }
 
     @Test
-    fun `전달받은 로또 5개와 보너스 번호를 비교해 결과를 반환한다`() {
+    fun `로또 번호 5개와 보너스 번호를 맞추면 2등이다`() {
         val winningNumber = listOf(1, 2, 3, 4, 5, 6)
         val winningLotto = WinningLotto.create(winningNumber, 7)
         val userLottoNumbers = LottoNumbers(
