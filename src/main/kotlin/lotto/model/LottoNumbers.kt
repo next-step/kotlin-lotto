@@ -21,13 +21,19 @@ class LottoNumbers private constructor(val numbers: List<Int>) {
         const val LOTTO_NUMBERS_LENGTH = 6
 
         fun create(numbers: List<Int>): LottoNumbers {
-            require(numbers.size == LOTTO_NUMBERS_LENGTH) {
-                "로또 번호는 6개 입니다."
-            }
-
-            val lottoNumbers = numbers.map { validateLottoNumber(it) }
+            val lottoNumbers = numbers
+                .run { validateLottoNumbersLength(this) }
+                .map { validateLottoNumber(it) }
 
             return LottoNumbers(lottoNumbers)
+        }
+
+        private fun validateLottoNumbersLength(numbers: List<Int>): List<Int> {
+            require(numbers.toSet().size == LOTTO_NUMBERS_LENGTH) {
+                "로또 번호는 6개이어야하며 중복된 숫자가 존재해선 안됩니다."
+            }
+
+            return numbers
         }
 
         private fun validateLottoNumber(lottoNumber: Int): Int {

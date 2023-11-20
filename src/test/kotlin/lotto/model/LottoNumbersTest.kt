@@ -28,9 +28,10 @@ class LottoNumbersTest : FunSpec({
         }
     }
 
-    test("로또 번호 생성 시 숫자 개수가 6개가 아닌 경우 IllegalArgumentException 예외 발생 테스트") {
+    test("로또 번호 생성 시 숫자 개수가 6개가 아니거나 중복된 숫자가 존재하는 경우 IllegalArgumentException 예외 발생 테스트") {
         forAll(
             row(listOf(1, 2, 3, 4, 5)),
+            row(listOf(1, 2, 3, 4, 5, 5)),
             row(listOf(1, 2, 3, 4, 5, 6, 7))
         ) { numbers ->
             shouldThrow<IllegalArgumentException> { LottoNumbers.create(numbers) }
