@@ -23,6 +23,12 @@ class LottoViewController(
         return lottoInputConverter.getLottoNumbers(purchasePrice)
     }
 
+    fun getBonusNumber(): Int {
+        val bonusNumber: String? = lottoInputView.getBonusNumber()
+
+        return lottoInputConverter.getBonusNumber(bonusNumber)
+    }
+
     fun getWinningNumbers(): WinningNumbers {
         val winningNumbers: String? = lottoInputView.getWinningNumbers()
         return lottoInputConverter.getWinningNumbers(winningNumbers)

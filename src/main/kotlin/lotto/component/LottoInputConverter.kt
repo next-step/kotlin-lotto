@@ -7,7 +7,8 @@ class LottoInputConverter(
     private val lottoInputValidator: LottoInputValidator
 ) {
     fun getPurchasePrice(purchasePrice: String?): Int {
-        return purchasePrice.run { lottoInputValidator.validatePurchasePrice(this) }
+        return purchasePrice
+            .run { lottoInputValidator.validatePurchasePrice(this) }
             .toInt()
     }
 
@@ -15,6 +16,12 @@ class LottoInputConverter(
         val lottoNumbersCount: Int = lottoInputValidator.validateLottoNumbersCount(purchasePrice / Lotto.LOTTO_PRICE)
 
         return LottoNumbers.generate(lottoNumbersCount)
+    }
+
+    fun getBonusNumber(bonusNumber: String?): Int {
+        return lottoInputValidator
+            .validateLottoNumber(bonusNumber)
+            .toInt()
     }
 
     fun getWinningNumbers(winningNumbers: String?): WinningNumbers {

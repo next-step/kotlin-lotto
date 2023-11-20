@@ -5,8 +5,12 @@ class LottoInputView {
         return getInput("구입 금액을 입력해주세요.")
     }
 
+    fun getBonusNumber(): String? {
+        return getInput("보너스 번호를 입력해주세요.")
+    }
+
     fun getWinningNumbers(): String? {
-        return getInput("지난 주 당첨 번호를 입력해 주세요.")
+        return getInput("지난 주 당첨 번호를 입력해주세요.")
     }
 
     private fun getInput(message: String): String? {
