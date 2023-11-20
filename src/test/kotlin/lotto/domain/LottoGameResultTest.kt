@@ -15,12 +15,10 @@ class LottoGameResultTest : FunSpec({
 
         val lottoGameResult = LottoGameResult(purchaseMoney, winningLottoNumbers, lottoTickets)
 
-        lottoGameResult.lottoTicketWinningResults shouldBe listOf(
-            LottoTicketWinningResult(LottoPrize.FIRST, 1),
-            LottoTicketWinningResult(LottoPrize.SECOND, 0),
-            LottoTicketWinningResult(LottoPrize.THIRD, 0),
-            LottoTicketWinningResult(LottoPrize.FOURTH, 1),
-        )
+        lottoGameResult.getWinningLottoTicketCountBy(LottoPrize.FIRST) shouldBe 1
+        lottoGameResult.getWinningLottoTicketCountBy(LottoPrize.SECOND) shouldBe 0
+        lottoGameResult.getWinningLottoTicketCountBy(LottoPrize.THIRD) shouldBe 0
+        lottoGameResult.getWinningLottoTicketCountBy(LottoPrize.FOURTH) shouldBe 1
     }
 
     test("로또 게임 결과는 수익률을 갖는다.") {

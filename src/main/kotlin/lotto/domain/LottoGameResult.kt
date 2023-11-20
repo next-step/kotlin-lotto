@@ -5,17 +5,28 @@ class LottoGameResult(
     winningLottoNumbers: LottoNumbers,
     lottoTickets: List<LottoTicket>,
 ) {
-    val lottoTicketWinningResults: List<LottoTicketWinningResult>
+    private val winningLottoTicketCountByLottoPrize: Map<LottoPrize, Int>
     val totalRateOfReturn: Double
 
     init {
-        lottoTicketWinningResults = LottoPrize.values().map { lottoPrize ->
-            val winningLottoTicketCount = lottoTickets.filter { it.countMatchingLottoNumbers(winningLottoNumbers) == lottoPrize.matchCount }.size
-            LottoTicketWinningResult(lottoPrize, winningLottoTicketCount)
-        }
+        // 각 로또 상금별 당첨 티켓 수 계산
+        winningLottoTicketCountByLottoPrize = LottoPrize.values()
+            .associateWith { lottoPrize ->
+                lottoTickets.count {
+                    it.countMatchingLottoNumbers(winningLottoNumbers) == lottoPrize.matchCount
+                }
+            }
 
-        val totalLottoPrizeMoney = lottoTicketWinningResults
-            .sumOf { it.totalWinningPrizeMoney }
+        // 총 상금 계산
+        val totalLottoPrizeMoney = winningLottoTicketCountByLottoPrize
+            .map { it.key.prizeMoney * it.value }
+            .sum()
+
+        // 수익률 계산
         totalRateOfReturn = totalLottoPrizeMoney.toDouble() / purchaseMoney.toDouble()
+    }
+
+    fun getWinningLottoTicketCountBy(lottoPrize: LottoPrize): Int {
+        return winningLottoTicketCountByLottoPrize[lottoPrize] ?: 0
     }
 }

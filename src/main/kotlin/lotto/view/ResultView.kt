@@ -1,7 +1,8 @@
 package lotto.view
 
+import lotto.domain.LottoGameResult
+import lotto.domain.LottoPrize
 import lotto.domain.LottoTicket
-import lotto.domain.LottoTicketWinningResult
 
 object ResultView {
 
@@ -16,16 +17,20 @@ object ResultView {
         println()
     }
 
-    fun printWinningStatistics(lottoTicketWinningResults: List<LottoTicketWinningResult>) {
+    fun printLottoGameResult(lottoGameResult: LottoGameResult) {
         println("\n당첨 통계\n---------")
-        lottoTicketWinningResults.sortedBy { it.lottoPrize.matchCount }.forEach {
-            val lottoPrize = it.lottoPrize
-            val winningLottoCount = it.winningLottoTicketCount
+        printWinningLottoTicketCountByLottoPrize(lottoGameResult)
+        printTotalRateOfReturn(lottoGameResult.totalRateOfReturn)
+    }
+
+    private fun printWinningLottoTicketCountByLottoPrize(lottoGameResult: LottoGameResult) {
+        LottoPrize.values().sortedBy { it.matchCount }.forEach { lottoPrize ->
+            val winningLottoCount = lottoGameResult.getWinningLottoTicketCountBy(lottoPrize)
             println("${lottoPrize.matchCount}개 일치 (${lottoPrize.prizeMoney})- ${winningLottoCount}개")
         }
     }
 
-    fun printTotalRateOfReturn(totalRateOrReturn: Double) {
+    private fun printTotalRateOfReturn(totalRateOrReturn: Double) {
         val formattedTotalRateOfReturn = String.format("%.2f", totalRateOrReturn)
         print("총 수익률은 ${formattedTotalRateOfReturn}입니다.")
 
