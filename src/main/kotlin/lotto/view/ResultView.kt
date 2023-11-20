@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.domain.LottoTicket
-import lotto.domain.LottoTicketWinningInfo
+import lotto.domain.LottoTicketWinningResult
 
 object ResultView {
 
@@ -16,9 +16,9 @@ object ResultView {
         println()
     }
 
-    fun printWinningStatistics(lottoTicketWinningInfos: List<LottoTicketWinningInfo>) {
+    fun printWinningStatistics(lottoTicketWinningResults: List<LottoTicketWinningResult>) {
         println("\n당첨 통계\n---------")
-        lottoTicketWinningInfos.sortedBy { it.lottoPrize.matchCount }.forEach {
+        lottoTicketWinningResults.sortedBy { it.lottoPrize.matchCount }.forEach {
             val lottoPrize = it.lottoPrize
             val winningLottoCount = it.winningLottoTicketCount
             println("${lottoPrize.matchCount}개 일치 (${lottoPrize.prizeMoney})- ${winningLottoCount}개")

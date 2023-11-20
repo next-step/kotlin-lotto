@@ -15,6 +15,6 @@ fun main() {
     val winningLottoNumbers = LottoNumbers.of(InputView.inputWinningLottoNumbers())
 
     val lottoGameResult = lottoGame.generateLottoGameResult(winningLottoNumbers)
-    ResultView.printWinningStatistics(lottoGameResult.lottoTicketWinningInfos)
+    ResultView.printWinningStatistics(lottoGameResult.lottoTicketWinningResults)
     ResultView.printTotalRateOfReturn(lottoGameResult.totalRateOfReturn)
 }

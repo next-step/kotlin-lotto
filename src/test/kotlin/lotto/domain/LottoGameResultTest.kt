@@ -15,11 +15,11 @@ class LottoGameResultTest : FunSpec({
 
         val lottoGameResult = LottoGameResult(purchaseMoney, winningLottoNumbers, lottoTickets)
 
-        lottoGameResult.lottoTicketWinningInfos shouldBe listOf(
-            LottoTicketWinningInfo(LottoPrize.FIRST, 1),
-            LottoTicketWinningInfo(LottoPrize.SECOND, 0),
-            LottoTicketWinningInfo(LottoPrize.THIRD, 0),
-            LottoTicketWinningInfo(LottoPrize.FOURTH, 1),
+        lottoGameResult.lottoTicketWinningResults shouldBe listOf(
+            LottoTicketWinningResult(LottoPrize.FIRST, 1),
+            LottoTicketWinningResult(LottoPrize.SECOND, 0),
+            LottoTicketWinningResult(LottoPrize.THIRD, 0),
+            LottoTicketWinningResult(LottoPrize.FOURTH, 1),
         )
     }
 

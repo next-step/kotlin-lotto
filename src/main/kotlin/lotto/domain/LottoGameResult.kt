@@ -5,16 +5,16 @@ class LottoGameResult(
     winningLottoNumbers: LottoNumbers,
     lottoTickets: List<LottoTicket>,
 ) {
-    val lottoTicketWinningInfos: List<LottoTicketWinningInfo>
+    val lottoTicketWinningResults: List<LottoTicketWinningResult>
     val totalRateOfReturn: Double
 
     init {
-        lottoTicketWinningInfos = LottoPrize.values().map { lottoPrize ->
+        lottoTicketWinningResults = LottoPrize.values().map { lottoPrize ->
             val winningLottoTicketCount = lottoTickets.filter { it.countMatchingLottoNumbers(winningLottoNumbers) == lottoPrize.matchCount }.size
-            LottoTicketWinningInfo(lottoPrize, winningLottoTicketCount)
+            LottoTicketWinningResult(lottoPrize, winningLottoTicketCount)
         }
 
-        val totalLottoPrizeMoney = lottoTicketWinningInfos
+        val totalLottoPrizeMoney = lottoTicketWinningResults
             .sumOf { it.totalWinningPrizeMoney }
         totalRateOfReturn = totalLottoPrizeMoney.toDouble() / purchaseMoney.toDouble()
     }
