@@ -4,6 +4,7 @@
 
 - Step 1 : [https://github.com/next-step/kotlin-lotto/pull/849](https://github.com/next-step/kotlin-lotto/pull/849)
 - Step 2 : [https://github.com/next-step/kotlin-lotto/pull/939](https://github.com/next-step/kotlin-lotto/pull/939)
+- Step 3 : [https://github.com/next-step/kotlin-lotto/pull/957](https://github.com/next-step/kotlin-lotto/pull/957)
 
 ## 미션 내용
 
@@ -105,6 +106,10 @@
 
 ### STEP 3
 
+<details>
+<summary>접기/펼치기</summary>
+<div markdown="1">
+
 #### [요구 사항 분석]
 
 - 2등을 위한 보너스 번호(추가 번호) 하나를 더 추첨
@@ -124,3 +129,14 @@
 - [x] 로또 번호를 원시 타입으로 포장한다.
 - [x] 당첨 번호 목록에 size 제약을 건다.
 - [x] 일급 컬렉션(LottoTickets)을 의미 있게 사용할 수 있도록 비즈니스 로직을 위임하거나, 제거한다.
+
+</div>
+</details>
+
+<br>
+
+### STEP 4
+
+#### [피드백 반영]
+
+- [x] 로또 번호를 원시 타입으로 포장한다 (https://github.com/next-step/kotlin-lotto/pull/957#discussion_r1398365801)

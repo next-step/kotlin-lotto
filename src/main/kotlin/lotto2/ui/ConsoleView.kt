@@ -1,5 +1,6 @@
 package lotto2.ui
 
+import lotto2.domain.LottoNumber
 import lotto2.domain.LottoRanking
 import lotto2.domain.LottoTickets
 
@@ -31,9 +32,9 @@ object ConsoleView {
             println(RECENT_LOTTO_WINNING_NUMBERS_PROMPT)
         }
 
-        fun getLottoWinningNumbers(): List<Int> {
+        fun getLottoWinningNumbers(): List<LottoNumber> {
             return getUserInput().split(",")
-                .map { it.trim().toInt() }.sorted()
+                .map { LottoNumber(it.trim().toInt()) }
         }
 
         fun printBonusNumbersPrompt() {
@@ -64,7 +65,7 @@ object ConsoleView {
                         else -> "${ranking.matchingCount}개 일치 (${ranking.prize}원)"
                     }
 
-                    println("resultDescription- ${count}개")
+                    println("$resultDescription- ${count}개")
                 }
         }
 
