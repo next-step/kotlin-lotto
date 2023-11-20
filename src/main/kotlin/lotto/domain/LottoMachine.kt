@@ -25,12 +25,6 @@ object LottoMachine {
     }
 
     fun createWinningRate(cash: Int, winningStatus: Map<LottoRanking, Int>): Float {
-        val totalPrice = createTotalWinningPrice(winningStatus)
-
-        return totalPrice / cash.toFloat()
-    }
-
-    private fun createTotalWinningPrice(winningStatus: Map<LottoRanking, Int>): Int {
-        return winningStatus.toList().sumOf { it.first.findPrize(it) }
+        return LottoCalculator.calculateWinningRate(cash, winningStatus)
     }
 }
