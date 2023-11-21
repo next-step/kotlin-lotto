@@ -8,7 +8,7 @@ data class Lotto(val numbers: Set<LottoNumber>) {
 
     constructor(vararg numbers: Int) : this(
         numbers
-            .map { LottoNumber(it) }
+            .map { LottoNumber.create(it) }
             .toSet()
     )
 

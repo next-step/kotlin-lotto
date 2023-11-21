@@ -30,6 +30,6 @@ object InputView {
         val lotto = inputLotto()
         println("보너스 볼을 입력해 주세요.")
         val bonusNumber = readln().toInt()
-        return WinningLotto(Lotto(*lotto), LottoNumber(bonusNumber))
+        return WinningLotto(Lotto(*lotto), LottoNumber.create(bonusNumber))
     }
 }

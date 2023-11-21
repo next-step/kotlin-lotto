@@ -22,7 +22,7 @@ class LottoMachineTest {
         val money = expectLottos.size * LOTTO_PRICE
         val sut = LottoMachine(money) { expectLottos }
 
-        val actual = sut.issueStatistics(WinningLotto(Lotto(1, 2, 3, 4, 5, 6), LottoNumber(7)))
+        val actual = sut.issueStatistics(WinningLotto(Lotto(1, 2, 3, 4, 5, 6), LottoNumber.create(7)))
 
         val expectTotalProfit = 4031560000L.toBigDecimal()
         val expectProfitRate = expectTotalProfit.divide(money.toBigDecimal(), 2, RoundingMode.CEILING)
