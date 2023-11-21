@@ -17,4 +17,17 @@ object InputView {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
         return readln().split(",").map { it.trim().toInt() }
     }
+
+    fun getManualLottoSize(): Int {
+        println("\n수동으로 구매할 로또 수를 입력해 주세요.")
+        return readln().toInt()
+    }
+
+    fun getManualLottoNumbers(lottoSize: Int): List<List<Int>> {
+        println("\n수동으로 추첨할 번호를 입력해 주세요.")
+        val manualLottoNumbers = List(lottoSize) {
+            readlnOrNull() ?: throw IllegalArgumentException("번호를 다시 입력해 주세요")
+        }
+        return manualLottoNumbers.map { it.split(",").map { stringNumber -> stringNumber.trim().toInt() } }
+    }
 }
