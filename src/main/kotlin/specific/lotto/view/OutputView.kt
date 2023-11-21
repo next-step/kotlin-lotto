@@ -8,7 +8,7 @@ object OutputView {
     fun printTickets(tickets: Tickets) {
         println("${tickets.size}개를 구매했습니다.")
         tickets.forEach {
-            println(it.numbers.sortedBy { number -> number.value })
+            println(it.numbers.map { it.value }.sorted())
         }
     }
 
@@ -18,7 +18,7 @@ object OutputView {
         Rank.values()
             .filter { it != Rank.NO_WIN }
             .forEach {
-                println("${it.condition} (${it.prize}원- ${winningResult.aggregatedData[Rank.NO_WIN]}개)")
+                println("${it.condition} (${it.prize}원- ${winningResult.aggregatedData[it]}개)")
             }
     }
 

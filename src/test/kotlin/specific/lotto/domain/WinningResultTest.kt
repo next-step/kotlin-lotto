@@ -10,14 +10,19 @@ class WinningResultTest {
     @ParameterizedTest
     @MethodSource("provideSourceOfRank")
     fun `당첨된 개수를 각각 집계한다`(rank: Rank) {
-        // given,
+        // given
         val ranks = listOf(rank)
 
         // when
         val winningResult = WinningResult(ranks)
 
         // then
-        assertEquals(1, winningResult.aggregatedData[rank])
+        Rank.values().forEach {
+            when (it == rank) {
+                true -> assertEquals(1, winningResult.aggregatedData[it])
+                false -> assertEquals(0, winningResult.aggregatedData[it])
+            }
+        }
     }
 
     @ParameterizedTest
