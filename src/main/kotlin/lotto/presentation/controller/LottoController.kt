@@ -1,8 +1,15 @@
 package lotto.presentation.controller
 
-import lotto.domain.*
+import lotto.domain.LottoStore
 import lotto.domain.LottoStore.Companion.LOTTO_PRICE
-import lotto.presentation.controller.dto.*
+import lotto.domain.LottoTicket
+import lotto.domain.LottoTickets
+import lotto.domain.WinningLottoInfo
+import lotto.presentation.controller.dto.EvaluateRequest
+import lotto.presentation.controller.dto.EvaluateResponse
+import lotto.presentation.controller.dto.LottoResultDto
+import lotto.presentation.controller.dto.PurchaseRequest
+import lotto.presentation.controller.dto.PurchaseResponse
 
 class LottoController() {
     fun purchase(req: PurchaseRequest): PurchaseResponse {

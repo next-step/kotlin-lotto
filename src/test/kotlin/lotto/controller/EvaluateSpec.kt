@@ -4,8 +4,8 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
-import lotto.presentation.controller.dto.EvaluateRequest
 import lotto.presentation.controller.LottoController
+import lotto.presentation.controller.dto.EvaluateRequest
 import lotto.presentation.controller.dto.PurchaseResponse
 
 class EvaluateSpec : BehaviorSpec({

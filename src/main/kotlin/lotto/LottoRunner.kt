@@ -1,7 +1,7 @@
 package lotto
 
-import lotto.presentation.controller.dto.EvaluateRequest
 import lotto.presentation.controller.LottoController
+import lotto.presentation.controller.dto.EvaluateRequest
 import lotto.presentation.controller.dto.PurchaseRequest
 import lotto.presentation.view.InputView
 import lotto.presentation.view.OutputView
