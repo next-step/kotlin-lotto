@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoStore {
-    fun buyLottoTicket(amount: Int): List<LottoNumber> =
+    fun buyLottoTicket(amount: Int): List<LottoTicket> =
         List(calculateCount(amount)) {
             createAutoLottoTicket()
         }
@@ -10,10 +10,10 @@ class LottoStore {
         return amount / LOTTO_PRICE
     }
 
-    private fun createAutoLottoTicket(): LottoNumber {
+    private fun createAutoLottoTicket(): LottoTicket {
         val numbers = (LOTTO_NUMBER_MIN..LOTTO_NUMBER_MAX).shuffled().take(LOTTO_NUMBER_COUNT).sorted()
 
-        return LottoNumber.of(numbers)
+        return LottoTicket.of(numbers)
     }
 
     companion object {

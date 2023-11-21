@@ -1,6 +1,4 @@
-package lotto.presentation.controller
-
-import lotto.domain.LottoNumber
+package lotto.presentation.controller.dto
 
 class EvaluateRequest private constructor(
     val winningTicket: List<Int>,
@@ -19,8 +17,3 @@ class EvaluateRequest private constructor(
         }
     }
 }
-
-// TODO : Winning Lotto 효용성이 낮아서, 별도 선언하지 않았습니다.
-class WinningNumber(
-    val lottoNumber: LottoNumber
-)

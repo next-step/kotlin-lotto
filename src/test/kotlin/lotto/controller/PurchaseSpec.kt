@@ -3,7 +3,7 @@ package lotto.controller
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import lotto.presentation.controller.LottoController
-import lotto.presentation.controller.PurchaseRequest
+import lotto.presentation.controller.dto.PurchaseRequest
 
 class PurchaseSpec : BehaviorSpec({
     given("구입 금액이 주어졌을 때") {

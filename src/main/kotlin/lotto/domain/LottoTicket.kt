@@ -1,7 +1,7 @@
 package lotto.domain
 
-class LottoNumber private constructor(val numbers: List<Int>) {
-    infix fun countSameNumberWith(other: LottoNumber): Int {
+class LottoTicket private constructor(val numbers: List<Int>) {
+    infix fun countSameNumberWith(other: LottoTicket): Int {
         return numbers.count { other.numbers.contains(it) }
     }
 
@@ -10,8 +10,8 @@ class LottoNumber private constructor(val numbers: List<Int>) {
     }
 
     companion object {
-        fun of(numbers: List<Int>): LottoNumber {
-            return LottoNumber(numbers)
+        fun of(numbers: List<Int>): LottoTicket {
+            return LottoTicket(numbers)
         }
     }
 }

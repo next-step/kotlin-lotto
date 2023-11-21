@@ -6,7 +6,7 @@ import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.startWith
 import lotto.domain.LottoStore.Companion.LOTTO_PRICE
-import lotto.presentation.controller.PurchaseRequest
+import lotto.presentation.controller.dto.PurchaseRequest
 
 class PurchaseRequestSpec : BehaviorSpec({
     given("구입 금액이 주어졌을 때") {

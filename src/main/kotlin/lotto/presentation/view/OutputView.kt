@@ -1,7 +1,7 @@
 package lotto.presentation.view
 
-import lotto.presentation.controller.EvaluateResponse
-import lotto.presentation.controller.PurchaseResponse
+import lotto.presentation.controller.dto.EvaluateResponse
+import lotto.presentation.controller.dto.PurchaseResponse
 
 object OutputView {
     fun drawLottoTicketsOutput(resp: PurchaseResponse) {

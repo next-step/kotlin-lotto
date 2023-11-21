@@ -1,4 +1,6 @@
-package lotto.presentation.controller
+package lotto.presentation.controller.dto
+
+import lotto.presentation.controller.LottoResult
 
 class EvaluateResponse private constructor(
     val rankResult: List<List<Int>>,

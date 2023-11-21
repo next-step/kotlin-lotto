@@ -33,7 +33,7 @@ class LottoResult(
          * */
         val result = Rank.values().map { rank ->
             val rankFrequency = rankCounts[rank] ?: RankFrequency.of(0)
-            val matchedCount = rank.countOfMatch
+            val matchedCount = rank.matchCount
             val winningMoney = rank.winningMoney
             val frequency = rankFrequency.value
 

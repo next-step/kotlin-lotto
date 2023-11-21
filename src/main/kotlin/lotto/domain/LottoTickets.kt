@@ -3,9 +3,9 @@ package lotto.domain
 import lotto.domain.vo.RankFrequency
 import lotto.presentation.controller.LottoResult
 
-class LottoTickets(val tickets: List<LottoNumber>) {
+class LottoTickets(val tickets: List<LottoTicket>) {
     // TODO : 리펙토링, aggregateByRank 이 너무 비대하다. 역할 분배 필요
-    fun aggregateByRank(winningNumber: LottoNumber, bonusNumber: Int): LottoResult =
+    fun aggregateByRank(winningNumber: LottoTicket, bonusNumber: Int): LottoResult =
         tickets
             .map { ticket ->
                 val countOfMatch = ticket countSameNumberWith winningNumber
@@ -19,6 +19,6 @@ class LottoTickets(val tickets: List<LottoNumber>) {
     fun size(): Int = tickets.size
 
     companion object {
-        fun of(tickets: List<LottoNumber>): LottoTickets = LottoTickets(tickets)
+        fun of(tickets: List<LottoTicket>): LottoTickets = LottoTickets(tickets)
     }
 }

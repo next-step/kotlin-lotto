@@ -1,4 +1,4 @@
-package lotto.presentation.controller
+package lotto.presentation.controller.dto
 
 import lotto.domain.LottoTickets
 

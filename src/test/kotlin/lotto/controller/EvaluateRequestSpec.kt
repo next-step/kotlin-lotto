@@ -3,7 +3,7 @@ package lotto.controller
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
-import lotto.presentation.controller.EvaluateRequest
+import lotto.presentation.controller.dto.EvaluateRequest
 
 class EvaluateRequestSpec : BehaviorSpec({
     given("우승자 번호와 보너스볼 입력값이 주어졌을 때") {
