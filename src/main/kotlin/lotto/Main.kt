@@ -1,8 +1,10 @@
 package lotto
 
 import lotto.domain.DefaultLottoGenerateStrategy
+import lotto.domain.Lotto
 import lotto.domain.LottoGenerator
 import lotto.domain.LottoStore
+import lotto.domain.WinningLotto
 import lotto.ui.InputView
 import lotto.ui.ResultView
 
@@ -12,12 +14,12 @@ fun main() {
 
     val money = InputView.inputMoney()
     val boughtLottos = store.buyLottos(money)
-    InputView.showBoughtLottos(boughtLottos)
+    ResultView.showBoughtLottos(boughtLottos)
 
-    val winningNumbers = InputView.inputWinningNumbers()
+    val winningLotto = WinningLotto(Lotto(InputView.inputWinningNumbers()), InputView.inputBonusNumber())
 
-    val checkedLottos = boughtLottos.matchAll(winningNumbers)
-    val returnRate = boughtLottos.totalReward() / money.toDouble()
+    val checkedLottos = boughtLottos.matchAll(winningLotto)
+    val returnRate = checkedLottos.totalReward() / money.toDouble()
 
     ResultView.showResult(checkedLottos, returnRate)
 }
