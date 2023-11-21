@@ -12,6 +12,8 @@ object LottoStore {
         return cash.value >= LOTTO_PRICE
     }
 
+    fun isNotPurchasable(cash: LottoCash): Boolean = !isPurchasable(cash)
+
     fun purchaseLottosByAuto(cash: LottoCash): List<Lotto> {
         val count = cash.value / LOTTO_PRICE
         return List(count) { Lotto.auto() }

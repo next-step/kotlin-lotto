@@ -20,7 +20,7 @@ class LottoStoreTest : BehaviorSpec({
         val cash = 500
         val lottoCash = LottoCash(cash)
         then("로또를 구매할 수 없다.") {
-            LottoStore.isPurchasable(lottoCash) shouldBe false
+            LottoStore.isNotPurchasable(lottoCash) shouldBe true
         }
     }
 

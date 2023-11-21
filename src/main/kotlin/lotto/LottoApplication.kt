@@ -16,7 +16,7 @@ class LottoApplication {
             do {
                 val cash = InputView.readCash()
                 lottoCash = LottoCash(cash)
-            } while (!LottoStore.isPurchasable(lottoCash))
+            } while (LottoStore.isNotPurchasable(lottoCash))
             val lottos = LottoStore.purchaseLottosByAuto(lottoCash)
             ResultView.printPurchaseResult(lottos)
 
