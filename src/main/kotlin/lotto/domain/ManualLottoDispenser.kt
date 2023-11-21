@@ -1,7 +1,7 @@
 package lotto.domain
 
 class ManualLottoDispenser(
-    private val lottoDispenser: LottoDispenser,
+    private val lottoDispenser: LottoDispenser = RandomLottoDispenser(),
     vararg manualLottos: Lotto,
 ): LottoDispenser {
     private val manualLottos = manualLottos.toList()

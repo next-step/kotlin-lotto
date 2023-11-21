@@ -3,8 +3,8 @@ package lotto.domain
 const val LOTTO_PRICE = 1000
 
 class LottoMachine(
-    lottoDispenser: LottoDispenser,
     private val money: Int,
+    lottoDispenser: LottoDispenser,
 ) {
     val issuedLottos = lottoDispenser.issue(money)
 
