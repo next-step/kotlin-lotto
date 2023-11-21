@@ -12,4 +12,8 @@ data class Lottos(private val lottos: List<Lotto>) {
             LottoRank.getRank(matchCount, lotto.containsBonusBall(bonusBall))
         }.mapValues { (_, lottos) -> Lottos(lottos) }
     }
+
+    fun addLottos(newLottos: List<Lotto>): Lottos {
+        return Lottos(this.lottos + newLottos)
+    }
 }
