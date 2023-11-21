@@ -3,8 +3,8 @@ package lottoAuto.view
 import lottoAuto.domain.LottoRank
 
 object OutputView {
-    fun printNumOfLotto(numOfLotto: Int) {
-        println("${numOfLotto}개를 구매했습니다.")
+    fun printNumOfLotto(numOfManualLotto: Int, numOfRandomLotto: Int) {
+        println("\n수동으로 ${numOfManualLotto}장, 자동으로 ${numOfRandomLotto}개를 구매했습니다.")
     }
 
     fun printLottoNumbers(lottoNumbers: List<Int>) {

@@ -1,12 +1,6 @@
 package lottoAuto
 
-import lottoAuto.domain.Lotto
-import lottoAuto.domain.LottoFactory
-import lottoAuto.domain.LottoNumber
-import lottoAuto.domain.LottoRank
-import lottoAuto.domain.LottoProfitCalculator
-import lottoAuto.domain.toLottoNumber
-import lottoAuto.domain.WinningLotto
+import lottoAuto.domain.*
 import lottoAuto.view.InputView
 import lottoAuto.view.OutputView
 
@@ -32,14 +26,36 @@ object LottoController {
     }
 
     fun createLottoList(purchaseAmount: Int): List<Lotto> {
-        val lottoList = LottoFactory.create(purchaseAmount)
-        OutputView.printNumOfLotto(lottoList.size)
+        val manualLottoSize = getManualLottoSize()
+        val randomLottoSize = getRandomLottoSize(purchaseAmount, manualLottoSize)
+        val manualNumbers = getManualLottoNumbers(manualLottoSize)
+
+        val fixedLottoList = FixedLottoFactory(numbers = manualNumbers).create(manualLottoSize)
+        val randomLottoList = RandomLottoFactory().create(randomLottoSize)
+        val lottoList = fixedLottoList + randomLottoList
+
+        OutputView.printNumOfLotto(
+            numOfManualLotto = fixedLottoList.size,
+            numOfRandomLotto = randomLottoList.size
+        )
 
         lottoList.forEach {
             val lottoNumbers = it.lottoNumbers.map { lottoNumber -> lottoNumber.number }
             OutputView.printLottoNumbers(lottoNumbers)
         }
         return lottoList
+    }
+
+    private fun getManualLottoSize(): Int {
+        return InputView.getManualLottoSize()
+    }
+
+    private fun getRandomLottoSize(purchaseAmount: Int, manualLottoSize: Int): Int {
+        return (purchaseAmount / Lotto.LOTTO_PRICE) - manualLottoSize
+    }
+
+    private fun getManualLottoNumbers(lottoSize: Int): List<List<Int>> {
+        return InputView.getManualLottoNumbers(lottoSize)
     }
 
     fun statistics(
