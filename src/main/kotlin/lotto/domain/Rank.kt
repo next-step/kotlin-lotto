@@ -2,7 +2,6 @@ package lotto.domain
 
 import lotto.domain.vo.Amount
 import lotto.domain.vo.MatchCount
-import lotto.domain.vo.RankFrequency
 
 enum class Rank(val matchCount: MatchCount, val winningMoney: Amount) {
     FIRST(MatchCount.of(6), Amount.of(2_000_000_000)),
@@ -18,8 +17,9 @@ enum class Rank(val matchCount: MatchCount, val winningMoney: Amount) {
                 return SECOND
             }
 
-            return values().find { it.matchCount == MatchCount.of(countOfMatch) }
-                ?: throw IllegalArgumentException("해당하는 등수가 없습니다.")
+            return values().find {
+                it.matchCount == MatchCount.of(countOfMatch)
+            } ?: MISS
         }
     }
 }
