@@ -3,7 +3,6 @@ package lotto.domain
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.vo.RankFrequency
-import lotto.presentation.controller.LottoResult
 
 class LottoResultSpec : BehaviorSpec({
 

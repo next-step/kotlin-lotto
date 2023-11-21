@@ -1,7 +1,6 @@
 package lotto.domain
 
 import lotto.domain.vo.RankFrequency
-import lotto.presentation.controller.LottoResult
 
 class WinningLottoInfo private constructor(
     private val winningTicket: LottoTicket,
