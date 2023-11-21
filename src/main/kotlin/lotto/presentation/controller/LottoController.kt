@@ -6,9 +6,7 @@ import lotto.presentation.controller.dto.EvaluateResponse
 import lotto.presentation.controller.dto.PurchaseRequest
 import lotto.presentation.controller.dto.PurchaseResponse
 
-class LottoController(
-    var tickets: LottoTickets? = null
-) {
+class LottoController() {
     fun purchase(req: PurchaseRequest): PurchaseResponse {
         val tickets = LottoStore()
             .buyLottoTicket(req.amount)

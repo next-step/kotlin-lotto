@@ -10,27 +10,18 @@ class LottoRunner private constructor(
     private val controller: LottoController = LottoController()
 ) {
     fun run() {
-        purchaseLotto()
-        evaluateByWinningNumbers()
-    }
+        val purchaseRequest = PurchaseRequest.from(InputView.getPurchaseInput())
+        val purchaseResponse = controller.purchase(purchaseRequest)
 
-    private fun purchaseLotto() {
-        val req = PurchaseRequest.from(InputView.getPurchaseInput())
+        OutputView.drawLottoTicketsOutput(purchaseResponse)
 
-        val resp = controller.purchase(req)
-
-        OutputView.drawLottoTicketsOutput(resp)
-    }
-
-    private fun evaluateByWinningNumbers() {
         val inputWinNumbers = InputView.getWinningNumbersInput()
         val inputBonusNumber = InputView.getBonusNumberInput()
 
-        val req = EvaluateRequest.from(inputWinNumbers, inputBonusNumber)
+        val evaluateRequest = EvaluateRequest.from(inputWinNumbers, inputBonusNumber)
+        val evaluateResponse = controller.evaluate(purchaseResponse, evaluateRequest)
 
-        val resp = controller.evaluate(req)
-
-        OutputView.drawLottoResultOutput(resp)
+        OutputView.drawLottoResultOutput(evaluateResponse)
     }
 
     companion object {
