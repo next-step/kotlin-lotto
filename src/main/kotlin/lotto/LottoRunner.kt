@@ -1,10 +1,6 @@
 package lotto
 
-import lotto.controller.EndLottoRequest
-import lotto.controller.EndLottoResponse
 import lotto.controller.LottoController
-import lotto.controller.PurchaseRequest
-import lotto.controller.PurchaseResponse
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -12,49 +8,24 @@ class LottoRunner(
     private val controller: LottoController = LottoController()
 ) {
     fun run() {
-        if (!purchaseLotto()) return
-        createWinningNumbers()
-    }
-
-    private fun purchaseLotto(): Boolean {
-        val request = kotlin.runCatching {
-            InputView.purchaseRequest
+        runCatching {
+            purchaseLotto()
+            createWinningNumbers()
         }.getOrElse {
             OutputView.drawError(it.message)
-            return false
-        }
-
-        return when (val response = controller.purchase(request)) {
-            is PurchaseResponse.Success -> {
-                OutputView.drawPurchaseOutput(response)
-                true
-            }
-
-            is PurchaseResponse.Error -> {
-                OutputView.drawError(response.message)
-                false
-            }
         }
     }
 
-    private fun createWinningNumbers(): Boolean {
-        val request = runCatching {
-            InputView.endLottoRequest
-        }.getOrElse {
-            OutputView.drawError(it.message)
-            return false
-        }
-        return when (val response = controller.end(request)) {
-            is EndLottoResponse.Success -> {
-                OutputView.drawEarningRateOutput(response)
-                true
-            }
+    private fun purchaseLotto() {
+        val request = InputView.purchaseRequest
+        val response = controller.purchase(request)
+        OutputView.drawPurchaseOutput(response)
+    }
 
-            is EndLottoResponse.Error -> {
-                OutputView.drawError(response.message)
-                false
-            }
-        }
+    private fun createWinningNumbers() {
+        val request = InputView.endLottoRequest
+        val response = controller.end(request)
+        OutputView.drawEarningRateOutput(response)
     }
 }
 

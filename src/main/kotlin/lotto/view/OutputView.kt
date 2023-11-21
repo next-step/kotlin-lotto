@@ -16,13 +16,13 @@ object OutputView {
     private const val EARNING_RATE_MSG = "총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 %s라는 의미임)"
     private const val ERROR_PREFIX = "[ERROR]"
 
-    fun drawPurchaseOutput(response: PurchaseResponse.Success) {
+    fun drawPurchaseOutput(response: PurchaseResponse) {
         val ticket = response.ticket
         drawPurchaseCount(ticket.count)
         drawNumbers(ticket.numbers)
     }
 
-    fun drawEarningRateOutput(response: EndLottoResponse.Success) {
+    fun drawEarningRateOutput(response: EndLottoResponse) {
         val result = response.result
         println()
         println(RESULT_MSG)

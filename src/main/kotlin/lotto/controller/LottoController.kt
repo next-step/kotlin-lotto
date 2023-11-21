@@ -14,28 +14,19 @@ class LottoController(
     private var purchasedTicket: LottoTicket? = null,
 ) {
     fun purchase(request: PurchaseRequest): PurchaseResponse =
-        runCatching {
-            shop.purchase(Amount(request.amount), request.manualLottoNumbers.toLottoNumbers())
-                .save()
-                .let(PurchaseResponse::Success)
-        }.getOrElse { error ->
-            if (error is CustomException) PurchaseResponse.Error(error.errorMessage)
-            else throw error
-        }
+        shop.purchase(Amount(request.amount), request.manualLottoNumbers.toLottoNumbers())
+            .save()
+            .let(::PurchaseResponse)
 
-    fun end(request: EndLottoRequest): EndLottoResponse =
-        runCatching {
-            val purchasedTicket =
-                purchasedTicket ?: return EndLottoResponse.Success(LottoResult.withoutPurchasedTicket())
-            val winningLotto = WinningLotto(
-                winningNumber = LottoNumberGenerator.createFrom(request.winningNumbers),
-                bonusNumber = request.bonusNumber
-            )
-            return shop.receivePrize(purchasedTicket, winningLotto).let(EndLottoResponse::Success)
-        }.getOrElse { error ->
-            if (error is CustomException) EndLottoResponse.Error(error.errorMessage)
-            else throw error
-        }
+    fun end(request: EndLottoRequest): EndLottoResponse {
+        val purchasedTicket =
+            purchasedTicket ?: return EndLottoResponse(LottoResult.withoutPurchasedTicket())
+        val winningLotto = WinningLotto(
+            winningNumber = LottoNumberGenerator.createFrom(request.winningNumbers),
+            bonusNumber = request.bonusNumber
+        )
+        return shop.receivePrize(purchasedTicket, winningLotto).let(::EndLottoResponse)
+    }
 
     private fun LottoTicket.save(): LottoTicket =
         this.also { purchasedTicket = it }
