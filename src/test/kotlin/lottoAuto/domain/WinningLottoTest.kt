@@ -71,4 +71,26 @@ class WinningLottoTest {
             )
         }
     }
+
+    @Test
+    fun `당첨 로또 번호와 보너스 번호가 중복될 경우 IllegalArgumentException을 발생시킨다`() {
+        // given
+        val lottoNumbers = listOf(
+            1.toLottoNumber(),
+            2.toLottoNumber(),
+            3.toLottoNumber(),
+            4.toLottoNumber(),
+            5.toLottoNumber(),
+            6.toLottoNumber()
+        )
+
+        assertThrows<IllegalArgumentException> { // then
+            WinningLotto( // when
+                lotto = Lotto(lottoNumbers),
+                bonusLottoNumber = 1.toLottoNumber()
+            )
+        }.also {
+            assertEquals("보너스 번호는 당첨 번호와 중복될 수 없습니다.", it.message)
+        }
+    }
 }
