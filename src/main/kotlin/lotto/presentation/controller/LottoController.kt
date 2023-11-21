@@ -22,8 +22,12 @@ class LottoController() {
 
         val winningLottoInfo = WinningLottoInfo.of(winningLottoTicket, bonusNumber)
         val lottoResult = purchasedTickets.aggregateByRank(winningLottoInfo)
+        val resultTable = lottoResult.getResultTable()
+        val earningRate = lottoResult.getEarningRate()
 
-        return EvaluateResponse.from(lottoResult)
+        val lottoResultDto = LottoResultDto.of(resultTable, earningRate)
+
+        return EvaluateResponse.from(lottoResultDto)
     }
 
     private fun List<LottoTicket>.save(): LottoTickets =

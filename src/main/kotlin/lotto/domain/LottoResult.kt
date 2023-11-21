@@ -1,12 +1,9 @@
-package lotto.presentation.controller
+package lotto.domain
 
 import lotto.domain.LottoStore.Companion.LOTTO_PRICE
-import lotto.domain.Rank
 import lotto.domain.vo.Amount
 import lotto.domain.vo.RankFrequency
 
-// TODO-review : LottoResult 는 view <-> domain 사이의 결합을 낮추기 위해 controller 에서 사용하는 객체입니다.
-// 이러한 객체들은 패키지 구조상 어디에 위치해야하는지 고민입니다!
 class LottoResult(
     private val rankCounts: Map<Rank, RankFrequency>,
 ) {
@@ -24,13 +21,6 @@ class LottoResult(
     }
 
     fun getResultTable(): List<List<Int>> {
-        /**
-         * 3개 일치 (5000원)- 1개
-         * 4개 일치 (50000원)- 0개
-         * 5개 일치 (1500000원)- 0개
-         * 5개 일치, 보너스 볼 일치(30000000원) - 0개
-         * 6개 일치 (2000000000원)- 0개
-         * */
         val result = Rank.values().map { rank ->
             val rankFrequency = rankCounts[rank] ?: RankFrequency.of(0)
             val matchedCount = rank.matchCount

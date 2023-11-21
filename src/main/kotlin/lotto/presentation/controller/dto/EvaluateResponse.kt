@@ -1,15 +1,13 @@
 package lotto.presentation.controller.dto
 
-import lotto.presentation.controller.LottoResult
-
 class EvaluateResponse private constructor(
     val rankResult: List<List<Int>>,
     val earningRate: Double,
 ) {
     companion object {
-        fun from(lottoResult: LottoResult): EvaluateResponse {
-            val rankResult = lottoResult.getResultTable()
-            val earningRate = lottoResult.getEarningRate()
+        fun from(lottoResultDto: LottoResultDto): EvaluateResponse {
+            val rankResult = lottoResultDto.resultTable
+            val earningRate = lottoResultDto.earingRate
 
             return EvaluateResponse(rankResult, earningRate)
         }
