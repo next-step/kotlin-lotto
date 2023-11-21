@@ -1,27 +1,40 @@
 package lotto.component
 
-import lotto.model.LottoNumbers
-import lotto.model.LottoPrize
-import lotto.model.LottoResult
-import lotto.model.WinningNumbers
+import lotto.model.*
 
 class Lotto(
     private val lottoResultAnalyzer: LottoResultAnalyzer
 ) {
-    fun draw(lottoNumbers: List<LottoNumbers>, winningNumbers: WinningNumbers): LottoResult {
-        val lottoPrizes: List<LottoPrize> = getLottoPrizes(lottoNumbers, winningNumbers)
+    fun draw(lottoNumbers: List<LottoNumbers>, winningNumbers: WinningNumbers, bonusNumber: LottoNumber): LottoResult {
+        val lottoPrizes: List<LottoPrize> = getLottoPrizes(lottoNumbers, winningNumbers, bonusNumber)
         val revenueRate: Double = lottoResultAnalyzer.getRevenueRate(lottoPrizes)
 
         return LottoResult(lottoPrizes, revenueRate)
     }
 
-    private fun getLottoPrizes(lottoNumbers: List<LottoNumbers>, winningNumbers: WinningNumbers): List<LottoPrize> {
+    private fun getLottoPrizes(
+        lottoNumbers: List<LottoNumbers>,
+        winningNumbers: WinningNumbers,
+        bonusNumber: LottoNumber
+    ): List<LottoPrize> {
         return lottoNumbers
-            .map { winningNumbers.match(it) }
-            .map { LottoPrize.of(it) }
+            .map {
+                val matchedCount: Int = winningNumbers.match(it)
+                val isBonusNumberMatched: Boolean = it.contain(bonusNumber)
+
+                LottoPrize.of(matchedCount, isBonusNumberMatched)
+            }
     }
 
     companion object {
-        const val LOTTO_PRICE = 1000
+        private const val LOTTO_PRICE = 1000
+
+        fun purchaseLottoCount(amount: Int): Int {
+            return amount / LOTTO_PRICE
+        }
+
+        fun getLottoTotalPrice(count: Int): Int {
+            return count * LOTTO_PRICE
+        }
     }
 }

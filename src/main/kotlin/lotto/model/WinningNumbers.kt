@@ -7,6 +7,10 @@ class WinningNumbers private constructor(
         return lottoNumbers.match(target)
     }
 
+    fun contain(number: LottoNumber): Boolean {
+        return lottoNumbers.contain(number)
+    }
+
     companion object {
         fun create(numbers: List<Int>): WinningNumbers {
             val lottoNumbers = LottoNumbers.create(numbers)

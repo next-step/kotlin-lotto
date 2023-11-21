@@ -2,36 +2,37 @@ package lotto.model
 
 import lotto.utils.shuffleAndTake
 
-class LottoNumbers private constructor(val numbers: List<Int>) {
+class LottoNumbers private constructor(val numbers: List<LottoNumber>) {
     fun match(target: LottoNumbers): Int {
-        val sourceLottoNumbers = numbers
-        val targetLottoNumbers = target.numbers.toSet()
+        val sourceLottoNumbers = numbers.map { it.number }
+        val targetLottoNumbers = target.numbers.map { it.number }.toSet()
 
         return sourceLottoNumbers
             .intersect(targetLottoNumbers)
             .size
     }
 
+    fun contain(number: LottoNumber): Boolean {
+        return numbers.find { it.number == number.number } != null
+    }
+
     companion object {
-        private val LOTTO_NUMBER_POOL = (1..45).toList()
         const val LOTTO_NUMBERS_LENGTH = 6
 
         fun create(numbers: List<Int>): LottoNumbers {
-            require(numbers.size == LOTTO_NUMBERS_LENGTH) {
-                "로또 번호는 6개 입니다."
-            }
-
-            val lottoNumbers = numbers.map { validateLottoNumber(it) }
+            val lottoNumbers = numbers
+                .run { validateLottoNumbersLength(this) }
+                .map { LottoNumber.from(it) }
 
             return LottoNumbers(lottoNumbers)
         }
 
-        private fun validateLottoNumber(lottoNumber: Int): Int {
-            require(LOTTO_NUMBER_POOL.contains(lottoNumber)) {
-                "로또 번호는 1 이상 45 이하의 자연수입니다."
+        private fun validateLottoNumbersLength(numbers: List<Int>): List<Int> {
+            require(numbers.toSet().size == LOTTO_NUMBERS_LENGTH) {
+                "로또 번호는 6개이어야하며 중복된 숫자가 존재해선 안됩니다."
             }
 
-            return lottoNumber
+            return numbers
         }
 
         fun generate(lottoNumbersCount: Int): List<LottoNumbers> {
@@ -40,7 +41,9 @@ class LottoNumbers private constructor(val numbers: List<Int>) {
         }
 
         private fun generate(): LottoNumbers {
-            val numbers = LOTTO_NUMBER_POOL.shuffleAndTake(LOTTO_NUMBERS_LENGTH, sort = true)
+            val numbers: List<LottoNumber> = LottoNumber.LOTTO_NUMBER_RANGE
+                .shuffleAndTake(LOTTO_NUMBERS_LENGTH, sort = true)
+                .map { LottoNumber.from(it) }
 
             return LottoNumbers(numbers)
         }

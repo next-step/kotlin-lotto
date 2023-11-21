@@ -17,6 +17,6 @@ class LottoResultAnalyzer {
     }
 
     private fun getTotalPrice(lottoNumbersCount: Int): Int {
-        return lottoNumbersCount * Lotto.LOTTO_PRICE
+        return Lotto.getLottoTotalPrice(lottoNumbersCount)
     }
 }
