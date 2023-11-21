@@ -4,6 +4,7 @@ import lotto.data.Lotto
 import lotto.data.LottoNumber
 import lotto.data.LottoRanking
 import lotto.data.WinningLotto
+import java.util.EnumMap
 
 object LottoMachine {
 
@@ -24,7 +25,7 @@ object LottoMachine {
         return LottoRanking.findLottoRanking(matchingNumberCnt, hasBonusNumber)
     }
 
-    fun createWinningRate(cash: Int, winningStatus: Map<LottoRanking, Int>): Float {
+    fun createWinningRate(cash: Int, winningStatus: EnumMap<LottoRanking, Int>): Float {
         return LottoCalculator.calculateWinningRate(cash, winningStatus)
     }
 }

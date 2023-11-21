@@ -6,6 +6,7 @@ import lotto.data.LottoRanking
 import lotto.data.WinningLotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import java.util.EnumMap
 
 class LottoMachineTest {
 
@@ -61,12 +62,11 @@ class LottoMachineTest {
     fun `구매 금액과 당첨 통계를 받았고, 수익률을 요청한다면, 수익률을 반환한다`() {
         // given : 구매 금액과 당첨 통계를 받는다.
         val cash = 6000
-        val winningStatus = mutableMapOf(
-            LottoRanking.ThirdPlace to 2,
-            LottoRanking.FourthPlace to 1,
-            LottoRanking.FifthPlace to 2,
-            LottoRanking.None to 1
-        )
+        val winningStatus: EnumMap<LottoRanking, Int> = EnumMap(LottoRanking::class.java)
+        winningStatus[LottoRanking.ThirdPlace] = 2
+        winningStatus[LottoRanking.FourthPlace] = 1
+        winningStatus[LottoRanking.FifthPlace] = 2
+        winningStatus[LottoRanking.None] = 1
 
         // when : 수익률을 요청한다.
         val winningRate = LottoMachine.createWinningRate(cash, winningStatus)

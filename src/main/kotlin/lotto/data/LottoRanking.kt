@@ -14,18 +14,10 @@ enum class LottoRanking(val matchingNumberCnt: Int, val price: Int) : Prize {
 
     companion object {
         fun findLottoRanking(matchingNumberCnt: Int, hasBonusNumber: Boolean): LottoRanking {
-            return if (matchingNumberCnt == SecondPlace.matchingNumberCnt) {
-                determineRankingWithBonusNumber(hasBonusNumber)
-            } else {
-                LottoRanking.values().find { it.matchingNumberCnt == matchingNumberCnt } ?: None
-            }
-        }
-
-        private fun determineRankingWithBonusNumber(isContainBonusNumber: Boolean): LottoRanking {
-            return if (isContainBonusNumber) {
+            return if (matchingNumberCnt == SecondPlace.matchingNumberCnt && hasBonusNumber) {
                 SecondPlace
             } else {
-                ThirdPlace
+                LottoRanking.values().find { it.matchingNumberCnt == matchingNumberCnt } ?: None
             }
         }
     }
