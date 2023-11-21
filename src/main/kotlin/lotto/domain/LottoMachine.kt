@@ -1,7 +1,5 @@
 package lotto.domain
 
-const val LOTTO_PRICE = 1000
-
 class LottoMachine(
     private val money: Int,
     lottoDispenser: LottoDispenser,
