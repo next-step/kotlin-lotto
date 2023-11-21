@@ -1,9 +1,12 @@
 package specific.lotto.controller
 
-import specific.lotto.domain.*
+import specific.lotto.domain.Money
+import specific.lotto.domain.Player
+import specific.lotto.domain.Round
+import specific.lotto.domain.TicketMachine
+import specific.lotto.domain.WinningNumbers
 import specific.lotto.view.InputView
 import specific.lotto.view.OutputView
-import kotlin.math.min
 
 class LottoController {
 

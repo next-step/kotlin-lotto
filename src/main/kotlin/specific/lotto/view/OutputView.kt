@@ -1,6 +1,8 @@
 package specific.lotto.view
 
-import specific.lotto.domain.*
+import specific.lotto.domain.Rank
+import specific.lotto.domain.Tickets
+import specific.lotto.domain.WinningResult
 
 object OutputView {
     fun printTickets(tickets: Tickets) {
@@ -21,7 +23,7 @@ object OutputView {
     }
 
     fun printReturnOnInvestment(returnOnInvestment: Double) {
-        println("총 수익률은 ${String.format("%.2f", )}입니다. (${makeProfitOrLossStatus(returnOnInvestment)})")
+        println("총 수익률은 ${String.format("%.2f", returnOnInvestment)}입니다. (${makeProfitOrLossStatus(returnOnInvestment)})")
     }
 
     private fun makeProfitOrLossStatus(returnOnInvestment: Double): String =
