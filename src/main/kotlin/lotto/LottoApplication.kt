@@ -1,9 +1,10 @@
 package lotto
 
+import lotto.domain.LOTTO_PRICE
 import lotto.domain.Lotto
-import lotto.domain.LottoGenerator
+import lotto.domain.LottoDispenser
 import lotto.domain.LottoMachine
-import lotto.domain.ManualLottoGenerator
+import lotto.domain.ManualLottoDispenser
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -17,8 +18,8 @@ class LottoApplication(
         val manualLotto = inputView.inputManualLotto()
         val lottoGenerator = manualLottoGenerator(*manualLotto.toTypedArray())
 
-        val lottoMachine = LottoMachine(lottoGenerator)
-        val issueLottos = lottoMachine.issueLottos(money)
+        val lottoMachine = LottoMachine(lottoGenerator, money)
+        val issueLottos = lottoMachine.issuedLottos
         resultView.printLottos(issueLottos)
 
         val winningLotto = inputView.inputWinningLotto()
@@ -26,11 +27,16 @@ class LottoApplication(
         resultView.printStatistic(statistics)
     }
 
-    private fun manualLottoGenerator(vararg manualLottos: Lotto): LottoGenerator {
-        return ManualLottoGenerator(randomLottoGenerator(), *manualLottos)
+    private fun manualLottoGenerator(vararg manualLottos: Lotto): LottoDispenser {
+        return ManualLottoDispenser(randomLottoGenerator(), *manualLottos)
     }
 
-    private fun randomLottoGenerator(): LottoGenerator {
-        return LottoGenerator { Lotto.random() }
+    private fun randomLottoGenerator(): LottoDispenser {
+        return LottoDispenser { money ->
+            val issuedLottoSize = money / LOTTO_PRICE
+            (0 until issuedLottoSize)
+                .map { Lotto.random() }
+                .toList()
+        }
     }
 }
