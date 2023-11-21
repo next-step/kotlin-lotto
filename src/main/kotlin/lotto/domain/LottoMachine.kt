@@ -3,13 +3,13 @@ package lotto.domain
 const val LOTTO_PRICE = 1000
 
 class LottoMachine(private val lottoGenerator: LottoGenerator) {
-    private var issuedLottos = mutableListOf<Lotto>()
+    private lateinit var issuedLottos: List<Lotto>
     private var money: Int = 0
 
-    fun inputMoney(money: Int) {
-        val newIssuedLottos = (0 until issuedLottoSize(money)).map { lottoGenerator.generate() }
-        issuedLottos.addAll(newIssuedLottos)
-        this.money += money
+    fun issueLottos(money: Int): List<Lotto> {
+        this.issuedLottos = (0 until issuedLottoSize(money)).map { lottoGenerator.generate() }
+        this.money = money
+        return issuedLottos.toList()
     }
 
     fun issueStatistics(winningLotto: WinningLotto): Statistics {
@@ -17,10 +17,6 @@ class LottoMachine(private val lottoGenerator: LottoGenerator) {
             .groupingBy { winningLotto.judge(it) }
             .eachCount()
         return Statistics(money, statistics)
-    }
-
-    fun issuedLottos(): List<Lotto> {
-        return issuedLottos.toList()
     }
 
     private fun issuedLottoSize(money: Int): Int {

@@ -13,9 +13,8 @@ class LottoMachineTest {
     fun `입력 금액 만큼 로또 생성`(money: Int, expectSize: Int) {
         val expectLottos = (0 until expectSize).map { _ -> Lotto(1, 2, 3, 4, 5, 6) }
         val sut = LottoMachine(lottoGenerator(expectLottos))
-        sut.inputMoney(money)
 
-        val actualLottos = sut.issuedLottos()
+        val actualLottos = sut.issueLottos(money)
 
         assertThat(actualLottos).hasSize(expectSize)
     }
@@ -35,7 +34,7 @@ class LottoMachineTest {
         )
         val money = expectLottos.size * LOTTO_PRICE
         val sut = LottoMachine(lottoGenerator(expectLottos))
-        sut.inputMoney(money)
+        sut.issueLottos(money)
 
         val actual = sut.issueStatistics(WinningLotto(Lotto(1, 2, 3, 4, 5, 6), LottoNumber(7)))
 
