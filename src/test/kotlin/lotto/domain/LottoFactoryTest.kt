@@ -1,8 +1,11 @@
 package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
+import java.lang.IllegalArgumentException
 
 internal class LottoFactoryTest {
     @ParameterizedTest
@@ -17,5 +20,15 @@ internal class LottoFactoryTest {
 
         // then
         assertThat(lottoCount.autoLottoCount).isEqualTo(expected)
+    }
+
+    @Test
+    fun `수동으로 구매할 로또 수가 전체 로또 수보다 많으면 예외를 발생한다`() {
+        // given
+        val money = 1500
+        val manualLottoCount = 2
+
+        // when, then
+        assertThrows<IllegalArgumentException> { LottoFactory.calculateLottoCount(money, manualLottoCount) }
     }
 }
