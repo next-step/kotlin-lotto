@@ -10,13 +10,13 @@ class WinningLottoTest {
     @Test
     fun `증복된 숫자로 우승 로또를 생성 시 예외 발생`() {
         assertThrows<IllegalArgumentException> {
-            WinningLotto(Lotto(1, 2, 3, 4, 5, 6), LottoNumber(6))
+            WinningLotto(Lotto(1, 2, 3, 4, 5, 6), LottoNumber.create(6))
         }
     }
 
     @Test
     fun `꽝 로또 판정`() {
-        val sut = WinningLotto(Lotto(1, 2, 7, 8, 9, 10), LottoNumber(11))
+        val sut = WinningLotto(Lotto(1, 2, 7, 8, 9, 10), LottoNumber.create(11))
 
         val actual = sut.judge(Lotto(1, 2, 3, 4, 5, 6))
 
@@ -25,7 +25,7 @@ class WinningLottoTest {
 
     @Test
     fun `5등 로또 판정`() {
-        val sut = WinningLotto(Lotto(1, 2, 3, 7, 8, 9), LottoNumber(10))
+        val sut = WinningLotto(Lotto(1, 2, 3, 7, 8, 9), LottoNumber.create(10))
 
         val actual = sut.judge(Lotto(1, 2, 3, 4, 5, 6))
 
@@ -34,7 +34,7 @@ class WinningLottoTest {
 
     @Test
     fun `4등 로또 판정`() {
-        val sut = WinningLotto(Lotto(1, 2, 3, 4, 8, 9), LottoNumber(10))
+        val sut = WinningLotto(Lotto(1, 2, 3, 4, 8, 9), LottoNumber.create(10))
 
         val actual = sut.judge(Lotto(1, 2, 3, 4, 5, 6))
 
@@ -43,7 +43,7 @@ class WinningLottoTest {
 
     @Test
     fun `3등 로또 판정`() {
-        val sut = WinningLotto(Lotto(1, 2, 3, 4, 5, 7), LottoNumber(8))
+        val sut = WinningLotto(Lotto(1, 2, 3, 4, 5, 7), LottoNumber.create(8))
 
         val actual = sut.judge(Lotto(1, 2, 3, 4, 5, 6))
 
@@ -52,7 +52,7 @@ class WinningLottoTest {
 
     @Test
     fun `2등 로또 판정`() {
-        val sut = WinningLotto(Lotto(1, 2, 3, 4, 5, 7), LottoNumber(6))
+        val sut = WinningLotto(Lotto(1, 2, 3, 4, 5, 7), LottoNumber.create(6))
 
         val actual = sut.judge(Lotto(1, 2, 3, 4, 5, 6))
 
@@ -61,7 +61,7 @@ class WinningLottoTest {
 
     @Test
     fun `1등 로또 판정`() {
-        val sut = WinningLotto(Lotto(1, 2, 3, 4, 5, 6), LottoNumber(7))
+        val sut = WinningLotto(Lotto(1, 2, 3, 4, 5, 6), LottoNumber.create(7))
 
         val actual = sut.judge(Lotto(1, 2, 3, 4, 5, 6))
 

@@ -1,8 +1,7 @@
 package lotto
 
-import lotto.domain.Lotto
-import lotto.domain.LottoGenerator
 import lotto.domain.LottoMachine
+import lotto.domain.ManualLottoDispenser
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -12,18 +11,16 @@ class LottoApplication(
 ) {
 
     fun run() {
-        val lottoMachine = LottoMachine(lottoGenerator())
-
         val money = inputView.inputMoney()
-        lottoMachine.inputMoney(money)
-        resultView.printLottos(lottoMachine.issuedLottos())
+        val manualLotto = inputView.inputManualLotto()
+        val lottoDispenser = ManualLottoDispenser(manualLottos = manualLotto.toTypedArray())
+
+        val lottoMachine = LottoMachine(money, lottoDispenser)
+        resultView.printLottos(lottoMachine.issuedLottos)
 
         val winningLotto = inputView.inputWinningLotto()
         val statistics = lottoMachine.issueStatistics(winningLotto)
         resultView.printStatistic(statistics)
     }
 
-    private fun lottoGenerator(): LottoGenerator {
-        return LottoGenerator { Lotto.random() }
-    }
 }

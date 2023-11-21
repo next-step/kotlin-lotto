@@ -1,6 +1,6 @@
 package lotto.domain
 
-class Lotto(val numbers: Set<LottoNumber>) {
+data class Lotto(val numbers: Set<LottoNumber>) {
 
     init {
         require(this.numbers.size == 6) { "로또는 유일한 숫자 6개로 구성해야합니다." }
@@ -8,7 +8,7 @@ class Lotto(val numbers: Set<LottoNumber>) {
 
     constructor(vararg numbers: Int) : this(
         numbers
-            .map { LottoNumber(it) }
+            .map { LottoNumber.create(it) }
             .toSet()
     )
 
