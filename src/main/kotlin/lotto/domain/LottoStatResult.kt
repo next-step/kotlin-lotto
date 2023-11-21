@@ -11,7 +11,7 @@ class LottoStatResult(
         val totalReward =
             lottoStat.toList().fold(DEFAULT_REWARD) { fold, next -> fold + (next.first.winningMoney * next.second) }
 
-        return round(totalReward / (getCountOfLotto() * LottoMachine.LOTTO_PRICE).toDouble() * 100) / 100
+        return round(totalReward / (getCountOfLotto() * LottoPolicy.PRICE).toDouble() * 100) / 100
     }
 
     private fun getCountOfLotto(): Int = lottoStat.values.sum()

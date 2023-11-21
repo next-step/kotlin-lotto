@@ -1,13 +1,11 @@
 package lotto.domain
 
 object LottoMachine {
-    const val LOTTO_PRICE = 1000
-
     fun purchase(
         purchaseAmount: Int,
         manualLottery: Lottery,
     ): PurchasedLottery {
-        val numberOfLotto = purchaseAmount / LOTTO_PRICE
+        val numberOfLotto = purchaseAmount / LottoPolicy.PRICE
         val autoLottoCount = numberOfLotto - manualLottery.getCount()
         val autoLottery = Lottery(List(size = autoLottoCount) { Lotto() })
 
