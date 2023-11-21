@@ -1,50 +1,39 @@
 package specific.lotto.controller
 
-import specific.lotto.domain.Money
-import specific.lotto.domain.Number
-import specific.lotto.domain.Rank
-import specific.lotto.domain.Ticket
-import specific.lotto.domain.TicketMachine
-import specific.lotto.domain.WinningResult
-import specific.lotto.domain.WinningSet
+import specific.lotto.domain.*
 import specific.lotto.view.InputView
 import specific.lotto.view.OutputView
+import kotlin.math.min
 
 class LottoController {
-    fun inputMoney(): Money {
+
+    fun participateRound(): Round {
+        val player = Player(inputMoney(), TicketMachine())
+        OutputView.printTickets(player.tickets)
+        val winningNumbers = inputWinningNumbers()
+        val round = Round(player, winningNumbers)
+        OutputView.printWinningResult(round.winningResult)
+        OutputView.printReturnOnInvestment(round.player.money.calculateReturnOnInvestment())
+        return round
+    }
+
+    private fun inputMoney(): Money {
         val moneyInput = InputView.getMoney()
         require(!moneyInput.isNullOrBlank()) { "'moneyInput' cannot be null or blank" }
         val principal = moneyInput.toLongOrThrow { "'moneyInput' should be convertible to Int" }
         return Money(principal)
     }
 
-    fun buyTicket(money: Money): List<Ticket> {
-        val ticketMachine = TicketMachine()
-        val tickets = ticketMachine.sellTickets(money)
-        OutputView.printTickets(tickets)
-        return tickets
-    }
-
-    fun inputWinningSet(): WinningSet {
-        val winningNumberInput = InputView.getWinningNumber()
-        require(!winningNumberInput.isNullOrBlank()) { "'winningNumberInput' cannot be null or blank" }
-        val numberCombination = winningNumberInput
+    private fun inputWinningNumbers(): WinningNumbers {
+        val mainNumbersInput = InputView.getMainNumbers()
+        val bonusNumberInput = InputView.getBonusNumber()
+        require(!mainNumbersInput.isNullOrBlank()) { "'mainNumbersInput' cannot be null or blank" }
+        require(!bonusNumberInput.isNullOrBlank()) { "'bonusNumberInput' cannot be null or blank" }
+        val mainNumbers = mainNumbersInput
             .split(", ")
-            .map { it.toIntOrThrow { "'lottoNumber' should be convertible to Int" } }
-            .map { Number(it) }
-            .toSet()
-        return WinningSet(numberCombination)
-    }
-
-    fun makeWinningResult(tickets: List<Ticket>, winningSet: WinningSet): WinningResult {
-        val ranks = tickets.map { Rank.decideRank(it, winningSet) }
-        val winningResult = WinningResult(ranks)
-        OutputView.printWinningResult(winningResult)
-        return winningResult
-    }
-
-    fun receivePrize(money: Money, winningResult: WinningResult) {
-        money.make(winningResult.totalPrize)
+            .map { it.toIntOrThrow { "lotto number should be convertible to Int" } }
+        val bonusNumber = bonusNumberInput.toIntOrThrow { "lotto number should be convertible to Int" }
+        return WinningNumbers(mainNumbers, bonusNumber)
     }
 
     private fun String?.toIntOrThrow(lazyMessage: () -> Any): Int {

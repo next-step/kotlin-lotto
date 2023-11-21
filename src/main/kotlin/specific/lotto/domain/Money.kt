@@ -1,26 +1,25 @@
 package specific.lotto.domain
 
-data class Money private constructor(val principal: Long, private var _remain: Long) {
-
-    constructor(principal: Long) : this(principal, principal)
+class Money(val principal: Long) {
 
     init {
-        require(principal >= 0) { "'principal' must be equal to or greater than 0" }
+        require(principal > 0) { "'principal' must be greater than 0" }
     }
 
-    val remain: Long
-        get() = _remain
+    var remaining: Long = principal
+        private set
 
     fun spend(amount: Long) {
         require(amount >= 0) { "amount must be equal to or greater than 0" }
-        check(remain >= amount) { "not enough money" }
-        _remain -= amount
+        check(remaining >= amount) { "not enough money" }
+        remaining -= amount
     }
 
     fun make(amount: Long) {
         require(amount >= 0) { "amount must be equal to or greater than 0" }
-        _remain += amount
+        remaining += amount
     }
 
-    fun calculateReturnOnInvestment(): Double = remain.toDouble() / principal
+    fun calculateReturnOnInvestment(): Double = remaining.toDouble() / principal
+
 }
