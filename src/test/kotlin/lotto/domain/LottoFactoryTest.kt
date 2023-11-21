@@ -10,9 +10,10 @@ internal class LottoFactoryTest {
     fun `로또를 구매하면 1000원 단위로 구매한다`(money: Int) {
         // given
         val expected = money / Lotto.LOTTO_PRICE
+        val manualLottoCount = 0
 
         // when
-        val lottos = LottoFactory.buyLotto(money)
+        val lottos = LottoFactory.buyLotto(money, manualLottoCount)
 
         // then
         assertThat(lottos.size).isEqualTo(expected)
