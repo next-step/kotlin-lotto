@@ -1,13 +1,20 @@
 package lotto.domain
 
+import lotto.dto.LottoTicketsResult
+import lotto.dto.ManualLottoTickets
+import lotto.`interface`.impl.AutomaticTicketGenerationStrategy
+
 class LottoMachine(private val ticketPrice: Int) {
 
-    init {
-        require(ticketPrice > 0) { "티켓 가격은 양수여야 합니다." }
+    fun generateTickets(amount: Int, manualTickets: ManualLottoTickets? = null): LottoTicketsResult {
+        val totalTicketCount = amount / ticketPrice
+        val manualLottoTickets = manualTickets?.tickets ?: listOf()
+        val automaticTicketCount = totalTicketCount - manualLottoTickets.size
+        val automaticTickets = generateAutomaticTickets(automaticTicketCount)
+        return LottoTicketsResult(manualLottoTickets.size, manualLottoTickets + automaticTickets)
     }
 
-    fun generateTickets(amount: Int): List<LottoTicket> {
-        val ticketCount = amount / ticketPrice
-        return List(ticketCount) { LottoTicket.generate() }
+    private fun generateAutomaticTickets(count: Int): List<LottoTicket> {
+        return List(count) { AutomaticTicketGenerationStrategy().generate() }
     }
 }
