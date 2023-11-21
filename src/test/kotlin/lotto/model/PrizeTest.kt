@@ -24,13 +24,6 @@ class PrizeTest {
             listOf(5, true, Prize.SECOND),
             listOf(5, false, Prize.THIRD),
         )
-
-        @JvmStatic
-        fun provideIsBonusTestParam() = listOf(
-            listOf(6, false, false),
-            listOf(5, true, true),
-            listOf(2, true, false),
-        )
     }
 }
 
