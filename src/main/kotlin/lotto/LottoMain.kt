@@ -1,6 +1,5 @@
 package lotto
 
-import lotto.data.LottoNumber
 import lotto.domain.LottoMachine
 import lotto.domain.RandomLogic
 import lotto.service.LottoGame
