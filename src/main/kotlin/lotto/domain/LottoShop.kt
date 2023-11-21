@@ -1,7 +1,6 @@
 package lotto.domain
 
 import lotto.error.InvalidLottoAmountException
-import lotto.error.InvalidLottoNumberException
 
 class LottoShop(
     private val price: Amount = Amount(1000)

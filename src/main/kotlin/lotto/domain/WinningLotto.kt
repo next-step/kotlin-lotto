@@ -7,7 +7,7 @@ data class WinningLotto(
     val bonusNumber: Int,
 ) {
     init {
-        LottoNumberGenerator.checkNumber(bonusNumber)
+        LottoNumber.checkCanInclude(bonusNumber)
         require(!winningNumber.contains(bonusNumber)) {
             throw InvalidWinningLottoException("보너스 볼과 당첨번호 숫자가 중복됩니다")
         }
