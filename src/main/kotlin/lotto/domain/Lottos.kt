@@ -13,7 +13,7 @@ data class Lottos(private val lottos: List<Lotto>) {
         }.mapValues { (_, lottos) -> Lottos(lottos) }
     }
 
-    fun addLottos(newLottos: List<Lotto>): Lottos {
-        return Lottos(this.lottos + newLottos)
+    operator fun plus(other: Lottos): Lottos {
+        return Lottos(this.lottos + other.lottos)
     }
 }

@@ -40,15 +40,9 @@ class LottoStoreTest {
     }
 
     @Test
-    fun `LottoStore 에 3000원으로 로또를 수동 구매할 때 지정한 번호로만 3장 구매가 된다`() {
+    fun `LottoStore 에 3000원으로 로또를 수동 구매할 때 로또 번호를 하나만 지정하면 IllegalArgumentException 이 발생한다`() {
         val lottoNumbers = listOf(1, 2, 3, 4, 5, 6) // 지정한 번호
 
-        val lottos = LottoStore.purchase(3000, ManualLottoGenerator(lottoNumbers))
-
-        assertThat(lottos.size).isEqualTo(3)
-        val purchaseLottos = lottos.getLottos()
-        assertThat(purchaseLottos[0].match(Lotto.fromInts(lottoNumbers))).isEqualTo(6)
-        assertThat(purchaseLottos[1].match(Lotto.fromInts(lottoNumbers))).isEqualTo(6)
-        assertThat(purchaseLottos[2].match(Lotto.fromInts(lottoNumbers))).isEqualTo(6)
+        assertThrows<IllegalArgumentException> { LottoStore.purchase(3000, ManualLottoGenerator(lottoNumbers)) }
     }
 }

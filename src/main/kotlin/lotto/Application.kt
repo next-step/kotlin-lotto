@@ -10,10 +10,8 @@ fun main() {
     val manualCount = InputView.getManualLottoCount()
     val manualLottoNumbers = InputView.getManualLottoNumbers(manualCount)
     val autoLottos = LottoStore.purchase(purchaseAmount - manualCount * 1000, RandomLottoGenerator())
-    val manualLottos = manualLottoNumbers
-        .map { LottoStore.purchase(1000, ManualLottoGenerator(it)) }
-        .flatMap { it.getLottos() }
-    val totalLottos = autoLottos.addLottos(manualLottos)
+    val manualLottos = LottoStore.purchase(manualCount * 1000, ManualLottoGenerator(*manualLottoNumbers.toTypedArray()))
+    val totalLottos = autoLottos + manualLottos
     OutputView.printLottos(totalLottos)
     val lastWinningNumbers = InputView.getLastWinningNumbers()
     val bonusBall = InputView.getBonusBall()
