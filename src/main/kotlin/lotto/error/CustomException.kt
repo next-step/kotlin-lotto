@@ -15,3 +15,7 @@ class InvalidLottoAmountException(): CustomException() {
 class InvalidLottoNumberException(reason: String): CustomException() {
     override val errorMessage: String = "유효하지 않은 로또 번호 : $reason"
 }
+
+class InvalidWinningLottoException(reason: String): CustomException() {
+    override val errorMessage: String = "유효하지 않은 당첨 로또 : $reason"
+}
