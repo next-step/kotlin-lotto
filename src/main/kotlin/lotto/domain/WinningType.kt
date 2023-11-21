@@ -25,7 +25,7 @@ enum class WinningType(private val prize: Prize, private val matchCount: MatchCo
 
             val lottoMatchResult = WinningType.values().map { winningType ->
                 val winningTicketCount =
-                    WinningTicketCount.valueOf(lottoList.filter { lotto -> matchCount(lotto, winningType, winningLottoNumbers) }.size)
+                    WinningTicketCount.valueOf(lottoList.filter { lotto -> match(lotto, winningType, winningLottoNumbers) }.size)
 
                 LottoMatchResult(winningType.matchCount, winningType.prize, winningTicketCount, winningType == FIVE_AND_BONUS_MATCH)
             }
@@ -33,11 +33,18 @@ enum class WinningType(private val prize: Prize, private val matchCount: MatchCo
             return lottoMatchResult
         }
 
-        private fun matchCount(lotto: Lotto, winningType: WinningType, winningLottoNumbers: WinningLottoNumbers): Boolean {
-            if (winningType == FIVE_AND_BONUS_MATCH) {
-                return lotto.getMatchCount(winningLottoNumbers) == winningType.matchCount.matchCount && lotto.getIsMatchNumber(winningLottoNumbers.winningBonusNumber)
+        private fun match(lotto: Lotto, winningType: WinningType, winningLottoNumbers: WinningLottoNumbers): Boolean {
+            return when (winningType) {
+                FIVE_AND_BONUS_MATCH -> {
+                    lotto.getMatchCount(winningLottoNumbers) == winningType.matchCount.matchCount && lotto.getIsMatchNumber(winningLottoNumbers.winningBonusNumber)
+                }
+                FIVE_MATCH -> {
+                    lotto.getMatchCount(winningLottoNumbers) == winningType.matchCount.matchCount && !lotto.getIsMatchNumber(winningLottoNumbers.winningBonusNumber)
+                }
+                else -> {
+                    lotto.getMatchCount(winningLottoNumbers) == winningType.matchCount.matchCount
+                }
             }
-            return lotto.getMatchCount(winningLottoNumbers) == winningType.matchCount.matchCount
         }
     }
 }
