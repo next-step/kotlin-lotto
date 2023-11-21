@@ -1,6 +1,12 @@
 package lottoAuto
 
-import lottoAuto.domain.*
+import lottoAuto.domain.FixedLottoFactory
+import lottoAuto.domain.Lotto
+import lottoAuto.domain.LottoNumber
+import lottoAuto.domain.LottoProfitCalculator
+import lottoAuto.domain.RandomLottoFactory
+import lottoAuto.domain.WinningLotto
+import lottoAuto.domain.toLottoNumber
 import lottoAuto.view.InputView
 import lottoAuto.view.OutputView
 
