@@ -31,7 +31,8 @@ object OutputView {
         drawEarningRate(result.earningRate)
     }
 
-    fun drawError(message: String) {
+    fun drawError(errorMessage: String?) {
+        val message = errorMessage ?: "알 수 없는 에러"
         println(ERROR_PREFIX + message)
     }
 
