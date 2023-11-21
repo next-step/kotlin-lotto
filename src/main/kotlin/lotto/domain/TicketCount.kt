@@ -1,4 +1,4 @@
-package lotto.dto
+package lotto.domain
 
 data class TicketCount(val count: Int) {
     init {

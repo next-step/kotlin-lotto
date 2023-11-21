@@ -7,17 +7,45 @@ import org.junit.jupiter.api.Test
 class LottoResultEvaluatorTest {
 
     @Test
-    @DisplayName("주어진 티켓 목록과 당첨 티켓으로 매치 결과가 올바르게 생성된다")
-    fun `주어진 티켓 목록과 당첨 티켓으로 매치 결과가 올바르게 생성된다`() {
-        val winningTicket = LottoTicket(listOf(1, 2, 3, 4, 5, 6))
-        val tickets = listOf(
-            LottoTicket(listOf(1, 2, 3, 4, 5, 6)),
-            LottoTicket(listOf(1, 2, 3, 4, 5, 7)),
-        )
-        val evaluator = LottoResultEvaluator(winningTicket, 7)
-        val result = evaluator.evaluate(tickets)
+    @DisplayName("6개 숫자가 모두 일치하는 경우를 올바르게 처리한다")
+    fun `handles perfect match correctly`() {
+        val winningNumbers = setOf(1, 2, 3, 4, 5, 6)
+        val bonusBall = 7
+        val winningTicket = LottoTicket.from(winningNumbers.toList())
+        val evaluator = LottoResultEvaluator(winningTicket, bonusBall)
+
+        val userTicket = LottoTicket.from(winningNumbers.toList())
+        val result = evaluator.evaluate(listOf(userTicket))
 
         assertEquals(1, result.getMatchCount(6))
+    }
+
+    @Test
+    @DisplayName("5개 숫자와 보너스 볼이 일치하는 경우를 올바르게 처리한다")
+    fun `handles 5 matches with bonus ball correctly`() {
+        val winningNumbers = setOf(1, 2, 3, 4, 5, 6)
+        val bonusBall = 7
+        val winningTicket = LottoTicket.from(winningNumbers.toList())
+        val evaluator = LottoResultEvaluator(winningTicket, bonusBall)
+
+        val userTicket = LottoTicket.from(listOf(1, 2, 3, 4, 5, bonusBall))
+        val result = evaluator.evaluate(listOf(userTicket))
+
+        assertEquals(1, result.bonusMatchCount)
+    }
+
+    @Test
+    @DisplayName("5개 숫자만 일치하는 경우를 올바르게 처리한다")
+    fun `handles 5 matches correctly`() {
+        val winningNumbers = setOf(1, 2, 3, 4, 5, 6)
+        val bonusBall = 7
+        val winningTicket = LottoTicket.from(winningNumbers.toList())
+        val evaluator = LottoResultEvaluator(winningTicket, bonusBall)
+
+        val userTicket = LottoTicket.from(listOf(1, 2, 3, 4, 5, 10))
+        val result = evaluator.evaluate(listOf(userTicket))
+
         assertEquals(1, result.getMatchCount(5))
+        assertEquals(0, result.bonusMatchCount)
     }
 }

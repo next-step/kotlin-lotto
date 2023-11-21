@@ -1,9 +1,9 @@
 package lotto.view
 
 import lotto.domain.LottoTicket
+import lotto.domain.TicketCount
 import lotto.dto.LottoMatchResult
 import lotto.dto.LottoTicketsResult
-import lotto.dto.TicketCount
 import lotto.enum.Rank
 
 object ResultView {
@@ -16,7 +16,10 @@ object ResultView {
     }
 
     private fun showTicketList(tickets: List<LottoTicket>) {
-        tickets.forEach { formatPrintln(it.readOnlyNumbers.toString()) }
+        tickets.forEach { ticket ->
+            val ticketNumbersString = ticket.readOnlyNumbers.joinToString(", ") { number -> number.number.toString() }
+            formatPrintln("[$ticketNumbersString]")
+        }
     }
 
     fun showReturnRate(returnRate: Double) {
@@ -32,7 +35,8 @@ object ResultView {
     private fun showMatchCountsStatistics(matchResult: LottoMatchResult) {
         (3..6).forEach { matchCount ->
             val count = matchResult.getMatchCount(matchCount)
-            val reward = Rank.valueOf(matchCount, matchCount == 5 && matchResult.bonusMatchCount > 0).winningMoney
+            val isBonusMatch = matchCount == 5 && matchResult.bonusMatchCount > 0
+            val reward = Rank.determineRank(matchCount, isBonusMatch).winningMoney
             formatPrintln("%d개 일치 (%d원)- %d개", matchCount, reward, count)
         }
     }

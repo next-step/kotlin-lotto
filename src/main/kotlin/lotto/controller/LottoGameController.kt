@@ -2,7 +2,6 @@ package lotto.controller
 
 import lotto.domain.LottoConstants
 import lotto.domain.LottoMachine
-import lotto.domain.LottoRankDeterminer
 import lotto.domain.LottoResultEvaluator
 import lotto.domain.LottoRevenueCalculator
 import lotto.domain.LottoTicket
@@ -16,16 +15,16 @@ import lotto.view.ResultView
 
 class LottoGameController {
     fun run() {
-        val amount = requestPurchaseAmount()
+        val purchaseAmount = requestPurchaseAmount()
         val manualTicketsInfo = requestManualTicketsInfo()
-        val tickets = generateTickets(amount, manualTicketsInfo)
+        val tickets = generateTickets(purchaseAmount, manualTicketsInfo)
         displayTickets(tickets)
 
         val winningInfo = requestWinningInfo()
         val matchResult = calculateMatchResult(tickets, winningInfo)
         displayMatchResult(matchResult)
 
-        val returnRate = calculateReturnRate(matchResult, amount)
+        val returnRate = calculateReturnRate(matchResult, purchaseAmount)
         displayReturnRate(returnRate)
     }
 
@@ -49,7 +48,7 @@ class LottoGameController {
     }
 
     private fun convertToManualLottoTickets(manualTicketsInfo: ManualTicketsInfo): ManualLottoTickets {
-        val manualTickets = manualTicketsInfo.ticketsNumbers.map { LottoTicket(it.numbers) }
+        val manualTickets = manualTicketsInfo.ticketsNumbers.map { LottoTicket.from(it.numbers) }
         return ManualLottoTickets(manualTickets)
     }
 
@@ -60,7 +59,7 @@ class LottoGameController {
     }
 
     private fun calculateMatchResult(tickets: LottoTicketsResult, winningInfo: WinningInfo): LottoMatchResult {
-        val evaluator = LottoResultEvaluator(LottoTicket(winningInfo.winningNumbers.toList()), winningInfo.bonusBall)
+        val evaluator = LottoResultEvaluator(LottoTicket.from(winningInfo.winningNumbers.toList()), winningInfo.bonusBall)
         return evaluator.evaluate(tickets.tickets)
     }
 
@@ -69,8 +68,7 @@ class LottoGameController {
     }
 
     private fun calculateReturnRate(matchResult: LottoMatchResult, amount: PurchaseAmount): Double {
-        val rankDeterminer = LottoRankDeterminer()
-        val revenueCalculator = LottoRevenueCalculator(matchResult, rankDeterminer)
+        val revenueCalculator = LottoRevenueCalculator(matchResult)
         return revenueCalculator.calculateReturnRate(amount.amount.toDouble())
     }
 

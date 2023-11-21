@@ -11,13 +11,22 @@ class LottoRevenueCalculatorTest {
     @Test
     @DisplayName("주어진 매치 결과로 수익률이 올바르게 계산된다")
     fun `주어진 매치 결과로 수익률이 올바르게 계산된다`() {
-        val matchResult = LottoMatchResult(mapOf(5 to 1, 4 to 2), 0)
-        val rankDeterminer = LottoRankDeterminer()
-        val calculator = LottoRevenueCalculator(matchResult, rankDeterminer)
+        val matchCounts = mapOf(
+            3 to 1,
+            4 to 0,
+            5 to 0,
+            6 to 0
+        )
+        val bonusMatchCount = 0
+        val matchResult = LottoMatchResult(matchCounts, bonusMatchCount)
+        val calculator = LottoRevenueCalculator(matchResult)
+        val purchaseAmount = 1000.0
 
-        val returnRate = calculator.calculateReturnRate(10000.0)
-        val expectedReturn = (Rank.THIRD.winningMoney + 2 * Rank.FOURTH.winningMoney) / 10000.0
+        val expectedRevenue = Rank.FIFTH.winningMoney * matchCounts[3]!!
+        val expectedReturnRate = expectedRevenue / purchaseAmount
 
-        assertEquals(expectedReturn, returnRate, 0.001)
+        val actualReturnRate = calculator.calculateReturnRate(purchaseAmount)
+
+        assertEquals(expectedReturnRate, actualReturnRate)
     }
 }

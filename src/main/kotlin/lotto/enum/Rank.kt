@@ -9,7 +9,7 @@ enum class Rank(val countOfMatch: Int, val winningMoney: Int) {
     MISS(0, 0);
 
     companion object {
-        fun valueOf(countOfMatch: Int, matchBonus: Boolean): Rank {
+        fun determineRank(countOfMatch: Int, matchBonus: Boolean): Rank {
             return values().firstOrNull { it.isMatchingRank(countOfMatch, matchBonus) } ?: MISS
         }
 

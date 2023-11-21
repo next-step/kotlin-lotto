@@ -34,14 +34,14 @@ class LottoMachineTest {
     @DisplayName("로또 티켓의 번호는 1부터 45 사이여야 한다")
     fun `로또 티켓의 번호는 1부터 45 사이여야 한다`() {
         val ticket = LottoTicket.generate()
-        assertTrue(ticket.readOnlyNumbers.all { it in 1..45 })
+        assertTrue(ticket.readOnlyNumbers.all { it.number in 1..45 })
     }
 
     @Test
     @DisplayName("번호의 갯수가 부족한 로또 티켓 생성 시 예외 발생")
     fun `번호의 갯수가 부족한 로또 티켓 생성 시 예외 발생`() {
         assertThrows<IllegalArgumentException> {
-            LottoTicket(listOf(1, 2, 3, 4, 5))
+            LottoTicket.from(listOf(1, 2, 3, 4, 5))
         }
     }
 
@@ -49,7 +49,7 @@ class LottoMachineTest {
     @DisplayName("번호가 중복된 로또 티켓 생성 시 예외 발생")
     fun `번호가 중복된 로또 티켓 생성 시 예외 발생`() {
         assertThrows<IllegalArgumentException> {
-            LottoTicket(listOf(1, 1, 2, 3, 4, 5))
+            LottoTicket.from(listOf(1, 1, 2, 3, 4, 5))
         }
     }
 
@@ -57,7 +57,7 @@ class LottoMachineTest {
     @DisplayName("번호 범위를 벗어난 로또 티켓 생성 시 예외 발생")
     fun `번호 범위를 벗어난 로또 티켓 생성 시 예외 발생`() {
         assertThrows<IllegalArgumentException> {
-            LottoTicket(listOf(0, 1, 2, 3, 4, 46))
+            LottoTicket.from(listOf(0, 1, 2, 3, 4, 46))
         }
     }
 
@@ -66,7 +66,7 @@ class LottoMachineTest {
     fun `수동 티켓 번호가 올바른 형식인지 검증한다`() {
         val manualNumbers = listOf(1, 2, 3, 4, 5, 6)
         val ticket = ManualTicketGenerationStrategy(manualNumbers).generate()
-        assertTrue(ticket.readOnlyNumbers == manualNumbers)
+        assertTrue(ticket.readOnlyNumbers.map { it.number } == manualNumbers)
     }
 
     @Test
@@ -76,12 +76,12 @@ class LottoMachineTest {
             LottoTicketNumbers(listOf(1, 2, 3, 4, 5, 6)),
             LottoTicketNumbers(listOf(7, 8, 9, 10, 11, 12))
         )
-        val manualLottoTickets = ManualLottoTickets(manualTicketNumbersList.map { LottoTicket(it.numbers) })
+        val manualLottoTickets = ManualLottoTickets(manualTicketNumbersList.map { LottoTicket.from(it.numbers) })
         val purchaseAmount = PurchaseAmount(7000)
         val tickets = lottoMachine.generateTickets(purchaseAmount.amount, manualLottoTickets)
 
         assertEquals(7, tickets.tickets.size)
-        assertTrue(tickets.tickets.take(2).all { it.readOnlyNumbers in manualTicketNumbersList.map { it.numbers } })
-        assertTrue(tickets.tickets.drop(2).all { it.readOnlyNumbers.all { num -> num in 1..45 } })
+        assertTrue(tickets.tickets.take(2).all { it.readOnlyNumbers.map { num -> num.number } in manualTicketNumbersList.map { it.numbers } })
+        assertTrue(tickets.tickets.drop(2).all { it.readOnlyNumbers.all { num -> num.number in 1..45 } })
     }
 }
