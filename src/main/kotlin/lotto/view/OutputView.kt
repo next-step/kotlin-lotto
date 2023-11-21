@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.Lotto
+import lotto.domain.LottoCount
 import lotto.domain.LottoPrize
 import lotto.domain.LottoResult
 
@@ -29,8 +30,8 @@ object OutputView {
         )
     }
 
-    fun buyLotto(lottos: List<Lotto>) {
-        println("${lottos.size}개를 구매했습니다.")
+    fun buyLotto(lottos: List<Lotto>, lottoCount: LottoCount) {
+        println("수동으로 ${lottoCount.manualLottoCount}장, 자동으로 ${lottoCount.autoLottoCount}개를 구매했습니다.")
         lottos.forEach { println(it.numbers) }
         println()
     }

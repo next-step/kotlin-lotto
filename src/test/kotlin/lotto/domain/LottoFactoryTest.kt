@@ -13,9 +13,9 @@ internal class LottoFactoryTest {
         val manualLottoCount = 0
 
         // when
-        val lottos = LottoFactory.buyLotto(money, manualLottoCount)
+        val lottoCount = LottoFactory.calculateLottoCount(money, manualLottoCount)
 
         // then
-        assertThat(lottos.size).isEqualTo(expected)
+        assertThat(lottoCount.autoLottoCount).isEqualTo(expected)
     }
 }

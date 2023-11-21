@@ -21,4 +21,9 @@ object InputView {
         println("수동으로 구매할 로또 수를 입력해 주세요.")
         return readln().toInt()
     }
+
+    fun enterManualLotto(manualLottoCount: Int): List<List<Int>> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        return List(manualLottoCount) { readln().split(DELIMITER).map { it.trim().toInt() } }
+    }
 }

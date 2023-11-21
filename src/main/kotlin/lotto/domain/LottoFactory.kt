@@ -1,19 +1,17 @@
 package lotto.domain
 
 object LottoFactory {
-    fun buyLotto(money: Int, manualLottoCount: Int): List<Lotto> {
+    fun calculateLottoCount(money: Int, manualLottoCount: Int): LottoCount {
         val lottoCount = money / Lotto.LOTTO_PRICE
         require(lottoCount >= manualLottoCount) { "수동으로 구매할 로또 수가 전체 로또 수보다 많습니다." }
 
-        return listOf(buyAutoLotto(lottoCount - manualLottoCount), buyManualLotto(manualLottoCount)).flatten()
+        return LottoCount(lottoCount - manualLottoCount, manualLottoCount)
     }
 
-    private fun buyManualLotto(manualLottoCount: Int): List<Lotto> {
-        // todo 구현
-        return emptyList()
-    }
+    fun buyLotto(autoLottoCount: Int, manualLottoNumberList: List<List<Int>>): List<Lotto> {
+        val manualLottoList = manualLottoNumberList.map(::Lotto)
+        val autoLottoList = List(autoLottoCount) { Lotto.auto() }
 
-    private fun buyAutoLotto(autoLottoCount: Int): List<Lotto> {
-        return List(autoLottoCount) { Lotto.auto() }
+        return manualLottoList + autoLottoList
     }
 }

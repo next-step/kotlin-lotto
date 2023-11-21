@@ -10,8 +10,9 @@ import lotto.view.OutputView
 fun main() {
     val inputMoney = InputView.enterMoney()
     val manualLottoCount = InputView.enterManualLottoCount()
-    val lottoList = LottoFactory.buyLotto(inputMoney, manualLottoCount)
-    OutputView.buyLotto(lottoList)
+    val lottoCount = LottoFactory.calculateLottoCount(inputMoney, manualLottoCount)
+    val lottoList = LottoFactory.buyLotto(lottoCount.autoLottoCount, InputView.enterManualLotto(manualLottoCount))
+    OutputView.buyLotto(lottoList, lottoCount)
     val winningLotto = WinningLotto(Lotto(InputView.enterWinningLotto()), InputView.enterBonusNumber())
     OutputView.printLottoResult(LottoResult(lottoList, winningLotto))
 }
