@@ -20,15 +20,24 @@ class RankTest : StringSpec({
         rank.reward shouldBe 0
     }
 
+    "로또 번호가 4개 일치하고 보너스 볼이 일치하면 4등이다." {
+        val matchCount = 4
+        val isMatchBonusNumber = true
+        val rank = Rank.valueOf(matchCount, isMatchBonusNumber)
+        rank shouldBe Rank.FOURTH
+    }
+
     "로또 번호가 5개 일치하고 보너스 볼이 일치하지 않으면 3등이다." {
         val matchCount = 5
-        val rank = Rank.valueOf(matchCount, isMatchBonusNumber = false)
+        val isMatchBonusNumber = false
+        val rank = Rank.valueOf(matchCount, isMatchBonusNumber)
         rank shouldBe Rank.THIRD
     }
 
     "로또 번호가 5개 일치하고 보너스 볼이 일치하면 2등이다." {
         val matchCount = 5
-        val rank = Rank.valueOf(matchCount, isMatchBonusNumber = true)
+        val isMatchBonusNumber = true
+        val rank = Rank.valueOf(matchCount, isMatchBonusNumber)
         rank shouldBe Rank.SECOND
     }
 

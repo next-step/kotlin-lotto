@@ -11,7 +11,7 @@ enum class Rank(val matchCount: Int, val reward: Int, val isMatchBonusNumber: Bo
 
     companion object {
         fun valueOf(matchCount: Int, isMatchBonusNumber: Boolean = false): Rank {
-            return values().find { it.matchCount == matchCount && it.isMatchBonusNumber == isMatchBonusNumber }
+            return values().find { it.matchCount == matchCount && if (it.isMatchBonusNumber) isMatchBonusNumber else true }
                 ?: takeIf { matchCount in MISS.matchCount until FIFTH.matchCount }?.let { MISS }
                 ?: throw IllegalArgumentException("로또 숫자의 일치 수는 로또 숫자 수의 범위를 벗어날 수 없습니다. matchCount=$matchCount")
         }
