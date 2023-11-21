@@ -4,6 +4,8 @@ import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.ints.shouldBeGreaterThan
 import io.kotest.matchers.shouldBe
+import lotto.domain.model.Rank.Companion.filterHasReward
+import lotto.domain.model.Rank.Companion.sortedByReward
 
 class RankTest : StringSpec({
     "로또 번호가 3개 이상 일치하면 상금이 있다." {
@@ -41,5 +43,15 @@ class RankTest : StringSpec({
         shouldThrowWithMessage<IllegalArgumentException>("로또 숫자의 일치 수는 로또 숫자 수의 범위를 벗어날 수 없습니다. matchCount=$matchCount") {
             Rank.valueOf(matchCount)
         }
+    }
+
+    "로또 등수 중 상금이 있는 등수를 필터링 할 수 있다." {
+        val ranks = arrayOf(Rank.FIRST, Rank.SECOND, Rank.MISS)
+        ranks.filterHasReward() shouldBe arrayOf(Rank.FIRST, Rank.SECOND)
+    }
+
+    "로또 등수 중 상금에 대한 오름차순 정렬할 수 있다." {
+        val ranks = listOf(Rank.SECOND, Rank.FIRST, Rank.FOURTH, Rank.THIRD)
+        ranks.sortedByReward() shouldBe listOf(Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST)
     }
 })
