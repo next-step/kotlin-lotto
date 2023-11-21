@@ -1,5 +1,8 @@
 package lotto.view
 
+import lotto.controller.EndLottoRequest
+import lotto.controller.PurchaseRequest
+
 object InputView {
     private const val PURCHASE_AMOUNT_QUESTION = "구입금액을 입력해 주세요."
     private const val MANUAL_LOTTO_COUNT_QUESTION = "수동으로 구매할 로또 수를 입력해 주세요."
@@ -8,25 +11,37 @@ object InputView {
     private const val BONUS_NUMBER_QUESTION = "보너스 볼을 입력해 주세요."
     private const val LOTTO_NUMBER_DELIMITER = ", "
 
-    fun getPurchaseAmount(): Int {
+    val purchaseRequest : PurchaseRequest
+        get() = PurchaseRequest(
+            amount = getPurchaseAmount(),
+            manualLottoNumbers = getManualLottoNumbers(),
+        )
+
+    val endLottoRequest : EndLottoRequest
+        get() = EndLottoRequest(
+            winningNumbers = getWinningNumbersInput(),
+            bonusNumber = getBonusNumberInput()
+        )
+
+    private fun getPurchaseAmount(): Int {
         println(PURCHASE_AMOUNT_QUESTION)
         return readIntInput()
     }
 
-    fun getManualLottoNumbers(): List<List<Int>> {
+    private fun getManualLottoNumbers(): List<List<Int>> {
         println()
         val count = getManualLottoCount()
         println()
         return getManualLottoNumbers(count)
     }
 
-    fun getWinningNumbersInput(): List<Int> {
+    private fun getWinningNumbersInput(): List<Int> {
         println()
         println(WINNING_NUMBERS_QUESTION)
         return parseLottoNumbers(readInput())
     }
 
-    fun getBonusNumberInput(): Int {
+    private fun getBonusNumberInput(): Int {
         println(BONUS_NUMBER_QUESTION)
         return readIntInput()
     }

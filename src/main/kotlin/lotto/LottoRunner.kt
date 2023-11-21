@@ -17,14 +17,14 @@ class LottoRunner(
     }
 
     private fun purchaseLotto(): Boolean {
-        val (amount, manualLottoNumbers) = runCatching {
-            InputView.getPurchaseAmount() to InputView.getManualLottoNumbers()
+        val request = kotlin.runCatching {
+            InputView.purchaseRequest
         }.getOrElse {
             OutputView.drawError(it.message)
             return false
         }
 
-        return when (val response = controller.purchase(PurchaseRequest(amount, manualLottoNumbers))) {
+        return when (val response = controller.purchase(request)) {
             is PurchaseResponse.Success -> {
                 OutputView.drawPurchaseOutput(response)
                 true
@@ -38,9 +38,13 @@ class LottoRunner(
     }
 
     private fun createWinningNumbers(): Boolean {
-        val winningNumbers = InputView.getWinningNumbersInput() ?: return false
-        val bonusNumber = InputView.getBonusNumberInput() ?: return false
-        return when (val response = controller.end(EndLottoRequest(winningNumbers, bonusNumber))) {
+        val request = runCatching {
+            InputView.endLottoRequest
+        }.getOrElse {
+            OutputView.drawError(it.message)
+            return false
+        }
+        return when (val response = controller.end(request)) {
             is EndLottoResponse.Success -> {
                 OutputView.drawEarningRateOutput(response)
                 true
