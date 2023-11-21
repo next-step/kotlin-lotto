@@ -11,5 +11,5 @@ class LottoStatCalculator(private val winningLotto: WinningLotto) {
         }.eachCount()
     )
 
-    private fun getIsMatchBonusNumber(lotto: Lotto) = lotto.contains(winningLotto.bonusNumber)
+    private fun getIsMatchBonusNumber(lotto: Lotto) = lotto.contains(LottoNumber(winningLotto.bonusNumber))
 }

@@ -6,11 +6,11 @@ class WinningLotto(
 ) {
 
     init {
-        require(!lotto.contains(bonusNumber)) { "Duplicated number is in lotto!" }
+        require(!lotto.contains(LottoNumber(bonusNumber))) { "Duplicated number is in lotto!" }
         require(Lotto.MIN_LOTTO_NUMBER <= bonusNumber && bonusNumber <= Lotto.MAX_LOTTO_NUMBER) { "Invalidate bonus number!" }
     }
 
     fun getCountOfMatch(targetLotto: Lotto) = targetLotto.numbers.count { contains(it) }
 
-    private fun contains(number: Int) = lotto.numbers.contains(number)
+    private fun contains(lottoNumber: LottoNumber) = lotto.numbers.contains(lottoNumber)
 }

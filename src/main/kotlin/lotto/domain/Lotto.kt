@@ -1,12 +1,12 @@
 package lotto.domain
 
 class Lotto {
-    val numbers: List<Int>
+    val numbers: List<LottoNumber>
 
     constructor() {
         numbers = LOTTO_NUMBER_POOL.shuffled()
             .take(NUMBER_OF_LOTTO_NUMBER)
-            .sorted()
+            .sorted().map { LottoNumber(it) }
     }
 
     constructor(numbers: List<Int>) {
@@ -14,10 +14,10 @@ class Lotto {
         require(numbers.distinct().count() == NUMBER_OF_LOTTO_NUMBER)
         require(numbers.all { it in (MIN_LOTTO_NUMBER) until MAX_LOTTO_NUMBER + 1 })
 
-        this.numbers = numbers.sorted()
+        this.numbers = numbers.sorted().map { LottoNumber(it) }
     }
 
-    fun contains(number: Int) = numbers.contains(number)
+    fun contains(lottoNumber: LottoNumber) = numbers.contains(lottoNumber)
 
     companion object {
         private const val NUMBER_OF_LOTTO_NUMBER = 6
