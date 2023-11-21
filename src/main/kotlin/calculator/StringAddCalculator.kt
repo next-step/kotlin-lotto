@@ -20,12 +20,11 @@ class StringAddCalculator {
 
         if (customDelimiter.isNotBlank()) {
             val replacedText = text.replace("//$customDelimiter\n", "")
-            return replacedText.split(customDelimiter).map {
+            return replacedText.split(Regex("[,:${customDelimiter}\n]")).map {
                 require(it.matches(Regex("[0-9]+"))) { "숫자와 지정된 구분자만 입력할 수 있습니다." }
                 it.toInt()
             }
         }
-
 
         return text.split(Regex("[,:\n]")).map {
             require(it.matches(Regex("[0-9]+"))) { "숫자와 지정된 구분자만 입력할 수 있습니다." }

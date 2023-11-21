@@ -55,8 +55,8 @@ class StringAddCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["//;\n1;2;3"])
-    fun customDelimiter(text: String) {
+    @ValueSource(strings = ["//;\n1;2;3", "//<\n1<2<3", "//<\n1<2,3"])
+    fun `custom 구분자로 입력값을 구분`(text: String) {
         assertThat(calculator.add(text)).isSameAs(6);
     }
 }
