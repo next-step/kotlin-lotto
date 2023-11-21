@@ -2,6 +2,7 @@ package lotto.view
 
 import lotto.model.LottoNumber
 import lotto.model.LottoTicket
+import lotto.model.ManualNumber
 
 object InputView {
     fun getPurchasePrice(): Int {
@@ -23,15 +24,15 @@ object InputView {
         return Pair(numbers, bonusNumber)
     }
 
-    fun getManualNumbers(): List<List<LottoNumber>> {
+    fun getManualNumbers(): List<ManualNumber> {
         println("수동으로 구매할 로또 수를 입력해 주세요.")
 
         val count = readln().toInt()
-        var numbersList = emptyList<List<LottoNumber>>()
+        var numbersList = emptyList<ManualNumber>()
         require(count > 0)
         println("수동으로 구매할 번호를 입력해 주세요.")
         numbersList = (1..count).map {
-            inputManualNumber()
+            ManualNumber(inputManualNumber())
         }
         return numbersList
     }

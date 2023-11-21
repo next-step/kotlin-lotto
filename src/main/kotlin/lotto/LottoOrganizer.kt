@@ -1,8 +1,6 @@
 package lotto
 
-import lotto.model.LottoGenerator
-import lotto.model.LottoPerson
-import lotto.model.WinningLotto
+import lotto.model.*
 import lotto.view.InputView
 import lotto.view.ResultView
 

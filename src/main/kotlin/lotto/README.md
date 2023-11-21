@@ -32,7 +32,7 @@
 
 ## 적용 해볼 것
 
-- [ ] 확장 함수 써보기
+- [x] 확장 함수 써보기
 
 ## 리뷰 받은 것
 
@@ -64,7 +64,7 @@
 - [x] 모든 matchCount를 Map의 key값으로 들고 있을 필요가 있을까요? results: MutableMap<Prize, Int>  이런 구조는 어떨까요?
 - [x] 2 뎁스 이상입니다! 함수를 분리해보면 어떨까요? !! 은 null일 경우, 비정상종료되는 구조예요! 좀더 nullsafe한방법을 활용해봐도 좋을거같아요!
 - [x] getMatchCount는 winningNumbers , lottoTicket이 가져야할 책임이 아닌지 고민해봐요 디미터의 법칙을 고민해보아요! https://dkswnkk.tistory.com/687
-- [ ] Given절을 좀더 활용하면 어떨까요? 
+- [x] Given절을 좀더 활용하면 어떨까요? 
   ```kotlin
      Given(" 당첨번호가 1, 2, 3, 4, 5, 6일때") {
         When("로또가 1, 2, 3, 4, 5, 6이면") {
@@ -72,7 +72,7 @@
         When("로또가 11, 2, 3, 4, 5, 6이면") {
                 Then("5개 일치하여, 2등이다") {
   ```
-- [ ] 다른 클래스들의 모든 테스트 케이스를 작성해보면 어떨까요?
+- [x] 다른 클래스들의 모든 테스트 케이스를 작성해보면 어떨까요?
 
 ### 4차
 - [x] LottoGenerator을 LottoPerson생성시점에 주입받으면 어떨까요? 생성에 대한 책임은 LottoGenerator에게 구매에 대한 책임은 LottoPerson에게 위입해보면 어떨까요?
@@ -101,17 +101,22 @@
 - [x] Prize에서는 List나 LottoNumber를 몰라도 되지않을까요?
   - getKeyWithMatched의 파라미터처럼 matched, bonus 만 받아와도 좋을거같아요!
 - [x] Prize의 복잡한 When 문 하나씩 맵핑하는것보다, enum.values, find등의 함수를 활용해보는건 어떨까요?
-- [ ] Prize 테스트 코드를 작성해보아요!
+- [x] Prize 테스트 코드를 작성해보아요!
 - [x] 보통 2중첩이상의 분기문부터는 가독성도 좋지않고, 실수발생률이 커진다고 합니다! 요구사항을 습관화해보아요!
 - [x] 결과에 대한 테스트 코드를 구체적으로 작성해보면 어떨까요?  2등, 3등의 케이스도 검증하면좋을거같아요!
 - [x] 구체적인 케이스명을 활용하면 어떨까요?> getLottoResult라는 네이밍은 너무 모호하네요!
 
 ### 6차
-- [ ] 미리 로또번호들을 생성해놓고 재활용해보면 어떨까요?
+- [x] 미리 로또번호들을 생성해놓고 재활용해보면 어떨까요?
 - [x] LottoGenerator은 로또 생성에 대한 책임을 가지고 있어요, generateTickets해야하는 티켓 수량만 관심이 있지않을까요?
 - [x] isBonus 외부에서 노출될 필요가 있을까요?
 - [x] manualNumbers 또한 LottoGenerator에게 객체생성 책임을 부여해도 좋을거같아요!
-- 
+
+### 7차
+- [x] List 형태에 로또번호Pool을 가지고 shuffled().take() 만해도 좋을거같긴해요!
+- [x] List 또한 일급 컬렉션을 활용해봐도 좋을거 같아요!
+- [x] shuffled함수는 generateAutoTickets내부에서 처리되어야할 책임은 아닐까요?
+
 ## 챗 지피티와의 대화
 
 ### DDD에서 도메인이 풍부해질수록 단일책임원칙을 위반하는것 아닐까

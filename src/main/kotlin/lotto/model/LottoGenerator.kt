@@ -1,20 +1,19 @@
 package lotto.model
 
 object LottoGenerator {
-    private fun getLottoNumbers(shuffled: Iterable<Int>.() -> List<Int>): List<LottoNumber> =
-        (LottoNumber.NUMBER_RANGE).shuffled().take(
+    private val LOTTO_NUMBERS = (LottoNumber.NUMBER_RANGE).map { LottoNumber.from(it) }
+    private fun getLottoNumbers(): List<LottoNumber> =
+        (LOTTO_NUMBERS).shuffled().take(
             LottoTicket.NUMBER_COUNT
-        ).map { LottoNumber.from(it) }
+        )
 
     fun generateAutoTickets(
-        ticketCount: Int,
-        shuffled: Iterable<Int>.() -> List<Int>
+        ticketCount: Int
     ): List<LottoTicket> = List(ticketCount) {
-        LottoTicket(numbers = getLottoNumbers(shuffled))
+        LottoTicket(numbers = getLottoNumbers())
     }
 
     fun generateManualTickets(
-        manualNumbers: List<List<LottoNumber>>,
-    ): List<LottoTicket> = manualNumbers.map { LottoTicket(it) }
-
+        manualNumbers: List<ManualNumber>,
+    ): List<LottoTicket> = manualNumbers.map { LottoTicket(it.numbers) }
 }
