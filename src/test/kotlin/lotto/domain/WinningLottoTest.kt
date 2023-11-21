@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.MethodSource
 internal class WinningLottoTest {
     @ParameterizedTest
     @MethodSource("getLottoBonusNumberPair")
-    fun `보너스 번호는 당첨 번호와 중복될 수 없다`(lottoBonusNumberPair: Pair<Lotto, Int>) {
+    fun `보너스 번호는 당첨 번호와 중복될 수 없다`(lottoBonusNumberPair: Pair<Lotto, LottoNumber>) {
         // given
         val (lotto, bonusNumber) = lottoBonusNumberPair
 
@@ -18,9 +18,9 @@ internal class WinningLottoTest {
     companion object {
         @JvmStatic
         fun getLottoBonusNumberPair() = listOf(
-            Pair(Lotto(listOf(1, 2, 3, 4, 5, 6)), 1),
-            Pair(Lotto(listOf(1, 2, 3, 4, 5, 6)), 2),
-            Pair(Lotto(listOf(1, 2, 3, 4, 5, 6)), 3)
+            Pair(Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }), LottoNumber(1)),
+            Pair(Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }), LottoNumber(2)),
+            Pair(Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }), LottoNumber(3))
         )
     }
 }

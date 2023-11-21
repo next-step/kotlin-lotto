@@ -8,7 +8,7 @@ object LottoFactory {
         return LottoCount(lottoCount - manualLottoCount, manualLottoCount)
     }
 
-    fun buyLotto(autoLottoCount: Int, manualLottoNumberList: List<List<Int>>): List<Lotto> {
+    fun buyLotto(autoLottoCount: Int, manualLottoNumberList: List<List<LottoNumber>>): List<Lotto> {
         val manualLottoList = manualLottoNumberList.map(::Lotto)
         val autoLottoList = List(autoLottoCount) { Lotto.auto() }
 
