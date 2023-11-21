@@ -8,7 +8,7 @@ import lotto.domain.Lottos
 object OutputView {
     fun printLottos(lottos: Lottos) {
         println("${lottos.size}개를 구매했습니다.")
-        lottos.getLottos().forEach { printLotto(it) }
+        lottos.forEach { printLotto(it) }
     }
 
     fun printResult(lottoResult: LottoResult) {

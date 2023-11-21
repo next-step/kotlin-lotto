@@ -35,8 +35,7 @@ class LottoStoreTest {
         val lottos = LottoStore.purchase(1000, listOf(lottoNumbers))
 
         assertThat(lottos.size).isEqualTo(1)
-        val purchaseLottos = lottos.getLottos()
-        assertThat(purchaseLottos.first().match(Lotto.fromInts(lottoNumbers))).isEqualTo(6)
+        assertThat(lottos.first().match(Lotto.fromInts(lottoNumbers))).isEqualTo(6)
     }
 
     @Test
@@ -45,8 +44,7 @@ class LottoStoreTest {
 
         val lottos = LottoStore.purchase(3000, listOf(lottoNumbers))
         assertThat(lottos.size).isEqualTo(3)
-        val purchaseLottos = lottos.getLottos()
-        assertThat(purchaseLottos.contains(Lotto.fromInts(lottoNumbers)))
+        assertThat(lottos.contains(Lotto.fromInts(lottoNumbers)))
     }
 
     @Test
