@@ -11,16 +11,10 @@ class WinningLotto(
     fun rank(lottos: List<Lotto>): LottoRanks {
         val ranks = lottos.map {
             LottoRank.from(
-                matchCount = this.countSameNumber(it),
+                matchCount = it.countSameNumber(it),
                 withBonus = it.withSameNumber(bonusLottoNumber)
             )
         }
         return LottoRanks(ranks)
-    }
-
-    private fun countSameNumber(lotto: Lotto): Int {
-        return this.lotto.lottoNumbers.intersect(
-            lotto.lottoNumbers.toSet()
-        ).size
     }
 }
