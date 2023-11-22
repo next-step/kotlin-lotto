@@ -20,6 +20,18 @@ class LottoViewController(
         return convertPurchasePrice(purchasePrice)
     }
 
+    fun getManualLottoNumbersCount(): Int {
+        val manualLottoNumbersCount = lottoInputView.getManualLottoNumbersCount()
+
+        return convertManualLottoNumbersCount(manualLottoNumbersCount)
+    }
+
+    fun getManualLottoNumbers(): LottoNumbers {
+        val manualLottoNumbers = lottoInputView.getManualLottoNumbers()
+
+        return convertLottoNumbers(manualLottoNumbers)
+    }
+
     fun getLottoNumbers(purchasePrice: Int): List<LottoNumbers> {
         return convertLottoNumbers(purchasePrice)
     }
@@ -40,6 +52,23 @@ class LottoViewController(
         return purchasePrice
             .run { lottoInputValidator.validatePurchasePrice(this) }
             .toInt()
+    }
+
+    private fun convertManualLottoNumbersCount(manualLottoNumbersCount: String?): Int {
+        return lottoInputValidator
+            .validateManualLottoNumbersCount(manualLottoNumbersCount)
+            .toInt()
+    }
+
+    private fun convertLottoNumbers(lottoNumbers: String?): LottoNumbers {
+        val numbers = lottoNumbers
+            .run { lottoInputValidator.validateLottoNumbers(this) }
+            .split(LOTTO_NUMBERS_SEPARATOR)
+            .map { lottoInputValidator.validateLottoNumber(it) }
+            .map { it.toInt() }
+            .run { lottoInputValidator.validateLottoNumberCount(this) }
+
+        return LottoNumbers.create(numbers)
     }
 
     private fun convertLottoNumbers(purchasePrice: Int): List<LottoNumbers> {
