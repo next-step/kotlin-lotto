@@ -20,9 +20,9 @@ class LottoCashTest : StringSpec({
         forAll(
             row(-1000),
             row(-100000),
-        ) { text ->
-            shouldThrowWithMessage<IllegalArgumentException>("숫자는 음수일 수 없습니다.") {
-                LottoCash(text)
+        ) { number ->
+            shouldThrowWithMessage<IllegalArgumentException>("숫자는 음수일 수 없습니다. value=$number") {
+                LottoCash(number)
             }
         }
     }

@@ -23,7 +23,7 @@ class LottoNumberTest : StringSpec({
             row(46),
             row(200),
         ) { number ->
-            shouldThrowWithMessage<IllegalArgumentException>("로또 숫자의 범위는 1~45 입니다.") {
+            shouldThrowWithMessage<IllegalArgumentException>("로또 숫자의 범위는 1~45 입니다. value=$number") {
                 LottoNumber.get(number)
             }
         }

@@ -9,7 +9,7 @@ import io.kotest.matchers.shouldBe
 class LottoTest : StringSpec({
     "로또의 숫자 개수가 6이면 로또를 생성한다." {
         val list = listOf(1, 2, 3, 4, 5, 6)
-        Lotto.valueOf(list) shouldBe list.map { LottoNumber.get(it) }
+        Lotto.valueOf(list) shouldBe list.mapTo(mutableSetOf()) { LottoNumber.get(it) }
     }
 
     "로또의 숫자 개수가 6이 아니면 IllegalArgumentException 예외를 던진다." {
@@ -17,7 +17,7 @@ class LottoTest : StringSpec({
             row(listOf(1, 2, 3, 4, 5)),
             row(listOf(1, 2, 3, 4, 5, 6, 7))
         ) { list ->
-            shouldThrowWithMessage<IllegalArgumentException>("로또의 숫자 개수는 6입니다.") {
+            shouldThrowWithMessage<IllegalArgumentException>("로또의 숫자 개수는 6입니다. size=${list.size}") {
                 Lotto.valueOf(list)
             }
         }
@@ -25,7 +25,7 @@ class LottoTest : StringSpec({
 
     "로또 숫자가 중복된 경우 IllegalArgumentException 예외를 던진다." {
         val list = listOf(1, 2, 3, 4, 5, 5)
-        shouldThrowWithMessage<IllegalArgumentException>("로또 숫자는 중복될 수 없습니다.") {
+        shouldThrowWithMessage<IllegalArgumentException>("로또의 숫자 개수는 6입니다. size=${list.distinct().size}") {
             Lotto.valueOf(list)
         }
     }
