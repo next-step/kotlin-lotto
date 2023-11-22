@@ -7,20 +7,30 @@ import lotto.view.ResultView
 
 class LottoOrganizer {
     fun start() {
-        val lottoPerson = LottoPerson(InputView.getPurchasePrice())
-        ResultView.renderTicketCount(lottoPerson.lottoTickets.size)
-        ResultView.renderTickets(lottoPerson.lottoTickets)
+        val lottoPerson = LottoPerson(LottoGenerator)
+
+        val purchasePrice = InputView.getPurchasePrice()
+        val manualNumbers = InputView.getManualNumbers()
+
+        val lottoTickets = lottoPerson.buyLottoTickets(
+            purchasePrice,
+            manualNumbers
+        )
+
+        ResultView.renderTicketCount(lottoTickets.size, manualNumbers.size)
+        ResultView.renderTickets(lottoTickets)
 
         val (winningNumbers, bonusNumber) = InputView.getWinningNumbers()
-        val lottoResults = LottoResults(winningNumbers.map { LottoNumber.from(it) }, LottoNumber.from(bonusNumber))
-        val results = lottoResults.getResults(lottoPerson.lottoTickets.map { it.numbers })
-        val profit = lottoResults.getProfit(results)
+
+        val winningLotto = WinningLotto(winningNumbers, bonusNumber)
+
+        val lottoResult = winningLotto.getLottoResult(lottoTickets)
 
         ResultView.renderResults(
-            results
+            lottoResult.results
         )
         ResultView.renderProfit(
-            profit
+            lottoResult.profit
         )
     }
 }

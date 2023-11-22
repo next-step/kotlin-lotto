@@ -8,8 +8,8 @@ object ResultView {
         lottoTickets.forEach { ticket -> println(ticket.numbers.map { it.number }) }
     }
 
-    fun renderTicketCount(ticketCount: Int) {
-        println("${ticketCount}개를 구매했습니다.")
+    fun renderTicketCount(ticketCount: Int, manualCount: Int) {
+        println("수동으로 ${manualCount}장, 자동으로 ${ticketCount - manualCount}개를 구매했습니다.")
     }
 
     fun renderResults(results: Map<Prize, Int>) {

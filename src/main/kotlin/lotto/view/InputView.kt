@@ -1,6 +1,8 @@
 package lotto.view
 
+import lotto.model.LottoNumber
 import lotto.model.LottoTicket
+import lotto.model.ManualNumber
 
 object InputView {
     fun getPurchasePrice(): Int {
@@ -8,17 +10,34 @@ object InputView {
         return readln().toInt()
     }
 
-    fun getWinningNumbers(): Pair<List<Int>, Int> {
+    fun getWinningNumbers(): Pair<List<LottoNumber>, LottoNumber> {
         println("지난 주 당첨 번호를 입력해 주세요.")
 
-        val numbers = readln().split(",").map { it.trim().toInt() }
+        val numbers = readln().split(",").map { LottoNumber.from(it.trim().toInt()) }
 
         require(numbers.size == LottoTicket.NUMBER_COUNT) { "당첨 번호는 ${LottoTicket.NUMBER_COUNT}개 여야 합니다" }
 
         println("보너스 볼을 입력해 주세요.")
 
-        val bonusNumber = readln().toInt()
+        val bonusNumber = LottoNumber.from(readln().toInt())
 
         return Pair(numbers, bonusNumber)
+    }
+
+    fun getManualNumbers(): List<ManualNumber> {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+
+        val count = readln().toInt()
+        var numbersList = emptyList<ManualNumber>()
+        require(count > 0)
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        numbersList = (1..count).map {
+            ManualNumber(inputManualNumber())
+        }
+        return numbersList
+    }
+
+    private fun inputManualNumber(): List<LottoNumber> {
+        return readln().split(",").map { LottoNumber.from(it.trim().toInt()) }
     }
 }

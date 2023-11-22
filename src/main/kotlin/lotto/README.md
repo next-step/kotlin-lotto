@@ -6,6 +6,8 @@
 - 로또 1장의 가격은 1000원이다.
 - 2등을 위해 추가 번호를 하나 더 추첨한다.
 - 당첨 통계에 2등도 추가해야 한다.
+- 현재 로또 생성기는 자동 생성 기능만 제공한다. 사용자가 수동으로 추첨 번호를 입력할 수 있도록 해야 한다.
+- 입력한 금액, 자동 생성 숫자, 수동 생성 번호를 입력하도록 해야 한다.
 
 ## 프로그래밍 요구 사항
 
@@ -30,7 +32,7 @@
 
 ## 적용 해볼 것
 
-- [ ] 확장 함수 써보기
+- [x] 확장 함수 써보기
 
 ## 리뷰 받은 것
 
@@ -62,7 +64,7 @@
 - [x] 모든 matchCount를 Map의 key값으로 들고 있을 필요가 있을까요? results: MutableMap<Prize, Int>  이런 구조는 어떨까요?
 - [x] 2 뎁스 이상입니다! 함수를 분리해보면 어떨까요? !! 은 null일 경우, 비정상종료되는 구조예요! 좀더 nullsafe한방법을 활용해봐도 좋을거같아요!
 - [x] getMatchCount는 winningNumbers , lottoTicket이 가져야할 책임이 아닌지 고민해봐요 디미터의 법칙을 고민해보아요! https://dkswnkk.tistory.com/687
-- [ ] Given절을 좀더 활용하면 어떨까요? 
+- [x] Given절을 좀더 활용하면 어떨까요? 
   ```kotlin
      Given(" 당첨번호가 1, 2, 3, 4, 5, 6일때") {
         When("로또가 1, 2, 3, 4, 5, 6이면") {
@@ -70,8 +72,50 @@
         When("로또가 11, 2, 3, 4, 5, 6이면") {
                 Then("5개 일치하여, 2등이다") {
   ```
-- [ ] 다른 클래스들의 모든 테스트 케이스를 작성해보면 어떨까요?
+- [x] 다른 클래스들의 모든 테스트 케이스를 작성해보면 어떨까요?
 
+### 4차
+- [x] LottoGenerator을 LottoPerson생성시점에 주입받으면 어떨까요? 생성에 대한 책임은 LottoGenerator에게 구매에 대한 책임은 LottoPerson에게 위입해보면 어떨까요?
+- [x] lottoTickets을 내부 프로퍼티로 가질 필요가 있을까요?
+- [x] LottoResults의 책임은 무엇일까요? 당첨번호에 대한 책임, 로또 결과에 대한 책임 등 여러책임이 엮여있지는 않은지 고민해보아요!
+  - 실제 LottoResults의 구조는 getResults의 리턴값 구조이지않을까요? class LottoResults(private val result:  Map<Prize, Int>)
+- [x] isBonus에 대한 체크는 Prize내에서 처리되면 어떨까요? 숫자 5는 무엇을 의미할까요? Prize.Second의 matched가 변경된다면 문제가 생기진 않을까요?
+- [x] groupBy,associateWith 등의 키워드를 활용해봐도 좋을거같네요!
+- [x] bonus 볼 여부 또한 Prize에서 가지고 있어야할 정보는 아닐까요?
+
+### 5차
+- [x] 파라미터가 3개 이상이라면 책임분리의 신호일수도 있어요!
+  ```kotlin
+  // ASIS
+  val lottoResult = LottoResultFactory.getLottoResult(lottoTickets, winningNumbers, bonusNumber)
+  
+  // TOBE
+  val winningLotto = WinningLotto(winningNumbers, bonusNumber)
+  val lottoResult = winningLotto.getLottoResult(lottoTickets)
+  ```
+- [x] 기본 값 활용하기
+  ```kotlin
+  enum class Prize(
+      val matched: Int, val prize: Int, val bonus: Boolean = false // 필요한 곳에만 true
+  ```
+- [x] Prize에서는 List나 LottoNumber를 몰라도 되지않을까요?
+  - getKeyWithMatched의 파라미터처럼 matched, bonus 만 받아와도 좋을거같아요!
+- [x] Prize의 복잡한 When 문 하나씩 맵핑하는것보다, enum.values, find등의 함수를 활용해보는건 어떨까요?
+- [x] Prize 테스트 코드를 작성해보아요!
+- [x] 보통 2중첩이상의 분기문부터는 가독성도 좋지않고, 실수발생률이 커진다고 합니다! 요구사항을 습관화해보아요!
+- [x] 결과에 대한 테스트 코드를 구체적으로 작성해보면 어떨까요?  2등, 3등의 케이스도 검증하면좋을거같아요!
+- [x] 구체적인 케이스명을 활용하면 어떨까요?> getLottoResult라는 네이밍은 너무 모호하네요!
+
+### 6차
+- [x] 미리 로또번호들을 생성해놓고 재활용해보면 어떨까요?
+- [x] LottoGenerator은 로또 생성에 대한 책임을 가지고 있어요, generateTickets해야하는 티켓 수량만 관심이 있지않을까요?
+- [x] isBonus 외부에서 노출될 필요가 있을까요?
+- [x] manualNumbers 또한 LottoGenerator에게 객체생성 책임을 부여해도 좋을거같아요!
+
+### 7차
+- [x] List 형태에 로또번호Pool을 가지고 shuffled().take() 만해도 좋을거같긴해요!
+- [x] List 또한 일급 컬렉션을 활용해봐도 좋을거 같아요!
+- [x] shuffled함수는 generateAutoTickets내부에서 처리되어야할 책임은 아닐까요?
 
 ## 챗 지피티와의 대화
 

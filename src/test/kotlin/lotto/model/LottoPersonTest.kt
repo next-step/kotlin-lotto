@@ -5,10 +5,12 @@ import io.kotest.matchers.shouldBe
 
 class LottoPersonTest: BehaviorSpec({
     Given("10000원을 가진 로또 인간") {
-        val lottoPerson = LottoPerson(10000)
-        When("생성될 때") {
+        val inputMoney = 10000
+        val lottoPerson = LottoPerson(LottoGenerator)
+        When("로또를 구입할 때") {
+            val lottoTickets = lottoPerson.buyLottoTickets(inputMoney, emptyList())
             Then("10장의 로또 티켓을 가진다") {
-                lottoPerson.lottoTickets.size shouldBe 10
+                lottoTickets.size shouldBe 10
             }
         }
     }
