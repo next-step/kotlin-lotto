@@ -52,4 +52,12 @@ class LottoInputValidator {
 
         return bonusNumber
     }
+
+    fun validateLottoOverbuy(purchasePrice: Int, totalPrice: Int): Int {
+        require(totalPrice >= purchasePrice) {
+            "구매 금액 이상으로 로또를 구매할 수 없습니다."
+        }
+
+        return purchasePrice
+    }
 }

@@ -70,4 +70,13 @@ class LottoInputValidatorTest : FunSpec({
             validator.validateBonusNumber(bonusNumber, winningNumbers)
         }
     }
+
+    test("수동 구매 로또 개수 입력 시 구매 금액을 초과하는 경우 IllegalArgumentException 예외 발생 테스트") {
+        val budget = Lotto.getLottoTotalPrice(1)
+        val purchasePrice = Lotto.getLottoTotalPrice(2)
+
+        shouldThrow<IllegalArgumentException> {
+            validator.validateLottoOverbuy(purchasePrice, budget)
+        }
+    }
 })
