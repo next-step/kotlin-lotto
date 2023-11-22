@@ -5,6 +5,14 @@ class LottoInputView {
         return getInput("구입 금액을 입력해주세요.")
     }
 
+    fun getManualLottoNumbersCount(): String? {
+        return getInput("수동으로 구매할 로또 수를 입력해 주세요.")
+    }
+
+    fun getManualLottoNumbers(): String? {
+        return getInput("수동으로 구매할 번호를 입력해 주세요.")
+    }
+
     fun getBonusNumber(): String? {
         return getInput("보너스 번호를 입력해주세요.")
     }
