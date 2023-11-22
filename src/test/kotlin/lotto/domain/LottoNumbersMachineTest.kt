@@ -41,4 +41,18 @@ class LottoNumbersMachineTest {
         val userLotto = lottoMachine.sellLotto(1000)
         userLotto[0].getNumbers() shouldContainInOrder lottoNumbers
     }
+
+    @Test
+    fun `로또 숫자를 수동으로 입력받는다`() {
+        val manualNumber = listOf("1,2,3,4,5,6")
+        val userLotto = lottoMachine.sellLotto(1000, manualNumber)
+        userLotto[0].getNumbers() shouldContainInOrder lottoNumbers
+    }
+
+    @Test
+    fun `수동 로또를 뺀 나머지는 자동로또로 구매한다`() {
+        val manualNumber = listOf("1,2,3,4,5,6")
+        val userLotto = lottoMachine.sellLotto(2000, manualNumber)
+        userLotto.size shouldBe 2
+    }
 }
