@@ -1,6 +1,5 @@
 package lotto
 
-import lotto.data.NumberCombination
 import lotto.domain.LottoMachine
 import lotto.domain.RandomLogic
 import lotto.service.LottoGame
@@ -11,16 +10,21 @@ fun main() {
 
     val cash = InputView.inputCash()
     val lottoGame = LottoGame(RandomLogic())
-    val purchaseLottoList = lottoGame.buyLotto(cash.toInt())
+    val gameTimes = lottoGame.getGameTimes(cash)
+    val manualGameTimes = InputView.inputManualCnt(gameTimes)
 
-    OutputView.showLottoList(purchaseLottoList)
+    val numberCombinationList = InputView.inputNumberCombination(manualGameTimes)
 
-    val winningNumberList = NumberCombination(InputView.inputWinningNumber())
+    val purchaseLottoList = lottoGame.buyLotto(gameTimes, numberCombinationList)
+
+    OutputView.showLottoList(purchaseLottoList, manualGameTimes)
+
+    val winningNumberCombination = InputView.inputWinningNumber()
     val bonusNumber = InputView.inputBonusNumber()
 
-    val winningLotto = LottoMachine.createWinningLotto(winningNumberList, bonusNumber)
+    val winningLotto = LottoMachine.createWinningLotto(winningNumberCombination, bonusNumber)
     val winningStatus = lottoGame.getWinningStats(winningLotto, purchaseLottoList)
-    val winningRate = LottoMachine.createWinningRate(cash.toInt(), winningStatus)
+    val winningRate = LottoMachine.createWinningRate(cash, winningStatus)
 
     OutputView.showWinningStatus(winningStatus, winningRate)
 }

@@ -16,9 +16,10 @@ class LottoGameTest {
         // given : 금액을 입력 받는다.
         val cash = 4500
         val lottoGame = LottoGame(RandomLogic())
+        val gameTimes = lottoGame.getGameTimes(cash)
 
         // when : 로또를 구매한다.
-        val lottoList = lottoGame.buyLotto(cash)
+        val lottoList = lottoGame.buyLotto(gameTimes)
 
         // then : 입력 받은 금액의 최대 수량의 로또를 구매한다.
         assertThat(lottoList.size).isEqualTo(4)
