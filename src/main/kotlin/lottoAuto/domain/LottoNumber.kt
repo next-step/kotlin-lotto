@@ -1,6 +1,6 @@
 package lottoAuto.domain
 
-data class LottoNumber(val number: Int) {
+data class LottoNumber private constructor(val number: Int) {
     companion object {
         const val MIN_NUMBER = 1
         const val MAX_NUMBER = 45
