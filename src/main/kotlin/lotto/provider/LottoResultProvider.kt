@@ -12,8 +12,7 @@ object LottoResultProvider {
         winningNumber: WinningNumber,
         purchaseOrder: LottoPurchaseOrder,
     ): LottoResult {
-        val winResult = winningNumber.getResult(lottoTickets)
-        val totalPrize = winResult.totalPrizeWon
+        val totalPrize = lottoTickets.getRankResult(winningNumber).totalPrize()
 
         val lottoProfitResult = LottoProfitResult(
             totalTicketPrice = purchaseOrder.totalPrice,

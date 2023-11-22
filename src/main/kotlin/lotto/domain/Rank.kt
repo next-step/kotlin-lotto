@@ -8,9 +8,7 @@ enum class Rank(val hitCount: Int, val prize: Long) {
     FirstPlace(6, 2_000_000_000);
 
     companion object {
-        fun getRank(lottoTicket: LottoTicket, winningNumber: WinningNumber): Rank {
-            val count = lottoTicket.lottoNumberList.count { it in winningNumber.lottoNumberList }
-
+        fun ofCount(count: Int): Rank {
             return Rank.values().find { it.hitCount == count } ?: LastPlace
         }
     }
