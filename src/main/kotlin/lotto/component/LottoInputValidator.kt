@@ -53,6 +53,16 @@ class LottoInputValidator {
         return bonusNumber
     }
 
+    fun validateManualLottoNumbersCount(manualLottoNumbersCount: String?): String {
+        val count = manualLottoNumbersCount?.toIntOrNull()
+
+        require(count != null && count >= 0) {
+            "수동 구매 숫자는 0 또는 자연수입니다."
+        }
+
+        return manualLottoNumbersCount
+    }
+
     fun validateLottoOverbuy(purchasePrice: Int, totalPrice: Int): Int {
         require(totalPrice >= purchasePrice) {
             "구매 금액 이상으로 로또를 구매할 수 없습니다."

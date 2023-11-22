@@ -71,6 +71,17 @@ class LottoInputValidatorTest : FunSpec({
         }
     }
 
+    test("수동 구매 로또 숫자가 0 또는 자연수가 아닌 경우 IllegalArgumentException 예외 발생 테스트") {
+        forAll(
+            row("-1"),
+            row("a"),
+        ) { manualLottoNumbersCount ->
+            shouldThrow<IllegalArgumentException> {
+                validator.validateManualLottoNumbersCount(manualLottoNumbersCount)
+            }
+        }
+    }
+
     test("수동 구매 로또 개수 입력 시 구매 금액을 초과하는 경우 IllegalArgumentException 예외 발생 테스트") {
         val budget = Lotto.getLottoTotalPrice(1)
         val purchasePrice = Lotto.getLottoTotalPrice(2)
