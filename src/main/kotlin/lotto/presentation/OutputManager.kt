@@ -11,8 +11,8 @@ class OutputManager {
         println(pay)
     }
 
-    fun printSellLottoCount(userLottos: List<Lotto>) {
-        println("${userLottos.size}개를 구매했습니다.")
+    fun printSellLottoCount(userLottos: List<Lotto>, manualLottoAmount: Int) {
+        println("수동으로 ${manualLottoAmount}장, 자동으로 ${userLottos.size - manualLottoAmount}개를 구매했습니다.")
         userLottos.forEach {
             println(it.getNumbers())
         }
