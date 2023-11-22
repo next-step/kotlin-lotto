@@ -2,7 +2,7 @@ package lotto.domain
 
 data class LottoTicket(private val _lottoNumberList: List<LottoNumber>) : AbstractLottoTicket(_lottoNumberList) {
     fun getRank(winningNumber: WinningNumber): Rank {
-        return Rank.ofCount(_lottoNumberList.count { it in winningNumber.lottoNumberList })
+        return Rank.of(_lottoNumberList.count { it in winningNumber.lottoNumberList }, _lottoNumberList.contains(winningNumber.bonusNumber))
     }
 
     companion object {
