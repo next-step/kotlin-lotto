@@ -9,7 +9,7 @@ class WinningLottoTest {
     @Test
     fun `주어진 로또 리스트와 당첨 로또를 비교하여 당첨 등수를 반환한다`() {
         // given
-        val bonusLottoNumber = 8.toLottoNumber()
+        val bonusLottoNumber = 3.toLottoNumber()
         val lotto = Lotto(
             lottoNumbers = (4..9).map { it.toLottoNumber() }
         )
