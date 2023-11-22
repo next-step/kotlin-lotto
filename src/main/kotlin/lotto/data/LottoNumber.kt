@@ -19,8 +19,8 @@ class LottoNumber private constructor(private val number: Int) : Comparable<Lott
 
         private val NUMBERS: Map<Int, LottoNumber> = (MIN_NUMBER..MAX_NUMBER).associateWith(::LottoNumber)
 
-        fun createLottoNumbers(numbers: List<Int>): Set<LottoNumber> {
-            return LinkedHashSet(numbers.map(::from))
+        fun createLottoNumbers(numberCombination: NumberCombination): Set<LottoNumber> {
+            return LinkedHashSet(numberCombination.numberCombination.map(::from))
         }
 
         fun createRandomLottoNumber(lottoCreation: RandomLogicInterface): Set<LottoNumber> {

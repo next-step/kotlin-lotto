@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.data.NumberCombination
 import lotto.domain.LottoMachine
 import lotto.domain.RandomLogic
 import lotto.service.LottoGame
@@ -14,7 +15,7 @@ fun main() {
 
     OutputView.showLottoList(purchaseLottoList)
 
-    val winningNumberList = InputView.inputWinningNumber()
+    val winningNumberList = NumberCombination(InputView.inputWinningNumber())
     val bonusNumber = InputView.inputBonusNumber()
 
     val winningLotto = LottoMachine.createWinningLotto(winningNumberList, bonusNumber)

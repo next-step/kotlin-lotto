@@ -3,6 +3,7 @@ package lotto.domain
 import lotto.data.Lotto
 import lotto.data.LottoNumber
 import lotto.data.LottoRanking
+import lotto.data.NumberCombination
 import lotto.data.WinningLotto
 import java.util.EnumMap
 
@@ -12,8 +13,8 @@ object LottoMachine {
         return Lotto(lottoNumbers)
     }
 
-    fun createWinningLotto(winningNumbers: List<Int>, bonusNumber: Int): WinningLotto {
-        val winningLotto = LottoNumber.createLottoNumbers(winningNumbers)
+    fun createWinningLotto(winningNumberCombination: NumberCombination, bonusNumber: Int): WinningLotto {
+        val winningLotto = LottoNumber.createLottoNumbers(winningNumberCombination)
         val bonusLottoNumber = LottoNumber.from(bonusNumber)
         return WinningLotto(Lotto(winningLotto), bonusLottoNumber)
     }

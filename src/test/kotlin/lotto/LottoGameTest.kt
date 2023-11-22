@@ -3,6 +3,7 @@ package lotto
 import lotto.data.Lotto
 import lotto.data.LottoNumber
 import lotto.data.LottoRanking
+import lotto.data.NumberCombination
 import lotto.domain.LottoMachine
 import lotto.domain.RandomLogic
 import lotto.service.LottoGame
@@ -27,16 +28,16 @@ class LottoGameTest {
     fun `로또 구매와 당첨 번호를 입력 했다면, 당첨을 확인을 요청할 때, 당첨 통계를 반환한다`() {
         // given : 로또 구매와 당첨 번호를 입력한다.
         // 2등 - 2개, 3등 - 1개, 4등 - 1개
-        val winningNumberList = listOf(1, 2, 3, 4, 5, 6)
+        val winningNumberCombination = NumberCombination(listOf(1, 2, 3, 4, 5, 6))
         val bonusNumber = 7
-        val winningLotto = LottoMachine.createWinningLotto(winningNumberList, bonusNumber)
+        val winningLotto = LottoMachine.createWinningLotto(winningNumberCombination, bonusNumber)
 
-        val purchaseLottoNumbers1 = LottoNumber.createLottoNumbers(listOf(1, 2, 3, 4, 5, 7))
-        val purchaseLottoNumbers2 = LottoNumber.createLottoNumbers(listOf(1, 2, 3, 4, 5, 7))
-        val purchaseLottoNumbers3 = LottoNumber.createLottoNumbers(listOf(1, 2, 3, 4, 7, 8))
-        val purchaseLottoNumbers4 = LottoNumber.createLottoNumbers(listOf(1, 2, 3, 7, 8, 9))
-        val purchaseLottoNumbers5 = LottoNumber.createLottoNumbers(listOf(1, 2, 6, 7, 8, 9))
-        val purchaseLottoNumbers6 = LottoNumber.createLottoNumbers(listOf(11, 12, 13, 14, 15, 16))
+        val purchaseLottoNumbers1 = LottoNumber.createLottoNumbers(NumberCombination(listOf(1, 2, 3, 4, 5, 7)))
+        val purchaseLottoNumbers2 = LottoNumber.createLottoNumbers(NumberCombination(listOf(1, 2, 3, 4, 5, 7)))
+        val purchaseLottoNumbers3 = LottoNumber.createLottoNumbers(NumberCombination(listOf(1, 2, 3, 4, 7, 8)))
+        val purchaseLottoNumbers4 = LottoNumber.createLottoNumbers(NumberCombination(listOf(1, 2, 3, 7, 8, 9)))
+        val purchaseLottoNumbers5 = LottoNumber.createLottoNumbers(NumberCombination(listOf(1, 2, 6, 7, 8, 9)))
+        val purchaseLottoNumbers6 = LottoNumber.createLottoNumbers(NumberCombination(listOf(11, 12, 13, 14, 15, 16)))
 
         val purchaseLotto1 = Lotto((purchaseLottoNumbers1))
         val purchaseLotto2 = Lotto((purchaseLottoNumbers2))
