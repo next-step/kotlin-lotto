@@ -18,7 +18,7 @@ class LottoSimulator(
     fun simulate(): LottoResult {
         val purchaseOrder = LottoPurchaseOrder(
             budget = inputView.provideBudget(),
-            ticketPrice = LottoTicket.price,
+            ticketPrice = LottoTicket.PRICE,
         )
 
         val result = LottoResultProvider.provideLottoResult(
