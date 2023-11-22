@@ -1,8 +1,7 @@
 package lotto.domain
 
-data class Price(val value: Int?) {
+data class Price(val value: Int) {
     init {
-        require(value != null) { "로또 금액은 숫자를 입력해야합니다." }
         require(isValidPrice(value)) { "잘못된 금액입니다. value=$value" }
     }
 
