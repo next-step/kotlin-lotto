@@ -2,8 +2,9 @@ package lotto.domain
 
 class AutoLottoNumberGenerator : LottoNumberGenerator {
     override fun generateNumber(): List<LottoNumber> {
-        return List(MAX_LOTTO_NUMBER_AMOUNT) { (START_NUMBER..END_NUMBER).random() }
-            .map { LottoNumber(it) }
+        return (START_NUMBER..END_NUMBER).shuffled()
+            .take(MAX_LOTTO_NUMBER_AMOUNT)
+            .map(::LottoNumber)
     }
 
     companion object {

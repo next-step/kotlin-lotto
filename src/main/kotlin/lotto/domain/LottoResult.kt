@@ -1,22 +1,18 @@
 package lotto.domain
 
-import java.util.EnumMap
+class LottoResult(
+    private val result: Map<Revenue, Int>
+) {
 
-class LottoResult {
-    private val result: EnumMap<Revenue, Int> = EnumMap<Revenue, Int>(Revenue::class.java)
-
-    fun setLottoResult(matchedNumberCount: Int) {
-        if (matchedNumberCount >= MINIMUM_MATCH_COUNT) {
-            val key = Revenue.of(matchedNumberCount)
-            result[key] = result.getOrDefault(key, 0) + 1
-        }
-    }
-
-    fun getLottoResult(key: Int): Int {
+    fun getLottoRankCount(key: Int): Int {
         if (key < MINIMUM_MATCH_COUNT) {
             return 0
         }
-        return result[Revenue.of(key)] ?: 0
+        return result.getOrDefault(Revenue.of(key, false), DEFAULT_MAP_VALUE)
+    }
+
+    fun getLottoRankingMatchCount(key: Revenue): Int {
+        return result.getOrDefault(key, DEFAULT_MAP_VALUE)
     }
 
     fun calcRate(lottoPrice: Int, userLottoCount: Int): Double {
@@ -24,12 +20,13 @@ class LottoResult {
         var revenue = 0
         result.keys.forEach {
 
-            revenue += this.getLottoResult(it.matchCount) * it.prizeMoney
+            revenue += this.getLottoRankingMatchCount(it) * it.prizeMoney
         }
         return revenue / userTotalPay.toDouble()
     }
 
     companion object {
-        private const val MINIMUM_MATCH_COUNT: Int = 3
+        const val MINIMUM_MATCH_COUNT: Int = 3
+        private const val DEFAULT_MAP_VALUE: Int = 0
     }
 }
