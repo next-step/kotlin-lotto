@@ -40,7 +40,6 @@ object OutputView {
         println("${lottoRank.matchCount}개 일치 (${lottoRank.winningMoney}원) - ${countValue}개")
     }
 
-
     fun printProfitResult(rateOfReturn: Double, resultMsg: String) {
         println("총 수익률은 $rateOfReturn 입니다.(기준이 1이기 때문에 결과적으로 $resultMsg (이)라는 의미임)")
     }
