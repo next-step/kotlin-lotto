@@ -19,9 +19,11 @@ class LottoSimulator(
             ticketPrice = LottoTicket.PRICE,
         )
 
+        val lottoTickets = inputView.provideLottoTickets(purchaseOrder.ticketCount)
+        val winningNumber = inputView.getWinningNumber()
+
         val result = LottoResultProvider.provideLottoResult(
-            lottoTickets = inputView.provideLottoTickets(purchaseOrder.ticketCount),
-            winningNumber = inputView.getWinningNumber(),
+            totalPrize = lottoTickets.getRankResult(winningNumber).totalPrize(),
             purchaseOrder = purchaseOrder,
         )
 
