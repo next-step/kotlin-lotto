@@ -15,18 +15,20 @@ object LottoController {
         return InputView.getPurchaseAmount()
     }
 
-    fun getWinningNumbers(): List<LottoNumber> {
+    fun getWinningNumbers(): List<LottoNumber> { // 제거
         return InputView.getWinningNumbers().map { it.toLottoNumber() }
     }
 
-    fun getWinningLotto(winningNumbers: List<LottoNumber>, bonusLottoNumber: LottoNumber): WinningLotto {
+    fun getWinningLotto(): WinningLotto {
+        val winningNumbers = InputView.getWinningNumbers().map { it.toLottoNumber() }
+        val bonusLottoNumber = InputView.getBonusNumber().toLottoNumber()
         return WinningLotto(
             lotto = Lotto(winningNumbers),
             bonusLottoNumber = bonusLottoNumber
         )
     }
 
-    fun getBonusLottoNumber(): LottoNumber {
+    fun getBonusLottoNumber(): LottoNumber { // 제거
         val bonusNumber = InputView.getBonusNumber()
         return bonusNumber.toLottoNumber()
     }
@@ -83,9 +85,7 @@ object LottoController {
 fun main() {
     val purchaseAmount = LottoController.getPurchaseAmount()
     val lottoList = LottoController.createLottoList(purchaseAmount)
-    val winningNumbers = LottoController.getWinningNumbers()
-    val bonusLottoNumber = LottoController.getBonusLottoNumber()
-    val winningLotto = LottoController.getWinningLotto(winningNumbers, bonusLottoNumber)
+    val winningLotto = LottoController.getWinningLotto()
 
     LottoController.statistics(purchaseAmount, lottoList, winningLotto)
 }
