@@ -6,12 +6,15 @@ import lotto.view.InputView
 import lotto.view.OutputView
 
 fun main() {
-    val purchaseAmount = InputView.getPurchaseAmount()
-    val userLotto = LottoStore.purchase(purchaseAmount, RandomLottoGenerator())
-    OutputView.printLottos(userLotto)
+    val totalMoney = InputView.getPurchaseAmount()
+    val manualCount = InputView.getManualLottoCount()
+    val manualLottoNumbers = InputView.getManualLottoNumbers(manualCount)
+    val manualLottos = ManualLottoGenerator(manualLottoNumbers).generateLotto(manualCount)
+    val totalLottos = LottoStore.purchase(totalMoney, manualLottos, RandomLottoGenerator())
+    OutputView.printLottos(totalLottos)
     val lastWinningNumbers = InputView.getLastWinningNumbers()
     val bonusBall = InputView.getBonusBall()
     val winningLotto = Lotto.fromInts(lastWinningNumbers.getIntegersAfterSplit(","))
-    val lottoResult = LottoResult(userLotto, winningLotto, LottoNumber(bonusBall))
+    val lottoResult = LottoResult(totalLottos, winningLotto, LottoNumber(bonusBall))
     OutputView.printResult(lottoResult)
 }
