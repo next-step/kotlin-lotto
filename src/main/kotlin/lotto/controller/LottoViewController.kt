@@ -26,10 +26,12 @@ class LottoViewController(
         return convertManualLottoNumbersCount(manualLottoNumbersCount)
     }
 
-    fun getManualLottoNumbers(): LottoNumbers {
-        val manualLottoNumbers = lottoInputView.getManualLottoNumbers()
-
-        return convertLottoNumbers(manualLottoNumbers)
+    fun getManualLottoNumbers(manualLottoNumbersCount: Int): List<LottoNumbers> {
+        return List(manualLottoNumbersCount) {
+            lottoInputView
+                .getManualLottoNumbers()
+                .run { convertLottoNumbers(this) }
+        }
     }
 
     fun getLottoNumbers(purchasePrice: Int): List<LottoNumbers> {
