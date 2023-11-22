@@ -9,20 +9,25 @@ class WinningResultTest {
 
     @ParameterizedTest
     @MethodSource("provideSourceOfRank")
-    fun `당첨 결과들은 등수별로 집계된다`(rank: Rank) {
-        // given,
+    fun `당첨된 개수를 각각 집계한다`(rank: Rank) {
+        // given
         val ranks = listOf(rank)
 
         // when
         val winningResult = WinningResult(ranks)
 
         // then
-        assertEquals(1, winningResult.aggregatedData[rank])
+        Rank.values().forEach {
+            when (it == rank) {
+                true -> assertEquals(1, winningResult.aggregatedData[it])
+                false -> assertEquals(0, winningResult.aggregatedData[it])
+            }
+        }
     }
 
     @ParameterizedTest
     @MethodSource("provideSourceOfRank")
-    fun `당첨자는 등수에 따라 상금을 받는다`(rank: Rank) {
+    fun `총 상금은 모든 상금을 합한 값이다`(rank: Rank) {
         // given,
         val ranks = listOf(rank)
         val winningResult = WinningResult(ranks)
