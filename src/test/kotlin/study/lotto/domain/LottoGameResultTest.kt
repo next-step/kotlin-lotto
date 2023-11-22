@@ -19,7 +19,7 @@ class LottoGameResultTest {
         val bonusNumber = LottoNumber(9)
 
         val result = LottoGameResult.getResult(
-            BuyingLottoes(lottoes, Lottoes(emptyList())),
+            BuyingLottoes(BuyingAutoLottoes(lottoes), BuyingManualLottoes(Lottoes(emptyList()))),
             winningLotto,
             bonusNumber
         )
@@ -41,7 +41,7 @@ class LottoGameResultTest {
         val bonusNumber = LottoNumber(9)
 
         val result = LottoGameResult.getResult(
-            BuyingLottoes(lottoes, Lottoes(emptyList())),
+            BuyingLottoes(BuyingAutoLottoes(lottoes), BuyingManualLottoes(Lottoes(emptyList()))),
             winningLotto,
             bonusNumber
         )

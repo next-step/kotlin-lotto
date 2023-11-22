@@ -9,6 +9,8 @@ data class Amount(val amount: Int) {
     operator fun compareTo(amount: Int): Int = this.amount - amount
     operator fun div(other: Int): Int = this.amount / other
 
+    operator fun times(other: Int): Int = this.amount * other
+
     companion object {
         val ZERO = Amount(0)
     }

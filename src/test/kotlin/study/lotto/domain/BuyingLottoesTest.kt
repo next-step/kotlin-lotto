@@ -15,9 +15,9 @@ class BuyingLottoesTest {
         val buyingAuto = Lottoes(listOf(autoLotto1, autoLotto2))
         val buyingManual = Lottoes(listOf(manualLotto1, manualLotto2))
 
-        val buyingLottoes = BuyingLottoes(buyingAuto, buyingManual)
+        val buyingLottoes = BuyingLottoes(BuyingAutoLottoes(buyingAuto), BuyingManualLottoes(buyingManual))
 
-        val allLottoes = buyingLottoes.getAll()
+        val allLottoes = buyingLottoes.toTotalList()
         assertEquals(4, allLottoes.size)
         assertEquals(listOf(autoLotto1, autoLotto2, manualLotto1, manualLotto2), allLottoes)
     }

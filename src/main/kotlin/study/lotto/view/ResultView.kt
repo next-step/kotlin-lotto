@@ -5,9 +5,9 @@ import study.lotto.domain.PrizeGrade
 
 class ResultView {
     fun displayLottoes(lottoes: BuyingLottoes) {
-        println("수동으로 ${lottoes.buyingManual.size}장, 자동으로 ${lottoes.buyingAuto.size}개를 구매했습니다.")
-        lottoes.getAll().forEach { lottoNumbers ->
-            println(lottoNumbers.numbers.toList().map { it.number })
+        println("수동으로 ${lottoes.buyingManualLottoes.size}장, 자동으로 ${lottoes.buyingAutoLottoes.size}개를 구매했습니다.")
+        lottoes.toTotalList().forEach { lotto ->
+            println(lotto.numbers.toList().map { it.number })
         }
     }
 

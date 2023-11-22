@@ -16,8 +16,6 @@ class Lotto(val numbers: LottoNumbers) {
     ]
 
     companion object {
-        const val PRICE_PER_TICKET = 1_000
-
         fun generate(): Lotto {
             return Lotto(LottoNumbers.random())
         }

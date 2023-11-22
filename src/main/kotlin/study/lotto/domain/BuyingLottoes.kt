@@ -1,8 +1,8 @@
 package study.lotto.domain
 
 data class BuyingLottoes(
-    val buyingAuto: Lottoes,
-    val buyingManual: Lottoes
+    val buyingAutoLottoes: BuyingAutoLottoes,
+    val buyingManualLottoes: BuyingManualLottoes,
 ) {
-    fun getAll(): Lottoes = buyingAuto + buyingManual
+    fun toTotalList(): List<Lotto> = this.buyingAutoLottoes + this.buyingManualLottoes
 }
