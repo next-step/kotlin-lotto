@@ -61,12 +61,7 @@ class LottoViewController(
     }
 
     private fun convertLottoNumbers(lottoNumbers: String?): LottoNumbers {
-        val numbers = lottoNumbers
-            .run { lottoInputValidator.validateLottoNumbers(this) }
-            .split(LOTTO_NUMBERS_SEPARATOR)
-            .map { lottoInputValidator.validateLottoNumber(it) }
-            .map { it.toInt() }
-            .run { lottoInputValidator.validateLottoNumberCount(this) }
+        val numbers = convertLottoNumbersStringToIntList(lottoNumbers)
 
         return LottoNumbers.create(numbers)
     }
@@ -88,14 +83,18 @@ class LottoViewController(
     }
 
     private fun convertWinningNumbers(winningNumbers: String?): WinningNumbers {
-        val numbers = winningNumbers
+        val numbers = convertLottoNumbersStringToIntList(winningNumbers)
+
+        return WinningNumbers.create(numbers)
+    }
+
+    private fun convertLottoNumbersStringToIntList(lottoNumbers: String?): List<Int> {
+        return lottoNumbers
             .run { lottoInputValidator.validateLottoNumbers(this) }
             .split(LOTTO_NUMBERS_SEPARATOR)
             .map { lottoInputValidator.validateLottoNumber(it) }
             .map { it.toInt() }
             .run { lottoInputValidator.validateLottoNumberCount(this) }
-
-        return WinningNumbers.create(numbers)
     }
 
     fun printPurchasedLottoNumbers(lottoNumbers: List<LottoNumbers>) {
