@@ -25,8 +25,8 @@ class LottoAutoTest : StringSpec({
                         LottoNumber(4),
                         LottoNumber(5),
                         LottoNumber(6),
-                    )
-
+                    ),
+                    bonusNumber = LottoNumber(19)
                 ),
                 lottoTicketsProvider = MockTicketProvider(
                     ManualTicketProvideStrategy(
@@ -54,8 +54,8 @@ class LottoAutoTest : StringSpec({
                         LottoNumber(4),
                         LottoNumber(5),
                         LottoNumber(6),
-                    )
-
+                    ),
+                    bonusNumber = LottoNumber(19)
                 ),
                 lottoTicketsProvider = MockTicketProvider(
                     ManualTicketProvideStrategy(

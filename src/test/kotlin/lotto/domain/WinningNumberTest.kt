@@ -9,7 +9,8 @@ class WinningNumberTest : StringSpec({
         Assertions.assertThatThrownBy {
             WinningNumber(
                 listOf(1, 2, 3, 4, 5)
-                    .map { LottoNumber(it) }
+                    .map { LottoNumber(it) },
+                bonusNumber = LottoNumber(19)
             )
         }.isInstanceOf(IllegalArgumentException::class.java)
             .hasMessageContaining("Invalid size: ${WinningNumber::class.java.name}")
@@ -17,7 +18,8 @@ class WinningNumberTest : StringSpec({
         Assertions.assertThatThrownBy {
             WinningNumber(
                 listOf(1, 2, 3, 4, 5, 6, 7)
-                    .map { LottoNumber(it) }
+                    .map { LottoNumber(it) },
+                bonusNumber = LottoNumber(19)
             )
         }.isInstanceOf(IllegalArgumentException::class.java)
             .hasMessageContaining("Invalid size: ${WinningNumber::class.java.name}")
@@ -27,7 +29,8 @@ class WinningNumberTest : StringSpec({
         Assertions.assertThatThrownBy {
             WinningNumber(
                 listOf(1, 2, 3, 4, 5, 5)
-                    .map { LottoNumber(it) }
+                    .map { LottoNumber(it) },
+                bonusNumber = LottoNumber(19)
             )
         }.isInstanceOf(IllegalArgumentException::class.java)
             .hasMessageContaining("Duplicated number: ${WinningNumber::class.java.name}")

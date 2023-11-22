@@ -12,10 +12,20 @@ class UserInputView(
         readln().trim().toInt()
     }
 
-    override fun getWinningNumber(): WinningNumber =
-        println("당첨번호는 무엇인가요?").run {
-            WinningNumber(readln().trim().split(",").map { it.toInt() }.map { LottoNumber(it) })
+    override fun getWinningNumber(): WinningNumber {
+        val lottoNumberList = println("당첨번호는 무엇인가요?").run {
+            readln().trim().split(",").map { it.toInt() }.map { LottoNumber(it) }
         }
+
+        val bonusBall = println("보너스 볼을 입력해 주세요.").run {
+            LottoNumber(readln().trim().toInt())
+        }
+
+        return WinningNumber(
+            lottoNumberList,
+            bonusBall,
+        )
+    }
 
     override fun provideLottoTickets(ticketCount: Int): LottoTickets {
         val lottoTickets = lottoTicketsProvider.provide(ticketCount)

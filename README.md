@@ -23,4 +23,4 @@
 - [x] winning statistics should show correct ROI
 - [x] lotto purchase order should calculate correct total price and remainder
 - [x] lotto profit result should calculate correct profit rate
-- [ ] bonus number should not be in lotto numbers of winning number
+- [x] bonus number should not be in lotto numbers of winning number
