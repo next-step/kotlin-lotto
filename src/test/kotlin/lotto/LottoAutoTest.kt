@@ -7,7 +7,6 @@ import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
 import lotto.domain.ManualTicketProvideStrategy
 import lotto.domain.WinningNumber
-import lotto.provider.budget.MockBudgetProvider
 import lotto.provider.ticket.MockTicketProvider
 import lotto.provider.winningnumber.MockWinningNumberProvider
 import lotto.view.MockInputView
@@ -18,7 +17,7 @@ class LottoAutoTest : StringSpec({
     "winning statistics should calculate correct profit" {
         LottoSimulator(
             MockInputView(
-                budgetProvider = MockBudgetProvider(5000),
+                budget = 5000,
                 winningNumberProvider = MockWinningNumberProvider(
                     WinningNumber(
                         listOf(
@@ -48,7 +47,7 @@ class LottoAutoTest : StringSpec({
     "winning statistics should show correct ROI" {
         LottoSimulator(
             MockInputView(
-                budgetProvider = MockBudgetProvider(5000),
+                budget = 5000,
                 winningNumberProvider = MockWinningNumberProvider(
                     WinningNumber(
                         listOf(

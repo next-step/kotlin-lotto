@@ -6,11 +6,12 @@ import lotto.provider.ticket.LottoTicketsProvider
 import lotto.provider.winningnumber.WinningNumberProvider
 
 class UserInputView(
-    private val budget: Int,
     private val winningNumberProvider: WinningNumberProvider,
     private val lottoTicketsProvider: LottoTicketsProvider,
 ) : InputView {
-    override fun provideBudget(): Int = budget
+    override fun provideBudget(): Int = println("구입 금액을 입력하세요").run {
+        readln().trim().toInt()
+    }
 
     override fun provideWinningNumber(): WinningNumber = winningNumberProvider.provide()
 
