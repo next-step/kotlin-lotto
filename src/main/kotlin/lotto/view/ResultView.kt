@@ -8,7 +8,7 @@ private const val INFORMATION_MESSAGE = """
 ---------"""
 
 fun printLottoList(manualLottoList: List<LottoNumbers>, autoLottoList: List<LottoNumbers>) {
-    println("수등오로 ${manualLottoList.size}장, 자동으로 ${autoLottoList.size}개를 구매했습니다.")
+    println("수동으로 ${manualLottoList.size}장, 자동으로 ${autoLottoList.size}개를 구매했습니다.")
     manualLottoList.forEach { println(it.state()) }
     autoLottoList.forEach { println(it.state()) }
     println()
