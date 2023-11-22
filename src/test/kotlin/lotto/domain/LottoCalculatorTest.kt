@@ -3,6 +3,7 @@ package lotto.domain
 import lotto.data.LottoRanking
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import java.util.EnumMap
 
 class LottoCalculatorTest {
     @Test
@@ -10,7 +11,7 @@ class LottoCalculatorTest {
         // given : 구매한 로또의 통계와 구매 금액을 받는다.
         // 총 당첨금 5천원
         val cash = 100000
-        val winningStatus = mutableMapOf<LottoRanking, Int>()
+        val winningStatus: EnumMap<LottoRanking, Int> = EnumMap(LottoRanking::class.java)
         winningStatus[LottoRanking.FifthPlace] = 1
 
         // when : 구매 금액 대비 당첨 금액에 대한 수익률은 요청한다.

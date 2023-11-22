@@ -2,6 +2,7 @@ package lotto.view
 
 import lotto.data.Lotto
 import lotto.data.LottoRanking
+import lotto.domain.LottoCalculator
 
 object OutputView {
 
@@ -10,7 +11,10 @@ object OutputView {
     private const val TXT_LOSS_COMMENT = "기준이 1이기 때문에 결과적으로 손해라는 의미임"
     private const val DIVIDING_LINE = "---------"
 
-    fun showLottoList(lottoList: List<Lotto>) {
+    fun showLottoList(lottoList: List<Lotto>, manualGameTimes: Int) {
+        val autoGameTimes = LottoCalculator.getAutoTimes(lottoList.size, manualGameTimes)
+
+        println("수동으로 ${manualGameTimes}장, 자동으로 ${autoGameTimes}장 구매했습니다.")
         lottoList.forEach {
             println(it.selectNumbers)
         }
