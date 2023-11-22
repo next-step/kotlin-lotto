@@ -8,7 +8,6 @@ import lotto.domain.LottoTickets
 import lotto.domain.ManualTicketProvideStrategy
 import lotto.domain.WinningNumber
 import lotto.provider.ticket.MockTicketProvider
-import lotto.provider.winningnumber.MockWinningNumberProvider
 import lotto.view.MockInputView
 import lotto.view.ResultView
 
@@ -18,17 +17,16 @@ class LottoAutoTest : StringSpec({
         LottoSimulator(
             MockInputView(
                 budget = 5000,
-                winningNumberProvider = MockWinningNumberProvider(
-                    WinningNumber(
-                        listOf(
-                            LottoNumber(1),
-                            LottoNumber(2),
-                            LottoNumber(3),
-                            LottoNumber(4),
-                            LottoNumber(5),
-                            LottoNumber(6),
-                        )
+                winningNumber = WinningNumber(
+                    listOf(
+                        LottoNumber(1),
+                        LottoNumber(2),
+                        LottoNumber(3),
+                        LottoNumber(4),
+                        LottoNumber(5),
+                        LottoNumber(6),
                     )
+
                 ),
                 lottoTicketsProvider = MockTicketProvider(
                     ManualTicketProvideStrategy(
@@ -48,17 +46,16 @@ class LottoAutoTest : StringSpec({
         LottoSimulator(
             MockInputView(
                 budget = 5000,
-                winningNumberProvider = MockWinningNumberProvider(
-                    WinningNumber(
-                        listOf(
-                            LottoNumber(1),
-                            LottoNumber(2),
-                            LottoNumber(3),
-                            LottoNumber(4),
-                            LottoNumber(5),
-                            LottoNumber(6),
-                        )
+                winningNumber = WinningNumber(
+                    listOf(
+                        LottoNumber(1),
+                        LottoNumber(2),
+                        LottoNumber(3),
+                        LottoNumber(4),
+                        LottoNumber(5),
+                        LottoNumber(6),
                     )
+
                 ),
                 lottoTicketsProvider = MockTicketProvider(
                     ManualTicketProvideStrategy(

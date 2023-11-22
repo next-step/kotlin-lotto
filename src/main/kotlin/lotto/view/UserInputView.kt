@@ -1,19 +1,21 @@
 package lotto.view
 
+import lotto.domain.LottoNumber
 import lotto.domain.LottoTickets
 import lotto.domain.WinningNumber
 import lotto.provider.ticket.LottoTicketsProvider
-import lotto.provider.winningnumber.WinningNumberProvider
 
 class UserInputView(
-    private val winningNumberProvider: WinningNumberProvider,
     private val lottoTicketsProvider: LottoTicketsProvider,
 ) : InputView {
-    override fun provideBudget(): Int = println("구입 금액을 입력하세요").run {
+    override fun getBudget(): Int = println("구입 금액을 입력하세요").run {
         readln().trim().toInt()
     }
 
-    override fun provideWinningNumber(): WinningNumber = winningNumberProvider.provide()
+    override fun getWinningNumber(): WinningNumber =
+        println("당첨번호는 무엇인가요?").run {
+            WinningNumber(readln().trim().split(",").map { it.toInt() }.map { LottoNumber(it) })
+        }
 
     override fun provideLottoTickets(ticketCount: Int): LottoTickets {
         val lottoTickets = lottoTicketsProvider.provide(ticketCount)
