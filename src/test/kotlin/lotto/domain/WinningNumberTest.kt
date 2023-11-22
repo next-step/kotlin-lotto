@@ -32,4 +32,15 @@ class WinningNumberTest : StringSpec({
         }.isInstanceOf(IllegalArgumentException::class.java)
             .hasMessageContaining("Duplicated number: ${WinningNumber::class.java.name}")
     }
+
+    "bonus number should not be in lotto numbers of winning number" {
+        Assertions.assertThatThrownBy {
+            WinningNumber(
+                listOf(1, 2, 3, 4, 5, 19)
+                    .map { LottoNumber(it) },
+                bonusNumber = LottoNumber(19)
+            )
+        }.isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessageContaining("Bonus number duplicated in lotto numbers")
+    }
 })
