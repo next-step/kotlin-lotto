@@ -47,9 +47,9 @@ class LottoRanksTest {
         val lottoRankCount = lottoRanks.groupByLottoRank()
 
         // then
-        assertEquals(1, lottoRankCount[LottoRank.FIRST])
-        assertEquals(2, lottoRankCount[LottoRank.SECOND])
-        assertEquals(3, lottoRankCount[LottoRank.THIRD])
-        assertEquals(4, lottoRankCount[LottoRank.FOURTH])
+        assertEquals(1, lottoRankCount.counter[LottoRank.FIRST])
+        assertEquals(2, lottoRankCount.counter[LottoRank.SECOND])
+        assertEquals(3, lottoRankCount.counter[LottoRank.THIRD])
+        assertEquals(4, lottoRankCount.counter[LottoRank.FOURTH])
     }
 }

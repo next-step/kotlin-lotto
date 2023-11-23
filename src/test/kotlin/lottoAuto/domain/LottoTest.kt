@@ -61,22 +61,26 @@ class LottoTest {
     @Test
     fun `countSameNumber 테스트`() {
         // given
-        val lotto1 = Lotto(listOf(
-            1.toLottoNumber(),
-            2.toLottoNumber(),
-            3.toLottoNumber(),
-            4.toLottoNumber(),
-            5.toLottoNumber(),
-            6.toLottoNumber()
-        ))
-        val lotto2 = Lotto(listOf(
-            10.toLottoNumber(),
-            20.toLottoNumber(),
-            30.toLottoNumber(),
-            4.toLottoNumber(),
-            5.toLottoNumber(),
-            6.toLottoNumber()
-        ))
+        val lotto1 = Lotto(
+            listOf(
+                1.toLottoNumber(),
+                2.toLottoNumber(),
+                3.toLottoNumber(),
+                4.toLottoNumber(),
+                5.toLottoNumber(),
+                6.toLottoNumber()
+            )
+        )
+        val lotto2 = Lotto(
+            listOf(
+                10.toLottoNumber(),
+                20.toLottoNumber(),
+                30.toLottoNumber(),
+                4.toLottoNumber(),
+                5.toLottoNumber(),
+                6.toLottoNumber()
+            )
+        )
 
         // when
         val sameNumberSize = lotto1.countSameNumber(lotto2)

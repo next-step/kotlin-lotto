@@ -2,7 +2,7 @@ package lottoAuto.domain
 
 class RandomLottoFactory : LottoFactory {
     override fun create(lottoSize: Int): List<Lotto> {
-        require(lottoSize < 0) { "생성할 로또 개수는 0개 미만일 수 없습니다" }
+        require(lottoSize >= 0) { "생성할 로또 개수는 0개 미만일 수 없습니다" }
         return List(lottoSize) { Lotto(createShuffledLottoNumbers()) }
     }
 

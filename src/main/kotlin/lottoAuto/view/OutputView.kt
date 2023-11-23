@@ -1,6 +1,7 @@
 package lottoAuto.view
 
 import lottoAuto.domain.LottoRank
+import lottoAuto.domain.LottoRankCounter
 
 object OutputView {
     fun printNumOfLotto(numOfManualLotto: Int, numOfRandomLotto: Int) {
@@ -16,8 +17,9 @@ object OutputView {
         println("---------")
     }
 
-    fun printStatistics(lottoRankGroup: Map<LottoRank, Int>) {
-        lottoRankGroup
+    fun printStatistics(lottoRankCounter: LottoRankCounter) {
+        lottoRankCounter
+            .counter
             .entries
             .forEach {
                 this.printStatisticsWithBonus(

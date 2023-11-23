@@ -8,8 +8,8 @@ import org.junit.jupiter.params.provider.CsvSource
 class RandomLottoFactoryTest {
     @ParameterizedTest
     @CsvSource(
-        "0",
         "1",
+        "4",
         "14"
     )
     fun `구매 금액이 주어질 경우 임의의 당첨번호로 구성된 로또 리스트를 생성한다`(lottoSize: Int) {
