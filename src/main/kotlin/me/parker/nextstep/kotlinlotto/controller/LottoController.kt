@@ -16,8 +16,7 @@ fun main() {
         ConsoleInput.inputLottoNumbers()
     }
 
-    val lottoTicketMachine = LottoTicketMachine(amountOfPurchase, manualLottoNumbers)
-    val purchasedLottoTickets = lottoTicketMachine.purchase()
+    val purchasedLottoTickets = LottoTicketMachine.purchase(amountOfPurchase, manualLottoNumbers)
 
     ConsoleResult.outputPurchasedLottoTickets(sizeOfManual, purchasedLottoTickets)
 
@@ -26,8 +25,7 @@ fun main() {
 
     val bonusLottoNumber: Int = ConsoleInput.inputBonusLottoNumber()
 
-    val lottoResult = LottoWinningMachine(wonLottoTicket, purchasedLottoTickets, LottoNumber(bonusLottoNumber))
-        .result()
+    val lottoResult = LottoWinningMachine.result(wonLottoTicket, purchasedLottoTickets, LottoNumber(bonusLottoNumber))
 
     ConsoleResult.outputLottoResult(lottoResult)
 }

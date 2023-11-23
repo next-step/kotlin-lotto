@@ -14,9 +14,8 @@ class LottoTicketMachineTest : DescribeSpec({
                     listOf(3, 5, 11, 16, 32, 38),
                     listOf(7, 11, 16, 35, 36, 44),
                 )
-                val lottoTicketMachine = LottoTicketMachine(13_000, manualLottoNumbers)
 
-                val purchasedLottoTickets = lottoTicketMachine.purchase()
+                val purchasedLottoTickets = LottoTicketMachine.purchase(13_000, manualLottoNumbers)
 
                 purchasedLottoTickets.size shouldBe 13
                 manualLottoNumbers.forEach {
@@ -32,22 +31,21 @@ class LottoTicketMachineTest : DescribeSpec({
                     listOf(3, 5, 11, 16, 32, 38),
                     listOf(7, 11, 16, 35, 36, 44),
                 )
-                val lottoTicketMachine = LottoTicketMachine(9_500, manualLottoNumbers)
 
-                val purchasedLottoTickets = lottoTicketMachine.purchase()
+                val purchasedLottoTickets = LottoTicketMachine.purchase(9_500, manualLottoNumbers)
 
                 purchasedLottoTickets.size shouldBe 9
                 manualLottoNumbers.forEach {
-                    purchasedLottoTickets.map { ticket -> ticket.lottoNumbers } shouldContain LottoNumbers(ManualLottoNumbersGenerationRule(it))
+                    purchasedLottoTickets.map { ticket -> ticket.lottoNumbers } shouldContain LottoNumbers(
+                        ManualLottoNumbersGenerationRule(it)
+                    )
                 }
             }
         }
 
         context("구매할 돈 0과 빈 수동 번호 리스트를 입력하면") {
             it("빈 LottoTicket 리스트를 반환한다.") {
-                val lottoTicketMachine = LottoTicketMachine(0, listOf())
-
-                val purchasedLottoTickets = lottoTicketMachine.purchase()
+                val purchasedLottoTickets = LottoTicketMachine.purchase(0, listOf())
 
                 purchasedLottoTickets.size shouldBe 0
             }
@@ -62,7 +60,7 @@ class LottoTicketMachineTest : DescribeSpec({
                 )
 
                 shouldThrow<IllegalArgumentException> {
-                    LottoTicketMachine(1_000, manualLottoNumbers)
+                    LottoTicketMachine.purchase(1_000, manualLottoNumbers)
                 }.message shouldBe "구매할 수 있는 로또 개수보다 많은 수동 로또 번호를 입력할 수 없습니다."
             }
         }
