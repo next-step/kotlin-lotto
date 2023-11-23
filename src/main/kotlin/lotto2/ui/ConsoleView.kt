@@ -2,7 +2,7 @@ package lotto2.ui
 
 import lotto2.domain.LottoNumber
 import lotto2.domain.LottoRanking
-import lotto2.domain.LottoTickets
+import lotto2.domain.LottoTicket
 
 object ConsoleView {
 
@@ -48,11 +48,10 @@ object ConsoleView {
     }
 
     object Output {
-        fun printLottoGameResults(lottoTickets: LottoTickets) {
-            println("${lottoTickets.size()}개를 구매했습니다.")
+        fun printLottoGameResults(lottoTickets: List<LottoTicket>) {
+            println("${lottoTickets.size}개를 구매했습니다.")
 
-            val lottoNumbers = lottoTickets.getAllLottoNumbers()
-            lottoNumbers.forEach { println(it) }
+            lottoTickets.forEach { println(it.numbers) }
         }
 
         fun printWinningStatistics(winningStatistics: Map<LottoRanking, Int>) {

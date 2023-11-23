@@ -1,6 +1,6 @@
 package lotto2.domain
 
-data class LottoNumbers(private val numbers: List<LottoNumber>) {
+data class LottoNumbers(private val numbers: List<LottoNumber>) : Collection<LottoNumber> by numbers {
     init {
         validateSize()
         validateDuplicate()
@@ -24,7 +24,7 @@ data class LottoNumbers(private val numbers: List<LottoNumber>) {
     }
 
     override fun toString(): String {
-        return "$numbers"
+        return numbers.map { it.number }.toString()
     }
 
     companion object {

@@ -9,6 +9,6 @@ class LottoShopTest : StringSpec({
         val 구매금액 = 7300
         val lottoTickets = LottoShop.buyLottoTickets(구매금액)
 
-        lottoTickets.size() shouldBe 7
+        lottoTickets.size shouldBe 7
     }
 })
