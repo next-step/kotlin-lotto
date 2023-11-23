@@ -10,7 +10,7 @@ class LottoMachine(
             .map { Lotto(it) }
     }
 
-    fun sellLotto(pay: Int, manualNumber: List<String> = arrayListOf()): List<Lotto> {
+    fun sellLotto(pay: Int, manualNumber: List<String> = emptyList()): List<Lotto> {
         val remainPay = pay - (lottoPrice * manualNumber.size)
         validatePay(pay, remainPay)
 
@@ -29,8 +29,8 @@ class LottoMachine(
         return manualNumbers.map { it ->
             LottoNumbers(
                 it.split(",")
-                .map { it.toInt() }
-                .map { LottoNumber(it) }
+                    .map { it.toInt() }
+                    .map { LottoNumber(it) }
             )
         }.map { Lotto(it) }
     }
