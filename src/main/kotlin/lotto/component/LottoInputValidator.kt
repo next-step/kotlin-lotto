@@ -15,7 +15,7 @@ class LottoInputValidator {
     }
 
     fun validateLottoNumbersCount(lottoNumbersCount: Int): Int {
-        require(lottoNumbersCount > 0) {
+        require(lottoNumbersCount >= 0) {
             "로또를 구매할 수 없습니다."
         }
 

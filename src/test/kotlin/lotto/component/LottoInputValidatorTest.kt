@@ -25,7 +25,7 @@ class LottoInputValidatorTest : FunSpec({
     }
 
     test("로또를 구매할 수 없는 경우 금액 IllegalArgumentException 예외 발생 테스트") {
-        val lottoNumbersCount = 0
+        val lottoNumbersCount = -1
 
         shouldThrow<IllegalArgumentException> {
             validator.validateLottoNumbersCount(lottoNumbersCount)
