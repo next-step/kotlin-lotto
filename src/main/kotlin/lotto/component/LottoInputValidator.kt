@@ -47,7 +47,7 @@ class LottoInputValidator {
     }
 
     fun validateBonusNumber(bonusNumber: LottoNumber, winningNumbers: WinningNumbers): LottoNumber {
-        require(!winningNumbers.contain(bonusNumber)) {
+        require(bonusNumber !in winningNumbers) {
             "보너스 번호는 당첨 번호에 포함될 수 없습니다."
         }
 

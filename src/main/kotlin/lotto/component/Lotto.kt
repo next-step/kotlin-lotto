@@ -20,7 +20,7 @@ class Lotto(
         return lottoNumbers
             .map {
                 val matchedCount: Int = winningNumbers.match(it)
-                val isBonusNumberMatched: Boolean = it.contain(bonusNumber)
+                val isBonusNumberMatched: Boolean = bonusNumber in it
 
                 LottoPrize.of(matchedCount, isBonusNumberMatched)
             }

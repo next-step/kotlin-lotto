@@ -12,7 +12,7 @@ class LottoNumbers private constructor(val numbers: List<LottoNumber>) {
             .size
     }
 
-    fun contain(number: LottoNumber): Boolean {
+    operator fun contains(number: LottoNumber): Boolean {
         return numbers.find { it.number == number.number } != null
     }
 
