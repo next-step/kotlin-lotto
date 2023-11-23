@@ -50,9 +50,9 @@ class LottoNumbersMachineTest {
     }
 
     @Test
-    fun `수동 로또를 뺀 나머지는 자동로또로 구매한다`() {
+    fun `수동 로또를 뺀 나머지는 자동 로또로 구매한다`() {
         val manualNumber = listOf("1,2,3,4,5,6")
         val userLotto = lottoMachine.sellLotto(2000, manualNumber)
-        userLotto.size shouldBe 2
+        userLotto.size - manualNumber.size shouldBe 1
     }
 }
