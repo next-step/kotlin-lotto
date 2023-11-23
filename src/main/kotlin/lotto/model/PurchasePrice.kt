@@ -1,6 +1,5 @@
 package lotto.model
 
-
 @JvmInline
 value class PurchasePrice(val purchasePrice: Int) {
     init {
