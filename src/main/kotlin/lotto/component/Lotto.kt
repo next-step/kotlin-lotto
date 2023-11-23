@@ -29,8 +29,8 @@ class Lotto(
     companion object {
         private const val LOTTO_PRICE = 1000
 
-        fun purchaseLottoCount(amount: Int): Int {
-            return amount / LOTTO_PRICE
+        fun purchaseLottoCount(purchasePrice: PurchasePrice): Int {
+            return purchasePrice.purchasePrice / LOTTO_PRICE
         }
 
         fun getLottoTotalPrice(count: Int): Int {

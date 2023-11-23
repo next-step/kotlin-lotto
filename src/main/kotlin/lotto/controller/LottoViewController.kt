@@ -2,10 +2,7 @@ package lotto.controller
 
 import lotto.component.Lotto
 import lotto.component.LottoInputValidator
-import lotto.model.LottoNumber
-import lotto.model.LottoNumbers
-import lotto.model.LottoResult
-import lotto.model.WinningNumbers
+import lotto.model.*
 import lotto.view.LottoInputView
 import lotto.view.LottoResultView
 
@@ -14,7 +11,7 @@ class LottoViewController(
     private val lottoInputValidator: LottoInputValidator,
     private val lottoResultView: LottoResultView
 ) {
-    fun getPurchasePrice(): Int {
+    fun getPurchasePrice(): PurchasePrice {
         val purchasePrice: String? = lottoInputView.getPurchasePrice()
 
         return convertPurchasePrice(purchasePrice)
@@ -34,7 +31,7 @@ class LottoViewController(
         }
     }
 
-    fun getLottoNumbers(purchasePrice: Int): List<LottoNumbers> {
+    fun getLottoNumbers(purchasePrice: PurchasePrice): List<LottoNumbers> {
         return convertLottoNumbers(purchasePrice)
     }
 
@@ -50,10 +47,11 @@ class LottoViewController(
         return convertWinningNumbers(winningNumbers)
     }
 
-    private fun convertPurchasePrice(purchasePrice: String?): Int {
+    private fun convertPurchasePrice(purchasePrice: String?): PurchasePrice {
         return purchasePrice
             .run { lottoInputValidator.validatePurchasePrice(this) }
             .toInt()
+            .run { PurchasePrice(this) }
     }
 
     private fun convertManualLottoNumbersCount(manualLottoNumbersCount: String?): Int {
@@ -68,7 +66,7 @@ class LottoViewController(
         return LottoNumbers.create(numbers)
     }
 
-    private fun convertLottoNumbers(purchasePrice: Int): List<LottoNumbers> {
+    private fun convertLottoNumbers(purchasePrice: PurchasePrice): List<LottoNumbers> {
         val count: Int = Lotto.purchaseLottoCount(purchasePrice)
         val lottoNumbersCount: Int = lottoInputValidator.validateLottoNumbersCount(count)
 
