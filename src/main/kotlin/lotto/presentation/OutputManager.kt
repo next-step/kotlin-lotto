@@ -11,6 +11,10 @@ class OutputManager {
         println(pay)
     }
 
+    fun printNotSellLotto() {
+        println(NOT_SELL_LOTTO)
+    }
+
     fun printSellLottoCount(userLottos: List<Lotto>, manualLottoAmount: Int) {
         println("수동으로 ${manualLottoAmount}장, 자동으로 ${userLottos.size - manualLottoAmount}개를 구매했습니다.")
         userLottos.forEach {
@@ -33,6 +37,7 @@ class OutputManager {
     }
 
     companion object {
+        private val NOT_SELL_LOTTO: String = "로또를 구입하지 못했습니다."
         private val DECIMAL_FORMAT: DecimalFormat = DecimalFormat("#.##")
         private const val RESULT_MESSAGE: String = "당첨 통계"
         private val RESULT_MESSAGE_MAP2: MutableMap<Revenue, String> = Revenue.values().associate {

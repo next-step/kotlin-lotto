@@ -19,6 +19,11 @@ class LottoStore(
         val inputManualNumbers = inputManager.inputManualLottoNumbers(sellManualLottoCount)
 
         val userLottos = lottoMachine.sellLotto(userPay, inputManualNumbers)
+        if (userLottos.isEmpty()) {
+            outputManager.printNotSellLotto()
+            return
+        }
+
         outputManager.printSellLottoCount(userLottos, sellManualLottoCount)
 
         val winningNumbers = WinningLotto.create(inputManager.inputWinningNumber(), inputManager.inputBonusNumber())

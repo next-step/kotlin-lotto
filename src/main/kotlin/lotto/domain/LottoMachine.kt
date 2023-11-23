@@ -12,7 +12,9 @@ class LottoMachine(
 
     fun sellLotto(pay: Int, manualNumber: List<String> = emptyList()): List<Lotto> {
         val remainPay = pay - (lottoPrice * manualNumber.size)
-        validatePay(pay, remainPay)
+        if (checkedPay(pay, remainPay)) {
+            return emptyList()
+        }
 
         val manualLottos = createManualLotto(manualNumber)
         val autoLottos = createLotto(remainPay / lottoPrice)
@@ -20,9 +22,8 @@ class LottoMachine(
         return manualLottos + autoLottos
     }
 
-    private fun validatePay(pay: Int, remainPay: Int) {
-        require(pay >= lottoPrice) { SELL_LOTTO_ERROR_MESSAGE }
-        require(remainPay <= pay) { SELL_LOTTO_ERROR_MESSAGE }
+    private fun checkedPay(pay: Int, remainPay: Int): Boolean {
+        return (pay < lottoPrice) || (remainPay > pay)
     }
 
     private fun createManualLotto(manualNumbers: List<String>): List<Lotto> {
