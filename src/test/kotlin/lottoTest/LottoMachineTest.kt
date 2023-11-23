@@ -1,24 +1,58 @@
 package lottoTest
 
+import io.kotest.core.spec.style.FunSpec
+import io.kotest.datatest.withData
+import io.kotest.matchers.shouldBe
 import lotto.domain.Lottery
+import lotto.domain.Lotto
 import lotto.domain.LottoMachine
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.CsvSource
+import lotto.domain.PurchasedLottery
 
-class LottoMachineTest {
+data class LottoMachineTestData(
+    val purchaseAmount: Int,
+    val manualLottery: Lottery,
+    val expectedAutoCount: Int
+)
 
-    @ParameterizedTest
-    @CsvSource(
-        value = [
-            "10000, 10",
-            "12345, 12",
-            "24680, 24",
-        ]
-    )
-    fun `금액만큼 로또를 구매`(input: Int, expected: Int) {
-        val lottoList: Lottery = LottoMachine.purchase(input)
+class LottoMachineTest : FunSpec({
+    context("로또를 수동과 자동 섞어서 구매") {
+        withData(
+            listOf(
+                LottoMachineTestData(
+                    10000,
+                    Lottery(
+                        listOf(
+                            Lotto(listOf(1, 2, 3, 4, 5, 6)),
+                            Lotto(listOf(1, 2, 3, 4, 5, 7)),
+                        )
+                    ),
+                    8
+                ),
+                LottoMachineTestData(
+                    8500,
+                    Lottery(
+                        listOf()
+                    ),
+                    8
+                ),
+                LottoMachineTestData(
+                    3200,
+                    Lottery(
+                        listOf(
+                            Lotto(listOf(1, 2, 3, 4, 5, 6)),
+                            Lotto(listOf(1, 2, 3, 4, 5, 7)),
+                            Lotto(listOf(1, 2, 3, 4, 5, 8)),
+                        )
+                    ),
+                    0
+                ),
+            )
+        ) { (purchaseAmount, manualLottery, expectedAutoCount) ->
+            val purchasedLottery: PurchasedLottery =
+                LottoMachine.purchase(purchaseAmount = purchaseAmount, manualLottery = manualLottery)
 
-        assertEquals(expected, lottoList.getCount())
+            purchasedLottery.getManualCount() shouldBe manualLottery.getCount()
+            purchasedLottery.getAutoCount() shouldBe expectedAutoCount
+        }
     }
-}
+})

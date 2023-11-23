@@ -1,6 +1,7 @@
 package lottoTest
 
 import lotto.domain.Lotto
+import lotto.domain.LottoPolicy
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -31,10 +32,10 @@ class LottoTest {
         fun generateIllegalLottoNumbers(): List<Arguments> {
             return listOf(
                 Arguments.of(
-                    listOf(1, 2, 3, 4, 5, Lotto.MAX_LOTTO_NUMBER + 1)
+                    listOf(1, 2, 3, 4, 5, LottoPolicy.MAX_LOTTO_NUMBER + 1)
                 ),
                 Arguments.of(
-                    listOf(1, 2, 3, 4, 5, Lotto.MIN_LOTTO_NUMBER - 1)
+                    listOf(1, 2, 3, 4, 5, LottoPolicy.MIN_LOTTO_NUMBER - 1)
                 )
             )
         }
