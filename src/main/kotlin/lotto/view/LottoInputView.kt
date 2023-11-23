@@ -27,9 +27,9 @@ class LottoInputView {
         return readlnOrNull()
     }
 
-    fun printPurchasedLottoNumbers(lottoNumbers: List<List<Int>>) {
-        println("${lottoNumbers.size}개의 로또를 구매했습니다.")
-        lottoNumbers.forEach { printLottoNumbers(it) }
+    fun printPurchasedLottoNumbers(manualLottoNumbers: List<List<Int>>, lottoNumbers: List<List<Int>>) {
+        println("수동으로 ${manualLottoNumbers.size}장, 자동으로 ${lottoNumbers.size}장의 로또를 구매했습니다.")
+        (manualLottoNumbers + lottoNumbers).forEach { printLottoNumbers(it) }
         println()
     }
 

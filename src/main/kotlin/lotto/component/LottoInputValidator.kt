@@ -2,6 +2,7 @@ package lotto.component
 
 import lotto.model.LottoNumber
 import lotto.model.LottoNumbers
+import lotto.model.PurchasePrice
 import lotto.model.WinningNumbers
 
 class LottoInputValidator {
@@ -63,7 +64,7 @@ class LottoInputValidator {
         return manualLottoNumbersCount
     }
 
-    fun validateLottoOverbuy(purchasePrice: Int, purchaseTotalPrice: Int): Int {
+    fun validateLottoOverbuy(purchasePrice: PurchasePrice, purchaseTotalPrice: PurchasePrice): PurchasePrice {
         require(purchaseTotalPrice >= purchasePrice) {
             "구매 금액 이상으로 로또를 구매할 수 없습니다."
         }

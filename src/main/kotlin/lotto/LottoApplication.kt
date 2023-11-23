@@ -20,12 +20,17 @@ fun main() {
     val lottoController = LottoController(lotto)
 
     val purchasePrice: PurchasePrice = lottoViewController.getPurchasePrice()
-    val lottoNumbers: List<LottoNumbers> = lottoViewController.getLottoNumbers(purchasePrice)
-    lottoViewController.printPurchasedLottoNumbers(lottoNumbers)
+
+    val manualLottoNumbersCount: Int = lottoViewController.getManualLottoNumbersCount()
+    val (manualLottoNumbers, extraPurchasePrice) = lottoViewController.getManualLottoNumbers(manualLottoNumbersCount, purchasePrice)
+    val lottoNumbers: List<LottoNumbers> = lottoViewController.getLottoNumbers(extraPurchasePrice)
+
+    lottoViewController.printPurchasedLottoNumbers(manualLottoNumbers, lottoNumbers)
+
     val winningNumbers: WinningNumbers = lottoViewController.getWinningNumbers()
     val bonusNumber: LottoNumber = lottoViewController.getBonusNumber(winningNumbers)
 
-    val input = LottoInput(lottoNumbers, winningNumbers, bonusNumber)
+    val input = LottoInput(manualLottoNumbers + lottoNumbers, winningNumbers, bonusNumber)
     val result = lottoController.run(input)
 
     lottoViewController.printLottoResult(result)

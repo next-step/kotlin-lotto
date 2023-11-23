@@ -23,12 +23,19 @@ class LottoViewController(
         return convertManualLottoNumbersCount(manualLottoNumbersCount)
     }
 
-    fun getManualLottoNumbers(manualLottoNumbersCount: Int): List<LottoNumbers> {
-        return List(manualLottoNumbersCount) {
+    fun getManualLottoNumbers(manualLottoNumbersCount: Int, purchasePrice: PurchasePrice): Pair<List<LottoNumbers>, PurchasePrice> {
+        val manualLottoPurchasePrice = Lotto.getLottoTotalPrice(manualLottoNumbersCount)
+            .run { PurchasePrice(this) }
+            .run { lottoInputValidator.validateLottoOverbuy(this, purchasePrice) }
+
+        val extraPurchasePrice = purchasePrice - manualLottoPurchasePrice
+        val manualLottoNumbers: List<LottoNumbers> = List(manualLottoNumbersCount) {
             lottoInputView
                 .getManualLottoNumbers()
                 .run { convertLottoNumbers(this) }
         }
+
+        return Pair(manualLottoNumbers, extraPurchasePrice)
     }
 
     fun getLottoNumbers(purchasePrice: PurchasePrice): List<LottoNumbers> {
@@ -97,8 +104,11 @@ class LottoViewController(
             .run { lottoInputValidator.validateLottoNumberCount(this) }
     }
 
-    fun printPurchasedLottoNumbers(lottoNumbers: List<LottoNumbers>) {
-        lottoInputView.printPurchasedLottoNumbers(lottoNumbers.convertToLottoNumberList())
+    fun printPurchasedLottoNumbers(manualLottoNumbers: List<LottoNumbers>, lottoNumbers: List<LottoNumbers>) {
+        lottoInputView.printPurchasedLottoNumbers(
+            manualLottoNumbers.convertToLottoNumberList(),
+            lottoNumbers.convertToLottoNumberList()
+        )
     }
 
     private fun List<LottoNumbers>.convertToLottoNumberList(): List<List<Int>> {
