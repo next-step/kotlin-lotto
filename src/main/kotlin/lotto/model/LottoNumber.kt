@@ -1,6 +1,7 @@
 package lotto.model
 
-class LottoNumber private constructor(val number: Int) {
+@JvmInline
+value class LottoNumber private constructor(val number: Int) {
     companion object {
         val LOTTO_NUMBER_RANGE = (1..45).toList()
 
