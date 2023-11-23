@@ -19,7 +19,7 @@ class InputManager {
     fun inputManualLottoNumbers(count: Int): List<String> {
         println(INPUT_MANUAL_LOTTO_NUMBER_MESSAGE)
         val input = mutableListOf<String>()
-        for (i: Int in 1..count) {
+        repeat(count) {
             input.add(inputUserValue().replace("\\s".toRegex(), ""))
         }
 
