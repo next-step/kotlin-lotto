@@ -16,4 +16,14 @@ value class PurchasePrice(val purchasePrice: Int) {
     operator fun minus(purchasePrice: PurchasePrice): PurchasePrice {
         return PurchasePrice(this.purchasePrice - purchasePrice.purchasePrice)
     }
+
+    operator fun compareTo(purchasePrice: PurchasePrice): Int {
+        return this.purchasePrice - purchasePrice.purchasePrice
+    }
+
+    companion object {
+        fun from(purchasePrice: Int): PurchasePrice {
+            return PurchasePrice(purchasePrice)
+        }
+    }
 }
