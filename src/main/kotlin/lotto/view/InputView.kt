@@ -6,12 +6,12 @@ import lotto.domain.WinningLotto
 
 object InputView {
     fun getPurchaseAmount(): Int {
-        println("구입금액을 입력해 주세요.")
+        println(TextResource.ENTER_PURCHASE_AMOUNT)
         return readln().toInt()
     }
 
     fun getManualLottoCount(): Int {
-        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        println(TextResource.ENTER_MANUAL_LOTTO_COUNT)
         return readln().toInt()
     }
 
@@ -20,7 +20,7 @@ object InputView {
             return Lottery(emptyList())
         }
 
-        println("수동으로 구매할 번호를 입력해 주세요.")
+        println(TextResource.ENTER_MANUAL_LOTTO_NUMBERS)
 
         return Lottery(
             List(count) { _ ->
@@ -34,7 +34,7 @@ object InputView {
     }
 
     fun getLastWinnerLotto(): WinningLotto {
-        println("지난 주 당첨 번호를 입력해 주세요.")
+        println(TextResource.ENTER_LAST_WINNER_LOTTO)
         val lotto = Lotto(
             readln()
                 .split(",")
@@ -45,7 +45,7 @@ object InputView {
     }
 
     private fun getBonusNumber(): Int {
-        println("보너스 볼을 입력해 주세요.")
+        println(TextResource.ENTER_BONUS_NUMBER)
         return readln().toInt()
     }
 }

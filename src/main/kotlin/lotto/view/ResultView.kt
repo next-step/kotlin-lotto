@@ -9,27 +9,29 @@ object ResultView {
     private fun showLottery(lottery: Lottery) {
         println(
             lottery.lottoList.joinToString("\n") {
-                it.numbers.toString()
+               "[${it.numbers.map { lottoNumber -> lottoNumber.number }.joinToString(", ")}]"
             } + "\n"
         )
     }
 
     private fun showRank(rank: Rank, rankCount: Int) {
         println(
-            "${rank.countOfMatch}개 일치".let { text ->
-                if (rank.isMatchBonus) {
-                    "$text, 보너스 볼 일치"
-                } else {
-                    "$text "
-                }
-            }.let { text ->
-                "$text(${rank.winningMoney}원)- ${rankCount}개"
-            }
+            TextResource.resultByRank(
+                countOfMatch = rank.countOfMatch,
+                isMatchBonus = rank.isMatchBonus,
+                winningMoney = rank.winningMoney,
+                rankCount = rankCount,
+            )
         )
     }
 
     fun showPurchasedLottery(purchasedLottery: PurchasedLottery) {
-        println("수동으로 ${purchasedLottery.getManualCount()}장, 자동으로 ${purchasedLottery.getAutoCount()}개를 구매했습니다.")
+        println(
+            TextResource.countOfPurchasedLottery(
+                manualCount = purchasedLottery.getManualCount(),
+                autoCount = purchasedLottery.getAutoCount()
+            )
+        )
 
         showLottery(purchasedLottery.getLottery())
     }
@@ -37,10 +39,10 @@ object ResultView {
     fun showLottoStatResult(lottoStatResult: LottoStatResult) {
         val returnRate = lottoStatResult.getReturnRate()
 
-        println("\n당첨 통계\n---------")
+        println("\n${TextResource.LOTTO_RESULT}")
         Rank.values().filter { it.countOfMatch > 0 }.forEach {
             showRank(it, lottoStatResult.getCount(it))
         }
-        println("총 수익률은 ${returnRate}입니다.${if (returnRate < 1) "(기준이 1이기 때문에 결과적으로 손해라는 의미임)" else ""}")
+        println(TextResource.total_return_rate(returnRate))
     }
 }

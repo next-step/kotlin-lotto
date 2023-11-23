@@ -1,6 +1,7 @@
 package lotto.domain
 
-class Lottery(
+@JvmInline
+value class Lottery(
     val lottoList: List<Lotto>
 ) {
     fun getCount() = lottoList.count()

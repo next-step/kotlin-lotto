@@ -1,3 +1,4 @@
 package lotto.domain
 
-data class LottoNumber(val number: Int)
+@JvmInline
+value class LottoNumber(val number: Int)
