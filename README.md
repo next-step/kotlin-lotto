@@ -140,3 +140,5 @@
 #### [피드백 반영]
 
 - [x] 로또 번호를 원시 타입으로 포장한다 (https://github.com/next-step/kotlin-lotto/pull/957#discussion_r1398365801)
+- [x] 당첨 로또와 총 등수를 담당하는 도메인 모델 객체를 추가하여 역할을
+  응집한다 (https://github.com/next-step/kotlin-lotto/pull/957#discussion_r1398366321)

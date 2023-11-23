@@ -14,13 +14,13 @@ data class LottoNumbers(private val numbers: List<LottoNumber>) : Collection<Lot
         require(numbers.size == numbers.toSet().size) { "로또 번호들은 서로 중복될 수 없습니다." }
     }
 
+    fun countMatchingNumbers(lottoNumbers: LottoNumbers): Int {
+        return numbers.intersect(lottoNumbers.numbers.toSet()).size
+    }
+
     fun contains(number: Int): Boolean {
         return numbers.map { it.number }
             .contains(number)
-    }
-
-    fun countMatchingNumbers(lottoNumbers: LottoNumbers): Int {
-        return numbers.intersect(lottoNumbers.numbers.toSet()).size
     }
 
     override fun toString(): String {
