@@ -1,13 +1,9 @@
 package lotto.domain
 
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.data.forAll
-import io.kotest.data.row
 import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.ints.shouldBeLessThan
 import io.kotest.matchers.shouldBe
-import lotto.error.InvalidLottoNumberException
 
 class LottoNumberGeneratorSpec : FunSpec({
     context("로또 번호 생성") {

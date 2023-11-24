@@ -11,13 +11,13 @@ object InputView {
     private const val BONUS_NUMBER_QUESTION = "보너스 볼을 입력해 주세요."
     private const val LOTTO_NUMBER_DELIMITER = ", "
 
-    val purchaseRequest : PurchaseRequest
+    val purchaseRequest: PurchaseRequest
         get() = PurchaseRequest(
             amount = getPurchaseAmount(),
             manualLottoNumbers = getManualLottoNumbers(),
         )
 
-    val endLottoRequest : EndLottoRequest
+    val endLottoRequest: EndLottoRequest
         get() = EndLottoRequest(
             winningNumbers = getWinningNumbersInput(),
             bonusNumber = getBonusNumberInput()
