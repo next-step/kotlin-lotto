@@ -20,6 +20,7 @@
 # 로또(2등)
 - [X] 로또 안에 포함된 숫자를 관리하는 객체를 만든다. (LottoNumber)
   - [X] 로또 숫자는 1~45까지의 숫자이다.
+  - [] 로또는 중복되지 않은 숫자로 이루어져있다. 
 - [X] 로또는 LottoNumber 여러개를 가지고 LottoNumberGenerator를 통해 만든다.
 - [X] 로또 숫자를 원하는 수만큼 만들어내는 LottoNumberGenerator 객체가 있다. 
 - [X] 구입한 금액만큼 로또를 발급해준다. (LottoMachine)

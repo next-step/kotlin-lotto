@@ -1,18 +1,18 @@
 package lotto.view
 
-import lotto.Lotto
-import lotto.LottoNumber
-import lotto.WinningLotto
+import lotto.domain.Lotto
+import lotto.domain.LottoNumber
+import lotto.domain.Money
+import lotto.domain.WinningLotto
 
 object InputView {
-    fun getPurchaseAmount(): Int {
+    fun getPurchaseAmount(): Money {
         println("구입금액을 입력해 주세요.")
-        return readln().toInt()
+        return Money(readln().toInt())
     }
-
     fun getWinningNumbers(): WinningLotto {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        val winningNumbers = readln().replace(" ",""). split(",").map { LottoNumber.valueOf(it.toInt()) }
+        val winningNumbers = readln().replace(" ",""). split(",").map { LottoNumber.valueOf(it.toInt()) }.toSet()
         val winningLotto = convertToLotto(winningNumbers)
 
         println("보너스 볼을 입력해 주세요.")
@@ -20,8 +20,9 @@ object InputView {
         return WinningLotto(winningLotto, bonusNumber)
     }
 
-    private fun convertToLotto(numbers: List<LottoNumber>): Lotto {
+    private fun convertToLotto(numbers: Set<LottoNumber>): Lotto {
         return Lotto(numbers)
     }
+
 
 }
