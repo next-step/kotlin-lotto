@@ -16,7 +16,7 @@ internal class LottoFactoryTest {
         val manualLottoCount = 0
 
         // when
-        val lottoCount = LottoFactory.calculateLottoCount(money, manualLottoCount)
+        val lottoCount = LottoOrder(money, manualLottoCount)
 
         // then
         assertThat(lottoCount.autoLottoCount).isEqualTo(expected)
@@ -29,6 +29,6 @@ internal class LottoFactoryTest {
         val manualLottoCount = 2
 
         // when, then
-        assertThrows<IllegalArgumentException> { LottoFactory.calculateLottoCount(money, manualLottoCount) }
+        assertThrows<IllegalArgumentException> { LottoOrder(money, manualLottoCount) }
     }
 }
