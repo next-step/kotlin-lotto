@@ -1,6 +1,10 @@
 package lotto.view
 
-import lotto.domain.*
+import lotto.domain.Lotto
+import lotto.domain.LottoNumber
+import lotto.domain.LottoPrize
+import lotto.domain.LottoResult
+import lotto.domain.Money
 
 object ResultView {
     fun printLottoList(lottos: Set<Lotto>) {
@@ -15,11 +19,15 @@ object ResultView {
     }
 
     fun outputResult(money: Money, result: LottoResult) {
-        println("당첨 통계")
-        println("---------")
-        for (rank in LottoPrize.rankOf()) {
-            println("${rank.text} (${rank.prizeMoney}원) - ${result.getResult(rank)}개")
+        val resultString = buildString {
+            appendLine("당첨 통계")
+            appendLine("---------")
+            for (rank in LottoPrize.rankOf()) {
+                appendLine("${rank.text} (${rank.prizeMoney}원) - ${result.getResult(rank)}개")
+            }
+            append("총 수익률은 %.2f입니다.".format(result.getProfitRate(money)))
         }
-        println("총 수익률은 %.2f입니다.".format(result.getProfitRate(money)))
+
+        println(resultString)
     }
 }
