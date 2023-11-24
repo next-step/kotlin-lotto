@@ -5,8 +5,6 @@ import io.kotest.matchers.shouldBe
 import org.bmsk.domain.model.lotto.LottoLottery
 import org.bmsk.domain.model.lotto.LottoNumber
 
-private fun LottoLottery(numbers: List<Int>): LottoLottery = LottoLottery(numbers.map(::LottoNumber))
-
 class LottoStatisticsTest : FunSpec({
     context("LottoStatisticsAnalyzer") {
         val mockLottoLotteries = listOf(
@@ -31,11 +29,13 @@ class LottoStatisticsTest : FunSpec({
             val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber)
             val stats = analyzer.calculateLottoStatistics(winningNumbers)
 
-            stats.numberOfMatches3 shouldBe 1
-            stats.numberOfMatches4 shouldBe 0
-            stats.numberOfMatches5 shouldBe 0
-            stats.numberOfMatches6 shouldBe 0
+            stats.matchCounts[MatchCount.THREE] shouldBe 1
+            stats.matchCounts[MatchCount.FOUR] shouldBe null
+            stats.matchCounts[MatchCount.FIVE] shouldBe null
+            stats.matchCounts[MatchCount.SIX] shouldBe null
             (stats.totalProfitRate * 100).toInt() / 100.0 shouldBe 0.35
         }
     }
 })
+
+private fun LottoLottery(numbers: List<Int>): LottoLottery = LottoLottery(numbers.map(::LottoNumber))
