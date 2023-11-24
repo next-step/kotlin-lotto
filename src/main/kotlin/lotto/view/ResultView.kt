@@ -3,18 +3,17 @@ package lotto.view
 import lotto.domain.model.LottoMatchResult
 import lotto.domain.model.vo.RateOfReturn
 
-private const val LOTTO_MATCH_RESULT_DESCRIPTION = "%d개 일치 (%d원)- %d개"
-private const val LOTTO_BONUS_MATCH_RESULT_DESCRIPTION = "%d개 일치, 보너스 볼 일치(%d원) - %d개"
-private const val LOTTO_RATE_OF_RETURN_DESCRIPTION = "총 수익률은 %.2f입니다.(기준이 %d이기 때문에 결과적으로 %s라는 의미임)"
-private const val LOTTO_RATE_OF_RETURN_BENCHMARK_NUMBER = 1
-private const val PROFIT = "이득이"
-private const val LOSS = "손해"
-
-
 /**
  * 결과 뷰
  * */
 object ResultView {
+
+    private const val LOTTO_MATCH_RESULT_DESCRIPTION = "%d개 일치 (%d원)- %d개"
+    private const val LOTTO_BONUS_MATCH_RESULT_DESCRIPTION = "%d개 일치, 보너스 볼 일치(%d원) - %d개"
+    private const val LOTTO_RATE_OF_RETURN_DESCRIPTION = "총 수익률은 %.2f입니다.(기준이 %d이기 때문에 결과적으로 %s라는 의미임)"
+    private const val LOTTO_RATE_OF_RETURN_BENCHMARK_NUMBER = 1
+    private const val PROFIT = "이득이"
+    private const val LOSS = "손해"
 
     /**
      * 로또 일치 결과 뷰
@@ -26,7 +25,7 @@ object ResultView {
     }
     
     private fun drawLottoMatchResult(lottoMatchResult: LottoMatchResult) {
-        if (lottoMatchResult.isBonusMatch) {
+        if (lottoMatchResult.bonusMatch.bonusMatch == true) {
             println(LOTTO_BONUS_MATCH_RESULT_DESCRIPTION.format(lottoMatchResult.matchCount.matchCount, lottoMatchResult.prize.prize, lottoMatchResult.winningTicketCount.ticketCount))
             return
         }

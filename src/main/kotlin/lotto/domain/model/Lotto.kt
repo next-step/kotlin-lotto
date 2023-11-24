@@ -13,13 +13,13 @@ data class Lotto(val lottoNumbers: LottoNumbers) {
      * 로또 맞은 횟수 반환
      * */
     fun getMatchCount(winningLottoNumbers: WinningLottoNumbers): Int {
-        return lottoNumbers.numbers.filter { winningLottoNumbers.winningNumbers.contains(it) }.size
+        return lottoNumbers.numbers.filter { winningLottoNumbers.winningLottoNumbers.contains(it) }.size
     }
 
     /**
      * 특정 로또 번호가 맞는지 확인
      * */
-    infix fun getIsMatchNumber(lottoNumber: LottoNumber): Boolean {
+    fun matchNumber(lottoNumber: LottoNumber): Boolean {
         return lottoNumbers.numbers.contains(lottoNumber)
     }
 

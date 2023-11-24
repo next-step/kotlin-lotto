@@ -4,11 +4,11 @@ package lotto.domain.model.vo
  * 로또 넘버 리스트
  * */
 @JvmInline
-value class LottoNumbers(val numbers: Set<LottoNumber>) {
+value class LottoNumbers(val numbers: Set<LottoNumber>): Set<LottoNumber> by numbers {
 
     init {
         require(numbers.isNotEmpty()) {
-            "로또의 번호를 골라야 합니다."
+            "로또번호들은 비어 있을 수 없습니다."
         }
 
         require(numbers.size == DEFAULT_LOTTO_NUMBER_LIST_LENGTH) {

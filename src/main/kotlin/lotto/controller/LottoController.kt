@@ -13,14 +13,14 @@ object LottoController {
      * 로또 기계 시작
      * */
     fun runLottoMachine() {
-        val buyPrice = BuyPrice.valueOf(InputView.getInputValue(InputView.InputType.BUY_LOTTO_PRICE))
+        val buyPrice = InputView.drawBuyPrice()
         val lottoList = LottoCreateMachine.buyLottoList(buyPrice)
 
         InputView.drawLottoList(lottoList)
 
-        val winningNumberText = InputView.getInputValue(InputView.InputType.LAST_WEEK_WINNING_NUMBER)
-        val winningBonusNumberText = InputView.getInputValue(InputView.InputType.LAST_WEEK_WINNING_NUMBER_BONUS)
-        val lottoResultList = WinningType.runDrawLottos(winningNumberText, winningBonusNumberText, lottoList)
+        val winningNumbers = InputView.drawWinningLottoNumber()
+        val winningBonusNumber = InputView.drawWinningBonusNumber()
+        val lottoResultList = WinningType.runDrawLottos(winningNumbers, winningBonusNumber, lottoList)
 
         ResultView.drawLottoMatchResultList(lottoResultList)
 

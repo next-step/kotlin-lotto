@@ -2,6 +2,7 @@ package lotto
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.shouldBe
 import lotto.domain.model.vo.LottoNumber
 import lotto.domain.model.vo.LottoNumbers
@@ -43,11 +44,12 @@ class LottoNumberListTest : FunSpec({
 
     test("로또 번호 리스트 생성시 [1, 2, 3, 4, 5, 6]을 넣을 경우 [1, 2, 3, 4, 5, 6]을 가지고 있는 로또 번호 리스트가 생성 되어야 한다.") {
         val lottoNumbers = LottoNumbers.valueOf(setOf(1, 2, 3, 4, 5, 6))
-        lottoNumbers.numbers.contains(LottoNumber.valueOf(1)) shouldBe true
-        lottoNumbers.numbers.contains(LottoNumber.valueOf(2)) shouldBe true
-        lottoNumbers.numbers.contains(LottoNumber.valueOf(3)) shouldBe true
-        lottoNumbers.numbers.contains(LottoNumber.valueOf(4)) shouldBe true
-        lottoNumbers.numbers.contains(LottoNumber.valueOf(5)) shouldBe true
-        lottoNumbers.numbers.contains(LottoNumber.valueOf(6)) shouldBe true
+
+        val mutableSet = mutableSetOf<LottoNumber>()
+        (1..6).forEach { index ->
+            mutableSet.add(LottoNumber.valueOf(index))
+        }
+
+        lottoNumbers.numbers shouldContainExactly mutableSet.toSet()
     }
 })

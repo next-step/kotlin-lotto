@@ -23,11 +23,6 @@ value class BuyPrice(val buyPrice: Int) {
         /**
          * 구매 가격 객체 생성
          * */
-        fun valueOf(buyPrice: String = DEFAULT_BUY_PRICE.toString()): BuyPrice {
-            require(buyPrice.isNotBlank() && buyPrice.toIntOrNull() != null) {
-                "구매 가격은 숫자만 입력 가능합니다."
-            }
-            return BuyPrice(buyPrice.toInt())
-        }
+        fun valueOf(buyPrice: Int = DEFAULT_BUY_PRICE): BuyPrice = BuyPrice(buyPrice)
     }
 }
