@@ -1,11 +1,11 @@
 package me.parker.nextstep.kotlinlotto.domain
 
-class LottoWinningMachine(
-    private val wonLottoTicket: LottoTicket,
-    private val boughtLottoTickets: List<LottoTicket>,
-    private val bonusLottoNumber: LottoNumber
-) {
-    fun result(): LottoResult {
+object LottoWinningMachine {
+    fun result(
+        wonLottoTicket: LottoTicket,
+        boughtLottoTickets: List<LottoTicket>,
+        bonusLottoNumber: LottoNumber
+    ): LottoResult {
         val rankMatchCounts: MutableMap<LottoRank, Int> = LottoRank.values().associateWithTo(mutableMapOf()) { 0 }
         boughtLottoTickets
             .map { it.match(wonLottoTicket, bonusLottoNumber) }
@@ -23,5 +23,4 @@ class LottoWinningMachine(
 
         return LottoResult(rankMatchCounts, profitRate)
     }
-
 }

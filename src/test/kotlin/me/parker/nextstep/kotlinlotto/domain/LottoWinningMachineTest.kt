@@ -26,7 +26,7 @@ class LottoWinningMachineTest : DescribeSpec({
                 val bonusLottoNumber = LottoNumber(7)
 
                 shouldNotThrow<Exception> {
-                    LottoWinningMachine(lastWonLottoTicket, boughtLottoTickets, bonusLottoNumber)
+                    LottoWinningMachine.result(lastWonLottoTicket, boughtLottoTickets, bonusLottoNumber)
                 }
             }
         }
@@ -54,9 +54,7 @@ class LottoWinningMachineTest : DescribeSpec({
                 )
                 val bonusLottoNumber = LottoNumber(7)
 
-                val lottoWinningMachine = LottoWinningMachine(lastWonLottoTicket, boughtLottoTickets, bonusLottoNumber)
-
-                val result = lottoWinningMachine.result()
+                val result = LottoWinningMachine.result(lastWonLottoTicket, boughtLottoTickets, bonusLottoNumber)
 
                 result.matchCount[LottoRank.FIRST] shouldBe 0
                 result.matchCount[LottoRank.SECOND] shouldBe 0
@@ -84,9 +82,7 @@ class LottoWinningMachineTest : DescribeSpec({
                 )
                 val bonusLottoNumber = LottoNumber(7)
 
-                val lottoWinningMachine = LottoWinningMachine(lastWonLottoTicket, boughtLottoTickets, bonusLottoNumber)
-
-                val result = lottoWinningMachine.result()
+                val result = LottoWinningMachine.result(lastWonLottoTicket, boughtLottoTickets, bonusLottoNumber)
 
                 result.matchCount[LottoRank.FIRST] shouldBe 1
                 result.matchCount[LottoRank.SECOND] shouldBe 1

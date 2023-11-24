@@ -50,5 +50,4 @@ class LottoRankTest : DescribeSpec({
             }
         }
     }
-
 })

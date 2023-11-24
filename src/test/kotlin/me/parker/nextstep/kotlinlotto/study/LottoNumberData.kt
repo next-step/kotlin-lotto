@@ -1,4 +1,3 @@
 package me.parker.nextstep.kotlinlotto.study
 
-data class LottoNumberData(val number: Int) {
-}
+data class LottoNumberData(val number: Int)

@@ -2,26 +2,30 @@ package me.parker.nextstep.kotlinlotto.controller
 
 import me.parker.nextstep.kotlinlotto.domain.LottoNumber
 import me.parker.nextstep.kotlinlotto.domain.LottoTicket
+import me.parker.nextstep.kotlinlotto.domain.LottoTicketMachine
 import me.parker.nextstep.kotlinlotto.domain.LottoWinningMachine
 import me.parker.nextstep.kotlinlotto.view.ConsoleInput
 import me.parker.nextstep.kotlinlotto.view.ConsoleResult
 
 fun main() {
     val amountOfPurchase: Int = ConsoleInput.inputAmountOfPurchaseLotto()
+    val sizeOfManual: Int = ConsoleInput.inputSizeOfManualLotto()
 
-    val purchasedLottoTickets: List<LottoTicket> = List(amountOfPurchase / LottoTicket.PRICE) {
-        LottoTicket.automatic()
+    ConsoleInput.inputManualLottoNumbers()
+    val manualLottoNumbers: List<List<Int>> = List(sizeOfManual) {
+        ConsoleInput.inputLottoNumbers()
     }
 
-    ConsoleResult.outputPurchasedLottoTickets(purchasedLottoTickets)
+    val purchasedLottoTickets = LottoTicketMachine.purchase(amountOfPurchase, manualLottoNumbers)
+
+    ConsoleResult.outputPurchasedLottoTickets(sizeOfManual, purchasedLottoTickets)
 
     val lastWonLottoNumbers: List<Int> = ConsoleInput.inputLastWonLottoNumbers()
     val wonLottoTicket = LottoTicket.manual(lastWonLottoNumbers)
 
     val bonusLottoNumber: Int = ConsoleInput.inputBonusLottoNumber()
 
-    val lottoResult = LottoWinningMachine(wonLottoTicket, purchasedLottoTickets, LottoNumber(bonusLottoNumber))
-        .result()
+    val lottoResult = LottoWinningMachine.result(wonLottoTicket, purchasedLottoTickets, LottoNumber(bonusLottoNumber))
 
     ConsoleResult.outputLottoResult(lottoResult)
 }
