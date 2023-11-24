@@ -5,13 +5,15 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
 
+private fun LottoLottery(numbers: List<Int>): LottoLottery = LottoLottery(numbers.map(::LottoNumber))
+
 class LottoLotteryTest : FunSpec({
 
-    test("sorted 함수를 사용하면 로또 번호를 정렬할 수 있다.") {
+    test("sortedNumbers 함수를 사용하면 로또 번호를 정렬할 수 있다.") {
         val numbers = listOf(1, 45, 2, 44, 3, 43)
         val lottery = LottoLottery(numbers)
-        val sortedLottery = lottery.sorted()
-        numbers.sorted() shouldBe sortedLottery.numbers
+        val sortedNumbers = lottery.sortedNumbers()
+        numbers.sorted().map(::LottoNumber) shouldBe sortedNumbers
     }
 
     test("contains 함수를 사용하면 특정 번호가 포함되어 있는지 알 수 있다.") {

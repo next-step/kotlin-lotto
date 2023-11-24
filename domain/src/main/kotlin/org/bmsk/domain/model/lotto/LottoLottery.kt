@@ -1,16 +1,18 @@
 package org.bmsk.domain.model.lotto
 
 data class LottoLottery(
-    val numbers: List<Int>,
-    val price: Int = DEFAULT_PRICE,
+    val numbers: Set<LottoNumber>,
 ) {
+    constructor(numbers: List<LottoNumber>) : this(numbers.toSet())
+
     init {
         require(numbers.size == LOTTO_NUMBER_SIZE)
         require(numbers.distinct().size == LOTTO_NUMBER_SIZE)
     }
 
-    fun sorted(): LottoLottery = copy(numbers = numbers.sorted())
-    fun contains(number: Int): Boolean = numbers.contains(number)
+    fun sortedNumbers(): List<LottoNumber> = numbers.sortedBy { it.number }
+    fun contains(number: LottoNumber): Boolean = numbers.contains(number)
+    fun contains(number: Int): Boolean = contains(LottoNumber(number))
 
     companion object {
         const val DEFAULT_PRICE = 1000

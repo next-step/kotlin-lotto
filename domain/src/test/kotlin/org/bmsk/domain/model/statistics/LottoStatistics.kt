@@ -3,6 +3,9 @@ package org.bmsk.domain.model.statistics
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import org.bmsk.domain.model.lotto.LottoLottery
+import org.bmsk.domain.model.lotto.LottoNumber
+
+private fun LottoLottery(numbers: List<Int>): LottoLottery = LottoLottery(numbers.map(::LottoNumber))
 
 class LottoStatisticsTest : FunSpec({
     context("LottoStatisticsAnalyzer") {
@@ -25,7 +28,7 @@ class LottoStatisticsTest : FunSpec({
         val analyzer = LottoStatisticsAnalyzer(mockLottoLotteries)
 
         test("주어진 임의 데이터에 대해 당첨 번호가 1, 2, 3, 4, 5, 6이라면 총 수익률은 0.35이다.") {
-            val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
+            val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber)
             val stats = analyzer.calculateLottoStatistics(winningNumbers)
 
             stats.numberOfMatches3 shouldBe 1

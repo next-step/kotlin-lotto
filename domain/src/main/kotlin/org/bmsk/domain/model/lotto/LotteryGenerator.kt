@@ -26,6 +26,6 @@ class LotteryGenerator(
             val randomNumber = randomGenerator.generate(exceptionNumbers = numbers)
             numbers.add(randomNumber)
         }
-        return LottoLottery(numbers = numbers.toList())
+        return LottoLottery(numbers = numbers.toList().map(::LottoNumber))
     }
 }

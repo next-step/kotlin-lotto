@@ -1,18 +1,18 @@
 package org.bmsk.domain.model.statistics
 
 import org.bmsk.domain.model.lotto.LottoLottery
+import org.bmsk.domain.model.lotto.LottoNumber
 
 class LottoStatisticsAnalyzer(
     private val lottoTickets: List<LottoLottery>,
 ) {
-    fun calculateLottoStatistics(winningNumbers: List<Int>): LottoStatistics {
+    fun calculateLottoStatistics(winningNumbers: List<LottoNumber>): LottoStatistics {
         val winningNumbersAsSet = winningNumbers.toSet()
         val matchCounts = calculateMatchCounts(winningNumbersAsSet)
         val totalProfit = calculateTotalProfit(matchCounts)
         val profitRate = calculateProfitRate(totalProfit)
 
         return LottoStatistics(
-            lottoTickets = lottoTickets,
             numberOfMatches3 = matchCounts[MATCH_3] ?: 0,
             numberOfMatches4 = matchCounts[MATCH_4] ?: 0,
             numberOfMatches5 = matchCounts[MATCH_5] ?: 0,
@@ -21,7 +21,7 @@ class LottoStatisticsAnalyzer(
         )
     }
 
-    private fun calculateMatchCounts(winningNumbersAsSet: Set<Int>): Map<Int, Int> {
+    private fun calculateMatchCounts(winningNumbersAsSet: Set<LottoNumber>): Map<Int, Int> {
         val matchCounts = mutableMapOf(
             MATCH_3 to 0,
             MATCH_4 to 0,
