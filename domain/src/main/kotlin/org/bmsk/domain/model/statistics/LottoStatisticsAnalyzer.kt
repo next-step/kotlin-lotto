@@ -19,14 +19,10 @@ class LottoStatisticsAnalyzer(
     }
 
     private fun calculateMatchCounts(winningNumbersAsSet: Set<LottoNumber>): Map<MatchCount, Int> {
-        val matchCounts = mutableMapOf<MatchCount, Int>()
-
-        lottoLotteries.forEach { lottery ->
-            val matchCount = MatchCount.from(lottery.numbers.count { it in winningNumbersAsSet })
-            matchCounts[matchCount] = matchCounts.getOrDefault(matchCount, 0) + 1
-        }
-
-        return matchCounts.toMap()
+        return lottoLotteries
+            .map { lottery -> MatchCount.from(lottery.numbers.count { it in winningNumbersAsSet }) }
+            .groupingBy { it }
+            .eachCount()
     }
 
     private fun calculateTotalProfit(matchCounts: Map<MatchCount, Int>): Int {
