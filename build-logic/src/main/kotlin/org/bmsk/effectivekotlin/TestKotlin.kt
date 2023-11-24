@@ -11,6 +11,7 @@ internal fun Project.configureTest() {
     val libs = extensions.libs
     dependencies {
         "testImplementation"(libs.findLibrary("kotest.runner.junit5").get())
+        "testImplementation"(libs.findLibrary("kotest-framework-datatest").get())
         "testImplementation"(libs.findLibrary("assertj.core").get())
         "testImplementation"(libs.findLibrary("junit.jupiter").get())
     }

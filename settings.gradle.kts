@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "kotlin-lotto"
 include("domain")
+include("presenter")
