@@ -1,7 +1,6 @@
 package lotto.domain
 
 import io.kotest.assertions.throwables.shouldNotThrow
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.collections.shouldContainInOrder
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
@@ -26,9 +25,8 @@ class LottoNumbersMachineTest {
 
     @Test
     fun `1000원 미만의 돈으로는 로또를 살 수 없다`() {
-        shouldThrow<IllegalArgumentException> {
-            lottoMachine.sellLotto(900)
-        }
+        val userLotto = lottoMachine.sellLotto(900)
+        userLotto.isEmpty() shouldBe true
     }
 
     @Test
@@ -40,5 +38,19 @@ class LottoNumbersMachineTest {
     fun `로또의 숫자는 자동 생성된다`() {
         val userLotto = lottoMachine.sellLotto(1000)
         userLotto[0].getNumbers() shouldContainInOrder lottoNumbers
+    }
+
+    @Test
+    fun `로또 숫자를 수동으로 입력받는다`() {
+        val manualNumber = listOf("1,2,3,4,5,6")
+        val userLotto = lottoMachine.sellLotto(1000, manualNumber)
+        userLotto[0].getNumbers() shouldContainInOrder lottoNumbers
+    }
+
+    @Test
+    fun `수동 로또를 뺀 나머지는 자동 로또로 구매한다`() {
+        val manualNumber = listOf("1,2,3,4,5,6")
+        val userLotto = lottoMachine.sellLotto(2000, manualNumber)
+        userLotto.size - manualNumber.size shouldBe 1
     }
 }
