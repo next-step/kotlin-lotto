@@ -15,10 +15,10 @@ fun main() {
 
     val winningLotto = InputView.getWinningNumbers()
 
-    val result = LottoResult()
-    lottoList.groupBy {
-        val prize = winningLotto.calculatePrize(it)
-        result.updateResult(prize)
-    }
+    val resultMap = lottoList.groupBy { winningLotto.calculatePrize(it) }
+        .mapValues { it.value.size }
+
+    val result = LottoResult(resultMap)
+
     ResultView.outputResult(purchaseAmount, result)
 }

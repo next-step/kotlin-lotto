@@ -11,13 +11,11 @@ class LottoResultTest {
         val bonusNumber = LottoNumber(7)
         val winningLotto = WinningLotto(winningNumbers, bonusNumber)
         val lottos = listOf<Lotto>(testLotto)
-        val result = LottoResult()
 
-        lottos.forEach {
-            val prize = winningLotto.calculatePrize(it)
-            result.updateResult(prize)
-        }
+        val resultMap = lottos.groupBy { winningLotto.calculatePrize(it) }
+            .mapValues { it.value.size }
 
+        val result = LottoResult(resultMap)
         Assertions.assertThat(result.getProfitRate(Money(1000))).isEqualTo(2000000.0)
     }
 }
