@@ -1,8 +1,11 @@
 package lottoAuto.view
 
+import lottoAuto.domain.LottoRank
+import lottoAuto.domain.LottoRankCounter
+
 object OutputView {
-    fun printNumOfLotto(numOfLotto: Int) {
-        println("${numOfLotto}개를 구매했습니다.")
+    fun printNumOfLotto(numOfManualLotto: Int, numOfRandomLotto: Int) {
+        println("\n수동으로 ${numOfManualLotto}장, 자동으로 ${numOfRandomLotto}개를 구매했습니다.")
     }
 
     fun printLottoNumbers(lottoNumbers: List<Int>) {
@@ -14,17 +17,29 @@ object OutputView {
         println("---------")
     }
 
-    fun printStatistics(
-        matchCount: Int,
-        winningMoney: Int,
+    fun printStatistics(lottoRankCounter: LottoRankCounter) {
+        lottoRankCounter
+            .counter
+            .entries
+            .forEach {
+                this.printStatisticsWithBonus(
+                    it.key,
+                    it.value,
+                    it.key == LottoRank.BONUS
+                )
+            }
+    }
+
+    private fun printStatisticsWithBonus(
+        lottoRank: LottoRank,
         countValue: Int,
-        isBonusMatch: Boolean
+        withBonus: Boolean
     ) {
-        if (isBonusMatch) {
-            println("$matchCount 개 일치, 보너스 볼 일치($winningMoney 원) - $countValue 개")
-        } else {
-            println("$matchCount 개 일치 ($winningMoney 원) - $countValue 개")
+        if (withBonus) {
+            println("${lottoRank.matchCount}개 일치, 보너스 볼 일치(${lottoRank.winningMoney}원) - ${countValue}개")
+            return
         }
+        println("${lottoRank.matchCount}개 일치 (${lottoRank.winningMoney}원) - ${countValue}개")
     }
 
     fun printProfitResult(rateOfReturn: Double, resultMsg: String) {

@@ -12,6 +12,12 @@ data class Lotto(
         return lottoNumbers.contains(lottoNumber)
     }
 
+    fun countSameNumber(lotto: Lotto): Int {
+        return this.lottoNumbers.intersect(
+            lotto.lottoNumbers.toSet()
+        ).size
+    }
+
     companion object {
         const val LOTTO_SIZE = 6
         const val LOTTO_PRICE = 1000

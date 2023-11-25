@@ -1,0 +1,40 @@
+package lottoAuto.domain
+
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
+
+class RandomLottoFactoryTest {
+    @ParameterizedTest
+    @CsvSource(
+        "1",
+        "4",
+        "14"
+    )
+    fun `구매 금액이 주어질 경우 임의의 당첨번호로 구성된 로또 리스트를 생성한다`(lottoSize: Int) {
+        // given
+        val randomLottoFactory = RandomLottoFactory()
+
+        // when
+        val lottoList = randomLottoFactory.create(lottoSize)
+
+        // then
+        assertEquals(lottoSize, lottoList.size)
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        "-1",
+        "-11",
+        "-111"
+    )
+    fun `로또 사이즈가 음수일 경우 IllegalArgumentException을 발생시킨다`(lottoSize: Int) {
+        // given
+        val randomLottoFactory = RandomLottoFactory()
+
+        assertThrows<IllegalArgumentException> { // then
+            randomLottoFactory.create(lottoSize) // when
+        }
+    }
+}

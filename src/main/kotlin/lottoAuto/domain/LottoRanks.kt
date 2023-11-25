@@ -7,10 +7,14 @@ data class LottoRanks(
         return ranks.sumOf { it.winningMoney }
     }
 
-    fun groupByLottoRank(): Map<LottoRank, Int> {
+    fun groupByLottoRank(): LottoRankCounter {
         val lottoRankCountMap = ranks
             .groupingBy { it }
             .eachCount()
-        return LottoRank.values().filterNot { it == LottoRank.MISS }.associateWith { lottoRankCountMap[it] ?: 0 }
+        return LottoRank
+            .values()
+            .filterNot { it == LottoRank.MISS }
+            .associateWith { lottoRankCountMap[it] ?: 0 }
+            .toLottoRankCounter()
     }
 }

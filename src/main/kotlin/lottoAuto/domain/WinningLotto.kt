@@ -1,22 +1,20 @@
 package lottoAuto.domain
 
-data class WinningLotto(
-    val winningLottoNumbers: List<LottoNumber>,
+class WinningLotto(
+    val lotto: Lotto,
     val bonusLottoNumber: LottoNumber
 ) {
-    fun rank(lottoList: List<Lotto>): LottoRanks {
-        val ranks = lottoList.map {
+    init {
+        require(!lotto.withSameNumber(bonusLottoNumber)) { "보너스 번호는 당첨 번호와 중복될 수 없습니다." }
+    }
+
+    fun rank(lottos: List<Lotto>): LottoRanks {
+        val ranks = lottos.map {
             LottoRank.from(
-                matchCount = this.countSameNumber(it),
+                matchCount = this.lotto.countSameNumber(it),
                 withBonus = it.withSameNumber(bonusLottoNumber)
             )
         }
         return LottoRanks(ranks)
-    }
-
-    private fun countSameNumber(lotto: Lotto): Int {
-        return winningLottoNumbers.intersect(
-            lotto.lottoNumbers.toSet()
-        ).size
     }
 }
