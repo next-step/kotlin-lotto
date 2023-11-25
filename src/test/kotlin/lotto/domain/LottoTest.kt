@@ -9,7 +9,7 @@ internal class LottoTest {
     @ValueSource(strings = ["1,2,3,4,5", "1,2,3,4,5,6,7", "1,2,3,4,5,6,7,8"])
     fun `로또 번호가 6개가 아니면 오류가 발생한다`(input: String) {
         // given
-        val numbers = input.split(",").map { LottoNumber(it.toInt()) }
+        val numbers = input.split(",").map { LottoNumber.of(it.toInt()) }
 
         // when & then
         assertThrows<IllegalArgumentException> { Lotto(numbers) }
@@ -19,7 +19,7 @@ internal class LottoTest {
     @ValueSource(strings = ["1,2,3,4,5,5", "1,2,3,4,5,6,6", "1,2,3,4,5,6,7,7"])
     fun `로또 번호에 중복이 있으면 오류가 발생한다`(input: String) {
         // given
-        val numbers = input.split(",").map { LottoNumber(it.toInt()) }
+        val numbers = input.split(",").map { LottoNumber.of(it.toInt()) }
 
         // when & then
         assertThrows<IllegalArgumentException> { Lotto(numbers) }
@@ -32,6 +32,6 @@ internal class LottoTest {
         val numbers = input.split(",")
 
         // when & then
-        assertThrows<IllegalArgumentException> { Lotto(numbers.map { LottoNumber(it.toInt()) }) }
+        assertThrows<IllegalArgumentException> { Lotto(numbers.map { LottoNumber.of(it.toInt()) }) }
     }
 }

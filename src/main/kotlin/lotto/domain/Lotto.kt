@@ -16,7 +16,7 @@ class Lotto(val numbers: List<LottoNumber>) {
         fun auto(): Lotto {
             return Lotto(
                 (LOTTO_NUMBER_MIN..LOTTO_NUMBER_MAX).toList().shuffled()
-                    .take(LOTTO_NUMBER_SIZE).sorted().map(::LottoNumber)
+                    .take(LOTTO_NUMBER_SIZE).sorted().map(LottoNumber::of)
             )
         }
     }

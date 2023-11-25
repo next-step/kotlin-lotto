@@ -11,12 +11,12 @@ object InputView {
 
     fun enterWinningLotto(): List<LottoNumber> {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return readln().split(DELIMITER).map { LottoNumber(it.trim().toInt()) }
+        return readln().split(DELIMITER).map { LottoNumber.of(it.trim().toInt()) }
     }
 
     fun enterBonusNumber(): LottoNumber {
         println("보너스 볼을 입력해 주세요.")
-        return LottoNumber(readln().toInt())
+        return LottoNumber.of(readln().toInt())
     }
 
     fun enterManualLottoCount(): Int {
@@ -26,6 +26,6 @@ object InputView {
 
     fun enterManualLotto(manualLottoCount: Int): List<List<LottoNumber>> {
         println("수동으로 구매할 번호를 입력해 주세요.")
-        return List(manualLottoCount) { readln().split(DELIMITER).map { LottoNumber(it.trim().toInt()) } }
+        return List(manualLottoCount) { readln().split(DELIMITER).map { LottoNumber.of(it.trim().toInt()) } }
     }
 }
