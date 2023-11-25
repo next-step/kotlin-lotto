@@ -9,7 +9,7 @@ class LottoGameTest : FunSpec({
     test("로또 게임에선 로또를 구입하고, 결과를 생성할 수 있다.") {
         // given
         val purchaseMoney = 1_000L
-        val winningLottoNumbers = LottoNumbers.of(1, 2, 3, 4, 5, 6)
+        val winningLottoNumbers = LottoNumbers.of(setOf(1, 2, 3, 4, 5, 6))
 
         // when
         val lottoGame = LottoGame(purchaseMoney)

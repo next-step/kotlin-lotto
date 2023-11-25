@@ -20,10 +20,5 @@ data class LottoNumbers(
         fun of(numbers: Set<Int>): LottoNumbers {
             return LottoNumbers(numbers.map(::LottoNumber).toSet())
         }
-
-        fun of(vararg numbers: Int): LottoNumbers {
-            require(numbers.size == numbers.toSet().size) { "로또 숫자는 중복될 수 없습니다." }
-            return LottoNumbers(numbers.map(::LottoNumber).toSet())
-        }
     }
 }

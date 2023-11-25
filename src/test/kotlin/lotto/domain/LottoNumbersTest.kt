@@ -10,11 +10,11 @@ class LottoNumbersTest : FunSpec({
     context("LottoNumbers 정상 생성") {
         withData(
             nameFn = { "LottoNumbers of $it" },
-            listOf(1, 2, 3, 4, 5, 6),
-            listOf(3, 2, 4, 5, 40, 41),
+            setOf(1, 2, 3, 4, 5, 6),
+            setOf(3, 2, 4, 5, 40, 41),
         ) { numbers ->
 
-            val lottoNumbers = LottoNumbers.of(*numbers.toIntArray())
+            val lottoNumbers = LottoNumbers.of(numbers)
             lottoNumbers.lottoNumbers.map(LottoNumber::number).toSet() shouldBe numbers
         }
     }
@@ -22,12 +22,12 @@ class LottoNumbersTest : FunSpec({
     context("LottoNumbers size가 6이 아닐 경우 IllegalArgumentException throw") {
         withData(
             nameFn = { "LottoNumbers of $it" },
-            listOf(1, 2, 3, 4, 5, 6, 7),
-            listOf(3, 2, 4, 5, 40),
+            setOf(1, 2, 3, 4, 5, 6, 7),
+            setOf(3, 2, 4, 5, 40),
         ) { numbers ->
 
             shouldThrow<IllegalArgumentException> {
-                LottoNumbers.of(*numbers.toIntArray())
+                LottoNumbers.of(numbers)
             }
         }
     }
@@ -35,19 +35,19 @@ class LottoNumbersTest : FunSpec({
     context("LottoNumbers of에 중복된 숫자를 넘기면 IllegalArgumentException throw") {
         withData(
             nameFn = { "LottoNumbers of $it" },
-            listOf(1, 2, 3, 4, 4, 6),
-            listOf(3, 2, 4, 5, 40, 40),
+            setOf(1, 2, 3, 4, 4, 6),
+            setOf(3, 2, 4, 5, 40, 40),
         ) { numbers ->
 
             shouldThrow<IllegalArgumentException> {
-                LottoNumbers.of(*numbers.toIntArray())
+                LottoNumbers.of(numbers)
             }
         }
     }
 
     test("LottoNumbers는 다른 LottoNumbers랑 일치하는 개수를 구할수 있다.") {
-        val lottoNumbers1 = LottoNumbers.of(1, 2, 3, 4, 5, 6)
-        val lottoNumbers2 = LottoNumbers.of(5, 6, 40, 41, 42, 43)
+        val lottoNumbers1 = LottoNumbers.of(setOf(1, 2, 3, 4, 5, 6))
+        val lottoNumbers2 = LottoNumbers.of(setOf(5, 6, 40, 41, 42, 43))
 
         lottoNumbers1.countMatchingLottoNumbers(lottoNumbers2) shouldBe 2
     }
