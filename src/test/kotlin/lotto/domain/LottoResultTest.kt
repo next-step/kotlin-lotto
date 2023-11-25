@@ -13,8 +13,8 @@ class LottoResultTest {
         val lottos = listOf<Lotto>(testLotto)
         val result = LottoResult()
 
-        for (lotto in lottos) {
-            val prize = winningLotto.calculatePrize(lotto)
+        lottos.forEach {
+            val prize = winningLotto.calculatePrize(it)
             result.updateResult(prize)
         }
 
