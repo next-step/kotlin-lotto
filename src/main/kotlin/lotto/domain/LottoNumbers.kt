@@ -14,6 +14,10 @@ data class LottoNumbers(
         return lottoNumbers.intersect(other.lottoNumbers).size
     }
 
+    fun contains(lottoNumber: LottoNumber): Boolean {
+        return lottoNumbers.contains(lottoNumber)
+    }
+
     companion object {
         const val LOTTO_NUMBERS_SIZE = 6
 

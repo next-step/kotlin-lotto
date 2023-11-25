@@ -61,4 +61,13 @@ class LottoNumbersTest : FunSpec({
         (LottoNumbers.of(numbers1) == LottoNumbers.of(numbers2)) shouldBe true
         (LottoNumbers.of(numbers1) == LottoNumbers.of(numbers3)) shouldBe false
     }
+
+    test("LottoNumbers는 LottoNumber를 갖고있는지 확인할 수 있다.") {
+        val lottoNumbers = LottoNumbers.of(setOf(1, 2, 3, 4, 5, 6))
+        val lottoNumber1 = LottoNumber(1)
+        val lottoNumber7 = LottoNumber(7)
+
+        lottoNumbers.contains(lottoNumber1) shouldBe true
+        lottoNumbers.contains(lottoNumber7) shouldBe false
+    }
 })
