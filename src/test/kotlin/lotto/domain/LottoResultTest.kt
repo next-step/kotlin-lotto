@@ -14,7 +14,7 @@ class LottoResultTest {
         val result = LottoResult()
 
         for (lotto in lottos) {
-            val prize = winningLotto.calculatePrize(lotto)
+            val prize = winningLotto.calculatePrize(lotto, bonusNumber)
             result.updateResult(prize)
         }
 

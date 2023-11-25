@@ -15,6 +15,7 @@ class LottoNumberTest {
     @ValueSource(ints = [99, 1000, 101, 47, 60])
     @ParameterizedTest
     fun `로또에 포함되는 숫자가 1~45 범위외이면 예외를 던진다`(num: Int) {
+
         assertThatThrownBy { LottoNumber.valueOf(num) }
             .isInstanceOf(IllegalArgumentException::class.java)
     }

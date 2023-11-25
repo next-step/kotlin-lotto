@@ -3,10 +3,8 @@ package lotto
 import lotto.domain.LottoMachine
 import lotto.domain.LottoNumberGenerator
 import lotto.domain.LottoResult
-import lotto.domain.WinningLotto
 import lotto.view.InputView
 import lotto.view.ResultView
-
 
 fun main() {
     val purchaseAmount = InputView.getPurchaseAmount()
@@ -18,10 +16,9 @@ fun main() {
     val winningLotto = InputView.getWinningNumbers()
 
     val result = LottoResult()
-    for (lotto in lottoList) {
-        val prize = winningLotto.calculatePrize(lotto)
+    lottoList.groupBy {
+        val prize = winningLotto.calculatePrize(it, winningLotto.bonusNumber) // 로또 수익률 계산
         result.updateResult(prize)
     }
-
     ResultView.outputResult(purchaseAmount, result)
 }

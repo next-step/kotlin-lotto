@@ -9,4 +9,11 @@ class LottoTest {
         val lotto = Lotto(1, 2, 3, 4, 5, 6)
         assertEquals(6, lotto.lottoNumbers.size)
     }
+
+    @Test
+    fun `당첨 번호에는 보너스 넘버가 포함되지 않아야한다`() {
+        val lotto = Lotto(1, 2, 3, 4, 5, 6)
+        val bonusNumber = LottoNumber(6)
+        assertEquals(true, lotto.contains(bonusNumber))
+    }
 }
