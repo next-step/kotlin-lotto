@@ -2,7 +2,6 @@ package lottoAuto
 
 import lottoAuto.domain.FixedLottoFactory
 import lottoAuto.domain.Lotto
-import lottoAuto.domain.LottoNumber
 import lottoAuto.domain.RandomLottoFactory
 import lottoAuto.domain.WinningLotto
 import lottoAuto.domain.toLottoNumber
@@ -10,6 +9,34 @@ import lottoAuto.view.InputView
 import lottoAuto.view.OutputView
 
 object LottoController {
+    fun createLottos(): List<Lotto> {
+        val purchaseAmount = InputView.getPurchaseAmount()
+        val fixedLottos = createFixedLottos()
+        val randomLottos = createRandomLottos(purchaseAmount, fixedLottos.size)
+        OutputView.printNumOfLotto(
+            numOfManualLotto = fixedLottos.size,
+            numOfRandomLotto = randomLottos.size
+        )
+
+        val lottos = fixedLottos + randomLottos
+        lottos.forEach {
+            val lottoNumbers = it.lottoNumbers.map { lottoNumber -> lottoNumber.number }
+            OutputView.printLottoNumbers(lottoNumbers)
+        }
+        return lottos
+    }
+
+    private fun createFixedLottos(): List<Lotto> {
+        val manualLottoSize = InputView.getManualLottoSize()
+        val manualNumbers = InputView.getManualLottoNumbers(manualLottoSize)
+        return FixedLottoFactory(numbers = manualNumbers).create(manualLottoSize)
+    }
+
+    private fun createRandomLottos(purchaseAmount: Int, manualLottoSize: Int): List<Lotto> {
+        val randomLottoSize = (purchaseAmount / Lotto.LOTTO_PRICE) - manualLottoSize
+        return RandomLottoFactory().create(randomLottoSize)
+    }
+
     fun getWinningLotto(): WinningLotto {
         val winningNumbers = InputView.getWinningNumbers().map { it.toLottoNumber() }
         val bonusLottoNumber = InputView.getBonusNumber().toLottoNumber()
@@ -19,53 +46,14 @@ object LottoController {
         )
     }
 
-    fun getBonusLottoNumber(): LottoNumber { // 제거
-        val bonusNumber = InputView.getBonusNumber()
-        return bonusNumber.toLottoNumber()
-    }
-
-    fun createLottoList(purchaseAmount: Int): List<Lotto> {
-        val manualLottoSize = getManualLottoSize()
-        val randomLottoSize = getRandomLottoSize(purchaseAmount, manualLottoSize)
-        val manualNumbers = getManualLottoNumbers(manualLottoSize)
-
-        val fixedLottoList = FixedLottoFactory(numbers = manualNumbers).create(manualLottoSize)
-        val randomLottoList = RandomLottoFactory().create(randomLottoSize)
-        val lottoList = fixedLottoList + randomLottoList
-
-        OutputView.printNumOfLotto(
-            numOfManualLotto = fixedLottoList.size,
-            numOfRandomLotto = randomLottoList.size
-        )
-
-        lottoList.forEach {
-            val lottoNumbers = it.lottoNumbers.map { lottoNumber -> lottoNumber.number }
-            OutputView.printLottoNumbers(lottoNumbers)
-        }
-        return lottoList
-    }
-
-    private fun getManualLottoSize(): Int {
-        return InputView.getManualLottoSize()
-    }
-
-    private fun getRandomLottoSize(purchaseAmount: Int, manualLottoSize: Int): Int {
-        return (purchaseAmount / Lotto.LOTTO_PRICE) - manualLottoSize
-    }
-
-    private fun getManualLottoNumbers(lottoSize: Int): List<List<Int>> {
-        return InputView.getManualLottoNumbers(lottoSize)
-    }
-
     fun statistics(
-        purchaseAmount: Int,
-        lottoList: List<Lotto>,
+        lottos: List<Lotto>,
         winningLotto: WinningLotto,
     ) {
         OutputView.printStatisticsHeader()
-        val lottoRanks = winningLotto.rank(lottoList)
+        val lottoRanks = winningLotto.rank(lottos)
         val lottoRankGroup = lottoRanks.groupByLottoRank()
-        val profit = lottoRankGroup.calcProfit(purchaseAmount)
+        val profit = lottoRankGroup.calcProfit(lottos.size * Lotto.LOTTO_PRICE)
 
         OutputView.printStatistics(lottoRankGroup)
         OutputView.printProfitResult(profit.rateOfReturn, profit.resultMsg)
@@ -73,9 +61,7 @@ object LottoController {
 }
 
 fun main() {
-    val purchaseAmount = InputView.getPurchaseAmount()
-    val lottoList = LottoController.createLottoList(purchaseAmount)
+    val lottos = LottoController.createLottos()
     val winningLotto = LottoController.getWinningLotto()
-
-    LottoController.statistics(purchaseAmount, lottoList, winningLotto)
+    LottoController.statistics(lottos, winningLotto)
 }
