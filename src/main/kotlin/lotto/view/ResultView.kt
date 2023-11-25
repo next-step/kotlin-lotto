@@ -24,10 +24,17 @@ object ResultView {
     }
 
     private fun printWinningLottoTicketCountByLottoPrize(lottoGameResult: LottoGameResult) {
-        LottoPrize.values().sortedBy { it.matchCount }.forEach { lottoPrize ->
-            val winningLottoCount = lottoGameResult.getWinningLottoTicketCountBy(lottoPrize)
-            println("${lottoPrize.matchCount}개 일치 (${lottoPrize.prizeMoney})- ${winningLottoCount}개")
-        }
+        LottoPrize.values()
+            .filter { it != LottoPrize.MISS }
+            .sortedByDescending { it.ordinal }.forEach { lottoPrize ->
+                val winningLottoCount = lottoGameResult.getWinningLottoTicketCountBy(lottoPrize)
+
+                if (lottoPrize.matchBonus == true) {
+                    println("${lottoPrize.matchCount}개 일치, 보너스 볼 일치(${lottoPrize.prizeMoney})- ${winningLottoCount}개")
+                } else {
+                    println("${lottoPrize.matchCount}개 일치 (${lottoPrize.prizeMoney})- ${winningLottoCount}개")
+                }
+            }
     }
 
     private fun printTotalRateOfReturn(totalRateOrReturn: Double) {
