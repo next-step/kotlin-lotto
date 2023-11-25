@@ -9,8 +9,8 @@ class LottoGameResultTest : FunSpec({
         val purchaseMoney = 1_000L
         val winningLottoNumbers = LottoNumbers.of(setOf(1, 2, 3, 4, 5, 6))
         val lottoTickets = listOf(
-            LottoTicket.of(setOf(1, 2, 3, 4, 5, 6)),
-            LottoTicket.of(setOf(10, 20, 30, 4, 5, 6)),
+            LottoTicket.of(setOf(1, 2, 3, 4, 5, 6)), // FIRST 6개일치
+            LottoTicket.of(setOf(10, 20, 30, 4, 5, 6)), // FIRTH 3개일치
         )
 
         val lottoGameResult = LottoGameResult(purchaseMoney, winningLottoNumbers, lottoTickets)
@@ -18,7 +18,7 @@ class LottoGameResultTest : FunSpec({
         lottoGameResult.getWinningLottoTicketCountBy(LottoPrize.FIRST) shouldBe 1
         lottoGameResult.getWinningLottoTicketCountBy(LottoPrize.SECOND) shouldBe 0
         lottoGameResult.getWinningLottoTicketCountBy(LottoPrize.THIRD) shouldBe 0
-        lottoGameResult.getWinningLottoTicketCountBy(LottoPrize.FOURTH) shouldBe 1
+        lottoGameResult.getWinningLottoTicketCountBy(LottoPrize.FIFTH) shouldBe 1
     }
 
     test("구입 금액 1000원으로 1등에 당첨되었다면 수익률은 2000000이다.") {
