@@ -25,4 +25,14 @@ object InputView {
 
         return winningLottoNumbers
     }
+
+    fun inputBonusLottoNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+
+        val bonusLottoNumber = readlnOrNull()?.toIntOrNull()
+
+        require(bonusLottoNumber != null) { "보너스 번호가 입력되지 않았습니다." }
+
+        return bonusLottoNumber
+    }
 }

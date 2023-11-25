@@ -2,7 +2,7 @@ package lotto.domain
 
 class LottoGameResult(
     purchaseMoney: Long,
-    winningLottoNumbers: LottoNumbers,
+    winningLottoNumbers: WinningLottoNumbers,
     lottoTickets: List<LottoTicket>,
 ) {
     private val winningLottoTicketCountByLottoPrize: Map<LottoPrize, Int>
@@ -19,10 +19,14 @@ class LottoGameResult(
 
     private fun initWinningLottoTicketCountByLottoPrize(
         lottoTickets: List<LottoTicket>,
-        winningLottoNumbers: LottoNumbers,
+        winningLottoNumbers: WinningLottoNumbers,
     ): Map<LottoPrize, Int> {
         return lottoTickets
-            .mapNotNull { LottoPrize.of(it.countMatchingLottoNumbers(winningLottoNumbers)) }
+            .map {
+                val matchCount = it.countMatchingLottoNumbers(winningLottoNumbers.lottoNumbers)
+                val bonusMatch = it.contains(winningLottoNumbers.bonusLottoNumber)
+                LottoPrize.of(matchCount, bonusMatch)
+            }
             .groupingBy { it }
             .eachCount()
     }

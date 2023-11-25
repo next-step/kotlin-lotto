@@ -6,7 +6,7 @@ class LottoGame(
 ) {
     val lottoTickets: List<LottoTicket> = lottoTicketIssuer.issueLottoByAuto(purchaseMoney)
 
-    fun generateLottoGameResult(winningLottoNumbers: LottoNumbers): LottoGameResult {
+    fun generateLottoGameResult(winningLottoNumbers: WinningLottoNumbers): LottoGameResult {
         return LottoGameResult(
             purchaseMoney = purchaseMoney,
             winningLottoNumbers = winningLottoNumbers,
