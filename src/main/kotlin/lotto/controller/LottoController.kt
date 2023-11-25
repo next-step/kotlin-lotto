@@ -14,8 +14,9 @@ class LottoController(
 ) {
     fun purchase(): LottoTicket {
         val amount = InputView.purchaseAmount.let(::Amount)
+        val purchaseAmount = shop.toLottoPurchaseAmount(amount)
         val lottoNumbers = InputView.manualLottoNumbers.toLottoNumbers()
-        return shop.purchase(amount, lottoNumbers)
+        return shop.purchase(purchaseAmount, lottoNumbers)
             .save()
     }
 
