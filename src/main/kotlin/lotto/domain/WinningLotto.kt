@@ -1,13 +1,15 @@
 package lotto.domain
 
+import lotto.error.InvalidWinningLottoException
+
 data class WinningLotto(
     val winningNumber: LottoNumber,
     val bonusNumber: Int,
 ) {
     init {
-        LottoNumberGenerator.checkNumber(bonusNumber)
+        LottoNumber.checkCanInclude(bonusNumber)
         require(!winningNumber.contains(bonusNumber)) {
-            "보너스 볼과 당첨번호 숫자가 중복됩니다"
+            throw InvalidWinningLottoException("보너스 볼과 당첨번호 숫자가 중복됩니다")
         }
     }
 

@@ -51,7 +51,6 @@ class LottoTicketSpec : FunSpec({
         val fiveMatchedLottoWithBonus = LottoNumber(listOf(1, 2, 3, 4, 5, bonusNumber))
         val allMatchedLotto = LottoNumber(listOf(1, 2, 3, 4, 5, 6))
 
-
         test("한 장도 당첨되지 않음") {
             val ticket = LottoTicket(listOf(nonMatchedLotto, oneMatchedLotto))
 

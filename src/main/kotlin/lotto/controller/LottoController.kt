@@ -1,29 +1,37 @@
 package lotto.controller
 
 import lotto.domain.Amount
+import lotto.domain.LottoNumber
+import lotto.domain.LottoResult
 import lotto.domain.LottoShop
-import lotto.domain.LottoNumberGenerator
 import lotto.domain.LottoTicket
 import lotto.domain.WinningLotto
+import lotto.view.InputView
 
 class LottoController(
     private val shop: LottoShop = LottoShop(),
     private var purchasedTicket: LottoTicket? = null,
 ) {
-    fun purchase(request: PurchaseRequest): PurchaseResponse =
-        shop.purchase(Amount(request.amount))
+    fun purchase(): LottoTicket {
+        val amount = InputView.purchaseAmount.let(::Amount)
+        val purchaseAmount = shop.toLottoPurchaseAmount(amount)
+        val lottoNumbers = InputView.manualLottoNumbers.toLottoNumbers()
+        return shop.purchase(purchaseAmount, lottoNumbers)
             .save()
-            .let(::PurchaseResponse)
+    }
 
-    fun end(request: EndLottoRequest): EndLottoResponse {
-        val purchasedTicket = purchasedTicket ?: throw IllegalArgumentException("티켓이 저장되지 않았습니다")
+    fun end(): LottoResult {
+        val purchasedTicket =
+            purchasedTicket ?: return LottoResult.withoutPurchasedTicket()
         val winningLotto = WinningLotto(
-            winningNumber = LottoNumberGenerator.createFrom(request.winningNumbers),
-            bonusNumber = request.bonusNumber
+            winningNumber = LottoNumber.of(InputView.winningNumbers),
+            bonusNumber = InputView.bonusNumber
         )
-        return shop.receivePrize(purchasedTicket, winningLotto).let(::EndLottoResponse)
+        return shop.receivePrize(purchasedTicket, winningLotto)
     }
 
     private fun LottoTicket.save(): LottoTicket =
         this.also { purchasedTicket = it }
+
+    private fun List<List<Int>>.toLottoNumbers(): List<LottoNumber> = this.map { LottoNumber.of(it) }
 }
