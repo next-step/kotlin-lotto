@@ -1,8 +1,10 @@
 package lotto.domain
 
 object LottoFactory {
-    fun buyLotto(money: Int): List<Lotto> {
-        val lottoCount = money / Lotto.LOTTO_PRICE
-        return List(lottoCount) { Lotto.auto() }
+    fun buyLotto(autoLottoCount: Int, manualLottoNumberList: List<List<LottoNumber>>): List<Lotto> {
+        val manualLottoList = manualLottoNumberList.map(::Lotto)
+        val autoLottoList = List(autoLottoCount) { Lotto.auto() }
+
+        return manualLottoList + autoLottoList
     }
 }
