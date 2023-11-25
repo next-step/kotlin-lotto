@@ -17,7 +17,7 @@ fun main() {
 
     val result = LottoResult()
     lottoList.groupBy {
-        val prize = winningLotto.calculatePrize(it, winningLotto.bonusNumber) // 로또 수익률 계산
+        val prize = winningLotto.calculatePrize(it)
         result.updateResult(prize)
     }
     ResultView.outputResult(purchaseAmount, result)

@@ -7,7 +7,7 @@ class WinningLotto(val winningNumber: Lotto, val bonusNumber: LottoNumber) {
         }
     }
 
-    fun calculatePrize(lotto: Lotto, bonusNumber: LottoNumber): LottoPrize {
+    fun calculatePrize(lotto: Lotto): LottoPrize {
         var matchBonus = false
         val matchedCount = getMatchingCount(lotto)
         if (lotto.lottoNumbers.contains(bonusNumber)) {
