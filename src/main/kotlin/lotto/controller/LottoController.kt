@@ -6,24 +6,27 @@ import lotto.domain.LottoResult
 import lotto.domain.LottoShop
 import lotto.domain.LottoTicket
 import lotto.domain.WinningLotto
+import lotto.view.InputView
 
 class LottoController(
     private val shop: LottoShop = LottoShop(),
     private var purchasedTicket: LottoTicket? = null,
 ) {
-    fun purchase(request: PurchaseRequest): PurchaseResponse =
-        shop.purchase(Amount(request.amount), request.manualLottoNumbers.toLottoNumbers())
+    fun purchase(): LottoTicket {
+        val amount = InputView.purchaseAmount.let(::Amount)
+        val lottoNumbers = InputView.manualLottoNumbers.toLottoNumbers()
+        return shop.purchase(amount, lottoNumbers)
             .save()
-            .let(::PurchaseResponse)
+    }
 
-    fun end(request: EndLottoRequest): EndLottoResponse {
+    fun end(): LottoResult {
         val purchasedTicket =
-            purchasedTicket ?: return EndLottoResponse(LottoResult.withoutPurchasedTicket())
+            purchasedTicket ?: return LottoResult.withoutPurchasedTicket()
         val winningLotto = WinningLotto(
-            winningNumber = LottoNumber.of(request.winningNumbers),
-            bonusNumber = request.bonusNumber
+            winningNumber = LottoNumber.of(InputView.winningNumbers),
+            bonusNumber = InputView.bonusNumber
         )
-        return shop.receivePrize(purchasedTicket, winningLotto).let(::EndLottoResponse)
+        return shop.receivePrize(purchasedTicket, winningLotto)
     }
 
     private fun LottoTicket.save(): LottoTicket =

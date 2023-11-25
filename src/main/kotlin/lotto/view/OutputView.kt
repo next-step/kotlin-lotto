@@ -1,11 +1,11 @@
 package lotto.view
 
-import lotto.controller.EndLottoResponse
-import lotto.controller.PurchaseResponse
 import lotto.domain.EarningRate
 import lotto.domain.LottoNumber
 import lotto.domain.LottoRank
 import lotto.domain.LottoRankCounts
+import lotto.domain.LottoResult
+import lotto.domain.LottoTicket
 
 object OutputView {
     private const val RESULT_MSG = "당첨 통계"
@@ -16,14 +16,12 @@ object OutputView {
     private const val EARNING_RATE_MSG = "총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 %s라는 의미임)"
     private const val ERROR_PREFIX = "[ERROR]"
 
-    fun drawPurchaseOutput(response: PurchaseResponse) {
-        val ticket = response.ticket
+    fun drawPurchaseTicket(ticket: LottoTicket) {
         drawPurchaseCount(ticket.count)
         drawNumbers(ticket.numbers)
     }
 
-    fun drawEarningRateOutput(response: EndLottoResponse) {
-        val result = response.result
+    fun drawLottoResult(result: LottoResult) {
         println()
         println(RESULT_MSG)
         println(DIVIDE_LINE)

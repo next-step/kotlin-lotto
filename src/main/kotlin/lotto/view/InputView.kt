@@ -1,8 +1,5 @@
 package lotto.view
 
-import lotto.controller.EndLottoRequest
-import lotto.controller.PurchaseRequest
-
 object InputView {
     private const val PURCHASE_AMOUNT_QUESTION = "구입금액을 입력해 주세요."
     private const val MANUAL_LOTTO_COUNT_QUESTION = "수동으로 구매할 로또 수를 입력해 주세요."
@@ -11,40 +8,32 @@ object InputView {
     private const val BONUS_NUMBER_QUESTION = "보너스 볼을 입력해 주세요."
     private const val LOTTO_NUMBER_DELIMITER = ", "
 
-    val purchaseRequest: PurchaseRequest
-        get() = PurchaseRequest(
-            amount = getPurchaseAmount(),
-            manualLottoNumbers = getManualLottoNumbers(),
-        )
+    val purchaseAmount: Int
+        get() {
+            println(PURCHASE_AMOUNT_QUESTION)
+            return readIntInput()
+        }
 
-    val endLottoRequest: EndLottoRequest
-        get() = EndLottoRequest(
-            winningNumbers = getWinningNumbersInput(),
-            bonusNumber = getBonusNumberInput()
-        )
+    val manualLottoNumbers: List<List<Int>>
+        get() {
+            println()
+            val count = getManualLottoCount()
+            println()
+            return getManualLottoNumbers(count)
+        }
 
-    private fun getPurchaseAmount(): Int {
-        println(PURCHASE_AMOUNT_QUESTION)
-        return readIntInput()
-    }
+    val winningNumbers: List<Int>
+        get() {
+            println()
+            println(WINNING_NUMBERS_QUESTION)
+            return parseLottoNumbers(readInput())
+        }
 
-    private fun getManualLottoNumbers(): List<List<Int>> {
-        println()
-        val count = getManualLottoCount()
-        println()
-        return getManualLottoNumbers(count)
-    }
-
-    private fun getWinningNumbersInput(): List<Int> {
-        println()
-        println(WINNING_NUMBERS_QUESTION)
-        return parseLottoNumbers(readInput())
-    }
-
-    private fun getBonusNumberInput(): Int {
-        println(BONUS_NUMBER_QUESTION)
-        return readIntInput()
-    }
+    val bonusNumber: Int
+        get() {
+            println(BONUS_NUMBER_QUESTION)
+            return readIntInput()
+        }
 
     private fun readInput(): String = readlnOrNull()
         ?: throw IllegalArgumentException("입력 값이 없습니다.")
