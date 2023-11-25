@@ -1,35 +1,28 @@
 package lotto.view
 
-import lotto.Lotto
-import lotto.LottoMachine
+import lotto.domain.Lotto
+import lotto.domain.LottoNumber
+import lotto.domain.Money
+import lotto.domain.WinningLotto
 
 object InputView {
-
-    fun inputPurchaseAmount(): List<Lotto> {
-        println("구입 금액을 입력해 주세요.")
-        val price = readln().toIntOrNull() ?: throw IllegalArgumentException("가격 입력이 올바르지 않습니다.")
-
-        val lottoMachine = LottoMachine(price)
-        println("로또 ${lottoMachine.getCountOfLotto()}개를 구매했습니다.")
-        val result = lottoMachine.getLottoList()
-
-        result.forEach {
-            println(it)
-        }
-
-        return result
+    fun getPurchaseAmount(): Money {
+        println("구입금액을 입력해 주세요.")
+        return Money(readln().toInt())
     }
-
-    fun inputWinningNumbers(): List<Int> {
+    fun getWinningNumbers(): WinningLotto {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        val winningNumber = readln()
-        val checkNumber = Lotto.validateLottoNumber(winningNumber)
-        if (checkNumber.isNotEmpty()) {
-            return checkNumber
-        } else {
-            println("유효하지 않은 당첨 번호입니다. 다시 입력하세요.")
-            return inputWinningNumbers()
-        }
-        return listOf()
+        val winningNumbers = readln().replace(" ",""). split(",").map { LottoNumber.valueOf(it.toInt()) }.toSet()
+        val winningLotto = convertToLotto(winningNumbers)
+
+        println("보너스 볼을 입력해 주세요.")
+        val bonusNumber = LottoNumber(readln().toInt())
+        return WinningLotto(winningLotto, bonusNumber)
     }
+
+    private fun convertToLotto(numbers: Set<LottoNumber>): Lotto {
+        return Lotto(numbers)
+    }
+
+
 }

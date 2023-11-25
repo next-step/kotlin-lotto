@@ -1,26 +1,33 @@
 package lotto.view
 
-import lotto.LottoMachine
-import lotto.LottoPrize
+import lotto.domain.Lotto
+import lotto.domain.LottoNumber
+import lotto.domain.LottoPrize
+import lotto.domain.LottoResult
+import lotto.domain.Money
 
 object ResultView {
-    fun printWinningStatistics(winningResult: Map<Int, Int>) {
-        println("당첨 통계")
-        println("---------")
-
-        val winningResult = buildString {
-            for (matchingNumbers in 3..6) {
-                val count = winningResult[matchingNumbers] ?: 0
-                val prize = LottoPrize.getPrize(matchingNumbers)
-                appendLine("$matchingNumbers 개 일치 ($prize)원- $count 개")
-            }
+    fun printLottoList(lottos: Set<Lotto>) {
+        println("${lottos.size}개를 구매했습니다.")
+        for (lotto in lottos) {
+            printLotto(lotto.lottoNumbers.toList())
         }
-        println(winningResult)
     }
 
-    fun printTotalProfitRate(totalPrize: Int, amount : Int) {
-        val profitRate = LottoMachine.calculateTotalEarning(totalPrize, amount)
-        println("총 수익률은 $profitRate 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
+    private fun printLotto(numbers: List<LottoNumber>) {
+        println("[${numbers.joinToString { it.number.toString() }}]")
     }
 
+    fun outputResult(money: Money, result: LottoResult) {
+        val resultString = buildString {
+            appendLine("당첨 통계")
+            appendLine("---------")
+            for (rank in LottoPrize.rankOf()) {
+                appendLine("${rank.text} (${rank.prizeMoney}원) - ${result.getResult(rank)}개")
+            }
+            append("총 수익률은 %.2f입니다.".format(result.getProfitRate(money)))
+        }
+
+        println(resultString)
+    }
 }
