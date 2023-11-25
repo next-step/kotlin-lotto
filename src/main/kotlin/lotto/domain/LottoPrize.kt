@@ -10,4 +10,11 @@ enum class LottoPrize(
     THIRD(4, 50_000L),
     FOURTH(3, 5_000L),
     ;
+
+    companion object {
+
+        fun of(matchCount: Int): LottoPrize? {
+            return LottoPrize.values().firstOrNull { it.matchCount == matchCount }
+        }
+    }
 }
