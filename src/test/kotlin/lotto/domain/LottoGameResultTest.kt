@@ -21,13 +21,13 @@ class LottoGameResultTest : FunSpec({
         lottoGameResult.getWinningLottoTicketCountBy(LottoPrize.FOURTH) shouldBe 1
     }
 
-    test("로또 게임 결과는 수익률을 갖는다.") {
+    test("구입 금액 1000원으로 1등에 당첨되었다면 수익률은 2000000이다.") {
         val purchaseMoney = 1_000L
         val winningLottoNumbers = LottoNumbers.of(setOf(1, 2, 3, 4, 5, 6))
         val lottoTickets = listOf(LottoTicket.of(setOf(1, 2, 3, 4, 5, 6)))
 
         val lottoGameResult = LottoGameResult(purchaseMoney, winningLottoNumbers, lottoTickets)
 
-        lottoGameResult.totalRateOfReturn shouldBe LottoPrize.FIRST.prizeMoney.toDouble() / purchaseMoney.toDouble()
+        lottoGameResult.totalRateOfReturn shouldBe 2000000.0
     }
 })
