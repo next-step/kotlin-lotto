@@ -3,12 +3,6 @@ package lotto
 data class Lotto(
     val numbers: Set<Int>,
 ) {
-    var rank: Rank = Rank.MISS
-        private set
-
-    fun setRank(rank: Rank?) {
-        this.rank = rank ?: Rank.MISS
-    }
 
     companion object {
 
