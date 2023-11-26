@@ -1,4 +1,6 @@
 import lotto.Lotto
+import lotto.LottoGame
+import lotto.LottoResult
 import lotto.Rank
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
@@ -29,19 +31,19 @@ class LottoGameTest {
     fun result(count: Int) {
         val lottoList = listOf(Lotto.of())
         val lastLotto = Lotto(lottoList.first().numbers.take(count).toSet())
-        val result = lottoGame.result(lottoList, lastLotto)
-        LottoResult.findByMatchCount(count)?.let {
-            assertThat(result.first()?.matchResult).isEqualTo(it.matchResult)
+        val result = lottoGame.result(lottoList, lastLotto, 0)
+        result.first()?.let {
+            assertThat(it.rank.count).isEqualTo(count)
         }
     }
 
     @DisplayName(value = "보너스 로또 발급")
     @Test
     fun resultBonus() {
-        val lottoList = listOf(Lotto(listOf(1, 2, 3, 4, 5, 9)))
-        val lastNumbers = listOf(1, 2, 3, 4, 5, 6)
-        val bonus = 9
-        lottoGame.result(lottoList, lastNumbers, bonus)
-        assertThat(lottoList.first().rank).isEqualTo(Rank.SECOND)
+        val lottoList = listOf(Lotto.of())
+        val lastLotto = Lotto(lottoList.first().numbers.take(5).toSet())
+        val bonus = lottoList.first().numbers.last()
+        val result = lottoGame.result(lottoList, lastLotto, bonus)
+        assertThat(result.first()?.rank).isEqualTo(Rank.SECOND)
     }
 }

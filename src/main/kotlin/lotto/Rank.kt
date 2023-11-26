@@ -6,7 +6,6 @@ enum class Rank(val count: Int, private val winningMoney: Int) {
     THIRD(5, 1500000),
     FOURTH(4, 50000),
     FIFTH(3, 5000),
-    MISS(0, 0)
     ;
 
     fun getWinningMoney(size: Int): Int {
