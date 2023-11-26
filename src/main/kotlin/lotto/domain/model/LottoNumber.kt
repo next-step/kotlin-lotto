@@ -3,12 +3,6 @@ package lotto.domain.model
 @JvmInline
 value class LottoNumber private constructor(val value: Int) {
 
-    init {
-        require(value in lottoNumberRange) {
-            OUT_OF_RANGE_EXCEPTION_MESSAGE.format(value)
-        }
-    }
-
     companion object {
         private const val LOTTO_NUMBER_START = 1
         private const val LOTTO_NUMBER_END = 45
