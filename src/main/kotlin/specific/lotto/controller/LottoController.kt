@@ -12,7 +12,9 @@ class LottoController {
 
     fun participateRound() {
         runCatching {
-            val player = Player(inputMoney(), TicketMachine())
+            val money = inputMoney()
+            val manualTicketNumbers = inputManualTicketNumbers(inputManualTicketCount())
+            val player = Player(money, manualTicketNumbers, TicketMachine())
             OutputView.printTickets(player.tickets)
             val winningNumbers = inputWinningNumbers()
             val round = Round(player, winningNumbers)
@@ -41,6 +43,23 @@ class LottoController {
             .map { it.toIntOrThrow { "lotto number should be convertible to Int" } }
         val bonusNumber = bonusNumberInput.toIntOrThrow { "lotto number should be convertible to Int" }
         return WinningNumbers(mainNumbers, bonusNumber)
+    }
+
+    private fun inputManualTicketCount(): Int {
+        val manualTicketCountInput = InputView.getManualLottoCount()
+        require(!manualTicketCountInput.isNullOrBlank()) { "'manualTicketCountInput' cannot be null or blank" }
+        return manualTicketCountInput.toIntOrThrow { "'manualTicketCountInput' should be convertible to Long" }
+    }
+
+    private fun inputManualTicketNumbers(manualLottoCount: Int): List<List<Int>> {
+        return (1..manualLottoCount)
+            .map {
+                val manualNumbersInput = InputView.getManualNumbers()
+                require(!manualNumbersInput.isNullOrBlank()) { "'manualNumbersInput' cannot be null or blank" }
+                manualNumbersInput
+                    .split(", ")
+                    .map { it.toIntOrThrow { "lotto number should be convertible to Int" } }
+            }
     }
 
     private fun String?.toIntOrThrow(lazyMessage: () -> Any): Int {

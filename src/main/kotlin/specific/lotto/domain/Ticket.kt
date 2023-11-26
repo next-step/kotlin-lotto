@@ -16,7 +16,7 @@ data class Ticket(val numbers: Set<Number>) {
     }
 
     companion object {
-        const val PRICE = 1000
+        const val PRICE = 1000L
         const val NUMBERS_SIZE = 6
     }
 }
