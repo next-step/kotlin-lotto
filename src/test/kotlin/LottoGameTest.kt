@@ -1,5 +1,4 @@
 import lotto.Lotto
-import lotto.LottoGame
 import lotto.Rank
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
@@ -7,7 +6,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-class LottoGameTest{
+class LottoGameTest {
     private var lottoGame: LottoGame = LottoGame()
 
     @DisplayName(value = "구입 금액에 해당하는 로또 개수 결과 출력")
@@ -21,17 +20,19 @@ class LottoGameTest{
     @ParameterizedTest
     @ValueSource(ints = [1])
     fun start(count: Int) {
-        assertThat(lottoGame.start(count).size).isEqualTo(count)
+        assertThat(lottoGame.getLottoList(count).size).isEqualTo(count)
     }
 
-    @DisplayName(value = "로또 발급")
-    @Test
-    fun result() {
-        val lottoList = listOf(Lotto(listOf(1, 2, 3, 7, 8, 9)))
-        val lastNumbers = listOf(1, 2, 3, 4, 5, 6)
-        val bonus = 10
-        lottoGame.result(lottoList, lastNumbers, bonus)
-        assertThat(lottoList.first().rank).isEqualTo(Rank.FIFTH)
+    @DisplayName(value = "로또 결과")
+    @ParameterizedTest
+    @ValueSource(ints = [3, 4, 5, 6])
+    fun result(count: Int) {
+        val lottoList = listOf(Lotto.of())
+        val lastLotto = Lotto(lottoList.first().numbers.take(count).toSet())
+        val result = lottoGame.result(lottoList, lastLotto)
+        LottoResult.findByMatchCount(count)?.let {
+            assertThat(result.first()?.matchResult).isEqualTo(it.matchResult)
+        }
     }
 
     @DisplayName(value = "보너스 로또 발급")
