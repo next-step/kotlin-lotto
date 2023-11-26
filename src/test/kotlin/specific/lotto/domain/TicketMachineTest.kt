@@ -18,7 +18,7 @@ class TicketMachineTest {
         val tickets = ticketMachine.sellTickets(money, listOf(manualNumbers))
 
         // then
-        assertEquals(manualNumbers.map { Number(it) }.toSet(), tickets[0].numbers)
+        assertEquals(manualNumbers.map { Number(it) }.toSet(), tickets.manualTickets[0].numbers)
     }
 
     @ParameterizedTest
@@ -33,6 +33,6 @@ class TicketMachineTest {
         val tickets = ticketMachine.sellTickets(money, emptyList())
 
         // then
-        assertEquals(count, tickets.size)
+        assertEquals(count, tickets.manualTickets.size + tickets.autoTickets.size)
     }
 }
