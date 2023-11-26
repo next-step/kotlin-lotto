@@ -1,6 +1,6 @@
 package lotto.domain
 
-class Buy(val amount: Int, var manualCount: Int) {
+class Money(val amount: Int, var manualCount: Int) {
 
     constructor(amount: Int) : this(amount, manualCount = 0)
 

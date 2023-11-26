@@ -1,25 +1,25 @@
 package lotto.view
 
-import lotto.domain.Buy
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
+import lotto.domain.Money
 import lotto.domain.WinningLotto
 
 object InputView {
-    fun getPurchaseAmount(): Buy {
+    fun getPurchaseAmount(): Money {
         println("구입금액을 입력해 주세요.")
-        val price = Buy(readln().toInt())
+        val price = Money(readln().toInt())
         println("수동으로 구매할 로또 수를 입력해 주세요.")
         price.manualCount = readln().toInt()
         return price
     }
 
-    fun getManaulLottos(buy: Buy): List<Lotto> {
+    fun getManaulLottos(buy: Money): List<Lotto> {
         var manaulLottos = mutableListOf<Lotto>()
         if (buy.manualCount > 0) {
             println("수동으로 구매할 번호를 입력해 주세요.")
             repeat(buy.manualCount) {
-                val manualLotto = readln().replace(" ", "").split(",").map { LottoNumber.valueOf(it.toInt()) }.toSet()
+                val manualLotto = readln().replace(" ", "").split(",").map { LottoNumber(it.toInt()) }.toSet()
                 manaulLottos.add(Lotto(manualLotto))
             }
         }

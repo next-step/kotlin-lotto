@@ -7,8 +7,8 @@ class LottoResult(private val result: EnumMap<LottoPrize, Int>) {
 
     fun getResult(prize: LottoPrize) = result[prize] ?: 0
 
-    fun getProfitRate(buy: Buy): Double {
+    fun getProfitRate(money: Money): Double {
         val sum = result.map { it.key.prizeMoney * it.value }.sum()
-        return sum.toDouble() / buy.amount
+        return sum.toDouble() / money.amount
     }
 }
