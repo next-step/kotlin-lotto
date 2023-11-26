@@ -16,6 +16,6 @@ class LottoResultTest {
             .mapValues { it.value.size }
 
         val result = LottoResult(resultMap)
-        Assertions.assertThat(result.getProfitRate(Money(1000))).isEqualTo(2000000.0)
+        Assertions.assertThat(result.getProfitRate(Buy(1000))).isEqualTo(2000000.0)
     }
 }

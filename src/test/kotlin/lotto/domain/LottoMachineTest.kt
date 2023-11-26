@@ -9,7 +9,7 @@ class LottoMachineTest {
     @CsvSource(value = ["5000, 5", "14000, 14"])
     fun `구입한 금액에 대해 로또를 발급한다`(amount: Int, expectSize: Int) {
         val lottoNumberGenerator = LottoNumberGenerator()
-        val lottos = LottoMachine.generateLotto(Money(amount), lottoNumberGenerator)
+        val lottos = LottoMachine.generateLotto(Buy(amount), lottoNumberGenerator)
         assertThat(lottos.size).isEqualTo(expectSize)
     }
 }

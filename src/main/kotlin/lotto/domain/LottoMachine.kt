@@ -1,7 +1,7 @@
 package lotto.domain
 
 object LottoMachine {
-    fun generateLotto(money: Money, lottoNumberGenerator: LottoNumberGenerator): List<Lotto> {
-        return (0 until money.getCounts()).map { Lotto.from(lottoNumberGenerator) }
+    fun generateLotto(buy: Buy, lottoNumberGenerator: LottoNumberGenerator): List<Lotto> {
+        return (0 until buy.getCounts()).map { Lotto.from(lottoNumberGenerator) }
     }
 }
