@@ -1,11 +1,8 @@
 package lotto.domain
 
-class Buy(var amount: Int, var manualCount: Int) {
+class Buy(val amount: Int, var manualCount: Int) {
 
-    constructor(amount: Int) : this(amount, manualCount = 0) {
-        this.amount = amount
-        this.manualCount = 0
-    }
+    constructor(amount: Int) : this(amount, manualCount = 0)
 
     fun getCounts(): Int {
         if (manualCount != 0) {
