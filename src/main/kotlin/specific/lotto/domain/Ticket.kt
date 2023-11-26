@@ -8,7 +8,7 @@ data class Ticket(val numbers: Set<Number>) {
     }
 
     fun countSameNumber(winningNumbers: WinningNumbers): Int {
-        return numbers.count { it in winningNumbers.mainNumbers.numbers }
+        return numbers.count { winningNumbers.isMatchMainNumber(it) }
     }
 
     fun hasBonusNumber(winningNumbers: WinningNumbers): Boolean {
