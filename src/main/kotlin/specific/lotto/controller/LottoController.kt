@@ -10,20 +10,24 @@ import specific.lotto.view.OutputView
 
 class LottoController {
 
-    fun participateRound(): Round {
-        val player = Player(inputMoney(), TicketMachine())
-        OutputView.printTickets(player.tickets)
-        val winningNumbers = inputWinningNumbers()
-        val round = Round(player, winningNumbers)
-        OutputView.printWinningResult(round.winningResult)
-        OutputView.printReturnOnInvestment(round.player.money.calculateReturnOnInvestment())
-        return round
+    fun participateRound() {
+        runCatching {
+            val player = Player(inputMoney(), TicketMachine())
+            OutputView.printTickets(player.tickets)
+            val winningNumbers = inputWinningNumbers()
+            val round = Round(player, winningNumbers)
+            OutputView.printWinningResult(round.winningResult)
+            OutputView.printReturnOnInvestment(round.player.money.calculateReturnOnInvestment())
+            round
+        }.onFailure {
+            println(it.message)
+        }
     }
 
     private fun inputMoney(): Money {
         val moneyInput = InputView.getMoney()
         require(!moneyInput.isNullOrBlank()) { "'moneyInput' cannot be null or blank" }
-        val principal = moneyInput.toLongOrThrow { "'moneyInput' should be convertible to Int" }
+        val principal = moneyInput.toLongOrThrow { "'moneyInput' should be convertible to Long" }
         return Money(principal)
     }
 
