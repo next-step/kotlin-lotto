@@ -23,7 +23,7 @@ object ResultView {
             appendLine("당첨 통계")
             appendLine("---------")
             for (rank in LottoPrize.rankOf()) {
-                appendLine("${rank.text} (${rank.prizeMoney}원) - ${result.getResult(rank)}개")
+                appendLine("${rank.text} (${rank.prizeMoney}원) - ${result.getResult(rank) ?: 0}개")
             }
             append("총 수익률은 %.2f입니다.".format(result.getProfitRate(money)))
         }
