@@ -1,5 +1,7 @@
 import lotto.Lotto
 import lotto.LottoGame
+import lotto.LottoResult
+import lotto.LottoResult.LottoMatchResult.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -20,15 +22,18 @@ class LottoGameTest {
     @ParameterizedTest
     @ValueSource(ints = [1])
     fun start(count: Int) {
-        assertThat(lottoGame.start(count).size).isEqualTo(count)
+        assertThat(lottoGame.getLottoList(count).size).isEqualTo(count)
     }
 
-    @DisplayName(value = "로또 발급")
-    @Test
-    fun result() {
-        val lottoList = listOf(Lotto(listOf(1, 2, 3, 7, 8, 9)))
-        val lastNumbers = listOf(1, 2, 3, 4, 5, 6)
-        lottoGame.match(lottoList, lastNumbers)
-        assertThat(lottoList.first().matchCount).isEqualTo(3)
+    @DisplayName(value = "로또 결과")
+    @ParameterizedTest
+    @ValueSource(ints = [3, 4, 5, 6])
+    fun result(count: Int) {
+        val lottoList = listOf(Lotto.of())
+        val lastLotto = Lotto(lottoList.first().numbers.take(count).toSet())
+        val result = lottoGame.result(lottoList, lastLotto)
+        LottoResult.findByMatchCount(count)?.let {
+            assertThat(result.first()?.matchResult).isEqualTo(it.matchResult)
+        }
     }
 }
