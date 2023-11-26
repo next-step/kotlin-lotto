@@ -21,9 +21,7 @@ object LottoStore {
 
     fun checkMatchResult(lottos: List<Lotto>, lastWeekMatchLotto: LastWeekMatchLotto): List<Rank> {
         return lottos.map { lotto ->
-            val matchCount = lotto.count { lastWeekMatchLotto.numbers.contains(it) }
-            val isMatchBonusNumber = lotto.contains(lastWeekMatchLotto.bonusNumber)
-            Rank.valueOf(matchCount, isMatchBonusNumber)
+            lastWeekMatchLotto.match(lotto)
         }
     }
 }

@@ -9,6 +9,8 @@ value class Lotto private constructor(private val set: Set<LottoNumber>) : Set<L
         }
     }
 
+    fun matchCount(lotto: Lotto): Int = count { lotto.contains(it) }
+
     companion object {
         private const val LOTTO_NUMBER_COUNT = 6
 
