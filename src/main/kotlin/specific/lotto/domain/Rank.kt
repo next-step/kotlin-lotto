@@ -21,7 +21,7 @@ enum class Rank(
     companion object {
         fun decideRank(sameNumbersCount: Int, hasBonusNumber: Boolean): Rank {
             Rank.values().forEach {
-                if(it.checkCondition(sameNumbersCount, hasBonusNumber)) {
+                if (it.checkCondition(sameNumbersCount, hasBonusNumber)) {
                     return it
                 }
             }

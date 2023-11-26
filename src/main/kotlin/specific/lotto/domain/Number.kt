@@ -1,7 +1,5 @@
 package specific.lotto.domain
 
-
-
 @JvmInline
 value class Number(val value: Int) {
     init {

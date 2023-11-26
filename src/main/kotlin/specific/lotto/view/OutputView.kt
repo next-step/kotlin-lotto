@@ -24,18 +24,20 @@ object OutputView {
     }
 
     fun printReturnOnInvestment(returnOnInvestment: Double) {
-        println("총 수익률은 ${String.format("%.2f", returnOnInvestment)}입니다. (${makeProfitOrLossStatus(returnOnInvestment)})")
+        println(
+            "총 수익률은 ${String.format("%.2f", returnOnInvestment)}입니다. (${makeProfitOrLossStatus(returnOnInvestment)})"
+        )
     }
 
     private fun makeRankCondition(rank: Rank): String {
-        if(!rank.isWin) {
+        if (!rank.isWin) {
             return "당첨되지 않음"
         }
         return "${rank.sameNumbersCount}개 일치${makeBonusNumberMatchStatus(rank.bonusNumberCondition)}"
     }
 
     private fun makeBonusNumberMatchStatus(bonusNumberCondition: BonusNumberCondition): String =
-        if(bonusNumberCondition == BonusNumberCondition.MATCH) ", 보너스 볼 일치" else ""
+        if (bonusNumberCondition == BonusNumberCondition.MATCH) ", 보너스 볼 일치" else ""
 
     private fun makeProfitOrLossStatus(returnOnInvestment: Double): String =
         "기준이 1이기 때문에 결과적으로 ${if (returnOnInvestment > 1) "이득이라는" else "손해라는"} 의미임"
