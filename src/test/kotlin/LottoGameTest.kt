@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-class LottoGameTest{
+class LottoGameTest {
     private var lottoGame: LottoGame = LottoGame()
 
     @DisplayName(value = "구입 금액에 해당하는 로또 개수 결과 출력")
@@ -28,7 +28,7 @@ class LottoGameTest{
     fun result() {
         val lottoList = listOf(Lotto(listOf(1, 2, 3, 7, 8, 9)))
         val lastNumbers = listOf(1, 2, 3, 4, 5, 6)
-        lottoGame.result(lottoList, lastNumbers)
+        lottoGame.match(lottoList, lastNumbers)
         assertThat(lottoList.first().matchCount).isEqualTo(3)
     }
 }

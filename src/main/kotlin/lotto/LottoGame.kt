@@ -16,11 +16,24 @@ class LottoGame {
         }
     }
 
-    fun result(lottoList: List<Lotto>, lastNumbers: List<Int>) {
+    fun match(lottoList: List<Lotto>, lastNumbers: List<Int>) {
         lottoList.forEach { lotto ->
             val count = (lotto.numbers + lastNumbers).groupBy { it }.filter { it.value.size > 1 }.count()
             lotto.match(count)
         }
+    }
+
+    fun result(lottoList: List<Lotto>): List<LottoResult?> {
+        val lottoByMatch = lottoList.groupBy { it.matchCount }
+        return lottoByMatch.map { (matchCount, lottoList) ->
+            LottoMatchResult.findByMatchCount(matchCount)?.let {
+                LottoResult(it, lottoList.size)
+            }
+        }
+    }
+
+    fun getTotalWinningMoney(result: List<LottoResult?>): Int {
+        return result.sumOf { it?.matchResult?.winningMoney?.times(it.count) ?: 0 }
     }
 
     companion object {

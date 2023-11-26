@@ -1,8 +1,6 @@
 package lotto
 
-import lotto.view.InputType
 import lotto.view.InputView
-import lotto.view.ResultType
 import lotto.view.ResultView
 
 fun main() {
@@ -10,16 +8,18 @@ fun main() {
     val resultView = ResultView()
     val lottoGame = LottoGame()
 
-    val amount = inputView.inputPrice(InputType.PURCHASE_AMOUNT)
+    val amount = inputView.inputPrice()
     val count = LottoGame().getLottoCount(amount)
 
-    resultView.printCount(ResultType.PURCHASE_COUNT, count)
+    resultView.printCount(count)
 
     val lottoList = lottoGame.start(count)
     resultView.printLottoList(lottoList)
 
-    val lastNumbers = inputView.inputNumbers(InputType.LAST_WEEK_WINNING_NUMBER)
+    val lastNumbers = inputView.inputNumbers()
 
-    lottoGame.result(lottoList, lastNumbers)
-    resultView.printResult(amount, lottoList)
+    lottoGame.match(lottoList, lastNumbers)
+    val result = lottoGame.result(lottoList)
+    val totalWinningMoney = lottoGame.getTotalWinningMoney(result)
+    resultView.printResult(amount, result, totalWinningMoney)
 }
