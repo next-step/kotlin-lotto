@@ -13,13 +13,12 @@ fun main() {
 
     resultView.printCount(count)
 
-    val lottoList = lottoGame.start(count)
+    val lottoList = lottoGame.getLottoList(count)
     resultView.printLottoList(lottoList)
 
-    val lastNumbers = inputView.inputNumbers()
+    val lastLotto = inputView.inputNumbers()
 
-    lottoGame.match(lottoList, lastNumbers)
-    val result = lottoGame.result(lottoList)
+    val result = lottoGame.result(lottoList, lastLotto)
     val totalWinningMoney = lottoGame.getTotalWinningMoney(result)
     resultView.printResult(amount, result, totalWinningMoney)
 }
