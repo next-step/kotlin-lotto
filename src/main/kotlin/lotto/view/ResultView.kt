@@ -2,6 +2,7 @@ package lotto.view
 
 import lotto.Lotto
 import lotto.LottoResult
+import lotto.LottoResult.LottoMatchResult
 import lotto.view.ResultType.PURCHASE_COUNT
 
 class ResultView {
@@ -18,10 +19,9 @@ class ResultView {
 
     fun printResult(amount: Int, lottoList: List<LottoResult?>, totalWinningMoney: Int) {
         println(INIT_RESULT)
-        lottoList.forEach {
-            it?.let {
-                println(it.matchResult.message.format(it.count))
-            }
+        val lottoByMatch = lottoList.associateBy { it?.matchResult }
+        LottoMatchResult.values().forEach {
+            println(it.message.format(lottoByMatch[it]?.count ?: 0))
         }
         println(ResultType.PROFIT_RATE.message.format(totalWinningMoney.toDouble() / amount))
     }
