@@ -26,4 +26,9 @@ class LottoCashTest : StringSpec({
             }
         }
     }
+
+    "로또를 구매하면 거스름돈을 받을 수 있다." {
+        val lottoCash = LottoCash(14000)
+        lottoCash.purchase(1000).value shouldBe 13000
+    }
 })

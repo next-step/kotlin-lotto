@@ -14,6 +14,14 @@ object LottoStore {
 
     fun isNotPurchasable(cash: LottoCash): Boolean = !isPurchasable(cash)
 
+    fun purchaseLottosByManual(cash: LottoCash, lottoNumbersByManual: List<List<Int>>): Pair<List<Lotto>, LottoCash> {
+        val lottosByManual = lottoNumbersByManual.map {
+            Lotto.valueOf(it)
+        }
+        val lottoPrice = lottosByManual.size * LOTTO_PRICE
+        return lottosByManual to cash.purchase(lottoPrice)
+    }
+
     fun purchaseLottosByAuto(cash: LottoCash): List<Lotto> {
         val count = cash.value / LOTTO_PRICE
         return List(count) { Lotto.auto() }

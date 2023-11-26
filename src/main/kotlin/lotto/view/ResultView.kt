@@ -5,8 +5,8 @@ import lotto.domain.model.LottoMatchResult
 import lotto.domain.model.Rank
 
 object ResultView {
-    fun printPurchaseResult(lottos: List<Lotto>) {
-        println("${lottos.size}개를 구매했습니다.")
+    fun printPurchaseResult(lottosByManualCount: Int, lottosByAutoCount: Int, lottos: List<Lotto>) {
+        println("수동으로 ${lottosByManualCount}개, 자동으로 ${lottosByAutoCount}개를 구매했습니다.")
         lottos.forEach { lotto ->
             println(lotto.map { it.value })
         }

@@ -16,11 +16,26 @@ class LottoStoreTest : BehaviorSpec({
             LottoStore.isPurchasable(lottoCash) shouldBe true
         }
     }
+
     given("로또를 구매할 수 없는 구입 금액이 주어지면") {
         val cash = 500
         val lottoCash = LottoCash(cash)
         then("로또를 구매할 수 없다.") {
             LottoStore.isNotPurchasable(lottoCash) shouldBe true
+        }
+    }
+
+    given("로또 구입 금액과 수동으로 구매할 로또 번호가 주어지면") {
+        val lottoCash = LottoCash(10000)
+        val lottoNumbersByManual = listOf(
+            listOf(8, 21, 23, 41, 42, 43),
+            listOf(3, 5, 11, 16, 32, 38),
+            listOf(7, 11, 16, 35, 36, 44),
+        )
+        then("수동으로 구매할 번호의 수만큼 로또를 수동 발급하고 거스름돈을 돌려받는다.") {
+            val (lottosByManual, changes) = LottoStore.purchaseLottosByManual(lottoCash, lottoNumbersByManual)
+            lottosByManual.size shouldBe 3
+            changes.value shouldBe 7000
         }
     }
 
