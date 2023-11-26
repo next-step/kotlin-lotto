@@ -38,9 +38,7 @@ class LottoController {
         val bonusNumberInput = InputView.getBonusNumber()
         require(!mainNumbersInput.isNullOrBlank()) { "'mainNumbersInput' cannot be null or blank" }
         require(!bonusNumberInput.isNullOrBlank()) { "'bonusNumberInput' cannot be null or blank" }
-        val mainNumbers = mainNumbersInput
-            .split(", ")
-            .map { it.toIntOrThrow { "lotto number should be convertible to Int" } }
+        val mainNumbers = splitAndConvertToInt(mainNumbersInput)
         val bonusNumber = bonusNumberInput.toIntOrThrow { "lotto number should be convertible to Int" }
         return WinningNumbers(mainNumbers, bonusNumber)
     }
@@ -52,15 +50,17 @@ class LottoController {
     }
 
     private fun inputManualTicketNumbers(manualLottoCount: Int): List<List<Int>> {
-        return (1..manualLottoCount)
+        return InputView.getManualNumbers(manualLottoCount)
             .map {
-                val manualNumbersInput = InputView.getManualNumbers()
-                require(!manualNumbersInput.isNullOrBlank()) { "'manualNumbersInput' cannot be null or blank" }
-                manualNumbersInput
-                    .split(", ")
-                    .map { it.toIntOrThrow { "lotto number should be convertible to Int" } }
+                require(!it.isNullOrBlank()) { "'manualNumbersInput' cannot be null or blank" }
+                splitAndConvertToInt(it)
             }
     }
+
+    private fun splitAndConvertToInt(line: String): List<Int> =
+        line
+            .split(", ")
+            .map { it.toIntOrThrow { "lotto number should be convertible to Int" } }
 
     private fun String?.toIntOrThrow(lazyMessage: () -> Any): Int {
         require(!isNullOrBlank()) { lazyMessage }

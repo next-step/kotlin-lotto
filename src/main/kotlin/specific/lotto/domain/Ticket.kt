@@ -20,5 +20,3 @@ data class Ticket(val numbers: Set<Number>) {
         const val NUMBERS_SIZE = 6
     }
 }
-
-typealias Tickets = List<Ticket>

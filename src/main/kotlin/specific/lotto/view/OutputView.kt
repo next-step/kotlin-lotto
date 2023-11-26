@@ -7,8 +7,11 @@ import specific.lotto.domain.WinningResult
 
 object OutputView {
     fun printTickets(tickets: Tickets) {
-        println("${tickets.size}개를 구매했습니다.")
-        tickets.forEach {
+        println("수동으로 ${tickets.manualTickets.size}장, 자동으로 ${tickets.autoTickets.size}개를 구매했습니다.")
+        tickets.manualTickets.forEach {
+            println(it.numbers.map { it.value }.sorted())
+        }
+        tickets.autoTickets.forEach {
             println(it.numbers.map { it.value }.sorted())
         }
     }

@@ -11,9 +11,9 @@ object InputView {
         return readlnOrNull()
     }
 
-    fun getManualNumbers(): String? {
+    fun getManualNumbers(manualLottoCount: Int): List<String?> {
         println("수동으로 구매할 번호를 입력해 주세요.")
-        return readlnOrNull()
+        return (1..manualLottoCount).map { readlnOrNull() }
     }
 
     fun getMainNumbers(): String? {
@@ -25,5 +25,4 @@ object InputView {
         println("보너스 볼을 입력해 주세요.")
         return readlnOrNull()
     }
-
 }

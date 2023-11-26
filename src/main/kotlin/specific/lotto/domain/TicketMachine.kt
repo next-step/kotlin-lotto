@@ -4,20 +4,20 @@ class TicketMachine {
     fun sellTickets(money: Money, manualTicketNumbers: List<List<Int>>): Tickets {
         val manualTickets = sellManualTickets(money, manualTicketNumbers)
         val autoTickets = sellAutoTickets(money)
-        return manualTickets + autoTickets
+        return Tickets(manualTickets, autoTickets)
     }
 
-    private fun sellManualTickets(money: Money, manualTicketNumbers: List<List<Int>>): Tickets {
+    private fun sellManualTickets(money: Money, manualTicketNumbers: List<List<Int>>): List<Ticket> {
         require(manualTicketNumbers.size <= TICKET_LIMIT) { "cannot purchase more than $TICKET_LIMIT" }
-        val tickets: Tickets = manualTicketNumbers.map { issueTicket(it) }
+        val tickets: List<Ticket> = manualTicketNumbers.map { issueTicket(it) }
         money.spend(Ticket.PRICE * tickets.size)
         return tickets
     }
 
-    private fun sellAutoTickets(money: Money): Tickets {
+    private fun sellAutoTickets(money: Money): List<Ticket> {
         val count = money.remaining / Ticket.PRICE
         require(count <= TICKET_LIMIT) { "cannot purchase more than $TICKET_LIMIT" }
-        val tickets: Tickets = List(count.toInt()) { issueTicket() }
+        val tickets: List<Ticket> = List(count.toInt()) { issueTicket() }
         money.spend(Ticket.PRICE * tickets.size)
         return tickets
     }
