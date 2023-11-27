@@ -13,5 +13,6 @@ value class LottoNumber(val number: Int) {
     companion object {
         private const val MINIMUM_NUMBER = 1
         private const val MAXIMUM_NUMBER = 45
+        val ALL_NUMBERS = (MINIMUM_NUMBER..MAXIMUM_NUMBER).map { LottoNumber(it) }
     }
 }

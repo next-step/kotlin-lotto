@@ -29,9 +29,6 @@ value class LottoNumbers(private val numbers: List<LottoNumber>) : Collection<Lo
     }
 
     companion object {
-        private const val MINIMUM_NUMBER = 1
-        private const val MAXIMUM_NUMBER = 45
         const val MAIN_LOTTO_NUMBERS_COUNT = 6
-        val FULL_NUMBER_RANGE = (MINIMUM_NUMBER..MAXIMUM_NUMBER).map { LottoNumber(it) }.toList()
     }
 }
