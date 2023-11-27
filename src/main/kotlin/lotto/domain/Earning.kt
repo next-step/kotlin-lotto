@@ -7,6 +7,6 @@ value class Earning(
 
     fun calculate(result: Map<Int, Int>): Int = result
         .filter { strategy.containsKey(it.key) }
-        .map { (strategy[it.key]!! * (it.value)) }
+        .map { (strategy[it.key]?.times(it.value) ?: 0) }
         .reduceOrNull { acc, i -> acc + i } ?: 0
 }
