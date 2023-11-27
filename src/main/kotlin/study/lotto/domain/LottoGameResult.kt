@@ -2,21 +2,25 @@ package study.lotto.domain
 
 class LottoGameResult private constructor(
     val statistics: Map<PrizeGrade, Int>,
-    val earningsRate: Double
+    val earningsRate: Double,
 ) {
     companion object {
-        fun getResult(lottoes: Lottoes, winningLotto: Lotto, bonusNumber: LottoNumber): LottoGameResult {
-            val statistics = buildStatistics(lottoes.getPrizes(winningLotto, bonusNumber))
+        fun getResult(lottoes: BuyingLottoes, winningLotto: Lotto, bonusNumber: LottoNumber): LottoGameResult {
+            val totalBuyingLottoes = lottoes.toTotalList().let(::Lottoes)
+            val statistics = buildStatistics(totalBuyingLottoes.getPrizes(winningLotto, bonusNumber))
             val earningsRate = calculateEarningsRate(
                 calculateTotalPrize(statistics),
-                lottoes.size
+                totalBuyingLottoes.size
             )
 
             return LottoGameResult(statistics, earningsRate)
         }
         private fun calculateEarningsRate(totalPrize: Long, lottoCount: Int): Double {
-            val totalSpent = lottoCount * Lotto.PRICE_PER_TICKET
-            return totalPrize.toDouble() / totalSpent
+            val totalSpent = BuyingLottoesAmount
+                .get(Amount(lottoCount))
+                .getSpentAmount()
+
+            return totalPrize.toDouble() / totalSpent.amount
         }
 
         private fun buildStatistics(matchCounts: List<PrizeGrade>): Map<PrizeGrade, Int> {

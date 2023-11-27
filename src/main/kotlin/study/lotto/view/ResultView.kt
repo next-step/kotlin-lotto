@@ -1,13 +1,13 @@
 package study.lotto.view
 
-import study.lotto.domain.Lottoes
+import study.lotto.domain.BuyingLottoes
 import study.lotto.domain.PrizeGrade
 
 class ResultView {
-    fun displayLottoes(lottoes: Lottoes) {
-        println("${lottoes.size}개를 구매했습니다.")
-        lottoes.toList().forEach { lottoNumbers ->
-            println(lottoNumbers.numbers.toList().map { it.number })
+    fun displayLottoes(lottoes: BuyingLottoes) {
+        println("수동으로 ${lottoes.buyingManualLottoes.size}장, 자동으로 ${lottoes.buyingAutoLottoes.size}개를 구매했습니다.")
+        lottoes.toTotalList().forEach { lotto ->
+            println(lotto.numbers.toList().map { it.number })
         }
     }
 

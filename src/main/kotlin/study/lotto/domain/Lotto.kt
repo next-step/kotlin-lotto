@@ -1,6 +1,6 @@
 package study.lotto.domain
 
-class Lotto constructor(val numbers: LottoNumbers) {
+class Lotto(val numbers: LottoNumbers) {
 
     private fun countMatches(winningNumbers: Lotto): Int {
         return this.numbers.count(winningNumbers.numbers::contains)
@@ -16,8 +16,6 @@ class Lotto constructor(val numbers: LottoNumbers) {
     ]
 
     companion object {
-        const val PRICE_PER_TICKET = 1_000
-
         fun generate(): Lotto {
             return Lotto(LottoNumbers.random())
         }
