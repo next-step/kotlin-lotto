@@ -1,6 +1,7 @@
 package lotto2.domain
 
-data class LottoNumbers(private val numbers: List<LottoNumber>) : Collection<LottoNumber> by numbers {
+@JvmInline
+value class LottoNumbers(private val numbers: List<LottoNumber>) : Collection<LottoNumber> by numbers {
     init {
         validateSize()
         validateDuplicate()

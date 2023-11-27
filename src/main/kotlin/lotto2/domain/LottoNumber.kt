@@ -1,6 +1,7 @@
 package lotto2.domain
 
-data class LottoNumber(val number: Int) {
+@JvmInline
+value class LottoNumber(val number: Int) {
     init {
         validateRange()
     }
