@@ -20,4 +20,10 @@ class MoneyTest {
     fun `구매할 금액을 입력하면 구매한 로또 개수를 출력해줄 수 있다`(price: Int, count: Int) {
         Assertions.assertThat(Money(price).getCounts()).isEqualTo(count)
     }
+
+    @CsvSource("3000, 1, 2", "14000, 10, 4", "1000, 0, 1")
+    @ParameterizedTest
+    fun `수동으로 로또를 구매하면 나머지는 자동으로 구매할 수 있다`(price: Int, manualCount: Int, autoCount: Int) {
+        Assertions.assertThat(Money(price, manualCount).getCounts()).isEqualTo(autoCount)
+    }
 }

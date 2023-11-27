@@ -1,13 +1,11 @@
 package lotto.domain
 
-class LottoResult {
-    private var result = LottoPrize.values().associateWith { 0 }.toMap()
+import java.util.EnumMap
 
-    constructor(resultMap: Map<LottoPrize, Int>) {
-        this.result = resultMap
-    }
+class LottoResult(private val result: EnumMap<LottoPrize, Int>) {
+    constructor(resultMap: Map<LottoPrize, Int>) : this(EnumMap(resultMap))
 
-    fun getResult(prize: LottoPrize) = result[prize]
+    fun getResult(prize: LottoPrize) = result[prize] ?: 0
 
     fun getProfitRate(money: Money): Double {
         val sum = result.map { it.key.prizeMoney * it.value }.sum()
