@@ -9,7 +9,6 @@ class LottoGame {
         winningLotto: Set<Int>,
     ): Int {
         val matchCount = userLotto.intersect(winningLotto.toSet()).size
-        println("${matchCount}개 맞았습니다.")
         return rank(matchCount)
     }
 

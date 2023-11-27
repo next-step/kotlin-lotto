@@ -3,9 +3,6 @@ package lotto
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
-
-
-
 class BenefitCalculator {
     fun calculate(result: Map<Int, Int>): String {
         val spend = result.map { it.value }.sum() * LOTTO_PRICE
