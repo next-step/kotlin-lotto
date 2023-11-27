@@ -13,7 +13,11 @@ value class LottoAnswer(
     }
 
     private fun innerMatch(inputLotto: Lotto): Int {
-        return inputLotto.numbers.count { outer -> answer.find { outer == it } != null }
+        return inputLotto.numbers.count { outer -> isAnswerNumberMatch(outer) }
+    }
+
+    private fun isAnswerNumberMatch(outer: Int): Boolean {
+        return answer.find { outer == it } != null
     }
 
     companion object {
