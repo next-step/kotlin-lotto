@@ -1,6 +1,5 @@
 package lotto.controller
 
-import lotto.component.Lotto
 import lotto.component.LottoInputValidator
 import lotto.model.*
 import lotto.view.LottoInputView
@@ -24,7 +23,7 @@ class LottoViewController(
     }
 
     fun getManualLottoNumbers(manualLottoNumbersCount: Int, purchasePrice: PurchasePrice): Pair<List<LottoNumbers>, PurchasePrice> {
-        val manualLottoPurchasePrice = Lotto.getLottoTotalPrice(manualLottoNumbersCount)
+        val manualLottoPurchasePrice = PurchasePrice.getLottoTotalPrice(manualLottoNumbersCount)
             .run { PurchasePrice(this) }
             .run { lottoInputValidator.validateLottoOverbuy(this, purchasePrice) }
 
@@ -74,7 +73,7 @@ class LottoViewController(
     }
 
     private fun convertLottoNumbers(purchasePrice: PurchasePrice): List<LottoNumbers> {
-        val count: Int = Lotto.purchaseLottoCount(purchasePrice)
+        val count: Int = PurchasePrice.purchaseLottoCount(purchasePrice)
         val lottoNumbersCount: Int = lottoInputValidator.validateLottoNumbersCount(count)
 
         return LottoNumbers.generate(lottoNumbersCount)

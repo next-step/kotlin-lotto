@@ -1,6 +1,7 @@
 package lotto.component
 
 import lotto.model.LottoPrize
+import lotto.model.PurchasePrice
 import kotlin.math.round
 
 class LottoResultAnalyzer {
@@ -17,6 +18,6 @@ class LottoResultAnalyzer {
     }
 
     private fun getTotalPrice(lottoNumbersCount: Int): Int {
-        return Lotto.getLottoTotalPrice(lottoNumbersCount)
+        return PurchasePrice.getLottoTotalPrice(lottoNumbersCount)
     }
 }

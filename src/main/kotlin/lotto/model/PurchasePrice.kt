@@ -21,8 +21,18 @@ value class PurchasePrice(val purchasePrice: Int) {
     }
 
     companion object {
+        private const val LOTTO_PRICE = 1000
+
         fun from(purchasePrice: Int): PurchasePrice {
             return PurchasePrice(purchasePrice)
+        }
+
+        fun purchaseLottoCount(purchasePrice: PurchasePrice): Int {
+            return purchasePrice.purchasePrice / LOTTO_PRICE
+        }
+
+        fun getLottoTotalPrice(count: Int): Int {
+            return count * LOTTO_PRICE
         }
     }
 }

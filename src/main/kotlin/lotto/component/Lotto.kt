@@ -25,16 +25,4 @@ class Lotto(
                 LottoPrize.of(matchedCount, isBonusNumberMatched)
             }
     }
-
-    companion object {
-        private const val LOTTO_PRICE = 1000
-
-        fun purchaseLottoCount(purchasePrice: PurchasePrice): Int {
-            return purchasePrice.purchasePrice / LOTTO_PRICE
-        }
-
-        fun getLottoTotalPrice(count: Int): Int {
-            return count * LOTTO_PRICE
-        }
-    }
 }

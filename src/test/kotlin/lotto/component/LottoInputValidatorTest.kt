@@ -84,8 +84,8 @@ class LottoInputValidatorTest : FunSpec({
     }
 
     test("수동 구매 로또 개수 입력 시 구매 금액을 초과하는 경우 IllegalArgumentException 예외 발생 테스트") {
-        val budget = PurchasePrice.from(Lotto.getLottoTotalPrice(1))
-        val purchasePrice = PurchasePrice.from(Lotto.getLottoTotalPrice(2))
+        val budget = PurchasePrice.from(PurchasePrice.getLottoTotalPrice(1))
+        val purchasePrice = PurchasePrice.from(PurchasePrice.getLottoTotalPrice(2))
 
         shouldThrow<IllegalArgumentException> {
             validator.validateLottoOverbuy(purchasePrice, budget)
