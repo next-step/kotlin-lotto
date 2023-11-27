@@ -6,7 +6,7 @@ import io.kotest.data.Row2
 import io.kotest.data.forAll
 import io.kotest.matchers.shouldBe
 
-class ParserTest: StringSpec({
+class ParserTest : StringSpec({
 
     "계산식 파싱(커스텀, 일반, 빈값)을 진행해야 한다" {
         forAll(

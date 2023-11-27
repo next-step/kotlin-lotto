@@ -6,6 +6,6 @@ class EarningRate(
     val strategy: (Double) -> BigDecimal
 ) {
     fun calculate(principal: Int, earn: Int): BigDecimal {
-        return strategy(earn.toDouble()/principal.toDouble())
+        return strategy(earn.toDouble() / principal.toDouble())
     }
 }

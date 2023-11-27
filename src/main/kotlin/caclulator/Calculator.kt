@@ -9,5 +9,4 @@ object Calculator {
         }
         return parsed.reduce { acc, i -> acc + i }
     }
-
 }

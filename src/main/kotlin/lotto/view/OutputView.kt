@@ -10,7 +10,6 @@ object OutputView {
         lotteries.forEach {
             println(it.numbers)
         }
-
     }
 
     fun outputLottoResult(result: LottoResult, strategy: Map<Int, Int>) {

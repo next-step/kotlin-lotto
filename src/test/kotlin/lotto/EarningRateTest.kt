@@ -6,7 +6,7 @@ import lotto.domain.EarningRate
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-class EarningRateTest: StringSpec({
+class EarningRateTest : StringSpec({
 
     "14000원을 투자해서 5000원을 벌어들인 경우 0.35의 수익률이 발생해야한다" {
         val earningRate = EarningRate { result ->
@@ -16,5 +16,4 @@ class EarningRateTest: StringSpec({
         val result = earningRate.calculate(14000, 5000)
         result shouldBe BigDecimal.valueOf(0.35)
     }
-
 })
