@@ -12,10 +12,10 @@ class LottoService(
     fun play(answer: LottoAnswer, earningStrategy: Map<Int, Int>): LottoResult {
         val result = answer.match(lotteries)
         val earning = Earning(earningStrategy).calculate(result)
-        val earningRate = EarningRate({ result ->
-            val decimal = result.toBigDecimal()
+        val earningRate = EarningRate { earningRate ->
+            val decimal = earningRate.toBigDecimal()
             decimal.setScale(2, RoundingMode.DOWN)
-        }).calculate(principal, earning)
+        }.calculate(principal, earning)
         return LottoResult(earningRate, result)
     }
 
