@@ -7,8 +7,8 @@ class WinningNumbers private constructor(
         return lottoNumbers.match(target)
     }
 
-    fun contain(number: LottoNumber): Boolean {
-        return lottoNumbers.contain(number)
+    operator fun contains(number: LottoNumber): Boolean {
+        return number in lottoNumbers
     }
 
     companion object {

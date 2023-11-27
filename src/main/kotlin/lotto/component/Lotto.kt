@@ -20,21 +20,9 @@ class Lotto(
         return lottoNumbers
             .map {
                 val matchedCount: Int = winningNumbers.match(it)
-                val isBonusNumberMatched: Boolean = it.contain(bonusNumber)
+                val isBonusNumberMatched: Boolean = bonusNumber in it
 
                 LottoPrize.of(matchedCount, isBonusNumberMatched)
             }
-    }
-
-    companion object {
-        private const val LOTTO_PRICE = 1000
-
-        fun purchaseLottoCount(amount: Int): Int {
-            return amount / LOTTO_PRICE
-        }
-
-        fun getLottoTotalPrice(count: Int): Int {
-            return count * LOTTO_PRICE
-        }
     }
 }

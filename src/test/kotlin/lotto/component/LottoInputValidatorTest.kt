@@ -5,6 +5,7 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.data.blocking.forAll
 import io.kotest.data.row
 import lotto.model.LottoNumber
+import lotto.model.PurchasePrice
 import lotto.model.WinningNumbers
 
 class LottoInputValidatorTest : FunSpec({
@@ -24,7 +25,7 @@ class LottoInputValidatorTest : FunSpec({
     }
 
     test("로또를 구매할 수 없는 경우 금액 IllegalArgumentException 예외 발생 테스트") {
-        val lottoNumbersCount = 0
+        val lottoNumbersCount = -1
 
         shouldThrow<IllegalArgumentException> {
             validator.validateLottoNumbersCount(lottoNumbersCount)
@@ -68,6 +69,26 @@ class LottoInputValidatorTest : FunSpec({
 
         shouldThrow<IllegalArgumentException> {
             validator.validateBonusNumber(bonusNumber, winningNumbers)
+        }
+    }
+
+    test("수동 구매 로또 숫자가 0 또는 자연수가 아닌 경우 IllegalArgumentException 예외 발생 테스트") {
+        forAll(
+            row("-1"),
+            row("a"),
+        ) { manualLottoNumbersCount ->
+            shouldThrow<IllegalArgumentException> {
+                validator.validateManualLottoNumbersCount(manualLottoNumbersCount)
+            }
+        }
+    }
+
+    test("수동 구매 로또 개수 입력 시 구매 금액을 초과하는 경우 IllegalArgumentException 예외 발생 테스트") {
+        val budget = PurchasePrice.from(PurchasePrice.getLottoTotalPrice(1))
+        val purchasePrice = PurchasePrice.from(PurchasePrice.getLottoTotalPrice(2))
+
+        shouldThrow<IllegalArgumentException> {
+            validator.validateLottoOverbuy(purchasePrice, budget)
         }
     }
 })

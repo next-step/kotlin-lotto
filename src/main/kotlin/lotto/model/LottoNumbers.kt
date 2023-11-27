@@ -12,7 +12,7 @@ class LottoNumbers private constructor(val numbers: List<LottoNumber>) {
             .size
     }
 
-    fun contain(number: LottoNumber): Boolean {
+    operator fun contains(number: LottoNumber): Boolean {
         return numbers.find { it.number == number.number } != null
     }
 
@@ -28,7 +28,7 @@ class LottoNumbers private constructor(val numbers: List<LottoNumber>) {
         }
 
         private fun validateLottoNumbersLength(numbers: List<Int>): List<Int> {
-            require(numbers.toSet().size == LOTTO_NUMBERS_LENGTH) {
+            require(numbers.distinct().size == LOTTO_NUMBERS_LENGTH) {
                 "로또 번호는 6개이어야하며 중복된 숫자가 존재해선 안됩니다."
             }
 
