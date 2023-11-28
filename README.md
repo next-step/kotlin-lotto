@@ -27,3 +27,4 @@
 - [x] second place result should be correct
 - [x] Rank should show correct result
 - [x] Rank result should show correct prize
+- [x] LottoTickets should provide correct RankResult
