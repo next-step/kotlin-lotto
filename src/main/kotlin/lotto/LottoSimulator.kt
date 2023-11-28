@@ -1,9 +1,9 @@
 package lotto
 
+import lotto.domain.LottoProfitResult
 import lotto.domain.LottoPurchaseOrder
 import lotto.domain.LottoResult
 import lotto.domain.LottoTicket
-import lotto.provider.LottoResultProvider
 import lotto.provider.ticket.AutoTicketProvider
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -22,9 +22,14 @@ class LottoSimulator(
         val lottoTickets = inputView.provideLottoTickets(purchaseOrder.ticketCount)
         val winningNumber = inputView.getWinningNumber()
 
-        val result = LottoResultProvider.provideLottoResult(
+        val lottoProfitResult = LottoProfitResult(
+            totalTicketPrice = purchaseOrder.totalPrice,
             totalPrize = lottoTickets.getRankResult(winningNumber).totalPrize(),
-            purchaseOrder = purchaseOrder,
+            remainder = purchaseOrder.remainder
+        )
+
+        val result = LottoResult(
+            lottoProfitResult = lottoProfitResult,
         )
 
         resultView.printResult(result)
