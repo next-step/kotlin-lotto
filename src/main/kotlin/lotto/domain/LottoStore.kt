@@ -15,6 +15,9 @@ object LottoStore {
     fun isNotPurchasable(cash: LottoCash): Boolean = !isPurchasable(cash)
 
     fun purchaseLottosByManual(cash: LottoCash, lottoNumbersByManual: List<List<Int>>): Pair<List<Lotto>, LottoCash> {
+        require(cash.value >= lottoNumbersByManual.size * LOTTO_PRICE) {
+            "구매할 로또의 총 가격은 로또 구매 금액보다 클 수 없습니다. lottoCash=${cash.value}, lottoCount=${lottoNumbersByManual.size}"
+        }
         val lottosByManual = lottoNumbersByManual.map {
             Lotto.valueOf(it)
         }
