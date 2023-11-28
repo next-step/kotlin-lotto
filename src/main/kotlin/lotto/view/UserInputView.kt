@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.LottoNumber
+import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
 import lotto.domain.WinningNumber
 import lotto.provider.ticket.LottoTicketsProvider
@@ -22,7 +23,7 @@ class UserInputView(
         }
 
         return WinningNumber(
-            lottoNumberList,
+            LottoTicket(lottoNumberList),
             bonusBall,
         )
     }
