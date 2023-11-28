@@ -15,11 +15,6 @@ value class LottoGame(
     constructor(vararg values: Int) : this(values.toList())
     constructor(strategy: LottoNumbersStrategy) : this(strategy.pick())
 
-    override fun toString(): String {
-        return values.map { it.value }
-            .joinToString(prefix = "[", postfix = "]", separator = ", ")
-    }
-
     fun numbersIntersections(other: LottoGame): Int {
         return other.values
             .intersect(this.values)
@@ -34,7 +29,3 @@ value class LottoGame(
         const val REQUIRE_COUNT_OF_NUMBER = 6
     }
 }
-
-// fun List<LottoNumber>.toTreeSet(): TreeSet<LottoNumber> {
-//    return TreeSet(this)
-// }
