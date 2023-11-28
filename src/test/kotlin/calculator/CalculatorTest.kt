@@ -3,10 +3,11 @@ package calculator
 import caclulator.Calculator
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
-import io.kotest.data.*
+import io.kotest.data.Row2
+import io.kotest.data.forAll
 import io.kotest.matchers.shouldBe
 
-class CalculatorTest: StringSpec({
+class CalculatorTest : StringSpec({
 
     "',' 연산자를 입력 받았을 때 계산 결과 출력" {
         val result = Calculator.calculate("2,2,3")
@@ -45,5 +46,4 @@ class CalculatorTest: StringSpec({
             Calculator.calculate("-1:2:-3")
         }
     }
-
 })
