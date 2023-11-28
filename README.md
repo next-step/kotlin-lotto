@@ -28,3 +28,4 @@
 - [x] Rank should show correct result
 - [x] Rank result should show correct prize
 - [x] LottoTickets should provide correct RankResult
+- [x] LottoResult should provide correct profit rate
