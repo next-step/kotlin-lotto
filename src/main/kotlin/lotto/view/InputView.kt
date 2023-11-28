@@ -9,7 +9,7 @@ class InputView {
         return readln().toInt()
     }
 
-    fun inputLastLotto(): Lotto {
+    fun inputWinningLotto(): Lotto {
         println(LAST_WEEK_WINNING_NUMBER.question)
         val numbers = readln().split(",").map { it.trim().toInt() }.toSet()
         return Lotto(numbers)

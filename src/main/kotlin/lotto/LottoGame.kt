@@ -8,26 +8,18 @@ class LottoGame {
 
     fun getLottoList(count: Int): List<Lotto> {
         return mutableListOf<Lotto>().apply {
-            repeat(count) { this.add(Lotto.of()) }
+            repeat(count) { this.add(Lotto.getAutoNumbers()) }
         }
     }
 
-    fun result(lottoList: List<Lotto>, lastLotto: Lotto, bonus: Int): List<LottoResult?> {
-        return lottoList.map { lotto ->
-            val count = lotto.numbers.intersect(lastLotto.numbers).count()
-            val hasBonus = if (count == 5) hasMatchBonusBall(lotto.numbers, bonus) else false
-            Rank.valueOf(count, hasBonus)?.let {
-                LottoResult(it).apply { this.addCount() }
-            }
-        }
+    fun result(lottoList: List<Lotto>, winningLotto: Lotto, bonus: Int): Map<Rank, Int> {
+        return lottoList.mapNotNull { lotto ->
+            lotto.match(winningLotto, bonus).let { (count, hasBonus) -> Rank.valueOf(count, hasBonus) }
+        }.groupingBy { it }.eachCount()
     }
 
-    fun getTotalWinningMoney(result: List<LottoResult?>): Int {
-        return result.sumOf { it?.rank?.getWinningMoney(it.count) ?: 0 }
-    }
-
-    private fun hasMatchBonusBall(numbers: Set<Int>, bonus: Int): Boolean {
-        return numbers.contains(bonus)
+    fun getTotalWinningMoney(result: Map<Rank, Int>): Int {
+        return result.toList().sumOf { it.first.getWinningMoney(it.second) }
     }
 
     companion object {

@@ -17,10 +17,10 @@ fun main() {
     val lottoList = lottoGame.getLottoList(count)
     resultView.printLottoList(lottoList)
 
-    val lastLotto = inputView.inputLastLotto()
+    val winningLotto = inputView.inputWinningLotto()
     val bonus = inputView.inputNumber(InputType.BONUS_BALL)
 
-    val result = lottoGame.result(lottoList, lastLotto, bonus)
+    val result = lottoGame.result(lottoList, winningLotto, bonus)
     val totalWinningMoney = lottoGame.getTotalWinningMoney(result)
     resultView.printResult(amount, result, totalWinningMoney)
 }
