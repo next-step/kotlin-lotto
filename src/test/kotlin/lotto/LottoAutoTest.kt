@@ -19,14 +19,7 @@ class LottoAutoTest : StringSpec({
             MockInputView(
                 budget = 5000,
                 winningNumber = WinningNumber(
-                    listOf(
-                        LottoNumber(1),
-                        LottoNumber(2),
-                        LottoNumber(3),
-                        LottoNumber(4),
-                        LottoNumber(5),
-                        LottoNumber(6),
-                    ),
+                    listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) },
                     bonusNumber = LottoNumber(19)
                 ),
                 lottoTicketsProvider = MockTicketProvider(
@@ -48,14 +41,7 @@ class LottoAutoTest : StringSpec({
             MockInputView(
                 budget = 5000,
                 winningNumber = WinningNumber(
-                    listOf(
-                        LottoNumber(1),
-                        LottoNumber(2),
-                        LottoNumber(3),
-                        LottoNumber(4),
-                        LottoNumber(5),
-                        LottoNumber(6),
-                    ),
+                    listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) },
                     bonusNumber = LottoNumber(19)
                 ),
                 lottoTicketsProvider = MockTicketProvider(
@@ -77,14 +63,7 @@ class LottoAutoTest : StringSpec({
             MockInputView(
                 budget = 5000,
                 winningNumber = WinningNumber(
-                    listOf(
-                        LottoNumber(1),
-                        LottoNumber(2),
-                        LottoNumber(3),
-                        LottoNumber(4),
-                        LottoNumber(5),
-                        LottoNumber(9),
-                    ),
+                    listOf(1, 2, 3, 4, 5, 9).map { LottoNumber(it) },
                     bonusNumber = LottoNumber(19)
                 ),
                 lottoTicketsProvider = MockTicketProvider(
