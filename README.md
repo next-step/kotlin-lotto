@@ -58,6 +58,7 @@
 ### 지난주 로또 당첨 번호 LastWeekMatchLottoTest
 - [x] 지난주 로또 당첨 번호는 6개 번호가 있다.
 - [x] 지난주 로또 당첨 번호는 보너스 번호가 있다.
+- [x] 지난주 로또 당첨 번호와 보너스 번호가 중복되는 경우 IllegalArgumentException 예외를 던진다.
 
 ### 로또 등수 RankTest
 - [x] 로또 번호가 3개 이상 일치하면 상금이 있다.
