@@ -14,9 +14,7 @@ fun main() {
     val ticket = order.ticketing()
 
     OutputView.presentTicket(ticket)
-
     val winningNumbers: WinningNumbers = InputView.selectWinningNumbers()
-
     val lottoWinners: LottoWinners = ticket.winnerAggregate(winningNumbers)
     OutputView.presentPrizes(lottoWinners, order.pricePerGame())
 }
