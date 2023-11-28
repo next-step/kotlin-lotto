@@ -26,3 +26,4 @@
 - [x] bonus number should not be in lotto numbers of winning number
 - [x] second place result should be correct
 - [x] Rank should show correct result
+- [x] Rank result should show correct prize
