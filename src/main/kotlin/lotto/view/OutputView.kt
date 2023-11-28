@@ -9,6 +9,7 @@ object OutputView {
 
     fun presentPrizes(lottoWinners: LottoWinners, pricePerGame: Int) {
         val earningRate = lottoWinners.earningRate(pricePerGame)
+        println()
         println(
             """
         당첨 통계
