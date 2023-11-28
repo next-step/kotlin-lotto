@@ -19,8 +19,12 @@ class LottoApplication {
                 val cash = InputView.readCash()
                 lottoCash = LottoCash(cash)
             } while (LottoStore.isNotPurchasable(lottoCash))
-            val lottos = LottoStore.purchaseLottosByAuto(lottoCash)
-            ResultView.printPurchaseResult(lottos)
+
+            val lottoNumbersByManual = InputView.readLottoNumbersByManual()
+            val (lottosByManual, lottoCashForAuto) = LottoStore.purchaseLottosByManual(lottoCash, lottoNumbersByManual)
+            val lottosByAuto = LottoStore.purchaseLottosByAuto(lottoCashForAuto)
+            val lottos = lottosByManual + lottosByAuto
+            ResultView.printPurchaseResult(lottosByManual.size, lottosByAuto.size, lottos)
 
             val (numbers, bonusNumber) = InputView.readLastWeekMatchNumbers()
             val lastWeekMatchLotto = LastWeekMatchLotto.valueOf(numbers, bonusNumber)

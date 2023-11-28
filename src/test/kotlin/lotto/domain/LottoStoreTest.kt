@@ -1,5 +1,6 @@
 package lotto.domain
 
+import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
@@ -16,11 +17,42 @@ class LottoStoreTest : BehaviorSpec({
             LottoStore.isPurchasable(lottoCash) shouldBe true
         }
     }
+
     given("로또를 구매할 수 없는 구입 금액이 주어지면") {
         val cash = 500
         val lottoCash = LottoCash(cash)
         then("로또를 구매할 수 없다.") {
             LottoStore.isNotPurchasable(lottoCash) shouldBe true
+        }
+    }
+
+    given("로또 구입 금액과 수동으로 구매할 로또 번호가 주어지면") {
+        val lottoCash = LottoCash(10000)
+        val lottoNumbersByManual = listOf(
+            listOf(8, 21, 23, 41, 42, 43),
+            listOf(3, 5, 11, 16, 32, 38),
+            listOf(7, 11, 16, 35, 36, 44),
+        )
+        then("수동으로 구매할 번호의 수만큼 로또를 수동 발급하고 거스름돈을 돌려받는다.") {
+            val (lottosByManual, changes) = LottoStore.purchaseLottosByManual(lottoCash, lottoNumbersByManual)
+            lottosByManual.size shouldBe 3
+            changes.value shouldBe 7000
+        }
+    }
+
+    given("로또 구입 금액보다") {
+        val lottoCash = LottoCash(1000)
+        `when`("더 많은 로또를 수동으로 구입하면") {
+            val lottoNumbersByManual = listOf(
+                listOf(8, 21, 23, 41, 42, 43),
+                listOf(3, 5, 11, 16, 32, 38),
+                listOf(7, 11, 16, 35, 36, 44),
+            )
+            then("IllegalArgumentException 예외를 던진다.") {
+                shouldThrowWithMessage<IllegalArgumentException>("구매할 로또의 총 가격은 로또 구매 금액보다 클 수 없습니다. lottoCash=${lottoCash.value}, lottoCount=${lottoNumbersByManual.size}") {
+                    LottoStore.purchaseLottosByManual(lottoCash, lottoNumbersByManual)
+                }
+            }
         }
     }
 
