@@ -18,9 +18,10 @@ class LottoOrder(
 
     fun ticketing(): LottoTicket {
         requireCountCheck()
-        OutputView.confirmTicketTypeCount(manualCount, autoCount)
-        return issue(manualCount, LottoManualOrderStrategy) +
+        val lottoTicket = issue(manualCount, LottoManualOrderStrategy) +
             issue(autoCount, LottoAutomaticOrderStrategy)
+        OutputView.confirmTicketTypeCount(manualCount, autoCount)
+        return lottoTicket
     }
 
     private fun requireCountCheck() {

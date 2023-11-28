@@ -12,6 +12,7 @@ fun main() {
         manualCount = InputView.manualOrderCount()
     )
     val ticket = order.ticketing()
+
     OutputView.presentTicket(ticket)
 
     val winningNumbers: WinningNumbers = InputView.selectWinningNumbers()

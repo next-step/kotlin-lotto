@@ -40,7 +40,7 @@ object OutputView {
     }
 
     fun confirmTicketTypeCount(manualCount: Int, autoCount: Int) {
-        println("수동으로 ${manualCount}장, 자동으로 ${autoCount}개를 구매했습니다.")
+        println("\n수동으로 ${manualCount}장, 자동으로 ${autoCount}개를 구매했습니다.")
     }
 }
 

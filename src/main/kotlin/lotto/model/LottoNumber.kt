@@ -1,7 +1,5 @@
 package lotto.model
 
-import lotto.model.strategy.LottoNumberStrategy
-
 @JvmInline
 value class LottoNumber(
     val value: Int,
@@ -17,9 +15,5 @@ value class LottoNumber(
     companion object {
         const val UPPER_LIMIT_VALUE: Int = 46
         const val LOWER_LIMIT_VALUE: Int = 1
-
-        fun of(strategy: LottoNumberStrategy): LottoNumber {
-            return LottoNumber(strategy.pick())
-        }
     }
 }
