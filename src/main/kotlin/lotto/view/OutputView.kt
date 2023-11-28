@@ -1,19 +1,14 @@
 package lotto.view
 
-import lotto.model.Game
-import lotto.model.LottoOrder
+import lotto.model.LottoGame
 import lotto.model.LottoTicket
 import lotto.model.LottoWinners
 import lotto.model.Rank
 
 object OutputView {
-    fun presetRound(lottoTicket: LottoTicket) {
-        println(lottoTicket.present())
-    }
 
-    fun presentPrizes(lottoWinners: LottoWinners) {
-        val earningRate = lottoWinners.earningRate(LottoOrder.priceOfGame())
-
+    fun presentPrizes(lottoWinners: LottoWinners, pricePerGame: Int) {
+        val earningRate = lottoWinners.earningRate(pricePerGame)
         println(
             """
         당첨 통계
@@ -34,16 +29,21 @@ object OutputView {
         }
     }
 
-    fun presentPurchaseInfo(manualTicket: LottoTicket, autoTicket: LottoTicket) {
-        println("수동으로 ${manualTicket.gamesCount()}장, 자동으로 ${autoTicket.gamesCount()}개를 구매했습니다.")
+    fun presentTicket(ticket: LottoTicket) {
+        for (game in ticket.lottoGames) {
+            presentGame(game)
+        }
+    }
+
+    private fun presentGame(game: LottoGame) {
+        println(game.toPresent())
+    }
+
+    fun confirmTicketTypeCount(manualCount: Int, autoCount: Int) {
+        println("수동으로 ${manualCount}장, 자동으로 ${autoCount}개를 구매했습니다.")
     }
 }
 
-private fun LottoTicket.present(): String {
-    return this.games
-        .joinToString("\n") { it.present() }
-}
-
-private fun Game.present(): String {
-    return this.lottoNumbers.toString()
+private fun LottoGame.toPresent(): String {
+    return this.values.map { it -> it.value }.sorted().joinToString(prefix = "[", postfix = "]")
 }

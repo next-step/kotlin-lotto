@@ -1,14 +1,14 @@
 package lotto.model
 
 data class WinningNumbers(
-    val lottoNumbers: LottoNumbers,
+    val lottoGame: LottoGame,
     val bonusNumber: LottoNumber
 ) {
 
-    fun toRank(otherNumber: LottoNumbers): Rank {
+    fun toRank(otherGame: LottoGame): Rank {
         return Rank.of(
-            this.lottoNumbers.numbersIntersections(otherNumber),
-            otherNumber.containNumber(this.bonusNumber)
+            this.lottoGame.numbersIntersections(otherGame),
+            otherGame.containNumber(this.bonusNumber)
         )
     }
 }
