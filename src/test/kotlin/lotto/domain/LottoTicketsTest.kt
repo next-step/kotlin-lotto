@@ -11,17 +11,20 @@ class LottoTicketsTest : StringSpec({
         LottoNumber(7)
     )
 
+    fun lottoTicket(v1: Int, v2: Int, v3: Int, v4: Int, v5: Int, v6: Int): LottoTicket =
+        LottoTicket(listOf(v1, v2, v3, v4, v5, v6).map { LottoNumber(it) })
+
     "LottoTickets should provide correct RankResult" {
         val actual = LottoTickets(
             listOf(
-                LottoTicket(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }),
-                LottoTicket(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }),
-                LottoTicket(listOf(1, 2, 3, 4, 5, 7).map { LottoNumber(it) }),
-                LottoTicket(listOf(1, 2, 3, 4, 5, 8).map { LottoNumber(it) }),
-                LottoTicket(listOf(1, 2, 3, 4, 5, 8).map { LottoNumber(it) }),
-                LottoTicket(listOf(1, 2, 3, 4, 8, 9).map { LottoNumber(it) }),
-                LottoTicket(listOf(1, 2, 3, 11, 12, 13).map { LottoNumber(it) }),
-                LottoTicket(listOf(11, 12, 13, 14, 15, 16).map { LottoNumber(it) })
+                lottoTicket(1, 2, 3, 4, 5, 6),
+                lottoTicket(1, 2, 3, 4, 5, 6),
+                lottoTicket(1, 2, 3, 4, 5, 7),
+                lottoTicket(1, 2, 3, 4, 5, 8),
+                lottoTicket(1, 2, 3, 4, 5, 8),
+                lottoTicket(1, 2, 3, 4, 8, 9),
+                lottoTicket(1, 2, 3, 11, 12, 13),
+                lottoTicket(11, 12, 13, 14, 15, 16)
             )
         ).getRankResult(winningNumber)
 
