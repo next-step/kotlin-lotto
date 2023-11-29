@@ -33,7 +33,7 @@ class LottoAutoTest : StringSpec({
                 ),
             ),
             resultView = ResultView(),
-        ).simulate().lottoProfitResult.totalPrize shouldBe Rank.FirstPlace.prize
+        ).simulate().totalPrize shouldBe Rank.FirstPlace.prize
     }
 
     "winning statistics should show correct ROI" {
@@ -77,6 +77,6 @@ class LottoAutoTest : StringSpec({
                 ),
             ),
             resultView = ResultView(),
-        ).simulate().lottoProfitResult.totalPrize shouldBe Rank.SecondPlace.prize
+        ).simulate().totalPrize shouldBe Rank.SecondPlace.prize
     }
 })
