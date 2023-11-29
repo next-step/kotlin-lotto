@@ -1,5 +1,12 @@
 package lotto.domain
 
-data class WinningNumber(private var _winningNumberList: List<LottoNumber>) : AbstractLottoTicket(_winningNumberList) {
-    fun getResult(lottoTickets: LottoTickets): WinResult = WinResult(lottoTickets, this)
+data class WinningNumber(
+    private val _lottoTicket: LottoTicket,
+    val bonusNumber: LottoNumber,
+) {
+    val lottoNumberList get() = _lottoTicket.lottoNumberList
+
+    init {
+        require(bonusNumber !in _lottoTicket.lottoNumberList) { "Bonus number duplicated in lotto numbers ${_lottoTicket.lottoNumberList} $bonusNumber" }
+    }
 }

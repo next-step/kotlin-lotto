@@ -2,18 +2,14 @@ package lotto.view
 
 import lotto.domain.LottoTickets
 import lotto.domain.WinningNumber
-import lotto.provider.budget.BudgetProvider
-import lotto.provider.ticket.LottoTicketsProvider
-import lotto.provider.winningnumber.WinningNumberProvider
 
 class MockInputView(
-    private val budgetProvider: BudgetProvider,
-    private val winningNumberProvider: WinningNumberProvider,
-    private val lottoTicketsProvider: LottoTicketsProvider,
+    private val budget: Int,
+    private val winningNumber: WinningNumber,
 ) : InputView {
-    override fun provideBudget(): Int = budgetProvider.provide()
+    override fun getBudget(): Int = budget
 
-    override fun provideWinningNumber(): WinningNumber = winningNumberProvider.provide()
+    override fun getWinningNumber(): WinningNumber = winningNumber
 
-    override fun provideLottoTickets(ticketCount: Int): LottoTickets = lottoTicketsProvider.provide(ticketCount)
+    override fun printPurchasedLotto(lottoTickets: LottoTickets) = Unit
 }

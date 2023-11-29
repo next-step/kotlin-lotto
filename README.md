@@ -23,3 +23,9 @@
 - [x] winning statistics should show correct ROI
 - [x] lotto purchase order should calculate correct total price and remainder
 - [x] lotto profit result should calculate correct profit rate
+- [x] bonus number should not be in lotto numbers of winning number
+- [x] second place result should be correct
+- [x] Rank should show correct result
+- [x] Rank result should show correct prize
+- [x] LottoTickets should provide correct RankResult
+- [x] LottoResult should provide correct profit rate

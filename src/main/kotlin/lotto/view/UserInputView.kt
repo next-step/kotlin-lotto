@@ -1,23 +1,30 @@
 package lotto.view
 
+import lotto.domain.LottoNumber
+import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
 import lotto.domain.WinningNumber
-import lotto.provider.ticket.LottoTicketsProvider
-import lotto.provider.winningnumber.WinningNumberProvider
+class UserInputView : InputView {
+    override fun getBudget(): Int = println("구입 금액을 입력하세요").run {
+        readln().trim().toInt()
+    }
 
-class UserInputView(
-    private val budget: Int,
-    private val winningNumberProvider: WinningNumberProvider,
-    private val lottoTicketsProvider: LottoTicketsProvider,
-) : InputView {
-    override fun provideBudget(): Int = budget
+    override fun getWinningNumber(): WinningNumber {
+        val lottoNumberList = println("당첨번호는 무엇인가요?").run {
+            readln().trim().split(",").map { it.toInt() }.map { LottoNumber(it) }
+        }
 
-    override fun provideWinningNumber(): WinningNumber = winningNumberProvider.provide()
+        val bonusBall = println("보너스 볼을 입력해 주세요.").run {
+            LottoNumber(readln().trim().toInt())
+        }
 
-    override fun provideLottoTickets(ticketCount: Int): LottoTickets {
-        val lottoTickets = lottoTicketsProvider.provide(ticketCount)
+        return WinningNumber(
+            LottoTicket(lottoNumberList),
+            bonusBall,
+        )
+    }
 
-        println("$ticketCount 개를 구매했습니다.")
+    override fun printPurchasedLotto(lottoTickets: LottoTickets) {
         lottoTickets.lottoTicketList.forEach { ticket ->
             println(
                 ticket.lottoNumberList.map { number ->
@@ -25,7 +32,6 @@ class UserInputView(
                 }
             )
         }
-
-        return lottoTickets
+        println("${lottoTickets.lottoTicketList.size} 개를 구매했습니다.")
     }
 }

@@ -6,10 +6,9 @@ import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
 import lotto.domain.ManualTicketProvideStrategy
+import lotto.domain.Rank
 import lotto.domain.WinningNumber
-import lotto.provider.budget.MockBudgetProvider
 import lotto.provider.ticket.MockTicketProvider
-import lotto.provider.winningnumber.MockWinningNumberProvider
 import lotto.view.MockInputView
 import lotto.view.ResultView
 
@@ -17,61 +16,70 @@ class LottoAutoTest : StringSpec({
 
     "winning statistics should calculate correct profit" {
         LottoSimulator(
-            MockInputView(
-                budgetProvider = MockBudgetProvider(5000),
-                winningNumberProvider = MockWinningNumberProvider(
-                    WinningNumber(
-                        listOf(
-                            LottoNumber(1),
-                            LottoNumber(2),
-                            LottoNumber(3),
-                            LottoNumber(4),
-                            LottoNumber(5),
-                            LottoNumber(6),
-                        )
-                    )
-                ),
-                lottoTicketsProvider = MockTicketProvider(
-                    ManualTicketProvideStrategy(
-                        LottoTickets(
-                            listOf(
-                                LottoTicket(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
-                            )
-                        )
-                    )
+            inputView = MockInputView(
+                budget = 5000,
+                winningNumber = WinningNumber(
+                    LottoTicket(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }),
+                    bonusNumber = LottoNumber(19)
                 ),
             ),
             resultView = ResultView(),
-        ).simulate().lottoProfitResult.totalPrize shouldBe 2_000_000_000
+        ).simulate(
+            lottoTicketsProvider = MockTicketProvider(
+                ManualTicketProvideStrategy(
+                    LottoTickets(
+                        listOf(
+                            LottoTicket(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
+                        )
+                    )
+                ),
+            )
+        ).totalPrize shouldBe Rank.FirstPlace.prize
     }
 
     "winning statistics should show correct ROI" {
         LottoSimulator(
-            MockInputView(
-                budgetProvider = MockBudgetProvider(5000),
-                winningNumberProvider = MockWinningNumberProvider(
-                    WinningNumber(
-                        listOf(
-                            LottoNumber(1),
-                            LottoNumber(2),
-                            LottoNumber(3),
-                            LottoNumber(4),
-                            LottoNumber(5),
-                            LottoNumber(6),
-                        )
-                    )
-                ),
-                lottoTicketsProvider = MockTicketProvider(
-                    ManualTicketProvideStrategy(
-                        LottoTickets(
-                            listOf(
-                                LottoTicket(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
-                            )
-                        )
-                    )
+            inputView = MockInputView(
+                budget = 5000,
+                winningNumber = WinningNumber(
+                    LottoTicket(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }),
+                    bonusNumber = LottoNumber(19)
                 ),
             ),
             resultView = ResultView(),
-        ).simulate().profitRate.shouldBe(400_000)
+        ).simulate(
+            lottoTicketsProvider = MockTicketProvider(
+                ManualTicketProvideStrategy(
+                    LottoTickets(
+                        listOf(
+                            LottoTicket(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
+                        )
+                    )
+                )
+            ),
+        ).profitRate.shouldBe(400_000)
+    }
+
+    "second place result should be correct" {
+        LottoSimulator(
+            inputView = MockInputView(
+                budget = 5000,
+                winningNumber = WinningNumber(
+                    LottoTicket(listOf(1, 2, 3, 4, 5, 9).map { LottoNumber(it) }),
+                    bonusNumber = LottoNumber(19)
+                ),
+            ),
+            resultView = ResultView(),
+        ).simulate(
+            lottoTicketsProvider = MockTicketProvider(
+                ManualTicketProvideStrategy(
+                    LottoTickets(
+                        listOf(
+                            LottoTicket(listOf(1, 2, 3, 4, 5, 19).map { LottoNumber(it) })
+                        )
+                    )
+                )
+            ),
+        ).totalPrize shouldBe Rank.SecondPlace.prize
     }
 })
