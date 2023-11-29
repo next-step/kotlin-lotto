@@ -8,5 +8,5 @@ interface InputView {
 
     fun getWinningNumber(): WinningNumber
 
-    fun provideLottoTickets(ticketCount: Int): LottoTickets
+    fun printPurchasedLotto(lottoTickets: LottoTickets)
 }
