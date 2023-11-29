@@ -28,6 +28,7 @@ class LottoSimulator(
             remainder = purchaseOrder.remainder
         )
 
+        resultView.printRankResults(lottoResult)
         resultView.printResult(result)
         return result
     }
