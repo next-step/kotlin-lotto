@@ -5,6 +5,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 
 class LottoNumberTest : StringSpec({
+
     "LottoNumber 는 1~46 사이의 수 이어야한다" {
         shouldNotThrow<IllegalArgumentException> {
             (1..46).forEach { LottoNumber(it) }

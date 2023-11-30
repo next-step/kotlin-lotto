@@ -1,16 +1,20 @@
 package lotto
 
-import lotto.app.LottoApp
 import lotto.model.LottoWinners
 import lotto.model.WinningNumbers
 import lotto.view.InputView
 import lotto.view.OutputView
+import lotto.view.order.LottoOrder
 
 fun main() {
-    val amount: Int = InputView.purchaseAmount(LottoApp.pricePerGame())
-    val round = LottoApp.transaction(amount)
-    OutputView.presetRound(round)
-    val winningNumbers: WinningNumbers = InputView.drawing()
-    val lottoWinners: LottoWinners = round.winnerAggregate(winningNumbers)
-    OutputView.presentPrizes(lottoWinners)
+    val order = LottoOrder(
+        totalAmount = InputView.amountLottoOrder(),
+        manualCount = InputView.manualOrderCount()
+    )
+    val ticket = order.ticketing()
+
+    OutputView.presentTicket(ticket)
+    val winningNumbers: WinningNumbers = InputView.selectWinningNumbers()
+    val lottoWinners: LottoWinners = ticket.winnerAggregate(winningNumbers)
+    OutputView.presentPrizes(lottoWinners, order.pricePerGame())
 }

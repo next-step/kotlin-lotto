@@ -18,16 +18,12 @@ enum class Rank(
 
     companion object {
         fun of(matchCount: Int, bonus: Boolean): Rank {
-            if (isBoom(matchCount)) {
-                return BOOM
+            return when {
+                isBoom(matchCount) -> BOOM
+                isSecond(matchCount, bonus) -> SECOND
+                isThird(matchCount, bonus) -> THIRD
+                else -> countToRank(matchCount)
             }
-            if (isSecond(matchCount, bonus)) {
-                return SECOND
-            }
-            if (isThird(matchCount, bonus)) {
-                return THIRD
-            }
-            return countToRank(matchCount)
         }
 
         private fun isBoom(matchCount: Int): Boolean {

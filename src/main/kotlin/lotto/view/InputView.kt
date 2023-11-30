@@ -1,22 +1,34 @@
 package lotto.view
 
 import lotto.model.LottoNumber
-import lotto.model.LottoNumbers
 import lotto.model.WinningNumbers
+import lotto.view.order.impl.LottoManualOrderStrategy
 
 object InputView {
-    fun purchaseAmount(pricePerGame: Int): Int {
+
+    private const val LOTTO_NUMBER_DELIMITER = ","
+
+    fun amountLottoOrder(): Int {
         println("구입금액을 입력해 주세요.")
-        val purchaseGameCount: Int = readln().toInt() / pricePerGame
-        println("$purchaseGameCount 개를 구매했습니다.")
-        return purchaseGameCount
+        return readln().toInt()
     }
 
-    fun drawing(): WinningNumbers {
-        println("지난 주 당첨 번호를 입력해 주세요.")
-        val winningNumbers = LottoNumbers((readlnOrNull() ?: "").split(",").map { it.toInt() })
+    fun manualOrderCount(): Int {
+        println("\n수동으로 구매할 로또 수를 입력해 주세요.")
+        return readln().toInt()
+    }
+
+    fun manualOrderNumbers(count: Int): List<String> {
+        println("\n수동으로 구매할 번호를 입력해 주세요.")
+        return (1..count)
+            .map { requireNotNull(readlnOrNull()) }
+    }
+
+    fun selectWinningNumbers(): WinningNumbers {
+        println("\n지난 주 당첨 번호를 입력해 주세요.")
+        val lottoGame = LottoManualOrderStrategy.manualIssue(readln())
         println("보너스 볼을 입력해 주세요.")
         val bonusNumber = LottoNumber((readlnOrNull() ?: "").toInt())
-        return WinningNumbers(winningNumbers, bonusNumber)
+        return WinningNumbers(lottoGame, bonusNumber)
     }
 }

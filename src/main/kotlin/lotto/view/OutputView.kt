@@ -1,19 +1,15 @@
 package lotto.view
 
-import lotto.app.LottoApp
-import lotto.model.Game
+import lotto.model.LottoGame
+import lotto.model.LottoTicket
 import lotto.model.LottoWinners
 import lotto.model.Rank
-import lotto.model.Round
 
 object OutputView {
-    fun presetRound(round: Round) {
-        println(round.present())
-    }
 
-    fun presentPrizes(lottoWinners: LottoWinners) {
-        val earningRate = lottoWinners.earningRate(LottoApp.pricePerGame())
-
+    fun presentPrizes(lottoWinners: LottoWinners, pricePerGame: Int) {
+        val earningRate = lottoWinners.earningRate(pricePerGame)
+        println()
         println(
             """
         당첨 통계
@@ -22,24 +18,33 @@ object OutputView {
         4개 일치 (50000원)- ${lottoWinners.countOfRank(Rank.FOURTH)}개
         5개 일치 (1500000원)- ${lottoWinners.countOfRank(Rank.THIRD)}개
         6개 일치 (2000000000원)- ${lottoWinners.countOfRank(Rank.FIRST)}개
-        총 수익률은 ${earningRate.incomeStatement()} 입니다.(기준이 1이기 때문에 결과적으로 ${earningRate.incomeStatement()} 라는 의미임)
+        총 수익률은 $earningRate 입니다.(기준이 1이기 때문에 결과적으로 ${incomeStatement(earningRate)} 라는 의미임)
             """.trimIndent()
         )
     }
-}
 
-private fun Round.present(): String {
-    return this.games
-        .joinToString("\n") { it.present() }
-}
-
-private fun Game.present(): String {
-    return this.lottoNumbers.toString()
-}
-
-fun Double.incomeStatement(): String {
-    return when (this >= LottoWinners.BENEFIT_LOSS_CROSS_POINT) {
-        true -> LottoWinners.BENEFIT_MESSAGE
-        false -> LottoWinners.LOSS_MESSAGE
+    fun incomeStatement(earningRate: Double): String {
+        return when (earningRate >= LottoWinners.BENEFIT_LOSS_CROSS_POINT) {
+            true -> "이익"
+            false -> "손해"
+        }
     }
+
+    fun presentTicket(ticket: LottoTicket) {
+        for (game in ticket.lottoGames) {
+            presentGame(game)
+        }
+    }
+
+    private fun presentGame(game: LottoGame) {
+        println(game.toPresent())
+    }
+
+    fun confirmTicketTypeCount(manualCount: Int, autoCount: Int) {
+        println("\n수동으로 ${manualCount}장, 자동으로 ${autoCount}개를 구매했습니다.")
+    }
+}
+
+private fun LottoGame.toPresent(): String {
+    return this.values.map { it -> it.value }.sorted().joinToString(prefix = "[", postfix = "]")
 }
