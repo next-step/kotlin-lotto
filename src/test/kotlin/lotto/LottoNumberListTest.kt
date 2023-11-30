@@ -3,7 +3,6 @@ package lotto
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldContainExactly
-import io.kotest.matchers.shouldBe
 import lotto.domain.model.vo.LottoNumber
 import lotto.domain.model.vo.LottoNumbers
 
@@ -50,6 +49,6 @@ class LottoNumberListTest : FunSpec({
             mutableSet.add(LottoNumber.valueOf(index))
         }
 
-        lottoNumbers.numbers shouldContainExactly mutableSet.toSet()
+        lottoNumbers.value shouldContainExactly mutableSet.toSet()
     }
 })

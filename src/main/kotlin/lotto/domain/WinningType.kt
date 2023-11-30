@@ -32,9 +32,9 @@ enum class WinningType(private val prize: Prize, private val matchCount: MatchCo
 
         private fun match(lotto: Lotto, winningType: WinningType, winningLottoNumbers: WinningLottoNumbers): Boolean {
 
-            val isMatch = lotto.getMatchCount(winningLottoNumbers) == winningType.matchCount.matchCount
+            val isMatch = lotto.getMatchCount(winningLottoNumbers) == winningType.matchCount.value
 
-            if (winningType.bonusMatch.bonusMatch != null) {
+            if (winningType.bonusMatch.value != null) {
                 return isMatch && matchBonus(lotto, winningType, winningLottoNumbers)
             }
 
@@ -42,7 +42,7 @@ enum class WinningType(private val prize: Prize, private val matchCount: MatchCo
         }
 
         private fun matchBonus(lotto: Lotto, winningType: WinningType, winningLottoNumbers: WinningLottoNumbers): Boolean {
-            return  winningType.bonusMatch.bonusMatch == lotto.matchNumber(winningLottoNumbers.winningBonusNumber)
+            return  winningType.bonusMatch.value == lotto.matchNumber(winningLottoNumbers.winningBonusNumber)
         }
     }
 }

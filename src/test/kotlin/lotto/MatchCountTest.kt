@@ -30,16 +30,16 @@ class MatchCountTest : FunSpec({
 
     test("로또 번호 맞춘 횟수 생성시 `1`을 넣을 경우 `1`을 가지고 있는 로또 번호 맞춘 횟수가 생성 되어야 한다.") {
         val matchCount = MatchCount.valueOf(1)
-        matchCount.matchCount shouldBe 1
+        matchCount.value shouldBe 1
     }
 
     test("로또 번호 맞춘 횟수 생성시 `3`을 넣을 경우 `3`을 가지고 있는 로또 번호 맞춘 횟수가 생성 되어야 한다.") {
         val matchCount = MatchCount.valueOf(3)
-        matchCount.matchCount shouldBe 3
+        matchCount.value shouldBe 3
     }
 
     test("로또 번호 맞춘 횟수 생성시 `6`을 넣을 경우 `6`을 가지고 있는 로또 번호 맞춘 횟수가 생성 되어야 한다.") {
         val matchCount = MatchCount.valueOf(6)
-        matchCount.matchCount shouldBe 6
+        matchCount.value shouldBe 6
     }
 })

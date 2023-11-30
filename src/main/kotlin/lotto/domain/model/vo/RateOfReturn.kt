@@ -4,9 +4,9 @@ package lotto.domain.model.vo
  * 로또 수익률
  * */
 @JvmInline
-value class RateOfReturn(val rateOfReturn: Double) {
+value class RateOfReturn(val value: Double) {
     init {
-        require(rateOfReturn >= MIN_RATE_OF_RETURN) {
+        require(value >= MIN_RATE_OF_RETURN) {
             "수익률은 ${MIN_RATE_OF_RETURN}보다 낮을 수 없습니다."
         }
     }

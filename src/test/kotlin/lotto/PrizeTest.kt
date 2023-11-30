@@ -35,11 +35,11 @@ class PrizeTest: FunSpec({
     }
 
     test("로또 상금 생성시 `2000000000`을 넣을 경우 `2000000000`원을 가진 로또 상금이 생성된다.") {
-        Prize.valueOf(2000000000).prize shouldBe 2000000000
+        Prize.valueOf(2000000000).value shouldBe 2000000000
     }
 
     test("로또 상금 생성시 `5000`을 넣을 경우 `5000`원을 가진 로또 상금이 생성된다.") {
-        Prize.valueOf(5000).prize shouldBe 5000
+        Prize.valueOf(5000).value shouldBe 5000
     }
 
 })

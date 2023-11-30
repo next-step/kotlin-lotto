@@ -25,19 +25,19 @@ object ResultView {
     }
     
     private fun drawLottoMatchResult(lottoMatchResult: LottoMatchResult) {
-        if (lottoMatchResult.bonusMatch.bonusMatch == true) {
-            println(LOTTO_BONUS_MATCH_RESULT_DESCRIPTION.format(lottoMatchResult.matchCount.matchCount, lottoMatchResult.prize.prize, lottoMatchResult.winningTicketCount.ticketCount))
+        if (lottoMatchResult.bonusMatch.value == true) {
+            println(LOTTO_BONUS_MATCH_RESULT_DESCRIPTION.format(lottoMatchResult.matchCount.value, lottoMatchResult.prize.value, lottoMatchResult.winningTicketCount.value))
             return
         }
-        println(LOTTO_MATCH_RESULT_DESCRIPTION.format(lottoMatchResult.matchCount.matchCount, lottoMatchResult.prize.prize, lottoMatchResult.winningTicketCount.ticketCount))
+        println(LOTTO_MATCH_RESULT_DESCRIPTION.format(lottoMatchResult.matchCount.value, lottoMatchResult.prize.value, lottoMatchResult.winningTicketCount.value))
     }
 
     /**
      * 로또 수익률 결과 뷰
      * */
     fun drawLottoMatchResultRateOfReturn(rateOfReturn: RateOfReturn) {
-        val resultText = if (rateOfReturn.rateOfReturn >= LOTTO_RATE_OF_RETURN_BENCHMARK_NUMBER.toDouble()) PROFIT else LOSS
-        println(LOTTO_RATE_OF_RETURN_DESCRIPTION.format(rateOfReturn.rateOfReturn, LOTTO_RATE_OF_RETURN_BENCHMARK_NUMBER, resultText))
+        val resultText = if (rateOfReturn.value >= LOTTO_RATE_OF_RETURN_BENCHMARK_NUMBER.toDouble()) PROFIT else LOSS
+        println(LOTTO_RATE_OF_RETURN_DESCRIPTION.format(rateOfReturn.value, LOTTO_RATE_OF_RETURN_BENCHMARK_NUMBER, resultText))
     }
 
 }

@@ -15,8 +15,8 @@ object LottoRateOfReturnCalculator {
     fun rateOfReturn(buyPrice: BuyPrice, lottoMatchResultList: List<LottoMatchResult>): RateOfReturn {
 
         val returnValues = lottoMatchResultList.sumOf { lottoMatchResult ->
-            lottoMatchResult.prize.prize * lottoMatchResult.winningTicketCount.ticketCount
+            lottoMatchResult.prize.value * lottoMatchResult.winningTicketCount.value
         }
-        return RateOfReturn.valueOf(returnValues.toDouble() / buyPrice.buyPrice)
+        return RateOfReturn.valueOf(returnValues.toDouble() / buyPrice.value)
     }
 }

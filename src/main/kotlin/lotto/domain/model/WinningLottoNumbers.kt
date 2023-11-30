@@ -1,4 +1,7 @@
-package lotto.domain.model.vo
+package lotto.domain.model
+
+import lotto.domain.model.vo.LottoNumber
+import lotto.domain.model.vo.LottoNumbers
 
 
 /**

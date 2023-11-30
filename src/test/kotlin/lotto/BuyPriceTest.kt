@@ -36,11 +36,11 @@ class BuyPriceTest : FunSpec({
     }
 
     test("구입금액에 `1000` 입력시 구입금액이 `1000`원 이여야한다.") {
-        BuyPrice.valueOf(1000).buyPrice shouldBe 1000
+        BuyPrice.valueOf(1000).value shouldBe 1000
     }
 
     test("구입금액에 `23000` 입력시 구입금액이 `23000`원 이여야한다.") {
-        BuyPrice.valueOf(23000).buyPrice shouldBe 23000
+        BuyPrice.valueOf(23000).value shouldBe 23000
     }
 
 })

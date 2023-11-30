@@ -17,11 +17,11 @@ object LottoCreateMachine {
      * */
     fun buyLottoList(buyPrice: BuyPrice, price: Price = Price.valueOf()): List<Lotto> {
 
-        require(buyPrice.buyPrice.toDouble() % price.price.toDouble() == DEFAULT_REMAINDER) {
+        require(buyPrice.value.toDouble() % price.value.toDouble() == DEFAULT_REMAINDER) {
             "구입금액을 로또가격으로 나눴을때 나머지가 ${MIN_LOTTO_COUNT}이여야 합니다."
         }
 
-        val lottoCount: Double = (buyPrice.buyPrice.toDouble() / price.price.toDouble())
+        val lottoCount: Double = (buyPrice.value.toDouble() / price.value.toDouble())
 
         require(!lottoCount.isNaN() && !lottoCount.isInfinite()) {
             "구입금액을 로또가격으로 나눴을때 NaN, Infinite가 나오면 안됩니다."

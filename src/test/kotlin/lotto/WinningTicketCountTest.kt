@@ -35,11 +35,11 @@ class WinningTicketCountTest : FunSpec({
     }
 
     test("당첨된 로또 티켓 카운트 생성시 `3`을 입력할 경우 `3`개의 횟수를 가진 당첨 로또 티켓 카운트가 생성되어야 한다.") {
-        WinningTicketCount.valueOf(3).ticketCount shouldBe 3
+        WinningTicketCount.valueOf(3).value shouldBe 3
     }
 
     test("당첨된 로또 티켓 카운트 생성시 `100`을 입력할 경우 `100`개의 횟수를 가진 당첨 로또 티켓 카운트가 생성되어야 한다.") {
-        WinningTicketCount.valueOf(100).ticketCount shouldBe 100
+        WinningTicketCount.valueOf(100).value shouldBe 100
     }
 
 })

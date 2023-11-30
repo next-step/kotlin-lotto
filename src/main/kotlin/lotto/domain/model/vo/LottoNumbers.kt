@@ -4,20 +4,20 @@ package lotto.domain.model.vo
  * 로또 넘버 리스트
  * */
 @JvmInline
-value class LottoNumbers(val numbers: Set<LottoNumber>): Set<LottoNumber> by numbers {
+value class LottoNumbers(val value: Set<LottoNumber>): Set<LottoNumber> by value {
 
     init {
-        require(numbers.isNotEmpty()) {
+        require(value.isNotEmpty()) {
             "로또번호들은 비어 있을 수 없습니다."
         }
 
-        require(numbers.size == DEFAULT_LOTTO_NUMBER_LIST_LENGTH) {
+        require(value.size == DEFAULT_LOTTO_NUMBER_LIST_LENGTH) {
             "로또의 번호 개수는 ${DEFAULT_LOTTO_NUMBER_LIST_LENGTH}개여야 합니다."
         }
     }
 
     override fun toString(): String {
-        return numbers.toString()
+        return value.toString()
     }
 
     companion object {
@@ -40,7 +40,7 @@ value class LottoNumbers(val numbers: Set<LottoNumber>): Set<LottoNumber> by num
         fun valueOf(primitiveLottoNumber: Set<Int>): LottoNumbers {
             return LottoNumbers(primitiveLottoNumber
                 .map { number -> LottoNumber.valueOf(number) }
-                .sortedBy { lottoNumber -> lottoNumber.number }.toSet())
+                .sortedBy { lottoNumber -> lottoNumber.value }.toSet())
         }
     }
 
