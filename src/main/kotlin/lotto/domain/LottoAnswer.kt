@@ -5,7 +5,7 @@ value class LottoAnswer(
     private val answer: List<Int>
 ) {
 
-    fun match(inputLottos: List<Lotto>): Map<Int, Int> {
+    fun match(inputLottos: List<Lotto>): Map<MatchCount, Int> {
         return inputLottos
             .map { innerMatch(it) }
             .groupingBy { it }
