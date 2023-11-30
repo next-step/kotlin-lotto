@@ -1,6 +1,7 @@
 package lotto.vo
 
-class LottoMachine(val buyPrice: Long) {
+class LottoMachine(buyPrice: Long = 0L) {
+    val buyPrice: Long = buyPrice
     fun createLotto(): AutoLotto {
         return AutoLotto(buyPrice)
     }
@@ -18,6 +19,10 @@ class LottoMachine(val buyPrice: Long) {
 
     fun calculateAutoLottoCount(manualLottoCount: Long): Long {
         return (buyPrice - (manualLottoCount * 1000L)) / 1000L
+    }
+
+    fun calculateAutoLottoBuyPrice(manualLottoCount: Long): Long {
+        return (buyPrice - (manualLottoCount * 1000L))
     }
 
     fun createAutoLotto(count: Long): List<AutoLotto> {

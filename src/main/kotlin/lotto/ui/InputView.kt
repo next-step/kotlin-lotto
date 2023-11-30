@@ -1,5 +1,7 @@
 package lotto.ui
 
+import lotto.vo.ManualLotto
+
 object InputView {
     fun promptForPrice(): Long {
         println("구입금액을 입력해 주세요.")
@@ -21,8 +23,14 @@ object InputView {
         return readln().toLongOrNull() ?: throw IllegalArgumentException("로또 수 입력이 올바르지 않습니다.")
     }
 
-    fun promptForManualLottoStrings(count: Long): List<String> {
+    fun promptForManualLotto(count: Long): List<ManualLotto> {
         println("수동으로 구매할 번호를 입력해 주세요.")
-        return (1..count).map { readln() }
+        val manualLottos = mutableListOf<ManualLotto>()
+        for (i in 1..count) {
+            val inputString = readln()
+            val manualLotto = ManualLotto().initLottoNumbers(inputString)
+            manualLottos.add(manualLotto)
+        }
+        return manualLottos
     }
 }

@@ -8,9 +8,11 @@ fun main() {
     while (true) {
         try {
             val price = InputView.promptForPrice()
-            val count = InputView.promptForManualLottoCount()
-            val manualLottoStrings = InputView.promptForManualLottoStrings(count)
-            val autoLotto = ResultView.promptForAutoLotto(price)
+            val manualLottoCount = InputView.promptForManualLottoCount()
+            val manualLottos = InputView.promptForManualLotto(manualLottoCount)
+            val autoLottoBuyPrice = ResultView.promptForBuyCount(manualLottoCount, price)
+            val manualLotto = ResultView.promptForManualLotto(manualLottos)
+            val autoLotto = ResultView.promptForAutoLotto(autoLottoBuyPrice)
 
             val lastWeekWinningNumbers = InputView.promptForLastWeekWinningNumbers()
             val lastWeekBonusNumber = InputView.promptForBonusNumbers()
