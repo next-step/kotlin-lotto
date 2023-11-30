@@ -4,5 +4,5 @@ import java.math.BigDecimal
 
 data class LottoResult(
     val earningRate: BigDecimal,
-    val earnResult: Map<Int, Int>
+    val earnResult: Map<MatchCount, Int>
 )

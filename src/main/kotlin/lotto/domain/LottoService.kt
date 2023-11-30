@@ -9,7 +9,7 @@ class LottoService(
 ) {
     val lottoCount = lotteries.size
 
-    fun play(answer: LottoAnswer, earningStrategy: Map<Int, Int>): LottoResult {
+    fun play(answer: LottoAnswer, earningStrategy: Map<MatchCount, Int>): LottoResult {
         val result = answer.match(lotteries)
         val earning = Earning(earningStrategy).calculate(result)
         val earningRate = EarningRate { earningRate ->
