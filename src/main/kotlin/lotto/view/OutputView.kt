@@ -25,7 +25,7 @@ object OutputView {
         println("총 수익률은 ${result.earningRate}입니다.")
     }
 
-    private fun outputLottoResultSeperate(matchCount: MatchCount, amount: Int, earnResult: Map<MatchCount, Int>): String{
+    private fun outputLottoResultSeperate(matchCount: MatchCount, amount: Int, earnResult: Map<MatchCount, Int>): String {
         if (matchCount.isMatchBonus) {
             return "${matchCount.matchCount}개 일치, 보너스 볼 일치(${amount}원)- ${earnResult[matchCount] ?: 0}개"
         }

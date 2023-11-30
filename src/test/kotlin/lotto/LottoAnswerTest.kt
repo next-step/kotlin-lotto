@@ -19,6 +19,6 @@ class LottoAnswerTest : StringSpec({
         val bonusNumber = 7
         val answer = LottoAnswer.create(listOf(1, 2, 3, 4, 5, 6), bonusNumber)
         val inputLotto = Lotto.create(TestNumberGeneratorFive)
-        answer.match(listOf(inputLotto)) shouldBe mapOf( MatchCount.FIVE_WITH_BONUS to 1)
+        answer.match(listOf(inputLotto)) shouldBe mapOf(MatchCount.FIVE_WITH_BONUS to 1)
     }
 })
