@@ -1,6 +1,8 @@
-package lotto.domain
+package lotto.provider.ticket
 
-import lotto.provider.ticket.TicketProvideStrategy
+import lotto.domain.LottoNumber
+import lotto.domain.LottoTicket
+import lotto.domain.LottoTickets
 
 object AutoTicketProvideStrategy : TicketProvideStrategy {
     private val preGeneratedLottoNumbers = (LottoNumber.validNumberRange)

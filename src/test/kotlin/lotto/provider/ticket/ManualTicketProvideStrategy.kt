@@ -1,6 +1,6 @@
-package lotto.domain
+package lotto.provider.ticket
 
-import lotto.provider.ticket.TicketProvideStrategy
+import lotto.domain.LottoTickets
 
 class ManualTicketProvideStrategy(private val lottoTickets: LottoTickets) : TicketProvideStrategy {
     override fun provide(ticketCount: Int): LottoTickets = lottoTickets
