@@ -31,4 +31,17 @@ class ManualLottoTest : FunSpec({
         // Then
         manualLottos.manualLotto[1].numbers shouldHaveSize 6
     }
+
+//    test("수동으로 구매하고 난 후 자동으로 구매할 로또 수를 계산한다") {
+//        // Given
+//        val price = 2000L
+//        val buyCount = 1L
+//        val manualLottos = ManualLottos(price, buyCount)
+//
+//        // When
+//        val autoLottoCount = manualLottos.calculateAutoLottoCount()
+//
+//        // Then
+//        autoLottoCount shouldBe 1L
+//    }
 })
