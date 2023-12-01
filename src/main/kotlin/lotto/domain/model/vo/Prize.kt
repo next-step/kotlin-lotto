@@ -4,9 +4,9 @@ package lotto.domain.model.vo
  * 로또 상금
  * */
 @JvmInline
-value class Prize(val prize: Int) {
+value class Prize(val value: Int) {
     init {
-        require(prize in MIN_PRIZE..MAX_PRIZE) {
+        require(value in MIN_PRIZE..MAX_PRIZE) {
             "상금은 ${MIN_PRIZE}원 ~ ${MAX_PRIZE}원의 가격만 들어와야 합니다."
         }
     }

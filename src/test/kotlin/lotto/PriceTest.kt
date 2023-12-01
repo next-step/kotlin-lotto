@@ -40,11 +40,11 @@ class PriceTest: FunSpec({
     }
 
     test("로또 가격 생성시 `2000`을 넣을 경우 `2000`원을 가진 로또 가격이 생성된다.") {
-        Price.valueOf(2000).price shouldBe 2000
+        Price.valueOf(2000).value shouldBe 2000
     }
 
     test("로또 가격 생성시 `1000`을 넣을 경우 `1000`원을 가진 로또 가격이 생성된다.") {
-        Price.valueOf(1000).price shouldBe 1000
+        Price.valueOf(1000).value shouldBe 1000
     }
 
 })

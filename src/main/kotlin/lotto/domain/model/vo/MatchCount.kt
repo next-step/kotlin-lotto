@@ -4,9 +4,9 @@ package lotto.domain.model.vo
  * 로또 번호 맞춘 횟수
  * */
 @JvmInline
-value class MatchCount(val matchCount: Int) {
+value class MatchCount(val value: Int) {
     init {
-        require(matchCount in MIN_MATCH_COUNT..MAX_MATCH_COUNT) {
+        require(value in MIN_MATCH_COUNT..MAX_MATCH_COUNT) {
             "로또 번호 맞춘 횟수는 $MIN_MATCH_COUNT ~ ${MAX_MATCH_COUNT}개의 숫자만 들어와야 합니다."
         }
     }
