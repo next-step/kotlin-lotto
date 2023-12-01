@@ -14,6 +14,8 @@ value class Price(val value: Int) {
         }
     }
 
+    fun toDouble(): Double = value.toDouble()
+
     companion object {
         private const val DEFAULT_PRICE = 1000
         private const val DEFAULT_REMAINDER = 0

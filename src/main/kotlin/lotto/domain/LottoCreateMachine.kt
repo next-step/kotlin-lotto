@@ -21,7 +21,7 @@ object LottoCreateMachine {
             "구입금액을 로또가격으로 나눴을때 나머지가 ${MIN_LOTTO_COUNT}이여야 합니다."
         }
 
-        val lottoCount: Double = (buyPrice.value.toDouble() / price.value.toDouble())
+        val lottoCount: Double = (buyPrice.toDouble() / price.toDouble())
 
         require(!lottoCount.isNaN() && !lottoCount.isInfinite()) {
             "구입금액을 로또가격으로 나눴을때 NaN, Infinite가 나오면 안됩니다."
