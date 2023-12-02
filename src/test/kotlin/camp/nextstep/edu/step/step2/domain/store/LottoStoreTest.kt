@@ -1,8 +1,9 @@
 package camp.nextstep.edu.step.step2.domain.store
 
 import camp.nextstep.edu.step.step2.domain.amount.BuyAmount
-import camp.nextstep.edu.step.step2.domain.lotto.Lotto
 import camp.nextstep.edu.step.step2.domain.lotto.Number
+import camp.nextstep.edu.step.step2.domain.lotto.Lotto
+import camp.nextstep.edu.step.step2.domain.lotto.Lottos
 import camp.nextstep.edu.step.step2.domain.lotto.WinningLotto
 import camp.nextstep.edu.step.step2.domain.result.LottoMatch
 import camp.nextstep.edu.step.step2.domain.result.LottoResult
@@ -40,6 +41,8 @@ class LottoStoreTest : BehaviorSpec({
             )
         )
 
+        val userLottos = Lottos(lottos = lottoNumbers)
+
         val lastWeekWinningLottoLotto = Lotto(
             listOf(
                 Number(number = 1),
@@ -52,13 +55,12 @@ class LottoStoreTest : BehaviorSpec({
         )
 
         val winningLotto = WinningLotto(
-            userLottoTickets = lottoNumbers,
             winningLotto = lastWeekWinningLottoLotto
         )
 
         When("로또 번호를 검증하면") {
             val lottoResult =
-                LottoStore.checkLottoTicketsWinningResult(winningLotto = winningLotto)
+                LottoStore.checkLottoTicketsWinningResult(userLottos = userLottos, winningLotto = winningLotto)
 
             Then("로또 결과를 반환한다.") {
                 lottoResult shouldBe LottoResult(
@@ -72,4 +74,64 @@ class LottoStoreTest : BehaviorSpec({
             }
         }
     }
+
+    Given("로또의 수량이주어지고") {
+        val lottoTicketAmount = LottoTicketAmount(lottoTicketAmount = 10)
+
+        When("로또 발급을 시도하면") {
+            val lottoTickets = LottoStore.createNumbersByLottoTicketAmount(ticketAmount = lottoTicketAmount)
+
+            Then("구매한 수량만큼의 로또가 발급된다.") {
+                lottoTickets.lottos.size shouldBe 10
+            }
+        }
+    }
+
+    Given("유저의 로또와 저번주 당첨번호가 주어지고") {
+        val userLottos = Lottos(
+            lottos = listOf(
+                Lotto(
+                    listOf(
+                        Number(number = 1),
+                        Number(number = 2),
+                        Number(number = 3),
+                        Number(number = 4),
+                        Number(number = 5),
+                        Number(number = 6)
+                    )
+                )
+            )
+        )
+
+        val lastWeekWinningLottoLotto = Lotto(
+            listOf(
+                Number(number = 1),
+                Number(number = 2),
+                Number(number = 3),
+                Number(number = 4),
+                Number(number = 5),
+                Number(number = 6)
+            )
+        )
+
+        val winningLotto = WinningLotto(
+            winningLotto = lastWeekWinningLottoLotto
+        )
+
+        When("당첨 결과를 확인하면") {
+            val lottoResult = LottoStore.checkLottoTicketsWinningResult(userLottos = userLottos, winningLotto = winningLotto)
+
+            Then("당첨 결과를 반환한다.") {
+                lottoResult shouldBe LottoResult(
+                    lottoTotalPrice = 1000,
+                    lottoResults = listOf(
+                        LottoMatch.of(
+                            matchCount = 6
+                        )
+                    )
+                )
+            }
+        }
+    }
+
 })
