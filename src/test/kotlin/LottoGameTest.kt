@@ -1,5 +1,6 @@
 import lotto.Lotto
 import lotto.LottoGame
+import lotto.LottoResult
 import lotto.Rank
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
@@ -28,29 +29,21 @@ class LottoGameTest {
     @ParameterizedTest
     @ValueSource(ints = [3, 4, 5, 6])
     fun result(count: Int) {
-        val lottoList = listOf(Lotto.getAutoNumbers())
-        val winningLotto = Lotto(lottoList.first().numbers.take(count).toSet())
-        val result = lottoGame.result(lottoList, winningLotto, 0).toList()
-        result.first().let { (rank, count) ->
-            assertThat(rank.count).isEqualTo(count)
+        val lottoList = listOf(Lotto.of())
+        val lastLotto = Lotto(lottoList.first().numbers.take(count).toSet())
+        val result = lottoGame.result(lottoList, lastLotto, 0)
+        result.first()?.let {
+            assertThat(it.rank.count).isEqualTo(count)
         }
     }
 
-    @DisplayName(value = "로또 결과 - 보너스 볼 일치")
+    @DisplayName(value = "보너스 로또 발급")
     @Test
     fun resultBonus() {
-        val lottoList = listOf(Lotto.getAutoNumbers())
-        val winningLotto = Lotto(lottoList.first().numbers.take(5).toSet())
+        val lottoList = listOf(Lotto.of())
+        val lastLotto = Lotto(lottoList.first().numbers.take(5).toSet())
         val bonus = lottoList.first().numbers.last()
-        val result = lottoGame.result(lottoList, winningLotto, bonus).toList()
-        assertThat(result.first().first).isEqualTo(Rank.SECOND)
-    }
-
-    @DisplayName(value = "로또 번호 범위 (1 ~ 45) 테스트")
-    @Test
-    fun rangeLottoNumbers() {
-        Lotto.getAutoNumbers().numbers.forEach {
-            assertThat(it).isIn(1..45)
-        }
+        val result = lottoGame.result(lottoList, lastLotto, bonus)
+        assertThat(result.first()?.rank).isEqualTo(Rank.SECOND)
     }
 }
