@@ -2,6 +2,19 @@ package lotto.domain
 
 @JvmInline
 value class LottoNumbers(private val value: List<LottoNumber>) {
+
+    init {
+        require(value.size == Lotto.NUMBERS_COUNT) {
+            "로또 번호는 항상 ${Lotto.NUMBERS_COUNT}개 여야 합니다."
+        }
+        require(!hasDuplicate()) {
+            "로또 번호는 중복이 없어야 합니다."
+        }
+        require(isSorted()) {
+            "로또 번호는 항상 정렬되어야 합니다."
+        }
+    }
+
     val size: Int
         get() = value.size
 
@@ -16,11 +29,11 @@ value class LottoNumbers(private val value: List<LottoNumber>) {
         return value.count { other.value.contains(it) }
     }
 
-    fun hasDuplicate(): Boolean {
+    private fun hasDuplicate(): Boolean {
         return value.distinct() != value
     }
 
-    fun isSorted(): Boolean {
+    private fun isSorted(): Boolean {
         return value.map { it.value }
             .zipWithNext { a, b -> a <= b }
             .all { it }

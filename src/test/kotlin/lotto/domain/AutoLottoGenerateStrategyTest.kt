@@ -19,7 +19,7 @@ class AutoLottoGenerateStrategyTest {
 
         val lotto = autoLottoGenerateStrategy.generate()
 
-        assertThat(lotto.numbers.hasDuplicate()).isFalse
+        assertThat(lotto.numbers.numbers.distinct().size).isEqualTo(6)
     }
 
     @Test
@@ -28,6 +28,6 @@ class AutoLottoGenerateStrategyTest {
 
         val lotto = autoLottoGenerateStrategy.generate()
 
-        assertThat(lotto.numbers.isSorted()).isTrue
+        assertThat(lotto.numbers.numbers).isSorted
     }
 }
