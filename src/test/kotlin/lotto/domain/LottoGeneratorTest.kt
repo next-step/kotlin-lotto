@@ -7,7 +7,7 @@ class LottoGeneratorTest {
     @Test
     fun `특정 규칙으로 로또를 발행할 수 있다`() {
         val lottoGenerateStrategy = LottoGenerateStrategy {
-            Lotto(listOf(1, 2, 3, 4, 5, 6))
+            Lotto.of(listOf(1, 2, 3, 4, 5, 6))
         }
 
         val generator = LottoGenerator(lottoGenerateStrategy)

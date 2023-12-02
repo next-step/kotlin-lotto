@@ -2,6 +2,7 @@ package lotto.ui
 
 import lotto.domain.LottoWinning
 import lotto.domain.Lottos
+import lotto.domain.MatchedLottos
 import java.text.DecimalFormat
 
 object ResultView {
@@ -12,7 +13,7 @@ object ResultView {
         }
     }
 
-    fun showResult(lottos: Lottos, returnRate: Double) {
+    fun showResult(lottos: MatchedLottos, returnRate: Double) {
         val winningLottos = lottos.value
             .groupBy { it.winning }
 

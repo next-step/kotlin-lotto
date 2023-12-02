@@ -7,6 +7,6 @@ class DefaultLottoGenerateStrategy : LottoGenerateStrategy {
             .subList(0, Lotto.NUMBERS_COUNT)
             .sorted()
 
-        return Lotto(numbers)
+        return Lotto.of(numbers)
     }
 }
