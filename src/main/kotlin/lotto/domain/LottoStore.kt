@@ -1,14 +1,22 @@
 package lotto.domain
 
-private const val LOTTO_PRICE = 1000
+class LottoStore {
+    private val lottoGenerator = LottoGenerator()
 
-class LottoStore(private val lottoGenerator: LottoGenerator) {
-    fun buyLottos(money: Int): Lottos {
+    fun buyLotto(lottoGenerateStrategy: LottoGenerateStrategy): Lotto {
+        return lottoGenerator.publish(lottoGenerateStrategy)
+    }
+
+    fun buyLottos(money: Int, lottoGenerateStrategy: LottoGenerateStrategy): Lottos {
         val lottoCount = money / LOTTO_PRICE
         val lottos = List(lottoCount) {
-            lottoGenerator.publish()
+            lottoGenerator.publish(lottoGenerateStrategy)
         }
 
         return Lottos(lottos)
+    }
+
+    companion object {
+        const val LOTTO_PRICE = 1000
     }
 }

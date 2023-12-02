@@ -1,7 +1,7 @@
 package lotto.domain
 
-class LottoGenerator(private val lottoGenerateStrategy: LottoGenerateStrategy) {
-    fun publish(): Lotto {
+class LottoGenerator {
+    fun publish(lottoGenerateStrategy: LottoGenerateStrategy): Lotto {
         return lottoGenerateStrategy.generate()
     }
 }

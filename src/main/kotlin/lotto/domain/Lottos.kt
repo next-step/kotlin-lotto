@@ -7,4 +7,8 @@ value class Lottos(val value: List<Lotto>) {
 
         return MatchedLottos(matchedLottos)
     }
+
+    operator fun plus(other: Lottos): Lottos {
+        return Lottos(value + other.value)
+    }
 }

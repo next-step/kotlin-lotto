@@ -1,6 +1,6 @@
 package lotto.domain
 
-class DefaultLottoGenerateStrategy : LottoGenerateStrategy {
+class AutoLottoGenerateStrategy : LottoGenerateStrategy {
     private val numberPool: IntRange = Lotto.MIN_NUMBER..Lotto.MAX_NUMBER
     override fun generate(): Lotto {
         val numbers = numberPool.shuffled()

@@ -25,4 +25,12 @@ value class LottoNumbers(private val value: List<LottoNumber>) {
             .zipWithNext { a, b -> a <= b }
             .all { it }
     }
+
+    companion object {
+        fun of(numbers: List<Int>): LottoNumbers {
+            val lottoNumbers = numbers.map { LottoNumber(it) }
+
+            return LottoNumbers(lottoNumbers)
+        }
+    }
 }
