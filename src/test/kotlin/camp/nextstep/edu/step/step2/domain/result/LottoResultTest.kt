@@ -24,18 +24,19 @@ class LottoResultTest : BehaviorSpec({
         }
     }
 
-    Given("로또 결과 객체가 주어지고") {
+    Given("로또 결과 도메인이 주어지고") {
         val totalPrice = 1000
-        val matchResult = listOf(LottoMatch.of(matchCount = 6))
-
+        val matchResult = listOf(LottoMatch.of(matchCount = 1))
         val lottoResult = LottoResult(lottoTotalPrice = totalPrice, lottoResults = matchResult)
 
-        When("로또 통계율 계산을 시도하면") {
-            val result = lottoResult.calculateProfitRate()
+        When("로또 결과 전달을 위한 Dto를 생성하면") {
+            val lottoResultDto = lottoResult.calculateResultAndReturnDto()
 
-            Then("로또 통계율이 계산된다") {
-                result shouldBe 2000000.0
-            }
+                Then("로또 결과 Dto가 반환된다") {
+                    lottoResultDto.matchResponse.size shouldBe 5
+                    lottoResultDto.lottoProfitRate shouldBe 0.0
+                }
         }
     }
+
 })
