@@ -3,7 +3,7 @@ package specific.lotto.domain
 class Money(val principal: Long) {
 
     init {
-        require(principal > 0) { "'principal' must be greater than 0" }
+        require(principal >= Ticket.PRICE) { "'principal' must be equal to or greater than ${Ticket.PRICE}" }
     }
 
     var remaining: Long = principal

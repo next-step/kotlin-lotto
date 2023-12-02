@@ -20,12 +20,8 @@ enum class Rank(
 
     companion object {
         fun decideRank(sameNumbersCount: Int, hasBonusNumber: Boolean): Rank {
-            Rank.values().forEach {
-                if (it.checkCondition(sameNumbersCount, hasBonusNumber)) {
-                    return it
-                }
-            }
-            throw IllegalArgumentException("impossible case")
+            return Rank.values().firstOrNull { it.checkCondition(sameNumbersCount, hasBonusNumber) }
+                ?:throw IllegalArgumentException("impossible case")
         }
     }
 }

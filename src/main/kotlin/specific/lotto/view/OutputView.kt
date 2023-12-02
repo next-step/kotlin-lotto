@@ -9,10 +9,10 @@ object OutputView {
     fun printTickets(tickets: Tickets) {
         println("수동으로 ${tickets.manualTickets.size}장, 자동으로 ${tickets.autoTickets.size}개를 구매했습니다.")
         tickets.manualTickets.forEach {
-            println(it.numbers.map { it.value }.sorted())
+            println(it.getSortedNumbers().map { it.value })
         }
         tickets.autoTickets.forEach {
-            println(it.numbers.map { it.value }.sorted())
+            println(it.getSortedNumbers().map { it.value })
         }
     }
 
@@ -40,7 +40,10 @@ object OutputView {
     }
 
     private fun makeBonusNumberMatchStatus(bonusNumberCondition: BonusNumberCondition): String =
-        if (bonusNumberCondition == BonusNumberCondition.MATCH) ", 보너스 볼 일치" else ""
+        when (bonusNumberCondition) {
+            BonusNumberCondition.MATCH -> ", 보너스 볼 일치"
+            else -> ""
+        }
 
     private fun makeProfitOrLossStatus(returnOnInvestment: Double): String =
         "기준이 1이기 때문에 결과적으로 ${if (returnOnInvestment > 1) "이득이라는" else "손해라는"} 의미임"

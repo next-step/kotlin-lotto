@@ -1,5 +1,6 @@
 package specific.lotto.controller
 
+import specific.lotto.domain.MarkedNumbers
 import specific.lotto.domain.Money
 import specific.lotto.domain.Player
 import specific.lotto.domain.Round
@@ -49,12 +50,13 @@ class LottoController {
         return manualTicketCountInput.toIntOrThrow { "'manualTicketCountInput' should be convertible to Long" }
     }
 
-    private fun inputManualTicketNumbers(manualLottoCount: Int): List<List<Int>> {
+    private fun inputManualTicketNumbers(manualLottoCount: Int): List<MarkedNumbers> {
         return InputView.getManualNumbers(manualLottoCount)
             .map {
                 require(!it.isNullOrBlank()) { "'manualNumbersInput' cannot be null or blank" }
                 splitAndConvertToInt(it)
             }
+            .map(::MarkedNumbers)
     }
 
     private fun splitAndConvertToInt(line: String): List<Int> =

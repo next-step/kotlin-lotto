@@ -15,7 +15,7 @@ data class Delimiter(val token: Char) {
             "//(.)\n".toRegex()
                 .findAll(this)
                 .map { it.groupValues[1].first() }
-                .map { Delimiter(it) }
+                .map(::Delimiter)
                 .toList()
 
         fun String.removeCustomDelimiter(): String =
