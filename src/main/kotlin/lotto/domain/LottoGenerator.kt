@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoGenerator {
-    fun publish(lottoGenerateStrategy: LottoGenerateStrategy): Lotto {
-        return lottoGenerateStrategy.generate()
+    fun publish(lottoNumbersGenerateStrategy: LottoNumbersGenerateStrategy): Lotto {
+        return Lotto(lottoNumbersGenerateStrategy.generate())
     }
 }

@@ -3,14 +3,14 @@ package lotto.domain
 class LottoStore {
     private val lottoGenerator = LottoGenerator()
 
-    fun buyLotto(lottoGenerateStrategy: LottoGenerateStrategy): Lotto {
-        return lottoGenerator.publish(lottoGenerateStrategy)
+    fun buyLotto(lottoNumbersGenerateStrategy: LottoNumbersGenerateStrategy): Lotto {
+        return lottoGenerator.publish(lottoNumbersGenerateStrategy)
     }
 
-    fun buyLottos(money: Int, lottoGenerateStrategy: LottoGenerateStrategy): Lottos {
+    fun buyLottos(money: Int, lottoNumbersGenerateStrategy: LottoNumbersGenerateStrategy): Lottos {
         val lottoCount = money / LOTTO_PRICE
         val lottos = List(lottoCount) {
-            lottoGenerator.publish(lottoGenerateStrategy)
+            lottoGenerator.publish(lottoNumbersGenerateStrategy)
         }
 
         return Lottos(lottos)

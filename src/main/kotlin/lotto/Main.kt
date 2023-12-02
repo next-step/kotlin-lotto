@@ -1,12 +1,11 @@
 package lotto
 
-import lotto.domain.AutoLottoGenerateStrategy
+import lotto.domain.AutoLottoNumbersGenerateStrategy
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
-import lotto.domain.LottoNumbers
 import lotto.domain.LottoStore
 import lotto.domain.Lottos
-import lotto.domain.ManualLottoGenerateStrategy
+import lotto.domain.ManualLottoNumbersGenerateStrategy
 import lotto.domain.WinningLotto
 import lotto.ui.InputView
 import lotto.ui.ResultView
@@ -24,12 +23,12 @@ fun main() {
     }
 
     val manualLottos = List(boughtManualLottoCounts) {
-        val lottoNumbers = LottoNumbers.of(InputView.inputManualLottoNumber())
+        val lottoNumbers = InputView.inputManualLottoNumber()
 
-        store.buyLotto(ManualLottoGenerateStrategy(lottoNumbers))
+        store.buyLotto(ManualLottoNumbersGenerateStrategy(lottoNumbers))
     }.let { Lottos(it) }
 
-    val autoLottos = store.buyLottos(money - manualLottosPrice, AutoLottoGenerateStrategy())
+    val autoLottos = store.buyLottos(money - manualLottosPrice, AutoLottoNumbersGenerateStrategy())
 
     val boughtLottos = manualLottos + autoLottos
 

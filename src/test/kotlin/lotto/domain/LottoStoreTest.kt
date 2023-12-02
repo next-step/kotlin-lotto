@@ -16,10 +16,10 @@ class LottoStoreTest {
         ]
     )
     fun `로또는 1000원당 한 장을 살 수 있다`(money: Int, lottoCount: Int) {
-        val lottoGenerateStrategy = LottoGenerateStrategy { Lotto.of(listOf(1, 2, 3, 4, 5, 6)) }
+        val lottoNumbersGenerateStrategy = LottoNumbersGenerateStrategy { LottoNumbers.of(listOf(1, 2, 3, 4, 5, 6)) }
         val lottoStore = LottoStore()
 
-        val lottos = lottoStore.buyLottos(money, lottoGenerateStrategy)
+        val lottos = lottoStore.buyLottos(money, lottoNumbersGenerateStrategy)
 
         assertThat(lottos.value.size).isEqualTo(lottoCount)
     }
