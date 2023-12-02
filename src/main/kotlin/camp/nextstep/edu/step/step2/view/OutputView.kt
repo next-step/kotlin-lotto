@@ -1,7 +1,6 @@
 package camp.nextstep.edu.step.step2.view
 
-import camp.nextstep.edu.step.step2.domain.result.LottoMatch
-import camp.nextstep.edu.step.step2.domain.result.LottoResult
+import camp.nextstep.edu.step.step2.dto.LottoResultDto
 
 class OutputView {
 
@@ -13,14 +12,13 @@ class OutputView {
         }
     }
 
-    fun displayLottoResult(lottoResult: LottoResult) {
+    fun displayLottoResultByDto(lottoResultDto: LottoResultDto) {
         println("당첨 통계")
         println("---------")
-        LottoMatch.values().reversed().forEach {
-            val count = lottoResult.getResultCount(it)
-            println("${it.matchCount}개 일치 (${it.prize}원) - ${count}개")
+        lottoResultDto.matchResponse.forEach { matchResponse ->
+            println("${matchResponse.matchCount}개 일치 (${matchResponse.prize}원) - ${matchResponse.userMatchCont}개")
         }
-        println("총 수익률은 ${lottoResult.calculateProfitRate()}입니다.")
+        println("총 수익률은 ${lottoResultDto.lottoProfitRate}입니다.")
     }
 
 }
