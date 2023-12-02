@@ -11,7 +11,7 @@ class NumberGeneratorTest : BehaviorSpec({
         val generatorStrategy = NumberGenerator.LOTTO_RANDOM
 
         When("생성기에 전략을 주입하면") {
-            val numberGenerator = NumberGenerator.generate(generatorStrategy)
+            val numberGenerator = NumberGenerator.generate(generatorStrategy, startNumber = 1, endNumber = 45)
 
             Then("각 전략에 맞는 번호들이 생성된다.") {
                 numberGenerator.size shouldBe 6
