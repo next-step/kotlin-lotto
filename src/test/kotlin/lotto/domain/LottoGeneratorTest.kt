@@ -5,14 +5,14 @@ import org.junit.jupiter.api.Test
 
 class LottoGeneratorTest {
     @Test
-    fun `특정 규칙으로 로또를 발행할 수 있다`() {
-        val lottoGenerateStrategy = LottoGenerateStrategy {
-            Lotto(listOf(1, 2, 3, 4, 5, 6))
+    fun `특정 규칙으로 로또번호를 발행할 수 있다`() {
+        val lottoNumbersGenerateStrategy = LottoNumbersGenerateStrategy {
+            LottoNumbers.of(listOf(1, 2, 3, 4, 5, 6))
         }
 
-        val generator = LottoGenerator(lottoGenerateStrategy)
-        val lotto = generator.publish()
+        val generator = LottoGenerator()
+        val lotto = generator.publish(lottoNumbersGenerateStrategy)
 
-        assertThat(lotto.numbers).isEqualTo(listOf(1, 2, 3, 4, 5, 6))
+        assertThat(lotto.numbers.numbers).isEqualTo(listOf(1, 2, 3, 4, 5, 6))
     }
 }

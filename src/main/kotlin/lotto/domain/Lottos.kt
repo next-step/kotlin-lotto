@@ -2,13 +2,13 @@ package lotto.domain
 
 @JvmInline
 value class Lottos(val value: List<Lotto>) {
-    fun matchAll(winningLotto: WinningLotto): Lottos {
-        val lottos = value.map { it.match(winningLotto) }
+    fun matchAll(winningLotto: WinningLotto): MatchedLottos {
+        val matchedLottos = value.map { it.match(winningLotto) }
 
-        return Lottos(lottos)
+        return MatchedLottos(matchedLottos)
     }
 
-    fun totalReward(): Int {
-        return value.sumOf { it.winning.reward }
+    operator fun plus(other: Lottos): Lottos {
+        return Lottos(value + other.value)
     }
 }
