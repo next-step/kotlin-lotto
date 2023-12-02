@@ -1,14 +1,16 @@
 package camp.nextstep.edu.step.step2.generator
 
+import camp.nextstep.edu.step.step2.domain.lotto.Number
+
 enum class NumberGenerator(
-    val generate: () -> List<Int>
+    val generate: (Int, Int) -> List<Int>
 ) {
-    LOTTO_RANDOM({ (1..45).shuffled().subList(0, 6).distinct().sorted() });
+    LOTTO_RANDOM({ startNum, endNum -> (startNum..endNum).shuffled().subList(0, 6).distinct().sorted() });
 
 
     companion object {
-        fun generate(generator: NumberGenerator): List<Int> {
-            return generator.generate()
+        fun generate(generator: NumberGenerator, startNumber: Int, endNumber: Int): List<Number> {
+             return generator.generate(startNumber, endNumber).map { Number(it) }
         }
     }
 
