@@ -1,9 +1,4 @@
-package lotto2.application
-
-import lotto2.domain.LottoFactory
-import lotto2.domain.LottoMoney
-import lotto2.domain.LottoNumbers
-import lotto2.domain.LottoTicket
+package lotto2.domain
 
 object LottoShop {
     const val LOTTO_PRICE = 1_000

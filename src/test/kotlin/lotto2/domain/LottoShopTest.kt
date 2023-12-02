@@ -1,11 +1,8 @@
-package lotto2.application
+package lotto2.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import lotto2.domain.LottoMoney
-import lotto2.domain.LottoNumber
-import lotto2.domain.LottoNumbers
 
 class LottoShopTest : StringSpec({
 

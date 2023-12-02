@@ -1,8 +1,8 @@
 package lotto2
 
-import lotto2.application.LottoShop
 import lotto2.domain.LottoNumber
 import lotto2.domain.LottoNumbers
+import lotto2.domain.LottoShop
 import lotto2.domain.LottoTicket
 import lotto2.domain.WinningLotto
 import lotto2.ui.ConsoleView
