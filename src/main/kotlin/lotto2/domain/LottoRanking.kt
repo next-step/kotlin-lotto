@@ -15,6 +15,10 @@ enum class LottoRanking(val matchingCount: Int, val prize: Int) {
                 return SECOND
             }
 
+            if (THIRD.matchingCount == matchingCount && !isBonusMatched) {
+                return THIRD
+            }
+
             return values().find {
                 it.matchingCount == matchingCount
             } ?: MISS
