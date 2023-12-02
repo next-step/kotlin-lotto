@@ -5,6 +5,7 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.nulls.shouldNotBeNull
+import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldInclude
 
 class LottoNumbersTest : StringSpec({
@@ -45,5 +46,41 @@ class LottoNumbersTest : StringSpec({
                 LottoNumbers(numbers.map { LottoNumber(it) })
             }.message shouldInclude "중복"
         }
+    }
+})
+
+class CountMatchingNumbersTest : StringSpec({
+
+    "2개의 로또 번호들이 서로 겹치는 숫자가 없다면, 0을 반환한다. " {
+        val lottoNumbers1 = LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
+        val lottoNumbers2 = LottoNumbers(listOf(31, 32, 33, 34, 35, 36).map { LottoNumber(it) })
+
+        lottoNumbers1.countMatchingNumbers(lottoNumbers2) shouldBe 0
+    }
+
+    "2개의 로또 번호들이 서로 총 3개의 숫자가 겹친다면, 3을 반환한다. " {
+        val lottoNumbers1 = LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
+        val lottoNumbers2 = LottoNumbers(listOf(1, 2, 3, 34, 35, 36).map { LottoNumber(it) })
+
+        lottoNumbers1.countMatchingNumbers(lottoNumbers2) shouldBe 3
+    }
+
+    "2개의 로또 번호들이 서로 총 6개의 숫자가 겹친다면, 6을 반환한다. " {
+        val lottoNumbers1 = LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
+        val lottoNumbers2 = LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
+
+        lottoNumbers1.countMatchingNumbers(lottoNumbers2) shouldBe 6
+    }
+})
+
+class ContainsTest : StringSpec({
+    val lottoNumbers = LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
+
+    "로또 번호에 포함된 숫자라면 참을 반환한다." {
+        lottoNumbers.contains(6) shouldBe true
+    }
+
+    "로또 번호에 포함되지 않은 숫자라면 거짓을 반환한다." {
+        lottoNumbers.contains(666) shouldBe false
     }
 })
