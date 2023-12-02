@@ -1,18 +1,17 @@
 package lotto.domain
 
 class Lotto(
-    val numbers: List<Int>,
+    val numbers: List<LottoNumber>,
     val winning: LottoWinning = LottoWinning.Miss,
 ) {
+    constructor(numbers: List<Int>) : this(numbers.map { LottoNumber(it) })
+
     init {
         require(numbers.size == NUMBERS_COUNT) {
             "로또 번호는 항상 ${NUMBERS_COUNT}개 여야 합니다."
         }
         require(numbers.distinct().size == NUMBERS_COUNT) {
             "로또 번호는 중복이 없어야 합니다."
-        }
-        require(numbers.all { it in MIN_NUMBER..MAX_NUMBER }) {
-            "로또 번호는 항상 ${MIN_NUMBER}에서 ${MAX_NUMBER}사이 값이어야 합니다."
         }
         require(numbers.isSortedNumber()) {
             "로또 번호는 항상 정렬되어야 합니다."
@@ -29,8 +28,10 @@ class Lotto(
         )
     }
 
-    private fun List<Int>.isSortedNumber(): Boolean {
-        return zipWithNext { a, b -> a <= b }.all { it }
+    private fun List<LottoNumber>.isSortedNumber(): Boolean {
+        return map { it.value }
+            .zipWithNext { a, b -> a <= b }
+            .all { it }
     }
 
     companion object {

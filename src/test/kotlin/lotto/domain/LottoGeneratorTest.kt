@@ -13,6 +13,6 @@ class LottoGeneratorTest {
         val generator = LottoGenerator(lottoGenerateStrategy)
         val lotto = generator.publish()
 
-        assertThat(lotto.numbers).isEqualTo(listOf(1, 2, 3, 4, 5, 6))
+        assertThat(lotto.numbers.map { it.value }).isEqualTo(listOf(1, 2, 3, 4, 5, 6))
     }
 }
