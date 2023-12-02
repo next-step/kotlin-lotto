@@ -2,7 +2,6 @@ package lotto
 
 import lotto.domain.AutoLottoGenerateStrategy
 import lotto.domain.Lotto
-import lotto.domain.LottoMatcher
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoStore
@@ -37,7 +36,7 @@ fun main() {
     ResultView.showBoughtLottos(boughtLottos, boughtManualLottoCounts)
 
     val winningLotto = WinningLotto(Lotto.of(InputView.inputWinningNumbers()), LottoNumber(InputView.inputBonusNumber()))
-    val matchedLotto = LottoMatcher.matchAll(boughtLottos, winningLotto)
+    val matchedLotto = boughtLottos.matchAll(winningLotto)
 
     val returnRate = matchedLotto.totalReward() / money.toDouble()
 
