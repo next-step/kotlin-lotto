@@ -18,9 +18,8 @@ class DefaultLottoGenerateStrategyTest {
         val defaultLottoGenerateStrategy = DefaultLottoGenerateStrategy()
 
         val lotto = defaultLottoGenerateStrategy.generate()
-        val numbersSet = lotto.numbers.distinct()
 
-        assertThat(lotto.numbers.size).isEqualTo(numbersSet.size)
+        assertThat(lotto.numbers.hasDuplicate()).isFalse
     }
 
     @Test
@@ -29,6 +28,6 @@ class DefaultLottoGenerateStrategyTest {
 
         val lotto = defaultLottoGenerateStrategy.generate()
 
-        assertThat(lotto.numbers).isSorted
+        assertThat(lotto.numbers.isSorted()).isTrue
     }
 }

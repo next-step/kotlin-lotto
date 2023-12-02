@@ -15,7 +15,7 @@ class LottoTest {
 
         val lotto = Lotto.of(numbers)
 
-        assertThat(lotto.numbers.map { it.value }).isEqualTo(listOf(1, 2, 3, 4, 5, 6))
+        assertThat(lotto.numbers.numbers).isEqualTo(listOf(1, 2, 3, 4, 5, 6))
     }
 
     @Test
