@@ -9,8 +9,8 @@ class LottoRankings(private val rankings: Map<LottoRanking, Int>) {
     }
 
     fun getProfitRate(totalInvestment: Int): Double {
-        val totalPrize = LottoRanking.values().sumOf { ranking ->
-            (rankings[ranking] ?: 0) * ranking.prize
+        val totalPrize = rankings.keys.sumOf {
+            rankings[it]!! * it.prize
         }
 
         return totalPrize.toDouble() / totalInvestment.toDouble()
