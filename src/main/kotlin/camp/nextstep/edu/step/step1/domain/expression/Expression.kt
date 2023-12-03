@@ -1,6 +1,4 @@
-package camp.nextstep.edu.step.domain.expression
-
-import java.lang.RuntimeException
+package camp.nextstep.edu.step.step1.domain.expression
 
 @JvmInline
 value class Expression(
@@ -9,10 +7,17 @@ value class Expression(
 
     init {
         require(value.isNotEmpty()) { throw RuntimeException() }
+        validateNegativeExpression()
     }
 
     fun splitExpression(): List<String> {
         return value.split("[,:]".toRegex())
+    }
+
+    private fun validateNegativeExpression() {
+        if (value.contains("-")) {
+            throw RuntimeException()
+        }
     }
 
 }

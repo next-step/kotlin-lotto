@@ -1,4 +1,4 @@
-package camp.nextstep.edu.step.domain.amount
+package camp.nextstep.edu.step.step1.domain.amount
 
 @JvmInline
 value class FinalResult(
