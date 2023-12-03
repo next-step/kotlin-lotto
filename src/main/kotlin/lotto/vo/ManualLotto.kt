@@ -1,22 +1,21 @@
 package lotto.vo
 
 class ManualLotto() {
-    var numbers: List<LottoNumber> = listOf()
+    val lottos: MutableList<Lotto> = mutableListOf()
 
     fun initLottoNumbers(input: String): ManualLotto {
-        val input = input.split(",")
-        require(input.size == 6) { "로또 번호는 6개여야 합니다." }
-        LottoNumber.of(input).forEach { addLottoNumber(it) }
-        return this
+        val numbers = input.split(",").map { it.trim() }
+        require(numbers.size == LOTTO_NUMBER_COUNT) { "로또 번호는 6개여야 합니다." }
+        val lottoNumbers = LottoNumber.of(numbers)
+        return addLottoNumbers(lottoNumbers)
     }
 
     fun addLottoNumbers(numbers: List<LottoNumber>): ManualLotto {
-        numbers.forEach { addLottoNumber(it) }
+        lottos.add(Lotto(numbers))
         return this
     }
 
-    private fun addLottoNumber(number: LottoNumber) {
-        require(!numbers.contains(number)) { "로또 번호는 중복될 수 없습니다." }
-        numbers = numbers.plus(number)
+    companion object {
+        private const val LOTTO_NUMBER_COUNT = 6
     }
 }

@@ -1,8 +1,8 @@
 package lotto.ui
 
 import lotto.vo.AutoLotto
+import lotto.vo.Lotto
 import lotto.vo.LottoMachine
-import lotto.vo.LottoNumber
 import lotto.vo.Lottos
 import lotto.vo.ManualLotto
 import lotto.vo.WinningLotto
@@ -18,9 +18,9 @@ object ResultView {
         return autoLottoBuyPrice
     }
 
-    fun promptForManualLotto(manualLottos: List<ManualLotto>) {
-        manualLottos.forEach { manualLotto ->
-            println(manualLotto.numbers)
+    fun promptForManualLotto(manualLotto: ManualLotto) {
+        manualLotto.lottos.forEach { lottos ->
+            println(lottos.numbers)
         }
     }
 
@@ -32,8 +32,8 @@ object ResultView {
         return autoLotto
     }
 
-    fun printWinningPoints(autoLotto: AutoLotto, winningLotto: WinningLotto) {
-        val statistics = WinningStatistics.calculateStatistics(autoLotto, winningLotto)
+    fun printWinningPoints(lottos: Lottos, winningLotto: WinningLotto) {
+        val statistics = WinningStatistics.calculateStatistics(lottos, winningLotto)
 
         println("당첨 통계")
         println("---------")
@@ -42,7 +42,7 @@ object ResultView {
                 println("${rank.matchingCount}개 일치 (${rank.winningPrice}원) - ${statistics.getValue(rank)}개")
             }
         }
-        val totalWinningPrice = winningLotto.calculateTotalWinningPrice(lottos = autoLotto.lottos)
-        println("총 수익률은 ${autoLotto.getProfitRate(totalWinningPrice)}입니다.")
+        val totalWinningPrice = winningLotto.calculateTotalWinningPrice(lottos = lottos)
+        println("총 수익률은 ${lottos.getProfitRate(totalWinningPrice)}입니다.")
     }
 }

@@ -1,9 +1,8 @@
-package autolotto.vo
+package lotto.vo
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
-import lotto.vo.ManualLottos
 
 class ManualLottoTest : FunSpec({
     test("수동으로 구매할 로또 수를 입력받는다") {
@@ -29,7 +28,15 @@ class ManualLottoTest : FunSpec({
         }
 
         // Then
-        manualLottos.manualLotto[1].numbers shouldHaveSize 6
+        manualLottos.manualLotto[1].lottos shouldHaveSize 1
+        manualLottos.manualLotto[1].lottos[0].numbers shouldBe listOf(
+            LottoNumber(1),
+            LottoNumber(2),
+            LottoNumber(3),
+            LottoNumber(4),
+            LottoNumber(5),
+            LottoNumber(6)
+        )
     }
 
 //    test("수동으로 구매하고 난 후 자동으로 구매할 로또 수를 계산한다") {

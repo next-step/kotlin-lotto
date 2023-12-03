@@ -15,8 +15,8 @@ class WinningLotto(input: String, inputBonus: String = "") {
         require(!numbers.contains(bonusNumber)) { "보너스 번호는 당첨 번호에 포함될 수 없습니다." }
     }
 
-    fun calculateTotalWinningPrice(lottos: List<Lotto>): Long {
-        return lottos.sumOf { lotto ->
+    fun calculateTotalWinningPrice(lottos: Lottos): Long {
+        return lottos.lottos.sumOf { lotto ->
             checkWinning(lotto).winningPrice
         }
     }

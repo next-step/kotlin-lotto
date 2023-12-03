@@ -1,12 +1,8 @@
-package autolotto.vo
+package lotto.vo
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import lotto.vo.AutoLotto
-import lotto.vo.Lotto
-import lotto.vo.LottoNumber
-import lotto.vo.WinningLotto
 
 class AutoLottoTest : FunSpec({
     test("로또 구입금액을 입력받으면 로또 수량이 결정된다") {
@@ -41,8 +37,8 @@ class AutoLottoTest : FunSpec({
         // Given
         val input = 1000L
         val lottoNumber = (1..6).map { LottoNumber.of(it) }
-        val lotto = AutoLotto(input, listOf())
-        val lottos = listOf(Lotto(lottoNumber))
+        val lotto = Lottos(input, listOf())
+        val lottos = Lottos(input, listOf(Lotto(lottoNumber)))
         val winningLotto = WinningLotto("1, 2, 3, 4, 5, 6", "7")
 
         // When

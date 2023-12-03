@@ -2,6 +2,7 @@ package lotto.vo
 
 class LottoMachine(buyPrice: Long = 0L) {
     val buyPrice: Long = buyPrice
+
     fun createLotto(): AutoLotto {
         return AutoLotto(buyPrice)
     }

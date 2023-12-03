@@ -51,4 +51,20 @@ class LottoMachineTest : FunSpec({
         // Then
         autoLotto.size shouldBe 2
     }
+
+    test("수동으로 구매하고 난 후 나머지금액은 자동으로 발급한다") {
+        // Given
+        val buyPrice = 5000L
+        val manualLottoCount = 3L
+        val manualLottoNumber = listOf("1,2,3,4,5,6", "1,2,3,4,5,6", "1,2,3,4,5,6")
+        val lottoMachine = LottoMachine(buyPrice)
+
+        // When
+        val manualLotto = lottoMachine.createManualLotto(manualLottoNumber)
+        val autoLottoCount = lottoMachine.calculateAutoLottoCount(manualLottoCount)
+        val autoLotto = lottoMachine.createAutoLotto(autoLottoCount)
+
+        manualLotto.size shouldBe 3L
+        autoLotto.size shouldBe 2L
+    }
 })
