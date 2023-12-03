@@ -1,7 +1,5 @@
 package specific.lotto.domain
 
-
-
 @JvmInline
 value class Number(val value: Int) {
     init {
@@ -12,7 +10,7 @@ value class Number(val value: Int) {
         const val MIN_NUMBER = 1
         const val MAX_NUMBER = 45
 
-        private val numberPool = (MIN_NUMBER..MAX_NUMBER).map { Number(it) }.toList()
+        private val numberPool = (MIN_NUMBER..MAX_NUMBER).map(::Number).toList()
 
         fun getNumberPool() = numberPool
     }

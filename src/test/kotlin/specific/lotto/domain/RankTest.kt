@@ -2,6 +2,7 @@ package specific.lotto.domain
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class RankTest {
 
@@ -48,5 +49,28 @@ class RankTest {
 
         // then
         assertEquals(Rank.FIFTH, rank)
+    }
+
+    @Test
+    fun `일치하는 숫자가 3개 미만일 경우 당첨이 아니다`() {
+        // given, when
+        val ranks = listOf<Rank>(
+            Rank.decideRank(2, true),
+            Rank.decideRank(2, false),
+            Rank.decideRank(1, true),
+            Rank.decideRank(1, false),
+            Rank.decideRank(0, true),
+            Rank.decideRank(0, false),
+        )
+
+        // then
+        ranks.forEach {
+            assertEquals(false, it.isWin)
+        }
+    }
+
+    @Test
+    fun `7개 이상 숫자가 일치하는 경우는 없다`() {
+        assertThrows<IllegalArgumentException> { Rank.decideRank(7, true) }
     }
 }

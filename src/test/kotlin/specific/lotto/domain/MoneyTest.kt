@@ -8,8 +8,8 @@ import org.junit.jupiter.params.provider.ValueSource
 
 class MoneyTest {
     @ParameterizedTest
-    @ValueSource(ints = [-10, -1])
-    fun `돈은 양의 정수이다`(principal: Long) {
+    @ValueSource(ints = [-10, -1, 500])
+    fun `입력받은 돈은 로또를 1장 이상 구매할 수 있어야 한다`(principal: Long) {
         // given, when, then
         assertThrows<IllegalArgumentException> { Money(principal) }
     }

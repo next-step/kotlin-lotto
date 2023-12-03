@@ -1,25 +1,33 @@
 package specific.lotto.domain
 
-enum class Rank(val prize: Long, val condition: String) {
-    FIRST(2000000000L, "6개 일치"),
-    SECOND(30000000L, "5개 일치, 보너스 볼 일치"),
-    THIRD(1500000L, "5개 일치"),
-    FOURTH(50000L, "4개 일치"),
-    FIFTH(5000L, "3개 일치"),
-    NO_WIN(0L, "2개 이하 일치");
+enum class Rank(
+    val isWin: Boolean,
+    val sameNumbersCount: Int,
+    val bonusNumberCondition: BonusNumberCondition,
+    val prize: Long,
+) {
+    FIRST(true, 6, BonusNumberCondition.IRRELEVANCE, 2000000000L),
+    SECOND(true, 5, BonusNumberCondition.MATCH, 30000000L),
+    THIRD(true, 5, BonusNumberCondition.MISMATCH, 1500000L),
+    FOURTH(true, 4, BonusNumberCondition.IRRELEVANCE, 50000L),
+    FIFTH(true, 3, BonusNumberCondition.IRRELEVANCE, 5000L),
+    NO_WIN_TWO_MATCH(false, 2, BonusNumberCondition.IRRELEVANCE, 0L),
+    NO_WIN_ONE_MATCH(false, 1, BonusNumberCondition.IRRELEVANCE, 0L),
+    NO_WIN_ZERO_MATCH(false, 0, BonusNumberCondition.IRRELEVANCE, 0L);
+
+    fun checkCondition(sameNumbersCount: Int, hasBonusNumber: Boolean): Boolean =
+        sameNumbersCount == this.sameNumbersCount && bonusNumberCondition.checkCondition(hasBonusNumber)
 
     companion object {
-        fun decideRank(countOfSameNumber: Int, hasBonusNumber: Boolean): Rank {
-            return when(countOfSameNumber) {
-                6 -> FIRST
-                5 -> when(hasBonusNumber) {
-                    true -> SECOND
-                    false -> THIRD
-                }
-                4 -> FOURTH
-                3 -> FIFTH
-                else -> NO_WIN
-            }
+        fun decideRank(sameNumbersCount: Int, hasBonusNumber: Boolean): Rank {
+            return Rank.values().firstOrNull { it.checkCondition(sameNumbersCount, hasBonusNumber) }
+                ?:throw IllegalArgumentException("impossible case")
         }
     }
+}
+
+enum class BonusNumberCondition(val checkCondition: (Boolean) -> Boolean) {
+    MATCH({ isBonusMatch -> isBonusMatch }),
+    MISMATCH({ isBonusMatch -> !isBonusMatch }),
+    IRRELEVANCE({ true });
 }
