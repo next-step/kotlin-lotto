@@ -22,4 +22,3 @@ enum class LottoRanking(val matchingCount: Int, val isBonusMatched: Boolean, val
         }
     }
 }
-

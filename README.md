@@ -4,6 +4,7 @@
 
 - Step 1 : [https://github.com/next-step/kotlin-lotto/pull/849](https://github.com/next-step/kotlin-lotto/pull/849)
 - Step 2 : [https://github.com/next-step/kotlin-lotto/pull/939](https://github.com/next-step/kotlin-lotto/pull/939)
+- Step 3 : [https://github.com/next-step/kotlin-lotto/pull/957](https://github.com/next-step/kotlin-lotto/pull/957)
 
 ## 미션 내용
 
@@ -105,6 +106,10 @@
 
 ### STEP 3
 
+<details>
+<summary>접기/펼치기</summary>
+<div markdown="1">
+
 #### [요구 사항 분석]
 
 - 2등을 위한 보너스 번호(추가 번호) 하나를 더 추첨
@@ -124,3 +129,26 @@
 - [x] 로또 번호를 원시 타입으로 포장한다.
 - [x] 당첨 번호 목록에 size 제약을 건다.
 - [x] 일급 컬렉션(LottoTickets)을 의미 있게 사용할 수 있도록 비즈니스 로직을 위임하거나, 제거한다.
+
+</div>
+</details>
+
+<br>
+
+### STEP 4
+
+#### [피드백 반영]
+
+- [x] 로또 번호를 원시 타입으로 포장한다 (https://github.com/next-step/kotlin-lotto/pull/957#discussion_r1398365801)
+- [x] 당첨 로또와 총 등수를 담당하는 도메인 모델 객체를 추가하여 역할을
+  응집한다 (https://github.com/next-step/kotlin-lotto/pull/957#discussion_r1398366321)
+
+#### [요구 사항 분석]
+
+- 수동 로또 기능 구현
+- 수동 로또 구매 후 남은 차액은 모두 자동으로 구매
+
+####[기능 목록]
+
+- [x] 구입 금액에서 구매할 수동 로또 수를 뺀 나머지 차액은 모두 자동 로또 수로 계산한다
+- [x] 수동 로또 입력 번호를 관리한다
