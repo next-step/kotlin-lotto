@@ -14,11 +14,11 @@ class LottoMachine(val buyPrice: Long = 0L) {
     }
 
     fun calculateAutoLottoCount(manualLottoCount: Long): Long {
-        return (buyPrice - (manualLottoCount * 1000L)) / 1000L
+        return (buyPrice - (manualLottoCount * LOTTO_PRICE_PER_ONE)) / LOTTO_PRICE_PER_ONE
     }
 
     fun calculateAutoLottoBuyPrice(manualLottoCount: Long): Long {
-        return (buyPrice - (manualLottoCount * 1000L))
+        return (buyPrice - (manualLottoCount * LOTTO_PRICE_PER_ONE))
     }
 
     fun createAutoLotto(count: Long): List<AutoLotto> {
@@ -28,5 +28,9 @@ class LottoMachine(val buyPrice: Long = 0L) {
             autoLottoList.add(autoLotto)
         }
         return autoLottoList
+    }
+
+    companion object {
+        private const val LOTTO_PRICE_PER_ONE = 1000L
     }
 }
