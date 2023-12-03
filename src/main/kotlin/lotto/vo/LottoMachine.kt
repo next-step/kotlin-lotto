@@ -1,11 +1,6 @@
 package lotto.vo
 
-class LottoMachine(buyPrice: Long = 0L) {
-    val buyPrice: Long = buyPrice
-
-    fun createLotto(): AutoLotto {
-        return AutoLotto(buyPrice)
-    }
+class LottoMachine(val buyPrice: Long = 0L) {
 
     fun createManualLotto(inputString: List<String>): List<ManualLotto> {
         val manualLottoList = mutableListOf<ManualLotto>()

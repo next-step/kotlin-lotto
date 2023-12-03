@@ -1,7 +1,5 @@
 package lotto.vo
 
-import kotlin.math.floor
-
 class AutoLotto(private val price: Long, originLottos: List<Lotto> = listOf()) {
     val count: Int = initCount(price)
     val lottos: List<Lotto> = originLottos.ifEmpty { createLottoList() }

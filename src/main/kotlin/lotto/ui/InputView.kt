@@ -1,6 +1,5 @@
 package lotto.ui
 
-import lotto.vo.Lottos
 import lotto.vo.ManualLotto
 
 object InputView {
@@ -26,7 +25,7 @@ object InputView {
 
     fun promptForManualLotto(count: Long): ManualLotto {
         println("수동으로 구매할 번호를 입력해 주세요.")
-        var manualLottos = ManualLotto()
+        val manualLottos = ManualLotto()
         for (i in 1..count) {
             val inputString = readln()
             manualLottos.initLottoNumbers(inputString)

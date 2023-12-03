@@ -1,9 +1,6 @@
 package lotto.winningpoint
 
-import lotto.vo.AutoLotto
-import lotto.vo.Lotto
 import lotto.vo.Lottos
-import lotto.vo.ManualLotto
 import lotto.vo.WinningLotto
 
 object WinningStatistics {

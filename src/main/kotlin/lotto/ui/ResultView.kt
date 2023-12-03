@@ -1,7 +1,6 @@
 package lotto.ui
 
 import lotto.vo.AutoLotto
-import lotto.vo.Lotto
 import lotto.vo.LottoMachine
 import lotto.vo.Lottos
 import lotto.vo.ManualLotto
