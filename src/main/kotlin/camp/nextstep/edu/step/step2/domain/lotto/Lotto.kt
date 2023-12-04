@@ -1,5 +1,7 @@
 package camp.nextstep.edu.step.step2.domain.lotto
 
+import camp.nextstep.edu.step.step2.domain.number.Number
+
 class Lotto(
     val numbers: List<Number>
 ) {

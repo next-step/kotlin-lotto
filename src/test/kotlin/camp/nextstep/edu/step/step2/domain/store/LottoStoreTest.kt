@@ -1,7 +1,7 @@
 package camp.nextstep.edu.step.step2.domain.store
 
 import camp.nextstep.edu.step.step2.domain.amount.BuyAmount
-import camp.nextstep.edu.step.step2.domain.lotto.Number
+import camp.nextstep.edu.step.step2.domain.number.Number
 import camp.nextstep.edu.step.step2.domain.lotto.Lotto
 import camp.nextstep.edu.step.step2.domain.lotto.Lottos
 import camp.nextstep.edu.step.step2.domain.lotto.WinningLotto

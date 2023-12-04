@@ -1,5 +1,6 @@
 package camp.nextstep.edu.step.step2.domain.lotto
 
+import camp.nextstep.edu.step.step2.domain.number.Number
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName

@@ -1,4 +1,4 @@
-package camp.nextstep.edu.step.step2.domain.lotto
+package camp.nextstep.edu.step.step2.domain.number
 
 @JvmInline
 value class Number(
