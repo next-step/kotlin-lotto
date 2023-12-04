@@ -1,8 +1,8 @@
 package lotto.domain
 
-import lotto.domain.model.vo.BuyPrice
+import lotto.domain.model.BuyPrice
 import lotto.domain.model.Lotto
-import lotto.domain.model.vo.Price
+import lotto.domain.model.Price
 import lotto.util.isNotInfinite
 import lotto.util.isNotNan
 

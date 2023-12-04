@@ -1,4 +1,4 @@
-package lotto.domain.model.vo
+package lotto.domain.model
 
 /**
  * 로또 상금

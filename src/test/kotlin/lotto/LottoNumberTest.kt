@@ -3,7 +3,7 @@ package lotto
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.model.vo.LottoNumber
+import lotto.domain.model.LottoNumber
 
 /**
  * 로또 번호 테스트

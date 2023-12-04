@@ -3,8 +3,7 @@ package lotto
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.model.vo.WinningTicketCount
-
+import lotto.domain.model.WinningTicketCount
 
 /**
  * 당첨된 로또 티켓 카운트 테스트
@@ -41,5 +40,4 @@ class WinningTicketCountTest : FunSpec({
     test("당첨된 로또 티켓 카운트 생성시 `100`을 입력할 경우 `100`개의 횟수를 가진 당첨 로또 티켓 카운트가 생성되어야 한다.") {
         WinningTicketCount.valueOf(100).value shouldBe 100
     }
-
 })

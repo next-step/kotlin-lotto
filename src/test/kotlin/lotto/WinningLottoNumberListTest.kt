@@ -1,12 +1,12 @@
 package lotto
 
+import lotto.domain.model.LottoNumber
+import lotto.domain.model.LottoNumbers
+import lotto.domain.model.WinningLottoNumbers
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.shouldBe
-import lotto.domain.model.vo.LottoNumber
-import lotto.domain.model.vo.LottoNumbers
-import lotto.domain.model.WinningLottoNumbers
 
 /**
  * 지난 주 당첨 로또 번호 테스트

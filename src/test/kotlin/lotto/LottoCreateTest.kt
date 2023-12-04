@@ -4,13 +4,13 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.LottoCreateMachine
-import lotto.domain.model.vo.BuyPrice
-import lotto.domain.model.vo.Price
+import lotto.domain.model.BuyPrice
+import lotto.domain.model.Price
 
 /**
  * 로또 생성 테스트
  * */
-class LottoCreateTest: StringSpec({
+class LottoCreateTest : StringSpec({
 
     "구입금액을 로또가격으로 나눴을때 나머지가 0보다 크지 않으면 IllegalArgumentException 예외를 던진다." {
         shouldThrow<IllegalArgumentException> {

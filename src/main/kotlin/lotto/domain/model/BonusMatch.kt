@@ -1,4 +1,4 @@
-package lotto.domain.model.vo
+package lotto.domain.model
 
 @JvmInline
 value class BonusMatch(val value: Boolean) {

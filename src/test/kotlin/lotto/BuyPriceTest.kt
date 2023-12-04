@@ -3,8 +3,7 @@ package lotto
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.model.vo.BuyPrice
-
+import lotto.domain.model.BuyPrice
 
 /**
  * 로또 구입 금액 테스트
@@ -42,5 +41,4 @@ class BuyPriceTest : FunSpec({
     test("구입금액에 `23000` 입력시 구입금액이 `23000`원 이여야한다.") {
         BuyPrice.valueOf(23000).value shouldBe 23000
     }
-
 })

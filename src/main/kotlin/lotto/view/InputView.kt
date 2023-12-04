@@ -1,9 +1,9 @@
 package lotto.view
 
+import lotto.domain.model.BuyPrice
 import lotto.domain.model.Lotto
-import lotto.domain.model.vo.BuyPrice
-import lotto.domain.model.vo.LottoNumber
-import lotto.domain.model.vo.LottoNumbers
+import lotto.domain.model.LottoNumber
+import lotto.domain.model.LottoNumbers
 
 /**
  * 입력 뷰
@@ -50,7 +50,6 @@ object InputView {
         return LottoNumbers.valueOf(winningNumbers.map { winningLottoNumber -> winningLottoNumber.toInt() }.toSet())
     }
 
-
     /**
      * 보너스 번호 뷰
      * */
@@ -65,11 +64,10 @@ object InputView {
         return LottoNumber.valueOf(lottoNumberText.toInt())
     }
 
-
     /**
      * 로또 목록
      * */
-    fun drawLottoList(lottoList: List<Lotto>){
+    fun drawLottoList(lottoList: List<Lotto>) {
         println(BUY_LOTTO_COUNT_DESCRIPTION.format(lottoList.size))
         lottoList.forEach {
             println(it.lottoNumbers.value)

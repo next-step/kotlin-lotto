@@ -1,10 +1,10 @@
-package lotto.domain.model.vo
+package lotto.domain.model
 
 /**
  * 로또 숫자
  * */
 @JvmInline
-value class LottoNumber private constructor(val value: Int){
+value class LottoNumber private constructor(val value: Int) {
 
     init {
         require(value in MIN_NUMBER_VALUE..MAX_NUMBER_VALUE) {

@@ -60,5 +60,4 @@ class CalculatorTest : FunSpec({
     test("계산기에 입력받은 문자열이 “0:5,5”일 경우 예외를 던진다.") {
         Calculator.calculate("0:5,5") shouldBe 10
     }
-
 })

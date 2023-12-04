@@ -1,10 +1,10 @@
-package lotto.domain.model.vo
+package lotto.domain.model
 
 /**
  * 로또 넘버 리스트
  * */
 @JvmInline
-value class LottoNumbers(val value: Set<LottoNumber>): Set<LottoNumber> by value {
+value class LottoNumbers(val value: Set<LottoNumber>) : Set<LottoNumber> by value {
 
     init {
         require(value.isNotEmpty()) {
@@ -38,10 +38,12 @@ value class LottoNumbers(val value: Set<LottoNumber>): Set<LottoNumber> by value
          * @param primitiveLottoNumber 원시 타임의 로또 번호 리스트
          * */
         fun valueOf(primitiveLottoNumber: Set<Int>): LottoNumbers {
-            return LottoNumbers(primitiveLottoNumber
-                .map { number -> LottoNumber.valueOf(number) }
-                .sortedBy { lottoNumber -> lottoNumber.value }.toSet())
+            return LottoNumbers(
+                primitiveLottoNumber
+                    .map { number -> LottoNumber.valueOf(number) }
+                    .sortedBy { lottoNumber -> lottoNumber.value }
+                    .toSet()
+            )
         }
     }
-
 }

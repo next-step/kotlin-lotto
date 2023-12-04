@@ -3,12 +3,12 @@ package lotto
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.model.vo.Price
+import lotto.domain.model.Price
 
 /**
  * 로또 가격 테스트
  * */
-class PriceTest: FunSpec({
+class PriceTest : FunSpec({
     test("로또 가격 생성시 `0`을 넣을 경우 예외(IllegalArgumentException)를 던진다.") {
         shouldThrow<IllegalArgumentException> {
             Price.valueOf(0)
@@ -46,5 +46,4 @@ class PriceTest: FunSpec({
     test("로또 가격 생성시 `1000`을 넣을 경우 `1000`원을 가진 로또 가격이 생성된다.") {
         Price.valueOf(1000).value shouldBe 1000
     }
-
 })

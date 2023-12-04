@@ -3,7 +3,6 @@ package lotto.controller
 import lotto.domain.LottoCreateMachine
 import lotto.domain.WinningType
 import lotto.domain.LottoRateOfReturnCalculator
-import lotto.domain.model.vo.BuyPrice
 import lotto.view.InputView
 import lotto.view.ResultView
 
