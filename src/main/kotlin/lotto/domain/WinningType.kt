@@ -5,6 +5,7 @@ import lotto.domain.model.Lotto
 import lotto.domain.model.LottoMatchResult
 import lotto.domain.model.LottoNumber
 import lotto.domain.model.LottoNumbers
+import lotto.domain.model.Lottos
 import lotto.domain.model.MatchCount
 import lotto.domain.model.Prize
 import lotto.domain.model.WinningLottoNumbers
@@ -31,7 +32,7 @@ enum class WinningType(
         fun runDrawLottos(
             winningNumbers: LottoNumbers,
             bonusNumber: LottoNumber,
-            lottoList: List<Lotto>
+            lottoList: Lottos
         ): List<LottoMatchResult> {
             val winningLottoNumbers = WinningLottoNumbers.of(winningNumbers, bonusNumber)
 

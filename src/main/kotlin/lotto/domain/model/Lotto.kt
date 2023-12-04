@@ -20,8 +20,10 @@ data class Lotto(val lottoNumbers: LottoNumbers) {
     }
 
     companion object {
-        fun from(lottoNumbers: Set<Int> = LottoNumbers.createPrimitiveLottoNumberList()): Lotto {
-            return Lotto(LottoNumbers.valueOf(lottoNumbers))
+        fun auto(): Lotto = Lotto(LottoNumbers.valueOf(LottoNumbers.createPrimitiveLottoNumberList()))
+
+        fun from(lottoNumbers: LottoNumbers): Lotto {
+            return Lotto(lottoNumbers)
         }
     }
 }
