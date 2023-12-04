@@ -3,6 +3,8 @@ package lotto.domain
 import lotto.domain.model.vo.BuyPrice
 import lotto.domain.model.Lotto
 import lotto.domain.model.vo.Price
+import lotto.util.isNotInfinite
+import lotto.util.isNotNan
 
 /**
  * 로또 생성 기계
@@ -23,7 +25,7 @@ object LottoCreateMachine {
 
         val lottoCount: Double = (buyPrice.toDouble() / price.toDouble())
 
-        require(!lottoCount.isNaN() && !lottoCount.isInfinite()) {
+        require(lottoCount.isNotNan() && lottoCount.isNotInfinite()) {
             "구입금액을 로또가격으로 나눴을때 NaN, Infinite가 나오면 안됩니다."
         }
 
