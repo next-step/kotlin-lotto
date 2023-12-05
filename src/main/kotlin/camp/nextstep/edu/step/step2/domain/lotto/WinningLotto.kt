@@ -1,7 +1,10 @@
 package camp.nextstep.edu.step.step2.domain.lotto
 
+import camp.nextstep.edu.step.step2.domain.number.BonusNumber
+
 data class WinningLotto(
     val winningLotto: Lotto,
+    val bonusNumber: BonusNumber
 ) {
 
     init {
