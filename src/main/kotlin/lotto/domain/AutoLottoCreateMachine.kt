@@ -7,21 +7,15 @@ import lotto.domain.model.Price
 import lotto.util.isNotInfinite
 import lotto.util.isNotNan
 
-/**
- * 로또 생성 기계
- * */
 object AutoLottoCreateMachine {
 
-    private const val MIN_LOTTO_COUNT = 1
+    private const val MIN_LOTTO_COUNT = 0
     private const val DEFAULT_REMAINDER = 0.0
 
-    /**
-     * 로또 리스트 구매
-     * */
     fun buyAutoLottoList(selfLottosSize: Int, buyPrice: BuyPrice, price: Price = Price.valueOf()): Lottos {
 
         require(buyPrice.value.toDouble() % price.value.toDouble() == DEFAULT_REMAINDER) {
-            "구입금액을 로또가격으로 나눴을때 나머지가 ${MIN_LOTTO_COUNT}이여야 합니다."
+            "구입금액을 로또가격으로 나눴을때 나머지가 ${DEFAULT_REMAINDER}이여야 합니다."
         }
 
         val lottoCount: Double = (buyPrice.toDouble() / price.toDouble())

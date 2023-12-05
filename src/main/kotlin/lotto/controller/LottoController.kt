@@ -20,7 +20,7 @@ object LottoController {
         InputView.drawLottoList(selfLottos, autoLottos)
 
         val winningNumbers = InputView.drawWinningLottoNumbers()
-        val winningBonusNumber = InputView.drawWinningBonusNumber()
+        val winningBonusNumber = InputView.drawWinningBonusNumber(winningNumbers)
         val lottoResultList = WinningType.runDrawLottos(winningNumbers, winningBonusNumber, selfLottos + autoLottos)
 
         ResultView.drawLottoMatchResultList(lottoResultList)

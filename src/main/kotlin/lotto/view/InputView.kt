@@ -104,15 +104,21 @@ object InputView {
     /**
      * 보너스 번호 뷰
      * */
-    fun drawWinningBonusNumber(): LottoNumber {
+    fun drawWinningBonusNumber(winningLottoNumbers: LottoNumbers): LottoNumber {
         println(WINNING_BONUS_NUMBER_DESCRIPTION)
-        val lottoNumberText = readln()
+        val bonusLottoNumberText = readln()
 
-        require(lottoNumberText.toIntOrNull() != null) {
-            "구입 금액은 숫자만 들어올 수 있습니다."
+        require(bonusLottoNumberText.toIntOrNull() != null) {
+            "보너스 넘버는 숫자만 들어올 수 있습니다."
         }
 
-        return LottoNumber.valueOf(lottoNumberText.toInt())
+        val bonusLottoNumber = LottoNumber.valueOf(bonusLottoNumberText.toInt())
+
+        require(bonusLottoNumber !in winningLottoNumbers) {
+            "보너스 넘버와 당첨 로또 번호는 겹칠 수 없습니다."
+        }
+
+        return bonusLottoNumber
     }
 
     /**
