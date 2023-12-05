@@ -55,7 +55,7 @@ object LottoStore {
 
         val matchResult = lottoWinningResults(
             userlottos = userLottos,
-            winningWinningLotto = winningLotto
+            winningLotto = winningLotto
         )
 
         return LottoResult(totalPrice, matchResult)
@@ -73,12 +73,17 @@ object LottoStore {
      */
     private fun lottoWinningResults(
         userlottos: Lottos,
-        winningWinningLotto: WinningLotto
+        winningLotto: WinningLotto
     ): List<LottoMatch> {
-        return userlottos.lottos
-            .map { numbers -> numbers.countMatch(winningWinningLotto.winningLotto) }
-            .map { LottoMatch.of(it) }
-            .sorted()
+        val lottoMatchResults = mutableListOf<LottoMatch>()
+
+        for (lotto in userlottos.lottos) {
+            val matchNumbers = lotto.countMatch(winningLotto.winningLotto)
+            val matchBonus = lotto.countMatchBonus(winningLotto.bonusNumber)
+            lottoMatchResults.add(LottoMatch.of(matchNumbers, matchBonus))
+        }
+
+        return lottoMatchResults
     }
 
 }
