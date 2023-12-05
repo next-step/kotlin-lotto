@@ -20,8 +20,6 @@ value class LottoNumbers(val value: Set<LottoNumber>) : Set<LottoNumber> by valu
         return value.toString()
     }
 
-    override fun contains(element: LottoNumber): Boolean = value.contains(element)
-
     companion object {
 
         private const val DEFAULT_LOTTO_NUMBER_LIST_LENGTH = 6
