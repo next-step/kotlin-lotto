@@ -1,4 +1,4 @@
-package camp.nextstep.edu.step.domain.expression
+package camp.nextstep.edu.step.step1.domain.expression
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
@@ -31,6 +31,20 @@ class ExpressionTest : BehaviorSpec({
             Then("쉼표 또는 콜론을 통해 문자열식을 분리한다.") {
                 splitExpression.size shouldBe 3
                 splitExpression shouldBe listOf("1", "2", "3")
+            }
+        }
+    }
+
+    Given("만약, 식에 음수가 포함되어있고") {
+        val expressionRequestWithNegativeNumbers = "1,-2:3"
+
+        When("생성을 요청하면") {
+            val exceptionByNegativeNumber = shouldThrow<RuntimeException> {
+                Expression(value = expressionRequestWithNegativeNumbers)
+            }
+
+            Then("예외가 발생한다.") {
+                exceptionByNegativeNumber shouldBe RuntimeException()
             }
         }
     }

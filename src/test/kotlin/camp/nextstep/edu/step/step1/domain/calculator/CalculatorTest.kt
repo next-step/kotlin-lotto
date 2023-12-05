@@ -1,6 +1,6 @@
-package camp.nextstep.edu.step.domain.calculator
+package camp.nextstep.edu.step.step1.domain.calculator
 
-import camp.nextstep.edu.step.domain.amount.FinalResult
+import camp.nextstep.edu.step.step1.domain.amount.FinalResult
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 
@@ -10,7 +10,7 @@ class CalculatorTest : BehaviorSpec({
         val numbers = listOf("1", "2", "3")
 
         When("계산기에 숫자 리스트를 넣으면") {
-            val calculator = Calculator.of(expressions = numbers)
+            val calculator = Calculator(expressions = numbers)
             val result = calculator.calculateExpression()
 
             Then("숫자들의 합을 반환한다.") {
