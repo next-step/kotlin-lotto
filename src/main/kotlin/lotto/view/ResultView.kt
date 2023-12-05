@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.domain.model.LottoMatchResult
-import lotto.domain.model.vo.RateOfReturn
+import lotto.domain.model.RateOfReturn
 
 /**
  * 결과 뷰
@@ -25,7 +25,7 @@ object ResultView {
     }
     
     private fun drawLottoMatchResult(lottoMatchResult: LottoMatchResult) {
-        if (lottoMatchResult.bonusMatch.value == true) {
+        if (lottoMatchResult.bonusMatch.value) {
             println(LOTTO_BONUS_MATCH_RESULT_DESCRIPTION.format(lottoMatchResult.matchCount.value, lottoMatchResult.prize.value, lottoMatchResult.winningTicketCount.value))
             return
         }
@@ -39,5 +39,4 @@ object ResultView {
         val resultText = if (rateOfReturn.value >= LOTTO_RATE_OF_RETURN_BENCHMARK_NUMBER.toDouble()) PROFIT else LOSS
         println(LOTTO_RATE_OF_RETURN_DESCRIPTION.format(rateOfReturn.value, LOTTO_RATE_OF_RETURN_BENCHMARK_NUMBER, resultText))
     }
-
 }

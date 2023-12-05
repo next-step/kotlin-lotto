@@ -10,7 +10,6 @@ private const val CUSTOM_DELIMITER_DROP_INDEX = 4
 private const val NUMBER_MIN_VALUE = 0
 private const val NUMBER_MAX_VALUE = 100
 
-
 /**
  * 문자열 계산기 (덧셈, 커스텀 구분자)
  * */

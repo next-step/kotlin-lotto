@@ -1,4 +1,4 @@
-package lotto.domain.model.vo
+package lotto.domain.model
 
 /**
  * 당첨된 로또 티켓 개수

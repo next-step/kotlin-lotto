@@ -1,8 +1,8 @@
 package lotto.domain
 
-import lotto.domain.model.vo.BuyPrice
+import lotto.domain.model.BuyPrice
 import lotto.domain.model.LottoMatchResult
-import lotto.domain.model.vo.RateOfReturn
+import lotto.domain.model.RateOfReturn
 
 /**
  * 수익률 계산기

@@ -1,4 +1,4 @@
-package lotto.domain.model.vo
+package lotto.domain.model
 
 /**
  * 로또 가격
@@ -7,7 +7,7 @@ package lotto.domain.model.vo
 value class Price(val value: Int) {
     init {
         require(value in MIN_PRICE..MAX_PRICE) {
-            "로또 가격은 ${MIN_PRICE}~${MAX_PRICE}원 사이여야 합니다."
+            "로또 가격은 $MIN_PRICE~${MAX_PRICE}원 사이여야 합니다."
         }
         require(value % DEFAULT_PRICE == DEFAULT_REMAINDER) {
             "로또 가격을 ${DEFAULT_PRICE}으로 나누었을 때 나머지가 ${DEFAULT_REMAINDER}원이 나와야 합니다."
