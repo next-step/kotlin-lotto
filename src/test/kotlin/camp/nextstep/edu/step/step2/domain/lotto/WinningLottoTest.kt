@@ -1,5 +1,6 @@
 package camp.nextstep.edu.step.step2.domain.lotto
 
+import camp.nextstep.edu.step.step2.domain.number.BonusNumber
 import camp.nextstep.edu.step.step2.domain.number.Number
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
@@ -21,9 +22,12 @@ class WinningLottoTest : BehaviorSpec({
             )
         )
 
+        val bonusNumber = BonusNumber(number = Number(number = 7))
+
         When("생성을 요청하면") {
             val winningLotto = WinningLotto(
-                winningLotto = winningLottoRequest
+                winningLotto = winningLottoRequest,
+                bonusNumber = bonusNumber
             )
 
             Then("정상적으로 생성된다.") {
@@ -35,6 +39,8 @@ class WinningLottoTest : BehaviorSpec({
                     Number(5),
                     Number(6)
                 )
+
+                winningLotto.bonusNumber shouldBe BonusNumber(number = Number(number = 7))
             }
 
         }
@@ -45,10 +51,13 @@ class WinningLottoTest : BehaviorSpec({
             listOf()
         )
 
+        val bonusNumber = BonusNumber(number = Number(number = 7))
+
         When("생성 시") {
             val exceptionByEmptyLotto = shouldThrow<IllegalArgumentException> {
                 WinningLotto(
-                    winningLotto = emptyLotto
+                    winningLotto = emptyLotto,
+                    bonusNumber = bonusNumber
                 )
             }
 
