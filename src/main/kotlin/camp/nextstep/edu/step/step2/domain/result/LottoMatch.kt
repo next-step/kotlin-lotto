@@ -18,4 +18,5 @@ enum class LottoMatch(
             return values().find { it.matchCount == matchCount && it.bonusMatch == bonusMatch } ?: NONE
         }
     }
+    
 }
