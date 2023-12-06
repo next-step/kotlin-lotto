@@ -2,7 +2,7 @@ package camp.nextstep.edu.step.step2.view
 
 import camp.nextstep.edu.step.step2.dto.LottoResultDto
 
-object OutputView {
+class OutputView {
 
     fun displayTicketsNumbers(ticketsAmount: Int, ticketNumbers: List<List<Int>>) {
         println("${ticketsAmount}개를 구매했습니다.")
@@ -18,7 +18,7 @@ object OutputView {
         lottoResultDto.matchResponse.forEach { matchResponse ->
             println("${matchResponse.matchCount}개 일치 (${matchResponse.prize}원) - ${matchResponse.userMatchCont}개")
         }
-        println("총 수익률은 %.2f 입니다.".format(lottoResultDto.lottoProfitRate))
+        println("총 수익률은 ${lottoResultDto.lottoProfitRate}입니다.")
     }
 
 }

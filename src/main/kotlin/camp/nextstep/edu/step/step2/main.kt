@@ -1,47 +1,34 @@
 package camp.nextstep.edu.step.step2
 
-import camp.nextstep.edu.step.step2.domain.amount.BuyAmount
-import camp.nextstep.edu.step.step2.domain.lotto.Lottos
 import camp.nextstep.edu.step.step2.domain.lotto.WinningLotto
 import camp.nextstep.edu.step.step2.domain.store.LottoStore
 import camp.nextstep.edu.step.step2.view.InputView
 import camp.nextstep.edu.step.step2.view.OutputView
 
-
 fun main() {
-    val buyAmount = InputView.getInputValueAndReturnBuyAmount()
+    val inputView = InputView()
+    val outputView = OutputView()
 
-    val lottos = buyLottoTicketsWithAmount(buyAmount = buyAmount)
-
-    checkLottoTicketsWinningResult(lottos = lottos)
-}
-
-private fun buyLottoTicketsWithAmount(buyAmount: BuyAmount): Lottos {
+    val buyAmount = inputView.getInputValueAndReturnBuyAmount()
     val tickets = LottoStore.buyLottoTickets(buyAmount = buyAmount)
 
     val lottos = LottoStore.createNumbersByLottoTicketAmount(ticketAmount = tickets)
 
     val ticketElements = lottos.getLottoElements()
 
-    OutputView.displayTicketsNumbers(
+    outputView.displayTicketsNumbers(
         ticketsAmount = tickets.lottoTicketAmount,
         ticketNumbers = ticketElements
     )
 
-    return lottos
-}
-
-private fun checkLottoTicketsWinningResult(lottos: Lottos) {
-    val lastWeekWinningNumbers = InputView.inputLastWeekWinningNumbers()
-    val bonusNumber = InputView.inputBonusNumber()
+    val lastWeekWinningNumbers = inputView.inputLastWeekWinningNumbers()
 
     val lottoResult = LottoStore.checkLottoTicketsWinningResult(
         userLottos = lottos,
         winningLotto = WinningLotto(
-            winningLotto = lastWeekWinningNumbers,
-            bonusNumber = bonusNumber
+            winningLotto = lastWeekWinningNumbers
         )
     )
 
-    OutputView.displayLottoResultByDto(lottoResultDto = lottoResult.calculateResultAndReturnDto())
+    outputView.displayLottoResultByDto(lottoResultDto = lottoResult.calculateResultAndReturnDto())
 }

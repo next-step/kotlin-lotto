@@ -1,11 +1,10 @@
 package camp.nextstep.edu.step.step2.domain.store
 
 import camp.nextstep.edu.step.step2.domain.amount.BuyAmount
+import camp.nextstep.edu.step.step2.domain.lotto.Number
 import camp.nextstep.edu.step.step2.domain.lotto.Lotto
 import camp.nextstep.edu.step.step2.domain.lotto.Lottos
 import camp.nextstep.edu.step.step2.domain.lotto.WinningLotto
-import camp.nextstep.edu.step.step2.domain.number.BonusNumber
-import camp.nextstep.edu.step.step2.domain.number.Number
 import camp.nextstep.edu.step.step2.domain.result.LottoMatch
 import camp.nextstep.edu.step.step2.domain.result.LottoResult
 import io.kotest.core.spec.style.BehaviorSpec
@@ -55,27 +54,20 @@ class LottoStoreTest : BehaviorSpec({
             )
         )
 
-        val bonusNumber = BonusNumber(number = Number(number = 7))
-
         val winningLotto = WinningLotto(
-            winningLotto = lastWeekWinningLottoLotto,
-            bonusNumber = bonusNumber
+            winningLotto = lastWeekWinningLottoLotto
         )
 
         When("로또 번호를 검증하면") {
             val lottoResult =
-                LottoStore.checkLottoTicketsWinningResult(
-                    userLottos = userLottos,
-                    winningLotto = winningLotto
-                )
+                LottoStore.checkLottoTicketsWinningResult(userLottos = userLottos, winningLotto = winningLotto)
 
             Then("로또 결과를 반환한다.") {
                 lottoResult shouldBe LottoResult(
                     lottoTotalPrice = 1000,
                     lottoResults = listOf(
                         LottoMatch.of(
-                            matchCount = 6,
-                            bonusMatch = 0
+                            matchCount = 6
                         )
                     )
                 )
@@ -87,8 +79,7 @@ class LottoStoreTest : BehaviorSpec({
         val lottoTicketAmount = LottoTicketAmount(lottoTicketAmount = 10)
 
         When("로또 발급을 시도하면") {
-            val lottoTickets =
-                LottoStore.createNumbersByLottoTicketAmount(ticketAmount = lottoTicketAmount)
+            val lottoTickets = LottoStore.createNumbersByLottoTicketAmount(ticketAmount = lottoTicketAmount)
 
             Then("구매한 수량만큼의 로또가 발급된다.") {
                 lottoTickets.lottos.size shouldBe 10
@@ -123,26 +114,19 @@ class LottoStoreTest : BehaviorSpec({
             )
         )
 
-        val bonusNumber = BonusNumber(number = Number(number = 7))
-
         val winningLotto = WinningLotto(
-            winningLotto = lastWeekWinningLottoLotto,
-            bonusNumber = bonusNumber
+            winningLotto = lastWeekWinningLottoLotto
         )
 
         When("당첨 결과를 확인하면") {
-            val lottoResult = LottoStore.checkLottoTicketsWinningResult(
-                userLottos = userLottos,
-                winningLotto = winningLotto
-            )
+            val lottoResult = LottoStore.checkLottoTicketsWinningResult(userLottos = userLottos, winningLotto = winningLotto)
 
             Then("당첨 결과를 반환한다.") {
                 lottoResult shouldBe LottoResult(
                     lottoTotalPrice = 1000,
                     lottoResults = listOf(
                         LottoMatch.of(
-                            matchCount = 6,
-                            bonusMatch = 0
+                            matchCount = 6
                         )
                     )
                 )

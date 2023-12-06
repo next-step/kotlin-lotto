@@ -1,4 +1,4 @@
-package camp.nextstep.edu.step.step2.domain.number
+package camp.nextstep.edu.step.step2.domain.lotto
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
