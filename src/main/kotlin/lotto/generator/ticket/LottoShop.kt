@@ -8,5 +8,5 @@ interface LottoShop {
 }
 
 interface TicketGenerator {
-    fun provide(ticketCount: Int): LottoTickets
+    fun create(ticketCount: Int): LottoTickets
 }
