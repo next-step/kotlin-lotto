@@ -11,5 +11,9 @@ class MockInputView(
 
     override fun getWinningNumber(): WinningNumber = winningNumber
 
-    override fun printPurchasedLotto(lottoTickets: LottoTickets) = Unit
+    override fun printPurchasedLotto(autoLottoTickets: LottoTickets, manualLottoTickets: LottoTickets) = Unit
+
+    override fun getManualLottoCount(): Int = 0
+
+    override fun printManualLottoInputString() = Unit
 }
