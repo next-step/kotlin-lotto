@@ -1,10 +1,10 @@
-package lotto.provider.ticket
+package lotto.generator.ticket
 
 import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
 
-object ManualTicketProvideStrategy : TicketProvideStrategy {
+object ManualTicketGenerator : TicketGenerator {
     override fun provide(ticketCount: Int): LottoTickets {
         val lottoTicketList = mutableListOf<LottoTicket>()
         repeat(ticketCount) {

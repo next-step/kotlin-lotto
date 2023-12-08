@@ -5,8 +5,8 @@ import lotto.domain.LottoResult
 import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
 import lotto.domain.RankResult
-import lotto.provider.ticket.ActualLottoShop
-import lotto.provider.ticket.LottoShop
+import lotto.generator.ticket.ActualLottoShop
+import lotto.generator.ticket.LottoShop
 import lotto.view.InputView
 import lotto.view.ResultView
 import lotto.view.UserInputView
@@ -21,7 +21,7 @@ class LottoSimulator(
             ticketPrice = LottoTicket.PRICE,
         )
 
-        val lottoTickets = createLottoTickets(lottoShop, purchaseOrder.ticketCount)
+        val lottoTickets = generateLottoTickets(lottoShop, purchaseOrder.ticketCount)
 
         val winningNumber = inputView.getWinningNumber()
 
@@ -43,7 +43,7 @@ class LottoSimulator(
         resultView.printResult(result)
     }
 
-    private fun createLottoTickets(lottoShop: LottoShop, ticketCount: Int): LottoTickets {
+    private fun generateLottoTickets(lottoShop: LottoShop, ticketCount: Int): LottoTickets {
         val manualLottoCount = inputView.getManualLottoCount()
 
         val manualTickets = if (manualLottoCount != 0) {
