@@ -2,7 +2,6 @@ package camp.nextstep.edu.step.step2.view
 
 import camp.nextstep.edu.step.step2.domain.amount.BuyAmount
 import camp.nextstep.edu.step.step2.domain.lotto.Lotto
-import camp.nextstep.edu.step.step2.domain.number.BonusNumber
 import camp.nextstep.edu.step.step2.domain.number.Number
 
 object InputView {
@@ -17,9 +16,9 @@ object InputView {
         return Lotto.ofInputValues(numbers = readLine()!!)
     }
 
-    fun inputBonusNumber(): BonusNumber {
+    fun inputBonusNumber(): Number {
         println("보너스 볼을 입력해 주세요.")
-        return BonusNumber(number = Number(number = readLine()!!.toInt()))
+        return Number(number = readLine()!!.toInt())
     }
 
 }

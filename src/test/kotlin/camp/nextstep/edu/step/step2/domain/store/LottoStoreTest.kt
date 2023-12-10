@@ -4,7 +4,6 @@ import camp.nextstep.edu.step.step2.domain.amount.BuyAmount
 import camp.nextstep.edu.step.step2.domain.lotto.Lotto
 import camp.nextstep.edu.step.step2.domain.lotto.Lottos
 import camp.nextstep.edu.step.step2.domain.lotto.WinningLotto
-import camp.nextstep.edu.step.step2.domain.number.BonusNumber
 import camp.nextstep.edu.step.step2.domain.number.Number
 import camp.nextstep.edu.step.step2.domain.result.LottoMatch
 import camp.nextstep.edu.step.step2.domain.result.LottoResult
@@ -55,7 +54,7 @@ class LottoStoreTest : BehaviorSpec({
             )
         )
 
-        val bonusNumber = BonusNumber(number = Number(number = 7))
+        val bonusNumber = Number(number = 7)
 
         val winningLotto = WinningLotto(
             winningLotto = lastWeekWinningLottoLotto,
@@ -123,7 +122,7 @@ class LottoStoreTest : BehaviorSpec({
             )
         )
 
-        val bonusNumber = BonusNumber(number = Number(number = 7))
+        val bonusNumber = Number(number = 7)
 
         val winningLotto = WinningLotto(
             winningLotto = lastWeekWinningLottoLotto,
