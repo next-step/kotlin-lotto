@@ -4,7 +4,6 @@ import camp.nextstep.edu.step.step2.domain.amount.BuyAmount
 import camp.nextstep.edu.step.step2.domain.lotto.Lotto
 import camp.nextstep.edu.step.step2.domain.lotto.Lottos
 import camp.nextstep.edu.step.step2.domain.lotto.WinningLotto
-import camp.nextstep.edu.step.step2.domain.result.LottoMatch
 import camp.nextstep.edu.step.step2.domain.result.LottoResult
 import camp.nextstep.edu.step.step2.generator.NumberGenerator
 
@@ -53,10 +52,7 @@ object LottoStore {
             ticketPrice = LOTTO_TICKET_PRICE
         )
 
-        val matchResult = lottoWinningResults(
-            userlottos = userLottos,
-            winningLotto = winningLotto
-        )
+        val matchResult = userLottos.checkLottoNumbersByWinningLotto(winningLotto = winningLotto)
 
         return LottoResult(totalPrice, matchResult)
     }
@@ -66,24 +62,6 @@ object LottoStore {
      */
     private fun getTotalPriceByLottoAmountAndTicketPrice(lottoSize: Int, ticketPrice: Long): Int {
         return lottoSize * ticketPrice.toInt()
-    }
-
-    /**
-     * @description : 로또의 결과를 확인합니다. ( 보통 로또 판매처에 내가 구매한 로또들을 넣고 확인하는 방식을 생각했다. )
-     */
-    private fun lottoWinningResults(
-        userlottos: Lottos,
-        winningLotto: WinningLotto
-    ): List<LottoMatch> {
-        val lottoMatchResults = mutableListOf<LottoMatch>()
-
-        for (lotto in userlottos.lottos) {
-            val matchNumbers = lotto.countMatch(winningLotto.winningLotto)
-            val matchBonus = lotto.countMatchBonus(winningLotto.bonusNumber)
-            lottoMatchResults.add(LottoMatch.of(matchNumbers, matchBonus))
-        }
-
-        return lottoMatchResults
     }
 
 }
