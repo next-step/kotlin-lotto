@@ -1,5 +1,6 @@
 package lotto.vo
 
+import lotto.vo.LottoNumber.Companion.LOTTO_NUMBER_DELIMITER
 import lotto.winningpoint.WinningRank
 
 class WinningLotto(input: String, inputBonus: String = "") {
@@ -7,7 +8,7 @@ class WinningLotto(input: String, inputBonus: String = "") {
     val bonusNumber: LottoNumber
 
     init {
-        numbers = LottoNumber.of(input.split(","))
+        numbers = LottoNumber.of(input.split(LOTTO_NUMBER_DELIMITER))
         bonusNumber = LottoNumber.of(inputBonus)
         require(numbers.isNotEmpty()) { "당첨 번호는 비어있을 수 없습니다." }
         require(numbers.size == 6) { "당첨 번호는 6개여야 합니다." }
