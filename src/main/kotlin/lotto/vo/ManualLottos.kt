@@ -1,5 +1,7 @@
 package lotto.vo
 
+import lotto.vo.LottoMachine.Companion.LOTTO_PRICE_PER_ONE
+
 class ManualLottos(price: Long, private val buyCount: Long) {
     val manualLotto: List<ManualLotto> = createManualLottoList(price)
 
@@ -12,7 +14,6 @@ class ManualLottos(price: Long, private val buyCount: Long) {
     }
 
     companion object {
-        private const val LOTTO_PRICE_PER_ONE = 1000L
         private const val LOTTO_COUNT_START = 1L
     }
 }

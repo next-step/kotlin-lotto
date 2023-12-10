@@ -26,6 +26,6 @@ class LottoMachine(val buyPrice: Long = 0L) {
     }
 
     companion object {
-        private const val LOTTO_PRICE_PER_ONE = 1000L
+        const val LOTTO_PRICE_PER_ONE = 1000L
     }
 }
