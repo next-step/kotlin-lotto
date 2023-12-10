@@ -31,7 +31,7 @@ object ResultView {
         return autoLotto
     }
 
-    fun printWinningPoints(lottos: Lottos, winningLotto: WinningLotto) {
+    fun printWinningPoints(budget: Long, lottos: Lottos, winningLotto: WinningLotto) {
         val statistics = WinningStatistics.calculateStatistics(lottos, winningLotto)
 
         println("당첨 통계")
@@ -42,6 +42,6 @@ object ResultView {
             }
         }
         val totalWinningPrice = winningLotto.calculateTotalWinningPrice(lottos = lottos)
-        println("총 수익률은 ${lottos.getProfitRate(totalWinningPrice)}입니다.")
+        println("총 수익률은 ${WinningStatistics.getProfitRate(budget, totalWinningPrice)}입니다.")
     }
 }

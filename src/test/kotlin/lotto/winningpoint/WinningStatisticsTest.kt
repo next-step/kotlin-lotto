@@ -18,7 +18,7 @@ class WinningStatisticsTest : FunSpec({
         val nothing = (11..16).map { LottoNumber(it) }
         val autoLotto = AutoLotto(buyPrice, listOf(Lotto(first), Lotto(nothing)))
         val autoLottos = autoLotto.lottos
-        val lottos = Lottos(buyPrice, autoLottos)
+        val lottos = Lottos(autoLottos)
 
         val winningLotto = WinningLotto("1,2,3,4,5,6", "7")
 
@@ -38,7 +38,7 @@ class WinningStatisticsTest : FunSpec({
         val autoLotto = AutoLotto(2000L, listOf(Lotto(first), Lotto(nothing)))
         val autoLottos = autoLotto.lottos
         val manualLotto: ManualLotto = ManualLotto().addLottoNumbers(nothing)
-        val lottos = Lottos(3000L, autoLottos + manualLotto.lottos)
+        val lottos = Lottos(autoLottos + manualLotto.lottos)
 
         val winningLotto = WinningLotto("1,2,3,4,5,6", "7")
 

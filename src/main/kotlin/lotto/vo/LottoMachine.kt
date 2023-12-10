@@ -3,7 +3,7 @@ package lotto.vo
 class LottoMachine(val buyPrice: Long = 0L) {
 
     fun createManualLotto(inputString: List<String>): List<ManualLotto> {
-        return inputString.map { ManualLotto.initLottoNumbers(it) }
+        return inputString.map { ManualLotto().initLottoNumbers(it) }
     }
 
     fun calculateAutoLottoCount(manualLottoCount: Long): Long {

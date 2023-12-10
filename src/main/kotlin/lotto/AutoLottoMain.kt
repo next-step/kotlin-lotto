@@ -8,18 +8,18 @@ import lotto.vo.WinningLotto
 fun main() {
     while (true) {
         try {
-            val price = InputView.promptForPrice()
-            val manualLottoCount = InputView.promptForManualLottoCount(price)
+            val budget = InputView.promptForPrice()
+            val manualLottoCount = InputView.promptForManualLottoCount(budget)
             val manualLottos = InputView.promptForManualLotto(manualLottoCount)
-            val autoLottoBuyPrice = ResultView.promptForBuyCount(manualLottoCount, price)
+            val autoLottoBuyPrice = ResultView.promptForBuyCount(manualLottoCount, budget)
             ResultView.promptForManualLotto(manualLottos)
             val autoLotto = ResultView.promptForAutoLotto(autoLottoBuyPrice)
-            val lottos = Lottos(price, manualLottos.lottos + autoLotto.lottos)
+            val lottos = Lottos(manualLottos.lottos + autoLotto.lottos)
 
             val lastWeekWinningNumbers = InputView.promptForLastWeekWinningNumbers()
             val lastWeekBonusNumber = InputView.promptForBonusNumbers()
             val winningLotto = WinningLotto(lastWeekWinningNumbers, lastWeekBonusNumber)
-            ResultView.printWinningPoints(lottos, winningLotto)
+            ResultView.printWinningPoints(budget, lottos, winningLotto)
             break
         } catch (e: Exception) {
             println(e.message)
