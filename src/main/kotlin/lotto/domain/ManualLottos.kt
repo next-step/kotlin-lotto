@@ -1,6 +1,6 @@
-package lotto.vo
+package lotto.domain
 
-import lotto.vo.LottoMachine.Companion.LOTTO_PRICE_PER_ONE
+import lotto.domain.LottoMachine.Companion.LOTTO_PRICE_PER_ONE
 
 class ManualLottos(price: Long, private val buyCount: Long) {
     internal val manualLotto: List<ManualLotto> = createManualLottoList(price)

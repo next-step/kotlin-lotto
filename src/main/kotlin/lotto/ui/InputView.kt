@@ -1,7 +1,7 @@
 package lotto.ui
 
-import lotto.vo.LottoMachine
-import lotto.vo.ManualLotto
+import lotto.domain.LottoMachine
+import lotto.domain.ManualLotto
 
 object InputView {
     fun promptForPrice(): Long {

@@ -1,6 +1,6 @@
-package lotto.vo
+package lotto.domain
 
-import lotto.vo.LottoNumber.Companion.LOTTO_NUMBER_DELIMITER
+import lotto.domain.LottoNumber.Companion.LOTTO_NUMBER_DELIMITER
 
 class ManualLotto {
     val lottos: MutableList<Lotto> = mutableListOf()

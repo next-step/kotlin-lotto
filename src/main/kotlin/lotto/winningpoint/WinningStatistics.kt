@@ -1,7 +1,7 @@
 package lotto.winningpoint
 
-import lotto.vo.Lottos
-import lotto.vo.WinningLotto
+import lotto.domain.Lottos
+import lotto.domain.WinningLotto
 import kotlin.math.floor
 
 object WinningStatistics {

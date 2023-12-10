@@ -3,12 +3,12 @@ package lotto.winningpoint
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.maps.shouldHaveSize
 import io.kotest.matchers.shouldBe
-import lotto.vo.AutoLotto
-import lotto.vo.Lotto
-import lotto.vo.LottoNumber
-import lotto.vo.Lottos
-import lotto.vo.ManualLotto
-import lotto.vo.WinningLotto
+import lotto.domain.AutoLotto
+import lotto.domain.Lotto
+import lotto.domain.LottoNumber
+import lotto.domain.Lottos
+import lotto.domain.ManualLotto
+import lotto.domain.WinningLotto
 
 class WinningStatisticsTest : FunSpec({
     test("전달된 로또와 당첨번호를 비교하여 당첨 통계를 계산한다(자동만)") {

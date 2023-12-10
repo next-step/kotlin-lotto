@@ -1,4 +1,4 @@
-package lotto.vo
+package lotto.domain
 
 class LottoMachine(val buyPrice: Long = 0L) {
 

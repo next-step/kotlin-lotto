@@ -1,6 +1,6 @@
-package lotto.vo
+package lotto.domain
 
-import lotto.vo.LottoNumber.Companion.LOTTO_NUMBER_DELIMITER
+import lotto.domain.LottoNumber.Companion.LOTTO_NUMBER_DELIMITER
 import lotto.winningpoint.WinningRank
 
 class WinningLotto(input: String, inputBonus: String = "") {

@@ -1,10 +1,10 @@
 package lotto.ui
 
-import lotto.vo.AutoLotto
-import lotto.vo.LottoMachine
-import lotto.vo.Lottos
-import lotto.vo.ManualLotto
-import lotto.vo.WinningLotto
+import lotto.domain.AutoLotto
+import lotto.domain.LottoMachine
+import lotto.domain.Lottos
+import lotto.domain.ManualLotto
+import lotto.domain.WinningLotto
 import lotto.winningpoint.WinningRank
 import lotto.winningpoint.WinningStatistics
 

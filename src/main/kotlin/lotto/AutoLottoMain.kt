@@ -2,8 +2,8 @@ package lotto
 
 import lotto.ui.InputView
 import lotto.ui.ResultView
-import lotto.vo.Lottos
-import lotto.vo.WinningLotto
+import lotto.domain.Lottos
+import lotto.domain.WinningLotto
 
 fun main() {
     while (true) {
