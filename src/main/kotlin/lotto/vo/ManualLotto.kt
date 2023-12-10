@@ -1,7 +1,8 @@
 package lotto.vo
 
-class ManualLotto() {
+object ManualLotto {
     val lottos: MutableList<Lotto> = mutableListOf()
+    private const val LOTTO_NUMBER_COUNT = 6
 
     fun initLottoNumbers(input: String): ManualLotto {
         val numbers = input.split(",").map { it.trim() }
@@ -13,9 +14,5 @@ class ManualLotto() {
     fun addLottoNumbers(numbers: List<LottoNumber>): ManualLotto {
         lottos.add(Lotto(numbers))
         return this
-    }
-
-    companion object {
-        private const val LOTTO_NUMBER_COUNT = 6
     }
 }

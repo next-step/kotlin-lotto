@@ -3,22 +3,17 @@ package lotto.vo
 class LottoMachine(val buyPrice: Long = 0L) {
 
     fun createManualLotto(inputString: List<String>): List<ManualLotto> {
-        val manualLottoList = mutableListOf<ManualLotto>()
-        for (input in inputString) {
-            require(input.split(",").size == 6) { "로또 번호는 6개여야 합니다." }
-            val lottoNumber = LottoNumber.of(input.split(","))
-            val manualLotto = ManualLotto().addLottoNumbers(lottoNumber)
-            manualLottoList.add(manualLotto)
-        }
-        return manualLottoList
+        return inputString.map { ManualLotto.initLottoNumbers(it) }
     }
 
     fun calculateAutoLottoCount(manualLottoCount: Long): Long {
-        return (buyPrice - (manualLottoCount * LOTTO_PRICE_PER_ONE)) / LOTTO_PRICE_PER_ONE
+        return calculateAutoLottoBuyPrice(manualLottoCount) / LOTTO_PRICE_PER_ONE
     }
 
     fun calculateAutoLottoBuyPrice(manualLottoCount: Long): Long {
-        return (buyPrice - (manualLottoCount * LOTTO_PRICE_PER_ONE))
+        val autoLottoBuyPrice = buyPrice - (manualLottoCount * LOTTO_PRICE_PER_ONE)
+        require(autoLottoBuyPrice >= 0) { "로또 구매 금액이 부족합니다." }
+        return autoLottoBuyPrice
     }
 
     fun createAutoLotto(count: Long): List<AutoLotto> {

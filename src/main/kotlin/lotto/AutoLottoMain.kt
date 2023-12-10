@@ -9,7 +9,7 @@ fun main() {
     while (true) {
         try {
             val price = InputView.promptForPrice()
-            val manualLottoCount = InputView.promptForManualLottoCount()
+            val manualLottoCount = InputView.promptForManualLottoCount(price)
             val manualLottos = InputView.promptForManualLotto(manualLottoCount)
             val autoLottoBuyPrice = ResultView.promptForBuyCount(manualLottoCount, price)
             ResultView.promptForManualLotto(manualLottos)
