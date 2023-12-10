@@ -1,8 +1,6 @@
-package autolotto.vo
+package lotto.domain
 
-import kotlin.math.floor
-
-class AutoLotto(private val price: Long, originLottos: List<Lotto> = listOf()) {
+class AutoLotto(price: Long, originLottos: List<Lotto> = listOf()) {
     val count: Int = initCount(price)
     val lottos: List<Lotto> = originLottos.ifEmpty { createLottoList() }
 
@@ -15,11 +13,6 @@ class AutoLotto(private val price: Long, originLottos: List<Lotto> = listOf()) {
 
     private fun createLottoList(): List<Lotto> {
         return (LOTTO_COUNT_START..count).map { Lotto() }
-    }
-
-    fun getProfitRate(winningPrice: Long): Double {
-        val profitRate = (winningPrice / this.price).toDouble()
-        return floor(profitRate * 10) / 100.0
     }
 
     companion object {

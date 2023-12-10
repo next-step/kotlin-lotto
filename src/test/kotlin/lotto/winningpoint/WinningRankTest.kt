@@ -1,4 +1,4 @@
-package autolotto.winningpoint
+package lotto.winningpoint
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.data.forAll

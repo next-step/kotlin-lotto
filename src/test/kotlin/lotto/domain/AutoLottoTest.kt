@@ -1,8 +1,9 @@
-package autolotto.vo
+package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import lotto.winningpoint.WinningStatistics
 
 class AutoLottoTest : FunSpec({
     test("로또 구입금액을 입력받으면 로또 수량이 결정된다") {
@@ -37,13 +38,12 @@ class AutoLottoTest : FunSpec({
         // Given
         val input = 1000L
         val lottoNumber = (1..6).map { LottoNumber.of(it) }
-        val lotto = AutoLotto(input, listOf())
-        val lottos = listOf(Lotto(lottoNumber))
+        val lottos = Lottos(listOf(Lotto(lottoNumber)))
         val winningLotto = WinningLotto("1, 2, 3, 4, 5, 6", "7")
 
         // When
         val winningPrice = winningLotto.calculateTotalWinningPrice(lottos)
-        val profitRate = lotto.getProfitRate(winningPrice)
+        val profitRate = WinningStatistics.getProfitRate(input, winningPrice)
 
         // Then
         profitRate shouldBe 200000.0

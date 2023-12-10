@@ -1,4 +1,4 @@
-package autolotto.winningpoint
+package lotto.winningpoint
 
 enum class WinningRank(val matchingCount: Int, val winningPrice: Long, val isBonusNumberNeeded: Boolean = false) {
     FIRST(6, 2_000_000_000),
