@@ -31,7 +31,7 @@ class LottoMachineTest : FunSpec({
         // Given
         val input = 3000L
         val lottoMachine = LottoMachine(input)
-        val manualLottoCount = 1L
+        val manualLottoCount = 1
 
         // When
         val autoLottoCount = lottoMachine.calculateAutoLottoCount(manualLottoCount)
@@ -42,7 +42,7 @@ class LottoMachineTest : FunSpec({
 
     test("자동 로또를 발급한다") {
         // Given
-        val autoLottoCount = 2L
+        val autoLottoCount = 2
         val lottoMachine = LottoMachine(3000L)
 
         // When
@@ -55,7 +55,7 @@ class LottoMachineTest : FunSpec({
     test("수동으로 구매하고 난 후 나머지금액은 자동으로 발급한다") {
         // Given
         val buyPrice = 5000L
-        val manualLottoCount = 3L
+        val manualLottoCount = 3
         val manualLottoNumber = listOf("1,2,3,4,5,6", "1,2,3,4,5,6", "1,2,3,4,5,6")
         val lottoMachine = LottoMachine(buyPrice)
 

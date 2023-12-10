@@ -19,14 +19,14 @@ object InputView {
         return readln()
     }
 
-    fun promptForManualLottoCount(price: Long): Long {
+    fun promptForManualLottoCount(price: Long): Int {
         println("수동으로 구매할 로또 수를 입력해 주세요.")
-        val manualLottoCount = readln().toLongOrNull() ?: throw IllegalArgumentException("로또 수 입력이 올바르지 않습니다.")
+        val manualLottoCount = readln().toIntOrNull() ?: throw IllegalArgumentException("로또 수 입력이 올바르지 않습니다.")
         LottoMachine(price).calculateAutoLottoCount(manualLottoCount)
         return manualLottoCount
     }
 
-    fun promptForManualLotto(count: Long): ManualLotto {
+    fun promptForManualLotto(count: Int): ManualLotto {
         println("수동으로 구매할 번호를 입력해 주세요.")
         val manualLottos = ManualLotto()
         for (i in 1..count) {

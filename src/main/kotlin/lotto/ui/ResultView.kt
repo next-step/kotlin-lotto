@@ -10,7 +10,7 @@ import lotto.winningpoint.WinningStatistics
 
 object ResultView {
 
-    fun promptForBuyCount(manualLottoCount: Long, price: Long): Long {
+    fun promptForBuyCount(manualLottoCount: Int, price: Long): Long {
         val autoLottoCount = LottoMachine(price).calculateAutoLottoCount(manualLottoCount)
         val autoLottoBuyPrice = LottoMachine(price).calculateAutoLottoBuyPrice(manualLottoCount)
         println("수동으로 ${manualLottoCount}장, 자동으로 ${autoLottoCount}개를 구매했습니다.")
