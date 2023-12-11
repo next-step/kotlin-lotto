@@ -8,5 +8,9 @@ interface InputView {
 
     fun getWinningNumber(): WinningNumber
 
-    fun printPurchasedLotto(lottoTickets: LottoTickets)
+    fun printPurchasedLotto(autoLottoTickets: LottoTickets, manualLottoTickets: LottoTickets)
+
+    fun getManualLottoCount(): Int
+
+    fun getManualNumbers(manualLottoCount: Int): List<List<Int>>
 }

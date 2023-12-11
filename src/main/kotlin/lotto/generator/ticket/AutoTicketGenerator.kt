@@ -1,11 +1,14 @@
-package lotto.domain
+package lotto.generator.ticket
 
-import lotto.provider.ticket.TicketProvideStrategy
+import lotto.domain.LottoNumber
+import lotto.domain.LottoTicket
+import lotto.domain.LottoTickets
 
-object AutoTicketProvideStrategy : TicketProvideStrategy {
+object AutoTicketGenerator {
     private val preGeneratedLottoNumbers = (LottoNumber.validNumberRange)
         .map { LottoNumber(it) }
-    override fun provide(ticketCount: Int): LottoTickets {
+
+    fun create(ticketCount: Int): LottoTickets {
         val tickets = List(ticketCount) {
             LottoTicket(
                 preGeneratedLottoNumbers

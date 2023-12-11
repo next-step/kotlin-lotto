@@ -24,14 +24,35 @@ class UserInputView : InputView {
         )
     }
 
-    override fun printPurchasedLotto(lottoTickets: LottoTickets) {
-        lottoTickets.lottoTicketList.forEach { ticket ->
+    override fun printPurchasedLotto(autoLottoTickets: LottoTickets, manualLottoTickets: LottoTickets) {
+        println("수동으로 ${manualLottoTickets.lottoTicketList.size}, 자동으로 ${autoLottoTickets.lottoTicketList.size} 개를 구매했습니다.")
+        manualLottoTickets.print()
+        autoLottoTickets.print()
+    }
+
+    override fun getManualLottoCount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        return readln().trim().toInt()
+    }
+
+    override fun getManualNumbers(manualLottoCount: Int): List<List<Int>> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        val lottoTicketNumbers = mutableListOf<List<Int>>()
+
+        repeat(manualLottoCount) {
+            val lottoTicket = readln().trim().split(",").map { it.toInt() }
+            lottoTicketNumbers.add(lottoTicket)
+        }
+        return lottoTicketNumbers
+    }
+
+    private fun LottoTickets.print() {
+        lottoTicketList.forEach { ticket ->
             println(
                 ticket.lottoNumberList.map { number ->
                     number.value
                 }
             )
         }
-        println("${lottoTickets.lottoTicketList.size} 개를 구매했습니다.")
     }
 }
