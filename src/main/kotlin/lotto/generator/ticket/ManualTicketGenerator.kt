@@ -4,13 +4,12 @@ import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
 
-object ManualTicketGenerator : TicketGenerator {
-    override fun create(ticketCount: Int): LottoTickets {
-        val lottoTicketList = mutableListOf<LottoTicket>()
-        repeat(ticketCount) {
-            val lottoTicket = LottoTicket(readln().trim().split(",").map { it.toInt() }.map { LottoNumber(it) })
-            lottoTicketList.add(lottoTicket)
-        }
-        return LottoTickets(lottoTicketList)
+object ManualTicketGenerator {
+    fun create(manualNumbersList: List<List<Int>>): LottoTickets {
+        return LottoTickets(
+            manualNumbersList.map { list ->
+                LottoTicket(list.map { LottoNumber(it) })
+            }
+        )
     }
 }

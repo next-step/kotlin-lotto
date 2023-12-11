@@ -35,8 +35,15 @@ class UserInputView : InputView {
         return readln().trim().toInt()
     }
 
-    override fun printManualLottoInputString() {
+    override fun getManualNumbers(manualLottoCount: Int): List<List<Int>> {
         println("수동으로 구매할 번호를 입력해 주세요.")
+        val lottoTicketNumbers = mutableListOf<List<Int>>()
+
+        repeat(manualLottoCount) {
+            val lottoTicket = readln().trim().split(",").map { it.toInt() }
+            lottoTicketNumbers.add(lottoTicket)
+        }
+        return lottoTicketNumbers
     }
 
     private fun LottoTickets.print() {

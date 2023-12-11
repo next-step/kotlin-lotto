@@ -4,11 +4,10 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
-import lotto.domain.LottoTickets
 import lotto.domain.Rank
 import lotto.domain.WinningNumber
-import lotto.generator.ticket.ExactTicketGenerator
-import lotto.generator.ticket.MockLottoShop
+import lotto.generator.MockLottoShop
+import lotto.generator.ticket.ManualTicketGenerator
 import lotto.view.MockInputView
 import lotto.view.ResultView
 
@@ -22,17 +21,12 @@ class LottoAutoTest : StringSpec({
                     LottoTicket(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }),
                     bonusNumber = LottoNumber(19)
                 ),
+                manualNumbersList = listOf(listOf(1, 2, 3, 4, 5, 6))
             ),
             resultView = ResultView(),
         ).simulate(
             lottoShop = MockLottoShop(
-                ExactTicketGenerator(
-                    LottoTickets(
-                        listOf(
-                            LottoTicket(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
-                        )
-                    )
-                ),
+                manualTicketGenerator = ManualTicketGenerator
             )
         ).totalPrize shouldBe Rank.FirstPlace.prize
     }
@@ -45,17 +39,12 @@ class LottoAutoTest : StringSpec({
                     LottoTicket(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }),
                     bonusNumber = LottoNumber(19)
                 ),
+                manualNumbersList = listOf(listOf(1, 2, 3, 4, 5, 6))
             ),
             resultView = ResultView(),
         ).simulate(
             lottoShop = MockLottoShop(
-                ExactTicketGenerator(
-                    LottoTickets(
-                        listOf(
-                            LottoTicket(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
-                        )
-                    )
-                )
+                manualTicketGenerator = ManualTicketGenerator
             ),
         ).profitRate.shouldBe(2_000_000)
     }
@@ -68,17 +57,12 @@ class LottoAutoTest : StringSpec({
                     LottoTicket(listOf(1, 2, 3, 4, 5, 9).map { LottoNumber(it) }),
                     bonusNumber = LottoNumber(19)
                 ),
+                manualNumbersList = listOf(listOf(1, 2, 3, 4, 5, 19))
             ),
             resultView = ResultView(),
         ).simulate(
             lottoShop = MockLottoShop(
-                ExactTicketGenerator(
-                    LottoTickets(
-                        listOf(
-                            LottoTicket(listOf(1, 2, 3, 4, 5, 19).map { LottoNumber(it) })
-                        )
-                    )
-                )
+                manualTicketGenerator = ManualTicketGenerator
             ),
         ).totalPrize shouldBe Rank.SecondPlace.prize
     }

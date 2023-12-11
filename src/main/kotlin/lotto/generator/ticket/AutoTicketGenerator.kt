@@ -4,10 +4,11 @@ import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
 
-object AutoTicketGenerator : TicketGenerator {
+object AutoTicketGenerator {
     private val preGeneratedLottoNumbers = (LottoNumber.validNumberRange)
         .map { LottoNumber(it) }
-    override fun create(ticketCount: Int): LottoTickets {
+
+    fun create(ticketCount: Int): LottoTickets {
         val tickets = List(ticketCount) {
             LottoTicket(
                 preGeneratedLottoNumbers

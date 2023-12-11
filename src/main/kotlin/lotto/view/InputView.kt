@@ -12,5 +12,5 @@ interface InputView {
 
     fun getManualLottoCount(): Int
 
-    fun printManualLottoInputString()
+    fun getManualNumbers(manualLottoCount: Int): List<List<Int>>
 }
