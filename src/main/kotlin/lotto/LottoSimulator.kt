@@ -6,7 +6,9 @@ import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
 import lotto.domain.RankResult
 import lotto.generator.ticket.ActualLottoShop
+import lotto.generator.ticket.AutoTicketGenerator
 import lotto.generator.ticket.LottoShop
+import lotto.generator.ticket.ManualTicketGenerator
 import lotto.view.InputView
 import lotto.view.ResultView
 import lotto.view.UserInputView
@@ -62,5 +64,10 @@ fun main() {
     LottoSimulator(
         UserInputView(),
         ResultView()
-    ).simulate(lottoShop = ActualLottoShop)
+    ).simulate(
+        lottoShop = ActualLottoShop(
+            autoTicketGenerator = AutoTicketGenerator,
+            manualTicketGenerator = ManualTicketGenerator,
+        )
+    )
 }
