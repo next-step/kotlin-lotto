@@ -17,7 +17,7 @@ class LottoAutoTest : StringSpec({
     "winning statistics should calculate correct profit" {
         LottoSimulator(
             inputView = MockInputView(
-                budget = 5000,
+                budget = 1000,
                 winningNumber = WinningNumber(
                     LottoTicket(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }),
                     bonusNumber = LottoNumber(19)
@@ -40,7 +40,7 @@ class LottoAutoTest : StringSpec({
     "winning statistics should show correct ROI" {
         LottoSimulator(
             inputView = MockInputView(
-                budget = 5000,
+                budget = 1000,
                 winningNumber = WinningNumber(
                     LottoTicket(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }),
                     bonusNumber = LottoNumber(19)
@@ -57,13 +57,13 @@ class LottoAutoTest : StringSpec({
                     )
                 )
             ),
-        ).profitRate.shouldBe(400_000)
+        ).profitRate.shouldBe(2_000_000)
     }
 
     "second place result should be correct" {
         LottoSimulator(
             inputView = MockInputView(
-                budget = 5000,
+                budget = 1000,
                 winningNumber = WinningNumber(
                     LottoTicket(listOf(1, 2, 3, 4, 5, 9).map { LottoNumber(it) }),
                     bonusNumber = LottoNumber(19)
