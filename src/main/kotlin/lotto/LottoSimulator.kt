@@ -52,7 +52,7 @@ class LottoSimulator(
             lottoShop.provideManualTickets(inputView.getManualNumbers(manualLottoCount))
         } else LottoTickets(listOf())
 
-        val autoTickets = lottoShop.provideAutoTickets(ticketCount - manualLottoCount)
+        val autoTickets = lottoShop.provideAutoTickets(ticketCount, manualLottoCount)
         inputView.printPurchasedLotto(autoLottoTickets = autoTickets, manualLottoTickets = manualTickets)
 
         return LottoTickets(manualTickets.lottoTicketList + autoTickets.lottoTicketList)

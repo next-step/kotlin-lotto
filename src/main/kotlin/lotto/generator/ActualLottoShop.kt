@@ -8,7 +8,7 @@ class ActualLottoShop(
     private val autoTicketGenerator: AutoTicketGenerator,
     private val manualTicketGenerator: ManualTicketGenerator,
 ) : LottoShop {
-    override fun provideAutoTickets(ticketCount: Int): LottoTickets = autoTicketGenerator.create(ticketCount)
+    override fun provideAutoTickets(ticketCount: Int, preGeneratedTicketCount: Int): LottoTickets = autoTicketGenerator.create(ticketCount - preGeneratedTicketCount)
     override fun provideManualTickets(manualNumbersList: List<List<Int>>): LottoTickets =
         manualTicketGenerator.create(manualNumbersList)
 }
