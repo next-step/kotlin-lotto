@@ -1,6 +1,6 @@
 package camp.nextstep.edu.step.step2.generator
 
-import camp.nextstep.edu.step.step2.domain.lotto.Number
+import camp.nextstep.edu.step.step2.domain.number.Number
 
 enum class NumberGenerator(
     val generate: (Int, Int) -> List<Int>

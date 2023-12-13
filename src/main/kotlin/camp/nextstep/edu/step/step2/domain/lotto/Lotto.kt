@@ -1,11 +1,17 @@
 package camp.nextstep.edu.step.step2.domain.lotto
 
+import camp.nextstep.edu.step.step2.domain.number.Number
+
 class Lotto(
     val numbers: List<Number>
 ) {
 
     fun countMatch(targetLotto: Lotto): Int {
         return numbers.count { targetLotto.numbers.contains(it) }
+    }
+
+    fun countMatchBonus(bonusNumber: Number): Int {
+        return numbers.count { it.number == bonusNumber.number }
     }
 
     fun getNumberElements(): List<Int> {
