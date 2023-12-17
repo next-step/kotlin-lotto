@@ -1,5 +1,6 @@
 package camp.nextstep.edu.step.step2.domain.lotto
 
+import camp.nextstep.edu.step.step2.domain.number.Number
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
@@ -8,7 +9,7 @@ import org.junit.jupiter.api.DisplayName
 @DisplayName("당첨 로또 확인 도메인은")
 class WinningLottoTest : BehaviorSpec({
 
-    Given("유저 티켓번호들과 이전 당첨 로또가 주어지고") {
+    Given("당첨 로또 티켓과 보너스 숫자가 주어지고") {
         val winningLottoRequest = Lotto(
             listOf(
                 Number(1),
@@ -20,9 +21,13 @@ class WinningLottoTest : BehaviorSpec({
             )
         )
 
+        val bonusNumber = Number(number = 7)
+        val duplicateBonusNumber = Number(number = 6)
+
         When("생성을 요청하면") {
             val winningLotto = WinningLotto(
-                winningLotto = winningLottoRequest
+                winningLotto = winningLottoRequest,
+                bonusNumber = bonusNumber
             )
 
             Then("정상적으로 생성된다.") {
@@ -34,8 +39,20 @@ class WinningLottoTest : BehaviorSpec({
                     Number(5),
                     Number(6)
                 )
+                winningLotto.bonusNumber shouldBe Number(number = 7)
             }
+        }
 
+        When("만약 당첨 로또 숫자들 중 보너스 숫자와 중복이 발생한다면") {
+            val exceptionByDuplicateBonusNumber = shouldThrow<IllegalArgumentException> {
+                WinningLotto(
+                    winningLotto = winningLottoRequest,
+                    bonusNumber = duplicateBonusNumber
+                )
+            }
+            Then("예외가 발생한다.") {
+                exceptionByDuplicateBonusNumber.message shouldBe "보너스 번호는 당첨 번호와 중복될 수 없습니다."
+            }
         }
     }
 
@@ -44,10 +61,13 @@ class WinningLottoTest : BehaviorSpec({
             listOf()
         )
 
+        val bonusNumber = Number(number = 7)
+
         When("생성 시") {
             val exceptionByEmptyLotto = shouldThrow<IllegalArgumentException> {
                 WinningLotto(
-                    winningLotto = emptyLotto
+                    winningLotto = emptyLotto,
+                    bonusNumber = bonusNumber
                 )
             }
 
@@ -58,3 +78,4 @@ class WinningLottoTest : BehaviorSpec({
     }
 
 })
+
