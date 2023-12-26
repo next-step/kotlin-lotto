@@ -1,15 +1,17 @@
 package camp.nextstep.edu.step.step2.view
 
+import camp.nextstep.edu.step.step2.dto.LottoProcessDto
 import camp.nextstep.edu.step.step2.dto.LottoResultDto
 
 object OutputView {
 
-    fun displayTicketsNumbers(ticketsAmount: Int, ticketNumbers: List<List<Int>>) {
-        println("${ticketsAmount}개를 구매했습니다.")
+    fun displayTicketsNumbers(lottoProcessDto: LottoProcessDto) {
+        println("수동으로 ${lottoProcessDto.manualTicketAmount}장, 자동으로 ${lottoProcessDto.autoTicketAmount}개를 구매했습니다.")
 
-        for (ticketNumber in ticketNumbers) {
-            println(ticketNumber)
+        for (lottoTicket in lottoProcessDto.lottoTicketList) {
+            println(lottoTicket)
         }
+
     }
 
     fun displayLottoResultByDto(lottoResultDto: LottoResultDto) {

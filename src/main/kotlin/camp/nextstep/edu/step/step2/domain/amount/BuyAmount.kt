@@ -12,8 +12,9 @@ value class BuyAmount(
 
     constructor(amount: Long) : this(BigDecimal.valueOf(amount))
 
-    fun divideByLotteryPrice(ticketPrice: Long): Int {
-        return amount.divide(BigDecimal.valueOf(ticketPrice)).toInt()
+    fun divideByLotteryPriceAndManualLottoAmount(ticketPrice: Long, manualTicketAmount: Int): Int {
+        val ticketAmount = amount.divide(BigDecimal.valueOf(ticketPrice)).toInt()
+        return ticketAmount - manualTicketAmount
     }
 
 }
