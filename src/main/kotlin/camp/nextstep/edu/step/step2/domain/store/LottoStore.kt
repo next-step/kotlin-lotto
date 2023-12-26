@@ -20,20 +20,31 @@ object LottoStore {
     /**
      * @description : 구매금액에 따른 로또 티켓 수량을 구한다.
      */
-    fun buyLottoTickets(buyAmount: BuyAmount): LottoTicketAmount {
-        val lottoTicketAmount = buyAmount.divideByLotteryPrice(ticketPrice = LOTTO_TICKET_PRICE)
+    fun buyAutoLottoTickets(buyAmount: BuyAmount, manualTicketAmount: Int): LottoTicketAmount {
+        val lottoTicketAmount = buyAmount.divideByLotteryPriceAndManualLottoAmount(
+            ticketPrice = LOTTO_TICKET_PRICE,
+            manualTicketAmount = manualTicketAmount
+        )
+
         return LottoTicketAmount(lottoTicketAmount)
     }
 
     /**
      * @description : 로또 티켓 수량에 따른 로또 번호를 생성한다.
      */
-    fun createNumbersByLottoTicketAmount(ticketAmount: LottoTicketAmount): Lottos {
+    fun createNumbersByLottoTicketAmount(
+        ticketAmount: LottoTicketAmount,
+        manualLottos: Lottos
+    ): Lottos {
         val lottoTickets = mutableListOf<Lotto>()
 
         for (i in 1..ticketAmount.lottoTicketAmount) {
-            val numbers = NumberGenerator.generate(NumberGenerator.LOTTO_RANDOM, START_NUMBER, END_NUMBER)
-            lottoTickets.add(Lotto(numbers = numbers))
+            val numbers =
+                NumberGenerator.generate(NumberGenerator.LOTTO_RANDOM, START_NUMBER, END_NUMBER)
+
+            if (!manualLottos.isContainLottoNumbers(numbers)) {
+                lottoTickets.add(Lotto(numbers = numbers))
+            }
         }
 
         return Lottos(lottos = lottoTickets)
