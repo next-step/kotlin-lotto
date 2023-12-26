@@ -1,7 +1,9 @@
 package camp.nextstep.edu.step.step2.view
 
 import camp.nextstep.edu.step.step2.domain.amount.BuyAmount
+import camp.nextstep.edu.step.step2.domain.amount.TicketAmount
 import camp.nextstep.edu.step.step2.domain.lotto.Lotto
+import camp.nextstep.edu.step.step2.domain.lotto.Lottos
 import camp.nextstep.edu.step.step2.domain.number.Number
 
 object InputView {
@@ -9,6 +11,17 @@ object InputView {
     fun getInputValueAndReturnBuyAmount(): BuyAmount {
         println("구입금액을 입력해 주세요.")
         return BuyAmount(readLine()!!.toLong())
+    }
+
+    fun inputManualLottoCount(): TicketAmount {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        return TicketAmount(amount = readLine()!!.toLong())
+    }
+
+    fun inputManalLottoNumbers(ticketAmount: Long): Lottos {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        val lottoList = (1..ticketAmount).map { Lotto.ofInputValues(numbers = readLine()!!) }
+        return Lottos(lottos = lottoList)
     }
 
     fun inputLastWeekWinningNumbers(): Lotto {
