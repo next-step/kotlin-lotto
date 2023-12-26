@@ -22,7 +22,6 @@ class Lottos(
             val matchBonus = lotto.countMatchBonus(winningLotto.bonusNumber)
             LottoMatch.of(matchNumbers, matchBonus)
         }
-    }
 
     fun getLottoElements(): List<List<Int>> {
         return lottos.stream()

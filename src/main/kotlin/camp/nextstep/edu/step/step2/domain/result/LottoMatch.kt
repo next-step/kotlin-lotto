@@ -19,5 +19,5 @@ enum class LottoMatch(
                 ?: NONE
         }
     }
-
+    
 }
