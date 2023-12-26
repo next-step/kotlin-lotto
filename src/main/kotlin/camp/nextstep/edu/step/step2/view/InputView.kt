@@ -1,7 +1,7 @@
 package camp.nextstep.edu.step.step2.view
 
 import camp.nextstep.edu.step.step2.domain.amount.BuyAmount
-import camp.nextstep.edu.step.step2.domain.amount.TicketAmount
+import camp.nextstep.edu.step.step2.domain.amount.ManualTicketAmount
 import camp.nextstep.edu.step.step2.domain.lotto.Lotto
 import camp.nextstep.edu.step.step2.domain.lotto.Lottos
 import camp.nextstep.edu.step.step2.domain.number.Number
@@ -13,9 +13,9 @@ object InputView {
         return BuyAmount(readLine()!!.toLong())
     }
 
-    fun inputManualLottoCount(): TicketAmount {
+    fun inputManualLottoCount(): ManualTicketAmount {
         println("수동으로 구매할 로또 수를 입력해 주세요.")
-        return TicketAmount(amount = readLine()!!.toLong())
+        return ManualTicketAmount(amount = readLine()!!.toLong())
     }
 
     fun inputManalLottoNumbers(ticketAmount: Long): Lottos {
