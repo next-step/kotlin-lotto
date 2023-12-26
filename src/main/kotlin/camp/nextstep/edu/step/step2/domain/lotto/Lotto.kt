@@ -10,6 +10,10 @@ class Lotto(
         return numbers.count { targetLotto.numbers.contains(it) }
     }
 
+    fun isDuplicateNumber(anotherNumber: Number): Boolean {
+        return numbers.contains(anotherNumber)
+    }
+
     fun countMatchBonus(bonusNumber: Number): Int {
         return numbers.count { it.number == bonusNumber.number }
     }
