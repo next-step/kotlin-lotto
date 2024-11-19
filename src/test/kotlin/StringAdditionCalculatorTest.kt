@@ -13,4 +13,8 @@ class StringAdditionCalculatorTest : StringSpec ({
         StringAdditionCalculator("").add() shouldBe 0
         StringAdditionCalculator(null).add() shouldBe 0
     }
+
+    "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다." {
+        StringAdditionCalculator("1").add() shouldBe 1
+    }
 })
