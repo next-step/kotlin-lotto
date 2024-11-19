@@ -6,12 +6,30 @@ class StringCalculator {
             return 0
         }
 
-        if (input.toIntOrNull() != null) {
-            return input.toInt()
+        val matchResults = extractCustomDelimiter(input)
+
+        if (matchResults != null) {
+            val customDelimiter = matchResults.groupValues[1]
+            val token = matchResults.groupValues[2]
+            return calculate(extractNumbers(token, customDelimiter))
         }
 
-        val numbers = input.split(",|:".toRegex())
+        return calculate(extractNumbers(input))
+    }
 
-        return numbers.sumOf { it.toInt() }
+    private fun calculate(numbers: List<String>): Int = numbers.sumOf { it.toInt() }
+
+    private fun extractCustomDelimiter(input: String): MatchResult? {
+        return Regex(CUSTOM_DELIMITER_KEYWORD).find(input) ?: return null
+    }
+
+    private fun extractNumbers(
+        input: String,
+        delimiter: String = DEFAULT_DELIMITER_REGEX,
+    ): List<String> = input.split(delimiter.toRegex())
+
+    companion object {
+        private const val DEFAULT_DELIMITER_REGEX = ",|:"
+        private const val CUSTOM_DELIMITER_KEYWORD = "//(.)\\n(.*)"
     }
 }
