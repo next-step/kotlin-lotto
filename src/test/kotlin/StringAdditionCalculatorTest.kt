@@ -4,7 +4,13 @@ import io.kotest.matchers.shouldBe
 class StringAdditionCalculator(private val str: String?) {
     fun add(): Int {
         if (str.isNullOrBlank()) return 0
-        return str.toInt()
+
+        val numbers = str.split(",")
+        if (numbers.size == 1) {
+            return str.toInt()
+        }
+
+        return numbers.map { it.toInt() }.sum()
     }
 }
 
@@ -16,5 +22,10 @@ class StringAdditionCalculatorTest : StringSpec ({
 
     "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다." {
         StringAdditionCalculator("1").add() shouldBe 1
+    }
+
+    "숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다." {
+        StringAdditionCalculator("1,2").add() shouldBe 3
+        StringAdditionCalculator("2,3").add() shouldBe 5
     }
 })
