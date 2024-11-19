@@ -16,7 +16,7 @@ class StringCalculator {
     }
 
     private fun calculate(numbers: List<String>): Int {
-        val sum = numbers.sumOf { it.toInt().takeIf { it >= 0 } ?: throw RuntimeException("숫자는 음수가 될 수 없습니다.") }
+        val sum = numbers.sumOf { it.toInt().takeIf { it >= 0 } ?: throw RuntimeException(NUMBER_ERROR_MESSAGE) }
 
         return sum
     }
@@ -33,5 +33,6 @@ class StringCalculator {
     companion object {
         private const val DEFAULT_DELIMITER_REGEX = ",|:"
         private const val CUSTOM_DELIMITER_KEYWORD = "//(.)\\n(.*)"
+        private const val NUMBER_ERROR_MESSAGE = "숫자는 음수가 될 수 없습니다."
     }
 }
