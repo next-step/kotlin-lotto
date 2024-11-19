@@ -4,13 +4,10 @@ import io.kotest.matchers.shouldBe
 class StringAdditionCalculator(private val str: String?) {
     fun add(): Int {
         if (str.isNullOrBlank()) return 0
-
-        val numbers = str.split(",|:".toRegex())
-        if (numbers.size == 1) {
-            return str.toInt()
-        }
-
-        return numbers.map { it.toInt() }.sum()
+        val matchResult = Regex("//(.)\n(.*)").find(str)
+        val separator = matchResult?.groupValues?.get(1)
+        val numbers = matchResult?.groupValues?.get(2)?.split(",|:|${separator?.let { Regex.escape(it) }}".toRegex()) ?: str.split(",|:".toRegex())
+        return if (numbers.size == 1 && separator == null) str.toInt() else numbers.sumOf { it.toInt() }
     }
 }
 
@@ -37,5 +34,10 @@ class StringAdditionCalculatorTest : StringSpec ({
     "구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다." {
         StringAdditionCalculator("1,2:3").add() shouldBe 6
         StringAdditionCalculator("1:2,3").add() shouldBe 6
+    }
+
+    "\"//\"와 \"\\n\" 문자 사이에 커스텀 구분자를 지정할 수 있다." {
+        StringAdditionCalculator("//;\n1;2;3").add() shouldBe 6
+        StringAdditionCalculator("//-\n1-2-3").add() shouldBe 6
     }
 })
