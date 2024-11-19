@@ -33,4 +33,9 @@ class StringAdditionCalculatorTest : StringSpec ({
         StringAdditionCalculator("1:2").add() shouldBe 3
         StringAdditionCalculator("2:3").add() shouldBe 5
     }
+
+    "구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다." {
+        StringAdditionCalculator("1,2:3").add() shouldBe 6
+        StringAdditionCalculator("1:2,3").add() shouldBe 6
+    }
 })
