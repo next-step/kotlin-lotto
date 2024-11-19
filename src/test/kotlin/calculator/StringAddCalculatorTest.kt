@@ -19,4 +19,8 @@ class StringAddCalculatorTest : StringSpec({
     "숫자 두개를 컴마(,) 구분자로 입력할 경우 두숫자의 합을 반환한다." {
         calculator.add("1,2") shouldBe 3
     }
+
+    "구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다." {
+        calculator.add("1,2:3") shouldBe 6
+    }
 })

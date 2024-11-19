@@ -10,7 +10,7 @@ class StringCalculator {
             return input.toInt()
         }
 
-        val numbers = input.split(",")
+        val numbers = input.split(",|:".toRegex())
 
         return numbers.sumOf { it.toInt() }
     }
