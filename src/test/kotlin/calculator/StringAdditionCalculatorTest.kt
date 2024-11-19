@@ -4,7 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
-class StringAdditionCalculatorTest : StringSpec ({
+class StringAdditionCalculatorTest : StringSpec({
     "빈 문자열 또는 null을 입력할 경우 0을 반환해야 한다." {
         StringAdditionCalculator("").add() shouldBe 0
         StringAdditionCalculator(null).add() shouldBe 0
@@ -35,16 +35,18 @@ class StringAdditionCalculatorTest : StringSpec ({
     }
 
     "숫자 이외의 값을 전달할 경우 RuntimeException 예외가 발생해야 한다." {
-        val exception = shouldThrow<RuntimeException> {
-            StringAdditionCalculator("1,2,a").add()
-        }
+        val exception =
+            shouldThrow<RuntimeException> {
+                StringAdditionCalculator("1,2,a").add()
+            }
         exception.message shouldBe "숫자 이외의 값을 입력할 수 없습니다."
     }
 
     "음수를 전달할 경우 RuntimeException 예외가 발생해야 한다." {
-        val exception = shouldThrow<RuntimeException> {
-            StringAdditionCalculator("-1,2").add()
-        }
+        val exception =
+            shouldThrow<RuntimeException> {
+                StringAdditionCalculator("-1,2").add()
+            }
         exception.message shouldBe "음수를 입력할 수 없습니다."
     }
 })
