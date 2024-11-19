@@ -15,5 +15,8 @@ fun main() {
     }
 
     ResultView.printLottoList(lottoList)
+
+    val winningNumbers = InputView.getWinningNumbers()
+    println("winningNumbers = ${winningNumbers}")
 }
 
