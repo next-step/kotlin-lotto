@@ -40,7 +40,7 @@
       // ...
   }
   ```
-- [ ] 숫자 이외의 값을 전달할 경우 RuntimeException 예외가 발생해야 한다. (예 : “kimdabomi”)
+- [x] 숫자 이외의 값을 전달할 경우 RuntimeException 예외가 발생해야 한다. (예 : “kimdabomi”)
 - [ ] 음수를 전달할 경우 RuntimeException 예외가 발생해야 한다. (예 : “-1,2,3”)
   ``` kotlin
   class StringAddCalculatorTest {
