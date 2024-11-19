@@ -15,4 +15,8 @@ class StringAddCalculatorTest : StringSpec({
     "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다." {
         calculator.add("1") shouldBe 1
     }
+
+    "숫자 두개를 컴마(,) 구분자로 입력할 경우 두숫자의 합을 반환한다." {
+        calculator.add("1,2") shouldBe 3
+    }
 })
