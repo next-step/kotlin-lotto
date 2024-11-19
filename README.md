@@ -31,7 +31,7 @@
   ``` kotlin
   val tokens = text.split(",|:".toRegex())
   ```
-- [ ] "//"와 "\n" 문자 사이에 커스텀 구분자를 지정할 수 있다. (예 : “//;\n1;2;3” => 6)
+- [x] "//"와 "\n" 문자 사이에 커스텀 구분자를 지정할 수 있다. (예 : “//;\n1;2;3” => 6)
   ``` kotlin
   val result = Regex("//(.)\n(.*)").find(text)
   result?.let {
