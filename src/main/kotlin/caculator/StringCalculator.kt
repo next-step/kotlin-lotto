@@ -20,7 +20,7 @@ class StringCalculator {
     private fun calculate(numbers: List<String>): Int = numbers.sumOf { it.toInt() }
 
     private fun extractCustomDelimiter(input: String): MatchResult? {
-        return Regex(CUSTOM_DELIMITER_KEYWORD).find(input) ?: return null
+        return Regex(CUSTOM_DELIMITER_KEYWORD).find(input)
     }
 
     private fun extractNumbers(
