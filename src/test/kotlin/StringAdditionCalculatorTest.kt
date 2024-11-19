@@ -5,7 +5,7 @@ class StringAdditionCalculator(private val str: String?) {
     fun add(): Int {
         if (str.isNullOrBlank()) return 0
 
-        val numbers = str.split(",")
+        val numbers = str.split(",").map { it.split(":") }.flatten()
         if (numbers.size == 1) {
             return str.toInt()
         }
@@ -27,5 +27,10 @@ class StringAdditionCalculatorTest : StringSpec ({
     "숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다." {
         StringAdditionCalculator("1,2").add() shouldBe 3
         StringAdditionCalculator("2,3").add() shouldBe 5
+    }
+
+    "숫자 두개를 콜론(:) 구분자로 입력할 경우 두 숫자의 합을 반환한다." {
+        StringAdditionCalculator("1:2").add() shouldBe 3
+        StringAdditionCalculator("2:3").add() shouldBe 5
     }
 })
