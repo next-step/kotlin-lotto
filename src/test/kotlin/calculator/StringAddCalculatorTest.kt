@@ -1,6 +1,7 @@
 package calculator
 
 import caculator.StringCalculator
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
@@ -26,5 +27,9 @@ class StringAddCalculatorTest : StringSpec({
 
     "\"//\"와 \"\\n\" 문자 사이에 커스텀 구분자를 지정할 수 있다." {
         calculator.add("//;\n1;2;3") shouldBe 6
+    }
+
+    "음수를 전달할 경우 RuntimeException예외가 발생해야 한다." {
+        shouldThrow<RuntimeException> { calculator.add("-1,2,3") }
     }
 })

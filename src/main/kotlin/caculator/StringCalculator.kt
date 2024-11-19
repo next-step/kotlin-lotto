@@ -9,15 +9,17 @@ class StringCalculator {
         val matchResults = extractCustomDelimiter(input)
 
         if (matchResults != null) {
-            val customDelimiter = matchResults.groupValues[1]
-            val token = matchResults.groupValues[2]
-            return calculate(extractNumbers(token, customDelimiter))
+            return calculate(extractNumbers(input = matchResults.groupValues[2], delimiter = matchResults.groupValues[1]))
         }
 
         return calculate(extractNumbers(input))
     }
 
-    private fun calculate(numbers: List<String>): Int = numbers.sumOf { it.toInt() }
+    private fun calculate(numbers: List<String>): Int {
+        val sum = numbers.sumOf { it.toInt().takeIf { it >= 0 } ?: throw RuntimeException("숫자는 음수가 될 수 없습니다.") }
+
+        return sum
+    }
 
     private fun extractCustomDelimiter(input: String): MatchResult? {
         return Regex(CUSTOM_DELIMITER_KEYWORD).find(input)
