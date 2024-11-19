@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.LottoGenerator
+import lotto.domain.LottoResultAnalyzer
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -17,6 +18,12 @@ fun main() {
     ResultView.printLottoList(lottoList)
 
     val winningNumbers = InputView.getWinningNumbers()
-    println("winningNumbers = ${winningNumbers}")
+
+    val lottoResult = LottoResultAnalyzer.analyze(
+        lottoList = lottoList,
+        winningLotto = winningNumbers
+    )
+
+    ResultView.printResult(lottoResult)
 }
 
