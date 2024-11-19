@@ -1,10 +1,7 @@
 package lotto.domain
 
 object LottoResultAnalyzer {
-    fun analyze(
-        lottoList: List<List<Int>>,
-        winningLotto: List<Int>
-    ): LottoResult {
+    fun analyze(lottoList: List<List<Int>>, winningLotto: List<Int>): LottoResult {
         val result = lottoList.map { lotto ->
             lotto.count { it in winningLotto }
         }

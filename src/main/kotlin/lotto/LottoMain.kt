@@ -5,7 +5,6 @@ import lotto.domain.LottoResultAnalyzer
 import lotto.view.InputView
 import lotto.view.ResultView
 
-
 fun main() {
     val purchaseAmount = InputView.getPurchaseAmount()
     ResultView.printPurchaseAmount(purchaseAmount)
@@ -21,9 +20,8 @@ fun main() {
 
     val lottoResult = LottoResultAnalyzer.analyze(
         lottoList = lottoList,
-        winningLotto = winningNumbers
+        winningLotto = winningNumbers,
     )
 
     ResultView.printResult(lottoResult)
 }
-

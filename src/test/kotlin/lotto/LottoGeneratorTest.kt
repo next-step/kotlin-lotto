@@ -17,5 +17,4 @@ class LottoGeneratorTest {
         // then
         assertThat(lotto).hasSize(6)
     }
-
 }

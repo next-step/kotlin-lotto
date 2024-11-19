@@ -3,7 +3,6 @@ package lotto.domain
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-
 class LottoResultAnalyzerTest {
 
     private val lottoResultAnalyzer: LottoResultAnalyzer = LottoResultAnalyzer

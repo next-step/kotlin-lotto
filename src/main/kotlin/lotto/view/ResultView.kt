@@ -34,8 +34,10 @@ object ResultView {
         val rateOfReturn = earningAmount.toDouble() / purchaseAmount
         val isProfitable = rateOfReturn > 1.0
 
-        println("총 수익률은 ${rateOfReturn}입니다. (기준이 1이기 때문에 결과적으로 ${이익or손해(isProfitable)}라는 의미임.)")
+        println(
+            "총 수익률은 ${rateOfReturn}입니다. (기준이 1이기 때문에 결과적으로 ${isProfitOrLoss(isProfitable)}라는 의미임.)",
+        )
     }
 
-    private fun 이익or손해(isProfitable: Boolean) = if (isProfitable) "이익" else "손해"
+    private fun isProfitOrLoss(isProfitable: Boolean) = if (isProfitable) "이익" else "손해"
 }
