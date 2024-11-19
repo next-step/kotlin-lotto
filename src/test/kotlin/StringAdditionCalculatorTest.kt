@@ -5,7 +5,7 @@ class StringAdditionCalculator(private val str: String?) {
     fun add(): Int {
         if (str.isNullOrBlank()) return 0
 
-        val numbers = str.split(",").map { it.split(":") }.flatten()
+        val numbers = str.split(",|:".toRegex())
         if (numbers.size == 1) {
             return str.toInt()
         }
