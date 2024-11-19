@@ -11,4 +11,8 @@ class StringAddCalculatorTest : StringSpec({
         calculator.add(null) shouldBe 0
         calculator.add("") shouldBe 0
     }
+
+    "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다." {
+        calculator.add("1") shouldBe 1
+    }
 })
