@@ -1,4 +1,4 @@
-package study
+package calculate
 
 object CustomDelimiter {
     private val CUSTOM_DELIMITER_PATTERN = Regex("//(.)\n(.*)")

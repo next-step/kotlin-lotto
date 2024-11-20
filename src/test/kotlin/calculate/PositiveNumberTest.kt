@@ -1,4 +1,4 @@
-package study
+package calculate
 
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
