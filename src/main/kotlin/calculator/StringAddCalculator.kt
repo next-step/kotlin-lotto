@@ -2,21 +2,22 @@ package calculator
 
 object StringAddCalculator {
 
-    private val DEFAULT_SEPARATOR = listOf(
-        ",",
-        ":",
-    )
-
     fun calculate(expression: String?): Int {
         if (expression.isNullOrBlank()) return 0
+
         return expression
-            .parse(DEFAULT_SEPARATOR)
+            .selectSeparator()
+            .parse()
             .validate()
             .calculate()
     }
 
-    private fun String.parse(separator: List<String>): List<Int> {
-        return this.split(*separator.toTypedArray()).map { it.toInt() }
+    private fun String.selectSeparator(): SeparatorSelectResult {
+        return SeparatorSelector.select(this)
+    }
+
+    private fun SeparatorSelectResult.parse(): List<Int> {
+        return this.expression.split(this.regex).map { it.toInt() }
     }
 
     private fun List<Int>.validate(): List<Int> {
