@@ -34,4 +34,11 @@ class StringCalculatorTest {
         assertThatThrownBy { stringCalculator.calculate("*,2,3") }.isInstanceOf(RuntimeException::class.java)
             .hasMessage("숫자가 아니에요")
     }
+
+    @Test
+    fun `빈 문자열이나 null을 입력하면 0을 출력한다`() {
+        val stringCalculator = StringCalculator()
+        assertThat(stringCalculator.calculate("")).isEqualTo(0)
+        assertThat(stringCalculator.calculate(null)).isEqualTo(0)
+    }
 }
