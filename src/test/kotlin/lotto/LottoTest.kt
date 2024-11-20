@@ -3,6 +3,7 @@ package lotto
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import java.math.RoundingMode
 
 class Lotto(private val money: Int) {
     init {
@@ -63,6 +64,21 @@ enum class LottoRank(val matchCount: Int, val prize: Int) {
 
 
 class LottoTest : StringSpec({
+    fun verifyLottoRank(matchCount: Int, expectedRank: LottoRank, expectedPrize: Int) {
+        val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
+        var matchingTicket: LottoTicket? = null
+        while (matchingTicket == null) {
+            val lottoTickets = List(14000) { LottoTicket() }
+            matchingTicket = lottoTickets.firstOrNull { ticket ->
+                ticket.matchCount(winningNumbers) == matchCount
+            }
+        }
+
+        val rank = LottoRank.from(matchingTicket!!.matchCount(winningNumbers))
+        rank shouldBe expectedRank
+        rank.prize shouldBe expectedPrize
+    }
+
     "구매금액을 입력하면 몇 개를 구매했는지 반환해야 한다." {
         Lotto(14000).buyCount() shouldBe 14
         Lotto(25000).buyCount() shouldBe 25
@@ -84,67 +100,19 @@ class LottoTest : StringSpec({
     }
 
     "구매한 로또 목록에서 당첨 번호와 일치하는 게 3개이면 5등이다. (5000원)" {
-        val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
-
-        var matchingTicket: LottoTicket? = null
-        while (matchingTicket == null) {
-            val lottoTickets = List(14000) { LottoTicket() }
-            matchingTicket = lottoTickets.firstOrNull { ticket ->
-                ticket.matchCount(winningNumbers) == 3
-            }
-        }
-
-        val rank = LottoRank.from(matchingTicket!!.matchCount(winningNumbers))
-        rank shouldBe LottoRank.FIFTH
-        rank.prize shouldBe 5000
+        verifyLottoRank(3, LottoRank.FIFTH, 5000)
     }
 
     "구매한 로또 목록에서 당첨 번호와 일치하는 게 4개이면 4등이다. (50000원)" {
-        val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
-
-        var matchingTicket: LottoTicket? = null
-        while (matchingTicket == null) {
-            val lottoTickets = List(14000) { LottoTicket() }
-            matchingTicket = lottoTickets.firstOrNull { ticket ->
-                ticket.matchCount(winningNumbers) == 4
-            }
-        }
-
-        val rank = LottoRank.from(matchingTicket!!.matchCount(winningNumbers))
-        rank shouldBe LottoRank.FOURTH
-        rank.prize shouldBe 50_000
+        verifyLottoRank(4, LottoRank.FOURTH, 50_000)
     }
 
     "구매한 로또 목록에서 당첨 번호와 일치하는 게 5개이면 3등이다. (1500000원)" {
-        val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
-
-        var matchingTicket: LottoTicket? = null
-        while (matchingTicket == null) {
-            val lottoTickets = List(14000) { LottoTicket() }
-            matchingTicket = lottoTickets.firstOrNull { ticket ->
-                ticket.matchCount(winningNumbers) == 5
-            }
-        }
-
-        val rank = LottoRank.from(matchingTicket!!.matchCount(winningNumbers))
-        rank shouldBe LottoRank.THIRD
-        rank.prize shouldBe 1_500_000
+        verifyLottoRank(5, LottoRank.THIRD, 1_500_000)
     }
 
     "구매한 로또 목록에서 당첨 번호와 일치하는 게 6개이면 1등이다. (2000000000원)" {
-        val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
-
-        var matchingTicket: LottoTicket? = null
-        while (matchingTicket == null) {
-            val lottoTickets = List(14000) { LottoTicket() }
-            matchingTicket = lottoTickets.firstOrNull { ticket ->
-                ticket.matchCount(winningNumbers) == 6
-            }
-        }
-
-        val rank = LottoRank.from(matchingTicket!!.matchCount(winningNumbers))
-        rank shouldBe LottoRank.FIRST
-        rank.prize shouldBe 2_000_000_000
+        verifyLottoRank(6, LottoRank.FIRST, 2_000_000_000)
     }
 
     "로또 번호는 6개, 1부터 45 사이의 숫자, 중복 불가여야 한다." {
@@ -157,5 +125,9 @@ class LottoTest : StringSpec({
         shouldThrow<IllegalArgumentException> {
             LottoTicket(listOf(1, 2, 3, 4, 5, 46))
         }
+    }
+
+    "수익률을 계산해야 한다. (당첨 금액 / 구매 금액 의 소수점 둘째자리까지 버림)" {
+
     }
 })
