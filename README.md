@@ -18,6 +18,6 @@
 - [ ] 커스텀 구분자가 존재할 경우 해당 구분자를 기준으로 문자열을 분리한다.
 
 #### 예외 처리
-- [ ] 숫자 이외의 값이 포함된 경우 `RuntimeException`을 throw 한다.
-- [ ] 음수가 포함된 경우 `RuntimeException`을 throw 한다.
+- [x] 숫자 이외의 값이 포함된 경우 `RuntimeException`을 throw 한다.
+- [x] 음수가 포함된 경우 `RuntimeException`을 throw 한다.
 - [ ] 공백이 포함된 경우 이를 무시하거나 올바르게 처리한다.
