@@ -21,8 +21,8 @@ class StringAdditionCalculator(private val str: String?) {
         private const val NEGATIVE_NUMBER_MESSAGE = "음수를 입력할 수 없습니다."
 
         private fun validate(numbers: List<String>) {
-            if (numbers.any { it.matches(NOT_NUMBER_REGEX) }) throw RuntimeException(NOT_NUMBER_MESSAGE)
-            if (numbers.any { it.toInt() < 0 }) throw RuntimeException(NEGATIVE_NUMBER_MESSAGE)
+            if (numbers.any { it.matches(NOT_NUMBER_REGEX) }) throw IllegalArgumentException(NOT_NUMBER_MESSAGE)
+            if (numbers.any { it.toInt() < 0 }) throw IllegalArgumentException(NEGATIVE_NUMBER_MESSAGE)
         }
     }
 }
