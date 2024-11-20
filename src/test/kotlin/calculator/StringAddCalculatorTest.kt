@@ -5,7 +5,15 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
 
+
 object StringAddCalculator {
+    private const val FIND_DELIMITER_PATTERN = "(?<=//)(.*?)(?=\\n)"
+    private const val FIND_ADD_TEXT_PATTERN = "(?<=\\n)(.*)"
+    private val DELIMITER_REGEX = Regex(FIND_DELIMITER_PATTERN)
+    private val ADD_TEXT_REGEX = Regex(FIND_ADD_TEXT_PATTERN)
+    private val DEFAULT_DELIMITERS = listOf(",", ":")
+
+
     fun add(text: String?): Int {
         if (text.isNullOrBlank()) {
             return 0
@@ -14,17 +22,17 @@ object StringAddCalculator {
     }
 
     private fun parse(text: String): List<Int> {
-        if (!text.startsWith("//")) {
-            return text.split(",", ":").map { it.toInt() }
+        val customDelimiter = DELIMITER_REGEX.find(text)?.value
+        if(text.startsWith("//")) {
+
         }
-        val regex = Regex("//(.)\\n(.*)") // `//`와 `\n` 사이의 문자, 이후 문자열을 각각 캡처
-        val matchResult = regex.find(text)
-        if (matchResult != null) {
-            val customDelimiter = matchResult.groupValues[1]
-            val text2 = matchResult.groupValues[2]
-            return text2.split(",", ":", customDelimiter).map { it.toInt() }
-        }
-        return text.split(",", ":").map { it.toInt() }
+        val addText = ADD_TEXT_REGEX.find(text)?.value
+        val delimiters = customDelimiter?.let {
+            DEFAULT_DELIMITERS + it
+        } ?: DEFAULT_DELIMITERS
+        val map = addText?.split(*delimiters.toTypedArray())
+        val map1 = map?.map { it.toInt() }
+        return map1.orEmpty()
     }
 }
 
