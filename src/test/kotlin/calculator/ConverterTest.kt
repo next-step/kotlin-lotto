@@ -2,31 +2,26 @@ package calculator
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
-import io.kotest.matchers.collections.shouldContainExactly
+import io.kotest.matchers.shouldBe
 
 class ConverterTest : BehaviorSpec({
     val converter = Converter()
 
-    Given("문자열 리스트를 숫자 리스트로 변환하는 기능이 있을 때") {
-        When("문자열 리스트에 숫자만 포함되어 있다면") {
-            val result = converter.toPositiveNumbers(listOf("1", "2", "3"))
-            Then("숫자 리스트로 변환해야 한다") {
-                result shouldContainExactly listOf(1, 2, 3)
+    Given("문자열을 숫자로 변환할 때") {
+        When("숫자인 문자열이라면") {
+            val result = converter.toPositiveNumber("1")
+            Then("숫자로 변환해야 한다") {
+                result shouldBe 1
             }
         }
 
-        When("문자열 리스트에 숫자가 아닌 값이 포함되어 있다면") {
-            Then("예외를 던져야 한다") {
-                shouldThrow<IllegalStateException> {
-                    converter.toPositiveNumbers(listOf("1", "a", "3"))
+        When("문자열에 숫자가 아닌 값이라면") {
+            listOf("a", "-1").forEach { input ->
+                Then("예외를 던져야 한다") {
+                    shouldThrow<IllegalStateException> {
+                        converter.toPositiveNumber(input)
+                    }
                 }
-            }
-        }
-
-        When("문자열 리스트가 비어 있다면") {
-            val result = converter.toPositiveNumbers(emptyList())
-            Then("빈 숫자 리스트를 반환해야 한다") {
-                result shouldContainExactly emptyList()
             }
         }
     }
