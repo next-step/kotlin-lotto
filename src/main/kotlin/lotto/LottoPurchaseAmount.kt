@@ -15,6 +15,10 @@ value class LottoPurchaseAmount(private val amount: Int) {
         require(amount % LOTTO_PRICE == 0) { "로또 구매 금액은 1000원 단위여야 합니다." }
     }
 
+    fun toLottoPurchaseCount(): LottoPurchaseCount {
+        return LottoPurchaseCount(this.amount / LOTTO_PRICE)
+    }
+
     companion object {
         private const val LOTTO_PRICE = 1000
     }

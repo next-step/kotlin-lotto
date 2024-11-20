@@ -40,4 +40,19 @@ class LottoPurchaseAmountTest : StringSpec({
             exception.message shouldBe "로또 구매 금액은 1000원 단위여야 합니다."
         }
     }
+
+    "구입 금액에 해당하는 로또 개수를 반환할 수 있다." {
+        forAll(
+            row(1000, 1),
+            row(2000, 2),
+            row(12000, 12),
+            row(40000, 40),
+            row(5000, 5),
+        ) { amount, expectedCount ->
+            val lottoPurchaseAmount = LottoPurchaseAmount(amount)
+            val lottoPurchaseCount = lottoPurchaseAmount.toLottoPurchaseCount()
+
+            lottoPurchaseCount shouldBe LottoPurchaseCount(expectedCount)
+        }
+    }
 })
