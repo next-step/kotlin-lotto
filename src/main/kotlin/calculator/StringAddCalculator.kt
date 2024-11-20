@@ -23,12 +23,7 @@ class StringAddCalculator {
                         .split(DEFAULT_DELIMITER)
                         .map { it.toInt() }
 
-                if (operands.any { it < 0 }) {
-                    throw RuntimeException("피연산자로 음수는 허용하지 않습니다: text=$text")
-                }
-
-                return operands
-                    .reduce(Int::plus)
+                return Operands(operands).sum()
             }
         }
 
@@ -38,12 +33,7 @@ class StringAddCalculator {
                 .split(DEFAULT_DELIMITER)
                 .map { it.toInt() }
 
-        if (operands.any { it < 0 }) {
-            throw RuntimeException("피연산자로 음수는 허용하지 않습니다: text=$text")
-        }
-
-        return operands
-            .reduce(Int::plus)
+        return Operands(operands).sum()
     }
 
     companion object {
