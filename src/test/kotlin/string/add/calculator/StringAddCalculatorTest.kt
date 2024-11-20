@@ -12,10 +12,20 @@ class StringAddCalculator {
         if (text.isNullOrBlank()) {
             return 0
         }
-        return text
-            .split(",", ":")
+        val tokens = split(text)
+        return tokens
             .map { it.toInt() }
             .sum()
+    }
+
+    private fun split(text: String): List<String> {
+        val regex = "//(.)\n(.*)".toRegex()
+        val matchResult = regex.matchEntire(text)
+        if (matchResult != null) {
+            val (delimiter, numbers) = matchResult.destructured
+            return numbers.split(delimiter)
+        }
+        return text.split(",", ":")
     }
 }
 
@@ -51,6 +61,12 @@ class StringAddCalculatorTest {
     @Test
     fun `구분자를 쉼표 이외에 콜론을 사용할 수 있다`() {
         val sum = sut.calculate("1,2:3")
+        sum shouldBe 6
+    }
+
+    @Test
+    fun `커스텀 구분자를 지정할 수 있다`() {
+        val sum = sut.calculate("//;\n1;2;3")
         sum shouldBe 6
     }
 }
