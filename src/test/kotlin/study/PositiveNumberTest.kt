@@ -1,10 +1,9 @@
 package study
 
-import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.NullAndEmptySource
+import org.junit.jupiter.params.provider.EmptySource
 
 class PositiveNumberTest {
     @Test
@@ -17,10 +16,10 @@ class PositiveNumberTest {
     }
 
     @ParameterizedTest
-    @NullAndEmptySource
-    fun `빈 문자는 0`(text: String?) {
-        val actual = PositiveNumber(text)
-
-        assertThat(actual).isEqualTo(PositiveNumber(0))
+    @EmptySource
+    fun `빈 문자는 예외`(text: String) {
+        assertThatIllegalArgumentException().isThrownBy {
+            PositiveNumber(text)
+        }
     }
 }
