@@ -7,10 +7,6 @@ data class PositiveNumber(val value: Int) {
 
     constructor(str: String) : this(str.toIntOrNull() ?: throw IllegalArgumentException("숫자만 입력 가능합니다"))
 
-    operator fun plus(other: PositiveNumber): PositiveNumber {
-        return PositiveNumber(value + other.value)
-    }
-
     companion object {
         val ZERO: PositiveNumber = PositiveNumber(0)
     }

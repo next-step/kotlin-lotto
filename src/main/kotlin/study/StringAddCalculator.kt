@@ -1,7 +1,7 @@
 package study
 
 object StringAddCalculator {
-    private const val DEFAULT_DELIMITERS = "[,:]"
+    private val DEFAULT_DELIMITERS = Regex("[,:]")
 
     fun add(text: String?): Int {
         if (text.isNullOrBlank()) {
@@ -19,6 +19,6 @@ object StringAddCalculator {
             return CustomDelimiter.parse(text)
         }
 
-        return text.split(DEFAULT_DELIMITERS.toRegex())
+        return text.split(DEFAULT_DELIMITERS)
     }
 }
