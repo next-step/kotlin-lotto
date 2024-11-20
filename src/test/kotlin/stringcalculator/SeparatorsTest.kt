@@ -31,9 +31,10 @@ class SeparatorsTest : StringSpec({
 
     "구분자는 공백일 수 없다." {
         val separators = Separators()
-        val exception = shouldThrowExactly<IllegalArgumentException> {
-            separators.addSeparator(" ")
-        }
+        val exception =
+            shouldThrowExactly<IllegalArgumentException> {
+                separators.addSeparator(" ")
+            }
         exception.message shouldBe "구분자는 공백일 수 없습니다."
     }
 })

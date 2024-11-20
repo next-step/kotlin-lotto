@@ -15,9 +15,10 @@ class NumberTest : StringSpec({
             row(100_000_001),
             row(1_000_000_000),
         ) { amount ->
-            val exception = shouldThrowExactly<IllegalArgumentException> {
-                Number(amount)
-            }
+            val exception =
+                shouldThrowExactly<IllegalArgumentException> {
+                    Number(amount)
+                }
             exception.message shouldBe "숫자의 범위는 0 이상 1억 이하입니다."
         }
     }
