@@ -69,6 +69,10 @@ class StringCalculator(input: String) {
         require(nonNumberMatches.size == numbers.size - 1) { "입력 형식이 올바르지 않습니다." }
     }
 
+    fun calculate(): Number {
+        return numbers.reduce { acc, number -> acc.plus(number) }
+    }
+
     companion object {
         private const val CUSTOM_SEPARATOR_DELIMITER_PATTERN = "//(.*?)\n"
         private const val NUMBER_PATTERN = "\\d+"

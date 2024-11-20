@@ -36,4 +36,35 @@ class StringCalculatorTest : StringSpec({
             exception.message shouldBe "입력 형식이 올바르지 않습니다."
         }
     }
+
+    "입력이 빈 문자열일 경우 0을 반환한다." {
+        val stringCalculator = StringCalculator("")
+        val actual = stringCalculator.calculate()
+        actual shouldBe Number(0)
+    }
+
+    "분리된 숫자와 연산자를 통해 계산을 수행할 수 있다." {
+        forAll(
+            row("1,2,3", 6),
+            row("1:2:3:4:5", 15),
+            row("//;\n1,2;3:4", 10),
+        ) { input, expected ->
+            val stringCalculator = StringCalculator(input)
+            val actual = stringCalculator.calculate()
+            actual shouldBe Number(expected)
+        }
+    }
+
+    "숫자 하나를 입력받은 경우 해당 숫자를 반환한다." {
+        forAll(
+            row("1"),
+            row("2"),
+            row("10"),
+            row("5000"),
+        ) { input ->
+            val stringCalculator = StringCalculator(input)
+            val actual = stringCalculator.calculate()
+            actual shouldBe Number(input.toInt())
+        }
+    }
 })
