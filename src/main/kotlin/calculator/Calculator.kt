@@ -5,30 +5,35 @@ class Calculator {
         if (text.isNullOrBlank()) return 0
         val result = Regex(CUSTROM_DELIMITER).find(text)
 
-        return if (result == null) {
-            // 기본 구분자 처리
-            this.sum(text.split(Regex(BASIC_DELIMITER)))
-        } else {
-            // 커스텀 구분자 처리
-            // TODO: 아래 코드를 함수로 빼기
-            val customDelimiter = result.groupValues[1]
-            this.sum(result.groupValues[2].split(customDelimiter))
+        return result?.let {
+            this.handleCustomDelimiter(result)
+        } ?: run {
+            this.handleBasicDelimiter(text)
         }
     }
 
-    fun sum(input: List<String>): Int {
-        // TODO: 인덴트를 1로 줄이기 (함수로 빼기?)
-        try {
-            return input.sumOf {
-                val number = it.toInt()
-                if (number < 0) {
-                    throw RuntimeException("음수 값은 더할 수 없습니다. [$number] in $this")
-                }
-                number
-            }
-        } catch (e: NumberFormatException) {
-            throw RuntimeException("숫자 이외의 값은 더할 수 없습니다. [$this]")
+    private fun sum(input: List<String>): Int {
+        return input.sumOf {
+            this.convertToNumber(it)
         }
+    }
+
+    private fun handleBasicDelimiter(text: String): Int {
+        return this.sum(text.split(Regex(BASIC_DELIMITER)))
+    }
+
+    private fun handleCustomDelimiter(result: MatchResult): Int {
+        val customDelimiter = result.groupValues[1]
+        val numbers = result.groupValues[2]
+        return this.sum(numbers.split(customDelimiter))
+    }
+
+    private fun convertToNumber(input: String): Int {
+        val number =
+            input.toIntOrNull()
+                ?: throw RuntimeException("숫자 이외의 값은 더할 수 없습니다. [$input]")
+        require((number < 0).not()) { "음수 값은 더할 수 없습니다. [$number] in $input" }
+        return number
     }
 
     companion object {
