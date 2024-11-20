@@ -19,13 +19,19 @@ class StringAddCalculator {
     }
 
     private fun split(text: String): List<String> {
-        val regex = "//(.)\n(.*)".toRegex()
+        val regex = CUSTOM_DELIMITER.toRegex()
         val matchResult = regex.matchEntire(text)
         if (matchResult != null) {
             val (delimiter, numbers) = matchResult.destructured
             return numbers.split(delimiter)
         }
-        return text.split(",", ":")
+        return text.split(COMMA, COLON)
+    }
+
+    companion object {
+        private const val COMMA = ","
+        private const val COLON = ":"
+        private const val CUSTOM_DELIMITER = "//(.)\n(.*)"
     }
 }
 
