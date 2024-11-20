@@ -1,27 +1,50 @@
 package string.add.calculator
 
 import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
 class StringAddCalculator {
-    fun calculate(text: String?): Int = if (text.isNullOrBlank()) 0 else text.toInt()
+    fun calculate(text: String?): Int {
+        if (text.isNullOrBlank()) {
+            return 0
+        }
+        return text
+            .split(",")
+            .map { it.toInt() }
+            .sum()
+    }
 }
 
 @Suppress("NonAsciiCharacters")
 class StringAddCalculatorTest {
+    private lateinit var sut: StringAddCalculator
+
+    @BeforeEach
+    fun setUp() {
+        sut = StringAddCalculator()
+    }
+
     @ParameterizedTest
     @NullAndEmptySource
     fun `빈 문자열 또는 null 을 입력할 경우 0을 반환해야 한다`(text: String?) {
-        val sum = StringAddCalculator().calculate(text)
+        val sum = sut.calculate(text)
         sum shouldBe 0
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["0", "1", "42"])
     fun `숫자 하나를 입력한 경우 해당 숫자를 반환한다`(text: String) {
-        val sum = StringAddCalculator().calculate(text)
+        val sum = sut.calculate(text)
         sum shouldBe text.toInt()
+    }
+
+    @Test
+    fun `숫자 두개를 쉼표(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다`() {
+        val sum = sut.calculate("1,2")
+        sum shouldBe 3
     }
 }
