@@ -15,40 +15,47 @@ class TextParser {
 
             val customDelimiter: String? = extractCustomDelimiter(text)
             val normalizedText = normalizeText(text, customDelimiter)
-            return normalizedText.split(DEFAULT_DELIMITER).map(String::toInt)
+            return parseToNumbers(normalizedText)
         }
 
+        private fun parseToNumbers(normalizedText: String): List<Int> = normalizedText.split(DEFAULT_DELIMITER).map(String::toInt)
+
         private fun extractCustomDelimiter(text: String): String? {
-            if (!text.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+            if (!containsCustomDelimiter(text)) {
                 return null
             }
 
-            val customDelimiter: String =
-                text
-                    .substringAfter(CUSTOM_DELIMITER_PREFIX)
-                    .substringBefore(CUSTOM_DELIMITER_SUFFIX)
-
-            if (customDelimiter.isEmpty()) {
-                throw IllegalArgumentException("올바르지 않은 커스텀 구분자 형식입니다")
-            }
-
-            return customDelimiter
+            return getCustomDelimiter(text)
         }
+
+        private fun containsCustomDelimiter(text: String) = text.startsWith(CUSTOM_DELIMITER_PREFIX)
+
+        private fun getCustomDelimiter(text: String) =
+            text
+                .substringAfter(CUSTOM_DELIMITER_PREFIX)
+                .substringBefore(CUSTOM_DELIMITER_SUFFIX)
 
         private fun normalizeText(
             text: String,
             customDelimiter: String?,
+        ): String {
+            val textWithoutCustomDelimiter: String =
+                customDelimiter?.run {
+                    replaceToDefaultDelimiter(removeCustomDelimiterFormat(text, this), this)
+                } ?: text
+            return replaceToDefaultDelimiter(textWithoutCustomDelimiter)
+        }
+
+        private fun removeCustomDelimiterFormat(
+            text: String,
+            customDelimiter: String,
         ): String =
-            when (customDelimiter) {
-                null -> text.replace(DEFAULT_DELIMITER_2, DEFAULT_DELIMITER)
-                else ->
-                    text
-                        .replace(
-                            CUSTOM_DELIMITER_PREFIX + customDelimiter + CUSTOM_DELIMITER_SUFFIX,
-                            "",
-                        )
-                        .replace(customDelimiter, DEFAULT_DELIMITER)
-                        .replace(DEFAULT_DELIMITER_2, DEFAULT_DELIMITER)
-            }
+            text
+                .replace(CUSTOM_DELIMITER_PREFIX + customDelimiter + CUSTOM_DELIMITER_SUFFIX, "")
+
+        private fun replaceToDefaultDelimiter(
+            text: String,
+            delimiter: String = DEFAULT_DELIMITER_2,
+        ) = text.replace(delimiter, DEFAULT_DELIMITER)
     }
 }
