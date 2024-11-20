@@ -18,7 +18,7 @@ class PositiveNumberTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    fun `빈 문자는 0`(text : String?) {
+    fun `빈 문자는 0`(text: String?) {
         val actual = PositiveNumber(text)
 
         assertThat(actual).isEqualTo(PositiveNumber(0))
