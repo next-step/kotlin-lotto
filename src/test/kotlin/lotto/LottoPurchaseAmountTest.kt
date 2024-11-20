@@ -1,0 +1,43 @@
+package lotto
+
+import io.kotest.assertions.throwables.shouldThrowExactly
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.data.forAll
+import io.kotest.data.row
+import io.kotest.matchers.shouldBe
+
+class LottoPurchaseAmountTest : StringSpec({
+    "로또 구매 금액은 자연수 여야 합니다." {
+        forAll(
+            row(-1),
+            row(0),
+            row(-1000),
+            row(-200),
+            row(-99999),
+        ) { amount ->
+            val exception =
+                shouldThrowExactly<IllegalArgumentException> {
+                    LottoPurchaseAmount(amount)
+                }
+
+            exception.message shouldBe "로또 구매 금액은 자연수 여야 합니다."
+        }
+    }
+
+    "로또 구매 금액은 1000원 단위여야 합니다." {
+        forAll(
+            row(10),
+            row(100),
+            row(1001),
+            row(2100),
+            row(30030),
+        ) { amount ->
+            val exception =
+                shouldThrowExactly<IllegalArgumentException> {
+                    LottoPurchaseAmount(amount)
+                }
+
+            exception.message shouldBe "로또 구매 금액은 1000원 단위여야 합니다."
+        }
+    }
+})
