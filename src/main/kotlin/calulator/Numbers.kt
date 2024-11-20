@@ -9,7 +9,7 @@ class Numbers(private val numbers: List<Int>) {
 
     private fun validateNonNegative() {
         if (numbers.any { it < 0 }) {
-            throw RuntimeException("음수는 입력할 수 없습니다.")
+            throw RuntimeException("음수는 입력할 수 없습니다. 입력된 숫자 : $numbers")
         }
     }
 }
