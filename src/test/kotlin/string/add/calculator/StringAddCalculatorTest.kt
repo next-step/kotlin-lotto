@@ -3,6 +3,7 @@ package string.add.calculator
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
@@ -46,5 +47,11 @@ class StringAddCalculatorTest {
     fun `커스텀 구분자를 지정할 수 있다`() {
         val sum = sut.calculate("//;\n1;2;3")
         sum shouldBe 6
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["-1,2,3", "1,2,가나다"])
+    fun `숫자 이외의 값 또는 음수를 전달하는 경우 예외를 던진다`(text: String) {
+        assertThrows<RuntimeException> { sut.calculate(text) }
     }
 }
