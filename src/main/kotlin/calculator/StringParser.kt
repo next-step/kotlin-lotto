@@ -11,8 +11,8 @@ class StringParser {
     internal fun extractCustomSeparatorAndContent(text: String): Pair<String, String> {
         val matchResult = CUSTOM_SEPARATOR_PATTERN.find(text)
         return if (matchResult != null) {
-            val customSeparator = matchResult.groupValues[1]
-            val content = text.replaceFirst(CUSTOM_SEPARATOR_PATTERN, "")
+            val customSeparator = matchResult.groupValues[DELIMITER_INDEX]
+            val content = matchResult.groupValues[VALUES_INDEX]
             content to customSeparator
         } else {
             text to DEFAULT_SEPARATOR_REGEX
@@ -28,7 +28,9 @@ class StringParser {
     }
 
     companion object {
-        private val CUSTOM_SEPARATOR_PATTERN = Regex("//(.)\n")
+        private val CUSTOM_SEPARATOR_PATTERN = Regex("//(.)\\n(.*)")
         private const val DEFAULT_SEPARATOR_REGEX = "[,:]"
+        private const val DELIMITER_INDEX = 1
+        private const val VALUES_INDEX = 2
     }
 }
