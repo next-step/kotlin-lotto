@@ -1,38 +1,29 @@
 package calculator
 
-import calculator.StringAddCalculator.calculate
-import calculator.StringAddCalculator.parse
+import calculator.StringAddCalculator.add
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
 
 object StringAddCalculator {
-
-    fun parse(text: String): List<Int> {
-        return text.split(",", ":").map { it.toInt() }
+    fun add(text: String?): Int {
+        if (text.isNullOrBlank()) {
+            return 0
+        }
+        return parse(text).sum()
     }
 
-    fun calculate(text: String): Int {
-        return parse(text).sum()
+    private fun parse(text: String): List<Int> {
+        return text.split(",", ":").map { it.toInt() }
     }
 }
 
 class StringAddCalculatorTest : StringSpec({
-    "쉼표를 통해 문자에서 숫자를 분리한다" {
-        val text = "1,2,3"
-        parse(text) shouldBe listOf(1, 2, 3)
+    "빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다" {
+        listOf(null, "").forAll { text ->
+            add(text) shouldBe 0
+        }
     }
-
-    "콜론을 통해 숫자를 분리한다" {
-        val text = "1:2:3"
-        parse(text) shouldBe listOf(1, 2, 3)
-    }
-
-    "분리한 숫자의 합을 반환한다" {
-        val text = "1,2,3:4"
-        calculate(text) shouldBe 10
-    }
-
-    "빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다" {}
     "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다" {}
     "숫자 두개를 쉼표(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다" {}
     "구분자를 쉼표(,) 이외에 콜론(:)을 사용할 수 있다" {}
