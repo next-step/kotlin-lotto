@@ -14,9 +14,21 @@ class Lotto(private val money: Int) {
         return money / LOTTO_PRICE_UNIT
     }
 
+    fun lottoIssuance(): List<LottoTicket> {
+        return (1..buyCount()).map { LottoTicket() }
+    }
+
     companion object {
         private const val LOTTO_PRICE_UNIT = 1000
         private const val LOTTO_PRICE_UNIT_EXCEPTION_MESSAGE = "구매금액은 1000원 단위로만 가능합니다."
+    }
+}
+
+class LottoTicket {
+    private val lottoNumbers = (1..45).shuffled().take(6).sorted()
+
+    fun numbers(): List<Int> {
+        return lottoNumbers
     }
 }
 
@@ -32,5 +44,11 @@ class LottoTest : StringSpec({
                 Lotto(1400)
             }
         exception.message shouldBe "구매금액은 1000원 단위로만 가능합니다."
+    }
+
+    "구매한 개수만큼 로또를 발급해야 한다." {
+        val lotto = Lotto(14000)
+        val lottoList = lotto.lottoIssuance().map { it.numbers() }
+        lottoList.size shouldBe 14
     }
 })
