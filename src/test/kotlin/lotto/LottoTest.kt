@@ -3,6 +3,7 @@ package lotto
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import java.math.BigDecimal
 import java.math.RoundingMode
 
 class Lotto(private val money: Int) {
@@ -16,6 +17,11 @@ class Lotto(private val money: Int) {
 
     fun lottoIssuance(lottoTicket: LottoTicket): List<LottoTicket> {
         return (1..buyCount()).map { lottoTicket }
+    }
+
+    fun calculateProfitRate(totalPrize: Int): BigDecimal {
+        return totalPrize.toBigDecimal()
+            .divide(money.toBigDecimal(), 2, RoundingMode.DOWN)
     }
 
     companion object {
@@ -128,6 +134,18 @@ class LottoTest : StringSpec({
     }
 
     "수익률을 계산해야 한다. (당첨 금액 / 구매 금액 의 소수점 둘째자리까지 버림)" {
+        val purchaseAmount = 14000
+        val lotto = Lotto(purchaseAmount)
+        val lottoTickets = lotto.lottoIssuance(LottoTicket())
+        val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
 
+        val totalPrize = lottoTickets.sumOf { ticket ->
+            LottoRank.from(ticket.matchCount(winningNumbers)).prize
+        }
+
+        val profitRate = lotto.calculateProfitRate(totalPrize)
+        val expectedProfitRate = "0.00".toBigDecimal()
+
+        profitRate shouldBe expectedProfitRate
     }
 })
