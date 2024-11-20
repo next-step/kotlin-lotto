@@ -23,8 +23,8 @@ class Lotto(private val money: Int) {
     }
 }
 
-class LottoTicket {
-    private val lottoNumbers = (1..45).shuffled().take(6).sorted()
+class LottoTicket(numbers: List<Int>? = null) {
+    private val lottoNumbers = numbers ?: (1..45).shuffled().take(6).sorted()
 
     fun numbers(): List<Int> {
         return lottoNumbers
@@ -73,40 +73,65 @@ class LottoTest : StringSpec({
 
     "구매한 로또 목록에서 당첨 번호와 일치하는 게 3개이면 5등이다. (5000원)" {
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
-        val lottoTickets = List(14000) { LottoTicket() }
 
-        val matchingTicket = lottoTickets.first { ticket ->
-            ticket.matchCount(winningNumbers) == 3
+        var matchingTicket: LottoTicket? = null
+        while (matchingTicket == null) {
+            val lottoTickets = List(14000) { LottoTicket() }
+            matchingTicket = lottoTickets.firstOrNull { ticket ->
+                ticket.matchCount(winningNumbers) == 3
+            }
         }
 
-        val rank = LottoRank.from(matchingTicket.matchCount(winningNumbers))
+        val rank = LottoRank.from(matchingTicket!!.matchCount(winningNumbers))
         rank shouldBe LottoRank.FIFTH
         rank.prize shouldBe 5000
     }
 
     "구매한 로또 목록에서 당첨 번호와 일치하는 게 4개이면 4등이다. (50000원)" {
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
-        val lottoTickets = List(14000) { LottoTicket() }
 
-        val matchingTicket = lottoTickets.first { ticket ->
-            ticket.matchCount(winningNumbers) == 4
+        var matchingTicket: LottoTicket? = null
+        while (matchingTicket == null) {
+            val lottoTickets = List(14000) { LottoTicket() }
+            matchingTicket = lottoTickets.firstOrNull { ticket ->
+                ticket.matchCount(winningNumbers) == 4
+            }
         }
 
-        val rank = LottoRank.from(matchingTicket.matchCount(winningNumbers))
+        val rank = LottoRank.from(matchingTicket!!.matchCount(winningNumbers))
         rank shouldBe LottoRank.FOURTH
         rank.prize shouldBe 50_000
     }
 
     "구매한 로또 목록에서 당첨 번호와 일치하는 게 5개이면 3등이다. (1500000원)" {
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
-        val lottoTickets = List(14000) { LottoTicket() }
 
-        val matchingTicket = lottoTickets.first { ticket ->
-            ticket.matchCount(winningNumbers) == 5
+        var matchingTicket: LottoTicket? = null
+        while (matchingTicket == null) {
+            val lottoTickets = List(14000) { LottoTicket() }
+            matchingTicket = lottoTickets.firstOrNull { ticket ->
+                ticket.matchCount(winningNumbers) == 5
+            }
         }
 
-        val rank = LottoRank.from(matchingTicket.matchCount(winningNumbers))
+        val rank = LottoRank.from(matchingTicket!!.matchCount(winningNumbers))
         rank shouldBe LottoRank.THIRD
         rank.prize shouldBe 1_500_000
+    }
+
+    "구매한 로또 목록에서 당첨 번호와 일치하는 게 6개이면 1등이다. (2000000000원)" {
+        val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
+
+        var matchingTicket: LottoTicket? = null
+        while (matchingTicket == null) {
+            val lottoTickets = List(14000) { LottoTicket() }
+            matchingTicket = lottoTickets.firstOrNull { ticket ->
+                ticket.matchCount(winningNumbers) == 6
+            }
+        }
+
+        val rank = LottoRank.from(matchingTicket!!.matchCount(winningNumbers))
+        rank shouldBe LottoRank.FIRST
+        rank.prize shouldBe 2_000_000_000
     }
 })
