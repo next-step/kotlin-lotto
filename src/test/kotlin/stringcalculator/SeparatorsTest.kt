@@ -8,10 +8,10 @@ import io.kotest.matchers.shouldBe
 
 class SeparatorsTest : StringSpec({
 
-    "기본 구분자로 \",\"와 \";\"를 가진다." {
+    "기본 구분자로 \",\"와 \":\"를 가진다." {
         val separators = Separators()
         separators.isExist(",") shouldBe true
-        separators.isExist(";") shouldBe true
+        separators.isExist(":") shouldBe true
     }
 
     "구분자를 추가할 수 있다." {
