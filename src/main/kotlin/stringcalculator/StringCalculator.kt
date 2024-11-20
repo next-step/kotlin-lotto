@@ -1,3 +1,8 @@
 package stringcalculator
 
-class StringCalculator(val inputString: String)
+class StringCalculator {
+    fun calculate(inputString: String): Int {
+        val numbers = inputString.split(",", ":")
+        return numbers.sumOf { it.toInt() }
+    }
+}
