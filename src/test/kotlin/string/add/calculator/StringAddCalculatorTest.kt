@@ -13,7 +13,7 @@ class StringAddCalculator {
             return 0
         }
         return text
-            .split(",")
+            .split(",", ":")
             .map { it.toInt() }
             .sum()
     }
@@ -46,5 +46,11 @@ class StringAddCalculatorTest {
     fun `숫자 두개를 쉼표(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다`() {
         val sum = sut.calculate("1,2")
         sum shouldBe 3
+    }
+
+    @Test
+    fun `구분자를 쉼표 이외에 콜론을 사용할 수 있다`() {
+        val sum = sut.calculate("1,2:3")
+        sum shouldBe 6
     }
 }
