@@ -9,7 +9,9 @@ class StringParser {
     }
 
     internal fun extractCustomSeparatorAndContent(text: String): Pair<String, String> {
-        val matchResult = CUSTOM_SEPARATOR_PATTERN.find(text)
+        val normalizeInput = normalizeInput(text)
+        val matchResult = CUSTOM_SEPARATOR_PATTERN.find(normalizeInput)
+
         return if (matchResult != null) {
             val customSeparator = matchResult.groupValues[DELIMITER_INDEX]
             val content = matchResult.groupValues[VALUES_INDEX]
@@ -25,6 +27,10 @@ class StringParser {
     ): List<String> {
         val separatorRegex = customSeparator.toRegex()
         return content.split(separatorRegex).filter { it.isNotBlank() }
+    }
+
+    fun normalizeInput(input: String): String {
+        return input.replace("\\n", "\n")
     }
 
     companion object {
