@@ -15,6 +15,6 @@ class NumbersTest {
     @Test
     fun `sum 메서드가 합을 구한다`() {
         val numbers = Numbers(listOf(1, 2, 3))
-        assertThat(numbers.sum()).isEqualTo(6)
+        assertThat(numbers.sum).isEqualTo(6)
     }
 }
