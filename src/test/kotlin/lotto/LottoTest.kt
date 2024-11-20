@@ -96,4 +96,17 @@ class LottoTest : StringSpec({
         rank shouldBe LottoRank.FOURTH
         rank.prize shouldBe 50_000
     }
+
+    "구매한 로또 목록에서 당첨 번호와 일치하는 게 5개이면 3등이다. (1500000원)" {
+        val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
+        val lottoTickets = List(14000) { LottoTicket() }
+
+        val matchingTicket = lottoTickets.first { ticket ->
+            ticket.matchCount(winningNumbers) == 5
+        }
+
+        val rank = LottoRank.from(matchingTicket.matchCount(winningNumbers))
+        rank shouldBe LottoRank.THIRD
+        rank.prize shouldBe 1_500_000
+    }
 })
