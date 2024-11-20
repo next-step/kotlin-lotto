@@ -8,8 +8,8 @@ import java.math.RoundingMode
 class LottoService(
     private val lotto: Lotto,
 ) {
-    fun lottoIssuance(lottoTicket: LottoTicket): List<LottoTicket> {
-        return (1..lotto.buyCount()).map { lottoTicket }
+    fun lottoIssuance(): List<LottoTicket> {
+        return (1..lotto.buyCount()).map { LottoTicket() }
     }
 
     fun calculateProfitRate(totalPrize: Int): BigDecimal {
