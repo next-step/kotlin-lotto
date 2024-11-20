@@ -3,29 +3,27 @@ package calculator
 class StringParser {
     fun split(text: String): List<String> {
         if (text.isBlank()) return emptyList()
-        val customSeparator = extractCustomSeparator(text)
-        val content = removeCustomSeparatorHeader(text, customSeparator)
 
+        val (content, customSeparator) = extractCustomSeparatorAndContent(text)
         return splitContent(content, customSeparator)
     }
 
-    internal fun extractCustomSeparator(text: String): String? {
+    internal fun extractCustomSeparatorAndContent(text: String): Pair<String, String> {
         val matchResult = CUSTOM_SEPARATOR_PATTERN.find(text)
-        return matchResult?.groupValues?.get(1)
-    }
-
-    internal fun removeCustomSeparatorHeader(
-        text: String,
-        customSeparator: String?,
-    ): String {
-        return customSeparator?.let { text.replaceFirst(CUSTOM_SEPARATOR_PATTERN, "") } ?: text
+        return if (matchResult != null) {
+            val customSeparator = matchResult.groupValues[1]
+            val content = text.replaceFirst(CUSTOM_SEPARATOR_PATTERN, "")
+            content to customSeparator
+        } else {
+            text to DEFAULT_SEPARATOR_REGEX
+        }
     }
 
     fun splitContent(
         content: String,
-        customSeparator: String?,
+        customSeparator: String = DEFAULT_SEPARATOR_REGEX,
     ): List<String> {
-        val separatorRegex = customSeparator?.toRegex() ?: DEFAULT_SEPARATOR_REGEX.toRegex()
+        val separatorRegex = customSeparator.toRegex()
         return content.split(separatorRegex).filter { it.isNotBlank() }
     }
 
