@@ -1,15 +1,15 @@
 package calulator
 
 class Numbers(private val numbers: List<Int>) {
+    val sum = numbers.sum()
+
     init {
-        validateNonNegative(numbers)
+        validateNonNegative()
     }
 
-    private fun validateNonNegative(numbers: List<Int>) {
+    private fun validateNonNegative() {
         if (numbers.any { it < 0 }) {
-            throw RuntimeException()
+            throw RuntimeException("음수는 입력할 수 없습니다.")
         }
     }
-
-    fun sum(): Int = numbers.sum()
 }

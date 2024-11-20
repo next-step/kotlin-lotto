@@ -1,26 +1,24 @@
 package calulator
 
+import calulator.delimiterParser.CustomDelimiterStrategy
+import calulator.delimiterParser.DefaultDelimiterStrategy
+
 object Parser {
+
+    private val parseStrategy = listOf(
+        CustomDelimiterStrategy(),
+        DefaultDelimiterStrategy(),
+    )
+
     fun parse(text: String): Numbers {
         if (text.isBlank()) {
             return Numbers(emptyList())
         }
 
-        val matchResult = Regex("//(.)\n(.*)").find(text)
-        val numbers = if (matchResult != null) {
-            getNumbersByCustomDelimiter(matchResult)
-        } else {
-            getNumbersByDefaultDelimiter(text)
-        }
+        val strategy = parseStrategy.firstOrNull { it.support(text) }
+            ?: throw RuntimeException("잘못된 입력입니다.")
 
-        return Numbers(numbers.map { it.toInt() })
+        val numbers = strategy.parse(text)
+        return Numbers(numbers)
     }
-
-    private fun getNumbersByCustomDelimiter(matchResult: MatchResult): List<String> {
-        val delimiter = matchResult.groupValues[1]
-        val nums = matchResult.groupValues[2]
-        return nums.split(delimiter)
-    }
-
-    private fun getNumbersByDefaultDelimiter(text: String) = text.split("[,:]".toRegex())
 }
