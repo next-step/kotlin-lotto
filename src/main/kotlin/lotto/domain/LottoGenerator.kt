@@ -5,7 +5,7 @@ class LottoGenerator {
         return (1..45).shuffled()
             .take(6)
             .sorted()
-            .map { LottoNumber(it) }
+            .map { LottoNumber.of(it) }
             .let { Lotto(it) }
     }
 }
