@@ -39,4 +39,10 @@ class StringAddCalculatorTest {
     fun `잘못된 입력값이 들어오면 예외 발생한다`(text: String) {
         shouldThrow<RuntimeException> { calculator.add(text) }
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["-1", "-100", "-999999"])
+    fun `문자열 계산기에 음수를 전달하는 경우 예외 발생한다`(text: String) {
+        shouldThrow<RuntimeException> { calculator.add(text) }
+    }
 }

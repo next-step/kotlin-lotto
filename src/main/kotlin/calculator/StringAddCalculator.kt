@@ -8,6 +8,12 @@ class StringAddCalculator {
             return 0
         }
         val numbers = text.split(DELIMITER)
-        return numbers.sumOf { it.toIntOrNull() ?: throw RuntimeException("잘못된 입력값입니다 : $it") }
+        return numbers.sumOf { it.toIntOrThrowIfInvalid() }
+    }
+
+    private fun String.toIntOrThrowIfInvalid(): Int {
+        return this.toIntOrNull()?.also {
+            if (it < 0) throw RuntimeException("음수를 입력할 수 없습니다 : $this")
+        } ?: throw RuntimeException("잘못된 입력값입니다 : $this")
     }
 }
