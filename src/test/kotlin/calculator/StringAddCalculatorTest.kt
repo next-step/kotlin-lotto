@@ -3,6 +3,7 @@ package calculator
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullAndEmptySource
@@ -40,8 +41,15 @@ class StringAddCalculatorTest {
         calculator.add(text) shouldBe 6
     }
 
+    @DisplayName("//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다.")
+    @Test
+    fun customDelimiter() {
+        val text = "//;\n1;2;3"
+        calculator.add(text) shouldBe 6
+    }
+
     @ParameterizedTest
-    @ValueSource(strings = ["a", "a,b", ",,,"])
+    @ValueSource(strings = ["a", "a,b", ",,,", ":::::::"])
     fun `잘못된 입력값이 들어오면 예외 발생한다`(text: String) {
         shouldThrow<RuntimeException> { calculator.add(text) }
     }
