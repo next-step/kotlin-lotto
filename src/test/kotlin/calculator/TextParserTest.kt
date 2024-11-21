@@ -4,7 +4,7 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
 class TextParserTest : StringSpec({
-    val sut = TextParser(listOf(DefaultDelimiterSplitter, CustomDelimiterSplitter))
+    val sut = TextParser(listOf(CustomDelimiterSplitter, DefaultDelimiterSplitter))
 
     "문자열을 입력받으면 구분자를 기준으로 숫자들을 분리한다" {
         val text = "1,2:3"
@@ -47,7 +47,7 @@ class TextParser(
             return DEFAULT_VALUE
         }
 
-        val delimiterSplitter = delimiterSplitters.find { it.isSupport(input) } ?: DefaultDelimiterSplitter
+        val delimiterSplitter = delimiterSplitters.firstOrNull { it.isSupport(input) } ?: DefaultDelimiterSplitter
         return delimiterSplitter.split(input).map(String::toInt)
     }
 }
@@ -62,7 +62,7 @@ object DefaultDelimiterSplitter : DelimiterSplitter {
     private val DEFAULT_DELIMITER = Regex("[,:]")
 
     override fun isSupport(text: String): Boolean {
-        return !text.startsWith("//")
+        return true
     }
 
     override fun split(text: String): List<String> {
