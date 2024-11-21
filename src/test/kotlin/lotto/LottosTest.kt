@@ -2,6 +2,7 @@ package lotto
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 
 class LottosTest {
     @Test
@@ -18,21 +19,22 @@ class LottosTest {
     }
 
     @Test
-    fun `금액만큼 자동구매 가능`() {
+    fun `금액만큼 예상하는 번호로 자동구매 가능`() {
         val fixedLottoNumbersGenerator =
             FixedLottoNumbersGenerator(
                 listOf(
                     setOf(1, 2, 3, 4, 5, 6),
-                    setOf(4, 5, 6, 7, 8, 9),
-                    setOf(11, 12, 13, 14, 15, 16),
-                    setOf(21, 22, 23, 24, 25, 26),
+                    setOf(14, 15, 16, 17, 18, 19),
                 ),
             )
-        val buyAmount = Amount("4500")
+        val buyAmount = Amount("2500")
 
         val actual = Lottos.fromCount(buyAmount, fixedLottoNumbersGenerator)
 
-        assertThat(actual.size).isEqualTo(4)
+        assertAll(
+            {assertThat(actual.size).isEqualTo(2)},
+            {assertThat(actual.ranks(Lotto.from(listOf(1, 2, 3, 4, 5, 6)))).isEqualTo(Ranks.fromGroupBy(listOf(Rank.FIRST, Rank.MISS)))},
+        )
     }
 
     @Test
