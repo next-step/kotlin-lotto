@@ -9,8 +9,8 @@ class LottoStore {
     fun issueLottos(
         count: Int,
         generator: LottoNumberGenerator,
-    ): List<Lotto> {
-        return List(count) { Lotto(generator.generate()) }
+    ): PurchasedLottos {
+        return PurchasedLottos(List(count) { Lotto(generator.generate()) })
     }
 
     companion object {
