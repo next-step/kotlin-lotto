@@ -35,4 +35,20 @@ class LottoLineTest : StringSpec({
             exception.message shouldBe "로또 번호는 중복되지 않아야 합니다."
         }
     }
+
+    "다른 로또 라인과 비교해 같은 번호를 몇 개 가지고 있는지 반환할 수 있다." {
+        forAll(
+            row(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 4, 5, 6), 6),
+            row(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 4, 5, 7), 5),
+            row(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 4, 7, 8), 4),
+            row(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 7, 8, 9), 3),
+            row(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 7, 8, 9, 10), 2),
+            row(listOf(1, 2, 3, 4, 5, 6), listOf(1, 7, 8, 9, 10, 11), 1),
+            row(listOf(1, 2, 3, 4, 5, 6), listOf(7, 8, 9, 10, 11, 12), 0),
+        ) { numbers1, numbers2, expected ->
+            val lottoLine1 = LottoLine(numbers1.map { LottoBall(it) }.toList())
+            val lottoLine2 = LottoLine(numbers2.map { LottoBall(it) }.toList())
+            lottoLine1.extractMatchCount(lottoLine2) shouldBe expected
+        }
+    }
 })
