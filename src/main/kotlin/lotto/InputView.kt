@@ -1,13 +1,13 @@
 package lotto
 
-class InputView(private val template: String) {
-    fun read(): String {
-        println(template)
-        return readlnOrNull() ?: throw IllegalArgumentException("입력이 없습니다.")
+object InputView {
+    fun readMessage(message: String): String {
+        println(message)
+        return readlnOrNull() ?: ""
     }
 
-    fun readCsvToInt(): List<Int> {
-        return read().split(",")
-            .map { it.toInt() }
+    fun readCsvToInt(message: String): List<Int> {
+        println(message)
+        return readlnOrNull()?.split(",")?.map { it.trim().toInt() } ?: emptyList()
     }
 }
