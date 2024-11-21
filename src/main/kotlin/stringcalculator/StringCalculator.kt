@@ -1,9 +1,12 @@
 package stringcalculator
 
 object StringCalculator {
-    private const val CUSTOM_SEPARATOR_DELIMITER_PATTERN = "//(.*?)\\\\n"
-    private const val NUMBER_PATTERN = "\\d+"
-    private const val NON_NUMBER_PATTERN = "[^\\d]+"
+    private val CUSTOM_SEPARATOR_DELIMITER_PATTERN = "//(.*?)\\\\n".toRegex()
+    private val NUMBER_PATTERN = "\\d+".toRegex()
+    private val NON_NUMBER_PATTERN = "[^\\d]+".toRegex()
+
+    private val EMPTY_INITIALIZATION: Pair<Separators, List<Number>> =
+        Pair(Separators(), listOf(Number(0)))
 
     fun calculate(input: String): Int {
         val initialization =
@@ -20,7 +23,7 @@ object StringCalculator {
     }
 
     private fun initializeForBlankInput(): Pair<Separators, List<Number>> {
-        return Pair(Separators(), listOf(Number(0)))
+        return EMPTY_INITIALIZATION
     }
 
     private fun initializeWithInput(input: String): Pair<Separators, List<Number>> {
@@ -31,7 +34,7 @@ object StringCalculator {
     }
 
     private fun extractSeparators(input: String): Separators {
-        val pattern = CUSTOM_SEPARATOR_DELIMITER_PATTERN.toRegex()
+        val pattern = CUSTOM_SEPARATOR_DELIMITER_PATTERN
         val allMatches = pattern.findAll(input).toList()
         return allMatches.fold(Separators()) { tempSeparator, match ->
             val potentialSeparator = extractSeparatorFromMatch(match)
@@ -48,8 +51,8 @@ object StringCalculator {
     }
 
     private fun extractNumbers(input: String): List<Number> {
-        val cleanedInput = input.replaceFirst(CUSTOM_SEPARATOR_DELIMITER_PATTERN.toRegex(), "")
-        return NUMBER_PATTERN.toRegex().findAll(cleanedInput)
+        val cleanedInput = input.replaceFirst(CUSTOM_SEPARATOR_DELIMITER_PATTERN, "")
+        return NUMBER_PATTERN.findAll(cleanedInput)
             .map { Number(it.value) }
             .toList()
     }
@@ -59,8 +62,8 @@ object StringCalculator {
         separators: Separators,
         numbers: List<Number>,
     ) {
-        val cleanedInput = input.replaceFirst(CUSTOM_SEPARATOR_DELIMITER_PATTERN.toRegex(), "")
-        val nonNumberMatches = NON_NUMBER_PATTERN.toRegex().findAll(cleanedInput).map { it.value }.toList()
+        val cleanedInput = input.replaceFirst(CUSTOM_SEPARATOR_DELIMITER_PATTERN, "")
+        val nonNumberMatches = NON_NUMBER_PATTERN.findAll(cleanedInput).map { it.value }.toList()
         checkNonMatchSeparator(nonNumberMatches, separators)
         checkInputFomula(nonNumberMatches, numbers)
     }
