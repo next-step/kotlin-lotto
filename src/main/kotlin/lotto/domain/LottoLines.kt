@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class LottoLines(private val lines: List<LottoLine>) {
     init {

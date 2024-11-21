@@ -1,11 +1,11 @@
-package lotto
+package lotto.domain
 
-enum class LottoRank(val prize: Int) {
-    FIRST(2_000_000_000),
-    SECOND(1_500_000),
-    THIRD(50_000),
-    FOURTH(5_000),
-    NO_RANK(0),
+enum class LottoRank(val rank: Int, val prize: Int, val description: String) {
+    FIRST(1, 2_000_000_000, "6개 일치"),
+    SECOND(2, 1_500_000, "5개 일치"),
+    THIRD(3, 50_000, "4개 일치"),
+    FOURTH(4, 5_000, "3개 일치"),
+    NO_RANK(5, 0, "꽝"),
     ;
 
     companion object {

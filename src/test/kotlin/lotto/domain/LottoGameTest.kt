@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
@@ -13,7 +13,7 @@ class LottoGameTest : StringSpec({
         ) { lottoNumbers ->
             val lottoGame =
                 LottoGame(
-                    "2000",
+                    LottoPurchaseAmount("2000"),
                     CustomLottoBallBallMachine(lottoNumbers),
                 )
             lottoGame.getLottoLines() shouldBe lottoNumbers

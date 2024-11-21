@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class LottoLine(private val lottoBalls: List<LottoBall>) {
     constructor(lottoInput: String) : this(lottoInput.split(",").map { LottoBall(it.trim().toInt()) })

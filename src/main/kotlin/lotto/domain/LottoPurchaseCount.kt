@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 @JvmInline
 value class LottoPurchaseCount(val count: Int) {

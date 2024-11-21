@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class CustomLottoBallBallMachine(lineValues: List<List<Int>>) : LottoBallMachine {
     private val lottoLines: MutableList<LottoLine> =

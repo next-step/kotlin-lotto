@@ -1,7 +1,9 @@
-package lotto
+package lotto.domain
 
 @JvmInline
 value class LottoPurchaseAmount(val amount: Int) {
+    constructor(amount: String) : this(amount.toInt())
+
     init {
         checkIsNaturalNumber()
         checkIsMultiplesOfLottoPrice()

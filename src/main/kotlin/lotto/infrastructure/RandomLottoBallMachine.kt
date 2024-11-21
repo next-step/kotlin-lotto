@@ -1,4 +1,8 @@
-package lotto
+package lotto.infrastructure
+
+import lotto.domain.LottoBall
+import lotto.domain.LottoBallMachine
+import lotto.domain.LottoLine
 
 class RandomLottoBallMachine : LottoBallMachine {
     override fun generate(): LottoLine {
