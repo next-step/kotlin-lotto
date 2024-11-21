@@ -3,7 +3,9 @@ package calculator
 object StringAddCalculator {
 
     fun calculate(expression: String?): Int {
-        if (expression.isNullOrBlank()) return 0
+        if (expression.isNullOrBlank()) {
+            return 0
+        }
 
         return expression
             .selectSeparator()
