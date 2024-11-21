@@ -1,9 +1,12 @@
 package calculator
 
-import org.assertj.core.api.Assertions.assertThat
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullAndEmptySource
+import org.junit.jupiter.params.provider.ValueSource
 
 class StringAddCalculatorTest {
     private lateinit var calculator: StringAddCalculator
@@ -16,6 +19,18 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @NullAndEmptySource
     fun `빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다`(text: String?) {
-        assertThat(calculator.add(text)).isZero
+        calculator.add(text) shouldBe 0
+    }
+
+    @Test
+    fun `숫자 두개를 쉼표(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다`() {
+        val text = "1,2"
+        calculator.add(text) shouldBe 3
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["a", "a,b", ",,,"])
+    fun `잘못된 입력값이 들어오면 예외 발생한다`(text: String) {
+        shouldThrow<RuntimeException> { calculator.add(text) }
     }
 }
