@@ -1,7 +1,7 @@
 package lotto
 
 @JvmInline
-value class LottoPurchaseAmount(private val amount: Int) {
+value class LottoPurchaseAmount(val amount: Int) {
     init {
         checkIsNaturalNumber()
         checkIsMultiplesOfLottoPrice()
@@ -21,5 +21,9 @@ value class LottoPurchaseAmount(private val amount: Int) {
 
     companion object {
         private const val LOTTO_PRICE = 1000
+
+        fun fromLottoPurchaseCount(lottoPurchaseCount: LottoPurchaseCount): LottoPurchaseAmount {
+            return LottoPurchaseAmount(lottoPurchaseCount.count * LOTTO_PRICE)
+        }
     }
 }

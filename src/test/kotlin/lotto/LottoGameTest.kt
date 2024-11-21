@@ -9,7 +9,7 @@ class LottoGameTest : StringSpec({
     "로또 머신을 통해 로또 라인들을 생성할 수 있다." {
         forAll(
             row(listOf(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 4, 5, 8))),
-            row(listOf(listOf(1, 33, 3, 24, 15, 45), listOf(6, 8, 9, 14, 17, 28))),
+            row(listOf(listOf(1, 3, 15, 24, 33, 45), listOf(6, 8, 9, 14, 17, 28))),
         ) { lottoNumbers ->
             val lottoGame =
                 LottoGame(
