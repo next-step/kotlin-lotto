@@ -5,14 +5,19 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
 class LottoTicketTest : StringSpec({
-    fun verifyLottoRank(matchCount: Int, expectedRank: LottoRank, expectedPrize: Int) {
+    fun verifyLottoRank(
+        matchCount: Int,
+        expectedRank: LottoRank,
+        expectedPrize: Int,
+    ) {
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
         var matchingTicket: LottoTicket? = null
         while (matchingTicket == null) {
             val lottoTickets = List(14000) { LottoTicket() }
-            matchingTicket = lottoTickets.firstOrNull { ticket ->
-                ticket.matchCount(winningNumbers) == matchCount
-            }
+            matchingTicket =
+                lottoTickets.firstOrNull { ticket ->
+                    ticket.matchCount(winningNumbers) == matchCount
+                }
         }
 
         val rank = LottoRank.from(matchingTicket!!.matchCount(winningNumbers))

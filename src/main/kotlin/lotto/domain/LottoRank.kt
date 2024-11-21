@@ -5,7 +5,8 @@ enum class LottoRank(val matchCount: Int, val prize: Int) {
     THIRD(5, 1_500_000),
     FOURTH(4, 50_000),
     FIFTH(3, 5000),
-    NONE(0, 0);
+    NONE(0, 0),
+    ;
 
     companion object {
         fun from(matchCount: Int): LottoRank {

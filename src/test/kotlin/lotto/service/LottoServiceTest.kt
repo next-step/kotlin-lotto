@@ -17,9 +17,10 @@ class LottoServiceTest : StringSpec({
         val lottoTickets = lottoService.lottoIssuance()
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
 
-        val totalPrize = lottoTickets.sumOf { ticket ->
-            LottoRank.from(ticket.matchCount(winningNumbers)).prize
-        }
+        val totalPrize =
+            lottoTickets.sumOf { ticket ->
+                LottoRank.from(ticket.matchCount(winningNumbers)).prize
+            }
 
         val profitRate = lottoService.calculateProfitRate(totalPrize)
         val expectedProfitRate = "0.00".toBigDecimal()

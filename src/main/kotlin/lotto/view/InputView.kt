@@ -10,8 +10,9 @@ object InputView {
 
     fun askWinningNumbers(): List<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        val numbers = readlnOrNull()?.split(",")?.map { it.trim().toInt() }
-            ?: throw IllegalArgumentException("1부터 45 사이의 숫자를 쉼표로 구분하여 입력해 주세요.")
+        val numbers =
+            readlnOrNull()?.split(",")?.map { it.trim().toInt() }
+                ?: throw IllegalArgumentException("1부터 45 사이의 숫자를 쉼표로 구분하여 입력해 주세요.")
 
         LottoTicket.validateNumbers(numbers) // 검증 로직 호출
         return numbers

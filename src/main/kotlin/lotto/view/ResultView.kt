@@ -4,12 +4,18 @@ import lotto.domain.LottoRank
 import java.math.BigDecimal
 
 object ResultView {
-    fun showPurchaseInfo(count: Int, lottoNumbers: List<List<Int>>) {
+    fun showPurchaseInfo(
+        count: Int,
+        lottoNumbers: List<List<Int>>,
+    ) {
         println("$count 개를 구매했습니다.")
         lottoNumbers.forEach { println(it) }
     }
 
-    fun showStatistics(statistics: Map<LottoRank, Int>, profitRate: BigDecimal) {
+    fun showStatistics(
+        statistics: Map<LottoRank, Int>,
+        profitRate: BigDecimal,
+    ) {
         println("\n당첨 통계")
         println("---------")
         statistics.forEach { (rank, count) ->

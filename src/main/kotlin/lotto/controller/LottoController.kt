@@ -2,7 +2,6 @@ package lotto.controller
 
 import lotto.domain.Lotto
 import lotto.domain.LottoRank
-import lotto.domain.LottoTicket
 import lotto.service.LottoService
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -18,13 +17,15 @@ class LottoController {
 
         val winningNumbers = InputView.askWinningNumbers()
 
-        val statistics = tickets.groupingBy { ticket ->
-            LottoRank.from(ticket.matchCount(winningNumbers))
-        }.eachCount()
+        val statistics =
+            tickets.groupingBy { ticket ->
+                LottoRank.from(ticket.matchCount(winningNumbers))
+            }.eachCount()
 
-        val totalPrize = statistics.entries.sumOf { (rank, count) ->
-            rank.prize * count
-        }
+        val totalPrize =
+            statistics.entries.sumOf { (rank, count) ->
+                rank.prize * count
+            }
 
         val profitRate = lottoService.calculateProfitRate(totalPrize)
 

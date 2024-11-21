@@ -8,7 +8,7 @@ class StringAdditionCalculator(private val str: String?) {
     }
 }
 
-class StringAdditionCalculatorTest : StringSpec ({
+class StringAdditionCalculatorTest : StringSpec({
     "빈 문자열 또는 null을 입력할 경우 0을 반환해야 한다." {
         StringAdditionCalculator("").add() shouldBe 0
         StringAdditionCalculator(null).add() shouldBe 0

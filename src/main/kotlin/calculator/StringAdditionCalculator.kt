@@ -25,7 +25,7 @@ class StringAdditionCalculator {
         private const val NOT_NUMBER_MESSAGE = "숫자 이외의 값을 입력할 수 없습니다."
         private const val NEGATIVE_NUMBER_MESSAGE = "음수를 입력할 수 없습니다."
         private const val DEFAULT_SEPARATOR = ",|:"
-        private const val CUSTOM_SEPARATOR_INDEX= 1
+        private const val CUSTOM_SEPARATOR_INDEX = 1
         private const val NUMBERS_INDEX = 2
 
         private fun validate(numbers: List<String>) {
