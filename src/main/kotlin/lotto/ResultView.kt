@@ -5,7 +5,10 @@ object ResultView {
         println(message)
     }
 
-    fun printStatistics(ranks: Ranks, amount: Amount) {
+    fun printStatistics(
+        ranks: Ranks,
+        amount: Amount,
+    ) {
         println("당첨 통계")
         println("---------")
         Rank.prizeRanks.forEach {

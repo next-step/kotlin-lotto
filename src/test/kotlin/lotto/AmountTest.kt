@@ -1,14 +1,14 @@
 package lotto
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal
 
-class AmountTest{
+class AmountTest {
     @Test
-    fun `음수는 예외발생`(){
-        assertThrows(IllegalArgumentException::class.java){
+    fun `음수는 예외발생`() {
+        assertThrows(IllegalArgumentException::class.java) {
             Amount(-1)
         }
     }
@@ -31,12 +31,10 @@ class AmountTest{
         val actual = first.rate(second)
 
         assertThat(actual.compareTo(BigDecimal("0.5"))).isEqualTo(0) // 값 비교 (scale 무시)
-
-
     }
 
     @Test
-    fun `multiply 계산 가능`( ){
+    fun `multiply 계산 가능`() {
         val first = Amount(1)
 
         val actual = first.multiply(2)
@@ -45,7 +43,7 @@ class AmountTest{
     }
 
     @Test
-        fun `divide 계산가능`() {
+    fun `divide 계산가능`() {
         val first = Amount(4)
         val second = Amount(2)
 
