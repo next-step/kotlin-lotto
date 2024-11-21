@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.Lotto
+import lotto.domain.Lotto
 
 class OutPutView {
     fun printLottoCount(count: Int) {

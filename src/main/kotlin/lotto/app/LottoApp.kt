@@ -1,7 +1,7 @@
 package lotto.app
 
-import lotto.LottoStore
-import lotto.AutoLottoNumberGenerator
+import lotto.domain.LottoStore
+import lotto.domain.AutoLottoNumberGenerator
 import lotto.view.InputView
 import lotto.view.OutPutView
 

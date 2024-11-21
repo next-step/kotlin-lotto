@@ -2,6 +2,7 @@ package lotto
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.LottoGenerator
 
 class LottoGeneratorTest : BehaviorSpec({
     Given("로또를 생성하면") {

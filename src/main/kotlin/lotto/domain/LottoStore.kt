@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class LottoStore {
     fun calculateLottoCount(amount: Int): Int {
