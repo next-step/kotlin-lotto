@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoMoney(private val money: Int) {
+class LottoMoney(val money: Int) {
 
     init {
         require(money >= LOTTO_COST) {
