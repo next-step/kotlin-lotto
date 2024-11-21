@@ -45,9 +45,9 @@ class LottoServiceTest {
                     LottoNumber(1),
                     LottoNumber(2),
                     LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5),
                     LottoNumber(7),
-                    LottoNumber(8),
-                    LottoNumber(9),
                 ),
             ),
             Lotto(
@@ -62,7 +62,7 @@ class LottoServiceTest {
             ),
         )
 
-        val winningNumbers = Lotto(
+        val winningNumbers = WinningLotto(
             listOf(
                 LottoNumber(1),
                 LottoNumber(2),
@@ -71,14 +71,16 @@ class LottoServiceTest {
                 LottoNumber(5),
                 LottoNumber(6),
             ),
+            bonusNumber = LottoNumber(7),
         )
 
         val expectedResults = LottoResults(
             listOf(
                 LottoResult(LottoRank.NONE, 1),
-                LottoResult(LottoRank.FOURTH, 1),
+                LottoResult(LottoRank.FIFTH, 0),
+                LottoResult(LottoRank.FOURTH, 0),
                 LottoResult(LottoRank.THIRD, 0),
-                LottoResult(LottoRank.SECOND, 0),
+                LottoResult(LottoRank.SECOND, 1),
                 LottoResult(LottoRank.FIRST, 1),
             ),
         )

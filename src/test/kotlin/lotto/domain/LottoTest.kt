@@ -34,15 +34,17 @@ class LottoTest {
 
     @ParameterizedTest
     @CsvSource(
-        "1,2,3,4,5,6:FIRST",
-        "1,2,3,4,5,7:SECOND",
-        "1,2,3,4,8,9:THIRD",
-        "1,2,3,10,11,12:FOURTH",
-        "7,8,9,10,11,12:NONE",
+        "1,2,3,4,5,6:45:FIRST",
+        "1,2,3,4,5,7:6:SECOND",
+        "1,2,3,4,5,7:45:THIRD",
+        "1,2,3,4,8,9:45:FOURTH",
+        "1,2,3,10,11,12:45:FIFTH",
+        "7,8,9,10,11,12:45:NONE",
         delimiter = ':',
     )
     fun `match 메서드는 일치하는 번호 개수에 따라 적절한 LottoRank를 반환한다`(
         winningNumbers: String,
+        bonusNumber: Int,
         expectedRank: LottoRank,
     ) {
         val lotto = Lotto(
@@ -56,8 +58,9 @@ class LottoTest {
             ),
         )
 
-        val winningLotto = Lotto(
+        val winningLotto = WinningLotto(
             winningNumbers.split(",").map { LottoNumber(it.toInt()) },
+            bonusNumber = LottoNumber(bonusNumber),
         )
 
         assertThat(lotto.match(winningLotto)).isEqualTo(expectedRank)
