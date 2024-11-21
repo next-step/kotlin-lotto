@@ -1,5 +1,6 @@
 package stringcalculator
 
+import io.kotest.assertions.assertSoftly
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
@@ -13,8 +14,10 @@ class StringCalculatorTest : StringSpec({
         val result1 = calculator.sum(commaExp)
         val result2 = calculator.sum(colonExp)
 
-        result1 shouldBe 6
-        result2 shouldBe 6
+        assertSoftly {
+            result1 shouldBe 6
+            result2 shouldBe 6
+        }
     }
 
     "커스텀 구분자를 전달하면 해당 구분자를 기준으로 분리하여 합계를 반환한다." {
