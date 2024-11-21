@@ -51,4 +51,23 @@ class LottoTest : BehaviorSpec({
             }
         }
     }
+    Given("로또 번호가 주어졌을 때") {
+        val lotto = Lotto(setOf(1, 2, 3, 4, 5, 6))
+
+        forAll(
+            row(setOf(1, 2, 3, 7, 8, 9), 3),
+            row(setOf(1, 2, 3, 4, 5, 6), 6),
+            row(setOf(7, 8, 9, 10, 11, 12), 0),
+            row(setOf(1, 2, 3, 4, 5), 5),
+            row(emptySet<Int>(), 0),
+        ) { winningNumbers, expectedMatchCount ->
+            When("당첨 번호가 ${winningNumbers}인 경우") {
+                val matchCount = lotto.matchCount(winningNumbers)
+
+                Then("일치하는 번호의 개수는 ${expectedMatchCount}이다") {
+                    matchCount shouldBe expectedMatchCount
+                }
+            }
+        }
+    }
 })
