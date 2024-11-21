@@ -1,10 +1,11 @@
 package stringcalculator
 
-class StringCalculator(input: String) {
-    private val separators: Separators
-    private val numbers: List<Number>
+object StringCalculator {
+    private const val CUSTOM_SEPARATOR_DELIMITER_PATTERN = "//(.*?)\\\\n"
+    private const val NUMBER_PATTERN = "\\d+"
+    private const val NON_NUMBER_PATTERN = "[^\\d]+"
 
-    init {
+    fun calculate(input: String): Int {
         val initialization =
             if (input.isBlank()) {
                 initializeForBlankInput()
@@ -12,9 +13,10 @@ class StringCalculator(input: String) {
                 initializeWithInput(input)
             }
 
-        this.separators = initialization.first
-        this.numbers = initialization.second
-        validate(input)
+        val separators = initialization.first
+        val numbers = initialization.second
+        validate(input, separators, numbers)
+        return numbers.reduce { acc, number -> acc.plus(number) }.amount
     }
 
     private fun initializeForBlankInput(): Pair<Separators, List<Number>> {
@@ -52,30 +54,30 @@ class StringCalculator(input: String) {
             .toList()
     }
 
-    private fun validate(input: String) {
+    private fun validate(
+        input: String,
+        separators: Separators,
+        numbers: List<Number>,
+    ) {
         val cleanedInput = input.replaceFirst(CUSTOM_SEPARATOR_DELIMITER_PATTERN.toRegex(), "")
         val nonNumberMatches = NON_NUMBER_PATTERN.toRegex().findAll(cleanedInput).map { it.value }.toList()
-        checkNonMatchSeparator(nonNumberMatches)
-        checkInputFomula(nonNumberMatches)
+        checkNonMatchSeparator(nonNumberMatches, separators)
+        checkInputFomula(nonNumberMatches, numbers)
     }
 
-    private fun checkNonMatchSeparator(nonNumberMatches: List<String>) {
+    private fun checkNonMatchSeparator(
+        nonNumberMatches: List<String>,
+        separators: Separators,
+    ) {
         require(nonNumberMatches.all { separators.isExist(it) }) {
             "입력에 유효하지 않은 구분자가 포함되어 있습니다."
         }
     }
 
-    private fun checkInputFomula(nonNumberMatches: List<String>) {
+    private fun checkInputFomula(
+        nonNumberMatches: List<String>,
+        numbers: List<Number>,
+    ) {
         require(nonNumberMatches.size == numbers.size - 1) { "입력 형식이 올바르지 않습니다." }
-    }
-
-    fun calculate(): Int {
-        return numbers.reduce { acc, number -> acc.plus(number) }.amount
-    }
-
-    companion object {
-        private const val CUSTOM_SEPARATOR_DELIMITER_PATTERN = "//(.*?)\\\\n"
-        private const val NUMBER_PATTERN = "\\d+"
-        private const val NON_NUMBER_PATTERN = "[^\\d]+"
     }
 }
