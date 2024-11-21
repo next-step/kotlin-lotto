@@ -25,6 +25,9 @@ class StringParser {
         content: String,
         customSeparator: String = DEFAULT_SEPARATOR_REGEX,
     ): List<String> {
+        require(content.isNotBlank()) { "입력값이 비어있거나 공백만 포함되어 있습니다." }
+        require(!content.contains("\\s".toRegex())) { "입력값이 비어있거나 공백이 포함되어 있습니다." }
+
         val separatorRegex = customSeparator.toRegex()
         return content.split(separatorRegex).filter { it.isNotBlank() }
     }
