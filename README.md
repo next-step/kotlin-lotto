@@ -59,18 +59,18 @@
     - [x] 로또 번호는 1부터 45까지의 수로 구성된다.
 
 
-- 로또 게임(LottoGame)
+- 로또 라인(LottoLine)
     - [x] 6개의 로또 볼로 이루어진다.
     - [x] 각각의 로또 볼은 중복될 수 없다.
     - [x] 하나의 문자열을 입력받아 하나의 로또 게임으로 변환할 수 있다.
 
 
-- 로또 게임들(LottoGames)
+- 로또 라인들(LottoLines)
     - [x] 한 개 이상의 로또 게임을 가지고 있다.
 
 
 - 로또 머신(LottoMachine)
-    - [ ] 로또 게임들(LottoGames)을 생성할 수 있다.
+    - [ ] 로또 라인(LottoLine)을 생성할 수 있다.
 
 
 - 로또 등수(LottoRank)
@@ -79,7 +79,7 @@
 
 
 - 게임 결과(LottoGameResult)
-    - [ ] 당첨 번호와 로또 게임을 비교하여 등수를 반환한다.
+    - [ ] 당첨 번호와 로또 라인을 비교하여 등수를 반환한다.
 
 
 - 게임 결과들(LottoGameResults)
@@ -87,7 +87,7 @@
 
 
 - 로또 체크 머신(LottoCheckMachine)
-    - [ ] 로또 게임들과 당첨 번호를 비교하여 게임 결과들(LottoGameResults)을 반환한다.
+    - [ ] 로또 라인들과 당첨 번호를 비교하여 게임 결과들(LottoGameResults)을 반환한다.
 
 
 - 당첨 통계(LottoStatistics)
