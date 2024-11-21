@@ -29,7 +29,7 @@ class StringParser {
         return content.split(separatorRegex).filter { it.isNotBlank() }
     }
 
-    fun normalizeInput(input: String): String {
+    private fun normalizeInput(input: String): String {
         return input.replace("\\n", "\n")
     }
 
