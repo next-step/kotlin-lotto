@@ -63,7 +63,6 @@
   - [X] 음수 불가
   - [X] 숫자를 받는다
   - [X] 나누기 가능
-- [ ] LottoNumber
 - [X] Lotto
   - [X] LottoNumber 6개 가짐
   - [X] LottoNumber 중복 불가
