@@ -10,6 +10,7 @@ object ResultView {
 
     fun printLottoList(lottos: Lottos) {
         lottos.lottos.forEach { println(it.numbers.numbers) }
+        println()
     }
 
     fun printStatistics(lottoRanks: List<LottoRank>) {
