@@ -1,19 +1,27 @@
 package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 class LottoRankTest {
 
-    @Test
-    fun `matchCount에 의해 LottoRank를 생성한다`() {
-        assertThat(LottoRank.from(0, false)).isEqualTo(LottoRank.NONE)
-        assertThat(LottoRank.from(1, false)).isEqualTo(LottoRank.NONE)
-        assertThat(LottoRank.from(2, false)).isEqualTo(LottoRank.NONE)
-        assertThat(LottoRank.from(3, false)).isEqualTo(LottoRank.FIFTH)
-        assertThat(LottoRank.from(4, false)).isEqualTo(LottoRank.FOURTH)
-        assertThat(LottoRank.from(5, false)).isEqualTo(LottoRank.THIRD)
-        assertThat(LottoRank.from(5, true)).isEqualTo(LottoRank.SECOND)
-        assertThat(LottoRank.from(6, false)).isEqualTo(LottoRank.FIRST)
+    @CsvSource(
+        "0, false, NONE",
+        "1, false, NONE",
+        "2, false, NONE",
+        "3, false, FIFTH",
+        "4, false, FOURTH",
+        "5, false, THIRD",
+        "5, true, SECOND",
+        "6, false, FIRST",
+    )
+    @ParameterizedTest
+    fun `matchCount에 의해 LottoRank를 생성한다`(
+        matchCount: Int,
+        isBonusMatched: Boolean,
+        expected: LottoRank,
+    ) {
+        assertThat(LottoRank.from(matchCount, isBonusMatched)).isEqualTo(expected)
     }
 }

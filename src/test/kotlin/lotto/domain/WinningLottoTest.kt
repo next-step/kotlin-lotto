@@ -1,7 +1,7 @@
 package lotto.domain
 
 import WinningLotto
-import org.junit.jupiter.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 
 class WinningLottoTest {
@@ -19,8 +19,8 @@ class WinningLottoTest {
 
         val bonusNumber = LottoNumber(6)
 
-        assertThrows(IllegalArgumentException::class.java) {
-            WinningLotto(lottoNumbers, bonusNumber)
-        }
+        assertThatThrownBy { WinningLotto(lottoNumbers, bonusNumber) }
+            .isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessage("보너스 번호는 당첨 번호와 중복되면 안됩니다. bonusNumber = $bonusNumber")
     }
 }

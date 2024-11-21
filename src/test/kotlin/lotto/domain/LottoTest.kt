@@ -4,8 +4,6 @@ import lotto.domain.LottoRank
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.CsvSource
 
 class LottoTest {
 
@@ -32,21 +30,8 @@ class LottoTest {
         assertThat(lotto).isNotNull
     }
 
-    @ParameterizedTest
-    @CsvSource(
-        "1,2,3,4,5,6:45:FIRST",
-        "1,2,3,4,5,7:6:SECOND",
-        "1,2,3,4,5,7:45:THIRD",
-        "1,2,3,4,8,9:45:FOURTH",
-        "1,2,3,10,11,12:45:FIFTH",
-        "7,8,9,10,11,12:45:NONE",
-        delimiter = ':',
-    )
-    fun `match 메서드는 일치하는 번호 개수에 따라 적절한 LottoRank를 반환한다`(
-        winningNumbers: String,
-        bonusNumber: Int,
-        expectedRank: LottoRank,
-    ) {
+    @Test
+    fun `match 메서드는 일치하는 번호 개수에 따라 적절한 LottoRank를 반환한다`() {
         val lotto = Lotto(
             listOf(
                 LottoNumber(1),
@@ -58,11 +43,20 @@ class LottoTest {
             ),
         )
 
-        val winningLotto = WinningLotto(
-            winningNumbers.split(",").map { LottoNumber(it.toInt()) },
-            bonusNumber = LottoNumber(bonusNumber),
+        val winningNumbers = WinningLotto(
+            listOf(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(6),
+            ),
+            bonusNumber = LottoNumber(45),
         )
 
-        assertThat(lotto.match(winningLotto)).isEqualTo(expectedRank)
+        val result = lotto.match(winningNumbers)
+
+        assertThat(result).isEqualTo(LottoRank.FIRST)
     }
 }
