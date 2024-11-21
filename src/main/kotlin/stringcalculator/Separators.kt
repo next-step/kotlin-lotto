@@ -15,5 +15,5 @@ class Separators(private val separators: List<Separator>) {
         require(value.isNotBlank()) { "구분자는 공백일 수 없습니다." }
     }
 
-    fun isExist(value: String) = separators.any { it == Separator(value) }
+    fun isExist(value: String) = separators.any { it.isEqual(value) }
 }
