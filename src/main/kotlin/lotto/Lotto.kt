@@ -1,6 +1,6 @@
 package lotto
 
-class Lotto(private val values: Set<Int>) {
+class Lotto(val values: Set<Int>) {
     init {
         require(values.size == LOTTO_SIZE) { "로또는 ${LOTTO_SIZE}개의 숫자로 이루어져야 합니다. 입력값: $values" }
         require(
@@ -12,10 +12,6 @@ class Lotto(private val values: Set<Int>) {
 
     fun match(other: Lotto): Int {
         return values.intersect(other.values).size
-    }
-
-    fun concat(s: String): String {
-        return values.joinToString(s)
     }
 
     companion object {

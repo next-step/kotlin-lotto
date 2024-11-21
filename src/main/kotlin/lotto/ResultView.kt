@@ -1,10 +1,6 @@
 package lotto
 
 object ResultView {
-    fun print(message: List<String>) {
-        println(message)
-    }
-
     fun printStatistics(
         ranks: Ranks,
         amount: Amount,
@@ -16,6 +12,12 @@ object ResultView {
             println("${it.matchCount}개 일치 (${it.prize.value}원) - ${count}개")
         }
         println("총 수익률은 ${ranks.rate(amount)}입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
+    }
+
+    fun printBoughtLotto(boughtLotto: Lottos) {
+        boughtLotto.values.forEach {
+            println("[%s]".format(it.values.sorted().joinToString(", ")))
+        }
     }
 
     fun print(message: String) {

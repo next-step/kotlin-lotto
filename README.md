@@ -64,15 +64,14 @@
   - [X] 숫자를 받는다
   - [X] 나누기 가능
 - [ ] LottoNumber
-
-- [ ] Lotto
+- [X] Lotto
   - [X] LottoNumber 6개 가짐
   - [X] LottoNumber 중복 불가
   - [X] 일치갯수 알 수 있다
   - [X] 1-45 사이의 숫자 객체
-- [ ] Lottos
+- [X] Lottos
   - [X] Lotto 여러개 가짐
   - [X] Rank를 알 수 있다
-- [ ] Rank
+- [X] Rank
   - [X] 3,4,5,6개 일치 통계
   - [X] 수익률 계산

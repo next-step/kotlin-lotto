@@ -9,7 +9,7 @@ value class Amount(val value: BigDecimal) {
         require(value >= BigDecimal.ZERO) { "음수는 입력할 수 없습니다." }
     }
 
-    constructor(str: String) : this(BigDecimal(str))
+    constructor(str: String) : this(str.toBigDecimalOrNull() ?: throw IllegalArgumentException("숫자가 아닙니다."))
     constructor(toInt: Int) : this(toInt.toBigDecimal())
 
     fun plus(other: Amount): Amount {
