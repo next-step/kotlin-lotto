@@ -13,4 +13,9 @@ object InputView {
     }
 
     private fun getLottoCount(purchaseAmount: Int): Int = (purchaseAmount / LOTTO_PRICE)
+
+    fun inputLastWeekWinningNumbers(): List<Int> {
+        println("지난 주 당첨 번호를 입력해 주세요.")
+        return (readlnOrNull() ?: "").split(",").map { it.trim().toInt() }
+    }
 }
