@@ -10,6 +10,7 @@ value class Amount(val value: BigDecimal) {
     }
 
     constructor(str: String) : this(BigDecimal(str))
+    constructor(toInt: Int) : this(toInt.toBigDecimal())
 
     fun plus(other: Amount): Amount {
         return Amount(value + other.value)
@@ -25,9 +26,5 @@ value class Amount(val value: BigDecimal) {
 
     fun divide(other: Amount): Int {
         return (value / other.value).toInt()
-    }
-
-    companion object {
-        val ZERO: Amount = Amount(BigDecimal.ZERO)
     }
 }
