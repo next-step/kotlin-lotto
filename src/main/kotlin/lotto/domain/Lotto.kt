@@ -3,6 +3,9 @@ package lotto.domain
 class Lotto(
     val lines: List<LottoLine>,
 ) {
+    val numberOfLines: Int
+        get() = lines.size
+
     fun match(winner: LottoLine): LottoResult {
         val rankToCount =
             lines

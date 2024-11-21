@@ -15,7 +15,7 @@ class LottoLine private constructor(
     fun match(winner: LottoLine): Rank = Rank.valueOf(countOverlap(winner))
 
     companion object {
-        private const val LINE_SIZE = 6
+        const val LINE_SIZE = 6
 
         fun from(values: List<Int>): LottoLine = LottoLine(values.map { LottoNumber.from(it) }.sorted())
 
