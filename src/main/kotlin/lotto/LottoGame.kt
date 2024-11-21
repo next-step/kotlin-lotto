@@ -1,6 +1,8 @@
 package lotto
 
 class LottoGame(private val lottoBalls: List<LottoBall>) {
+    constructor(lottoInput: String) : this(lottoInput.split(",").map { LottoBall(it.trim().toInt()) })
+
     init {
         checkIsSixBalls()
         checkIsUniqueBalls()
