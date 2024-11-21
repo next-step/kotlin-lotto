@@ -9,4 +9,10 @@ enum class LottoRank(val matchCount: Int?, val winningMoney: Int) {
     ;
 
     fun isWinning(): Boolean = this != NONE
+
+    companion object {
+        fun from(matchCount: Int): LottoRank {
+            return entries.find { it.matchCount == matchCount } ?: NONE
+        }
+    }
 }

@@ -1,24 +1,23 @@
 package lotto.domain
 
-class LottoResults(
-    private val results: List<LottoResult>,
+data class LottoResults(
+    val results: List<LottoResult>,
 ) : List<LottoResults.LottoResult> by results {
+
+    val isProfitable = calculateRateOfReturn() > 1.0
+
     fun calculateRateOfReturn(): Double {
         return calculateEarningMoney().toDouble() / calculateBuyingMoney()
     }
 
     fun calculateBuyingMoney(): Int {
-        return buyingLottoCount() * LOTTO_COST
+        return buyingLottoCount() * LottoMoney.LOTTO_COST
     }
 
     fun buyingLottoCount() = this.sumOf { it.count }
 
     fun calculateEarningMoney(): Int {
         return this.sumOf { it.rank.winningMoney * it.count }
-    }
-
-    fun isProfitable(): Boolean {
-        return calculateRateOfReturn() > 1.0
     }
 
     fun getWiningResults(): List<LottoResult> {

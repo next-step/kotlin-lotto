@@ -1,13 +1,14 @@
 package lotto.service
 
-import lotto.domain.LOTTO_COST
 import lotto.domain.Lotto
 import lotto.domain.LottoGenerator
+import lotto.domain.LottoMoney
 import lotto.domain.LottoResults
 
 class LottoService {
     fun getLottoNumbers(purchaseAmount: Int): List<Lotto> {
-        val buyingLottoQuantity = purchaseAmount / LOTTO_COST
+        val lottoMoney = LottoMoney(purchaseAmount)
+        val buyingLottoQuantity = lottoMoney.calculateQuantity()
         return (1..buyingLottoQuantity).map { LottoGenerator().generate() }
     }
 

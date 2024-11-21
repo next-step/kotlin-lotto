@@ -1,4 +1,4 @@
-import lotto.domain.LOTTO_COST
+import lotto.domain.LottoMoney
 import lotto.domain.LottoRank
 import lotto.domain.LottoResults
 import lotto.domain.LottoResults.LottoResult
@@ -15,7 +15,7 @@ class LottoResultsTest {
         )
         val lottoResults = LottoResults(results)
 
-        assertThat(lottoResults.calculateBuyingMoney()).isEqualTo(3 * LOTTO_COST)
+        assertThat(lottoResults.calculateBuyingMoney()).isEqualTo(3 * LottoMoney.LOTTO_COST)
     }
 
     @Test
@@ -40,7 +40,7 @@ class LottoResultsTest {
 
         val expectedRateOfReturn =
             (LottoRank.FIRST.winningMoney * 1 + LottoRank.SECOND.winningMoney * 2).toDouble() /
-                (lottoResults.buyingLottoCount() * LOTTO_COST)
+                (lottoResults.buyingLottoCount() * LottoMoney.LOTTO_COST)
 
         assertThat(lottoResults.calculateRateOfReturn()).isEqualTo(expectedRateOfReturn)
     }
@@ -53,7 +53,7 @@ class LottoResultsTest {
                 LottoResult(LottoRank.NONE, 0),
             ),
         )
-        assertThat(profitableResults.isProfitable()).isTrue
+        assertThat(profitableResults.isProfitable).isTrue
     }
 
     @Test
@@ -63,7 +63,7 @@ class LottoResultsTest {
                 LottoResult(LottoRank.NONE, 10),
             ),
         )
-        assertThat(unprofitableResults.isProfitable()).isFalse
+        assertThat(unprofitableResults.isProfitable).isFalse
     }
 
     @Test
