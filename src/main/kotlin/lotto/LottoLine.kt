@@ -15,4 +15,8 @@ class LottoLine(private val lottoBalls: List<LottoBall>) {
     private fun checkIsUniqueBalls() {
         require(lottoBalls.toSet().size == 6) { "로또 번호는 중복되지 않아야 합니다." }
     }
+
+    fun extractLottoNumbers(): List<Int> {
+        return lottoBalls.map { it.ballNumber }
+    }
 }

@@ -1,7 +1,7 @@
 package lotto
 
 @JvmInline
-value class LottoPurchaseCount(private val count: Int) {
+value class LottoPurchaseCount(val count: Int) {
     init {
         checkIsNaturalNumber()
     }

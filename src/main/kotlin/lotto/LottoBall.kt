@@ -1,7 +1,7 @@
 package lotto
 
 @JvmInline
-value class LottoBall(private val ballNumber: Int) {
+value class LottoBall(val ballNumber: Int) {
     init {
         checkIsInValidRange()
     }

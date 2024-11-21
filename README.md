@@ -69,9 +69,17 @@
     - [x] 한 개 이상의 로또 게임을 가지고 있다.
 
 
-- 로또 머신(LottoMachine)
-    - [ ] 로또 라인(LottoLine)을 생성할 수 있다.
+- 로또 머신(LottoBallMachine)
+    - [x] 로또 라인(LottoLine)을 생성할 수 있다.
 
+
+- 로또 게임(LottoGame)
+    - [x] 로또 구입 개수를 가지고 있다.
+        - [x] 구입 개수를 반환할 수 있다.
+    - [x] 로또 라인들(LottoLines)을 가지고 있다.
+        - [x] 로또 라인 정보를 반환할 수 있다.
+    - [x] 로또 머신(LottoMachine)을 가지고 있다.
+        - [x] 로또 머신(LottoBallMachine)을 통해 로또 라인들을 생성할 수 있다.
 
 - 로또 등수(LottoRank)
     - [ ] 1등부터 5등과 꽝으로 이루어져 있다.
