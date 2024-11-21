@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoManager(
+class LottoSeller(
     private val quantityChanger: QuantityChanger,
     private val lottoGenerator: LottoGenerator,
 ) {
