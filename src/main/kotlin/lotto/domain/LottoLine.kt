@@ -12,6 +12,8 @@ class LottoLine private constructor(
 
     fun countOverlap(other: LottoLine): Int = numbers.count { other.contains(it) }
 
+    fun match(winner: LottoLine): Rank = Rank.valueOf(countOverlap(winner))
+
     companion object {
         private const val LINE_SIZE = 6
 
