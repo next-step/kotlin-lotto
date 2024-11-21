@@ -5,17 +5,21 @@ import lotto.domain.LottoResults
 import lotto.domain.LottoResults.LottoResult
 
 object ResultView {
-    fun printPurchaseAmount(purchaseAmount: Int) {
-        println("${purchaseAmount}개를 구매했습니다.")
+    fun printLottoList(lottoList: List<Lotto>, manualLottoNumberCount: Int) {
+        println(
+            "수동으로 ${manualLottoNumberCount}장, " +
+                "자동으로 ${lottoList.size - manualLottoNumberCount}장을 구매했습니다.",
+        )
+        printNumbers(lottoList)
+        println()
     }
 
-    fun printLottoList(lottoList: List<Lotto>) {
+    private fun printNumbers(lottoList: List<Lotto>) {
         lottoList.forEach {
             println(
                 "[${it.lottoNumbers.joinToString(", ") { it.value.toString() }}]",
             )
         }
-        println()
     }
 
     fun printResult(lottoResults: LottoResults) {

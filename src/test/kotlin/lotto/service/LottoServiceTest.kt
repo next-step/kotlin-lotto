@@ -1,5 +1,4 @@
 import lotto.domain.Lotto
-import lotto.domain.LottoMoney
 import lotto.domain.LottoNumber
 import lotto.domain.LottoRank
 import lotto.domain.LottoResults
@@ -16,10 +15,11 @@ class LottoServiceTest {
     fun `getLottoNumbers는 구매 금액에 맞는 개수의 로또 번호를 생성한다`() {
         // Given
         val purchaseAmount = 5000
-        val expectedQuantity = purchaseAmount / LottoMoney.LOTTO_COST
+        val expectedQuantity = 5
+        val manualLottoNumbers = emptyList<Lotto>()
 
         // When
-        val lottoNumbers = lottoService.getLottoNumbers(purchaseAmount)
+        val lottoNumbers = lottoService.getLottoNumbers(purchaseAmount, manualLottoNumbers)
 
         // Then
         assertThat(lottoNumbers).hasSize(expectedQuantity)

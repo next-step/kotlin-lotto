@@ -1,6 +1,7 @@
 package lotto.view
 
 import WinningLotto
+import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 
 object InputView {
@@ -20,5 +21,21 @@ object InputView {
             lottoNumbers = numbers.map { LottoNumber.of(it) },
             bonusNumber = LottoNumber.of(bonusNumber),
         )
+    }
+
+    fun getManualLottoNumberCount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        return readln().toInt()
+    }
+
+    fun getManualLottoNumbers(manualLottoNumberCount: Int): List<Lotto> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        return (1..manualLottoNumberCount).map {
+            Lotto(
+                readln().split(",").map { number ->
+                    LottoNumber(number.toInt())
+                },
+            )
+        }
     }
 }

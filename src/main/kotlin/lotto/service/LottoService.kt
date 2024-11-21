@@ -7,10 +7,11 @@ import lotto.domain.LottoMoney
 import lotto.domain.LottoResults
 
 class LottoService {
-    fun getLottoNumbers(purchaseAmount: Int): List<Lotto> {
+    fun getLottoNumbers(purchaseAmount: Int, manualLottos: List<Lotto>): List<Lotto> {
         val lottoMoney = LottoMoney(purchaseAmount)
         val buyingLottoQuantity = lottoMoney.calculateQuantity()
-        return (1..buyingLottoQuantity).map { LottoGenerator().generate() }
+        val autoLottoCount = buyingLottoQuantity - manualLottos.size
+        return manualLottos + (1..autoLottoCount).map { LottoGenerator().generate() }
     }
 
     fun getLottoResult(lottoList: List<Lotto>, winningNumbers: WinningLotto): LottoResults {

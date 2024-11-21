@@ -8,10 +8,14 @@ fun main() {
     val lottoService = LottoService()
 
     val purchaseAmount = InputView.getPurchaseAmount()
-    ResultView.printPurchaseAmount(purchaseAmount)
+    val manualLottoCount = InputView.getManualLottoNumberCount()
+    val manualLottos = InputView.getManualLottoNumbers(manualLottoCount)
 
-    val lottoList = lottoService.getLottoNumbers(purchaseAmount)
-    ResultView.printLottoList(lottoList)
+    val lottoList = lottoService.getLottoNumbers(
+        purchaseAmount = purchaseAmount,
+        manualLottos = manualLottos,
+    )
+    ResultView.printLottoList(lottoList, manualLottoCount)
 
     val winningNumbers = InputView.getWinningNumbers()
     val lottoResults = lottoService.getLottoResult(lottoList, winningNumbers)
