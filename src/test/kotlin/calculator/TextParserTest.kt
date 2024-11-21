@@ -1,5 +1,8 @@
 package calculator
 
+import calculator.delimiter.CustomDelimiterSplitter
+import calculator.delimiter.DefaultDelimiterSplitter
+import calculator.parser.TextParser
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
@@ -38,51 +41,3 @@ class TextParserTest : StringSpec({
         actual shouldBe listOf()
     }
 })
-
-class TextParser(
-    private val delimiterSplitters: List<DelimiterSplitter>,
-) {
-    fun parse(input: String?): List<Int> {
-        if (input.isNullOrBlank()) {
-            return DEFAULT_VALUE
-        }
-
-        val delimiterSplitter = delimiterSplitters.firstOrNull { it.isSupport(input) } ?: DefaultDelimiterSplitter
-        return delimiterSplitter.split(input).map(String::toInt)
-    }
-}
-
-interface DelimiterSplitter {
-    fun isSupport(text: String): Boolean
-
-    fun split(text: String): List<String>
-}
-
-object DefaultDelimiterSplitter : DelimiterSplitter {
-    private val DEFAULT_DELIMITER = Regex("[,:]")
-
-    override fun isSupport(text: String): Boolean {
-        return true
-    }
-
-    override fun split(text: String): List<String> {
-        return text.split(DEFAULT_DELIMITER)
-    }
-}
-
-object CustomDelimiterSplitter : DelimiterSplitter {
-    private val CUSTOM_DELIMITER = Regex("//(.)\n(.*)")
-    private const val CUSTOM_DELIMITER_PREFIX = "//"
-
-    override fun isSupport(text: String): Boolean {
-        return text.startsWith(CUSTOM_DELIMITER_PREFIX)
-    }
-
-    override fun split(text: String): List<String> {
-        val matchResult = CUSTOM_DELIMITER.find(text) ?: throw IllegalArgumentException("Invalid input")
-        val (delimiter, numbers) = matchResult.destructured
-        return numbers.split(delimiter)
-    }
-}
-
-val DEFAULT_VALUE = listOf<Int>()
