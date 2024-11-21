@@ -3,7 +3,11 @@ package lotto
 class Lotto(private val values: Set<Int>) {
     init {
         require(values.size == LOTTO_SIZE) { "로또는 ${LOTTO_SIZE}개의 숫자로 이루어져야 합니다. 입력값: $values" }
-        require(values.all { it in LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER }) { "로또는 ${LOTTO_MIN_NUMBER}-${LOTTO_MAX_NUMBER} 범위의 숫자로 이루어져야 합니다. 입력값: $values" }
+        require(
+            values.all {
+                it in LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER
+            },
+        ) { "로또는 ${LOTTO_MIN_NUMBER}-${LOTTO_MAX_NUMBER} 범위의 숫자로 이루어져야 합니다. 입력값: $values" }
     }
 
     fun match(other: Lotto): Int {

@@ -15,7 +15,10 @@ class Lottos(private val values: List<Lotto>) {
     companion object {
         private val UNIT_PRICE = Amount("1000")
 
-        fun fromCount(buyAmount: Amount, generator: LottoNumbersGenerator): Lottos {
+        fun fromCount(
+            buyAmount: Amount,
+            generator: LottoNumbersGenerator,
+        ): Lottos {
             val makeCount = buyAmount.divide(UNIT_PRICE)
 
             return Lottos((1..makeCount).map { Lotto(generator.generate()) })
