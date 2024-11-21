@@ -18,8 +18,11 @@ class LottoClient(
         val winningNumbers = InputView.inputLastWeekWinningNumbers()
 
         val lottos = generator.generate(lottoCount)
+        ResultView.printLottoList(lottos)
         val result = winningStatistics.evaluate(lottos = lottos, winningNumbers = winningNumbers)
+        ResultView.printStatistics(lottoRanks = result)
         val profit = ProfitCalculator.evaluate(winningAmount = result.sumOf { it.prize }, purchaseAmount = amount)
+        ResultView.printProfit(profit)
     }
 
     private fun getLottoCount(purchaseAmount: Int): Int = (purchaseAmount / LOTTO_PRICE)
