@@ -1,13 +1,15 @@
 package calculator
 
-private const val DELIMITER = ","
+private const val COMMA_DELIMITER = ","
+
+private const val COLON_DELIMITER = ":"
 
 class StringAddCalculator {
     fun add(text: String?): Int {
         if (text.isNullOrBlank()) {
             return 0
         }
-        val numbers = text.split(DELIMITER)
+        val numbers = text.split(COMMA_DELIMITER, COLON_DELIMITER)
         return numbers.sumOf { it.toIntOrThrowIfInvalid() }
     }
 

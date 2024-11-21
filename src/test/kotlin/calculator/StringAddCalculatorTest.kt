@@ -34,6 +34,12 @@ class StringAddCalculatorTest {
         calculator.add(text) shouldBe 3
     }
 
+    @Test
+    fun `구분자를 쉼표(,) 이외에 콜론을 사용할 수 있다`() {
+        val text = "1,2:3"
+        calculator.add(text) shouldBe 6
+    }
+
     @ParameterizedTest
     @ValueSource(strings = ["a", "a,b", ",,,"])
     fun `잘못된 입력값이 들어오면 예외 발생한다`(text: String) {
