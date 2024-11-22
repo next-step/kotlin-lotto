@@ -11,6 +11,6 @@ value class LottoBall(val ballNumber: Int) {
     }
 
     companion object {
-        private val LOTTO_BALL_RANGE = 1..45
+        val LOTTO_BALL_RANGE = 1..45
     }
 }

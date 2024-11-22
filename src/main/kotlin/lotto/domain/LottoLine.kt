@@ -1,29 +1,19 @@
 package lotto.domain
 
-class LottoLine(private val lottoBalls: List<LottoBall>) {
+class LottoLine(private val lottoBalls: LottoBalls) {
+    constructor(balls: List<LottoBall>) : this(LottoBalls(balls))
+
     init {
-        checkIsSixBalls()
-        checkIsUniqueBalls()
-    }
-
-    private fun checkIsSixBalls() {
-        require(lottoBalls.size == LOTTO_BALLS_SIZE) { "로또 번호는 6개여야 합니다." }
-    }
-
-    private fun checkIsUniqueBalls() {
-        require(lottoBalls.toSet().size == LOTTO_BALLS_SIZE) { "로또 번호는 중복되지 않아야 합니다." }
+        lottoBalls.checkBallSize(LOTTO_BALLS_SIZE)
+        lottoBalls.checkIsUniqueBalls()
     }
 
     fun extractMatchCount(other: LottoLine): Int {
-        return lottoBalls.count { other.containsBall(it) }
-    }
-
-    private fun containsBall(ball: LottoBall): Boolean {
-        return lottoBalls.contains(ball)
+        return lottoBalls.extractMatchCount(other.lottoBalls)
     }
 
     fun extractLottoNumbers(): List<Int> {
-        return lottoBalls.map { it.ballNumber }
+        return lottoBalls.extractLottoNumbers()
     }
 
     companion object {
