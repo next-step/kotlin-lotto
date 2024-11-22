@@ -27,7 +27,7 @@ class InputView {
         } catch (e: NumberFormatException) {
             println("유효하지 않은 숫자입니다. 숫자를 입력해 주세요.")
             return readWinningNumbers()
-        }   catch (e: IllegalArgumentException) {
+        } catch (e: IllegalArgumentException) {
             println(e.message)
             return readWinningNumbers()
         }
