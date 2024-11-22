@@ -2,7 +2,9 @@ package lotto
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.collections.shouldBeSorted
 import io.kotest.matchers.collections.shouldContainExactly
+import io.kotest.matchers.collections.shouldContainInOrder
 import io.kotest.matchers.shouldBe
 
 class LottoTicketTest : StringSpec({
@@ -26,5 +28,14 @@ class LottoTicketTest : StringSpec({
         shouldThrow<IllegalArgumentException> {
             LottoTicket(numbers)
         }
+    }
+
+    "로또 티켓의 각 번호는 오름차순으로 정렬된다" {
+        val numbers = listOf(6, 4, 2, 5, 3, 1)
+
+        val sut = LottoTicket(numbers)
+
+        sut.numbers.shouldBeSorted()
+        sut.numbers shouldContainInOrder listOf(1, 2, 3, 4, 5, 6)
     }
 })
