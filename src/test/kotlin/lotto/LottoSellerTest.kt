@@ -1,7 +1,13 @@
 package lotto
 
+import lotto.domain.LottoGenerator
+import lotto.domain.LottoNumberMatcher
+import lotto.domain.LottoResultMapGenerator
 import lotto.domain.LottoSeller
+import lotto.domain.SetGenerator
+import lotto.domain.WinningNumbers
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.entry
 import org.junit.jupiter.api.Test
 
 class LottoSellerTest {
@@ -20,5 +26,24 @@ class LottoSellerTest {
     fun `로또 구매 갯수는 구매금액을 한장 가격으로 나눈 값이다`() {
         val lottoSeller = LottoSeller(5000)
         assertThat(lottoSeller.getLottoPurchaseCount()).isEqualTo(5)
+    }
+
+    @Test
+    fun `갯수별 금액과 갯수를 곱해 수익금을 만든다`() {
+        val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5))
+        val lottoNumberMatcher = LottoNumberMatcher(winningNumbers)
+        val lottoResultMapGenerator = LottoResultMapGenerator(lottoNumberMatcher)
+        val setGenerator =
+            object : SetGenerator {
+                override fun getSet(): List<Int> {
+                    return listOf(1, 2, 3, 4, 7)
+                }
+            }
+        val lottoSeller = LottoSeller(4000)
+        val lottoGenerator = LottoGenerator(setGenerator)
+        val lottos = lottoGenerator.getLottos(lottoSeller.getLottoPurchaseCount())
+        val resultMap = lottoResultMapGenerator.getResultMap(lottos)
+
+        assertThat(lottoSeller.getProfitMap(resultMap)).contains(entry(4, 200000))
     }
 }
