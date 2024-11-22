@@ -1,13 +1,15 @@
 package stringcalculator
 
-import stringcalculator.StringParser.splitToInt
+import stringcalculator.StringParser.splitToInts
+import stringcalculator.StringParser.toCalculateRequest
 
 class Application
 
 fun main() {
     val input = InputView.inputString()
 
-    val numbers = input.splitToInt()
+    val (delimiter, payload) = input.toCalculateRequest()
+    val numbers = payload.splitToInts(delimiter)
 
     println(numbers.sum())
 }
