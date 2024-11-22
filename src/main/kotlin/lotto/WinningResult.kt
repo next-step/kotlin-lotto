@@ -4,33 +4,42 @@ class WinningResult(
     order: Order,
     winNumbers: WinNumbers,
 ) {
-    val winningMatchCounts: Map<Int, Int>
+    val winningMatchCounts: List<Rank>
     val revenue: Int
     val rate: Double
 
     init {
-        winningMatchCounts = calculateMatchCounts(order, winNumbers)
+        winningMatchCounts = createRankResults(order, winNumbers)
         revenue = calculateRevenue()
-        rate = (revenue / order.amount).toDouble()
+        rate = revenue.toDouble() / order.amount.toDouble()
     }
 
     private fun calculateRevenue(): Int {
-        return winningMatchCounts.map { (rank, matchCount) -> getWinningMoney(rank) * matchCount }.sum()
+        return winningMatchCounts.map { (rank, matchCount) -> getPrizeMoney(rank) * matchCount }.sum()
     }
 
-    private fun calculateMatchCounts(
+    // 3 ~ 6 순서로 정렬된 List를 반환한다.
+    private fun createRankResults(
+        order: Order,
+        winNumbers: WinNumbers,
+    ): List<Rank> {
+        val result = groupByRanks(order, winNumbers)
+        return (MIN_RANK..MAX_RANK)
+            .map { rank -> Rank(rank, result[rank] ?: 0, getPrizeMoney(rank)) }
+            .sortedBy { it.rank }
+    }
+
+    private fun groupByRanks(
         order: Order,
         winNumbers: WinNumbers,
     ): Map<Int, Int> {
-        val result =
-            order.lottos.map { winNumbers.countMatchingNumbers(it.numbers) }
-                .filter { it >= MIN_RANK }
-                .groupBy { it }
-                .mapValues { (_, values) -> values.size }
-        return (MIN_RANK..MAX_RANK).associateWith { rank -> result[rank] ?: 0 }
+        return order.lottos.map { winNumbers.countMatchingNumbers(it.numbers) }
+            .filter { it >= MIN_RANK }
+            .groupBy { it }
+            .mapValues { (_, values) -> values.size }
     }
 
-    private fun getWinningMoney(matchCount: Int): Int {
+    private fun getPrizeMoney(matchCount: Int): Int {
         return when (matchCount) {
             6 -> FIRST_PRIZE
             5 -> SECOND_PRIZE

@@ -5,8 +5,8 @@ class LottoSystem(private val numberGenerator: NumberGenerator = LottoNumberGene
         return Order(amount, numberGenerator)
     }
 
-    fun createWinNumbers(): WinNumbers {
-        return WinNumbers(numberGenerator.generate())
+    fun createWinNumbers(winningNumbers: Set<Int>): WinNumbers {
+        return WinNumbers(winningNumbers)
     }
 
     fun createWinningResult(

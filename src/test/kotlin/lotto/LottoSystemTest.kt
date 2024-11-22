@@ -18,7 +18,7 @@ class LottoSystemTest : StringSpec({
     "당첨 번호를 입력받을 경우 당첨 번호 객체를 생성해야 한다." {
         val lottoSystem = LottoSystem(FixedNumberGenerator())
 
-        val winNumbers = lottoSystem.createWinNumbers()
+        val winNumbers = lottoSystem.createWinNumbers(setOf(1, 2, 3, 4, 5, 6))
 
         winNumbers shouldBe WinNumbers(FixedNumberGenerator().generate())
     }
@@ -26,14 +26,14 @@ class LottoSystemTest : StringSpec({
     "당첨 통계 결과를 제공해야 한다." {
         val lottoSystem = LottoSystem(FixedNumberGenerator())
         val order = lottoSystem.createOrder(1000)
-        val winNumbers = lottoSystem.createWinNumbers()
+        val winNumbers = lottoSystem.createWinNumbers(setOf(1, 2, 3, 8, 9, 10))
 
         val result = lottoSystem.createWinningResult(order, winNumbers)
 
         assertSoftly {
-            result.revenue shouldBe 2_000_000_000
-            result.winningMatchCounts[6] shouldBe 1
-            result.rate shouldBe 2000000.0
+            result.revenue shouldBe 5_000
+            result.winningMatchCounts[0].count shouldBe 1
+            result.rate shouldBe 5.0
         }
     }
 })

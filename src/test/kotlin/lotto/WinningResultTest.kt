@@ -12,10 +12,10 @@ class WinningResultTest : StringSpec({
         val result = WinningResult(order, winNumbers)
 
         assertSoftly {
-            result.winningMatchCounts[6] shouldBe 1
-            result.winningMatchCounts[5] shouldBe 0
-            result.winningMatchCounts[4] shouldBe 0
-            result.winningMatchCounts[3] shouldBe 0
+            result.winningMatchCounts[0].count shouldBe 0
+            result.winningMatchCounts[1].count shouldBe 0
+            result.winningMatchCounts[2].count shouldBe 0
+            result.winningMatchCounts[3].count shouldBe 1
         }
     }
 
