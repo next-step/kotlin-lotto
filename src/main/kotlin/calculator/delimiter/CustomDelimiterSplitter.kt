@@ -1,6 +1,7 @@
 package calculator.delimiter
 
 object CustomDelimiterSplitter : DelimiterSplitter {
+    override val priority: Int = 1
     private val CUSTOM_DELIMITER = Regex("//(.)\n(.*)")
     private const val CUSTOM_DELIMITER_PREFIX = "//"
 
