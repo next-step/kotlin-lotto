@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.Lotto
 import lotto.domain.WinningLotto
 
 class InputView {
@@ -23,7 +24,7 @@ class InputView {
                 input.split(",").map {
                     it.trim().toInt()
                 }
-            WinningLotto(numbers.toSet())
+            WinningLotto(Lotto(numbers.toSet()))
         } catch (e: NumberFormatException) {
             println("유효하지 않은 숫자입니다. 숫자를 입력해 주세요.")
             return readWinningNumbers()

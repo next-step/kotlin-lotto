@@ -31,7 +31,7 @@ class PurchasedLottosTest : BehaviorSpec({
         }
     }
     Given("구입한 로또 목록과 당첨 번호가 주어졌을 때") {
-        val winningLotto = WinningLotto(setOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = WinningLotto(Lotto(setOf(1, 2, 3, 4, 5, 6)))
 
         When("각 로또의 매칭 개수에 따라 Rank를 계산하면") {
             val lottos =
