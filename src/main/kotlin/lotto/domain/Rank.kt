@@ -7,6 +7,7 @@ enum class Rank(val matchCount: Int, val prize: BigDecimal) {
     FOUR(4, BigDecimal(50_000)),
     FIVE(5, BigDecimal(1_500_000)),
     SIX(6, BigDecimal(2_000_000_000)),
+    MISS(-1, BigDecimal(0)),
     ;
 
     fun totalPrize(count: Int): BigDecimal {
@@ -15,7 +16,7 @@ enum class Rank(val matchCount: Int, val prize: BigDecimal) {
 
     companion object {
         fun from(matchCount: Int): Rank? {
-            return values().find { it.matchCount == matchCount }
+            return entries.find { it.matchCount == matchCount } ?: MISS
         }
     }
 }
