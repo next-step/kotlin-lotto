@@ -33,6 +33,11 @@
     }
     ```
 - [x] (6) 음수를 전달할 경우 `RuntimeException` 예외가 발생해야 한다. (예 : “-1,2,3”)
+- [ ] 객체 분리하기
+  - [x] Number : 양수
+  - [ ] NumberParser : 숫자 추출
+  - [ ] DelimiterParser : 구분자 추출
+  - [ ] StringAddCalculator : 문자열 덧셈 계산기
 
 
 ### 기능 요구 사항
