@@ -18,7 +18,7 @@ object StringParser {
     }
 
     fun String.splitWithDefault(
-        delimiter: String,
+        delimiter: String = 줄바꿈,
         default: String = 공백,
     ): List<String> = this.split(delimiter)
         .takeIf { it.size >= 2 }

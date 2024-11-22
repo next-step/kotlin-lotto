@@ -12,7 +12,7 @@ data class Delimiter(
     val regex: Regex = delimiters.joinToString(DEFAULT_SEPARATOR).toRegex()
 
     private fun String.parseDelimiter(): String? {
-        val delimiter = this.splitWithDefault(StringParser.줄바꿈).first()
+        val delimiter = this.splitWithDefault().first()
 
         return delimiter.drop(DROP_SIZE)
             .takeIf { it.isNotEmpty() }
