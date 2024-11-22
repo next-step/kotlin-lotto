@@ -18,6 +18,6 @@ class LottoController(
 
         // 당첨 결과
         val result = lottoService.play(lotto, winner)
-        ResultView.printResult(result)
+        ResultView.printResult(result, payment)
     }
 }

@@ -13,6 +13,8 @@ class Payment(
         require(amount % PRICE_PER_LINE == BigInteger.ZERO) { "금액은 1000원 단위여야 합니다." }
     }
 
+    fun doubleValue(): Double = amount.toDouble()
+
     companion object {
         val PRICE_PER_LINE: BigInteger = BigInteger.valueOf(1000)
 
