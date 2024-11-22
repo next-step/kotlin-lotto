@@ -6,5 +6,6 @@ value class PurchasedLottos(val lottos: List<Lotto>) {
         return lottos.map { winningLotto.getRank(it) }
             .groupingBy { it }
             .eachCount()
+            .mapValues { MatchedCount(it.value) }
     }
 }

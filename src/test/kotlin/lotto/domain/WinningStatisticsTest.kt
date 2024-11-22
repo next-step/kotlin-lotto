@@ -23,10 +23,10 @@ class WinningStatisticsTest : BehaviorSpec({
             winningStatistics.calculateStatistics(purchasedLottos)
 
             Then("각 Rank의 매칭 개수가 올바르게 계산된다") {
-                winningStatistics.count(Rank.SIX) shouldBe 1
-                winningStatistics.count(Rank.FOUR) shouldBe 1
-                winningStatistics.count(Rank.THREE) shouldBe 1
-                winningStatistics.count(Rank.MISS) shouldBe 1
+                winningStatistics.count(Rank.SIX) shouldBe MatchedCount(1)
+                winningStatistics.count(Rank.FOUR) shouldBe MatchedCount(1)
+                winningStatistics.count(Rank.THREE) shouldBe MatchedCount(1)
+                winningStatistics.count(Rank.MISS) shouldBe MatchedCount(1)
             }
 
             Then("총 상금이 올바르게 계산된다") {

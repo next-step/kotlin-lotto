@@ -45,10 +45,10 @@ class PurchasedLottosTest : BehaviorSpec({
             val ranks = purchasedLottos.calculateRanks(winningLotto)
 
             Then("Rank별 매칭 결과가 올바르게 계산된다") {
-                ranks[Rank.SIX] shouldBe 1
-                ranks[Rank.FOUR] shouldBe 1
-                ranks[Rank.THREE] shouldBe 1
-                ranks[Rank.MISS] shouldBe 1
+                ranks[Rank.SIX] shouldBe MatchedCount(1)
+                ranks[Rank.FOUR] shouldBe MatchedCount(1)
+                ranks[Rank.THREE] shouldBe MatchedCount(1)
+                ranks[Rank.MISS] shouldBe MatchedCount(1)
             }
         }
 

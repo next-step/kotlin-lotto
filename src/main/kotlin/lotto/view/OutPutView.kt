@@ -27,7 +27,7 @@ class OutPutView {
         Rank.entries
             .filter { it != Rank.MISS } // MISS 제외
             .forEach { rank ->
-                builder.append("${rank.matchCount}개 일치 (${rank.prize}원) - ${statistics.count(rank)}개\n")
+                builder.append("${rank.matchCount}개 일치 (${rank.prize}원) - ${statistics.count(rank).value}개\n")
             }
         return builder.toString()
     }
