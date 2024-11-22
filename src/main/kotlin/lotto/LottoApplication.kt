@@ -10,7 +10,7 @@ import lotto.view.result.LottoListView
 import lotto.view.result.LottoResultView
 
 fun main() {
-    val lottoService = LottoService(DefaultLottoGenerator())
+    val lottoService = LottoService(DefaultLottoGenerator)
 
     val payAmount = BuyInputView.print()
     val purchaseCount = LottoPurchaseCount(payAmount)
