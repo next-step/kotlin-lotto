@@ -15,7 +15,7 @@ enum class Rank(val matchCount: Int, val prize: BigDecimal) {
     }
 
     companion object {
-        fun from(matchCount: Int): Rank? {
+        fun from(matchCount: Int): Rank {
             return entries.find { it.matchCount == matchCount } ?: MISS
         }
     }
