@@ -13,7 +13,7 @@ object LottoController {
         val lottoService = LottoService(lottoPurchasingMachine)
 
         val tickets = lottoService.lottoIssuance()
-        ResultView.showPurchaseInfo(tickets.size, tickets.map { it.numbers() })
+        ResultView.showPurchaseInfo(tickets.size, tickets.map { it.lottoNumbers })
 
         val winningNumbers = InputView.askWinningNumbers()
 

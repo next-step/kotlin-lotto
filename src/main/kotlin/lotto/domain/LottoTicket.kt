@@ -1,18 +1,21 @@
 package lotto.domain
 
-class LottoTicket(numbers: List<Int>? = null) {
-    private val lottoNumbers = numbers ?: (1..45).shuffled().take(6).sorted()
+class LottoTicket {
+    val lottoNumbers: List<Int>
 
-    init {
-        validateNumbers(lottoNumbers)
+    constructor() {
+        this.lottoNumbers = (1..45).shuffled()
+            .take(6)
+            .sorted()
     }
 
-    fun numbers(): List<Int> {
-        return lottoNumbers
+    constructor(numbers: List<Int>) {
+        this.lottoNumbers = numbers
+        validateNumbers(this.lottoNumbers)
     }
 
     fun matchCount(winningNumbers: List<Int>): Int {
-        return numbers().intersect(winningNumbers.toSet()).size
+        return lottoNumbers.intersect(winningNumbers.toSet()).size
     }
 
     companion object {

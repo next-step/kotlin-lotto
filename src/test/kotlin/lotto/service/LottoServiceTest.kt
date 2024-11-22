@@ -9,7 +9,7 @@ class LottoServiceTest : StringSpec({
     val lottoPurchasingMachineService = LottoService(LottoPurchasingMachine(14000))
 
     "구매한 개수만큼 로또를 발급해야 한다." {
-        val lottoList = lottoPurchasingMachineService.lottoIssuance().map { it.numbers() }
+        val lottoList = lottoPurchasingMachineService.lottoIssuance().map { it.lottoNumbers }
         lottoList.size shouldBe 14
     }
 
