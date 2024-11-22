@@ -26,6 +26,12 @@ object StringParser {
 
     private fun String.toIntOrThrow(): Int =
         runCatching {
-            this.toInt().takeIf { it >= 0 } ?: throw RuntimeException("[StringParser] 음수는 허용되지 않습니다. | input: '$this'")
-        }.getOrElse { throw RuntimeException("[StringParser] 값을 Int로 변환하는데 실패했습니다. | input: '$this'") }
+            this.toInt().takeIf { it >= 0 } ?: throw RuntimeException()
+        }.getOrElse { throw RuntimeException("[StringParser] 값이 음수거나 Int로 변환하는데 실패했습니다. | input: '$this'") }
 }
+
+data class StringCalculateRequest(
+    val delimiter: Delimiter,
+    val payload: String,
+)
+
