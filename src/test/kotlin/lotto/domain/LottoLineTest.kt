@@ -8,7 +8,7 @@ import io.kotest.matchers.shouldBe
 
 class LottoLineTest : StringSpec({
     "하나의 문자열을 입력받아 하나의 로또 라인으로 변환할 수 있다." {
-        LottoLine("1, 2, 3, 4, 5, 6")
+        LottoLine.makeNewLottoLine("1, 2, 3, 4, 5, 6")
     }
 
     "로또 라인에 로또 볼이 6개가 아니면 예외 처리한다." {

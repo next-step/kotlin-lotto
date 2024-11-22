@@ -15,7 +15,7 @@ class LottoGame(private val lottoPurchaseAmount: LottoPurchaseAmount, private va
     }
 
     fun returnGameResult(winningNumberInput: String): LottoGameResult {
-        val winningLottoLine = LottoLine(winningNumberInput)
+        val winningLottoLine = LottoLine.makeNewLottoLine(winningNumberInput)
         return lottoLines.extractLottoGameResult(winningLottoLine)
     }
 
