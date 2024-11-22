@@ -38,4 +38,18 @@ class LottoTicketTest : StringSpec({
         sut.numbers.shouldBeSorted()
         sut.numbers shouldContainInOrder listOf(1, 2, 3, 4, 5, 6)
     }
+
+    "로또 티켓의 각 번호는 1 미만일 수 없다" {
+        val numbers = listOf(1, 2, 3, 0, 4, 5)
+        shouldThrow<IllegalArgumentException> {
+            LottoTicket(numbers)
+        }
+    }
+
+    "로또 티켓의 각 번호는 45을 초과할 수 없다" {
+        val numbers = listOf(1, 2, 3, 46, 4, 5)
+        shouldThrow<IllegalArgumentException> {
+            LottoTicket(numbers)
+        }
+    }
 })
