@@ -46,4 +46,23 @@ class LottoSellerTest {
 
         assertThat(lottoSeller.getProfitMap(resultMap)).contains(entry(4, 200000))
     }
+
+    @Test
+    fun `수익금을 구매금액으로 나누어 수익률을 구한다`() {
+        val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5))
+        val lottoNumberMatcher = LottoNumberMatcher(winningNumbers)
+        val lottoResultMapGenerator = LottoResultMapGenerator(lottoNumberMatcher)
+        val setGenerator =
+            object : SetGenerator {
+                override fun getSet(): List<Int> {
+                    return listOf(1, 2, 3, 4, 7)
+                }
+            }
+        val lottoSeller = LottoSeller(4000)
+        val lottoGenerator = LottoGenerator(setGenerator)
+        val lottos = lottoGenerator.getLottos(lottoSeller.getLottoPurchaseCount())
+        val resultMap = lottoResultMapGenerator.getResultMap(lottos)
+        val profitMap = lottoSeller.getProfitMap(resultMap)
+        assertThat(lottoSeller.getProfit(profitMap)).isEqualTo(200000)
+    }
 }

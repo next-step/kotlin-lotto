@@ -10,6 +10,10 @@ class LottoSeller(val purchasePrice: Int) {
         return resultMap.map { Pair(it.key, moneys[it.key].times(it.value)) }.toMap()
     }
 
+    fun getProfit(profitMap: Map<Int, Int>): Int {
+        return profitMap.map { it.value }.sum()
+    }
+
     companion object {
         const val LOTTO_PRICE = 1000
     }
