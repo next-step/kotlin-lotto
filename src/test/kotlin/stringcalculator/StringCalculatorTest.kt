@@ -6,7 +6,7 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
 class StringCalculatorTest : StringSpec({
-    "콤마(,) 혹은 콜론(:)을 기준으로 값을 분리하여 합계를 반환한다." {
+    "콤마(,) 혹은 콜론(:)을 포함한 문자열 내에 있는 숫자들의 합계를 반환한다." {
         val commaExp = "1,2,3"
         val colonExp = "1:2:3"
         val calculator = StringCalculator()
@@ -20,7 +20,7 @@ class StringCalculatorTest : StringSpec({
         }
     }
 
-    "커스텀 구분자를 전달하면 해당 구분자를 기준으로 분리하여 합계를 반환한다." {
+    "커스텀 구분자를 포함한 문자열 내에 있는 숫자들의 합계를 반환한다." {
         val exp = "//<\n1<2<3"
         val calculator = StringCalculator()
 
