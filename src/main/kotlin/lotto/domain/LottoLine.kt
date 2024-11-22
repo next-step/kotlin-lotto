@@ -15,7 +15,11 @@ class LottoLine(private val lottoBalls: List<LottoBall>) {
     }
 
     fun extractMatchCount(other: LottoLine): Int {
-        return lottoBalls.count { other.lottoBalls.contains(it) }
+        return lottoBalls.count { other.containsBall(it) }
+    }
+
+    private fun containsBall(ball: LottoBall): Boolean {
+        return lottoBalls.contains(ball)
     }
 
     fun extractLottoNumbers(): List<Int> {
