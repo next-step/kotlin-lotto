@@ -15,9 +15,7 @@ class WinningStatistics(private val winningLotto: WinningLotto) {
         return this // 메서드 체이닝 지원
     }
 
-    fun count(rank: Rank): Int {
-        return statistics[rank] ?: 0
-    }
+    fun count(rank: Rank): Int = statistics[rank] ?: 0
 
     fun totalPrize(): BigDecimal {
         return statistics.map { (rank, count) ->

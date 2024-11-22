@@ -10,9 +10,7 @@ enum class Rank(val matchCount: Int, val prize: BigDecimal) {
     MISS(-1, BigDecimal(0)),
     ;
 
-    fun totalPrize(count: Int): BigDecimal {
-        return prize.multiply(BigDecimal(count))
-    }
+    fun totalPrize(count: Int): BigDecimal = prize.multiply(BigDecimal(count))
 
     companion object {
         fun from(matchCount: Int): Rank {
