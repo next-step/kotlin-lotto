@@ -1,7 +1,11 @@
 package lotto.domain
 
 class Lotto(val purchasePrice: Int) {
+    fun getLottoPurchaseCount(): Int {
+        return purchasePrice / LOTTO_PRICE
+    }
+
     companion object {
-        val lottoPrice = 1000
+        const val LOTTO_PRICE = 1000
     }
 }
