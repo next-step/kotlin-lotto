@@ -1,6 +1,7 @@
 package lotto.ui
 
 import lotto.domain.LottoLine
+import lotto.domain.Payment
 
 object InputView {
     private const val PAYMENT_PROMPT = "구입금액을 입력해 주세요."
@@ -9,14 +10,14 @@ object InputView {
     private val DELIMITER_PATTERN = "\\s*,\\s*".toRegex()
     private val LINE_PATTERN = """^\s*(\d+\s*,\s*){5}\d+\s*$""".toRegex()
 
-    fun getPayment(): Int {
+    fun getPayment(): Payment {
         println(PAYMENT_PROMPT)
         val rawInput = readln()
         if (!validateNumber(rawInput)) {
             println(PAYMENT_VALIDATION_FAIL_PROMPT)
             return getPayment()
         }
-        return rawInput.toInt()
+        return Payment.from(rawInput.toLong())
     }
 
     fun getWinner(): LottoLine {
