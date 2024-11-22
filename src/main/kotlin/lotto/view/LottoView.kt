@@ -9,7 +9,7 @@ class LottoView {
     }
 
     private fun drawLotto(lotto: Lotto) {
-        lotto.numbers.joinToString(prefix = "[", postfix = "]", separator = ",")
+        println(lotto.numbers.joinToString(prefix = "[", postfix = "]", separator = ","))
     }
 
     fun drawResultMap(lottoResult: LottoResult) {
