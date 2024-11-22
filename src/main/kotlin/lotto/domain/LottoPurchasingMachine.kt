@@ -1,6 +1,6 @@
 package lotto.domain
 
-class Lotto(val money: Int) {
+class LottoPurchasingMachine(val money: Int) {
     init {
         require(money % LOTTO_PRICE_UNIT == 0) { LOTTO_PRICE_UNIT_EXCEPTION_MESSAGE }
     }
