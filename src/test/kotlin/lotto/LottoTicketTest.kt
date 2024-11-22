@@ -52,4 +52,11 @@ class LottoTicketTest : StringSpec({
             LottoTicket(numbers)
         }
     }
+
+    "똑같은 로또 번호가 존재하면 예외를 던진다" {
+        val numbers = listOf(1, 1, 3, 4, 5, 6)
+        shouldThrow<IllegalArgumentException> {
+            LottoTicket(numbers)
+        }
+    }
 })
