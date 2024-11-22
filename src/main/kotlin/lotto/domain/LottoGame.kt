@@ -22,7 +22,7 @@ class LottoGame(private val lottoPurchaseAmount: LottoPurchaseAmount, private va
         return lottoPurchaseCount.count
     }
 
-    fun getLottoLines(): List<List<Int>> {
-        return lottoLines.extractLottoLines()
+    fun getLottoLines(): LottoLines {
+        return lottoLines
     }
 }

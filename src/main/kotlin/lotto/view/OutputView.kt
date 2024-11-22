@@ -1,30 +1,24 @@
 package lotto.view
 
-import lotto.domain.LottoRank
+import lotto.response.LottoLinesResponse
+import lotto.response.LottoRankResponse
 
 class OutputView {
     fun printPurchaseCount(purchaseCount: Int) {
         println("${purchaseCount}개를 구매했습니다.")
     }
 
-    fun printPurchaseLottoLines(lineValues: List<List<Int>>) {
-        val result =
-            buildString {
-                lineValues.forEach { line ->
-                    appendLine(line.joinToString(", ", "[", "]"))
-                }
-            }
+    fun printPurchaseLottoLines(lottoLinesResponse: LottoLinesResponse) {
+        val result = lottoLinesResponse.toFormattedString()
         println(result)
     }
 
-    fun printGameResult(gameResult: List<Pair<LottoRank, Int>>) {
+    fun printGameResult(gameResult: List<LottoRankResponse>) {
         val result =
             buildString {
                 appendLine("\n당첨 통계")
                 appendLine("---------")
-                gameResult.forEach { (rank, count) ->
-                    appendLine("${rank.description} (${rank.prize}원)- ${count}개")
-                }
+                gameResult.forEach { appendLine(it.toFormattedString()) }
             }
         println(result)
     }

@@ -3,7 +3,7 @@ package lotto.domain
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
-import io.kotest.matchers.shouldBe
+import io.kotest.matchers.equality.shouldBeEqualToComparingFields
 
 class LottoGameTest : StringSpec({
     "로또 머신을 통해 로또 라인들을 생성할 수 있다." {
@@ -16,7 +16,10 @@ class LottoGameTest : StringSpec({
                     LottoPurchaseAmount("2000"),
                     CustomLottoBallBallMachine(lottoNumbers),
                 )
-            lottoGame.getLottoLines() shouldBe lottoNumbers
+            lottoGame.getLottoLines() shouldBeEqualToComparingFields
+                lottoNumbers.map {
+                    LottoLine(it.map { LottoBall(it) }.toList())
+                }
         }
     }
 })
