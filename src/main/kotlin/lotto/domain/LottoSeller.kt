@@ -1,8 +1,30 @@
 package lotto.domain
 
-class LottoSeller(val purchasePrice: Int) {
+class LottoSeller(
+    val purchasePrice: Int,
+    val setGenerator: SetGenerator = RandomSetGenerator(),
+) {
     fun getLottoPurchaseCount(): Int {
         return purchasePrice / LOTTO_PRICE
+    }
+
+    fun sellLottos(): List<Lotto> {
+        val lottoGenerator = LottoGenerator(setGenerator)
+        return lottoGenerator.getLottos(getLottoPurchaseCount())
+    }
+
+    fun getLottoResult(
+        lottos: List<Lotto>,
+        winningNumbers: WinningNumbers,
+    ): LottoResult {
+        val lottoNumberMatcher = LottoNumberMatcher(winningNumbers)
+        val lottoResultMapGenerator = LottoResultMapGenerator(lottoNumberMatcher)
+        val resultMap = lottoResultMapGenerator.getResultMap(lottos)
+        val profitMap = getProfitMap(resultMap)
+        val profit = getProfit(profitMap)
+        val profitRate = getProfitRate(profit)
+
+        return LottoResult(lottos, resultMap, profitRate)
     }
 
     fun getProfitMap(resultMap: Map<Int, Int>): Map<Int, Int> {
