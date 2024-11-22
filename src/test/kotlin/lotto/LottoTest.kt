@@ -10,4 +10,9 @@ class LottoTest {
         val lotto = Lotto(5000)
         assertThat(lotto.purchasePrice).isEqualTo(5000)
     }
+
+    @Test
+    fun `로또 한장의 가격은 1000원이다`() {
+        assertThat(Lotto.Companion.lottoPrice).isEqualTo(1000)
+    }
 }
