@@ -29,9 +29,8 @@ class LottoLine(private val lottoBalls: List<LottoBall>) {
     companion object {
         private const val LOTTO_BALLS_SIZE = 6
 
-        fun makeNewLottoLine(lottoInput: String): LottoLine {
-            val lottoBalls = lottoInput.split(",").map { LottoBall(it.trim().toInt()) }
-            return LottoLine(lottoBalls)
+        fun makeNewLottoLine(lottoNumbers: List<Int>): LottoLine {
+            return LottoLine(lottoNumbers.map { LottoBall(it) })
         }
     }
 }

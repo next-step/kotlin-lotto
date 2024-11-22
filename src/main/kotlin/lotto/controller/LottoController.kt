@@ -1,5 +1,6 @@
 package lotto.controller
 
+import lotto.adapter.LottoInputAdapter
 import lotto.domain.LottoBallMachine
 import lotto.domain.LottoGame
 import lotto.domain.LottoPurchaseAmount
@@ -9,12 +10,15 @@ import lotto.view.OutputView
 class LottoController(
     private val inputView: InputView,
     private val outputView: OutputView,
-    private val lottoBallMachine: LottoBallMachine,
+    lottoBallMachine: LottoBallMachine,
 ) {
+    private val adapter = LottoInputAdapter()
     private val lottoGame: LottoGame
-    private val lottoPurchaseAmount: LottoPurchaseAmount = LottoPurchaseAmount(inputView.inputPurchaseAmount())
+    private val lottoPurchaseAmount: LottoPurchaseAmount
 
     init {
+        val purchaseInput = inputView.inputPurchaseAmount()
+        lottoPurchaseAmount = adapter.adaptPurchaseAmount(purchaseInput)
         lottoGame = LottoGame(lottoPurchaseAmount, lottoBallMachine)
     }
 
@@ -25,7 +29,8 @@ class LottoController(
 
     fun announceGameResult() {
         val winningLineInput = inputView.inputWinningNumbers()
-        val gameResult = lottoGame.returnGameResult(winningLineInput)
+        val winningNumbers = adapter.adaptWinningNumbers(winningLineInput)
+        val gameResult = lottoGame.returnGameResult(winningNumbers)
         val lottoProfitRate = gameResult.makeLottoProfitRate(lottoPurchaseAmount.toLottoPurchaseCount())
 
         outputView.printGameResult(gameResult.extractResult())

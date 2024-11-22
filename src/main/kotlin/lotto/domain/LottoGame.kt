@@ -1,11 +1,10 @@
 package lotto.domain
 
 class LottoGame(private val lottoPurchaseAmount: LottoPurchaseAmount, private val lottoBallMachine: LottoBallMachine) {
-    private val lottoPurchaseCount: LottoPurchaseCount
+    private val lottoPurchaseCount: LottoPurchaseCount = lottoPurchaseAmount.toLottoPurchaseCount()
     private val lottoLines: LottoLines
 
     init {
-        this.lottoPurchaseCount = lottoPurchaseAmount.toLottoPurchaseCount()
 
         val lottoLines =
             List(lottoPurchaseCount.count) {
@@ -14,8 +13,8 @@ class LottoGame(private val lottoPurchaseAmount: LottoPurchaseAmount, private va
         this.lottoLines = LottoLines(lottoLines)
     }
 
-    fun returnGameResult(winningNumberInput: String): LottoGameResult {
-        val winningLottoLine = LottoLine.makeNewLottoLine(winningNumberInput)
+    fun returnGameResult(winningNumbers: List<Int>): LottoGameResult {
+        val winningLottoLine = LottoLine.makeNewLottoLine(winningNumbers)
         return lottoLines.extractLottoGameResult(winningLottoLine)
     }
 
