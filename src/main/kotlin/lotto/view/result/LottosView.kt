@@ -1,6 +1,6 @@
 package lotto.view.result
 
-import lotto.view.dto.LottosDto
+import lotto.view.dto.lotto.LottosDto
 
 object LottosView {
     fun print(dto: LottosDto) {

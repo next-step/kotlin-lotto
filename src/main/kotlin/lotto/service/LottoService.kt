@@ -5,11 +5,11 @@ import lotto.domain.LottoGenerator
 import lotto.domain.LottoPurchaseCount
 import lotto.domain.LottoResults
 import lotto.domain.Number
-import lotto.view.dto.LottoDto
 import lotto.view.dto.LottoRankDto
 import lotto.view.dto.LottoResultsDto
-import lotto.view.dto.LottosDto
 import lotto.view.dto.WinningLottoDto
+import lotto.view.dto.lotto.LottoDto
+import lotto.view.dto.lotto.LottosDto
 
 class LottoService(
     private val lottoGenerator: LottoGenerator,
