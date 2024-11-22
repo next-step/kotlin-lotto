@@ -1,16 +1,16 @@
 package lotto.controller
 
-import lotto.domain.Lotto
+import lotto.domain.LottoPurchasingMachine
 import lotto.domain.LottoRank
 import lotto.service.LottoService
 import lotto.view.InputView
 import lotto.view.ResultView
 
-class LottoController {
+object LottoController {
     fun run() {
         val purchaseAmount = InputView.askPurchaseAmount()
-        val lotto = Lotto(purchaseAmount)
-        val lottoService = LottoService(lotto)
+        val lottoPurchasingMachine = LottoPurchasingMachine(purchaseAmount)
+        val lottoService = LottoService(lottoPurchasingMachine)
 
         val tickets = lottoService.lottoIssuance()
         ResultView.showPurchaseInfo(tickets.size, tickets.map { it.numbers() })
