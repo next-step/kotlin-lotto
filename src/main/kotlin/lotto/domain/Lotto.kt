@@ -1,7 +1,7 @@
 package lotto.domain
 
-class Lotto {
-    val numbers = RandomSetGenerator().getRandomNumbers()
+class Lotto(setGenerator: SetGenerator = RandomSetGenerator()) {
+    val numbers = setGenerator.getSet()
 
     fun isLotto(): Boolean {
         return numbers.all { it in (MINIMUM_NUMBER..MAXIMUM_NUMBER) }
