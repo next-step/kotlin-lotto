@@ -13,13 +13,13 @@ class OrderTest : StringSpec({
     }
 
     "주문 생성 시 전달된 금액이 1000원 단위가 아닐 경우 예외를 반환한다." {
-        shouldThrow<IllegalArgumentException> { Order(10001) }
+        shouldThrow<IllegalArgumentException> { Order(10001, FixedNumberGenerator()) }
     }
 
     "주문 생성 시 전달된 금액이 음수 혹은 0원일 경우 예외를 반환한다." {
         assertSoftly {
-            shouldThrow<IllegalArgumentException> { Order(-1) }
-            shouldThrow<IllegalArgumentException> { Order(0) }
+            shouldThrow<IllegalArgumentException> { Order(-1, FixedNumberGenerator()) }
+            shouldThrow<IllegalArgumentException> { Order(0, FixedNumberGenerator()) }
         }
     }
 })

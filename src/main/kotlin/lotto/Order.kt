@@ -2,7 +2,7 @@ package lotto
 
 class Order(
     val amount: Int,
-    numberGenerator: NumberGenerator = LottoNumberGenerator(),
+    numberGenerator: NumberGenerator,
 ) {
     val lottos: List<Lotto>
 
