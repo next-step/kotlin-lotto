@@ -1,24 +1,12 @@
 package lotto
 
 import lotto.domain.Lotto
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class LottoTest {
     @Test
-    fun `로또 구매금액을 입력받는다`() {
-        val lotto = Lotto(5000)
-        assertThat(lotto.purchasePrice).isEqualTo(5000)
-    }
-
-    @Test
-    fun `로또 한장의 가격은 1000원이다`() {
-        assertThat(Lotto.Companion.LOTTO_PRICE).isEqualTo(1000)
-    }
-
-    @Test
-    fun `로또 구매 갯수는 구매금액을 한장 가격으로 나눈 값이다`() {
-        val lotto = Lotto(5000)
-        assertThat(lotto.getLottoPurchaseCount()).isEqualTo(5)
+    fun `로또 번호는 1부터 45까지 번호 중 6개의 랜덤 조합이다`() {
+        val lotto = Lotto()
+        lotto.numbers.all { it in (1..45) }
     }
 }
