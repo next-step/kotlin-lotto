@@ -14,6 +14,10 @@ class LottoSeller(val purchasePrice: Int) {
         return profitMap.map { it.value }.sum()
     }
 
+    fun getProfitRate(profit: Int): Double {
+        return profit.toDouble().div(purchasePrice)
+    }
+
     companion object {
         const val LOTTO_PRICE = 1000
     }

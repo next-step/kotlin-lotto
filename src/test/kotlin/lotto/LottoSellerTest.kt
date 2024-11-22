@@ -65,4 +65,24 @@ class LottoSellerTest {
         val profitMap = lottoSeller.getProfitMap(resultMap)
         assertThat(lottoSeller.getProfit(profitMap)).isEqualTo(200000)
     }
+
+    @Test
+    fun `수익률이 1보다 크면 이득 1이면 본전 1보다 작으면 손해로 판정한다`() {
+        val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5))
+        val lottoNumberMatcher = LottoNumberMatcher(winningNumbers)
+        val lottoResultMapGenerator = LottoResultMapGenerator(lottoNumberMatcher)
+        val setGenerator =
+            object : SetGenerator {
+                override fun getSet(): List<Int> {
+                    return listOf(1, 2, 3, 4, 7)
+                }
+            }
+        val lottoSeller = LottoSeller(4000)
+        val lottoGenerator = LottoGenerator(setGenerator)
+        val lottos = lottoGenerator.getLottos(lottoSeller.getLottoPurchaseCount())
+        val resultMap = lottoResultMapGenerator.getResultMap(lottos)
+        val profitMap = lottoSeller.getProfitMap(resultMap)
+        val profit = lottoSeller.getProfit(profitMap)
+        assertThat(lottoSeller.getProfitRate(profit)).isEqualTo(50.0)
+    }
 }
