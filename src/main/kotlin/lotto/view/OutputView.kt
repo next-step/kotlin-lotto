@@ -8,25 +8,37 @@ class OutputView {
     }
 
     fun printPurchaseLottoLines(lineValues: List<List<Int>>) {
-        lineValues.forEach {
-            println(it.joinToString(", ", "[", "]"))
-        }
+        val result =
+            buildString {
+                lineValues.forEach { line ->
+                    appendLine(line.joinToString(", ", "[", "]"))
+                }
+            }
+        println(result)
     }
 
     fun printGameResult(gameResult: List<Pair<LottoRank, Int>>) {
-        println("\n당첨 통계")
-        println("---------")
-        gameResult.forEach { (rank, count) ->
-            println("${rank.description} (${rank.prize}원)- ${count}개")
-        }
+        val result =
+            buildString {
+                appendLine("\n당첨 통계")
+                appendLine("---------")
+                gameResult.forEach { (rank, count) ->
+                    appendLine("${rank.description} (${rank.prize}원)- ${count}개")
+                }
+            }
+        println(result)
     }
 
     fun printLottoProfitRate(lottoProfitRateValue: Double) {
-        print("총 수익률은 ${lottoProfitRateValue}입니다.")
-        if (lottoProfitRateValue <= 1.0) {
-            println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
-        } else {
-            println()
-        }
+        val result =
+            buildString {
+                append("총 수익률은 ${lottoProfitRateValue}입니다.")
+                if (lottoProfitRateValue <= 1.0) {
+                    appendLine("(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
+                } else {
+                    appendLine()
+                }
+            }
+        println(result)
     }
 }
