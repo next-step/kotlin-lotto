@@ -6,8 +6,8 @@ class Lotto(private val numbers: List<Number>) {
         require(!existDuplicateNumber(numbers)) { LOTTO_DUPLICATE_EXCEPTION_MESSAGE }
     }
 
-    fun match(winningNumbers: Lotto): LottoRank {
-        val matchCount = numbers.count { it in winningNumbers.numbers }
+    fun match(winningLotto: Lotto): LottoRank {
+        val matchCount = numbers.count { it in winningLotto.numbers }
         return LottoRank.from(matchCount)
     }
 
