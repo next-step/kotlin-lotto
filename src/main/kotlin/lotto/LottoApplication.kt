@@ -4,24 +4,23 @@ import lotto.domain.DefaultLottoGenerator
 import lotto.domain.LottoPurchaseCount
 import lotto.service.LottoService
 import lotto.view.input.BuyInputView
-import lotto.view.input.WinNumberInputView
+import lotto.view.input.WinningLottoInputView
 import lotto.view.result.BuyResultView
-import lotto.view.result.LottoListView
 import lotto.view.result.LottoResultView
+import lotto.view.result.LottosView
 
 fun main() {
     val lottoService = LottoService(DefaultLottoGenerator)
 
     val payAmount = BuyInputView.print()
     val purchaseCount = LottoPurchaseCount(payAmount)
-    BuyResultView.print(purchaseCount.amount)
+    val lottosDto = lottoService.createLottos(purchaseCount)
 
-    val lottos = lottoService.buy(purchaseCount)
+    BuyResultView.print(lottosDto.lottos.size)
+    LottosView.print(lottosDto)
 
-    LottoListView.print(lottos)
+    val winningLottoDto = WinningLottoInputView.print()
+    val resultsDto = lottoService.getResults(lottosDto, winningLottoDto)
 
-    val winningNumbers = WinNumberInputView.print()
-    val results = lottoService.getResults(lottos, winningNumbers)
-
-    LottoResultView.print(results)
+    LottoResultView.print(resultsDto)
 }

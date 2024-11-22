@@ -1,13 +1,13 @@
 package lotto.view.result
 
-import lotto.domain.LottoResults
+import lotto.view.dto.LottoResultsDto
 
 object LottoResultView {
-    fun print(results: LottoResults) {
+    fun print(dto: LottoResultsDto) {
         val sb = StringBuilder()
         printTitle(sb)
-        printWinCountInfo(sb, results)
-        printProfitRate(sb, results)
+        printWinCountInfo(sb, dto)
+        printProfitRate(sb, dto)
         println(sb.toString())
     }
 
@@ -18,18 +18,18 @@ object LottoResultView {
 
     private fun printWinCountInfo(
         sb: StringBuilder,
-        results: LottoResults,
+        dto: LottoResultsDto,
     ) {
-        results.getWinResult().forEach {
-            sb.append("${it.rank.matchCount}개 일치 (${it.rank.reward}원) - ${it.count}개\n")
+        dto.winResults.forEach {
+            sb.append("${it.matchCount}개 일치 (${it.reward}원) - ${it.winCount}개\n")
         }
     }
 
     private fun printProfitRate(
         sb: StringBuilder,
-        results: LottoResults,
+        dto: LottoResultsDto,
     ) {
-        val profitOrLoss = if (results.isProfit()) "이익" else "손해"
-        sb.append("총 수익률은 ${results.getProfitRate()}입니다. 기준이 ${LottoResults.MARGIN_VALUE}이기 때문에 결과적으로 ${profitOrLoss}라는 의미임.")
+        val profitOrLoss = if (dto.isProfit) "이익" else "손해"
+        sb.append("총 수익률은 ${dto.profitRate}입니다. 기준이 ${dto.margin}이기 때문에 결과적으로 ${profitOrLoss}라는 의미임.")
     }
 }

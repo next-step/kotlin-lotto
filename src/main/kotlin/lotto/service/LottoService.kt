@@ -4,21 +4,36 @@ import lotto.domain.Lotto
 import lotto.domain.LottoGenerator
 import lotto.domain.LottoPurchaseCount
 import lotto.domain.LottoResults
+import lotto.domain.Number
+import lotto.view.dto.LottoDto
+import lotto.view.dto.LottoRankDto
+import lotto.view.dto.LottoResultsDto
+import lotto.view.dto.LottosDto
+import lotto.view.dto.WinningLottoDto
 
 class LottoService(
     private val lottoGenerator: LottoGenerator,
 ) {
-    fun buy(count: LottoPurchaseCount): List<Lotto> {
-        return List(count.amount) { lottoGenerator.generate(Lotto.LOTTO_SIZE) }
+    fun createLottos(count: LottoPurchaseCount): LottosDto {
+        val lottos = Lotto.createLottos(count.amount, lottoGenerator)
+        return LottosDto(lottos.map { LottoDto(it.getNumbersRawValues()) })
     }
 
     fun getResults(
-        lottos: List<Lotto>,
-        winningNumbers: Lotto,
-    ): LottoResults {
-        val winInfo = lottos.map { it.match(winningNumbers) }.groupingBy { it }.eachCount()
-        return LottoResults.from(winInfo)
-    }
+        lottosDto: LottosDto,
+        winningLottoDto: WinningLottoDto,
+    ): LottoResultsDto {
+        val lottos = lottosDto.lottos.map { Lotto(it.numbers.map { value -> Number(value) }) }
+        val winningLotto = Lotto(winningLottoDto.numbers.map { Number(it) })
+        val lottoRankCountMap = lottos.map { it.match(winningLotto) }.groupingBy { it }.eachCount()
+        val lottoResults = LottoResults.from(lottoRankCountMap)
+        val winResults = lottoResults.filterWinResults()
 
-    private fun getAvailableLottoCount(payAmount: Int): Int = payAmount / LottoPurchaseCount.PRICE_PER_LOTTO
+        return LottoResultsDto(
+            winResults = winResults.map { LottoRankDto(matchCount = it.rank.matchCount, reward = it.rank.reward, winCount = it.count) },
+            profitRate = lottoResults.calculateProfitRate(),
+            isProfit = lottoResults.isProfit(),
+            margin = LottoResults.MARGIN_VALUE,
+        )
+    }
 }

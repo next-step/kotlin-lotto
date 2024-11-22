@@ -10,7 +10,7 @@ class LottoResultsTest : StringSpec({
         LottoResults(listOf(LottoResult(rank = LottoRank.FIRST, 2), LottoResult(rank = LottoRank.NONE, 1)))
 
     "로또 결과는 이익율를 조회할 수 있다." {
-        val profitRate = results.getProfitRate()
+        val profitRate = results.calculateProfitRate()
         val purchaseAmount = 3 * LottoPurchaseCount.PRICE_PER_LOTTO
         val profit = LottoRank.FIRST.reward * 2
         val expected = (profit / purchaseAmount).toDouble()
@@ -23,7 +23,7 @@ class LottoResultsTest : StringSpec({
     }
 
     "로또 결과는 당첨된 로또만 조회할 수 있다." {
-        val winResults = results.getWinResult()
+        val winResults = results.filterWinResults()
         winResults.forEach { it.rank.isWin() shouldBe true }
     }
 })
