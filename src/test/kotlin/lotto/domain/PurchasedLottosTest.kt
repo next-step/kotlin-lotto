@@ -30,4 +30,35 @@ class PurchasedLottosTest : BehaviorSpec({
             }
         }
     }
+    Given("구입한 로또 목록과 당첨 번호가 주어졌을 때") {
+        val winningLotto = WinningLotto(setOf(1, 2, 3, 4, 5, 6))
+
+        When("각 로또의 매칭 개수에 따라 Rank를 계산하면") {
+            val lottos =
+                listOf(
+                    Lotto(setOf(1, 2, 3, 4, 5, 6)),
+                    Lotto(setOf(1, 2, 3, 4, 7, 8)),
+                    Lotto(setOf(1, 2, 3, 7, 8, 9)),
+                    Lotto(setOf(7, 8, 9, 10, 11, 12)),
+                )
+            val purchasedLottos = PurchasedLottos(lottos)
+            val ranks = purchasedLottos.calculateRanks(winningLotto)
+
+            Then("Rank별 매칭 결과가 올바르게 계산된다") {
+                ranks[Rank.SIX] shouldBe 1
+                ranks[Rank.FOUR] shouldBe 1
+                ranks[Rank.THREE] shouldBe 1
+                ranks[Rank.MISS] shouldBe 1
+            }
+        }
+
+        When("로또 목록이 비어 있을 때 Rank를 계산하면") {
+            val purchasedLottos = PurchasedLottos(emptyList())
+            val ranks = purchasedLottos.calculateRanks(winningLotto)
+
+            Then("Rank 결과는 빈 Map이어야 한다") {
+                ranks shouldBe emptyMap()
+            }
+        }
+    }
 })

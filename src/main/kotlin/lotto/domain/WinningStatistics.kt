@@ -11,10 +11,7 @@ class WinningStatistics(private val winningLotto: WinningLotto) {
     fun calculateStatistics(purchasedLottos: PurchasedLottos): WinningStatistics {
         statistics =
             purchasedLottos
-                .lottos
-                .map { lotto -> winningLotto.getRank(lotto) }
-                .groupingBy { it }
-                .eachCount()
+                .calculateRanks(winningLotto)
         return this // 메서드 체이닝 지원
     }
 
