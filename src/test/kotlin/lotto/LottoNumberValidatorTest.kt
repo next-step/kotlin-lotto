@@ -14,8 +14,8 @@ class LottoNumberValidatorTest : StringSpec({
 
     "전달된 Set의 숫자들이 1 ~ 45 사이의 값을 가지고 있는지 검사할 수 있다. " {
         assertSoftly {
-            shouldThrow<IllegalArgumentException> { LottoNumberValidator.validateSize(setOf(1, 2, 3, 4, 5, 46)) }
-            shouldThrow<IllegalArgumentException> { LottoNumberValidator.validateSize(setOf(0, 2, 3, 4, 5, 6)) }
+            shouldThrow<IllegalArgumentException> { LottoNumberValidator.validateNumberRange(setOf(1, 2, 3, 4, 5, 46)) }
+            shouldThrow<IllegalArgumentException> { LottoNumberValidator.validateNumberRange(setOf(0, 2, 3, 4, 5, 6)) }
         }
     }
 })

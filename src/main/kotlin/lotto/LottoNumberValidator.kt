@@ -15,7 +15,7 @@ object LottoNumberValidator {
     }
 
     fun validateNumberRange(numbers: Set<Int>) {
-        require(!numbers.any { isInRange(it) }) { "로또 번호는 ${LOTTO_MIN_RANGE}~${LOTTO_MAX_RANGE} 내의 숫자여야 합니다." }
+        require(numbers.all { isInRange(it) }) { "로또 번호는 ${LOTTO_MIN_RANGE}~${LOTTO_MAX_RANGE} 내의 숫자여야 합니다." }
     }
 
     private fun isInRange(number: Int) = number in IntRange(LOTTO_MIN_RANGE, LOTTO_MAX_RANGE)
