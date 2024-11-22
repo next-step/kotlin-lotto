@@ -12,6 +12,7 @@ class NumberTest {
     @Test
     fun `유효한 숫자를 생성한다`() {
         val number = Number.from("5")
+
         number.toInt() shouldBe 5
     }
 
@@ -22,6 +23,7 @@ class NumberTest {
             shouldThrow<IllegalArgumentException> {
                 Number.from(text)
             }
+
         exception.message shouldContain "음수를 입력할 수 없습니다"
     }
 
@@ -33,6 +35,7 @@ class NumberTest {
             shouldThrow<IllegalArgumentException> {
                 Number.from(text)
             }
+
         exception.message shouldContain "잘못된 입력값입니다"
     }
 }
