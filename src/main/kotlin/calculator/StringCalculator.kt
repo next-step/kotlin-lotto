@@ -30,7 +30,7 @@ class StringCalculator {
             Regex("(?<=//.\\n).*")
                 .find(stringExpression)
                 ?.value
-                ?: throw IllegalArgumentException("표현식이 유효하지 않습니다.")
+                ?: throw RuntimeException("표현식이 유효하지 않습니다.")
         } else {
             stringExpression
         }
@@ -57,11 +57,13 @@ private class Expression(
             .split(*delimiters.toTypedArray())
             .map { it.toDouble() }
     } catch (e: NumberFormatException) {
-        throw IllegalArgumentException("숫자만 더할 수 있습니다.")
+        throw RuntimeException("숫자만 더할 수 있습니다.")
     }
 
     private fun requirePositiveNumbers(parsedTargetNumbers: List<Double>) {
-        require(parsedTargetNumbers.all { it >= 0 }) { "음수는 더할 수 없습니다." }
+        if (parsedTargetNumbers.any { it < 0 }) {
+            throw RuntimeException("음수는 더할 수 없습니다.")
+        }
     }
 
     fun calculate(): Double = targetNumbers.sum()
