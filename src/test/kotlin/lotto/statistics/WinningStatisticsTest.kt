@@ -5,21 +5,13 @@ import lotto.Lotto
 import lotto.Lottos
 import lotto.number.Numbers
 import lotto.rank.LottoRank
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class WinningStatisticsTest {
-    private lateinit var winningStatistics: WinningStatistics
-
-    @BeforeEach
-    fun beforeEach() {
-        winningStatistics = WinningStatistics()
-    }
-
     @Test
     fun `로또 번호 목록의 평가 결과를 반환한다`() {
         val lottos = Lottos(listOf(getFirstLotto(), getNoneLotto()))
-        winningStatistics.evaluate(lottos = lottos, winningNumbers = WINNING_NUMBERS) shouldContainExactly
+        WinningStatistics(purchasedLottos = lottos, winningNumbers = WINNING_NUMBERS).ranks shouldContainExactly
             listOf(
                 LottoRank.FIRST,
                 LottoRank.NONE,
