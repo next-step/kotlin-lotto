@@ -1,13 +1,31 @@
-package lotto
+package lotto.view
+
+import lotto.domain.Lotto
+import lotto.domain.RewardType
+import lotto.domain.WinningStatistics
 
 object OutputView {
+    fun printPurchaseResult(lottos: List<Lotto>) {
+        println("${lottos.size}개를 구매했습니다.")
+        lottos.forEach {
+            println(it.pickNumbers)
+        }
+    }
+
     fun printStatistics(winningStatistics: WinningStatistics) {
         println("당첨 통계")
         println("---------")
-        println("3개 일치 (${RewardType.THIRD.winningAmount}원)- ${winningStatistics.map[RewardType.THIRD] ?: 0}개")
-        println("4개 일치 (${RewardType.FOURTH.winningAmount}원)- ${winningStatistics.map[RewardType.FOURTH] ?: 0}개")
-        println("5개 일치 (${RewardType.SECOND.winningAmount}원)- ${winningStatistics.map[RewardType.SECOND] ?: 0}개")
-        println("6개 일치 (${RewardType.FIRST.winningAmount}원)- ${winningStatistics.map[RewardType.FIRST] ?: 0}개")
+        this.printMatchCount(rewardType = RewardType.FOURTH, rewardMap = winningStatistics.rewardMap)
+        this.printMatchCount(rewardType = RewardType.THIRD, rewardMap = winningStatistics.rewardMap)
+        this.printMatchCount(rewardType = RewardType.SECOND, rewardMap = winningStatistics.rewardMap)
+        this.printMatchCount(rewardType = RewardType.FIRST, rewardMap = winningStatistics.rewardMap)
         println("총 수익률은 ${winningStatistics.profit}입니다.")
+    }
+
+    private fun printMatchCount(
+        rewardType: RewardType,
+        rewardMap: Map<RewardType, Int>,
+    ) {
+        println("${rewardType.matchCount}개 일치 (${rewardType.winningAmount}원)- ${rewardMap[rewardType] ?: 0}개")
     }
 }

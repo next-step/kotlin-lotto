@@ -1,6 +1,6 @@
-package lotto
+package lotto.domain
 
 data class WinningStatistics(
-    val map: Map<RewardType, Int>, // TODO: map 이름 변경하기
+    val rewardMap: Map<RewardType, Int>,
     val profit: Double,
 )
