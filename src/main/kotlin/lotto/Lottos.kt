@@ -1,22 +1,15 @@
 package lotto
 
-class Lottos(val values: List<Lotto>) {
+data class Lottos(val values: List<Lotto>) {
     val size: Int = values.size
+    val totalAmount: Amount
+        get() = TICKET_PRICE.times(values.size)
 
-    fun ranks(lastLotto: Lotto): Ranks {
-        return Ranks.fromGroupBy(values.map { Rank.match(it.match(lastLotto)) })
+    fun match(otherLotto: Lotto): List<Rank> {
+        return values.map { Rank.match(it.match(otherLotto)) }
     }
 
     companion object {
-        private val UNIT_PRICE = Amount("1000")
-
-        fun fromCount(
-            buyAmount: Amount,
-            generator: LottoNumbersGenerator,
-        ): Lottos {
-            val makeCount = buyAmount.divide(UNIT_PRICE)
-
-            return Lottos((1..makeCount).map { Lotto(generator.generate()) })
-        }
+        private val TICKET_PRICE: Amount = Amount(1000)
     }
 }

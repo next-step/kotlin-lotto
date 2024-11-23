@@ -1,6 +1,6 @@
 package lotto
 
-class Lotto(val values: Set<Int>) {
+data class Lotto(val values: Set<Int>) {
     init {
         require(values.size == LOTTO_SIZE) { "로또는 ${LOTTO_SIZE}개의 숫자로 이루어져야 합니다. 입력값: $values" }
         require(
