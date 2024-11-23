@@ -1,5 +1,6 @@
 package lotto.client
 
+import lotto.Lotto
 import lotto.LottoMachine
 import lotto.Lottos
 import lotto.rank.LottoRank
@@ -27,7 +28,7 @@ class LottoClient(
         ResultView.printProfit(profit)
     }
 
-    private fun getLottoCount(purchaseAmount: Int): Int = (purchaseAmount / LOTTO_PRICE)
+    private fun getLottoCount(purchaseAmount: Int): Int = (purchaseAmount / Lotto.PRICE)
 
     private fun calculateStatistics(lottos: Lottos): List<LottoRank> {
         val winningNumbers = InputView.inputLastWeekWinningNumbers()
@@ -38,8 +39,4 @@ class LottoClient(
         lottoRanks: List<LottoRank>,
         amount: Int,
     ): Double = Profit(winningAmount = lottoRanks.sumOf { it.prize }, purchaseAmount = amount).yield()
-
-    companion object {
-        val LOTTO_PRICE = 1_000
-    }
 }
