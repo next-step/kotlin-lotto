@@ -4,7 +4,7 @@ import calculator.Patterns.CUSTOM
 
 object CustomExpressionCreator : ExpressionCreator {
     private const val SUBSTRING_TARGET_SEPARATOR = "\n"
-    
+
     override fun create(expression: String): Expressions {
         val customDelimiter = extractCustomDelimiter(expression)
         val splicedExpression = expression.substringAfter(SUBSTRING_TARGET_SEPARATOR)
