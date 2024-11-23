@@ -31,18 +31,16 @@ class LottoResultTest {
         )
 
         // when
-        val lottoResult = LottoResult(winningLottoTicket, lottoTickets)
+        val lottoResult = LottoResult.getResult(winningLottoTicket, lottoTickets)
 
         // then
-        assertThat(lottoResult.getStatics()).isEqualTo(
-            mapOf(
-                Rank.FIRST to 1,
-                Rank.SECOND to 1,
-                Rank.THIRD to 1,
-                Rank.FOURTH to 1,
-                Rank.FIFTH to 1,
-                Rank.NONE to 1
-            )
-        )
+        assertThat(lottoResult.rankInfo[Rank.FIRST]).isEqualTo(1)
+        assertThat(lottoResult.rankInfo[Rank.SECOND]).isEqualTo(1)
+        assertThat(lottoResult.rankInfo[Rank.THIRD]).isEqualTo(1)
+        assertThat(lottoResult.rankInfo[Rank.FOURTH]).isEqualTo(1)
+        assertThat(lottoResult.rankInfo[Rank.FIFTH]).isEqualTo(1)
+        assertThat(lottoResult.rankInfo[Rank.NONE]).isEqualTo(1)
+        assertThat(lottoResult.profitRate).isEqualTo(338592.5)
+        assertThat(lottoResult.isProfit).isTrue()
     }
 }

@@ -1,52 +1,48 @@
 package lotto.view
 
-import lotto.domain.Lotto
-import lotto.domain.LottoResults
-import lotto.domain.LottoResults.LottoResult
+import lotto.domain.LottoResult
+import lotto.domain.LottoTickets
+import lotto.domain.Rank
 
-object ResultView {
-    fun printPurchaseAmount(purchaseAmount: Int) {
-        println("${purchaseAmount}개를 구매했습니다.")
-    }
+class ResultView {
+    companion object {
+        fun printLottoNumbers(lottoTickets: LottoTickets) {
+            val manualLottoCount = lottoTickets.manualTickets.size
+            val autoLottoCount = lottoTickets.autoTickets.size
+            
+            println("수동으로 ${manualLottoCount}장, 자동으로 ${autoLottoCount}장을 구매했습니다.")
+            lottoTickets.tickets.forEach {
+                println("[${it.numbers.joinToString(", ")}]")
+            }
+        }
 
-    fun printLottoList(lottoList: List<Lotto>) {
-        lottoList.forEach {
+        fun printResult(result: LottoResult.Result) {
+            println("당첨 통계")
+            println("---------")
+            printRankInfo(result)
+            printProfitRate(result)
+        }
+
+        private fun printProfitRate(result: LottoResult.Result) {
             println(
-                "[${it.lottoNumbers.joinToString(", ") { it.value.toString() }}]",
+                "총 수익률은 ${result.profitRate}입니다. " +
+                        "(기준이 1이기 때문에 결과적으로 ${if (result.isProfit) "이익" else "손해"}입니다.)"
             )
         }
-        println()
-    }
 
-    fun printResult(lottoResults: LottoResults) {
-        printResultHeader()
-        printLottoResults(lottoResults)
-        printRateOfReturn(lottoResults)
-    }
+        private fun printRankInfo(result: LottoResult.Result) {
+            result.rankInfo.forEach { (rank, count) ->
+                if (rank == Rank.NONE) {
+                    return@forEach
+                }
 
-    private fun printResultHeader() {
-        println("당첨 통계")
-        println("---------")
-    }
+                if (rank == Rank.SECOND) {
+                    println("${rank.matchCount}개 일치, 보너스 볼 일치 (${rank.winningMoney}원)- ${count}개")
+                    return@forEach
+                }
 
-    private fun printLottoResults(lottoResults: LottoResults) {
-        lottoResults.getWiningResults()
-            .forEach(::printLottoResult)
+                println("${rank.matchCount}개 일치 (${rank.winningMoney}원)- ${count}개")
+            }
+        }
     }
-
-    private fun printLottoResult(lottoResult: LottoResult) {
-        println(
-            "${lottoResult.rank.matchCount}개 일치 " +
-                "${lottoResult.rank.winningMoney} - ${lottoResult.count}개",
-        )
-    }
-
-    private fun printRateOfReturn(lottoResults: LottoResults) {
-        println(
-            "총 수익률은 ${lottoResults.calculateRateOfReturn()}입니다. " +
-                "(기준이 1이기 때문에 결과적으로 ${profitOrLoss(lottoResults.isProfitable)}라는 의미임.)",
-        )
-    }
-
-    private fun profitOrLoss(isProfitable: Boolean) = if (isProfitable) "이익" else "손해"
 }

@@ -20,6 +20,11 @@ class LottoTicketsTest {
 
         assertThat(lottoTickets.autoTickets.size).isEqualTo(11)
         assertThat(lottoTickets.manualTickets.size).isEqualTo(3)
+    }
 
+    @Test
+    fun `로또 구입 금액을 계산한다`() {
+        val lottoTickets = LottoTickets(14500, 0, emptyList())
+        assertThat(lottoTickets.getTicketTotalPrice()).isEqualTo(14_000)
     }
 }
