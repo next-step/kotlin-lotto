@@ -1,11 +1,11 @@
 package stringcalculator.application
 
 import stringcalculator.core.Calculator
-import stringcalculator.core.StringParser
+import stringcalculator.core.FormulaParser
 
-class StringCalculatorService {
-    fun calculate(string: String?): Int {
-        val numberList = StringParser.parse(string)
-        return Calculator.sum(numberList)
+object StringCalculatorService {
+    fun calculate(formula: String?): Int {
+        val numbers = FormulaParser.parse(formula)
+        return Calculator.sum(numbers)
     }
 }
