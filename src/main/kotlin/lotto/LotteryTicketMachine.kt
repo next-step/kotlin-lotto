@@ -1,7 +1,9 @@
 package lotto
 
-class LotteryTicketMachine(balance: Int) {
+class LotteryTicketMachine(balance: Int, totalCost: Int = 0) {
     var balance = balance
+        private set
+    var totalCost: Int = totalCost
         private set
 
     init {
@@ -15,6 +17,7 @@ class LotteryTicketMachine(balance: Int) {
             return null
         }
         balance -= TICKET_PRICE
+        totalCost += TICKET_PRICE
         return LottoTicket(numbers)
     }
 
