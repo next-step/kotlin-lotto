@@ -1,4 +1,4 @@
-package lotto
+package lotto.view
 
 interface InputView {
     fun requestPrice(): Int

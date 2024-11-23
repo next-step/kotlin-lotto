@@ -1,7 +1,7 @@
 package lotto.fixture
 
-import lotto.LottoNumber
-import lotto.LottoNumberGenerator
+import lotto.domain.LottoNumber
+import lotto.domain.LottoNumberGenerator
 
 internal class FixedLottoNumberGenerator(
     private val numbers: List<Int>,

@@ -1,4 +1,7 @@
-package lotto
+package lotto.view
+
+import lotto.domain.LottoResult
+import lotto.domain.Lottos
 
 class ConsoleOutputView : OutputView {
     override fun printLottoQuantity(quantity: Int) {

@@ -1,4 +1,7 @@
-package lotto
+package lotto.view
+
+import lotto.domain.LottoResult
+import lotto.domain.Lottos
 
 interface OutputView {
     fun printLottoQuantity(quantity: Int)

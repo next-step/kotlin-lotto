@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 enum class Result(
     private val predicate: (Int) -> Boolean,

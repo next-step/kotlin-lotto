@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 data class Results(
     private val results: List<Result>,

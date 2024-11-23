@@ -1,4 +1,4 @@
-package lotto
+package lotto.view
 
 class ConsoleInputView : InputView {
     override fun requestPrice(): Int {
