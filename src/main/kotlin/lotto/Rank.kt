@@ -11,7 +11,7 @@ enum class Rank(val matchCount: Int, val prize: Amount) {
     ;
 
     fun prize(value: MatchedCount): Amount {
-        return prize.multiply(value)
+        return prize.times(value)
     }
 
     companion object {

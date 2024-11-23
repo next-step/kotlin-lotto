@@ -1,7 +1,6 @@
 package lotto
 
 import java.math.BigDecimal
-import java.math.RoundingMode
 
 @JvmInline
 value class Amount(val value: BigDecimal) {
@@ -12,19 +11,15 @@ value class Amount(val value: BigDecimal) {
     constructor(str: String) : this(str.toBigDecimalOrNull() ?: throw IllegalArgumentException("숫자가 아닙니다."))
     constructor(toInt: Int) : this(toInt.toBigDecimal())
 
-    fun plus(other: Amount): Amount {
-        return Amount(value + other.value)
+    operator fun minus(other: Amount): Amount {
+        return Amount(value - other.value)
     }
 
-    fun rate(amount: Amount): BigDecimal {
-        return value.divide(amount.value, 2, RoundingMode.DOWN)
+    operator fun times(size: Int): Amount {
+        return Amount(value * size.toBigDecimal())
     }
 
-    fun multiply(otherValue: Int): Amount {
-        return Amount(value * otherValue.toBigDecimal())
-    }
-
-    fun divide(other: Amount): Int {
+    operator fun div(other: Amount): Int {
         return (value / other.value).toInt()
     }
 }
