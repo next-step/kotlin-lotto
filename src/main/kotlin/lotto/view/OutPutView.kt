@@ -25,10 +25,9 @@ class OutPutView {
         val builder = StringBuilder()
         builder.append("당첨 통계\n---------\n")
         Rank.entries
-            .filter { it != Rank.MISS } // MISS 제외
-            .forEach { rank ->
-                builder.append("${rank.matchCount}개 일치 (${rank.prize}원) - ${statistics.count(rank).value}개\n")
-            }
+            .filter { it != Rank.MISS }
+            .forEach { rank -> builder.append(formatRankOutput(rank, statistics)) }
+
         return builder.toString()
     }
 
@@ -38,5 +37,16 @@ class OutPutView {
                 profitRate,
             ),
         )
+    }
+
+    private fun formatRankOutput(
+        rank: Rank,
+        statistics: WinningStatistics,
+    ): String {
+        return if (rank == Rank.SECOND) {
+            "5개 일치, 보너스 볼 일치 (${rank.prize}원) - ${statistics.count(rank).value}개\n"
+        } else {
+            "${rank.matchCount}개 일치 (${rank.prize}원) - ${statistics.count(rank).value}개\n"
+        }
     }
 }
