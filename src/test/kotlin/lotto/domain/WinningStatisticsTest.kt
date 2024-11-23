@@ -7,7 +7,7 @@ import java.math.RoundingMode
 
 class WinningStatisticsTest : BehaviorSpec({
     Given("구입한 로또와 당첨 번호가 주어졌을 때") {
-        val winningLotto = WinningLotto(Lotto(setOf(1, 2, 3, 4, 5, 6)))
+        val winningLotto = WinningLotto(Lotto(setOf(1, 2, 3, 4, 5, 6)), BonusNumber(7))
         val purchasedLottos =
             PurchasedLottos(
                 listOf(
@@ -23,9 +23,9 @@ class WinningStatisticsTest : BehaviorSpec({
             winningStatistics.calculateStatistics(purchasedLottos)
 
             Then("각 Rank의 매칭 개수가 올바르게 계산된다") {
-                winningStatistics.count(Rank.SIX) shouldBe MatchedCount(1)
-                winningStatistics.count(Rank.FOUR) shouldBe MatchedCount(1)
-                winningStatistics.count(Rank.THREE) shouldBe MatchedCount(1)
+                winningStatistics.count(Rank.FIRST) shouldBe MatchedCount(1)
+                winningStatistics.count(Rank.FOURTH) shouldBe MatchedCount(1)
+                winningStatistics.count(Rank.FIFTH) shouldBe MatchedCount(1)
                 winningStatistics.count(Rank.MISS) shouldBe MatchedCount(1)
             }
 
@@ -36,7 +36,7 @@ class WinningStatisticsTest : BehaviorSpec({
     }
 
     Given("구입한 로또 개수와 당첨 번호가 주어졌을 때") {
-        val winningLotto = WinningLotto(Lotto(setOf(1, 2, 3, 4, 5, 6)))
+        val winningLotto = WinningLotto(Lotto(setOf(1, 2, 3, 4, 5, 6)), BonusNumber(7))
         val purchasedLottos =
             PurchasedLottos(
                 listOf(
