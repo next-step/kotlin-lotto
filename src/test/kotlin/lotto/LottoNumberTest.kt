@@ -5,11 +5,10 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class LottoNumberTest {
-
     @Test
     fun `로또 번호가 1에서 45사이가 아니라면 예외가 발생한다`() {
         listOf(0, 46).forEach {
-            assertThrows<IllegalArgumentException>(message = "로또 번호는 1에서 45사이여야 합니다.",) {
+            assertThrows<IllegalArgumentException>(message = "로또 번호는 1에서 45사이여야 합니다.") {
                 LottoNumber.of(it)
             }
         }

@@ -9,7 +9,7 @@ class ResultView {
         fun printLottoNumbers(lottoTickets: LottoTickets) {
             val manualLottoCount = lottoTickets.manualTickets.size
             val autoLottoCount = lottoTickets.autoTickets.size
-            
+
             println("수동으로 ${manualLottoCount}장, 자동으로 ${autoLottoCount}장을 구매했습니다.")
             lottoTickets.tickets.forEach {
                 println("[${it.numbers.joinToString(", ")}]")
@@ -26,7 +26,7 @@ class ResultView {
         private fun printProfitRate(result: LottoResult.Result) {
             println(
                 "총 수익률은 ${result.profitRate}입니다. " +
-                        "(기준이 1이기 때문에 결과적으로 ${if (result.isProfit) "이익" else "손해"}입니다.)"
+                    "(기준이 1이기 때문에 결과적으로 ${if (result.isProfit) "이익" else "손해"}입니다.)",
             )
         }
 
