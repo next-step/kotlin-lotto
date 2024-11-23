@@ -3,23 +3,23 @@ package lotto.domain
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
-class UserTest {
+class LottoUserTest {
     @Test
     fun `사용자는 구매금액을 가지고 있는다`() {
         val lottoPurchaseAmount = LottoPurchaseAmount(1000)
 
-        val user = User(lottoPurchaseAmount)
+        val lottoUser = LottoUser(lottoPurchaseAmount)
 
-        user.lottoPurchaseAmount shouldBe lottoPurchaseAmount
+        lottoUser.lottoPurchaseAmount shouldBe lottoPurchaseAmount
     }
 
     @Test
     fun `사용자는 지불한 금액만큼의 로또를 가지고 있는다`() {
         val lottoPurchaseAmount = LottoPurchaseAmount(1000)
 
-        val user = User(lottoPurchaseAmount)
+        val lottoUser = LottoUser(lottoPurchaseAmount)
 
-        user.lotteries.size shouldBe lottoPurchaseAmount.calculateLottoCount()
+        lottoUser.lotteries.size shouldBe lottoPurchaseAmount.calculateLottoCount()
     }
 
     @Test

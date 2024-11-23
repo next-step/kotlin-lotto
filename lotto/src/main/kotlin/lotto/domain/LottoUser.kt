@@ -1,6 +1,6 @@
 package lotto.domain
 
-class User(
+class LottoUser(
     val lottoPurchaseAmount: LottoPurchaseAmount,
 ) {
     private val lottoCount = lottoPurchaseAmount.calculateLottoCount()
