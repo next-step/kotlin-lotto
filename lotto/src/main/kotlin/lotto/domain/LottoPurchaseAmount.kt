@@ -8,6 +8,8 @@ data class LottoPurchaseAmount(
         amount.validatePurchaseMinUnit()
     }
 
+    fun calculateLottoCount(): Int = amount / MIN_PURCHASE_AMOUNT
+
     private fun Int.validateMinimum() {
         require(this >= MIN_PURCHASE_AMOUNT) {
             "[PurchaseAmount] 구매금액은 ${MIN_PURCHASE_AMOUNT}원 이상이어야 합니다. | 입력금액: $this"
