@@ -21,9 +21,15 @@ class LotteryNumbersTest : StringSpec({
         numbers.distinct().size shouldBe 6
     }
 
-    "로또 번호 목록 길이가 6을 초과하면 예외 발생한다" {
+    "로또 번호가 6개가 아니면 예외 발생한다" {
         shouldThrow<IllegalArgumentException> {
             LotteryNumbers(List(size = 7) { 0 })
+        }
+    }
+
+    "로또 번호 중복일 시 예외 발생한다" {
+        shouldThrow<IllegalArgumentException> {
+            LotteryNumbers(listOf(1,1,1,1,1,1))
         }
     }
 })
