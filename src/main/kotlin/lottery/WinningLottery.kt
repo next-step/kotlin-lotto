@@ -2,7 +2,7 @@ package lottery
 
 class WinningLottery(val lotteryNumbers: LotteryNumbers) {
     fun countMatchedNumber(numbers: List<Int>): Int {
-        return lotteryNumbers.numbers.intersect(numbers.toSet()).size
+        return lotteryNumbers.countMatchedNumber(numbers)
     }
 
     companion object {
