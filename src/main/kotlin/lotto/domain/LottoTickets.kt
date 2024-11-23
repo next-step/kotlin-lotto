@@ -5,7 +5,6 @@ class LottoTickets(
     manualLottoCount: Int,
     manualNumbers: List<Set<Int>>
 ) {
-
     val manualTickets: List<LottoTicket> = getManualTickets(manualNumbers)
 
     val autoTickets: List<LottoTicket> = getAutoTickets(money, manualLottoCount)
