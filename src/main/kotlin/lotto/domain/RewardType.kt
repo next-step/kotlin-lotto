@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 enum class RewardType(val matchCount: Int, val winningAmount: Long) {
     FIRST(6, 2_000_000_000),
@@ -7,12 +7,13 @@ enum class RewardType(val matchCount: Int, val winningAmount: Long) {
     FOURTH(3, 5_000),
     FITFTH(2, 0),
     SIXTH(1, 0),
-    NONE(0, 0)
+    NONE(0, 0),
     ;
 
     companion object {
         fun of(matchCount: Int): RewardType {
-            return entries.find { it.matchCount == matchCount } ?: throw IllegalArgumentException("일치하는 RewardType이 없습니다.")
+            return entries.find { it.matchCount == matchCount }
+                ?: throw IllegalArgumentException("일치하는 RewardType이 없습니다. [matchCount=$matchCount]")
         }
     }
 }
