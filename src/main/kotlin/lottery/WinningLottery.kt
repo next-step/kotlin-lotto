@@ -6,7 +6,7 @@ class WinningLottery(val lotteryNumbers: LotteryNumbers) {
     }
 
     companion object {
-        fun create(numbers: List<Int>): WinningLottery {
+        fun create(numbers: Set<Int>): WinningLottery {
             return WinningLottery(LotteryNumbers(numbers))
         }
     }

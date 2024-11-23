@@ -22,16 +22,13 @@ class LotteryNumbersTest : StringSpec({
     }
 
     "로또 번호가 6개가 아니면 예외 발생한다" {
-        shouldThrow<IllegalArgumentException> { LotteryNumbers(List(size = 7) { 0 }) }
-    }
-
-    "로또 번호 중복일 시 예외 발생한다" {
-        shouldThrow<IllegalArgumentException> { LotteryNumbers(listOf(1, 1, 1, 1, 1, 1)) }
+        val numbers = setOf(1, 2, 3, 4, 5, 6, 7)
+        shouldThrow<IllegalArgumentException> { LotteryNumbers(numbers) }
     }
 
     "로또 번호가 1~45 범위를 벗어날 시 예외 발생한다" {
         listOf(0, -1, 46, 47).forAll { overNumber ->
-            shouldThrow<IllegalArgumentException> { LotteryNumbers(listOf(overNumber, 1, 1, 1, 1, 1)) }
+            shouldThrow<IllegalArgumentException> { LotteryNumbers(setOf(overNumber, 1, 1, 1, 1, 1)) }
         }
     }
 })
