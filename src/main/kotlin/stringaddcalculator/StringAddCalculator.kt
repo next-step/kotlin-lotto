@@ -6,12 +6,20 @@ class StringAddCalculator {
             return 0
         }
 
+        validateContainsNegativeNumber(text)
+
         if (containsOnlyOneNumber(text)) {
             return text.toInt()
         }
 
         val numbers = getNumbers(text)
         return sumAll(numbers)
+    }
+
+    private fun validateContainsNegativeNumber(text: String) {
+        if (text.contains(NEGATIVE_NUMBER_REGEX)) {
+            throw IllegalArgumentException("음수는 포함될 수 없습니다. 현재 입력 = $text")
+        }
     }
 
     private fun containsOnlyOneNumber(text: String): Boolean {
@@ -32,6 +40,7 @@ class StringAddCalculator {
     }
 
     companion object {
+        private val NEGATIVE_NUMBER_REGEX = Regex("-[0-9]+\$")
         private val DIGITS_ONLY_REGEX = Regex("^[0-9]+\$")
         private val DEFAULT_DELIMITER_REGEX = Regex("[,:]")
         private val CUSTOM_DELIMITER_REGEX = Regex("//(.)\\n(.*)")
