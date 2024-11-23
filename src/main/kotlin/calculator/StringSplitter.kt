@@ -4,8 +4,10 @@ object StringSplitter {
     private const val DELIMITER_COMMA = ","
     private const val DELIMITER_COLON = ":"
 
-    fun splitByCommaAndColon(text: String): List<String> {
-        val delimiters = DelimiterRegexGenerator.generate(DELIMITER_COMMA, DELIMITER_COLON)
-        return text.split(delimiters)
+    fun split(text: String): List<String> {
+        val (customDelimiter, extractedText) = DelimiterExtractor.extractDelimiterAndText(text)
+        val delimiters = arrayOf(DELIMITER_COMMA, DELIMITER_COLON, customDelimiter).filterNotNull()
+        val regex = DelimiterManager.generateRegex(delimiters)
+        return extractedText.split(regex)
     }
 }

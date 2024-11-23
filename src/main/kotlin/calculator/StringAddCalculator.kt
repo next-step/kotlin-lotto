@@ -1,10 +1,10 @@
 package calculator
 
-import calculator.StringSplitter.splitByCommaAndColon
+import calculator.StringSplitter.split
 
 class StringAddCalculator {
     fun add(text: String?): Long {
         if (text.isNullOrBlank()) return 0
-        return splitByCommaAndColon(text).sumOf { it.toLong() }
+        return split(text).sumOf { it.toLong() }
     }
 }
