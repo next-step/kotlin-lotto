@@ -1,5 +1,6 @@
 package lottery
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.ints.shouldBeInRange
@@ -18,5 +19,11 @@ class LotteryNumbersTest : StringSpec({
     "로또번호들은 중복되지 않는다" {
         val numbers = LotteryNumbers.create().numbers
         numbers.distinct().size shouldBe 6
+    }
+
+    "로또 번호 목록 길이가 6을 초과하면 예외 발생한다" {
+        shouldThrow<IllegalArgumentException> {
+            LotteryNumbers(List(size = 7) { 0 })
+        }
     }
 })
