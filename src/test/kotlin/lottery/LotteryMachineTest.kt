@@ -17,4 +17,10 @@ class LotteryMachineTest : StringSpec({
             LotteryMachine.buy(Money(1500))
         }
     }
+
+    "천원 미만 금액 투입 시 예외 발생한다" {
+        shouldThrow<IllegalArgumentException> {
+            LotteryMachine.buy(Money(900))
+        }
+    }
 })

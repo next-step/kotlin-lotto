@@ -7,13 +7,8 @@ object LotteryMachine {
     }
 
     private fun getBuyCount(money: Money): Int {
-        validate(money)
+        require(money.amount >= 1000) { "금액은 1000원 이상이어야 합니다" }
+        require(money.amount % 1000 == 0) { "금액은 1000원 단위여야 합니다" }
         return money.amount / 1000
-    }
-
-    private fun validate(money: Money) {
-        if (money.amount % 1000 != 0) {
-            throw IllegalArgumentException("단위는 1000원으로 입력해야 합니다")
-        }
     }
 }
