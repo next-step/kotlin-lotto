@@ -29,10 +29,12 @@ enum class Result(
         predicate = { it < FOURTH.count },
         count = 3,
         prize = 0,
-    );
+    ),
+    ;
 
     companion object {
-        fun of(count: Int): Result = entries.firstOrNull { it.predicate(count) }
-            ?: throw IllegalArgumentException()
+        fun of(count: Int): Result =
+            entries.firstOrNull { it.predicate(count) }
+                ?: throw IllegalArgumentException()
     }
 }
