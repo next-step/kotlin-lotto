@@ -9,4 +9,10 @@ class StringCalculatorTest : StringSpec({
         stringCalculator.add(null) shouldBe 0
         stringCalculator.add("") shouldBe 0
     }
+
+    "should return the number itself when a single number is input" {
+        val calculator = StringCalculator()
+        calculator.add("5") shouldBe 5
+        calculator.add("100") shouldBe 100
+    }
 })
