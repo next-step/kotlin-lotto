@@ -11,7 +11,7 @@ object Parser {
         val delimiters = extractDelimiters(text)
         val addTargetContent = extractAddTargetContent(text)
         return addTargetContent.split(*delimiters.toTypedArray())
-            .map { it.toIntOrNull() ?: throw IllegalArgumentException("Invalid number format: $it") }
+            .map { it.toIntOrNull() ?: throw RuntimeException("Invalid number format: $it") }
     }
 
     private fun extractDelimiters(text: String): List<String> {

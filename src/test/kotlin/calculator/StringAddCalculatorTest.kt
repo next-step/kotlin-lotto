@@ -29,14 +29,14 @@ class StringAddCalculatorTest : StringSpec({
         add("//;\n1;2;3") shouldBe 6
     }
 
-    "문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다" {
+    "문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 발생한다" {
         shouldThrow<RuntimeException> {
             add("-1")
         }
     }
 
-    "숫자가 아닌 글자를 입력하는 경우 예외 발생한다" {
-        shouldThrow<IllegalArgumentException> {
+    "숫자가 아닌 글자를 입력하는 경우 RuntimeException 예외 발생한다" {
+        shouldThrow<RuntimeException> {
             add("1,a,b")
         }
     }

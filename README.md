@@ -24,5 +24,5 @@
 - [x] 쉼표 또는 콜론을 통해 숫자를 분리한다
 - [x] 분리한 숫자의 합을 반환한다
 - [x] 문자열앞 //와 \n 사이 문자를 커스텀 구분자로 사용한다
-- [ ] 숫자 이외의 값을 전달하면 RuntimeException 예외가 발생한다
-- [ ] 음수를 전달하면 RuntimeException 예외가 발생한다
+- [x] 음수를 전달하면 RuntimeException 예외가 발생한다
+- [x] 숫자 이외의 값을 전달하면 RuntimeException 예외가 발생한다
