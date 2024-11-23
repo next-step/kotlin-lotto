@@ -17,4 +17,8 @@ data class Money(val amount: Int) {
         require(other.amount != 0) { "나누는 금액은 0 일 수 없습니다" }
         return this.amount.toDouble() / other.amount
     }
+
+    override fun toString(): String {
+        return "${amount}원"
+    }
 }

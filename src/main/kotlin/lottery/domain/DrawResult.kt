@@ -6,4 +6,8 @@ class DrawResult(val rankRewardLotteryCountMap: Map<RankReward, LotteryCount>) {
             total + rankReward.money * lotteryCount.count
         }
     }
+
+    fun findLotteryCount(rankReward: RankReward): LotteryCount {
+        return rankRewardLotteryCountMap[rankReward] ?: LotteryCount(0)
+    }
 }

@@ -13,4 +13,10 @@ class WinningTicket(val lottery: Lottery) {
                 .mapValues { LotteryCount(it.value) }
         return DrawResult(rankRewardLotteryCountMap)
     }
+
+    companion object {
+        fun create(numbers: List<Int>): WinningTicket {
+            return WinningTicket(Lottery(LotteryNumbers(numbers.toSet())))
+        }
+    }
 }
