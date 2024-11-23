@@ -14,11 +14,13 @@ data class Delimiter(
     private fun String.parseDelimiter(): String? {
         val delimiter = this.splitWithDefault().first()
 
-        return delimiter.drop(DROP_SIZE)
-            .takeIf { it.isNotEmpty() }
+        return delimiter.takeIf { it.startsWith(CUSTOM_DELIMITER_PREFIX) }
+            ?.drop(DROP_SIZE)
+            ?.takeIf { it.isNotEmpty() }
     }
 
     companion object {
+        private const val CUSTOM_DELIMITER_PREFIX = "//"
         private val DEFAULT_DELIMITERS = listOf(":", ",")
         private const val DEFAULT_SEPARATOR = "|"
         private const val DROP_SIZE = 2

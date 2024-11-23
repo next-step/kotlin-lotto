@@ -41,6 +41,16 @@ class StringParserTest {
     }
 
     @Test
+    fun `커스텀 구분자의 시작이 규칙에 어긋나는 경우 사용할 수 없다`() {
+        val input = "!!;\\n1:2;3,4"
+        val delimiters = listOf(":", ",")
+
+        val (delimiter) = input.toCalculateRequest()
+
+        delimiter.regex shouldBe Regex(delimiters.joinToString("|"))
+    }
+
+    @Test
     fun `음수가 들어가는 경우 실패한다`() {
         val input = "-3"
 
