@@ -4,12 +4,13 @@
 
 ### 셀프 피드백
 
-- JvmStatic을 사용하는 방법을 알아보기
+- JvmStatic, JvmInline 알아보기
 - 테스트코드 동적 파라미터 전달 방법 알아보기
 - 클래스 종류 정리하기
   - data class
   - object class
   - companion object
+  - inline class (<-> value class와의 차이도 알아보기)
   - class
 - 확장함수에 대해서 알아보기
   - let
