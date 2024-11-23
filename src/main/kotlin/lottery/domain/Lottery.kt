@@ -5,6 +5,10 @@ class Lottery(val lotteryNumbers: LotteryNumbers) {
         return this.lotteryNumbers.countMatchedNumber(other.lotteryNumbers)
     }
 
+    override fun toString(): String {
+        return "$lotteryNumbers"
+    }
+
     companion object {
         fun create(): Lottery {
             return Lottery(LotteryNumbers.create())

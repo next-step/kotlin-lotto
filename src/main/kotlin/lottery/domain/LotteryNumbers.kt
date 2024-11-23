@@ -10,6 +10,10 @@ class LotteryNumbers(val numbers: Set<Int>) {
         return this.numbers.intersect(other.numbers).size
     }
 
+    override fun toString(): String {
+        return "$numbers"
+    }
+
     companion object {
         fun create(): LotteryNumbers {
             val numbers = (1..45).shuffled().take(6).sorted().toSet()
