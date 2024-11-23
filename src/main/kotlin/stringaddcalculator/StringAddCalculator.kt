@@ -28,7 +28,14 @@ class StringAddCalculator {
 
     private fun getNumbers(text: String): List<Int> {
         if (text.contains(CUSTOM_DELIMITER_REGEX)) {
-            TODO()
+            val matchResult = CUSTOM_DELIMITER_REGEX.find(text) ?: return emptyList()
+
+            val delimiter = matchResult.groupValues[1]
+            val strNumbers = matchResult.groupValues[2].split(delimiter)
+
+            return strNumbers.map { strNumber ->
+                strNumber.toInt()
+            }
         }
 
         return text.split(DEFAULT_DELIMITER_REGEX)

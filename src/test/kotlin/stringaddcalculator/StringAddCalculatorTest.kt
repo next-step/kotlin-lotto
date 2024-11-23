@@ -49,7 +49,6 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = ["//;\n1;2;3"])
     fun customDelimiter(text: String) {
-        println(text)
         assertThat(calculator.add(text)).isSameAs(6)
     }
 
