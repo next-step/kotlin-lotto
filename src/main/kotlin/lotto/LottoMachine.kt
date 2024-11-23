@@ -1,6 +1,6 @@
 package lotto
 
-class Generator {
+class LottoMachine {
     fun generate(lottoCount: Int): Lottos =
         Lottos((1..lottoCount).map { Lotto() })
 }

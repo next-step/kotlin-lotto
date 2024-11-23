@@ -1,15 +1,15 @@
 package lotto.client
 
-import lotto.Generator
+import lotto.LottoMachine
 import lotto.Lottos
 import lotto.rank.LottoRank
-import lotto.statistics.ProfitCalculator
+import lotto.statistics.Profit
 import lotto.statistics.WinningStatistics
 import lotto.view.InputView
 import lotto.view.ResultView
 
 class LottoClient(
-    private val generator: Generator,
+    private val lottoMachine: LottoMachine,
     private val winningStatistics: WinningStatistics,
 ) {
     fun run() {
@@ -17,7 +17,7 @@ class LottoClient(
         val lottoCount = getLottoCount(amount)
         ResultView.printLottoCount(lottoCount)
 
-        val lottos = generator.generate(lottoCount)
+        val lottos = lottoMachine.generate(lottoCount)
         ResultView.printLottoList(lottos)
 
         val lottoRanks = calculateStatistics(lottos)
@@ -34,12 +34,10 @@ class LottoClient(
         return winningStatistics.evaluate(lottos = lottos, winningNumbers = winningNumbers)
     }
 
-    private fun calculateProfit(lottoRanks: List<LottoRank>, amount: Int): Double {
-        return ProfitCalculator.evaluate(
-            winningAmount = lottoRanks.sumOf { it.prize },
-            purchaseAmount = amount
-        )
-    }
+    private fun calculateProfit(
+        lottoRanks: List<LottoRank>,
+        amount: Int,
+    ): Double = Profit(winningAmount = lottoRanks.sumOf { it.prize }, purchaseAmount = amount).yield()
 
     companion object {
         val LOTTO_PRICE = 1_000
