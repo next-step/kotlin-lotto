@@ -3,7 +3,7 @@ package calculator
 class Calculator {
     fun execute(text: String?): Int {
         if (text.isNullOrBlank()) return 0
-        val result = Regex(CUSTROM_DELIMITER).find(text)
+        val result = CUSTOM_DELIMITER_REGEX.find(text)
 
         return result?.let {
             this.handleCustomDelimiter(result)
@@ -19,7 +19,7 @@ class Calculator {
     }
 
     private fun handleBasicDelimiter(text: String): Int {
-        return this.sum(text.split(Regex(BASIC_DELIMITER)))
+        return this.sum(text.split(BASIC_DELIMITER_REGEX))
     }
 
     private fun handleCustomDelimiter(result: MatchResult): Int {
@@ -32,12 +32,14 @@ class Calculator {
         val number =
             input.toIntOrNull()
                 ?: throw RuntimeException("숫자 이외의 값은 더할 수 없습니다. [$input]")
-        require((number < 0).not()) { "음수 값은 더할 수 없습니다. [$number] in $input" }
+        require((number >= 0)) { "음수 값은 더할 수 없습니다. [$number] in $input" }
         return number
     }
 
     companion object {
-        const val BASIC_DELIMITER = ",|:"
-        const val CUSTROM_DELIMITER = "//(.)\n(.*)"
+        private const val BASIC_DELIMITER = ",|:"
+        private const val CUSTOM_DELIMITER = "//(.)\n(.*)"
+        private val BASIC_DELIMITER_REGEX = Regex(BASIC_DELIMITER)
+        private val CUSTOM_DELIMITER_REGEX = Regex(CUSTOM_DELIMITER)
     }
 }

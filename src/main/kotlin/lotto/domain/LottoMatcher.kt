@@ -1,0 +1,10 @@
+package lotto
+
+object LottoMatcher {
+    fun match(lottos: List<Lotto>, winningNumbers: List<Int>): List<Lotto> {
+        return lottos.map { lotto ->
+            val matchCount = lotto.pickNumbers.intersect(winningNumbers).count()
+            lotto.updateMatchCount(matchCount)
+        }
+    }
+}
