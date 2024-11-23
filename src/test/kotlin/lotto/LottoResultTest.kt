@@ -2,6 +2,7 @@ package lotto
 
 import lotto.domain.LottoResult
 import lotto.domain.LottoTickets
+import lotto.domain.Rank
 import lotto.domain.WinningLottoTicket
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
