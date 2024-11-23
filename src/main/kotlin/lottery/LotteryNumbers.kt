@@ -1,13 +1,13 @@
 package lottery
 
-data class LotteryNumbers(val numbers: Set<Int>) {
+class LotteryNumbers(val numbers: Set<Int>) {
     init {
         require(numbers.size == 6) { "로또 번호는 6개이어야 합니다" }
         require(numbers.all { it in 1..45 }) { "로또 번호는 1부터 45 사이어야 합니다" }
     }
 
-    fun countMatchedNumber(numbers: List<Int>): Int {
-        return this.numbers.intersect(numbers.toSet()).size
+    fun countMatchedNumber(other: LotteryNumbers): Int {
+        return this.numbers.intersect(other.numbers).size
     }
 
     companion object {
