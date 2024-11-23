@@ -57,4 +57,10 @@ class StringAddCalculatorTest {
     fun negative() {
         assertThatThrownBy { calculator.add("-1") }.isInstanceOf(RuntimeException::class.java)
     }
+
+    @DisplayName(value = "문자열 계산기에 구분자로 지정할 문자가 아니면서 숫자가 아닌 문자를 입력하면 IllegalArgumentException 예외 처리를 한다.")
+    @Test
+    fun invalid() {
+        assertThatThrownBy { calculator.add("*:*") }.isInstanceOf(IllegalArgumentException::class.java)
+    }
 }
