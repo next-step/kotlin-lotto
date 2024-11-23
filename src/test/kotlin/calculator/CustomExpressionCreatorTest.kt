@@ -1,12 +1,10 @@
-package calculator
-
+import calculator.CustomExpressionCreator
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 class CustomExpressionCreatorTest {
-
     @Test
     @DisplayName("커스텀 구분자가 없으면 기본 구분자로 생성한다")
     fun `커스텀 구분자가 있으면 커스텀 구분자로 생성한다`() {

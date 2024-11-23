@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test
 import java.lang.RuntimeException
 
 class ExpressionsTest {
-
     @Test
     @DisplayName("양수의 값들로 Expressions 객체를 생성한다")
     fun `양수의 값들로 Expressions 객체를 생성한다`() {
