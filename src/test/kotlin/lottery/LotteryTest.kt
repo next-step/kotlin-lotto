@@ -46,4 +46,9 @@ class LotteryTest : StringSpec({
         val numbers = Lottery.create().lotteryNumbers.numbers
         numbers.forAll { it shouldBeInRange 1..45 }
     }
+
+    "로또번호들은 중복되지 않는다" {
+        val numbers = Lottery.create().lotteryNumbers.numbers
+        numbers.distinct().size shouldBe 6
+    }
 })
