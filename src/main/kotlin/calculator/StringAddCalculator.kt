@@ -1,7 +1,7 @@
 package calculator
 
 object StringAddCalculator {
-    fun calculate(expression: Expression): Int {
-        return expression.sum()
+    fun calculate(expressions: Expressions): Int {
+        return expressions.sum()
     }
 }

@@ -1,8 +1,7 @@
 package calculator
 
 fun main() {
-    val expression = "//;\n1;2;3"
-
-    val stringAddCalculator = StringAddCalculator.calculate(Expression.created(expression))
+    val expression = "-1,2,3"
+    val stringAddCalculator = StringAddCalculator.calculate(ExpressionFactory.determine(expression))
     println(stringAddCalculator)
 }
