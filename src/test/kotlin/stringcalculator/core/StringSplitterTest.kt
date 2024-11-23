@@ -4,7 +4,7 @@ import io.kotest.matchers.shouldBe
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
-class SplitterTest {
+class StringSplitterTest {
     @ParameterizedTest
     @CsvSource(
         "'', 1",
@@ -18,7 +18,7 @@ class SplitterTest {
         token: String,
         result: Int,
     ) {
-        Splitter(token).split().size shouldBe result
+        StringSplitter(token).split().size shouldBe result
     }
 
     @ParameterizedTest
@@ -35,6 +35,6 @@ class SplitterTest {
         customDelimiter: String,
         result: Int,
     ) {
-        Splitter(token, customDelimiter).split().size shouldBe result
+        StringSplitter(token, customDelimiter).split().size shouldBe result
     }
 }

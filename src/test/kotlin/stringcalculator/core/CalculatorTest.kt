@@ -18,7 +18,7 @@ class CalculatorTest {
         result: Int,
     ) {
         val list = (start..end).toList()
-        val numList = list.map { num -> Number(num.toString()) }
-        Calculator.sum(numList) shouldBe result
+        val numbers = list.map { num -> Number(num.toString()) }
+        Calculator.sum(numbers) shouldBe result
     }
 }

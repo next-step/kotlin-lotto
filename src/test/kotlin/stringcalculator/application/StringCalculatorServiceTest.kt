@@ -18,7 +18,7 @@ class StringCalculatorServiceTest {
         str: String,
         result: Int,
     ) {
-        StringCalculatorService().calculate(str) shouldBe result
+        StringCalculatorService.calculate(str) shouldBe result
     }
 
     @ParameterizedTest
@@ -34,6 +34,6 @@ class StringCalculatorServiceTest {
         str: String,
         result: Int,
     ) {
-        StringCalculatorService().calculate(str) shouldBe result
+        StringCalculatorService.calculate(str) shouldBe result
     }
 }
