@@ -4,7 +4,7 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import org.junit.jupiter.api.Test
 
-class LottoTest{
+class LottoTest {
 
     @Test
     fun `각 로또마다 6개의 숫자를 가지고 있다`() {
