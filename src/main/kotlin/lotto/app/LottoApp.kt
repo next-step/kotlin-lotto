@@ -23,6 +23,7 @@ fun main() {
 
     // 3. 당첨 번호 입력
     val winningNumbers = inputView.readWinningNumbers()
+    val bonusNumber = inputView.readBonusNumber()
 
     // Step 4: 당첨 통계 생성
     val winningStatistics = WinningStatistics(winningNumbers)

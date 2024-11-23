@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.BonusNumber
 import lotto.domain.Lotto
 import lotto.domain.WinningLotto
 
@@ -31,6 +32,17 @@ class InputView {
         } catch (e: IllegalArgumentException) {
             println(e.message)
             return readWinningNumbers()
+        }
+    }
+
+    fun readBonusNumber(): BonusNumber {
+        println("보너스 볼을 입력해 주세요.")
+        val input = readlnOrNull() ?: exitProgram()
+        return try {
+            BonusNumber(input.toInt())
+        } catch (e: NumberFormatException) {
+            println("유효하지 않은 숫자입니다. 숫자를 입력해 주세요.")
+            return readBonusNumber()
         }
     }
 
