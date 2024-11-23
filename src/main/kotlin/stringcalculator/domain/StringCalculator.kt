@@ -17,11 +17,19 @@ class StringCalculator {
             val numbersPart = matchResult?.groupValues?.get(2) ?: ""
 
             val delimitersRegex = Regex("[${Regex.escape(customDelimiter)},:]")
-            val numbers = numbersPart.split(delimitersRegex).filter { it.isNotBlank() }
-            return numbers.sumOf { it.toInt() }
+            val numbers = numbersPart.split(delimitersRegex).filter { it.isNotBlank() }.map { validateAndParse(it) }
+            return numbers.sum()
         }
 
-        val tokens = input.split("[,:]".toRegex())
-        return tokens.sumOf { it.toInt() }
+        val tokens = input.split("[,:]".toRegex()).map { validateAndParse(it) }
+        return tokens.sum()
+    }
+
+    private fun validateAndParse(value: String): Int {
+        val number = value.toIntOrNull() ?: throw RuntimeException("Invalid number: $value")
+        if (number < 0) {
+            throw RuntimeException("Negative numbers are not allowed: $value")
+        }
+        return number
     }
 }

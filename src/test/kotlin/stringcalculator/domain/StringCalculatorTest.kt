@@ -1,5 +1,6 @@
 package stringcalculator.domain
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
@@ -29,5 +30,23 @@ class StringCalculatorTest : StringSpec({
         calculator.add("//|\n11|22|33") shouldBe 66
         calculator.add("//.\n1.2,3:4") shouldBe 10
         calculator.add("//\n1:2,3") shouldBe 6
+    }
+
+    "should throw RuntimeException for negative numbers" {
+        val calculator = StringCalculator()
+        val exception =
+            shouldThrow<RuntimeException> {
+                calculator.add("19,-5,3")
+            }
+        exception.message shouldBe "Negative numbers are not allowed: -5"
+    }
+
+    "should throw RuntimeException for non-numeric values" {
+        val calculator = StringCalculator()
+        val exception =
+            shouldThrow<RuntimeException> {
+                calculator.add("5,22,S")
+            }
+        exception.message shouldBe "Invalid number: S"
     }
 })
