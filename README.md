@@ -11,6 +11,12 @@
   - object class
   - companion object
   - class
+- 확장함수에 대해서 알아보기
+  - let
+  - with
+  - run
+  - apply
+  - also
 
 ### 기능 요구 사항
 

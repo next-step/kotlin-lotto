@@ -13,9 +13,8 @@ object CustomExpressionCreator : ExpressionCreator {
     }
 
     private fun extractCustomDelimiter(expression: String): String {
-        return CUSTOM.regex.find(expression)
-            ?.groupValues
-            ?.get(1)
-            ?: throw IllegalArgumentException("커스텀 구분자가 존재하지 않습니다. input = $expression")
+        return CUSTOM.regex.find(expression)?.let { matchResult ->
+            matchResult.groupValues.getOrNull(1)
+        } ?: throw IllegalArgumentException("커스텀 구분자가 존재하지 않습니다. input = $expression")
     }
 }
