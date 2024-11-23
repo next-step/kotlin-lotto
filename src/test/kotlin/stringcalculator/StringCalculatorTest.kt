@@ -15,7 +15,7 @@ class StringCalculatorTest : StringSpec({
         ) { input ->
             val exception =
                 shouldThrowExactly<IllegalArgumentException> {
-                    StringCalculator("//;\n1;::2")
+                    StringCalculator.calculate("//;\n1;::2")
                 }
             exception.message shouldBe "입력에 유효하지 않은 구분자가 포함되어 있습니다."
         }
@@ -31,15 +31,14 @@ class StringCalculatorTest : StringSpec({
         ) { input ->
             val exception =
                 shouldThrowExactly<IllegalArgumentException> {
-                    StringCalculator(input)
+                    StringCalculator.calculate(input)
                 }
             exception.message shouldBe "입력 형식이 올바르지 않습니다."
         }
     }
 
     "입력이 빈 문자열일 경우 0을 반환한다." {
-        val stringCalculator = StringCalculator("")
-        val actual = stringCalculator.calculate()
+        val actual = StringCalculator.calculate("")
         actual shouldBe 0
     }
 
@@ -49,8 +48,8 @@ class StringCalculatorTest : StringSpec({
             row("1:2:3:4:5", 15),
             row("//;\\n1,2;3:4", 10),
         ) { input, expected ->
-            val stringCalculator = StringCalculator(input)
-            val actual = stringCalculator.calculate()
+
+            val actual = StringCalculator.calculate(input)
             actual shouldBe expected
         }
     }
@@ -62,8 +61,7 @@ class StringCalculatorTest : StringSpec({
             row("10"),
             row("5000"),
         ) { input ->
-            val stringCalculator = StringCalculator(input)
-            val actual = stringCalculator.calculate()
+            val actual = StringCalculator.calculate(input)
             actual shouldBe input.toInt()
         }
     }
