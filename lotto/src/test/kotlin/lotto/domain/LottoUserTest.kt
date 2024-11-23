@@ -1,5 +1,6 @@
 package lotto.domain
 
+import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
@@ -20,6 +21,23 @@ class LottoUserTest {
         val lottoUser = LottoUser(lottoPurchaseAmount)
 
         lottoUser.lotteries.size shouldBe lottoPurchaseAmount.calculateLottoCount()
+    }
+
+    @Test
+    fun `사용자는 로또별 당첨금액을 체크할 수 있다`() {
+        val lottoPurchaseAmount = LottoPurchaseAmount(10000)
+        val lottoUser = LottoUser(lottoPurchaseAmount)
+        val inputs = List(6) { it }.toSet()
+
+        val correctNumbers = CorrectNumbers(inputs)
+
+        lottoUser.checkLotteries(correctNumbers)
+
+        lottoUser.lotteries.forEach {
+            shouldNotThrowAny {
+                it.markedCorrectCount
+            }
+        }
     }
 
     @Test
