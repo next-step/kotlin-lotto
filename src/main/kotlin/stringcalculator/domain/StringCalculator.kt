@@ -10,6 +10,7 @@ class StringCalculator {
             return input.toInt()
         }
 
-        return -1
+        val tokens = input.split("[,;]".toRegex())
+        return tokens.sumOf { it.toInt() }
     }
 }

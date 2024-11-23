@@ -15,4 +15,11 @@ class StringCalculatorTest : StringSpec({
         calculator.add("5") shouldBe 5
         calculator.add("100") shouldBe 100
     }
+
+    "should return the sum of numbers split by basic delimiters" {
+        val calculator = StringCalculator()
+        calculator.add("24,32") shouldBe 56
+        calculator.add("16;7") shouldBe 23
+        calculator.add("2,5;19") shouldBe 26
+    }
 })
