@@ -1,8 +1,8 @@
 package lotto
 
 class WinningBoard(val winningTicket: LottoTicket) {
-    fun checkTicket(lottoTicket: LottoTicket): Int {
+    fun checkTicket(lottoTicket: LottoTicket): WinningResult {
         val matchNumbers = winningTicket.numbers intersect lottoTicket.numbers.toSet()
-        return matchNumbers.size
+        return WinningResult.valueOf(matchNumbers.size)
     }
 }
