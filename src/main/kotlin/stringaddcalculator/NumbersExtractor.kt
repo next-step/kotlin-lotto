@@ -16,9 +16,28 @@ object NumbersExtractor {
             val matchResult = CUSTOM_DELIMITER_REGEX.find(text) ?: return emptyList()
 
             val delimiter = matchResult.groupValues[1]
-            matchResult.groupValues[2].split(delimiter)
+            validateDelimiter(delimiter)
+            val numbersWithDelimiter = matchResult.groupValues[2]
+            validatePattern(delimiter = delimiter, numbersWithDelimiter = numbersWithDelimiter)
+
+            numbersWithDelimiter.split(delimiter)
         } else {
+            validatePattern(delimiter = DEFAULT_DELIMITER_REGEX.pattern, numbersWithDelimiter = text)
             text.split(DEFAULT_DELIMITER_REGEX)
+        }
+    }
+
+    private fun validateDelimiter(delimiter: String) {
+        println("delimiter=$delimiter")
+        if (delimiter.isEmpty()) {
+            throw IllegalArgumentException("구분자는 빈 값일 수 없습니다.")
+        }
+    }
+
+    private fun validatePattern(delimiter: String, numbersWithDelimiter: String) {
+        val patternRegex = Regex("^\\d+([${delimiter}]\\d+)+$")
+        if (patternRegex.matches(numbersWithDelimiter).not()) {
+            throw IllegalArgumentException("{숫자}{구분자}{숫자} 형태로 입력해야 합니다. 현재 입력 = $numbersWithDelimiter")
         }
     }
 }
