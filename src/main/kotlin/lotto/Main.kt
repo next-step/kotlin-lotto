@@ -1,6 +1,6 @@
 package lotto
 
-import lotto.domain.Bank
+import lotto.domain.LottoResult
 import lotto.domain.LottoSeller
 import lotto.domain.WinningNumbers
 import lotto.view.LottoView
@@ -13,8 +13,7 @@ fun main() {
     println("${lottoSeller.getLottoPurchaseCount(purchasePrice)}개를 구매했습니다.")
     println("지난 주 당첨 번호를 입력해 주세요.")
     val winningNumbers = readln().split(",").map { it.toInt() }
-    val bank = Bank()
-    val lottoResult = bank.getLottoResult(lottos, WinningNumbers(winningNumbers), purchasePrice)
+    val lottoResult = LottoResult.getLottoResult(lottos, WinningNumbers(winningNumbers), purchasePrice)
     val lottoView = LottoView()
 
     lottoView.drawLottos(lottoResult)
