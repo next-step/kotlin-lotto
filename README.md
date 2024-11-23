@@ -74,3 +74,12 @@
 - [X] Rank
   - [X] 3,4,5,6개 일치 통계
   - [X] 수익률 계산
+
+### 2차 피드백
+- [operator overloading](https://kotlinlang.org/docs/operator-overloading.html) 적용하기
+- [https://kotlinworld.com/420](object의 초기화 시점)
+- [https://kotlinworld.com/421](data class)
+- 객체지향에 대해 고민하기 
+- [Initializer functions for lists](https://kotlinlang.org/docs/constructing-collections.html#initializer-functions-for-lists)
+- [functional interface](https://kotlinlang.org/docs/fun-interfaces.html)
+
