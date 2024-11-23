@@ -11,8 +11,8 @@ class WinningLotto(
     }
 
     fun getRank(lottoToCompare: Lotto): Rank {
-        val matchCount = lottoToCompare.numbers.intersect(lotto.numbers.toSet()).size
-        val matchBonus = bonusNumber.value in lottoToCompare.numbers
+        val matchCount = lottoToCompare.intersect(lotto).size
+        val matchBonus = bonusNumber in lottoToCompare
         return Rank.from(matchCount, matchBonus)
     }
 }
