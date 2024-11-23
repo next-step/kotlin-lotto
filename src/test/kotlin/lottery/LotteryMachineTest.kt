@@ -12,7 +12,7 @@ class LotteryMachineTest : StringSpec({
         }
     }
 
-    "로또 구매를 1,000원단위로 하지 않을 시 예외 발생한다" {
+    "로또 구입를 1,000원단위로 하지 않을 시 예외 발생한다" {
         shouldThrow<IllegalArgumentException> {
             LotteryMachine.buy(Money(1500))
         }
