@@ -1,13 +1,18 @@
 package lotto
 
-import lotto.domain.*
+import lotto.domain.LottoMachine
+import lotto.domain.LottoNumberGenerator
+import lotto.domain.LottoResult
+import lotto.domain.LottoSeller
+import lotto.domain.Rank
+import lotto.domain.WinningNumbers
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.entry
 import org.junit.jupiter.api.Test
 
 class LottoResultTest {
     @Test
     fun `일치한 갯수 별로 분류한다`() {
+        val bonusNumber = 7
         val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5))
         val lottoNumberGenerator1 =
             LottoNumberGenerator { listOf(1, 2, 3, 4, 7) }
@@ -17,43 +22,46 @@ class LottoResultTest {
 
         val lottos1 = lottoMachine1.makeLottos(2)
         val lottos2 = lottoMachine2.makeLottos(1)
-        assertThat(LottoResult.getResultMap(lottos1, winningNumbers).get(4)).isEqualTo(2)
-        assertThat(LottoResult.getResultMap(lottos2, winningNumbers).get(3)).isEqualTo(1)
-    }
-
-    @Test
-    fun `갯수별 금액과 갯수를 곱해 수익금을 만든다`() {
-        val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5))
-        val lottoNumberGenerator =
-            LottoNumberGenerator { listOf(1, 2, 3, 4, 7) }
-        val lottoSeller = LottoSeller(lottoNumberGenerator)
-        val lottos = lottoSeller.sellLottos(4_000)
-        val resultMap = LottoResult.getResultMap(lottos, winningNumbers)
-
-        assertThat(LottoResult.getProfitMap(resultMap)).contains(entry(4, 200_000))
+        assertThat(LottoResult.getLottoMatchMap(lottos1, winningNumbers, bonusNumber).lottoMatchMap.get(Rank.FOURTH)).isEqualTo(2)
+        assertThat(LottoResult.getLottoMatchMap(lottos2, winningNumbers, bonusNumber).lottoMatchMap.get(Rank.FIFTH)).isEqualTo(1)
     }
 
     @Test
     fun `수익금을 구매금액으로 나누어 수익률을 구한다`() {
+        val bonusNumber = 7
         val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5))
         val lottoNumberGenerator = LottoNumberGenerator { listOf(1, 2, 3, 4, 7) }
         val lottoSeller = LottoSeller(lottoNumberGenerator)
         val lottos = lottoSeller.sellLottos(4_000)
-        val resultMap = LottoResult.getResultMap(lottos, winningNumbers)
-        val profitMap = LottoResult.getProfitMap(resultMap)
-        assertThat(LottoResult.getProfit(profitMap)).isEqualTo(200_000)
+        val lottoMatchMap = LottoResult.getLottoMatchMap(lottos, winningNumbers, bonusNumber)
+        assertThat(LottoResult.getProfit(lottoMatchMap)).isEqualTo(200_000)
     }
 
     @Test
     fun `수익률이 1보다 크면 이득 1이면 본전 1보다 작으면 손해로 판정한다`() {
+        val bonusNumber = 7
         val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5))
         val lottoNumberGenerator =
             LottoNumberGenerator { listOf(1, 2, 3, 4, 7) }
         val lottoSeller = LottoSeller(lottoNumberGenerator)
         val lottos = lottoSeller.sellLottos(4_000)
-        val resultMap = LottoResult.getResultMap(lottos, winningNumbers)
-        val profitMap = LottoResult.getProfitMap(resultMap)
-        val profit = LottoResult.getProfit(profitMap)
+        val lottoMatchMap = LottoResult.getLottoMatchMap(lottos, winningNumbers, bonusNumber)
+        val profit = LottoResult.getProfit(lottoMatchMap)
         assertThat(LottoResult.getProfitRate(profit, 4_000)).isEqualTo(50.0)
+    }
+
+    @Test
+    fun `당첨 통계에 2등도 추가해야 한다`() {
+        val bonusNumber = 7
+        val numbers = listOf(1, 2, 3, 4, 5, 7)
+        val winNumber = listOf(1, 2, 3, 4, 5, 6)
+        val purchasePrice = 1_000
+
+        val winningNumbers = WinningNumbers(winNumber)
+        val lottoSeller = LottoSeller { numbers }
+        val lottos = lottoSeller.sellLottos(purchasePrice)
+        val lottoResult = LottoResult.getLottoResult(lottos, winningNumbers, bonusNumber, purchasePrice)
+
+        assertThat(lottoResult.lottoMatchMap.lottoMatchMap.get(Rank.SECOND)).isEqualTo(1)
     }
 }

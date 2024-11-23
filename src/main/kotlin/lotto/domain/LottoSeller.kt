@@ -5,7 +5,7 @@ class LottoSeller(val lottoNumberGenerator: LottoNumberGenerator = RandomLottoNu
         return purchasePrice.div(LOTTO_PRICE)
     }
 
-    fun sellLottos(purchasePrice: Int): List<Lotto> {
+    fun sellLottos(purchasePrice: Int): Lottos {
         val lottoMachine = LottoMachine(lottoNumberGenerator)
         return lottoMachine.makeLottos(getLottoPurchaseCount(purchasePrice))
     }

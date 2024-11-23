@@ -5,7 +5,7 @@ import lotto.domain.LottoResult
 
 class LottoView {
     fun drawLottos(lottoResult: LottoResult) {
-        lottoResult.lottos.forEach { drawLotto(it) }
+        lottoResult.lottos.lottos.forEach { drawLotto(it) }
     }
 
     private fun drawLotto(lotto: Lotto) {
@@ -15,7 +15,7 @@ class LottoView {
     fun drawResultMap(lottoResult: LottoResult) {
         println("당첨 통계")
         println("---------")
-        lottoResult.lottoResultMap.forEach { println("${it.key}개 일치 : ${it.value}개") }
+        lottoResult.lottoMatchMap.lottoMatchMap.forEach { println("${it.key}개 일치 : ${it.value}개") }
     }
 
     fun drawProfitRate(lottoResult: LottoResult) {

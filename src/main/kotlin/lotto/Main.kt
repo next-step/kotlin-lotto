@@ -13,7 +13,9 @@ fun main() {
     println("${lottoSeller.getLottoPurchaseCount(purchasePrice)}개를 구매했습니다.")
     println("지난 주 당첨 번호를 입력해 주세요.")
     val winningNumbers = readln().split(",").map { it.toInt() }
-    val lottoResult = LottoResult.getLottoResult(lottos, WinningNumbers(winningNumbers), purchasePrice)
+    println("보너스 볼을 입력해 주세요.")
+    val bonusNumber = readln().toInt()
+    val lottoResult = LottoResult.getLottoResult(lottos, WinningNumbers(winningNumbers), bonusNumber, purchasePrice)
     val lottoView = LottoView()
 
     lottoView.drawLottos(lottoResult)

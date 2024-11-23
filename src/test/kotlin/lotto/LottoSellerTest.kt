@@ -15,6 +15,6 @@ class LottoSellerTest {
     fun sellLottosTest() {
         val lottoSeller = LottoSeller { listOf(1, 2, 3, 4, 5, 6) }
         val lottos = lottoSeller.sellLottos(5_000)
-        lottos.forEach { assertThat(it.numbers).containsExactly(1, 2, 3, 4, 5, 6) }
+        lottos.lottos.forEach { assertThat(it.numbers).containsExactly(1, 2, 3, 4, 5, 6) }
     }
 }
