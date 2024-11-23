@@ -1,10 +1,10 @@
-package additionparser.application
+package stringcalculator.application
 
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
-class AdditionParserServiceTest {
+class StringCalculatorServiceTest {
     @ParameterizedTest
     @CsvSource(
         "'', 0",
@@ -18,7 +18,7 @@ class AdditionParserServiceTest {
         str: String,
         result: Int,
     ) {
-        AdditionParserService().calculate(str) shouldBe result
+        StringCalculatorService().calculate(str) shouldBe result
     }
 
     @ParameterizedTest
@@ -34,6 +34,6 @@ class AdditionParserServiceTest {
         str: String,
         result: Int,
     ) {
-        AdditionParserService().calculate(str) shouldBe result
+        StringCalculatorService().calculate(str) shouldBe result
     }
 }

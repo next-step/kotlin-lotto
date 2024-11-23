@@ -1,4 +1,4 @@
-package additionparser.core
+package stringcalculator.core
 
 object Calculator {
     fun sum(numbers: List<Number>): Int {

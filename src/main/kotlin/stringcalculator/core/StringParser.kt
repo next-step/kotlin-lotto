@@ -1,4 +1,4 @@
-package additionparser.core
+package stringcalculator.core
 
 object StringParser {
     private const val REGEX_FIND_CUSTOM_DELIMITER = "(?<=//)(.*?)(?=\n)"

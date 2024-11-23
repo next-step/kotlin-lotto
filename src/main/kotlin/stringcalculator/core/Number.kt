@@ -1,4 +1,4 @@
-package additionparser.core
+package stringcalculator.core
 
 class Number(value: String) {
     var number = 0

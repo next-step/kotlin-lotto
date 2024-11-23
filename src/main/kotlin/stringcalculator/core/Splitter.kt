@@ -1,4 +1,4 @@
-package additionparser.core
+package stringcalculator.core
 
 class Splitter(private val token: String, private val customDelimiter: String = "") {
     fun split(): List<String> {

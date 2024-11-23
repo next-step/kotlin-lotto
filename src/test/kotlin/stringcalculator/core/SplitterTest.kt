@@ -1,4 +1,4 @@
-package additionparser.core
+package stringcalculator.core
 
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.params.ParameterizedTest
