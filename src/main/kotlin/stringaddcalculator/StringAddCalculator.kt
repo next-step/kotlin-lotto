@@ -6,17 +6,17 @@ class StringAddCalculator {
             return 0
         }
 
-        validateContainsNegativeNumber(text)
+        validateNoNegativeNumbers(text)
 
         if (containsOnlyOneNumber(text)) {
             return text.toInt()
         }
 
-        val numbers = getNumbers(text)
-        return sumAll(numbers)
+        val numbers = convertToNumbers(text)
+        return numbers.sum()
     }
 
-    private fun validateContainsNegativeNumber(text: String) {
+    private fun validateNoNegativeNumbers(text: String) {
         if (text.contains(NEGATIVE_NUMBER_REGEX)) {
             throw IllegalArgumentException("음수는 포함될 수 없습니다. 현재 입력 = $text")
         }
@@ -26,24 +26,22 @@ class StringAddCalculator {
         return text.matches(DIGITS_ONLY_REGEX)
     }
 
-    private fun getNumbers(text: String): List<Int> {
-        if (text.contains(CUSTOM_DELIMITER_REGEX)) {
+    private fun convertToNumbers(text: String): List<Int> {
+        val strNumbers: List<String> = extractNumbers(text)
+        return strNumbers.map { strNumber ->
+            strNumber.toInt()
+        }
+    }
+
+    private fun extractNumbers(text: String): List<String> {
+        return if (text.contains(CUSTOM_DELIMITER_REGEX)) {
             val matchResult = CUSTOM_DELIMITER_REGEX.find(text) ?: return emptyList()
 
             val delimiter = matchResult.groupValues[1]
-            val strNumbers = matchResult.groupValues[2].split(delimiter)
-
-            return strNumbers.map { strNumber ->
-                strNumber.toInt()
-            }
+            matchResult.groupValues[2].split(delimiter)
+        } else {
+            text.split(DEFAULT_DELIMITER_REGEX)
         }
-
-        return text.split(DEFAULT_DELIMITER_REGEX)
-            .map { strNumber -> strNumber.toInt() }
-    }
-
-    private fun sumAll(numbers: List<Int>): Int {
-        return numbers.sum()
     }
 
     companion object {
