@@ -1,7 +1,5 @@
 package lotto.domain
 
-import lotto.Rank
-
 class LottoResult(
     private val winningLottoTicket: WinningLottoTicket,
     private val lottoTickets: LottoTickets,
