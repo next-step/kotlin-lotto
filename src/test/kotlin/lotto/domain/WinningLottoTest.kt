@@ -11,7 +11,7 @@ class WinningLottoTest : BehaviorSpec({
         val validWinningLotto = Lotto(setOf(1, 2, 3, 4, 5, 6))
 
         When("당첨 로또 객체를 생성하면") {
-            val winningLotto = WinningLotto(validWinningLotto, BonusNumber(7))
+            val winningLotto = WinningLotto(validWinningLotto, BonusNumber.create(7, validWinningLotto))
 
             Then("객체가 정상적으로 생성된다") {
                 winningLotto shouldNotBe null
@@ -20,7 +20,8 @@ class WinningLottoTest : BehaviorSpec({
     }
 
     Given("당첨 복권과 당첨 로또 번호가 주어졌을 때") {
-        val winningLotto = WinningLotto(Lotto(setOf(1, 2, 3, 4, 5, 6)), BonusNumber(7))
+        val validWinningLotto = Lotto(setOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = WinningLotto(validWinningLotto, BonusNumber.create(7, validWinningLotto))
 
         forAll(
             row(setOf(1, 2, 3, 4, 5, 6), Rank.FIRST),

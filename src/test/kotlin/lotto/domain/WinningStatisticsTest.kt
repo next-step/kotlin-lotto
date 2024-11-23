@@ -7,7 +7,8 @@ import java.math.RoundingMode
 
 class WinningStatisticsTest : BehaviorSpec({
     Given("구입한 로또와 당첨 번호가 주어졌을 때") {
-        val winningLotto = WinningLotto(Lotto(setOf(1, 2, 3, 4, 5, 6)), BonusNumber(7))
+        val validWinningLotto = Lotto(setOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = WinningLotto(validWinningLotto, BonusNumber.create(7, validWinningLotto))
         val purchasedLottos =
             PurchasedLottos(
                 listOf(
@@ -36,7 +37,8 @@ class WinningStatisticsTest : BehaviorSpec({
     }
 
     Given("구입한 로또 개수와 당첨 번호가 주어졌을 때") {
-        val winningLotto = WinningLotto(Lotto(setOf(1, 2, 3, 4, 5, 6)), BonusNumber(7))
+        val validWinningLotto = Lotto(setOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = WinningLotto(validWinningLotto, BonusNumber.create(7, validWinningLotto))
         val purchasedLottos =
             PurchasedLottos(
                 listOf(

@@ -44,10 +44,7 @@ class InputView {
     fun readBonusNumber(winningLotto: Lotto): BonusNumber {
         val input = readlnOrNull() ?: exitProgram()
         return try {
-            require(input.toInt() !in winningLotto.numbers) {
-                "당첨 번호와 중복되는 숫자는 입력할 수 없습니다.\n보너스 볼을 입력해 주세요."
-            }
-            BonusNumber(input.toInt())
+            BonusNumber.create(input.toInt(), winningLotto)
         } catch (e: NumberFormatException) {
             println("유효하지 않은 숫자입니다. 숫자를 입력해 주세요.")
             return readBonusNumber(winningLotto)
