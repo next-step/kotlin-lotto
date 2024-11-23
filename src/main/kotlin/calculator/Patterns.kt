@@ -1,8 +1,8 @@
 package calculator
 
 enum class Patterns(val regex: Regex) {
-    DEFAULT("[,:]".toRegex()),
-    CUSTOM("//(.*?)\\n".toRegex()),
+    DEFAULT_DELIMITER("[,:]".toRegex()),
+    CUSTOM_DELIMITER("//(.*?)\\n".toRegex()),
     NONE("".toRegex()),
     ;
 

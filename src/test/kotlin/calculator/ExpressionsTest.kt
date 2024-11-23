@@ -14,7 +14,7 @@ class ExpressionsTest {
         val expression = "1,2,3"
 
         // Act:
-        val expressions = Expressions.created(expression, Patterns.DEFAULT.regex)
+        val expressions = Expressions.created(expression, Patterns.DEFAULT_DELIMITER.regex)
 
         // Assert:
         expressions.expressions shouldBe listOf(1, 2, 3)
@@ -28,7 +28,7 @@ class ExpressionsTest {
 
         // Act & Assert:
         shouldThrow<RuntimeException> {
-            Expressions.created(expression, Patterns.DEFAULT.regex)
+            Expressions.created(expression, Patterns.DEFAULT_DELIMITER.regex)
         }.message shouldBe "음수는 입력할 수 없습니다. input = -2"
     }
 
@@ -39,7 +39,7 @@ class ExpressionsTest {
         val expression = ""
 
         // Act:
-        val expressions = Expressions.created(expression, Patterns.DEFAULT.regex)
+        val expressions = Expressions.created(expression, Patterns.DEFAULT_DELIMITER.regex)
 
         // Assert:
         expressions.expressions shouldBe emptyList()
@@ -66,7 +66,7 @@ class ExpressionsTest {
         val expression = "1,2,3"
 
         // Act:
-        val expressions = Expressions.created(expression, Patterns.DEFAULT.regex)
+        val expressions = Expressions.created(expression, Patterns.DEFAULT_DELIMITER.regex)
 
         // Assert:
         expressions.expressions shouldBe listOf(1, 2, 3)
@@ -77,7 +77,7 @@ class ExpressionsTest {
     fun `Expressions 자료형의 표현식의 종합을 계산한다`() {
         // Arrange:
         val expression = "1,2,3"
-        val expressions = Expressions.created(expression, Patterns.DEFAULT.regex)
+        val expressions = Expressions.created(expression, Patterns.DEFAULT_DELIMITER.regex)
 
         // Act:
         val sum = expressions.sum()

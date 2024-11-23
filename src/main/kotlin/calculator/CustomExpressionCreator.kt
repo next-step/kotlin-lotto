@@ -1,6 +1,6 @@
 package calculator
 
-import calculator.Patterns.CUSTOM
+import calculator.Patterns.CUSTOM_DELIMITER
 
 object CustomExpressionCreator : ExpressionCreator {
     private const val SUBSTRING_TARGET_SEPARATOR = "\n"
@@ -13,7 +13,7 @@ object CustomExpressionCreator : ExpressionCreator {
     }
 
     private fun extractCustomDelimiter(expression: String): String {
-        return CUSTOM.regex.find(expression)?.let { matchResult ->
+        return CUSTOM_DELIMITER.regex.find(expression)?.let { matchResult ->
             matchResult.groupValues.getOrNull(1)
         } ?: throw IllegalArgumentException("커스텀 구분자가 존재하지 않습니다. input = $expression")
     }
