@@ -1,6 +1,6 @@
 package lotto
 
-class LottoNumber private constructor(number: Int) {
+class LottoNumber private constructor(val number: Int) {
     companion object {
         private val cache = (1..45).associateWith { LottoNumber(it) }
 
