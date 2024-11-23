@@ -29,4 +29,17 @@ class LottoTicketTest {
             .isEqualTo(listOf(1, 2, 3, 4, 5, 6))
     }
 
+    @Test
+    fun `자동 생성된 로또 티켓은 6개의 로또 번호를 가지고 있다`() {
+        val lottoTicket = LottoTicket.autoGenerate()
+        assertThat(lottoTicket.numbers.size).isEqualTo(6)
+    }
+
+    @Test
+    fun `자동 생성된 로또 티켓도 정렬되어 있다`() {
+        val lottoTicket = LottoTicket.autoGenerate()
+        val numbers = lottoTicket.numbers.map { it.number }
+        assertThat(numbers).isEqualTo(numbers.sorted())
+    }
+
 }
