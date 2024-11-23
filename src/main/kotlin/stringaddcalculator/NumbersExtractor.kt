@@ -2,7 +2,7 @@ package stringaddcalculator
 
 object NumbersExtractor {
     private val DEFAULT_DELIMITER_REGEX = Regex("[,:]")
-    private val CUSTOM_DELIMITER_REGEX = Regex("//(.)\\n(.*)")
+    private val CUSTOM_DELIMITER_REGEX = Regex("//(.*)\\n(.*)")
 
     fun extract(text: String): List<Int> {
         val splitNumbers = splitToNumbers(text)
@@ -17,6 +17,7 @@ object NumbersExtractor {
 
             val delimiter = matchResult.groupValues[1]
             validateDelimiter(delimiter)
+
             val numbersWithDelimiter = matchResult.groupValues[2]
             validatePattern(delimiter = delimiter, numbersWithDelimiter = numbersWithDelimiter)
 
@@ -28,9 +29,8 @@ object NumbersExtractor {
     }
 
     private fun validateDelimiter(delimiter: String) {
-        println("delimiter=$delimiter")
-        if (delimiter.isEmpty()) {
-            throw IllegalArgumentException("구분자는 빈 값일 수 없습니다.")
+        if (delimiter.isEmpty() || delimiter.length > 1) {
+            throw IllegalArgumentException("구분자는 빈 값이거나 2글자 이상일 수 없습니다.")
         }
     }
 

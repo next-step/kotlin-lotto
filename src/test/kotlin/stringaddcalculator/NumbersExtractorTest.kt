@@ -32,9 +32,14 @@ class NumbersExtractorTest {
         assertThat(numbers).containsExactly(1, 2, 3, 4, 5)
     }
 
-    @Test
-    fun `커스텀 구분자가 2개 이상의 문자로 구성된 경우 예외를 발생시킨다`() {
-        TODO("Not yet implemented")
+    @ParameterizedTest
+    @ValueSource(strings = ["", ";;"])
+    fun `커스텀 구분자가 빈 값이거나 2개 이상의 문자로 구성된 경우 예외를 발생시킨다`(delimiter: String) {
+        val text = "//${delimiter}\n1${delimiter}2${delimiter}3${delimiter}4${delimiter}5"
+
+        assertThatThrownBy { NumbersExtractor.extract(text) }
+            .isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessageContaining("구분자는 빈 값이거나 2글자 이상일 수 없습니다.")
     }
 
     @ParameterizedTest
