@@ -1,6 +1,5 @@
 package study
 
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
@@ -12,7 +11,7 @@ class KotlinStudyTest {
     fun `정규식을 사용해서 문자열 추출`() {
         val regex = Regex("//(.*)\n")
 
-        val matchResult = regex.find(input)!!  // 학습 테스트이기 때문에 널 아님 단언 사용
+        val matchResult = regex.find(input)!! // 학습 테스트이기 때문에 널 아님 단언 사용
         val extractedString = matchResult.groups[1]?.value
 
         assertThat(extractedString).isEqualTo(";")

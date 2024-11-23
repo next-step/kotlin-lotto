@@ -34,8 +34,11 @@ object NumbersExtractor {
         }
     }
 
-    private fun validatePattern(delimiter: String, numbersWithDelimiter: String) {
-        val patternRegex = Regex("^\\d+([${delimiter}]\\d+)+$")
+    private fun validatePattern(
+        delimiter: String,
+        numbersWithDelimiter: String,
+    ) {
+        val patternRegex = Regex("^\\d+([$delimiter]\\d+)+$")
         if (patternRegex.matches(numbersWithDelimiter).not()) {
             throw IllegalArgumentException("{숫자}{구분자}{숫자} 형태로 입력해야 합니다. 현재 입력 = $numbersWithDelimiter")
         }

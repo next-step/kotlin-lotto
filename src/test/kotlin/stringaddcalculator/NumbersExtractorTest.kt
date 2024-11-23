@@ -1,6 +1,5 @@
 package stringaddcalculator
 
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -17,7 +16,7 @@ class NumbersExtractorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["1,:2:3", "1,,2,3", ",1,2,3", "1,2,3,",])
+    @ValueSource(strings = ["1,:2:3", "1,,2,3", ",1,2,3", "1,2,3,"])
     fun `기본 구분자일 때 패턴 검사 - {숫자}{구분자}{숫자} 형태인지 검사하고 아닐 경우 예외를 발생시킨다`(text: String) {
         assertThatThrownBy { NumbersExtractor.extract(text) }
             .isInstanceOf(IllegalArgumentException::class.java)
@@ -43,7 +42,7 @@ class NumbersExtractorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["//;\n1;;2;3", "//;\n;1;2;3", "//;\n1;2;3;",])
+    @ValueSource(strings = ["//;\n1;;2;3", "//;\n;1;2;3", "//;\n1;2;3;"])
     fun `커스텀 구분자일 때 패턴 검사 - {숫자}{구분자}{숫자} 형태인지 검사하고 아닐 경우 예외를 발생시킨다`(text: String) {
         assertThatThrownBy { NumbersExtractor.extract(text) }
             .isInstanceOf(IllegalArgumentException::class.java)
