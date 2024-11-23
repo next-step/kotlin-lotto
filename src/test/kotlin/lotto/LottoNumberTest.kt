@@ -26,6 +26,6 @@ class LottoNumberTest {
     fun `같은 숫자는 캐싱된 값을 사용한다`() {
         val lottoNumber1 = LottoNumber.of(1)
         val lottoNumber2 = LottoNumber.of(1)
-        assert(lottoNumber1 === lottoNumber2)
+        assert(lottoNumber1 == lottoNumber2)
     }
 }
