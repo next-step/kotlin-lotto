@@ -8,15 +8,21 @@ import org.junit.jupiter.params.provider.ValueSource
 
 class LottoStore {
     fun sell(money: Int): List<Lotto> {
-        TODO("Not yet implemented")
+        if (isValidAmount(money)) throw NotEnoughMoneyException(money)
+
+        return emptyList()
     }
 
+    private fun isValidAmount(money: Int) = money % MIN_AMOUNT_UNIT != 0
+
+    companion object {
+        private const val MIN_AMOUNT_UNIT = 1000
+    }
 }
 
 class Lotto
 
-class NotEnoughMoneyException : RuntimeException() {
-
+class NotEnoughMoneyException(money: Int) : RuntimeException("입력 금액은 1천원 단위여야 합니다. 현재 입력 = $money") {
 }
 
 class LottoStoreTest {
