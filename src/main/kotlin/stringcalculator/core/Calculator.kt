@@ -2,10 +2,8 @@ package stringcalculator.core
 
 object Calculator {
     fun sum(numbers: List<Number>): Int {
-        if (numbers.isEmpty()) {
-            return 0
-        }
+        val sum = numbers.reduce { number1, number2 -> number1 + number2 }
 
-        return numbers.sumOf { it.number }
+        return sum.number
     }
 }
