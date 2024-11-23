@@ -1,4 +1,4 @@
-package lottery
+package lottery.domain
 
 enum class RankReward(val matchedNumberCount: Int, val money: Money) {
     RANK_1(6, Money(2_000_000_000)),

@@ -1,4 +1,4 @@
-package lottery
+package lottery.domain
 
 class Lottery(val lotteryNumbers: LotteryNumbers) {
     fun countMatchedNumber(other: Lottery): Int {

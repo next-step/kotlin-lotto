@@ -1,4 +1,4 @@
-package lottery
+package lottery.domain
 
 class DrawResult(val rankRewardLotteryCountMap: Map<RankReward, LotteryCount>) {
     fun calculateTotalPrize(): Money {

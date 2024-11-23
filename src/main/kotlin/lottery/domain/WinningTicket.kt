@@ -1,4 +1,4 @@
-package lottery
+package lottery.domain
 
 class WinningTicket(val lottery: Lottery) {
     fun draw(lotteries: List<Lottery>): DrawResult {

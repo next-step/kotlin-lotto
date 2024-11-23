@@ -1,10 +1,10 @@
-package lottery
+package lottery.domain
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
-import lottery.RankReward.RANK_1
-import lottery.RankReward.RANK_2
+import lottery.domain.RankReward.RANK_1
+import lottery.domain.RankReward.RANK_2
 
 class WinningTicketTest : StringSpec({
     "당첨로또는 번호를 직접 입력해 생성한다" {

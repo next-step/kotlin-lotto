@@ -1,4 +1,4 @@
-package lottery
+package lottery.domain
 
 object LotteryMachine {
     fun buy(money: Money): List<Lottery> {
