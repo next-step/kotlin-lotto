@@ -1,5 +1,8 @@
 package lotto
 
+import java.math.BigDecimal
+import java.math.RoundingMode
+
 typealias MatchedCount = Int
 
 data class Ranks(private val values: Map<Rank, MatchedCount>) {
@@ -7,7 +10,7 @@ data class Ranks(private val values: Map<Rank, MatchedCount>) {
         return values[rank] ?: 0
     }
 
-    fun rate(amount: Amount): String {
+    fun rate(amount: Amount): BigDecimal {
         val totalPrize =
             values.map {
                 it.key.prize(it.value)
@@ -15,8 +18,7 @@ data class Ranks(private val values: Map<Rank, MatchedCount>) {
                 it.value
             }
 
-        return Amount(totalPrize).rate(amount)
-            .toString()
+        return totalPrize.divide(amount.value, 2, RoundingMode.DOWN)
     }
 
     companion object {
