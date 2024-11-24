@@ -5,10 +5,10 @@ import java.math.BigDecimal
 
 class LottoUser(
     val lottoPurchaseAmount: LottoPurchaseAmount,
+    lottoCount: Int = lottoPurchaseAmount.calculateLottoCount(),
+    lottoGenerateStrategy: (() -> Set<Int>)? = null,
 ) {
-    private val lottoCount = lottoPurchaseAmount.calculateLottoCount()
-    val lotteries: List<Lotto> = List(lottoCount) { Lotto() }
-
+    val lotteries: List<Lotto> = generateLotteries(lottoCount, lottoGenerateStrategy)
     val compensation: Long
         get() = lotteries.sumOf { it.compensation }
     val 수익률: BigDecimal
@@ -25,7 +25,13 @@ class LottoUser(
 
     fun calculateLottoCorrectCount(): Map<LottoCompensationStrategy, Int> {
         return LottoCompensationStrategy.entries.associateWith { strategy ->
-                lotteries.count { it.markedCorrectCount == strategy.correctCount }
-            }
+            lotteries.count { it.markedCorrectCount == strategy.correctCount }
+        }
+    }
+
+    companion object {
+        private fun generateLotteries(lottoCount: Int, lottoGenerateStrategy: (() -> Set<Int>)?) = List(lottoCount) {
+            lottoGenerateStrategy?.let { Lotto { it.invoke() } } ?: Lotto()
+        }
     }
 }

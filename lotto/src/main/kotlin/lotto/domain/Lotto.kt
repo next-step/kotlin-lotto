@@ -4,9 +4,9 @@ import lotto.domain.enums.LottoCompensationStrategy
 
 data class Lotto(
     private var correctCount: Int? = null,
-    val generate: () -> Set<Int> = { generateRandomLotto() }
+    val rolling: () -> Set<Int> = { rollingRandom() },
 ) {
-    val values: Set<Int> = generate.invoke()
+    val values: Set<Int> = rolling.invoke()
 
     val markedCorrectCount
         get() = correctCount ?: error("[Lotto] 마킹이 되지 않은 로또입니다.")
@@ -26,7 +26,7 @@ data class Lotto(
         private const val MAX_LOTTO_NUMBER = 45
         private const val LOTTO_NUMBER_COUNT = 6
 
-        private fun generateRandomLotto(): Set<Int> {
+        private fun rollingRandom(): Set<Int> {
             return (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER)
                 .shuffled()
                 .take(LOTTO_NUMBER_COUNT)

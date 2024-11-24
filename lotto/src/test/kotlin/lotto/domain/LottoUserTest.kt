@@ -2,6 +2,7 @@ package lotto.domain
 
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.matchers.shouldBe
+import lotto.domain.enums.LottoCompensationStrategy
 import org.junit.jupiter.api.Test
 
 class LottoUserTest {
@@ -42,5 +43,16 @@ class LottoUserTest {
 
     @Test
     fun `사용자는 당첨금액을 알고 있다`() {
+        val lottoPurchaseAmount = LottoPurchaseAmount(10000)
+        val lottoUser = LottoUser(lottoPurchaseAmount) {
+            (1..6).toSet()
+        }
+
+        val inputs = (1..6).toSet()
+        val correctNumbers = CorrectNumbers(inputs)
+
+        lottoUser.checkLotteries(correctNumbers)
+
+        lottoUser.compensation shouldBe LottoCompensationStrategy.`6개`.compensation * lottoPurchaseAmount.calculateLottoCount()
     }
 }
