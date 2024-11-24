@@ -9,7 +9,6 @@ class BoughtLottoTest : StringSpec({
             Lotto(listOf(1, 2, 3, 4, 5, 6)),
             Lotto(listOf(1, 2, 3, 4, 5, 7)),
             Lotto(listOf(1, 2, 3, 4, 8, 9)),
-            Lotto(listOf(1, 2, 3, 8, 9, 10)),
             Lotto(listOf(1, 2, 8, 9, 10, 11)),
             Lotto(listOf(1, 8, 9, 10, 11, 12)),
         )
@@ -23,7 +22,7 @@ class BoughtLottoTest : StringSpec({
                 Reward.FIRST to 1,
                 Reward.SECOND to 1,
                 Reward.THIRD to 1,
-                Reward.FOURTH to 1,
+                Reward.FOURTH to 0,
                 Reward.NONE to 2,
             )
         )

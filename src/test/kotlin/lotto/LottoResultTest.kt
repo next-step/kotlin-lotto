@@ -35,4 +35,23 @@ class LottoResultTest : StringSpec({
 
         actual shouldBe 0
     }
+
+    "로또 결과 중 유효 보상을 반환한다." {
+        val sut = LottoResult(
+            mapOf(
+                Reward.FIRST to 1,
+                Reward.SECOND to 2,
+                Reward.THIRD to 2,
+                Reward.FOURTH to 3,
+                Reward.NONE to 5,
+            )
+        )
+
+        sut.winningRewards shouldBe mapOf(
+            Reward.FIRST to 1,
+            Reward.SECOND to 2,
+            Reward.THIRD to 2,
+            Reward.FOURTH to 3,
+        )
+    }
 })
