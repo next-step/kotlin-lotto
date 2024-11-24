@@ -2,7 +2,7 @@ package stringcalculator.core
 
 object FormulaParser {
     private val DELIMITER_FIND_PATTERN = Regex("(?<=//)(.*?)(?=\n)")
-    private val CUSTOM_DELIMITER_DECLARE_LEN = 4;
+    private val CUSTOM_DELIMITER_DECLARE_LEN = 4
 
     fun parse(str: String?): List<Number> {
         if (str.isNullOrBlank()) {
