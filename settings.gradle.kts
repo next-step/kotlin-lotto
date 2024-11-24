@@ -3,3 +3,4 @@ plugins {
 }
 rootProject.name = "kotlin-lotto"
 include("string-calculator")
+include("lotto")

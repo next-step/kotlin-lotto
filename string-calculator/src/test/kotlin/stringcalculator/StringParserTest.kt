@@ -4,6 +4,8 @@ import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.NullAndEmptySource
 import stringcalculator.StringParser.splitToInts
 import stringcalculator.StringParser.toCalculateRequest
 
@@ -74,5 +76,14 @@ class StringParserTest {
         }
 
         exception.message shouldContain "값이 음수거나 Int로 변환하는데 실패했습니다"
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    fun `빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다`(input: String?) {
+        val (delimiter, payload) = input.toCalculateRequest()
+        val numbers = payload.splitToInts(delimiter)
+
+        numbers.sum() shouldBe 0
     }
 }

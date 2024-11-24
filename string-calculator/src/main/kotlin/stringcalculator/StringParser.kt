@@ -3,10 +3,11 @@ package stringcalculator
 object StringParser {
     const val 공백 = ""
     const val 줄바꿈 = "\\n"
+    private const val DEFAULT_PAYLOAD = "0"
 
-    fun String.toCalculateRequest(): StringCalculateRequest {
-        val payload = this.split(줄바꿈).last()
-        return StringCalculateRequest(delimiter = Delimiter(this), payload = payload)
+    fun String?.toCalculateRequest(): StringCalculateRequest {
+        val payload = this?.split(줄바꿈)?.last()
+        return StringCalculateRequest(delimiter = Delimiter(this), payload = payload ?: DEFAULT_PAYLOAD)
     }
 
     fun String.splitToInts(delimiter: Delimiter): List<Int> {
