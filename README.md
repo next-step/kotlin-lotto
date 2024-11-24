@@ -66,3 +66,9 @@
 - [x] 로또번호를 출력한다.
 - [x] 지난 주 당첨 번호를 입력한다.
 - [x] 당첨 통계를 출력한다.
+
+### Step1 - 리뷰 반영사항
+- [x] Numbers::validate 시 find api 사용
+- [ ] Parser::덧셈수 변수명 고려
+- [x] StringAddCalculatorTest::커스텀 구분자 테스트 케이스 추가
+- [ ] Parser::parser 테스트 추가
