@@ -81,4 +81,20 @@ class LottoTicketTest : StringSpec({
         val result: Boolean = sut.matchesBonusBall(bonusNumber)
         result shouldBe false
     }
+
+    "로또 티켓은 해당 로또 번호가 포함되어 있는지 여부를 알려줄 수 있다" {
+        val sut = LottoTicket(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))
+
+        forAll(
+            row(LottoNumber(1), true),
+            row(LottoNumber(2), true),
+            row(LottoNumber(3), true),
+            row(LottoNumber(4), true),
+            row(LottoNumber(5), true),
+            row(LottoNumber(6), true),
+            row(LottoNumber(7), false),
+        ) { lottoNumber, expected ->
+            sut.contain(lottoNumber) shouldBe expected
+        }
+    }
 })

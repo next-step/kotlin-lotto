@@ -1,5 +1,6 @@
 package lotto
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
@@ -34,6 +35,16 @@ class LotteryWinningCheckerTest : StringSpec({
         ) { lottoTicket, expectedResult ->
             val winningResult = sut.checkTicket(lottoTicket)
             winningResult shouldBe expectedResult
+        }
+    }
+
+    "로또 당첨 검사기 생성 시 1등 당첨 번호 중 하나로 보너스 번호를 추가하려고 하면 IllegalArgumentException 예외를 던진다" {
+        val winningTicket = LottoTicket(numbers = listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))
+
+        winningTicket.numbers.forEach { bonusNumber ->
+            shouldThrow<IllegalArgumentException> {
+                LotteryWinningChecker(winningTicket = winningTicket, bonusNumber = bonusNumber)
+            }
         }
     }
 })

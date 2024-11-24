@@ -18,4 +18,10 @@ class LottoTicket(numbers: List<LottoNumber>) {
     }
 
     fun matchesBonusBall(bonusNumber: LottoNumber): Boolean = bonusNumber in numbers
+
+    fun contain(lottoNumber: LottoNumber): Boolean = lottoNumber in numbers
+
+    override fun toString(): String {
+        return "LottoTicket(numbers=$numbers)"
+    }
 }
