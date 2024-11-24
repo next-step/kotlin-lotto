@@ -13,9 +13,10 @@ class Lotto(private val numbers: List<Int>) {
     }
 
     private fun validateLottoNumber() {
-        val invalidNumberCount = numbers.count { number ->
-            number < LottoPolicy.MIN_LOTTO_NUMBER || number > LottoPolicy.MAX_LOTTO_NUMBER
-        }
+        val invalidNumberCount =
+            numbers.count { number ->
+                number < LottoPolicy.MIN_LOTTO_NUMBER || number > LottoPolicy.MAX_LOTTO_NUMBER
+            }
 
         if (invalidNumberCount != 0) {
             throw InvalidLottoNumberException(numbers)

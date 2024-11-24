@@ -1,7 +1,6 @@
 package lotto
 
-import org.assertj.core.api.Assertions.*
-import org.junit.jupiter.api.Test
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -23,7 +22,6 @@ class LottoTest {
     }
 
     companion object {
-
         @JvmStatic
         fun invalidCountLottoNumberProvider(): Stream<Arguments> {
             return Stream.of(
