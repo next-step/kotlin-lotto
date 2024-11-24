@@ -21,4 +21,8 @@ class Lotto(private val numbers: List<Int>) {
             throw InvalidLottoNumberException(numbers)
         }
     }
+
+    fun calculateMatchCount(winningNumbers: WinningNumbers): Int {
+        return numbers.count { number -> winningNumbers.contains(number) }
+    }
 }

@@ -5,7 +5,14 @@ import org.junit.jupiter.api.Test
 
 class LottoResultChecker {
     fun check(lottos: List<Lotto>, winningNumbers: WinningNumbers): LottoResults {
-        return LottoResults(emptyList())
+        val matchCounts = lottos.map { lotto ->
+            lotto.calculateMatchCount(winningNumbers)
+        }
+
+        val ranks = matchCounts.filter { matchCount -> LottoRank.isInTheRank(matchCount) }
+            .map { matchCount -> LottoRank.from(matchCount) }
+
+        return LottoResults(ranks)
     }
 
 }
@@ -18,7 +25,17 @@ enum class LottoRank(private val matchCount: Int, private val prizeAmount: Long)
     FIRST(6, 2_000_000_000),
     SECOND(5, 1_500_000),
     THIRD(4, 50_000),
-    FORTH(3, 5_000),
+    FORTH(3, 5_000),;
+
+    companion object {
+        fun from(matchCount: Int): LottoRank {
+            return entries.first { rank -> rank.matchCount == matchCount }
+        }
+
+        fun isInTheRank(matchCount: Int): Boolean {
+            return matchCount >= FORTH.matchCount
+        }
+    }
 }
 
 class LottoResultsCheckerTest {
