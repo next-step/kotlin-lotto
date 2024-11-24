@@ -46,4 +46,11 @@ class LottoTest : StringSpec({
 
         rankNone shouldBe LottoRank.NONE
     }
+
+    "match()는 보너스 번호가 당첨 번호에 포함되면 예외를 던진다." {
+        val lotto = createLottoFixture(listOf(1, 2, 3, 4, 5, 6))
+        val winLotto = createLottoFixture(listOf(1, 2, 3, 4, 5, 6))
+
+        shouldThrow<IllegalStateException> { lotto.match(winLotto, Number(6)) }
+    }
 })
