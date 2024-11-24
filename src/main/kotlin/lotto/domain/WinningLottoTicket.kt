@@ -1,6 +1,8 @@
 package lotto.domain
 
-class WinningLottoTicket private constructor(
+import lotto.domain.rank.Rank
+
+class WinningLottoTicket(
     val winningNumbers: Set<Int>,
     val bonusNumber: Int,
 ) {
@@ -14,18 +16,15 @@ class WinningLottoTicket private constructor(
         }
     }
 
+    fun matchTickets(lottoTickets: LottoTickets): Map<Rank, Int> {
+        val ranks = lottoTickets.tickets.map(::match)
+        val eachCount = ranks.groupingBy { it }.eachCount()
+        return Rank.entries.associateWith { rank -> eachCount.getOrDefault(rank, 0) }
+    }
+
     fun match(lottoTicket: LottoTicket): Rank {
         val matchCount = lottoTicket.numbers.count { winningNumbers.contains(it.number) }
         val isBonusMatched = lottoTicket.numbers.contains(LottoNumber.of(bonusNumber))
         return Rank.of(matchCount, isBonusMatched)
-    }
-
-    companion object {
-        fun of(
-            winningNumbers: Set<Int>,
-            bonusNumber: Int,
-        ): WinningLottoTicket {
-            return WinningLottoTicket(winningNumbers, bonusNumber)
-        }
     }
 }

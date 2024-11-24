@@ -2,7 +2,7 @@ package lotto.view
 
 class InputView {
     companion object {
-        fun getLottoMoney(): Int {
+        fun getMoney(): Int {
             println("구입 금액을 입력해주세요.")
             return readln().toInt()
         }

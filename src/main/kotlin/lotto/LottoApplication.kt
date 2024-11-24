@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.LottoPurchaseInfo
 import lotto.domain.LottoResult
 import lotto.domain.LottoTickets
 import lotto.domain.WinningLottoTicket
@@ -8,18 +9,19 @@ import lotto.view.ResultView
 
 class LottoApplication {
     fun run() {
-        val lottoMoney = InputView.getLottoMoney()
+        val money = InputView.getMoney()
         val manualLottoCount = InputView.getManualLottoCount()
         val manualNumbers = InputView.getManualNumbers(manualLottoCount)
+        val lottoPurchaseInfo = LottoPurchaseInfo(money, manualLottoCount)
 
-        val lottoTickets = LottoTickets.of(lottoMoney, manualLottoCount, manualNumbers)
+        val lottoTickets = LottoTickets(lottoPurchaseInfo, manualNumbers)
         ResultView.printLottoNumbers(lottoTickets)
 
         val winningLottoNumbers = InputView.getWinningLottoNumbers()
         val bonusNumber = InputView.getBonusNumber()
 
-        val winningLottoTicket = WinningLottoTicket.of(winningLottoNumbers, bonusNumber)
-        val result = LottoResult.getResult(winningLottoTicket, lottoTickets)
+        val winningLottoTicket = WinningLottoTicket(winningLottoNumbers, bonusNumber)
+        val result = LottoResult(winningLottoTicket, lottoTickets).getResult()
         ResultView.printResult(result)
     }
 }

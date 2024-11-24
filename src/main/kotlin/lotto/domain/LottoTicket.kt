@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoTicket private constructor(numbers: Set<Int>) {
+class LottoTicket(numbers: Set<Int>) {
     init {
         require(numbers.size == 6) { "로또 번호는 6개여야 합니다. 입력된 숫자 = $numbers" }
     }
@@ -13,10 +13,6 @@ class LottoTicket private constructor(numbers: Set<Int>) {
                 .take(6)
                 .toSet()
                 .let { LottoTicket(it) }
-        }
-
-        fun of(numbers: Set<Int>): LottoTicket {
-            return LottoTicket(numbers)
         }
     }
 }

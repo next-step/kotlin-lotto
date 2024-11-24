@@ -1,9 +1,10 @@
 package lotto
 
+import lotto.domain.LottoPurchaseInfo
 import lotto.domain.LottoResult
 import lotto.domain.LottoTickets
-import lotto.domain.Rank
 import lotto.domain.WinningLottoTicket
+import lotto.domain.rank.Rank
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -12,28 +13,30 @@ class LottoResultTest {
     fun `당첨 티켓과 로또 티켓을 비교하여 당첨 결과를 반환한다`() {
         // given
         val winningLottoTicket =
-            WinningLottoTicket.of(
+            WinningLottoTicket(
                 winningNumbers = setOf(1, 2, 3, 4, 5, 6),
                 bonusNumber = 7,
             )
 
         val lottoTickets =
-            LottoTickets.of(
-                money = 6_000,
-                manualLottoCount = 6,
+            LottoTickets(
+                LottoPurchaseInfo(
+                    money = 6_000,
+                    manualLottoCount = 6,
+                ),
                 manualNumbers =
-                    listOf(
-                        setOf(1, 2, 3, 4, 5, 6),
-                        setOf(1, 2, 3, 4, 5, 7),
-                        setOf(1, 2, 3, 4, 5, 8),
-                        setOf(1, 2, 3, 4, 8, 9),
-                        setOf(1, 2, 3, 10, 11, 12),
-                        setOf(25, 26, 27, 28, 29, 30),
-                    ),
+                listOf(
+                    setOf(1, 2, 3, 4, 5, 6),
+                    setOf(1, 2, 3, 4, 5, 7),
+                    setOf(1, 2, 3, 4, 5, 8),
+                    setOf(1, 2, 3, 4, 8, 9),
+                    setOf(1, 2, 3, 10, 11, 12),
+                    setOf(25, 26, 27, 28, 29, 30),
+                ),
             )
 
         // when
-        val lottoResult = LottoResult.getResult(winningLottoTicket, lottoTickets)
+        val lottoResult = LottoResult(winningLottoTicket, lottoTickets).getResult()
 
         // then
         assertThat(lottoResult.rankInfo[Rank.FIRST]).isEqualTo(1)

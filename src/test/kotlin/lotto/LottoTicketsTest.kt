@@ -1,6 +1,8 @@
 package lotto
 
+import lotto.domain.LottoPurchaseInfo
 import lotto.domain.LottoTickets
+import lotto.domain.rank.Rank
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -16,15 +18,42 @@ class LottoTicketsTest {
                 setOf(13, 14, 15, 16, 17, 18),
             )
 
-        val lottoTickets = LottoTickets.of(money, manualLottoCount, manualNumbers)
+        val lottoPurchaseInfo = LottoPurchaseInfo(money, manualLottoCount)
+        val lottoTickets = LottoTickets(lottoPurchaseInfo, manualNumbers)
 
         assertThat(lottoTickets.autoTickets.size).isEqualTo(11)
         assertThat(lottoTickets.manualTickets.size).isEqualTo(3)
     }
 
     @Test
-    fun `로또 구입 금액을 계산한다`() {
-        val lottoTickets = LottoTickets.of(14500, 0, emptyList())
-        assertThat(lottoTickets.getTicketTotalPrice()).isEqualTo(14_000)
+    fun test() {
+        val rankInfo = mapOf(
+            Rank.FIRST to 1,
+            Rank.SECOND to 1,
+            Rank.THIRD to 1,
+            Rank.FOURTH to 1,
+            Rank.FIFTH to 1,
+            Rank.NONE to 1,
+        )
+
+        val lottoTickets = LottoTickets(
+            LottoPurchaseInfo(
+                money = 6_000,
+                manualLottoCount = 6,
+            ),
+            manualNumbers =
+            listOf(
+                setOf(1, 2, 3, 4, 5, 6),
+                setOf(1, 2, 3, 4, 5, 7),
+                setOf(1, 2, 3, 4, 5, 8),
+                setOf(1, 2, 3, 4, 8, 9),
+                setOf(1, 2, 3, 10, 11, 12),
+                setOf(25, 26, 27, 28, 29, 30),
+            ),
+        )
+
+        val profitRate = lottoTickets.getProfitRate(rankInfo, lottoTickets)
+
+        assertThat(profitRate).isEqualTo(338592.5)
     }
 }

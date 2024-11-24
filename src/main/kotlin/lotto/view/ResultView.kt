@@ -2,7 +2,7 @@ package lotto.view
 
 import lotto.domain.LottoResult
 import lotto.domain.LottoTickets
-import lotto.domain.Rank
+import lotto.domain.rank.Rank
 
 class ResultView {
     companion object {
@@ -12,7 +12,9 @@ class ResultView {
 
             println("수동으로 ${manualLottoCount}장, 자동으로 ${autoLottoCount}장을 구매했습니다.")
             lottoTickets.tickets.forEach {
-                println("[${it.numbers.joinToString(", ")}]")
+                println(
+                    "[${it.numbers.map { it.number }.joinToString(", ")}]",
+                )
             }
         }
 
