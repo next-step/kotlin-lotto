@@ -18,12 +18,14 @@ class BoughtLottoTest : StringSpec({
 
         val actual = sut.matchResult()
 
-        actual shouldBe mapOf(
-            Reward.FIRST to 1,
-            Reward.SECOND to 1,
-            Reward.THIRD to 1,
-            Reward.FOURTH to 1,
-            Reward.NONE to 2,
+        actual shouldBe LottoResult(
+            mapOf(
+                Reward.FIRST to 1,
+                Reward.SECOND to 1,
+                Reward.THIRD to 1,
+                Reward.FOURTH to 1,
+                Reward.NONE to 2,
+            )
         )
     }
 })
