@@ -3,7 +3,7 @@ package calculator
 class TextParser {
     companion object {
         private const val DEFAULT_DELIMITERS = "[,:]" // [] 내부의 ,: 중 하나랑 매칭
-        private const val CUSTOM_DELIMITER_PATTERN = """//(.+?)\n(.*)""" // () 안이 각각 그룹
+        private val CUSTOM_DELIMITER_PATTERN_REGEX = Regex("""//(.+?)\n(.*)""") // 괄호 안이 각각 그룹
 
         fun parse(text: String?): List<Int> {
             if (text.isNullOrBlank()) {
@@ -16,7 +16,7 @@ class TextParser {
         }
 
         private fun extractDelimiterAndNumbers(text: String): Pair<String?, String> {
-            val matchResult = Regex(CUSTOM_DELIMITER_PATTERN).find(text)
+            val matchResult = CUSTOM_DELIMITER_PATTERN_REGEX.find(text)
             return if (matchResult != null) {
                 val (customDelimiter, numbers) = matchResult.destructured
                 Pair(customDelimiter, numbers)
