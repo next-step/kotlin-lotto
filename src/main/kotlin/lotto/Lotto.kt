@@ -12,12 +12,7 @@ class Lotto(
                 .sorted(),
         ),
 ) {
-    fun getRank(winningNumbers: List<Int>): LottoRank {
-        val matchCount = winningNumbers.count { isMatch(it) }
-        return LottoRank.getRank(matchCount = matchCount)
-    }
-
-    private fun isMatch(winningNumber: Int): Boolean = numbers.numbers.contains(winningNumber)
+    fun getRank(winningNumbers: List<Int>): LottoRank = LottoRank.getRank(lotto = this, winningNumbers = winningNumbers)
 
     companion object {
         private const val COUNT = 6

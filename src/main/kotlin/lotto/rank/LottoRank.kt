@@ -1,5 +1,7 @@
 package lotto.rank
 
+import lotto.Lotto
+
 enum class LottoRank(
     val matchCount: Int,
     val prize: Int,
@@ -12,6 +14,11 @@ enum class LottoRank(
     ;
 
     companion object {
-        fun getRank(matchCount: Int): LottoRank = entries.find { it.matchCount == matchCount } ?: NONE
+        fun getRank(
+            lotto: Lotto,
+            winningNumbers: List<Int>,
+        ): LottoRank = entries.find { it -> it.matchCount == winningNumbers.count { lotto.isMatch(it) } } ?: NONE
+
+        private fun Lotto.isMatch(winningNumber: Int): Boolean = numbers.numbers.contains(winningNumber)
     }
 }
