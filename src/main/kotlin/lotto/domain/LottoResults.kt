@@ -12,7 +12,7 @@ class LottoResults(private val results: List<LottoResult>) {
     fun isProfit(): Boolean = calculateProfitRate() > MARGIN_VALUE
 
     fun filterWinResults(): List<LottoResult> {
-        return results.filter { it.rank.isWin() }.sortedBy { it.rank.matchCount }
+        return results.filter { it.rank.isWin() }.sortedBy { it.rank.reward }
     }
 
     private fun sumOfProfit(): Long = results.sumOf { it.rank.reward * it.count }
