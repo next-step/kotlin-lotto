@@ -1,4 +1,3 @@
 package calculator.exception
 
-class NegativeNumberException(negatives: List<Int>) :
-    RuntimeException("Negatives not allowed: $negatives")
+class NegativeNumberException : RuntimeException("Negatives not allowed")
