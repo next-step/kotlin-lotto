@@ -6,15 +6,17 @@ private const val NEW_LINE = "\\n"
 
 object Calculator {
     fun sum(expression: String): Int {
-        val numbers: List<Int>
-
-        if (expression.startsWith(CUSTOM_DELIMITER_PREFIX) && expression.contains(NEW_LINE)) {
-            numbers = convertToInt(customSplit(expression), customSeparator(expression))
-        } else {
-            numbers = convertToInt(expression, DEFAULT_DELIMITERS)
-        }
+        val numbers: List<Int> = getNumbers(expression)
 
         return calculate(numbers)
+    }
+
+    private fun getNumbers(expression: String): List<Int> {
+        if (expression.startsWith(CUSTOM_DELIMITER_PREFIX) && expression.contains(NEW_LINE)) {
+            return convertToInt(customSplit(expression), customSeparator(expression))
+        }
+
+        return convertToInt(expression, DEFAULT_DELIMITERS)
     }
 
     private fun customSeparator(expression: String): String {
@@ -30,7 +32,10 @@ object Calculator {
         return expression.substring(endIndex + 2)
     }
 
-    private fun convertToInt(data: String, delimiters: String): List<Int> {
+    private fun convertToInt(
+        data: String,
+        delimiters: String,
+    ): List<Int> {
         val splitNumbers = data.split(Regex(delimiters))
 
         return splitNumbers
