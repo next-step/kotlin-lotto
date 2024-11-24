@@ -21,4 +21,8 @@ data class Money(val amount: Int) {
     override fun toString(): String {
         return "${amount}원"
     }
+
+    companion object {
+        val ZERO = Money(0)
+    }
 }
