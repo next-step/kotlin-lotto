@@ -1,15 +1,11 @@
 package step1
 
-class Calculator(expression: String) {
-    private val numbers: List<Int>
-
-    init{
-        numbers = expression.split(",", ":")
+object Calculator {
+    fun sum(expression: String): Int {
+       val numbers = expression.split(",", ":")
             .filter { it.isNotEmpty() }
-            .map { it.toInt() }
-    }
+            .map { it.toIntOrNull() ?: throw IllegalArgumentException("숫자로 변환할 수 없습니다. 입력값: $it") }
 
-    fun sum(): Int {
         return numbers.sum()
     }
 }
