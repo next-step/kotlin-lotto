@@ -12,9 +12,6 @@ class Numbers(private val numbers: List<Int>) {
     }
 
     private fun validate() {
-        val negatives = numbers.filter { it < 0 }
-        if (negatives.isNotEmpty()) {
-            throw NegativeNumberException(negatives)
-        }
+        numbers.find { it > 0 } ?: throw throw NegativeNumberException()
     }
 }
