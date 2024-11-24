@@ -2,7 +2,7 @@ package step1
 
 private const val DEFAULT_DELIMITERS = ",|:"
 private const val CUSTOM_DELIMITER_PREFIX = "//"
-private const val NEW_LINE = "\\n"
+private const val CUSTOM_DELIMITER_SUFFIX = "\\n"
 
 object Calculator {
     fun sum(expression: String): Int {
@@ -12,7 +12,7 @@ object Calculator {
     }
 
     private fun getNumbers(expression: String): List<Int> {
-        if (expression.startsWith(CUSTOM_DELIMITER_PREFIX) && expression.contains(NEW_LINE)) {
+        if (expression.startsWith(CUSTOM_DELIMITER_PREFIX) && expression.contains(CUSTOM_DELIMITER_SUFFIX)) {
             return convertToInt(customSplit(expression), customSeparator(expression))
         }
 
@@ -21,13 +21,13 @@ object Calculator {
 
     private fun customSeparator(expression: String): String {
         val startIndex = expression.indexOf(CUSTOM_DELIMITER_PREFIX) + 2
-        val endIndex = expression.indexOf(NEW_LINE)
+        val endIndex = expression.indexOf(CUSTOM_DELIMITER_SUFFIX)
 
         return expression.substring(startIndex, endIndex)
     }
 
     private fun customSplit(expression: String): String {
-        val endIndex = expression.indexOf(NEW_LINE)
+        val endIndex = expression.indexOf(CUSTOM_DELIMITER_SUFFIX)
 
         return expression.substring(endIndex + 2)
     }
