@@ -23,10 +23,11 @@ class LottoService(
     fun getResults(
         lottosDto: LottosDto,
         winningLottoDto: WinningLottoDto,
+        bonusNumber: Int,
     ): LottoResultsDto {
         val lottos = lottosDto.lottos.map { Lotto(it.numbers.map { value -> Number(value) }) }
         val winningLotto = Lotto(winningLottoDto.numbers.map { Number(it) })
-        val lottoRankCountMap = lottos.map { it.match(winningLotto) }.groupingBy { it }.eachCount()
+        val lottoRankCountMap = lottos.map { it.match(winningLotto, Number(bonusNumber)) }.groupingBy { it }.eachCount()
         val lottoResults = LottoResults.from(lottoRankCountMap)
         val winResults = lottoResults.filterWinResults()
 

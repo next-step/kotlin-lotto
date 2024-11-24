@@ -18,7 +18,7 @@ fun main() {
     LottosView.print(lottosDto)
 
     val winningLottoDto = WinningLottoInputView.print()
-    val resultsDto = lottoService.getResults(lottosDto, winningLottoDto)
+    val resultsDto = lottoService.getResults(lottosDto, winningLottoDto, 0)
 
     LottoResultView.print(resultsDto)
 }

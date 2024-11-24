@@ -17,27 +17,32 @@ class LottoTest : StringSpec({
     "match()는 인자로 들어온 번호와 로또의 번호가 일치하는 개수를 비교하고 등수를 반환한다." {
         val lotto = createLottoFixture(listOf(1, 2, 3, 4, 5, 6))
         val winLotto = createLottoFixture(listOf(1, 2, 3, 4, 5, 6))
-        val rankFirst = lotto.match(winLotto)
+        val rankFirst = lotto.match(winLotto, Number(7))
 
         rankFirst shouldBe LottoRank.FIRST
 
-        val winLotto2 = createLottoFixture(listOf(1, 2, 3, 4, 5, 7))
-        val rankSecond = lotto.match(winLotto2)
+        val winLotto2 = createLottoFixture(listOf(1, 2, 3, 4, 7, 8))
+        val rankSecond = lotto.match(winLotto2, Number(5))
 
         rankSecond shouldBe LottoRank.SECOND
 
-        val winLotto3 = createLottoFixture(listOf(1, 2, 3, 4, 7, 8))
-        val rankThird = lotto.match(winLotto3)
+        val winLotto3 = createLottoFixture(listOf(1, 2, 3, 4, 5, 8))
+        val rankThird = lotto.match(winLotto3, Number(9))
 
         rankThird shouldBe LottoRank.THIRD
 
-        val winLotto4 = createLottoFixture(listOf(1, 2, 3, 7, 8, 9))
-        val rankFourth = lotto.match(winLotto4)
+        val winLotto4 = createLottoFixture(listOf(1, 2, 3, 4, 7, 8))
+        val rankFourth = lotto.match(winLotto4, Number(10))
 
         rankFourth shouldBe LottoRank.FOURTH
 
-        val winLotto5 = createLottoFixture(listOf(1, 2, 7, 8, 9, 10))
-        val rankNone = lotto.match(winLotto5)
+        val winLotto5 = createLottoFixture(listOf(1, 2, 3, 11, 8, 9))
+        val rankFifth = lotto.match(winLotto5, Number(10))
+
+        rankFifth shouldBe LottoRank.FIFTH
+
+        val winLotto6 = createLottoFixture(listOf(1, 2, 7, 8, 9, 10))
+        val rankNone = lotto.match(winLotto6, Number(11))
 
         rankNone shouldBe LottoRank.NONE
     }
