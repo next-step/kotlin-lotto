@@ -10,7 +10,9 @@ object ResultView {
     fun printResult(result: WinningResult) {
         println("당첨 통계")
         println("-------")
-        result.winningMatchCounts.forEach { rank -> println("${rank.rank}개 일치 (${rank.prizeAmount}원) - ${rank.count}") }
+        result.winningMatchCounts.forEach { data ->
+            println("${data.prize.matchCount}개 일치 (${data.prize.prizeAmount}원) - ${data.totalCount}")
+        }
         println("총 수익률은 ${result.rate}입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
     }
 }

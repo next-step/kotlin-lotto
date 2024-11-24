@@ -32,7 +32,7 @@ class LottoSystemTest : StringSpec({
 
         assertSoftly {
             result.revenue shouldBe 5_000
-            result.winningMatchCounts[0].count shouldBe 1
+            result.winningMatchCounts[0].totalCount shouldBe 1
             result.rate shouldBe 5.0
         }
     }
