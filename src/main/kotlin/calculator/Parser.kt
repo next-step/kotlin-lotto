@@ -9,8 +9,8 @@ object Parser {
 
     fun parseToNumbers(text: String): List<Int> {
         val delimiters = extractDelimiters(text)
-        val addTargetContent = extractAddTargetContent(text)
-        return addTargetContent.split(*delimiters.toTypedArray())
+        val operands = extractOperands(text)
+        return operands.split(*delimiters.toTypedArray())
             .map { it.toIntOrNull() ?: throw RuntimeException("Invalid number format: $it") }
     }
 
@@ -23,7 +23,7 @@ object Parser {
         }
     }
 
-    private fun extractAddTargetContent(text: String): String {
+    private fun extractOperands(text: String): String {
         return if (text.startsWith(CUSTOM_DELIMITER_PREFIX)) {
             text.substringAfter(CONTENT_DELIMITER)
         } else {
