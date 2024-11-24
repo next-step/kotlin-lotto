@@ -6,7 +6,7 @@ import lotto.domain.LottoNumber
 class RandomLottoLineGenerator : LottoLineGenerator {
     override fun generate(): LottoLine {
         val numbers =
-            (LottoNumber.MIN_VALUE..LottoNumber.MAX_VALUE)
+            LottoNumber.RANGE
                 .shuffled()
                 .take(LottoLine.LINE_SIZE)
         return LottoLine.from(numbers)

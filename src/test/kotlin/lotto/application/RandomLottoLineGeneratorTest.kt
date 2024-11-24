@@ -22,6 +22,6 @@ class RandomLottoLineGeneratorTest {
 
         val line = sut.generate()
 
-        line.numbers.shouldForAll { it.value in LottoNumber.MIN_VALUE..LottoNumber.MAX_VALUE }
+        line.numbers.shouldForAll { it.value in LottoNumber.RANGE }
     }
 }
