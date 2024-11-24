@@ -40,12 +40,11 @@ private class Expression(
     mathExpression: String,
     customDelimiter: String? = null,
 ) {
-    private val targetNumbers: List<Double>
+    private val targetNumbers: List<PositiveNumber>
 
     init {
         val delimiters = DEFAULT_DELIMITERS + listOfNotNull(customDelimiter)
         val parsedTargetNumbers = parseTargetNumbers(mathExpression, delimiters)
-        requirePositiveNumbers(parsedTargetNumbers)
         this.targetNumbers = parsedTargetNumbers
     }
 
@@ -55,20 +54,23 @@ private class Expression(
     ) = try {
         mathExpression
             .split(*delimiters.toTypedArray())
-            .map { it.toDouble() }
+            .map { PositiveNumber(it.toDouble()) }
     } catch (e: NumberFormatException) {
         throw RuntimeException("입력한 표현식 \"${mathExpression}\"에 숫자가 아닌 유효하지 않은 문자가 포함되어 있습니다.")
     }
 
-    private fun requirePositiveNumbers(parsedTargetNumbers: List<Double>) {
-        if (parsedTargetNumbers.any { it < 0 }) {
-            throw RuntimeException("음수는 더할 수 없습니다.")
-        }
-    }
-
-    fun calculate(): Double = targetNumbers.sum()
+    fun calculate(): Double = targetNumbers.sumOf { it.number }
 
     companion object {
         private val DEFAULT_DELIMITERS = listOf(",", ":")
+    }
+}
+
+@JvmInline
+private value class PositiveNumber(
+    val number: Double,
+) {
+    init {
+        require(number >= 0) { "음수는 더할 수 없습니다." }
     }
 }
