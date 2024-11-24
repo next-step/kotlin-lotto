@@ -3,8 +3,6 @@ package lotto.domain
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-typealias MatchedCount = Int
-
 class WinningStatistics(private val winningLotto: WinningLotto) {
     private lateinit var statistics: Map<Rank, MatchedCount>
 
@@ -15,13 +13,11 @@ class WinningStatistics(private val winningLotto: WinningLotto) {
         return this // 메서드 체이닝 지원
     }
 
-    fun count(rank: Rank): Int {
-        return statistics[rank] ?: 0
-    }
+    fun count(rank: Rank): MatchedCount = statistics[rank] ?: MatchedCount(0)
 
     fun totalPrize(): BigDecimal {
         return statistics.map { (rank, count) ->
-            rank.totalPrize(count)
+            rank.totalPrize(count.value)
         }.reduce(BigDecimal::add)
     }
 

@@ -9,10 +9,10 @@ import java.math.BigDecimal
 class RankTest : BehaviorSpec({
     Given("Rank에 따라 총 상금을 계산할 때") {
         forAll(
-            row(Rank.FIVE, 2, BigDecimal(3_000_000)),
-            row(Rank.FOUR, 3, BigDecimal(150_000)),
-            row(Rank.SIX, 0, BigDecimal(0)),
-            row(Rank.THREE, 5, BigDecimal(25_000)),
+            row(Rank.THIRD, 2, BigDecimal(3_000_000)),
+            row(Rank.FOURTH, 3, BigDecimal(150_000)),
+            row(Rank.FIRST, 0, BigDecimal(0)),
+            row(Rank.FIFTH, 5, BigDecimal(25_000)),
             row(Rank.MISS, 10, BigDecimal(0)),
         ) { rank, count, expectedPrize ->
             When("매칭된 로또가 ${count}개이고 Rank가 ${rank}일 경우") {
@@ -26,15 +26,23 @@ class RankTest : BehaviorSpec({
     }
     Given("매칭된 숫자에 따라 Rank를 판별할 때") {
         forAll(
-            row(6, Rank.SIX),
-            row(5, Rank.FIVE),
-            row(4, Rank.FOUR),
-            row(3, Rank.THREE),
-            row(2, Rank.MISS),
-            row(0, Rank.MISS),
-        ) { matchCount, expectedRank ->
-            When("${matchCount}개의 숫자가 매칭되었을 경우") {
-                val rank = Rank.from(matchCount)
+            row(6, false, Rank.FIRST),
+            row(6, true, Rank.FIRST),
+            row(5, true, Rank.SECOND),
+            row(5, false, Rank.THIRD),
+            row(4, false, Rank.FOURTH),
+            row(4, true, Rank.FOURTH),
+            row(3, false, Rank.FIFTH),
+            row(3, true, Rank.FIFTH),
+            row(2, false, Rank.MISS),
+            row(2, true, Rank.MISS),
+            row(1, false, Rank.MISS),
+            row(1, true, Rank.MISS),
+            row(0, false, Rank.MISS),
+            row(0, true, Rank.MISS),
+        ) { matchCount, matchBonus, expectedRank ->
+            When("${matchCount}개의 숫자가 매칭되고 보너스 번호 매칭 결과가 ${matchBonus}인 경우") {
+                val rank = Rank.from(matchCount, matchBonus)
 
                 Then("Rank는 ${expectedRank}가 반환된다") {
                     rank shouldBe expectedRank

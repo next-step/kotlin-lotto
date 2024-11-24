@@ -22,10 +22,10 @@ fun main() {
     resultView.printPurchasedLottos(purchasedLottos)
 
     // 3. 당첨 번호 입력
-    val winningNumbers = inputView.readWinningNumbers()
+    val winningLotto = inputView.readWinningLotto()
 
     // Step 4: 당첨 통계 생성
-    val winningStatistics = WinningStatistics(winningNumbers)
+    val winningStatistics = WinningStatistics(winningLotto)
     val statistics = winningStatistics.calculateStatistics(purchasedLottos)
 
     // Step 5: 당첨 통계 출력
