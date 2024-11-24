@@ -1,5 +1,7 @@
 package lotto.domain
 
+import java.util.*
+
 class LotteryStatistician(
     targetLottoStr: String,
 ) {
@@ -27,7 +29,9 @@ class LotteryStatistician(
     }
 
     private fun initStatistics(): MutableMap<LottoRank, Int> =
-        LottoRank.entries.associateWith { 0 }.toMutableMap()
+        EnumMap<LottoRank, Int>(LottoRank::class.java).apply {
+            LottoRank.entries.forEach { this[it] = 0 }
+        }
 
     private fun Lotto.matchCount(lotto: Lotto): Int {
         return this.numbers.count { it in lotto.numbers }
