@@ -15,4 +15,6 @@ class BoughtLotto(
 
 data class LottoResult(
     val rewards: Map<Reward, Int>,
-)
+) {
+    fun calculateRateOfReturn(): Double = 0.0
+}
