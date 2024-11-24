@@ -24,8 +24,14 @@
     - 파라미터
       - List<LottoNumbers> -> 구매한 로또 번호
       - LottoNumbers -> 당첨 번호
-- [ ] return List<LottoResult>를 하기 때문에 수익률은 Controller(Main)에서 계산한다
-  - 추후 확장되면 별도 객체로 분리한다
+- [x] ~~return List<LottoResult>를 하기 때문에 수익률은 Controller(Main)에서 계산한다~~
+  - ~~추후 확장되면 별도 객체로 분리한다~~
+  - 별도 객체로 나누는 것이 더 적절할듯
+    - View는 계산보다 단순히 값을 받아 처리하는 것이 나중에 변경에 유리해서
+  - [x] LottoResults를 만든다
+    - [x] LottoResults는 List<LottoResult>를 가지고 있다
+      - [x] LottoResult는 Rank와 카운트를 가지는데, 생성과 동시에 값을 세팅하는 것이 적절한가?
+    - [x] LottoResults는 수익률을 계산하는 메서드를 가지고 있다
 
 ### 기능 요구 사항
 
