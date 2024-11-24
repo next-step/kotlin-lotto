@@ -12,7 +12,7 @@ class RewardTypeTest : FunSpec({
         RewardType.of(5) shouldBe RewardType.SECOND
         RewardType.of(4) shouldBe RewardType.THIRD
         RewardType.of(3) shouldBe RewardType.FOURTH
-        RewardType.of(2) shouldBe RewardType.FITFTH
+        RewardType.of(2) shouldBe RewardType.FIFTH
         RewardType.of(1) shouldBe RewardType.SIXTH
         RewardType.of(0) shouldBe RewardType.NONE
     }
@@ -43,8 +43,8 @@ class RewardTypeTest : FunSpec({
         RewardType.FOURTH.matchCount shouldBe 3
         RewardType.FOURTH.winningAmount shouldBe 5_000
 
-        RewardType.FITFTH.matchCount shouldBe 2
-        RewardType.FITFTH.winningAmount shouldBe 0
+        RewardType.FIFTH.matchCount shouldBe 2
+        RewardType.FIFTH.winningAmount shouldBe 0
 
         RewardType.SIXTH.matchCount shouldBe 1
         RewardType.SIXTH.winningAmount shouldBe 0

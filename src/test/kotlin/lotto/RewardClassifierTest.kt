@@ -36,6 +36,6 @@ class RewardClassifierTest : FunSpec({
         result[RewardType.FOURTH] shouldBe 1
         result[RewardType.SIXTH] shouldBe 1
         result[RewardType.NONE] shouldBe 1
-        result[RewardType.FITFTH] shouldBe null // 이 경우는 포함되지 않음
+        result[RewardType.FIFTH] shouldBe null // 이 경우는 포함되지 않음
     }
 })
