@@ -3,14 +3,16 @@ package lotto.domain
 import lotto.domain.enums.LottoCompensationStrategy
 
 data class Lotto(
-    val values: Set<Int> = generateLotto(),
     private var correctCount: Int? = null,
+    val generate: () -> Set<Int> = { generateRandomLotto() }
 ) {
+    val values: Set<Int> = generate.invoke()
+
     val markedCorrectCount
         get() = correctCount ?: error("[Lotto] 마킹이 되지 않은 로또입니다.")
 
     val compensation
-        get() = LottoCompensationStrategy.getCompensationByCorrectCount(markedCorrectCount)
+        get() = LottoCompensationStrategy.getCompensationByCorrectCount(correctCount)
 
     fun markCorrectCount(correctCount: Int) {
         if (this.correctCount != null) {
@@ -24,7 +26,7 @@ data class Lotto(
         private const val MAX_LOTTO_NUMBER = 45
         private const val LOTTO_NUMBER_COUNT = 6
 
-        private fun generateLotto(): Set<Int> {
+        private fun generateRandomLotto(): Set<Int> {
             return (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER)
                 .shuffled()
                 .take(LOTTO_NUMBER_COUNT)

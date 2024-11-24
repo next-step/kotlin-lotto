@@ -16,10 +16,10 @@ enum class LottoCompensationStrategy(
     companion object {
         private const val DEFAULT_COMPENSATION = 0L
 
-        fun findByCorrectCount(correctCount: Int): LottoCompensationStrategy? =
+        fun findByCorrectCount(correctCount: Int?): LottoCompensationStrategy? =
             entries.find { it.correctCount == correctCount }
 
-        fun getCompensationByCorrectCount(correctCount: Int): Long =
+        fun getCompensationByCorrectCount(correctCount: Int?): Long =
             findByCorrectCount(correctCount)?.compensation
                 ?: DEFAULT_COMPENSATION
     }
