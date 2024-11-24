@@ -13,12 +13,11 @@ enum class WinningResult(val countOfMatch: Int, val winnings: Int) {
         fun valueOf(
             countOfMatch: Int,
             matchBonus: Boolean = false,
-        ): WinningResult {
-            return when {
-                countOfMatch == 5 && matchBonus -> return SECOND
-                countOfMatch == 5 && !matchBonus -> return THIRD
+        ): WinningResult =
+            when {
+                countOfMatch == 5 && matchBonus -> SECOND
+                countOfMatch == 5 && !matchBonus -> THIRD
                 else -> entries.find { it.countOfMatch == countOfMatch } ?: LOSE
             }
-        }
     }
 }
