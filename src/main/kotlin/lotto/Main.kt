@@ -15,10 +15,9 @@ fun main() {
     val winningNumbers = readln().split(",").map { it.toInt() }
     println("보너스 볼을 입력해 주세요.")
     val bonusNumber = readln().toInt()
-    val lottoResult = LottoResult.getLottoResult(lottos, WinningNumbers(winningNumbers), bonusNumber, purchasePrice)
-    val lottoView = LottoView()
+    val lottoResult = LottoResult.getLottoResult(lottos, WinningNumbers(winningNumbers), bonusNumber)
 
-    lottoView.drawLottos(lottoResult)
-    lottoView.drawResultMap(lottoResult)
-    lottoView.drawProfitRate(lottoResult)
+    LottoView.drawLottos(lottoResult)
+    LottoView.drawResultMap(lottoResult)
+    LottoView.drawProfitRate(lottoResult)
 }

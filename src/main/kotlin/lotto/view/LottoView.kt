@@ -4,21 +4,23 @@ import lotto.domain.Lotto
 import lotto.domain.LottoResult
 
 class LottoView {
-    fun drawLottos(lottoResult: LottoResult) {
-        lottoResult.lottos.lottos.forEach { drawLotto(it) }
-    }
+    companion object {
+        fun drawLottos(lottoResult: LottoResult) {
+            lottoResult.lottos.drawLottos()
+        }
 
-    private fun drawLotto(lotto: Lotto) {
-        println(lotto.numbers.joinToString(prefix = "[", postfix = "]", separator = ","))
-    }
+        fun drawLotto(lotto: Lotto) {
+            println(lotto.numbers.joinToString(prefix = "[", postfix = "]", separator = ","))
+        }
 
-    fun drawResultMap(lottoResult: LottoResult) {
-        println("당첨 통계")
-        println("---------")
-        lottoResult.lottoMatchMap.lottoMatchMap.forEach { println("${it.key}개 일치 : ${it.value}개") }
-    }
+        fun drawResultMap(lottoResult: LottoResult) {
+            println("당첨 통계")
+            println("---------")
+            lottoResult.lottoMatchMap.drawMatchMap()
+        }
 
-    fun drawProfitRate(lottoResult: LottoResult) {
-        println("총 수익률은 ${lottoResult.profitRate}입니다.")
+        fun drawProfitRate(lottoResult: LottoResult) {
+            println("총 수익률은 ${lottoResult.profitRate}입니다.")
+        }
     }
 }
