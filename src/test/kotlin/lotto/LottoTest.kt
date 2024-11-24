@@ -16,4 +16,16 @@ class LottoTest : StringSpec({
             Lotto(listOf(1, 2, 3, 4, 5))
         }
     }
+
+    "로또 번호가 하나라도 1 미만 이라면 예외를 던진다." {
+        shouldThrow<IllegalArgumentException> {
+            Lotto(listOf(0, 1, 2, 3, 4, 5))
+        }
+    }
+
+    "로또 번호가 하나라도 45 초과라면 예외를 던진다." {
+        shouldThrow<IllegalArgumentException> {
+            Lotto(listOf(41, 42, 43, 44, 45, 46))
+        }
+    }
 })
