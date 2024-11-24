@@ -3,6 +3,10 @@ package lotto.domain
 import lotto.domain.LottoBall.Companion.LOTTO_BALL_RANGE
 
 class LottoBalls(private val balls: List<LottoBall>) {
+    fun extractRandomLottoBalls(size: Int): LottoBalls {
+        return LottoBalls(balls.shuffled().subList(0, size))
+    }
+
     fun checkBallSize(size: Int) {
         require(balls.size == size) { "로또 번호는 ${size}개여야 합니다." }
     }
@@ -24,6 +28,6 @@ class LottoBalls(private val balls: List<LottoBall>) {
     }
 
     companion object {
-        val LOTTO_BALLS: List<LottoBall> = LOTTO_BALL_RANGE.map { LottoBall(it) }
+        val CASHED_LOTTO_BALLS: LottoBalls = LottoBalls(LOTTO_BALL_RANGE.map { LottoBall(it) })
     }
 }

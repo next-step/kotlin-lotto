@@ -17,7 +17,7 @@ class LottoLine(private val lottoBalls: LottoBalls) {
     }
 
     companion object {
-        private const val LOTTO_BALLS_SIZE = 6
+        val LOTTO_BALLS_SIZE = 6
 
         fun makeNewLottoLine(lottoNumbers: List<Int>): LottoLine {
             return LottoLine(lottoNumbers.map { LottoBall(it) })

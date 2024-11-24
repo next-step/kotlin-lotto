@@ -21,7 +21,7 @@ class LottoController(
     init {
         val purchaseInput = inputView.inputPurchaseAmount()
         lottoPurchaseAmount = adapter.adaptPurchaseAmount(purchaseInput)
-        lottoGame = LottoGame(lottoPurchaseAmount, lottoBallMachine)
+        lottoGame = LottoGame.makeNewLottoGame(lottoPurchaseAmount, lottoBallMachine)
     }
 
     fun announcePurchasedLotto() {
