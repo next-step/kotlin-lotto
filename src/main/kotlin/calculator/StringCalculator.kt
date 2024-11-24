@@ -7,33 +7,19 @@ class StringCalculator {
         return expression.calculate()
     }
 
-    private fun parseExpression(stringExpression: String): Expression {
-        val customDelimiter = parseCustomDelimiter(stringExpression)
-        val mathExpression = parseMathExpression(stringExpression, customDelimiter)
-
-        return Expression(
-            mathExpression = mathExpression,
-            customDelimiter = customDelimiter,
-        )
-    }
-
-    private fun parseCustomDelimiter(stringExpression: String): String? =
-        Regex("(?<=//).(?=\\n)")
+    private fun parseExpression(stringExpression: String): Expression =
+        Regex("//(.)\\n(.*)")
             .find(stringExpression)
-            ?.value
+            ?.let {
+                val customDelimiter = it.groupValues[1]
+                val mathExpression = it.groupValues[2]
 
-    private fun parseMathExpression(
-        stringExpression: String,
-        customDelimiter: String?,
-    ): String =
-        if (customDelimiter != null) {
-            Regex("(?<=//.\\n).*")
-                .find(stringExpression)
-                ?.value
-                ?: throw RuntimeException("입력한 표현식이 유효하지 않습니다.")
-        } else {
-            stringExpression
-        }
+                Expression(
+                    mathExpression = mathExpression,
+                    customDelimiter = customDelimiter,
+                )
+            }
+            ?: Expression(stringExpression)
 }
 
 private class Expression(
@@ -43,7 +29,9 @@ private class Expression(
     private val targetNumbers: List<PositiveNumber>
 
     init {
-        val delimiters = DEFAULT_DELIMITERS + listOfNotNull(customDelimiter)
+        val delimiters = customDelimiter
+            ?.let { listOf(it) }
+            ?: DEFAULT_DELIMITERS
         val parsedTargetNumbers = parseTargetNumbers(mathExpression, delimiters)
         this.targetNumbers = parsedTargetNumbers
     }
