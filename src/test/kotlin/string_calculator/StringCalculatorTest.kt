@@ -1,9 +1,9 @@
 package string_calculator
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.EmptySource
@@ -52,29 +52,40 @@ class StringCalculatorTest {
         assertThat(result).isEqualTo(expected)
     }
 
-    @Test
-    fun `커스텀 문자열은 한 개이상일 경우 RuntimeException이 발생한다`() {
-
+    @DisplayName(value = "커스텀 문자열이 한 개 이상일 경우 RuntimeException이 발생한다.")
+    @ParameterizedTest(name = "{index} => input=''{0}'', expected=''{1}''")
+    @ValueSource(strings = ["//##\n1##2##3"])
+    fun twoCustomInput(input: String) {
+        assertThatThrownBy { stringAddCalculator.calculate(input) }
+            .isInstanceOf(RuntimeException::class.java)
+            .hasMessage("커스텀 구분자 설정이 제대로 되지 않았습니다")
     }
 
-    @Test
-    fun `입력된 문자열이 슬래시 슬래시로 시작할 경우 new line이 나오지 않는다면 RuntimeException이 발생한다`() {
-
+    @DisplayName(value = "입력된 문자열이 '//'로 시작할 경우 '\n'이 나오지 않는다면 RuntimeException이 발생한다.")
+    @ParameterizedTest(name = "{index} => input=''{0}'', expected=''{1}''")
+    @ValueSource(strings = ["//#1#2#3"])
+    fun wrongCustomInput(input: String) {
+        assertThatThrownBy { stringAddCalculator.calculate(input) }
+            .isInstanceOf(RuntimeException::class.java)
+            .hasMessage("커스텀 구분자 설정이 제대로 되지 않았습니다")
     }
 
-    @Test
-    fun `커스텀 문자열이 없다면 기본 구분자로 문자열을 parsing 한다`() {
-
+    @DisplayName(value = "구분자 사이에는 String이 숫자가 아닐 경우 RuntimeException이 발생한다.")
+    @ParameterizedTest(name = "{index} => input=''{0}'', expected=''{1}''")
+    @ValueSource(strings = ["1,#,1"])
+    fun wrongInput(input: String) {
+        assertThatThrownBy { stringAddCalculator.calculate(input) }
+            .isInstanceOf(RuntimeException::class.java)
+            .hasMessage("숫자로 변환할 수 없습니다")
     }
 
-    @Test
-    fun `구분자가 연속해서 나온다면 RuntimeException이 발생한다`() {
-
-    }
-
-    @Test
-    fun `구분자 사이에는 숫자 String이 있어야 한다`() {
-
+    @DisplayName(value = "구분자 사이의 String이 음수일 경우 RuntimeException이 발생한다.")
+    @ParameterizedTest(name = "{index} => input=''{0}'', expected=''{1}''")
+    @ValueSource(strings = ["1,-2,1"])
+    fun wrongInput2(input: String) {
+        assertThatThrownBy { stringAddCalculator.calculate(input) }
+            .isInstanceOf(RuntimeException::class.java)
+            .hasMessage("음수는 입력할 수 없습니다")
     }
 
     companion object {
