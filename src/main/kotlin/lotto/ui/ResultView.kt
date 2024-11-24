@@ -8,20 +8,21 @@ import lotto.domain.Rank
 
 object ResultView {
     private const val COMMA_SEPARATOR = ", "
+    private val NEWLINE = System.lineSeparator()
 
     fun printLotto(lotto: Lotto) {
-        lotto.lines.forEach { printLine(it) }
-        println()
+        val sb = StringBuilder()
+        lotto.lines.forEach { sb.append(formatLine(it)) }
+        println(sb.toString())
     }
 
-    private fun printLine(
+    private fun formatLine(
         line: LottoLine,
         prefix: String = "[",
-        suffix: String = "]",
-    ) {
+        postfix: String = "]$NEWLINE",
+    ): String {
         val numbers = line.numbers.map { it.value }
-        val text = prefix + numbers.joinToString(COMMA_SEPARATOR) + suffix
-        println(text)
+        return numbers.joinToString(COMMA_SEPARATOR, prefix, postfix)
     }
 
     fun printResult(
