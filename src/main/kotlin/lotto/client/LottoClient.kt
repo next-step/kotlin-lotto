@@ -22,7 +22,7 @@ class LottoClient(
         val lottoRanks = WinningStatistics(purchasedLottos = lottos, winningNumbers = winningNumbers).ranks
         ResultView.printStatistics(lottoRanks = lottoRanks)
 
-        val profit = Profit(winningAmount = lottoRanks.sumOf { it.prize }, purchaseAmount = amount).yield()
+        val profit = Profit(winningAmount = lottoRanks.sumOf { it.prize }, purchaseAmount = amount).calculateYield()
         ResultView.printProfit(profit)
     }
 
