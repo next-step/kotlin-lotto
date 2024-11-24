@@ -6,6 +6,6 @@ import lotto.rank.LottoRank
 class WinningStatistics(
     val ranks: List<LottoRank>,
 ) {
-    constructor(purchasedLottos: Lottos, winningNumbers: List<Int>) :
-        this(purchasedLottos.lottos.map { it.getRank(winningNumbers) })
+    constructor(purchasedLottos: Lottos, winningNumber: WinningNumber) :
+        this(purchasedLottos.lottos.map { it.getRank(winningNumber) })
 }

@@ -2,7 +2,9 @@ package lotto.client
 
 import lotto.Lotto
 import lotto.LottoMachine
+import lotto.number.Numbers
 import lotto.statistics.Profit
+import lotto.statistics.WinningNumber
 import lotto.statistics.WinningStatistics
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -19,7 +21,12 @@ class LottoClient(
         ResultView.printLottoList(lottos)
 
         val winningNumbers = InputView.inputLastWeekWinningNumbers()
-        val lottoRanks = WinningStatistics(purchasedLottos = lottos, winningNumbers = winningNumbers).ranks
+        val bonusBall = InputView.inputBonusBall()
+        val lottoRanks =
+            WinningStatistics(
+                purchasedLottos = lottos,
+                winningNumber = WinningNumber(numbers = Numbers(winningNumbers), bonusBall = bonusBall),
+            ).ranks
         ResultView.printStatistics(lottoRanks = lottoRanks)
 
         val profit = Profit(winningAmount = lottoRanks.sumOf { it.prize }, purchaseAmount = amount).calculateYield()
