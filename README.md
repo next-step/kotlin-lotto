@@ -10,6 +10,8 @@
   - [ ] FunSpec
   - [x] BehaviorSpec
   - [ ] DescribeSpec
+- Price를 BigDecimal로 변경하기
+  - 1등인 상황으로 LottoResultTest를 작성하다가 count를 호출해서 대상자가 2명이 됐을 때 오버플로우 발행해서 음수값으로 바뀜 
 
 ### 기능 구현 사항
 
