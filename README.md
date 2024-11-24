@@ -15,18 +15,12 @@
     - while문 조건식이 있기 때문에 별도 validate는 없어도 될 것 같..기도..?
   - [x] 로또 생성에 대한 책임을 발행하는 객체(Issuer)가 가진다.
     - 외부에서 반복하는 것도 생각했으나 발행자가 구매 개수를 관리하는 책임도 가지기 때문에 발행자가 가지는 것이 맞다고 생각함 
-- [ ] 지난주 당첨 번호를 입력받으면 당첨 통계를 구한다.
-  - [ ] match 메서드는 협력한다.
-    - 필드
-      - List<LottoResult>
-        - LottoResult
-          - rank: Rank
-            - Rank
-              - FIRST
-              - SECOND
-              - THIRD
-              - FOURTH
-          - count: Int
+- [x] 지난주 당첨 번호를 입력받으면 당첨 통계를 구한다.
+  - [x] 당첨 결과는 어떠한 형태로 다룰 것인가
+    - 방법1. Map<Rank, Int> -> Rank에 대한 카운트를 가지고 있는 방법
+    - 방법2. List<LottoResult> -> Rank와 카운트를 가지고 있는 방법
+    - 방법3. List<Int> -> 카운트만 가지고 있는 방법
+  - [x] match 메서드는 협력한다.
     - 파라미터
       - List<LottoNumbers> -> 구매한 로또 번호
       - LottoNumbers -> 당첨 번호

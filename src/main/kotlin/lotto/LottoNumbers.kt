@@ -1,6 +1,11 @@
 package lotto
 
-class LottoNumbers(val numbers: List<LottoNumber>) {
+class LottoNumbers(private val numbers: List<LottoNumber>) {
+
+    fun countMatch(winningLotto: LottoNumbers): Int {
+        return this.numbers.count { it in winningLotto.numbers }
+    }
+
     companion object {
         private const val LOTTO_COUNT = 6
 
