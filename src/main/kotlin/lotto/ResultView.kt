@@ -39,7 +39,7 @@ class ResultView {
             val returns = winningBoard.calculateRateOfReturn(lotteryTicketMachine.totalCost)
             val evaluationText: String = parseEvaluationText(BASE_RETURNS, returns)
 
-            println("총 수익률은 ${returns}입니다.(기준이 ${BASE_RETURNS}이기 때문에 결과적으로 ${evaluationText}라는 의미임")
+            println("총 수익률은 ${returns}입니다.(기준이 ${BASE_RETURNS}이기 때문에 결과적으로 ${evaluationText}라는 의미임)")
         }
 
         private fun parseEvaluationText(

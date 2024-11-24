@@ -12,7 +12,7 @@ class LotteryTicketMachine(balance: Int, totalCost: Int = 0) {
         }
     }
 
-    fun issueTicket(numbers: List<Int> = (1..45).shuffled().take(6)): LottoTicket? {
+    fun issueTicket(numbers: List<LottoNumber> = LOTTERY_NUMBERS_POOL.shuffled().take(6).map(::LottoNumber)): LottoTicket? {
         if (balance < TICKET_PRICE) {
             return null
         }
@@ -23,5 +23,6 @@ class LotteryTicketMachine(balance: Int, totalCost: Int = 0) {
 
     companion object {
         const val TICKET_PRICE: Int = 1000
+        private val LOTTERY_NUMBERS_POOL: IntRange = (1..45)
     }
 }
