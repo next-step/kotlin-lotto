@@ -1,6 +1,6 @@
 package lottery.domain
 
-class WinningTicket(val lottery: Lottery) {
+class WinningLottery(val lottery: Lottery) {
     fun draw(lotteries: List<Lottery>): DrawResult {
         val rankRewardLotteryCountMap =
             lotteries
@@ -15,8 +15,8 @@ class WinningTicket(val lottery: Lottery) {
     }
 
     companion object {
-        fun create(numbers: List<Int>): WinningTicket {
-            return WinningTicket(Lottery(LotteryNumbers(numbers.toSet())))
+        fun create(numbers: List<Int>): WinningLottery {
+            return WinningLottery(Lottery(LotteryNumbers(numbers.toSet())))
         }
     }
 }

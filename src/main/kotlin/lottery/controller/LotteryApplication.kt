@@ -3,7 +3,7 @@ package lottery.controller
 import lottery.domain.LotteryMachine
 import lottery.domain.LotteryTicketConverter.convertToTickets
 import lottery.domain.Money
-import lottery.domain.WinningTicket
+import lottery.domain.WinningLottery
 import lottery.view.InputView.inputPurchaseAmount
 import lottery.view.InputView.inputWinningLotteryNumbers
 import lottery.view.ResultView.printLotteries
@@ -18,6 +18,6 @@ fun main() {
     val lotteries = LotteryMachine.buy(tickets)
     printLotteries(lotteries)
 
-    val winningTicket = WinningTicket.create(inputWinningLotteryNumbers())
-    printStatistic(purchaseAmount, winningTicket.draw(lotteries))
+    val winningLottery = WinningLottery.create(inputWinningLotteryNumbers())
+    printStatistic(purchaseAmount, winningLottery.draw(lotteries))
 }
