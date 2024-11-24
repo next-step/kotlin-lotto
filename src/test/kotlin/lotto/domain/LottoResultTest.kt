@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 class LottoResultTest {
     @Test
     fun `수익률을 계산한다`() {
-        val payment = Payment.from(14_000)
+        val payment = LottoPayment.from(14_000)
         val result =
             LottoResult.of(
                 Rank.FOURTH to 1,

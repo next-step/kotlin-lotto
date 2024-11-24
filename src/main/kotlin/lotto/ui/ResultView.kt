@@ -2,8 +2,8 @@ package lotto.ui
 
 import lotto.domain.Lotto
 import lotto.domain.LottoLine
+import lotto.domain.LottoPayment
 import lotto.domain.LottoResult
-import lotto.domain.Payment
 import lotto.domain.Rank
 
 object ResultView {
@@ -29,7 +29,7 @@ object ResultView {
 
     fun printResult(
         result: LottoResult,
-        payment: Payment,
+        payment: LottoPayment,
     ) {
         val sb = StringBuilder()
         sb.append("${NEWLINE}당첨 통계$NEWLINE---------$NEWLINE")

@@ -2,7 +2,7 @@ package lotto.domain
 
 import java.math.BigInteger
 
-class Payment(
+class LottoPayment(
     val amount: BigInteger,
 ) {
     val numberOfLines: Int
@@ -18,6 +18,6 @@ class Payment(
     companion object {
         val PRICE_PER_LINE: BigInteger = BigInteger.valueOf(1000)
 
-        fun from(amount: Long): Payment = Payment(BigInteger.valueOf(amount))
+        fun from(amount: Long): LottoPayment = LottoPayment(BigInteger.valueOf(amount))
     }
 }

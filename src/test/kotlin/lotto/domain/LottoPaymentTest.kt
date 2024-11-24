@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 
 @Suppress("NonAsciiCharacters")
-class PaymentTest {
+class LottoPaymentTest {
     @ParameterizedTest
     @CsvSource(
         value = [
@@ -22,18 +22,18 @@ class PaymentTest {
         amount: Long,
         expected: Int,
     ) {
-        val payment = Payment.from(amount)
+        val payment = LottoPayment.from(amount)
         payment.numberOfLines shouldBe expected
     }
 
     @ParameterizedTest
     @ValueSource(longs = [0, -1000, Long.MIN_VALUE])
     fun `금액이 0이거나 음수이면 예외를 던집니다`(amount: Long) {
-        assertThrows<IllegalArgumentException> { Payment.from(amount) }
+        assertThrows<IllegalArgumentException> { LottoPayment.from(amount) }
     }
 
     @Test
     fun `금액이 1000원 단위가 아니면 예외를 던집니다`() {
-        assertThrows<IllegalArgumentException> { Payment.from(1500) }
+        assertThrows<IllegalArgumentException> { LottoPayment.from(1500) }
     }
 }

@@ -9,7 +9,7 @@ data class LottoResult(
 
     fun get(rank: Rank): Int = rankToCount.getOrDefault(rank, 0)
 
-    fun returnOnInvestment(payment: Payment): Double = totalPrize.toDouble() / payment.doubleValue()
+    fun returnOnInvestment(payment: LottoPayment): Double = totalPrize.toDouble() / payment.doubleValue()
 
     companion object {
         fun from(rankToCount: Map<Rank, Int>): LottoResult = LottoResult(EnumMap(rankToCount))
