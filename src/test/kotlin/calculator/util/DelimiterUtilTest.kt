@@ -37,4 +37,22 @@ class DelimiterUtilTest : DescribeSpec({
             }
         }
     }
+
+    describe("deleteCustomDelimiter") {
+        context("커스텀 구분자가 있는 경우") {
+            it("커스텀 구분자를 지운 문자열을 리턴한다.") {
+                val text = "//abc₩n10abc20"
+                val actual = deleteCustomDelimiter(text)
+                actual shouldBe "10abc20"
+            }
+        }
+
+        context("커스텀 구분자가 없는 경우") {
+            it("문자열을 그대로 리턴한다.") {
+                val text = "10,20"
+                val actual = deleteCustomDelimiter(text)
+                actual shouldBe "10,20"
+            }
+        }
+    }
 })
