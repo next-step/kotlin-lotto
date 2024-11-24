@@ -10,7 +10,10 @@ class LottoStore {
     fun sell(money: Int): List<Lotto> {
         if (isValidAmount(money)) throw NotEnoughMoneyException(money)
 
-        return emptyList()
+        val theNumberOfLotto = money / MIN_AMOUNT_UNIT
+        return (1..theNumberOfLotto).map {
+            Lotto()
+        }
     }
 
     private fun isValidAmount(money: Int) = money % MIN_AMOUNT_UNIT != 0
