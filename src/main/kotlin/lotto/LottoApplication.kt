@@ -4,6 +4,7 @@ import lotto.adapter.LottoInputAdapter
 import lotto.controller.LottoController
 import lotto.domain.LottoBallMachine
 import lotto.domain.LottoGame
+import lotto.infrastructure.DefaultProfitRateCalculator
 import lotto.infrastructure.RandomLottoBallMachine
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -14,7 +15,7 @@ fun main() {
     val lottoBallMachine: LottoBallMachine = RandomLottoBallMachine()
     val adapter = LottoInputAdapter()
 
-    val controller = LottoController(inputView, outputView, adapter)
+    val controller = LottoController(inputView, outputView, adapter, DefaultProfitRateCalculator())
 
     val lottoPurchaseAmount = controller.getLottoPurchaseAmount()
     val lottoGame = LottoGame.makeNewLottoGame(lottoPurchaseAmount, lottoBallMachine)

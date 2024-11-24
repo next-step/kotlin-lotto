@@ -1,9 +1,12 @@
 package lotto.domain
 
-class LottoGameResult(private val lottoResult: Map<LottoRank, Int>) {
-    fun makeLottoProfitRate(purchaseCount: LottoPurchaseCount): LottoProfitRate {
+class LottoGameResult(
+    private val lottoResult: Map<LottoRank, Int>,
+    private val profitRateCalculator: ProfitRateCalculator,
+) {
+    fun calculateProfitRate(lottoPurchaseAmount: LottoPurchaseAmount): Double {
         val totalPrize = lottoResult.map { it.key.prize * it.value }.sum()
-        return LottoProfitRate(totalPrize, LottoPurchaseAmount.fromLottoPurchaseCount(purchaseCount))
+        return profitRateCalculator.calculate(totalPrize, lottoPurchaseAmount)
     }
 
     fun extractResult(): List<Pair<LottoRank, Int>> {

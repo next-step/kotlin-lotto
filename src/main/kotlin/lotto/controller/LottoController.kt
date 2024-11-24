@@ -3,6 +3,7 @@ package lotto.controller
 import lotto.adapter.LottoInputAdapter
 import lotto.domain.LottoGame
 import lotto.domain.LottoPurchaseAmount
+import lotto.domain.ProfitRateCalculator
 import lotto.response.LottoLinesResponse
 import lotto.response.LottoRankResponse
 import lotto.view.InputView
@@ -12,6 +13,7 @@ class LottoController(
     private val inputView: InputView,
     private val outputView: OutputView,
     private val adapter: LottoInputAdapter,
+    private val profitRateCalculator: ProfitRateCalculator,
 ) {
     fun getLottoPurchaseAmount(): LottoPurchaseAmount {
         val purchaseInput = inputView.inputPurchaseAmount()
@@ -31,8 +33,8 @@ class LottoController(
     ) {
         val winningLineInput = inputView.inputWinningNumbers()
         val winningNumbers = adapter.adaptWinningNumbers(winningLineInput)
-        val gameResult = lottoGame.returnGameResult(winningNumbers)
-        val lottoProfitRate = gameResult.makeLottoProfitRate(lottoPurchaseAmount.toLottoPurchaseCount())
+        val gameResult = lottoGame.returnGameResult(winningNumbers, profitRateCalculator)
+        val profitRate = gameResult.calculateProfitRate(lottoPurchaseAmount)
 
         val gameResultResponse =
             gameResult.extractResult().map {
@@ -40,6 +42,6 @@ class LottoController(
             }
 
         outputView.printGameResult(gameResultResponse)
-        outputView.printLottoProfitRate(lottoProfitRate.rate)
+        outputView.printLottoProfitRate(profitRate)
     }
 }

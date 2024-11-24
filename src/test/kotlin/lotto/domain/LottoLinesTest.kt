@@ -6,6 +6,7 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.equality.shouldBeEqualToComparingFields
 import io.kotest.matchers.shouldBe
+import lotto.infrastructure.DefaultProfitRateCalculator
 
 class LottoLinesTest : StringSpec({
     "입력 받은 로또 라인의 수가 0이면 예외 처리한다." {
@@ -41,7 +42,8 @@ class LottoLinesTest : StringSpec({
                     winningNumbers.map { LottoBall(it) }
                         .toList(),
                 ),
-            ) shouldBeEqualToComparingFields LottoGameResult(expected)
+                DefaultProfitRateCalculator(),
+            ) shouldBeEqualToComparingFields LottoGameResult(expected, DefaultProfitRateCalculator())
         }
     }
 })

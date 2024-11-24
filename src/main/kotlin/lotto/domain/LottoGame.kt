@@ -1,9 +1,12 @@
 package lotto.domain
 
 class LottoGame(private val lottoPurchaseCount: LottoPurchaseCount, private val lottoLines: LottoLines) {
-    fun returnGameResult(winningNumbers: List<Int>): LottoGameResult {
+    fun returnGameResult(
+        winningNumbers: List<Int>,
+        profitRateCalculator: ProfitRateCalculator,
+    ): LottoGameResult {
         val winningLottoLine = LottoLine.makeNewLottoLine(winningNumbers)
-        return lottoLines.extractLottoGameResult(winningLottoLine)
+        return lottoLines.extractLottoGameResult(winningLottoLine, profitRateCalculator)
     }
 
     fun getPurchaseCount(): Int {
