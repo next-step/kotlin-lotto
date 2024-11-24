@@ -5,7 +5,10 @@ import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.string.shouldContain
+import lotto.domain.enums.LottoCompensationStrategy
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 class LottoTest {
     @Test
@@ -67,5 +70,25 @@ class LottoTest {
         shouldNotThrowAny {
             lotto.markedCorrectCount
         }
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = [0, 1, 2])
+    fun `맞춘 개수가 3개 미만인 경우 당첨금이 0원이다`(correctCount: Int) {
+        val lotto = Lotto()
+        lotto.markCorrectCount(correctCount)
+
+        lotto.markedCorrectCount shouldBe correctCount
+        lotto.compensation shouldBe 0
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = [3, 4, 5, 6])
+    fun `맞춘 개수가 3개 이상인 경우 당첨금이 존재한다`(correctCount: Int) {
+        val lotto = Lotto()
+        lotto.markCorrectCount(correctCount)
+
+        lotto.markedCorrectCount shouldBe correctCount
+        lotto.compensation shouldBe LottoCompensationStrategy.findByCorrectCount(correctCount)?.compensation
     }
 }

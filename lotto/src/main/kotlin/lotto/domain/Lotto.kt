@@ -1,11 +1,16 @@
 package lotto.domain
 
+import lotto.domain.enums.LottoCompensationStrategy
+
 data class Lotto(
     val values: Set<Int> = generateLotto(),
     private var correctCount: Int? = null,
 ) {
     val markedCorrectCount
         get() = correctCount ?: error("[Lotto] 마킹이 되지 않은 로또입니다.")
+
+    val compensation
+        get() = LottoCompensationStrategy.getCompensationByCorrectCount(markedCorrectCount)
 
     fun markCorrectCount(correctCount: Int) {
         if (this.correctCount != null) {
