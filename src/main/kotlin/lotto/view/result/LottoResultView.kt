@@ -21,7 +21,7 @@ object LottoResultView {
         dto: LottoResultsDto,
     ) {
         dto.winResults.forEach {
-            sb.append("${it.matchCount}개 일치 (${it.reward}원) - ${it.winCount}개\n")
+            sb.append("${it.matchCount}개 일치 ${if (it.containBonus) ", 보너스 볼 일치" else ""}(${it.reward}원) - ${it.winCount}개\n")
         }
     }
 

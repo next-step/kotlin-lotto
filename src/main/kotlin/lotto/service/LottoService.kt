@@ -23,16 +23,24 @@ class LottoService(
     fun getResults(
         lottosDto: LottosDto,
         winningLottoDto: WinningLottoDto,
-        bonusNumber: Int,
+        bonusBall: Int,
     ): LottoResultsDto {
         val lottos = lottosDto.lottos.map { Lotto(it.numbers.map { value -> Number(value) }) }
         val winningLotto = Lotto(winningLottoDto.numbers.map { Number(it) })
-        val lottoRankCountMap = lottos.map { it.match(winningLotto, Number(bonusNumber)) }.groupingBy { it }.eachCount()
+        val lottoRankCountMap = lottos.map { it.match(winningLotto, Number(bonusBall)) }.groupingBy { it }.eachCount()
         val lottoResults = LottoResults.from(lottoRankCountMap)
         val winResults = lottoResults.filterWinResults()
 
         return LottoResultsDto(
-            winResults = winResults.map { LottoRankDto(matchCount = it.rank.matchCount, reward = it.rank.reward, winCount = it.count) },
+            winResults =
+                winResults.map {
+                    LottoRankDto(
+                        matchCount = it.rank.matchCount,
+                        reward = it.rank.reward,
+                        winCount = it.count,
+                        containBonus = it.rank.containBonus,
+                    )
+                },
             profitRate = lottoResults.calculateProfitRate(),
             isProfit = lottoResults.isProfit(),
             margin = LottoResults.MARGIN_VALUE,
