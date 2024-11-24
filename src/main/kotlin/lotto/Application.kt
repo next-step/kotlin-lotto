@@ -1,7 +1,7 @@
 package lotto
 
 import lotto.application.LottoService
-import lotto.domain.RandomLottoLineGenerator
+import lotto.application.RandomLottoLineGenerator
 import lotto.ui.LottoController
 
 object Application {

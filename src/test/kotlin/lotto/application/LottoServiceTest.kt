@@ -3,7 +3,6 @@ package lotto.application
 import io.kotest.matchers.shouldBe
 import lotto.domain.Lotto
 import lotto.domain.LottoLine
-import lotto.domain.RandomLottoLineGenerator
 import lotto.domain.Rank
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test

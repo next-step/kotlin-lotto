@@ -1,4 +1,7 @@
-package lotto.domain
+package lotto.application
+
+import lotto.domain.LottoLine
+import lotto.domain.LottoNumber
 
 class RandomLottoLineGenerator : LottoLineGenerator {
     override fun generate(): LottoLine {

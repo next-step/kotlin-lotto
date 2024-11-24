@@ -2,7 +2,6 @@ package lotto.application
 
 import lotto.domain.Lotto
 import lotto.domain.LottoLine
-import lotto.domain.LottoLineGenerator
 import lotto.domain.LottoResult
 
 class LottoService(
