@@ -23,4 +23,11 @@ class CalculatorTest {
         assertThatThrownBy { Calculator.sum("1,-2") }
             .isInstanceOf(IllegalArgumentException::class.java)
     }
+
+    @Test
+    fun `빈 값을 입력하면 0을 반환한다`() {
+        val sum = Calculator.sum("")
+
+        assertThat(sum).isEqualTo(0)
+    }
 }
