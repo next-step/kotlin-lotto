@@ -64,4 +64,21 @@ class LottoTicketTest : StringSpec({
             result shouldBe expectedCountOfMatches
         }
     }
+
+    "로또 티켓은 보너스 로또 번호와 일치하는 로또 번호를 가지고 있으면 true를 반환한다" {
+        val sut = LottoTicket(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))
+
+        listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).forEach { bonusNumber ->
+            val result: Boolean = sut.matchesBonusBall(bonusNumber)
+            result shouldBe true
+        }
+    }
+
+    "로또 티켓은 보너스 로또 번호와 일치하지 않는 로또 번호를 가지고 있으면 false를 반환한다" {
+        val sut = LottoTicket(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))
+
+        val bonusNumber = LottoNumber(7)
+        val result: Boolean = sut.matchesBonusBall(bonusNumber)
+        result shouldBe false
+    }
 })

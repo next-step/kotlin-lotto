@@ -16,4 +16,6 @@ class LottoTicket(numbers: List<LottoNumber>) {
         val lottoNumbersOfMatches = this.numbers intersect other.numbers.toSet()
         return lottoNumbersOfMatches.size
     }
+
+    fun matchesBonusBall(bonusNumber: LottoNumber): Boolean = bonusNumber in numbers
 }
