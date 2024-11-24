@@ -8,16 +8,16 @@ fun main() {
 
     ResultView.announceIssuedLotteryTickets(lotteryTickets)
 
-    val inputWinningNumbers = ConsoleInput.inputWinningNumbers()
+    val inputDefaultWinningTicket = ConsoleInput.inputDefaultWinningTicket()
     val inputBonusNumber = ConsoleInput.inputBonusNumber()
-    val lotteryWinningChecker =
-        LotteryWinningChecker(
-            winningTicket = LottoTicket(inputWinningNumbers),
+    val winningTicket =
+        WinningTicket(
+            defaultTicket = inputDefaultWinningTicket,
             bonusNumber = inputBonusNumber,
         )
     println()
 
-    val checkedResults = lotteryTickets.map { lotteryWinningChecker.checkTicket(it) }
+    val checkedResults = lotteryTickets.map { winningTicket.checkTicket(it) }
 
     val winningBoard = WinningBoard(checkedResults)
     val winningResultsWithWinningsSorted =

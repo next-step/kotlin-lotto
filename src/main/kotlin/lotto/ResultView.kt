@@ -5,7 +5,15 @@ class ResultView {
         fun announceIssuedLotteryTickets(lotteryTickets: List<LottoTicket>) {
             println("${lotteryTickets.size}개를 구매했습니다.")
             for (ticket in lotteryTickets) {
-                println(ticket.numbers.joinToString(prefix = "[", postfix = "]", separator = ", "))
+                println(
+                    ticket.numbers
+                        .map(LottoNumber::value)
+                        .joinToString(
+                            prefix = "[",
+                            postfix = "]",
+                            separator = ", ",
+                        ),
+                )
             }
             println()
         }

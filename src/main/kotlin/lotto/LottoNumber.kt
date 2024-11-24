@@ -4,7 +4,7 @@ package lotto
 value class LottoNumber(val value: Int) : Comparable<LottoNumber> {
     init {
         require(value in LOTTO_NUMBERS_POOL) {
-            "로또 번호는 1부터 45까지만 허용합니다"
+            "로또 번호는 1부터 45까지만 허용합니다 value=$value"
         }
     }
 
