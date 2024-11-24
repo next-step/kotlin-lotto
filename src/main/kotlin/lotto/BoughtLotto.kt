@@ -16,5 +16,9 @@ class BoughtLotto(
 data class LottoResult(
     val rewards: Map<Reward, Int>,
 ) {
-    fun calculateRateOfReturn(): Double = 0.0
+    fun calculateRateOfReturn(): Double {
+        val totalRewardMoney = rewards.map { it.key.money * it.value }.sum()
+        val totalBoughtMoney = rewards.values.sum() * LOTTO_PRICE
+        return totalRewardMoney.toDouble() / totalBoughtMoney
+    }
 }

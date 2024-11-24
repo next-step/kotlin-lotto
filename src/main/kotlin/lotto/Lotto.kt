@@ -1,5 +1,7 @@
 package lotto
 
+const val LOTTO_PRICE = 1000
+
 data class Lotto(
     val numbers: List<Int>,
 ) {
