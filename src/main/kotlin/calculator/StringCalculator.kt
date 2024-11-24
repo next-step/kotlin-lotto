@@ -2,50 +2,37 @@ package calculator
 
 class StringCalculator {
     fun calculate(stringExpression: String?): Double {
-        require(!stringExpression.isNullOrBlank()) { "표현식이 유효하지 않습니다." }
+        require(!stringExpression.isNullOrBlank()) { "표현식이 입력되지 않았습니다." }
         val expression = parseExpression(stringExpression)
         return expression.calculate()
     }
 
-    private fun parseExpression(stringExpression: String): Expression {
-        val customDelimiter = parseCustomDelimiter(stringExpression)
-        val mathExpression = parseMathExpression(stringExpression, customDelimiter)
-
-        return Expression(
-            mathExpression = mathExpression,
-            customDelimiter = customDelimiter,
-        )
-    }
-
-    private fun parseCustomDelimiter(stringExpression: String): String? =
-        Regex("(?<=//).(?=\\n)")
+    private fun parseExpression(stringExpression: String): Expression =
+        Regex("//(.)\\n(.*)")
             .find(stringExpression)
-            ?.value
+            ?.let {
+                val customDelimiter = it.groupValues[1]
+                val mathExpression = it.groupValues[2]
 
-    private fun parseMathExpression(
-        stringExpression: String,
-        customDelimiter: String?,
-    ): String =
-        if (customDelimiter != null) {
-            Regex("(?<=//.\\n).*")
-                .find(stringExpression)
-                ?.value
-                ?: throw RuntimeException("표현식이 유효하지 않습니다.")
-        } else {
-            stringExpression
-        }
+                Expression(
+                    mathExpression = mathExpression,
+                    customDelimiter = customDelimiter,
+                )
+            }
+            ?: Expression(stringExpression)
 }
 
 private class Expression(
     mathExpression: String,
     customDelimiter: String? = null,
 ) {
-    private val targetNumbers: List<Double>
+    private val targetNumbers: List<PositiveNumber>
 
     init {
-        val delimiters = DEFAULT_DELIMITERS + listOfNotNull(customDelimiter)
+        val delimiters = customDelimiter
+            ?.let { listOf(it) }
+            ?: DEFAULT_DELIMITERS
         val parsedTargetNumbers = parseTargetNumbers(mathExpression, delimiters)
-        requirePositiveNumbers(parsedTargetNumbers)
         this.targetNumbers = parsedTargetNumbers
     }
 
@@ -55,20 +42,23 @@ private class Expression(
     ) = try {
         mathExpression
             .split(*delimiters.toTypedArray())
-            .map { it.toDouble() }
+            .map { PositiveNumber(it.toDouble()) }
     } catch (e: NumberFormatException) {
-        throw RuntimeException("숫자만 더할 수 있습니다.")
+        throw RuntimeException("입력한 표현식 \"${mathExpression}\"에 숫자가 아닌 유효하지 않은 문자가 포함되어 있습니다.")
     }
 
-    private fun requirePositiveNumbers(parsedTargetNumbers: List<Double>) {
-        if (parsedTargetNumbers.any { it < 0 }) {
-            throw RuntimeException("음수는 더할 수 없습니다.")
-        }
-    }
-
-    fun calculate(): Double = targetNumbers.sum()
+    fun calculate(): Double = targetNumbers.sumOf { it.number }
 
     companion object {
         private val DEFAULT_DELIMITERS = listOf(",", ":")
+    }
+}
+
+@JvmInline
+private value class PositiveNumber(
+    val number: Double,
+) {
+    init {
+        require(number >= 0) { "음수는 더할 수 없습니다." }
     }
 }
