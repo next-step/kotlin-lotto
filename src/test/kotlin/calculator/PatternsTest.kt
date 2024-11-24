@@ -28,10 +28,10 @@ class PatternsTest {
         @JvmStatic
         fun provider(): List<Arguments> {
             return listOf(
-                Arguments.of("1,2,3", "DEFAULT", true),
-                Arguments.of("1;2;3", "DEFAULT", false),
-                Arguments.of("//;\n1;2;3", "CUSTOM", true),
-                Arguments.of("1|2|3", "CUSTOM", false),
+                Arguments.of("1,2,3", "DEFAULT_DELIMITER", true),
+                Arguments.of("1;2;3", "DEFAULT_DELIMITER", false),
+                Arguments.of("//;\n1;2;3", "CUSTOM_DELIMITER", true),
+                Arguments.of("1|2|3", "CUSTOM_DELIMITER", false),
             )
         }
     }
