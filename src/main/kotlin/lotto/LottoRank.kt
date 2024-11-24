@@ -1,8 +1,8 @@
 package lotto
 
 enum class LottoRank(
-    private val matchCount: Int,
-    private val winningPrice: Price,
+    val matchCount: Int,
+    val winningPrice: Price,
 ) {
     FIRST( 6, Price(2_000_000_000)),
     SECOND( 5, Price(1_500_000)),
@@ -16,11 +16,13 @@ enum class LottoRank(
         return winningPrice.value * count
     }
 
+    fun getPriceValue(): Int {
+        return winningPrice.value
+    }
+
     companion object {
         fun valueOf(matchCount: Int): LottoRank {
             return entries.find { it.matchCount == matchCount } ?: NONE
         }
-
-
     }
 }

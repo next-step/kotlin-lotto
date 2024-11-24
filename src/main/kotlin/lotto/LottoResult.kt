@@ -12,4 +12,12 @@ class LottoResult(
     fun sum(): Int {
         return lottoRank.sumPrice(count)
     }
+
+    fun getMatchCount(): Int {
+        return lottoRank.matchCount
+    }
+
+    fun getWinningPrice(): Int {
+        return lottoRank.getPriceValue()
+    }
 }
