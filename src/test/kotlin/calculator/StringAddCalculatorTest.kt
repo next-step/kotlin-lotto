@@ -1,5 +1,6 @@
 package calculator
 
+import calculator.model.operator.AddOperator
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.BeforeEach
@@ -14,7 +15,7 @@ class StringAddCalculatorTest {
 
     @BeforeEach
     fun setUp() {
-        calculator = StringAddCalculator()
+        calculator = StringAddCalculator(AddOperator())
     }
 
     @DisplayName(value = "빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.")
@@ -40,14 +41,14 @@ class StringAddCalculatorTest {
 
     @DisplayName(value = "구분자를 쉼표(,) 이외에 콜론(:)을 사용할 수 있다.")
     @ParameterizedTest
-    @ValueSource(strings = ["1,2:3"])
+    @ValueSource(strings = ["1,2:3", "1:1,1,1:1:1"])
     fun colons(text: String) {
         assertThat(calculator.add(text)).isSameAs(6)
     }
 
     @DisplayName(value = "//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다.")
     @ParameterizedTest
-    @ValueSource(strings = ["//;\n1;2;3"])
+    @ValueSource(strings = ["//;\n1;2;3", "//@\n1@2@3", "//#\n1#1#1#1#1#1", "//@\n3@3", "//!\n1!1,3!1"])
     fun customDelimiter(text: String) {
         assertThat(calculator.add(text)).isSameAs(6)
     }
