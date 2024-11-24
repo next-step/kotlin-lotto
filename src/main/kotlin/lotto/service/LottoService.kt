@@ -14,7 +14,8 @@ import lotto.view.dto.lotto.LottosDto
 class LottoService(
     private val lottoGenerator: LottoGenerator,
 ) {
-    fun createLottos(count: LottoPurchaseCount): LottosDto {
+    fun createLottos(payAmount: Int): LottosDto {
+        val count = LottoPurchaseCount(payAmount)
         val lottos = Lotto.createLottos(count.amount, lottoGenerator)
         return LottosDto(lottos.map { LottoDto(it.getNumbersRawValues()) })
     }

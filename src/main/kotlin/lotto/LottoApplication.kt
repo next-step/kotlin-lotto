@@ -1,7 +1,6 @@
 package lotto
 
 import lotto.domain.DefaultLottoGenerator
-import lotto.domain.LottoPurchaseCount
 import lotto.service.LottoService
 import lotto.view.input.BuyInputView
 import lotto.view.input.WinningLottoInputView
@@ -13,8 +12,7 @@ fun main() {
     val lottoService = LottoService(DefaultLottoGenerator)
 
     val payAmount = BuyInputView.print()
-    val purchaseCount = LottoPurchaseCount(payAmount)
-    val lottosDto = lottoService.createLottos(purchaseCount)
+    val lottosDto = lottoService.createLottos(payAmount)
 
     BuyResultView.print(lottosDto.lottos.size)
     LottosView.print(lottosDto)
