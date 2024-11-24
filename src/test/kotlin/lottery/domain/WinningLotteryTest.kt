@@ -9,9 +9,7 @@ import lottery.domain.RankReward.RANK_2
 class WinningLotteryTest : StringSpec({
     "당첨로또는 번호를 직접 입력해 생성한다" {
         val winningLottery = WinningLottery(Lottery(LotteryNumbers(setOf(1, 2, 3, 4, 5, 6))))
-        val numbers = winningLottery.lottery.lotteryNumbers.numbers
-
-        numbers shouldContainAll setOf(1, 2, 3, 4, 5, 6)
+        winningLottery.lottery.lotteryNumbers.numbers shouldContainAll setOf(1, 2, 3, 4, 5, 6)
     }
 
     "당첨로또 추첨은 개수별 일치하는 로또수를 반환한다" {
