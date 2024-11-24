@@ -8,5 +8,9 @@ class Lotto(lottoNumberGenerator: LottoNumberGenerator = RandomLottoNumberGenera
         const val MINIMUM_NUMBER = 1
         const val MAXIMUM_NUMBER = 45
         const val PRICE = 1_000
+
+        fun of(lottoNumbers: LottoNumbers): Lotto {
+            return Lotto { lottoNumbers }
+        }
     }
 }

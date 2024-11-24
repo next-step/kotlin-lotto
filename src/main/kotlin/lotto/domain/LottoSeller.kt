@@ -5,8 +5,13 @@ class LottoSeller(val lottoNumberGenerator: LottoNumberGenerator = RandomLottoNu
         return purchasePrice.div(Lotto.PRICE)
     }
 
-    fun sellLottos(purchasePrice: Int): Lottos {
+    fun sellLottos(
+        purchasePrice: Int,
+        selectedlottoNumbersList: List<LottoNumbers> = listOf(),
+    ): Lottos {
         val lottoMachine = LottoMachine(lottoNumberGenerator)
-        return lottoMachine.makeLottos(getLottoPurchaseCount(purchasePrice))
+        val selectedLottos = Lottos(selectedlottoNumbersList.map { Lotto.of(it) })
+        val autoLottos = lottoMachine.makeLottos(getLottoPurchaseCount(purchasePrice) - selectedLottos.lottos.size)
+        return Lottos(selectedLottos.lottos + autoLottos.lottos)
     }
 }

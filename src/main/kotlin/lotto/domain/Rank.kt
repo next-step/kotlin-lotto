@@ -18,7 +18,7 @@ enum class Rank(
             matchBonus: Boolean,
         ): Rank {
             if (matchBonus) {
-                entries.find { it.countOfMatch == countOfMatch && it.isMatchBonusNeed }
+                return entries.find { it.countOfMatch == countOfMatch && it.isMatchBonusNeed }
                     ?: entries.find { it.countOfMatch == countOfMatch } ?: MISS
             }
             return entries.filter { !it.isMatchBonusNeed }.find { it.countOfMatch == countOfMatch } ?: MISS

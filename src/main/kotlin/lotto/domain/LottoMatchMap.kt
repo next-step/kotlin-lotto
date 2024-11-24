@@ -24,7 +24,9 @@ class LottoMatchMap(val lottoMatchMap: Map<Rank, Int>) {
             bonusNumber: Int,
         ): LottoMatchMap {
             val rankList =
-                lottos.lottos.map { Rank.valueOf(winningNumbers.matchNumbers(it), it.numbers.contains(bonusNumber)) }
+                lottos.lottos.map {
+                    Rank.valueOf(winningNumbers.matchNumbers(it), it.numbers.lottoNumbers.map { it.number }.contains(bonusNumber))
+                }
             return LottoMatchMap(Rank.entries.map { Pair(it, Rank.getRankCount(it, rankList)) }.toMap())
         }
     }
