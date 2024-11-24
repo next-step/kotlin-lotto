@@ -9,6 +9,7 @@ class LottoUser(
     lottoGenerateStrategy: (() -> Set<Int>)? = null,
 ) {
     val lotteries: List<Lotto> = generateLotteries(lottoCount, lottoGenerateStrategy)
+
     val compensation: Long
         get() = lotteries.sumOf { it.compensation }
     val 수익률: BigDecimal

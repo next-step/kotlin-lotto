@@ -1,6 +1,9 @@
 package lotto.domain
 
 import io.kotest.assertions.throwables.shouldNotThrowAny
+import io.kotest.inspectors.shouldForAll
+import io.kotest.inspectors.shouldForExactly
+import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
 import lotto.domain.enums.LottoCompensationStrategy
 import org.junit.jupiter.api.Test
@@ -34,7 +37,7 @@ class LottoUserTest {
 
         lottoUser.checkLotteries(correctNumbers)
 
-        lottoUser.lotteries.forEach {
+        lottoUser.lotteries.shouldForAll {
             shouldNotThrowAny {
                 it.markedCorrectCount
             }
