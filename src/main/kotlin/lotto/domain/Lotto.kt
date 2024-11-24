@@ -11,7 +11,7 @@ class Lotto(
             lines
                 .groupBy { it.match(winner) }
                 .mapValues { (_, value) -> value.size }
-        return LottoResult(rankToCount)
+        return LottoResult.from(rankToCount)
     }
 
     companion object {
