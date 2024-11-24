@@ -61,9 +61,27 @@ class StringAddCalculatorManagerTest : DescribeSpec({
         }
 
         context("문자열에 숫자 이외의 값을 전달받은 경우") {
-            val input = "a,20,-30"
-            assertThrows<RuntimeException> {
-                sut.inputToListOrThrow(input)
+            it("RuntimeException throw") {
+                val input = "a,20,-30"
+                assertThrows<RuntimeException> {
+                    sut.inputToListOrThrow(input)
+                }
+            }
+        }
+
+        context("빈 문자열을 전달받는 경우") {
+            it("emptyList 리턴한다") {
+                val input = ""
+                val actual = sut.inputToListOrThrow(input)
+                actual.size shouldBe 0
+            }
+        }
+
+        context("null을 전달받는 경우") {
+            it("emptyList 리턴한다") {
+                val input = ""
+                val actual = sut.inputToListOrThrow(input)
+                actual.size shouldBe 0
             }
         }
     }
