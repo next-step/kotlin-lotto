@@ -1,11 +1,20 @@
 package autolotto
 
+import autolotto.configuration.AutoLottoConfiguration
+import autolotto.controller.AutoLottoController
 import autolotto.view.InputView
+import autolotto.view.OutPutView
 
-val inputView = InputView()
+private val autoLottoController: AutoLottoController =
+    AutoLottoConfiguration().autoLottoController()
+
 fun main() {
-    val amount = inputView.getLottoPurchaseAmount()
-    val gameCount = inputView.getLottoGameCount(amount)
-
-//    val winningNumbers = inputView.getWinningNumber()
+    val amount = InputView.getLottoPurchaseAmount()
+    InputView.printLottoGameCount(amount)
+    val gameCount = InputView.getLottoGameCount(amount)
+    val createLottoInfo = autoLottoController.start(gameCount)
+    OutPutView.printLottoInfo(createLottoInfo)
+    val winnerNumbers = InputView.getWinningNumber()
+    val lottoWinnerResult = autoLottoController.getWinnerInfo(winnerNumbers)
+    OutPutView.printLottoResults(lottoWinnerResult, amount)
 }
