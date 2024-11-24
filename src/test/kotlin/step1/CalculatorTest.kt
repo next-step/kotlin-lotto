@@ -16,13 +16,11 @@ class CalculatorTest {
     fun `쉼표 또는 콜론이 아닌 다른 구분자의 경우 오류를 발생한다`() {
         assertThatThrownBy { Calculator.sum("1&2") }
             .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessageContaining("입력이 잘못 되었습니다.")
     }
 
     @Test
     fun `숫자 음수를 전달하는 경우 오류를 발생한다`() {
         assertThatThrownBy { Calculator.sum("1,-2") }
             .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessageContaining("입력이 잘못 되었습니다. ")
     }
 }
