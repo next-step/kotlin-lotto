@@ -2,6 +2,15 @@
 
 ## STEP 2
 
+### 셀프 피드백
+
+- backing field / property 에 대해 알아
+- Kotest Testing Styles 다뤄보기
+  - [x] StringSpec
+  - [ ] FunSpec
+  - [x] BehaviorSpec
+  - [ ] DescribeSpec
+
 ### 기능 구현 사항
 
 - [x] 구입 금액을 받아 로또를 발행(Issuer)하는 객체를 생성한다
