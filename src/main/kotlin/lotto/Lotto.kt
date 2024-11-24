@@ -3,7 +3,7 @@ package lotto
 import lotto.number.Numbers
 import lotto.rank.LottoRank
 
-class Lotto(
+data class Lotto(
     val numbers: Numbers =
         Numbers(
             RANGE

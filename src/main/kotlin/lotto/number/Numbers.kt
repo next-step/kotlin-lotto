@@ -1,5 +1,5 @@
 package lotto.number
 
-class Numbers(
+data class Numbers(
     val numbers: List<Int>,
 )
