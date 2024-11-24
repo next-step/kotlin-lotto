@@ -14,6 +14,6 @@ class ProfitTest {
 
     @Test
     fun `당첨금액과 구매급액으로 수익률을 계산한다`() {
-        profit.yield() shouldBe 0.35
+        profit.calculateYield() shouldBe 0.35
     }
 }
