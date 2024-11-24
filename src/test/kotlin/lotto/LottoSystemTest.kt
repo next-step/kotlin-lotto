@@ -20,7 +20,7 @@ class LottoSystemTest : StringSpec({
 
         val winNumbers = lottoSystem.createWinNumbers(setOf(1, 2, 3, 4, 5, 6))
 
-        winNumbers shouldBe WinNumbers(FixedNumberGenerator().generate())
+        winNumbers shouldBe Lotto(FixedNumberGenerator().generate())
     }
 
     "당첨 통계 결과를 제공해야 한다." {

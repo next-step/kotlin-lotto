@@ -2,7 +2,7 @@ package lotto
 
 class WinningResult(
     order: Order,
-    winNumbers: WinNumbers,
+    winNumbers: Lotto,
 ) {
     val winningMatchCounts: List<RankResult>
     val revenue: Int
@@ -21,7 +21,7 @@ class WinningResult(
     // 3 ~ 6 순서로 정렬된 List를 반환한다.
     private fun createRankResults(
         order: Order,
-        winNumbers: WinNumbers,
+        winNumbers: Lotto,
     ): List<RankResult> {
         val result = groupByRanks(order, winNumbers)
         return RANK_RANGE.map { rank ->
@@ -35,7 +35,7 @@ class WinningResult(
 
     private fun groupByRanks(
         order: Order,
-        winNumbers: WinNumbers,
+        winNumbers: Lotto,
     ): Map<Int, Int> {
         return order.lottos.map { winNumbers.countMatchingNumbers(it.numbers) }
             .filter { it >= RANK_RANGE.first }

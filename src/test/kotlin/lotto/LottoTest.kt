@@ -26,4 +26,13 @@ class LottoTest : StringSpec({
             shouldThrow<IllegalArgumentException> { Lotto(setOf(0, 2, 3, 4, 5, 6)) }
         }
     }
+
+    "당첨 번호는 전달받은 로또 중 몇개의 값이 일치하는지 계산할 수 있다." {
+        val winNumbers = Lotto(setOf(1, 2, 3, 4, 5, 6))
+        val lotto = Lotto(setOf(1, 2, 7, 8, 9, 10))
+
+        val result = winNumbers.countMatchingNumbers(lotto.numbers)
+
+        result shouldBe 2
+    }
 })

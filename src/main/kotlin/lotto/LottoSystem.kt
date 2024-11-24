@@ -1,17 +1,17 @@
 package lotto
 
-class LottoSystem(private val numberGenerator: NumberGenerator = LottoNumberGenerator()) {
+class LottoSystem(private val numberGenerator: NumberGenerator = RandomNumberGenerator()) {
     fun createOrder(amount: Int): Order {
         return Order(amount, numberGenerator)
     }
 
-    fun createWinNumbers(winningNumbers: Set<Int>): WinNumbers {
-        return WinNumbers(winningNumbers)
+    fun createWinNumbers(winningNumbers: Set<Int>): Lotto {
+        return Lotto(winningNumbers)
     }
 
     fun createWinningResult(
         order: Order,
-        winNumbers: WinNumbers,
+        winNumbers: Lotto,
     ): WinningResult {
         return WinningResult(order, winNumbers)
     }
