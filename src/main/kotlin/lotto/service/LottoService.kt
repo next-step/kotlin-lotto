@@ -5,6 +5,7 @@ import lotto.domain.LottoGenerator
 import lotto.domain.LottoPurchaseCount
 import lotto.domain.LottoResults
 import lotto.domain.Number
+import lotto.domain.WinningLotto
 import lotto.view.dto.LottoRankDto
 import lotto.view.dto.LottoResultsDto
 import lotto.view.dto.WinningLottoDto
@@ -26,8 +27,8 @@ class LottoService(
         bonusBall: Int,
     ): LottoResultsDto {
         val lottos = lottosDto.lottos.map { Lotto(it.numbers.map { value -> Number(value) }) }
-        val winningLotto = Lotto(winningLottoDto.numbers.map { Number(it) })
-        val lottoRankCountMap = lottos.map { it.match(winningLotto, Number(bonusBall)) }.groupingBy { it }.eachCount()
+        val winningLotto = WinningLotto(Lotto(winningLottoDto.numbers.map { Number(it) }), Number(bonusBall))
+        val lottoRankCountMap = lottos.map { it.match(winningLotto) }.groupingBy { it }.eachCount()
         val lottoResults = LottoResults.from(lottoRankCountMap)
         val winResults = lottoResults.filterWinResults()
 
