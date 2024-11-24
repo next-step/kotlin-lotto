@@ -4,9 +4,8 @@ class LottoTicket {
     val lottoNumbers: List<Int>
 
     constructor() {
-        this.lottoNumbers = (1..45).shuffled()
-            .take(6)
-            .sorted()
+        this.lottoNumbers =
+            (1..45).shuffled().take(6).sorted()
     }
 
     constructor(numbers: List<Int>) {

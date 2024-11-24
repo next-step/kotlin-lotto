@@ -1,9 +1,8 @@
 package lotto.domain
 
 class BonusNumber(val number: Int = 1) {
-    fun isBonusNumber(bonusNumber: Int): Boolean {
-        require(bonusNumber in 1..45) { INPUT_BONUS_NUMBER_EXCEPTION_MESSAGE }
-        return true
+    init {
+        require(number in 1..45) { INPUT_BONUS_NUMBER_EXCEPTION_MESSAGE }
     }
 
     companion object {

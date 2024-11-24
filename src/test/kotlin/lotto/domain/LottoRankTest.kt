@@ -15,16 +15,23 @@ class LottoRankTest : StringSpec({
         var matchingTicket: LottoTicket? = null
         while (matchingTicket == null) {
             val lottoTickets = List(15000) { LottoTicket() }
-            matchingTicket = lottoTickets.firstOrNull { ticket ->
-                ticket.matchCount(winningNumbers) == matchCount &&
-                        (expectedRank != LottoRank.SECOND || ticket.hasBonusNumber(bonusNumber))
-            }
+            matchingTicket =
+                lottoTickets.firstOrNull { ticket ->
+                    when (expectedRank) {
+                        LottoRank.SECOND -> ticket.matchCount(winningNumbers) == matchCount &&
+                                ticket.hasBonusNumber(bonusNumber)
+                        LottoRank.THIRD -> ticket.matchCount(winningNumbers) == matchCount &&
+                                !ticket.hasBonusNumber(bonusNumber)
+                        else -> ticket.matchCount(winningNumbers) == matchCount
+                    }
+                }
         }
 
-        val rank = LottoRank.from(
-            matchingTicket!!.matchCount(winningNumbers),
-            matchingTicket!!.hasBonusNumber(bonusNumber)
-        )
+        val rank =
+            LottoRank.from(
+                matchingTicket!!.matchCount(winningNumbers),
+                matchingTicket!!.hasBonusNumber(bonusNumber),
+            )
 
         rank shouldBe expectedRank
         rank.prize shouldBe expectedPrize
