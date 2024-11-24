@@ -7,5 +7,5 @@ class WinningStatistics(
     val ranks: List<LottoRank>,
 ) {
     constructor(purchasedLottos: Lottos, winningNumber: WinningNumber) :
-        this(purchasedLottos.lottos.map { it.getRank(winningNumber) })
+        this(purchasedLottos.lottos.map { LottoRank.getRank(it, winningNumber) })
 }

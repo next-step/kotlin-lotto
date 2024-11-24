@@ -1,8 +1,6 @@
 package lotto
 
 import lotto.number.Numbers
-import lotto.rank.LottoRank
-import lotto.statistics.WinningNumber
 
 data class Lotto(
     val numbers: Numbers =
@@ -13,8 +11,6 @@ data class Lotto(
                 .sorted(),
         ),
 ) {
-    fun getRank(winningNumbers: WinningNumber): LottoRank = LottoRank.getRank(lotto = this, winningNumber = winningNumbers)
-
     companion object {
         private const val COUNT = 6
         private const val MIN_NUMBER = 1

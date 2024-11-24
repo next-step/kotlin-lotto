@@ -7,6 +7,8 @@ import lotto.number.Numbers
 import lotto.statistics.WinningNumber
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
 
 class LottoRankTest {
     private lateinit var winningNumber: WinningNumber
@@ -24,31 +26,56 @@ class LottoRankTest {
         ) shouldBe LottoRank.FIRST
     }
 
-    @Test
-    fun `번호가 2개 이하로 일치하면 아무것도 해당하지 않는다`() {
+    @ParameterizedTest
+    @MethodSource("noneLottos")
+    fun `번호가 2개 이하로 일치하면 아무것도 해당하지 않는다`(lotto: Lotto) {
         LottoRank.getRank(
-            lotto = Lotto(Numbers(listOf(1, 2, 0, 0, 0, 0))),
+            lotto = lotto,
             winningNumber = winningNumber,
         ) shouldBe LottoRank.NONE
     }
 
-    @Test
-    fun `번호 5개가 일치하고 보너스 번호가 일치하면 2등`() {
+    @ParameterizedTest
+    @MethodSource("secondLottos")
+    fun `번호 5개가 일치하고 보너스 번호가 일치하면 2등`(lotto: Lotto) {
         LottoRank.getRank(
-            lotto = Lotto(Numbers(listOf(1, 2, 3, 4, 5, BONUS_NUMBER))),
+            lotto = lotto,
             winningNumber = winningNumber,
         ) shouldBe LottoRank.SECOND
     }
 
-    @Test
-    fun `번호 5개가 일치하지만 보너스 번호가 일치하지 않으면 3등`() {
+    @ParameterizedTest
+    @MethodSource("thirdLottos")
+    fun `번호 5개가 일치하지만 보너스 번호가 일치하지 않으면 3등`(lotto: Lotto) {
         LottoRank.getRank(
-            lotto = Lotto(Numbers(listOf(1, 2, 3, 4, 5, 0))),
+            lotto = lotto,
             winningNumber = winningNumber,
         ) shouldBe LottoRank.THIRD
     }
 
     companion object {
+        @JvmStatic
+        private fun noneLottos() =
+            listOf(
+                Lotto(numbers = Numbers(listOf(1, 2, 0, 0, 0, 0))),
+                Lotto(numbers = Numbers(listOf(3, 4, 0, 0, 0, 0))),
+                Lotto(numbers = Numbers(listOf(5, 6, 0, 0, 0, 0))),
+            )
+
+        @JvmStatic
+        private fun secondLottos() =
+            listOf(
+                Lotto(numbers = Numbers(listOf(1, 2, 3, 4, 5, BONUS_NUMBER))),
+                Lotto(numbers = Numbers(listOf(2, 3, 4, 5, 6, BONUS_NUMBER))),
+            )
+
+        @JvmStatic
+        private fun thirdLottos() =
+            listOf(
+                Lotto(numbers = Numbers(listOf(1, 2, 3, 4, 5, 0))),
+                Lotto(numbers = Numbers(listOf(2, 3, 4, 5, 6, 0))),
+            )
+
         private const val BONUS_NUMBER = 7
         private val WINNING_NUMBERS = listOf(1, 2, 3, 4, 5, 6)
     }
