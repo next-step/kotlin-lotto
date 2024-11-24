@@ -1,24 +1,32 @@
 package lotto.view
 
-import WinningLotto
-import lotto.domain.LottoNumber
+class InputView {
+    companion object {
+        fun getMoney(): Int {
+            println("구입 금액을 입력해주세요.")
+            return readln().toInt()
+        }
 
-object InputView {
-    fun getPurchaseAmount(): Int {
-        println("구입금액을 입력해 주세요.")
-        return readln().toInt()
-    }
+        fun getManualLottoCount(): Int {
+            println("수동으로 구매할 로또 수를 입력해주세요.")
+            return readln().toInt()
+        }
 
-    fun getWinningNumbers(): WinningLotto {
-        println("지난 주 당첨 번호를 입력해 주세요.")
-        val numbers = readln().split(",").map { it.toInt() }
+        fun getManualNumbers(manualLottoCount: Int): List<Set<Int>> {
+            println("수동으로 구매할 번호를 입력해주세요.")
+            return (1..manualLottoCount).map {
+                readln().split(",").map { it.toInt() }.toSet()
+            }
+        }
 
-        println("보너스 볼을 입력해 주세요.")
-        val bonusNumber = readln().toInt()
+        fun getWinningLottoNumbers(): Set<Int> {
+            println("지난 주 당첨 번호를 입력해주세요.")
+            return readln().split(",").map { it.toInt() }.toSet()
+        }
 
-        return WinningLotto(
-            lottoNumbers = numbers.map { LottoNumber.of(it) },
-            bonusNumber = LottoNumber.of(bonusNumber),
-        )
+        fun getBonusNumber(): Int {
+            println("보너스 볼을 입력해주세요.")
+            return readln().toInt()
+        }
     }
 }
