@@ -31,7 +31,7 @@ class FormulaParserTest : FunSpec({
             }
         }
         test("커스텀 구분자") {
-            listOf("//$\n1$%2$3$4", "//%\n1&45%2", "//+\n1++65+77").forAll { formula ->
+            listOf("//$\\n1$%2$3$4", "//%\\n1&45%2", "//+\\n1++65+77").forAll { formula ->
                 shouldThrow<NotNumberFormatException> {
                     FormulaParser.toNumbers(
                         CustomSeparatorParser(formula),
@@ -67,7 +67,7 @@ class FormulaParserTest : FunSpec({
             }
         }
         test("커스텀 구분자") {
-            listOf("//$\n1$-2$3$4", "//%\n1%-45%2", "//+\n1+65+-77").forAll { formula ->
+            listOf("//$\\n1$-2$3$4", "//%\\n1%-45%2", "//+\\n1+65+-77").forAll { formula ->
                 shouldThrow<NegativeNumberException> {
                     FormulaParser.toNumbers(
                         CustomSeparatorParser(formula),
