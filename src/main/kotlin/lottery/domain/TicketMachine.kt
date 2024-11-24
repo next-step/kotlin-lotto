@@ -1,11 +1,13 @@
 package lottery.domain
 
 object TicketMachine {
-    fun exchange(money: Money): List<Ticket> {
-        require(money.amount >= 1000) { "금액은 1000원 이상이어야 합니다" }
-        require(money.amount % 1000 == 0) { "금액은 1000원 단위여야 합니다" }
+    private const val LOTTERY_TICKET_PRICE = 1000
 
-        val ticketCount = money.amount / 1000
+    fun exchange(money: Money): List<Ticket> {
+        require(money.amount >= LOTTERY_TICKET_PRICE) { "금액은 $LOTTERY_TICKET_PRICE 원 이상이어야 합니다" }
+        require(money.amount % LOTTERY_TICKET_PRICE == 0) { "금액은 $LOTTERY_TICKET_PRICE 단위여야 합니다" }
+
+        val ticketCount = money.amount / LOTTERY_TICKET_PRICE
         return List(ticketCount) { Ticket() }
     }
 }

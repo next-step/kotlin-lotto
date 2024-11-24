@@ -12,4 +12,22 @@ class DrawResult(private val rankRewardLotteryCountMap: Map<RankReward, LotteryC
     fun findLotteryCount(rankReward: RankReward): LotteryCount {
         return rankRewardLotteryCountMap[rankReward] ?: LotteryCount(0)
     }
+
+    companion object {
+        fun from(
+            winningLottery: WinningLottery,
+            lotteries: List<Lottery>,
+        ): DrawResult {
+            val rankRewardLotteryCountMap =
+                lotteries
+                    .mapNotNull { lottery ->
+                        val matchedNumberCount = winningLottery.lottery.countMatchedNumber(lottery)
+                        RankReward.fromMatchedNumberCount(matchedNumberCount)
+                    }
+                    .groupingBy { it }
+                    .eachCount()
+                    .mapValues { LotteryCount(it.value) }
+            return DrawResult(rankRewardLotteryCountMap)
+        }
+    }
 }
