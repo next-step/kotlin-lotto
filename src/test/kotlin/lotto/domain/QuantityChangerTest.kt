@@ -10,7 +10,7 @@ class QuantityChangerTest {
     @MethodSource("provide")
     fun `금액에 따라 맞는 수량을 반환해야 한다`(input: Pair<Int, Int>) {
         // given
-        val changer = QuantityChanger()
+        val changer: QuantityChanger = QuantityChangerImpl()
 
         // when
         val result = changer.change(input.first)

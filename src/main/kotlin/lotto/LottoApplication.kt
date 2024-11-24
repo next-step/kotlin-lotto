@@ -3,14 +3,14 @@ package lotto
 import lotto.domain.LotteryStatistician
 import lotto.domain.LottoGeneratorImpl
 import lotto.domain.LottoSeller
-import lotto.domain.QuantityChanger
+import lotto.domain.QuantityChangerImpl
 import lotto.view.InputView
 import lotto.view.ResultView
 
 class LottoApplication {
 
     private val lottoSeller = LottoSeller(
-        quantityChanger = QuantityChanger(),
+        quantityChanger = QuantityChangerImpl(),
         lottoGenerator = LottoGeneratorImpl(),
     )
 
