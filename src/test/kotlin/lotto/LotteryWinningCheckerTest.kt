@@ -19,9 +19,9 @@ class LotteryWinningCheckerTest : StringSpec({
 
         forAll(
             row(LottoTicket(numbers = listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber)), WinningResult.FIRST),
-            row(LottoTicket(numbers = listOf(2, 3, 4, 5, 6, 7).map(::LottoNumber)), WinningResult.SECOND),
-            row(LottoTicket(numbers = listOf(3, 4, 5, 6, 7, 8).map(::LottoNumber)), WinningResult.THIRD),
-            row(LottoTicket(numbers = listOf(4, 5, 6, 7, 8, 9).map(::LottoNumber)), WinningResult.FOURTH),
+            row(LottoTicket(numbers = listOf(2, 3, 4, 5, 6, 7).map(::LottoNumber)), WinningResult.THIRD),
+            row(LottoTicket(numbers = listOf(3, 4, 5, 6, 7, 8).map(::LottoNumber)), WinningResult.FOURTH),
+            row(LottoTicket(numbers = listOf(4, 5, 6, 7, 8, 9).map(::LottoNumber)), WinningResult.FIFTH),
             row(LottoTicket(numbers = listOf(5, 6, 7, 8, 9, 10).map(::LottoNumber)), WinningResult.LOSE),
             row(LottoTicket(numbers = listOf(6, 7, 8, 9, 10, 11).map(::LottoNumber)), WinningResult.LOSE),
             row(LottoTicket(numbers = listOf(7, 8, 9, 10, 11, 12).map(::LottoNumber)), WinningResult.LOSE),

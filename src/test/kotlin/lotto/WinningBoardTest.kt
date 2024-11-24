@@ -47,7 +47,7 @@ class WinningBoardTest : StringSpec({
     }
 
     "당첨 보드는 총 티켓 구매 비용을 받아 당첨 결과들과 비교하여 소수점 둘째 이하를 버린 수익률을 계산한다" {
-        val fourthResults = listOf(WinningResult.FOURTH)
+        val fourthResults = listOf(WinningResult.FIFTH)
         val loseResults = List(13) { WinningResult.LOSE }
         val winningResults = fourthResults + loseResults
         val sut = WinningBoard(winningResults = winningResults)

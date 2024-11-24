@@ -11,12 +11,26 @@ class WinningResultTest : StringSpec({
             row(0, WinningResult.LOSE),
             row(1, WinningResult.LOSE),
             row(2, WinningResult.LOSE),
-            row(3, WinningResult.FOURTH),
-            row(4, WinningResult.THIRD),
-            row(5, WinningResult.SECOND),
+            row(3, WinningResult.FIFTH),
+            row(4, WinningResult.FOURTH),
+            row(5, WinningResult.THIRD),
             row(6, WinningResult.FIRST),
         ) { countOfMatch, expectedResult ->
             WinningResult.valueOf(countOfMatch) shouldBe expectedResult
+        }
+    }
+
+    "일치하는 로또 번호 숫자와 matchBonus 가 true 일 때를 포함하여 당쳠 겱과를 찾을 수 있다." {
+        forAll(
+            row(0, WinningResult.LOSE),
+            row(1, WinningResult.LOSE),
+            row(2, WinningResult.LOSE),
+            row(3, WinningResult.FIFTH),
+            row(4, WinningResult.FOURTH),
+            row(5, WinningResult.SECOND),
+            row(6, WinningResult.FIRST),
+        ) { countOfMatch, expectedResult ->
+            WinningResult.valueOf(countOfMatch = countOfMatch, matchBonus = true) shouldBe expectedResult
         }
     }
 })
