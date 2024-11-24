@@ -1,7 +1,6 @@
 package lotto
 
 data class LottoNumbers(val numbers: List<LottoNumber>) {
-
     fun countMatch(winningLotto: LottoNumbers): Int {
         return this.numbers.count { it in winningLotto.numbers }
     }

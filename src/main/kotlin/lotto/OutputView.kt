@@ -8,7 +8,7 @@ object OutputView {
 
     fun printLotto(userLotto: List<LottoNumbers>) {
         println("${userLotto.size}개를 구매했습니다.")
-        userLotto.forEach { println("[${it}]") }.also { println() }
+        userLotto.forEach { println("[${ it }]") }.also { println() }
     }
 
     fun printResult(result: List<LottoResult>) {

@@ -11,7 +11,7 @@ object InputView {
         return get().split(", ").map { it.toInt() }
     }
 
-    private fun get() : String {
+    private fun get(): String {
         return readln()
     }
 }
