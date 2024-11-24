@@ -12,7 +12,9 @@ object ResultView {
 
     fun printLotto(lotto: Lotto) {
         val sb = StringBuilder()
-        lotto.lines.forEach { sb.append(formatLine(it)) }
+        sb.append("${lotto.numberOfLines}개를 구먀했습니다.$NEWLINE")
+        lotto.lines
+            .forEach { sb.append(formatLine(it)) }
         println(sb.toString())
     }
 
@@ -29,23 +31,33 @@ object ResultView {
         result: LottoResult,
         payment: Payment,
     ) {
-        println("\n당첨 통계\n---------")
-        Rank.entries.reversed().forEach { printResultByRank(it, result.get(it)) }
-        printReturnOnInvestment(result.returnOnInvestment(payment))
+        val sb = StringBuilder()
+        sb.append("${NEWLINE}당첨 통계$NEWLINE---------$NEWLINE")
+
+        val ranksSortedByPrize =
+            Rank.entries
+                .sortedBy { it.prize }
+        ranksSortedByPrize
+            .forEach { sb.append(formatResultByRank(it, result.get(it))) }
+
+        val roi = result.returnOnInvestment(payment)
+        sb.append(formatReturnOnInvestment(roi))
+
+        println(sb.toString())
     }
 
-    private fun printResultByRank(
+    private fun formatResultByRank(
         rank: Rank,
         count: Int,
-    ) {
+    ): String {
         if (rank == Rank.MISS) {
-            return
+            return ""
         }
-        println("${rank.count}개 일치 (${rank.prize}원)- ${count}개")
+        return "${rank.count}개 일치 (${rank.prize}원)- ${count}개$NEWLINE"
     }
 
-    private fun printReturnOnInvestment(roi: Double) {
+    private fun formatReturnOnInvestment(roi: Double): String {
         val formattedRoi = "%.2f".format(roi)
-        println("총 수익률은 ${formattedRoi}입니다.(기준이 1이기 때문에 결과적으로 ${if (roi > 1.0) "수익이" else "손해"}라는 의미임)")
+        return "총 수익률은 ${formattedRoi}입니다.(기준이 1이기 때문에 결과적으로 ${if (roi > 1.0) "수익이" else "손해"}라는 의미임)"
     }
 }
