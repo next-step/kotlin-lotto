@@ -4,7 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
-class LottoTicketTest : StringSpec({
+class LottoRankTest : StringSpec({
     fun verifyLottoRank(
         matchCount: Int,
         expectedRank: LottoRank,
