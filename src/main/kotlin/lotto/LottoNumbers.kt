@@ -17,5 +17,9 @@ class LottoNumbers(val numbers: List<LottoNumber>) {
             }
             return numbers
         }
+
+        fun created(numbers: List<Int>): LottoNumbers {
+            return LottoNumbers(numbers.map { LottoNumber(it) })
+        }
     }
 }
