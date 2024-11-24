@@ -19,7 +19,7 @@ class LottoServiceTest : StringSpec({
 
         val totalPrize =
             lottoTickets.sumOf { ticket ->
-                LottoRank.from(ticket.matchCount(winningNumbers)).prize
+                LottoRank.from(ticket.matchCount(winningNumbers), false).prize
             }
 
         val profitRate = lottoPurchasingMachineService.calculateProfitRate(totalPrize)

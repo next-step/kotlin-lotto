@@ -12,6 +12,10 @@ class LottoService(
         return (1..lottoPurchasingMachine.buyCount()).map { LottoTicket() }
     }
 
+    fun isBonusNumber(bonusNumber: Int): Boolean {
+        return bonusNumber in 1..45
+    }
+
     fun calculateProfitRate(totalPrize: Int): BigDecimal {
         return totalPrize.toBigDecimal()
             .divide(lottoPurchasingMachine.money.toBigDecimal(), 2, RoundingMode.DOWN)

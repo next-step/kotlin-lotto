@@ -18,6 +18,10 @@ class LottoTicket {
         return lottoNumbers.intersect(winningNumbers.toSet()).size
     }
 
+    fun hasBonusNumber(bonusNumber: BonusNumber): Boolean {
+        return lottoNumbers.contains(bonusNumber.number)
+    }
+
     companion object {
         private const val LOTTO_NUMBER_SIZE_EXCEPTION_MESSAGE = "로또 번호는 6개여야 합니다."
         private const val LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE = "로또 번호는 1부터 45까지만 가능합니다."
