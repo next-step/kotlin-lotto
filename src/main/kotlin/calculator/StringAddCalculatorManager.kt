@@ -4,6 +4,11 @@ import calculator.util.deleteCustomDelimiter
 import calculator.util.getCustomDelimiter
 
 class StringAddCalculatorManager {
+    fun start(input: String?): Int {
+        val parsedNumbers = inputToListOrThrow(input)
+        return StringAddCalculator(parsedNumbers).calculate()
+    }
+
     fun inputToListOrThrow(input: String?): List<Int> {
         if (input.isNullOrBlank()) return emptyList()
         val parsedNumbers = split(input)
