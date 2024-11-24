@@ -16,10 +16,10 @@ class DrawResult(private val rankRewardLotteryCountMap: Map<RankReward, LotteryC
     companion object {
         fun from(
             winningLottery: WinningLottery,
-            lotteries: List<Lottery>,
+            purchaseLotteries: List<Lottery>,
         ): DrawResult {
             val rankRewardLotteryCountMap =
-                lotteries
+                purchaseLotteries
                     .mapNotNull { lottery ->
                         val matchedNumberCount = winningLottery.lottery.countMatchedNumber(lottery)
                         RankReward.fromMatchedNumberCount(matchedNumberCount)

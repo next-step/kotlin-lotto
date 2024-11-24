@@ -1,5 +1,6 @@
 package lottery.controller
 
+import lottery.domain.DrawResult
 import lottery.domain.LotteryMachine
 import lottery.domain.Money
 import lottery.domain.TicketMachine
@@ -15,9 +16,10 @@ fun main() {
     val tickets = TicketMachine.exchange(purchaseAmount)
     printTicketCount(tickets)
 
-    val lotteries = LotteryMachine.buy(tickets)
-    printLotteries(lotteries)
+    val purchaseLotteries = LotteryMachine.purchase(tickets)
+    printLotteries(purchaseLotteries)
 
     val winningLottery = WinningLottery.create(inputWinningLotteryNumbers())
-    printStatistic(purchaseAmount, winningLottery.draw(lotteries))
+    val drawResult = DrawResult.from(winningLottery, purchaseLotteries)
+    printStatistic(purchaseAmount, drawResult)
 }
