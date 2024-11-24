@@ -1,4 +1,4 @@
-package study
+package calculate
 
 object StringAddCalculator {
     private val DEFAULT_DELIMITERS = Regex("[,:]")

@@ -1,4 +1,4 @@
-package study
+package calculate
 
 data class PositiveNumber(val value: Int) {
     init {

@@ -29,3 +29,57 @@
 - [X] 커스텀 구분자를 사용할 수 있다.
 - [X] 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw 한다.
     
+## 1차 피드백
+- [X] main 함수 만들기
+- [X] 패키지 명 적절하게 변경
+- 행동이 아닌 객체가 무엇인지 그 자체의 존재 이유를 명확하게 알 수 있도록 클래스명 만들도록 노력하기
+
+---
+
+# 2단계 - 로또(자동)
+
+## 기능 요구사항
+- 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
+- 로또 1장의 가격은 1000원이다.
+
+## 요구사항 정리
+- 입력값
+  - 로또 구입 금액
+    - 숫자만 가능
+  - 지난주 당첨 금액
+    - `,` 로 구분
+- 로또
+  - 1장의 가격은 1000원
+- 로또 구입
+  - 구입 금액에 해당하는 로또를 발급한다.
+- 통계
+  - 3,4,5,6개 일치 통계
+  - 수익률 계산
+    - 수익률 = (당첨금액 - 로또 구입 금액) / 로또 구입 금액 * 100
+
+## 기능 구현
+- [X] 금액
+  - [X] 숫자를 받는다
+  - [X] 음수 불가
+  - [X] 숫자를 받는다
+  - [X] 나누기 가능
+- [X] Lotto
+  - [X] LottoNumber 6개 가짐
+  - [X] LottoNumber 중복 불가
+  - [X] 일치갯수 알 수 있다
+  - [X] 1-45 사이의 숫자 객체
+- [X] Lottos
+  - [X] Lotto 여러개 가짐
+  - [X] Rank를 알 수 있다
+- [X] Rank
+  - [X] 3,4,5,6개 일치 통계
+  - [X] 수익률 계산
+
+### 2차 피드백
+- [operator overloading](https://kotlinlang.org/docs/operator-overloading.html) 적용하기
+- [https://kotlinworld.com/420](object의 초기화 시점)
+- [https://kotlinworld.com/421](data class)
+- 객체지향에 대해 고민하기 
+- [Initializer functions for lists](https://kotlinlang.org/docs/constructing-collections.html#initializer-functions-for-lists)
+- [functional interface](https://kotlinlang.org/docs/fun-interfaces.html)
+
