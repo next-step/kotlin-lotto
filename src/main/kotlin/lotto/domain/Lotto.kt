@@ -4,6 +4,10 @@ class Lotto private constructor(
     val pickNumbers: List<Int>,
     matchCount: Int,
 ) {
+    init {
+        require(pickNumbers.distinct().size == 6) { "로또 번호는 6개여야 합니다. [pickNumbers=${this.pickNumbers}]" }
+    }
+
     var matchCount: Int = matchCount
         private set
 

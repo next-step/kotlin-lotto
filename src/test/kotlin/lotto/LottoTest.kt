@@ -1,5 +1,6 @@
 package lotto
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.Lotto
@@ -15,6 +16,16 @@ class LottoTest : FunSpec({
         // then
         result.pickNumbers.distinct().size shouldBe 6
         result.matchCount shouldBe 0
+    }
+
+    test("로또를 생성할 때 중복된 번호가 있으면 IllegalArgumentException이 발생한다.") {
+        // given
+        val givenPickNumbers = listOf(1, 1, 2, 3, 4, 5)
+
+        // when & then
+        shouldThrow<IllegalArgumentException> {
+            Lotto.of(givenPickNumbers)
+        }
     }
 
     test("updateMatchCount를 호출하면 matchCount가 변경된다.") {
