@@ -13,7 +13,7 @@ class LottoMachineTest {
         val lottoMachine = LottoMachine(lottoNumberGenerator)
         val lottos = lottoMachine.makeLottos(4)
         repeat(4) {
-            assertThat(lottos[it].numbers).containsExactly(1, 2, 3, 4, 7)
+            assertThat(lottos.lottos[it].numbers).containsExactly(1, 2, 3, 4, 7)
         }
     }
 }

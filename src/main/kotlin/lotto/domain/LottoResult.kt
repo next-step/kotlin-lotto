@@ -1,27 +1,43 @@
 package lotto.domain
 
-import lotto.domain.Lotto.Companion.NUMBER_OF_NUMBER
-
 class LottoResult(
-    val lottos: List<Lotto>,
-    val lottoResultMap: Map<Int, Int>,
+    val lottos: Lottos,
+    val lottoMatchMap: LottoMatchMap,
     val profitRate: Double,
 ) {
     companion object {
-        fun getResultMap(
-            lottos: List<Lotto>,
+        fun getLottoResult(
+            lottos: Lottos,
             winningNumbers: WinningNumbers,
-        ): Map<Int, Int> {
-            val matchCounts = lottos.map { winningNumbers.matchNumbers(it) }
-            val pairs = List(NUMBER_OF_NUMBER + 1) { it }.map { Pair(it, getNumberCount(matchCounts, it)) }
-            return pairs.map { it.first to it.second }.toMap()
+            bonusNumber: Int,
+            purchasePrice: Int,
+        ): LottoResult {
+            val lottoMatchMap = getLottoMatchMap(lottos, winningNumbers, bonusNumber)
+            val profit = getProfit(lottoMatchMap)
+            val profitRate = getProfitRate(profit, purchasePrice)
+
+            return LottoResult(lottos, lottoMatchMap, profitRate)
         }
 
-        private fun getNumberCount(
-            numbers: List<Int>,
-            matchNumber: Int,
-        ): Int {
-            return numbers.filter { it == matchNumber }.size
+        fun getLottoMatchMap(
+            lottos: Lottos,
+            winningNumbers: WinningNumbers,
+            bonusNumber: Int,
+        ): LottoMatchMap {
+            val rankList =
+                lottos.lottos.map { Rank.valueOf(winningNumbers.matchNumbers(it), it.numbers.contains(bonusNumber)) }
+            return LottoMatchMap(Rank.entries.map { Pair(it, Rank.getRankCount(it, rankList)) }.toMap())
+        }
+
+        fun getProfit(lottoMatchMap: LottoMatchMap): Int {
+            return lottoMatchMap.lottoMatchMap.map { it.key.winningMoney.times(it.value) }.sum()
+        }
+
+        fun getProfitRate(
+            profit: Int,
+            purchasePrice: Int,
+        ): Double {
+            return profit.toDouble().div(purchasePrice)
         }
     }
 }

@@ -14,6 +14,6 @@ class LottoNumberMatcherTest {
             LottoNumberGenerator { listOf(1, 2, 3, 4, 7) }
         val lottoMachine = LottoMachine(lottoNumberGenerator)
         val lottos = lottoMachine.makeLottos(1)
-        assertThat(lottos.map { winningNumbers.matchNumbers(it) }).containsExactly(4)
+        assertThat(lottos.lottos.map { winningNumbers.matchNumbers(it) }).containsExactly(4)
     }
 }
