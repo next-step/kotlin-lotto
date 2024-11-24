@@ -5,19 +5,19 @@ data class LottoResult(
     val incomeRate: IncomeRate,
 ) {
     val first: Int
-        get() = results.first
+        get() = results.countByResult(Result.FIRST)
 
     val second: Int
-        get() = results.second
+        get() = results.countByResult(Result.SECOND)
 
     val third: Int
-        get() = results.third
+        get() = results.countByResult(Result.THIRD)
 
     val fourth: Int
-        get() = results.fourth
+        get() = results.countByResult(Result.FOURTH)
 
     val miss: Int
-        get() = results.miss
+        get() = results.countByResult(Result.MISS)
 
     val totalWinningCount: Int
         get() = first + second + third + fourth

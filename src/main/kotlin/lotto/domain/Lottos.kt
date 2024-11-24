@@ -5,5 +5,8 @@ data class Lottos(
 ) {
     val quantity: Int = lottos.size
 
-    fun match(winningNumbers: Set<LottoNumber>): Results = Results(lottos.map { Result.of(it.match(winningNumbers)) })
+    fun match(winningLotto: Lotto): Results {
+        val results = lottos.map { Result.of(it.compare(winningLotto)) }
+        return Results(results)
+    }
 }

@@ -3,21 +3,20 @@ package lotto.domain
 data class Results(
     private val results: List<Result>,
 ) {
-    val first: Int
-        get() = results.count { it == Result.FIRST }
-
-    val second: Int
-        get() = results.count { it == Result.SECOND }
-
-    val third: Int
-        get() = results.count { it == Result.THIRD }
-
-    val fourth: Int
-        get() = results.count { it == Result.FOURTH }
-
-    val miss: Int
-        get() = results.count { it == Result.MISS }
-
     val prize: Money
         get() = Money(results.sumOf(Result::prize))
+
+    fun countByResult(result: Result): Int {
+        fun count(result: Result): Int {
+            return results.count { it == result }
+        }
+
+        return when (result) {
+            Result.FIRST -> count(result)
+            Result.SECOND -> count(result)
+            Result.THIRD -> count(result)
+            Result.FOURTH -> count(result)
+            Result.MISS -> count(result)
+        }
+    }
 }

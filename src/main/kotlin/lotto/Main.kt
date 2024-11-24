@@ -1,8 +1,8 @@
 package lotto
 
+import lotto.domain.Lotto
 import lotto.domain.LottoFactory
 import lotto.domain.LottoIncomeCalculator
-import lotto.domain.LottoNumber
 import lotto.domain.LottoService
 import lotto.domain.LottoStore
 import lotto.domain.Money
@@ -22,7 +22,7 @@ fun main() {
     outputView.printLottoNumbers(lottos)
 
     val inputWinningNumbers = inputView.requestWinningNumbers()
-    val result = lottoService.getResult(lottos, inputWinningNumbers.map(::LottoNumber).toSet())
+    val result = lottoService.getResult(lottos, Lotto.of(inputWinningNumbers))
 
     outputView.printLottoResult(result)
 }
