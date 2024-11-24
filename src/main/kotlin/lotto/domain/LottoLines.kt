@@ -6,16 +6,16 @@ class LottoLines(private val lines: List<LottoLine>) {
     }
 
     fun extractLottoGameResult(
-        winningLottoLine: LottoLine,
+        winningLotto: WinningLotto,
         profitRateCalculator: ProfitRateCalculator,
     ): LottoGameResult {
-        return LottoGameResult(
-            lines.map { it.extractMatchCount(winningLottoLine) }
-                .map { LottoRank.fromMatchCount(it) }
-                .groupingBy { it }
-                .eachCount(),
-            profitRateCalculator,
-        )
+        val lottoRanks =
+            lines.map {
+                val (matchCount, bonusMatch) = winningLotto.match(it)
+                LottoRank.fromMatchAndBonus(matchCount, bonusMatch)
+            }.groupingBy { it }.eachCount()
+
+        return LottoGameResult(lottoRanks, profitRateCalculator)
     }
 
     fun extractLottoLines(): List<List<Int>> {

@@ -18,7 +18,7 @@ class LottoGameResultTest : StringSpec({
                     LottoRank.NO_RANK to 1,
                 ),
                 LottoPurchaseAmount(5000),
-                400311.0,
+                406310.0,
             ),
             row(
                 mapOf(
@@ -29,7 +29,7 @@ class LottoGameResultTest : StringSpec({
                     LottoRank.NO_RANK to 4,
                 ),
                 LottoPurchaseAmount(5000),
-                1.0,
+                10.0,
             ),
             row(
                 mapOf(
@@ -48,6 +48,17 @@ class LottoGameResultTest : StringSpec({
                     LottoRank.SECOND to 0,
                     LottoRank.THIRD to 0,
                     LottoRank.FOURTH to 1,
+                    LottoRank.NO_RANK to 13,
+                ),
+                LottoPurchaseAmount(14000),
+                3.57,
+            ),
+            row(
+                mapOf(
+                    LottoRank.FIRST to 0,
+                    LottoRank.SECOND to 0,
+                    LottoRank.THIRD to 0,
+                    LottoRank.FIFTH to 1,
                     LottoRank.NO_RANK to 13,
                 ),
                 LottoPurchaseAmount(14000),

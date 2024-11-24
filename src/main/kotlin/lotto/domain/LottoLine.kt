@@ -8,6 +8,10 @@ class LottoLine(private val lottoBalls: LottoBalls) {
         lottoBalls.checkIsUniqueBalls()
     }
 
+    fun containBonusBall(bonusBall: LottoBall): Boolean {
+        return lottoBalls.contains(bonusBall)
+    }
+
     fun extractMatchCount(other: LottoLine): Int {
         return lottoBalls.extractMatchCount(other.lottoBalls)
     }
@@ -17,7 +21,7 @@ class LottoLine(private val lottoBalls: LottoBalls) {
     }
 
     companion object {
-        val LOTTO_BALLS_SIZE = 6
+        const val LOTTO_BALLS_SIZE = 6
 
         fun makeNewLottoLine(lottoNumbers: List<Int>): LottoLine {
             return LottoLine(lottoNumbers.map { LottoBall(it) })

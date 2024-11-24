@@ -28,8 +28,9 @@ class LottoController(
         lottoGame: LottoGame,
         lottoPurchaseAmount: LottoPurchaseAmount,
     ) {
-        val winningNumbers = inputAdapter.fetchWinningNumbers()
-        val gameResult = lottoGame.returnGameResult(winningNumbers, profitRateCalculator)
+        val winningBalls = inputAdapter.fetchWinningNumbers()
+        val bonusBall = inputAdapter.fetchBonusNumber()
+        val gameResult = lottoGame.returnGameResult(winningBalls, bonusBall, profitRateCalculator)
         val profitRate = gameResult.calculateProfitRate(lottoPurchaseAmount)
 
         val gameResultResponse =

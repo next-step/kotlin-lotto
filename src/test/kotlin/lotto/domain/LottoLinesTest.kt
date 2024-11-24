@@ -38,9 +38,12 @@ class LottoLinesTest : StringSpec({
         ) { lottoNumbers, winningNumbers, expected ->
             val lottoLines = LottoLines(lottoNumbers.map { LottoLine(it.map { LottoBall(it) }.toList()) })
             lottoLines.extractLottoGameResult(
-                LottoLine(
-                    winningNumbers.map { LottoBall(it) }
-                        .toList(),
+                WinningLotto(
+                    LottoLine(
+                        winningNumbers.map { LottoBall(it) }
+                            .toList(),
+                    ),
+                    LottoBall(7),
                 ),
                 DefaultProfitRateCalculator(),
             ) shouldBeEqualToComparingFields LottoGameResult(expected, DefaultProfitRateCalculator())

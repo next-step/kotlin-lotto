@@ -3,6 +3,10 @@ package lotto.domain
 import lotto.domain.LottoBall.Companion.LOTTO_BALL_RANGE
 
 class LottoBalls(private val balls: List<LottoBall>) {
+    fun contains(bonusBall: LottoBall): Boolean {
+        return balls.contains(bonusBall)
+    }
+
     fun extractRandomLottoBalls(size: Int): LottoBalls {
         return LottoBalls(balls.shuffled().subList(0, size))
     }
