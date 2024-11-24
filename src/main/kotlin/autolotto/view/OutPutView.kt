@@ -1,4 +1,3 @@
 package autolotto.view
 
-class OutPutView {
-}
+class OutPutView
