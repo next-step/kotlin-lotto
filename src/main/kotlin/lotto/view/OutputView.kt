@@ -27,12 +27,17 @@ class OutputView {
         val result =
             buildString {
                 append("총 수익률은 ${lottoProfitRateValue}입니다.")
-                if (lottoProfitRateValue <= 1.0) {
-                    appendLine("(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
-                } else {
-                    appendLine()
-                }
+                addAdditionalExplan(lottoProfitRateValue)
             }
         println(result)
+    }
+
+    private fun StringBuilder.addAdditionalExplan(lottoProfitRateValue: Double) {
+        if (lottoProfitRateValue <= 1.0) {
+            appendLine("(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
+            return
+        }
+        appendLine()
+        return
     }
 }

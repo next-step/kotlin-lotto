@@ -6,8 +6,9 @@ import lotto.domain.LottoLine
 
 class RandomLottoBallMachine : LottoBallMachine {
     override fun generate(): LottoLine {
-        LottoBalls.LOTTO_BALLS.shuffled().let {
-            return LottoLine(it.subList(0, 6))
-        }
+        val lottoBalls =
+            LottoBalls.CASHED_LOTTO_BALLS
+                .extractRandomLottoBalls(LottoLine.LOTTO_BALLS_SIZE)
+        return LottoLine(lottoBalls)
     }
 }
