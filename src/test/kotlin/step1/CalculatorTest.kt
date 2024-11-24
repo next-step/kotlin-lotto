@@ -30,4 +30,11 @@ class CalculatorTest {
 
         assertThat(sum).isEqualTo(0)
     }
+
+    @Test
+    fun `커스텀 구분자를 사용한다`() {
+        val sum = Calculator.sum("//;\\n1;2;3")
+
+        assertThat(sum).isEqualTo(6)
+    }
 }
