@@ -25,6 +25,10 @@ class LottoRankTest : StringSpec({
         rank.prize shouldBe expectedPrize
     }
 
+    "구매한 로또 목록에서 당첨 번호와 일치하는 게 0개이면 낙첨이다. (0원)" {
+        verifyLottoRank(0, LottoRank.NONE, 0)
+    }
+
     "구매한 로또 목록에서 당첨 번호와 일치하는 게 3개이면 5등이다. (5000원)" {
         verifyLottoRank(3, LottoRank.FIFTH, 5000)
     }
