@@ -2,7 +2,7 @@ package stringCalculator.domain
 
 import stringCalculator.domain.FormulaFormatException.NegativeNumberException
 import stringCalculator.domain.FormulaFormatException.NotNumberFormatException
-import stringCalculator.domain.FormulaFormatException.WrongFormatException
+import stringCalculator.domain.FormulaFormatException.UndefinedFormatException
 
 abstract class FormulaParser(internal val formula: String) {
     abstract fun isUsingSeparator(): Boolean
@@ -18,7 +18,7 @@ abstract class FormulaParser(internal val formula: String) {
     companion object {
         fun toNumbers(vararg parsers: FormulaParser): List<Int> {
             parsers.toList().forEach { if (it.isUsingSeparator()) return it.parseFormula() }
-            throw WrongFormatException
+            throw UndefinedFormatException
         }
     }
 }

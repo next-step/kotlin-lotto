@@ -6,7 +6,7 @@ sealed class FormulaFormatException : Throwable() {
 
     object NotNumberFormatException : FormulaFormatException()
 
-    object WrongFormatException : FormulaFormatException()
+    object UndefinedFormatException : FormulaFormatException()
 
     object NegativeNumberException : FormulaFormatException()
 }
