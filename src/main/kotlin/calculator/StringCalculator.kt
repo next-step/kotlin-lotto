@@ -2,7 +2,7 @@ package calculator
 
 class StringCalculator {
     fun calculate(stringExpression: String?): Double {
-        require(!stringExpression.isNullOrBlank()) { "표현식이 유효하지 않습니다." }
+        require(!stringExpression.isNullOrBlank()) { "표현식이 입력되지 않았습니다." }
         val expression = parseExpression(stringExpression)
         return expression.calculate()
     }
@@ -30,7 +30,7 @@ class StringCalculator {
             Regex("(?<=//.\\n).*")
                 .find(stringExpression)
                 ?.value
-                ?: throw RuntimeException("표현식이 유효하지 않습니다.")
+                ?: throw RuntimeException("입력한 표현식이 유효하지 않습니다.")
         } else {
             stringExpression
         }
@@ -57,7 +57,7 @@ private class Expression(
             .split(*delimiters.toTypedArray())
             .map { it.toDouble() }
     } catch (e: NumberFormatException) {
-        throw RuntimeException("숫자만 더할 수 있습니다.")
+        throw RuntimeException("입력한 표현식 \"${mathExpression}\"에 숫자가 아닌 유효하지 않은 문자가 포함되어 있습니다.")
     }
 
     private fun requirePositiveNumbers(parsedTargetNumbers: List<Double>) {
