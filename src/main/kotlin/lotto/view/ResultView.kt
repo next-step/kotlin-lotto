@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.Lotto
+import lotto.domain.LottoRank
 import lotto.domain.WinningStatistics
 
 object ResultView {
@@ -11,12 +12,16 @@ object ResultView {
     }
 
     fun printStatistics(statistics: WinningStatistics) {
-        println("당첨통계")
-        println("---------")
-        statistics.statistics.keys.forEach {
-            println("${it.matchCount}개 일치(${it.winningAmount}원) - ${statistics.statistics[it]}개")
-        }
-        println("총 수익률은 ${statistics.returnRate}입니다.")
+        println(
+            buildString {
+                append("당첨통계\n")
+                append("---------\n")
+                statistics.statistics.filterKeys { it != LottoRank.NONE }.forEach { (rank, count) ->
+                    append("${rank.matchCount}개 일치(${rank.winningAmount}원) - ${count}개\n")
+                }
+                append("총 수익률은 ${statistics.returnRate}입니다.\n")
+            }
+        )
     }
 
 }

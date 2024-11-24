@@ -15,7 +15,7 @@ class LotteryStatistician(
         lotties
             .groupingBy { LottoRank.of(it.matchCount(targetLotto)) }
             .eachCount()
-            .forEach { (rank, count) -> rank?.let { statistics[it] = count } }
+            .forEach { (rank, count) -> statistics[rank] = count }
 
         return WinningStatistics(
             purchaseAmount = lotties.size * Lotto.AMOUNT_PER_LOTTO,

@@ -14,8 +14,8 @@ class LottoRankTest {
 
     @ParameterizedTest
     @MethodSource("provideUnknownMatchCount")
-    fun `예상치 못한 matchCount를 호출하면 null을 반환해야 한다`(input: Int) {
-        assertThat(LottoRank.of(input)).isNull()
+    fun `예상치 못한 matchCount를 호출하면 None을 반환해야 한다`(input: Int) {
+        assertThat(LottoRank.of(input)).isEqualTo(LottoRank.NONE)
     }
 
     companion object {
