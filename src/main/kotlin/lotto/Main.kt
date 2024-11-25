@@ -1,12 +1,13 @@
 package lotto
 
-import lotto.domain.Lotto
 import lotto.domain.LottoFactory
 import lotto.domain.LottoIncomeCalculator
+import lotto.domain.LottoNumber
 import lotto.domain.LottoService
 import lotto.domain.LottoStore
 import lotto.domain.Money
 import lotto.domain.RandomNumberGenerator
+import lotto.domain.WinningLotto
 import lotto.view.ConsoleInputView
 import lotto.view.ConsoleOutputView
 
@@ -22,7 +23,16 @@ fun main() {
     outputView.printLottoNumbers(lottos)
 
     val inputWinningNumbers = inputView.requestWinningNumbers()
-    val result = lottoService.getResult(lottos, Lotto.of(inputWinningNumbers))
+    val inputBonusNumber = inputView.requestBonusNumber()
+
+    val winningLottoNumbers = inputWinningNumbers.map(::LottoNumber).toSet()
+    val bonusLottoNumber = LottoNumber(inputBonusNumber)
+
+    val result =
+        lottoService.getResult(
+            lotto = lottos,
+            winningLotto = WinningLotto(winningLottoNumbers, bonusLottoNumber),
+        )
 
     outputView.printLottoResult(result)
 }
