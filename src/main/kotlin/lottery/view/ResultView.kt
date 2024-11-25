@@ -3,7 +3,6 @@ package lottery.view
 import lottery.domain.DrawResult
 import lottery.domain.Lottery
 import lottery.domain.Money
-import lottery.domain.ProfitRateCalculator
 import lottery.domain.RankReward
 import lottery.domain.Ticket
 
@@ -29,6 +28,6 @@ object ResultView {
         RankReward.sortLowToHighByRank().forEach { rank ->
             println("$rank- ${drawResult.findLotteryCount(rank)}개")
         }
-        println("총 수익률은 ${ProfitRateCalculator.calculate(purchaseAmount, drawResult)}입니다.")
+        println("총 수익률은 ${drawResult.getTotalReward().divideBy(purchaseAmount)}입니다.")
     }
 }

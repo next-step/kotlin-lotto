@@ -4,6 +4,7 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import lottery.domain.RankReward.RANK_1
 import lottery.domain.RankReward.RANK_2
+import lottery.domain.RankReward.RANK_4
 
 class DrawResultTest : StringSpec({
     "당첨로또 추첨은 개수별 일치하는 로또수를 반환한다" {
@@ -31,5 +32,11 @@ class DrawResultTest : StringSpec({
 
         drawResult.findLotteryCount(RANK_1).count shouldBe 2
         drawResult.findLotteryCount(RANK_2).count shouldBe 3
+    }
+
+    "구입 금액과 결과를 계산하여 수익률을 반환한다" {
+        val drawResult = DrawResult(mapOf(RANK_4 to LotteryCount(1)))
+
+        drawResult.getTotalReward().amount shouldBe 5_000
     }
 })
