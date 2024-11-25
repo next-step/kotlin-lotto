@@ -47,9 +47,17 @@ class InputView {
     }
 
     private fun inputWinningLotto(): WinningLotto {
-        println("지난 주 당첨 번호를 입력해 주세요.")
+        val winningLotto = inputWinningLottoNumbers()
         val bonusNumber = inputBonusNumber()
-        val winningLotto = try {
+        return WinningLotto(
+            lotto = winningLotto,
+            bonusNumber = bonusNumber,
+        )
+    }
+
+    private fun inputWinningLottoNumbers(): Lotto {
+        println("지난 주 당첨 번호를 입력해 주세요.")
+        return try {
             val maybeWinningNumbers = readlnOrNull()
             val winningNumbers = maybeWinningNumbers
                 ?.split(", ")
@@ -59,11 +67,6 @@ class InputView {
         } catch (e: NumberFormatException) {
             throw IllegalArgumentException("지난 주 당첨 번호는 숫자만 입력 가능합니다.")
         }
-
-        return WinningLotto(
-            lotto = winningLotto,
-            bonusNumber = bonusNumber,
-        )
     }
 
     private fun inputBonusNumber(): BonusNumber {
