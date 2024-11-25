@@ -12,24 +12,41 @@ class StringAddCalculator {
             return text.toInt();
         }
 
-        if (text.contains(",") || text.contains(":")) {
+        val numbers = parse(text)
+        validateNumbers(numbers)
+        return numbers.sum()
+    }
 
-            val numbers = text.split(",|:".toRegex()).toTypedArray()
-            return numbers.map { it.toInt() }.sum()
-
+    private fun validateNumbers(numbers: List<Int>) {
+        if (numbers.any { it < 0 }) {
+            throw RuntimeException("음수는 허용되지 않습니다.")
         }
+    }
 
-        if (text.startsWith("//") && text.contains("\n")) {
-            val customDelimiter = text.substring(2, 3)
-            val numbers = text.substring(4).split(customDelimiter).toTypedArray()
-            return numbers.map { it.toInt() }.sum()
+    fun parse(text: String): List<Int> {
+        return when {
+            text.length == 1 -> listOf(text.toInt())
+            text.length == 2 && text.startsWith("-") -> throw RuntimeException("음수는 허용되지 않습니다.")
+            text.startsWith("//") && text.contains("\n") -> parseWithCustomDelimiter(text)
+            text.contains(",") || text.contains(":") -> parseWithDefaultDelimiters(text)
+            text.contains("[,:]".toRegex()) -> parseWithDefaultDelimiters(text)
+            else -> emptyList()
         }
+    }
 
-        if (text.contains("-")) {
-            throw RuntimeException()
-        }
+    private fun parseWithDefaultDelimiters(text: String): List<Int> {
+        return text.split("[,:]".toRegex())
+            .map { it.trim() }
+            .filter { it.isNotEmpty() }
+            .map { it.toInt() }
+    }
 
-
-        return 0
+    private fun parseWithCustomDelimiter(text: String): List<Int> {
+        val delimiter = text.substring(2, 3)
+        return text.substring(4)
+            .split(delimiter)
+            .map { it.trim() }
+            .filter { it.isNotEmpty() }
+            .map { it.toInt() }
     }
 }

@@ -58,4 +58,18 @@ class StringAddCalculatorTest {
         assertThatExceptionOfType(RuntimeException::class.java)
             .isThrownBy { calculator.add("-1") }
     }
+
+    @DisplayName(value = "문자열 계산기에 음수를 여러개 전달하는 경우 RuntimeException 예외 처리를 한다.")
+    @Test
+    fun multipleNegative() {
+        assertThatExceptionOfType(RuntimeException::class.java)
+            .isThrownBy { calculator.add("-1,-2") }
+    }
+
+    @DisplayName(value = "문자열 계산기에 음수와 양수를 같이 전달하는 경우 RuntimeException 예외 처리를 한다.")
+    @Test
+    fun multipleNegativeAndPositive() {
+        assertThatExceptionOfType(RuntimeException::class.java)
+            .isThrownBy { calculator.add("4,-2,1") }
+    }
 }
