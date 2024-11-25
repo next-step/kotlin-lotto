@@ -6,7 +6,7 @@ class Lotto(
     val numberOfLines: Int
         get() = lines.size
 
-    fun match(winner: LottoLine): LottoResult {
+    fun match(winner: WinningLine): LottoResult {
         val rankToCount =
             lines
                 .groupBy { it.match(winner) }
