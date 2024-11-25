@@ -1,7 +1,7 @@
 package lottery.domain
 
 object TicketMachine {
-    private const val LOTTERY_TICKET_PRICE = 1000
+    private const val LOTTERY_TICKET_PRICE = 1_000
 
     fun exchange(money: Money): List<Ticket> {
         require(money.amount >= LOTTERY_TICKET_PRICE) { "금액은 $LOTTERY_TICKET_PRICE 원 이상이어야 합니다" }
