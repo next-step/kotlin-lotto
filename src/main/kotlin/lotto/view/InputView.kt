@@ -1,8 +1,8 @@
 package lotto.view
 
 import lotto.BoughtLotto
-import lotto.LOTTO_PRICE
 import lotto.Lotto
+import lotto.LottoCost
 import lotto.WinningLotto
 
 class InputView {
@@ -18,19 +18,13 @@ class InputView {
 
     private fun inputMoney(): List<Lotto> {
         println("구입금액을 입력해 주세요.")
-        return try {
-            val maybeMoney = readlnOrNull()
-            val money = maybeMoney
-                ?.toInt()
-                ?: throw IllegalArgumentException("구입금액은 필수입니다.")
-            generateLottos(money)
-        } catch (e: NumberFormatException) {
-            throw IllegalArgumentException("구입금액은 숫자만 입력 가능합니다.")
-        }
+        val maybeMoney = readlnOrNull()
+        val lottoCost = LottoCost(maybeMoney)
+        return generateLottos(lottoCost)
     }
 
-    private fun generateLottos(money: Int): List<Lotto> {
-        val boughtLottoAmount = money / LOTTO_PRICE
+    private fun generateLottos(lottoCost: LottoCost): List<Lotto> {
+        val boughtLottoAmount = lottoCost.calculateBoughtLottoAmount()
         val lottos = (1..boughtLottoAmount).map { Lotto.auto() }
         printBoughtLottos(lottos)
         return lottos
@@ -38,7 +32,9 @@ class InputView {
 
     private fun printBoughtLottos(lottos: List<Lotto>) {
         lottos.forEach {
-            val lottoNumbersString = it.numbers.joinToString(", ")
+            val lottoNumbersString = it.numbers.joinToString(", ") {
+                lottoNumber -> lottoNumber.value.toString()
+            }
             println("[$lottoNumbersString]")
         }
     }
