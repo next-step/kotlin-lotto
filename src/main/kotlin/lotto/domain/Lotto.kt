@@ -1,14 +1,15 @@
 package lotto.domain
 
-class Lotto(private val numbers: List<Number>) {
+class Lotto(val numbers: List<Number>) {
     init {
         require(numbers.size == LOTTO_SIZE) { LOTTO_SIZE_EXCEPTION_MESSAGE }
         require(!existDuplicateNumber(numbers)) { LOTTO_DUPLICATE_EXCEPTION_MESSAGE }
     }
 
-    fun match(winningLotto: Lotto): LottoRank {
-        val matchCount = numbers.count { it in winningLotto.numbers }
-        return LottoRank.from(matchCount)
+    fun match(winningLotto: WinningLotto): LottoRank {
+        val containBonus = numbers.contains(winningLotto.bonusNumber)
+        val matchCount = numbers.count { it in winningLotto.lotto.numbers } + if (containBonus) 1 else 0
+        return LottoRank.from(matchCount, containBonus)
     }
 
     fun getNumbersRawValues(): List<Int> = numbers.map { it.value }

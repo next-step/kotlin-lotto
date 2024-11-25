@@ -4,6 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import lotto.fixture.createLottoFixture
+import lotto.fixture.createWinningLottoFixture
 
 class LottoTest : StringSpec({
     "로또는 6개의 숫자로 구성되어 있지 않으면 예외를 던진다." {
@@ -16,28 +17,33 @@ class LottoTest : StringSpec({
 
     "match()는 인자로 들어온 번호와 로또의 번호가 일치하는 개수를 비교하고 등수를 반환한다." {
         val lotto = createLottoFixture(listOf(1, 2, 3, 4, 5, 6))
-        val winLotto = createLottoFixture(listOf(1, 2, 3, 4, 5, 6))
+        val winLotto = createWinningLottoFixture(listOf(1, 2, 3, 4, 5, 6), 7)
         val rankFirst = lotto.match(winLotto)
 
         rankFirst shouldBe LottoRank.FIRST
 
-        val winLotto2 = createLottoFixture(listOf(1, 2, 3, 4, 5, 7))
+        val winLotto2 = createWinningLottoFixture(listOf(1, 2, 3, 4, 7, 8), 5)
         val rankSecond = lotto.match(winLotto2)
 
         rankSecond shouldBe LottoRank.SECOND
 
-        val winLotto3 = createLottoFixture(listOf(1, 2, 3, 4, 7, 8))
+        val winLotto3 = createWinningLottoFixture(listOf(1, 2, 3, 4, 5, 8), 9)
         val rankThird = lotto.match(winLotto3)
 
         rankThird shouldBe LottoRank.THIRD
 
-        val winLotto4 = createLottoFixture(listOf(1, 2, 3, 7, 8, 9))
+        val winLotto4 = createWinningLottoFixture(listOf(1, 2, 3, 4, 7, 8), 10)
         val rankFourth = lotto.match(winLotto4)
 
         rankFourth shouldBe LottoRank.FOURTH
 
-        val winLotto5 = createLottoFixture(listOf(1, 2, 7, 8, 9, 10))
-        val rankNone = lotto.match(winLotto5)
+        val winLotto5 = createWinningLottoFixture(listOf(1, 2, 3, 11, 8, 9), 10)
+        val rankFifth = lotto.match(winLotto5)
+
+        rankFifth shouldBe LottoRank.FIFTH
+
+        val winLotto6 = createWinningLottoFixture(listOf(1, 2, 7, 8, 9, 10), 11)
+        val rankNone = lotto.match(winLotto6)
 
         rankNone shouldBe LottoRank.NONE
     }
