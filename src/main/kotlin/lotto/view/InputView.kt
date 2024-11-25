@@ -16,6 +16,43 @@ class InputView {
         }
     }
 
+    fun readManualLottos(
+        manualCount: Int,
+        manualLottos: MutableList<Lotto> = mutableListOf(),
+    ): List<Lotto> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+
+        while (manualLottos.size < manualCount) {
+            val input = readlnOrNull() ?: exitProgram()
+            val remainCount = manualCount - manualLottos.size
+
+            try {
+                val numbers = input.split(",").map { it.trim().toInt() }.toSet()
+                manualLottos.add(Lotto(numbers)) // 입력된 로또를 상태에 추가
+            } catch (e: NumberFormatException) {
+                println("유효하지 않은 숫자입니다. 다시 입력해 주세요. (${remainCount}개 남음)")
+                readManualLottos(remainCount, manualLottos)
+            } catch (e: IllegalArgumentException) {
+                println("${e.message}. 다시 입력해 주세요. (${remainCount}개 남음)")
+                readManualLottos(remainCount, manualLottos)
+            }
+        }
+
+        return manualLottos
+    }
+
+    fun readManualCount(purchasedCount: Int): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        val input = readlnOrNull() ?: exitProgram()
+        return try {
+            require(input.toInt() <= purchasedCount) { "수동으로 구매할 로또 수는 총 구매한 로또 수보다 작아야 합니다." }
+            input.toInt()
+        } catch (e: NumberFormatException) {
+            println("유효하지 않은 숫자입니다. 숫자를 입력해 주세요.")
+            return readManualCount(purchasedCount)
+        }
+    }
+
     fun readWinningLotto(): WinningLotto {
         println("지난 주 당첨 번호를 입력해 주세요. (쉼표로 구분)")
         val winningLotto = readWinningNumbers()
