@@ -4,7 +4,17 @@ fun main() {
     val inputBalance = ConsoleInput.inputBalance()
 
     val lotteryTicketMachine = LotteryTicketMachine(balance = inputBalance)
-    val lotteryTickets = generateSequence { lotteryTicketMachine.issueTicket() }.toList()
+
+    val affordableTicketCount = lotteryTicketMachine.affordableTickets()
+    val inputManualTicketCount = ConsoleInput.inputManualTicketCount()
+    if (inputManualTicketCount > affordableTicketCount) {
+        ResultView.announceTooManyInputManualTicketCount(inputManualTicketCount, affordableTicketCount)
+        return
+    }
+
+    val manualLotteryTickets = ConsoleInput.inputManualLottoNumbers(inputManualTicketCount, lotteryTicketMachine)
+    val automaticLotteryTickets = generateSequence { lotteryTicketMachine.issueTicket() }.toList()
+    val lotteryTickets = manualLotteryTickets + automaticLotteryTickets
 
     ResultView.announceIssuedLotteryTickets(lotteryTickets)
 
