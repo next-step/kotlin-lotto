@@ -15,9 +15,17 @@ class LottoClient(
     fun run() {
         val amount = InputView.inputPurchaseAmount()
         val lottoCount = getLottoCount(amount)
-        ResultView.printLottoCount(lottoCount)
 
-        val lottos = lottoMachine.generate(lottoCount)
+        val manualLottos =
+            InputView
+                .inputManualLottoCount()
+                .let { InputView.inputManualLottoNumbers(it) }
+                .let { lottoMachine.generateByManual(numbers = it) }
+
+        val autoLottoCount = lottoCount - manualLottos.lottos.size
+        val lottos = manualLottos + lottoMachine.generate(lottoCount = autoLottoCount)
+
+        ResultView.printLottoCount(manualLottoCount = manualLottos.lottos.size, autoLottoCount = autoLottoCount)
         ResultView.printLottoList(lottos)
 
         val winningNumbers = InputView.inputLastWeekWinningNumbers()

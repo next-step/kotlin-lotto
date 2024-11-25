@@ -9,6 +9,10 @@ object ResultView {
         println("${lottoCount}개를 구매했습니다")
     }
 
+    fun printLottoCount(manualLottoCount: Int, autoLottoCount: Int) {
+        println("수동으로 ${manualLottoCount}장, 자동으로 ${autoLottoCount}개를 구매했습니다")
+    }
+
     fun printLottoList(lottos: Lottos) {
         lottos.lottos.forEach { println(it.numbers.numbers) }
         println()
