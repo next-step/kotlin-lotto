@@ -45,10 +45,10 @@ class LottoLineTest {
         actual shouldBe expected
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{index}: 당첨 순위는 {1}")
     @MethodSource
     fun `당첨 순위를 구한다`(
-        winner: LottoLine,
+        winner: WinningLine,
         expected: Rank,
     ) {
         val line = LottoLine.from(1, 2, 3, 4, 5, 6)
@@ -76,12 +76,64 @@ class LottoLineTest {
         @JvmStatic
         private fun `당첨 순위를 구한다`(): List<Arguments> =
             listOf(
-                Arguments.of(LottoLine.from(1, 2, 3, 4, 5, 6), Rank.FIRST),
-                Arguments.of(LottoLine.from(1, 2, 3, 4, 5, 7), Rank.THIRD),
-                Arguments.of(LottoLine.from(1, 2, 3, 4, 7, 8), Rank.FOURTH),
-                Arguments.of(LottoLine.from(1, 2, 3, 7, 8, 9), Rank.FIFTH),
-                Arguments.of(LottoLine.from(1, 8, 9, 10, 11, 12), Rank.MISS),
-                Arguments.of(LottoLine.from(7, 8, 9, 10, 11, 12), Rank.MISS),
+                Arguments.of(
+                    WinningLine(
+                        // 6개 일치
+                        LottoLine.from(1, 2, 3, 4, 5, 6),
+                        LottoNumber.from(7),
+                    ),
+                    Rank.FIRST,
+                ),
+                Arguments.of(
+                    WinningLine(
+                        // 5개 일치
+                        LottoLine.from(1, 2, 3, 4, 5, 7),
+                        // 보너스 볼 일치 o
+                        LottoNumber.from(6),
+                    ),
+                    Rank.SECOND,
+                ),
+                Arguments.of(
+                    WinningLine(
+                        // 5개 일치
+                        LottoLine.from(1, 2, 3, 4, 5, 7),
+                        // 보너스 볼 일치 x
+                        LottoNumber.from(42),
+                    ),
+                    Rank.THIRD,
+                ),
+                Arguments.of(
+                    WinningLine(
+                        // 4개 일치
+                        LottoLine.from(1, 2, 3, 4, 7, 8),
+                        LottoNumber.from(6),
+                    ),
+                    Rank.FOURTH,
+                ),
+                Arguments.of(
+                    WinningLine(
+                        // 3개 일치
+                        LottoLine.from(1, 2, 3, 7, 8, 9),
+                        LottoNumber.from(6),
+                    ),
+                    Rank.FIFTH,
+                ),
+                Arguments.of(
+                    WinningLine(
+                        // 1개 일치
+                        LottoLine.from(1, 8, 9, 10, 11, 12),
+                        LottoNumber.from(6),
+                    ),
+                    Rank.MISS,
+                ),
+                Arguments.of(
+                    WinningLine(
+                        // 0개 일치
+                        LottoLine.from(7, 8, 9, 10, 11, 12),
+                        LottoNumber.from(6),
+                    ),
+                    Rank.MISS,
+                ),
             )
     }
 }
