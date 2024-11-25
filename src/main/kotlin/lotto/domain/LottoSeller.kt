@@ -2,15 +2,16 @@ package lotto.domain
 
 class LottoSeller(val lottoNumberGenerator: LottoNumberGenerator = RandomLottoNumberGenerator()) {
     fun getLottoPurchaseCount(purchasePrice: Int): Int {
-        return purchasePrice.div(LOTTO_PRICE)
+        return purchasePrice.div(Lotto.PRICE)
     }
 
-    fun sellLottos(purchasePrice: Int): Lottos {
+    fun sellLottos(
+        purchasePrice: Int,
+        selectedlottoNumbersList: List<LottoNumbers> = listOf(),
+    ): Lottos {
         val lottoMachine = LottoMachine(lottoNumberGenerator)
-        return lottoMachine.makeLottos(getLottoPurchaseCount(purchasePrice))
-    }
-
-    companion object {
-        const val LOTTO_PRICE = 1000
+        val selectedLottos = Lottos(selectedlottoNumbersList.map { Lotto.of(it) })
+        val autoLottos = lottoMachine.makeLottos(getLottoPurchaseCount(purchasePrice) - selectedLottos.lottos.size)
+        return Lottos(selectedLottos.lottos + autoLottos.lottos)
     }
 }
