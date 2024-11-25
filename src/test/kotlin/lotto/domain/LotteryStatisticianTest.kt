@@ -29,8 +29,6 @@ class LotteryStatisticianTest {
     @ParameterizedTest
     @MethodSource("provideInvalidateValue")
     fun `유효하지 않은 값을 입력하면 예외를 던진다`(input: String) {
-        // given
-
         // when & then
         assertThatThrownBy { LotteryStatistician(input, 7) }
             .isInstanceOf(IllegalArgumentException::class.java)

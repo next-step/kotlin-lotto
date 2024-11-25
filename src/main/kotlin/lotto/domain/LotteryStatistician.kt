@@ -1,6 +1,6 @@
 package lotto.domain
 
-import java.util.*
+import java.util.EnumMap
 
 class LotteryStatistician(
     targetLottoStr: String,
