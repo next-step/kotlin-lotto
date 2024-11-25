@@ -8,8 +8,8 @@ class LottoStoreTest : BehaviorSpec({
     Given("수동 로또와 전체 로또 개수, 로또 번호 생성기가 주어졌을 때") {
         val manualLottos =
             listOf(
-                Lotto(setOf(1, 2, 3, 4, 5, 6)),
-                Lotto(setOf(7, 8, 9, 10, 11, 12)),
+                Lotto.from(setOf(1, 2, 3, 4, 5, 6)),
+                Lotto.from(setOf(7, 8, 9, 10, 11, 12)),
             )
         val totalLottoCount = 5
 
@@ -27,7 +27,7 @@ class LottoStoreTest : BehaviorSpec({
             Then("자동 로또는 자동 생성된 번호로 구성된다") {
                 val autoLottos = purchasedLottos.lottos.subList(manualLottos.size, totalLottoCount)
                 autoLottos.forEach { lotto ->
-                    lotto.numbers shouldBe setOf(13, 14, 15, 16, 17, 18)
+                    lotto.numbers shouldBe setOf(13, 14, 15, 16, 17, 18).map(::LottoNumber)
                 }
             }
 

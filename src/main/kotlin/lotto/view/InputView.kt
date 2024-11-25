@@ -94,7 +94,7 @@ class InputView {
                 .map { it.trim().toInt() }
                 .toSet()
 
-        return Lotto(numbers)
+        return Lotto.from(numbers)
     }
 
     private inline fun <T> readAndParse(

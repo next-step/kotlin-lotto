@@ -17,7 +17,9 @@ class OutPutView {
     fun printPurchasedLottos(purchasedLottos: PurchasedLottos) {
         purchasedLottos
             .lottos
-            .forEach { println(it.numbers) }
+            .forEach {
+                println(it.numbers.map { it.value })
+            }
         println()
     }
 

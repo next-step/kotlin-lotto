@@ -1,20 +1,16 @@
 package lotto.domain
 
-@JvmInline
-value class BonusNumber private constructor(val value: Int) {
-    init {
-        LottoRule.validate(value)
-    }
-
+class BonusNumber private constructor(val value: LottoNumber) {
     companion object {
         fun create(
             value: Int,
-            winningNumbers: Lotto,
+            winningLotto: Lotto,
         ): BonusNumber {
-            require(value !in winningNumbers.numbers) {
+            val lottoNumber = LottoNumber(value)
+            require(lottoNumber !in winningLotto.numbers) {
                 "보너스 번호는 당첨 번호와 중복될 수 없습니다."
             }
-            return BonusNumber(value)
+            return BonusNumber(lottoNumber)
         }
     }
 }
