@@ -24,5 +24,7 @@ class Lotto private constructor(
         fun of(pickNumbers: List<Int>): Lotto {
             return Lotto(pickNumbers = pickNumbers, matchCount = 0)
         }
+
+        const val PRICE = 1000
     }
 }

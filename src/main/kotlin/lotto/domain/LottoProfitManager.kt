@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.domain.Lotto.Companion.PRICE
+
 object LottoProfitManager {
     fun computeProfit(lottos: List<Lotto>): Double {
         val totalWinningAmount =
@@ -12,7 +14,7 @@ object LottoProfitManager {
                     else -> 0
                 }
             }
-        val totalPurchaseAmount = lottos.size * 1000
+        val totalPurchaseAmount = lottos.size * PRICE
         return totalWinningAmount.toDouble() / totalPurchaseAmount
     }
 }

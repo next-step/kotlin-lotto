@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.domain.Lotto.Companion.PRICE
+
 class LottoPurchaseManager(
     private val numberPicker: NumberPicker,
 ) {
@@ -12,10 +14,6 @@ class LottoPurchaseManager(
     }
 
     private fun getAvailableCount(money: Long): Long {
-        return money / LOTTO_PRICE
-    }
-
-    companion object {
-        private const val LOTTO_PRICE = 1000L
+        return money / PRICE
     }
 }
