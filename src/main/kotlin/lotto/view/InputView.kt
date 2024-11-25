@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.BonusNumber
 import lotto.BoughtLotto
 import lotto.Lotto
 import lotto.LottoCost
@@ -8,12 +9,11 @@ import lotto.WinningLotto
 class InputView {
     fun input(): BoughtLotto {
         val lottos = inputMoney()
-        val bonusNumber = inputBonusNumber()
         val winningLotto = inputWinningLotto()
         println()
         return BoughtLotto(
             lottos = lottos,
-            winningLotto = winningLotto
+            winningLotto = winningLotto,
         )
     }
 
@@ -22,15 +22,6 @@ class InputView {
         val maybeMoney = readlnOrNull()
         val lottoCost = LottoCost(maybeMoney)
         return generateLottos(lottoCost)
-    }
-
-    private fun inputBonusNumber(): Int {
-        println("보너스 볼을 입력해 주세요.")
-        return try {
-            readln().toInt()
-        } catch (e: NumberFormatException) {
-            throw IllegalArgumentException("보너스 볼은 숫자만 입력 가능합니다.")
-        }
     }
 
     private fun generateLottos(lottoCost: LottoCost): List<Lotto> {
@@ -51,15 +42,27 @@ class InputView {
 
     private fun inputWinningLotto(): WinningLotto {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return try {
+        val bonusNumber = inputBonusNumber()
+        val winningLotto = try {
             val maybeWinningNumbers = readlnOrNull()
             val winningNumbers = maybeWinningNumbers
                 ?.split(", ")
                 ?.map { it.toInt() }
                 ?: throw IllegalArgumentException("지난 주 당첨 번호는 필수입니다.")
-            WinningLotto(Lotto(winningNumbers))
+            Lotto(winningNumbers)
         } catch (e: NumberFormatException) {
             throw IllegalArgumentException("지난 주 당첨 번호는 숫자만 입력 가능합니다.")
         }
+
+        return WinningLotto(
+            lotto = winningLotto,
+            bonusNumber = bonusNumber,
+        )
+    }
+
+    private fun inputBonusNumber(): BonusNumber {
+        println("보너스 볼을 입력해 주세요.")
+        val maybeBonusBall = readln()
+        return BonusNumber(maybeBonusBall)
     }
 }
