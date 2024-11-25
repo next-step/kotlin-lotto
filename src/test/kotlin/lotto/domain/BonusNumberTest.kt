@@ -8,13 +8,13 @@ import io.kotest.matchers.shouldBe
 
 class BonusNumberTest : BehaviorSpec({
     Given("보너스 번호와 당첨 번호가 주어졌을 때") {
-        val winningNumbers = Lotto(setOf(1, 2, 3, 4, 5, 6))
+        val winningNumbers = Lotto.from(setOf(1, 2, 3, 4, 5, 6))
         When("보너스 번호가 당첨 번호와 중복되지 않을 경우") {
 
             val bonusNumber = BonusNumber.create(7, winningNumbers)
 
             Then("정상적으로 생성된다") {
-                bonusNumber.value shouldBe 7
+                bonusNumber.value shouldBe LottoNumber(7)
             }
         }
 

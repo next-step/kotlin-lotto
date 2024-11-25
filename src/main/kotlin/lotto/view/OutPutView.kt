@@ -6,14 +6,20 @@ import lotto.domain.WinningStatistics
 import java.math.BigDecimal
 
 class OutPutView {
-    fun printLottoCount(count: Int) {
-        println("${count}개를 구매했습니다.")
+    fun printLottoCount(
+        count: Int,
+        manualCount: Int,
+    ) {
+        val autoCount = count - manualCount
+        println("수동으로 ${manualCount}장, 자동으로 ${autoCount}개를 구매했습니다.")
     }
 
     fun printPurchasedLottos(purchasedLottos: PurchasedLottos) {
         purchasedLottos
             .lottos
-            .forEach { println(it.numbers) }
+            .forEach {
+                println(it.numbers.map { it.value })
+            }
         println()
     }
 

@@ -8,7 +8,7 @@ import io.kotest.matchers.shouldNotBe
 
 class WinningLottoTest : BehaviorSpec({
     Given("당첨 번호가 주어졌을 때") {
-        val validWinningLotto = Lotto(setOf(1, 2, 3, 4, 5, 6))
+        val validWinningLotto = Lotto.from(setOf(1, 2, 3, 4, 5, 6))
 
         When("당첨 로또 객체를 생성하면") {
             val winningLotto = WinningLotto(validWinningLotto, BonusNumber.create(7, validWinningLotto))
@@ -20,7 +20,7 @@ class WinningLottoTest : BehaviorSpec({
     }
 
     Given("당첨 복권과 당첨 로또 번호가 주어졌을 때") {
-        val validWinningLotto = Lotto(setOf(1, 2, 3, 4, 5, 6))
+        val validWinningLotto = Lotto.from(setOf(1, 2, 3, 4, 5, 6))
         val winningLotto = WinningLotto(validWinningLotto, BonusNumber.create(7, validWinningLotto))
 
         forAll(
@@ -32,7 +32,7 @@ class WinningLottoTest : BehaviorSpec({
             row(setOf(7, 8, 9, 10, 11, 12), Rank.MISS),
         ) { lottoNumbers, expectedRank ->
             When("당첨 로또 번호가 ${lottoNumbers}일 때") {
-                val rank = winningLotto.getRank(Lotto(lottoNumbers))
+                val rank = winningLotto.getRank(Lotto.from(lottoNumbers))
 
                 Then("Rank는 ${expectedRank}가 반환된다") {
                     rank shouldBe expectedRank

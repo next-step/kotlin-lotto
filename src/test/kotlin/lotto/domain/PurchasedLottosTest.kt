@@ -8,8 +8,8 @@ class PurchasedLottosTest : BehaviorSpec({
         When("로또 목록이 비어 있지 않은 경우") {
             val lottos =
                 listOf(
-                    Lotto(setOf(1, 2, 3, 4, 5, 6)),
-                    Lotto(setOf(7, 8, 9, 10, 11, 12)),
+                    Lotto.from(setOf(1, 2, 3, 4, 5, 6)),
+                    Lotto.from(setOf(7, 8, 9, 10, 11, 12)),
                 )
             val purchasedLottos = PurchasedLottos(lottos)
 
@@ -31,17 +31,17 @@ class PurchasedLottosTest : BehaviorSpec({
         }
     }
     Given("구입한 로또 목록과 당첨 번호가 주어졌을 때") {
-        val winningLottoNumbers = Lotto(setOf(1, 2, 3, 4, 5, 6))
+        val winningLottoNumbers = Lotto.from(setOf(1, 2, 3, 4, 5, 6))
         val bonusNumber = 7
         val winningLotto = WinningLotto(winningLottoNumbers, BonusNumber.create(bonusNumber, winningLottoNumbers))
 
         When("각 로또의 매칭 개수에 따라 Rank를 계산하면") {
             val lottos =
                 listOf(
-                    Lotto(setOf(1, 2, 3, 4, 5, 6)),
-                    Lotto(setOf(1, 2, 3, 4, 7, 8)),
-                    Lotto(setOf(1, 2, 3, 7, 8, 9)),
-                    Lotto(setOf(7, 8, 9, 10, 11, 12)),
+                    Lotto.from(setOf(1, 2, 3, 4, 5, 6)),
+                    Lotto.from(setOf(1, 2, 3, 4, 7, 8)),
+                    Lotto.from(setOf(1, 2, 3, 7, 8, 9)),
+                    Lotto.from(setOf(7, 8, 9, 10, 11, 12)),
                 )
             val purchasedLottos = PurchasedLottos(lottos)
             val ranks = purchasedLottos.calculateRanks(winningLotto)
