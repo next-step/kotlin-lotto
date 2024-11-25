@@ -1,6 +1,6 @@
 package lotto
 
-import lotto.LotteryTicketMachine.Companion.TICKET_PRICE
+import lotto.LottoConstants.TICKET_PRICE
 import java.math.RoundingMode
 
 class WinningBoard(private val winningResults: List<WinningResult>) {
