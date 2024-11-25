@@ -16,17 +16,6 @@ enum class LottoRank(
     NONE(0, 0),
     ;
 
-    data class Key(
-        val matchCount: Int,
-        val matchBonus: Boolean,
-        val message: String? = BONUS_BALL_MESSAGE.takeIf { matchCount == SECOND.matchCount && matchBonus },
-    )
-
-    val key: Key
-        get() {
-            return Key(matchCount = matchCount, matchBonus = matchBonus)
-        }
-
     companion object {
         fun getRank(
             lotto: Lotto,
@@ -47,7 +36,5 @@ enum class LottoRank(
             matchCount: Int,
             matchBonus: Boolean,
         ): Boolean = rank.matchBonus == matchBonus && rank.matchCount == matchCount
-
-        private const val BONUS_BALL_MESSAGE = "보너스 볼 일치"
     }
 }
