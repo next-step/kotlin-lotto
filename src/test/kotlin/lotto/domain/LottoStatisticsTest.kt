@@ -35,4 +35,12 @@ class LottoStatisticsTest : StringSpec({
         val totalPrize = LottoStatistics.calculateTotalPrize(statistics)
         totalPrize shouldBe (2000000000 + 1500000 + 50000 + 5000 * 3)
     }
+
+    "should calculate profit" {
+        val totalPrize = 2000000000 + 1500000 + 50000 + 5000 * 3
+        val purchaseAmount = 10000
+
+        val profit = LottoStatistics.calculateProfit(totalPrize, purchaseAmount)
+        profit shouldBe (totalPrize.toDouble() / purchaseAmount)
+    }
 })

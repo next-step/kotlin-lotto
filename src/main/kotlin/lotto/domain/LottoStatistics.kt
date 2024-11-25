@@ -24,4 +24,15 @@ object LottoStatistics {
             prizeMap[matchCount]?.times(count) ?: 0
         }
     }
+
+    fun calculateProfit(
+        totalPrize: Int,
+        purchaseAmount: Int,
+    ): Double {
+        return if (purchaseAmount > 0) {
+            totalPrize.toDouble() / purchaseAmount
+        } else {
+            0.0
+        }
+    }
 }
