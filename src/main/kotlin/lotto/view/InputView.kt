@@ -8,6 +8,7 @@ import lotto.WinningLotto
 class InputView {
     fun input(): BoughtLotto {
         val lottos = inputMoney()
+        val bonusNumber = inputBonusNumber()
         val winningLotto = inputWinningLotto()
         println()
         return BoughtLotto(
@@ -21,6 +22,15 @@ class InputView {
         val maybeMoney = readlnOrNull()
         val lottoCost = LottoCost(maybeMoney)
         return generateLottos(lottoCost)
+    }
+
+    private fun inputBonusNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        return try {
+            readln().toInt()
+        } catch (e: NumberFormatException) {
+            throw IllegalArgumentException("보너스 볼은 숫자만 입력 가능합니다.")
+        }
     }
 
     private fun generateLottos(lottoCost: LottoCost): List<Lotto> {
