@@ -1,6 +1,6 @@
 package lotto
 
-import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
@@ -12,20 +12,14 @@ class LottoTest : StringSpec({
     }
 
     "로또 번호가 6개 미만이라면 예외를 던진다." {
-        shouldThrow<IllegalArgumentException> {
+        shouldThrowWithMessage<IllegalArgumentException>("로또 번호는 6개여야 합니다.") {
             Lotto(listOf(1, 2, 3, 4, 5))
         }
     }
-
-    "로또 번호가 하나라도 1 미만 이라면 예외를 던진다." {
-        shouldThrow<IllegalArgumentException> {
-            Lotto(listOf(0, 1, 2, 3, 4, 5))
-        }
-    }
-
-    "로또 번호가 하나라도 45 초과라면 예외를 던진다." {
-        shouldThrow<IllegalArgumentException> {
-            Lotto(listOf(41, 42, 43, 44, 45, 46))
+    
+    "로또 번호 중 중복된 수가 있다면 예외를 던진다." {
+        shouldThrowWithMessage<IllegalArgumentException>("중복된 로또 번호가 존재합니다.") {
+            Lotto(listOf(1, 1, 2, 3, 4, 5))
         }
     }
 })
