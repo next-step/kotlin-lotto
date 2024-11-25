@@ -10,7 +10,8 @@ class LottoResultTest : StringSpec({
                 Reward.FIRST to 0,
                 Reward.SECOND to 0,
                 Reward.THIRD to 0,
-                Reward.FOURTH to 1,
+                Reward.FOURTH to 0,
+                Reward.FIFTH to 1,
                 Reward.NONE to 4,
             )
         )

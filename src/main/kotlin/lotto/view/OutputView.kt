@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.LottoResult
+import lotto.Reward
 
 class OutputView {
     fun printResult(lottoResult: LottoResult) {
@@ -12,7 +13,10 @@ class OutputView {
         )
         lottoResult.winningRewards
             .forEach { (reward, count) ->
-                println("${reward.matchingNumberCount}개 일치 (${reward.money}원)- ${count}개")
+                when (reward) {
+                    Reward.SECOND -> println("${reward.matchingNumberCount}개 일치, 보너스볼 일치(${reward.money}원)- ${count}개")
+                    else -> println("${reward.matchingNumberCount}개 일치 (${reward.money}원)- ${count}개")
+                }
             }
         println("총 수익률은 ${lottoResult.calculateRateOfReturn()}입니다.")
     }
