@@ -1,27 +1,28 @@
 package study.lotto.view
 
-import study.lotto.model.LottePrize
+import study.lotto.model.LottoPrize
 import study.lotto.model.Lotto
+import study.lotto.model.LottoStat
 
 /**
  * @author 이상준
  */
 class ResultView {
-    fun printLotte(result: List<Lotto>) {
+    fun printLotto(result: List<Lotto>) {
         result.forEach {
-            println(it.lotteNumbers)
+            println(it.lottoNumbers)
         }
     }
 
-    fun printLotteCount(result: List<Lotto>) {
+    fun printLottoCount(result: List<Lotto>) {
         println("${result.size}개를 구매했습니다.")
     }
 
-    fun printWinLotte(statMap: Map<LottePrize, Int>) {
+    fun printWinLotto(statSet: Set<LottoStat>) {
         println("당첨 통계")
         println("---------")
-        statMap.forEach {
-            println("${it.key.prize}개 일치 (${it.key.amount})원 - ${it.value}개")
+        statSet.forEach {
+            println("${it.lottoPrize.prize}개 일치 (${it.lottoPrize.amount})원 - ${it.count}개")
         }
     }
 

@@ -1,4 +1,4 @@
-## Lotte
+## Lotto
 
 # 프로그래밍 요구 사항
 - 모든 기능을 TDD로 구현해 단위 테스트가 존재해야 한다. 단, UI(System.out, System.in) 로직은 제외
