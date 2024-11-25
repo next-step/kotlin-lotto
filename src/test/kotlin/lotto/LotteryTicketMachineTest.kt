@@ -57,4 +57,24 @@ class LotteryTicketMachineTest : StringSpec({
         result.shouldNotBeNull()
         sut.totalCost shouldBe Money(1000)
     }
+
+    "로또 티켓 머신은 수동으로 로또 번호를 입력받아 로또 티켓을 발급할 수 있다" {
+        val sut = LotteryTicketMachine(balance = Money(1000), totalCost = Money.ZERO)
+        val lottoNumbers = (1..6).map { LottoNumber(it) }
+
+        val result = sut.issueTicket(lottoNumbers)
+
+        result.shouldNotBeNull()
+        result.numbers shouldBe lottoNumbers
+    }
+
+    "로또 티켓 머신은 수동 번호 티켓을 발급할 때도 잔액이 부족하면 null을 반환한다" {
+        val sut = LotteryTicketMachine(balance = Money(1999), totalCost = Money.ZERO)
+        sut.issueTicket()
+        val lottoNumbers = (1..6).map { LottoNumber(it) }
+
+        val result = sut.issueTicket(lottoNumbers)
+
+        result.shouldBeNull()
+    }
 })
