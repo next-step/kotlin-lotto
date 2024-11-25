@@ -2,7 +2,6 @@ package autolotto.service
 
 import autolotto.entity.Lotto
 import autolotto.repository.LottoRepository
-import kotlin.random.Random
 
 class LottoService(private val lottoRepository: LottoRepository) {
     fun start(gameCount: Int): List<Lotto> {
@@ -13,9 +12,9 @@ class LottoService(private val lottoRepository: LottoRepository) {
     }
 
     private fun generateLottoNumbers(): Set<Int> {
-        return generateSequence { Random.nextInt(45) + 1 }
-            .distinct()
-            .take(6)
+        return (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER)
+            .shuffled()
+            .take(LOTTO_TAKE_NUMBER)
             .toSet()
     }
 
@@ -31,7 +30,7 @@ class LottoService(private val lottoRepository: LottoRepository) {
             lottos.map { lotto -> comparisonWinningNumbers(lotto, winnersNumbers) }
                 .groupBy { it }.mapValues { it.value.size }.toMutableMap()
         resultMap.forEach { (key, value) ->
-            comparisonWinningNumbers[key] = (resultMap[key] ?: 0) + value
+            resultMap[key] = (comparisonWinningNumbers[key] ?: 0) + value
         }
         return resultMap
     }
@@ -42,5 +41,11 @@ class LottoService(private val lottoRepository: LottoRepository) {
     ): Int {
         val matchedNumbers = lotto.lottoGame.filter { winnersNumbers.contains(it) }
         return matchedNumbers.count()
+    }
+
+    companion object {
+        private const val MIN_LOTTO_NUMBER = 1
+        private const val MAX_LOTTO_NUMBER = 45
+        private const val LOTTO_TAKE_NUMBER = 6
     }
 }

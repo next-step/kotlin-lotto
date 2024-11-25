@@ -9,8 +9,8 @@ object InputView {
         return amount / LOTTO_AMOUNT
     }
 
-    fun printLottoGameCount(gameCount: Int) {
-        println("${gameCount}개를 구매했습니다.")
+    fun printLottoGameCount(amount: Int) {
+        println("${getLottoGameCount(amount)}개를 구매했습니다.")
     }
 
     fun getLottoPurchaseAmount(): Int {
