@@ -1,7 +1,7 @@
 package lotto.domain
 
 data class LottoResult(
-    val results: Results,
+    private val results: Results,
     val incomeRate: IncomeRate,
 ) {
     val first: Int
@@ -15,6 +15,9 @@ data class LottoResult(
 
     val fourth: Int
         get() = results.countByResult(Result.FOURTH)
+
+    val fifth: Int
+        get() = results.countByResult(Result.FIFTH)
 
     val miss: Int
         get() = results.countByResult(Result.MISS)
