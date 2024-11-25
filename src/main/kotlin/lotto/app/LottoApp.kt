@@ -15,10 +15,13 @@ fun main() {
     // 1. 구입 금액 입력 및 로또 개수 계산
     val purchaseAmount = inputView.readPurchaseAmount()
     val lottoCount = lottoStore.calculateLottoCount(purchaseAmount)
-    resultView.printLottoCount(lottoCount)
+    val manualCount = inputView.readManualCount(lottoCount)
+    val manualLottos = inputView.readManualLottos(manualCount)
+
+    resultView.printLottoCount(lottoCount, manualCount)
 
     // 2. 로또 발행 및 출력
-    val purchasedLottos = lottoStore.issueLottos(lottoCount, numberGenerator)
+    val purchasedLottos = lottoStore.issueLottos(manualLottos, lottoCount, numberGenerator)
     resultView.printPurchasedLottos(purchasedLottos)
 
     // 3. 당첨 번호 입력
