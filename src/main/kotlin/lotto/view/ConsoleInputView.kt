@@ -18,6 +18,14 @@ class ConsoleInputView : InputView {
             .map { it.trim().toInt() }
     }
 
+    override fun requestBonusNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        val bonusNumber =
+            readlnOrNull() ?: throw IllegalArgumentException("입력값이 없습니다.")
+
+        return bonusNumber.toInt()
+    }
+
     companion object {
         private const val DELIMITER = ","
     }
