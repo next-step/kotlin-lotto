@@ -10,6 +10,8 @@ enum class Prize(
     FOURTH(3, 5_000), ;
 
     companion object {
+        val RANK_RANGE = IntRange(3, 6)
+
         fun findByMatchCount(matchCount: Int): Prize {
             return entries.find { it.matchCount == matchCount }
                 ?: throw RuntimeException("일치하는 숫자의 개수에 해당하는 상품이 존재하지 않습니다.")

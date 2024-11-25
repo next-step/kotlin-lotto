@@ -1,18 +1,11 @@
 package lotto.domain
 
-class Lotto(generatedNumbers: Set<Int>) {
-    val numbers: Set<LottoNumber>
-
+class Lotto(val numbers: Set<LottoNumber>) {
     init {
-        validateSize(generatedNumbers)
-        numbers = generatedNumbers.map { LottoNumber(it) }.toSet()
+        validateSize(numbers)
     }
 
-    fun countMatchingNumbers(targetLotto: Set<LottoNumber>): Int {
-        return targetLotto.count { it in this.numbers }
-    }
-
-    private fun validateSize(numbers: Set<Int>) {
+    private fun validateSize(numbers: Set<LottoNumber>) {
         require(numbers.size == LOTTO_NUMBER_SIZE) { "로또 번호는 ${LOTTO_NUMBER_SIZE}개여야 합니다. 현재 전달된 개수는 ${numbers.size}개 입니다." }
     }
 

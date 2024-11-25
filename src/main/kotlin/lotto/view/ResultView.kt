@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.domain.Lotto
-import lotto.domain.WinningResult
+import lotto.view.dto.WinningResult
 
 object ResultView {
     fun printCreatedLottos(lottos: List<Lotto>) {

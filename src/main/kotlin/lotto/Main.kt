@@ -1,19 +1,21 @@
 package lotto
 
-import lotto.service.LottoSystem
+import lotto.service.OrderService
+import lotto.service.WinningLottoService
 import lotto.view.InputView
 import lotto.view.ResultView
 
 fun main() {
-    val lottoSystem = LottoSystem()
+    val orderService = OrderService()
+    val winningLottoService = WinningLottoService()
 
     val amount = InputView.getAmount()
-    val order = lottoSystem.createOrder(amount)
+    val order = orderService.makeOrder(amount)
     ResultView.printCreatedLottos(order.lottos)
 
     val winNumberInput = InputView.getWinNumberInput()
-    val winNumbers = lottoSystem.createWinNumbers(winNumberInput)
+    val winNumbers = winningLottoService.createWinningLotto(winNumberInput)
 
-    val result = lottoSystem.createWinningResult(order, winNumbers)
+    val result = winningLottoService.checkAndGetResult(order, winNumbers)
     ResultView.printResult(result)
 }

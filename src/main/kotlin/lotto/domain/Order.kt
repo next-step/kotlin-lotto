@@ -1,29 +1,17 @@
 package lotto.domain
 
-import lotto.util.NumberGenerator
+import lotto.const.LottoConst.UNIT_OF_AMOUNT
 
-class Order(
+data class Order(
     val amount: Int,
-    numberGenerator: NumberGenerator,
+    val lottos: List<Lotto>,
 ) {
-    val lottos: List<Lotto>
-
     init {
-        validatePositive()
-        val lottoCount = calculateLottoCounts()
-        lottos = List(lottoCount) { Lotto(numberGenerator.generate()) }
+        validateLottoCounts()
     }
 
-    private fun validatePositive() {
-        require(amount > 0) { "로또 구매 금액은 음수이거나 0원일 수 없습니다. (현재 입력 금액: $amount)" }
-    }
-
-    private fun calculateLottoCounts(): Int {
-        require(amount % UNIT_OF_AMOUNT == 0) { "로또 구매 금액은 1000원 단위로 입력되어야 합니다. (현재 입력 금액: $amount)" }
-        return amount / UNIT_OF_AMOUNT
-    }
-
-    companion object {
-        private const val UNIT_OF_AMOUNT = 1000
+    private fun validateLottoCounts() {
+        val count = amount / UNIT_OF_AMOUNT
+        require(lottos.size == count) { "구매한 금액과 로또의 수량이 일치하지 않습니다." }
     }
 }
