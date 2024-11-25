@@ -5,7 +5,7 @@ object ProfitRateCalculator {
         purchaseAmount: Money,
         drawResult: DrawResult,
     ): Double {
-        val totalPrize = drawResult.calculateTotalPrize()
+        val totalPrize = drawResult.getTotalReward()
         return totalPrize.divideBy(purchaseAmount)
     }
 }

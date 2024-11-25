@@ -1,7 +1,7 @@
 package lottery.domain
 
 class DrawResult(private val rankRewardLotteryCountMap: Map<RankReward, LotteryCount>) {
-    fun calculateTotalPrize(): Money {
+    fun getTotalReward(): Money {
         return rankRewardLotteryCountMap.entries.fold(Money.ZERO) { total, (rankReward, lotteryCount) ->
             val totalRewardPerRank = rankReward.money * lotteryCount.count
             total + totalRewardPerRank
