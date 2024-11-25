@@ -1,14 +1,12 @@
 package calculator
 
-import calculator.delimiter.CustomDelimiterSplitter
-import calculator.delimiter.DefaultDelimiterSplitter
 import calculator.parser.TextParser
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
 class StringAdditionCalculatorTest : StringSpec({
-    val textParser = TextParser(listOf(CustomDelimiterSplitter, DefaultDelimiterSplitter))
+    val textParser = TextParser
     val sut = StringAdditionCalculator(textParser)
 
     "빈 문자열이나 null을 입력받으면 0을 반환한다" {

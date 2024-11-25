@@ -1,6 +1,7 @@
 package calculator.delimiter
 
 object DefaultDelimiterSplitter : DelimiterSplitter {
+    override val priority: Int = Int.MAX_VALUE
     private val DEFAULT_DELIMITER = Regex("[,:]")
 
     override fun isSupport(text: String): Boolean {
