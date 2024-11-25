@@ -1,11 +1,12 @@
 package lotto.domain
 
-object LottoGenerator {
-    private const val LOTTO_MIN_NUMBER = 1
-    private const val LOTTO_MAX_NUMBER = 45
-    private const val LOTTO_NUMBERS_COUNT = 6
+import lotto.domain.Lotto.Companion.LOTTO_MAX_NUMBER
+import lotto.domain.Lotto.Companion.LOTTO_MIN_NUMBER
+import lotto.domain.Lotto.Companion.LOTTO_NUMBERS_COUNT
 
-    fun generateTicket() : List<Int> {
-        return (LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER).shuffled().take(LOTTO_NUMBERS_COUNT).sorted()
+object LottoGenerator {
+    fun generateTicket(): Lotto {
+        val numbers = (LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER).shuffled().take(LOTTO_NUMBERS_COUNT)
+        return Lotto.of(numbers)
     }
 }
