@@ -14,7 +14,7 @@ fun main() {
 
     // 1. 구입 금액 입력 및 로또 개수 계산
     val purchaseAmount = inputView.readPurchaseAmount()
-    val lottoCount = lottoStore.calculateLottoCount(purchaseAmount)
+    val lottoCount = purchaseAmount.calculateLottoCount()
     val manualCount = inputView.readManualCount(lottoCount)
     val manualLottos = inputView.readManualLottos(manualCount)
 

@@ -1,25 +1,25 @@
 package lotto.view
 
+import lotto.domain.Amount
 import lotto.domain.BonusNumber
 import lotto.domain.Lotto
 import lotto.domain.WinningLotto
 
 class InputView {
-    fun readPurchaseAmount(): Int {
-        println("구입 금액을 입력해 주세요.")
-        val input = readlnOrNull() ?: exitProgram()
-        return try {
-            input.toInt()
-        } catch (e: NumberFormatException) {
-            println("유효하지 않은 금액입니다. 숫자를 입력해 주세요.")
-            return readPurchaseAmount()
-        }
+    fun readPurchaseAmount(): Amount {
+        return readAndParse(
+            prompt = "구입 금액을 입력해 주세요.",
+            parser = { Amount(it.toInt()) },
+        )
     }
 
     fun readManualLottos(
         manualCount: Int,
         manualLottos: MutableList<Lotto> = mutableListOf(),
     ): List<Lotto> {
+        if (manualCount == 0) {
+            return emptyList()
+        }
         println("수동으로 구매할 번호를 입력해 주세요.")
 
         while (manualLottos.size < manualCount) {
@@ -41,15 +41,12 @@ class InputView {
     }
 
     fun readManualCount(purchasedCount: Int): Int {
-        println("수동으로 구매할 로또 수를 입력해 주세요.")
-        val input = readlnOrNull() ?: exitProgram()
-        return try {
-            require(input.toInt() <= purchasedCount) { "수동으로 구매할 로또 수는 총 구매한 로또 수보다 작아야 합니다." }
-            input.toInt()
-        } catch (e: NumberFormatException) {
-            println("유효하지 않은 숫자입니다. 숫자를 입력해 주세요.")
-            return readManualCount(purchasedCount)
-        }
+        return readAndParse(
+            prompt = "수동으로 구매할 로또 수를 입력해 주세요.",
+            parser = { it.toInt() },
+            validator = { it <= purchasedCount },
+            errorMessage = "수동으로 구매할 로또 수는 총 구매한 로또 수보다 작아야 합니다.",
+        )
     }
 
     fun readWinningLotto(): WinningLotto {
@@ -98,5 +95,24 @@ class InputView {
                 .toSet()
 
         return Lotto(numbers)
+    }
+
+    private inline fun <T> readAndParse(
+        prompt: String,
+        parser: (String) -> T,
+        validator: (T) -> Boolean = { true },
+        errorMessage: String = "유효하지 않은 입력입니다. 다시 시도해 주세요.",
+    ): T {
+        while (true) {
+            println(prompt)
+            val input = readlnOrNull() ?: exitProgram()
+            try {
+                val parsedValue = parser(input)
+                require(validator(parsedValue)) { errorMessage }
+                return parsedValue
+            } catch (e: Exception) {
+                println(e.message ?: errorMessage)
+            }
+        }
     }
 }
