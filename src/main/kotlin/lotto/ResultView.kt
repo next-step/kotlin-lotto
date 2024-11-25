@@ -34,9 +34,12 @@ class ResultView {
             winningBoard: WinningBoard,
         ) {
             winningResultsWithoutLose.forEach {
-                println("${it.countOfMatch}개 일치 (${it.winnings}원) - ${winningBoard.getWinningCount(it)}개")
+                println("${generateStatLabel(it)} - ${winningBoard.getWinningCount(it)}개")
             }
         }
+
+        private fun generateStatLabel(it: WinningResult) =
+            "${it.countOfMatch}개 일치${if (it == WinningResult.SECOND) ", 보너스 볼 일치" else " "}(${it.winnings.toInt()}원)"
 
         private const val BASE_RETURNS = 1
 
