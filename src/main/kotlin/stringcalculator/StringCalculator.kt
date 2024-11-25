@@ -2,15 +2,16 @@ package stringcalculator
 
 class StringCalculator {
     fun sum(exp: String): Int {
-        val tokens = TokenSplitter.splitExpBySeparator(exp)
-        return sumTokens(tokens)
+        val rawTokens = TokenSplitter.splitExpBySeparator(exp)
+        val convertedTokens = convertTokens(rawTokens)
+        return sumTokens(convertedTokens)
     }
 
-    private fun sumTokens(tokens: List<String>): Int {
-        return tokens.sumOf { token ->
-            token.toIntOrNull()?.takeIf { isPositiveInt(it) } ?: throw RuntimeException()
-        }
+    private fun convertTokens(tokens: List<String>): List<StringToken> {
+        return tokens.map { t -> StringToken(t) }.toList()
     }
 
-    private fun isPositiveInt(it: Int) = it >= 0
+    private fun sumTokens(tokens: List<StringToken>): Int {
+        return tokens.sumOf { stringToken -> stringToken.getIntValue }
+    }
 }
