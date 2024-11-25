@@ -2,9 +2,9 @@ package lotto
 
 class ConsoleInput {
     companion object {
-        fun inputBalance(): Int {
+        fun inputBalance(): Money {
             println("구입금액을 입력해 주세요.")
-            return readln().toInt()
+            return Money(readln().toInt())
         }
 
         fun inputDefaultWinningTicket(): LottoTicket {
