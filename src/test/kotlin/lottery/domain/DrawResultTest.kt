@@ -1,6 +1,7 @@
 package lottery.domain
 
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.doubles.shouldBeExactly
 import io.kotest.matchers.shouldBe
 import lottery.domain.RankReward.RANK_1
 import lottery.domain.RankReward.RANK_2
@@ -37,6 +38,6 @@ class DrawResultTest : StringSpec({
     "구입 금액과 결과를 계산하여 수익률을 반환한다" {
         val drawResult = DrawResult(mapOf(RANK_4 to LotteryCount(1)))
 
-        drawResult.getTotalReward().amount shouldBe 5_000
+        drawResult.getProfitRate(Money(1_000_000)) shouldBeExactly 0.005
     }
 })

@@ -28,6 +28,6 @@ object ResultView {
         RankReward.sortLowToHighByRank().forEach { rank ->
             println("$rank- ${drawResult.findLotteryCount(rank)}개")
         }
-        println("총 수익률은 ${drawResult.getTotalReward().divideBy(purchaseAmount)}입니다.")
+        println("총 수익률은 ${drawResult.getProfitRate(purchaseAmount)}입니다.")
     }
 }

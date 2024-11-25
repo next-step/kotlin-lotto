@@ -1,15 +1,19 @@
 package lottery.domain
 
 class DrawResult(private val rankRewardLotteryCountMap: Map<RankReward, LotteryCount>) {
-    fun getTotalReward(): Money {
-        return rankRewardLotteryCountMap.entries.fold(Money.ZERO) { total, (rankReward, lotteryCount) ->
-            val totalRewardPerRank = rankReward.money * lotteryCount.count
-            total + totalRewardPerRank
-        }
+    fun getProfitRate(purchaseAmount: Money): Double {
+        return getTotalReward().divideBy(purchaseAmount)
     }
 
     fun findLotteryCount(rankReward: RankReward): LotteryCount {
         return rankRewardLotteryCountMap[rankReward] ?: LotteryCount(0)
+    }
+
+    private fun getTotalReward(): Money {
+        return rankRewardLotteryCountMap.entries.fold(Money.ZERO) { total, (rankReward, lotteryCount) ->
+            val totalRewardPerRank = rankReward.money * lotteryCount.count
+            total + totalRewardPerRank
+        }
     }
 
     companion object {
