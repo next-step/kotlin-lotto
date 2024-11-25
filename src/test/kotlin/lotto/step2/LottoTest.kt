@@ -1,9 +1,9 @@
-package lotto
+package lotto.step2
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.Lotto
+import lotto.step2.domain.Lotto
 
 class LottoTest : FunSpec({
     test("로또를 처음 생성하면 pickNumbers의 개수는 6이고, matchCount는 0이다.") {

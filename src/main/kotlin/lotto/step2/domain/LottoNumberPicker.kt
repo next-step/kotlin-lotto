@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.step2.domain
 
 class LottoNumberPicker : NumberPicker {
     override fun pick(): List<Int> {

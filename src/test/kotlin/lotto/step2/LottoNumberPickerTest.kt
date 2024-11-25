@@ -1,8 +1,8 @@
-package lotto
+package lotto.step2
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.LottoNumberPicker
+import lotto.step2.domain.LottoNumberPicker
 
 class LottoNumberPickerTest : FunSpec({
     test("로또 번호를 6개 뽑는다.") {

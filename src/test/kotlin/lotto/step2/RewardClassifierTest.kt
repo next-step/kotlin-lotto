@@ -1,9 +1,9 @@
-package lotto
+package lotto.step2
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.RewardClassifier
-import lotto.domain.RewardType
+import lotto.step2.domain.RewardClassifier
+import lotto.step2.domain.RewardType
 
 class RewardClassifierTest : FunSpec({
     test("RewardClassifier가 로또를 올바르게 분류한다") {

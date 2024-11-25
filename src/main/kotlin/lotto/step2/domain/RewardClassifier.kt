@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.step2.domain
 
 object RewardClassifier {
     fun classify(lottos: List<Lotto>): Map<RewardType, Int> {

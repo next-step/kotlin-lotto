@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.step2.domain
 
 object LottoMatcher {
     fun match(

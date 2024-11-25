@@ -1,10 +1,8 @@
-package lotto
+package lotto.step2
 
-import lotto.domain.LottoGame
-import lotto.domain.LottoNumberPicker
-import lotto.domain.LottoPurchaseManager
-import lotto.view.InputView
-import lotto.view.OutputView
+import lotto.step2.domain.LottoGame
+import lotto.step2.domain.LottoNumberPicker
+import lotto.step2.domain.LottoPurchaseManager
 
 fun main() {
     val money = InputView.getPurchaseAmount()

@@ -1,4 +1,4 @@
-package lotto
+package lotto.step2
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.data.forAll
@@ -6,8 +6,8 @@ import io.kotest.data.headers
 import io.kotest.data.row
 import io.kotest.data.table
 import io.kotest.matchers.shouldBe
-import lotto.domain.Lotto
-import lotto.domain.LottoMatcher
+import lotto.step2.domain.Lotto
+import lotto.step2.domain.LottoMatcher
 
 class LottoMatcherTest : FunSpec({
     test("로또 번호가 일치하는 개수를 반환한다.") {

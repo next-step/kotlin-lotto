@@ -1,6 +1,6 @@
-package lotto
+package lotto.step2
 
-import lotto.domain.Lotto
+import lotto.step2.domain.Lotto
 
 object LottoStub {
     fun get(

@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.step2.domain
 
 enum class RewardType(val matchCount: Int, val winningAmount: Long) {
     FIRST(6, 2_000_000_000),

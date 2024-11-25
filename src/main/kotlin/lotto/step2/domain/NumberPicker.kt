@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.step2.domain
 
 interface NumberPicker {
     fun pick(): List<Int>

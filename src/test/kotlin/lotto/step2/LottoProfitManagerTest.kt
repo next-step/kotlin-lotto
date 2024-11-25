@@ -1,9 +1,9 @@
-package lotto
+package lotto.step2
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.LottoProfitManager
-import lotto.domain.RewardType
+import lotto.step2.domain.LottoProfitManager
+import lotto.step2.domain.RewardType
 
 class LottoProfitManagerTest : FunSpec({
     test("로또 수익률을 계산한다.") {

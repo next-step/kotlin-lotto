@@ -1,4 +1,4 @@
-package lotto.view
+package lotto.step2
 
 object InputView {
     fun getPurchaseAmount(): Long {

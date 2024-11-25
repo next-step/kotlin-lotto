@@ -1,4 +1,4 @@
-package lotto
+package lotto.step2
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.data.forAll
@@ -6,8 +6,8 @@ import io.kotest.data.headers
 import io.kotest.data.row
 import io.kotest.data.table
 import io.kotest.matchers.shouldBe
-import lotto.domain.LottoNumberPicker
-import lotto.domain.LottoPurchaseManager
+import lotto.step2.domain.LottoNumberPicker
+import lotto.step2.domain.LottoPurchaseManager
 
 class LottoPurchaseManagerTest : FunSpec({
     test("금액을 입력하면 구매 가능한 로또 개수를 반환한다.") {

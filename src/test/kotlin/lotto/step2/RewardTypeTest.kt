@@ -1,9 +1,9 @@
-package lotto
+package lotto.step2
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.RewardType
+import lotto.step2.domain.RewardType
 
 class RewardTypeTest : FunSpec({
     test("RewardType.of는 matchCount에 따라 올바른 RewardType을 반환한다") {

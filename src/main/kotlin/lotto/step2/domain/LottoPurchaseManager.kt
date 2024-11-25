@@ -1,6 +1,6 @@
-package lotto.domain
+package lotto.step2.domain
 
-import lotto.domain.Lotto.Companion.PRICE
+import lotto.step2.domain.Lotto.Companion.PRICE
 
 class LottoPurchaseManager(
     private val numberPicker: NumberPicker,

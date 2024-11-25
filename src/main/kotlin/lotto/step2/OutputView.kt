@@ -1,8 +1,8 @@
-package lotto.view
+package lotto.step2
 
-import lotto.domain.Lotto
-import lotto.domain.RewardType
-import lotto.domain.WinningStatistics
+import lotto.step2.domain.Lotto
+import lotto.step2.domain.RewardType
+import lotto.step2.domain.WinningStatistics
 
 object OutputView {
     fun printPurchaseResult(lottos: List<Lotto>) {
@@ -15,10 +15,10 @@ object OutputView {
     fun printStatistics(winningStatistics: WinningStatistics) {
         println("당첨 통계")
         println("---------")
-        this.printMatchCount(rewardType = RewardType.FOURTH, rewardMap = winningStatistics.rewardMap)
-        this.printMatchCount(rewardType = RewardType.THIRD, rewardMap = winningStatistics.rewardMap)
-        this.printMatchCount(rewardType = RewardType.SECOND, rewardMap = winningStatistics.rewardMap)
-        this.printMatchCount(rewardType = RewardType.FIRST, rewardMap = winningStatistics.rewardMap)
+        printMatchCount(rewardType = RewardType.FOURTH, rewardMap = winningStatistics.rewardMap)
+        printMatchCount(rewardType = RewardType.THIRD, rewardMap = winningStatistics.rewardMap)
+        printMatchCount(rewardType = RewardType.SECOND, rewardMap = winningStatistics.rewardMap)
+        printMatchCount(rewardType = RewardType.FIRST, rewardMap = winningStatistics.rewardMap)
         println("총 수익률은 ${winningStatistics.profit}입니다.")
     }
 
