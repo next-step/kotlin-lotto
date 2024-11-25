@@ -1,6 +1,6 @@
 package lotto.domain
 
-object LottoCalculator {
+object LottoPurchaseCalculator {
     private const val LOTTO_PRICE = 1000
 
     fun calculateTicketCount(amount: Int): Int {
