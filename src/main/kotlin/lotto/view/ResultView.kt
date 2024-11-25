@@ -17,9 +17,10 @@ object ResultView {
         println("당첨 통계")
         println("---------")
 
-        lottoRanks.filter { it != LottoRank.NONE }
-            .groupBy { it.matchCount }
-            .forEach { (matchCount, ranks) -> println("${matchCount}개 일치 (${ranks.first().prize}원) - ${ranks.size}개") }
+        lottoRanks
+            .filter { it != LottoRank.NONE }
+            .groupBy { it.key }
+            .forEach { (key, ranks) -> println("${key.matchCount}개 일치 ${key.message ?: ""} (${ranks.first().prize}원) - ${ranks.size}개") }
     }
 
     fun printProfit(profit: Double) {

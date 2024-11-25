@@ -1,9 +1,8 @@
 package lotto
 
 import lotto.number.Numbers
-import lotto.rank.LottoRank
 
-class Lotto(
+data class Lotto(
     val numbers: Numbers =
         Numbers(
             RANGE
@@ -12,13 +11,6 @@ class Lotto(
                 .sorted(),
         ),
 ) {
-    fun getRank(winningNumbers: List<Int>): LottoRank {
-        val matchCount = winningNumbers.count { isMatch(it) }
-        return LottoRank.getRank(matchCount = matchCount)
-    }
-
-    private fun isMatch(winningNumber: Int): Boolean = numbers.numbers.contains(winningNumber)
-
     companion object {
         private const val COUNT = 6
         private const val MIN_NUMBER = 1
