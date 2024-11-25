@@ -27,8 +27,7 @@ class InputView {
             val remainCount = manualCount - manualLottos.size
 
             try {
-                val numbers = input.split(",").map { it.trim().toInt() }.toSet()
-                manualLottos.add(Lotto(numbers)) // 입력된 로또를 상태에 추가
+                manualLottos.add(lottoParse(input))
             } catch (e: NumberFormatException) {
                 println("유효하지 않은 숫자입니다. 다시 입력해 주세요. (${remainCount}개 남음)")
                 readManualLottos(remainCount, manualLottos)
@@ -64,11 +63,7 @@ class InputView {
     fun readWinningNumbers(): Lotto {
         val input = readlnOrNull() ?: exitProgram()
         return try {
-            val numbers =
-                input.split(",").map {
-                    it.trim().toInt()
-                }
-            Lotto(numbers.toSet())
+            lottoParse(input)
         } catch (e: NumberFormatException) {
             println("유효하지 않은 숫자입니다. 숫자를 입력해 주세요.")
             return readWinningNumbers()
@@ -94,5 +89,14 @@ class InputView {
     private fun exitProgram(): Nothing {
         println("프로그램을 종료합니다.")
         kotlin.system.exitProcess(0)
+    }
+
+    private fun lottoParse(input: String): Lotto {
+        val numbers =
+            input.split(",")
+                .map { it.trim().toInt() }
+                .toSet()
+
+        return Lotto(numbers)
     }
 }
