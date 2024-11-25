@@ -2,6 +2,7 @@ package lotto.domain
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.purchase.LottoPurchaseCount
 import lotto.domain.vo.LottoResult
 
 class LottoResultsTest : StringSpec({
