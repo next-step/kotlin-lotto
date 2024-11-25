@@ -1,5 +1,6 @@
 package lotto.controller
 
+import lotto.domain.BonusNumber
 import lotto.domain.LottoPurchasingMachine
 import lotto.domain.LottoRank
 import lotto.service.LottoService
@@ -16,10 +17,13 @@ object LottoController {
         ResultView.showPurchaseInfo(tickets.size, tickets.map { it.lottoNumbers })
 
         val winningNumbers = InputView.askWinningNumbers()
+        val bonusNumber = InputView.askBonusNumber()
 
         val statistics =
             tickets.groupingBy { ticket ->
-                LottoRank.from(ticket.matchCount(winningNumbers))
+                val matchCount = ticket.matchCount(winningNumbers)
+                val hasBonus = matchCount == 5 && ticket.hasBonusNumber(BonusNumber(bonusNumber))
+                LottoRank.from(matchCount, hasBonus)
             }.eachCount()
 
         val totalPrize =
