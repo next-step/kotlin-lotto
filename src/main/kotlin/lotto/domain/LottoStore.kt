@@ -7,10 +7,13 @@ class LottoStore {
     }
 
     fun issueLottos(
-        count: Int,
+        manualLottos: List<Lotto>,
+        lottoCount: Int,
         generator: LottoNumberGenerator,
     ): PurchasedLottos {
-        return PurchasedLottos(List(count) { Lotto(generator.generate()) })
+        val autoCount = lottoCount - manualLottos.size
+        val autoLottos = List(autoCount) { Lotto(generator.generate()) }
+        return PurchasedLottos(manualLottos + autoLottos)
     }
 
     companion object {
