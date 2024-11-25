@@ -15,8 +15,8 @@ enum class Rank(
     companion object {
 
         private val rankCalcStrategy = listOf(
-            DefaultRankCalcStrategy(),
-            SecondRankCalcStrategy(),
+            DefaultRankCalculateStrategy(),
+            SecondRankCalculateStrategy(),
         )
 
         fun of(matchCount: Int, isBonusMatched: Boolean): Rank {

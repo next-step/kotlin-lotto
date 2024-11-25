@@ -1,11 +1,11 @@
 package lotto.domain.rank
 
-interface RankCalcStrategy {
+interface RankCalculateStrategy {
     fun support(matchCount: Int, isBonusMatched: Boolean): Boolean
     fun calculate(matchCount: Int, isBonusMatched: Boolean): Rank
 }
 
-class DefaultRankCalcStrategy : RankCalcStrategy {
+class DefaultRankCalculateStrategy : RankCalculateStrategy {
     override fun support(matchCount: Int, isBonusMatched: Boolean): Boolean {
         return !(matchCount == 5 && isBonusMatched)
     }
@@ -15,7 +15,7 @@ class DefaultRankCalcStrategy : RankCalcStrategy {
     }
 }
 
-class SecondRankCalcStrategy : RankCalcStrategy {
+class SecondRankCalculateStrategy : RankCalculateStrategy {
     override fun support(matchCount: Int, isBonusMatched: Boolean): Boolean {
         return matchCount == 5 && isBonusMatched
     }

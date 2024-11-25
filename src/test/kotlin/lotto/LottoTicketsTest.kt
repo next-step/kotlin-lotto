@@ -2,7 +2,7 @@ package lotto
 
 import lotto.domain.LottoPurchaseInfo
 import lotto.domain.LottoTickets
-import lotto.domain.rank.Rank
+import lotto.domain.WinningLottoTicket
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -27,13 +27,9 @@ class LottoTicketsTest {
 
     @Test
     fun test() {
-        val rankInfo = mapOf(
-            Rank.FIRST to 1,
-            Rank.SECOND to 1,
-            Rank.THIRD to 1,
-            Rank.FOURTH to 1,
-            Rank.FIFTH to 1,
-            Rank.NONE to 1,
+        val winningLottoTicket = WinningLottoTicket(
+            winningNumbers = setOf(1, 2, 3, 4, 5, 6),
+            bonusNumber = 7,
         )
 
         val lottoTickets = LottoTickets(
@@ -52,7 +48,7 @@ class LottoTicketsTest {
             ),
         )
 
-        val profitRate = lottoTickets.getProfitRate(rankInfo, lottoTickets)
+        val profitRate = winningLottoTicket.getProfitRate(lottoTickets)
 
         assertThat(profitRate).isEqualTo(338592.5)
     }

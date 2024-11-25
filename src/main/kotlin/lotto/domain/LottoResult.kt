@@ -8,7 +8,7 @@ class LottoResult(
 ) {
     fun getResult(): Result {
         val rankInfo = winningLottoTicket.matchTickets(lottoTickets)
-        val profitRate = lottoTickets.getProfitRate(rankInfo, lottoTickets)
+        val profitRate = winningLottoTicket.getProfitRate(lottoTickets)
         val isProfit = profitRate > 1.0
         return Result(rankInfo, profitRate, isProfit)
     }

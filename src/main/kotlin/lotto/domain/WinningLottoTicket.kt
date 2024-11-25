@@ -16,13 +16,23 @@ class WinningLottoTicket(
         }
     }
 
+    fun getProfitRate(lottoTickets: LottoTickets): Double {
+        val totalPrice = lottoTickets.totalTicketPrice
+        val rankInfo = matchTickets(lottoTickets)
+        val totalWinningMoney = rankInfo.entries.sumOf {
+                (rank, count) ->
+            rank.winningMoney * count
+        }
+        return totalWinningMoney.toDouble() / totalPrice
+    }
+
     fun matchTickets(lottoTickets: LottoTickets): Map<Rank, Int> {
         val ranks = lottoTickets.tickets.map(::match)
         val eachCount = ranks.groupingBy { it }.eachCount()
         return Rank.entries.associateWith { rank -> eachCount.getOrDefault(rank, 0) }
     }
 
-    fun match(lottoTicket: LottoTicket): Rank {
+    private fun match(lottoTicket: LottoTicket): Rank {
         val matchCount = lottoTicket.numbers.count { winningNumbers.contains(it.number) }
         val isBonusMatched = lottoTicket.numbers.contains(LottoNumber.of(bonusNumber))
         return Rank.of(matchCount, isBonusMatched)

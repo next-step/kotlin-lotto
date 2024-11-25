@@ -3,7 +3,7 @@ package lotto.domain
 class LottoPurchaseInfo(money: Int, val manualLottoCount: Int) {
 
     init {
-        require(money >= 1000) {
+        require(money >= LottoTickets.LOTTO_PRICE) {
             "로또 구매 금액은 1000원 이상이어야 합니다. 입력된 금액 = $money"
         }
 
