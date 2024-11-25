@@ -23,8 +23,6 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @MethodSource("provideNullOrBlankStrings")
     fun `Null 혹은 빈 값을 입력하면 0을 반환해야 한다`(expression: String?) {
-        // given
-
         // when
         val result = StringAddCalculator.calculate(expression)
 
