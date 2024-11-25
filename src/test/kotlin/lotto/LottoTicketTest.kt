@@ -1,6 +1,8 @@
 package lotto
 
+import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
+import lotto.domain.rank.Rank
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -40,5 +42,14 @@ class LottoTicketTest {
         val lottoTicket = LottoTicket.autoGenerate()
         val numbers = lottoTicket.numbers.map { it.number }
         assertThat(numbers).isEqualTo(numbers.sorted())
+    }
+
+    @Test
+    fun `match 함수가 잘 동작한다`() {
+        val lottoTicket = LottoTicket(setOf(1, 2, 3, 4, 5, 6))
+        val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) }.toSet()
+        val bonusNumber = LottoNumber.of(7)
+        val rank = lottoTicket.match(winningNumbers, bonusNumber)
+        assertThat(rank).isEqualTo(Rank.FIRST)
     }
 }

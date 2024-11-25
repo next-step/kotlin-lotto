@@ -3,6 +3,7 @@ package lotto
 import lotto.domain.LottoPurchaseInfo
 import lotto.domain.LottoTickets
 import lotto.domain.WinningLottoTicket
+import lotto.domain.rank.Rank
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -51,5 +52,45 @@ class LottoTicketsTest {
         val profitRate = winningLottoTicket.getProfitRate(lottoTickets)
 
         assertThat(profitRate).isEqualTo(338592.5)
+    }
+
+    @Test
+    fun `match 함수가 잘 동작한다`() {
+        val winningLottoTicket = WinningLottoTicket(
+            winningNumbers = setOf(1, 2, 3, 4, 5, 6),
+            bonusNumber = 7,
+        )
+
+        val lottoTickets = LottoTickets(
+            LottoPurchaseInfo(
+                money = 6_000,
+                manualLottoCount = 6,
+            ),
+            manualNumbers =
+            listOf(
+                setOf(1, 2, 3, 4, 5, 6),
+                setOf(1, 2, 3, 4, 5, 7),
+                setOf(1, 2, 3, 4, 5, 8),
+                setOf(1, 2, 3, 4, 8, 9),
+                setOf(1, 2, 3, 10, 11, 12),
+                setOf(25, 26, 27, 28, 29, 30),
+            ),
+        )
+
+        val matchResult = lottoTickets.match(
+            winningLottoNumbers = winningLottoTicket.winningNumbers,
+            bonusNumber = winningLottoTicket.bonusNumber,
+        )
+
+        assertThat(matchResult).isEqualTo(
+            mapOf(
+                Rank.FIRST to 1,
+                Rank.SECOND to 1,
+                Rank.THIRD to 1,
+                Rank.FOURTH to 1,
+                Rank.FIFTH to 1,
+                Rank.NONE to 1,
+            ),
+        )
     }
 }

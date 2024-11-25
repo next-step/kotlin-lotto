@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.domain.rank.Rank
+
 class LottoTickets(
     lottoPurchaseInfo: LottoPurchaseInfo,
     manualNumbers: List<Set<Int>>,
@@ -11,6 +13,11 @@ class LottoTickets(
     val tickets = manualTickets + autoTickets
 
     val totalTicketPrice = tickets.size * LOTTO_PRICE
+
+    fun match(winningLottoNumbers: Set<LottoNumber>, bonusNumber: LottoNumber): Map<Rank, Int> {
+        val matchResult = tickets.map { it.match(winningLottoNumbers, bonusNumber) }
+        return Rank.entries.associateWith { rank -> matchResult.count { it == rank } }
+    }
 
     private fun getManualTickets(manualNumbers: List<Set<Int>>): List<LottoTicket> {
         return manualNumbers.map { LottoTicket(it) }

@@ -3,9 +3,12 @@ package lotto.domain
 import lotto.domain.rank.Rank
 
 class WinningLottoTicket(
-    val winningNumbers: Set<Int>,
-    val bonusNumber: Int,
+    winningNumbers: Set<Int>,
+    bonusNumber: Int,
 ) {
+    val winningNumbers = winningNumbers.sorted().map { LottoNumber.of(it) }.toSet()
+    val bonusNumber = LottoNumber.of(bonusNumber)
+
     init {
         require(winningNumbers.size == 6) {
             "로또 번호는 6개여야 합니다. 입력된 숫자 = $winningNumbers"
@@ -19,22 +22,13 @@ class WinningLottoTicket(
     fun getProfitRate(lottoTickets: LottoTickets): Double {
         val totalPrice = lottoTickets.totalTicketPrice
         val rankInfo = matchTickets(lottoTickets)
-        val totalWinningMoney = rankInfo.entries.sumOf {
-                (rank, count) ->
+        val totalWinningMoney = rankInfo.entries.sumOf { (rank, count) ->
             rank.winningMoney * count
         }
         return totalWinningMoney.toDouble() / totalPrice
     }
 
     fun matchTickets(lottoTickets: LottoTickets): Map<Rank, Int> {
-        val ranks = lottoTickets.tickets.map(::match)
-        val eachCount = ranks.groupingBy { it }.eachCount()
-        return Rank.entries.associateWith { rank -> eachCount.getOrDefault(rank, 0) }
-    }
-
-    private fun match(lottoTicket: LottoTicket): Rank {
-        val matchCount = lottoTicket.numbers.count { winningNumbers.contains(it.number) }
-        val isBonusMatched = lottoTicket.numbers.contains(LottoNumber.of(bonusNumber))
-        return Rank.of(matchCount, isBonusMatched)
+        return lottoTickets.match(winningNumbers, bonusNumber)
     }
 }

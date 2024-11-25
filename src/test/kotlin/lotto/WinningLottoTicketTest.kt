@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.LottoNumber
 import lotto.domain.LottoPurchaseInfo
 import lotto.domain.LottoTickets
 import lotto.domain.WinningLottoTicket
@@ -16,7 +17,7 @@ class WinningLottoTicketTest {
         val winningLottoTicketTest = WinningLottoTicket(winningNumbers, bonusNumber)
 
         assertThat(winningLottoTicketTest.winningNumbers.size).isEqualTo(6)
-        assertThat(winningLottoTicketTest.bonusNumber).isEqualTo(7)
+        assertThat(winningLottoTicketTest.bonusNumber).isEqualTo(LottoNumber.of(7))
     }
 
     @Test
