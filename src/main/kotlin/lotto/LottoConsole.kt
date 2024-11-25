@@ -4,20 +4,30 @@ fun main() {
     val inputBalance = ConsoleInput.inputBalance()
 
     val lotteryTicketMachine = LotteryTicketMachine(balance = inputBalance)
-    val lotteryTickets = generateSequence { lotteryTicketMachine.issueTicket() }.toList()
+
+    val affordableTicketCount = lotteryTicketMachine.affordableTickets()
+    val inputManualTicketCount = ConsoleInput.inputManualTicketCount()
+    if (inputManualTicketCount > affordableTicketCount) {
+        ResultView.announceTooManyInputManualTicketCount(inputManualTicketCount, affordableTicketCount)
+        return
+    }
+
+    val manualLotteryTickets = ConsoleInput.inputManualLottoNumbers(inputManualTicketCount, lotteryTicketMachine)
+    val automaticLotteryTickets = generateSequence { lotteryTicketMachine.issueTicket() }.toList()
+    val lotteryTickets = manualLotteryTickets + automaticLotteryTickets
 
     ResultView.announceIssuedLotteryTickets(lotteryTickets)
 
-    val inputWinningNumbers = ConsoleInput.inputWinningNumbers()
+    val inputDefaultWinningTicket = ConsoleInput.inputDefaultWinningTicket()
     val inputBonusNumber = ConsoleInput.inputBonusNumber()
-    val lotteryWinningChecker =
-        LotteryWinningChecker(
-            winningTicket = LottoTicket(inputWinningNumbers),
+    val winningTicket =
+        WinningTicket(
+            defaultTicket = inputDefaultWinningTicket,
             bonusNumber = inputBonusNumber,
         )
     println()
 
-    val checkedResults = lotteryTickets.map { lotteryWinningChecker.checkTicket(it) }
+    val checkedResults = lotteryTickets.map { winningTicket.checkTicket(it) }
 
     val winningBoard = WinningBoard(checkedResults)
     val winningResultsWithWinningsSorted =
