@@ -21,15 +21,13 @@ enum class LottoRank(
             lotto: Lotto,
             winningNumber: WinningNumber,
         ): LottoRank =
-            entries.find { it ->
+            entries.find {
                 isMatched(
                     rank = it,
-                    matchCount = winningNumber.numbers.numbers.count { lotto.isMatch(it) },
-                    matchBonus = lotto.numbers.numbers.contains(winningNumber.bonusBall.number),
+                    matchCount = winningNumber.countMatchingNumbers(lotto),
+                    matchBonus = lotto.isMatchedBonus(winningNumber.bonusBall),
                 )
             } ?: NONE
-
-        private fun Lotto.isMatch(winningNumber: Int): Boolean = numbers.numbers.contains(winningNumber)
 
         private fun isMatched(
             rank: LottoRank,

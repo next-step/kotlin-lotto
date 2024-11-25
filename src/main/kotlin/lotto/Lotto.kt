@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.ball.BonusBall
 import lotto.number.Numbers
 
 data class Lotto(
@@ -11,6 +12,12 @@ data class Lotto(
                 .sorted(),
         ),
 ) {
+    init {
+        require(numbers.numbers.size == COUNT) { "로또 번호는 6개여야 합니다." }
+    }
+
+    fun isMatchedBonus(bonusBall: BonusBall): Boolean = numbers.hasNumber(bonusBall.number)
+
     companion object {
         private const val COUNT = 6
         private const val MIN_NUMBER = 1
