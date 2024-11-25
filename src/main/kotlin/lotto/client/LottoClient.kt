@@ -2,7 +2,6 @@ package lotto.client
 
 import lotto.Lotto
 import lotto.LottoMachine
-import lotto.number.Numbers
 import lotto.statistics.Profit
 import lotto.statistics.WinningNumber
 import lotto.statistics.WinningStatistics
@@ -13,7 +12,11 @@ class LottoClient(
     private val lottoMachine: LottoMachine,
 ) {
     fun run() {
-        val amount = InputView.inputPurchaseAmount()
+        val amount =
+            InputView
+                .inputPurchaseAmount()
+                .also { require(it >= Lotto.PRICE) { "구입 금액이 부족합니다." } }
+
         val lottoCount = getLottoCount(amount)
 
         val manualLottos =
@@ -23,6 +26,8 @@ class LottoClient(
                 .let { lottoMachine.generateByManual(numbers = it) }
 
         val autoLottoCount = lottoCount - manualLottos.lottos.size
+        require(autoLottoCount >= 0) { "구입금액이 부족하여 수동 로또를 구매할 수 없습니다." }
+
         val lottos = manualLottos + lottoMachine.generate(lottoCount = autoLottoCount)
 
         ResultView.printLottoCount(manualLottoCount = manualLottos.lottos.size, autoLottoCount = autoLottoCount)
@@ -32,12 +37,12 @@ class LottoClient(
         val bonusBall =
             InputView
                 .inputBonusBall()
-                .also { it.isNotDuplicated(winningNumber = Numbers(winningNumbers)) }
+                .also { it.isNotDuplicated(winningNumber = winningNumbers) }
 
         val lottoRanks =
             WinningStatistics(
                 purchasedLottos = lottos,
-                winningNumber = WinningNumber(numbers = Numbers(winningNumbers), bonusBall = bonusBall),
+                winningNumber = WinningNumber(numbers = winningNumbers, bonusBall = bonusBall),
             ).ranks
         ResultView.printStatistics(lottoRanks = lottoRanks)
 

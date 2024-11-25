@@ -13,7 +13,7 @@ data class Lotto(
         ),
 ) {
     init {
-        require(numbers.numbers.size == COUNT) { "로또 번호는 6개여야 합니다." }
+        require(numbers.numbers.size == COUNT) { "로또 번호는 ${COUNT}개여야 합니다." }
     }
 
     fun isMatchedBonus(bonusBall: BonusBall): Boolean = numbers.hasNumber(bonusBall.number)
