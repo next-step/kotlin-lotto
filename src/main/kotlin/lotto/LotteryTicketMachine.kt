@@ -23,6 +23,10 @@ class LotteryTicketMachine(balance: Money, totalCost: Money = Money.ZERO) {
         return LottoTicket(numbers)
     }
 
+    fun affordableTickets(): Int {
+        return balance.toInt() / TICKET_PRICE.toInt()
+    }
+
     companion object {
         private val LOTTERY_NUMBERS_POOL: IntRange = (1..45)
     }

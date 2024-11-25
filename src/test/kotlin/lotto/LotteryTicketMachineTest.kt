@@ -2,6 +2,8 @@ package lotto
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.data.forAll
+import io.kotest.data.row
 import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
@@ -76,5 +78,19 @@ class LotteryTicketMachineTest : StringSpec({
         val result = sut.issueTicket(lottoNumbers)
 
         result.shouldBeNull()
+    }
+
+    "로또 티켓 머신은 발급할 수 있는 티켓 수를 알려줄 수 있다" {
+        forAll(
+            row(Money(1000), 1),
+            row(Money(1999), 1),
+            row(Money(2000), 2),
+            row(Money(3000), 3),
+            row(Money(3001), 3),
+        ) { balance, expected ->
+            val sut = LotteryTicketMachine(balance = balance)
+
+            sut.affordableTickets() shouldBe expected
+        }
     }
 })

@@ -64,8 +64,9 @@
 
 ### 구현 기능 목록
 
-- [ ] LottoTicketMachine 구입금액(잔액) 을 가지고 발급할 수 있는 LottoTicket 개수를 체크할 수 있다
+- [x] LottoTicketMachine 구입금액(잔액) 을 가지고 발급할 수 있는 LottoTicket 개수를 체크할 수 있다
 - [x] LottoTicketMachine 은 수동으로 로또 번호를 받아 로또 티켓을 발급할 수 있다
+- [ ] UI 수동 발급 로직 추가
 
 - [x] 금액 관련 Int 는 Money 로 포장한다
 - [x] 수익률의 Double 값은 Returns 로 포장한다
