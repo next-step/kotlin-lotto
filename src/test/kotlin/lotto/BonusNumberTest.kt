@@ -1,22 +1,19 @@
 package lotto
 
-import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
 
 class BonusNumberTest : StringSpec({
     "보너스 볼을 생성한다." {
-        BonusNumber("1")
+        BonusNumber(LottoNumber(1))
     }
 
-    "보너스 볼 입력이 존재하지 않으면 예외를 던진다." {
-        shouldThrowWithMessage<IllegalArgumentException>("보너스 볼 입력은 필수입니다.") {
-            BonusNumber(null)
-        }
-    }
+    "로또 번호와 일치하는지 확인한다." {
+        val sut = BonusNumber(LottoNumber(1))
 
-    "보너스 볼이 숫자가 아니면 예외를 던진다." {
-        shouldThrowWithMessage<IllegalArgumentException>("보너스 볼은 문자가 될 수 없습니다.") {
-            BonusNumber("a")
-        }
+        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val actual = sut.isMatch(lotto)
+
+        actual shouldBe true
     }
 })

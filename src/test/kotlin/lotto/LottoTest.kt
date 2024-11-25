@@ -8,7 +8,7 @@ class LottoTest : StringSpec({
 
     "로또를 생성한다." {
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
-        lotto shouldBe Lotto(listOf(1, 2, 3, 4, 5, 6))
+        lotto.numbers shouldBe Lotto(listOf(1, 2, 3, 4, 5, 6)).numbers
     }
 
     "로또 번호가 6개 미만이라면 예외를 던진다." {
