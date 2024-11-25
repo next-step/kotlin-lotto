@@ -68,4 +68,4 @@
 - [ ] LottoTicketMachine 은 수동으로 로또 번호 목록을 받아 로또 티켓들을 발급할 수 있다
 
 - [x] 금액 관련 Int 는 Money 로 포장한다
-- [ ] 수익률의 Double 값은 Returns 로 포장한다
+- [x] 수익률의 Double 값은 Returns 로 포장한다

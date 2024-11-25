@@ -55,11 +55,11 @@ class ResultView {
 
         private fun parseEvaluationText(
             baseReturns: Int,
-            returns: Double,
+            returns: Returns,
         ): String =
-            if (baseReturns > returns) {
+            if (baseReturns > returns.toDouble()) {
                 "손해"
-            } else if (baseReturns.toDouble() == returns) {
+            } else if (baseReturns.toDouble() == returns.toDouble()) {
                 "본전"
             } else {
                 "이득"

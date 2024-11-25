@@ -52,7 +52,7 @@ class WinningBoardTest : StringSpec({
         val winningResults = fourthResults + loseResults
         val sut = WinningBoard(winningResults = winningResults)
 
-        sut.calculateRateOfReturn(totalCost = Money(14000)) shouldBe 0.35
+        sut.calculateRateOfReturn(totalCost = Money(14000)).toDouble() shouldBe 0.35
     }
 
     "당첨 보드에서 수익률을 구할 때 총 티켓 구매 비용이 1000원 미만이면 예외를 던진다" {
