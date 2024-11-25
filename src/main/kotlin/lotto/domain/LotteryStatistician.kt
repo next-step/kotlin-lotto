@@ -4,7 +4,7 @@ import java.util.*
 
 class LotteryStatistician(
     targetLottoStr: String,
-    bonusNumber: Int,
+    private val bonusNumber: Int,
 ) {
     private val targetLotto = Lotto(
         targetLottoStr.split(",").map { it.trim().toIntOrNull().validate() },
@@ -14,7 +14,7 @@ class LotteryStatistician(
         val statistics = initStatistics()
 
         lotties
-            .groupingBy { LottoRank.of(it.matchCount(targetLotto)) }
+            .groupingBy { LottoRank.of(it.matchCount(targetLotto), it.matchBonus(bonusNumber)) }
             .eachCount()
             .forEach { (rank, count) -> statistics[rank] = count }
 
@@ -36,6 +36,10 @@ class LotteryStatistician(
 
     private fun Lotto.matchCount(lotto: Lotto): Int {
         return this.numbers.count { it in lotto.numbers }
+    }
+
+    private fun Lotto.matchBonus(number: Int): Boolean {
+        return number in this.numbers
     }
 
 }

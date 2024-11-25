@@ -12,7 +12,7 @@ class LotteryStatisticianTest {
     fun `6개의 수가 맞으면 1등이다`() {
         // given
         val targetLottoStr = "1, 2, 3, 4, 5, 6"
-        val statistician = LotteryStatistician(targetLottoStr)
+        val statistician = LotteryStatistician(targetLottoStr, 7)
 
         // when
         val result = statistician.statistics(
@@ -32,7 +32,7 @@ class LotteryStatisticianTest {
         // given
 
         // when & then
-        assertThatThrownBy { LotteryStatistician(input) }
+        assertThatThrownBy { LotteryStatistician(input, 7) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessageContaining("로또 숫자의 범위는 ${LottoGenerator.RANGE} 입니다")
     }
