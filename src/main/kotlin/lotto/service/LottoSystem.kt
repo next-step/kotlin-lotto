@@ -1,4 +1,10 @@
-package lotto
+package lotto.service
+
+import lotto.domain.Lotto
+import lotto.domain.Order
+import lotto.domain.WinningResult
+import lotto.util.NumberGenerator
+import lotto.util.RandomNumberGenerator
 
 class LottoSystem(private val numberGenerator: NumberGenerator = RandomNumberGenerator()) {
     fun createOrder(amount: Int): Order {

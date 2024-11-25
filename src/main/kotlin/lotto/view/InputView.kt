@@ -1,4 +1,6 @@
-package lotto
+package lotto.view
+
+import lotto.util.NumberSplitter
 
 object InputView {
     fun getAmount(): Int {

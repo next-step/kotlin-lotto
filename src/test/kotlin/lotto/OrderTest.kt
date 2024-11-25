@@ -4,6 +4,7 @@ import io.kotest.assertions.assertSoftly
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.Order
 
 class OrderTest : StringSpec({
     "주문이 생성되면 전달된 금액에 맞는 로또를 소지한다." {

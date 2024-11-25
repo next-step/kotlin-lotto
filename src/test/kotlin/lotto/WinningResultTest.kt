@@ -3,6 +3,9 @@ package lotto
 import io.kotest.assertions.assertSoftly
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.Lotto
+import lotto.domain.Order
+import lotto.domain.WinningResult
 
 class WinningResultTest : StringSpec({
     "3개, 4개, 5개, 6개 에 대해 각각 몇개씩 일치하는지 정보를 제공한다." {

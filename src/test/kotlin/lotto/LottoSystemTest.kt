@@ -3,6 +3,8 @@ package lotto
 import io.kotest.assertions.assertSoftly
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.Lotto
+import lotto.service.LottoSystem
 
 class LottoSystemTest : StringSpec({
     "로또 금액을 입력받으면 해당 요청에 대한 주문을 생성해야한다." {

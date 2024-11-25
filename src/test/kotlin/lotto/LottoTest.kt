@@ -4,6 +4,7 @@ import io.kotest.assertions.assertSoftly
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.Lotto
 
 class LottoTest : StringSpec({
     "한장의 로또는 6개의 숫자로 구성된다." {

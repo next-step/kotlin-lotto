@@ -1,5 +1,9 @@
 package lotto
 
+import lotto.service.LottoSystem
+import lotto.view.InputView
+import lotto.view.ResultView
+
 fun main() {
     val lottoSystem = LottoSystem()
 

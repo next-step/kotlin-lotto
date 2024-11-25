@@ -1,4 +1,6 @@
-package lotto
+package lotto.domain
+
+import lotto.util.NumberGenerator
 
 class Order(
     val amount: Int,

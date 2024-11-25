@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 enum class Prize(
     val matchCount: Int,
