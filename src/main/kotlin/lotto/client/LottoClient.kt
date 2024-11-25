@@ -21,7 +21,11 @@ class LottoClient(
         ResultView.printLottoList(lottos)
 
         val winningNumbers = InputView.inputLastWeekWinningNumbers()
-        val bonusBall = InputView.inputBonusBall()
+        val bonusBall =
+            InputView
+                .inputBonusBall()
+                .also { it.isNotDuplicated(winningNumber = Numbers(winningNumbers)) }
+
         val lottoRanks =
             WinningStatistics(
                 purchasedLottos = lottos,

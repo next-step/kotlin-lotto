@@ -20,9 +20,9 @@ data class Lotto(
 
     companion object {
         private const val COUNT = 6
-        private const val MIN_NUMBER = 1
-        private const val MAX_NUMBER = 45
-        private val RANGE = (MIN_NUMBER..MAX_NUMBER).toList()
+        const val MIN_NUMBER = 1
+        const val MAX_NUMBER = 45
         const val PRICE: Int = 1_000
+        val RANGE = (MIN_NUMBER..MAX_NUMBER).toList()
     }
 }
