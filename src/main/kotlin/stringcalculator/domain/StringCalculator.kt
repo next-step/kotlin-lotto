@@ -1,7 +1,7 @@
 package stringcalculator.domain
 
 class StringCalculator(
-    private val delimiterExtractor: DelimiterExtractor = DelimiterExtractor(),
+    private val delimiterExtractor: DelimiterExtractor = DelimiterExtractor,
     private val numberParser: NumberParser = NumberParser(),
 ) {
     fun add(input: String?): Int {
@@ -9,6 +9,6 @@ class StringCalculator(
 
         val (delimitersRegex, numbersPart) = delimiterExtractor.extract(input)
         val numbers = numberParser.parse(numbersPart, delimitersRegex)
-        return numbers.sum()
+        return numbers.sumOf { it.getValue() }
     }
 }
