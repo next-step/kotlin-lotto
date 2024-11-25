@@ -4,6 +4,7 @@ import java.util.*
 
 class LotteryStatistician(
     targetLottoStr: String,
+    bonusNumber: Int,
 ) {
     private val targetLotto = Lotto(
         targetLottoStr.split(",").map { it.trim().toIntOrNull().validate() },
