@@ -3,7 +3,9 @@ package lotto.application
 import io.kotest.matchers.shouldBe
 import lotto.domain.Lotto
 import lotto.domain.LottoLine
+import lotto.domain.LottoNumber
 import lotto.domain.Rank
+import lotto.domain.WinningLine
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
@@ -29,15 +31,24 @@ class LottoServiceTest {
     fun `로또 게임 결과를 구한다`() {
         val lotto =
             Lotto.from(
+                // FIFTH
                 LottoLine.from(1, 2, 3, 7, 8, 9),
+                // FOURTH
                 LottoLine.from(1, 2, 3, 4, 8, 9),
+                // SECOND
+                LottoLine.from(1, 2, 3, 4, 5, 7),
             )
-        val winner = LottoLine.from(1, 2, 3, 4, 5, 6)
+        val winner =
+            WinningLine(
+                LottoLine.from(1, 2, 3, 4, 5, 6),
+                LottoNumber.from(7),
+            )
 
         val result = sut.play(lotto, winner)
 
+        result.get(Rank.SECOND) shouldBe 1
         result.get(Rank.FOURTH) shouldBe 1
         result.get(Rank.FIFTH) shouldBe 1
-        result.totalPrize shouldBe 55_000
+        result.totalPrize shouldBe 30_055_000
     }
 }

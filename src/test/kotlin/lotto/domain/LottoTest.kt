@@ -11,8 +11,10 @@ class LottoTest {
             Lotto.from(
                 // FIRST
                 LottoLine.from(1, 2, 3, 4, 5, 6),
-                // THIRD
+                // SECOND
                 LottoLine.from(1, 2, 3, 4, 5, 7),
+                // THIRD
+                LottoLine.from(1, 2, 3, 4, 5, 8),
                 // FOURTH
                 LottoLine.from(1, 2, 3, 4, 8, 9),
                 // FIFTH
@@ -21,13 +23,18 @@ class LottoTest {
                 LottoLine.from(1, 2, 8, 9, 10, 11),
                 LottoLine.from(1, 8, 9, 10, 11, 12),
             )
-        val winner = LottoLine.from(1, 2, 3, 4, 5, 6)
+        val winner =
+            WinningLine(
+                LottoLine.from(1, 2, 3, 4, 5, 6),
+                LottoNumber.from(7),
+            )
 
         val result = lotto.match(winner)
 
         val expected =
             LottoResult.of(
                 Rank.FIRST to 1,
+                Rank.SECOND to 1,
                 Rank.THIRD to 1,
                 Rank.FOURTH to 1,
                 Rank.FIFTH to 1,
