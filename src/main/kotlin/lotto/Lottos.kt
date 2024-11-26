@@ -5,8 +5,11 @@ data class Lottos(val values: List<Lotto>) {
     val totalAmount: Amount
         get() = TICKET_PRICE.times(values.size)
 
-    fun match(otherLotto: Lotto): List<Rank> {
-        return values.map { Rank.match(it.match(otherLotto)) }
+    fun match(
+        otherLotto: Lotto,
+        isBonus: Boolean,
+    ): List<Rank> {
+        return values.map { Rank.match(it.match(otherLotto), isBonus) }
     }
 
     companion object {
