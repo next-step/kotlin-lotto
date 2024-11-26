@@ -1,9 +1,9 @@
 package lotto
 
-class LotteryTicketMachine(balance: Int, totalCost: Int = 0) {
-    var balance = balance
+class LotteryTicketMachine(balance: Money, totalCost: Money = Money.ZERO) {
+    var balance: Money = balance
         private set
-    var totalCost: Int = totalCost
+    var totalCost: Money = totalCost
         private set
 
     init {
@@ -21,8 +21,12 @@ class LotteryTicketMachine(balance: Int, totalCost: Int = 0) {
         return LottoTicket(numbers)
     }
 
+    fun affordableTickets(): Long {
+        return balance.toLong() / TICKET_PRICE.toLong()
+    }
+
     companion object {
-        const val TICKET_PRICE: Int = 1000
         private val LOTTERY_NUMBERS_POOL: IntRange = (1..45)
+        val TICKET_PRICE: Money = Money(1000)
     }
 }
