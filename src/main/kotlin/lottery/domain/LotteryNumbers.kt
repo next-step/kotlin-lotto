@@ -7,7 +7,7 @@ class LotteryNumbers(val numbers: Set<Int>) {
     }
 
     fun countMatchedNumber(other: LotteryNumbers): Int {
-        return this.numbers.intersect(other.numbers).size
+        return (numbers intersect other.numbers).size
     }
 
     override fun toString(): String {
