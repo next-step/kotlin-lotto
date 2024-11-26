@@ -3,10 +3,10 @@ package lotto.domain
 class LottoStore {
     fun issueLottos(
         manualLottos: List<Lotto>,
-        lottoCount: Int,
+        purchasedLottoCount: Int,
         generator: LottoNumberGenerator,
     ): PurchasedLottos {
-        val autoCount = lottoCount - manualLottos.size
+        val autoCount = purchasedLottoCount - manualLottos.size
         val autoLottos = List(autoCount) { Lotto(generator.generate()) }
         return PurchasedLottos(manualLottos + autoLottos)
     }
