@@ -1,5 +1,6 @@
 package lotto.domain
 
+import io.kotest.matchers.collections.shouldContainExactlyInAnyOrder
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
@@ -42,5 +43,21 @@ class LottoTest {
             )
 
         result shouldBe expected
+    }
+
+    @Test
+    fun `두 로또를 통합한다`() {
+        val lines =
+            listOf(
+                LottoLine.from(1, 2, 3, 4, 5, 6),
+                LottoLine.from(2, 3, 4, 5, 6, 7),
+                LottoLine.from(3, 4, 5, 6, 7, 8),
+            )
+        val lotto1 = Lotto.from(lines[0])
+        val lotto2 = Lotto.from(lines[1], lines[2])
+
+        val actual: Lotto = lotto1.merge(lotto2)
+
+        actual.lines shouldContainExactlyInAnyOrder lines
     }
 }
