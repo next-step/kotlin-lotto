@@ -8,37 +8,25 @@ import lotto.view.InputView
 import lotto.view.ResultView
 
 fun main() {
-    val inputView = InputView()
-    val resultView = ResultView()
-    val totalPurchaseAmount = inputView.readTotalPurchaseAmount().toInt()
+    val totalPurchaseAmount = InputView.readTotalPurchaseAmountAsInt()
     val totalPurchaseCount =
         LottoCalculator().calculateLottoCount(
             totalPurchaseAmount = totalPurchaseAmount,
             pricePerAmount = 1000,
         )
-    resultView.printTotalPurchaseCount(
-        count = totalPurchaseCount,
-    )
+
+    ResultView.printTotalPurchaseCount(totalPurchaseCount)
 
     val lottoGenerator = LottoGenerator(totalPurchaseCount)
     val lottoList = lottoGenerator.generate()
-    resultView.printLottoNumbers(
-        list = lottoList,
-    )
+    ResultView.printLottoNumbers(lottoList)
 
-    val winningLotto =
-        inputView.readWinningLotto(
-            promptMessage = InputView.ENTER_LAST_WINNING_NUMBER,
-        )
+    val winningLotto = InputView.readWinningLotto(InputView.ENTER_LAST_WINNING_NUMBER)
     val lottoResultManager =
         LottoResultManager(
             winningLotto = Lotto(winningLotto),
             lottoList = lottoList,
         )
-    resultView.printLottoResult(
-        lottoResultMap = lottoResultManager.getResult().lottoResultMap,
-    )
-    resultView.printWinningRate(
-        winningRate = lottoResultManager.calculateWinningRate(),
-    )
+    ResultView.printLottoResult(lottoResultManager.getResult())
+    ResultView.printWinningRate(lottoResultManager.getWinningRate())
 }

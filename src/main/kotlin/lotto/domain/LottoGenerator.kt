@@ -10,6 +10,10 @@ class LottoGenerator(private val count: Int) {
     }
 
     private fun generateSingleLotto(): Lotto {
-        return Lotto(List(6) { Random.nextInt(1..100) })
+        return Lotto(List(LOTTO_NUMBER_SIZE) { Random.nextInt(1..99) })
+    }
+
+    companion object {
+        private const val LOTTO_NUMBER_SIZE = 6
     }
 }
