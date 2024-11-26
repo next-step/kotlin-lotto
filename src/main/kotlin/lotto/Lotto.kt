@@ -1,6 +1,7 @@
 package lotto
 
-class Lotto(
+class Lotto
+private constructor(
     numbers: List<Int>,
 ) {
     val numbers: List<LottoNumber>
@@ -19,5 +20,7 @@ class Lotto(
                 .sorted()
             return Lotto(numbers)
         }
+
+        fun manual(numbers: List<Int>): Lotto = Lotto(numbers)
     }
 }
