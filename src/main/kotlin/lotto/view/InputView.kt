@@ -26,7 +26,7 @@ object InputView {
             readlnOrNull()?.split(LOTTO_NUMBERS_SPLIT_UNIT)?.map { it.trim().toInt() }
                 ?: throw IllegalArgumentException(INPUT_NUMBER_EXCEPTION_MESSAGE)
 
-        LottoTicket.validateNumbers(numbers)
+        LottoTicket(numbers)
         return numbers
     }
 }
