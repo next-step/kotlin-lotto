@@ -15,8 +15,6 @@ class Lotto(
     }
 
     companion object {
-        fun from(lines: List<LottoLine>): Lotto = Lotto(lines)
-
         fun from(vararg lines: LottoLine): Lotto = Lotto(lines.toList())
     }
 }

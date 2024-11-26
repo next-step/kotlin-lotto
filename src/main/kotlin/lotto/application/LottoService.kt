@@ -12,8 +12,5 @@ class LottoService(
         winner: WinningLine,
     ): LottoResult = lotto.match(winner)
 
-    fun generateRandom(numberOfLines: Int): Lotto =
-        Lotto.from(
-            (1..numberOfLines).map { lineGenerator.generate() },
-        )
+    fun generateRandom(numberOfLines: Int): Lotto = Lotto((1..numberOfLines).map { lineGenerator.generate() })
 }

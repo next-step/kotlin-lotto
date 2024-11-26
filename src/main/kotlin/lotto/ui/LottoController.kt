@@ -11,6 +11,7 @@ class LottoController(
 
         // 수동 발급
         val numberOfManual = InputView.getNumberOfManual()
+        val manualLotto = InputView.getManualLotto(numberOfManual)
 
         // 로또 자동 발급
         val lotto = lottoService.generateRandom(payment.numberOfLines)
