@@ -2,6 +2,7 @@ package lotto.domain
 
 enum class Result(
     private val predicateResult: (Int, Boolean) -> Boolean,
+    val needBonus: Boolean = false,
     val count: Int,
     val prize: Money,
 ) {
@@ -12,6 +13,7 @@ enum class Result(
     ),
     SECOND(
         predicateResult = { count, isBonus -> count == SECOND.count && isBonus },
+        needBonus = true,
         count = 5,
         prize = Money(30_000_000),
     ),
