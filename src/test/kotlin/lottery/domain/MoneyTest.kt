@@ -9,6 +9,6 @@ class MoneyTest : StringSpec({
     }
 
     "나누는 금액이 0 일시 예외 발생한다" {
-        shouldThrow<IllegalArgumentException> { Money(1000).divideBy(Money(0)) }
+        shouldThrow<IllegalArgumentException> { Money(1000) / Money(0) }
     }
 })

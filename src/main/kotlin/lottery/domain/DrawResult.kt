@@ -2,7 +2,7 @@ package lottery.domain
 
 class DrawResult(private val rankRewardLotteryCountMap: Map<RankReward, LotteryCount>) {
     fun getProfitRate(purchaseAmount: Money): Double {
-        return getTotalReward().divideBy(purchaseAmount)
+        return getTotalReward() / purchaseAmount
     }
 
     fun findLotteryCount(rankReward: RankReward): LotteryCount {
