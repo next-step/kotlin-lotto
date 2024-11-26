@@ -83,3 +83,23 @@
 - [Initializer functions for lists](https://kotlinlang.org/docs/constructing-collections.html#initializer-functions-for-lists)
 - [functional interface](https://kotlinlang.org/docs/fun-interfaces.html)
 
+
+## 3단계 - 로또(2등)
+
+### 기능 요구사항
+- 2등을 위해 추가 번호를 하나 더 추첨한다.
+- 당첨 통계에 2등도 추가해야 한다.
+
+### 프로그래밍 요구 사항
+- 모든 기능을 TDD로 구현해 단위 테스트가 존재해야 한다. 단, UI(System.out, System.in) 로직은 제외
+- Enum 클래스를 적용해 프로그래밍을 구현한다.
+- 일급 컬렉션을 쓴다.
+- indent(인덴트, 들여쓰기) depth를 2를 넘지 않도록 구현한다. 1까지만 허용한다.
+- 예를 들어 while문 안에 if문이 있으면 들여쓰기는 2이다.
+- 함수(또는 메서드)가 한 가지 일만 잘 하도록 구현한다.
+
+### 기능 구현
+- [X] 2등
+  - [X] 2등은 추가번호가 있다
+  - [X] 2등은 보너스번호를 추가 확인한다
+  - [X] 당첨은 일치갯수와 추가번호 일치여부로 판단한다

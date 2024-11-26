@@ -14,4 +14,16 @@ data class LottoStatistics(private val ranks: Ranks, private val amount: Amount)
     fun isLoss(): Boolean {
         return rate() < BigDecimal.ONE
     }
+
+    companion object {
+        fun from(
+            user: User,
+            lastWeekNumbers: Lotto,
+            bonusNumber: LottoNumber,
+        ): LottoStatistics {
+            val ranks = user.match(lastWeekNumbers, lastWeekNumbers.contains(bonusNumber))
+
+            return LottoStatistics(ranks, user.totalBuyAmount)
+        }
+    }
 }

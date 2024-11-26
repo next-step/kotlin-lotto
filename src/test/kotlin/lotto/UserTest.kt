@@ -12,9 +12,9 @@ class UserTest {
         val expectedLottos =
             Lottos(
                 listOf(
-                    Lotto(setOf(1, 2, 3, 4, 5, 6)),
-                    Lotto(setOf(7, 8, 9, 10, 11, 12)),
-                    Lotto(setOf(13, 14, 15, 16, 17, 18)),
+                    Lotto(listOf(1, 2, 3, 4, 5, 6)),
+                    Lotto(listOf(7, 8, 9, 10, 11, 12)),
+                    Lotto(listOf(13, 14, 15, 16, 17, 18)),
                 ),
             )
 
@@ -25,25 +25,5 @@ class UserTest {
             { assertThat(user.totalLottos).isEqualTo(expectedLottos) },
             { assertThat(user.totalLottoSize).isEqualTo(3) },
         )
-    }
-
-    @Test
-    fun `ranks 를 통해 당첨금액을 계산한다`() {
-        val initialAmount = Amount(1000)
-        val user = User(initialAmount)
-        val lottoNumbers = List(6) { it + 1 }
-        user.buyLotto { Lottos(listOf(Lotto(lottoNumbers.toSet()))) }
-
-        val actual: LottoStatistics = user.statistics(Lotto(setOf(1, 2, 3, 4, 5, 6)))
-        val expected =
-            LottoStatistics(
-                Ranks(
-                    mapOf(
-                        Rank.FIRST to 1,
-                    ),
-                ),
-                initialAmount,
-            )
-        assertThat(actual).isEqualTo(expected)
     }
 }

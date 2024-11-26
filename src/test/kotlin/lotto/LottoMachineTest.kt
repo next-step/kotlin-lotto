@@ -10,8 +10,8 @@ class LottoMachineTest {
         val expectedLottos =
             Lottos(
                 listOf(
-                    Lotto(setOf(1, 2, 3, 4, 5, 6)),
-                    Lotto(setOf(7, 8, 9, 10, 11, 12)),
+                    Lotto(listOf(1, 2, 3, 4, 5, 6)),
+                    Lotto(listOf(7, 8, 9, 10, 11, 12)),
                 ),
             )
         val autoMachine: (Amount) -> Lottos = { _ -> expectedLottos }
@@ -25,7 +25,7 @@ class LottoMachineTest {
     @Test
     fun `숫자를 통해 Lotto 생성가능`() {
         val numbers = listOf(1, 2, 3, 4, 5, 6)
-        val expected = Lotto(numbers.toSet())
+        val expected = Lotto(listOf(1, 2, 3, 4, 5, 6))
         val lottoMachine = LottoMachine()
 
         val actual = lottoMachine.createLotto(numbers)

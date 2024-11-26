@@ -2,8 +2,8 @@ package lotto
 
 object ResultView {
     fun printBoughtLotto(boughtLotto: Lottos) {
-        boughtLotto.values.forEach {
-            println("[%s]".format(it.values.sorted().joinToString(", ")))
+        boughtLotto.values.forEach { lottos ->
+            println("[%s]".format(lottos.values.sorted().map { it.value }.joinToString(", ")))
         }
     }
 

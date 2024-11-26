@@ -17,7 +17,7 @@ class RanksTest {
 
     @Test
     fun `rate 를 계산할수 있다`() {
-        val actual = Ranks.fromGroupBy(listOf(Rank.FOURTH))
+        val actual = Ranks.fromGroupBy(listOf(Rank.FIFTH))
 
         assertThat(actual.rate(Amount(14000))).isEqualTo(0.35.toBigDecimal())
     }
