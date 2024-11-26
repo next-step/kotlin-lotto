@@ -14,3 +14,8 @@ value class LottoCost(
         return value / LOTTO_PRICE
     }
 }
+
+@JvmInline
+value class ManualLottoAmount(
+    val value: Int,
+)
