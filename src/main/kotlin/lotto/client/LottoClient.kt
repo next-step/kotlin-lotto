@@ -2,6 +2,7 @@ package lotto.client
 
 import lotto.Lotto
 import lotto.LottoMachine
+import lotto.Lottos
 import lotto.statistics.Profit
 import lotto.statistics.WinningNumber
 import lotto.statistics.WinningStatistics
@@ -12,18 +13,17 @@ class LottoClient(
     private val lottoMachine: LottoMachine,
 ) {
     fun run() {
-        val amount =
-            InputView
-                .inputPurchaseAmount()
-                .also { require(it >= Lotto.PRICE) { "구입 금액이 부족합니다." } }
+        val amount = InputView.inputPurchaseAmount() ?: 0
+        require(amount >= Lotto.PRICE) { "구입 금액이 부족합니다." }
 
         val lottoCount = getLottoCount(amount)
 
         val manualLottos =
             InputView
                 .inputManualLottoCount()
-                .let { InputView.inputManualLottoNumbers(it) }
-                .let { lottoMachine.generateByManual(numbers = it) }
+                ?.let { InputView.inputManualLottoNumbers(it) }
+                ?.let { lottoMachine.generateByManual(numbers = it) }
+                ?: Lottos(lottos = emptyList())
 
         val autoLottoCount = lottoCount - manualLottos.lottos.size
         require(autoLottoCount >= 0) { "구입금액이 부족하여 수동 로또를 구매할 수 없습니다." }

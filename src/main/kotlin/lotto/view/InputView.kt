@@ -5,10 +5,9 @@ import lotto.number.LottoNumber
 import lotto.number.Numbers
 
 object InputView {
-    fun inputPurchaseAmount(): Int {
+    fun inputPurchaseAmount(): Int? {
         println("구입금액을 입력하세요.")
         return readlnOrNull()?.toIntOrNull()
-            ?: throw IllegalArgumentException("구입금액을 다시 입력해주세요")
     }
 
     fun inputLastWeekWinningNumbers(): Numbers {
@@ -21,10 +20,9 @@ object InputView {
         return BonusBall(LottoNumber(readlnOrNull()?.toIntOrNull() ?: 0))
     }
 
-    fun inputManualLottoCount(): Int {
+    fun inputManualLottoCount(): Int? {
         println("수동으로 구매할 로또 수를 입력해 주세요.")
         return readlnOrNull()?.toIntOrNull()
-            ?: throw IllegalArgumentException("수동으로 구매할 로또 개수를 다시 입력해주세요")
     }
 
     fun inputManualLottoNumbers(lottoCount: Int): List<Numbers> {
