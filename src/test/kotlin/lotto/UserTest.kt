@@ -3,6 +3,10 @@ package lotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
+import java.util.stream.Stream
 
 class UserTest {
     @Test
@@ -12,9 +16,9 @@ class UserTest {
         val expectedLottos =
             Lottos(
                 listOf(
-                    Lotto(setOf(1, 2, 3, 4, 5, 6)),
-                    Lotto(setOf(7, 8, 9, 10, 11, 12)),
-                    Lotto(setOf(13, 14, 15, 16, 17, 18)),
+                    Lotto(listOf(1, 2, 3, 4, 5, 6)),
+                    Lotto(listOf(7, 8, 9, 10, 11, 12)),
+                    Lotto(listOf(13, 14, 15, 16, 17, 18)),
                 ),
             )
 
@@ -27,23 +31,62 @@ class UserTest {
         )
     }
 
-    @Test
-    fun `ranks 를 통해 당첨금액을 계산한다`() {
-        val initialAmount = Amount(1000)
-        val user = User(initialAmount)
-        val lottoNumbers = List(6) { it + 1 }
-        user.buyLotto { Lottos(listOf(Lotto(lottoNumbers.toSet()))) }
+    @ParameterizedTest
+    @MethodSource("rankTestData")
+    fun `ranks 를 통해 당첨금액을 계산한다`(
+        winningNumbers: Lotto,
+        userLottos: Lottos,
+        bonusNumber: Int,
+        expectedRank: Rank,
+    ) {
+        val user = User(Amount(1000))
+        user.buyLotto { userLottos }
 
-        val actual: LottoStatistics = user.statistics(Lotto(setOf(1, 2, 3, 4, 5, 6)))
-        val expected =
-            LottoStatistics(
-                Ranks(
-                    mapOf(
-                        Rank.FIRST to 1,
-                    ),
+        val actual: LottoStatistics = user.statistics(winningNumbers, LottoNumber(bonusNumber))
+
+        assertThat(actual.machRankCount(expectedRank)).isEqualTo(1)
+    }
+
+    companion object {
+        @JvmStatic
+        fun rankTestData(): Stream<Arguments> =
+            Stream.of(
+                Arguments.of(
+                    Lotto(listOf(1, 2, 3, 4, 5, 6)),
+                    Lottos(listOf(Lotto(listOf(1, 2, 3, 4, 5, 6)))),
+                    7,
+                    Rank.FIRST,
                 ),
-                initialAmount,
+                Arguments.of(
+                    Lotto(listOf(1, 2, 3, 4, 5, 10)),
+                    Lottos(listOf(Lotto(listOf(1, 2, 3, 4, 5, 6)))),
+                    10,
+                    Rank.SECOND,
+                ),
+                Arguments.of(
+                    Lotto(listOf(1, 2, 3, 4, 5, 10)),
+                    Lottos(listOf(Lotto(listOf(1, 2, 3, 4, 5, 20)))),
+                    45,
+                    Rank.THIRD,
+                ),
+                Arguments.of(
+                    Lotto(listOf(1, 2, 3, 4, 11, 13)),
+                    Lottos(listOf(Lotto(listOf(1, 2, 3, 4, 20, 30)))),
+                    5,
+                    Rank.FOURTH,
+                ),
+                Arguments.of(
+                    Lotto(listOf(1, 2, 3, 10, 11, 12)),
+                    Lottos(listOf(Lotto(listOf(1, 2, 3, 4, 5, 6)))),
+                    5,
+                    Rank.FIFTH,
+                ),
+                Arguments.of(
+                    Lotto(listOf(1, 2, 3, 4, 5, 6)),
+                    Lottos(listOf(Lotto(listOf(1, 2, 10, 11, 12, 13)))),
+                    5,
+                    Rank.MISS,
+                ),
             )
-        assertThat(actual).isEqualTo(expected)
     }
 }
