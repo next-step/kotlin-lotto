@@ -9,6 +9,9 @@ class LottoController(
         // 금약 입력
         val payment = InputView.getPayment()
 
+        // 수동 발급
+        val numberOfManual = InputView.getNumberOfManual()
+
         // 로또 자동 발급
         val lotto = lottoService.generateRandom(payment.numberOfLines)
         ResultView.printLotto(lotto)
