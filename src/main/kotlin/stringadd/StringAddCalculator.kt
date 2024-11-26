@@ -1,34 +1,38 @@
 package stringadd
 
 class StringAddCalculator {
-    private val delimiters = mutableListOf(",", ":") // default delimiters
-
     fun add(text: String?): Int {
         if (text.isNullOrBlank()) return 0
-        val inputs = parseInputs(text)
-        if (inputs.any { it.toInt() < 0 }) throw RuntimeException("Input must be non-negative")
+        val inputs: List<Int> = parseInputs(text).map { it.trim().toIntOrNull() ?: 0 }
         return addByInputSize(inputs)
     }
 
     private fun parseInputs(text: String): List<String> {
-        val splitTarget = if (text.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-            val delimiterAndInput = text.split("\n")
-            val customDelimiter = delimiterAndInput[0].removePrefix(CUSTOM_DELIMITER_PREFIX)
-            delimiters.add(customDelimiter)
-            delimiterAndInput[1]
-        } else {
-            text
-        }
+        val delimiters = mutableListOf(",", ":") // default delimiters
+        val splitTarget =
+            if (text.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+                val delimiterAndInput = text.split("\n")
+                require(delimiterAndInput.size == 2) {
+                    "$CUSTOM_DELIMITER_PREFIX 와 New line 사이에 커스텀 delimiter 를 추가 하십쇼"
+                }
+                val customDelimiter = parseCustomDelimiter(delimiterAndInput[0])
+                delimiters.add(customDelimiter)
+                delimiterAndInput[1]
+            } else {
+                text
+            }
         return splitTarget.split(delimiters = delimiters.toTypedArray())
     }
 
-    private fun addByInputSize(inputs: List<String>): Int {
+    private fun parseCustomDelimiter(input: String): String {
+        return input.takeIf { it.startsWith(CUSTOM_DELIMITER_PREFIX) }
+            ?.removePrefix(CUSTOM_DELIMITER_PREFIX)
+            .orEmpty()
+    }
+
+    private fun addByInputSize(inputs: List<Int>): Int {
         require(inputs.isNotEmpty())
-        return when (inputs.size) {
-            1 -> inputs[0].toInt()
-            2 -> inputs[0].toInt() + inputs[1].toInt()
-            else -> inputs[0].toInt() + inputs[1].toInt() + inputs[2].toInt()
-        }
+        return inputs.sum()
     }
 
     companion object {
