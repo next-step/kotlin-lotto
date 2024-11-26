@@ -9,7 +9,7 @@ import lottery.domain.RankReward.RANK_4
 
 class DrawResultTest : StringSpec({
     "당첨로또 추첨은 개수별 일치하는 로또수를 반환한다" {
-        val winningLottery = WinningLottery(Lottery(LotteryNumbers(setOf(1, 2, 3, 4, 5, 6))))
+        val winningLottery = WinningLottery(LotteryNumbers(setOf(1, 2, 3, 4, 5, 6)))
 
         val rank1Lottery1 = Lottery(LotteryNumbers(setOf(1, 2, 3, 4, 5, 6)))
         val rank1Lottery2 = Lottery(LotteryNumbers(setOf(1, 2, 3, 4, 5, 6)))

@@ -1,10 +1,6 @@
 package lottery.domain
 
-class Lottery(val lotteryNumbers: LotteryNumbers) {
-    fun countMatchedNumber(other: Lottery): Int {
-        return lotteryNumbers.countMatchedNumber(other.lotteryNumbers)
-    }
-
+data class Lottery(val lotteryNumbers: LotteryNumbers) {
     override fun toString(): String {
         return "$lotteryNumbers"
     }

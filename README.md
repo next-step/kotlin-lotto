@@ -83,7 +83,7 @@
 - [x] TicketMachineTest::테스트 케이스 추가
 - [x] LotteryApplication::스태틱임포트 원복
 - [x] LotteryTest::로또번호 일치 수 반환 테스트 케이스 추가
-- [ ] WinningLottery::lottery가 아닌 lotteryNumber를 갖도록 수정
+- [x] WinningLottery::lottery 가 아닌 lotteryNumbers 를 갖도록 수정
 - [ ] Ticket::object 로 수정
 - [ ] Money::value class 로 수정
 - [ ] Money::divideBy operator fun 으로 수정
