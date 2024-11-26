@@ -1,6 +1,7 @@
 package lotto.step2
 
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.shouldBe
 import lotto.step2.domain.LottoNumberPicker
 
@@ -24,8 +25,8 @@ class LottoNumberPickerTest : FunSpec({
         val result = lottoNumberPicker.pick()
 
         // then
-        result.forEach {
-            it shouldBe (1..45).toList().find { number -> number == it }
+        result.forEach { number ->
+            (1..45).shouldContain(number)
         }
     }
 })
