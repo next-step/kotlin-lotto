@@ -39,6 +39,13 @@ class RankTest {
     }
 
     @Test
+    fun `2등은 추가번호가 있다`() {
+        val rank = Rank.SECOND
+
+        assertThat(rank.isBonus).isTrue()
+    }
+
+    @Test
     fun `prizeRanks 상금목록을 알수 있다`() {
         val prizeRanks = Rank.prizeRanks
 
