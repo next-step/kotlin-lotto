@@ -1,9 +1,9 @@
 package lotto.view.dto
 
-import lotto.domain.RankResult
+import lotto.domain.LottoResult
 
 data class WinningResult(
-    val winningMatchCounts: List<RankResult>,
+    val winningMatchCounts: List<LottoResult>,
     val revenue: Int,
-    val rate: Double,
+    val rate: Int,
 )
