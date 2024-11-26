@@ -8,13 +8,17 @@ import org.junit.jupiter.params.provider.CsvSource
 class RankTest {
     @ParameterizedTest
     @CsvSource(
-        "3, FOURTH",
-        "4, THIRD",
-        "5, SECOND",
-        "6, FIRST",
+        "6, false, FIRST",
+        "5, false, THIRD",
+        "4, false, FOURTH",
+        "3, false, FIFTH",
     )
-    fun `일치갯수로 Rank를 알 수 있다`(matchCount: Int, expected: Rank) {
-        val rank = Rank.match(matchCount)
+    fun `당첨은 일치갯수와 추가번호 일치여부로 판단한다`(
+        matchCount: Int,
+        isBonus: Boolean,
+        expected: Rank,
+    ) {
+        val rank = Rank.match(matchCount, isBonus)
 
         assertThat(rank).isEqualTo(expected)
     }
