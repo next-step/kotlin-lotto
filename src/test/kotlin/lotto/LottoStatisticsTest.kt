@@ -58,7 +58,6 @@ class LottoStatisticsTest {
         assertThat(isLoss).isFalse()
     }
 
-
     @ParameterizedTest
     @MethodSource("rankTestData")
     fun `등수 별로 일치갯수를 알 수 있다`(

@@ -23,7 +23,10 @@ class User(private var amount: Amount) {
         return LottoStatistics(ranks, totalBuyAmount)
     }
 
-    fun match(lastWeekNumbers: Lotto, bonus: Boolean): Ranks {
+    fun match(
+        lastWeekNumbers: Lotto,
+        bonus: Boolean,
+    ): Ranks {
         return Ranks.fromGroupBy(totalLottos.match(lastWeekNumbers, bonus))
     }
 }
