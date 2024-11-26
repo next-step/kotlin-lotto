@@ -1,3 +1,3 @@
 package lotto.model
 
-data class Lotto(val numbers: List<Int>)
+data class Lotto(val value: List<Int>)
