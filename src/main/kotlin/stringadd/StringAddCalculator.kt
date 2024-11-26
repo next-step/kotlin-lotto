@@ -22,7 +22,7 @@ class StringAddCalculator {
     }
 
     private fun addByInputSize(inputs: List<String>): Int {
-        assert(inputs.isNotEmpty())
+        require(inputs.isNotEmpty())
         return when (inputs.size) {
             1 -> inputs[0].toInt()
             2 -> inputs[0].toInt() + inputs[1].toInt()
