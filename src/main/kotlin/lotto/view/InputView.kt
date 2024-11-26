@@ -30,10 +30,7 @@ object InputView {
         return generateLottoList(lottoCount)
     }
 
-    private fun generateLottoList(lottoCount: Int) =
-        (1..lottoCount)
-            .map { Numbers(numbers = getInputNumberList()) }
-            .toList()
+    private fun generateLottoList(lottoCount: Int) = List(size = lottoCount) { Numbers(numbers = getInputNumberList()) }
 
     private fun getInputNumberList(): List<LottoNumber> =
         (readlnOrNull() ?: "")
