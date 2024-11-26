@@ -37,7 +37,7 @@ class LottoClient(
         val bonusBall =
             InputView
                 .inputBonusBall()
-                .also { it.isNotDuplicated(winningNumber = winningNumbers) }
+                .also { require(it.isNotDuplicated(winningNumber = winningNumbers)) { "보너스볼 번호와 당첨 번호와 중복됩니다." } }
 
         val lottoRanks =
             WinningStatistics(
