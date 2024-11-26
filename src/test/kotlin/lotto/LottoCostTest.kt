@@ -2,7 +2,8 @@ package lotto
 
 import io.kotest.assertions.throwables.shouldThrowMessage
 import io.kotest.core.spec.style.StringSpec
-import io.kotest.inspectors.forAll
+import io.kotest.data.forAll
+import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 
 class LottoCostTest : StringSpec({
@@ -18,14 +19,15 @@ class LottoCostTest : StringSpec({
     }
 
     "로또 구입 갯수를 계산한다." {
-        val lottoCosts = listOf(
-            LottoCost(1000) to 1,
-            LottoCost(1500) to 1,
-            LottoCost(10000) to 10,
-        )
-
-        lottoCosts.forAll { (lottoCost, expected) ->
-            lottoCost.calculateBoughtLottoAmount() shouldBe expected
+        forAll(
+            row(1000, 0, 1),
+            row(1000, 1, 0),
+            row(1500, 0, 1),
+            row(1500, 1, 0),
+            row(10000, 2, 8),
+        ) { lottoCost, manualLottoAmount, expected ->
+            val actual = LottoCost(lottoCost).calculateBoughtLottoAmount(ManualLottoAmount(manualLottoAmount))
+            actual shouldBe expected
         }
     }
 })
