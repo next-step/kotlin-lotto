@@ -5,7 +5,7 @@ class User(private var amount: Amount) {
         get() = autoLottos
     val totalLottoSize: Int
         get() = autoLottos.size
-    private val totalBuyAmount: Amount
+    val totalBuyAmount: Amount
         get() = autoLottos.totalAmount
     private lateinit var autoLottos: Lottos
 
@@ -21,5 +21,9 @@ class User(private var amount: Amount) {
         val isBonus = lastNumbers.contains(bonusNumber)
         val ranks: Ranks = Ranks.fromGroupBy(totalLottos.match(lastNumbers, isBonus))
         return LottoStatistics(ranks, totalBuyAmount)
+    }
+
+    fun match(lastWeekNumbers: Lotto, bonus: Boolean): Ranks {
+        return Ranks.fromGroupBy(totalLottos.match(lastWeekNumbers, bonus))
     }
 }

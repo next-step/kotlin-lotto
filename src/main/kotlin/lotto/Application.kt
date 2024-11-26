@@ -11,6 +11,6 @@ fun main() {
 
     val lastWeekNumbers = lottoMachine.createLotto(InputView.readCsvToInt("지난 주 당첨 번호를 입력해 주세요."))
     val bonusNumber: LottoNumber = lottoMachine.createLottoNumber(InputView.readMessage("보너스 볼을 입력해 주세요."))
-    val lottoStatistics = user.statistics(lastWeekNumbers, bonusNumber)
+    val lottoStatistics = LottoStatistics.from(user, lastWeekNumbers, bonusNumber)
     ResultView.printStatistics(lottoStatistics)
 }
