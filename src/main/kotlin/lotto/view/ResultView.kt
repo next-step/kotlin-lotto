@@ -1,17 +1,17 @@
-package lottery.view
+package lotto.view
 
-import lottery.domain.DrawResult
-import lottery.domain.Lottery
-import lottery.domain.Money
-import lottery.domain.RankReward
-import lottery.domain.Ticket
+import lotto.domain.DrawResult
+import lotto.domain.Lotto
+import lotto.domain.Money
+import lotto.domain.RankReward
+import lotto.domain.Ticket
 
 object ResultView {
     fun printTicketCount(tickets: List<Ticket>) {
         println("${tickets.size}개를 구매했습니다.")
     }
 
-    fun printLotteries(lotteries: List<Lottery>) {
+    fun printLotteries(lotteries: List<Lotto>) {
         lotteries.forEach {
             println(it)
         }
@@ -26,7 +26,7 @@ object ResultView {
         println("당첨 통계")
         println("---------")
         RankReward.sortLowToHighByRank().forEach { rank ->
-            println("$rank- ${drawResult.findLotteryCount(rank)}개")
+            println("$rank- ${drawResult.findLottoCount(rank)}개")
         }
         println("총 수익률은 ${drawResult.getProfitRate(purchaseAmount)}입니다.")
     }

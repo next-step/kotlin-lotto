@@ -1,6 +1,6 @@
-package lottery.domain
+package lotto.domain
 
-data class LotteryCount(val count: Int) {
+data class LottoCount(val count: Int) {
     override fun toString(): String {
         return "$count"
     }

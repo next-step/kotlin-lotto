@@ -83,8 +83,15 @@
 - [x] TicketMachineTest::테스트 케이스 추가
 - [x] LotteryApplication::스태틱임포트 원복
 - [x] LotteryTest::로또번호 일치 수 반환 테스트 케이스 추가
-- [x] WinningLottery::lottery 가 아닌 lotteryNumbers 를 갖도록 수정
+- [x] WinningLottery::lotto 가 아닌 lotteryNumbers 를 갖도록 수정
 - [x] Ticket::object 로 수정
 - [x] Money::value class 로 수정
 - [x] Money::divideBy operator fun 으로 수정
 - [x] DrawResult::getTotalReward 로직 내 타입 명시
+
+## 기능 구현 목록
+- [x] 로또 영문명을 Lotto 로 변경
+- [ ] 일급컬렉션으로 로또번호를 감싼다.
+- [ ] 보너스볼은 로또번호와 중복되지 않는다.
+- [ ] 5개 일치와 보너스볼 일치는 2등이다.
+- [ ] 5개 일치는 3등이다.

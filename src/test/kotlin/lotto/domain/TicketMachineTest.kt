@@ -1,10 +1,10 @@
-package lottery.domain
+package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
-import lottery.domain.TicketMachine.exchange
+import lotto.domain.TicketMachine.exchange
 
 class TicketMachineTest : StringSpec({
     "구입금액을 입력하면 티켓 카운트를 반환한다" {

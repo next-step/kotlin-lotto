@@ -1,4 +1,4 @@
-package lottery.domain
+package lotto.domain
 
 @JvmInline
 value class Money(private val amount: Int) {
