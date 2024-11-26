@@ -14,7 +14,8 @@ fun main() {
     ResultView.printCreatedLottos(order.lottos)
 
     val winNumberInput = InputView.getWinNumberInput()
-    val winNumbers = winningLottoService.createWinningLotto(winNumberInput)
+    val bonusNumber = InputView.getBonusNumber()
+    val winNumbers = winningLottoService.createWinningLotto(winNumberInput, bonusNumber)
 
     val result = winningLottoService.checkAndGetResult(order, winNumbers)
     ResultView.printResult(result)

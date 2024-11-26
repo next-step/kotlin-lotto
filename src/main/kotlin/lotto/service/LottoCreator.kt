@@ -12,9 +12,12 @@ class LottoCreator(private val numberGenerator: NumberGenerator = RandomNumberGe
         return List(count) { createSingleLotto() }
     }
 
-    fun createWinningLotto(winningNumbers: Set<Int>): WinningLotto {
+    fun createWinningLotto(
+        winningNumbers: Set<Int>,
+        bonusNumber: Int,
+    ): WinningLotto {
         val winningLotto = Lotto(winningNumbers.map { LottoNumber(it) }.toSet())
-        return WinningLotto(winningLotto)
+        return WinningLotto(winningLotto, LottoConst.getLottoNumber(bonusNumber))
     }
 
     private fun createSingleLotto(): Lotto {

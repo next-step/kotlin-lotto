@@ -16,6 +16,11 @@ object InputView {
             .toSet()
     }
 
+    fun getBonusNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        return getNumberInput()
+    }
+
     private fun getNumberInput(): Int {
         return requireNotNull(readln().toIntOrNull()) { "숫자를 입력해주세요." }
     }
