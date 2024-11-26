@@ -1,4 +1,9 @@
 package calculator
 
-class AdditionCalculator {
+class AdditionCalculator(
+) {
+
+    fun calculate(tokens: TextTokens): Int {
+        return 0
+    }
 }
