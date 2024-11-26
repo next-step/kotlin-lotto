@@ -5,21 +5,18 @@ import lottery.domain.LotteryMachine
 import lottery.domain.Money
 import lottery.domain.TicketMachine
 import lottery.domain.WinningLottery
-import lottery.view.InputView.inputPurchaseAmount
-import lottery.view.InputView.inputWinningLotteryNumbers
-import lottery.view.ResultView.printLotteries
-import lottery.view.ResultView.printStatistic
-import lottery.view.ResultView.printTicketCount
+import lottery.view.InputView
+import lottery.view.ResultView
 
 fun main() {
-    val purchaseAmount = Money(inputPurchaseAmount())
+    val purchaseAmount = Money(InputView.inputPurchaseAmount())
     val tickets = TicketMachine.exchange(purchaseAmount)
-    printTicketCount(tickets)
+    ResultView.printTicketCount(tickets)
 
     val purchaseLotteries = LotteryMachine.purchase(tickets)
-    printLotteries(purchaseLotteries)
+    ResultView.printLotteries(purchaseLotteries)
 
-    val winningLottery = WinningLottery.create(inputWinningLotteryNumbers())
+    val winningLottery = WinningLottery.create(InputView.inputWinningLotteryNumbers())
     val drawResult = DrawResult.from(winningLottery, purchaseLotteries)
-    printStatistic(purchaseAmount, drawResult)
+    ResultView.printStatistic(purchaseAmount, drawResult)
 }
