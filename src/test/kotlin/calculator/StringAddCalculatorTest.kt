@@ -9,7 +9,6 @@ import io.kotest.data.row
 import io.kotest.data.table
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
-import java.awt.SystemColor.text
 
 class StringAddCalculatorTest : StringSpec({
     "빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다" {
