@@ -4,23 +4,16 @@ class ConsoleInput {
     companion object {
         fun inputBalance(): Money {
             println("구입금액을 입력해 주세요.")
-            return Money(readln().toInt())
+            return Money(readln().toLong())
         }
 
-        fun inputManualTicketCount(): Int {
+        fun inputManualTicketCount(): Long {
             println("수동으로 구매할 로또 수를 입력해 주세요.")
-            return readln().toInt()
+            return readln().toLong()
         }
 
-        fun inputManualLottoNumbers(
-            inputManualTicketCount: Int,
-            lotteryTicketMachine: LotteryTicketMachine,
-        ): List<LottoTicket> {
-            println("수동으로 구매할 번호를 입력해 주세요.")
-            return (1..inputManualTicketCount).asSequence().mapNotNull {
-                lotteryTicketMachine
-                    .issueTicket(readln().split(", ").map(String::toInt).map(::LottoNumber))
-            }.toList()
+        fun inputManualLottoNumbers(): List<LottoNumber> {
+            return readln().split(", ").map(String::toInt).map(::LottoNumber)
         }
 
         fun inputDefaultWinningTicket(): LottoTicket {

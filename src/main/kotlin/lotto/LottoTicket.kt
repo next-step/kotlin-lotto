@@ -1,15 +1,15 @@
 package lotto
 
 class LottoTicket(numbers: List<LottoNumber>) {
-    private val _numbers: Set<LottoNumber> = numbers.toSet()
+    private val _numbers: Set<LottoNumber> = numbers.toSortedSet()
 
     val numbers: List<LottoNumber>
-        get() = _numbers.sorted() // Getter에서 정렬된 List 반환
+        get() = _numbers.toList() // Getter에서 정렬된 List 반환
 
     constructor(vararg numbers: Int) : this(numbers.toList().map(::LottoNumber))
 
     init {
-        require(numbers.size == 6) {
+        require(numbers.size == LOTTO_NUMBERS_SIZE) {
             "로또 번호는 총 6개여야 합니다"
         }
         require(numbers.size == _numbers.size) {
@@ -26,5 +26,9 @@ class LottoTicket(numbers: List<LottoNumber>) {
 
     override fun toString(): String {
         return "LottoTicket(numbers=$numbers)"
+    }
+
+    companion object {
+        private const val LOTTO_NUMBERS_SIZE = 6
     }
 }

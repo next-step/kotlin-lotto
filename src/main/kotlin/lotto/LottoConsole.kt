@@ -12,7 +12,12 @@ fun main() {
         return
     }
 
-    val manualLotteryTickets = ConsoleInput.inputManualLottoNumbers(inputManualTicketCount, lotteryTicketMachine)
+    val manualLotteryTickets =
+        if (inputManualTicketCount > 0) {
+            issueManualLotteryTickets(inputManualTicketCount, lotteryTicketMachine)
+        } else {
+            emptyList()
+        }
     val automaticLotteryTickets = generateSequence { lotteryTicketMachine.issueTicket() }.toList()
     val lotteryTickets = manualLotteryTickets + automaticLotteryTickets
 
@@ -27,14 +32,28 @@ fun main() {
         )
     println()
 
-    val checkedResults = lotteryTickets.map { winningTicket.checkTicket(it) }
+    val checkedResults = winningTicket.checkTicketAll(lotteryTickets)
 
     val winningBoard = WinningBoard(checkedResults)
     val winningResultsWithWinningsSorted =
         WinningResult.entries.filterNot { it == WinningResult.LOSE }.sortedBy { it.winnings }
-    ResultView.announceWinningStats(
-        winningBoard,
-        lotteryTicketMachine,
-        winningResultsWithWinningsSorted,
-    )
+
+    println("당첨 통계")
+    println("---------")
+    winningResultsWithWinningsSorted.forEach {
+        ResultView.announceWinningResultsWithEachCount(it, winningBoard.getWinningCount(it))
+    }
+    val rateOfReturn =
+        winningBoard.calculateRateOfReturn(totalCost = lotteryTicketMachine.totalCost)
+    ResultView.announceRateOfReturn(rateOfReturn)
+}
+
+private fun issueManualLotteryTickets(
+    inputManualTicketCount: Long,
+    lotteryTicketMachine: LotteryTicketMachine,
+): List<LottoTicket> {
+    println("수동으로 구매할 번호를 입력해 주세요.")
+    return (1..inputManualTicketCount).mapNotNull {
+        lotteryTicketMachine.issueTicket(ConsoleInput.inputManualLottoNumbers())
+    }
 }

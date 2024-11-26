@@ -1,7 +1,7 @@
 package lotto
 
 @JvmInline
-value class Money(val amount: Int) : Comparable<Money> {
+value class Money(private val amount: Long) : Comparable<Money> {
     operator fun plus(other: Money): Money {
         return Money(amount + other.amount)
     }
@@ -14,7 +14,7 @@ value class Money(val amount: Int) : Comparable<Money> {
         return amount.compareTo(other.amount)
     }
 
-    fun toInt(): Int {
+    fun toLong(): Long {
         return amount
     }
 

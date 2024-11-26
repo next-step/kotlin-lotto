@@ -1,7 +1,5 @@
 package lotto
 
-import lotto.LottoConstants.TICKET_PRICE
-
 class LotteryTicketMachine(balance: Money, totalCost: Money = Money.ZERO) {
     var balance: Money = balance
         private set
@@ -23,11 +21,12 @@ class LotteryTicketMachine(balance: Money, totalCost: Money = Money.ZERO) {
         return LottoTicket(numbers)
     }
 
-    fun affordableTickets(): Int {
-        return balance.toInt() / TICKET_PRICE.toInt()
+    fun affordableTickets(): Long {
+        return balance.toLong() / TICKET_PRICE.toLong()
     }
 
     companion object {
         private val LOTTERY_NUMBERS_POOL: IntRange = (1..45)
+        val TICKET_PRICE: Money = Money(1000)
     }
 }

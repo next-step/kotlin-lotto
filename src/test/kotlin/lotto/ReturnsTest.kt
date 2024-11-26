@@ -5,14 +5,14 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
-import lotto.LottoConstants.TICKET_PRICE
+import lotto.LotteryTicketMachine.Companion.TICKET_PRICE
 
 class ReturnsTest : StringSpec({
     "총 당첨 금액과 총 비용을 받아 수익률을 구할 수 있다(기본 소수점 둘째자리, 내림)" {
         val totalWinningAmount = Money(5000)
         val totalCost = Money(14000)
 
-        val result = Returns(totalWinningAmount = totalWinningAmount, totalCost = totalCost)
+        val result = RateOfReturn(totalWinningAmount = totalWinningAmount, totalCost = totalCost)
 
         result.toDouble() shouldBe 0.35
     }
@@ -22,7 +22,7 @@ class ReturnsTest : StringSpec({
         val totalCost = TICKET_PRICE - Money(1)
 
         shouldThrow<IllegalArgumentException> {
-            Returns(totalWinningAmount = totalWinningAmount, totalCost = totalCost)
+            RateOfReturn(totalWinningAmount = totalWinningAmount, totalCost = totalCost)
         }
     }
 
@@ -30,7 +30,7 @@ class ReturnsTest : StringSpec({
         val totalWinningAmount = Money(1000)
         val totalCost = Money(9000)
 
-        val result = Returns(totalWinningAmount = totalWinningAmount, totalCost = totalCost)
+        val result = RateOfReturn(totalWinningAmount = totalWinningAmount, totalCost = totalCost)
 
         forAll(
             row(0, 0),

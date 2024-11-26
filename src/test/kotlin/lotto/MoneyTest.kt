@@ -41,7 +41,7 @@ class MoneyTest : StringSpec({
     "Money는 Int 타입으로 변환할 수 있다" {
         val money1000 = Money(1000)
 
-        money1000.toInt() shouldBe 1000
+        money1000.toLong() shouldBe 1000
     }
 
     "Money는 Double 타입으로 변환할 수 있다" {
