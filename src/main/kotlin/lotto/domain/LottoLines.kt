@@ -5,13 +5,17 @@ class LottoLines(private val lines: List<LottoLine>) {
         require(lines.isNotEmpty()) { "1개 이상의 로또 라인을 가지고 있어야 합니다." }
     }
 
-    fun extractLottoGameResult(winningLottoLine: LottoLine): LottoGameResult {
-        return LottoGameResult(
-            lines.map { it.extractMatchCount(winningLottoLine) }
-                .map { LottoRank.fromMatchCount(it) }
-                .groupingBy { it }
-                .eachCount(),
-        )
+    fun extractLottoGameResult(
+        winningLotto: WinningLotto,
+        profitRateCalculator: ProfitRateCalculator,
+    ): LottoGameResult {
+        val lottoRanks =
+            lines.map {
+                val (matchCount, bonusMatch) = winningLotto.match(it)
+                LottoRank.fromMatchAndBonus(matchCount, bonusMatch)
+            }.groupingBy { it }.eachCount()
+
+        return LottoGameResult(lottoRanks, profitRateCalculator)
     }
 
     fun extractLottoLines(): List<List<Int>> {

@@ -12,7 +12,7 @@ class LottoGameTest : StringSpec({
             row(listOf(listOf(1, 3, 15, 24, 33, 45), listOf(6, 8, 9, 14, 17, 28))),
         ) { lottoNumbers ->
             val lottoGame =
-                LottoGame(
+                LottoGame.makeNewLottoGame(
                     LottoPurchaseAmount("2000"),
                     CustomLottoBallBallMachine(lottoNumbers),
                 )

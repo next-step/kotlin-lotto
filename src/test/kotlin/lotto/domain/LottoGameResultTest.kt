@@ -4,6 +4,7 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
+import lotto.infrastructure.DefaultProfitRateCalculator
 
 class LottoGameResultTest : StringSpec({
     "로또의 수익률을 계산할 수 있다." {
@@ -17,7 +18,7 @@ class LottoGameResultTest : StringSpec({
                     LottoRank.NO_RANK to 1,
                 ),
                 LottoPurchaseAmount(5000),
-                400311.0,
+                406310.0,
             ),
             row(
                 mapOf(
@@ -28,7 +29,7 @@ class LottoGameResultTest : StringSpec({
                     LottoRank.NO_RANK to 4,
                 ),
                 LottoPurchaseAmount(5000),
-                1.0,
+                10.0,
             ),
             row(
                 mapOf(
@@ -50,19 +51,22 @@ class LottoGameResultTest : StringSpec({
                     LottoRank.NO_RANK to 13,
                 ),
                 LottoPurchaseAmount(14000),
+                3.57,
+            ),
+            row(
+                mapOf(
+                    LottoRank.FIRST to 0,
+                    LottoRank.SECOND to 0,
+                    LottoRank.THIRD to 0,
+                    LottoRank.FIFTH to 1,
+                    LottoRank.NO_RANK to 13,
+                ),
+                LottoPurchaseAmount(14000),
                 0.35,
             ),
         ) { lottoResult, purchasePrice, expected ->
-            val lottoGameResult = LottoGameResult(lottoResult)
-            val lottoProfitRate = lottoGameResult.makeLottoProfitRate(purchasePrice.toLottoPurchaseCount())
-            lottoProfitRate.rate shouldBe expected
+            val lottoProfitRate = LottoGameResult(lottoResult, DefaultProfitRateCalculator())
+            lottoProfitRate.calculateProfitRate(purchasePrice) shouldBe expected
         }
     }
 })
-
-// class LottoGameResult(private val lottoResult: Map<LottoRank, Int>) {
-//    fun makeLottoProfitRate(purchaseCount: LottoPurchaseCount): LottoProfitRate {
-//        val totalPrize = lottoResult.map { it.key.prize * it.value }.sum()
-//        return LottoProfitRate(totalPrize, purchaseCount)
-//    }
-// }

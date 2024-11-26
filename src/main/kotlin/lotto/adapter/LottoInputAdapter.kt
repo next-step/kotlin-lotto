@@ -1,15 +1,13 @@
 package lotto.adapter
 
+import lotto.domain.LottoBall
+import lotto.domain.LottoBalls
 import lotto.domain.LottoPurchaseAmount
 
-class LottoInputAdapter {
-    fun adaptPurchaseAmount(input: String): LottoPurchaseAmount {
-        val amount = input.toInt()
-        return LottoPurchaseAmount(amount)
-    }
+interface LottoInputAdapter {
+    fun fetchPurchaseAmount(): LottoPurchaseAmount
 
-    fun adaptWinningNumbers(input: String): List<Int> {
-        return input.split(",")
-            .map { it.trim().toInt() }
-    }
+    fun fetchWinningNumbers(): LottoBalls
+
+    fun fetchBonusNumber(): LottoBall
 }
