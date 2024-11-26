@@ -10,8 +10,8 @@ class DrawResult(private val rankRewardLotteryCountMap: Map<RankReward, LotteryC
     }
 
     private fun getTotalReward(): Money {
-        return rankRewardLotteryCountMap.entries.fold(Money.ZERO) { total, (rankReward, lotteryCount) ->
-            val totalRewardPerRank = rankReward.money * lotteryCount.count
+        return rankRewardLotteryCountMap.entries.fold(Money.ZERO) { total: Money, (rankReward: RankReward, lotteryCount: LotteryCount) ->
+            val totalRewardPerRank: Money = rankReward.money * lotteryCount.count
             total + totalRewardPerRank
         }
     }

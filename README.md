@@ -87,4 +87,4 @@
 - [x] Ticket::object 로 수정
 - [x] Money::value class 로 수정
 - [x] Money::divideBy operator fun 으로 수정
-- [ ] DrawResult::getTotalReward 로직 내 타입 명시
+- [x] DrawResult::getTotalReward 로직 내 타입 명시
