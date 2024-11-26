@@ -2,7 +2,7 @@ package lottery.domain
 
 class Lottery(val lotteryNumbers: LotteryNumbers) {
     fun countMatchedNumber(other: Lottery): Int {
-        return this.lotteryNumbers.countMatchedNumber(other.lotteryNumbers)
+        return lotteryNumbers.countMatchedNumber(other.lotteryNumbers)
     }
 
     override fun toString(): String {
