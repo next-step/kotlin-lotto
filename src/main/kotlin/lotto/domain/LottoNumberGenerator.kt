@@ -13,7 +13,7 @@ class AutoLottoNumberGenerator : LottoNumberGenerator {
         return (LOTTO_NUMBER_MIN..LOTTO_NUMBER_MAX)
             .shuffled()
             .take(LOTTO_NUMBER_COUNT)
-            .map(::LottoNumber)
+            .map { LottoNumber.of(it) }
             .toSet()
     }
 }

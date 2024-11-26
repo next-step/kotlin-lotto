@@ -27,7 +27,7 @@ class LottoTest : BehaviorSpec({
                 }
 
                 Then("로또 번호는 오름차순으로 정렬되어 있다") {
-                    lotto.numbers shouldBe expected.map(::LottoNumber)
+                    lotto.numbers shouldBe expected.map { LottoNumber.of(it) }
                 }
             }
         }
@@ -55,10 +55,10 @@ class LottoTest : BehaviorSpec({
         val lotto = Lotto.from(setOf(1, 2, 3, 4, 5, 6))
 
         forAll(
-            row(setOf(1, 2, 3, 7, 8, 9).map(::LottoNumber).toSet(), 3),
-            row(setOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).toSet(), 6),
-            row(setOf(7, 8, 9, 10, 11, 12).map(::LottoNumber).toSet(), 0),
-            row(setOf(1, 2, 3, 4, 5).map(::LottoNumber).toSet(), 5),
+            row(setOf(1, 2, 3, 7, 8, 9).map { LottoNumber.of(it) }.toSet(), 3),
+            row(setOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) }.toSet(), 6),
+            row(setOf(7, 8, 9, 10, 11, 12).map { LottoNumber.of(it) }.toSet(), 0),
+            row(setOf(1, 2, 3, 4, 5).map { LottoNumber.of(it) }.toSet(), 5),
             row(emptySet<LottoNumber>(), 0),
         ) { winningNumbers, expectedMatchCount ->
             When("당첨 번호가 ${winningNumbers}인 경우") {

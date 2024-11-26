@@ -14,7 +14,7 @@ class BonusNumberTest : BehaviorSpec({
             val bonusNumber = BonusNumber.create(7, winningNumbers)
 
             Then("정상적으로 생성된다") {
-                bonusNumber.value shouldBe LottoNumber(7)
+                bonusNumber.value shouldBe LottoNumber.of(7)
             }
         }
 

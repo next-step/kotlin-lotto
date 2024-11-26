@@ -24,7 +24,7 @@ class Lotto(numbers: Set<LottoNumber>) {
 
     companion object {
         fun from(numbers: Set<Int>): Lotto {
-            return Lotto(numbers.map(::LottoNumber).toSet())
+            return Lotto(numbers.map { LottoNumber.of(it) }.toSet())
         }
     }
 }

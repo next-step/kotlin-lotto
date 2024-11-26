@@ -16,7 +16,7 @@ class LottoStoreTest : BehaviorSpec({
         When("자동 로또 번호를 생성하여 발급하면") {
             val mockGenerator =
                 object : LottoNumberGenerator {
-                    override fun generate(): Set<LottoNumber> = setOf(13, 14, 15, 16, 17, 18).map(::LottoNumber).toSet()
+                    override fun generate(): Set<LottoNumber> = setOf(13, 14, 15, 16, 17, 18).map { LottoNumber.of(it) }.toSet()
                 }
             val purchasedLottos = LottoStore().issueLottos(manualLottos, totalLottoCount, mockGenerator)
 
@@ -27,7 +27,7 @@ class LottoStoreTest : BehaviorSpec({
             Then("자동 로또는 자동 생성된 번호로 구성된다") {
                 val autoLottos = purchasedLottos.lottos.subList(manualLottos.size, totalLottoCount)
                 autoLottos.forEach { lotto ->
-                    lotto.numbers shouldBe setOf(13, 14, 15, 16, 17, 18).map(::LottoNumber)
+                    lotto.numbers shouldBe setOf(13, 14, 15, 16, 17, 18).map { LottoNumber.of(it) }
                 }
             }
 
@@ -43,7 +43,7 @@ class LottoStoreTest : BehaviorSpec({
                         manualLottos,
                         1,
                         object : LottoNumberGenerator {
-                            override fun generate(): Set<LottoNumber> = setOf(13, 14, 15, 16, 17, 18).map(::LottoNumber).toSet()
+                            override fun generate(): Set<LottoNumber> = setOf(13, 14, 15, 16, 17, 18).map { LottoNumber.of(it) }.toSet()
                         },
                     )
                 }
