@@ -13,4 +13,12 @@ fun main() {
     )
     // resultView 필요
     println("$totalPurchaseCount 개를 구매했습니다.")
+
+    val lottoGenerator = LottoGenerator(totalPurchaseCount)
+    val lottoList = lottoGenerator.generate()
+
+    //resultView 필요
+    lottoList.forEach {
+        println(it.numbers)
+    }
 }
