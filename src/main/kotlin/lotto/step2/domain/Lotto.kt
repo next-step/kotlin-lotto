@@ -21,10 +21,10 @@ class Lotto private constructor(
     }
 
     companion object {
+        const val PRICE = 1000
+
         fun of(pickNumbers: List<Int>): Lotto {
             return Lotto(pickNumbers = pickNumbers, matchCount = 0)
         }
-
-        const val PRICE = 1000
     }
 }
