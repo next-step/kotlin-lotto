@@ -32,12 +32,14 @@ class LottoMachineTest {
     }
 
     companion object {
+        private const val NOT_MATCHED_NUMBER = 45
+
         @JvmStatic
         private fun lottoNumberList() =
             listOf(
                 listOf(
-                    Numbers(listOf(1, 2, 3, 4, 5, 0)),
-                    Numbers(listOf(1, 2, 3, 4, 5, 6)),
+                    Numbers.fromInts(listOf(1, 2, 3, 4, 5, NOT_MATCHED_NUMBER)),
+                    Numbers.fromInts(listOf(1, 2, 3, 4, 5, 6)),
                 ),
             )
     }

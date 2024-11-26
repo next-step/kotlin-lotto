@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.Lottos
+import lotto.number.LottoNumber
 import lotto.rank.LottoRank
 import lotto.rank.LottoRank.SECOND
 
@@ -14,8 +15,12 @@ object ResultView {
     }
 
     fun printLottoList(lottos: Lottos) {
-        lottos.lottos.forEach { println(it.numbers.numbers) }
+        lottos.lottos.forEach { println(it.numbers.numbers.toFormattedString()) }
         println()
+    }
+
+    private fun List<LottoNumber>.toFormattedString(): String {
+        return this.joinToString(prefix = "[", postfix = "]") { it.number.toString() }
     }
 
     fun printStatistics(lottoRanks: List<LottoRank>) {

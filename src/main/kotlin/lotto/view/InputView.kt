@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.ball.BonusBall
+import lotto.number.LottoNumber
 import lotto.number.Numbers
 
 object InputView {
@@ -17,7 +18,7 @@ object InputView {
 
     fun inputBonusBall(): BonusBall {
         println("보너스 볼을 입력해주세요.")
-        return BonusBall(readlnOrNull()?.toIntOrNull() ?: 0)
+        return BonusBall(LottoNumber(readlnOrNull()?.toIntOrNull() ?: 0))
     }
 
     fun inputManualLottoCount(): Int {
@@ -36,8 +37,9 @@ object InputView {
             .map { Numbers(numbers = getInputNumberList()) }
             .toList()
 
-    private fun getInputNumberList(): List<Int> =
+    private fun getInputNumberList(): List<LottoNumber> =
         (readlnOrNull() ?: "")
             .split(",")
             .map { it.trim().toIntOrNull() ?: 0 }
+            .map { LottoNumber(it) }
 }

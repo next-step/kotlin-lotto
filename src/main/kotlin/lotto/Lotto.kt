@@ -1,12 +1,14 @@
 package lotto
 
 import lotto.ball.BonusBall
+import lotto.number.LottoNumber
 import lotto.number.Numbers
+import lotto.number.Numbers.Companion.sorted
 
 data class Lotto(
     val numbers: Numbers =
         Numbers(
-            RANGE
+            LottoNumber.RANGE
                 .shuffled()
                 .take(COUNT)
                 .sorted(),
@@ -19,10 +21,7 @@ data class Lotto(
     fun isMatchedBonus(bonusBall: BonusBall): Boolean = numbers.hasNumber(bonusBall.number)
 
     companion object {
-        private const val COUNT = 6
-        const val MIN_NUMBER = 1
-        const val MAX_NUMBER = 45
         const val PRICE: Int = 1_000
-        val RANGE = (MIN_NUMBER..MAX_NUMBER).toList()
+        private const val COUNT = 6
     }
 }
