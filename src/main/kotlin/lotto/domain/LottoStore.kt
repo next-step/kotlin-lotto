@@ -7,7 +7,7 @@ class LottoStore {
         generator: LottoNumberGenerator,
     ): PurchasedLottos {
         val autoCount = lottoCount - manualLottos.size
-        val autoLottos = List(autoCount) { Lotto.from(generator.generate()) }
+        val autoLottos = List(autoCount) { Lotto(generator.generate()) }
         return PurchasedLottos(manualLottos + autoLottos)
     }
 
