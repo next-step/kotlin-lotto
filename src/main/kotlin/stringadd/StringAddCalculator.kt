@@ -15,10 +15,7 @@ class StringAddCalculator {
         val delimiters = mutableListOf(",", ":") // default delimiters
         val splitTarget =
             if (text.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-                val delimiterAndInput = text.split("\n")
-                require(delimiterAndInput.size == 2) {
-                    "$CUSTOM_DELIMITER_PREFIX 와 New line 사이에 커스텀 delimiter 를 추가 하십쇼"
-                }
+                val delimiterAndInput = splitDelimiterAndInput(text)
                 val customDelimiter = parseCustomDelimiter(delimiterAndInput[0])
                 delimiters.add(customDelimiter)
                 delimiterAndInput[1]
@@ -26,6 +23,14 @@ class StringAddCalculator {
                 text
             }
         return splitTarget.split(delimiters = delimiters.toTypedArray())
+    }
+
+    private fun splitDelimiterAndInput(text: String): List<String> {
+        val splitText = text.split("\n")
+        require(splitText.size == 2) {
+            "$CUSTOM_DELIMITER_PREFIX 와 New line 사이에 커스텀 delimiter 를 추가 하십쇼"
+        }
+        return splitText
     }
 
     private fun parseCustomDelimiter(input: String): String {
