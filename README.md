@@ -80,7 +80,7 @@
 
 ### Step2 - 리뷰 반영사항
 - [x] LotteryNumbers::intersect infix 함수 문법 적용
-- [ ] TicketMachineTest::금액을 1,000원단위로 하지 않을 시 예외 발생 케이스 추가
+- [x] TicketMachineTest::테스트 케이스 추가
 - [ ] LotteryApplication::스태틱임포트 원복
 - [ ] LotteryTest::로또번호 일치 수 반환 테스트 케이스 추가
 - [ ] WinningLottery::lottery가 아닌 lotteryNumber를 갖도록 수정
