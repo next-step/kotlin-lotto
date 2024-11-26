@@ -10,10 +10,14 @@ object ResultView {
     private const val COMMA_SEPARATOR = ", "
     private val NEWLINE = System.lineSeparator()
 
-    fun printLotto(lotto: Lotto) {
+    fun printLotto(
+        lotto: Lotto,
+        numberOfManual: Int,
+    ) {
         val output =
             buildString {
-                appendLine("${lotto.numberOfLines}개를 구매했습니다.")
+                appendLine()
+                appendLine("수동으로 ${numberOfManual}장, 자동으로 ${lotto.numberOfLines - numberOfManual}개를 구매했습니다.")
                 appendLine(formatLotto(lotto))
             }
         println(output)
