@@ -5,12 +5,11 @@ import lotto.BoughtLotto
 import lotto.Lotto
 import lotto.LottoCost
 import lotto.LottoNumber
-import lotto.ManualLottoAmount
 import lotto.WinningLotto
 
 class InputView {
     fun input(): BoughtLotto {
-        val lottos = inputMoney()
+        val lottos = inputLottoCost()
         val winningLotto = inputWinningLotto()
         println()
         return BoughtLotto(
@@ -19,43 +18,49 @@ class InputView {
         )
     }
 
-    private fun inputMoney(): List<Lotto> {
-        println("구입금액을 입력해 주세요.")
-        val maybeMoney = readlnOrNull()
-        val lottoCost = try {
-            requireNotNull(maybeMoney) { "구입 금액은 필수입니다." }
-            LottoCost(maybeMoney.toInt())
-        } catch (e: NumberFormatException) {
-            throw IllegalArgumentException("구입 금액은 숫자만 입력가능합니다.")
-        }
+    private fun inputLottoCost(): List<Lotto> {
+        val money = inputMoney()
+        val manualLottoAmount = inputManualLottoAmount()
+        val lottoCost = LottoCost(money, manualLottoAmount)
         return generateLottos(lottoCost)
     }
 
-    private fun generateLottos(lottoCost: LottoCost): List<Lotto> {
-        println("수동으로 구매할 로또 수를 입력해주세요.")
-        val manualLottoAmount = inputManualLottoAmount()
-        val manualLottos = inputManualLottoNumbers(manualLottoAmount)
-
-        val autoLottoAmount = lottoCost.calculateBoughtLottoAmount(manualLottoAmount)
-        val autoLottos = (1..autoLottoAmount).map { Lotto.auto() }
-
-        val generatedLottos = manualLottos + autoLottos
-        printBoughtLottos(manualLottoAmount, autoLottoAmount, generatedLottos)
-        return generatedLottos
+    private fun inputMoney(): Int {
+        println("구입금액을 입력해 주세요.")
+        val maybeMoney = readlnOrNull()
+        return try {
+            requireNotNull(maybeMoney) { "구입 금액은 필수입니다." }
+            maybeMoney.toInt()
+        } catch (e: NumberFormatException) {
+            throw IllegalArgumentException("구입 금액은 숫자만 입력가능합니다.")
+        }
     }
 
-    private fun inputManualLottoAmount(): ManualLottoAmount {
+    private fun inputManualLottoAmount(): Int {
+        println("수동으로 구매할 로또 수를 입력해주세요.")
         try {
             val maybeManualLottoAmount = readlnOrNull() ?: throw IllegalArgumentException("수동으로 구매할 로또 수는 필수입니다.")
-            return ManualLottoAmount(maybeManualLottoAmount.toInt())
+            return maybeManualLottoAmount.toInt()
         } catch (e: NumberFormatException) {
             throw IllegalArgumentException("수동으로 구매할 로또 수는 숫자만 입력 가능합니다.")
         }
     }
 
-    private fun inputManualLottoNumbers(manualLottoAmount: ManualLottoAmount): List<Lotto> {
+    private fun generateLottos(lottoCost: LottoCost): List<Lotto> {
+        println("수동으로 구매할 로또 수를 입력해주세요.")
+        val manualLottos = inputManualLottoNumbers(lottoCost)
+
+        val autoLottoAmount = lottoCost.autoLottoAmount
+        val autoLottos = (1..autoLottoAmount).map { Lotto.auto() }
+
+        val generatedLottos = manualLottos + autoLottos
+        printBoughtLottos(lottoCost, generatedLottos)
+        return generatedLottos
+    }
+
+    private fun inputManualLottoNumbers(lottoCost: LottoCost): List<Lotto> {
         println("수동으로 구매할 번호를 입력해주세요.")
-        val maybeManualLottoNumbers = (1..manualLottoAmount.value)
+        val maybeManualLottoNumbers = (1..lottoCost.manualLottoAmount)
             .map { readlnOrNull() }
 
         return maybeManualLottoNumbers.map {
@@ -71,13 +76,11 @@ class InputView {
         }
     }
 
-
     private fun printBoughtLottos(
-        manualLottoAmount: ManualLottoAmount,
-        autoLottoAmount: Int,
+        lottoCost: LottoCost,
         lottos: List<Lotto>,
     ) {
-        println("수동으로 ${manualLottoAmount.value}장, 자동으로 ${autoLottoAmount}장 구매했습니다.")
+        println("수동으로 ${lottoCost.manualLottoAmount}장, 자동으로 ${lottoCost.autoLottoAmount}장 구매했습니다.")
         lottos.forEach {
             val lottoNumbersString = it.numbers.joinToString(", ") {
                 lottoNumber -> lottoNumber.value.toString()
