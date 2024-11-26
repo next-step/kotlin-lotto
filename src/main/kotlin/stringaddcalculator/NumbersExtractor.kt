@@ -1,13 +1,23 @@
 package stringaddcalculator
 
 object NumbersExtractor {
+    private val NEGATIVE_NUMBER_REGEX = Regex("-[0-9]+\$")
+
     private val DEFAULT_DELIMITER_REGEX = Regex("[,:]")
     private val CUSTOM_DELIMITER_REGEX = Regex("//(.*)\\n(.*)")
 
     fun extract(text: String): List<Int> {
+        validateNoNegativeNumbers(text)
+
         val splitNumbers = splitToNumbers(text)
         return splitNumbers.map { splitNumber ->
             splitNumber.toInt()
+        }
+    }
+
+    private fun validateNoNegativeNumbers(text: String) {
+        if (text.contains(NEGATIVE_NUMBER_REGEX)) {
+            throw IllegalArgumentException("음수는 포함될 수 없습니다. 현재 입력 = $text")
         }
     }
 

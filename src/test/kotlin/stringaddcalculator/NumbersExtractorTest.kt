@@ -7,6 +7,14 @@ import org.junit.jupiter.params.provider.ValueSource
 
 class NumbersExtractorTest {
     @Test
+    fun `음수가 포함된 경우 예외를 발생시킨다`() {
+        val text = "-1:2,3"
+
+        assertThatThrownBy { NumbersExtractor.extract(text) }
+            .isExactlyInstanceOf(IllegalArgumentException::class.java)
+    }
+
+    @Test
     fun `커스텀 구분자가 없으면 콤마 또는 콜론으로 숫자를 추출한다`() {
         val text = "1,2:3,4:5"
 
