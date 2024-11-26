@@ -19,18 +19,8 @@ object LottoController {
         val winningNumbers = InputView.askWinningNumbers()
         val bonusNumber = InputView.askBonusNumber()
 
-        val statistics =
-            tickets.groupingBy { ticket ->
-                val matchCount = ticket.matchCount(winningNumbers)
-                val hasBonus = matchCount == 5 && ticket.hasBonusNumber(BonusNumber(bonusNumber))
-                LottoRank.from(matchCount, hasBonus)
-            }.eachCount()
-
-        val totalPrize =
-            statistics.entries.sumOf { (rank, count) ->
-                rank.prize * count
-            }
-
+        val statistics = lottoService.calculateStatistics(tickets, winningNumbers, BonusNumber(bonusNumber))
+        val totalPrize = lottoService.calculateTotalPrize(statistics)
         val profitRate = lottoService.calculateProfitRate(totalPrize)
 
         ResultView.showStatistics(statistics, profitRate)
