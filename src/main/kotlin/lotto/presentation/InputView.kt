@@ -1,15 +1,17 @@
 package lotto.presentation
 
 object InputView {
-    fun inputPurchaseAmount(): String? {
+    fun inputPurchaseAmount(): String {
         println(GUIDE_INPUT_PURCHASE_AMOUNT)
         val purchaseAmount = readlnOrNull()
+        require(purchaseAmount != null)
         return purchaseAmount
     }
 
-    fun inputWinningNumber(): String? {
+    fun inputWinningNumbers(): String {
         println(GUIDE_INPUT_LAST_WINNING_NUMBER)
         val winningNumber = readlnOrNull()
+        require(winningNumber != null)
         return winningNumber
     }
 

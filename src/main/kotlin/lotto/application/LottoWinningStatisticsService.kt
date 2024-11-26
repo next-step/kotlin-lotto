@@ -9,7 +9,7 @@ import lotto.core.YieldCalculator
 object LottoWinningStatisticsService {
     fun start(
         lottos: Lottos,
-        winningNumber: String?,
+        winningNumber: String,
     ): LottoWinningStatistics {
         val winningNumbers = WinningNumbers(winningNumber)
         WinningChecker.markWinningStatus(lottos, winningNumbers)

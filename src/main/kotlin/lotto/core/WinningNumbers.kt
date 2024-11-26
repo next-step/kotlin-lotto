@@ -3,13 +3,10 @@ package lotto.core
 import lotto.core.constant.LottoConstants
 
 data class WinningNumbers(val winningNumbers: List<Int>) {
-    constructor(winningNumbers: String?) : this(splitNumbers(winningNumbers))
+    constructor(winningNumbers: String) : this(splitNumbers(winningNumbers))
 
     companion object {
-        private fun splitNumbers(winningNumbers: String?): List<Int> {
-            if (winningNumbers == null) {
-                throw RuntimeException()
-            }
+        private fun splitNumbers(winningNumbers: String): List<Int> {
 
             val numberList = winningNumbers.split(DELIMITER)
             if (numberList.size < LottoConstants.LOTTO_NUMBER_COUNT) {
