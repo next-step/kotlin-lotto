@@ -1,8 +1,10 @@
 package lotto.domain
 
+import lotto.model.Lotto
+
 class LottoResultManager(
-    private val winningLotto: List<Int>,
-    private val lottoList: List<List<Int>>
+    private val winningLotto: Lotto,
+    private val lottoList: List<Lotto>
 ) {
     fun isWinResult(): LottoResult {
         return LottoResult.Success(1, 1, 1, 1)

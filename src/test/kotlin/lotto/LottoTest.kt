@@ -4,6 +4,7 @@ import lotto.domain.LottoCalculator
 import lotto.domain.LottoGenerator
 import lotto.domain.LottoResult
 import lotto.domain.LottoResultManager
+import lotto.model.Lotto
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -28,8 +29,8 @@ class LottoTest {
 
     @Test
     fun `{given} 당첨번호 1, 2, 3, 4, 5, 6 {when} 3개 미만 일치 {then} 당첨 아님`() {
-        val winningNumber = listOf(1, 2, 3, 4, 5, 6)
-        val testLottoNumber = listOf(1, 2, 3, 9, 9, 9)
+        val winningNumber =  Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val testLottoNumber =  Lotto(listOf(1, 2, 3, 9, 9, 9))
         val lottoNumberList = listOf(testLottoNumber)
         val lottoResultManager = LottoResultManager(winningNumber, lottoNumberList)
         val isWinResult = lottoResultManager.isWinResult()
@@ -38,12 +39,12 @@ class LottoTest {
 
     @Test
     fun `{given} 당첨번호 1, 2, 3, 4, 5, 6 {when} 3개 이상 일치 {then} 당첨`() {
-        val winningNumber = listOf(1, 2, 3, 4, 5, 6)
+        val winningNumber =  Lotto(listOf(1, 2, 3, 4, 5, 6))
 
-        val testLottoNumberThree = listOf(1, 2, 3, 9, 9, 9)
-        val testLottoNumberFour = listOf(1, 2, 3, 4, 9, 9)
-        val testLottoNumberFive = listOf(1, 2, 3, 4, 5, 9)
-        val testLottoNumberSix = listOf(1, 2, 3, 4, 5, 6)
+        val testLottoNumberThree = Lotto(listOf(1, 2, 3, 9, 9, 9))
+        val testLottoNumberFour =  Lotto(listOf(1, 2, 3, 4, 9, 9))
+        val testLottoNumberFive =  Lotto(listOf(1, 2, 3, 4, 5, 9))
+        val testLottoNumberSix =  Lotto(listOf(1, 2, 3, 4, 5, 6))
 
         val lottoNumberList = listOf(
             testLottoNumberThree,
@@ -59,13 +60,13 @@ class LottoTest {
 
     @Test
     fun `{given} 로또 4장 {when} 1개 당첨 {then} 수익률 4 분의 1`() {
-        val winningNumber = listOf(1, 2, 3, 4, 5, 6)
+        val winningNumber = Lotto(listOf(1, 2, 3, 4, 5, 6))
         val lottoNumberList = listOf(
             listOf(1, 2, 3, 4, 5, 6),
             listOf(100, 200, 300, 400, 500),
             listOf(100, 200, 300, 400, 500),
             listOf(100, 200, 300, 400, 500),
-        )
+        ).map { Lotto(it) }
         val lottoResultManager = LottoResultManager(winningNumber, lottoNumberList)
         val winningRate = lottoResultManager.calculateWinningRate()
         assertEquals(0.25, winningRate)
