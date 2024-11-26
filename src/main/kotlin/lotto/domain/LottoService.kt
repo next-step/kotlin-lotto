@@ -10,7 +10,7 @@ class LottoService(
 
     fun getResult(
         lotto: Lottos,
-        winningLotto: Lotto,
+        winningLotto: WinningLotto,
     ): LottoResult {
         val results = lotto.match(winningLotto)
         val incomeRate = calculateIncomeRate(lotto, results)

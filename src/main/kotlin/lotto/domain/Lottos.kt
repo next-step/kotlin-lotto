@@ -5,7 +5,7 @@ data class Lottos(
 ) {
     val quantity: Int = lottos.size
 
-    fun match(winningLotto: Lotto): Results {
+    fun match(winningLotto: WinningLotto): Results {
         val results = lottos.map(winningLotto::compare)
         return Results(results)
     }
