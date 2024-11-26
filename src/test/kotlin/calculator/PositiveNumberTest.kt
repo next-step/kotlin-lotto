@@ -5,7 +5,6 @@ import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
 class PositiveNumberTest {
-
     @Test
     fun `숫자가 아닌 문자는 예외가 발생한다`() {
         shouldThrow<RuntimeException> {
@@ -23,6 +22,4 @@ class PositiveNumberTest {
             message shouldBe "0보다 큰 양수를 입력하세요"
         }
     }
-
-
 }

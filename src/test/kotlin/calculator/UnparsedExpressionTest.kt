@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.params.provider.ValueSource
 
 class UnparsedExpressionTest {
-
     @Test
     fun `입력 값이 null 이면 0을 반환한다`() {
         val expression = UnparsedExpression(null)
@@ -41,7 +40,6 @@ class UnparsedExpressionTest {
         textTokens.findToken()[3] shouldBe PositiveNumber.of("44")
     }
 
-
     @ParameterizedTest
     @ValueSource(strings = ["//@\n1@2@3", "//;\n1;2;3"])
     fun `커스텀 구분자로 분리할수 있다3`(text: String) {
@@ -57,7 +55,7 @@ class UnparsedExpressionTest {
     fun `숫자 하나를 입력하면 해당 숫자를 반환한다`(
         text: String,
         result: String,
-        ) {
+    ) {
         val expression = UnparsedExpression(text)
         val textTokens = expression.splitText()
         textTokens.findToken()[0] shouldBe PositiveNumber.of(result)

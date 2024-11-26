@@ -10,4 +10,8 @@ class TextTokens {
     fun findToken(): List<PositiveNumber> {
         return tokens
     }
+
+    fun sum(): Int {
+        return tokens.sumOf { it.number }
+    }
 }

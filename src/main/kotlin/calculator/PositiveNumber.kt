@@ -1,9 +1,8 @@
 package calculator
 
-
 @JvmInline
 value class PositiveNumber(
-    private val number: Int
+    val number: Int,
 ) {
     init {
         require(number >= 0) { "0보다 큰 양수를 입력하세요" }

@@ -1,7 +1,5 @@
 package calculator
 
-
-
 class UnparsedExpression(
     var text: String? = null,
 ) {
@@ -33,7 +31,7 @@ class UnparsedExpression(
         val result = text?.let { Regex(CUSTOM_DELIMITER).find(it) }
         result?.let {
             val customDelimiter = it.groupValues[1]
-            return  it.groupValues[2].split(customDelimiter)
+            return it.groupValues[2].split(customDelimiter)
         }
         return emptyList()
     }
