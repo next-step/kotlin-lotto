@@ -2,12 +2,13 @@ package lotto.view
 
 object InputView {
     fun readTotalPurchaseAmountAsInt(): Int {
-        return readlnOrNull()?.toIntOrNull() ?: 0
+        return readlnOrNull()?.trim()?.toIntOrNull() ?: 0
     }
 
     fun readWinningLotto(promptMessage: String): List<Int> {
         println(promptMessage)
         val winningLotto = readlnOrNull()?.split(",")?.map { it.trim().toIntOrNull() ?: 0 }
+        require(winningLotto?.size == 6) { "Lotto size must be 6" }
         return winningLotto ?: throw IllegalStateException("Separate Lotto numbers by comma (,)")
     }
 

@@ -10,8 +10,8 @@ class LottoTest {
     fun `{given} 로또 총 구매금액 1만 원 {when} LottoCalculator calculateLottoCount() {then} 10 반환`() {
         val totalPurchaseAmount = 10000
         val pricePerAmount = 1000
-        val lottoCalculator = LottoCalculator()
-        val purchaseCount = lottoCalculator.calculateLottoCount(totalPurchaseAmount, pricePerAmount)
+        val lottoCalculator = LottoCalculator(totalPurchaseAmount, pricePerAmount)
+        val purchaseCount = lottoCalculator.calculateLottoCount()
         assertEquals(10, purchaseCount)
     }
 
@@ -40,8 +40,8 @@ class LottoTest {
                 sixMatchingNumber,
             ).map(::Lotto)
 
-        val lottoResultManager = LottoResultManager(winningNumber, lottoNumberList)
-        val actualResult = lottoResultManager.getResult()
+        val lottoResultStore = LottoResultStore(winningNumber, lottoNumberList)
+        val actualResult = lottoResultStore.getResult()
         val everyPlaceHasOneWinningExpected = LottoResult(
             mapOf(
                 LottoWinPlace.FOURTH to 1,
@@ -54,7 +54,7 @@ class LottoTest {
     }
 
     @Test
-    fun `{given} 로또 4장 {when} 1개 당첨 {then} 수익률 4 분의 1`() {
+    fun `{given} 로또 4장 이고 1개 당첨인 경우 {when} LottoResultStore calculateWinningRateFromResult() {then} 수익률 4 분의 1`() {
         val winningNumber = listOf(1, 2, 3, 4, 5, 6)
         val lottoNumberList =
             listOf(
@@ -63,8 +63,9 @@ class LottoTest {
                 listOf(100, 200, 300, 400, 500),
                 listOf(100, 200, 300, 400, 500),
             ).map { Lotto(it) }
-        val lottoResultManager = LottoResultManager(Lotto(winningNumber), lottoNumberList)
-        val winningRate = lottoResultManager.getWinningRate()
+        val lottoResultStore = LottoResultStore(Lotto(winningNumber), lottoNumberList)
+        val fakeCalculator = LottoCalculator(lottoNumberList.size, 1000)
+        val winningRate = fakeCalculator.calculateWinningRateFromResult(lottoResultStore.getResult().getSum())
 
         assertEquals(0.25, winningRate)
     }

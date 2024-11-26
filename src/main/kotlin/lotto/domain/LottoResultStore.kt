@@ -3,11 +3,16 @@ package lotto.domain
 import lotto.model.Lotto
 import java.math.BigDecimal
 
-class LottoResultManager(
+class LottoResultStore(
     private val winningLotto: Lotto,
-    private val lottoList: List<Lotto>,
+    lottoList: List<Lotto>,
 ) {
-    private val resultMap = mutableMapOf<LottoWinPlace, Int>()
+    private val resultMap = mutableMapOf(
+        LottoWinPlace.FIRST to 0,
+        LottoWinPlace.SECOND to 0,
+        LottoWinPlace.THIRD to 0,
+        LottoWinPlace.FOURTH to 0,
+    )
 
     init {
         require(lottoList.isNotEmpty())
@@ -27,25 +32,21 @@ class LottoResultManager(
         return LottoResult(resultMap)
     }
 
-    fun getWinningRate(): Double {
-        val totalLottoSize = lottoList.size.toDouble()
-        val totalWin = resultMap.values.sumOf { it }.toDouble()
-        return totalWin / totalLottoSize
-    }
-
     companion object {
         private const val MIN_WINNING_COUNT = 3
     }
 }
 
 @JvmInline
-value class LottoResult(val lottoResultMap: Map<LottoWinPlace, Int>)
+value class LottoResult(val lottoResultMap: Map<LottoWinPlace, Int>) {
+    fun getSum(): Int = lottoResultMap.values.sum()
+}
 
 enum class LottoWinPlace(val prizeMoney: BigDecimal, val matchingNumberCount: Int) {
-    FIRST(BigDecimal(5000), 3),
-    SECOND(BigDecimal(50000), 4),
-    THIRD(BigDecimal(1_500_000), 5),
-    FOURTH(BigDecimal(2_000_000_000), 6),
+    FOURTH(BigDecimal(5000), 3),
+    THIRD(BigDecimal(50000), 4),
+    SECOND(BigDecimal(1_500_000), 5),
+    FIRST(BigDecimal(2_000_000_000), 6),
     ;
 
     companion object {

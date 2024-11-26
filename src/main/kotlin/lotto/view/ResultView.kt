@@ -17,11 +17,7 @@ object ResultView {
         println("\n당첨 통계\n---------")
         val lottoResultMap = result.lottoResultMap
         LottoWinPlace.getPlacesFromLowest().forEach { winPlace ->
-            println(
-                "${winPlace.matchingNumberCount}개 일치 " +
-                    "(${winPlace.prizeMoney}원) - " +
-                    "${lottoResultMap[winPlace]}",
-            )
+            println("${winPlace.matchingNumberCount}개 일치 (${winPlace.prizeMoney}원) - ${lottoResultMap[winPlace]}")
         }
     }
 
