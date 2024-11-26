@@ -1,6 +1,7 @@
 package lotto
 
 import io.kotest.assertions.throwables.shouldThrowMessage
+import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
@@ -27,6 +28,12 @@ class LottoCostTest : StringSpec({
             row(LottoCost(10000, 2), 8),
         ) { lottoCost, expected ->
             lottoCost.autoLottoAmount shouldBe expected
+        }
+    }
+
+    "수동 구입 갯수가 구입 가능 숫자를 능가하면 예외를 던진다." {
+        shouldThrowWithMessage<IllegalArgumentException>("구입 가능한 로또 갯수를 초과했습니다.") {
+            LottoCost(1000, 2)
         }
     }
 })
