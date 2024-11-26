@@ -16,7 +16,7 @@ class LottoController(
 
         // 로또 발급
         val lotto = lottoService.buy(BuyLottoCommand(payment, manualLotto))
-        ResultView.printLotto(lotto)
+        ResultView.printLotto(lotto, numberOfManual)
 
         // 당첨 번호
         val winner = InputView.getWinner()
