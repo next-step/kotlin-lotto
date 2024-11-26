@@ -47,7 +47,6 @@ class InputView {
     }
 
     private fun generateLottos(lottoCost: LottoCost): List<Lotto> {
-        println("수동으로 구매할 로또 수를 입력해주세요.")
         val manualLottos = inputManualLottoNumbers(lottoCost)
 
         val autoLottoAmount = lottoCost.autoLottoAmount

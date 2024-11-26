@@ -1,5 +1,6 @@
 package lotto
 
+import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
@@ -57,5 +58,11 @@ class WinningLottoTest : StringSpec({
         val actual = sut.match(lotto)
 
         actual shouldBe Reward.NONE
+    }
+
+    "보너스 볼 번호가 당첨 번호 번호와 중복된다면 예외를 던진다." {
+        shouldThrowWithMessage<IllegalArgumentException>("보너스 볼 번호는 당첨 번호와 중복될 수 없습니다.") {
+            WinningLotto(Lotto.manual(listOf(1, 2, 3, 4, 5, 6)), BonusNumber(LottoNumber(6)))
+        }
     }
 })
