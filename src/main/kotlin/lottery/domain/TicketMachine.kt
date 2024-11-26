@@ -8,6 +8,6 @@ object TicketMachine {
         require(money.amount % LOTTERY_TICKET_PRICE == 0) { "금액은 $LOTTERY_TICKET_PRICE 단위여야 합니다" }
 
         val ticketCount = money.amount / LOTTERY_TICKET_PRICE
-        return List(ticketCount) { Ticket() }
+        return List(ticketCount) { Ticket }
     }
 }

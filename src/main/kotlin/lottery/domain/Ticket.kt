@@ -1,3 +1,3 @@
 package lottery.domain
 
-class Ticket
+object Ticket
