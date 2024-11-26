@@ -18,6 +18,8 @@ value class Money(val value: Int) {
 
     fun toDouble(): Double = value.toDouble()
 
+    override fun toString(): String = value.toString()
+
     companion object {
         val ZERO = Money(0)
     }
