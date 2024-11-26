@@ -11,12 +11,13 @@ class StringAddCalculator {
     }
 
     private fun parseInputs(text: String): List<String> {
-        var splitTarget = text
-        if (text.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+        val splitTarget = if (text.startsWith(CUSTOM_DELIMITER_PREFIX)) {
             val delimiterAndInput = text.split("\n")
             val customDelimiter = delimiterAndInput[0].removePrefix(CUSTOM_DELIMITER_PREFIX)
             delimiters.add(customDelimiter)
-            splitTarget = delimiterAndInput[1]
+            delimiterAndInput[1]
+        } else {
+            text
         }
         return splitTarget.split(delimiters = delimiters.toTypedArray())
     }
