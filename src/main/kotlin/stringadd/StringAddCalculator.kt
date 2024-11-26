@@ -12,9 +12,9 @@ class StringAddCalculator {
 
     private fun parseInputs(text: String): List<String> {
         var splitTarget = text
-        if (text.startsWith("//")) {
+        if (text.startsWith(CUSTOM_DELIMITER_PREFIX)) {
             val delimiterAndInput = text.split("\n")
-            val customDelimiter = delimiterAndInput[0].removePrefix("//")
+            val customDelimiter = delimiterAndInput[0].removePrefix(CUSTOM_DELIMITER_PREFIX)
             delimiters.add(customDelimiter)
             splitTarget = delimiterAndInput[1]
         }
@@ -28,5 +28,9 @@ class StringAddCalculator {
             2 -> inputs[0].toInt() + inputs[1].toInt()
             else -> inputs[0].toInt() + inputs[1].toInt() + inputs[2].toInt()
         }
+    }
+
+    companion object {
+        private const val CUSTOM_DELIMITER_PREFIX = "//"
     }
 }
