@@ -1,6 +1,6 @@
 package lotto.domain
 
-class DrawResult(private val rankRewardLottoCountMap: Map<RankReward, LottoCount>) {
+data class DrawResult(private val rankRewardLottoCountMap: Map<RankReward, LottoCount>) {
     fun getProfitRate(purchaseAmount: Money): Double {
         return getTotalReward() / purchaseAmount
     }
