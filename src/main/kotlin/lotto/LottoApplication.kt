@@ -19,7 +19,9 @@ class LottoApplication {
         val lotties = lottoSeller.purchase(purchaseAmount)
         ResultView.printPurchaseLotties(lotties)
 
-        val statistician = LotteryStatistician(InputView.showAndGetTargetLotto())
+        val targetLottoStr = InputView.showAndGetTargetLotto()
+        val bonusNumber = InputView.showAndGetBonusNumber()
+        val statistician = LotteryStatistician(targetLottoStr, bonusNumber)
         ResultView.printStatistics(statistician.statistics(lotties))
     }
 

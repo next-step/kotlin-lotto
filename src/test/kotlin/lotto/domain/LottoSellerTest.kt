@@ -9,7 +9,7 @@ class LottoSellerTest {
     fun `14_000원을 지불하면 14개의 로또를 얻어야 한다`() {
         // given
         val seller = LottoSeller(
-            quantityChanger = QuantityChanger(),
+            quantityChanger = QuantityChangerImpl(),
             lottoGenerator = LottoGeneratorImpl(),
         )
 

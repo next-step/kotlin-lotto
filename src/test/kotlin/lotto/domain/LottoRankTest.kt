@@ -7,25 +7,29 @@ import org.junit.jupiter.params.provider.MethodSource
 class LottoRankTest {
 
     @ParameterizedTest
-    @MethodSource("provideLottoRankMapper")
-    fun `of 함수는 정확히 LottoRank에 매핑해야 한다`(input: Pair<Int, LottoRank>) {
-        assertThat(LottoRank.of(input.first)).isEqualTo(input.second)
+    @MethodSource("provideLottoRankTestParameter")
+    fun `of 함수는 정확히 LottoRank에 매핑해야 한다`(input: Parameter) {
+        assertThat(LottoRank.of(input.matchCount, input.matchBonus)).isEqualTo(input.result)
     }
 
     @ParameterizedTest
     @MethodSource("provideUnknownMatchCount")
     fun `예상치 못한 matchCount를 호출하면 None을 반환해야 한다`(input: Int) {
-        assertThat(LottoRank.of(input)).isEqualTo(LottoRank.NONE)
+        assertThat(LottoRank.of(input, true)).isEqualTo(LottoRank.NONE)
     }
 
     companion object {
         @JvmStatic
-        fun provideLottoRankMapper(): List<Pair<Int, LottoRank>> {
+        fun provideLottoRankTestParameter(): List<Parameter> {
             return listOf(
-                6 to LottoRank.FIRST,
-                5 to LottoRank.SECOND,
-                4 to LottoRank.THIRD,
-                3 to LottoRank.FOURTH,
+                Parameter(6, true, LottoRank.FIRST),
+                Parameter(6, false, LottoRank.FIRST),
+                Parameter(5, true, LottoRank.SECOND),
+                Parameter(5, false, LottoRank.THIRD),
+                Parameter(4, true, LottoRank.FOURTH),
+                Parameter(4, false, LottoRank.FOURTH),
+                Parameter(3, true, LottoRank.FIFTH),
+                Parameter(3, false, LottoRank.FIFTH),
             )
         }
 
@@ -38,5 +42,11 @@ class LottoRankTest {
             )
         }
     }
+
+    data class Parameter(
+        val matchCount: Int,
+        val matchBonus: Boolean,
+        val result: LottoRank,
+    )
 
 }
