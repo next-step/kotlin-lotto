@@ -27,11 +27,15 @@ enum class Rank(val matchCount: Int, val prize: Amount, val isBonus: Boolean = f
             matchCount: Int,
             isBonus: Boolean,
         ): Rank {
-            if (matchCount == 5 && isBonus) {
+            if (SECOND.sameMatchCount(matchCount) && isBonus) {
                 return SECOND
             }
 
             return noBonusRanks.find { it.matchCount == matchCount } ?: MISS
         }
+    }
+
+    private fun sameMatchCount(matchCount: Int): Boolean {
+        return this.matchCount == matchCount
     }
 }
