@@ -13,7 +13,7 @@ object ResultView {
     fun printLotto(lotto: Lotto) {
         val output =
             buildString {
-                appendLine("${lotto.numberOfLines}개를 구먀했습니다.")
+                appendLine("${lotto.numberOfLines}개를 구매했습니다.")
                 appendLine(formatLotto(lotto))
             }
         println(output)
