@@ -29,7 +29,7 @@ class LottoService(
         purchaseCountDto: LottoPurchaseCountDto,
         manualLottosDto: LottosDto,
     ): LottosDto {
-        val manualLottos = manualLottosDto.lottos.map { Lotto.from(it.numbers) }
+        val manualLottos = manualLottosDto.lottos.map { Lotto.createManualLotto(it.numbers) }
         val autoLottos = Lotto.createAutoLottos(purchaseCountDto.autoLottoAmount, lottoGenerator)
         val totalLottos = manualLottos + autoLottos
         return LottosDto(totalLottos.map { LottoDto(it.getNumbersRawValues()) })

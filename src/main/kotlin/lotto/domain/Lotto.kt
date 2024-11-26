@@ -26,6 +26,6 @@ class Lotto(private val numbers: List<Number>) {
             lottoGenerator: LottoGenerator,
         ): List<Lotto> = List(amount) { lottoGenerator.generate(LOTTO_SIZE) }
 
-        fun from(numbers: List<Int>): Lotto = Lotto(numbers.map { Number(it) })
+        fun createManualLotto(numbers: List<Int>): Lotto = Lotto(numbers.map { Number(it) })
     }
 }
