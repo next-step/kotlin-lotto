@@ -23,6 +23,21 @@ class RankTest {
         assertThat(rank).isEqualTo(expected)
     }
 
+    @ParameterizedTest
+    @CsvSource(
+        "5, true, SECOND",
+        "5, false, THIRD",
+    )
+    fun `2등은 보너스번호를 추가 확인한다`(
+        matchCount: Int,
+        isBonus: Boolean,
+        expected: Rank,
+    ) {
+        val rank = Rank.match(matchCount, isBonus)
+
+        assertThat(rank).isEqualTo(expected)
+    }
+
     @Test
     fun `prizeRanks 상금목록을 알수 있다`() {
         val prizeRanks = Rank.prizeRanks
