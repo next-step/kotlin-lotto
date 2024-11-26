@@ -11,6 +11,8 @@ data class LottoNumber(
         private const val COUNT = 6
         const val MIN_NUMBER = 1
         const val MAX_NUMBER = 45
-        val RANGE: List<LottoNumber> = (MIN_NUMBER..MAX_NUMBER).map { LottoNumber(it) }.toList()
+        val RANGE: List<LottoNumber> = (MIN_NUMBER..MAX_NUMBER)
+            .map(::LottoNumber)
+            .toList()
     }
 }
