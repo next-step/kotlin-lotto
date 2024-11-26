@@ -2,9 +2,9 @@ package lotto.step3.domain
 
 class LottoGame {
     fun execute(
-        lastWeekWinningNumbers: Set<Int>,
+        lastWeekWinningNumbers: Set<LottoNumber>,
         lottos: List<Lotto>,
-        bonusNumber: Int,
+        bonusNumber: LottoNumber,
     ): WinningStatistics {
         val rankMap =
             RankClassifier.classify(

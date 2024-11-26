@@ -3,6 +3,7 @@ package lotto.step3
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import lotto.step3.domain.LottoProfitManager
+import lotto.step3.domain.LottoPurchaseManager.Companion.LOTTO_PRICE
 import lotto.step3.domain.Rank
 
 class LottoProfitManagerTest : FunSpec({
@@ -23,7 +24,7 @@ class LottoProfitManagerTest : FunSpec({
         val result = LottoProfitManager.computeProfit(rankMap = givenRankMap)
 
         // then
-        val totalPurchaseAmount = givenRankMap.values.sum() * 1000
+        val totalPurchaseAmount = givenRankMap.values.sum() * LOTTO_PRICE
         val totalWinningAmount =
             givenRankMap.entries.sumOf { (rank, count) ->
                 rank.winningAmount * count

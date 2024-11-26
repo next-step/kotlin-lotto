@@ -2,6 +2,7 @@ package lotto.step3
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import lotto.step3.domain.LottoNumber
 import lotto.step3.domain.Rank
 import lotto.step3.domain.RankClassifier
 
@@ -21,8 +22,8 @@ class RankClassifierTest : FunSpec({
                 LottoStub.get(numbers = listOf(21, 22, 23, 24, 25, 26)),
                 LottoStub.get(numbers = listOf(7, 22, 23, 24, 25, 26)),
             )
-        val givenWinningNumbers = setOf(1, 2, 3, 4, 5, 6)
-        val givenBonusNumber = 7
+        val givenWinningNumbers = setOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6))
+        val givenBonusNumber = LottoNumber(7)
         // when
         val result = RankClassifier.classify(givenLottoList, givenWinningNumbers, givenBonusNumber)
 

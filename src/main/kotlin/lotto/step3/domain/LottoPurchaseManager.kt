@@ -16,6 +16,6 @@ class LottoPurchaseManager(
     }
 
     companion object {
-        private const val LOTTO_PRICE = 1000L
+        const val LOTTO_PRICE = 1000L
     }
 }

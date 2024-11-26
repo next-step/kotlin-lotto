@@ -1,8 +1,8 @@
 package lotto.step3.domain
 
 interface NumberPicker {
-    fun pick(): List<Int>
+    fun pick(): List<LottoNumber>
 
-    val candidates: List<Int>
-        get() = (1..45).toList()
+    val candidates: List<LottoNumber>
+        get() = (1..45).map { LottoNumber(it) }
 }

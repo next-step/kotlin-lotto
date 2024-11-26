@@ -3,8 +3,8 @@ package lotto.step3.domain
 object RankClassifier {
     fun classify(
         lottos: List<Lotto>,
-        winningNumbers: Set<Int>,
-        bonusNumber: Int,
+        winningNumbers: Set<LottoNumber>,
+        bonusNumber: LottoNumber,
     ): Map<Rank, Int> {
         return lottos.groupBy { lotto ->
             val matchCount = lotto.numbers.intersect(winningNumbers).size

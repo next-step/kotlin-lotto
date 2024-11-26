@@ -2,16 +2,25 @@ package lotto.step3
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import lotto.step3.domain.LottoNumber
 import lotto.step3.domain.NumberPicker
 
 class NumberPickerTest : FunSpec({
     test("번호를 6개 뽑는다.") {
         // given
-        val givenNumbers = listOf(1, 2, 3, 4, 5, 6)
+        val givenNumbers =
+            listOf(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(6),
+            )
 
         val numberPicker =
             object : NumberPicker {
-                override fun pick(): List<Int> {
+                override fun pick(): List<LottoNumber> {
                     return givenNumbers
                 }
             }
