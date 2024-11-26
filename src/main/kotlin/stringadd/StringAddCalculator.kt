@@ -3,7 +3,11 @@ package stringadd
 class StringAddCalculator {
     fun add(text: String?): Int {
         if (text.isNullOrBlank()) return 0
-        val inputs: List<Int> = parseInputs(text).map { it.trim().toIntOrNull() ?: 0 }
+        val inputs: List<Int> = parseInputs(text).map {
+            val num = it.trim().toIntOrNull() ?: 0
+            if (num < 0) throw RuntimeException()
+            num
+        }
         return addByInputSize(inputs)
     }
 
