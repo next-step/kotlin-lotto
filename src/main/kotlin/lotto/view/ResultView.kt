@@ -26,7 +26,7 @@ object ResultView {
         println("당첨 통계")
         println("---------")
         RankReward.sortLowToHighByRank().forEach { rank ->
-            println("$rank- ${drawResult.findLottoCount(rank)}개")
+            println("$rank- ${drawResult.getLottoCount(rank)}개")
         }
         println("총 수익률은 ${drawResult.getProfitRate(purchaseAmount)}입니다.")
     }

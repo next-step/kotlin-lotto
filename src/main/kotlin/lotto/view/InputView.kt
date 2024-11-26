@@ -14,4 +14,10 @@ object InputView {
             ?.toSet()
             ?: throw IllegalArgumentException("잘못된 입력입니다.")
     }
+
+    fun inputWinningBonusNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        return readlnOrNull()?.toIntOrNull()
+            ?: throw IllegalArgumentException("잘못된 입력입니다")
+    }
 }

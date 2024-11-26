@@ -5,7 +5,7 @@ data class DrawResult(private val rankRewardLottoCountMap: Map<RankReward, Lotto
         return getTotalReward() / purchaseAmount
     }
 
-    fun findLottoCount(rankReward: RankReward): LottoCount {
+    fun getLottoCount(rankReward: RankReward): LottoCount {
         return rankRewardLottoCountMap[rankReward] ?: LottoCount(0)
     }
 

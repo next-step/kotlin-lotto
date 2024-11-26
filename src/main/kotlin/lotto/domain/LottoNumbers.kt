@@ -9,6 +9,10 @@ data class LottoNumbers(val numbers: Set<LottoNumber>) {
         return (numbers intersect other.numbers).size
     }
 
+    fun containsNumber(other: LottoNumber): Boolean {
+        return numbers.contains(other)
+    }
+
     override fun toString(): String {
         return "$numbers"
     }

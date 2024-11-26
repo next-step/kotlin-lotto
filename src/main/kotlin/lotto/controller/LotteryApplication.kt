@@ -16,7 +16,11 @@ fun main() {
     val purchaseLotteries = LottoMachine.purchase(tickets)
     ResultView.printLotteries(purchaseLotteries)
 
-    val winningLotto = WinningLotto.create(InputView.inputWinningLottoNumbers())
+    val winningLotto =
+        WinningLotto.create(
+            InputView.inputWinningLottoNumbers(),
+            InputView.inputWinningBonusNumber(),
+        )
     val drawResult = DrawResult.from(winningLotto, purchaseLotteries)
     ResultView.printStatistic(purchaseAmount, drawResult)
 }
