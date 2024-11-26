@@ -9,7 +9,7 @@ class PositiveNumberTest {
     @Test
     fun `숫자가 아닌 문자는 예외가 발생한다`() {
         shouldThrow<RuntimeException> {
-            PositiveNumber("a")
+            PositiveNumber.of("a")
         }.apply {
             message shouldBe "숫자를 입력하세요"
         }
@@ -18,7 +18,7 @@ class PositiveNumberTest {
     @Test
     fun `음수를 입력하면 예외가 발생한다`() {
         shouldThrow<RuntimeException> {
-            PositiveNumber("-1")
+            PositiveNumber.of("-1")
         }.apply {
             message shouldBe "0보다 큰 양수를 입력하세요"
         }
