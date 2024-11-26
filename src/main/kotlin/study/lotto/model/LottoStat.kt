@@ -4,7 +4,7 @@ package study.lotto.model
  * @author 이상준
  */
 class LottoStat(
-    val lottoPrize: LottoPrize,
+    val lottoPrize: Rank,
     count: Int = DEFAULT_COUNT,
 ) {
     var count: Int = count

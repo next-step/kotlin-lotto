@@ -10,7 +10,7 @@ import kotlin.math.floor
 class LottoService {
     fun buyLotto(money: Int): List<Lotto> {
         require(money >= LOTTO_PRICE) { "로또 구입금액은 최소 ${LOTTO_PRICE}원입니다." }
-        return (0 until money / LOTTO_PRICE).map { Lotto(randomLotto()) }
+        return (0 until   money / LOTTO_PRICE).map { Lotto(randomLotto()) }
     }
 
     fun profitLotto(

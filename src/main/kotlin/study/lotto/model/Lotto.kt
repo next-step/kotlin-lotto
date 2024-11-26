@@ -11,6 +11,12 @@ data class Lotto(
     ): Int {
         return winLotto.lottoNumbers.intersect(this.lottoNumbers).size
     }
+
+    fun ishBonus(
+        bonus: Int,
+    ): Boolean {
+        return this.lottoNumbers.contains(bonus)
+    }
 }
 
 
