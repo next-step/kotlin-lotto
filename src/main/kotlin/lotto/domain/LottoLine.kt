@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoLine private constructor(
+class LottoLine(
     val numbers: List<LottoNumber>,
 ) {
     init {

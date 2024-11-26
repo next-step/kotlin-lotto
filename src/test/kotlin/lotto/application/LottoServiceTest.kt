@@ -4,6 +4,7 @@ import io.kotest.matchers.shouldBe
 import lotto.domain.Lotto
 import lotto.domain.LottoLine
 import lotto.domain.LottoNumber
+import lotto.domain.LottoPayment
 import lotto.domain.Rank
 import lotto.domain.WinningLine
 import org.junit.jupiter.api.BeforeAll
@@ -18,6 +19,20 @@ class LottoServiceTest {
     @BeforeAll
     fun setUp() {
         sut = LottoService(RandomLottoLineGenerator())
+    }
+
+    @Test
+    fun `남은 금액으로 자동 로또를 발급한다`() {
+        val payment = LottoPayment.from(3_000L)
+        val manualLotto =
+            Lotto.from(
+                LottoLine.from(1, 2, 3, 4, 5, 6),
+                LottoLine.from(7, 8, 9, 10, 11, 12),
+            )
+
+        val lotto = sut.buy(BuyLottoCommand(payment, manualLotto))
+
+        lotto.numberOfLines shouldBe 3
     }
 
     @Test
