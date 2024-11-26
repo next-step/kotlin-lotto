@@ -2,6 +2,9 @@ package lotto
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
+import java.math.BigDecimal
 
 class LottoStatisticsTest {
     @Test
@@ -15,15 +18,30 @@ class LottoStatisticsTest {
         assertThat(actual).isEqualTo(1)
     }
 
-    @Test
-    fun `수익률을 계산한다`() {
-        val ranks = Ranks(mapOf(Rank.FOURTH to 1))
-        val amount = Amount(3000)
+    @ParameterizedTest
+    @CsvSource(
+        value = [
+            "FIRST, 1000000, 2000.00",
+            "SECOND, 1000000, 30.00",
+            "THIRD, 1000000, 1.50",
+            "FOURTH, 10000, 5.00",
+            "FIFTH, 3000, 1.66",
+            "MISS, 3000, 0.00",
+        ],
+        delimiter = ',',
+    )
+    fun `수익률을 계산한다`(
+        rank: Rank,
+        initAmount: Int,
+        expectedRate: BigDecimal,
+    ) {
+        val ranks = Ranks(mapOf(rank to 1))
+        val amount = Amount(initAmount)
         val statistics = LottoStatistics(ranks, amount)
 
         val rate = statistics.rate()
 
-        assertThat(rate).isEqualTo(1.66.toBigDecimal())
+        assertThat(rate).isEqualTo(expectedRate)
     }
 
     @Test
