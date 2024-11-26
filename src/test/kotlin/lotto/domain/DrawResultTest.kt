@@ -9,14 +9,14 @@ import lotto.domain.RankReward.RANK_4
 
 class DrawResultTest : StringSpec({
     "당첨로또 추첨은 개수별 일치하는 로또수를 반환한다" {
-        val winningLotto = WinningLotto(LottoNumbers(setOf(1, 2, 3, 4, 5, 6)))
+        val winningLotto = WinningLotto(LottoNumbers.from(setOf(1, 2, 3, 4, 5, 6)))
 
-        val rank1Lotto1 = Lotto(LottoNumbers(setOf(1, 2, 3, 4, 5, 6)))
-        val rank1Lotto2 = Lotto(LottoNumbers(setOf(1, 2, 3, 4, 5, 6)))
+        val rank1Lotto1 = Lotto(LottoNumbers.from(setOf(1, 2, 3, 4, 5, 6)))
+        val rank1Lotto2 = Lotto(LottoNumbers.from(setOf(1, 2, 3, 4, 5, 6)))
 
-        val rank2Lotto1 = Lotto(LottoNumbers(setOf(1, 2, 3, 4, 5, 21)))
-        val rank2Lotto2 = Lotto(LottoNumbers(setOf(1, 2, 3, 4, 5, 22)))
-        val rank2Lotto3 = Lotto(LottoNumbers(setOf(1, 2, 3, 4, 5, 23)))
+        val rank2Lotto1 = Lotto(LottoNumbers.from(setOf(1, 2, 3, 4, 5, 21)))
+        val rank2Lotto2 = Lotto(LottoNumbers.from(setOf(1, 2, 3, 4, 5, 22)))
+        val rank2Lotto3 = Lotto(LottoNumbers.from(setOf(1, 2, 3, 4, 5, 23)))
 
         val drawResult =
             DrawResult.from(

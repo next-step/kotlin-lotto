@@ -6,8 +6,8 @@ data class WinningLotto(val lottoNumbers: LottoNumbers) {
     }
 
     companion object {
-        fun create(numbers: List<Int>): WinningLotto {
-            return WinningLotto(LottoNumbers(numbers.toSet()))
+        fun create(numbers: Set<Int>): WinningLotto {
+            return WinningLotto(LottoNumbers.from(numbers))
         }
     }
 }

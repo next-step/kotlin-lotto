@@ -7,10 +7,11 @@ object InputView {
             ?: throw IllegalArgumentException("잘못된 입력입니다")
     }
 
-    fun inputWinningLottoNumbers(): List<Int> {
+    fun inputWinningLottoNumbers(): Set<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
         return readlnOrNull()?.split(",")
             ?.map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("숫자만 입력하여야 합니다. $it") }
+            ?.toSet()
             ?: throw IllegalArgumentException("잘못된 입력입니다.")
     }
 }
