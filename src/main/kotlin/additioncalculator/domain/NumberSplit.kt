@@ -5,13 +5,18 @@ import java.lang.RuntimeException
 class NumberSplit(private val text: String?) {
     fun splitNumberResult(): Numbers {
         if (text.isNullOrEmpty()) return Numbers(listOf())
-        if (text.toIntOrNull() != null && text.toIntOrNull()!! < NUMBER_MINIMUM) {
-            throw RuntimeException(INVALID_NEGATIVE_MESSAGE)
+        val textToIntOrNull = text.toIntOrNull()
+        if (textToIntOrNull != null) {
+            checkNumberMinimum(textToIntOrNull)
         }
         if (text.toIntOrNull() != null) return Numbers(listOf(text.toInt()))
         val delimiters: List<String> = Delimiters(text).findDelimiters()
         val transferText: String = text.replace(Regex(REPLACE_CUSTOM_DELIMITER_REGEX_PATTERN), "")
         return Numbers(splitTextsToInts(transferText.split(*delimiters.toTypedArray())))
+    }
+
+    private fun checkNumberMinimum(checkNumber: Int) {
+        if(checkNumber < NUMBER_MINIMUM) throw RuntimeException(INVALID_NEGATIVE_MESSAGE)
     }
 
     private fun splitTextsToInts(splitTexts: List<String>): List<Int> {
