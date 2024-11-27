@@ -1,5 +1,6 @@
 package lotto.ui
 
+import lotto.application.BuyLottoCommand
 import lotto.application.LottoService
 
 class LottoController(
@@ -9,9 +10,13 @@ class LottoController(
         // 금약 입력
         val payment = InputView.getPayment()
 
-        // 로또 자동 발급
-        val lotto = lottoService.generateRandom(payment.numberOfLines)
-        ResultView.printLotto(lotto)
+        // 수동 구매
+        val numberOfManual = InputView.getNumberOfManual()
+        val manualLotto = InputView.getManualLotto(numberOfManual)
+
+        // 로또 발급
+        val lotto = lottoService.buy(BuyLottoCommand(payment, manualLotto))
+        ResultView.printLotto(lotto, numberOfManual)
 
         // 당첨 번호
         val winner = InputView.getWinner()

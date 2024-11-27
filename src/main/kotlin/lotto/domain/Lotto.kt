@@ -14,9 +14,9 @@ class Lotto(
         return LottoResult.from(rankToCount)
     }
 
-    companion object {
-        fun from(lines: List<LottoLine>): Lotto = Lotto(lines)
+    fun merge(lotto: Lotto): Lotto = Lotto(lines + lotto.lines)
 
+    companion object {
         fun from(vararg lines: LottoLine): Lotto = Lotto(lines.toList())
     }
 }
