@@ -42,4 +42,12 @@ class LottoNumbersTest : StringSpec({
     "로또 번호 생성시 오름차순으로 정렬된다" {
         LottoNumbers.from(setOf(6, 5, 4, 3, 2, 1)).numbers shouldBeSortedBy { it.number }
     }
+
+    "로또 번호에 포함되는 번호가 있다면 true 를 반환한다" {
+        LottoNumbers.from(setOf(1, 2, 3, 4, 5, 6)).containsNumber(LottoNumber(1)) shouldBe true
+    }
+
+    "로또 번호에 포함되는 번호가 없다면 false 를 반환한다" {
+        LottoNumbers.from(setOf(1, 2, 3, 4, 5, 6)).containsNumber(LottoNumber(45)) shouldBe false
+    }
 })

@@ -12,7 +12,7 @@ class LottoNumbers(numbers: Set<LottoNumber>) {
     }
 
     fun containsNumber(other: LottoNumber): Boolean {
-        return numbers.contains(other)
+        return other in numbers
     }
 
     override fun toString(): String {
