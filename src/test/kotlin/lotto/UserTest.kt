@@ -67,4 +67,30 @@ class UserTest {
             { assertThat(user.totalLottoSize).isEqualTo(0) },
         )
     }
+
+    @Test
+    fun `잔여 금액 로또 모두 자동 구매`() {
+        val initialAmount = Amount(3_000) // 사용자가 보유한 금액
+        val user = User(initialAmount)
+        val manualLottos = Lottos(
+            listOf(
+                Lotto(listOf(1, 2, 3, 4, 5, 6)),
+                Lotto(listOf(7, 8, 9, 10, 11, 12)),
+            )
+        )
+        val autoLottos = Lottos(
+            listOf(
+                Lotto(listOf(13, 14, 15, 16, 17, 18)),
+            )
+        )
+        user.buyManualNumbers(manualLottos)
+
+        val autoMachine: (Amount) -> Lottos = { _ -> autoLottos }
+        user.buyAutoLotto(autoMachine)
+
+        assertAll(
+            { assertThat(user.totalLottoSize).isEqualTo(3) },
+            { assertThat(user.totalBuyAmount).isEqualTo(Amount(3_000)) },
+        )
+    }
 }
