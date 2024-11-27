@@ -1,7 +1,7 @@
 package lotto.domain
 
 @JvmInline
-value class BonusNumber(val number: Int = 1) {
+value class BonusNumber(val number: Int) {
     init {
         require(number in 1..45) { INPUT_BONUS_NUMBER_EXCEPTION_MESSAGE }
     }
