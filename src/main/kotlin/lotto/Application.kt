@@ -5,7 +5,7 @@ fun main() {
     val lottoMachine = LottoMachine()
 
     val user = User(Amount(userAmount))
-    user.buyLotto(lottoMachine.autoGenerate)
+    user.buyAutoLotto(lottoMachine.autoGenerate)
     ResultView.print("${user.totalLottoSize}개를 구매했습니다.")
     ResultView.printBoughtLotto(user.totalLottos)
 

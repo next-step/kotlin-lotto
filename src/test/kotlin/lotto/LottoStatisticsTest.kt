@@ -67,7 +67,7 @@ class LottoStatisticsTest {
         expectedRank: Rank,
     ) {
         val user = User(Amount(1_000))
-        user.buyLotto { userLottos }
+        user.buyAutoLotto { userLottos }
 
         val actual = LottoStatistics.from(user, winningNumbers, LottoNumber(bonusNumber))
 
