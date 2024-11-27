@@ -21,6 +21,7 @@ object InputView {
         println(INPUT_MANUAL_TICKET_COUNT)
         return readlnOrNull()?.toIntOrNull() ?: throw IllegalArgumentException("유효한 수동 구매 개수를 입력해 주세요.")
     }
+
     fun askManualPurchaseNumbers(manualTicketCount: Int): List<List<Int>>? {
         println(INPUT_MANUAL_TICKETS)
         val manualTickets = mutableListOf<List<Int>>()
@@ -30,12 +31,15 @@ object InputView {
                 println(LottoTicket.LOTTO_NUMBER_SIZE_EXCEPTION_MESSAGE)
                 return null
             }
-            val numbers = input.split(LOTTO_NUMBERS_SPLIT_UNIT)
-                .mapNotNull { it.trim().toIntOrNull() }
+
+            val numbers =
+                input.split(LOTTO_NUMBERS_SPLIT_UNIT)
+                    .mapNotNull { it.trim().toIntOrNull() }
             if (numbers.size != 6) {
                 println(LottoTicket.LOTTO_NUMBER_SIZE_EXCEPTION_MESSAGE)
                 return null
             }
+
             manualTickets.add(numbers)
         }
         return manualTickets

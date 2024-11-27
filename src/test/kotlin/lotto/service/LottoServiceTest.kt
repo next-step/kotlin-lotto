@@ -21,15 +21,18 @@ class LottoServiceTest : StringSpec({
         val fixedWinningNumbers = listOf(1, 2, 3, 4, 5, 6)
         val fixedBonusNumber = BonusNumber(7)
 
-        val lottoTickets = lottoPurchasingMachineService.lottoIssuance(
-            totalTicketCount,
-            manualTicketCount,
-        )
-        val totalPrize = lottoTickets.sumOf { ticket ->
-            val matchCount = ticket.matchCount(fixedWinningNumbers)
-            val hasBonusNumber = ticket.hasBonusNumber(fixedBonusNumber)
-            LottoRank.from(matchCount, hasBonusNumber).prize
-        }
+        val lottoTickets =
+            lottoPurchasingMachineService.lottoIssuance(
+                totalTicketCount,
+                manualTicketCount,
+            )
+
+        val totalPrize =
+            lottoTickets.sumOf { ticket ->
+                val matchCount = ticket.matchCount(fixedWinningNumbers)
+                val hasBonusNumber = ticket.hasBonusNumber(fixedBonusNumber)
+                LottoRank.from(matchCount, hasBonusNumber).prize
+            }
 
         val profitRate = lottoPurchasingMachineService.calculateProfitRate(totalPrize)
         val expectedProfitRate = BigDecimal("0.00")

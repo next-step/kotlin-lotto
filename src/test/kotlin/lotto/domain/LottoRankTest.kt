@@ -18,9 +18,11 @@ class LottoRankTest : StringSpec({
             matchingTicket =
                 lottoTickets.firstOrNull { ticket ->
                     when (expectedRank) {
-                        LottoRank.SECOND -> ticket.matchCount(winningNumbers) == matchCount &&
+                        LottoRank.SECOND ->
+                            ticket.matchCount(winningNumbers) == matchCount &&
                                 ticket.hasBonusNumber(bonusNumber)
-                        LottoRank.THIRD -> ticket.matchCount(winningNumbers) == matchCount &&
+                        LottoRank.THIRD ->
+                            ticket.matchCount(winningNumbers) == matchCount &&
                                 !ticket.hasBonusNumber(bonusNumber)
                         else -> ticket.matchCount(winningNumbers) == matchCount
                     }

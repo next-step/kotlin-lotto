@@ -2,7 +2,6 @@ package lotto.controller
 
 import lotto.domain.BonusNumber
 import lotto.domain.LottoPurchasingMachine
-import lotto.domain.LottoRank
 import lotto.domain.LottoTicket
 import lotto.service.LottoService
 import lotto.view.InputView

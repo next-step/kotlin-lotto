@@ -2,6 +2,7 @@ package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
+
 class LottoTicketTest : StringSpec({
     "로또 번호가 6개가 아니면 예외가 발생한다" {
         val invalidNumbers = listOf(1, 2, 3, 4, 5)
