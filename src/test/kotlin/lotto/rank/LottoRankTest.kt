@@ -3,6 +3,7 @@ package lotto.rank
 import io.kotest.matchers.shouldBe
 import lotto.Lotto
 import lotto.ball.BonusBall
+import lotto.number.LottoNumber
 import lotto.number.Numbers
 import lotto.statistics.WinningNumber
 import org.junit.jupiter.api.BeforeEach
@@ -15,7 +16,8 @@ class LottoRankTest {
 
     @BeforeEach
     fun beforeEach() {
-        winningNumber = WinningNumber(numbers = Numbers(WINNING_NUMBERS), bonusBall = BonusBall(7))
+        winningNumber =
+            WinningNumber(numbers = Numbers(WINNING_NUMBERS), bonusBall = BonusBall(LottoNumber(BONUS_NUMBER)))
     }
 
     @Test
@@ -54,29 +56,31 @@ class LottoRankTest {
     }
 
     companion object {
+        private const val NOT_MATCHED_NUMBER = 45
+        private const val BONUS_NUMBER = 7
+
+        private val WINNING_NUMBERS = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }
+
         @JvmStatic
         private fun noneLottos() =
             listOf(
-                Lotto(numbers = Numbers(listOf(1, 2, 0, 0, 0, 0))),
-                Lotto(numbers = Numbers(listOf(3, 4, 0, 0, 0, 0))),
-                Lotto(numbers = Numbers(listOf(5, 6, 0, 0, 0, 0))),
+                Lotto(numbers = Numbers.fromInts(listOf(1, 2) + List(size = 4) { NOT_MATCHED_NUMBER })),
+                Lotto(numbers = Numbers.fromInts(listOf(3, 4) + List(size = 4) { NOT_MATCHED_NUMBER })),
+                Lotto(numbers = Numbers.fromInts(listOf(5, 6) + List(size = 4) { NOT_MATCHED_NUMBER })),
             )
 
         @JvmStatic
         private fun secondLottos() =
             listOf(
-                Lotto(numbers = Numbers(listOf(1, 2, 3, 4, 5, BONUS_NUMBER))),
-                Lotto(numbers = Numbers(listOf(2, 3, 4, 5, 6, BONUS_NUMBER))),
+                Lotto(numbers = Numbers.fromInts(listOf(1, 2, 3, 4, 5, BONUS_NUMBER))),
+                Lotto(numbers = Numbers.fromInts(listOf(2, 3, 4, 5, 6, BONUS_NUMBER))),
             )
 
         @JvmStatic
         private fun thirdLottos() =
             listOf(
-                Lotto(numbers = Numbers(listOf(1, 2, 3, 4, 5, 0))),
-                Lotto(numbers = Numbers(listOf(2, 3, 4, 5, 6, 0))),
+                Lotto(numbers = Numbers.fromInts(listOf(1, 2, 3, 4, 5, NOT_MATCHED_NUMBER))),
+                Lotto(numbers = Numbers.fromInts(listOf(2, 3, 4, 5, 6, NOT_MATCHED_NUMBER))),
             )
-
-        private const val BONUS_NUMBER = 7
-        private val WINNING_NUMBERS = listOf(1, 2, 3, 4, 5, 6)
     }
 }
