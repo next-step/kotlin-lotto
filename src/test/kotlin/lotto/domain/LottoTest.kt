@@ -1,5 +1,6 @@
 package lotto.domain
 
+import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
@@ -46,5 +47,14 @@ class LottoTest : StringSpec({
         val rankNone = lotto.match(winLotto6)
 
         rankNone shouldBe LottoRank.NONE
+    }
+
+    "로또는 생성기를 통해 자동으로 수량 만큼 만들 수 있다." {
+        val lottos = Lotto.createAutoLottos(3, DefaultLottoGenerator)
+        lottos.size shouldBe 3
+    }
+
+    "로또는 생성기 없이 수동으로 만들 수 있다." {
+        shouldNotThrow<IllegalArgumentException> { Lotto.createManualLotto(listOf(1, 2, 3, 4, 5, 6)) }
     }
 })

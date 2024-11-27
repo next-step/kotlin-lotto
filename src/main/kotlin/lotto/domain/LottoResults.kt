@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.domain.purchase.LottoPurchaseCount
 import lotto.domain.vo.LottoResult
 
 class LottoResults(private val results: List<LottoResult>) {

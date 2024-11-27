@@ -2,23 +2,37 @@ package lotto.service
 
 import lotto.domain.Lotto
 import lotto.domain.LottoGenerator
-import lotto.domain.LottoPurchaseCount
 import lotto.domain.LottoResults
 import lotto.domain.Number
 import lotto.domain.WinningLotto
+import lotto.domain.purchase.Amount
+import lotto.domain.purchase.LottoPurchaseCount
 import lotto.view.dto.LottoRankDto
 import lotto.view.dto.LottoResultsDto
 import lotto.view.dto.WinningLottoDto
 import lotto.view.dto.lotto.LottoDto
+import lotto.view.dto.lotto.LottoPurchaseCountDto
 import lotto.view.dto.lotto.LottosDto
 
 class LottoService(
     private val lottoGenerator: LottoGenerator,
 ) {
-    fun createLottos(payAmount: Int): LottosDto {
-        val count = LottoPurchaseCount(payAmount)
-        val lottos = Lotto.createLottos(count.amount, lottoGenerator)
-        return LottosDto(lottos.map { LottoDto(it.getNumbersRawValues()) })
+    fun createPurchaseCount(
+        pay: Int,
+        manualLottoAmount: Int,
+    ): LottoPurchaseCountDto {
+        val purchaseCount = LottoPurchaseCount(pay, Amount(manualLottoAmount))
+        return LottoPurchaseCountDto(purchaseCount.autoLottoAmount.value, purchaseCount.manualLottoAmount.value)
+    }
+
+    fun createLottos(
+        purchaseCountDto: LottoPurchaseCountDto,
+        manualLottosDto: LottosDto,
+    ): LottosDto {
+        val manualLottos = manualLottosDto.lottos.map { Lotto.createManualLotto(it.numbers) }
+        val autoLottos = Lotto.createAutoLottos(purchaseCountDto.autoLottoAmount, lottoGenerator)
+        val totalLottos = manualLottos + autoLottos
+        return LottosDto(totalLottos.map { LottoDto(it.getNumbersRawValues()) })
     }
 
     fun getResults(
