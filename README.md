@@ -97,3 +97,10 @@
 - [x] 5개 일치와 보너스볼 일치는 2등이다.
 - [x] 5개 일치는 3등이다.
 - [x] 보너스 볼 일치를 출력한다.
+
+### 리뷰 반영사항 - 1
+- [x] LottoNumber::comparable 구현
+- [ ] LottoNumbers::contains 을 in 으로 수정
+- [ ] RankReward::matchBonus 를 nullable 변수로 추출 후 matched 함수 추출
+- [ ] LottoNumber::테스트 전용 메서드 제거
+- [ ] LottoNumbers::동반객체 메서드 좀더 의미있는 자동/수동 으로 네이밍

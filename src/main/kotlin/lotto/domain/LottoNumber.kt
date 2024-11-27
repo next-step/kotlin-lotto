@@ -1,9 +1,13 @@
 package lotto.domain
 
 @JvmInline
-value class LottoNumber(val number: Int) {
+value class LottoNumber(val number: Int) : Comparable<LottoNumber> {
     init {
         require(number in LOTTO_NUMBER_RANGE) { "로또 번호는 $LOTTO_MIN_NUMBER 부터 $LOTTO_MAX_NUMBER 사이어야 합니다" }
+    }
+
+    override fun compareTo(other: LottoNumber): Int {
+        return number.compareTo(other.number)
     }
 
     override fun toString(): String {

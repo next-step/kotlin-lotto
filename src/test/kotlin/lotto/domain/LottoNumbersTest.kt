@@ -7,6 +7,7 @@ import io.kotest.data.headers
 import io.kotest.data.row
 import io.kotest.data.table
 import io.kotest.inspectors.forAll
+import io.kotest.matchers.collections.shouldBeSortedBy
 import io.kotest.matchers.shouldBe
 
 class LottoNumbersTest : StringSpec({
@@ -14,7 +15,7 @@ class LottoNumbersTest : StringSpec({
         LottoNumbers.create().numbers.size shouldBe 6
     }
 
-    "로또번호들은 중복되지 않는다" {
+    "로또번 호들은 중복되지 않는다" {
         val numbers = LottoNumbers.create().numbers
         numbers.distinct().size shouldBe 6
     }
@@ -24,7 +25,7 @@ class LottoNumbersTest : StringSpec({
         shouldThrow<IllegalArgumentException> { LottoNumbers.from(numbers) }
     }
 
-    "로또번호끼리의 일치 수를 반환한다" {
+    "로또 번호끼리의 일치 수를 반환한다" {
         table(
             headers("lottoNumbers", "otherNumbers", "expected"),
             row(setOf(1, 2, 3, 4, 5, 6), setOf(1, 2, 3, 4, 5, 6), 6),
@@ -36,5 +37,9 @@ class LottoNumbersTest : StringSpec({
             val other = LottoNumbers.from(others)
             origin.countMatchedNumber(other) shouldBe expected
         }
+    }
+
+    "로또 번호 생성시 오름차순으로 정렬된다" {
+        LottoNumbers.from(setOf(6, 5, 4, 3, 2, 1)).numbers shouldBeSortedBy { it.number }
     }
 })
