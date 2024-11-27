@@ -2,6 +2,7 @@ package lotto.application
 
 import lotto.domain.Lotto
 import lotto.domain.LottoResult
+import lotto.domain.LottoResult2
 import lotto.domain.WinningLine
 
 class LottoService(
@@ -17,6 +18,11 @@ class LottoService(
         lotto: Lotto,
         winner: WinningLine,
     ): LottoResult = lotto.match(winner)
+
+    fun play2(
+        lotto: Lotto,
+        winner: WinningLine,
+    ): LottoResult2 = lotto.match2(winner)
 
     fun generateRandom(numberOfLines: Int): Lotto = Lotto((1..numberOfLines).map { lineGenerator.generate() })
 }

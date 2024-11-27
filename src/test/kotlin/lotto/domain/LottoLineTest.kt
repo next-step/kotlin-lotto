@@ -49,10 +49,10 @@ class LottoLineTest {
     @MethodSource
     fun `당첨 순위를 구한다`(
         winner: WinningLine,
-        expected: Rank,
+        expected: Rank2,
     ) {
         val line = LottoLine.from(1, 2, 3, 4, 5, 6)
-        val actual = line.match(winner)
+        val actual = line.match2(winner)
         actual shouldBe expected
     }
 
@@ -82,7 +82,7 @@ class LottoLineTest {
                         LottoLine.from(1, 2, 3, 4, 5, 6),
                         LottoNumber.from(7),
                     ),
-                    Rank.FIRST,
+                    Rank2.FIRST,
                 ),
                 Arguments.of(
                     WinningLine(
@@ -91,7 +91,7 @@ class LottoLineTest {
                         // 보너스 볼 일치 o
                         LottoNumber.from(6),
                     ),
-                    Rank.SECOND,
+                    Rank2.SECOND,
                 ),
                 Arguments.of(
                     WinningLine(
@@ -100,7 +100,7 @@ class LottoLineTest {
                         // 보너스 볼 일치 x
                         LottoNumber.from(42),
                     ),
-                    Rank.THIRD,
+                    Rank2.THIRD,
                 ),
                 Arguments.of(
                     WinningLine(
@@ -108,7 +108,7 @@ class LottoLineTest {
                         LottoLine.from(1, 2, 3, 4, 7, 8),
                         LottoNumber.from(6),
                     ),
-                    Rank.FOURTH,
+                    Rank2.FOURTH,
                 ),
                 Arguments.of(
                     WinningLine(
@@ -116,7 +116,7 @@ class LottoLineTest {
                         LottoLine.from(1, 2, 3, 7, 8, 9),
                         LottoNumber.from(6),
                     ),
-                    Rank.FIFTH,
+                    Rank2.FIFTH,
                 ),
                 Arguments.of(
                     WinningLine(
@@ -124,7 +124,7 @@ class LottoLineTest {
                         LottoLine.from(1, 8, 9, 10, 11, 12),
                         LottoNumber.from(6),
                     ),
-                    Rank.MISS,
+                    Rank2.MISS,
                 ),
                 Arguments.of(
                     WinningLine(
@@ -132,7 +132,7 @@ class LottoLineTest {
                         LottoLine.from(7, 8, 9, 10, 11, 12),
                         LottoNumber.from(6),
                     ),
-                    Rank.MISS,
+                    Rank2.MISS,
                 ),
             )
     }

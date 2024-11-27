@@ -14,6 +14,14 @@ class Lotto(
         return LottoResult.from(rankToCount)
     }
 
+    fun match2(winner: WinningLine): LottoResult2 {
+        val rankToCount =
+            lines
+                .groupBy { it.match2(winner) }
+                .mapValues { (_, value) -> value.size }
+        return LottoResult2.from(rankToCount)
+    }
+
     fun merge(lotto: Lotto): Lotto = Lotto(lines + lotto.lines)
 
     companion object {

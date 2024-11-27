@@ -14,5 +14,5 @@ object Application {
 
 fun main() {
     val controller = Application.lottoController()
-    controller.play()
+    controller.play2()
 }

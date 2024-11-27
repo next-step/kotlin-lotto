@@ -4,7 +4,9 @@ import lotto.domain.Lotto
 import lotto.domain.LottoLine
 import lotto.domain.LottoPayment
 import lotto.domain.LottoResult
+import lotto.domain.LottoResult2
 import lotto.domain.Rank
+import lotto.domain.Rank2
 
 object ResultView {
     private const val COMMA_SEPARATOR = ", "
@@ -43,6 +45,26 @@ object ResultView {
         println(output)
     }
 
+    fun printResult2(
+        result: LottoResult2,
+        payment: LottoPayment,
+    ) {
+        val roi = result.returnOnInvestment(payment)
+        val output =
+            buildString {
+                appendLine()
+                appendLine("당첨 통계")
+                appendLine("---------")
+
+                // 당첨 통계
+                appendLine(formatResult2(result))
+
+                // 수익률
+                append(formatRoi(roi))
+            }
+        println(output)
+    }
+
     private fun formatLotto(lotto: Lotto): String =
         lotto.lines
             .joinToString(NEWLINE) { formatLine(it) }
@@ -61,6 +83,12 @@ object ResultView {
             .filter { it != Rank.MISS }
             .joinToString(NEWLINE) { formatResultByRank(it, result.get(it)) }
 
+    private fun formatResult2(result: LottoResult2): String =
+        Rank2.entries
+            .sortedBy { it.prize }
+            .filter { it != Rank2.MISS }
+            .joinToString(NEWLINE) { formatResultByRank2(it, result.get(it)) }
+
     private fun formatResultByRank(
         rank: Rank,
         count: Int,
@@ -68,6 +96,16 @@ object ResultView {
         when (rank) {
             Rank.MISS -> ""
             Rank.SECOND -> "${rank.count}개 일치, 보너스 볼 일치 (${rank.prize}원)- ${count}개"
+            else -> "${rank.count}개 일치 (${rank.prize}원)- ${count}개"
+        }
+
+    private fun formatResultByRank2(
+        rank: Rank2,
+        count: Int,
+    ): String =
+        when (rank) {
+            Rank2.MISS -> ""
+            Rank2.SECOND -> "${rank.count}개 일치, 보너스 볼 일치 (${rank.prize}원)- ${count}개"
             else -> "${rank.count}개 일치 (${rank.prize}원)- ${count}개"
         }
 

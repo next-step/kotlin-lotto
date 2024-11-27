@@ -18,6 +18,14 @@ class LottoLine(
             contains(winner.bonus),
         )
 
+    fun match2(winner: WinningLine): Rank2 =
+        Rank2.valueOf(
+            MatchStats(
+                countOverlap(winner.line),
+                contains(winner.bonus),
+            ),
+        )
+
     companion object {
         const val LINE_SIZE = 6
 
