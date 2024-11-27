@@ -3,14 +3,16 @@ package lotto.domain
 class Lotto {
     companion object {
         fun generate(): Set<LottoNumber> {
-            return setOf(
-                LottoNumber.from(1),
-                LottoNumber.from(2),
-                LottoNumber.from(3),
-                LottoNumber.from(4),
-                LottoNumber.from(5),
-                LottoNumber.from(6),
-            )
+            return (MINIMUM_NUMBER..MAXIMUM_NUMBER)
+                .shuffled()
+                .take(NUMBER_OF_SELECT)
+                .sorted()
+                .map { LottoNumber.from(it) }
+                .toSet()
         }
+
+        private const val MINIMUM_NUMBER = 1
+        private const val MAXIMUM_NUMBER = 45
+        private const val NUMBER_OF_SELECT = 6
     }
 }
