@@ -1,4 +1,6 @@
-package lotto
+package lotto.view
+
+import lotto.util.NumberSplitter
 
 object InputView {
     fun getAmount(): Int {
@@ -12,6 +14,11 @@ object InputView {
             .map { it.toIntOrNull() }
             .requireNoNulls()
             .toSet()
+    }
+
+    fun getBonusNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        return getNumberInput()
     }
 
     private fun getNumberInput(): Int {

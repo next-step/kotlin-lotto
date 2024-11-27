@@ -1,4 +1,4 @@
-package lotto
+package lotto.util
 
 object NumberSplitter {
     private const val SEPARATOR = ","
