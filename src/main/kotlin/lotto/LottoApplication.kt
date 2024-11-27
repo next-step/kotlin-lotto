@@ -18,8 +18,11 @@ fun main() {
     val controller = LottoController(inputAdapter, outputView, DefaultProfitRateCalculator())
 
     val lottoPurchaseAmount = controller.getLottoPurchaseAmount()
-    val lottoGame = LottoGame.makeNewLottoGame(lottoPurchaseAmount, lottoBallMachine)
+    val manualPurchaseCount = inputAdapter.fetchManualPurchaseCount()
+    val manualLines = inputAdapter.fetchManualLines(manualPurchaseCount)
 
-    controller.announcePurchasedLotto(lottoGame)
+    val lottoGame = LottoGame.makeNewLottoGame(lottoPurchaseAmount, manualLines, lottoBallMachine)
+
+    controller.announcePurchasedLotto(lottoGame, manualPurchaseCount)
     controller.announceGameResult(lottoGame, lottoPurchaseAmount)
 }

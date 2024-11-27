@@ -16,10 +16,11 @@ class LottoGameResult(
         return profitRateCalculator.calculate(totalPrize, lottoPurchaseAmount)
     }
 
-    fun extractResult(): List<Pair<LottoRank, Int>> {
+    fun <T> extractResult(transform: (Pair<LottoRank, Int>) -> T): List<T> {
         return getLottoRankCounts()
             .toList()
             .sortedByDescending { it.first.rank }
+            .map(transform)
     }
 
     private fun getLottoRankCounts(): Map<LottoRank, Int> =
