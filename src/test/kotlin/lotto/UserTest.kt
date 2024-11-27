@@ -1,6 +1,7 @@
 package lotto
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 
@@ -44,6 +45,26 @@ class UserTest {
         assertAll(
             { assertThat(user.totalLottos).isEqualTo(expectedLottos) },
             { assertThat(user.totalLottoSize).isEqualTo(3) },
+        )
+    }
+
+
+    @Test
+    fun `금액 보다 수동 수량이 많으면 예외 발생`() {
+        val initialAmount = Amount(1_000) // 사용자가 보유한 금액
+        val user = User(initialAmount)
+        val expectedLottos = Lottos(
+            listOf(
+                Lotto(listOf(1, 2, 3, 4, 5, 6)),
+                Lotto(listOf(7, 8, 9, 10, 11, 12)),
+                Lotto(listOf(13, 14, 15, 16, 17, 18)),
+            )
+        )
+
+        assertAll(
+            { assertThatIllegalArgumentException().isThrownBy { user.buyManualNumbers(expectedLottos) } },
+            { assertThat(user.totalLottos).isEqualTo(Lottos(emptyList())) },
+            { assertThat(user.totalLottoSize).isEqualTo(0) },
         )
     }
 }
