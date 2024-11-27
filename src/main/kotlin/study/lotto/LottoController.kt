@@ -1,7 +1,10 @@
 package study.lotto
 
-import study.lotto.model.LottoPrize
+import study.lotto.model.Lotto
 import study.lotto.model.LottoStat
+import study.lotto.model.LottoStats
+import study.lotto.model.Lottos
+import study.lotto.model.Rank
 import study.lotto.view.InputView
 import study.lotto.view.ResultView
 
@@ -13,7 +16,13 @@ class LottoController(
     private val inputView: InputView,
     private val resultView: ResultView,
 ) {
-    private val winLottoStatsSet = mutableSetOf<LottoStat>()
+    private val lottoStats = LottoStats()
+
+    init {
+        Rank.entries.forEach {
+            this.lottoStats.addStat(LottoStat(it))
+        }
+    }
 
     fun run() {
         val money = inputView.inputMoney()
@@ -21,29 +30,40 @@ class LottoController(
         resultView.printLottoCount(lottos)
         resultView.printLotto(lottos)
         val winLotto = inputView.inputWinLotto()
+        val bonus = inputView.inputBonusBall(winLotto)
 
-        lottos.forEach {
+        playGame(lottos, winLotto, bonus)
+        resultView.printWinLotto(this.lottoStats)
+        resultView.printProfit(lottoService.profitLotto(this.lottoStats, money))
+    }
+
+    private fun playGame(
+        lottos: Lottos,
+        winLotto: Lotto,
+        bonus: Int,
+    ) {
+        lottos.getLottos().forEach {
             val matchCount = it.matchLotto(winLotto)
 
-            if (matchCount > 2) {
-                val prize = LottoPrize.findPrize(matchCount) ?: throw IllegalArgumentException("당첨금이 없습니다.")
-                winLottoStatsSet.find { lottoStat -> lottoStat.lottoPrize == prize }?.addCount() ?: run {
-                    winLottoStatsSet.add(LottoStat(prize, 1))
-                }
+            var matchBonus = false
+            if (matchCount == Rank.THIRD.countOfMatch) {
+                matchBonus = it.ishBonus(bonus)
             }
+            val rank = Rank.findRank(matchCount, matchBonus)
+            this.lottoStats.getStat().find { lottoStat ->
+                lottoStat.rank == rank
+            }?.addCount()
         }
-
-        resultView.printWinLotto(winLottoStatsSet)
-        resultView.printProfit(lottoService.profitLotto(winLottoStatsSet, money))
     }
 }
 
 fun main() {
-    val lottoController = LottoController(
-        LottoService(),
-        InputView(),
-        ResultView(),
-    )
+    val lottoController =
+        LottoController(
+            LottoService(),
+            InputView(),
+            ResultView(),
+        )
 
     lottoController.run()
 }

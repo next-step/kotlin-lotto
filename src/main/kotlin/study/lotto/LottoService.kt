@@ -1,23 +1,28 @@
 package study.lotto
 
 import study.lotto.model.Lotto
-import study.lotto.model.LottoStat
+import study.lotto.model.LottoStats
+import study.lotto.model.Lottos
 import kotlin.math.floor
 
 /**
  * @author 이상준
  */
 class LottoService {
-    fun buyLotto(money: Int): List<Lotto> {
+    fun buyLotto(money: Int): Lottos {
         require(money >= LOTTO_PRICE) { "로또 구입금액은 최소 ${LOTTO_PRICE}원입니다." }
-        return (0 until money / LOTTO_PRICE).map { Lotto(randomLotto()) }
+        Lottos().apply {
+            repeat(money / LOTTO_PRICE) {
+                addLotto(Lotto(randomLotto()))
+            }
+        }.let { return it }
     }
 
     fun profitLotto(
-        statSet: Set<LottoStat>,
+        lottoStats: LottoStats,
         money: Int,
     ): Double {
-        val total = statSet.sumOf { it.lottoPrize.amount * it.count }
+        val total = lottoStats.getStat().sumOf { it.rank.amount * it.count }
         return (total.toDouble() / (money * 10)).let { floor(it * 100) / 100 }
     }
 
