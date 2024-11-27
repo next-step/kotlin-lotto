@@ -6,8 +6,8 @@ import io.kotest.data.forAll
 import io.kotest.data.headers
 import io.kotest.data.row
 import io.kotest.data.table
-import io.kotest.inspectors.forAll
 import io.kotest.matchers.collections.shouldBeSortedBy
+import io.kotest.matchers.ints.shouldBeInRange
 import io.kotest.matchers.shouldBe
 
 class LottoNumbersTest : StringSpec({
@@ -49,5 +49,11 @@ class LottoNumbersTest : StringSpec({
 
     "로또 번호에 포함되는 번호가 없다면 false 를 반환한다" {
         LottoNumbers.from(setOf(1, 2, 3, 4, 5, 6)).containsNumber(LottoNumber(45)) shouldBe false
+    }
+
+    "로또 번호의 범위는 1~45이다" {
+        LottoNumbers.create().numbers.forEach {
+            it.number shouldBeInRange 1..45
+        }
     }
 })
