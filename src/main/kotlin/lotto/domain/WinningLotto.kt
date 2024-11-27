@@ -12,7 +12,7 @@ data class WinningLotto(
         return lottoNumbers.countMatchedNumber(other.lottoNumbers)
     }
 
-    fun isMatchBonus(other: Lotto): Boolean {
+    fun matchBonus(other: Lotto): Boolean {
         return other.lottoNumbers.containsNumber(bonus)
     }
 

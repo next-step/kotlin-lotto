@@ -24,9 +24,9 @@ data class DrawResult(private val rankRewardLottoCountMap: Map<RankReward, Lotto
             val rankRewardLottoCountMap =
                 purchaseLotteries
                     .map { lotto ->
-                        val matchedNumberCount = winningLotto.countMatchedNumber(lotto)
-                        val isMatchBonus = winningLotto.isMatchBonus(lotto)
-                        RankReward.valueOf(matchedNumberCount, isMatchBonus)
+                        val matchedCount = winningLotto.countMatchedNumber(lotto)
+                        val matchBonus = winningLotto.matchBonus(lotto)
+                        RankReward.valueOf(matchedCount, matchBonus)
                     }
                     .groupingBy { it }
                     .eachCount()
