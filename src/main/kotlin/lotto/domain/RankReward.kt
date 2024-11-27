@@ -15,7 +15,8 @@ enum class RankReward(
     ;
 
     override fun toString(): String {
-        return "${matchedCount}개 일치 ($money)"
+        val bonusText = if (this in needMatchBonusRanks) ", 보너스 볼 일치" else ""
+        return "${matchedCount}개 일치$bonusText ($money)"
     }
 
     companion object {
@@ -30,5 +31,7 @@ enum class RankReward(
         fun sortLowToHighByRank(): List<RankReward> {
             return entries.sortedByDescending { it.rankValue }
         }
+
+        private val needMatchBonusRanks: List<RankReward> = listOf(SECOND)
     }
 }

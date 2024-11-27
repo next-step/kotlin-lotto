@@ -6,6 +6,10 @@ value class LottoNumber(val number: Int) {
         require(number in LOTTO_NUMBER_RANGE) { "로또 번호는 $LOTTO_MIN_NUMBER 부터 $LOTTO_MAX_NUMBER 사이어야 합니다" }
     }
 
+    override fun toString(): String {
+        return "$number"
+    }
+
     companion object {
         private const val LOTTO_MIN_NUMBER = 1
         private const val LOTTO_MAX_NUMBER = 45

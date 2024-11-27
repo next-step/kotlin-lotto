@@ -1,8 +1,11 @@
 package lotto.domain
 
-data class LottoNumbers(val numbers: Set<LottoNumber>) {
+class LottoNumbers(numbers: Set<LottoNumber>) {
+    val numbers: Set<LottoNumber>
+
     init {
         require(numbers.size == LOTTO_NUMBER_COUNT) { "로또 번호는 $LOTTO_NUMBER_COUNT 개이어야 합니다" }
+        this.numbers = numbers.sortedBy { it.number }.toSet()
     }
 
     fun countMatchedNumber(other: LottoNumbers): Int {
