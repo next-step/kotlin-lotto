@@ -2,10 +2,9 @@ package additioncalculator.view
 
 import additioncalculator.domain.StringAddCalculator
 
-class StringAddCalculatorController {
+object StringAddCalculatorController {
     fun add() {
-        val text: String? = InputView().view()
-        val stringAddCalculator = StringAddCalculator()
-        ResultView().view(stringAddCalculator.add(text))
+        val text = InputView.promptForCalculation()
+        ResultView.view(StringAddCalculator.add(text))
     }
 }
