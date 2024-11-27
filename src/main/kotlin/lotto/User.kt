@@ -2,14 +2,15 @@ package lotto
 
 class User(private var amount: Amount) {
     val totalLottos: Lottos
-        get() = autoLottos
+        get() = manualLottos.merge(autoLottos)
     val totalLottoSize: Int
-        get() = autoLottos.size
+        get() = totalLottos.size
     val totalBuyAmount: Amount
-        get() = autoLottos.totalAmount
-    private lateinit var autoLottos: Lottos
+        get() = totalLottos.totalAmount
+    private var manualLottos: Lottos = Lottos(emptyList())
+    private var autoLottos: Lottos = Lottos(emptyList())
 
-    fun buyLotto(autoMachine: (amount: Amount) -> Lottos) {
+    fun buyAutoLotto(autoMachine: (amount: Amount) -> Lottos) {
         autoLottos = autoMachine(amount)
         amount = amount.minus(autoLottos.totalAmount)
     }
@@ -19,5 +20,14 @@ class User(private var amount: Amount) {
         bonus: Boolean,
     ): Ranks {
         return Ranks.fromGroupBy(totalLottos.match(lastWeekNumbers, bonus))
+    }
+
+    fun buyManualNumbers(lottos: Lottos) {
+        val requiredAmount = lottos.totalAmount
+        if (amount.isLessThan(requiredAmount)) {
+            throw IllegalArgumentException("수동 구매 금액이 부족합니다.")
+        }
+        manualLottos = lottos
+        amount = amount.minus(requiredAmount)
     }
 }
