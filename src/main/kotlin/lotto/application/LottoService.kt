@@ -1,7 +1,6 @@
 package lotto.application
 
 import lotto.domain.Lotto
-import lotto.domain.LottoResult
 import lotto.domain.LottoResult2
 import lotto.domain.WinningLine
 
@@ -13,11 +12,6 @@ class LottoService(
         val autoLotto = generateRandom(payment.numberOfLines - manualLotto.numberOfLines)
         return manualLotto.merge(autoLotto)
     }
-
-    fun play(
-        lotto: Lotto,
-        winner: WinningLine,
-    ): LottoResult = lotto.match(winner)
 
     fun play2(
         lotto: Lotto,
