@@ -1,15 +1,24 @@
-package additioncalculator
+package additioncalculator.domain
 
-import additioncalculator.domain.NumberSplit
 import additioncalculator.domain.NumberSplit.Companion.INVALID_NEGATIVE_MESSAGE
 import additioncalculator.domain.NumberSplit.Companion.INVALID_NUMBER_TRANSFER
-import additioncalculator.domain.Numbers
 import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.NullAndEmptySource
 import java.lang.IllegalArgumentException
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class NumberSplitTest {
+    @ParameterizedTest
+    @NullAndEmptySource
+    fun `입력 문자열이 null 이거나 빈문자열일 경우 빈 리스트를 반환한다`(text: String?) {
+        val numbers: Numbers = NumberSplit(text = text).splitNumberResult()
+        numbers.numbers.isEmpty() shouldBe true
+    }
+
     @Test
     fun `입력 받은 하나의 문자열을 숫자들로 반환한다`() {
         val numbers: Numbers = NumberSplit(text = "//t\n" + "1t2,3:4,12:34:56t78,9").splitNumberResult()
