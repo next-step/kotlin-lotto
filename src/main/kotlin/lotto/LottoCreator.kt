@@ -1,4 +1,4 @@
-package lotto.service
+package lotto
 
 import lotto.const.LottoConst
 import lotto.domain.Lotto

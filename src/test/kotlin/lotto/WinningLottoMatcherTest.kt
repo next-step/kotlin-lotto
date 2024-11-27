@@ -8,10 +8,8 @@ import lotto.domain.LottoNumber
 import lotto.domain.Order
 import lotto.domain.Rank
 import lotto.domain.WinningLotto
-import lotto.service.LottoCreator
-import lotto.service.WinningLottoService
 
-class WinningLottoServiceTest : StringSpec({
+class WinningLottoMatcherTest : StringSpec({
     "입력된 숫자를 가진 당첨 로또를 생성할 수 있다." {
         val lottoCreator = LottoCreator(FixedNumberGenerator())
 
@@ -33,11 +31,11 @@ class WinningLottoServiceTest : StringSpec({
                     LottoNumber(9),
                 ),
             )
-        val winningLottoService = WinningLottoService()
+        val winningLottoMatcher = WinningLottoMatcher()
         val order = Order(1000, listOf(lotto))
         val winNumbers = WinningLotto(Lotto(FixedNumberGenerator().generate().map { LottoNumber(it) }.toSet()), LottoNumber(7))
 
-        val result = winningLottoService.checkAndGetResult(order, winNumbers)
+        val result = winningLottoMatcher.checkAndGetResult(order, winNumbers)
 
         assertSoftly {
             result.winningMatchCounts[0].rank shouldBe Rank.FIFTH
@@ -58,21 +56,21 @@ class WinningLottoServiceTest : StringSpec({
     }
 
     "수익을 제공한다." {
-        val winningLottoService = WinningLottoService()
+        val winningLottoMatcher = WinningLottoMatcher()
         val order = Order(1000, listOf(Lotto(FixedNumberGenerator().generate().map { LottoNumber(it) }.toSet())))
         val winNumbers = WinningLotto(Lotto(FixedNumberGenerator().generate().map { LottoNumber(it) }.toSet()), LottoNumber(7))
 
-        val result = winningLottoService.checkAndGetResult(order, winNumbers)
+        val result = winningLottoMatcher.checkAndGetResult(order, winNumbers)
 
         result.revenue shouldBe 2_000_000_000
     }
 
     "수익률을 제공한다." {
-        val winningLottoService = WinningLottoService()
+        val winningLottoMatcher = WinningLottoMatcher()
         val order = Order(1000, listOf(Lotto(FixedNumberGenerator().generate().map { LottoNumber(it) }.toSet())))
         val winNumbers = WinningLotto(Lotto(FixedNumberGenerator().generate().map { LottoNumber(it) }.toSet()), LottoNumber(7))
 
-        val result = winningLottoService.checkAndGetResult(order, winNumbers)
+        val result = winningLottoMatcher.checkAndGetResult(order, winNumbers)
 
         result.rate shouldBe 2000000.0
     }

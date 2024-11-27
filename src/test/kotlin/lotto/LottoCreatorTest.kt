@@ -2,7 +2,6 @@ package lotto
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import lotto.service.LottoCreator
 
 class LottoCreatorTest : StringSpec({
     "입력된 개수만큼의 로또를 생성할 수 있다." {

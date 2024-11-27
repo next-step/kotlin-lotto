@@ -1,11 +1,9 @@
-package lotto.service
+package lotto
 
 import lotto.const.LottoConst.UNIT_OF_AMOUNT
 import lotto.domain.Order
 
-class OrderService() {
-    private val lottoCreator = LottoCreator()
-
+class LottoShop(private val lottoCreator: LottoCreator) {
     fun makeOrder(amount: Int): Order {
         validateAmountIsPositive(amount)
         val lottoCounts = calculateLottoCounts(amount)
