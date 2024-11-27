@@ -1,11 +1,9 @@
 package stringcalculator.domain
 
-class DelimiterExtractor {
-    companion object {
-        private const val CUSTOM_DELIMITER_PREFIX = "//"
-        private const val CUSTOM_DELIMITER_SEPARATOR = "\n"
-        private const val DEFAULT_DELIMITERS = ",:"
-    }
+object DelimiterExtractor {
+    private const val CUSTOM_DELIMITER_PREFIX = "//"
+    private const val CUSTOM_DELIMITER_SEPARATOR = "\n"
+    private const val DEFAULT_DELIMITERS = ",:"
 
     fun extract(input: String): Pair<Regex, String> {
         return if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {

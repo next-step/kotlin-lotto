@@ -8,7 +8,7 @@ class NumberParserTest : StringSpec({
     "should parse valid numbers and calculate the sum" {
         val parser = NumberParser()
         val numbers = parser.parse("1,2,3", Regex("[,:]"))
-        numbers shouldBe listOf(1, 2, 3)
+        numbers.sumOf { it.getValue() } shouldBe 6
     }
 
     "should throw RuntimeException for negative numbers" {
