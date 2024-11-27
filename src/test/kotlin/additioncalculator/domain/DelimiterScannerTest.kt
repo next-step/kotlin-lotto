@@ -15,6 +15,12 @@ class DelimiterScannerTest {
     }
 
     @Test
+    fun `문자열에 찾으려는 구분자가 존재하지 않을 수 있다`() {
+        val findDelimiters = DelimiterScanner.findDelimiters(inputText = "1u2x3w4z5")
+        findDelimiters.containsAll(listOf()) shouldBe true
+    }
+
+    @Test
     fun `기본 구분자 쉼표(,)를 찾아낼 수 있다`() {
         val findDelimiters = DelimiterScanner.findDelimiters(inputText = "1,2,3,4,5")
         findDelimiters.containsAll(listOf(",")) shouldBe true
