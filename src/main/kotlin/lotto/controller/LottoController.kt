@@ -34,7 +34,7 @@ class LottoController(
         val profitRate = gameResult.calculateProfitRate(lottoPurchaseAmount)
 
         val gameResultResponse =
-            gameResult.extractResult().map {
+            gameResult.extractResult {
                 LottoRankResponse(it.first, it.second)
             }
 
