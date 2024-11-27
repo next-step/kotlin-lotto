@@ -4,8 +4,11 @@ import lotto.response.LottoLinesResponse
 import lotto.response.LottoRankResponse
 
 class OutputView {
-    fun printPurchaseCount(purchaseCount: Int) {
-        println("${purchaseCount}개를 구매했습니다.")
+    fun printPurchaseCount(
+        purchaseCount: Int,
+        manualPurchaseCount: Int,
+    ) {
+        println("\n수동으로 ${manualPurchaseCount}장, 자동으로 ${purchaseCount - manualPurchaseCount}개를 구매했습니다.")
     }
 
     fun printPurchaseLottoLines(lottoLinesResponse: LottoLinesResponse) {

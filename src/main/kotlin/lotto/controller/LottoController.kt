@@ -3,6 +3,7 @@ package lotto.controller
 import lotto.adapter.LottoInputAdapter
 import lotto.domain.LottoGame
 import lotto.domain.LottoPurchaseAmount
+import lotto.domain.LottoPurchaseCount
 import lotto.domain.ProfitRateCalculator
 import lotto.response.LottoLinesResponse
 import lotto.response.LottoRankResponse
@@ -17,8 +18,11 @@ class LottoController(
         return inputAdapter.fetchPurchaseAmount()
     }
 
-    fun announcePurchasedLotto(lottoGame: LottoGame) {
-        outputView.printPurchaseCount(lottoGame.getPurchaseCount())
+    fun announcePurchasedLotto(
+        lottoGame: LottoGame,
+        manualPurchaseCount: LottoPurchaseCount,
+    ) {
+        outputView.printPurchaseCount(lottoGame.getPurchaseCount(), manualPurchaseCount.count)
         val lottoLines = lottoGame.getLottoLines()
         val lottoLinesResponse = LottoLinesResponse(lottoLines)
         outputView.printPurchaseLottoLines(lottoLinesResponse)
