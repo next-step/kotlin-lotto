@@ -41,12 +41,8 @@ class OrderTest : StringSpec({
                 Order(
                     10000,
                     listOf(
-                        Lotto(
-                            setOf(
-                                LottoNumber(1),
-                                LottoNumber(2),
-                            ),
-                        ),
+                        createLotto(1, 2, 3, 4, 5, 6),
+                        createLotto(1, 2, 3, 7, 8, 9),
                     ),
                 )
             }

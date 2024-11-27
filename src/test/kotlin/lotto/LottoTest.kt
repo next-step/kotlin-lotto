@@ -8,19 +8,9 @@ import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 
 class LottoTest : StringSpec({
-    val correctLottoNumbers =
-        setOf(
-            LottoNumber(1),
-            LottoNumber(2),
-            LottoNumber(3),
-            LottoNumber(4),
-            LottoNumber(5),
-            LottoNumber(6),
-        )
-
     "한장의 로또는 6개의 숫자로 구성된다." {
 
-        val lotto = Lotto(correctLottoNumbers)
+        val lotto = createLotto(1, 2, 3, 4, 5, 6)
 
         lotto.numbers.size shouldBe 6
     }
@@ -29,7 +19,7 @@ class LottoTest : StringSpec({
         assertSoftly {
             shouldThrow<IllegalArgumentException> { Lotto(setOf()) }
             shouldThrow<IllegalArgumentException> { Lotto(setOf(LottoNumber(1))) }
-            shouldThrow<IllegalArgumentException> { Lotto(correctLottoNumbers + LottoNumber(7)) }
+            shouldThrow<IllegalArgumentException> { Lotto((1..7).map { LottoNumber(it) }.toSet()) }
         }
     }
 })

@@ -1,6 +1,5 @@
 package lotto
 
-import io.kotest.assertions.assertSoftly
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.Lotto
@@ -20,45 +19,31 @@ class WinningLottoMatcherTest : StringSpec({
     }
 
     "각 등수에 대해 각각 몇개씩 일치하는지 정보를 제공한다." {
-        val lotto =
-            Lotto(
-                setOf(
-                    LottoNumber(1),
-                    LottoNumber(2),
-                    LottoNumber(3),
-                    LottoNumber(7),
-                    LottoNumber(8),
-                    LottoNumber(9),
-                ),
-            )
+        val lotto = createLotto(1, 2, 3, 7, 8, 9)
         val winningLottoMatcher = WinningLottoMatcher()
         val order = Order(1000, listOf(lotto))
-        val winNumbers = WinningLotto(Lotto(FixedNumberGenerator().generate().map { LottoNumber(it) }.toSet()), LottoNumber(7))
+        val winNumbers = WinningLotto(createLotto(1, 2, 3, 4, 5, 6), LottoNumber(7))
 
         val result = winningLottoMatcher.checkAndGetResult(order, winNumbers)
+        val expected =
+            listOf(
+                Rank.FIFTH to 1,
+                Rank.FOURTH to 0,
+                Rank.THIRD to 0,
+                Rank.SECOND to 0,
+                Rank.FIRST to 0,
+            )
 
-        assertSoftly {
-            result.winningMatchCounts[0].rank shouldBe Rank.FIFTH
-            result.winningMatchCounts[0].totalCount shouldBe 1
-
-            result.winningMatchCounts[1].rank shouldBe Rank.FOURTH
-            result.winningMatchCounts[1].totalCount shouldBe 0
-
-            result.winningMatchCounts[2].rank shouldBe Rank.THIRD
-            result.winningMatchCounts[2].totalCount shouldBe 0
-
-            result.winningMatchCounts[3].rank shouldBe Rank.SECOND
-            result.winningMatchCounts[3].totalCount shouldBe 0
-
-            result.winningMatchCounts[4].rank shouldBe Rank.FIRST
-            result.winningMatchCounts[4].totalCount shouldBe 0
+        expected.forEachIndexed { index, pair ->
+            pair.first shouldBe result.winningMatchCounts[index].rank
+            pair.second shouldBe result.winningMatchCounts[index].totalCount
         }
     }
 
     "수익을 제공한다." {
         val winningLottoMatcher = WinningLottoMatcher()
-        val order = Order(1000, listOf(Lotto(FixedNumberGenerator().generate().map { LottoNumber(it) }.toSet())))
-        val winNumbers = WinningLotto(Lotto(FixedNumberGenerator().generate().map { LottoNumber(it) }.toSet()), LottoNumber(7))
+        val order = Order(1000, listOf(createLotto(1, 2, 3, 4, 5, 6)))
+        val winNumbers = WinningLotto(createLotto(1, 2, 3, 4, 5, 6), LottoNumber(7))
 
         val result = winningLottoMatcher.checkAndGetResult(order, winNumbers)
 
@@ -67,8 +52,8 @@ class WinningLottoMatcherTest : StringSpec({
 
     "수익률을 제공한다." {
         val winningLottoMatcher = WinningLottoMatcher()
-        val order = Order(1000, listOf(Lotto(FixedNumberGenerator().generate().map { LottoNumber(it) }.toSet())))
-        val winNumbers = WinningLotto(Lotto(FixedNumberGenerator().generate().map { LottoNumber(it) }.toSet()), LottoNumber(7))
+        val order = Order(1000, listOf(createLotto(1, 2, 3, 4, 5, 6)))
+        val winNumbers = WinningLotto(createLotto(1, 2, 3, 4, 5, 6), LottoNumber(7))
 
         val result = winningLottoMatcher.checkAndGetResult(order, winNumbers)
 
