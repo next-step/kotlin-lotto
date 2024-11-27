@@ -12,8 +12,8 @@ class LottoLine(
 
     fun countOverlap(other: LottoLine): Int = numbers.count { other.contains(it) }
 
-    fun match2(winner: WinningLine): Rank2 =
-        Rank2.valueOf(
+    fun match(winner: WinningLine): Rank =
+        Rank.valueOf(
             MatchStats(
                 countOverlap(winner.line),
                 contains(winner.bonus),

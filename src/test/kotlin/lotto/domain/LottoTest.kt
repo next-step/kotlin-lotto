@@ -30,16 +30,16 @@ class LottoTest {
                 LottoNumber.from(7),
             )
 
-        val result = lotto.match2(winner)
+        val result = lotto.match(winner)
 
         val expected =
-            LottoResult2.of(
-                Rank2.FIRST to 1,
-                Rank2.SECOND to 1,
-                Rank2.THIRD to 1,
-                Rank2.FOURTH to 1,
-                Rank2.FIFTH to 1,
-                Rank2.MISS to 2,
+            LottoResult.of(
+                Rank.FIRST to 1,
+                Rank.SECOND to 1,
+                Rank.THIRD to 1,
+                Rank.FOURTH to 1,
+                Rank.FIFTH to 1,
+                Rank.MISS to 2,
             )
 
         result shouldBe expected

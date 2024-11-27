@@ -1,6 +1,6 @@
 package lotto.domain
 
-enum class Rank2(
+enum class Rank(
     val count: Int,
     val prize: Int,
     val match: (MatchStats) -> Boolean,
@@ -14,7 +14,7 @@ enum class Rank2(
     ;
 
     companion object {
-        fun valueOf(stats: MatchStats): Rank2 =
+        fun valueOf(stats: MatchStats): Rank =
             entries.firstOrNull { it.match(stats) }
                 ?: throw IllegalArgumentException("${stats.count}개 일치, 보너스 볼 일치 = ${stats.isBonusMatched} 에 해당하는 등수가 없습니다.")
     }

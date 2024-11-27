@@ -5,7 +5,7 @@ import lotto.domain.Lotto
 import lotto.domain.LottoLine
 import lotto.domain.LottoNumber
 import lotto.domain.LottoPayment
-import lotto.domain.Rank2
+import lotto.domain.Rank
 import lotto.domain.WinningLine
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
@@ -61,9 +61,9 @@ class LottoServiceTest {
 
         val result = sut.play2(lotto, winner)
 
-        result.get(Rank2.SECOND) shouldBe 1
-        result.get(Rank2.FOURTH) shouldBe 1
-        result.get(Rank2.FIFTH) shouldBe 1
+        result.get(Rank.SECOND) shouldBe 1
+        result.get(Rank.FOURTH) shouldBe 1
+        result.get(Rank.FIFTH) shouldBe 1
         result.totalPrize shouldBe 30_055_000
     }
 }

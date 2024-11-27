@@ -6,7 +6,7 @@ import lotto.application.LottoService
 class LottoController(
     private val lottoService: LottoService,
 ) {
-    fun play2() {
+    fun play() {
         // 금약 입력
         val payment = InputView.getPayment()
 
@@ -23,6 +23,6 @@ class LottoController(
 
         // 당첨 결과
         val result = lottoService.play2(lotto, winner)
-        ResultView.printResult2(result, payment)
+        ResultView.printResult(result, payment)
     }
 }
