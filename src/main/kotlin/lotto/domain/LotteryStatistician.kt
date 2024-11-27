@@ -3,30 +3,21 @@ package lotto.domain
 import java.util.EnumMap
 
 class LotteryStatistician(
-    targetLottoStr: String,
+    private val targetLotto: Lotto,
     private val bonusNumber: Int,
 ) {
-    private val targetLotto = Lotto(
-        targetLottoStr.split(",").map { it.trim().toIntOrNull().validate() },
-    )
-
-    fun statistics(lotties: List<Lotto>): WinningStatistics {
+    fun statistics(lotties: Lotties): WinningStatistics {
         val statistics = initStatistics()
 
-        lotties
+        lotties.all
             .groupingBy { LottoRank.of(it.matchCount(targetLotto), it.matchBonus(bonusNumber)) }
             .eachCount()
             .forEach { (rank, count) -> statistics[rank] = count }
 
         return WinningStatistics(
-            purchaseAmount = lotties.size * Lotto.AMOUNT_PER_LOTTO,
+            purchaseAmount = lotties.all.size * Lotto.AMOUNT_PER_LOTTO,
             statistics = statistics,
         )
-    }
-
-    private fun Int?.validate(): Int {
-        return this?.takeIf { it in LottoGenerator.RANGE }
-            ?: throw IllegalArgumentException("로또 숫자의 범위는 ${LottoGenerator.RANGE} 입니다")
     }
 
     private fun initStatistics(): MutableMap<LottoRank, Int> =
