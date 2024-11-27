@@ -22,7 +22,7 @@ object NumberSplit {
     }
 
     private fun checkNumberMinimum(checkNumber: Int) {
-        if(checkNumber < NUMBER_MINIMUM) {
+        if (checkNumber < NUMBER_MINIMUM) {
             throw RuntimeException(INVALID_NEGATIVE_MESSAGE)
         }
     }
@@ -42,10 +42,8 @@ object NumberSplit {
         return numberOrNull
     }
 
-
-        private const val REPLACE_CUSTOM_DELIMITER_REGEX_PATTERN: String = "//(.)\\n"
-        private const val NUMBER_MINIMUM: Int = 0
-        const val INVALID_NEGATIVE_MESSAGE: String = "음수는 불가 합니다"
-        const val INVALID_NUMBER_TRANSFER: String = "계산이 불가한 문자열 입니다"
-
+    private const val REPLACE_CUSTOM_DELIMITER_REGEX_PATTERN: String = "//(.)\\n"
+    private const val NUMBER_MINIMUM: Int = 0
+    const val INVALID_NEGATIVE_MESSAGE: String = "음수는 불가 합니다"
+    const val INVALID_NUMBER_TRANSFER: String = "계산이 불가한 문자열 입니다"
 }

@@ -16,7 +16,10 @@ object DelimiterScanner {
         require(inputText.isNotEmpty()) { DELIMITER_TEXT_NOT_EMPTY_MESSAGE }
     }
 
-    private fun checkDefaultDelimiter(inputText: String, mutableDelimiterList: MutableList<String>) {
+    private fun checkDefaultDelimiter(
+        inputText: String,
+        mutableDelimiterList: MutableList<String>,
+    ) {
         if (inputText.contains(DEFAULT_DELIMITER)) {
             mutableDelimiterList.add(DEFAULT_DELIMITER)
         }
@@ -26,7 +29,10 @@ object DelimiterScanner {
         }
     }
 
-    private fun findCustomDelimiter(inputText: String, mutableDelimiterList: MutableList<String>) {
+    private fun findCustomDelimiter(
+        inputText: String,
+        mutableDelimiterList: MutableList<String>,
+    ) {
         val matchResult: MatchResult? = Regex(CUSTOM_DELIMITER_REGEX_PATTERN).find(inputText)
 
         matchResult?.let {
@@ -38,5 +44,5 @@ object DelimiterScanner {
     private const val SECOND_DEFAULT_DELIMITER: String = ":"
     private const val CUSTOM_DELIMITER_REGEX_PATTERN: String = "//(.)\n(.*)"
     private const val CUSTOM_DELIMITER_REGEX_PATTERN_FIND_INDEX: Int = 1
-    private const val DELIMITER_TEXT_NOT_EMPTY_MESSAGE: String = "구분자를 찾기 위해 입력된 텍스트가 빈 문자열일 수 없습니다"
+    const val DELIMITER_TEXT_NOT_EMPTY_MESSAGE: String = "구분자를 찾기 위해 입력된 텍스트가 빈 문자열일 수 없습니다"
 }
