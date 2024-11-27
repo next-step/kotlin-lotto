@@ -35,5 +35,7 @@ class Lotto(private val lottoNumberGenerator: LottoNumberGenerator? = null, vara
         private const val LOTTO_NUMBER_COUNT_EXCEPTION_MESSAGE = "로또 초기화시 입력된 로또 번호가 6개가 아닙니다."
         private const val LOTTO_NUMBER_DISTINCT_MESSAGE = "로또 초기화시 입력된 로또 번호에 중복이 있습니다."
         private const val LOTTO_PARAMETERS_ERROR_MESSAGE = "로또 생성시 필요한 매개변수를 잘못입력하셨습니다."
+
+        const val LOTTO_PRICE = 1000
     }
 }
