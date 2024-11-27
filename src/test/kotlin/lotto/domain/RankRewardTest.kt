@@ -1,16 +1,15 @@
 package lotto.domain
 
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.headers
 import io.kotest.data.row
 import io.kotest.data.table
+import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
 import lotto.domain.RankReward.FIFTH
 import lotto.domain.RankReward.FIRST
 import lotto.domain.RankReward.FOURTH
-import lotto.domain.RankReward.MISS
 import lotto.domain.RankReward.SECOND
 import lotto.domain.RankReward.THIRD
 
@@ -25,19 +24,14 @@ class RankRewardTest : StringSpec({
             row(4, false, FOURTH),
             row(3, true, FIFTH),
             row(3, false, FIFTH),
-            row(2, true, MISS),
-            row(1, true, MISS),
         ).forAll { matchedCount, matchBonus, expected ->
             RankReward.valueOf(matchedCount = matchedCount, matchBonus = matchBonus) shouldBe expected
         }
     }
 
-    "잘못된 조건을 전달하면 예외 발생한다" {
-        shouldThrow<IllegalArgumentException> {
-            RankReward.valueOf(
-                matchedCount = -10,
-                matchBonus = true,
-            )
+    "순위가 아닌 매칭카운트를 전달하면 null을 반환한다" {
+        listOf(0, 1, 2).forAll { notRankMatchedCount ->
+            RankReward.valueOf(matchedCount = notRankMatchedCount, matchBonus = true) shouldBe null
         }
     }
 })

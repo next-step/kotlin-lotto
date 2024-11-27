@@ -23,7 +23,7 @@ data class DrawResult(private val rankRewardLottoCountMap: Map<RankReward, Lotto
         ): DrawResult {
             val rankRewardLottoCountMap =
                 purchaseLotteries
-                    .map { lotto ->
+                    .mapNotNull { lotto ->
                         val matchedCount = winningLotto.countMatchedNumber(lotto)
                         val matchBonus = winningLotto.matchBonus(lotto)
                         RankReward.valueOf(matchedCount, matchBonus)

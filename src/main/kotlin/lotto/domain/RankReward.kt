@@ -4,15 +4,26 @@ enum class RankReward(
     val rankValue: Int,
     val matchedCount: Int,
     val money: Money,
-    private val matched: (Int, Boolean) -> Boolean,
+    val matchBonus: Boolean?,
 ) {
-    FIRST(1, 6, Money(2_000_000_000), { matchedCount, _ -> matchedCount == FIRST.matchedCount }),
-    SECOND(2, 5, Money(30_000_000), { matchedCount, matchBonus -> matchedCount == SECOND.matchedCount && matchBonus }),
-    THIRD(3, 5, Money(1_500_000), { matchedCount, matchBonus -> matchedCount == THIRD.matchedCount && !matchBonus }),
-    FOURTH(4, 4, Money(50_000), { matchedCount, _ -> matchedCount == FOURTH.matchedCount }),
-    FIFTH(5, 3, Money(5_000), { matchedCount, _ -> matchedCount == FIFTH.matchedCount }),
-    MISS(6, 0, Money(0), { matchedCount, _ -> matchedCount in MISS.matchedCount..<FIFTH.matchedCount }),
+    FIRST(1, 6, Money(2_000_000_000), null),
+    SECOND(2, 5, Money(30_000_000), true),
+    THIRD(3, 5, Money(1_500_000), false),
+    FOURTH(4, 4, Money(50_000), null),
+    FIFTH(5, 3, Money(5_000), null),
     ;
+
+    private fun matched(
+        matchedCount: Int,
+        matchBonus: Boolean,
+    ): Boolean {
+        if (this.matchedCount != matchedCount) return false
+
+        return when (this.matchBonus) {
+            null -> true
+            else -> this.matchBonus == matchBonus
+        }
+    }
 
     override fun toString(): String {
         val bonusText = if (this in needMatchBonusRanks) ", 보너스 볼 일치" else ""
@@ -23,9 +34,8 @@ enum class RankReward(
         fun valueOf(
             matchedCount: Int,
             matchBonus: Boolean,
-        ): RankReward {
+        ): RankReward? {
             return entries.firstOrNull { it.matched(matchedCount, matchBonus) }
-                ?: throw IllegalArgumentException("잘못된 조회 조건입니다. $matchedCount, $matchBonus")
         }
 
         fun sortLowToHighByRank(): List<RankReward> {
