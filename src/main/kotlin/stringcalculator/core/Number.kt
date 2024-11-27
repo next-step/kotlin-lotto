@@ -10,7 +10,7 @@ data class Number(val number: Int) {
     }
 
     operator fun plus(other: Number): Number {
-        return Number((number + other.number).toString())
+        return Number(number + other.number)
     }
 
     companion object {
