@@ -27,6 +27,9 @@ class Lotto(private val lottoNumberGenerator: LottoNumberGenerator? = null, vara
         return lottoNumber.map { LottoNumber.get(it) }.toSet()
     }
 
+    fun match(winningNumber: List<LottoNumber>): MatchingResult? =
+        MatchingResult.fromMatchNumber(lottoNumbers.intersect(winningNumber).size)
+
     companion object {
         private const val LOTTO_NUMBER_COUNT = 6
         private const val LOTTO_NUMBER_COUNT_EXCEPTION_MESSAGE = "로또 초기화시 입력된 로또 번호가 6개가 아닙니다."

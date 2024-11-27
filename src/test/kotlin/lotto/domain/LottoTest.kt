@@ -24,4 +24,18 @@ class LottoTest : StringSpec({
     "발급된 로또의 로또번호 갯수는 6개이다." {
         Lotto(RandomGenerator).lottoNumbers.size shouldBe 6
     }
+
+    "각 로또의 번호를 매칭하여 결과를 도출한다." {
+        listOf(
+            Pair(listOf(45, 44, 43, 42, 41, 40), null),
+            Pair(listOf(1, 45, 44, 43, 42, 41), null),
+            Pair(listOf(1, 2, 45, 44, 43, 42), null),
+            Pair(listOf(1, 2, 3, 45, 44, 43), MatchingResult.MATCHED_THREE),
+            Pair(listOf(1, 2, 3, 4, 45, 44), MatchingResult.MATCHED_FOUR),
+            Pair(listOf(1, 2, 3, 4, 5, 45), MatchingResult.MATCHED_FIVE),
+            Pair(listOf(1, 2, 3, 4, 5, 6), MatchingResult.MATCHED_SIX),
+        ).forAll { (winningNumbers, matchingResult) ->
+            Lotto(null, 1, 2, 3, 4, 5, 6).match(winningNumbers.map { LottoNumber.get(it) }) shouldBe matchingResult
+        }
+    }
 })
