@@ -1,16 +1,17 @@
 package lotto.application
 
+import lotto.core.LottoMarket
 import lotto.presentation.InputView
 import lotto.presentation.ResultView
 
 object LottoController {
     fun start() {
         val purchaseAmount = InputView.inputPurchaseAmount()
-        val lottos = LottoMarketService.start(purchaseAmount)
+        val lottos = LottoMarket.purchase(purchaseAmount)
         ResultView.printLottos(lottos)
 
-        val winningNumber = InputView.inputWinningNumbers()
-        val winningStatistics = LottoWinningStatisticsService.start(lottos, winningNumber)
+        val winningNumbers = InputView.inputWinningNumbers()
+        val winningStatistics = LottoWinningStatisticsService.start(lottos, winningNumbers)
 
         ResultView.printWinningStatistics(winningStatistics)
     }
