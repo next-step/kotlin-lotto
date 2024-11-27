@@ -5,6 +5,8 @@ import lotto.domain.LottoTicket
 object InputView {
     private const val INPUT_PURCHASE_AMOUNT = "구입금액을 입력해 주세요."
     private const val AMOUNT_EXCEPTION_MESSAGE = "유효한 금액을 입력해 주세요."
+    private const val INPUT_MANUAL_TICKET_COUNT = "수동으로 구매할 로또 수를 입력해 주세요."
+    private const val INPUT_MANUAL_TICKETS = "수동으로 구매할 번호를 입력해 주세요."
     private const val INPUT_LAST_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요."
     private const val INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요."
     private const val INPUT_NUMBER_EXCEPTION_MESSAGE = "당첨 숫자를 쉼표로 구분하여 입력해 주세요."
@@ -13,6 +15,30 @@ object InputView {
     fun askPurchaseAmount(): Int {
         println(INPUT_PURCHASE_AMOUNT)
         return readlnOrNull()?.toIntOrNull() ?: throw IllegalArgumentException(AMOUNT_EXCEPTION_MESSAGE)
+    }
+
+    fun askManualPurchaseAmount(): Int {
+        println(INPUT_MANUAL_TICKET_COUNT)
+        return readlnOrNull()?.toIntOrNull() ?: throw IllegalArgumentException("유효한 수동 구매 개수를 입력해 주세요.")
+    }
+    fun askManualPurchaseNumbers(manualTicketCount: Int): List<List<Int>>? {
+        println(INPUT_MANUAL_TICKETS)
+        val manualTickets = mutableListOf<List<Int>>()
+        repeat(manualTicketCount) {
+            val input = readlnOrNull()?.trim()
+            if (input.isNullOrEmpty()) {
+                println(LottoTicket.LOTTO_NUMBER_SIZE_EXCEPTION_MESSAGE)
+                return null
+            }
+            val numbers = input.split(LOTTO_NUMBERS_SPLIT_UNIT)
+                .mapNotNull { it.trim().toIntOrNull() }
+            if (numbers.size != 6) {
+                println(LottoTicket.LOTTO_NUMBER_SIZE_EXCEPTION_MESSAGE)
+                return null
+            }
+            manualTickets.add(numbers)
+        }
+        return manualTickets
     }
 
     fun askBonusNumber(): Int {
