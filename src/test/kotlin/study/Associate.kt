@@ -2,7 +2,6 @@ package study
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.LottoNumber
 
 class Associate : DescribeSpec({
     describe("associateWith") {
@@ -70,16 +69,6 @@ class Associate : DescribeSpec({
                 groupBy[0] shouldBe listOf(2, 4, 6, 8)
                 groupBy[1] shouldBe listOf(1, 3, 5, 7, 9)
             }
-        }
-    }
-
-    describe("LottoNumber with associateWith") {
-        it("test") {
-            val numbers: Map<Int, LottoNumber> = (1..45).associateWith(::LottoNumber)
-            numbers[1] shouldBe LottoNumber(1)
-            numbers[2] shouldBe LottoNumber(2)
-            numbers[3] shouldBe LottoNumber(3)
-            numbers[4] shouldBe LottoNumber(4)
         }
     }
 })
