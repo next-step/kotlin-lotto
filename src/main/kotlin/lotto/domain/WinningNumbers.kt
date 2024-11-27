@@ -1,13 +1,18 @@
 package lotto.domain
 
 class WinningNumbers(
-    val numbers: LottoNumbers,
+    val winningNumbers: LottoNumbers,
+    val bonusnumber: LottoNumber,
 ) {
+    init {
+        require(!winningNumbers.containNumber(bonusnumber.number)) { "Bonus must not in winningNumbers" }
+    }
+
     fun matchNumbers(lotto: Lotto): Int {
         return lotto.numbers.lottoNumbers.filter { isInWinningNumbers(it) }.size
     }
 
     private fun isInWinningNumbers(number: LottoNumber): Boolean {
-        return numbers.lottoNumbers.map { it.number }.contains(number.number)
+        return winningNumbers.containNumber(number.number)
     }
 }

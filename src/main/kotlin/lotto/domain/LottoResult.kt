@@ -2,19 +2,17 @@ package lotto.domain
 
 class LottoResult(
     val lottos: Lottos,
-    val lottoMatchMap: LottoMatchMap,
-    val profitRate: Double,
+    val lottoOutcome: LottoOutcome,
 ) {
     companion object {
         fun getLottoResult(
-            lottos: Lottos,
+            lottoCustomerInput: LottoCustomerInput,
             winningNumbers: WinningNumbers,
-            bonusNumber: Int,
+            lottoNumberGenerator: LottoNumberGenerator = RandomLottoNumberGenerator(),
         ): LottoResult {
-            val lottoMatchMap = LottoMatchMap.getLottoMatchMap(lottos, winningNumbers, bonusNumber)
-            val profitRate = lottoMatchMap.getProfitRate()
-
-            return LottoResult(lottos, lottoMatchMap, profitRate)
+            val lottoSeller = LottoSeller(lottoNumberGenerator)
+            val lottos = lottoSeller.sellLottos(lottoCustomerInput)
+            return LottoResult(lottos, LottoOutcome.of(lottos, winningNumbers))
         }
     }
 }

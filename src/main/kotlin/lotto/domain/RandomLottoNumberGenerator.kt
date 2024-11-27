@@ -6,6 +6,6 @@ import lotto.domain.Lotto.Companion.NUMBER_OF_NUMBER
 
 class RandomLottoNumberGenerator : LottoNumberGenerator {
     override fun getLottoNumbers(): LottoNumbers {
-        return LottoNumbers((MINIMUM_NUMBER..MAXIMUM_NUMBER).shuffled().subList(0, NUMBER_OF_NUMBER).sorted().map { LottoNumber(it) })
+        return LottoNumbers((MINIMUM_NUMBER..MAXIMUM_NUMBER).shuffled().subList(0, NUMBER_OF_NUMBER).map { LottoNumber(it) }.toSet())
     }
 }

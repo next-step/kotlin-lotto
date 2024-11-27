@@ -1,26 +1,32 @@
 package lotto.view
 
 import lotto.domain.Lotto
+import lotto.domain.LottoRankMatchMap
 import lotto.domain.LottoResult
 
-class LottoView {
-    companion object {
-        fun drawLottos(lottoResult: LottoResult) {
-            lottoResult.lottos.drawLottos()
-        }
+object LottoView {
+    fun drawLottos(lottoResult: LottoResult) {
+        lottoResult.lottos.lottos.forEach { drawLotto(it) }
+    }
 
-        fun drawLotto(lotto: Lotto) {
-            println(lotto.numbers.lottoNumbers.map { it.number }.joinToString(prefix = "[", postfix = "]", separator = ","))
-        }
+    fun drawMatchMap(lottoResult: LottoResult) {
+        println("당첨 통계")
+        println("---------")
+        drawMatchMap(lottoResult.lottoOutcome.lottoRankMatchMap)
+    }
 
-        fun drawResultMap(lottoResult: LottoResult) {
-            println("당첨 통계")
-            println("---------")
-            lottoResult.lottoMatchMap.drawMatchMap()
-        }
+    fun drawProfitRate(lottoResult: LottoResult) {
+        println(
+            "총 수익률은 ${lottoResult.lottoOutcome.lottoProfitRate.profitRate}입니다. " +
+                lottoResult.lottoOutcome.lottoProfitRate.getProfitRateDescription(),
+        )
+    }
 
-        fun drawProfitRate(lottoResult: LottoResult) {
-            println("총 수익률은 ${lottoResult.profitRate}입니다.")
-        }
+    private fun drawLotto(lotto: Lotto) {
+        println(lotto.numbers.asJoinString())
+    }
+
+    private fun drawMatchMap(lottoRankMatchMap: LottoRankMatchMap) {
+        lottoRankMatchMap.lottoRankMatchMap.forEach { println("${it.key}등 : ${it.value}개") }
     }
 }
