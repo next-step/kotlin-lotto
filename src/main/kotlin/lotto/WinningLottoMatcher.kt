@@ -1,36 +1,19 @@
-package lotto.service
+package lotto
 
 import lotto.domain.Lotto
 import lotto.domain.LottoResult
 import lotto.domain.Order
 import lotto.domain.Rank
 import lotto.domain.WinningLotto
-import lotto.view.dto.WinningResult
-import kotlin.math.roundToInt
+import lotto.domain.WinningResult
 
-class WinningLottoService {
-    private val lottoCreator = LottoCreator()
-
-    fun createWinningLotto(
-        winningNumbers: Set<Int>,
-        bonusNumber: Int,
-    ): WinningLotto {
-        return lottoCreator.createWinningLotto(winningNumbers, bonusNumber)
-    }
-
+class WinningLottoMatcher {
     fun checkAndGetResult(
         order: Order,
         winningLotto: WinningLotto,
     ): WinningResult {
         val winningMatchCounts = aggregateLottoResult(order.lottos, winningLotto)
-        val revenue = calculateRevenue(winningMatchCounts)
-        val rate = (revenue.toDouble() / order.amount.toDouble()).roundToInt()
-
-        return WinningResult(winningMatchCounts, revenue, rate)
-    }
-
-    private fun calculateRevenue(matchCounts: List<LottoResult>): Int {
-        return matchCounts.sumOf { it.getTotalPrizeMoney() }
+        return WinningResult(winningMatchCounts, order.amount)
     }
 
     private fun aggregateLottoResult(
@@ -48,16 +31,11 @@ class WinningLottoService {
         winningLotto: WinningLotto,
     ): Map<Rank, Int> {
         val result = Rank.entries.filter { it !== Rank.MISS }.associateWith { 0 }
-        val data =
-            lottos.map {
-                Rank.findByMatchCount(
-                    winningLotto.countMatchingNumbers(it),
-                    winningLotto.matchBonusNumber(it),
-                )
-            }
+        val rankWithMatchCounts =
+            lottos.map { winningLotto.matchLotto(it) }
                 .filter { it !== Rank.MISS }
                 .groupBy { it }
                 .mapValues { (_, values) -> values.size }
-        return result.mapValues { (rank, count) -> data[rank] ?: count }
+        return result.mapValues { (rank, count) -> rankWithMatchCounts[rank] ?: count }
     }
 }
