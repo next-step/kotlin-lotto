@@ -12,6 +12,10 @@ data class WinningLotto(
         return lottoNumbers.countMatchedNumber(other.lottoNumbers)
     }
 
+    fun isMatchBonus(other: Lotto): Boolean {
+        return other.lottoNumbers.containsNumber(bonus)
+    }
+
     companion object {
         fun create(
             numbers: Set<Int>,
@@ -19,7 +23,7 @@ data class WinningLotto(
         ): WinningLotto {
             return WinningLotto(
                 lottoNumbers = LottoNumbers.from(numbers),
-                bonus = LottoNumber(bonus)
+                bonus = LottoNumber(bonus),
             )
         }
     }
