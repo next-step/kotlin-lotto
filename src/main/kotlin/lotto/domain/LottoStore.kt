@@ -1,16 +1,14 @@
 package lotto.domain
 
 class LottoStore {
-    fun calculateLottoCount(amount: Int): Int {
-        require(amount >= LOTTO_PRICE) { "구입 금액은 최소 1000원 이상이어야 합니다." }
-        return amount / LOTTO_PRICE
-    }
-
     fun issueLottos(
-        count: Int,
+        manualLottos: List<Lotto>,
+        purchasedLottoCount: Int,
         generator: LottoNumberGenerator,
     ): PurchasedLottos {
-        return PurchasedLottos(List(count) { Lotto(generator.generate()) })
+        val autoCount = purchasedLottoCount - manualLottos.size
+        val autoLottos = List(autoCount) { Lotto(generator.generate()) }
+        return PurchasedLottos(manualLottos + autoLottos)
     }
 
     companion object {

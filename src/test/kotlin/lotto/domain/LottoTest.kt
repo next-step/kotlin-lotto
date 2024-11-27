@@ -13,13 +13,13 @@ class LottoTest : BehaviorSpec({
             row(setOf(21, 24, 13, 41, 5, 6), listOf(5, 6, 13, 21, 24, 41)),
         ) { input, expected ->
             When("로또 번호를 생성") {
-                val lotto = Lotto(input)
+                val lotto = Lotto.from(input)
                 Then("로또 번호는 6개이다") {
                     lotto.numbers.size shouldBe 6
                 }
 
                 Then("모든 번호는 1부터 45 사이여야 한다") {
-                    lotto.numbers.all { it in 1..45 } shouldBe true
+                    lotto.numbers.all { it.value in 1..45 } shouldBe true
                 }
 
                 Then("중복된 번호는 없어야 한다") {
@@ -27,7 +27,7 @@ class LottoTest : BehaviorSpec({
                 }
 
                 Then("로또 번호는 오름차순으로 정렬되어 있다") {
-                    lotto.numbers shouldBe expected
+                    lotto.numbers shouldBe expected.map { LottoNumber.of(it) }
                 }
             }
         }
@@ -43,7 +43,7 @@ class LottoTest : BehaviorSpec({
             ) { invalidNumbers, expectedMessage ->
                 val exception =
                     shouldThrow<IllegalArgumentException> {
-                        Lotto(invalidNumbers)
+                        Lotto.from(invalidNumbers)
                     }
                 Then("예외가 발생한다") {
                     exception.message shouldBe expectedMessage
@@ -52,14 +52,14 @@ class LottoTest : BehaviorSpec({
         }
     }
     Given("로또 번호가 주어졌을 때") {
-        val lotto = Lotto(setOf(1, 2, 3, 4, 5, 6))
+        val lotto = Lotto.from(setOf(1, 2, 3, 4, 5, 6))
 
         forAll(
-            row(setOf(1, 2, 3, 7, 8, 9), 3),
-            row(setOf(1, 2, 3, 4, 5, 6), 6),
-            row(setOf(7, 8, 9, 10, 11, 12), 0),
-            row(setOf(1, 2, 3, 4, 5), 5),
-            row(emptySet<Int>(), 0),
+            row(setOf(1, 2, 3, 7, 8, 9).map { LottoNumber.of(it) }.toSet(), 3),
+            row(setOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) }.toSet(), 6),
+            row(setOf(7, 8, 9, 10, 11, 12).map { LottoNumber.of(it) }.toSet(), 0),
+            row(setOf(1, 2, 3, 4, 5).map { LottoNumber.of(it) }.toSet(), 5),
+            row(emptySet<LottoNumber>(), 0),
         ) { winningNumbers, expectedMatchCount ->
             When("당첨 번호가 ${winningNumbers}인 경우") {
                 val matchCount = lotto.matchCount(winningNumbers)

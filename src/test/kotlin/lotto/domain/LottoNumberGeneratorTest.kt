@@ -15,7 +15,7 @@ class LottoNumberGeneratorTest : BehaviorSpec({
             }
 
             Then("모든 번호는 1부터 45 사이여야 한다") {
-                numbers.all { it in 1..45 } shouldBe true
+                numbers.all { it.value in 1..45 } shouldBe true
             }
 
             Then("중복된 번호는 없어야 한다") {

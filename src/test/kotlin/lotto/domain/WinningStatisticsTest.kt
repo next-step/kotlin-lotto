@@ -7,15 +7,15 @@ import java.math.RoundingMode
 
 class WinningStatisticsTest : BehaviorSpec({
     Given("구입한 로또와 당첨 번호가 주어졌을 때") {
-        val validWinningLotto = Lotto(setOf(1, 2, 3, 4, 5, 6))
+        val validWinningLotto = Lotto.from(setOf(1, 2, 3, 4, 5, 6))
         val winningLotto = WinningLotto(validWinningLotto, BonusNumber.create(7, validWinningLotto))
         val purchasedLottos =
             PurchasedLottos(
                 listOf(
-                    Lotto(setOf(1, 2, 3, 4, 5, 6)),
-                    Lotto(setOf(1, 2, 3, 4, 7, 8)),
-                    Lotto(setOf(1, 2, 3, 7, 8, 9)),
-                    Lotto(setOf(7, 8, 9, 10, 11, 12)),
+                    Lotto.from(setOf(1, 2, 3, 4, 5, 6)),
+                    Lotto.from(setOf(1, 2, 3, 4, 7, 8)),
+                    Lotto.from(setOf(1, 2, 3, 7, 8, 9)),
+                    Lotto.from(setOf(7, 8, 9, 10, 11, 12)),
                 ),
             )
         val winningStatistics = WinningStatistics(winningLotto)
@@ -37,15 +37,15 @@ class WinningStatisticsTest : BehaviorSpec({
     }
 
     Given("구입한 로또 개수와 당첨 번호가 주어졌을 때") {
-        val validWinningLotto = Lotto(setOf(1, 2, 3, 4, 5, 6))
+        val validWinningLotto = Lotto.from(setOf(1, 2, 3, 4, 5, 6))
         val winningLotto = WinningLotto(validWinningLotto, BonusNumber.create(7, validWinningLotto))
         val purchasedLottos =
             PurchasedLottos(
                 listOf(
-                    Lotto(setOf(1, 2, 3, 7, 15, 16)),
-                    Lotto(setOf(1, 2, 3, 14, 17, 18)),
-                    Lotto(setOf(11, 21, 31, 7, 8, 9)),
-                    Lotto(setOf(7, 8, 9, 10, 11, 12)),
+                    Lotto.from(setOf(1, 2, 3, 7, 15, 16)),
+                    Lotto.from(setOf(1, 2, 3, 14, 17, 18)),
+                    Lotto.from(setOf(11, 21, 31, 7, 8, 9)),
+                    Lotto.from(setOf(7, 8, 9, 10, 11, 12)),
                 ),
             )
         val winningStatistics =
