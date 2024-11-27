@@ -12,6 +12,10 @@ data class Lottos(val values: List<Lotto>) {
         return values.map { Rank.match(it.match(otherLotto), isBonus) }
     }
 
+    fun merge(other: Lottos): Lottos {
+        return Lottos(values + other.values)
+    }
+
     companion object {
         private val TICKET_PRICE: Amount = Amount(1000)
     }
