@@ -14,15 +14,6 @@ class User(private var amount: Amount) {
         amount = amount.minus(autoLottos.totalAmount)
     }
 
-    fun statistics(
-        lastNumbers: Lotto,
-        bonusNumber: LottoNumber,
-    ): LottoStatistics {
-        val isBonus = lastNumbers.contains(bonusNumber)
-        val ranks: Ranks = Ranks.fromGroupBy(totalLottos.match(lastNumbers, isBonus))
-        return LottoStatistics(ranks, totalBuyAmount)
-    }
-
     fun match(
         lastWeekNumbers: Lotto,
         bonus: Boolean,
