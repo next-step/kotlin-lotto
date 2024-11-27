@@ -1,4 +1,4 @@
-package additioncalculator
+package additioncalculator.domain
 
 import additioncalculator.domain.Numbers
 import io.kotest.matchers.shouldBe
