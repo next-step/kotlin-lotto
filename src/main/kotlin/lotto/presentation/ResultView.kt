@@ -25,8 +25,9 @@ object ResultView {
         stringBuffer.append(STR_NEW_LINE)
         stringBuffer.append(STR_SEPARATOR)
         stringBuffer.append(STR_NEW_LINE)
-        winningStatistics.rank.filter { (it.key != WinningRank.RANK0) }
-            .forEach {
+
+        winningStatistics.winningRankCount.filter { (it.key != WinningRank.RANK0) }
+            .map {
                 stringBuffer.append(it.key.winningCount)
                 stringBuffer.append(STR_MATCH)
                 stringBuffer.append(it.key.winningAmount)
