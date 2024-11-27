@@ -4,9 +4,6 @@ import additioncalculator.domain.DelimiterScanner.DELIMITER_TEXT_NOT_EMPTY_MESSA
 import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestInstance
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.EmptySource
 import java.lang.IllegalArgumentException
 
 class DelimiterScannerTest {
@@ -16,6 +13,7 @@ class DelimiterScannerTest {
             DelimiterScanner.findDelimiters(inputText = "")
         }
     }
+
     @Test
     fun `기본 구분자 쉼표(,)를 찾아낼 수 있다`() {
         val findDelimiters = DelimiterScanner.findDelimiters(inputText = "1,2,3,4,5")
