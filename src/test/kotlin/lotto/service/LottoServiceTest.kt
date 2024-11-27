@@ -8,14 +8,16 @@ import lotto.domain.LottoRank
 
 class LottoServiceTest : StringSpec({
     val lottoPurchasingMachineService = LottoService(LottoPurchasingMachine(14000))
+    val totalTicketCount = 14
+    val manualTicketCount = 4
 
-    "구매한 개수만큼 로또를 발급해야 한다." {
-        val lottoList = lottoPurchasingMachineService.lottoIssuance().map { it.lottoNumbers }
-        lottoList.size shouldBe 14
+    "구매한 개수 중에 수동으로 구매한 수량을 제외한 나머지 수량만큼 자동으로 로또를 생성한다." {
+        val lottoList = lottoPurchasingMachineService.lottoIssuance(totalTicketCount, manualTicketCount).map { it.lottoNumbers }
+        lottoList.size shouldBe 10
     }
 
     "수익률을 계산해야 한다. (당첨 금액 / 구매 금액 의 소수점 둘째자리까지 버림)" {
-        val lottoTickets = lottoPurchasingMachineService.lottoIssuance()
+        val lottoTickets = lottoPurchasingMachineService.lottoIssuance(totalTicketCount, manualTicketCount)
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
         val bonusNumber = BonusNumber(7)
 
