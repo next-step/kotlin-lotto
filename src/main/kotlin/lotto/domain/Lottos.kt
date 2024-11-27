@@ -1,12 +1,12 @@
 package lotto.domain
 
 data class Lottos(
-    val lottos: List<Lotto>,
+    val lottos: List<DefaultLotto>,
 ) {
     val quantity: Int = lottos.size
 
-    fun match(winningLotto: Lotto): Results {
-        val results = lottos.map { Result.of(it.compare(winningLotto)) }
+    fun match(winningLotto: WinningLotto): Results {
+        val results = lottos.map(winningLotto::compare)
         return Results(results)
     }
 }

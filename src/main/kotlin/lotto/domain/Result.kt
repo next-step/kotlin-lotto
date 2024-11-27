@@ -1,40 +1,53 @@
 package lotto.domain
 
 enum class Result(
-    private val predicateCount: (Int) -> Boolean,
+    private val predicateResult: (Int, Boolean) -> Boolean,
+    val needBonus: Boolean = false,
     val count: Int,
-    val prize: Int,
+    val prize: Money,
 ) {
     FIRST(
-        predicateCount = { it == FIRST.count },
+        predicateResult = { count, _ -> count == FIRST.count },
         count = 6,
-        prize = 2_000_000_000,
+        prize = Money(2_000_000_000),
     ),
     SECOND(
-        predicateCount = { it == SECOND.count },
+        predicateResult = { count, isBonus -> count == SECOND.count && isBonus },
+        needBonus = true,
         count = 5,
-        prize = 15_000_000,
+        prize = Money(30_000_000),
     ),
     THIRD(
-        predicateCount = { it == THIRD.count },
-        count = 4,
-        prize = 50_000,
+        predicateResult = { count, isBonus -> count == THIRD.count && !isBonus },
+        count = 5,
+        prize = Money(1_500_000),
     ),
     FOURTH(
-        predicateCount = { it == FOURTH.count },
+        predicateResult = { count, _ -> count == FOURTH.count },
+        count = 4,
+        prize = Money(50_000),
+    ),
+    FIFTH(
+        predicateResult = { count, _ -> count == FIFTH.count },
         count = 3,
-        prize = 5_000,
+        prize = Money(5_000),
     ),
     MISS(
-        predicateCount = { it < FOURTH.count },
+        predicateResult = { count, _ -> count < MISS.count },
         count = 3,
-        prize = 0,
+        prize = Money(0),
     ),
     ;
 
     companion object {
-        fun of(count: Int): Result =
-            entries.firstOrNull { it.predicateCount(count) }
-                ?: throw IllegalArgumentException()
+        private const val MAX_COUNT = 6
+
+        fun of(
+            count: Int,
+            matchBonus: Boolean = false,
+        ): Result {
+            require(count <= MAX_COUNT) { "로또 번호는 6개를 초과할 수 없습니다." }
+            return entries.first { it.predicateResult(count, matchBonus) }
+        }
     }
 }

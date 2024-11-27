@@ -9,15 +9,14 @@ import io.kotest.matchers.shouldBe
 class ResultTest : StringSpec({
     "당첨 결과를 계산한다" {
         forAll(
-            row(6, Result.FIRST, 2_000_000_000),
-            row(5, Result.SECOND, 15_000_000),
-            row(4, Result.THIRD, 50_000),
-            row(3, Result.FOURTH, 5_000),
-            row(2, Result.MISS, 0),
-            row(1, Result.MISS, 0),
-            row(0, Result.MISS, 0),
-        ) { count, result, prize ->
-            Result.of(count) shouldBe result
+            row(6, false, Result.FIRST, Money(2_000_000_000)),
+            row(5, true, Result.SECOND, Money(30_000_000)),
+            row(5, false, Result.THIRD, Money(1_500_000)),
+            row(4, false, Result.FOURTH, Money(50_000)),
+            row(3, false, Result.FIFTH, Money(5_000)),
+            row(2, false, Result.MISS, Money(0)),
+        ) { count, isBonus, result, prize ->
+            Result.of(count, isBonus) shouldBe result
             result.prize shouldBe prize
         }
     }

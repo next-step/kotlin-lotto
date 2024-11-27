@@ -1,30 +1,20 @@
 package lotto.domain
 
+import java.util.EnumMap
+
 data class LottoResult(
-    val results: Results,
+    private val results: Results,
     val incomeRate: IncomeRate,
 ) {
-    val first: Int
-        get() = results.countByResult(Result.FIRST)
-
-    val second: Int
-        get() = results.countByResult(Result.SECOND)
-
-    val third: Int
-        get() = results.countByResult(Result.THIRD)
-
-    val fourth: Int
-        get() = results.countByResult(Result.FOURTH)
-
-    val miss: Int
-        get() = results.countByResult(Result.MISS)
-
-    val totalWinningCount: Int
-        get() = first + second + third + fourth
-
     val prize: Money
         get() = results.prize
 
     val incomeRateValue: Double
         get() = incomeRate.value
+
+    val ranks: EnumMap<Result, Int>
+        get() {
+            val resultCountMap = Result.entries.associateWith(results::countByResult)
+            return EnumMap(resultCountMap)
+        }
 }
