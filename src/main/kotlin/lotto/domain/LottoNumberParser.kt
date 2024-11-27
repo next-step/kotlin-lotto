@@ -1,8 +1,8 @@
 package lotto.domain
 
-import lotto.domain.Lotto.Companion.LOTTO_MAX_NUMBER
-import lotto.domain.Lotto.Companion.LOTTO_MIN_NUMBER
 import lotto.domain.Lotto.Companion.LOTTO_NUMBERS_COUNT
+import lotto.domain.LottoNumber.Companion.LOTTO_MAX_NUMBER
+import lotto.domain.LottoNumber.Companion.LOTTO_MIN_NUMBER
 
 object LottoNumberParser {
     fun parse(input: String): List<Int> {
