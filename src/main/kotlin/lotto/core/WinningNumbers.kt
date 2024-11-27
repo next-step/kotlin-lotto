@@ -3,40 +3,13 @@ package lotto.core
 import lotto.core.constant.LottoConstants
 
 data class WinningNumbers(val winningNumbers: List<Int>) {
-    constructor(winningNumbers: String) : this(splitNumbers(winningNumbers))
-
-    companion object {
-        private fun splitNumbers(winningNumbers: String): List<Int> {
-
-            val numberList = winningNumbers.split(DELIMITER)
-            if (numberList.size < LottoConstants.LOTTO_NUMBER_COUNT) {
-                throw RuntimeException()
-            }
-
-            val numbers = transformNumbers(numberList)
-            checkInsideLottoNumber(numbers)
-            checkDuplicates(numbers)
-            return numbers
+    init {
+        if (winningNumbers.size != LottoConstants.LOTTO_NUMBER_COUNT) {
+            throw IllegalArgumentException("당첨 번호의 숫자가 잘못되었습니다.")
         }
+    }
 
-        private fun transformNumbers(numberList: List<String>): List<Int> {
-            return numberList.map { number -> number.trim().toIntOrNull() ?: throw RuntimeException() }
-        }
-
-        private fun checkDuplicates(list: List<Int>) {
-            if (list.size != list.toSet().size) {
-                throw RuntimeException()
-            }
-        }
-
-        private fun checkInsideLottoNumber(numbers: List<Int>) {
-            numbers.forEach {
-                if (it < LottoConstants.LOTTO_NUMBER_MIN || LottoConstants.LOTTO_NUMBER_MAX < it) {
-                    throw RuntimeException()
-                }
-            }
-        }
-
-        private const val DELIMITER = ","
+    fun countCommonNumbers(lotto: Lotto): Int {
+        return winningNumbers.filter { it in lotto.numbers }.size
     }
 }
