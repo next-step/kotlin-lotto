@@ -4,10 +4,11 @@ import java.lang.RuntimeException
 
 class NumberSplit(private val text: String?) {
     fun splitNumberResult(): Numbers {
-        if(text.isNullOrEmpty()) return Numbers(listOf())
-        if(text.toIntOrNull() != null && text.toIntOrNull()!! < NUMBER_MINIMUM)
+        if (text.isNullOrEmpty()) return Numbers(listOf())
+        if (text.toIntOrNull() != null && text.toIntOrNull()!! < NUMBER_MINIMUM) {
             throw RuntimeException(INVALID_NEGATIVE_MESSAGE)
-        if(text.toIntOrNull() != null ) return Numbers(listOf(text.toInt()))
+        }
+        if (text.toIntOrNull() != null) return Numbers(listOf(text.toInt()))
         val delimiters: List<String> = Delimiters(text).findDelimiters()
         val transferText: String = text.replace(Regex(REPLACE_CUSTOM_DELIMITER_REGEX_PATTERN), "")
         return Numbers(splitTextsToInts(transferText.split(*delimiters.toTypedArray())))
@@ -20,7 +21,7 @@ class NumberSplit(private val text: String?) {
     private fun nullCheckTextToInt(text: String): Int {
         val numberOrNull: Int? = text.toIntOrNull()
         requireNotNull(numberOrNull) { INVALID_NUMBER_TRANSFER }
-        if(numberOrNull < NUMBER_MINIMUM) throw RuntimeException(INVALID_NEGATIVE_MESSAGE)
+        if (numberOrNull < NUMBER_MINIMUM) throw RuntimeException(INVALID_NEGATIVE_MESSAGE)
         return numberOrNull
     }
 
