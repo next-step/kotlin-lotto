@@ -7,14 +7,14 @@ import study.lotto.model.Rank
 /**
  * @author 이상준
  */
-class RankTest: StringSpec({
+class RankTest : StringSpec({
     "Rank SECOND 테스트" {
-        val second = Rank.findPrize(5, true)
+        val second = Rank.findRank(5, true)
 
         second shouldBe Rank.SECOND
     }
     "Rank THIRD 테스트" {
-        val third = Rank.findPrize(5, false)
+        val third = Rank.findRank(5, false)
 
         third shouldBe Rank.THIRD
     }

@@ -1,42 +1,43 @@
 package study.lotto.view
 
-import study.lotto.model.Lotto
-import study.lotto.model.LottoStat
+import study.lotto.model.LottoStats
+import study.lotto.model.Lottos
 import study.lotto.model.Rank
 
 /**
  * @author 이상준
  */
 class ResultView {
-    fun printLotto(result: List<Lotto>) {
-        result.forEach {
+    fun printLotto(lottos: Lottos) {
+        lottos.getLottos().forEach {
             println(it.lottoNumbers)
         }
     }
 
-    fun printLottoCount(result: List<Lotto>) {
-        println("${result.size}개를 구매했습니다.")
+    fun printLottoCount(lottos: Lottos) {
+        println(PURCHASE_MESSAGE.format(lottos.lottoCount()))
     }
 
-    fun printWinLotto(statSet: Set<LottoStat>) {
-        println("당첨 통계")
+    fun printWinLotto(lottoStats: LottoStats) {
+        println(WINNER_STAT_MESSAGE)
         println("---------")
-        statSet.filter {
-            it.lottoPrize != Rank.MISS
+        lottoStats.getStat().filter {
+            it.rank != Rank.MISS
         }.forEach {
-            val bonusMessage = if (it.lottoPrize == Rank.SECOND) BONUS_MATCH_MESSAGE else " "
-            println("${it.lottoPrize.prize}개 일치${bonusMessage}(${it.lottoPrize.amount})원 - ${it.count}개")
+            val bonusMessage = if (it.rank == Rank.SECOND) BONUS_MATCH_MESSAGE else " "
+            println(WINNER_STAT_RESULT_MESSAGE.format(it.rank.countOfMatch, bonusMessage, it.rank.amount, it.count))
         }
     }
 
     fun printProfit(lottoProfit: Double) {
-        println("총 수익률은 $lottoProfit% 입니다.")
+        println(PROFIT_MESSAGE.format(lottoProfit))
     }
 
     companion object {
-        const val BONUS_MATCH_MESSAGE = ", 보너스 볼 일치"
-        const val WINNER_STAT_MESSAGE = "당첨 통계"
-        const val MIN_LOTTO_NUMBER = 1
-        const val MAX_LOTTO_NUMBER = 45
+        private const val BONUS_MATCH_MESSAGE = ", 보너스 볼 일치"
+        private const val WINNER_STAT_MESSAGE = "당첨 통계"
+        private const val WINNER_STAT_RESULT_MESSAGE = "%s 개 일치 %s(%s) - %s개"
+        private const val PURCHASE_MESSAGE = "%s개를 구매했습니다."
+        private const val PROFIT_MESSAGE = "총 수익률은 %s%% 입니다."
     }
 }

@@ -3,7 +3,7 @@ package study.lotto.model
 /**
  * @author 이상준
  */
-enum class Rank(val prize: Int, val amount: Int) {
+enum class Rank(val countOfMatch: Int, val amount: Int) {
     MISS(0, 0),
     FIFTH(3, 5_000),
     FOURTH(4, 50_000),
@@ -13,14 +13,17 @@ enum class Rank(val prize: Int, val amount: Int) {
     ;
 
     companion object {
-        fun findPrize(prize: Int, matchBonus: Boolean = false): Rank {
-            return entries.find { it.prize == prize }?.let {
-                if (it == THIRD && matchBonus) {
+        fun findRank(
+            countOfMatch: Int,
+            matchBonus: Boolean = false,
+        ): Rank? {
+            return entries.find { it.countOfMatch == countOfMatch }?.let {
+                if (it.countOfMatch == SECOND.countOfMatch && matchBonus) {
                     SECOND
                 } else {
                     it
                 }
-            } ?: MISS
+            }
         }
     }
 }

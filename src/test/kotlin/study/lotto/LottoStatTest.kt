@@ -2,8 +2,8 @@ package study.lotto
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import study.lotto.model.Rank
 import study.lotto.model.LottoStat
+import study.lotto.model.Rank
 
 /**
  * @author 이상준
@@ -22,5 +22,4 @@ class LottoStatTest : StringSpec({
 
         lottoStat.count shouldBe 2
     }
-
 })
