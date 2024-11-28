@@ -1,6 +1,6 @@
 package lotto.domain
 
-data class Lottos(
+class Lottos private constructor(
     val lottos: List<DefaultLotto>,
 ) {
     val quantity: Int = lottos.size
@@ -8,5 +8,14 @@ data class Lottos(
     fun match(winningLotto: WinningLotto): Results {
         val results = lottos.map(winningLotto::compare)
         return Results(results)
+    }
+
+    companion object {
+        fun from(
+            autoLottos: List<DefaultLotto>,
+            manualLottos: List<DefaultLotto> = emptyList(),
+        ): Lottos {
+            return Lottos(autoLottos + manualLottos)
+        }
     }
 }
