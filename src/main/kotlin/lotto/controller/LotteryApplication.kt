@@ -10,6 +10,7 @@ import lotto.view.ResultView
 
 fun main() {
     val purchaseAmount = Money(InputView.inputPurchaseAmount())
+    InputView.inputManualTicketCount()
     val tickets = TicketMachine.exchange(purchaseAmount)
     ResultView.printTicketCount(tickets)
 
