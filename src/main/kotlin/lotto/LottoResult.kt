@@ -2,13 +2,13 @@ package lotto
 
 sealed class LottoResult {
     sealed class SuccessStep<out T>(val data: T) : LottoResult() {
-        data class InputAmountStep(val amount: Amount) : SuccessStep<Amount>(amount)
+        data class InputAmountStep(val amount: ViewAmount) : SuccessStep<ViewAmount>(amount)
 
-        data class InputManualStep(val manual: Lottos) : SuccessStep<Lottos>(manual)
+        data class InputManualStep(val manual: ViewManual) : SuccessStep<ViewManual>(manual)
 
-        data class InputLastWeekNumbersStep(val lastWeekNumbers: Lotto) : SuccessStep<Lotto>(lastWeekNumbers)
+        data class InputLastWeekNumbersStep(val lastWeekNumbers: ViewLastWeekNumbers) : SuccessStep<ViewLastWeekNumbers>(lastWeekNumbers)
 
-        data class InputBonusNumberStep(val bonusNumber: LottoNumber) : SuccessStep<LottoNumber>(bonusNumber)
+        data class InputBonusNumberStep(val bonusNumber: ViewBonusNumber) : SuccessStep<ViewBonusNumber>(bonusNumber)
     }
 
     sealed class Error(val message: String) : LottoResult() {

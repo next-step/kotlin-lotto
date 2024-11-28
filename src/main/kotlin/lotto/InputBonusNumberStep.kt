@@ -1,13 +1,12 @@
 package lotto
 
-class InputBonusNumberStep(val inputProvider: () -> String? = { readln() }) : LottoViewStep<LottoNumber>() {
+class InputBonusNumberStep(val inputProvider: () -> String? = { readln() }) : LottoViewStep<ViewBonusNumber>() {
     override fun apply(lottoMachine: LottoMachine): LottoResult {
         return try {
             println("보너스 볼을 입력해 주세요.")
             val bonusNumber = read()
 
-            val lottoNumber = lottoMachine.createLottoNumber(bonusNumber)
-            LottoResult.SuccessStep.InputBonusNumberStep(lottoNumber)
+            LottoResult.SuccessStep.InputBonusNumberStep(bonusNumber.toInt())
         } catch (e: Exception) {
             LottoResult.Error.CustomError("입력 오류: ${e.message}")
         }

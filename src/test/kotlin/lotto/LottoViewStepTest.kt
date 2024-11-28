@@ -10,7 +10,7 @@ class LottoViewStepTest {
 
         val actual = inputAmountStep.apply(lottoMachine = LottoMachine())
 
-        assertThat(actual).isEqualTo(LottoResult.SuccessStep.InputAmountStep(Amount(1_000)))
+        assertThat(actual).isEqualTo(LottoResult.SuccessStep.InputAmountStep(1_000))
     }
 
     @Test
@@ -20,7 +20,7 @@ class LottoViewStepTest {
 
         val actual = inputManualStep.apply(lottoMachine = LottoMachine())
 
-        val expected = LottoResult.SuccessStep.InputManualStep(Lottos(listOf(Lotto(listOf(1, 2, 3, 4, 5, 6)))))
+        val expected = LottoResult.SuccessStep.InputManualStep(listOf(listOf(1, 2, 3, 4, 5, 6)))
         assertThat(actual).isEqualTo(expected)
     }
 
@@ -31,7 +31,7 @@ class LottoViewStepTest {
 
         val actual = inputLastWeekStep.apply(lottoMachine = LottoMachine())
 
-        val expected = LottoResult.SuccessStep.InputLastWeekNumbersStep(Lotto(listOf(1, 2, 3, 4, 5, 6)))
+        val expected = LottoResult.SuccessStep.InputLastWeekNumbersStep(listOf(1, 2, 3, 4, 5, 6))
         assertThat(actual).isEqualTo(expected)
     }
 
@@ -41,6 +41,6 @@ class LottoViewStepTest {
 
         val actual = inputBonusStep.apply(lottoMachine = LottoMachine())
 
-        assertThat(actual).isEqualTo(LottoResult.SuccessStep.InputBonusNumberStep(LottoNumber(1)))
+        assertThat(actual).isEqualTo(LottoResult.SuccessStep.InputBonusNumberStep(1))
     }
 }

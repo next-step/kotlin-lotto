@@ -1,16 +1,24 @@
 package lotto
 
-class InputManualBuyStep(val inputProvider: () -> String? = { readln() }) : LottoViewStep<Lottos>() {
+class InputManualBuyStep(val inputProvider: () -> String? = { readln() }) : LottoViewStep<ViewManual>() {
     override fun apply(lottoMachine: LottoMachine): LottoResult {
         return try {
             println("수동으로 구매할 로또 수를 입력해 주세요.")
             val manualLottoCount = read().toIntOrNull() ?: throw IllegalArgumentException("Invalid input")
             println("수동으로 구매할 번호를 입력해 주세요.")
 
-            val manualLottos = lottoMachine.createManualLottos(manualLottoCount) { readCsvToInt() }
-            LottoResult.SuccessStep.InputManualStep(manualLottos)
+            LottoResult.SuccessStep.InputManualStep(createManualLottos(manualLottoCount) { readCsvToInt() })
         } catch (e: Exception) {
             LottoResult.Error.CustomError("입력 오류: ${e.message}")
+        }
+    }
+
+    private fun createManualLottos(
+        manualLottoCount: Int,
+        apply: () -> List<Int>,
+    ): ViewManual {
+        return List(manualLottoCount) {
+            apply()
         }
     }
 

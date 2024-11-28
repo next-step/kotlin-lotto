@@ -1,13 +1,11 @@
 package lotto
 
-class InputLastWeekNumbersStep(val inputProvider: () -> String? = { readln() }) : LottoViewStep<Lotto>() {
+class InputLastWeekNumbersStep(val inputProvider: () -> String? = { readln() }) : LottoViewStep<ViewLastWeekNumbers>() {
     override fun apply(lottoMachine: LottoMachine): LottoResult {
         return try {
             println("지난 주 당첨 번호를 입력해 주세요.")
-            val numbers = readCsvToInt()
 
-            val lastWeekNumbers = lottoMachine.createLotto(numbers)
-            LottoResult.SuccessStep.InputLastWeekNumbersStep(lastWeekNumbers)
+            LottoResult.SuccessStep.InputLastWeekNumbersStep(readCsvToInt())
         } catch (e: Exception) {
             LottoResult.Error.CustomError("입력 오류: ${e.message}")
         }
