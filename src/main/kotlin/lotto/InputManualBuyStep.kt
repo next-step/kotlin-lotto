@@ -1,7 +1,7 @@
 package lotto
 
 class InputManualBuyStep(val inputProvider: () -> String? = { readln() }) : LottoViewStep<Lottos>() {
-    override fun apply(lottoMachine: LottoMachine): LottoResult<Lottos> {
+    override fun apply(lottoMachine: LottoMachine): LottoResult {
         return try {
             println("수동으로 구매할 로또 수를 입력해 주세요.")
             val manualLottoCount = read().toIntOrNull() ?: throw IllegalArgumentException("Invalid input")
