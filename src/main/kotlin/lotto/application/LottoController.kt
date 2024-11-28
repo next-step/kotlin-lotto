@@ -1,8 +1,6 @@
 package lotto.application
 
-import lotto.core.Lotto
 import lotto.core.LottoMarket
-import lotto.core.WinningNumbers
 import lotto.presentation.InputView
 import lotto.presentation.ResultView
 
