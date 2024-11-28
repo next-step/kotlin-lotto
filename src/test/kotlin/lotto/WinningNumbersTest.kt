@@ -25,7 +25,7 @@ class WinningNumbersTest {
     @Test
     fun matchNumbersTest() {
         val winningNumbers = WinningNumbers(LottoNumbers.of(listOf(1, 2, 3, 4, 5, 6)), LottoNumber(7))
-        val lotto = Lotto { LottoNumbers.of(listOf(1, 2, 3, 4, 5, 6)) }
+        val lotto = Lotto(LottoNumbers.of(listOf(1, 2, 3, 4, 5, 6)))
         assertThat(winningNumbers.matchNumbers(lotto)).isEqualTo(6)
     }
 }
