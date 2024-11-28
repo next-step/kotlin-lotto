@@ -21,7 +21,7 @@ data class LottoStatistics(private val ranks: Ranks, private val amount: Amount)
             lastWeekNumbers: Lotto,
             bonusNumber: LottoNumber,
         ): LottoStatistics {
-            val ranks = user.match(lastWeekNumbers, lastWeekNumbers.contains(bonusNumber))
+            val ranks = user.match(lastWeekNumbers, user.contains(bonusNumber))
 
             return LottoStatistics(ranks, user.totalBuyAmount)
         }
