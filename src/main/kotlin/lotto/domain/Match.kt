@@ -1,14 +1,14 @@
 package lotto.domain
 
+import lotto.constant.FIFTH_RANK_NUMBER
+import lotto.constant.FIRST_RANK_NUMBER
+import lotto.constant.FOURTH_RANK_NUMBER
 import lotto.constant.MATCH_COUNT_FIVE
 import lotto.constant.MATCH_COUNT_FOUR
 import lotto.constant.MATCH_COUNT_SIX
 import lotto.constant.MATCH_COUNT_THREE
-import lotto.constant.RANK_FIFTH
-import lotto.constant.RANK_FIRST
-import lotto.constant.RANK_FOURTH
-import lotto.constant.RANK_NO_PRIZE
-import lotto.constant.RANK_THIRD
+import lotto.constant.NO_RANK_NUMBER
+import lotto.constant.THIRD_RANK_NUMBER
 
 class Match {
     companion object {
@@ -25,11 +25,11 @@ class Match {
 
         private fun rank(matchCount: Int): Int {
             return when (matchCount) {
-                MATCH_COUNT_SIX -> RANK_FIRST
-                MATCH_COUNT_FIVE -> RANK_THIRD
-                MATCH_COUNT_FOUR -> RANK_FOURTH
-                MATCH_COUNT_THREE -> RANK_FIFTH
-                else -> RANK_NO_PRIZE
+                MATCH_COUNT_SIX -> FIRST_RANK_NUMBER
+                MATCH_COUNT_FIVE -> THIRD_RANK_NUMBER
+                MATCH_COUNT_FOUR -> FOURTH_RANK_NUMBER
+                MATCH_COUNT_THREE -> FIFTH_RANK_NUMBER
+                else -> NO_RANK_NUMBER
             }
         }
     }
