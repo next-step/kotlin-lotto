@@ -25,7 +25,7 @@ fun main() {
 
     val lottoResult = LottoResult.getLottoResult(lottoCustomerInput, WinningNumbers(LottoNumbers(winningNumbers), LottoNumber(bonusNumber)))
 
-    LottoView.drawLottos(lottoResult)
-    LottoView.drawMatchMap(lottoResult)
-    LottoView.drawProfitRate(lottoResult)
+    LottoView.drawLottos(lottoResult.lottos)
+    LottoView.drawMatchMap(lottoResult.lottoOutcome.lottoRankMatchMap)
+    LottoView.drawProfitRate(lottoResult.lottoOutcome.lottoProfitRate)
 }
