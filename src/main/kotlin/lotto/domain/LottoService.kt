@@ -4,8 +4,8 @@ class LottoService(
     private val lottoStore: LottoStore,
     private val incomeCalculator: IncomeCalculator,
 ) {
-    fun issue(inputMoney: Money): Lottos {
-        return lottoStore.sell(inputMoney)
+    fun issue(lottoOrder: LottoOrder): Lottos {
+        return lottoStore.sell(lottoOrder)
     }
 
     fun getResult(
