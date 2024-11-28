@@ -1,5 +1,10 @@
 package lotto
 
+typealias ManualLottos = Lottos
+typealias AutoLottos = Lottos
+typealias LastWeekNumbers = Lotto
+typealias IsBonus = Boolean
+
 class User(
     private var amount: Amount,
     private var manualLottos: Lottos = Lottos(emptyList()),
@@ -16,7 +21,7 @@ class User(
     val totalBuyAmount: Amount
         get() = totalLottos.totalAmount
 
-    fun buyManualLottos(lottos: Lottos) {
+    fun buyManualLottos(lottos: ManualLottos) {
         val requiredAmount = lottos.totalAmount
         if (amount.isLessThan(requiredAmount)) {
             throw IllegalArgumentException("수동 구매 금액이 부족합니다.")
@@ -25,14 +30,14 @@ class User(
         amount = amount.minus(requiredAmount)
     }
 
-    fun buyAutoLotto(autoMachine: (amount: Amount) -> Lottos) {
+    fun buyAutoLotto(autoMachine: (amount: Amount) -> AutoLottos) {
         autoLottos = autoMachine(amount)
         amount = amount.minus(autoLottos.totalAmount)
     }
 
     fun match(
-        lastWeekNumbers: Lotto,
-        bonus: Boolean,
+        lastWeekNumbers: LastWeekNumbers,
+        bonus: IsBonus,
     ): Ranks {
         return Ranks.fromGroupBy(totalLottos.match(lastWeekNumbers, bonus))
     }
