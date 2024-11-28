@@ -1,26 +1,25 @@
 package string_calculator
 
-interface OperandsExtractor {
-    fun extract(input: String): List<Int>
-}
+object OperandsExtractor {
+    private const val DEFAULT_DELIMITERS = ",|:"
+    private const val CUSTOM_DELIMITER_FIRST_INDICATOR = "//"
+    private const val CUSTOM_DELIMITER_SECOND_INDICATOR = "\n"
+    private val inputRegex = Regex("$CUSTOM_DELIMITER_FIRST_INDICATOR(.)$CUSTOM_DELIMITER_SECOND_INDICATOR(.*)")
 
-class OperandsExtractorImpl : OperandsExtractor {
-    override fun extract(input: String): List<Int> {
-        val (delimiters: Regex, expression: String) =
-            getExpressionInfo(input)
-
+    fun extract(input: String): List<Int> {
+        val (delimiters, expression) = getExpressionInfo(input)
         return ExpressionParser.parseToInts(expression, delimiters)
     }
 
-    private fun getExpressionInfo(input: String): Pair<Regex, String> =
+    private fun getExpressionInfo(input: String): ExpressionInfo =
         if (input.startsWith(CUSTOM_DELIMITER_FIRST_INDICATOR)) {
             val matchResult = inputRegex.find(input) ?: throw RuntimeException("커스텀 구분자 설정이 제대로 되지 않았습니다")
             val customDelimiter = matchResult.groupValues[1]
             val expression = matchResult.groupValues[2]
 
-            getCustomDelimiterRegex(customDelimiter) to expression
+            ExpressionInfo(getCustomDelimiterRegex(customDelimiter), expression)
         } else {
-            getDefaultDelimiterRegex() to input
+            ExpressionInfo(getDefaultDelimiterRegex(), input)
         }
 
     private fun getDefaultDelimiterRegex() =
@@ -28,11 +27,4 @@ class OperandsExtractorImpl : OperandsExtractor {
 
     private fun getCustomDelimiterRegex(customDelimiter: String) =
         "$customDelimiter|$DEFAULT_DELIMITERS".toRegex()
-
-    private companion object {
-        const val DEFAULT_DELIMITERS = ",|:"
-        const val CUSTOM_DELIMITER_FIRST_INDICATOR = "//"
-        const val CUSTOM_DELIMITER_SECOND_INDICATOR = "\n"
-        val inputRegex = Regex("$CUSTOM_DELIMITER_FIRST_INDICATOR(.)$CUSTOM_DELIMITER_SECOND_INDICATOR(.*)")
-    }
 }

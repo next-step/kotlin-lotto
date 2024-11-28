@@ -1,10 +1,8 @@
 package string_calculator
 
-class StringAddCalculator(
-    private val operandsExtractor: OperandsExtractor = OperandsExtractorImpl()
-) {
+class StringAddCalculator {
     fun calculate(input: String): Int {
-        val operands = operandsExtractor.extract(input)
+        val operands = OperandsExtractor.extract(input)
         return operands.sum()
     }
 }
