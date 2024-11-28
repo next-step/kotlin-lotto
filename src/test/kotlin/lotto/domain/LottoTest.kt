@@ -33,7 +33,7 @@ class LottoTest {
         val result = lotto.match(winner)
 
         val expected =
-            LottoResult.of(
+            MatchResult.of(
                 Rank.FIRST to 1,
                 Rank.SECOND to 1,
                 Rank.THIRD to 1,
