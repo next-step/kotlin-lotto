@@ -17,6 +17,8 @@ class StringAddCalculator {
                 CustomDelimiterStrategy(),
                 DefaultDelimiterStrategy()
             )
-        ).parseNumbers(input).sum()
+        ).parseNumbers(input).let {
+            Numbers.from(it).sum()
+        }
     }
 }
