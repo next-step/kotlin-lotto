@@ -1,7 +1,7 @@
 package lotto
 
 data class LottoResults(
-    private val _results: List<LottoResult> = LottoRank.entries.map { LottoResult(lottoRank = it) }.toMutableList(),
+    private val _results: MutableList<LottoResult> = LottoRank.entries.map { LottoResult(lottoRank = it) }.toMutableList(),
 ) {
     val results: List<LottoResult>
         get() = _results
