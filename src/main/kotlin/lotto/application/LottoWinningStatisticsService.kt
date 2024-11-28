@@ -8,9 +8,9 @@ object LottoWinningStatisticsService {
     fun start(
         lottos: Lottos,
         numbers: List<Int>,
+        bonusNumber: Int,
     ): LottoWinningStatistics {
-        val winningNumbers = WinningNumbers(numbers)
-        val lottoResult = lottos.countWinningRanks(winningNumbers)
+        val lottoResult = lottos.countWinningRanks(WinningNumbers(numbers, bonusNumber))
         return LottoWinningStatistics(lottoResult, lottoResult.calculateYield(lottos.size))
     }
 }
