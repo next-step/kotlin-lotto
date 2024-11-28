@@ -9,14 +9,15 @@ class LottoResultTest {
     @Test
     fun `수익률을 계산한다`() {
         val payment = LottoPayment.from(14_000)
-        val result =
-            LottoResult.of(
+        val matchResult =
+            MatchResult.of(
                 Rank.FOURTH to 1,
                 Rank.FIFTH to 1,
                 Rank.MISS to 12,
             )
+        val result = LottoResult(matchResult, payment)
 
-        val roi = result.returnOnInvestment(payment)
+        val roi = result.returnOnInvestment
 
         roi shouldBe (3.92857142857 plusOrMinus 1e-6)
     }

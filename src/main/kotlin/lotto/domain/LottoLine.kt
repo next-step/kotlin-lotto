@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoLine private constructor(
+class LottoLine(
     val numbers: List<LottoNumber>,
 ) {
     init {
@@ -14,8 +14,10 @@ class LottoLine private constructor(
 
     fun match(winner: WinningLine): Rank =
         Rank.valueOf(
-            countOverlap(winner.line),
-            contains(winner.bonus),
+            MatchStats(
+                countOverlap(winner.line),
+                contains(winner.bonus),
+            ),
         )
 
     companion object {

@@ -2,39 +2,37 @@ package lotto.ui
 
 import lotto.domain.Lotto
 import lotto.domain.LottoLine
-import lotto.domain.LottoPayment
 import lotto.domain.LottoResult
+import lotto.domain.MatchResult
 import lotto.domain.Rank
 
 object ResultView {
     private const val COMMA_SEPARATOR = ", "
     private val NEWLINE = System.lineSeparator()
 
-    fun printLotto(lotto: Lotto) {
+    fun printLotto(
+        lotto: Lotto,
+        numberOfManual: Int,
+    ) {
         val output =
             buildString {
-                appendLine("${lotto.numberOfLines}개를 구먀했습니다.")
+                appendLine()
+                appendLine("수동으로 ${numberOfManual}장, 자동으로 ${lotto.numberOfLines - numberOfManual}개를 구매했습니다.")
                 appendLine(formatLotto(lotto))
             }
         println(output)
     }
 
-    fun printResult(
-        result: LottoResult,
-        payment: LottoPayment,
-    ) {
-        val roi = result.returnOnInvestment(payment)
+    fun printResult(result: LottoResult) {
         val output =
             buildString {
                 appendLine()
                 appendLine("당첨 통계")
                 appendLine("---------")
-
                 // 당첨 통계
-                appendLine(formatResult(result))
-
+                appendLine(formatResult(result.matchResult))
                 // 수익률
-                append(formatRoi(roi))
+                append(formatRoi(result.returnOnInvestment))
             }
         println(output)
     }
@@ -51,7 +49,7 @@ object ResultView {
         line.numbers
             .joinToString(COMMA_SEPARATOR, prefix, postfix) { it.value.toString() }
 
-    private fun formatResult(result: LottoResult): String =
+    private fun formatResult(result: MatchResult): String =
         Rank.entries
             .sortedBy { it.prize }
             .filter { it != Rank.MISS }

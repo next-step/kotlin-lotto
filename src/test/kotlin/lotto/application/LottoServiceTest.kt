@@ -1,14 +1,14 @@
 package lotto.application
 
+import io.kotest.matchers.doubles.plusOrMinus
 import io.kotest.matchers.shouldBe
 import lotto.domain.Lotto
 import lotto.domain.LottoLine
-import lotto.domain.LottoNumber
 import lotto.domain.Rank
-import lotto.domain.WinningLine
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
+import org.junit.jupiter.api.assertThrows
 
 @Suppress("NonAsciiCharacters")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -18,6 +18,34 @@ class LottoServiceTest {
     @BeforeAll
     fun setUp() {
         sut = LottoService(RandomLottoLineGenerator())
+    }
+
+    @Test
+    fun `로또를 구매할 금액이 없으면 예외를 던진다`() {
+        val command =
+            BuyLottoCommand(
+                1000L,
+                listOf(
+                    listOf(1, 2, 3, 4, 5, 6),
+                    listOf(7, 8, 9, 10, 11, 12),
+                ),
+            )
+        assertThrows<IllegalArgumentException> { sut.buy(command) }
+    }
+
+    @Test
+    fun `남은 금액으로 자동 로또를 발급한다`() {
+        val payment = 3_000L
+        val manualLotto =
+            listOf(
+                listOf(1, 2, 3, 4, 5, 6),
+                listOf(7, 8, 9, 10, 11, 12),
+            )
+        val command = BuyLottoCommand(payment, manualLotto)
+
+        val lotto = sut.buy(command)
+
+        lotto.numberOfLines shouldBe 3
     }
 
     @Test
@@ -38,17 +66,15 @@ class LottoServiceTest {
                 // SECOND
                 LottoLine.from(1, 2, 3, 4, 5, 7),
             )
-        val winner =
-            WinningLine(
-                LottoLine.from(1, 2, 3, 4, 5, 6),
-                LottoNumber.from(7),
-            )
+        val winner = WinnerInfo(listOf(1, 2, 3, 4, 5, 6), 7)
+        val command = PlayLottoCommand(lotto, winner, 3_000L)
 
-        val result = sut.play(lotto, winner)
+        val result = sut.play(command)
 
-        result.get(Rank.SECOND) shouldBe 1
-        result.get(Rank.FOURTH) shouldBe 1
-        result.get(Rank.FIFTH) shouldBe 1
-        result.totalPrize shouldBe 30_055_000
+        result.matchResult.get(Rank.SECOND) shouldBe 1
+        result.matchResult.get(Rank.FOURTH) shouldBe 1
+        result.matchResult.get(Rank.FIFTH) shouldBe 1
+        result.matchResult.totalPrize shouldBe 30_055_000
+        result.returnOnInvestment shouldBe (10_018.3333333 plusOrMinus 1e-6)
     }
 }
