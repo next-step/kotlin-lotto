@@ -7,6 +7,10 @@ class User(
 ) {
     val totalLottos: Lottos
         get() = manualLottos.merge(autoLottos)
+    val autoLottoSize: Int
+        get() = autoLottos.size
+    val manualLottoSize: Int
+        get() = manualLottos.size
     val totalLottoSize: Int
         get() = totalLottos.size
     val totalBuyAmount: Amount
@@ -31,14 +35,5 @@ class User(
         bonus: Boolean,
     ): Ranks {
         return Ranks.fromGroupBy(totalLottos.match(lastWeekNumbers, bonus))
-    }
-
-    fun buyManualNumbers(lottos: Lottos) {
-        val requiredAmount = lottos.totalAmount
-        if (amount.isLessThan(requiredAmount)) {
-            throw IllegalArgumentException("수동 구매 금액이 부족합니다.")
-        }
-        manualLottos = lottos
-        amount = amount.minus(requiredAmount)
     }
 }
