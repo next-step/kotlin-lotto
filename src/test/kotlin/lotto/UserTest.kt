@@ -40,7 +40,7 @@ class UserTest {
             )
         )
 
-        user.buyManualNumbers(expectedLottos)
+        user.buyManualLottos(expectedLottos)
 
         assertAll(
             { assertThat(user.totalLottos).isEqualTo(expectedLottos) },
@@ -62,7 +62,7 @@ class UserTest {
         )
 
         assertAll(
-            { assertThatIllegalArgumentException().isThrownBy { user.buyManualNumbers(expectedLottos) } },
+            { assertThatIllegalArgumentException().isThrownBy { user.buyManualLottos(expectedLottos) } },
             { assertThat(user.totalLottos).isEqualTo(Lottos(emptyList())) },
             { assertThat(user.totalLottoSize).isEqualTo(0) },
         )
@@ -83,7 +83,7 @@ class UserTest {
                 Lotto(listOf(13, 14, 15, 16, 17, 18)),
             )
         )
-        user.buyManualNumbers(manualLottos)
+        user.buyManualLottos(manualLottos)
 
         val autoMachine: (Amount) -> Lottos = { _ -> autoLottos }
         user.buyAutoLotto(autoMachine)
@@ -109,7 +109,7 @@ class UserTest {
                 Lotto(listOf(13, 14, 15, 16, 17, 18)),
             )
         )
-        user.buyManualNumbers(manualLottos)
+        user.buyManualLottos(manualLottos)
 
         val autoMachine: (Amount) -> Lottos = { _ -> autoLottos }
         user.buyAutoLotto(autoMachine)
@@ -118,6 +118,32 @@ class UserTest {
         assertAll(
             { assertThat(user.totalLottos).isEqualTo(expectedLottos) },
             { assertThat(user.totalLottoSize).isEqualTo(3) },
+        )
+    }
+
+    @Test
+    fun `수동 구매 수량과 자동 구매수량을 알 수 있다`() {
+        val initialAmount = Amount(3_000) // 사용자가 보유한 금액
+        val user = User(initialAmount)
+        val manualLottos = Lottos(
+            listOf(
+                Lotto(listOf(1, 2, 3, 4, 5, 6)),
+                Lotto(listOf(7, 8, 9, 10, 11, 12)),
+            )
+        )
+        val autoLottos = Lottos(
+            listOf(
+                Lotto(listOf(13, 14, 15, 16, 17, 18)),
+            )
+        )
+        user.buyManualLottos(manualLottos)
+
+        val autoMachine: (Amount) -> Lottos = { _ -> autoLottos }
+        user.buyAutoLotto(autoMachine)
+
+        assertAll(
+            { assertThat(user.manualLottoSize).isEqualTo(2) },
+            { assertThat(user.autoLottoSize).isEqualTo(1) },
         )
     }
 }

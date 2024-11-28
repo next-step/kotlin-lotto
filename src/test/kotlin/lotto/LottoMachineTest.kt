@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 class LottoMachineTest {
     @Test
     fun `자동구매 가능`() {
-        var amount = Amount(2000)
+        var amount = Amount(2_000)
         val expectedLottos =
             Lottos(
                 listOf(
