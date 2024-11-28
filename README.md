@@ -72,3 +72,34 @@
 - [x] Parser::덧셈수 변수명 고려
 - [x] StringAddCalculatorTest::커스텀 구분자 테스트 케이스 추가
 - [x] Parser::parser 테스트 추가
+
+# Step3 로또(2등)
+## 기능 요구사항
+- 2등을 위해 추가 번호를 하나 더 추첨한다.
+- 당첨 통계에 2등도 추가해야 한다.
+
+### Step2 - 리뷰 반영사항
+- [x] LotteryNumbers::intersect infix 함수 문법 적용
+- [x] TicketMachineTest::테스트 케이스 추가
+- [x] LotteryApplication::스태틱임포트 원복
+- [x] LotteryTest::로또번호 일치 수 반환 테스트 케이스 추가
+- [x] WinningLottery::lotto 가 아닌 lotteryNumbers 를 갖도록 수정
+- [x] Ticket::object 로 수정
+- [x] Money::value class 로 수정
+- [x] Money::divideBy operator fun 으로 수정
+- [x] DrawResult::getTotalReward 로직 내 타입 명시
+
+## 기능 구현 목록
+- [x] 로또 영문명을 Lotto 로 변경
+- [x] 로또 번호를 값 객체로 래핑한다.
+- [x] 일급컬렉션으로 로또 번호 리스트를 래핑한다.
+- [x] 보너스볼은 로또번호와 중복되지 않는다.
+- [x] 5개 일치와 보너스볼 일치는 2등이다.
+- [x] 5개 일치는 3등이다.
+- [x] 보너스 볼 일치를 출력한다.
+
+### 리뷰 반영사항 - 1
+- [x] LottoNumber::comparable 구현
+- [x] LottoNumbers::contains 을 in 으로 수정
+- [x] RankReward::matchBonus 를 nullable 변수로 추출 후 matched 함수 추출
+- [x] LottoNumber::테스트 전용 메서드 제거
