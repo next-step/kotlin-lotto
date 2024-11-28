@@ -12,7 +12,7 @@
   - [x] 체이닝 형태로 풀어내기
 - [x] (리뷰 코멘트) InputView에 get 메서드를 덮어씌운 이유
 - [x] (리뷰 코멘트) 주석을 남긴 이유
-- [ ] LottoNumber의 random을 외부에서 주입받도록 분리
+- [x] LottoNumber의 random을 외부에서 주입받도록 분리
 - [ ] LottoNumbers.countMatch를 O(n^2)에서 O(n)으로 개선
 
 ### 셀프 피드백

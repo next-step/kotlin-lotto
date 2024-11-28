@@ -1,6 +1,6 @@
 package lotto
 
-class LottoResult(
+data class LottoResult(
     val lottoRank: LottoRank,
 ) {
     var count: Int = 0

@@ -18,10 +18,10 @@ data class LottoNumbers(val numbers: List<LottoNumber>) {
             return LottoNumbers(numbers.map { LottoNumber(it) })
         }
 
-        fun generate(): LottoNumbers {
+        fun generate(range: IntRange): LottoNumbers {
             return LottoNumbers(mutableSetOf<LottoNumber>().apply {
                 while (size < LOTTO_COUNT) {
-                    add(LottoNumber.generate())
+                    add(LottoNumber.generate(range.random()))
                 }
             }.toList())
         }
