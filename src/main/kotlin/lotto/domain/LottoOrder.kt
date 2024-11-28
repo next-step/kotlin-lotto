@@ -6,7 +6,6 @@ data class LottoOrder(
     val manualLottoNumbers: List<List<Int>> = emptyList(),
 ) {
     init {
-        require(money.value >= 0) { "금액은 0 이상이어야 합니다." }
         require(manualCount == manualLottoNumbers.size) { "수동 로또 개수와 수동 로또 번호의 개수가 일치해야 합니다." }
         require(manualCount * LOTTO_PRICE <= money.value) { "금액이 부족합니다." }
     }
