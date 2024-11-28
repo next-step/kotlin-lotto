@@ -17,11 +17,9 @@ enum class RankReward(
         matchedCount: Int,
         matchBonus: Boolean,
     ): Boolean {
-        if (this.matchedCount != matchedCount) return false
-
         return when (this.matchBonus) {
-            null -> true
-            else -> this.matchBonus == matchBonus
+            null -> this.matchedCount == matchedCount
+            else -> this.matchedCount == matchedCount && this.matchBonus == matchBonus
         }
     }
 
