@@ -1,17 +1,17 @@
 package lotto.domain
 
+import lotto.constant.MATCH_COUNT_FIVE
+import lotto.constant.MATCH_COUNT_FOUR
+import lotto.constant.MATCH_COUNT_SIX
+import lotto.constant.MATCH_COUNT_THREE
+import lotto.constant.RANK_FIFTH
+import lotto.constant.RANK_FIRST
+import lotto.constant.RANK_FOURTH
+import lotto.constant.RANK_NO_PRIZE
+import lotto.constant.RANK_THIRD
+
 class Match {
     companion object {
-        private const val MATCH_COUNT_FIRST_PRIZE = 6
-        private const val MATCH_COUNT_SECOND_PRIZE = 5
-        private const val MATCH_COUNT_THIRD_PRIZE = 4
-        private const val MATCH_COUNT_FOURTH_PRIZE = 3
-        private const val RANK_FIRST = 1
-        private const val RANK_SECOND = 2
-        private const val RANK_THIRD = 3
-        private const val RANK_FOURTH = 4
-        private const val RANK_NO_PRIZE = 0
-
         fun lottoNumber(
             userLotto: Lotto,
             winningLotto: Lotto,
@@ -25,10 +25,10 @@ class Match {
 
         private fun rank(matchCount: Int): Int {
             return when (matchCount) {
-                MATCH_COUNT_FIRST_PRIZE -> RANK_FIRST
-                MATCH_COUNT_SECOND_PRIZE -> RANK_SECOND
-                MATCH_COUNT_THIRD_PRIZE -> RANK_THIRD
-                MATCH_COUNT_FOURTH_PRIZE -> RANK_FOURTH
+                MATCH_COUNT_SIX -> RANK_FIRST
+                MATCH_COUNT_FIVE -> RANK_THIRD
+                MATCH_COUNT_FOUR -> RANK_FOURTH
+                MATCH_COUNT_THREE -> RANK_FIFTH
                 else -> RANK_NO_PRIZE
             }
         }
