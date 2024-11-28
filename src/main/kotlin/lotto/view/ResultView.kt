@@ -1,13 +1,13 @@
 package lotto.view
 
+import lotto.domain.AutoTicket
 import lotto.domain.DrawResult
 import lotto.domain.Lotto
 import lotto.domain.Money
 import lotto.domain.RankReward
-import lotto.domain.Ticket
 
 object ResultView {
-    fun printTicketCount(tickets: List<Ticket>) {
+    fun printTicketCount(tickets: List<AutoTicket>) {
         println("${tickets.size}개를 구매했습니다.")
     }
 

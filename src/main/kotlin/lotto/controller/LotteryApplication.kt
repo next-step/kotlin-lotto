@@ -13,7 +13,7 @@ fun main() {
     val tickets = TicketMachine.exchange(purchaseAmount)
     ResultView.printTicketCount(tickets)
 
-    val purchaseLotteries = LottoMachine.purchase(tickets)
+    val purchaseLotteries = LottoMachine.autoPurchase(tickets)
     ResultView.printLotteries(purchaseLotteries)
 
     val winningLotto =
