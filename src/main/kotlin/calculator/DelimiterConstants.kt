@@ -8,6 +8,7 @@ object DelimiterConstants {
     const val NUMBERS_GROUP_INDEX = 2
 
     val CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)".toRegex()
+    val SINGLE_NUMBER_PATTERN = "\\d+".toRegex()
 
     const val EMPTY_STRING = ""
 }
