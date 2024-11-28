@@ -5,10 +5,6 @@ class LottoMachine(val autoGenerate: (Amount) -> Lottos = defaultAutoGenerateFun
         return Lotto(values.map { LottoNumber(it) }.toSet())
     }
 
-    fun createLottoNumber(readMessage: String): LottoNumber {
-        return LottoNumber(readMessage.toInt())
-    }
-
     fun createPay(value: String): Amount {
         if (value.toIntOrNull() == null) {
             throw IllegalArgumentException("숫자가 아닙니다.")
@@ -18,13 +14,9 @@ class LottoMachine(val autoGenerate: (Amount) -> Lottos = defaultAutoGenerateFun
 
     fun createManualLottos(
         manualLottoCount: Int,
-        function: () -> List<Int>,
+        generator: () -> List<Int>,
     ): Lottos {
-        return Lottos(
-            List(manualLottoCount) {
-                createLotto(function())
-            },
-        )
+        return Lottos.from(manualLottoCount) { generator() }
     }
 
     companion object {
