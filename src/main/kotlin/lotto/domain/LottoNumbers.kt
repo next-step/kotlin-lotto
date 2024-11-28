@@ -11,7 +11,7 @@ class LottoNumbers(numbers: Set<LottoNumber>) {
         return (numbers intersect other.numbers).size
     }
 
-    fun containsNumber(other: LottoNumber): Boolean {
+    operator fun contains(other: LottoNumber): Boolean {
         return other in numbers
     }
 

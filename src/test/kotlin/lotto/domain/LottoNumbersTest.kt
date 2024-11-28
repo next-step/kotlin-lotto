@@ -44,11 +44,11 @@ class LottoNumbersTest : StringSpec({
     }
 
     "로또 번호에 포함되는 번호가 있다면 true 를 반환한다" {
-        LottoNumbers.from(setOf(1, 2, 3, 4, 5, 6)).containsNumber(LottoNumber(1)) shouldBe true
+        (LottoNumber(1) in LottoNumbers.from(setOf(1, 2, 3, 4, 5, 6))) shouldBe true
     }
 
     "로또 번호에 포함되는 번호가 없다면 false 를 반환한다" {
-        LottoNumbers.from(setOf(1, 2, 3, 4, 5, 6)).containsNumber(LottoNumber(45)) shouldBe false
+        (LottoNumber(45) in LottoNumbers.from(setOf(1, 2, 3, 4, 5, 6))) shouldBe false
     }
 
     "로또 번호의 범위는 1~45이다" {

@@ -113,4 +113,11 @@
 - [x] RankReward::matchBonus 디폴트파라미터 사용
 - [x] RankReward::matched 메서드 가독성 증대
 - [x] RankReward::view 의존성인 toString 메서드 제거
-- [ ] WinningLotto::operator fun 사용
+- [x] WinningLotto::operator fun 사용
+
+## 기능 구현 목록
+- [ ] 수동 구매 로또 수를 입력받는다.
+- [ ] 수동 구맬 로또 번호를 입력받는다.
+- [ ] 수동 로또 수를 뺀만큼 자동으로 생성한다.
+- [ ] 수동 로또와 자동 로또를 상태로 보유한다.
+- [x] 로또를 수동으로 생성할 수 있다.

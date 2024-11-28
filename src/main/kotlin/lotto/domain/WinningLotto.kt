@@ -5,7 +5,7 @@ data class WinningLotto(
     val bonus: LottoNumber,
 ) {
     init {
-        require(!lottoNumbers.containsNumber(bonus)) { "보너스 볼 번호는 로또 번호와 중복될 수 없습니다" }
+        require(bonus !in lottoNumbers) { "보너스 볼 번호는 로또 번호와 중복될 수 없습니다" }
     }
 
     fun countMatchedNumber(other: Lotto): Int {
@@ -13,7 +13,7 @@ data class WinningLotto(
     }
 
     fun matchBonus(other: Lotto): Boolean {
-        return other.lottoNumbers.containsNumber(bonus)
+        return bonus in other.lottoNumbers
     }
 
     companion object {
