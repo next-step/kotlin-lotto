@@ -1,13 +1,13 @@
 package lotto.view
 
-import lotto.domain.Lotto
+import lotto.domain.LottoNumbers
 import lotto.domain.LottoProfitRate
 import lotto.domain.LottoRankMatchMap
 import lotto.domain.Lottos
 
 object LottoView {
     fun drawLottos(lottos: Lottos) {
-        lottos.lottos.forEach { drawLotto(it) }
+        lottos.lottos.forEach { drawLottoNumbers(it.numbers) }
     }
 
     fun drawMatchMap(lottoRankMatchMap: LottoRankMatchMap) {
@@ -17,13 +17,14 @@ object LottoView {
     }
 
     fun drawProfitRate(lottoProfitRate: LottoProfitRate) {
-        println(
-            "총 수익률은 ${lottoProfitRate.profitRate}입니다. " +
-                lottoProfitRate.getProfitRateDescription(),
-        )
+        val lottoProfitRateDescription = if (lottoProfitRate.profitRate > 1.0) "이득이에요" else "손해에요"
+        println("총 수익률은 ${lottoProfitRate.profitRate}입니다. $lottoProfitRateDescription")
     }
 
-    private fun drawLotto(lotto: Lotto) {
-        println(lotto.numbers.asJoinString())
+    private fun drawLottoNumbers(lottoNumbers: LottoNumbers) {
+        val joinToString =
+            lottoNumbers.lottoNumbers.map { it.number }.sorted()
+                .joinToString(prefix = "[", postfix = "]", separator = ",")
+        println(joinToString)
     }
 }

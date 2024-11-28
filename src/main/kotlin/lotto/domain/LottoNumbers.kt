@@ -9,10 +9,6 @@ data class LottoNumbers(val lottoNumbers: Set<LottoNumber>) {
         return lottoNumbers.map { it.number }.contains(number)
     }
 
-    fun asJoinString(): String {
-        return lottoNumbers.map { it.number }.sorted().joinToString(prefix = "[", postfix = "]", separator = ",")
-    }
-
     companion object {
         fun of(lottoNumbers: List<Int>): LottoNumbers {
             return LottoNumbers(lottoNumbers.map { LottoNumber(it) }.toSet())
