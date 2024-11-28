@@ -1,10 +1,13 @@
 package lotto.domain
 
-class Lotto {
+data class Lotto(val lottoNumbers: Set<LottoNumber>) {
     companion object {
-        fun generate(): Set<LottoNumber> {
-            return (MINIMUM_NUMBER..MAXIMUM_NUMBER)
-                .shuffled()
+        fun generate(numberOfLotto: Int): List<Lotto> {
+            return List(numberOfLotto) { Lotto(createSingleLotto()) }
+        }
+
+        private fun createSingleLotto(): Set<LottoNumber> {
+            return (MINIMUM_NUMBER..MAXIMUM_NUMBER).shuffled()
                 .take(NUMBER_OF_SELECT)
                 .sorted()
                 .map { LottoNumber.from(it) }

@@ -1,9 +1,10 @@
 package lotto.domain
 
-class LottoNumber private constructor(private val number: Int) {
+class LottoNumber private constructor(val number: Int) {
     companion object {
         private const val MINIMUM_NUMBER = 1
         private const val MAXIMUM_NUMBER = 45
+
         private val NUMBERS: Map<Int, LottoNumber> = (MINIMUM_NUMBER..MAXIMUM_NUMBER).associateWith { LottoNumber(it) }
 
         fun from(number: Int): LottoNumber {
