@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.Lotto
 import lotto.domain.LottoAmount
 import lotto.domain.LottoMachine
 import lotto.view.InputView
@@ -13,5 +14,13 @@ fun main() {
     val tickets = LottoMachine.generateTickets(ticketCount)
     ResultView.printAutoGenerateLotto(tickets)
 
-    InputView.inputWinningLotto()
+    val inputWinningLotto = InputView.inputWinningLotto()
+    val winningLotto = Lotto.createWinningLotto(inputWinningLotto)
+    println(
+        winningLotto.numbers.joinToString(
+            separator = ", ",
+            prefix = "당첨 번호는 [ ",
+            postfix = " ]",
+        ) { it.value.toString().padStart(2, ' ') },
+    )
 }

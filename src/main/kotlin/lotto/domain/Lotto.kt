@@ -5,7 +5,6 @@ import lotto.domain.LottoNumber.Companion.LOTTO_NUMBER_RANGE
 data class Lotto private constructor(val numbers: Set<LottoNumber>) {
     init {
         require(numbers.size == SIZE) { "로또 번호는 ${SIZE}개여야 합니다." }
-        require(numbers.distinct().size == SIZE) { "로또 번호는 중복될 수 없습니다." }
     }
 
     companion object {
@@ -17,6 +16,19 @@ data class Lotto private constructor(val numbers: Set<LottoNumber>) {
                     .sortedBy { it.value }
                     .toSet()
             return Lotto(lottoNumbers)
+        }
+
+        fun createWinningLotto(winningLotto: String): Lotto {
+            val numbers =
+                winningLotto.split(",")
+                    .map {
+                        LottoNumber.from(
+                            it.trim()
+                                .toIntOrNull() ?: throw IllegalArgumentException("숫자가 아닌 문자를 입력했습니다. 입력값 : '$it'"),
+                        )
+                    }
+                    .toSet()
+            return Lotto(numbers)
         }
 
         fun generateAuto(): Lotto {
