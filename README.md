@@ -8,8 +8,8 @@
 - [x] 컬렉션 선언 -> 엘리먼트 추가 -> 컬렉션 리턴하는 방식을 체이닝으로 풀어내기
   - [x] LottoIssuer (`List(size: Int, init: (index: Int) -> T)`)
   - [x] LottoResultHandler (map, fold 등)
-- [ ] LottoNumbers의 generateNumbers와 generate를 하나로 처리하도록 개선
-  - [ ] 체이닝 형태로 풀어내기
+- [x] LottoNumbers의 generateNumbers와 generate를 하나로 처리하도록 개선
+  - [x] 체이닝 형태로 풀어내기
 - [x] (리뷰 코멘트) InputView에 get 메서드를 덮어씌운 이유
 - [x] (리뷰 코멘트) 주석을 남긴 이유
 - [ ] LottoNumber의 random을 외부에서 주입받도록 분리

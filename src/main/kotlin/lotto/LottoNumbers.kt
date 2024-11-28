@@ -19,17 +19,11 @@ data class LottoNumbers(val numbers: List<LottoNumber>) {
         }
 
         fun generate(): LottoNumbers {
-            val numbers = generateNumbers()
-            require(numbers.size == LOTTO_COUNT) { "로또 숫자가 충분하지 않습니다." }
-            return LottoNumbers(numbers.toList())
-        }
-
-        private fun generateNumbers(): Set<LottoNumber> {
-            val numbers = mutableSetOf<LottoNumber>()
-            while (numbers.size < LOTTO_COUNT) {
-                numbers.add(LottoNumber.generate())
-            }
-            return numbers
+            return LottoNumbers(mutableSetOf<LottoNumber>().apply {
+                while (size < LOTTO_COUNT) {
+                    add(LottoNumber.generate())
+                }
+            }.toList())
         }
     }
 }
