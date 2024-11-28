@@ -6,11 +6,11 @@ package study.lotto.model
 data class Lotto(
     val lottoNumbers: Set<Int>,
 ) {
-    fun matchLotto(
-        winLotto: Lotto,
-    ): Int {
+    fun matchLotto(winLotto: Lotto): Int {
         return winLotto.lottoNumbers.intersect(this.lottoNumbers).size
     }
+
+    fun ishBonus(bonus: Int): Boolean {
+        return this.lottoNumbers.contains(bonus)
+    }
 }
-
-

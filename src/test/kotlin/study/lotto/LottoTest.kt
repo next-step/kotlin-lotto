@@ -38,4 +38,16 @@ class LottoTest : StringSpec({
 
         lotto.matchLotto(winLotto) shouldBe 0
     }
+    "로또 보너스볼 매칭 테스트" {
+        val lotto = Lotto(setOf(1, 2, 3, 4, 5, 6))
+        val bonus = 3
+
+        lotto.ishBonus(bonus) shouldBe true
+    }
+    "로또 보너스볼 매칭 불일치 테스트" {
+        val lotto = Lotto(setOf(1, 2, 3, 4, 5, 6))
+        val bonus = 7
+
+        lotto.ishBonus(bonus) shouldBe false
+    }
 })
