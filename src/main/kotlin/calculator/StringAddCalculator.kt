@@ -2,19 +2,21 @@ package calculator
 
 class StringAddCalculator {
 
-    fun add(text: String?): Int {
+    fun add(input: String?): Int {
 
-        if (text.isNullOrEmpty()) {
+        if (input.isNullOrEmpty()) {
             return 0;
         }
 
-        if (text.length == 1) {
-            return text.toInt();
+        if (input.length == 1) {
+            return input.toInt();
         }
 
-        val numbers = NumberParser().parse(text)
-        NumberValidator().validate(numbers)
-        return numbers.sum()
+        return NumberParser(
+            listOf(
+                CustomDelimiterStrategy(),
+                DefaultDelimiterStrategy()
+            )
+        ).parseNumbers(input).sum()
     }
-
 }
