@@ -4,13 +4,13 @@ enum class RankReward(
     val rankValue: Int,
     val matchedCount: Int,
     val money: Money,
-    val matchBonus: Boolean?,
+    val matchBonus: Boolean? = null,
 ) {
-    FIRST(1, 6, Money(2_000_000_000), null),
-    SECOND(2, 5, Money(30_000_000), true),
-    THIRD(3, 5, Money(1_500_000), false),
-    FOURTH(4, 4, Money(50_000), null),
-    FIFTH(5, 3, Money(5_000), null),
+    FIRST(1, 6, Money(2_000_000_000)),
+    SECOND(2, 5, Money(30_000_000), matchBonus = true),
+    THIRD(3, 5, Money(1_500_000), matchBonus = false),
+    FOURTH(4, 4, Money(50_000)),
+    FIFTH(5, 3, Money(5_000)),
     ;
 
     private fun matched(

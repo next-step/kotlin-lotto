@@ -103,3 +103,14 @@
 - [x] LottoNumbers::contains 을 in 으로 수정
 - [x] RankReward::matchBonus 를 nullable 변수로 추출 후 matched 함수 추출
 - [x] LottoNumber::테스트 전용 메서드 제거
+
+# Step4 로또(수동)
+## 기능 요구사항
+- 현재 로또 생성기는 자동 생성 기능만 제공한다. 사용자가 수동으로 추첨 번호를 입력할 수 있도록 해야 한다.
+- 입력한 금액, 자동 생성 숫자, 수동 생성 번호를 입력하도록 해야 한다.
+
+### Step3 - 리뷰 반영사항
+- [x] RankReward::matchBonus 디폴트파라미터 사용
+- [ ] RankReward::matched 메서드 가독성 증대
+- [ ] RankReward::toString 메서드 제거
+- [ ] WinningLotto::operator fun 사용
