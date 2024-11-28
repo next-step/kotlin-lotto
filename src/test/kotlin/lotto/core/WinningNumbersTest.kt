@@ -9,7 +9,10 @@ import java.util.stream.Stream
 class WinningNumbersTest {
     @ParameterizedTest
     @MethodSource("provideParameters")
-    fun `생성자에 잘못된 값 전달 시 오류를 확인한다`(numberList: List<Int>, bonusNumber: Int) {
+    fun `생성자에 잘못된 값 전달 시 오류를 확인한다`(
+        numberList: List<Int>,
+        bonusNumber: Int,
+    ) {
         shouldThrow<IllegalArgumentException> {
             WinningNumbers(numberList, bonusNumber)
         }
@@ -24,7 +27,7 @@ class WinningNumbersTest {
                 Arguments.of(listOf(1, 2, 3, 4, 5, 6), 1),
                 Arguments.of(listOf(1, 2, 3, 4, 5, 6), -1),
                 Arguments.of(listOf(1, 2, 3, 4, 5, 46), 45),
-                Arguments.of(listOf(-1, 2, 3, 4, 5, 40), 45)
+                Arguments.of(listOf(-1, 2, 3, 4, 5, 40), 45),
             )
         }
     }
