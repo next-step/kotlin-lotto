@@ -15,23 +15,23 @@ import study.lotto.model.Rank
 class LottoServiceTest : StringSpec({
     val lottoService = LottoService()
 
-    "로또 0원으로 구매시 예외 테스트" {
-        val money = 0
+    "로또 0개 구매시 예외 테스트" {
+        val count = 0
         val exception =
             shouldThrow<IllegalArgumentException> {
-                lottoService.buyLotto(money)
+                lottoService.buyLotto(count)
             }
-        exception.message should startWith("로또 구입금액은 최소")
+        exception.message should startWith("Failed requirement.")
     }
-    "로또 1000원으로 구매시 개수 테스트" {
-        val money = 1000
-        val lottos = lottoService.buyLotto(money)
+    "로또 1개 구매시 개수 테스트" {
+        val count = 1
+        val lottos = lottoService.buyLotto(count)
 
         lottos.lottoCount() shouldBe 1
     }
-    "로또 2000원으로 구매시 개수 테스트" {
-        val money = 2000
-        val lottos = lottoService.buyLotto(money)
+    "로또 2개 구매시 개수 테스트" {
+        val count = 2
+        val lottos = lottoService.buyLotto(count)
 
         lottos.lottoCount() shouldBe 2
     }

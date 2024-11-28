@@ -1,6 +1,7 @@
 package study.lotto
 
 import study.lotto.model.Lotto
+import study.lotto.model.LottoNumber
 import study.lotto.model.LottoStat
 import study.lotto.model.LottoStats
 import study.lotto.model.Lottos
@@ -17,6 +18,7 @@ class LottoController(
     private val resultView: ResultView,
 ) {
     private val lottoStats = LottoStats()
+    private val lottos = Lottos()
 
     init {
         Rank.entries.forEach {
@@ -25,10 +27,7 @@ class LottoController(
     }
 
     fun run() {
-        val money = inputView.inputMoney()
-        val lottos = lottoService.buyLotto(money)
-        resultView.printLottoCount(lottos)
-        resultView.printLotto(lottos)
+        val money = inputSettingsFromMoney()
         val winLotto = inputView.inputWinLotto()
         val bonus = inputView.inputBonusBall(winLotto)
 
@@ -37,10 +36,23 @@ class LottoController(
         resultView.printProfit(lottoService.profitLotto(this.lottoStats, money))
     }
 
+    private fun inputSettingsFromMoney(): Int {
+        val money = inputView.inputMoney()
+        val manualCount = inputView.inputBuyManualCount(money)
+        lottos.addAllLotto(inputView.inputManualLotto(manualCount))
+
+        val autoCount = lottoService.buyLottoCount(money) - manualCount
+        lottos.addAllLotto(lottoService.buyLotto(autoCount))
+        resultView.printLottoCount(manualCount, autoCount)
+        resultView.printLotto(lottos)
+
+        return money
+    }
+
     private fun playGame(
         lottos: Lottos,
         winLotto: Lotto,
-        bonus: Int,
+        bonus: LottoNumber,
     ) {
         lottos.getLottos().forEach {
             val matchCount = it.matchLotto(winLotto)
