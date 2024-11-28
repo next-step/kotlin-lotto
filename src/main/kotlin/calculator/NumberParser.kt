@@ -1,7 +1,6 @@
 package calculator
 
 class NumberParser(private val delimiterStrategies: List<DelimiterStrategy>) {
-
     fun parseNumbers(input: String): List<Int> {
         return when {
             isSingleNumber(input) -> listOf(input.toInt())

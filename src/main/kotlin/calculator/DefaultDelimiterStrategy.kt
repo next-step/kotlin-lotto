@@ -3,7 +3,7 @@ package calculator
 class DefaultDelimiterStrategy : DelimiterStrategy {
     override fun supports(text: String): Boolean {
         return text.contains(DelimiterConstants.COMMA_DELIMITER) ||
-                text.contains(DelimiterConstants.COLON_DELIMITER)
+            text.contains(DelimiterConstants.COLON_DELIMITER)
     }
 
     override fun parse(text: String): List<Int> {
@@ -13,4 +13,3 @@ class DefaultDelimiterStrategy : DelimiterStrategy {
             .map { it.toInt() }
     }
 }
-
