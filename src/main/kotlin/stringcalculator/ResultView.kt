@@ -1,4 +1,4 @@
-package string_calculator
+package stringcalculator
 
 class ResultView(private val outputMessage: String? = "") {
     fun render() {

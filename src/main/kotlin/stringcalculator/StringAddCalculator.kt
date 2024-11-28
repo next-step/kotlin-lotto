@@ -1,4 +1,4 @@
-package string_calculator
+package stringcalculator
 
 class StringAddCalculator {
     fun calculate(input: String): Int {

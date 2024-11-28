@@ -1,4 +1,4 @@
-package string_calculator
+package stringcalculator
 
 object OperandsExtractor {
     private const val DEFAULT_DELIMITERS = ",|:"
@@ -22,9 +22,7 @@ object OperandsExtractor {
             ExpressionInfo(getDefaultDelimiterRegex(), input)
         }
 
-    private fun getDefaultDelimiterRegex() =
-        DEFAULT_DELIMITERS.toRegex()
+    private fun getDefaultDelimiterRegex() = DEFAULT_DELIMITERS.toRegex()
 
-    private fun getCustomDelimiterRegex(customDelimiter: String) =
-        "$customDelimiter|$DEFAULT_DELIMITERS".toRegex()
+    private fun getCustomDelimiterRegex(customDelimiter: String) = "$customDelimiter|$DEFAULT_DELIMITERS".toRegex()
 }

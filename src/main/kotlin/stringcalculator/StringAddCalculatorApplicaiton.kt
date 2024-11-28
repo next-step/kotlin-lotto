@@ -1,4 +1,4 @@
-package string_calculator
+package stringcalculator
 
 fun main() {
     val input = InputView("Enter input: ").getInputMessage()

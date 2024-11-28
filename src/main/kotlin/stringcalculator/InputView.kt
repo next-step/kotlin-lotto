@@ -1,4 +1,4 @@
-package string_calculator
+package stringcalculator
 
 class InputView(private val requestMessage: String = "") {
     fun getInputMessage(): String {

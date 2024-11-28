@@ -1,4 +1,4 @@
-package string_calculator
+package stringcalculator
 
 data class ExpressionInfo(
     val delimiter: Regex,

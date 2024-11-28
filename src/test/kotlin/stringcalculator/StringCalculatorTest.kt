@@ -1,4 +1,4 @@
-package string_calculator
+package stringcalculator
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
@@ -37,9 +37,12 @@ class StringCalculatorTest {
         ",1:2,3=6",
         "1:2,3,=6",
         "1=1",
-        delimiterString = "="
+        delimiterString = "=",
     )
-    fun calculateInput(input: String, expected: Int) {
+    fun calculateInput(
+        input: String,
+        expected: Int,
+    ) {
         val result = stringAddCalculator.calculate(input)
         assertThat(result).isEqualTo(expected)
     }
@@ -47,7 +50,10 @@ class StringCalculatorTest {
     @DisplayName(value = "입력된 문자열이 '//'로 시작할 경우 '\n'이 나올 때까지의 문자열을 커스텀 구분자로 기본 구분자에 포함해서 계산한다.")
     @ParameterizedTest(name = "{index} => input=''{0}'', expected=''{1}''")
     @MethodSource("provideCustomInputs")
-    fun customInput(input: String, expected: Int) {
+    fun customInput(
+        input: String,
+        expected: Int,
+    ) {
         val result = stringAddCalculator.calculate(input)
         assertThat(result).isEqualTo(expected)
     }
@@ -90,12 +96,13 @@ class StringCalculatorTest {
 
     companion object {
         @JvmStatic
-        fun provideCustomInputs() = arrayOf(
-            arrayOf("//-\n1-2-3", 6),
-            arrayOf("//m\n1m2m3", 6),
-            arrayOf("//#\n1#2#3", 6),
-            arrayOf("//-\n1-2--3", 6),
-            arrayOf("//-\n1", 1)
-        )
+        fun provideCustomInputs() =
+            arrayOf(
+                arrayOf("//-\n1-2-3", 6),
+                arrayOf("//m\n1m2m3", 6),
+                arrayOf("//#\n1#2#3", 6),
+                arrayOf("//-\n1-2--3", 6),
+                arrayOf("//-\n1", 1),
+            )
     }
 }
