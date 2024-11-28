@@ -6,7 +6,7 @@
 
 - [x] (리뷰 코멘트) backing properties를 쓰지 않았을 때 대비 장단점
 - [ ] 컬렉션 선언 -> 엘리먼트 추가 -> 컬렉션 리턴하는 방식을 체이닝으로 풀어내기
-  - [ ] LottoIssuer (`List(size: Int, init: (index: Int) -> T)`)
+  - [x] LottoIssuer (`List(size: Int, init: (index: Int) -> T)`)
   - [ ] LottoResultHandler (map, fold 등)
 - [ ] LottoNumbers의 generateNumbers와 generate를 하나로 처리하도록 개선
   - [ ] 체이닝 형태로 풀어내기
