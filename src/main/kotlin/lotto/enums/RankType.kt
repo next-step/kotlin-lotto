@@ -11,7 +11,7 @@ import lotto.constant.NO_RANK_NUMBER
 import lotto.constant.THIRD_RANK_NUMBER
 import lotto.constant.THIRD_RANK_PRIZE
 
-enum class LottoRank(val rank: Int, val prize: Int) {
+enum class RankType(val rank: Int, val prize: Int) {
     FIRST_RANK(FIRST_RANK_NUMBER, FIRST_RANK_PRIZE),
     THIRD_RANK(THIRD_RANK_NUMBER, THIRD_RANK_PRIZE),
     FOURTH_RANK(FOURTH_RANK_NUMBER, FOURTH_RANK_PRIZE),
@@ -20,7 +20,7 @@ enum class LottoRank(val rank: Int, val prize: Int) {
     ;
 
     companion object {
-        fun of(rank: Int): LottoRank {
+        fun of(rank: Int): RankType {
             return when (rank) {
                 FIRST_RANK_NUMBER -> FIRST_RANK
                 THIRD_RANK_NUMBER -> THIRD_RANK
