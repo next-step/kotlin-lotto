@@ -6,12 +6,11 @@ data class LottoResults(
     val results: List<LottoResult>
         get() = _results
 
-    fun computeProfitRate(price: Price): Double {
-        return results.sumOf { it.sum() }.toDouble() / price.value
+    fun counting(lottoResult: LottoResult) {
+        _results.find { it.lottoRank == lottoResult.lottoRank }?.count()
     }
 
-    fun add(lottoResult: LottoResult): LottoResults {
-        _results.add(lottoResult)
-        return this
+    fun computeProfitRate(price: Price): Double {
+        return results.sumOf { it.sum() }.toDouble() / price.value
     }
 }

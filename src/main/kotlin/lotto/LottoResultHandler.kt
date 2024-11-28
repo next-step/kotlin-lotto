@@ -7,7 +7,7 @@ object LottoResultHandler {
     ): LottoResults {
         return userLotto.fold(LottoResults()) { lottoResults, lottoNumbers ->
             val matchCount = lottoNumbers.countMatch(winningLotto)
-            lottoResults.add(LottoResult(LottoRank.valueOf(matchCount)))
+            lottoResults.apply { counting(LottoResult(LottoRank.valueOf(matchCount))) }
         }
     }
 }
