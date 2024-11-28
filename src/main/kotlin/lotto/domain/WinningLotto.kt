@@ -18,11 +18,11 @@ data class WinningLotto(
 
     companion object {
         fun create(
-            numbers: Set<Int>,
+            lottoNumbers: LottoNumbers,
             bonus: Int,
         ): WinningLotto {
             return WinningLotto(
-                lottoNumbers = LottoNumbers.from(numbers),
+                lottoNumbers = lottoNumbers,
                 bonus = LottoNumber(bonus),
             )
         }

@@ -1,21 +1,21 @@
 package lotto.view
 
-import lotto.domain.AutoTicket
 import lotto.domain.DrawResult
 import lotto.domain.Lotto
 import lotto.domain.Money
 import lotto.domain.RankReward
+import lotto.domain.Tickets
 
 object ResultView {
-    fun printTicketCount(tickets: List<AutoTicket>) {
-        println("${tickets.size}개를 구매했습니다.")
+    fun printTicketCount(tickets: Tickets) {
+        println()
+        println("수동으로 ${tickets.manualTickets.size}장, 자동으로 ${tickets.autoTickets.size}개를 구매했습니다.")
     }
 
     fun printLotteries(lotteries: List<Lotto>) {
         lotteries.forEach {
             println(it)
         }
-        println()
     }
 
     fun printStatistic(

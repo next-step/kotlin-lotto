@@ -1,5 +1,10 @@
 package lotto.domain
 
-object AutoTicket
+data class Tickets(
+    val manualTickets: List<ManualTicket>,
+    val autoTickets: List<AutoTicket>,
+)
 
-data class ManualTicket(val lottoNumbers: Set<Int>)
+data class ManualTicket(val lottoNumbers: LottoNumbers)
+
+object AutoTicket

@@ -10,7 +10,9 @@ class LottoTest : StringSpec({
     }
 
     "로또를 수동으로 생성한다" {
-        Lotto.manual(setOf(1, 2, 3, 4, 5, 6)).lottoNumbers.numbers shouldContainAll
+        val lotto =
+            Lotto.manual(LottoNumbers.from(setOf(1, 2, 3, 4, 5, 6)))
+        lotto.lottoNumbers.numbers shouldContainAll
             setOf(
                 LottoNumber(1),
                 LottoNumber(2),

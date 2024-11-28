@@ -14,7 +14,16 @@ object InputView {
             ?: throw IllegalArgumentException("잘못된 입력입니다")
     }
 
+    fun inputManualLottoNumbersList(manualTicketCount: Int): List<Set<Int>> {
+        println()
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        return (1..manualTicketCount).map {
+            inputLottoNumbers()
+        }
+    }
+
     fun inputWinningLottoNumbers(): Set<Int> {
+        println()
         println("지난 주 당첨 번호를 입력해 주세요.")
         return inputLottoNumbers()
     }

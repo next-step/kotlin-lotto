@@ -10,8 +10,8 @@ data class Lotto(val lottoNumbers: LottoNumbers) {
             return Lotto(LottoNumbers.create())
         }
 
-        fun manual(numbers: Set<Int>): Lotto {
-            return Lotto(LottoNumbers.from(numbers))
+        fun manual(lottoNumbers: LottoNumbers): Lotto {
+            return Lotto(lottoNumbers)
         }
     }
 }
