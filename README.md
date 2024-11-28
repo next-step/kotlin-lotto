@@ -2,6 +2,19 @@
 
 ## STEP 2
 
+### 피드백 - 1
+
+- [x] (리뷰 코멘트) backing properties를 쓰지 않았을 때 대비 장단점
+- [ ] 컬렉션 선언 -> 엘리먼트 추가 -> 컬렉션 리턴하는 방식을 체이닝으로 풀어내기
+  - [ ] LottoIssuer (`List(size: Int, init: (index: Int) -> T)`)
+  - [ ] LottoResultHandler (map, fold 등)
+- [ ] LottoNumbers의 generateNumbers와 generate를 하나로 처리하도록 개선
+  - [ ] 체이닝 형태로 풀어내기
+- [x] (리뷰 코멘트) InputView에 get 메서드를 덮어씌운 이유
+- [x] (리뷰 코멘트) 주석을 남긴 이유
+- [ ] LottoNumber의 random을 외부에서 주입받도록 분리
+- [ ] LottoNumbers.countMatch를 O(n^2)에서 O(n)으로 개선
+
 ### 셀프 피드백
 
 - backing field / property 에 대해 알아
