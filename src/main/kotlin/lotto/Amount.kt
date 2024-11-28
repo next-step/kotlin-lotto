@@ -26,4 +26,8 @@ value class Amount(val value: BigDecimal) {
     fun isLessThan(other: Amount): Boolean {
         return value < other.value
     }
+
+    companion object {
+        val ZERO: Amount = Amount(BigDecimal.ZERO)
+    }
 }

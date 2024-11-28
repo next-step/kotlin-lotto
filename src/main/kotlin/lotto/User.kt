@@ -6,7 +6,7 @@ typealias LastWeekNumbers = Lotto
 typealias IsBonus = Boolean
 
 class User(
-    private var amount: Amount,
+    private var amount: Amount = Amount.ZERO,
     private var manualLottos: Lottos = Lottos(emptyList()),
     private var autoLottos: Lottos = Lottos(emptyList()),
 ) {
@@ -40,5 +40,13 @@ class User(
         bonus: IsBonus,
     ): Ranks {
         return Ranks.fromGroupBy(totalLottos.match(lastWeekNumbers, bonus))
+    }
+
+    fun pay(amount: Amount) {
+        this.amount = amount
+    }
+
+    fun contains(bonusNumber: LottoNumber): IsBonus {
+        return totalLottos.values.any { it.contains(bonusNumber) }
     }
 }

@@ -6,9 +6,21 @@ object ResultView {
         println("---------")
         Rank.prizeRanks.forEach {
             val count = statistics.machRankCount(it)
-            println("${it.matchCount}개 일치 (${it.prize.value}원) - ${count}개")
+            printRankStatistic(it, count)
         }
         printRate(statistics)
+    }
+
+    private fun printRankStatistic(
+        it: Rank,
+        count: Int,
+    ) {
+        if (it == Rank.SECOND) {
+            println("5개 일치, 보너스 볼 일치 (${it.prize.value}원) - ${count}개")
+            return
+        }
+
+        println("${it.matchCount}개 일치 (${it.prize.value}원) - ${count}개")
     }
 
     private fun printRate(statistics: LottoStatistics) {

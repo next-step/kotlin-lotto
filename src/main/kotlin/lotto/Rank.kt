@@ -21,7 +21,7 @@ enum class Rank(val matchCount: Int, val prize: Amount, val isBonus: Boolean = f
                 .sortedBy { it.matchCount }
         val prizeRanks: List<Rank> =
             entries.filter { it != MISS }
-                .sortedBy { it.matchCount }
+                .sortedBy { it.prize.value }
 
         fun match(
             matchCount: Int,

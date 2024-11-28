@@ -6,20 +6,22 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 
 class UserTest {
+    private fun createLottos(vararg lottos: List<Int>) = Lottos(lottos.map { Lotto(it) })
+
+    private fun createAutoMachine(returnLottos: Lottos): (Amount) -> Lottos = { _ -> returnLottos }
+
     @Test
     fun `구입금액만큼 자동 구매 가능`() {
         val initialAmount = Amount(3_000) // 사용자가 보유한 금액
         val user = User(initialAmount)
         val expectedLottos =
-            Lottos(
-                listOf(
-                    Lotto(listOf(1, 2, 3, 4, 5, 6)),
-                    Lotto(listOf(7, 8, 9, 10, 11, 12)),
-                    Lotto(listOf(13, 14, 15, 16, 17, 18)),
-                ),
+            createLottos(
+                listOf(1, 2, 3, 4, 5, 6),
+                listOf(7, 8, 9, 10, 11, 12),
+                listOf(13, 14, 15, 16, 17, 18),
             )
 
-        val autoMachine: (Amount) -> Lottos = { _ -> expectedLottos }
+        val autoMachine = createAutoMachine(expectedLottos)
         user.buyAutoLotto(autoMachine)
 
         assertAll(
@@ -33,12 +35,10 @@ class UserTest {
         val initialAmount = Amount(3_000) // 사용자가 보유한 금액
         val user = User(initialAmount)
         val expectedLottos =
-            Lottos(
-                listOf(
-                    Lotto(listOf(1, 2, 3, 4, 5, 6)),
-                    Lotto(listOf(7, 8, 9, 10, 11, 12)),
-                    Lotto(listOf(13, 14, 15, 16, 17, 18)),
-                ),
+            createLottos(
+                listOf(1, 2, 3, 4, 5, 6),
+                listOf(7, 8, 9, 10, 11, 12),
+                listOf(13, 14, 15, 16, 17, 18),
             )
 
         user.buyManualLottos(expectedLottos)
@@ -54,12 +54,10 @@ class UserTest {
         val initialAmount = Amount(1_000) // 사용자가 보유한 금액
         val user = User(initialAmount)
         val expectedLottos =
-            Lottos(
-                listOf(
-                    Lotto(listOf(1, 2, 3, 4, 5, 6)),
-                    Lotto(listOf(7, 8, 9, 10, 11, 12)),
-                    Lotto(listOf(13, 14, 15, 16, 17, 18)),
-                ),
+            createLottos(
+                listOf(1, 2, 3, 4, 5, 6),
+                listOf(7, 8, 9, 10, 11, 12),
+                listOf(13, 14, 15, 16, 17, 18),
             )
 
         assertAll(
@@ -74,17 +72,13 @@ class UserTest {
         val initialAmount = Amount(3_000) // 사용자가 보유한 금액
         val user = User(initialAmount)
         val manualLottos =
-            Lottos(
-                listOf(
-                    Lotto(listOf(1, 2, 3, 4, 5, 6)),
-                    Lotto(listOf(7, 8, 9, 10, 11, 12)),
-                ),
+            createLottos(
+                listOf(1, 2, 3, 4, 5, 6),
+                listOf(7, 8, 9, 10, 11, 12),
             )
         val autoLottos =
-            Lottos(
-                listOf(
-                    Lotto(listOf(13, 14, 15, 16, 17, 18)),
-                ),
+            createLottos(
+                listOf(13, 14, 15, 16, 17, 18),
             )
         user.buyManualLottos(manualLottos)
 
@@ -102,17 +96,13 @@ class UserTest {
         val initialAmount = Amount(3_000) // 사용자가 보유한 금액
         val user = User(initialAmount)
         val manualLottos =
-            Lottos(
-                listOf(
-                    Lotto(listOf(1, 2, 3, 4, 5, 6)),
-                    Lotto(listOf(7, 8, 9, 10, 11, 12)),
-                ),
+            createLottos(
+                listOf(1, 2, 3, 4, 5, 6),
+                listOf(7, 8, 9, 10, 11, 12),
             )
         val autoLottos =
-            Lottos(
-                listOf(
-                    Lotto(listOf(13, 14, 15, 16, 17, 18)),
-                ),
+            createLottos(
+                listOf(13, 14, 15, 16, 17, 18),
             )
         user.buyManualLottos(manualLottos)
 
@@ -131,17 +121,13 @@ class UserTest {
         val initialAmount = Amount(3_000) // 사용자가 보유한 금액
         val user = User(initialAmount)
         val manualLottos =
-            Lottos(
-                listOf(
-                    Lotto(listOf(1, 2, 3, 4, 5, 6)),
-                    Lotto(listOf(7, 8, 9, 10, 11, 12)),
-                ),
+            createLottos(
+                listOf(1, 2, 3, 4, 5, 6),
+                listOf(7, 8, 9, 10, 11, 12),
             )
         val autoLottos =
-            Lottos(
-                listOf(
-                    Lotto(listOf(13, 14, 15, 16, 17, 18)),
-                ),
+            createLottos(
+                listOf(13, 14, 15, 16, 17, 18),
             )
         user.buyManualLottos(manualLottos)
 

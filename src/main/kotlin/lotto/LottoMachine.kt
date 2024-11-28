@@ -9,6 +9,24 @@ class LottoMachine(val autoGenerate: (Amount) -> Lottos = defaultAutoGenerateFun
         return LottoNumber(readMessage.toInt())
     }
 
+    fun createPay(value: String): Amount {
+        if (value.toIntOrNull() == null) {
+            throw IllegalArgumentException("숫자가 아닙니다.")
+        }
+        return Amount(value)
+    }
+
+    fun createManualLottos(
+        manualLottoCount: Int,
+        function: () -> List<Int>,
+    ): Lottos {
+        return Lottos(
+            List(manualLottoCount) {
+                createLotto(function())
+            },
+        )
+    }
+
     companion object {
         private val TICKET_PRICE: Amount = Amount(1000)
         private val CACHE: List<LottoNumber> = (LottoNumber.MIN_NUMBER..LottoNumber.MAX_NUMBER).map { LottoNumber(it) }
