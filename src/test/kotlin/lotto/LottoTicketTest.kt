@@ -52,38 +52,21 @@ class LottoTicketTest : StringSpec({
         val sut = LottoTicket(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))
 
         forAll(
-            row(LottoTicket(numbers = listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber)), 6),
-            row(LottoTicket(numbers = listOf(2, 3, 4, 5, 6, 7).map(::LottoNumber)), 5),
-            row(LottoTicket(numbers = listOf(3, 4, 5, 6, 7, 8).map(::LottoNumber)), 4),
-            row(LottoTicket(numbers = listOf(4, 5, 6, 7, 8, 9).map(::LottoNumber)), 3),
-            row(LottoTicket(numbers = listOf(5, 6, 7, 8, 9, 10).map(::LottoNumber)), 2),
-            row(LottoTicket(numbers = listOf(6, 7, 8, 9, 10, 11).map(::LottoNumber)), 1),
-            row(LottoTicket(numbers = listOf(7, 8, 9, 10, 11, 12).map(::LottoNumber)), 0),
+            row(LottoTicket(1, 2, 3, 4, 5, 6), 6),
+            row(LottoTicket(2, 3, 4, 5, 6, 7), 5),
+            row(LottoTicket(3, 4, 5, 6, 7, 8), 4),
+            row(LottoTicket(4, 5, 6, 7, 8, 9), 3),
+            row(LottoTicket(5, 6, 7, 8, 9, 10), 2),
+            row(LottoTicket(6, 7, 8, 9, 10, 11), 1),
+            row(LottoTicket(7, 8, 9, 10, 11, 12), 0),
         ) { lottoTicket, expectedCountOfMatches ->
             val result = sut.countOfMatches(lottoTicket)
             result shouldBe expectedCountOfMatches
         }
     }
 
-    "로또 티켓은 보너스 로또 번호와 일치하는 로또 번호를 가지고 있으면 true를 반환한다" {
-        val sut = LottoTicket(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))
-
-        listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).forEach { bonusNumber ->
-            val result: Boolean = sut.matchesBonusBall(bonusNumber)
-            result shouldBe true
-        }
-    }
-
-    "로또 티켓은 보너스 로또 번호와 일치하지 않는 로또 번호를 가지고 있으면 false를 반환한다" {
-        val sut = LottoTicket(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))
-
-        val bonusNumber = LottoNumber(7)
-        val result: Boolean = sut.matchesBonusBall(bonusNumber)
-        result shouldBe false
-    }
-
     "로또 티켓은 해당 로또 번호가 포함되어 있는지 여부를 알려줄 수 있다" {
-        val sut = LottoTicket(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))
+        val sut = LottoTicket(1, 2, 3, 4, 5, 6)
 
         forAll(
             row(LottoNumber(1), true),
