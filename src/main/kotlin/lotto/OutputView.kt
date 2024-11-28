@@ -12,18 +12,17 @@ object OutputView {
     }
 
     fun printResult(result: List<LottoResult>) {
-        StringBuilder().apply {
-            append("\n당첨 통계\n")
-            append("---------\n")
-            result
-                .sortedBy { it.getWinningPrice() }
-                .forEach {
-                    if (it.getMatchCount() >= PRINT_VALID_MATCH_COUNT) {
-                        append("${it.getMatchCount()}개 일치 ")
-                        append("(${it.getWinningPrice()}원) - ${it.count}개\n")
-                    }
-                }
-        }.also(::println)
+        println("""
+            |당첨 통계
+            |---------
+            |
+            """.trimMargin() +
+                result
+                    .sortedBy { it.getWinningPrice() }
+                    .filter { it.getMatchCount() >= PRINT_VALID_MATCH_COUNT }
+                    .joinToString(separator = "\n") {
+                        "${it.getMatchCount()}개 일치 (${it.getWinningPrice()}원) - ${it.count}개"
+                    })
     }
 
     fun printProfitRate(computeProfitRate: Double) {

@@ -14,6 +14,7 @@
 - [x] (리뷰 코멘트) 주석을 남긴 이유
 - [x] LottoNumber의 random을 외부에서 주입받도록 분리
 - [x] 외부로 노출할 필요없는 프로퍼티 private으로 변경
+- [ ] StringBuilder 대신 StringTemplate 사용하도록 변경
 - [ ] LottoNumbers.countMatch를 O(n^2)에서 O(n)으로 개선
 
 
