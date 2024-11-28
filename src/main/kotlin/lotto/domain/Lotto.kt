@@ -14,6 +14,7 @@ data class Lotto private constructor(val numbers: Set<LottoNumber>) {
         fun create(numbers: List<Int>): Lotto {
             val lottoNumbers =
                 numbers.map { LottoNumber.from(it) }
+                    .sortedBy { it.value }
                     .toSet()
             return Lotto(lottoNumbers)
         }
