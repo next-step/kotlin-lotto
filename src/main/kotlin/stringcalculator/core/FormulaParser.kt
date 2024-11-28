@@ -1,8 +1,8 @@
 package stringcalculator.core
 
 object FormulaParser {
-    private const val REGEX_FIND_CUSTOM_DELIMITER = "(?<=//)(.*?)(?=\n)"
-    private val DELIMITER_FIND_PATTERN = Regex(REGEX_FIND_CUSTOM_DELIMITER)
+    private val DELIMITER_FIND_PATTERN = Regex("(?<=//)(.*?)(?=\n)")
+    private const val CUSTOM_DELIMITER_DECLARE_LEN = 4
 
     fun parse(str: String?): List<Number> {
         if (str.isNullOrBlank()) {
@@ -15,14 +15,14 @@ object FormulaParser {
     }
 
     private fun makeSplitter(str: String): StringSplitter {
-        if (str.length < 4) {
+        if (str.length < CUSTOM_DELIMITER_DECLARE_LEN) {
             return StringSplitter(str)
         }
         val delimiter = extractCustomDelimiter(str)
         if (delimiter.isNullOrBlank()) {
             return StringSplitter(str)
         }
-        return StringSplitter(str.substring(4), delimiter)
+        return StringSplitter(str.substring(CUSTOM_DELIMITER_DECLARE_LEN), delimiter)
     }
 
     private fun extractCustomDelimiter(str: String): String? {
