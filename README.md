@@ -112,5 +112,5 @@
 ### Step3 - 리뷰 반영사항
 - [x] RankReward::matchBonus 디폴트파라미터 사용
 - [x] RankReward::matched 메서드 가독성 증대
-- [ ] RankReward::toString 메서드 제거
+- [x] RankReward::view 의존성인 toString 메서드 제거
 - [ ] WinningLotto::operator fun 사용

@@ -40,6 +40,6 @@ enum class RankReward(
             return entries.sortedByDescending { it.rankValue }
         }
 
-        private val needMatchBonusRanks: List<RankReward> = listOf(SECOND)
+        val needMatchBonusRanks: List<RankReward> = listOf(SECOND)
     }
 }

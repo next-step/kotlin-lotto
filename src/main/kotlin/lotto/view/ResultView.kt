@@ -26,7 +26,9 @@ object ResultView {
         println("당첨 통계")
         println("---------")
         RankReward.sortLowToHighByRank().forEach { rank ->
-            println("$rank- ${drawResult.getLottoCount(rank)}개")
+            val bonusText = if (rank in RankReward.needMatchBonusRanks) ", 보너스 볼 일치" else ""
+            val rankText = "${rank.matchedCount}개 일치$bonusText (${rank.money})"
+            println("$rankText- ${drawResult.getLottoCount(rank)}개")
         }
         println("총 수익률은 ${drawResult.getProfitRate(purchaseAmount)}입니다.")
     }
