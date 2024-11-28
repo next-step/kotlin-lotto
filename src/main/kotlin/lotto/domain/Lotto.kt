@@ -4,6 +4,8 @@ import lotto.stretagy.NumberListGenerator
 
 data class Lotto(val lottoNumbers: Set<LottoNumber>) {
     companion object {
+        private const val NUMBER_OF_SELECT = 6
+
         fun generate(
             numberListGenerator: NumberListGenerator,
             numberOfLotto: Int,
@@ -19,7 +21,5 @@ data class Lotto(val lottoNumbers: Set<LottoNumber>) {
                 .map { LottoNumber.from(it) }
                 .toSet()
         }
-
-        private const val NUMBER_OF_SELECT = 6
     }
 }

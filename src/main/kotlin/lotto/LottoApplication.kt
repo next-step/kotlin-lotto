@@ -10,7 +10,7 @@ fun main() {
     val lottoNumberListGenerator = LottoNumberListGenerator()
     val amount = InputView.purchaseAmount()
 
-    val numberOfLotto = Cashier(amount).purchaseLotto()
+    val numberOfLotto = Cashier.purchaseLotto(amount)
     val lottos = Lotto.generate(lottoNumberListGenerator, numberOfLotto)
     OutputView.printPurchaseResult(lottos)
 
