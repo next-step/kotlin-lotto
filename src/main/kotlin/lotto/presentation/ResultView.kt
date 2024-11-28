@@ -26,7 +26,7 @@ object ResultView {
         stringBuffer.append(STR_SEPARATOR)
         stringBuffer.append(STR_NEW_LINE)
 
-        winningStatistics.winningRankCount.filter { (it.key != WinningRank.RANK0) }
+        winningStatistics.lottoResult.winningRankCount.filter { (it.key != WinningRank.NOTHING) }
             .map {
                 stringBuffer.append(it.key.winningCount)
                 stringBuffer.append(STR_MATCH)

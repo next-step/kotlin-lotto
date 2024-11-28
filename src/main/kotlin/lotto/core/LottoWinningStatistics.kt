@@ -1,3 +1,3 @@
 package lotto.core
 
-data class LottoWinningStatistics(val winningRankCount: Map<WinningRank, Int>, val yieldRate: Float)
+data class LottoWinningStatistics(val lottoResult: LottoResult, val yieldRate: Float)

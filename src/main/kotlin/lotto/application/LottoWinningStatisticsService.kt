@@ -3,7 +3,6 @@ package lotto.application
 import lotto.core.LottoWinningStatistics
 import lotto.core.Lottos
 import lotto.core.WinningNumbers
-import lotto.core.YieldCalculator
 
 object LottoWinningStatisticsService {
     fun start(
@@ -11,8 +10,7 @@ object LottoWinningStatisticsService {
         numbers: List<Int>,
     ): LottoWinningStatistics {
         val winningNumbers = WinningNumbers(numbers)
-        val winningRankCount = lottos.countWinningRanks(winningNumbers)
-
-        return LottoWinningStatistics(winningRankCount, YieldCalculator.calculate(winningRankCount, lottos.size))
+        val lottoResult = lottos.countWinningRanks(winningNumbers)
+        return LottoWinningStatistics(lottoResult, lottoResult.calculateYield(lottos.size))
     }
 }
