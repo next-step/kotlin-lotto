@@ -6,11 +6,11 @@ import lotto.view.InputView
 import lotto.view.OutputView
 
 fun main() {
-    val inputView = InputView()
-    val outputView = OutputView()
-    val inputAmount = inputView.inputPurchaseAmount()
+    val amount = InputView.purchaseAmount()
 
-    val numberOfLotto = Cashier(inputAmount).purchaseLotto()
+    val numberOfLotto = Cashier(amount).purchaseLotto()
     val lottos = Lotto.generate(numberOfLotto)
-    outputView.printPurchaseResult(lottos)
+    OutputView.printPurchaseResult(lottos)
+
+    val winningNumbers = InputView.winningNumbers()
 }
