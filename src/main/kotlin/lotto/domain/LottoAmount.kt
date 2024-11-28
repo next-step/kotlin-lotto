@@ -1,6 +1,7 @@
 package lotto.domain
 
-class LottoAmount(private val amount: Int) {
+@JvmInline
+value class LottoAmount(private val amount: Int) {
     val ticketCount: Int
         get() = amount / LOTTO_PRICE
 
