@@ -12,4 +12,6 @@ fun main() {
 
     val tickets = LottoMachine.generateTickets(ticketCount)
     ResultView.printAutoGenerateLotto(tickets)
+
+    InputView.inputWinningLotto()
 }
