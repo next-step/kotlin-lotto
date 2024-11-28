@@ -2,8 +2,8 @@ package lotto.ui
 
 import lotto.domain.Lotto
 import lotto.domain.LottoLine
-import lotto.domain.LottoPayment
 import lotto.domain.LottoResult
+import lotto.domain.MatchResult
 import lotto.domain.Rank
 
 object ResultView {
@@ -23,22 +23,16 @@ object ResultView {
         println(output)
     }
 
-    fun printResult(
-        result: LottoResult,
-        payment: LottoPayment,
-    ) {
-        val roi = result.returnOnInvestment(payment)
+    fun printResult(result: LottoResult) {
         val output =
             buildString {
                 appendLine()
                 appendLine("당첨 통계")
                 appendLine("---------")
-
                 // 당첨 통계
-                appendLine(formatResult(result))
-
+                appendLine(formatResult(result.matchResult))
                 // 수익률
-                append(formatRoi(roi))
+                append(formatRoi(result.returnOnInvestment))
             }
         println(output)
     }
@@ -55,7 +49,7 @@ object ResultView {
         line.numbers
             .joinToString(COMMA_SEPARATOR, prefix, postfix) { it.value.toString() }
 
-    private fun formatResult(result: LottoResult): String =
+    private fun formatResult(result: MatchResult): String =
         Rank.entries
             .sortedBy { it.prize }
             .filter { it != Rank.MISS }
