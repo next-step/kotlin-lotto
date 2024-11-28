@@ -15,10 +15,17 @@ object InputView {
         return splitNumbers(readlnOrNull() ?: throw RuntimeException("잘못된 값이 입력되었습니다."))
     }
 
+    fun inputBonusNumber(): Int {
+        println(GUIDE_INPUT_BONUS_NUMBER)
+        val number = readlnOrNull() ?: throw RuntimeException("잘못된 값이 입력되었습니다.")
+        return number.toIntOrNull() ?: throw RuntimeException("잘못된 값이 입력되었습니다.")
+    }
+
     private fun splitNumbers(winningNumbers: String): List<Int> {
         val numberList = winningNumbers.split(DELIMITER)
         val numbers = transformNumbers(numberList)
-        checkInsideLottoNumber(numbers)
+        numbers.forEach { checkInsideLottoNumber(it) }
+
         checkDuplicates(numbers)
         return numbers
     }
@@ -33,15 +40,14 @@ object InputView {
         }
     }
 
-    private fun checkInsideLottoNumber(numbers: List<Int>) {
-        numbers.forEach {
-            if (it < LottoConstants.LOTTO_NUMBER_MIN || LottoConstants.LOTTO_NUMBER_MAX < it) {
-                throw IllegalArgumentException("로또 숫자의 범위를 넘어섰습니다.")
-            }
+    private fun checkInsideLottoNumber(number: Int) {
+        if (number < LottoConstants.LOTTO_NUMBER_MIN || LottoConstants.LOTTO_NUMBER_MAX < number) {
+            throw IllegalArgumentException("로또 숫자의 범위를 넘어섰습니다.")
         }
     }
 
     private const val GUIDE_INPUT_PURCHASE_AMOUNT = "구입금액을 입력해 주세요."
     private const val GUIDE_INPUT_LAST_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요."
+    private const val GUIDE_INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요."
     private const val DELIMITER = ","
 }
