@@ -32,25 +32,77 @@ class MatchTest : DescribeSpec({
 
         context("5자리가 일치하는 경우") {
             it("should be 2") {
-                val userLotto = winningLotto.copy()
+                val usrLottoNumbers =
+                    setOf(
+                        LottoNumber.from(1),
+                        LottoNumber.from(2),
+                        LottoNumber.from(3),
+                        LottoNumber.from(4),
+                        LottoNumber.from(5),
+                        LottoNumber.from(10),
+                    )
+                val userLotto = Lotto(usrLottoNumbers)
+
                 val sut = Match.lottoNumber(userLotto, winningLotto)
+
                 sut shouldBe 2
             }
         }
 
         context("4자리가 일치하는 경우") {
             it("should be 3") {
-                val userLotto = winningLotto.copy()
+                val usrLottoNumbers =
+                    setOf(
+                        LottoNumber.from(1),
+                        LottoNumber.from(2),
+                        LottoNumber.from(3),
+                        LottoNumber.from(4),
+                        LottoNumber.from(11),
+                        LottoNumber.from(12),
+                    )
+                val userLotto = Lotto(usrLottoNumbers)
+
                 val sut = Match.lottoNumber(userLotto, winningLotto)
+
                 sut shouldBe 3
             }
         }
 
-        context("5자리가 일치하는 경우") {
+        context("3자리가 일치하는 경우") {
             it("should be 4") {
-                val userLotto = winningLotto.copy()
+                val usrLottoNumbers =
+                    setOf(
+                        LottoNumber.from(1),
+                        LottoNumber.from(2),
+                        LottoNumber.from(3),
+                        LottoNumber.from(11),
+                        LottoNumber.from(12),
+                        LottoNumber.from(13),
+                    )
+                val userLotto = Lotto(usrLottoNumbers)
+
                 val sut = Match.lottoNumber(userLotto, winningLotto)
+
                 sut shouldBe 4
+            }
+        }
+
+        context("3자리 미만인 경우") {
+            it("should be 0") {
+                val usrLottoNumbers =
+                    setOf(
+                        LottoNumber.from(1),
+                        LottoNumber.from(2),
+                        LottoNumber.from(10),
+                        LottoNumber.from(11),
+                        LottoNumber.from(12),
+                        LottoNumber.from(13),
+                    )
+                val userLotto = Lotto(usrLottoNumbers)
+
+                val sut = Match.lottoNumber(userLotto, winningLotto)
+
+                sut shouldBe 0
             }
         }
     }
