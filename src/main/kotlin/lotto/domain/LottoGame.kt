@@ -21,13 +21,15 @@ class LottoGame(private val lottoPurchaseCount: LottoPurchaseCount, private val 
     companion object {
         fun makeNewLottoGame(
             lottoPurchaseAmount: LottoPurchaseAmount,
+            manualLines: List<LottoLine>,
             lottoBallMachine: LottoBallMachine,
         ): LottoGame {
             val lottoPurchaseCount = lottoPurchaseAmount.toLottoPurchaseCount()
             val lottoLines =
-                List(lottoPurchaseCount.count) {
-                    lottoBallMachine.generate()
-                }
+                manualLines +
+                    List(lottoPurchaseCount.count) {
+                        lottoBallMachine.generate()
+                    }
             return LottoGame(lottoPurchaseCount, LottoLines(lottoLines))
         }
     }
