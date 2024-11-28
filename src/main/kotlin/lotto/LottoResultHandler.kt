@@ -5,11 +5,9 @@ object LottoResultHandler {
         userLotto: List<LottoNumbers>,
         winningLotto: LottoNumbers,
     ): LottoResults {
-        val lottoResults = LottoResults()
-        userLotto.map {
-            val matchCount = it.countMatch(winningLotto)
-            lottoResults.counting(LottoResult(LottoRank.valueOf(matchCount)))
+        return userLotto.fold(LottoResults()) { lottoResults, lottoNumbers ->
+            val matchCount = lottoNumbers.countMatch(winningLotto)
+            lottoResults.add(LottoResult(LottoRank.valueOf(matchCount)))
         }
-        return lottoResults
     }
 }
