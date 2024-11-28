@@ -1,16 +1,31 @@
 package lotto.core
 
 import io.kotest.assertions.throwables.shouldThrow
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
+import java.util.stream.Stream
 
 class WinningNumbersTest {
-    @Test
-    fun `잘못된 문자열 입력 시 오류를 확인한다`() {
+    @ParameterizedTest
+    @MethodSource("provideParameters")
+    fun `생성자에 잘못된 값 전달 시 오류를 확인한다`(numberList: List<Int>, bonusNumber: Int) {
         shouldThrow<IllegalArgumentException> {
-            WinningNumbers(listOf(1))
+            WinningNumbers(numberList, bonusNumber)
         }
-        shouldThrow<IllegalArgumentException> {
-            WinningNumbers(listOf(1, 2, 3, 4, 5, 6, 7))
+    }
+
+    companion object {
+        @JvmStatic
+        fun provideParameters(): Stream<Arguments> {
+            return Stream.of(
+                Arguments.of(listOf(1), 1),
+                Arguments.of(listOf(1, 2, 3, 4, 5, 6, 7), 1),
+                Arguments.of(listOf(1, 2, 3, 4, 5, 6), 1),
+                Arguments.of(listOf(1, 2, 3, 4, 5, 6), -1),
+                Arguments.of(listOf(1, 2, 3, 4, 5, 46), 45),
+                Arguments.of(listOf(-1, 2, 3, 4, 5, 40), 45)
+            )
         }
     }
 }
