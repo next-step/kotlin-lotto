@@ -2,14 +2,15 @@ package lotto.core
 
 import lotto.core.constant.LottoConstants
 
-data class WinningNumbers(val winningNumbers: List<Int>) {
+class WinningNumbers(numbers: List<Int>, private val bonusNumber: Int) {
+    private val lotto: Lotto = Lotto(numbers)
+
     init {
-        if (winningNumbers.size != LottoConstants.LOTTO_NUMBER_COUNT) {
-            throw IllegalArgumentException("당첨 번호의 숫자가 잘못되었습니다.")
-        }
+        require(LottoConstants.LOTTO_NUMBER_MIN <= bonusNumber && bonusNumber <= LottoConstants.LOTTO_NUMBER_MAX ) { LottoConstants.ERROR_INVALID_NUMBER_SCOPE}
+        require(!lotto.contains(bonusNumber)) { LottoConstants.ERROR_INVALID_BONUS_NUMBER }
     }
 
-    fun countCommonNumbers(lotto: Lotto): Int {
-        return winningNumbers.filter { it in lotto.numbers }.size
+    fun checkWinningState(lotto: Lotto): WinningRank {
+        return WinningRank.getRank(this.lotto.countCommonNumbers(lotto), lotto.contains(bonusNumber))
     }
 }
