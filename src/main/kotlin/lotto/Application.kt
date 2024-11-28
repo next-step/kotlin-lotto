@@ -1,16 +1,18 @@
 package lotto
 
 fun main() {
-    val userAmount = InputView.readMessage("구입금액을 입력해 주세요.").toInt()
+    val userAmount = InputView.getUserAmount()
     val lottoMachine = LottoMachine()
 
-    val user = User(Amount(userAmount))
-    user.buyAutoLotto(lottoMachine.autoGenerate)
-    ResultView.print("${user.totalLottoSize}개를 구매했습니다.")
-    ResultView.printBoughtLotto(user.totalLottos)
+    val user = User(userAmount)
+    val manualLottos:Lottos = InputView.getManualLotto(lottoMachine)
 
-    val lastWeekNumbers = lottoMachine.createLotto(InputView.readCsvToInt("지난 주 당첨 번호를 입력해 주세요."))
-    val bonusNumber: LottoNumber = lottoMachine.createLottoNumber(InputView.readMessage("보너스 볼을 입력해 주세요."))
+    user.buyManualLottos(manualLottos)
+    user.buyAutoLotto(lottoMachine.autoGenerate)
+    ResultView.printBoughtLotto(user)
+
+    val lastWeekNumbers = InputView.getLastWeekNumbers(lottoMachine)
+    val bonusNumber = InputView.getBonusNumber(lottoMachine)
     val lottoStatistics = LottoStatistics.from(user, lastWeekNumbers, bonusNumber)
     ResultView.printStatistics(lottoStatistics)
 }
