@@ -45,7 +45,7 @@ class ConsoleInputView : InputView {
     }
 
     private fun readInput(): String {
-        return readInput()
+        return readlnOrNull() ?: throw IllegalArgumentException("입력값이 없습니다.")
     }
 
     companion object {
