@@ -8,7 +8,7 @@ typealias IsBonus = Boolean
 class User(
     private var amount: Amount,
     private var manualLottos: Lottos = Lottos(emptyList()),
-    private var autoLottos: Lottos = Lottos(emptyList())
+    private var autoLottos: Lottos = Lottos(emptyList()),
 ) {
     val totalLottos: Lottos
         get() = manualLottos.merge(autoLottos)

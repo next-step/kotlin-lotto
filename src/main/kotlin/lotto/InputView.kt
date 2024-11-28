@@ -22,7 +22,7 @@ object InputView {
         return Lottos(
             List(manualLottoCount) {
                 getManualLottoCount(lottoMachine)
-            }
+            },
         )
     }
 

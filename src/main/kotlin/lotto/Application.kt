@@ -5,7 +5,7 @@ fun main() {
     val lottoMachine = LottoMachine()
 
     val user = User(userAmount)
-    val manualLottos:Lottos = InputView.getManualLotto(lottoMachine)
+    val manualLottos: Lottos = InputView.getManualLotto(lottoMachine)
 
     user.buyManualLottos(manualLottos)
     user.buyAutoLotto(lottoMachine.autoGenerate)
