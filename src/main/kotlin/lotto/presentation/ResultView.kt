@@ -26,16 +26,9 @@ object ResultView {
         stringBuffer.append(STR_SEPARATOR)
         stringBuffer.append(STR_NEW_LINE)
 
-        winningStatistics.lottoResult.winningRankCount.filter { (it.key != WinningRank.NOTHING) }
-            .map {
-                stringBuffer.append(it.key.winningCount)
-                stringBuffer.append(STR_MATCH)
-                stringBuffer.append(it.key.winningAmount)
-                stringBuffer.append(STR_AMOUNT)
-                stringBuffer.append(it.value)
-                stringBuffer.append(STR_COUNT)
-                stringBuffer.append(STR_NEW_LINE)
-            }
+        winningStatistics.lottoResult.winningRankCount
+            .filter { (it.key != WinningRank.NOTHING) }
+            .map { appendWinningCount(it, stringBuffer) }
 
         stringBuffer.append("총 수익률은 ")
         stringBuffer.append(winningStatistics.yieldRate)
@@ -45,13 +38,32 @@ object ResultView {
         println(stringBuffer.toString())
     }
 
+    private fun appendWinningCount(
+        winningRangCount: Map.Entry<WinningRank, Int>,
+        stringBuffer: StringBuffer,
+    ) {
+        stringBuffer.append(winningRangCount.key.winningCount.first)
+        stringBuffer.append(STR_MATCH)
+        if (winningRangCount.key.winningCount.second) {
+            stringBuffer.append(STR_MATCH_BONUS_BALL)
+        }
+        stringBuffer.append(STR_LEFT_PARENTHESIS)
+        stringBuffer.append(winningRangCount.key.winningAmount)
+        stringBuffer.append(STR_AMOUNT)
+        stringBuffer.append(winningRangCount.value)
+        stringBuffer.append(STR_COUNT)
+        stringBuffer.append(STR_NEW_LINE)
+    }
+
     private const val STR_PURCHASED_COUNT = "개를 구매하였습니다."
     private const val STR_NEW_LINE = "\n"
     private const val STR_WINNING_STATISTICS = "당첨 통계"
     private const val STR_SEPARATOR = "---------"
-    private const val STR_MATCH = "개 일치("
+    private const val STR_MATCH = "개 일치"
+    private const val STR_LEFT_PARENTHESIS = "("
     private const val STR_AMOUNT = "원) - "
     private const val STR_COUNT = "개"
     private const val STR_PROFIT_IS_LOSS = "기준이 1이기 때문에 결과적으로 손해라는 의미임"
     private const val STR_PROFIT_IS_GOOD = "기준이 1이기 때문에 결과적으로 손해는 아니라는 의미임"
+    private const val STR_MATCH_BONUS_BALL = ", 보너스 볼 일치"
 }
