@@ -8,7 +8,8 @@ class LottoService(
     private val lineGenerator: LottoLineGenerator,
 ) {
     fun buy(command: BuyLottoCommand): Lotto {
-        val (payment, manualLotto) = command
+        val payment = command.payment
+        val manualLotto = command.manualLotto
         val autoLotto = generateRandom(payment.numberOfLines - manualLotto.numberOfLines)
         return manualLotto.merge(autoLotto)
     }
