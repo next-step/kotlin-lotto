@@ -5,6 +5,7 @@ import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
@@ -57,6 +58,18 @@ class StringAddCalculatorTest {
     fun negative() {
         assertThatExceptionOfType(RuntimeException::class.java)
             .isThrownBy { calculator.add("-1") }
+    }
+
+    @DisplayName("잘못된 커스텀 구분자 형식 입력시 예외가 발생한다")
+    @Test
+    fun invalidCustomDelimiterFormat() {
+        assertThrows<IllegalArgumentException> {
+            calculator.add("//;;\n1;2;3")
+        }
+
+        assertThrows<IllegalArgumentException> {
+            calculator.add("//1;2;3\n")
+        }
     }
 
     @DisplayName(value = "문자열 계산기에 음수를 여러개 전달하는 경우 RuntimeException 예외 처리를 한다.")
