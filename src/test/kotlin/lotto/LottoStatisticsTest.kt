@@ -85,8 +85,8 @@ class LottoStatisticsTest {
                     Rank.FIRST,
                 ),
                 Arguments.of(
-                    Lotto(listOf(1, 2, 3, 4, 5, 10)),
-                    Lottos(listOf(Lotto(listOf(1, 2, 3, 4, 5, 6)))),
+                    Lotto(listOf(1, 2, 3, 4, 5, 6)),
+                    Lottos(listOf(Lotto(listOf(1, 2, 3, 4, 5, 10)))),
                     10,
                     Rank.SECOND,
                 ),

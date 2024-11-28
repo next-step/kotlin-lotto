@@ -47,6 +47,6 @@ class User(
     }
 
     fun contains(bonusNumber: LottoNumber): IsBonus {
-        return manualLottos.values.any { it.contains(bonusNumber) }
+        return totalLottos.values.any { it.contains(bonusNumber) }
     }
 }
