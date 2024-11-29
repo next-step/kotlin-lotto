@@ -1,6 +1,11 @@
 package lotto.domain
 
 class LottoBunch(val value: List<Lotto>) {
+    constructor(
+        purchaseCount: Int,
+        lottoNumberGenerator: LottoNumberGenerator = RandomGenerator,
+    ) : this(List(purchaseCount) { Lotto(lottoNumberGenerator) })
+
     fun getMatchLottoResult(winningNumbers: List<LottoNumber>): Map<MatchingResult, Int> {
         val result: MutableMap<MatchingResult, Int> = MatchingResult.entries.associateWith { 0 }.toMutableMap()
         value.forEach {

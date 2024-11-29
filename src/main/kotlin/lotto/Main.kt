@@ -1,10 +1,8 @@
 package lotto
 
-import lotto.domain.Lotto
 import lotto.domain.LottoBunch
 import lotto.domain.LottoNumber
 import lotto.domain.PurchaseAmount
-import lotto.domain.RandomGenerator
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -16,7 +14,7 @@ fun main() {
     val purchaseCount = PurchaseAmount(purchaseAmount).getLottoCount()
 
     resultView.showPurchaseCount(purchaseCount)
-    val lottoBunch = LottoBunch(List(purchaseCount) { Lotto(RandomGenerator) })
+    val lottoBunch = LottoBunch(purchaseCount)
     resultView.showPurchaseLotto(lottoBunch)
 
     val winningNumbers = inputView.getWinningNumbers() ?: return
