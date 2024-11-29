@@ -1,16 +1,17 @@
 package lotto.domain
 
 import lotto.domain.data.Lotto
+import lotto.util.NumberGenerator
 import lotto.util.RandomNumberGenerator
 
 class LottoFactory(
     private val totalLottoCount: Int,
-    private val randomNumberGenerator: RandomNumberGenerator = RandomNumberGenerator(),
+    private val randomNumberGenerator: NumberGenerator = RandomNumberGenerator(),
 ) {
     fun createLottoList(): List<Lotto> {
         return List(totalLottoCount) {
             randomNumberGenerator
-                .getRandomNumbers(LOTTO_NUMBER_SIZE)
+                .getNumbers(LOTTO_NUMBER_SIZE)
                 .let { Lotto(it) }
         }
     }

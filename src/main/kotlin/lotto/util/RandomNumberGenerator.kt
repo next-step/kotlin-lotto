@@ -5,10 +5,10 @@ import kotlin.random.Random
 class RandomNumberGenerator(
     from: Int = 1,
     until: Int = 99,
-) {
+) : NumberGenerator {
     private val randomNumbers = List(100) { Random.nextInt(from, until) }
 
-    fun getRandomNumbers(count: Int): List<Int> {
+    override fun getNumbers(count: Int): List<Int> {
         return randomNumbers.shuffled().take(count)
     }
 }

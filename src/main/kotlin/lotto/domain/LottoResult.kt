@@ -7,17 +7,15 @@ import java.math.BigDecimal
 class LottoResult(
     private val winningLotto: Lotto,
     private val myLottoList: List<Lotto>,
-    private val minMatchingCount: Int = 3,
-    private val matchCounter: LottoNumberMatchCounter = LottoNumberMatchCounter(),
 ) {
     private val resultMap = LottoWinPlace.entries.associateWith { 0 }.toMutableMap()
 
     fun getResults(): Map<LottoWinPlace, Int> {
-        matchCounter.countMatchingNumbersAndGet(
-            target = winningLotto,
-            lottoList = myLottoList,
-        ).values
-            .filter { matchCount -> matchCount >= minMatchingCount }
+        countMatchesPerList(
+            target = winningLotto.value,
+            list = myLottoList.map { it.value },
+        )
+            .filter { matchCount -> matchCount >= MIN_MATCHING_COUNT }
             .forEach { matchCount ->
                 var count = resultMap.getOrElse(LottoWinPlace.fromCount(matchCount)) { 0 }
                 resultMap[LottoWinPlace.fromCount(matchCount)] = ++count
@@ -29,5 +27,16 @@ class LottoResult(
         return resultMap
             .map { it.key.prizeMoney * it.value.toBigDecimal() }
             .fold(BigDecimal.ZERO, BigDecimal::add)
+    }
+
+    private fun countMatchesPerList(
+        target: List<Int>,
+        list: List<List<Int>>,
+    ): List<Int> {
+        return list.map { it.count { number -> target.contains(number) } }
+    }
+
+    companion object {
+        private const val MIN_MATCHING_COUNT = 3
     }
 }

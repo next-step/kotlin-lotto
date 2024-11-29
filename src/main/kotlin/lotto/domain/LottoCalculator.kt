@@ -16,6 +16,7 @@ class LottoCalculator {
         totalProfit: BigDecimal,
         totalPurchaseAmount: BigDecimal
     ): BigDecimal {
+        require(totalPurchaseAmount > BigDecimal.ZERO) { "invalid totalPurchaseAmount : $totalPurchaseAmount" }
         if (totalProfit == BigDecimal.ZERO) return BigDecimal.ZERO
         return totalProfit.divide(totalPurchaseAmount, 2, RoundingMode.HALF_UP)
     }
