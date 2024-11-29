@@ -3,7 +3,7 @@ package lotto
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
-class LottoResultTest : StringSpec ({
+class LottoResultTest : StringSpec({
 
     "로또 결과를 생성할 수 있다" {
         // Arrange:

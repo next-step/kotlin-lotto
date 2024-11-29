@@ -3,7 +3,7 @@ package lotto
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
-class CountTest : StringSpec ({
+class CountTest : StringSpec({
 
     "Count 객체를 생성할 수 있다" {
         // Arrange:
@@ -26,5 +26,4 @@ class CountTest : StringSpec ({
         // Assert:
         result shouldBe Count(2)
     }
-
 })

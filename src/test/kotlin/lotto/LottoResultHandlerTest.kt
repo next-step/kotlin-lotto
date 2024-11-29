@@ -3,8 +3,7 @@ package lotto
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
-class LottoResultHandlerTest : StringSpec ({
-
+class LottoResultHandlerTest : StringSpec({
     "사용자가 구매한 로또 번호와 당첨 번호가 완전히 일치하면 1등이 된다." {
         // Arrange:
         val lottoNumbers = LottoNumbers(
@@ -14,7 +13,7 @@ class LottoResultHandlerTest : StringSpec ({
                 LottoNumber(3),
                 LottoNumber(4),
                 LottoNumber(5),
-                LottoNumber(6)
+                LottoNumber(6),
             )
         )
         val userLottos = listOf(lottoNumbers)
@@ -33,13 +32,13 @@ class LottoResultHandlerTest : StringSpec ({
         // Arrange:
         val userLotto = listOf(
             LottoNumbers(
-                listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }
+                listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) },
             )
         )
         val bonusNumber = LottoNumber(7)
         val winningNumbers = WinningNumbers(
             LottoNumbers(listOf(8, 9, 10, 11, 12, 13).map { LottoNumber(it) }),
-            bonusNumber
+            bonusNumber,
         )
 
         // Act:

@@ -2,7 +2,10 @@ package lotto
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import lotto.LottoRank.*
+import lotto.LottoRank.FIRST
+import lotto.LottoRank.FIFTH
+import lotto.LottoRank.THIRD
+import lotto.LottoRank.SECOND
 
 class LottoRankTest : StringSpec({
 

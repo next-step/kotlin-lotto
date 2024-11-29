@@ -23,11 +23,13 @@ data class LottoNumbers(val numbers: List<LottoNumber>) {
         }
 
         fun generate(range: IntRange): LottoNumbers {
-            return LottoNumbers(mutableSetOf<LottoNumber>().apply {
-                while (size < LOTTO_COUNT) {
-                    add(LottoNumber.generate(range.random()))
-                }
-            }.toList())
+            return LottoNumbers(
+                mutableSetOf<LottoNumber>().apply {
+                    while (size < LOTTO_COUNT) {
+                        add(LottoNumber.generate(range.random()))
+                    }
+                }.toList()
+            )
         }
     }
 }
