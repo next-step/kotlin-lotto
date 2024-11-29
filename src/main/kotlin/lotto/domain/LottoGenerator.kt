@@ -2,15 +2,16 @@ package lotto.domain
 
 import lotto.model.Lotto
 import kotlin.random.Random
-import kotlin.random.nextInt
 
-class LottoGenerator(private val count: Int) {
+class LottoGenerator(private val lottoCount: Int) {
+    private val randomNumbers = List(lottoCount) { Random.nextInt(1, 99) }
+
     fun generate(): List<Lotto> {
-        return List(count) { generateSingleLotto() }
+        return List(lottoCount) { generateSingleLotto() }
     }
 
     private fun generateSingleLotto(): Lotto {
-        return Lotto(List(LOTTO_NUMBER_SIZE) { Random.nextInt(1..99) })
+        return Lotto(randomNumbers.shuffled().take(LOTTO_NUMBER_SIZE))
     }
 
     companion object {
