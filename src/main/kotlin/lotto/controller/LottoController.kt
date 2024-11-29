@@ -6,12 +6,17 @@ import lotto.domain.LottoResult
 import lotto.domain.data.Lotto
 import lotto.view.InputView
 import lotto.view.ResultView
+import java.math.BigDecimal
 
 class LottoController {
     fun start() {
-        val totalPurchaseAmount = InputView.readTotalPurchaseAmountAsInt()
-        val calculator = LottoCalculator(totalPurchaseAmount, 1000)
-        val totalLottoCount = calculator.calculateLottoCount()
+        val totalPurchaseAmount = InputView.readTotalPurchaseAmountAsInt().toBigDecimal()
+
+        val calculator = LottoCalculator()
+        val totalLottoCount = calculator.calculateLottoCount(
+            totalPurchaseAmount = totalPurchaseAmount,
+            pricePerAmount = BigDecimal(1000)
+        )
         // 총 구매 로또 개수
         ResultView.printTotalPurchaseCount(totalLottoCount)
 
@@ -21,19 +26,16 @@ class LottoController {
 
         // 결과 출력
         val winningNumbers = InputView.readWinningLotto(InputView.ENTER_LAST_WINNING_NUMBER)
-        val result = LottoResult()
-        ResultView.printLottoResult(
-            resultMap =
-                result.getResults(
-                    winningLotto = Lotto(winningNumbers),
-                    myLottoList = myLottoList,
-                ),
+        val result = LottoResult(
+            winningLotto = Lotto(winningNumbers),
+            myLottoList = myLottoList,
         )
-        ResultView.printWinningRate(
-            winningRate =
-                calculator.calculateWinningRateFromResult(
-                    totalWinCount = result.getTotalWinCount(),
-                ),
+        ResultView.printLottoResult(resultMap = result.getResults())
+        ResultView.printProfitRate(
+            profitRate = calculator.calculateProfitRate(
+                result.getTotalProfit(),
+                totalPurchaseAmount,
+            )
         )
     }
 }

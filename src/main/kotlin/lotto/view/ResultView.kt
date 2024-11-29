@@ -2,6 +2,7 @@ package lotto.view
 
 import lotto.domain.data.Lotto
 import lotto.domain.data.LottoWinPlace
+import java.math.BigDecimal
 
 object ResultView {
     fun printTotalPurchaseCount(count: Int) {
@@ -19,7 +20,7 @@ object ResultView {
         }
     }
 
-    fun printWinningRate(winningRate: Double) {
-        println("\n총 수익률은 $winningRate 입니다.\n")
+    fun printProfitRate(profitRate: BigDecimal) {
+        println("\n총 수익률은 $profitRate 입니다.\n")
     }
 }

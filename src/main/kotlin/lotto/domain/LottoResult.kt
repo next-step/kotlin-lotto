@@ -2,17 +2,17 @@ package lotto.domain
 
 import lotto.domain.data.Lotto
 import lotto.domain.data.LottoWinPlace
+import java.math.BigDecimal
 
 class LottoResult(
+    private val winningLotto: Lotto,
+    private val myLottoList: List<Lotto>,
     private val minMatchingCount: Int = 3,
     private val matchCounter: LottoNumberMatchCounter = LottoNumberMatchCounter(),
 ) {
     private val resultMap = mutableMapOf<LottoWinPlace, Int>()
 
-    fun getResults(
-        winningLotto: Lotto,
-        myLottoList: List<Lotto>,
-    ): Map<LottoWinPlace, Int> {
+    fun getResults(): Map<LottoWinPlace, Int> {
         matchCounter.countMatchingNumbersAndGet(
             target = winningLotto,
             lottoList = myLottoList,
@@ -25,7 +25,9 @@ class LottoResult(
         return resultMap
     }
 
-    fun getTotalWinCount(): Int {
-        return resultMap.values.sum()
+    fun getTotalProfit(): BigDecimal {
+        return resultMap
+            .map { it.key.prizeMoney * it.value.toBigDecimal() }
+            .fold(BigDecimal.ZERO, BigDecimal::add)
     }
 }
