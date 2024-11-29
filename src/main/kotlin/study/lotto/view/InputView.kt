@@ -1,6 +1,6 @@
 package study.lotto.view
 
-import study.lotto.LottoService
+import study.lotto.LottoOperator
 import study.lotto.model.Lotto
 import study.lotto.model.LottoNumber
 import study.lotto.model.Lottos
@@ -43,8 +43,8 @@ class InputView {
     fun inputBonusBall(winLotto: Lotto): LottoNumber {
         println(INPUT_BONUS_BALL_MESSAGE)
         val bonus = readlnOrNull()?.toInt() ?: throw IllegalArgumentException()
-        require(bonus in LottoService.MIN_LOTTO_NUMBER..LottoService.MAX_LOTTO_NUMBER) {
-            ERROR_BONUS_NUMBER_CHECK_MESSAGE.format(LottoService.MIN_LOTTO_NUMBER, LottoService.MAX_LOTTO_NUMBER)
+        require(bonus in LottoOperator.MIN_LOTTO_NUMBER..LottoOperator.MAX_LOTTO_NUMBER) {
+            ERROR_BONUS_NUMBER_CHECK_MESSAGE.format(LottoOperator.MIN_LOTTO_NUMBER, LottoOperator.MAX_LOTTO_NUMBER)
         }
         require(!winLotto.lottoNumbers.contains(LottoNumber(bonus))) { ERROR_BONUS_WIN_LOTTO_CHECK_MESSAGE }
 

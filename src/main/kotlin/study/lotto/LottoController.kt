@@ -13,7 +13,7 @@ import study.lotto.view.ResultView
  * @author 이상준
  */
 class LottoController(
-    private val lottoService: LottoService,
+    private val lottoOperator: LottoOperator,
     private val inputView: InputView,
     private val resultView: ResultView,
 ) {
@@ -33,7 +33,7 @@ class LottoController(
 
         playGame(lottos, winLotto, bonus)
         resultView.printWinLotto(this.lottoStats)
-        resultView.printProfit(lottoService.profitLotto(this.lottoStats, money))
+        resultView.printProfit(lottoOperator.getProfitLotto(this.lottoStats, money))
     }
 
     private fun inputSettingsFromMoney(): Int {
@@ -41,8 +41,8 @@ class LottoController(
         val manualCount = inputView.inputBuyManualCount(money)
         lottos.addAllLotto(inputView.inputManualLotto(manualCount))
 
-        val autoCount = lottoService.buyLottoCount(money) - manualCount
-        lottos.addAllLotto(lottoService.buyLotto(autoCount))
+        val autoCount = lottoOperator.getBuyLottoCount(money) - manualCount
+        lottos.addAllLotto(lottoOperator.buyLotto(autoCount))
         resultView.printLottoCount(manualCount, autoCount)
         resultView.printLotto(lottos)
 
@@ -72,7 +72,7 @@ class LottoController(
 fun main() {
     val lottoController =
         LottoController(
-            LottoService(),
+            LottoOperator(),
             InputView(),
             ResultView(),
         )

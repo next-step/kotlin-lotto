@@ -3,7 +3,8 @@ package study.lotto.model
 /**
  * @author 이상준
  */
-data class LottoNumber(val number: Int) {
+@JvmInline
+value class LottoNumber(val number: Int) {
     init {
         require(number in 1..45) { ERROR_LOTTO_NUMBER_MESSAGE }
     }
