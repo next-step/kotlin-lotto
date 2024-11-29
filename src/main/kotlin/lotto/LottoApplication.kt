@@ -1,6 +1,8 @@
 package lotto
 
+import lotto.domain.LottoProfitRate
 import lotto.domain.LottoPurchaseController
+import lotto.domain.LottoResult
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -16,5 +18,9 @@ class LottoApplication {
         ResultView.printLotto(lottos)
 
         val winnerLottoNumbers = InputView.inputWinnerLottoNumbers()
+        val lottoResult = LottoResult(lottos, winnerLottoNumbers)
+        val lottoProfitRate = LottoProfitRate(lottoResult, purchaseAmount)
+        ResultView.printLottoResult(lottoResult)
+        ResultView.printLottoProfitRate(lottoProfitRate)
     }
 }
