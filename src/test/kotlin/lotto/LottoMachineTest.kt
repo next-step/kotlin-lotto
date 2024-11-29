@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 class LottoMachineTest {
     @Test
     fun `자동구매 가능`() {
-        var amount = Amount(2000)
+        var amount = Amount(2_000)
         val expectedLottos =
             Lottos(
                 listOf(
@@ -29,6 +29,27 @@ class LottoMachineTest {
         val lottoMachine = LottoMachine()
 
         val actual = lottoMachine.createLotto(numbers)
+
+        assertThat(actual).isEqualTo(expected)
+    }
+
+    @Test
+    fun `createPayment 가능`() {
+        val expected = Amount(2_000)
+        val lottoMachine = LottoMachine()
+
+        val actual = lottoMachine.createPay("2000")
+
+        assertThat(actual).isEqualTo(expected)
+    }
+
+    @Test
+    fun `Lottos 생성 가능`() {
+        val numbers = listOf(1, 2, 3, 4, 5, 6)
+        val expected = Lottos(listOf(Lotto(listOf(1, 2, 3, 4, 5, 6))))
+        val lottoMachine = LottoMachine()
+
+        val actual = lottoMachine.createManualLottos(1) { numbers }
 
         assertThat(actual).isEqualTo(expected)
     }

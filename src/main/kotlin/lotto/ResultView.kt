@@ -1,20 +1,26 @@
 package lotto
 
 object ResultView {
-    fun printBoughtLotto(boughtLotto: Lottos) {
-        boughtLotto.values.forEach { lottos ->
-            println("[%s]".format(lottos.values.sorted().map { it.value }.joinToString(", ")))
-        }
-    }
-
     fun printStatistics(statistics: LottoStatistics) {
         println("당첨 통계")
         println("---------")
         Rank.prizeRanks.forEach {
             val count = statistics.machRankCount(it)
-            println("${it.matchCount}개 일치 (${it.prize.value}원) - ${count}개")
+            printRankStatistic(it, count)
         }
         printRate(statistics)
+    }
+
+    private fun printRankStatistic(
+        it: Rank,
+        count: Int,
+    ) {
+        if (it == Rank.SECOND) {
+            println("5개 일치, 보너스 볼 일치 (${it.prize.value}원) - ${count}개")
+            return
+        }
+
+        println("${it.matchCount}개 일치 (${it.prize.value}원) - ${count}개")
     }
 
     private fun printRate(statistics: LottoStatistics) {
@@ -23,7 +29,10 @@ object ResultView {
         println("총 수익률은 ${statistics.rate()}입니다.(기준이 1이기 때문에 결과적으로 ${result}이라는 의미임)")
     }
 
-    fun print(message: String) {
-        println(message)
+    fun printBoughtLotto(user: User) {
+        println("수동으로 ${user.manualLottoSize}장, 자동으로 ${user.autoLottoSize}개를 구매했습니다.")
+        user.totalLottos.values.forEach { lottos ->
+            println("[%s]".format(lottos.values.sorted().map { it.value }.joinToString(", ")))
+        }
     }
 }

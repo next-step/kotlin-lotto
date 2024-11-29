@@ -103,3 +103,26 @@
   - [X] 2등은 추가번호가 있다
   - [X] 2등은 보너스번호를 추가 확인한다
   - [X] 당첨은 일치갯수와 추가번호 일치여부로 판단한다
+
+### 3차 피드백
+- [typealiases](kotlinlang.org/docs/type-aliases.html)
+  - "모든 원시값과 문자열을 포장한다."
+- [Kotest For All](https://kotest.io/docs/proptest/property-test-functions.html#for-all)
+- [named-arguments](https://kotlinlang.org/docs/functions.html#named-arguments)
+  - Rank.kt
+
+## 4단계 - 로또(수동)
+### 기능 요구사항
+- 현재 로또 생성기는 자동 생성 기능만 제공한다. 사용자가 수동으로 추첨 번호를 입력할 수 있도록 해야 한다.
+- 입력한 금액, 자동 생성 숫자, 수동 생성 번호를 입력하도록 해야 한다.
+
+### 기능 구현
+#### 로또 번호 입력
+- [X] 수동 번호 구매 가능
+  - [X] 수동 구매 가능
+  - [X] 금액 보다 수동 수량이 많으면 예외 발생
+- [X] 잔여 금액 로또 모두 자동 구매
+- [X] 수동 번호와 자동 번호 조합 하여 최종 로또 목록을 알 수 있다
+- [X] 수동 구매 수량과 자동 구매수량을 알 수 있다
+- [X] 로또 번호는 범위를 벗어나면 예외 발생
+- [X] 로또 번호는 비교 가능하다

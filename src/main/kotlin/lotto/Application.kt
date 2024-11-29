@@ -1,16 +1,54 @@
 package lotto
 
 fun main() {
-    val userAmount = InputView.readMessage("구입금액을 입력해 주세요.").toInt()
-    val lottoMachine = LottoMachine()
+    val steps: List<LottoViewStep<*>> =
+        listOf(
+            InputAmountStep(),
+            InputManualBuyStep(),
+            InputLastWeekNumbersStep(),
+            InputBonusNumberStep(),
+        )
 
-    val user = User(Amount(userAmount))
-    user.buyLotto(lottoMachine.autoGenerate)
-    ResultView.print("${user.totalLottoSize}개를 구매했습니다.")
-    ResultView.printBoughtLotto(user.totalLottos)
+    val gameContext = GameContext()
+    for (step in steps) {
+        if (stepApply(step, gameContext)) break
+    }
+}
 
-    val lastWeekNumbers = lottoMachine.createLotto(InputView.readCsvToInt("지난 주 당첨 번호를 입력해 주세요."))
-    val bonusNumber: LottoNumber = lottoMachine.createLottoNumber(InputView.readMessage("보너스 볼을 입력해 주세요."))
-    val lottoStatistics = LottoStatistics.from(user, lastWeekNumbers, bonusNumber)
-    ResultView.printStatistics(lottoStatistics)
+private fun stepApply(
+    step: LottoViewStep<*>,
+    gameContext: GameContext,
+): Boolean {
+    try {
+        when (val result = step.apply(gameContext.lottoMachine)) {
+            is LottoResult.SuccessStep.InputAmountStep -> {
+                gameContext.pay(result.amount)
+            }
+
+            is LottoResult.SuccessStep.InputManualStep -> {
+                gameContext.buyManualLottos(result.manual)
+                gameContext.buyAutoLotto(gameContext.generator())
+                ResultView.printBoughtLotto(gameContext.user)
+            }
+
+            is LottoResult.SuccessStep.InputLastWeekNumbersStep -> {
+                gameContext.setLastWeekNumbers(result.lastWeekNumbers)
+            }
+
+            is LottoResult.SuccessStep.InputBonusNumberStep -> {
+                val lottoStatistics = gameContext.statistics(result.bonusNumber)
+                ResultView.printStatistics(lottoStatistics)
+            }
+
+            is LottoResult.Error -> {
+                println("에러 발생: ${result.message}")
+                return true // 에러 발생 시 중단
+            }
+        }
+    } catch (e: Exception) {
+        println("에러 발생: ${e.message}")
+        return true
+    }
+
+    return false
 }

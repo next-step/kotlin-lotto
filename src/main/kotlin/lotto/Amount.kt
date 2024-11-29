@@ -22,4 +22,12 @@ value class Amount(val value: BigDecimal) {
     operator fun div(other: Amount): Int {
         return (value / other.value).toInt()
     }
+
+    fun isLessThan(other: Amount): Boolean {
+        return value < other.value
+    }
+
+    companion object {
+        val ZERO: Amount = Amount(BigDecimal.ZERO)
+    }
 }

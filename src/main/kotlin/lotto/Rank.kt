@@ -3,12 +3,12 @@ package lotto
 import java.math.BigDecimal
 
 enum class Rank(val matchCount: Int, val prize: Amount, val isBonus: Boolean = false) {
-    FIRST(6, Amount(BigDecimal(2_000_000_000))),
-    SECOND(5, Amount(BigDecimal(30_000_000)), true),
-    THIRD(5, Amount(BigDecimal(1_500_000))),
-    FOURTH(4, Amount(BigDecimal(50_000))),
-    FIFTH(3, Amount(BigDecimal(5_000))),
-    MISS(0, Amount(BigDecimal(0))),
+    FIRST(matchCount = 6, prize = Amount(BigDecimal(2_000_000_000))),
+    SECOND(matchCount = 5, prize = Amount(BigDecimal(30_000_000)), isBonus = true),
+    THIRD(matchCount = 5, prize = Amount(BigDecimal(1_500_000))),
+    FOURTH(matchCount = 4, prize = Amount(BigDecimal(50_000))),
+    FIFTH(matchCount = 3, prize = Amount(BigDecimal(5_000))),
+    MISS(matchCount = 0, prize = Amount(BigDecimal(0))),
     ;
 
     fun prize(value: MatchedCount): Amount {
@@ -21,7 +21,7 @@ enum class Rank(val matchCount: Int, val prize: Amount, val isBonus: Boolean = f
                 .sortedBy { it.matchCount }
         val prizeRanks: List<Rank> =
             entries.filter { it != MISS }
-                .sortedBy { it.matchCount }
+                .sortedBy { it.prize.value }
 
         fun match(
             matchCount: Int,

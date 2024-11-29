@@ -5,8 +5,18 @@ class LottoMachine(val autoGenerate: (Amount) -> Lottos = defaultAutoGenerateFun
         return Lotto(values.map { LottoNumber(it) }.toSet())
     }
 
-    fun createLottoNumber(readMessage: String): LottoNumber {
-        return LottoNumber(readMessage.toInt())
+    fun createPay(value: String): Amount {
+        if (value.toIntOrNull() == null) {
+            throw IllegalArgumentException("숫자가 아닙니다.")
+        }
+        return Amount(value)
+    }
+
+    fun createManualLottos(
+        manualLottoCount: Int,
+        generator: () -> List<Int>,
+    ): Lottos {
+        return Lottos.from(manualLottoCount) { generator() }
     }
 
     companion object {
