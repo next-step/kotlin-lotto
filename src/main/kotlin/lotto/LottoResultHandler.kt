@@ -15,7 +15,7 @@ object LottoResultHandler {
         return userLotto.fold(LottoResults()) { lottoResults, lottoNumbers ->
             val matchCount = lottoNumbers.countMatch(winningLotto.lottoNumbers)
             val bonusMatch = lottoNumbers.matchBonus(winningLotto.bonusNumber)
-            lottoResults.apply { counting(LottoResult(LottoRank.valueOf(matchCount, bonusMatch))) }
+            lottoResults.counting(LottoResult(LottoRank.valueOf(matchCount, bonusMatch)))
         }
     }
 }

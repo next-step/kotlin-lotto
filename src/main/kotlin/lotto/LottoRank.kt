@@ -14,8 +14,8 @@ enum class LottoRank(
     NONE(0, Price(0)),
     ;
 
-    fun sumPrice(count: Int): Int {
-        return winningPrice.value * count
+    fun sumPrice(count: Count): Int {
+        return winningPrice.value * count.value
     }
 
     fun getPriceValue(): Int {

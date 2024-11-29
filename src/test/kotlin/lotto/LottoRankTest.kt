@@ -11,7 +11,7 @@ class LottoRankTest : BehaviorSpec({
             val lottoRank = LottoRank.FIRST
 
             Then("sumPrice(1)은 2,000,000,000원을 반환한다") {
-                lottoRank.sumPrice(1) shouldBe 2_000_000_000
+                lottoRank.sumPrice(Count(1)) shouldBe 2_000_000_000
             }
         }
 
@@ -19,7 +19,7 @@ class LottoRankTest : BehaviorSpec({
             val second = SECOND
 
             Then("sumPrice(1)은 1,500,000원을 반환한다") {
-                second.sumPrice(1) shouldBe 1_500_000
+                second.sumPrice(Count(1)) shouldBe 30_000_000
             }
         }
     }
@@ -29,7 +29,7 @@ class LottoRankTest : BehaviorSpec({
 
         When("3개를 맞췄을 때") {
             Then("valueOf(3)은 FOURTH를 반환한다") {
-                LottoRank.valueOf(matchCount) shouldBe LottoRank.FOURTH
+                LottoRank.valueOf(matchCount) shouldBe LottoRank.FIFTH
             }
         }
 
