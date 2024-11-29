@@ -4,6 +4,10 @@ class WinningLotto(
     val winningNumbers: Lotto,
     val bonusNumber: LottoNumber,
 ) {
+    init {
+        validateDuplicate()
+    }
+
     fun matchLotto(targetLotto: Lotto): Rank {
         return Rank.findByMatchCount(
             countMatchingNumbers(targetLotto),
@@ -11,11 +15,15 @@ class WinningLotto(
         )
     }
 
-    fun countMatchingNumbers(targetLotto: Lotto): Int {
+    private fun countMatchingNumbers(targetLotto: Lotto): Int {
         return targetLotto.numbers.count { it in winningNumbers.numbers }
     }
 
-    fun matchBonusNumber(targetLotto: Lotto): Boolean {
+    private fun matchBonusNumber(targetLotto: Lotto): Boolean {
         return targetLotto.numbers.contains(bonusNumber)
+    }
+
+    private fun validateDuplicate() {
+        require(!winningNumbers.numbers.contains(bonusNumber)) { "당첨 로또 번호와 보너스 번호는 중복될 수 없습니다." }
     }
 }
