@@ -14,5 +14,7 @@ class LottoApplication {
         val purchaseAmount = InputView.inputPurchaseAmount()
         val lottos = LottoPurchaseController.purchaseLotto(purchaseAmount)
         ResultView.printLotto(lottos)
+
+        val winnerLottoNumbers = InputView.inputWinnerLottoNumbers()
     }
 }
