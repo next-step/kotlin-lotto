@@ -4,7 +4,7 @@ import java.lang.RuntimeException
 
 object NumberSplit {
     fun textSplitToNumbers(textOrNull: String?): List<Int> {
-        if (textOrNull.isNullOrEmpty()) {
+        if (textOrNull.isNullOrBlank()) {
             return listOf()
         }
 

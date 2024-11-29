@@ -13,7 +13,7 @@ object DelimiterScanner {
     }
 
     private fun checkEmptyInputText(inputText: String) {
-        require(inputText.isNotEmpty()) { DELIMITER_TEXT_NOT_EMPTY_MESSAGE }
+        require(inputText.isNotBlank()) { DELIMITER_TEXT_NOT_EMPTY_MESSAGE }
     }
 
     private fun checkDefaultDelimiter(
