@@ -11,14 +11,15 @@ object ResultView {
 
     fun printStatistics(
         statistics: Map<WinningCategory, Int>,
-        profitRate: Double,
+        totalPrize: Int,
+        purchaseAmount: Int,
     ) {
         println("당첨 통계")
         println("---------")
-        WinningCategory.entries.forEach { category ->
-            val count = statistics[category] ?: 0
+        statistics.forEach { (category, count) ->
             println("${category.matchCount}개 일치 (${category.prize}원)- ${count}개")
         }
-        println("총 수익률은 ${"%.2f".format(profitRate)}입니다.")
+        val profitRate = if (purchaseAmount > 0) totalPrize.toDouble() / purchaseAmount else 0.0
+        println("총 수익률: ${"%.2f".format(profitRate)}")
     }
 }

@@ -2,10 +2,10 @@ package lotto.domain
 
 enum class WinningCategory(val matchCount: Int, val prize: Int) {
     NONE(0, 0),
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    SIX(6, 2000000000),
+    FOURTH(3, 5000),
+    THIRD(4, 50000),
+    SECOND(5, 1500000),
+    FIRST(6, 2000000000),
     ;
 
     companion object {
