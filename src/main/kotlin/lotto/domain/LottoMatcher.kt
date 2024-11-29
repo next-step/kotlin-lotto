@@ -1,8 +1,9 @@
 package lotto.domain
 
-class LottoMatcher(private val winningLotto: Lotto) {
+class LottoMatcher(private val winningLotto: Lotto, private val bonusNumber: LottoNumber) {
     fun match(ticket: Lotto): WinningCategory {
         val matchCount = ticket.getNumbers().count { it in winningLotto.getNumbers() }
-        return WinningCategory.fromMatchCount(matchCount)
+        val matchBonus = ticket.getNumbers().contains(bonusNumber)
+        return WinningCategory.fromMatchCount(matchCount, matchBonus)
     }
 }
