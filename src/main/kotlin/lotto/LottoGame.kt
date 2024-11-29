@@ -3,8 +3,10 @@ package lotto
 import lotto.domain.Lotto
 import lotto.domain.LottoAmount
 import lotto.domain.LottoMachine
+import lotto.domain.WinningMachine
 import lotto.view.InputView
 import lotto.view.ResultView
+import lotto.view.ResultView.printWinningStatistics
 
 fun main() {
     val amount = InputView.inputLottoAmount()
@@ -16,11 +18,7 @@ fun main() {
 
     val inputWinningLotto = InputView.inputWinningLotto()
     val winningLotto = Lotto.createWinningLotto(inputWinningLotto)
-    println(
-        winningLotto.numbers.joinToString(
-            separator = ", ",
-            prefix = "당첨 번호는 [ ",
-            postfix = " ]",
-        ) { it.value.toString().padStart(2, ' ') },
-    )
+
+    val calculateStatistics = WinningMachine(winningLotto).calculateStatistics(tickets)
+    printWinningStatistics(calculateStatistics)
 }

@@ -12,6 +12,6 @@ value class LottoAmount(private val amount: Int) {
     }
 
     companion object {
-        private const val LOTTO_PRICE = 1000
+        const val LOTTO_PRICE = 1000
     }
 }
