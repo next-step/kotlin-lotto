@@ -3,11 +3,12 @@ package stringadd
 class StringAddCalculator {
     fun add(text: String?): Int {
         if (text.isNullOrBlank()) return RESULT_ON_ERROR
-        val inputs = parseInputs(text).map {
-            val num = it.trim().toIntOrNull() ?: RESULT_ON_ERROR
-            if (num < 0) throw RuntimeException("숫자는 음수일 수 없습니다")
-            num
-        }
+        val inputs =
+            parseInputs(text).map {
+                val num = it.trim().toIntOrNull() ?: RESULT_ON_ERROR
+                if (num < 0) throw RuntimeException("숫자는 음수일 수 없습니다")
+                num
+            }
         return addByInputSize(inputs)
     }
 

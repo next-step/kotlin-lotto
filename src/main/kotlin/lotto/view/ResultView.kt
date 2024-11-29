@@ -1,8 +1,8 @@
 package lotto.view
 
 import lotto.domain.LottoResult
-import lotto.domain.LottoWinPlace
-import lotto.model.Lotto
+import lotto.domain.data.LottoWinPlace
+import lotto.domain.data.Lotto
 
 object ResultView {
     fun printTotalPurchaseCount(count: Int) {
@@ -13,11 +13,10 @@ object ResultView {
         list.forEach { println(it) }
     }
 
-    fun printLottoResult(result: LottoResult) {
+    fun printLottoResult(resultMap: Map<LottoWinPlace, Int>) {
         println("\n당첨 통계\n---------")
-        val lottoResultMap = result.lottoResultMap
         LottoWinPlace.getPlacesFromLowest().forEach { winPlace ->
-            println("${winPlace.matchingNumberCount}개 일치 (${winPlace.prizeMoney}원) - ${lottoResultMap[winPlace]}")
+            println("${winPlace.matchingNumberCount}개 일치 (${winPlace.prizeMoney}원) - ${resultMap[winPlace]}")
         }
     }
 
