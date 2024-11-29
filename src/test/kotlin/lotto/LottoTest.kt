@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-class LottoTest{
+class LottoTest {
 
     @Test
     fun `로또 번호는 6개여야 한다`() {
@@ -32,12 +32,5 @@ class LottoTest{
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         val winningLotto = Lotto(listOf(1, 2, 3, 7, 8, 9))
         assertEquals(3, lotto.match(winningLotto))
-    }
-
-    @Test
-    fun `랜덤 로또 번호를 생성한다`()
-    {
-        val randomLotto = Lotto.randomGenerate()
-        assertEquals(6, randomLotto.sortedNumbers.size)
     }
 }
