@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoMatcher {
+object LottoMatcher {
     fun matchLottoNumberCount(
         winningLotto: Lotto,
         lotto: Lotto,

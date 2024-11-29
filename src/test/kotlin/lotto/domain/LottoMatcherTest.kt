@@ -8,8 +8,7 @@ class LottoMatcherTest : StringSpec({
         val winningLotto = Lotto.create(listOf(1, 2, 3, 4, 5, 6))
         val lotto = Lotto.create(listOf(1, 2, 3, 4, 5, 7))
 
-        val lottoMatcher = LottoMatcher()
-        val matchingCount = lottoMatcher.matchLottoNumberCount(winningLotto, lotto)
+        val matchingCount = LottoMatcher.matchLottoNumberCount(winningLotto, lotto)
 
         matchingCount shouldBe 5
     }
@@ -18,8 +17,7 @@ class LottoMatcherTest : StringSpec({
         val winningLotto = Lotto.create(listOf(1, 2, 3, 4, 5, 6))
         val lotto = Lotto.create(listOf(7, 8, 9, 10, 11, 12))
 
-        val lottoMatcher = LottoMatcher()
-        val matchingCount = lottoMatcher.matchLottoNumberCount(winningLotto, lotto)
+        val matchingCount = LottoMatcher.matchLottoNumberCount(winningLotto, lotto)
 
         matchingCount shouldBe 0
     }
