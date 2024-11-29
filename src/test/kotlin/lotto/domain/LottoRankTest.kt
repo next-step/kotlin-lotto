@@ -20,10 +20,10 @@ class LottoRankTest : StringSpec({
                     when (expectedRank) {
                         LottoRank.SECOND ->
                             ticket.matchCount(winningNumbers) == matchCount &&
-                                    hasBonusNumber
+                                hasBonusNumber
                         LottoRank.THIRD ->
                             ticket.matchCount(winningNumbers) == matchCount &&
-                                    !hasBonusNumber
+                                !hasBonusNumber
                         else -> ticket.matchCount(winningNumbers) == matchCount
                     }
                 }
