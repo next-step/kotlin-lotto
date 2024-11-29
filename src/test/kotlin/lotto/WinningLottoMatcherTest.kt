@@ -10,19 +10,19 @@ import lotto.domain.WinningLotto
 
 class WinningLottoMatcherTest : StringSpec({
     "입력된 숫자를 가진 당첨 로또를 생성할 수 있다." {
-        val lottoCreator = LottoCreator(FixedNumberGenerator())
+        val lottoCreator = LottoCreator(FixedLottoNumberGenerator())
 
-        val result = lottoCreator.createWinningLotto(FixedNumberGenerator().generate(), 7)
+        val result = lottoCreator.createWinningLotto(setOf(1, 2, 3, 4, 5, 6), 7)
 
-        result.winningNumbers shouldBe Lotto(FixedNumberGenerator().generate().map { LottoNumber(it) }.toSet())
-        result.bonusNumber shouldBe LottoNumber(7)
+        result.winningNumbers shouldBe Lotto(FixedLottoNumberGenerator().generate())
+        result.bonusNumber shouldBe LottoNumber.getNumber(7)
     }
 
     "각 등수에 대해 각각 몇개씩 일치하는지 정보를 제공한다." {
         val lotto = createLotto(1, 2, 3, 7, 8, 9)
         val winningLottoMatcher = WinningLottoMatcher()
         val order = Order(1000, listOf(lotto))
-        val winNumbers = WinningLotto(createLotto(1, 2, 3, 4, 5, 6), LottoNumber(7))
+        val winNumbers = WinningLotto(createLotto(1, 2, 3, 4, 5, 6), LottoNumber.getNumber(7))
 
         val result = winningLottoMatcher.checkAndGetResult(order, winNumbers)
         val expected =
@@ -43,7 +43,7 @@ class WinningLottoMatcherTest : StringSpec({
     "수익을 제공한다." {
         val winningLottoMatcher = WinningLottoMatcher()
         val order = Order(1000, listOf(createLotto(1, 2, 3, 4, 5, 6)))
-        val winNumbers = WinningLotto(createLotto(1, 2, 3, 4, 5, 6), LottoNumber(7))
+        val winNumbers = WinningLotto(createLotto(1, 2, 3, 4, 5, 6), LottoNumber.getNumber(7))
 
         val result = winningLottoMatcher.checkAndGetResult(order, winNumbers)
 
@@ -53,7 +53,7 @@ class WinningLottoMatcherTest : StringSpec({
     "수익률을 제공한다." {
         val winningLottoMatcher = WinningLottoMatcher()
         val order = Order(1000, listOf(createLotto(1, 2, 3, 4, 5, 6)))
-        val winNumbers = WinningLotto(createLotto(1, 2, 3, 4, 5, 6), LottoNumber(7))
+        val winNumbers = WinningLotto(createLotto(1, 2, 3, 4, 5, 6), LottoNumber.getNumber(7))
 
         val result = winningLottoMatcher.checkAndGetResult(order, winNumbers)
 

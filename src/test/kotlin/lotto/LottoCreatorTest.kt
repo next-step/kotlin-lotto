@@ -5,7 +5,7 @@ import io.kotest.matchers.shouldBe
 
 class LottoCreatorTest : StringSpec({
     "입력된 개수만큼의 로또를 생성할 수 있다." {
-        val lottoCreator = LottoCreator(FixedNumberGenerator())
+        val lottoCreator = LottoCreator(FixedLottoNumberGenerator())
 
         val result = lottoCreator.createLottos(5)
 

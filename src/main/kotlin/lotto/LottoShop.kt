@@ -1,6 +1,5 @@
 package lotto
 
-import lotto.const.LottoConst.UNIT_OF_AMOUNT
 import lotto.domain.Order
 
 class LottoShop(private val lottoCreator: LottoCreator) {
@@ -17,5 +16,9 @@ class LottoShop(private val lottoCreator: LottoCreator) {
     private fun calculateLottoCounts(amount: Int): Int {
         require(amount % UNIT_OF_AMOUNT == 0) { "로또 구매 금액은 1000원 단위로 입력되어야 합니다. (현재 입력 금액: $amount)" }
         return amount / UNIT_OF_AMOUNT
+    }
+
+    companion object {
+        const val UNIT_OF_AMOUNT = 1000
     }
 }

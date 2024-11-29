@@ -1,13 +1,9 @@
 package lotto.domain
 
 @JvmInline
-value class LottoNumber(private val number: Int) {
+value class LottoNumber private constructor(private val number: Int) {
     init {
-        validateInRange()
-    }
-
-    private fun validateInRange() {
-        require(this.number in LOTTO_RANGE) { "로또 번호는 ${LOTTO_RANGE.first} ~ ${LOTTO_RANGE.last} 내의 숫자여야 합니다." }
+        validateInRange(number)
     }
 
     override fun toString(): String {
@@ -15,6 +11,16 @@ value class LottoNumber(private val number: Int) {
     }
 
     companion object {
-        private val LOTTO_RANGE = 1..45
+        private val LOTTO_NUMBER_RANGE = IntRange(1, 45)
+        val CACHED_LOTTO_NUMBERS = LOTTO_NUMBER_RANGE.map { LottoNumber(it) }.toSet()
+
+        fun getNumber(number: Int): LottoNumber {
+            validateInRange(number)
+            return CACHED_LOTTO_NUMBERS.first { it.number == number }
+        }
+
+        private fun validateInRange(number: Int) {
+            require(number in LOTTO_NUMBER_RANGE) { "로또 번호는 1~45 내의 숫자여야 합니다." }
+        }
     }
 }

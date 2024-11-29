@@ -4,5 +4,5 @@ import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 
 fun createLotto(vararg numbers: Int): Lotto {
-    return Lotto(numbers.map { LottoNumber(it) }.toSet())
+    return Lotto(numbers.map { LottoNumber.getNumber(it) }.toSet())
 }

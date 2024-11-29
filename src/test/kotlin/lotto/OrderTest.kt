@@ -12,12 +12,12 @@ class OrderTest : StringSpec({
     "주문이 생성되면 전달된 금액에 맞는 로또를 소지한다." {
         val lottoNumbers =
             setOf(
-                LottoNumber(1),
-                LottoNumber(2),
-                LottoNumber(3),
-                LottoNumber(4),
-                LottoNumber(5),
-                LottoNumber(6),
+                LottoNumber.getNumber(1),
+                LottoNumber.getNumber(2),
+                LottoNumber.getNumber(3),
+                LottoNumber.getNumber(4),
+                LottoNumber.getNumber(5),
+                LottoNumber.getNumber(6),
             )
         val lottos =
             listOf(
@@ -36,7 +36,7 @@ class OrderTest : StringSpec({
     "주문 생성 시 전달된 금액과 로또의 수량이 맞지 않을 경우 예외를 반환한다." {
 
         assertSoftly {
-            shouldThrow<IllegalArgumentException> { Order(10000, listOf(Lotto(setOf(LottoNumber(1))))) }
+            shouldThrow<IllegalArgumentException> { Order(10000, listOf(Lotto(setOf(LottoNumber.getNumber(1))))) }
             shouldThrow<IllegalArgumentException> {
                 Order(
                     10000,
