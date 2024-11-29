@@ -5,7 +5,7 @@ enum class LottoRank(
     private val winningPrice: Price,
 ) {
     FIRST(6, Price(2_000_000_000)),
-    SECOND(6, Price(30_000_000)),
+    SECOND(5, Price(30_000_000)),
     THIRD(5, Price(1_500_000)),
     FOURTH(4, Price(50_000)),
     FIFTH(3, Price(5_000)),
@@ -24,12 +24,13 @@ enum class LottoRank(
 
     companion object {
         fun valueOf(matchCount: Int): LottoRank {
-            return entries.find { it.matchCount == matchCount } ?: NONE
+            val find = entries.find { it.matchCount == matchCount }
+            return find ?: NONE
         }
 
         fun valueOf(value: Int, bonusMatch: Boolean): LottoRank {
             return when (value) {
-                FIRST.matchCount -> if (bonusMatch) SECOND else FIRST
+                SECOND.matchCount -> if (bonusMatch) SECOND else THIRD
                 else -> valueOf(value)
             }
         }

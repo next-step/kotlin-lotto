@@ -1,42 +1,63 @@
 package lotto
 
-import io.kotest.core.spec.style.BehaviorSpec
+import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import lotto.LottoRank.SECOND
+import lotto.LottoRank.*
 
-class LottoRankTest : BehaviorSpec({
+class LottoRankTest : StringSpec({
 
-    Given("로또 순위에") {
-        When("FIRST일 때") {
-            val lottoRank = LottoRank.FIRST
+    "로또 순위가 1등이면 2,000,000,000원을 반환한다" {
+        // Arrange:
+        val lottoRank = FIRST
 
-            Then("sumPrice(1)은 2,000,000,000원을 반환한다") {
-                lottoRank.sumPrice(Count(1)) shouldBe 2_000_000_000
-            }
-        }
+        // Act:
+        val result = lottoRank.sumPrice(Count(1))
 
-        When("SECOND일 때") {
-            val second = SECOND
-
-            Then("sumPrice(1)은 1,500,000원을 반환한다") {
-                second.sumPrice(Count(1)) shouldBe 30_000_000
-            }
-        }
+        // Assert:
+        result shouldBe 2_000_000_000
     }
 
-    Given("맞춘 개수에") {
+    "맞춘 개수가 3개이고 보너스 번호를 맞추지 않았을 때 로또 순위는 FIFTH이다" {
+        // Arrange:
         val matchCount = 3
 
-        When("3개를 맞췄을 때") {
-            Then("valueOf(3)은 FOURTH를 반환한다") {
-                LottoRank.valueOf(matchCount) shouldBe LottoRank.FIFTH
-            }
-        }
+        // Act:
+        val result = LottoRank.valueOf(matchCount, false)
 
-        When("6개를 맞췄을 때") {
-            Then("valueOf(6)은 FIRST를 반환한다") {
-                LottoRank.valueOf(6) shouldBe LottoRank.FIRST
-            }
-        }
+        // Assert:
+        result shouldBe FIFTH
+    }
+
+    "맞춘 개수가 5개이고 보너스 번호를 맞추지 않았을 때 로또 순위는 THIRD이다" {
+        // Arrange:
+        val matchCount = 5
+
+        // Act:
+        val result = LottoRank.valueOf(matchCount, false)
+
+        // Assert:
+        result shouldBe THIRD
+    }
+
+    "맞춘 개수가 5개이고 보너스 번호를 맞추었을 때 로또 순위는 SECOND이다" {
+        // Arrange:
+        val matchCount = 5
+
+        // Act:
+        val result = LottoRank.valueOf(matchCount, true)
+
+        // Assert:
+        result shouldBe SECOND
+    }
+
+    "맞춘 개수가 6개이면 로또 순위는 FIRST이다" {
+        // Arrange:
+        val matchCount = 6
+
+        // Act:
+        val result = LottoRank.valueOf(matchCount, false)
+
+        // Assert:
+        result shouldBe FIRST
     }
 })

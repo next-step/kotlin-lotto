@@ -5,14 +5,14 @@ data class LottoNumbers(val numbers: List<LottoNumber>) {
         return this.numbers.count { it in winningLotto.numbers }
     }
 
+    fun matchBonus(bonusNumber: LottoNumber): Boolean {
+        return bonusNumber in numbers
+    }
+
     override fun toString(): String {
         return numbers
             .sortedBy { it.value }
             .joinToString { it.value.toString() }
-    }
-
-    fun matchBonus(bonusNumber: LottoNumber): Boolean {
-        return bonusNumber in numbers
     }
 
     companion object {
