@@ -23,15 +23,17 @@ class LottoController {
         val winningNumbers = InputView.readWinningLotto(InputView.ENTER_LAST_WINNING_NUMBER)
         val result = LottoResult()
         ResultView.printLottoResult(
-            resultMap = result.getResults(
-                winningLotto = Lotto(winningNumbers),
-                myLottoList = myLottoList
-            )
+            resultMap =
+                result.getResults(
+                    winningLotto = Lotto(winningNumbers),
+                    myLottoList = myLottoList,
+                ),
         )
         ResultView.printWinningRate(
-            winningRate = calculator.calculateWinningRateFromResult(
-                totalWinCount = result.getTotalWinCount()
-            )
+            winningRate =
+                calculator.calculateWinningRateFromResult(
+                    totalWinCount = result.getTotalWinCount(),
+                ),
         )
     }
 }

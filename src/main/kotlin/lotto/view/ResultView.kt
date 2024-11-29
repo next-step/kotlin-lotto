@@ -1,8 +1,7 @@
 package lotto.view
 
-import lotto.domain.LottoResult
-import lotto.domain.data.LottoWinPlace
 import lotto.domain.data.Lotto
+import lotto.domain.data.LottoWinPlace
 
 object ResultView {
     fun printTotalPurchaseCount(count: Int) {

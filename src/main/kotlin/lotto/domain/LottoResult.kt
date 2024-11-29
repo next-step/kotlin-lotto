@@ -5,7 +5,7 @@ import lotto.domain.data.LottoWinPlace
 
 class LottoResult(
     private val minMatchingCount: Int = 3,
-    private val matchCounter: LottoNumberMatchCounter = LottoNumberMatchCounter()
+    private val matchCounter: LottoNumberMatchCounter = LottoNumberMatchCounter(),
 ) {
     private val resultMap = mutableMapOf<LottoWinPlace, Int>()
 
@@ -15,7 +15,7 @@ class LottoResult(
     ): Map<LottoWinPlace, Int> {
         matchCounter.countMatchingNumbersAndGet(
             target = winningLotto,
-            lottoList = myLottoList
+            lottoList = myLottoList,
         ).values
             .filter { matchCount -> matchCount >= minMatchingCount }
             .forEach { matchCount ->
@@ -25,7 +25,7 @@ class LottoResult(
         return resultMap
     }
 
-    fun getTotalWinCount() : Int {
+    fun getTotalWinCount(): Int {
         return resultMap.values.sum()
     }
 }

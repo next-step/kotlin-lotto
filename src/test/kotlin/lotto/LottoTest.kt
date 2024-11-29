@@ -2,9 +2,6 @@ package lotto
 
 import lotto.domain.LottoCalculator
 import lotto.domain.LottoFactory
-import lotto.domain.LottoResult
-import lotto.domain.data.LottoWinPlace
-import lotto.domain.data.Lotto
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
