@@ -12,13 +12,9 @@ class Lotto(private val lottoNumberGenerator: LottoNumberGenerator? = null, vara
             getByAuto()
         }
 
-    private fun getByAuto(): MutableSet<LottoNumber> {
-        lottoNumberGenerator ?: return mutableSetOf()
-        val lotto: MutableSet<LottoNumber> = mutableSetOf()
-        while (lotto.size < LOTTO_NUMBER_COUNT) {
-            lotto.add(LottoNumber.get(lottoNumberGenerator.generateLottoNumber()))
-        }
-        return lotto
+    private fun getByAuto(): Set<LottoNumber> {
+        lottoNumberGenerator ?: return setOf()
+        return buildSet { while (size < 6) add(LottoNumber.get(lottoNumberGenerator.generateLottoNumber())) }
     }
 
     private fun getByManual(lottoNumber: IntArray): Set<LottoNumber> {
