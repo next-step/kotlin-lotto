@@ -12,17 +12,32 @@ object OutputView {
     }
 
     fun printResult(result: List<LottoResult>) {
-        println("""
-            |당첨 통계
-            |---------
-            |
-            """.trimMargin() +
-                result
-                    .sortedBy { it.getWinningPrice() }
-                    .filter { it.getMatchCount() >= PRINT_VALID_MATCH_COUNT }
-                    .joinToString(separator = "\n") {
-                        "${it.getMatchCount()}개 일치 (${it.getWinningPrice()}원) - ${it.count}개"
-                    })
+        println(getHeader())
+        println(getBody(result))
+    }
+
+    private fun getHeader() = """
+                |당첨 통계
+                |---------
+                """.trimMargin()
+
+    private fun getBody(result: List<LottoResult>): Any {
+        return result
+            .sortedBy { it.getWinningPrice() }
+            .filter { it.getMatchCount() >= PRINT_VALID_MATCH_COUNT }
+            .joinToString(separator = "\n") { formatResult(it) }
+    }
+
+    private fun formatResult(it: LottoResult): String {
+        return "${getRankDescription(it)} (${it.getWinningPrice()}원) - ${it.count}개"
+    }
+
+    private fun getRankDescription(it: LottoResult): String {
+        return if (it.isSecondRank()) {
+            "5개 일치, 보너스 볼 일치"
+        } else {
+            "${it.getMatchCount()}개 일치"
+        }
     }
 
     fun printProfitRate(computeProfitRate: Double) {
