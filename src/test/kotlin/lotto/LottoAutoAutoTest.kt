@@ -1,8 +1,16 @@
 package lotto
 
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 
-class LottoAutoTest {
+class LottoAutoAutoTest {
+    private lateinit var lottoAuto: LottoAuto
+
+    @BeforeEach
+    fun setUp() {
+        lottoAuto = LottoAuto()
+    }
+
     @DisplayName(value = "구입 금액은 양수다.")
     fun checkPuchaseAmount() {
     }

@@ -1,9 +1,9 @@
 package lotto
 
 fun main() {
-    val lotto = Lotto()
+    val lottoAuto = LottoAuto()
     try {
-        lotto.start()
+        lottoAuto.start()
     } catch (e: Exception) {
         println("오류 : $e")
     }
