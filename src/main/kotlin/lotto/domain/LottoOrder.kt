@@ -10,7 +10,7 @@ data class LottoOrder(
         require(manualCount * LOTTO_PRICE <= money.value) { "금액이 부족합니다." }
     }
 
-    val remainingQuantity: Int
+    val autoLottoQuantity: Int
         get() = getRemainingMoney().value / LOTTO_PRICE
 
     private fun getRemainingMoney(): Money = Money(money.value - LOTTO_PRICE * manualCount)
