@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.domain.Lotto
-import lotto.domain.WinningCategory
+import lotto.domain.WinningStatistics
 
 object ResultView {
     fun printPurchaseInfo(tickets: List<Lotto>) {
@@ -10,16 +10,12 @@ object ResultView {
     }
 
     fun printStatistics(
-        statistics: Map<WinningCategory, Int>,
-        totalPrize: Int,
-        purchaseAmount: Int,
+        statistics: WinningStatistics,
+        profitRate: Double,
     ) {
         println("당첨 통계")
         println("---------")
-        statistics.forEach { (category, count) ->
-            println("${category.matchCount}개 일치 (${category.prize}원)- ${count}개")
-        }
-        val profitRate = if (purchaseAmount > 0) totalPrize.toDouble() / purchaseAmount else 0.0
+        statistics.getDescriptions().forEach { println(it) }
         println("총 수익률: ${"%.2f".format(profitRate)}")
     }
 }
