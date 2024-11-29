@@ -1,24 +1,30 @@
 package lotto.view
 
-import lotto.domain.Lotto
-import lotto.domain.LottoResult
+import lotto.domain.LottoNumbers
+import lotto.domain.LottoProfitRate
+import lotto.domain.LottoRankMatchMap
+import lotto.domain.Lottos
 
-class LottoView {
-    fun drawLottos(lottoResult: LottoResult) {
-        lottoResult.lottos.lottos.forEach { drawLotto(it) }
+object LottoView {
+    fun drawLottos(lottos: Lottos) {
+        lottos.lottos.forEach { drawLottoNumbers(it.numbers) }
     }
 
-    private fun drawLotto(lotto: Lotto) {
-        println(lotto.numbers.joinToString(prefix = "[", postfix = "]", separator = ","))
-    }
-
-    fun drawResultMap(lottoResult: LottoResult) {
+    fun drawMatchMap(lottoRankMatchMap: LottoRankMatchMap) {
         println("당첨 통계")
         println("---------")
-        lottoResult.lottoMatchMap.lottoMatchMap.forEach { println("${it.key}개 일치 : ${it.value}개") }
+        lottoRankMatchMap.lottoRankMatchMap.forEach { println("${it.key}등 : ${it.value}개") }
     }
 
-    fun drawProfitRate(lottoResult: LottoResult) {
-        println("총 수익률은 ${lottoResult.profitRate}입니다.")
+    fun drawProfitRate(lottoProfitRate: LottoProfitRate) {
+        val lottoProfitRateDescription = if (lottoProfitRate.profitRate > 1.0) "이득이에요" else "손해에요"
+        println("총 수익률은 ${lottoProfitRate.profitRate}입니다. $lottoProfitRateDescription")
+    }
+
+    private fun drawLottoNumbers(lottoNumbers: LottoNumbers) {
+        val joinToString =
+            lottoNumbers.lottoNumbers.map { it.number }.sorted()
+                .joinToString(prefix = "[", postfix = "]", separator = ",")
+        println(joinToString)
     }
 }

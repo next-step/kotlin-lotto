@@ -13,21 +13,34 @@ enum class Rank(
     MISS(0, false, 0), ;
 
     companion object {
-        fun valueOf(
+        fun getRankCount(
+            rank: Rank,
+            lottos: Lottos,
+            winningNumbers: WinningNumbers,
+        ): Int {
+            val ranks =
+                lottos.lottos.map {
+                    valueOf(
+                        winningNumbers.matchNumbers(it),
+                        it.numbers.lottoNumbers.map { lottoNumber -> lottoNumber.number }
+                            .contains(winningNumbers.bonusnumber.number),
+                    )
+                }
+            return ranks.filter { it.equals(rank) }.size
+        }
+
+        private fun valueOf(
             countOfMatch: Int,
             matchBonus: Boolean,
         ): Rank {
-            if (matchBonus) {
-                return entries.find { it.countOfMatch == countOfMatch } ?: MISS
+            if (!matchBonus) {
+                return entries.find { it.countOfMatch == countOfMatch && !it.isMatchBonusNeed } ?: MISS
             }
-            return entries.filter { !it.isMatchBonusNeed }.find { it.countOfMatch == countOfMatch } ?: MISS
-        }
-
-        fun getRankCount(
-            rank: Rank,
-            ranks: List<Rank>,
-        ): Int {
-            return ranks.filter { it.equals(rank) }.size
+            val bonusMatchRank = entries.find { it.countOfMatch == countOfMatch && it.isMatchBonusNeed }
+            if (bonusMatchRank != null) {
+                return bonusMatchRank
+            }
+            return entries.find { it.countOfMatch == countOfMatch } ?: MISS
         }
     }
 }
