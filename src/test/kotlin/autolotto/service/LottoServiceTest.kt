@@ -26,7 +26,7 @@ class LottoServiceTest {
             )
         lottos.forEach { lotto -> lottoRepository.save(lotto) }
 
-        val result = service.getWinnerInfo(listOf(7, 8, 9, 17, 14, 15, 16))
+        val result = service.getResult(listOf(7, 8, 9, 17, 14, 15, 16))
 
         result.get(3) shouldBe 1
         result.get(4) shouldBe 1

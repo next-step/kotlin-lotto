@@ -1,9 +1,14 @@
 package autolotto.view
 
-import autolotto.valid.Valid
+import autolotto.valid.*
 
 object InputView {
-    private val LOTTO_AMOUNT = 1000
+    private const val LOTTO_AMOUNT = 1000
+
+    private val positiveNumberValidator = PositiveNumberValidatorStrategy()
+    private val lottoAmountValidator = LottoAmountValidatorStrategy()
+    private val winningNumberValidator = WinningNumberValidatorStrategy()
+    private val numberValidatorStrategy = NumberValidatorStrategy()
 
     fun getLottoGameCount(amount: Int): Int {
         return amount / LOTTO_AMOUNT
@@ -16,9 +21,16 @@ object InputView {
     fun getLottoPurchaseAmount(): Int {
         println("구입금액을 입력해 주세요.")
         val input: Int = readLine()?.toIntOrNull() ?: throw RuntimeException("0 이 아닌 숫자를 입력해주세요")
-        val convertValue = Valid.inputNumberValid(input)
-        Valid.purchaseAmountValid(convertValue)
-        return convertValue
+
+        if (!positiveNumberValidator.isValid(input)) {
+            throw RuntimeException(positiveNumberValidator.getErrorMessage())
+        }
+
+        if (!lottoAmountValidator.isValid(input)) {
+            throw RuntimeException(lottoAmountValidator.getErrorMessage())
+        }
+
+        return input
     }
 
     fun getWinningNumber(): List<Int> {
@@ -28,7 +40,20 @@ object InputView {
             throw RuntimeException("당청번호를 입력해주세요.")
         }
         val splitValue = splitWinningNumbers(input)
-        return splitValue.map { e -> Valid.inputNumberValid(Valid.run { stringToInt(e) }) }.toList()
+        return splitValue.map { e ->
+            if (!numberValidatorStrategy.isValid(e)) {
+                throw RuntimeException(numberValidatorStrategy.getErrorMessage())
+            }
+            val number = Integer.parseInt(e)
+            if (!positiveNumberValidator.isValid(number)) {
+                throw RuntimeException(positiveNumberValidator.getErrorMessage())
+            }
+            number
+        }.also { numbers ->
+            if (!winningNumberValidator.isValid(numbers)) {
+                throw RuntimeException(winningNumberValidator.getErrorMessage())
+            }
+        }
     }
 
     fun printInputWinningNumber(winningNumbers: List<Int>) {
