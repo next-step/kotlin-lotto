@@ -2,6 +2,7 @@ package lotto
 
 data class LottoResult(
     val lottoRank: LottoRank,
+    val bonusMatch: Boolean = false,
 ) {
     var count: Int = 0
 

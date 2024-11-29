@@ -8,10 +8,14 @@ fun main() {
 
     OutputView.printLotto(userLotto)
 
-    val winningNumbers = InputView.getWinningNumbers()
+    val numbers = InputView.getLottoNumbers()
+    val number = InputView.getBonusNumber()
 
-    val winningLotto = LottoNumbers.created(winningNumbers)
-    val lottoResult = LottoResultHandler.match(userLotto, winningLotto)
+    val lottoNumbers = LottoNumbers.created(numbers)
+    val bonusNumber = LottoNumber.generate(number)
+    val winningNumbers = WinningNumbers(lottoNumbers, bonusNumber)
+
+    val lottoResult = LottoResultHandler.match(userLotto, winningNumbers)
 
     OutputView.printResult(lottoResult.results)
     OutputView.printProfitRate(lottoResult.computeProfitRate(price))

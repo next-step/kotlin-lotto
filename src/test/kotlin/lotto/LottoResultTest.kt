@@ -6,7 +6,7 @@ import io.kotest.matchers.shouldBe
 class LottoResultTest : BehaviorSpec({
 
     Given("2등 당첨된 1명인 로또 결과에") {
-        val lottoResult = LottoResult(lottoRank = LottoRank.SECOND)
+        val lottoResult = LottoResult(lottoRank = LottoRank.SECOND, bonusMatch = bonusMatch)
 
         When("2등 당첨금을 계산하면") {
             lottoResult.count()

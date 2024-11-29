@@ -11,6 +11,10 @@ data class LottoNumbers(val numbers: List<LottoNumber>) {
             .joinToString { it.value.toString() }
     }
 
+    fun matchBonus(bonusNumber: LottoNumber): Boolean {
+        return bonusNumber in numbers
+    }
+
     companion object {
         private const val LOTTO_COUNT = 6
 
