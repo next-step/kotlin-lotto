@@ -3,10 +3,12 @@ package lotto.domain
 @JvmInline
 value class LottoNumber private constructor(val value: Int) {
     init {
-        require(value in 1..45)
+        require(value in lottoNumberRange)
     }
 
     companion object {
+        private val lottoNumberRange = 1..45
+
         private val lottoNumbers: MutableMap<Int, LottoNumber> = mutableMapOf()
 
         fun get(lottoNumber: Int): LottoNumber =
