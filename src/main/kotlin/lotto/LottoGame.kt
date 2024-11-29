@@ -5,7 +5,7 @@ import lotto.LottoConstants.LOTTO_PRICE
 
 class LottoGame {
 
-    fun purchase(paidMoney : Int) : List<Lotto> {
+    fun purchase(paidMoney: Int): List<Lotto> {
         val purchaseTime = paidMoney / LOTTO_PRICE
         require(paidMoney >= LOTTO_PRICE) { "로또 구입 금액은 1000원 이상이어야 합니다." }
 
