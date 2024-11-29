@@ -13,8 +13,8 @@ class StringAddCalculator {
         return NumberParser(
             listOf(
                 CustomDelimiterStrategy(),
-                DefaultDelimiterStrategy(),
-            ),
+                DefaultDelimiterStrategy()
+            )
         ).parseNumbers(input).let {
             Numbers.from(it).sum()
         }
