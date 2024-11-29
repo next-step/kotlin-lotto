@@ -14,3 +14,14 @@
 ### 프로그래밍 요구 사항
 1. indent(인덴트, 들여쓰기) depth를 2를 넘지 않도록 구현한다. 1까지만 허용한다
 2. 함수(또는 메서드)의 길이가 10라인을 넘어가지 않도록 구현한다.
+
+### Feedback
+1. DelimiterExtractor - extractDelimiterAndText Data class 사용
+2. extractDelimiterAndText - 상수 선언
+3. StringSplitter - 네이밍 수정
+4. 커스텀 구분자에 대한 테스트 케이스 추가
+
+
+## step-2
+
+### 요구사항
