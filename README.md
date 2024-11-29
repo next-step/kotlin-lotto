@@ -30,8 +30,8 @@
   - 총 당첨금액과 수익률을 계산한다
 
 ### 5. UI 로직 분리
-- [ ] InputView 클래스 구현
-- [ ] ResultView 클래스 구현
+- [x] InputView 클래스 구현
+- [x] ResultView 클래스 구현
 
 --- 
 
