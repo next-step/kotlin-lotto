@@ -7,7 +7,7 @@ data class Lotto(val lottoNumbers: LottoNumbers) {
 
     companion object {
         fun auto(): Lotto {
-            return Lotto(LottoNumbers.create())
+            return Lotto(LottoNumbers.random())
         }
 
         fun manual(lottoNumbers: LottoNumbers): Lotto {

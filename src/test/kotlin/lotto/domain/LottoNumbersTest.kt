@@ -12,11 +12,11 @@ import io.kotest.matchers.shouldBe
 
 class LottoNumbersTest : StringSpec({
     "로또 하나에 6개의 랜덤번호가 들어있다" {
-        LottoNumbers.create().numbers.size shouldBe 6
+        LottoNumbers.random().numbers.size shouldBe 6
     }
 
     "로또번 호들은 중복되지 않는다" {
-        val numbers = LottoNumbers.create().numbers
+        val numbers = LottoNumbers.random().numbers
         numbers.distinct().size shouldBe 6
     }
 
@@ -52,7 +52,7 @@ class LottoNumbersTest : StringSpec({
     }
 
     "로또 번호의 범위는 1~45이다" {
-        LottoNumbers.create().numbers.forEach {
+        LottoNumbers.random().numbers.forEach {
             it.number shouldBeInRange 1..45
         }
     }

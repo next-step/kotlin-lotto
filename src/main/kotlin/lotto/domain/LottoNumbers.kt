@@ -22,7 +22,7 @@ class LottoNumbers(numbers: Set<LottoNumber>) {
     companion object {
         private const val LOTTO_NUMBER_COUNT = 6
 
-        fun create(): LottoNumbers {
+        fun random(): LottoNumbers {
             return LottoNumbers(LottoNumber.ALL.shuffled().take(LOTTO_NUMBER_COUNT).toSet())
         }
 
