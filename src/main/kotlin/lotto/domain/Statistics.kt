@@ -2,10 +2,10 @@ package lotto.domain
 
 data class Statistics(val rank: Int, val matchCount: Int) {
     fun earnings(): Long {
-        return (earningPriceByRanking() * matchCount).toLong()
+        return earningPriceByRanking() * matchCount
     }
 
-    private fun earningPriceByRanking() =
+    private fun earningPriceByRanking(): Long =
         when (rank) {
             RANK_FIRST -> FIRST_RANK_EARNING
             RANK_SECOND -> SECOND_RANK_EARNING
@@ -22,12 +22,12 @@ data class Statistics(val rank: Int, val matchCount: Int) {
         private const val RANK_FOURTH = 4
         private const val RANK_FIFTH = 5
 
-        private const val FIRST_RANK_EARNING = 2_000_000_000
-        private const val SECOND_RANK_EARNING = 1_500_000
-        private const val THIRD_RANK_EARNING = 50_000
-        private const val FOURTH_RANK_EARNING = 5_000
-        private const val FIFTH_RANK_EARNING = 0
-        private const val NO_RANK_EARNING = 0
+        private const val FIRST_RANK_EARNING = 2_000_000_000L
+        private const val SECOND_RANK_EARNING = 1_500_000L
+        private const val THIRD_RANK_EARNING = 50_000L
+        private const val FOURTH_RANK_EARNING = 5_000L
+        private const val FIFTH_RANK_EARNING = 0L
+        private const val NO_RANK_EARNING = 0L
 
         fun of(
             userLottos: List<Lotto>,

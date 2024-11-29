@@ -39,13 +39,13 @@ class StatisticsTest : DescribeSpec({
     describe("earningsRatio test") {
         it("Integer Overflow 발생하지 않도록 헨들링") {
             val statistics = Statistics(rank = 1, matchCount = 2)
-            val actual = Statistics.earningsRatio(statistics)
+            val actual = statistics.earnings()
             actual shouldBe 4_000_000_000
         }
 
         it("3등 3장") {
             val statistics = Statistics(rank = 3, matchCount = 3)
-            val actual = Statistics.earningsRatio(statistics)
+            val actual = statistics.earnings()
             actual shouldBe 150000
         }
     }
