@@ -14,6 +14,6 @@ class Lotto(val numbers: List<Int>) {
     fun match(other: Lotto): Int {
         return numbers.count { other.numbers.contains(it) }
     }
-    fun sortedList(): List<Int> = numbers.sorted()
 
+    fun sortedList(): List<Int> = numbers.sorted()
 }

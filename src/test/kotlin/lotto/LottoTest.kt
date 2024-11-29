@@ -1,11 +1,10 @@
 package lotto
 
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class LottoTest {
-
     @Test
     fun `로또 번호는 6개여야 한다`() {
         assertThrows<IllegalArgumentException> {

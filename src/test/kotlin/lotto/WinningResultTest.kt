@@ -5,7 +5,6 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class WinningResultTest {
-
     @Test
     fun `번호 3개 일치시 당첨금은 5000원이다`() {
         val winningStatistics = mapOf(3 to 1)
@@ -33,11 +32,12 @@ class WinningResultTest {
 
     @Test
     fun `총 당첨금을 계산한다`() {
-        val winningStatistics = mapOf(
-            3 to 2,
-            4 to 1,
-            5 to 1
-        )
+        val winningStatistics =
+            mapOf(
+                3 to 2,
+                4 to 1,
+                5 to 1,
+            )
         val winningResult = WinningResult(winningStatistics)
         val prize = winningResult.calculateTotalPrize()
         val expectedPrize = (5000 * 2) + (50000 * 1) + (1500000 * 1)
@@ -46,11 +46,10 @@ class WinningResultTest {
 
     @Test
     fun `수익률을 계산한다`() {
-        val winningStatistics = mapOf(3 to 1)  // 5,000원
-        val purchaseAmount = 10000  // 10장 구매
+        val winningStatistics = mapOf(3 to 1) // 5,000원
+        val purchaseAmount = 10000 // 10장 구매
         val winningResult = WinningResult(winningStatistics)
         val profitRate = winningResult.calculateProfitRate(purchaseAmount)
-        assertThat(profitRate).isEqualTo(0.5)  // 5000 / 10000 = 0.5
+        assertThat(profitRate).isEqualTo(0.5)
     }
-
 }

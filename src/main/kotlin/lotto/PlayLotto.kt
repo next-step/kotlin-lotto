@@ -3,13 +3,11 @@ package lotto
 import lotto.view.InputView
 import lotto.view.ResultView
 
-
 fun main() {
     PlayLotto().run()
 }
 
 class PlayLotto {
-
     private val lottoGame = LottoGame()
     private val inputView = InputView()
     private val resultView = ResultView()
