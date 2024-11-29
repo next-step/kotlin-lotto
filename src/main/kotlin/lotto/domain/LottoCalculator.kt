@@ -17,6 +17,6 @@ class LottoCalculator {
         totalPurchaseAmount: BigDecimal
     ): BigDecimal {
         if (totalProfit == BigDecimal.ZERO) return BigDecimal.ZERO
-        return totalProfit.divide(totalPurchaseAmount).setScale(2, RoundingMode.UP)
+        return totalProfit.divide(totalPurchaseAmount, 2, RoundingMode.HALF_UP)
     }
 }

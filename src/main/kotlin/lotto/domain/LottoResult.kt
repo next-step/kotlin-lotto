@@ -10,7 +10,7 @@ class LottoResult(
     private val minMatchingCount: Int = 3,
     private val matchCounter: LottoNumberMatchCounter = LottoNumberMatchCounter(),
 ) {
-    private val resultMap = mutableMapOf<LottoWinPlace, Int>()
+    private val resultMap = LottoWinPlace.entries.associateWith { 0 }.toMutableMap()
 
     fun getResults(): Map<LottoWinPlace, Int> {
         matchCounter.countMatchingNumbersAndGet(
@@ -19,7 +19,7 @@ class LottoResult(
         ).values
             .filter { matchCount -> matchCount >= minMatchingCount }
             .forEach { matchCount ->
-                var count = resultMap.getOrPut(LottoWinPlace.fromCount(matchCount)) { 0 }
+                var count = resultMap.getOrElse(LottoWinPlace.fromCount(matchCount)) { 0 }
                 resultMap[LottoWinPlace.fromCount(matchCount)] = ++count
             }
         return resultMap
