@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.util.StringParser
 import lotto.view.InputView
 import lotto.view.ResultView
 import kotlin.math.roundToLong
@@ -44,13 +45,13 @@ class LottoAuto {
         input2: String,
         purchasedLottoCount: Int,
     ): MutableMap<Int, Int> {
-        val winningNumbers = convertToInts(input2)
+        val winningNumbers = StringParser.convertToInts(input2)
         val matchedLottoNumberCounts = createMatchedLottoNumberCounts(winningNumbers, purchasedLottoCount)
         return matchedLottoNumberCounts
     }
 
     fun purchaseLottos(input: String): Pair<Int, Int> {
-        val purchaseAmount = convertToInt(input)
+        val purchaseAmount = StringParser.convertToInt(input)
         val purchasedLottoCount = countPurchasedLotto(purchaseAmount)
         return Pair(purchaseAmount, purchasedLottoCount)
     }
@@ -88,17 +89,6 @@ class LottoAuto {
         return matchedLottoNumberCounts
     }
 
-    private fun convertToInts(input2: String): List<Int> {
-        val winningNumbers =
-            input2.split(",")
-                .map { it.trim() }
-                .filter { it.isNotEmpty() }
-                .map {
-                    it.toIntOrNull() ?: throw NumberFormatException("숫자로 입력하지 않았습니다.")
-                }
-        return winningNumbers
-    }
-
     fun createLottos(purchasedLottoCount: Int): MutableList<List<Int>> {
         val purchasedLottos = mutableListOf<List<Int>>()
         repeat(purchasedLottoCount) { idx ->
@@ -112,11 +102,6 @@ class LottoAuto {
         if (purchaseAmount <= 0) throw RuntimeException("금액은 양수입니다.")
         val purchasedLottoCount = (purchaseAmount / TICKET_PRICE)
         return purchasedLottoCount
-    }
-
-    private fun convertToInt(input: String): Int {
-        val purchaseAmount = input.toIntOrNull() ?: throw RuntimeException("숫자로 입력하지 않았습니다.")
-        return purchaseAmount
     }
 
     private companion object {
