@@ -7,10 +7,10 @@ object LottoResultChecker {
     ): LottoResults {
         val matchCounts = userLottos.calculateMatchCountEach(winningLotto)
 
-        val ranks =
+        val ranksAcquiredByUser =
             matchCounts.filter { matchCount -> LottoRank.isInTheRank(matchCount) }
                 .map { matchCount -> LottoRank.from(matchCount) }
 
-        return LottoResults(ranks)
+        return LottoResults(ranksAcquiredByUser)
     }
 }

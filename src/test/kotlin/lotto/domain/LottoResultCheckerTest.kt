@@ -1,5 +1,6 @@
 package lotto.domain
 
+import io.kotest.assertions.assertSoftly
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 
@@ -22,7 +23,11 @@ class LottoResultCheckerTest : FreeSpec({
 
         val lottoResults = LottoResultChecker.check(userLottos, winningLotto)
 
-        val expected = mapOf(LottoRank.FIRST to 1, LottoRank.FIRST to 1, LottoRank.SECOND to 1, LottoRank.THIRD to 1, LottoRank.FORTH to 1)
-        lottoResults.winningLottoCountByRank shouldBe expected
+        assertSoftly {
+            lottoResults.getWinningLottoCountBy(LottoRank.FIRST) shouldBe 1
+            lottoResults.getWinningLottoCountBy(LottoRank.SECOND) shouldBe 1
+            lottoResults.getWinningLottoCountBy(LottoRank.THIRD) shouldBe 1
+            lottoResults.getWinningLottoCountBy(LottoRank.FORTH) shouldBe 1
+        }
     }
 })

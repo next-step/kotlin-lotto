@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoResults(ranks: List<LottoRank>) {
-    val winningLottoCountByRank: Map<LottoRank, Int> = ranks.groupingBy { it }.eachCount()
+    private val winningLottoCountByRank = ranks.groupingBy { it }.eachCount()
 
     fun calculateTotalPrizeAmount(): Long {
         return winningLottoCountByRank.map { (rank, count) ->
