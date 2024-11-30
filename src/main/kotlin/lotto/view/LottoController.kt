@@ -1,6 +1,10 @@
 package lotto.view
 
-import lotto.domain.*
+import lotto.domain.LottoNumberChecker
+import lotto.domain.LottoTicketIssuer
+import lotto.domain.LottoWinnerNumbers
+import lotto.domain.PurchasedLottoTickets
+import lotto.domain.lottoNumberGenerator
 
 object LottoController {
     fun lottoPurchased(): PurchasedLottoTickets {
