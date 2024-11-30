@@ -3,7 +3,7 @@ package lotto.domain
 object LottoTicketIssuer {
     fun issueTickets(amountPaid: Int): PurchasedLottoTickets {
         checkAmountPaid(amountPaid)
-        return PurchasedLottoTickets(amountPaid / DEFAULT_LOTTO_PRICE)
+        return PurchasedLottoTickets(purchasedCount = (amountPaid / DEFAULT_LOTTO_PRICE))
     }
 
     private fun checkAmountPaid(amountPaid: Int) {
