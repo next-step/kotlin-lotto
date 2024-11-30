@@ -12,6 +12,6 @@ internal fun winningLottoFixture(
     bonusNumber: Int,
 ): WinningLotto = WinningLotto(lottoNumbersFixture(*numbers), LottoNumber(bonusNumber))
 
-internal fun lottosFixture(vararg lottos: DefaultLotto): Lottos = Lottos(lottos.toList())
+internal fun lottosFixture(vararg lottos: DefaultLotto): Lottos = Lottos.from(lottos.toList())
 
-internal fun lottosFixture(vararg numbers: Int): Lottos = Lottos(listOf(lottoFixture(*numbers)))
+internal fun lottosFixture(vararg numbers: Int): Lottos = Lottos.from(listOf(lottoFixture(*numbers)))

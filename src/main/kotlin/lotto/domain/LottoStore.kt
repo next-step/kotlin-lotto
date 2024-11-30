@@ -3,10 +3,11 @@ package lotto.domain
 class LottoStore(
     private val lottoFactory: LottoFactory,
 ) {
-    fun sell(money: Money): Lottos {
-        val quantity = money.value / LOTTO_PRICE
-        val lottos = lottoFactory.create(quantity)
+    fun sell(lottoOrder: LottoOrder): Lottos {
+        val manualLottos = lottoFactory.createManual(lottoOrder.manualLottoNumbers)
+        val quantity = lottoOrder.autoLottoQuantity
+        val autoLottos = lottoFactory.createAuto(quantity)
 
-        return Lottos(lottos)
+        return Lottos.from(autoLottos, manualLottos)
     }
 }

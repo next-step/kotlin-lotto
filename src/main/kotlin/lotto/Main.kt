@@ -3,6 +3,7 @@ package lotto
 import lotto.domain.LottoFactory
 import lotto.domain.LottoIncomeCalculator
 import lotto.domain.LottoNumber
+import lotto.domain.LottoOrder
 import lotto.domain.LottoService
 import lotto.domain.LottoStore
 import lotto.domain.Money
@@ -17,7 +18,11 @@ fun main() {
     val lottoService = setup()
 
     val inputMoney = inputView.requestPrice()
-    val lottos = lottoService.issue(Money(inputMoney))
+    val manualLottoCount = inputView.requestManualLottoCount()
+    val manualLottoNumbers = inputView.requestManualLottoNumbers(manualLottoCount)
+    val lottoOrder = LottoOrder(Money(inputMoney), manualLottoCount, manualLottoNumbers)
+
+    val lottos = lottoService.issue(lottoOrder)
 
     outputView.printLottoQuantity(lottos.quantity)
     outputView.printLottoNumbers(lottos)

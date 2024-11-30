@@ -1,5 +1,6 @@
 package lotto.domain
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.doubles.shouldBeGreaterThan
 import io.kotest.matchers.shouldBe
@@ -16,10 +17,41 @@ class LottoServiceTest : StringSpec({
 
     "로또를 입력받은 금액만큼 발행한다" {
         val money = Money(14_000)
+        val lottoOrder = LottoOrder(money)
 
-        val actual = sut.issue(money)
+        val actual = sut.issue(lottoOrder)
 
         actual.quantity shouldBe 14
+    }
+
+    "로또를 입력받은 금액과 수동으로 입력한 숫자들로 발행한다" {
+        val money = Money(14_000)
+        val manualLottoNumbers = listOf(listOf(1, 2, 3, 4, 5, 6), listOf(7, 8, 9, 10, 11, 12))
+        val manualCount = manualLottoNumbers.size
+        val lottoOrder =
+            LottoOrder(
+                money = money,
+                manualCount = manualCount,
+                manualLottoNumbers = manualLottoNumbers,
+            )
+
+        val actual = sut.issue(lottoOrder)
+
+        actual.quantity shouldBe 14
+    }
+
+    "로또 주문 생성 시 입력받은 금액보다 수동 로또의 개수가 더 많으면 예외를 던진다" {
+        val money = Money(14_000)
+        val manualLottoNumbers = listOf(listOf(1, 2, 3, 4, 5, 6), listOf(7, 8, 9, 10, 11, 12))
+        val manualCount = manualLottoNumbers.size + 1
+
+        shouldThrow<IllegalArgumentException> {
+            LottoOrder(
+                money = money,
+                manualCount = manualCount,
+                manualLottoNumbers = manualLottoNumbers,
+            )
+        }
     }
 
     "로또와 당첨 번호를 입력받으면 로또 결과를 반환한다" {

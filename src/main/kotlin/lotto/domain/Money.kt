@@ -3,7 +3,7 @@ package lotto.domain
 @JvmInline
 value class Money(val value: Int) {
     init {
-        require(value % 1000 == 0) { "금액은 1000원 단위여야 합니다." }
+        require(value >= 0) { "금액은 0 이상이어야 합니다." }
     }
 
     operator fun plus(other: Money) = Money(value + other.value)
