@@ -1,8 +1,6 @@
 package lotto.view
 
 import lotto.domain.Lotto
-import lotto.domain.LottoProfitRate
-import lotto.domain.LottoResult
 
 object ResultView {
     private const val TEXT_DASH_REPEAT_COUNT = 9
@@ -32,17 +30,29 @@ object ResultView {
         println()
     }
 
-    fun printLottoResult(lottoResult: LottoResult) {
+    fun printLottoResult(
+        lottoResult: LottoResult,
+        purchaseAmount: Int,
+    ) {
+        printLottoRanks(lottoResult)
+        printLottoProfitRate(lottoResult, purchaseAmount)
+    }
+
+    private fun printLottoRanks(lottoResult: LottoResult) {
         println(TEXT_RESULT_LOTTO)
         println(TEXT_DASH.repeat(TEXT_DASH_REPEAT_COUNT))
-        lottoResult.prizeCounts.forEach { (prize, count) ->
+        lottoResult.rankCounts.forEach { (prize, count) ->
             println(TEXT_PRIZE_RESULT.format(prize.matchCount, prize.money, count))
         }
     }
 
-    fun printLottoProfitRate(lottoProfitRate: LottoProfitRate) {
-        val profitRateResultText = findProfitRateResultText(lottoProfitRate.profitRate)
-        println(TEXT_TOTAL_PROFIT_RATE.format(lottoProfitRate.profitRate, profitRateResultText))
+    private fun printLottoProfitRate(
+        lottoResult: LottoResult,
+        purchaseAmount: Int,
+    ) {
+        val profitRate = lottoResult.calculateProfitRate(purchaseAmount)
+        val profitRateResultText = findProfitRateResultText(profitRate)
+        println(TEXT_TOTAL_PROFIT_RATE.format(profitRate, profitRateResultText))
     }
 
     private fun findProfitRateResultText(profitRate: Float): String =

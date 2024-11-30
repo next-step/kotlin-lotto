@@ -5,5 +5,8 @@ import lotto.domain.lottonumber.RandomLottoNumbersGenerator
 object LottoPurchaseManager {
     private const val LOTTO_PRICE = 1000
 
-    fun purchaseLotto(amount: Int): List<Lotto> = LottoGenerator.generateLottos(amount / LOTTO_PRICE, RandomLottoNumbersGenerator())
+    fun purchaseLotto(amount: Int): List<Lotto> {
+        val lottoCount = amount / LOTTO_PRICE
+        return List(lottoCount) { Lotto.from(RandomLottoNumbersGenerator().generate()) }
+    }
 }
