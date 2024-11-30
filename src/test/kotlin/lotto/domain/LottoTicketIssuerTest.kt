@@ -5,6 +5,7 @@ import io.kotest.matchers.shouldBe
 import lotto.domain.LottoTicketIssuer.DEFAULT_LOTTO_PRICE
 import lotto.domain.LottoTicketIssuer.INVALID_MIN_COST_LOTTO_PAID_MESSAGE
 import lotto.domain.LottoTicketIssuer.INVALID_THOUSAND_UNIT_LOTTO_PAID_MESSAGE
+import lotto.view.lottoNumberGenerator
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 

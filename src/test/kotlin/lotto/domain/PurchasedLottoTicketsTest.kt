@@ -2,6 +2,7 @@ package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrowWithMessage
 import lotto.domain.PurchasedLottoTickets.Companion.INVALID_PURCHASED_COUNT_MESSAGE
+import lotto.view.lottoNumberGenerator
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 

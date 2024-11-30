@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.view
 
 import lotto.domain.LottoTicket.Companion.LOTTO_NUMBER_COUNT
 import lotto.domain.LottoTicket.Companion.LOTTO_NUMBER_MAX_VALUE

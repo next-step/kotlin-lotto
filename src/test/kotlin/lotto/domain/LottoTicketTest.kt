@@ -1,6 +1,7 @@
 package lotto.domain
 
 import io.kotest.matchers.equals.shouldBeEqual
+import lotto.view.lottoNumberGenerator
 import org.junit.jupiter.api.Test
 
 class LottoTicketTest {
