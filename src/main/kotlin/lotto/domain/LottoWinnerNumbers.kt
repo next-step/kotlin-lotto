@@ -22,7 +22,7 @@ class LottoWinnerNumbers(private val inputWinnerNumbersCommand: String?) {
         }
 
         return inputWinnerNumbersCommand.split(WINNER_NUMBERS_DELIMITER)
-            .map { inputWinnerNumber -> lottoNumberStringToInt(inputWinnerNumber) }
+            .map { inputWinnerNumber -> lottoNumberStringToInt(inputWinnerNumber.trim()) }
     }
 
     private fun lottoNumberStringToInt(numberString: String): Int {
