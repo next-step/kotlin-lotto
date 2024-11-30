@@ -13,8 +13,9 @@ object LottoController {
         val winningNumbers = InputView.inputWinningNumbers()
         val bonusNumber = InputView.inputBonusNumber()
 
-        val winningStatistics = LottoWinningStatisticsService.start(lottos, winningNumbers, bonusNumber)
+        val lottoResult = LottoWinningStatisticsService.start(lottos, winningNumbers, bonusNumber)
 
-        ResultView.printWinningStatistics(winningStatistics)
+        ResultView.printLottoResult(lottoResult)
+        ResultView.printYieldRate(lottoResult, lottos)
     }
 }
