@@ -18,9 +18,7 @@ enum class LottoRank(
             matchCount: Int,
             matchBonus: Boolean,
         ): LottoRank {
-            return entries.find { rank ->
-                rank.matchCount == matchCount && (!rank.matchBonus || matchBonus)
-            } ?: NONE
+            return entries.find { it.matchCount == matchCount && (!it.matchBonus || matchBonus) } ?: NONE
         }
     }
 }
