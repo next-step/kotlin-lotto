@@ -1,14 +1,11 @@
 package lotto
 
-class LottoResultChecker {
+object LottoResultChecker {
     fun check(
-        lottos: List<Lotto>,
+        lottos: Lottos,
         winningNumbers: WinningNumbers,
     ): LottoResults {
-        val matchCounts =
-            lottos.map { lotto ->
-                lotto.calculateMatchCount(winningNumbers)
-            }
+        val matchCounts = lottos.calculateAllMatchCounts(winningNumbers)
 
         val ranks =
             matchCounts.filter { matchCount -> LottoRank.isInTheRank(matchCount) }

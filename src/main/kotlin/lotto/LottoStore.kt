@@ -1,6 +1,8 @@
 package lotto
 
-class LottoStore {
+object LottoStore {
+    private const val MIN_AMOUNT_UNIT = 1000
+
     fun sell(money: Int): List<Lotto> {
         if (isValidAmount(money)) throw NotEnoughMoneyException(money)
 
@@ -12,8 +14,4 @@ class LottoStore {
     }
 
     private fun isValidAmount(money: Int) = money % MIN_AMOUNT_UNIT != 0
-
-    companion object {
-        private const val MIN_AMOUNT_UNIT = 1000
-    }
 }
