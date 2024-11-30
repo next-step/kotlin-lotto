@@ -4,7 +4,6 @@ import lotto.domain.LottoRank
 import lotto.domain.LottoResults
 import lotto.domain.UserLottos
 
-
 object LottoGamePrinter {
     fun printAmountMessage() {
         println("구입금액을 입력해 주세요.")
@@ -15,15 +14,19 @@ object LottoGamePrinter {
         println(userLottos)
     }
 
-    fun printWinningStatistics(lottoResults: LottoResults, profitRate: Double) {
+    fun printWinningStatistics(
+        lottoResults: LottoResults,
+        profitRate: Double,
+    ) {
         println(
             """
-        당첨 통계
-        ---------
-    """.trimIndent()
+            당첨 통계
+            ---------
+            """.trimIndent(),
         )
-        val sortedLottoRanks = LottoRank.entries
-            .sortedBy { lottoRank -> lottoRank.prizeAmount }
+        val sortedLottoRanks =
+            LottoRank.entries
+                .sortedBy { lottoRank -> lottoRank.prizeAmount }
 
         sortedLottoRanks.forEach { lottoRank ->
             val winningLottoCount = lottoResults.getWinningLottoCountBy(lottoRank)

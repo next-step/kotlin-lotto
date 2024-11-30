@@ -9,7 +9,7 @@ class LottoTest : FreeSpec({
         listOf(
             emptySet(),
             setOf(1, 2, 3, 4, 5),
-            setOf(1, 2, 3, 4, 5, 6, 7)
+            setOf(1, 2, 3, 4, 5, 6, 7),
         ).forEach { numbers ->
             "입력값: $numbers" {
                 shouldThrow<InvalidLottoNumberCountException> { Lotto(numbers) }
@@ -21,7 +21,7 @@ class LottoTest : FreeSpec({
         listOf(
             setOf(0, 1, 2, 3, 4, 5),
             setOf(-1, 1, 2, 3, 4, 5),
-            setOf(1, 2, 3, 4, 5, 46)
+            setOf(1, 2, 3, 4, 5, 46),
         ).forEach { numbers ->
             "입력값: $numbers" {
                 shouldThrow<InvalidLottoNumberException> { Lotto(numbers) }

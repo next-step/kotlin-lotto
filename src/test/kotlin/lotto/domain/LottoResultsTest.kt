@@ -14,16 +14,17 @@ class LottoResultsTest : FreeSpec({
     }
 
     "당첨된 로또 개수를 반환한다" {
-        val lottoResults = LottoResults(
-            listOf(
-                LottoRank.FIRST,
-                LottoRank.FIRST,
-                LottoRank.FIRST,
-                LottoRank.SECOND,
-                LottoRank.SECOND,
-                LottoRank.THIRD,
+        val lottoResults =
+            LottoResults(
+                listOf(
+                    LottoRank.FIRST,
+                    LottoRank.FIRST,
+                    LottoRank.FIRST,
+                    LottoRank.SECOND,
+                    LottoRank.SECOND,
+                    LottoRank.THIRD,
+                ),
             )
-        )
 
         assertSoftly {
             lottoResults.getWinningLottoCountBy(LottoRank.FIRST) shouldBe 3

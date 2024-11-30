@@ -5,10 +5,11 @@ object LottoStore {
         if (isValidAmount(money)) throw NotEnoughMoneyException(money)
 
         val theNumberOfLotto = money / Lotto.MIN_AMOUNT_UNIT
-        val lottos = (1..theNumberOfLotto).map {
-            val lottoNumbers = RandomLottoNumberGenerator.generate()
-            Lotto(lottoNumbers)
-        }
+        val lottos =
+            (1..theNumberOfLotto).map {
+                val lottoNumbers = RandomLottoNumberGenerator.generate()
+                Lotto(lottoNumbers)
+            }
 
         return UserLottos(lottos = lottos)
     }

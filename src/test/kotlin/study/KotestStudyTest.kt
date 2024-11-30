@@ -6,10 +6,7 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.core.spec.style.StringSpec
-import io.kotest.core.test.TestCase
-import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.shouldNot
 import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.string.shouldHaveLength
 
@@ -60,23 +57,24 @@ class DynamicTests : FunSpec({
     }
 })
 
-
 // 외부에 선언..? 더알아보자
 val database = mutableMapOf<Long, String>()
 
 class Callbacks : FunSpec({
     beforeEach {
-        database.clear()  // 이런식으로 접근해서 DB 리셋하는 것 처럼 사용하나?
+        database.clear() // 이런식으로 접근해서 DB 리셋하는 것 처럼 사용하나?
 
         println("===테스트 시작===")
-        println("""
+        println(
+            """
             [it 알아보기] 
             it = $it
             it.test = ${it.test}
             it.spec = ${it.spec}
             => 그런데 이거 어디다쓸까? 직접 사용할 일은 없을 것 같다. 
                그냥 내부에서 test 코드 접근 전에 실행할 장치같은 것 같음.(TestListener)  
-        """.trimIndent())
+            """.trimIndent(),
+        )
     }
 
     test("Kotest의 길이는 6이다") {
@@ -116,9 +114,9 @@ class ReusableCallbacks : FunSpec({
  * 다양한 스펙이 있으니, 참고하면 좋을 것 같다. 아마 테스트 스타일 차이일듯? String spec을 먼저 써보자
  */
 class StringSpecTest : StringSpec({
-   "String spec은 함수 없이 작성이 가능해서 많이 애용하는 것 같다" {
-       "정말간결한것 같음" shouldHaveLength 9
-   }
+    "String spec은 함수 없이 작성이 가능해서 많이 애용하는 것 같다" {
+        "정말간결한것 같음" shouldHaveLength 9
+    }
 })
 
 class FreeSpecTest : FreeSpec({
