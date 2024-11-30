@@ -1,4 +1,4 @@
 package lotto.domain
 
-class PurchasedLottoTickets {
+class PurchasedLottoTickets(val purchasedCount: Int) {
 }
