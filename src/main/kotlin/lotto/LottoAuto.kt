@@ -1,5 +1,7 @@
 package lotto
 
+import kotlin.math.roundToLong
+
 class LottoAuto {
     fun start() {
         val input = getPurchaseAmountInput()
@@ -22,7 +24,7 @@ class LottoAuto {
     fun calculate(
         matchedLottoNumberCounts: MutableMap<Int, Int>,
         purchaseAmount: Int,
-    ): Int {
+    ): Double {
         val prizeAmount = calculatePrizeMoney(matchedLottoNumberCounts)
         val rate = calculateRate(prizeAmount, purchaseAmount)
         return rate
@@ -43,19 +45,19 @@ class LottoAuto {
         return Pair(purchaseAmount, purchasedLottoCount)
     }
 
-    fun rateOutput(rate: Int) {
+    fun rateOutput(rate: Double) {
         println("총 수익률은 ${rate}입니다.")
     }
 
-    fun calculateRate(
+    private fun calculateRate(
         prizeAmount: Int,
         purchaseAmount: Int,
-    ): Int {
-        val rate = prizeAmount / purchaseAmount
-        return rate
+    ): Double {
+        val rate = (prizeAmount.toDouble() / purchaseAmount)
+        return (rate * 100).roundToLong() / 100.0
     }
 
-    fun calculatePrizeMoney(matchedLottoNumberCounts: MutableMap<Int, Int>): Int {
+    private fun calculatePrizeMoney(matchedLottoNumberCounts: MutableMap<Int, Int>): Int {
         val prizeAmount =
             (5000 * matchedLottoNumberCounts.getOrDefault(3, 0)) +
                 (50000 * matchedLottoNumberCounts.getOrDefault(4, 0)) +
@@ -71,14 +73,14 @@ class LottoAuto {
         println("6개 일치 (2000000000원)- ${matchedLottoNumberCounts.getOrDefault(6, 0)}개")
     }
 
-    fun createMatchedLottoNumberCounts(
+    private fun createMatchedLottoNumberCounts(
         winningNumbers: List<Int>,
         purchasedLottoCount: Int,
     ): MutableMap<Int, Int> {
         val matchedLottoNumberCounts = mutableMapOf<Int, Int>()
         if (winningNumbers.size != LOTTO_NUMBER_COUNT) throw RuntimeException("당첨 번호는 6개의 숫자로 이루어져야 합니다.")
         repeat(purchasedLottoCount) { idx ->
-            val matchedLottoNumberCount = 4 // countMatchedLottoNumber(winningNumbers, purchasedLottos[idx])
+            val matchedLottoNumberCount = 2 // countMatchedLottoNumber(winningNumbers, purchasedLottos[idx])
             if (matchedLottoNumberCount >= 3) {
                 val count = matchedLottoNumberCounts.getOrDefault(matchedLottoNumberCount, 0)
                 matchedLottoNumberCounts[matchedLottoNumberCount] = count + 1
@@ -87,8 +89,14 @@ class LottoAuto {
         return matchedLottoNumberCounts
     }
 
-    fun convertToInts(input2: String): List<Int> {
-        val winningNumbers = input2.split(",").map { it.toIntOrNull() ?: throw RuntimeException("숫자로 입력하지 않았습니다.") }
+    private fun convertToInts(input2: String): List<Int> {
+        val winningNumbers =
+            input2.split(",")
+                .map { it.trim() }
+                .filter { it.isNotEmpty() }
+                .map {
+                    it.toIntOrNull() ?: throw NumberFormatException("숫자로 입력하지 않았습니다.")
+                }
         return winningNumbers
     }
 
@@ -111,7 +119,7 @@ class LottoAuto {
     fun createLottos(purchasedLottoCount: Int): MutableList<List<Int>> {
         val purchasedLottos = mutableListOf<List<Int>>()
         repeat(purchasedLottoCount) { idx ->
-            val lotto = listOf<Int>() // createLotto()
+            val lotto = listOf<Int>(1, 2, 3, 4, 5, 6) // createLotto()
             purchasedLottos.add(lotto)
         }
         return purchasedLottos
@@ -121,13 +129,13 @@ class LottoAuto {
         println("${purchasedLottoCount}개를 구매했습니다.")
     }
 
-    fun countPurchasedLotto(purchaseAmount: Int): Int {
+    private fun countPurchasedLotto(purchaseAmount: Int): Int {
         if (purchaseAmount <= 0) throw RuntimeException("금액은 양수입니다.")
         val purchasedLottoCount = (purchaseAmount / TICKET_PRICE)
         return purchasedLottoCount
     }
 
-    fun convertToInt(input: String): Int {
+    private fun convertToInt(input: String): Int {
         val purchaseAmount = input.toIntOrNull() ?: throw RuntimeException("숫자로 입력하지 않았습니다.")
         return purchaseAmount
     }
