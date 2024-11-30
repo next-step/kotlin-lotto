@@ -29,6 +29,10 @@ class Lotto(private val numbers: Set<Int>) {
         return numbers.count { number -> winningNumbers.contains(number) }
     }
 
+    override fun toString(): String {
+        return numbers.toString()
+    }
+
     companion object {
         const val MIN_LOTTO_NUMBER = 1
         const val MAX_LOTTO_NUMBER = 45

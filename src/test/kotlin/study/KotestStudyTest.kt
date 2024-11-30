@@ -1,10 +1,13 @@
 package study
 
+import io.kotest.assertions.assertSoftly
 import io.kotest.core.spec.BeforeTest
 import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.core.spec.style.FreeSpec
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.core.test.TestCase
+import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNot
 import io.kotest.matchers.shouldNotBe
@@ -116,4 +119,20 @@ class StringSpecTest : StringSpec({
    "String spec은 함수 없이 작성이 가능해서 많이 애용하는 것 같다" {
        "정말간결한것 같음" shouldHaveLength 9
    }
+})
+
+class FreeSpecTest : FreeSpec({
+    "FreeSpec은 이렇게도 쓴다" - {
+        "마지막 검증 메서드에는 -를 붙이면 안됨" {
+            "굿" shouldHaveLength 1
+        }
+    }
+
+    "assertSoftly로 한번에 검증하기" {
+        assertSoftly {
+            "Hello" shouldBe "World" // 이 검증은 실패
+            1 + 1 shouldBe 2
+            listOf(1, 2, 3) shouldContain 4 // 이 검증도 실패
+        }
+    }
 })

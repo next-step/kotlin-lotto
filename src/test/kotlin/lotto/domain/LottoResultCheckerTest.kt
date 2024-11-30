@@ -23,6 +23,6 @@ class LottoResultCheckerTest : FreeSpec({
         val lottoResults = LottoResultChecker.check(lottos, winningNumbers)
 
         val expected = mapOf(LottoRank.FIRST to 1, LottoRank.FIRST to 1, LottoRank.SECOND to 1, LottoRank.THIRD to 1, LottoRank.FORTH to 1)
-        lottoResults.resultCountByRank shouldBe expected
+        lottoResults.winningLottoCountByRank shouldBe expected
     }
 })
