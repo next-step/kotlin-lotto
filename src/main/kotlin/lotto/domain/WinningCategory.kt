@@ -15,11 +15,11 @@ enum class WinningCategory(val matchCount: Int, val prize: Int) {
             matchBonus: Boolean,
         ): WinningCategory {
             return when {
-                count == 6 -> FIRST
-                count == 5 && matchBonus -> SECOND
-                count == 5 -> THIRD
-                count == 4 -> FOURTH
-                count == 3 -> FIFTH
+                count == FIRST.matchCount -> FIRST
+                count == SECOND.matchCount && matchBonus -> SECOND
+                count == THIRD.matchCount -> THIRD
+                count == FOURTH.matchCount -> FOURTH
+                count == FIFTH.matchCount -> FIFTH
                 else -> NONE
             }
         }

@@ -7,6 +7,14 @@ class Lotto private constructor(private val numbers: List<LottoNumber>) {
         }
     }
 
+    fun countMatchingNumbers(other: Lotto): Int {
+        return numbers.count { it in other.numbers }
+    }
+
+    fun hasNumber(number: LottoNumber): Boolean {
+        return numbers.contains(number)
+    }
+
     fun getNumbers(): List<LottoNumber> = numbers
 
     companion object {
