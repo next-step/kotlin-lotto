@@ -1,16 +1,8 @@
-package lotto
+package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrow
-import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.core.spec.style.FreeSpec
-import io.kotest.core.spec.style.StringSpec
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatThrownBy
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.ValueSource
-import study.StringSpecTest
 
 class LottoStoreTest : FreeSpec({
     "입력된 금액에 따라 로또를 여러장 구매한다" {

@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 object LottoResultChecker {
     fun check(

@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 enum class LottoRank(private val matchCount: Int, val prizeAmount: Long) {
     FIRST(6, 2_000_000_000),

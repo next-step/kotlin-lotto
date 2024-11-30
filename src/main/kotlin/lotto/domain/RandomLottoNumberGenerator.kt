@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 object RandomLottoNumberGenerator {
     private val lottoNumbers = (Lotto.MIN_LOTTO_NUMBER..Lotto.MAX_LOTTO_NUMBER).toList()

@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 object LottoStore {
     fun sell(money: Int): List<Lotto> {

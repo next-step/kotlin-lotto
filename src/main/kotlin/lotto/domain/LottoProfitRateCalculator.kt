@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 object LottoProfitRateCalculator {
     fun calculate(lottos: Lottos, lottoResults: LottoResults): Double {
