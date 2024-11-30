@@ -16,7 +16,7 @@ object LottoGameReader {
 
     private fun convertToNumber(str: String): Int {
         val number = str.trim().toIntOrNull()
-        requireNotNull(number) { "숫자만 입력해야 합니다." }
+        requireNotNull(number) { "숫자만 입력해야 합니다. 현재 입력=$str" }
         return number
     }
 }
