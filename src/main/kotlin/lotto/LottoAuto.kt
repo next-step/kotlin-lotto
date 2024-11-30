@@ -30,7 +30,7 @@ class LottoAuto {
     private fun diplayLottoNumber(purchasedLottoCount: Int): List<Lotto> {
         val purchasedLottos = lottoAutoController.generateLottos(purchasedLottoCount)
         repeat(purchasedLottos.size) { idx ->
-            ResultView(purchasedLottos[idx].toString()).render()
+            ResultView(purchasedLottos[idx].numbers.toString()).render()
         }
         return purchasedLottos
     }

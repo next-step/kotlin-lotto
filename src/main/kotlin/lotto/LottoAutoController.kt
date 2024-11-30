@@ -1,17 +1,18 @@
 package lotto
 
 import lotto.model.Lotto
+import lotto.model.LottoPurchase
 import lotto.model.LottoSystem
 import lotto.util.StringParser
 
 class LottoAutoController {
     private val lottoSystem = LottoSystem()
 
-    fun countPurchasedLotto(input: String): Pair<Int, Int> {
+    fun countPurchasedLotto(input: String): LottoPurchase {
         val purchaseAmount = StringParser.convertToInt(input)
-        val lottoCount = lottoSystem.calculateLottoCount(purchaseAmount = purchaseAmount)
         if (purchaseAmount <= 0) throw RuntimeException("금액은 양수입니다.")
-        return purchaseAmount to lottoCount
+        val lottoCount = lottoSystem.calculateLottoCount(purchaseAmount = purchaseAmount)
+        return LottoPurchase(purchaseAmount, lottoCount)
     }
 
     fun generateLottos(lottoCount: Int): List<Lotto> = List(lottoCount) { Lotto() }

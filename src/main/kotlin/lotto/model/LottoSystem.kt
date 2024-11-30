@@ -3,10 +3,7 @@ package lotto.model
 import lotto.util.MathCalculator
 
 class LottoSystem {
-    fun calculateLottoCount(purchaseAmount: Int): Int {
-        require(purchaseAmount >= LOTTO_PRICE) { "구매 금액은 $LOTTO_PRICE 원 이상이어야 합니다." }
-        return purchaseAmount / LOTTO_PRICE
-    }
+    fun calculateLottoCount(purchaseAmount: Int): Int = purchaseAmount / LOTTO_PRICE
 
     fun countLottosByMatchingNumbers(
         winningNumbers: List<Int>,

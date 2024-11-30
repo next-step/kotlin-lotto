@@ -1,6 +1,6 @@
 package lotto.model
 
-class Lotto(val numbers: List<Int> = generateNumbers()) {
+data class Lotto(val numbers: List<Int> = generateNumbers()) {
     fun countMatchingNumbers(winningNumbers: List<Int>): Int {
         var matchCount = 0
         for (number in winningNumbers) {
