@@ -1,5 +1,6 @@
 package lotto.step4
 
+import lotto.step4.domain.AutoLottoPurchasableMoneyCalculator
 import lotto.step4.domain.LottoGame
 import lotto.step4.domain.LottoNumberPicker
 import lotto.step4.domain.LottoPurchaseManager
@@ -8,15 +9,19 @@ import lotto.step4.view.OutputView
 
 fun main() {
     val money = InputView.getPurchaseAmount()
-    val lottos = LottoPurchaseManager(LottoNumberPicker()).purchase(money)
-    OutputView.printPurchaseResult(lottos = lottos)
+    val manualPurchaseCount = InputView.getManualPurchaseCount()
+    val manualPurchasedLottos = InputView.getManualPurchaseNumbers(manualPurchaseCount)
+    val autoPurchaseMoney = AutoLottoPurchasableMoneyCalculator.calculateMoney(money, manualPurchaseCount)
+    val autoPurchasedLottos = LottoPurchaseManager(LottoNumberPicker()).purchase(autoPurchaseMoney)
+    OutputView.printPurchaseResult(manualLottos = manualPurchasedLottos, autoLottos = autoPurchasedLottos)
+    val totalPurchasedLottos = manualPurchasedLottos + autoPurchasedLottos
 
     val lastWeekWinningNumbers = InputView.getLastWeekWinningNumbers()
     val bonusNumber = InputView.getBonusNumber()
     val winningStatistics =
         LottoGame().execute(
             lastWeekWinningNumbers = lastWeekWinningNumbers,
-            lottos = lottos,
+            lottos = totalPurchasedLottos,
             bonusNumber = bonusNumber,
         )
     OutputView.printStatistics(winningStatistics)

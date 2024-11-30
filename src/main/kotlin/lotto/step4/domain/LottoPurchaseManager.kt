@@ -3,7 +3,7 @@ package lotto.step4.domain
 class LottoPurchaseManager(
     private val numberPicker: NumberPicker,
 ) {
-    fun purchase(money: Long): List<Lotto> {
+    fun purchase(money: Money): List<Lotto> {
         val availableCount = this.getAvailableCount(money)
 
         return (1..availableCount).map {
@@ -11,11 +11,11 @@ class LottoPurchaseManager(
         }
     }
 
-    private fun getAvailableCount(money: Long): Long {
-        return money / LOTTO_PRICE
+    private fun getAvailableCount(money: Money): Long {
+        return money.div(LOTTO_PRICE)
     }
 
     companion object {
-        const val LOTTO_PRICE = 1000L
+        val LOTTO_PRICE = Money(1000L)
     }
 }
