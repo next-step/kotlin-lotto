@@ -28,6 +28,7 @@ object LottoNumberChecker {
         }
 
         return PurchasedLottoResults(
+            purchasedCount = purchasedLottoTickets.purchasedCount,
             threeNumberMatchCount = threeNumberMatchs.size,
             fourNumberMatchCount = fourNumberMatchs.size,
             fiveNumberMatchCount = fiveNumberMatchs.size,
