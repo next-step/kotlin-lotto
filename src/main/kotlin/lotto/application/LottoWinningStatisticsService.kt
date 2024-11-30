@@ -1,18 +1,16 @@
 package lotto.application
 
-import lotto.core.LottoWinningStatistics
+import lotto.core.LottoNumber
+import lotto.core.LottoResult
 import lotto.core.Lottos
-import lotto.core.WinningNumbers
-import lotto.core.YieldCalculator
+import lotto.core.WinningLotto
 
 object LottoWinningStatisticsService {
     fun start(
         lottos: Lottos,
-        numbers: List<Int>,
-    ): LottoWinningStatistics {
-        val winningNumbers = WinningNumbers(numbers)
-        val winningRankCount = lottos.countWinningRanks(winningNumbers)
-
-        return LottoWinningStatistics(winningRankCount, YieldCalculator.calculate(winningRankCount, lottos.size))
+        numbers: List<LottoNumber>,
+        bonusNumber: LottoNumber,
+    ): LottoResult {
+        return lottos.countWinningRanks(WinningLotto(numbers, bonusNumber))
     }
 }
