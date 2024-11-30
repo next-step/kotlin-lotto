@@ -16,8 +16,8 @@ enum class Rank(
         fun findByMatchCount(
             matchCount: Int,
             isBonusMatch: Boolean = false,
-        ): Rank? {
-            return entries.firstOrNull { it.match(matchCount, isBonusMatch) }
+        ): Rank {
+            return entries.firstOrNull { it.match(matchCount, isBonusMatch) } ?: MISS
         }
     }
 }
