@@ -10,7 +10,6 @@ import lotto.domain.LottoWinnerNumbers.Companion.INVALID_WINNER_NUMBERS_TO_INT_M
 import org.junit.jupiter.api.Test
 
 class LottoWinnerNumbersTest {
-
     @Test
     fun `로또 당첨 번호가 입력되지 않으면 에러가 발생한다`() {
         shouldThrowWithMessage<IllegalArgumentException>(message = INVALID_NULL_OR_BLANK_WINNER_NUMBERS_MESSAGE) {

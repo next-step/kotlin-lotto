@@ -7,9 +7,10 @@ class PurchasedLottoTickets(val purchasedCount: Int) {
         require(purchasedCount >= PURCHASED_COUNT_MIN_VALUE) { INVALID_PURCHASED_COUNT_MESSAGE }
     }
 
-    private fun generateLottoTickets(): List<LottoTicket>  {
+    private fun generateLottoTickets(): List<LottoTicket> {
         val lottoTickets: MutableList<LottoTicket> = mutableListOf()
         repeat(purchasedCount) { lottoTickets.add(LottoTicket()) }
+
         return lottoTickets
     }
 
