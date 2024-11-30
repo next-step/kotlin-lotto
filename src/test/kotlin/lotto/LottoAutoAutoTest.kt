@@ -1,7 +1,11 @@
 package lotto
 
+import lotto.model.Lotto
+import lotto.model.LottoSystem
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -29,8 +33,7 @@ class LottoAutoAutoTest {
         input: String,
         expectedCount: Int,
     ) {
-        val purchaseAmount = lottoAutoController.getPurchaseAmount(input)
-        val purchasedLottoCount = lottoAutoController.countPurchasedLotto(purchaseAmount)
+        val (purchaseAmount, purchasedLottoCount) = lottoAutoController.countPurchasedLotto(input)
         assertThat(purchaseAmount).isGreaterThan(0)
         assertThat(purchasedLottoCount).isEqualTo(expectedCount)
     }
@@ -39,10 +42,7 @@ class LottoAutoAutoTest {
     @ParameterizedTest(name = "{index} => input: ''{0}''")
     @ValueSource(strings = ["0", "-1000"])
     fun checkPurchaseAmount2(input: String) {
-        assertThatThrownBy {
-            val purchaseAmount = lottoAutoController.getPurchaseAmount(input)
-            lottoAutoController.countPurchasedLotto(purchaseAmount)
-        }
+        assertThatThrownBy { lottoAutoController.countPurchasedLotto(input) }
             .isInstanceOf(RuntimeException::class.java)
             .hasMessage("금액은 양수입니다.")
     }
@@ -51,7 +51,7 @@ class LottoAutoAutoTest {
     @ParameterizedTest(name = "{index} => input: ''{0}''")
     @ValueSource(strings = ["abc", "-1dd"])
     fun checkPurchaseAmount3(input: String) {
-        assertThatThrownBy { lottoAutoController.getPurchaseAmount(input) }
+        assertThatThrownBy { lottoAutoController.countPurchasedLotto(input) }
             .isInstanceOf(RuntimeException::class.java)
             .hasMessage("숫자로 입력하지 않았습니다.")
     }
@@ -67,58 +67,68 @@ class LottoAutoAutoTest {
         input: String,
         expected: Int,
     ) {
-        val purchaseAmount = lottoAutoController.getPurchaseAmount(input)
-        val purchasedLottoCount = lottoAutoController.countPurchasedLotto(purchaseAmount)
+        val (purchaseAmount, purchasedLottoCount) = lottoAutoController.countPurchasedLotto(input)
         assertThat(purchasedLottoCount).isEqualTo(expected)
     }
 
     @DisplayName(value = "로또 번호는 각기 다른 숫자로 이루어진 6개의 숫자가 오름차순으로 정렬되어야 한다.")
     @Test
     fun generateLottoNumbers() {
-        val lotto = lottoAutoController.createLottos(1).first()
+        val lotto = lottoAutoController.generateLottos(1).first()
 
-        assertThat(lotto.size).isEqualTo(6)
-        assertThat(lotto).isSorted
+        assertThat(lotto.numbers.size).isEqualTo(6)
+        assertThat(lotto.numbers).isSorted
     }
 
     @DisplayName("지난 주 당첨 번호는 6개의 숫자로 이루어져 있지 않다면 예외가 발생한다.")
     @ParameterizedTest(name = "{index} => winningNumbersInput=''{0}'', purchasedLottoCount=''{1}''")
-    @CsvSource(
-        "1,2,3,4,5,6,7;1",
-        "10,20,30,40,50,60,1,2,3;1",
-        "7,14,21,28,35;1",
-        delimiter = ';',
+    @ValueSource(
+        strings = [
+            "1,2,3,4,5,6,7",
+            "10,20,30,40,50,60,1,2,3",
+            "7,14,21,28,35",
+        ],
     )
-    fun validWinningNumbers(
-        winningNumbersInput: String,
-        purchasedLottoCount: Int,
-    ) {
-        assertThatThrownBy { lottoAutoController.matchLottoNumbers(winningNumbersInput, purchasedLottoCount) }
+    fun validWinningNumbers(winningNumbersInput: String) {
+        assertThatThrownBy { lottoAutoController.matchLottoNumbers(winningNumbersInput, listOf(Lotto())) }
             .isInstanceOf(RuntimeException::class.java)
             .hasMessage("당첨 번호는 6개의 숫자로 이루어져야 합니다.")
     }
 
-    @DisplayName(value = "당첨금 계산은 일치하는 번호가 세 개일 때부터다.")
-    @ParameterizedTest(name = "{index} => winningNumbersInput=''{0}'', purchasedLottoCount=''{1}''")
-    @CsvSource(
-        "1,2,7,8,9,10;1",
-        delimiter = ';',
-    )
-    fun calculatePrizeMoney(
-        winningNumbersInput: String,
-        purchasedLottoCount: Int,
-    ) {
-        // Todo
-//        assertThat(lottoAuto.matchLottoNumbers(winningNumbersInput, purchasedLottoCount))
+    @Test
+    @DisplayName("당첨금 계산은 일치하는 번호가 3개일 때부터다.")
+    fun testMatchLottoNumbers() {
+        val lottoSystem = LottoSystem()
+        val input = listOf(1, 2, 3, 4, 5, 6)
+        val lottos =
+            listOf(
+                // 3개 일치
+                Lotto(listOf(1, 2, 3, 7, 8, 9)),
+                // 3개 일치
+                Lotto(listOf(4, 5, 6, 10, 11, 12)),
+                // 2개 일치
+                Lotto(listOf(1, 2, 7, 8, 9, 10)),
+                // 0개 일치
+                Lotto(listOf(13, 14, 15, 16, 17, 18)),
+            )
+
+        val resultMap = lottoSystem.countLottosByMatchingNumbers(input, lottos)
+
+        assertEquals(2, resultMap[3], "3개 일치하는 로또는 2개여야 합니다.")
+        assertFalse(resultMap.containsKey(2), "2개 일치하는 로또는 당첨금 계산에 포함되지 않아야 합니다.")
+        assertFalse(resultMap.containsKey(0), "0개 일치하는 로또는 당첨금 계산에 포함되지 않아야 합니다.")
+        assertEquals(1, resultMap.size, "당첨금 계산에 포함되는 매칭 개수는 1개여야 합니다.")
     }
 
-    @DisplayName(value = "제일 많이 일치하는 경우를 한 번만 계산한다. (6개 일치할 경우 5개는 카운팅하지 않는다.")
-    fun verifyLottoNumbers() {
-        // Todo
-    }
-
-    @DisplayName(value = "수익률은 소수점 둘째 자리까지만 계산한다.")
+    @Test
+    @DisplayName("수익률은 소수점 둘째 자리까지만 계산한다.")
     fun calculateRate() {
-        // Todo
+        val lottoSystem = LottoSystem()
+        val purchaseAmount = 3000 // 구매 금액
+        val prizeAmount = mapOf(3 to 1, 4 to 1, 5 to 1)
+
+        val returnRate = lottoSystem.calculateReturnRate(prizeAmount, purchaseAmount)
+
+        assertEquals(68.33, returnRate, "수익률은 소수점 둘째 자리까지 계산되어야 합니다.")
     }
 }
