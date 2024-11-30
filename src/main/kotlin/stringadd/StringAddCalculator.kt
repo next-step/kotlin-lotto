@@ -2,17 +2,18 @@ package stringadd
 
 class StringAddCalculator {
     fun add(text: String?): Int {
-        if (text.isNullOrBlank()) return 0
-        val inputs: List<Int> = parseInputs(text).map {
-            val num = it.trim().toIntOrNull() ?: 0
-            if (num < 0) throw RuntimeException()
-            num
-        }
+        if (text.isNullOrBlank()) return RESULT_ON_ERROR
+        val inputs =
+            parseInputs(text).map {
+                val num = it.trim().toIntOrNull() ?: RESULT_ON_ERROR
+                if (num < 0) throw RuntimeException("숫자는 음수일 수 없습니다")
+                num
+            }
         return addByInputSize(inputs)
     }
 
     private fun parseInputs(text: String): List<String> {
-        val delimiters = mutableListOf(",", ":") // default delimiters
+        val delimiters = mutableListOf(DELIMITER_COLON, DELIMITER_COMMA) // default delimiters
         val splitTarget =
             if (text.startsWith(CUSTOM_DELIMITER_PREFIX)) {
                 val delimiterAndInput = splitDelimiterAndInput(text)
@@ -45,6 +46,9 @@ class StringAddCalculator {
     }
 
     companion object {
+        private const val RESULT_ON_ERROR = 0
+        private const val DELIMITER_COMMA = ","
+        private const val DELIMITER_COLON = ":"
         private const val CUSTOM_DELIMITER_PREFIX = "//"
     }
 }
