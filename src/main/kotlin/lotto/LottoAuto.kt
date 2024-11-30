@@ -1,17 +1,21 @@
 package lotto
 
+import lotto.view.InputView
 import kotlin.math.roundToLong
 
 class LottoAuto {
+    private val purchaseAmountInput = InputView("구입금액을 입력해 주세요.")
+    private val winningLottoInput = InputView("지난 주 당첨 번호를 입력해 주세요.")
+
     fun start() {
-        val input = getPurchaseAmountInput()
+        val input = purchaseAmountInput.getIntput()
         val (purchaseAmount, purchasedLottoCount) = purchaseLottos(input)
         purchasedLottoCountOutput(purchasedLottoCount)
 
         val purchasedLottos = createLottos(purchasedLottoCount)
         purchasedLottoOutput(purchasedLottoCount, purchasedLottos)
 
-        val input2 = getWinningLottoInput()
+        val input2 = winningLottoInput.getIntput()
         println("당첨 통계")
         println("--------")
         val matchedLottoNumberCounts = matchLottoNumbers(input2, purchasedLottoCount)
@@ -100,13 +104,6 @@ class LottoAuto {
         return winningNumbers
     }
 
-    fun getWinningLottoInput(): String {
-        println("지난 주 당첨 번호를 입력해 주세요.")
-        val input2 = readlnOrNull()?.trim()
-        if (input2.isNullOrEmpty()) throw RuntimeException("당첨 번호를 입력되지 않았습니다.")
-        return input2
-    }
-
     fun purchasedLottoOutput(
         purchasedLottoCount: Int,
         purchasedLottos: MutableList<List<Int>>,
@@ -138,13 +135,6 @@ class LottoAuto {
     private fun convertToInt(input: String): Int {
         val purchaseAmount = input.toIntOrNull() ?: throw RuntimeException("숫자로 입력하지 않았습니다.")
         return purchaseAmount
-    }
-
-    fun getPurchaseAmountInput(): String {
-        println("구입금액을 입력해 주세요.")
-        val input = readlnOrNull()?.trim()
-        if (input.isNullOrEmpty()) throw RuntimeException("금액을 입력되지 않았습니다.")
-        return input
     }
 
     private companion object {
