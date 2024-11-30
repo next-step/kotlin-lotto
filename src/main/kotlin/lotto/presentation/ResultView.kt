@@ -1,6 +1,6 @@
 package lotto.presentation
 
-import lotto.core.LottoWinningStatistics
+import lotto.core.LottoResult
 import lotto.core.Lottos
 import lotto.core.WinningRank
 
@@ -19,38 +19,49 @@ object ResultView {
         println(stringBuffer.toString())
     }
 
-    fun printWinningStatistics(winningStatistics: LottoWinningStatistics) {
+    fun printLottoResult(lottoResult: LottoResult) {
         val stringBuffer = StringBuffer()
         stringBuffer.append(STR_WINNING_STATISTICS)
         stringBuffer.append(STR_NEW_LINE)
         stringBuffer.append(STR_SEPARATOR)
         stringBuffer.append(STR_NEW_LINE)
 
-        winningStatistics.lottoResult.winningRankCount
-            .filter { (it.key != WinningRank.NOTHING) }
-            .map { appendWinningCount(it, stringBuffer) }
+        WinningRank.entries
+            .filter { it != WinningRank.NOTHING }
+            .forEach { rank ->
+                appendWinningCount(rank, lottoResult.winningRankCount.getOrDefault(rank, 0), stringBuffer)
+            }
+        println(stringBuffer.toString())
+    }
 
+    fun printYieldRate(
+        lottoResult: LottoResult,
+        lottos: Lottos,
+    ) {
+        val yieldRate = lottoResult.calculateYield(lottos.size)
+
+        val stringBuffer = StringBuffer()
         stringBuffer.append("총 수익률은 ")
-        stringBuffer.append(winningStatistics.yieldRate)
+        stringBuffer.append(yieldRate)
         stringBuffer.append("입니다.")
-        stringBuffer.append(if (winningStatistics.yieldRate < 1) STR_PROFIT_IS_LOSS else STR_PROFIT_IS_GOOD)
-
+        stringBuffer.append(if (yieldRate < 1) STR_PROFIT_IS_LOSS else STR_PROFIT_IS_GOOD)
         println(stringBuffer.toString())
     }
 
     private fun appendWinningCount(
-        winningRangCount: Map.Entry<WinningRank, Int>,
+        rank: WinningRank,
+        count: Int,
         stringBuffer: StringBuffer,
     ) {
-        stringBuffer.append(winningRangCount.key.winningCount.first)
+        stringBuffer.append(rank.winningCount.first)
         stringBuffer.append(STR_MATCH)
-        if (winningRangCount.key.winningCount.second) {
+        if (rank.winningCount.second) {
             stringBuffer.append(STR_MATCH_BONUS_BALL)
         }
         stringBuffer.append(STR_LEFT_PARENTHESIS)
-        stringBuffer.append(winningRangCount.key.winningAmount)
+        stringBuffer.append(rank.winningAmount)
         stringBuffer.append(STR_AMOUNT)
-        stringBuffer.append(winningRangCount.value)
+        stringBuffer.append(count)
         stringBuffer.append(STR_COUNT)
         stringBuffer.append(STR_NEW_LINE)
     }
