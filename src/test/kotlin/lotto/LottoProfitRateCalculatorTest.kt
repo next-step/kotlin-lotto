@@ -9,11 +9,11 @@ class LottoProfitRateCalculatorTest : StringSpec({
         val 두장의_4등_로또 =
             Lottos(
                 listOf(
-                    Lotto(listOf(1, 2, 3, 43, 44, 45)),
-                    Lotto(listOf(1, 2, 3, 43, 44, 45)),
+                    Lotto(setOf(1, 2, 3, 43, 44, 45)),
+                    Lotto(setOf(1, 2, 3, 43, 44, 45)),
                 ),
             )
-        val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5, 6))
+        val winningNumbers = WinningNumbers(setOf(1, 2, 3, 4, 5, 6))
 
         val lottoResults = LottoResultChecker.check(lottos = 두장의_4등_로또, winningNumbers = winningNumbers)
         val profitRate: Double = LottoProfitRateCalculator.calculate(두장의_4등_로또, lottoResults)

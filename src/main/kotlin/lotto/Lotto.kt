@@ -1,6 +1,6 @@
 package lotto
 
-class Lotto(private val numbers: List<Int>) {
+class Lotto(private val numbers: Set<Int>) {
     init {
         validateLottoNumberCount()
         validateLottoNumber()
@@ -12,7 +12,7 @@ class Lotto(private val numbers: List<Int>) {
         }
     }
 
-    private fun isInvalidCount(numbers: List<Int>) = numbers.size != NUMBER_COUNT
+    private fun isInvalidCount(numbers: Set<Int>) = numbers.size != NUMBER_COUNT
 
     private fun validateLottoNumber() {
         val invalidNumberCount =

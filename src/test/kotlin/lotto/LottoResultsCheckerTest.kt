@@ -2,22 +2,20 @@ package lotto
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
 
 class LottoResultsCheckerTest : StringSpec({
     "구매한 로또 목록과 당첨 번호를 비교해서 등수 별 개수를 기록한다" {
-        val firstPrize = listOf(1, 2, 3, 4, 5, 6)
+        val firstPrize = setOf(1, 2, 3, 4, 5, 6)
         val lottos =
             Lottos(
                 listOf(
                     Lotto(firstPrize),
-                    Lotto(listOf(1, 2, 3, 4, 5, 45)),
-                    Lotto(listOf(1, 2, 3, 4, 44, 45)),
-                    Lotto(listOf(1, 2, 3, 43, 44, 45)),
-                    Lotto(listOf(1, 2, 42, 43, 44, 45)),
-                    Lotto(listOf(1, 41, 42, 43, 44, 45)),
-                    Lotto(listOf(40, 41, 42, 43, 44, 45)),
+                    Lotto(setOf(1, 2, 3, 4, 5, 45)),
+                    Lotto(setOf(1, 2, 3, 4, 44, 45)),
+                    Lotto(setOf(1, 2, 3, 43, 44, 45)),
+                    Lotto(setOf(1, 2, 42, 43, 44, 45)),
+                    Lotto(setOf(1, 41, 42, 43, 44, 45)),
+                    Lotto(setOf(40, 41, 42, 43, 44, 45)),
                 ),
             )
         val winningNumbers = WinningNumbers(firstPrize)

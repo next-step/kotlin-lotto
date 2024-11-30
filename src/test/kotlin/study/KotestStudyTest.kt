@@ -84,9 +84,9 @@ class Callbacks : FunSpec({
         "kim" shouldHaveLength 3
     }
 
-    test("테스트가 여러갠데 하나가 실패하면 어떻게되지") {
-        "kim" shouldHaveLength 100  // 그냥 독립적인 테스트
-    }
+//    test("테스트가 여러갠데 하나가 실패하면 어떻게되지") {
+//        "kim" shouldHaveLength 100  // 그냥 독립적인 테스트
+//    }
 
     afterEach {
         println("===테스트 끝===")
