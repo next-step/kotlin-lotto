@@ -1,15 +1,15 @@
 package lotto.domain
 
-class PurchasedLottoTickets(val purchasedCount: Int) {
-    val purchasedLottoTickets: List<LottoTicket> = generateLottoTickets()
+class PurchasedLottoTickets(val purchasedCount: Int, lottoNumberGenerator: () -> Set<Int>) {
+    val purchasedLottoTickets: List<LottoTicket> = generateLottoTickets(lottoNumberGenerator)
 
     init {
         require(purchasedCount >= PURCHASED_COUNT_MIN_VALUE) { INVALID_PURCHASED_COUNT_MESSAGE }
     }
 
-    private fun generateLottoTickets(): List<LottoTicket> {
+    private fun generateLottoTickets(lottoNumberGenerator: () -> Set<Int>): List<LottoTicket> {
         val lottoTickets: MutableList<LottoTicket> = mutableListOf()
-        repeat(purchasedCount) { lottoTickets.add(LottoTicket()) }
+        repeat(purchasedCount) { lottoTickets.add(LottoTicket(lottoNumberGenerator)) }
 
         return lottoTickets
     }
