@@ -6,4 +6,8 @@ class Lottos(private val lottos: List<Lotto>) {
             lotto.calculateMatchCount(winningNumbers)
         }
     }
+
+    fun calculatePurchaseAmount(): Long {
+        return (lottos.size * Lotto.MIN_AMOUNT_UNIT).toLong()
+    }
 }
