@@ -9,7 +9,7 @@ import lotto.step4.view.OutputView
 
 fun main() {
     val money = InputView.getPurchaseAmount()
-    val manualPurchaseCount = InputView.getManualPurchaseCount()
+    val manualPurchaseCount = InputView.getManualPurchaseCount(money)
     val manualPurchasedLottos = InputView.getManualPurchaseNumbers(manualPurchaseCount)
     val autoPurchaseMoney = AutoLottoPurchasableMoneyCalculator.calculateMoney(money, manualPurchaseCount)
     val autoPurchasedLottos = LottoPurchaseManager(LottoNumberPicker()).purchase(autoPurchaseMoney)

@@ -1,5 +1,6 @@
 package lotto.step4.view
 
+import lotto.step4.domain.InputValidator
 import lotto.step4.domain.Lotto
 import lotto.step4.domain.LottoNumber
 import lotto.step4.domain.Money
@@ -17,15 +18,28 @@ object InputView {
         }
     }
 
-    fun getManualPurchaseCount(): Long {
+    fun getManualPurchaseCount(money: Money): Long {
         while (true) {
             println("수동으로 구매할 로또 수를 입력해 주세요.")
-            val input = readln().toLongOrNull() // 숫자로 변환, 실패 시 null 반환
-            if (input != null && input >= 0) { // 0 이상의 숫자만 유효
+            val input =
+                readln().toLongOrNull() // 숫자로 변환, 실패 시 null 반환
+                    ?: continue // 실패 시 다시 입력
+            if (input >= 0) { // 0 이상의 숫자만 유효
+                InputValidator.validateManualPurchaseCount(money, input)
                 return input
             } else {
                 println("유효하지 않은 입력입니다. 0 이상의 숫자를 입력해 주세요.")
             }
+        }
+    }
+
+    private fun validate(
+        money: Money,
+        input: Long,
+    ) {
+        if (input * 1000 > money.value) {
+            println("유효하지 않은 입력입니다. 로또 한 장의 가격은 1000원입니다.")
+            return
         }
     }
 
