@@ -1,4 +1,4 @@
-package lotto
+package lotto.ui
 
 object ConsoleReader {
     fun readLine(): String {

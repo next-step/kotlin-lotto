@@ -1,6 +1,8 @@
 package lotto
 
 import lotto.domain.*
+import lotto.ui.LottoGamePrinter
+import lotto.ui.LottoGameReader
 
 fun main() {
     val amount = LottoGameReader.readAmount()
