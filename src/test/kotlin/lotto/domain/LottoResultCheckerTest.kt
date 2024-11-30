@@ -6,8 +6,8 @@ import io.kotest.matchers.shouldBe
 class LottoResultCheckerTest : FreeSpec({
     "구매한 로또 목록과 당첨 번호를 비교해서 등수 별 개수를 기록한다" {
         val firstPrize = setOf(1, 2, 3, 4, 5, 6)
-        val lottos =
-            Lottos(
+        val userLottos =
+            UserLottos(
                 listOf(
                     Lotto(firstPrize),
                     Lotto(setOf(1, 2, 3, 4, 5, 45)),
@@ -18,9 +18,9 @@ class LottoResultCheckerTest : FreeSpec({
                     Lotto(setOf(40, 41, 42, 43, 44, 45)),
                 ),
             )
-        val winningNumbers = WinningNumbers(firstPrize)
+        val winningLotto = WinningLotto(firstPrize)
 
-        val lottoResults = LottoResultChecker.check(lottos, winningNumbers)
+        val lottoResults = LottoResultChecker.check(userLottos, winningLotto)
 
         val expected = mapOf(LottoRank.FIRST to 1, LottoRank.FIRST to 1, LottoRank.SECOND to 1, LottoRank.THIRD to 1, LottoRank.FORTH to 1)
         lottoResults.winningLottoCountByRank shouldBe expected

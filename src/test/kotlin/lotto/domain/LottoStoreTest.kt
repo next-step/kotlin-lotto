@@ -3,7 +3,6 @@ package lotto.domain
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
-import org.assertj.core.api.Assertions.assertThat
 
 class LottoStoreTest : FreeSpec({
     "입력된 금액에 따라 로또를 여러장 구매한다" {
@@ -11,7 +10,7 @@ class LottoStoreTest : FreeSpec({
 
         val lottos = LottoStore.buy(money)
 
-        lottos.size() shouldBe 14
+        lottos.getPurchaseLottoCount() shouldBe 14
     }
 
     "입력된 금액이 1천원 단위가 아니면 예외를 발생시킨다" - {

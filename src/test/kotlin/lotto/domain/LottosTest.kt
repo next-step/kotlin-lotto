@@ -5,7 +5,7 @@ import io.kotest.matchers.shouldBe
 
 class LottosTest : FreeSpec({
     "로또 구매 가격을 계산한다" {
-        val lottos = Lottos(
+        val userLottos = UserLottos(
             listOf(
                 Lotto(setOf(1, 2, 3, 4, 5, 6)),
                 Lotto(setOf(1, 2, 3, 4, 5, 6)),
@@ -15,7 +15,7 @@ class LottosTest : FreeSpec({
             )
         )
 
-        val purchaseAmount = lottos.calculatePurchaseAmount()
+        val purchaseAmount = userLottos.calculatePurchaseAmount()
 
         purchaseAmount shouldBe 5 * Lotto.MIN_AMOUNT_UNIT
     }

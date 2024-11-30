@@ -2,10 +2,10 @@ package lotto.domain
 
 object LottoResultChecker {
     fun check(
-        lottos: Lottos,
-        winningNumbers: WinningNumbers,
+        userLottos: UserLottos,
+        winningLotto: WinningLotto,
     ): LottoResults {
-        val matchCounts = lottos.calculateAllMatchCounts(winningNumbers)
+        val matchCounts = userLottos.calculateMatchCountEach(winningLotto)
 
         val ranks =
             matchCounts.filter { matchCount -> LottoRank.isInTheRank(matchCount) }

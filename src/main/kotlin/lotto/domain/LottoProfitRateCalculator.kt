@@ -1,8 +1,8 @@
 package lotto.domain
 
 object LottoProfitRateCalculator {
-    fun calculate(lottos: Lottos, lottoResults: LottoResults): Double {
-        val purchaseAmount = lottos.calculatePurchaseAmount()
+    fun calculate(userLottos: UserLottos, lottoResults: LottoResults): Double {
+        val purchaseAmount = userLottos.calculatePurchaseAmount()
         val prizeAmount = lottoResults.calculateTotalPrizeAmount()
         return (prizeAmount / purchaseAmount).toDouble()
     }

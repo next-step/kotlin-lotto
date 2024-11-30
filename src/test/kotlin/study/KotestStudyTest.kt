@@ -128,11 +128,11 @@ class FreeSpecTest : FreeSpec({
         }
     }
 
-    "assertSoftly로 한번에 검증하기" {
+    "assertSoftly로 한번에 검증하기 (실패하는 검증의 주석을 풀면 junit의 assertAll과 똑같이 동작함을 확인할 수 있다" {
         assertSoftly {
-            "Hello" shouldBe "World" // 이 검증은 실패
+//            "Hello" shouldBe "World" // 이 검증은 실패
             1 + 1 shouldBe 2
-            listOf(1, 2, 3) shouldContain 4 // 이 검증도 실패
+//            listOf(1, 2, 3) shouldContain 4 // 이 검증도 실패
         }
     }
 })

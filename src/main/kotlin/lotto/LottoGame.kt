@@ -8,16 +8,16 @@ fun main() {
     requireNotNull(amount) { "입력 금액은 숫자만 입력해야 합니다." }
 
     val lottos = LottoStore.buy(amount)
-    println("${lottos.size()}개를 구매했습니다.")
+    println("${lottos.getPurchaseLottoCount()}개를 구매했습니다.")
     println(lottos)
 
     println("지난 주 당첨 번호를 입력해 주세요.")
     val numbers = ConsoleReader.readLine().split(",")
         .map { number -> number.trim().toIntOrNull() ?: throw IllegalArgumentException("당첨 번호는 숫자만 입력해야 합니다.") }
         .toSet()
-    val winningNumbers = WinningNumbers(numbers)
+    val winningLotto = WinningLotto(numbers)
 
-    val lottoResults = LottoResultChecker.check(lottos, winningNumbers)
+    val lottoResults = LottoResultChecker.check(lottos, winningLotto)
 
     println("""
         당첨 통계

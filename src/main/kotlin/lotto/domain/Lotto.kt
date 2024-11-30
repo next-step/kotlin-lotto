@@ -25,8 +25,12 @@ class Lotto(private val numbers: Set<Int>) {
         }
     }
 
-    fun calculateMatchCount(winningNumbers: WinningNumbers): Int {
-        return numbers.count { number -> winningNumbers.contains(number) }
+    fun calculateMatchCount(other: Lotto): Int {
+        return numbers.count { number -> other.contains(number) }
+    }
+
+    private fun contains(number: Int): Boolean {
+        return number in numbers
     }
 
     override fun toString(): String {

@@ -1,9 +1,9 @@
 package lotto.domain
 
-class Lottos(private val lottos: List<Lotto>) {
-    fun calculateAllMatchCounts(winningNumbers: WinningNumbers): List<Int> {
+class UserLottos(private val lottos: List<Lotto>) {
+    fun calculateMatchCountEach(winningLotto: WinningLotto): List<Int> {
         return lottos.map { lotto ->
-            lotto.calculateMatchCount(winningNumbers)
+            winningLotto.calculateMatchCount(lotto)
         }
     }
 
@@ -11,7 +11,7 @@ class Lottos(private val lottos: List<Lotto>) {
         return (lottos.size * Lotto.MIN_AMOUNT_UNIT).toLong()
     }
 
-    fun size(): Int {
+    fun getPurchaseLottoCount(): Int {
         return lottos.size
     }
 

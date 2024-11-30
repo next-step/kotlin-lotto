@@ -1,7 +1,7 @@
 package lotto.domain
 
 object LottoStore {
-    fun buy(money: Int): Lottos {
+    fun buy(money: Int): UserLottos {
         if (isValidAmount(money)) throw NotEnoughMoneyException(money)
 
         val theNumberOfLotto = money / Lotto.MIN_AMOUNT_UNIT
@@ -10,7 +10,7 @@ object LottoStore {
             Lotto(lottoNumbers)
         }
 
-        return Lottos(lottos = lottos)
+        return UserLottos(lottos = lottos)
     }
 
     private fun isValidAmount(money: Int) = money % Lotto.MIN_AMOUNT_UNIT != 0
