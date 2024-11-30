@@ -7,13 +7,15 @@ enum class LottoRank(private val matchCount: Int, val prizeAmount: Long) {
     FORTH(3, 5_000), ;
 
     companion object {
+        private val VALID_MATCH_COUNT = entries.map { rank -> rank.matchCount }
+
         fun from(matchCount: Int): LottoRank {
             return entries.find { rank -> rank.matchCount == matchCount }
                 ?: throw InvalidMatchCountException(matchCount)
         }
 
         fun isInTheRank(matchCount: Int): Boolean {
-            return matchCount >= FORTH.matchCount
+            return VALID_MATCH_COUNT.contains(matchCount)
         }
     }
 }

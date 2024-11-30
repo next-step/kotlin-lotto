@@ -1,10 +1,9 @@
 package lotto
 
 import io.kotest.core.spec.style.FreeSpec
-import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
-class LottoResultsCheckerTest : FreeSpec({
+class LottoResultCheckerTest : FreeSpec({
     "구매한 로또 목록과 당첨 번호를 비교해서 등수 별 개수를 기록한다" {
         val firstPrize = setOf(1, 2, 3, 4, 5, 6)
         val lottos =
