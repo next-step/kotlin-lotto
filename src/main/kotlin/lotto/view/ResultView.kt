@@ -1,3 +1,7 @@
 package lotto.view
 
-class ResultView
+class ResultView(private val message: String) {
+    fun render() {
+        println(message)
+    }
+}

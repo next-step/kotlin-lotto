@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.view.InputView
+import lotto.view.ResultView
 import kotlin.math.roundToLong
 
 class LottoAuto {
@@ -10,19 +11,24 @@ class LottoAuto {
     fun start() {
         val input = purchaseAmountInput.getIntput()
         val (purchaseAmount, purchasedLottoCount) = purchaseLottos(input)
-        purchasedLottoCountOutput(purchasedLottoCount)
+        ResultView("${purchasedLottoCount}개를 구매했습니다.").render()
 
         val purchasedLottos = createLottos(purchasedLottoCount)
-        purchasedLottoOutput(purchasedLottoCount, purchasedLottos)
+        repeat(purchasedLottos.size) { idx ->
+            ResultView(purchasedLottos[idx].toString()).render()
+        }
 
         val input2 = winningLottoInput.getIntput()
-        println("당첨 통계")
-        println("--------")
+        ResultView("당첨 통계\n--------").render()
+
         val matchedLottoNumberCounts = matchLottoNumbers(input2, purchasedLottoCount)
-        matchedLottoNumberCountsOutput(matchedLottoNumberCounts)
+        ResultView("3개 일치 (5000원)- ${matchedLottoNumberCounts.getOrDefault(3, 0)}개").render()
+        ResultView("4개 일치 (50000원)- ${matchedLottoNumberCounts.getOrDefault(4, 0)}개").render()
+        ResultView("5개 일치 (150000원)- ${matchedLottoNumberCounts.getOrDefault(5, 0)}개").render()
+        ResultView("6개 일치 (2000000000원)- ${matchedLottoNumberCounts.getOrDefault(6, 0)}개").render()
 
         val rate = calculate(matchedLottoNumberCounts, purchaseAmount)
-        rateOutput(rate)
+        ResultView("총 수익률은 ${rate}입니다.").render()
     }
 
     fun calculate(
@@ -49,10 +55,6 @@ class LottoAuto {
         return Pair(purchaseAmount, purchasedLottoCount)
     }
 
-    fun rateOutput(rate: Double) {
-        println("총 수익률은 ${rate}입니다.")
-    }
-
     private fun calculateRate(
         prizeAmount: Int,
         purchaseAmount: Int,
@@ -68,13 +70,6 @@ class LottoAuto {
                 (150000 * matchedLottoNumberCounts.getOrDefault(5, 0)) +
                 (2000000000 * matchedLottoNumberCounts.getOrDefault(6, 0))
         return prizeAmount
-    }
-
-    fun matchedLottoNumberCountsOutput(matchedLottoNumberCounts: MutableMap<Int, Int>) {
-        println("3개 일치 (5000원)- ${matchedLottoNumberCounts.getOrDefault(3, 0)}개")
-        println("4개 일치 (50000원)- ${matchedLottoNumberCounts.getOrDefault(4, 0)}개")
-        println("5개 일치 (150000원)- ${matchedLottoNumberCounts.getOrDefault(5, 0)}개")
-        println("6개 일치 (2000000000원)- ${matchedLottoNumberCounts.getOrDefault(6, 0)}개")
     }
 
     private fun createMatchedLottoNumberCounts(
@@ -104,15 +99,6 @@ class LottoAuto {
         return winningNumbers
     }
 
-    fun purchasedLottoOutput(
-        purchasedLottoCount: Int,
-        purchasedLottos: MutableList<List<Int>>,
-    ) {
-        repeat(purchasedLottoCount) { idx ->
-            println(purchasedLottos[idx])
-        }
-    }
-
     fun createLottos(purchasedLottoCount: Int): MutableList<List<Int>> {
         val purchasedLottos = mutableListOf<List<Int>>()
         repeat(purchasedLottoCount) { idx ->
@@ -120,10 +106,6 @@ class LottoAuto {
             purchasedLottos.add(lotto)
         }
         return purchasedLottos
-    }
-
-    fun purchasedLottoCountOutput(purchasedLottoCount: Int) {
-        println("${purchasedLottoCount}개를 구매했습니다.")
     }
 
     private fun countPurchasedLotto(purchaseAmount: Int): Int {
