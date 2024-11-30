@@ -18,8 +18,9 @@ object LottoMarket {
         return List(count) { Lotto(generateNumbers()) }
     }
 
-    private fun generateNumbers(): List<Int> =
-        (LottoConstants.LOTTO_NUMBER_MIN..LottoConstants.LOTTO_NUMBER_MAX).shuffled().take(
-            LottoConstants.LOTTO_NUMBER_COUNT,
-        ).sorted()
+    private fun generateNumbers(): List<LottoNumber> =
+        (LottoNumber.LOTTO_NUMBER_MIN..LottoNumber.LOTTO_NUMBER_MAX).map { LottoNumber(it) }
+            .shuffled()
+            .take(LottoConstants.LOTTO_NUMBER_COUNT)
+            .sortedBy { it.number }
 }
