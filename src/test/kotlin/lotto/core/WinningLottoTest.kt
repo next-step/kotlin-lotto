@@ -6,15 +6,15 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
-class WinningNumbersTest {
+class WinningLottoTest {
     @ParameterizedTest
     @MethodSource("provideParameters")
     fun `생성자에 잘못된 값 전달 시 오류를 확인한다`(
-        numberList: List<Int>,
-        bonusNumber: Int,
+        numberList: List<LottoNumber>,
+        bonusNumber: LottoNumber,
     ) {
         shouldThrow<IllegalArgumentException> {
-            WinningNumbers(numberList, bonusNumber)
+            WinningLotto(numberList, bonusNumber)
         }
     }
 
@@ -22,13 +22,15 @@ class WinningNumbersTest {
         @JvmStatic
         fun provideParameters(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(listOf(1), 1),
-                Arguments.of(listOf(1, 2, 3, 4, 5, 6, 7), 1),
-                Arguments.of(listOf(1, 2, 3, 4, 5, 6), 1),
-                Arguments.of(listOf(1, 2, 3, 4, 5, 6), -1),
-                Arguments.of(listOf(1, 2, 3, 4, 5, 46), 45),
-                Arguments.of(listOf(-1, 2, 3, 4, 5, 40), 45),
+                Arguments.of(transformLottoNumbers(listOf(1)), LottoNumber(1)),
+                Arguments.of(transformLottoNumbers(listOf(1, 2, 3)), LottoNumber(1)),
+                Arguments.of(transformLottoNumbers(listOf(1, 2, 3, 4, 5, 45, 3)), LottoNumber(45)),
             )
+        }
+
+        @JvmStatic
+        fun transformLottoNumbers(numbers: List<Int>): List<LottoNumber> {
+            return numbers.map { LottoNumber(it) }
         }
     }
 }
