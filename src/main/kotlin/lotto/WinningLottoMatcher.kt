@@ -1,7 +1,7 @@
 package lotto
 
 import lotto.domain.Lotto
-import lotto.domain.LottoResult
+import lotto.domain.LottoStatistics
 import lotto.domain.Order
 import lotto.domain.Rank
 import lotto.domain.WinningLotto
@@ -19,10 +19,10 @@ class WinningLottoMatcher {
     private fun aggregateLottoResult(
         lottos: List<Lotto>,
         winningLotto: WinningLotto,
-    ): List<LottoResult> {
+    ): List<LottoStatistics> {
         val result = groupByRank(lottos, winningLotto)
         return result
-            .map { (rank, count) -> LottoResult(count, rank) }
+            .map { (rank, count) -> LottoStatistics(count, rank) }
             .sortedBy { it.rank.prizeAmount }
     }
 

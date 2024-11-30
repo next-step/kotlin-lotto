@@ -36,7 +36,7 @@ class WinningLottoMatcherTest : StringSpec({
 
         expected.forEachIndexed { index, pair ->
             pair.first shouldBe result.winningMatchCounts[index].rank
-            pair.second shouldBe result.winningMatchCounts[index].totalCount
+            pair.second shouldBe result.winningMatchCounts[index].totalMatchCount
         }
     }
 

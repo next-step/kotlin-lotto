@@ -16,9 +16,8 @@ enum class Rank(
         fun findByMatchCount(
             matchCount: Int,
             isBonusMatch: Boolean = false,
-        ): Rank {
+        ): Rank? {
             return entries.firstOrNull { it.match(matchCount, isBonusMatch) }
-                ?: throw RuntimeException("일치하는 숫자의 개수에 해당하는 상품이 존재하지 않습니다.")
         }
     }
 }

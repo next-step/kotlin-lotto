@@ -8,7 +8,7 @@ class WinningLotto(
         validateDuplicate()
     }
 
-    fun matchLotto(targetLotto: Lotto): Rank {
+    fun matchLotto(targetLotto: Lotto): Rank? {
         return Rank.findByMatchCount(
             countMatchingNumbers(targetLotto),
             matchBonusNumber(targetLotto),
