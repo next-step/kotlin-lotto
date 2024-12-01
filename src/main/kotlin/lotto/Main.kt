@@ -6,19 +6,21 @@ import lotto.view.ResultView
 fun main() {
     val lottoCreator = LottoCreator()
     val lottoShop = LottoShop(lottoCreator)
-    val winningLottoMatcher = WinningLottoMatcher()
 
     // 주문 생성
     val amount = InputView.getAmount()
-    val order = lottoShop.makeOrder(amount)
-    ResultView.printCreatedLottos(order.lottos)
+    val manualLottoCount = InputView.getManualLottoCount()
+    val manualLottoNumbers = InputView.getManualLottoNumbers(manualLottoCount)
+    val manualLottos = lottoCreator.createManualLottos(manualLottoNumbers)
+    val order = lottoShop.makeOrder(amount, manualLottoCount, manualLottos)
+    ResultView.printCreatedLottos(order)
 
     // 당첨번호 및 보너스번호 생성
     val winNumberInput = InputView.getWinNumberInput()
     val bonusNumber = InputView.getBonusNumber()
-    val winNumbers = lottoCreator.createWinningLotto(winNumberInput, bonusNumber)
+    val winningLotto = lottoCreator.createWinningLotto(winNumberInput, bonusNumber)
 
     // 결과 출력
-    val result = winningLottoMatcher.checkAndGetResult(order, winNumbers)
+    val result = winningLotto.extractWinningResult(order)
     ResultView.printResult(result)
 }

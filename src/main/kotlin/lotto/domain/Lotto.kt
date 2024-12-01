@@ -6,7 +6,7 @@ class Lotto(val numbers: Set<LottoNumber>) {
     }
 
     private fun validateSize(numbers: Set<LottoNumber>) {
-        require(numbers.size == LOTTO_NUMBER_SIZE) { "로또 번호는 ${LOTTO_NUMBER_SIZE}개여야 합니다. 현재 전달된 개수는 ${numbers.size}개 입니다." }
+        require(numbers.size == LOTTO_SIZE) { "로또 번호는 ${LOTTO_SIZE}개여야 합니다. 현재 전달된 개수는 ${numbers.size}개 입니다." }
     }
 
     override fun equals(other: Any?): Boolean {
@@ -23,6 +23,6 @@ class Lotto(val numbers: Set<LottoNumber>) {
     }
 
     companion object {
-        private const val LOTTO_NUMBER_SIZE = 6
+        private const val LOTTO_SIZE = 6
     }
 }
