@@ -42,7 +42,7 @@ class LottoNumbersTest : StringSpec({
     "보너스 번호가 로또 번호에 포함되어 있으면 true를 반환한다" {
         // Arrange:
         val userLotto = LottoNumbers.created(listOf(1, 2, 3, 4, 5, 6))
-        val bonusNumber = LottoNumber.generate(2)
+        val bonusNumber = LottoNumber(2)
 
         // Act:
         val result = bonusNumber in userLotto.numbers

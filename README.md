@@ -12,7 +12,7 @@
 
 ### 피드백 - 1
 
-- [ ] LottoNumber.generate 메서드 제거
+- [x] LottoNumber.generate 메서드 제거
 - [ ] LottoNumbers.match (v1) 메서드 제거
 - [ ] LottoResultHandler.match 메서드 네이밍 시그니처 변경
 - [ ] LottoNumbers의 countMatch를 O(n^2)에서 O(n)으로 개선

@@ -10,7 +10,7 @@ class LottoNumberTest : StringSpec({
         val value = 1
 
         // Act:
-        val lottoNumber = LottoNumber.generate(value)
+        val lottoNumber = LottoNumber(value)
 
         // Assert:
         lottoNumber.value shouldBe value
@@ -21,7 +21,7 @@ class LottoNumberTest : StringSpec({
         val value = 45
 
         // Act:
-        val lottoNumber = LottoNumber.generate(value)
+        val lottoNumber = LottoNumber(value)
 
         // Assert:
         lottoNumber.value shouldBe value
@@ -33,7 +33,7 @@ class LottoNumberTest : StringSpec({
 
         // Act:
         val exception = shouldThrow<IllegalArgumentException> {
-            LottoNumber.generate(value)
+            LottoNumber(value)
         }
 
         // Assert:
@@ -46,7 +46,7 @@ class LottoNumberTest : StringSpec({
 
         // Act:
         val exception = shouldThrow<IllegalArgumentException> {
-            LottoNumber.generate(value)
+            LottoNumber(value)
         }
 
         // Assert:

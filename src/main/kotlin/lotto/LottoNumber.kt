@@ -8,9 +8,5 @@ value class LottoNumber(val value: Int) {
 
     companion object {
         private val LOTTO_RANGE = 1..45
-
-        fun generate(value: Int): LottoNumber {
-            return LottoNumber(value)
-        }
     }
 }

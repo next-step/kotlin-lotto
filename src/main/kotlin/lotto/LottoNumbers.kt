@@ -26,7 +26,7 @@ data class LottoNumbers(val numbers: List<LottoNumber>) {
             return LottoNumbers(
                 mutableSetOf<LottoNumber>().apply {
                     while (size < LOTTO_COUNT) {
-                        add(LottoNumber.generate(range.random()))
+                        add(LottoNumber(range.random()))
                     }
                 }.toList()
             )

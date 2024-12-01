@@ -12,7 +12,7 @@ fun main() {
     val number = InputView.getBonusNumber()
 
     val lottoNumbers = LottoNumbers.created(numbers)
-    val bonusNumber = LottoNumber.generate(number)
+    val bonusNumber = LottoNumber(number)
     val winningNumbers = WinningNumbers(lottoNumbers, bonusNumber)
 
     val lottoResult = LottoResultHandler.match(userLotto, winningNumbers)
