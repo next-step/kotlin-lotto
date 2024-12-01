@@ -3,6 +3,7 @@ import io.kotest.matchers.shouldBe
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.LottoTickets
+import lotto.domain.PurchaseAmount
 import lotto.domain.WinningCategory
 import lotto.domain.WinningLotto
 import lotto.domain.WinningStatistics
@@ -68,7 +69,7 @@ class WinningStatisticsTest : StringSpec({
             )
 
         val statistics = WinningStatistics(tickets, winningLotto)
-        val profitRate = statistics.calculateProfitRate(2000)
+        val profitRate = statistics.calculateProfitRate(PurchaseAmount(2_000))
 
         profitRate shouldBe ((50_000 + 30_000_000).toDouble() / 2000)
     }

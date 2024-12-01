@@ -14,8 +14,8 @@ class WinningStatistics(tickets: LottoTickets, private val winningLotto: Winning
         }
     }
 
-    fun calculateProfitRate(purchaseAmount: Int): Double {
+    fun calculateProfitRate(purchaseAmount: PurchaseAmount): Double {
         val totalPrize = calculateTotalPrize()
-        return if (purchaseAmount > 0) totalPrize.toDouble() / purchaseAmount else 0.0
+        return totalPrize.toDouble() / purchaseAmount.getValue()
     }
 }

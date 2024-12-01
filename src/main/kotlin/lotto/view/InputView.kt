@@ -2,16 +2,18 @@ package lotto.view
 
 import lotto.domain.Lotto
 import lotto.domain.LottoTickets
+import lotto.domain.TicketCount
+import lotto.domain.PurchaseAmount
 
 object InputView {
-    fun getPurchaseAmount(): Int {
+    fun getPurchaseAmount(): PurchaseAmount {
         println("구입금액을 입력해 주세요.")
-        return readln().toInt()
+        return PurchaseAmount(readln().toInt())
     }
 
-    fun getManualTicketCount(): Int {
+    fun getManualTicketCount(): TicketCount {
         println("수동으로 구매할 로또 수를 입력해 주세요.")
-        return readln().toInt()
+        return TicketCount(readln().toInt())
     }
 
     fun getManualLottoNumbers(count: Int): LottoTickets {

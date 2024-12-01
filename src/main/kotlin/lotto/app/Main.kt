@@ -5,6 +5,7 @@ import lotto.domain.LottoNumber
 import lotto.domain.LottoStore
 import lotto.domain.LottoTickets
 import lotto.domain.RandomLottoGenerator
+import lotto.domain.TicketCount
 import lotto.domain.WinningLotto
 import lotto.domain.WinningStatistics
 import lotto.view.InputView
@@ -14,13 +15,15 @@ fun main() {
     val purchaseAmount = InputView.getPurchaseAmount()
     val lottoStore = LottoStore(RandomLottoGenerator())
 
-    val manualTicketCount = InputView.getManualTicketCount()
-    val manualTickets = InputView.getManualLottoNumbers(manualTicketCount)
+    val manualCount = InputView.getManualTicketCount()
+    val manualTickets = InputView.getManualLottoNumbers(manualCount.getValue())
 
-    val autoTicketAmount = purchaseAmount - (manualTicketCount * LottoStore.LOTTO_PRICE)
+    val autoTicketAmount = purchaseAmount.getValue() - (manualCount.getValue() * LottoStore.LOTTO_PRICE)
+    val autoCount = TicketCount(autoTicketAmount / LottoStore.LOTTO_PRICE)
     val autoTickets = lottoStore.sell(autoTicketAmount)
+
     val tickets = LottoTickets.combine(manualTickets.getTickets(), autoTickets.getTickets())
-    ResultView.printPurchaseInfo(tickets, manualTicketCount, autoTickets.size())
+    ResultView.printPurchaseInfo(tickets, manualCount, autoCount)
 
     val winningLotto =
         WinningLotto(
