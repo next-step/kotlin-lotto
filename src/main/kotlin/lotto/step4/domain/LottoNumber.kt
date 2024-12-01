@@ -1,4 +1,4 @@
-package lotto.step3.domain
+package lotto.step4.domain
 
 @JvmInline
 value class LottoNumber(val number: Int) {
