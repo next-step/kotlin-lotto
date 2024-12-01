@@ -10,7 +10,7 @@ class PriceTest : BehaviorSpec({
         When("Price가 음수이면") {
             Then("IllegalArgumentException을 던진다") {
                 shouldThrow<IllegalArgumentException> {
-                    Price(-1)
+                    Money(-1)
                 }.message shouldBe "음수는 입력할 수 없습니다."
             }
         }

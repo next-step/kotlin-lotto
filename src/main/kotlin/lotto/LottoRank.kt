@@ -2,24 +2,24 @@ package lotto
 
 enum class LottoRank(
     val matchCount: Int,
-    private val winningPrice: Price,
+    private val winningMoney: Money,
 ) {
-    FIRST(6, Price(2_000_000_000)),
-    SECOND(5, Price(30_000_000)),
-    THIRD(5, Price(1_500_000)),
-    FOURTH(4, Price(50_000)),
-    FIFTH(3, Price(5_000)),
-    SIXTH(2, Price(0)),
-    SEVENTH(1, Price(0)),
-    NONE(0, Price(0)),
+    FIRST(6, Money(2_000_000_000)),
+    SECOND(5, Money(30_000_000)),
+    THIRD(5, Money(1_500_000)),
+    FOURTH(4, Money(50_000)),
+    FIFTH(3, Money(5_000)),
+    SIXTH(2, Money(0)),
+    SEVENTH(1, Money(0)),
+    NONE(0, Money(0)),
     ;
 
     fun sumPrice(count: Count): Int {
-        return winningPrice.value * count.value
+        return winningMoney.value * count.value
     }
 
     fun getPriceValue(): Int {
-        return winningPrice.value
+        return winningMoney.value
     }
 
     companion object {

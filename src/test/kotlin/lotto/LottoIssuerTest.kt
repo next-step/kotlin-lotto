@@ -9,19 +9,19 @@ class LottoIssuerTest : BehaviorSpec({
         val lottoIssuer = LottoIssuer
 
         When("14,000원을 넣으면") {
-            val price = Price(14_000)
+            val price = Money(14_000)
 
             Then("14개의 로또를 발급한다") {
-                val lottoNumbers = lottoIssuer.buy(price)
+                val lottoNumbers = lottoIssuer.exchange(price, manualLottoNumbers)
                 lottoNumbers.size shouldBe 14
             }
         }
 
         When("13,333원을 넣으면") {
-            val price = Price(13_333)
+            val price = Money(13_333)
 
             Then("13개의 로또를 발급한다") {
-                val lottoNumbers = lottoIssuer.buy(price)
+                val lottoNumbers = lottoIssuer.exchange(price, manualLottoNumbers)
                 lottoNumbers.size shouldBe 13
             }
         }
