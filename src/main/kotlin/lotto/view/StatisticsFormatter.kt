@@ -1,4 +1,7 @@
-package lotto.domain
+package lotto.view
+
+import lotto.domain.WinningCategory
+import lotto.domain.WinningStatistics
 
 object StatisticsFormatter {
     fun formatDescriptions(statistics: WinningStatistics): List<String> {

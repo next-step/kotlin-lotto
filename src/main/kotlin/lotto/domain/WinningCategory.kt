@@ -1,12 +1,12 @@
 package lotto.domain
 
-enum class WinningCategory(val matchCount: Int, val prize: Int) {
+enum class WinningCategory(val matchCount: Int, val prize: Int, val requiresBonus: Boolean = false) {
     NONE(0, 0),
-    FIFTH(3, 5000),
-    FOURTH(4, 50000),
-    THIRD(5, 1500000),
-    SECOND(5, 30000000),
-    FIRST(6, 2000000000),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000, requiresBonus = true),
+    FIRST(6, 2_000_000_000),
     ;
 
     companion object {
@@ -14,14 +14,11 @@ enum class WinningCategory(val matchCount: Int, val prize: Int) {
             count: Int,
             matchBonus: Boolean,
         ): WinningCategory {
-            return when {
-                count == FIRST.matchCount -> FIRST
-                count == SECOND.matchCount && matchBonus -> SECOND
-                count == THIRD.matchCount -> THIRD
-                count == FOURTH.matchCount -> FOURTH
-                count == FIFTH.matchCount -> FIFTH
-                else -> NONE
-            }
+            return entries
+                .sortedByDescending { it.requiresBonus }
+                .find {
+                    it.matchCount == count && (if (it.requiresBonus) matchBonus else true)
+                } ?: NONE
         }
     }
 }

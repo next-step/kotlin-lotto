@@ -1,24 +1,37 @@
 package lotto.app
 
 import lotto.domain.Lotto
-import lotto.domain.LottoMatcher
 import lotto.domain.LottoNumber
 import lotto.domain.LottoStore
+import lotto.domain.LottoTickets
 import lotto.domain.RandomLottoGenerator
+import lotto.domain.TicketCount
+import lotto.domain.WinningLotto
+import lotto.domain.WinningStatistics
 import lotto.view.InputView
 import lotto.view.ResultView
 
 fun main() {
     val purchaseAmount = InputView.getPurchaseAmount()
     val lottoStore = LottoStore(RandomLottoGenerator())
-    val tickets = lottoStore.sell(purchaseAmount)
-    ResultView.printPurchaseInfo(tickets)
 
-    val winningLotto = Lotto.of(InputView.getWinningNumbers())
-    val bonusNumber = LottoNumber.of(InputView.getBonusNumber())
-    val lottoMatcher = LottoMatcher(winningLotto, bonusNumber)
+    val manualCount = InputView.getManualTicketCount()
+    val manualTickets = InputView.getManualLottoNumbers(manualCount.getValue())
 
-    val winningStatistics = lottoMatcher.evaluateTickets(tickets)
-    val profitRate = winningStatistics.calculateProfitRate(purchaseAmount)
-    ResultView.printStatistics(winningStatistics, profitRate)
+    val autoTicketAmount = purchaseAmount.getValue() - (manualCount.getValue() * LottoStore.LOTTO_PRICE)
+    val autoCount = TicketCount(autoTicketAmount / LottoStore.LOTTO_PRICE)
+    val autoTickets = lottoStore.sell(autoTicketAmount)
+
+    val tickets = LottoTickets.combine(manualTickets.getTickets(), autoTickets.getTickets())
+    ResultView.printPurchaseInfo(tickets, manualCount, autoCount)
+
+    val winningLotto =
+        WinningLotto(
+            winningLotto = Lotto.of(InputView.getWinningNumbers()),
+            bonusNumber = LottoNumber.of(InputView.getBonusNumber()),
+        )
+    val statistics = WinningStatistics(tickets, winningLotto)
+    val profitRate = statistics.calculateProfitRate(purchaseAmount)
+
+    ResultView.printStatistics(statistics, profitRate)
 }
