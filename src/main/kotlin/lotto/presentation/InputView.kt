@@ -31,7 +31,7 @@ object InputView {
         return manualLottoCount
     }
 
-    fun inputManualLottoNumbers(manualLottoCount: Int): List<List<LottoNumber>>  {
+    fun inputManualLottoNumbers(manualLottoCount: Int): List<List<LottoNumber>> {
         println("수동으로 구매할 번호를 입력해 주세요.")
 
         return (1..manualLottoCount).map { inputLottoNumbers() }

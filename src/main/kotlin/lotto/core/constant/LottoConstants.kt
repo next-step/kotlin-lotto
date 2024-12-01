@@ -9,5 +9,4 @@ object LottoConstants {
     const val ERROR_INVALID_INPUT = "잘못된 값이 입력되었습니다."
     const val ERROR_DUPLICATE_NUMBER = "중복된 숫자가 있습니다."
     const val ERROR_NOT_NUMBER = "숫자가 아닙니다."
-
 }
