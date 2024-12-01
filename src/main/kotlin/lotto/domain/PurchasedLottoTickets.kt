@@ -1,13 +1,14 @@
 package lotto.domain
 
 data class PurchasedLottoTickets(val purchasedCount: Int, private val generateLottoNumbers: () -> Set<Int>) {
-    val purchasedLottoTickets: List<LottoTicket> =
-        List(purchasedCount) {
-            LottoTicket(generateLottoNumbers = generateLottoNumbers)
-        }
+    val purchasedLottoTickets: List<LottoTicket>
 
     init {
         require(purchasedCount >= PURCHASED_COUNT_MIN_VALUE) { INVALID_PURCHASED_COUNT_MESSAGE }
+        purchasedLottoTickets =
+            List(purchasedCount) {
+                LottoTicket(generateLottoNumbers = generateLottoNumbers)
+            }
     }
 
     fun resultLottoPayout(lottoWinnerNumbers: LottoWinnerNumbers): PurchasedLottoResults {

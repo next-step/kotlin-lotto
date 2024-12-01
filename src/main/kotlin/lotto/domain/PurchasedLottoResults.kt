@@ -25,10 +25,10 @@ data class PurchasedLottoResults(
 
     fun getProfitMargin(): Double {
         val totalPayout =
-            threeNumberMatchCount * LottoNumberMatchPayout.byMatchCount(threeNumberMatchCount).matchCountPayout +
-                fourNumberMatchCount * LottoNumberMatchPayout.byMatchCount(fourNumberMatchCount).matchCountPayout +
-                fiveNumberMatchCount * LottoNumberMatchPayout.byMatchCount(fiveNumberMatchCount).matchCountPayout +
-                sixNumberMatchCount * LottoNumberMatchPayout.byMatchCount(sixNumberMatchCount).matchCountPayout
+            threeNumberMatchCount * LottoNumberMatchPayout.byMatchCount(THREE_NUMBER_MATCH).matchCountPayout +
+                fourNumberMatchCount * LottoNumberMatchPayout.byMatchCount(FOUR_NUMBER_MATCH).matchCountPayout +
+                fiveNumberMatchCount * LottoNumberMatchPayout.byMatchCount(FIVE_NUMBER_MATCH).matchCountPayout +
+                sixNumberMatchCount * LottoNumberMatchPayout.byMatchCount(SIX_NUMBER_MATCH).matchCountPayout
 
         return totalPayout.toDouble() / (purchasedCount * DEFAULT_LOTTO_PRICE).toDouble()
     }
@@ -37,5 +37,9 @@ data class PurchasedLottoResults(
         const val LOTTO_MATCH_COUNT_MIN_VALUE: Int = 0
         const val INVALID_LOTTO_MATCH_COUNT_MESSAGE: String = "로또 당첨 번호 매치 결과는 0 이상 이어야합니다"
         const val INVALID_PURCHASED_COUNT_LOTTO_MATCH_COUNT_MESSAGE: String = "당첨된 내역의 합이 구매한 개수보다 많을 수 없습니다"
+        const val THREE_NUMBER_MATCH: Int = 3
+        const val FOUR_NUMBER_MATCH: Int = 4
+        const val FIVE_NUMBER_MATCH: Int = 5
+        const val SIX_NUMBER_MATCH: Int = 6
     }
 }
