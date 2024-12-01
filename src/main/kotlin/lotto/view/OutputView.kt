@@ -32,13 +32,12 @@ class OutputView {
 
         fun printLottoStatistics(
             statisticsList: List<Statistics>,
-            amount: Int,
+            earningRatio: Double,
         ) {
             println(LOTTO_STATISTICS_TITLE)
             println(LOTTO_STATISTICS_SEPARATOR)
-            statisticsList.filter { it.rank in 1..5 && it.rank != 2 }
-                .forEach { printLottoResult(it) }
-            val earningRatio = Statistics.calculateEarningRatio(statisticsList, amount)
+            statisticsList.forEach { printLottoResult(it) }
+
             println(EARNING_RATIO_MESSAGE.format(earningRatio, getProfitStatus(earningRatio)))
         }
 
