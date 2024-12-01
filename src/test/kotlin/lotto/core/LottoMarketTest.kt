@@ -17,12 +17,15 @@ class LottoMarketTest {
         amount: String,
         count: Int,
     ) {
-        LottoMarket.purchase(amount).size shouldBe count
+        val list = List(0) { List(6) { LottoNumber(it) } }
+
+        LottoMarket.purchase(amount, list).size shouldBe count
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["", "-1000"])
     fun `잘못된 파라미터 입력 시 Exception을 테스트한다`(amount: String) {
-        shouldThrow<RuntimeException> { LottoMarket.purchase(amount) }
+        val list = List(0) { List(6) { LottoNumber(it) } }
+        shouldThrow<RuntimeException> { LottoMarket.purchase(amount, list) }
     }
 }
