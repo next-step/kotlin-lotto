@@ -8,4 +8,10 @@ class LottoTickets(private val tickets: List<Lotto>) {
     fun getTickets(): List<Lotto> = tickets
 
     fun size(): Int = tickets.size
+
+    companion object {
+        fun combine(manualTickets: List<Lotto>, autoTickets: List<Lotto>): LottoTickets {
+            return LottoTickets(manualTickets + autoTickets)
+        }
+    }
 }
