@@ -3,7 +3,7 @@ package lotto.view
 import lotto.domain.PurchasedLottoResults
 
 object LottoPayoutView {
-    fun view(purchasedLottoResults: PurchasedLottoResults) {
+    fun displayWinningStatistics(purchasedLottoResults: PurchasedLottoResults) {
         println("\n당첨 통계")
         println("---------")
         println("3개 일치 (5000원)- ${purchasedLottoResults.threeNumberMatchCount}개")

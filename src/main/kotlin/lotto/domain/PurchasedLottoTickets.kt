@@ -1,17 +1,58 @@
 package lotto.domain
 
-class PurchasedLottoTickets(val purchasedCount: Int, lottoNumberGenerator: () -> Set<Int>) {
-    val purchasedLottoTickets: List<LottoTicket> = generateLottoTickets(lottoNumberGenerator)
+data class PurchasedLottoTickets(val purchasedCount: Int, private val generateLottoNumbers: () -> Set<Int>) {
+    val purchasedLottoTickets: List<LottoTicket> =
+        List(purchasedCount) {
+            LottoTicket(generateLottoNumbers = generateLottoNumbers)
+        }
 
     init {
         require(purchasedCount >= PURCHASED_COUNT_MIN_VALUE) { INVALID_PURCHASED_COUNT_MESSAGE }
     }
 
-    private fun generateLottoTickets(lottoNumberGenerator: () -> Set<Int>): List<LottoTicket> {
-        val lottoTickets: MutableList<LottoTicket> = mutableListOf()
-        repeat(purchasedCount) { lottoTickets.add(LottoTicket(lottoNumberGenerator)) }
+    fun resultLottoPayout(lottoWinnerNumbers: LottoWinnerNumbers): PurchasedLottoResults {
+        val threeNumberMatchs = mutableListOf<LottoTicket>()
+        val fourNumberMatchs = mutableListOf<LottoTicket>()
+        val fiveNumberMatchs = mutableListOf<LottoTicket>()
+        val sixNumberMatchs = mutableListOf<LottoTicket>()
 
-        return lottoTickets
+        purchasedLottoTickets.forEach { lottoTicket ->
+            numberMatchApply(
+                lottoTicket = lottoTicket,
+                lottoWinnerNumbers = lottoWinnerNumbers,
+                threeNumberMatchs = threeNumberMatchs,
+                fourNumberMatchs = fourNumberMatchs,
+                fiveNumberMatchs = fiveNumberMatchs,
+                sixNumberMatchs = sixNumberMatchs,
+            )
+        }
+
+        return PurchasedLottoResults(
+            purchasedCount = purchasedCount,
+            threeNumberMatchCount = threeNumberMatchs.size,
+            fourNumberMatchCount = fourNumberMatchs.size,
+            fiveNumberMatchCount = fiveNumberMatchs.size,
+            sixNumberMatchCount = sixNumberMatchs.size,
+        )
+    }
+
+    private fun numberMatchApply(
+        lottoTicket: LottoTicket,
+        lottoWinnerNumbers: LottoWinnerNumbers,
+        threeNumberMatchs: MutableList<LottoTicket>,
+        fourNumberMatchs: MutableList<LottoTicket>,
+        fiveNumberMatchs: MutableList<LottoTicket>,
+        sixNumberMatchs: MutableList<LottoTicket>,
+    ) {
+        val lottoNumberMatchPayout = lottoTicket.checkLottoWinnerNumbersMatchPayout(lottoWinnerNumbers)
+
+        when (lottoNumberMatchPayout) {
+            LottoNumberMatchPayout.THREE_NUMBER_MATCH -> threeNumberMatchs.add(lottoTicket)
+            LottoNumberMatchPayout.FOUR_NUMBER_MATCH -> fourNumberMatchs.add(lottoTicket)
+            LottoNumberMatchPayout.FIVE_NUMBER_MATCH -> fiveNumberMatchs.add(lottoTicket)
+            LottoNumberMatchPayout.SIX_NUMBER_MATCH -> sixNumberMatchs.add(lottoTicket)
+            else -> return
+        }
     }
 
     companion object {

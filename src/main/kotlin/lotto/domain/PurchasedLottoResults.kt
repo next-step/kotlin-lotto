@@ -1,9 +1,5 @@
 package lotto.domain
 
-import lotto.domain.LottoNumberMatchPayout.FIVE_NUMBER_MATCH
-import lotto.domain.LottoNumberMatchPayout.FOUR_NUMBER_MATCH
-import lotto.domain.LottoNumberMatchPayout.SIX_NUMBER_MATCH
-import lotto.domain.LottoNumberMatchPayout.THREE_NUMBER_MATCH
 import lotto.domain.LottoTicketIssuer.DEFAULT_LOTTO_PRICE
 import lotto.domain.PurchasedLottoTickets.Companion.INVALID_PURCHASED_COUNT_MESSAGE
 import lotto.domain.PurchasedLottoTickets.Companion.PURCHASED_COUNT_MIN_VALUE
@@ -29,10 +25,10 @@ data class PurchasedLottoResults(
 
     fun getProfitMargin(): Double {
         val totalPayout =
-            threeNumberMatchCount * LottoNumberMatchPayout.matchCountToPayout(THREE_NUMBER_MATCH) +
-                fourNumberMatchCount * LottoNumberMatchPayout.matchCountToPayout(FOUR_NUMBER_MATCH) +
-                fiveNumberMatchCount * LottoNumberMatchPayout.matchCountToPayout(FIVE_NUMBER_MATCH) +
-                sixNumberMatchCount * LottoNumberMatchPayout.matchCountToPayout(SIX_NUMBER_MATCH)
+            threeNumberMatchCount * LottoNumberMatchPayout.byMatchCount(threeNumberMatchCount).matchCountPayout +
+                fourNumberMatchCount * LottoNumberMatchPayout.byMatchCount(fourNumberMatchCount).matchCountPayout +
+                fiveNumberMatchCount * LottoNumberMatchPayout.byMatchCount(fiveNumberMatchCount).matchCountPayout +
+                sixNumberMatchCount * LottoNumberMatchPayout.byMatchCount(sixNumberMatchCount).matchCountPayout
 
         return totalPayout.toDouble() / (purchasedCount * DEFAULT_LOTTO_PRICE).toDouble()
     }

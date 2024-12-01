@@ -1,23 +1,22 @@
 package lotto.domain
 
-object LottoNumberMatchPayout {
-    fun matchCountToPayout(matchCount: Int): Int {
-        return when (matchCount) {
-            THREE_NUMBER_MATCH -> THREE_NUMBER_MATCH_LOTTO_PAYOUT
-            FOUR_NUMBER_MATCH -> FOUR_NUMBER_MATCH_LOTTO_PAYOUT
-            FIVE_NUMBER_MATCH -> FIVE_NUMBER_MATCH_LOTTO_PAYOUT
-            SIX_NUMBER_MATCH -> SIX_NUMBER_MATCH_LOTTO_PAYOUT
-            else -> NO_MATCH_PAYOUT
-        }
-    }
+enum class LottoNumberMatchPayout(val matchCount: Int, val matchCountPayout: Int) {
+    NO_NUMBER_MATCH(matchCount = 0, matchCountPayout = 0),
+    ONE_NUMBER_MATCH(matchCount = 1, matchCountPayout = 0),
+    TWO_NUMBER_MATCH(matchCount = 2, matchCountPayout = 0),
+    THREE_NUMBER_MATCH(matchCount = 3, matchCountPayout = 5000),
+    FOUR_NUMBER_MATCH(matchCount = 4, matchCountPayout = 50000),
+    FIVE_NUMBER_MATCH(matchCount = 5, matchCountPayout = 1500000),
+    SIX_NUMBER_MATCH(matchCount = 6, matchCountPayout = 2000000000),
+    ;
 
-    const val THREE_NUMBER_MATCH: Int = 3
-    private const val THREE_NUMBER_MATCH_LOTTO_PAYOUT: Int = 5000
-    const val FOUR_NUMBER_MATCH: Int = 4
-    private const val FOUR_NUMBER_MATCH_LOTTO_PAYOUT: Int = 50000
-    const val FIVE_NUMBER_MATCH: Int = 5
-    private const val FIVE_NUMBER_MATCH_LOTTO_PAYOUT: Int = 1500000
-    const val SIX_NUMBER_MATCH: Int = 6
-    private const val SIX_NUMBER_MATCH_LOTTO_PAYOUT: Int = 2000000000
-    private const val NO_MATCH_PAYOUT: Int = 0
+    companion object {
+        fun byMatchCount(matchCount: Int): LottoNumberMatchPayout {
+            val findLottoMatchCountPayout = entries.find { it.matchCount == matchCount }
+            requireNotNull(findLottoMatchCountPayout) { INVALID_MATCH_COUNT_MESSAGE }
+            return findLottoMatchCountPayout
+        }
+
+        const val INVALID_MATCH_COUNT_MESSAGE: String = "로또 번호 매칭 카운트는 0부터 6까지만 존재할 수 있습니다"
+    }
 }

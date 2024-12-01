@@ -7,6 +7,9 @@ import org.junit.jupiter.params.provider.CsvSource
 class LottoNumberMatchPayoutTest {
     @ParameterizedTest
     @CsvSource(
+        "0, 0",
+        "1, 0",
+        "2, 0",
         "3, 5000",
         "4, 50000",
         "5, 1500000",
@@ -16,6 +19,6 @@ class LottoNumberMatchPayoutTest {
         matchCount: Int,
         payout: Int,
     ) {
-        LottoNumberMatchPayout.matchCountToPayout(matchCount = matchCount) shouldBe payout
+        LottoNumberMatchPayout.byMatchCount(matchCount = matchCount).matchCountPayout shouldBe payout
     }
 }
