@@ -10,6 +10,16 @@
   - 2등이 5개 + 보너스번호가 맞아야 함
   - 3등이 5개
 
+### 피드백 - 1
+
+- [ ] LottoNumber.generate 메서드 제거
+- [ ] LottoNumbers.match (v1) 메서드 제거
+- [ ] LottoResultHandler.match 메서드 네이밍 시그니처 변경
+- [ ] LottoNumbers의 countMatch를 O(n^2)에서 O(n)으로 개선
+- [ ] 코틀린헤더를 코틀린 관습에 맞게 변경
+  - [ ] WinningNumbers
+- [ ] LottoNumbersTest 테스트 코드 추가
+
 ### 기능 구현 사항
 
 - [x] VIEW 주석 제거
@@ -17,7 +27,7 @@
 - [x] LottoResult의 count를 래핑하고 불변하게 처리되도록 변경
   - [x] count 메서드명을 더 명확하게 변경
   - [x] count 프로퍼티를 래핑하고 불변하게 처리되도록 변경
-- [ ] 피드백 반영 및 구현 사항을 커밋 메시지에 명시
+- [x] 피드백 반영 및 구현 사항을 커밋 메시지에 명시
 - [x] 보너스 번호를 추가한다
 - [x] 당첨 통계에 2등도 추가된다
 
