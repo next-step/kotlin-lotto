@@ -5,7 +5,7 @@ data class LottoNumbers(val numbers: List<LottoNumber>) {
         return this.numbers.count { it in winningLotto.numbers }
     }
 
-    fun matchBonus(bonusNumber: LottoNumber): Boolean {
+    fun isMatchBonus(bonusNumber: LottoNumber): Boolean {
         return bonusNumber in numbers
     }
 

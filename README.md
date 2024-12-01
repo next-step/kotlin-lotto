@@ -14,7 +14,7 @@
 
 - [x] LottoNumber.generate 메서드 제거
 - [x] LottoResultHandler.match (v1) 메서드 제거
-- [ ] LottoNumbers.matchBonus 메서드 네이밍 시그니처 변경
+- [x] LottoNumbers.matchBonus 메서드 네이밍 시그니처 변경
 - [ ] LottoNumbers의 countMatch를 O(n^2)에서 O(n)으로 개선
 - [ ] 코틀린헤더를 코틀린 관습에 맞게 변경
   - [ ] WinningNumbers
