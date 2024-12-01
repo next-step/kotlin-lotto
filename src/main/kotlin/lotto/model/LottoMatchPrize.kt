@@ -9,7 +9,10 @@ enum class LottoMatchPrize(val matchCount: Int, val prizeAmount: Int) {
 
     companion object {
         private val map = entries.associateBy(LottoMatchPrize::matchCount)
+        private val list = entries.toTypedArray().sortedByDescending { it.matchCount }
 
         fun fromMatchCount(matchCount: Int): LottoMatchPrize? = map[matchCount]
+
+        fun getLottoMatchPrizes(): List<LottoMatchPrize> = list
     }
 }

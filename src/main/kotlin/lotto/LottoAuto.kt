@@ -1,14 +1,15 @@
 package lotto
 
 import lotto.model.Lotto
+import lotto.model.LottoMatchPrize
 import lotto.view.InputView
 import lotto.view.ResultView
 
 class LottoAuto {
     private val lottoAutoController = LottoAutoController()
 
-    private val purchaseAmountInput = InputView("구입금액을 입력해 주세요.")
-    private val winningLottoInput = InputView("지난 주 당첨 번호를 입력해 주세요.")
+    private val inputView = InputView()
+    private val resultView = ResultView()
 
     fun start() {
         val (purchaseAmount, purchasedLottoCount) = purchaseLottos()
@@ -21,28 +22,28 @@ class LottoAuto {
     }
 
     private fun purchaseLottos(): Pair<Int, Int> {
-        val input = purchaseAmountInput.getIntput()
+        val input = inputView.getPurchasAmountInput()
         val (purchaseAmount, purchasedLottoCount) = lottoAutoController.countPurchasedLotto(input)
-        ResultView("${purchasedLottoCount}개를 구매했습니다.").render()
+        resultView.renderPurchaseLottoCountOutput(purchasedLottoCount)
         return purchaseAmount to purchasedLottoCount
     }
 
     private fun diplayLottoNumber(purchasedLottoCount: Int): List<Lotto> {
         val purchasedLottos = lottoAutoController.generateLottos(purchasedLottoCount)
         repeat(purchasedLottos.size) { idx ->
-            ResultView(purchasedLottos[idx].numbers.toString()).render()
+            resultView.renderPurchaseLottoNumbersOutput(purchasedLottos[idx].numbers)
         }
         return purchasedLottos
     }
 
     private fun checkLottoNumbers(lottos: List<Lotto>): Map<Int, Int> {
-        val input = winningLottoInput.getIntput()
-        ResultView("당첨 통계\n--------").render()
+        val input = inputView.getWinningNumberInput()
+        resultView.renderResultOutput()
         val matchedLottoNumberCounts = lottoAutoController.matchLottoNumbers(input, lottos)
-        ResultView("3개 일치 (5000원)- ${matchedLottoNumberCounts.getOrDefault(3, 0)}개").render()
-        ResultView("4개 일치 (50000원)- ${matchedLottoNumberCounts.getOrDefault(4, 0)}개").render()
-        ResultView("5개 일치 (150000원)- ${matchedLottoNumberCounts.getOrDefault(5, 0)}개").render()
-        ResultView("6개 일치 (2000000000원)- ${matchedLottoNumberCounts.getOrDefault(6, 0)}개").render()
+        for (prize in LottoMatchPrize.getLottoMatchPrizes()) {
+            val count = matchedLottoNumberCounts.getOrDefault(prize.matchCount, 0)
+            resultView.renderLottoMatchResultOutput(prize.matchCount, prize.prizeAmount, count)
+        }
         return matchedLottoNumberCounts
     }
 
@@ -51,6 +52,6 @@ class LottoAuto {
         purchaseAmount: Int,
     ) {
         val rate = lottoAutoController.calculateReturnRate(matchedLottoNumberCounts, purchaseAmount)
-        ResultView("총 수익률은 ${rate}입니다.").render()
+        resultView.renderLottoProfit(rate)
     }
 }
