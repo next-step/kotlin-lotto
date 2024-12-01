@@ -10,18 +10,20 @@ class LottoIssuerTest : BehaviorSpec({
 
         When("14,000원을 넣으면") {
             val price = Money(14_000)
+            val emptyManualLottoNumbers = emptyList<String>()
 
             Then("14개의 로또를 발급한다") {
-                val lottoNumbers = lottoIssuer.issue(price, manualLottoNumbers)
+                val lottoNumbers = lottoIssuer.issue(price, emptyManualLottoNumbers)
                 lottoNumbers.size shouldBe 14
             }
         }
 
         When("13,333원을 넣으면") {
             val price = Money(13_333)
+            val emptyManualLottoNumbers = emptyList<String>()
 
             Then("13개의 로또를 발급한다") {
-                val lottoNumbers = lottoIssuer.issue(price, manualLottoNumbers)
+                val lottoNumbers = lottoIssuer.issue(price, emptyManualLottoNumbers)
                 lottoNumbers.size shouldBe 13
             }
         }

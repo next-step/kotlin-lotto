@@ -2,7 +2,7 @@ package lotto
 
 data class Count(val value: Int) {
     init {
-        require(value >= 0) { "음수는 입력할 수 없습니다." }
+        require(value >= 0) { "음수는 입력할 수 없습니다. input = $value" }
     }
 
     fun plus(): Count {

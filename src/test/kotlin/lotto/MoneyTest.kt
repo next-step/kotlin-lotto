@@ -4,7 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 
-class PriceTest : BehaviorSpec({
+class MoneyTest : BehaviorSpec({
 
     Given("Price에") {
         When("Price가 음수이면") {
