@@ -1,11 +1,10 @@
 package autolotto.view
 
 import autolotto.calculator.LottoCalculator
-import autolotto.dto.LottoResultResponse
 import autolotto.entity.Lotto
+import autolotto.enums.prize.Prize
 
 object OutPutView {
-
     fun printLottoInfo(lottos: List<Lotto>) {
         repeat(lottos.size) {
             printLotto(lottos[it])
@@ -20,15 +19,20 @@ object OutPutView {
     }
 
     fun printLottoResults(
-        lottoResultResponse: LottoResultResponse
+        lottoResultResponse: Map<Prize, Int>,
+        amount: Int,
     ) {
         println("당첨 통계")
         println("---------")
-        printLottoResult(lottoResultResponse.getWinnerResults())
-        println("총 수익률은 ${lottoResultResponse.getProfit()}입니다.${if (lottoResultResponse.getProfit() < 1) "(기준이 1이기 때문에 결과적으로 손해라는 의미임)" else ""}")
+        printLottoResult(lottoResultResponse)
+        val totalPrize = LottoCalculator.getTotalPrize(lottoResultResponse)
+        val profit = LottoCalculator.getProfitRate(totalPrize, amount)
+        println("총 수익률은 ${profit}입니다.${if (profit < 1) "(기준이 1이기 때문에 결과적으로 손해라는 의미임)" else ""}")
     }
 
-    private fun printLottoResult(lottos: List<String>) {
-        lottos.forEach { lottoResult -> println(lottoResult) }
+    private fun printLottoResult(lottoResultResponse: Map<Prize, Int>) {
+        lottoResultResponse.forEach { (prize, count) ->
+            println("${prize.matchCount}개 일치 (${prize.prizeMoney}원) - ${count}개")
+        }
     }
 }

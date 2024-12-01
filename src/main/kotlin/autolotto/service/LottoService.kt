@@ -1,7 +1,7 @@
 package autolotto.service
 
-import autolotto.dto.LottoResultResponse
 import autolotto.entity.Lotto
+import autolotto.enums.prize.Prize
 import autolotto.repository.LottoRepository
 
 class LottoService(private val lottoRepository: LottoRepository) {
@@ -19,21 +19,22 @@ class LottoService(private val lottoRepository: LottoRepository) {
             .toSet()
     }
 
-    fun getResult(winnersNumbers: List<Int>, amount: Int): LottoResultResponse {
-        val resultMap = mutableMapOf(
-            3 to 0,
-            4 to 0,
-            5 to 0,
-            6 to 0
-        )
+    fun getResult(winnersNumbers: List<Int>): Map<Prize, Int> {
+        val resultMap =
+            mutableMapOf(
+                Prize.THREE to 0,
+                Prize.FOUR to 0,
+                Prize.FIVE to 0,
+                Prize.SIX to 0,
+            )
         val lottos = lottoRepository.findAll()
         val comparisonWinningNumbers =
             lottos.map { lotto -> comparisonWinningNumbers(lotto, winnersNumbers) }
                 .groupBy { it }.mapValues { it.value.size }.toMutableMap()
         resultMap.forEach { (key, value) ->
-            resultMap[key] = (comparisonWinningNumbers[key] ?: 0) + value
+            resultMap[key] = (comparisonWinningNumbers[key.matchCount] ?: 0) + value
         }
-        return LottoResultResponse(resultMap, amount)
+        return resultMap
     }
 
     private fun comparisonWinningNumbers(

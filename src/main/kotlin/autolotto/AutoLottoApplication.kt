@@ -17,6 +17,6 @@ fun main() {
     OutPutView.printLottoInfo(createLottoInfo)
 
     val winnerNumbers = InputView.getWinningNumber()
-    val resultResponse = autoLottoController.getResult(winnerNumbers, amount)
-    OutPutView.printLottoResults(resultResponse)
+    val resultResponse = autoLottoController.getResult(winnerNumbers) // Map<Prize, Int>
+    OutPutView.printLottoResults(resultResponse, amount)
 }

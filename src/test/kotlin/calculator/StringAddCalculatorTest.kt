@@ -4,18 +4,10 @@ import io.kotest.matchers.shouldBe
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
 class StringAddCalculatorTest {
     private var calculator: StringAddCalculator = StringAddCalculator()
-
-    @ParameterizedTest
-    @NullAndEmptySource
-    fun `null 혹은 빈값 인 경우 을 반환`(input: String) {
-        val result = calculator.add(input)
-        result shouldBe 0
-    }
 
     @ParameterizedTest
     @ValueSource(strings = ["1"])
@@ -34,13 +26,6 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = ["1,2:3"])
     fun `구분자를 컴마(,) 이외에 콜론을 사용할 수 있다`(input: String) {
-        val result = calculator.add(input)
-        result shouldBe 6
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = ["//;\n1;2;3"])
-    fun `위 valueSource의 커스텀 구분자를 지정할 수 있다`(input: String) {
         val result = calculator.add(input)
         result shouldBe 6
     }

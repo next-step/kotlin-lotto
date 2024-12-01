@@ -1,14 +1,7 @@
 package autolotto.view
 
-import autolotto.valid.*
-
 object InputView {
     private const val LOTTO_AMOUNT = 1000
-
-    private val positiveNumberValidator = PositiveNumberValidatorStrategy()
-    private val lottoAmountValidator = LottoAmountValidatorStrategy()
-    private val winningNumberValidator = WinningNumberValidatorStrategy()
-    private val numberValidatorStrategy = NumberValidatorStrategy()
 
     fun getLottoGameCount(amount: Int): Int {
         return amount / LOTTO_AMOUNT
@@ -21,15 +14,8 @@ object InputView {
     fun getLottoPurchaseAmount(): Int {
         println("구입금액을 입력해 주세요.")
         val input: Int = readLine()?.toIntOrNull() ?: throw RuntimeException("0 이 아닌 숫자를 입력해주세요")
-
-        if (!positiveNumberValidator.isValid(input)) {
-            throw RuntimeException(positiveNumberValidator.getErrorMessage())
-        }
-
-        if (!lottoAmountValidator.isValid(input)) {
-            throw RuntimeException(lottoAmountValidator.getErrorMessage())
-        }
-
+        positiveNumber(input)
+        lottoAmountValid(input)
         return input
     }
 
@@ -39,29 +25,18 @@ object InputView {
         if (input.isNullOrEmpty()) {
             throw RuntimeException("당청번호를 입력해주세요.")
         }
-        val splitValue = splitWinningNumbers(input)
-        return splitValue.map { e ->
-            if (!numberValidatorStrategy.isValid(e)) {
-                throw RuntimeException(numberValidatorStrategy.getErrorMessage())
-            }
-            val number = Integer.parseInt(e)
-            if (!positiveNumberValidator.isValid(number)) {
-                throw RuntimeException(positiveNumberValidator.getErrorMessage())
-            }
-            number
-        }.also { numbers ->
-            if (!winningNumberValidator.isValid(numbers)) {
-                throw RuntimeException(winningNumberValidator.getErrorMessage())
-            }
-        }
+        return splitWinningNumbers(input)
     }
 
-    fun printInputWinningNumber(winningNumbers: List<Int>) {
-        val winningNumber = winningNumbers.joinToString { "," }
-        println(winningNumber)
+    private fun splitWinningNumbers(input: String): List<Int> {
+        return input.split(",").map { e -> e.trim().toInt() }
     }
 
-    private fun splitWinningNumbers(input: String): List<String> {
-        return input.split(",").map { e -> e.trim() }
+    private fun positiveNumber(input: Int) {
+        require(input >= 0) { "양수가 아닙니다. input=$input" }
+    }
+
+    private fun lottoAmountValid(input: Int) {
+        require(input >= LOTTO_AMOUNT && input % LOTTO_AMOUNT == 0) { "돈은 ${LOTTO_AMOUNT}원 단위로만 입력 가능합니다." }
     }
 }

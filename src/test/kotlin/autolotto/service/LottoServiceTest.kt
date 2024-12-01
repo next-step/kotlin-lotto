@@ -1,6 +1,7 @@
 package autolotto.service
 
 import autolotto.entity.Lotto
+import autolotto.enums.prize.Prize
 import autolotto.repository.LottoRepository
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
@@ -13,7 +14,7 @@ class LottoServiceTest {
     fun `lotto 값 생성 시 중복되는 숫자가 없어야한다`() {
         service.start(1)
         val lotto = lottoRepository.findAll().first()
-        lotto.lottoGame.size shouldBe 6
+        lotto.getNumbers().size shouldBe 6
     }
 
     @Test
@@ -28,7 +29,7 @@ class LottoServiceTest {
 
         val result = service.getResult(listOf(7, 8, 9, 17, 14, 15, 16))
 
-        result.get(3) shouldBe 1
-        result.get(4) shouldBe 1
+        result.get(Prize.THREE) shouldBe 1
+        result.get(Prize.FOUR) shouldBe 1
     }
 }

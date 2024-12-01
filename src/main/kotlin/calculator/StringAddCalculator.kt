@@ -8,15 +8,16 @@ class StringAddCalculator {
             return 0
         }
         val result =
-            customExpression(input)?.map { e -> e.toInt() }
-                ?: input.split(Regex(DEFAULT_PATTERN)).map { e -> CalculatorNumberConvert.convertInt(e) }
+            customExpression(input)?.mapNotNull { it.toIntOrNull() }
+                ?: input.split(Regex(DEFAULT_PATTERN))
+                    .filter { it.isNotBlank() }
+                    .map { CalculatorNumberConvert.convertInt(it) }
         return result.sum()
     }
 
     private fun customExpression(text: String): List<String>? {
-        return Regex(CUSTOM_PATTERN).find(text)?.let {
-            it.groupValues[2].split(it.groupValues[1])
-        }
+        val matchResult = Regex(CUSTOM_PATTERN).find(text) ?: return null
+        return matchResult.groupValues.getOrNull(2)?.split(matchResult.groupValues[1])
     }
 
     companion object {

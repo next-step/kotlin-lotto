@@ -4,24 +4,26 @@ import autolotto.enums.prize.Prize
 import kotlin.math.round
 
 object LottoCalculator {
-    private const val ZERO = 0
-    private const val ONE_HUNDRED = 100
-    fun getTotalPrize(
-        lotto: Map<Int, Int>
+    private const val PERCENT_SCALE = 100
+
+    fun getTotalPrize(lotto: Map<Prize, Int>): Int {
+        return lotto.map { (prize, count) -> getPrize(prize, count) }.sum()
+    }
+
+    private fun getPrize(
+        prize: Prize,
+        count: Int,
     ): Int {
-        return lotto.map { (number, count) -> getPrize(number, count) }.sum()
+        return prize.calculatePrize(count)
     }
 
-    private fun getPrize(number: Int, count: Int): Int {
-        val prize = Prize.fromMatchCount(number)
-        return prize?.calculatePrize(count) ?: ZERO
-    }
-
-
-    fun getProfitRate(totalPrize: Int, amount: Int): Double {
+    fun getProfitRate(
+        totalPrize: Int,
+        amount: Int,
+    ): Double {
         return round(
             totalPrize /
-                    (totalPrize - amount).toDouble() * ONE_HUNDRED
-        ) / ONE_HUNDRED
+                (totalPrize - amount).toDouble() * PERCENT_SCALE,
+        ) / PERCENT_SCALE
     }
 }
