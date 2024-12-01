@@ -1,6 +1,6 @@
 package calculator
 
-object StringSplitter {
+object ExpressionSplitter {
     private const val DELIMITER_COMMA = ","
     private const val DELIMITER_COLON = ":"
 
