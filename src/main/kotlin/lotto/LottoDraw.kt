@@ -3,6 +3,8 @@ package lotto
 fun main() {
     val purchasePrice = InputView.getPurchasePrice()
 
+    val manualLottoCount = InputView.getManualLottoCount()
+
     val price = Price(purchasePrice)
     val userLotto = LottoIssuer.buy(price)
 
