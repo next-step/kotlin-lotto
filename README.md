@@ -1,5 +1,44 @@
 # kotlin-lotto
 
+## STEP 3
+
+### 로또 당첨 도메인
+
+- 당첨번호가 1,2,3,4,5,6 
+- 보너스번호가 7
+  - 1등이 6개 
+  - 2등이 5개 + 보너스번호가 맞아야 함
+  - 3등이 5개
+
+### 피드백 - 1
+
+- [x] LottoNumber.generate 메서드 제거
+- [x] LottoResultHandler.match (v1) 메서드 제거
+- [x] LottoNumbers.matchBonus 메서드 네이밍 시그니처 변경
+- [x] LottoNumbers의 countMatch를 O(n^2)에서 O(n)으로 개선
+- [x] 코틀린헤더를 코틀린 관습에 맞게 변경
+  - [x] WinningNumbers
+- [x] LottoNumbersTest 테스트 커버리지 100% 적용
+
+### 기능 구현 사항
+
+- [x] VIEW 주석 제거
+- [x] UI 로직의 get 메서드를 덮어씌우지 않도록 변경
+- [x] LottoResult의 count를 래핑하고 불변하게 처리되도록 변경
+  - [x] count 메서드명을 더 명확하게 변경
+  - [x] count 프로퍼티를 래핑하고 불변하게 처리되도록 변경
+- [x] 피드백 반영 및 구현 사항을 커밋 메시지에 명시
+- [x] 보너스 번호를 추가한다
+- [x] 당첨 통계에 2등도 추가된다
+
+### 기능 요구 사항
+- [x] 보너스 번호를 추가한다
+- [x] 당첨 통계에 2등도 추가된다
+- [x] 열거 클래스를 적용해 프로그래밍을 구현한다
+- [x] 일급 컬렉션을 사용한다
+
+---
+
 ## STEP 2
 
 ### 피드백 - 1
@@ -14,8 +53,8 @@
 - [x] (리뷰 코멘트) 주석을 남긴 이유
 - [x] LottoNumber의 random을 외부에서 주입받도록 분리
 - [x] 외부로 노출할 필요없는 프로퍼티 private으로 변경
-- [ ] StringBuilder 대신 StringTemplate 사용하도록 변경
-- [ ] LottoNumbers.countMatch를 O(n^2)에서 O(n)으로 개선
+- [x] StringBuilder 대신 StringTemplate 사용하도록 변경
+- [x] LottoNumbers.countMatch를 O(n^2)에서 O(n)으로 개선
 
 
 ### 셀프 피드백

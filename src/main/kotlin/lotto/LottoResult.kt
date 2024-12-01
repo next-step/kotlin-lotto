@@ -2,11 +2,10 @@ package lotto
 
 data class LottoResult(
     val lottoRank: LottoRank,
+    val count: Count = Count.zero(),
 ) {
-    var count: Int = 0
-
-    fun count() {
-        count++
+    fun plus(): LottoResult {
+        return LottoResult(lottoRank, count.plus())
     }
 
     fun sum(): Int {
@@ -19,5 +18,9 @@ data class LottoResult(
 
     fun getWinningPrice(): Int {
         return lottoRank.getPriceValue()
+    }
+
+    fun isSecondRank(): Boolean {
+        return lottoRank == LottoRank.SECOND
     }
 }

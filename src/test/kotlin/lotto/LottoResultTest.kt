@@ -1,27 +1,41 @@
 package lotto
 
-import io.kotest.core.spec.style.BehaviorSpec
+import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
-class LottoResultTest : BehaviorSpec({
+class LottoResultTest : StringSpec({
 
-    Given("2등 당첨된 1명인 로또 결과에") {
-        val lottoResult = LottoResult(lottoRank = LottoRank.SECOND)
+    "로또 결과를 생성할 수 있다" {
+        // Arrange:
+        val lottoRank = LottoRank.FIRST
+        val count = Count.zero()
 
-        When("2등 당첨금을 계산하면") {
-            lottoResult.count()
+        // Act:
+        val lottoResult = LottoResult(lottoRank, count)
 
-            Then("sum()은 1,500,000원을 반환한다") {
-                lottoResult.sum() shouldBe 1_500_000
-            }
-        }
+        // Assert:
+        lottoResult.lottoRank shouldBe lottoRank
+    }
 
-        When("추가 당첨자가 나오면") {
-            lottoResult.count()
+    "당첨자가 추가되면 로또 결과 개수가 증가한다" {
+        // Arrange:
+        val lottoResult = LottoResult(LottoRank.FIRST, Count.zero())
 
-            Then("sum()은 3,000,000원을 반환한다") {
-                lottoResult.sum() shouldBe 3_000_000
-            }
-        }
+        // Act:
+        val result = lottoResult.plus()
+
+        // Assert:
+        result.count shouldBe Count(1)
+    }
+
+    "로또 결과의 sum은 개수 x 로또 상금의 결과이다" {
+        // Arrange:
+        val lottoResult = LottoResult(LottoRank.FIRST, Count(1))
+
+        // Act:
+        val result = lottoResult.sum()
+
+        // Assert:
+        result shouldBe 2_000_000_000
     }
 })

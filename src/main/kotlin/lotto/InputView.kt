@@ -3,15 +3,16 @@ package lotto
 object InputView {
     fun getPurchasePrice(): Int {
         println("구입금액을 입력해 주세요.")
-        return get().toInt()
+        return readln().toInt()
     }
 
-    fun getWinningNumbers(): List<Int> {
+    fun getLottoNumbers(): List<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return get().split(", ").map { it.toInt() }
+        return readln().split(", ").map { it.toInt() }
     }
 
-    private fun get(): String {
-        return readln()
+    fun getBonusNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        return readln().toInt()
     }
 }

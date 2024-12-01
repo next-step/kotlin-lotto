@@ -1,18 +1,22 @@
 package lotto
 
 fun main() {
-    val purchasePrice = InputView.getPurchasePrice() // VIEW(input)
+    val purchasePrice = InputView.getPurchasePrice()
 
     val price = Price(purchasePrice)
     val userLotto = LottoIssuer.buy(price)
 
-    OutputView.printLotto(userLotto) // VIEW(output)
+    OutputView.printLotto(userLotto)
 
-    val winningNumbers = InputView.getWinningNumbers()
+    val numbers = InputView.getLottoNumbers()
+    val number = InputView.getBonusNumber()
 
-    val winningLotto = LottoNumbers.created(winningNumbers)
-    val lottoResult = LottoResultHandler.match(userLotto, winningLotto)
+    val lottoNumbers = LottoNumbers.created(numbers)
+    val bonusNumber = LottoNumber(number)
+    val winningNumbers = WinningNumbers(lottoNumbers, bonusNumber)
 
-    OutputView.printResult(lottoResult.results) // VIEW(output)
-    OutputView.printProfitRate(lottoResult.computeProfitRate(price)) // VIEW(output)
+    val lottoResult = LottoResultHandler.match(userLotto, winningNumbers)
+
+    OutputView.printResult(lottoResult.results)
+    OutputView.printProfitRate(lottoResult.computeProfitRate(price))
 }

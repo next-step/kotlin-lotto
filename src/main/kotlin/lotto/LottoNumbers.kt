@@ -2,7 +2,12 @@ package lotto
 
 data class LottoNumbers(val numbers: List<LottoNumber>) {
     fun countMatch(winningLotto: LottoNumbers): Int {
-        return this.numbers.count { it in winningLotto.numbers }
+        val winningSet = winningLotto.numbers.toSet()
+        return numbers.count { it in winningSet }
+    }
+
+    fun isMatchBonus(bonusNumber: LottoNumber): Boolean {
+        return bonusNumber in numbers
     }
 
     override fun toString(): String {
@@ -19,11 +24,13 @@ data class LottoNumbers(val numbers: List<LottoNumber>) {
         }
 
         fun generate(range: IntRange): LottoNumbers {
-            return LottoNumbers(mutableSetOf<LottoNumber>().apply {
-                while (size < LOTTO_COUNT) {
-                    add(LottoNumber.generate(range.random()))
-                }
-            }.toList())
+            return LottoNumbers(
+                mutableSetOf<LottoNumber>().apply {
+                    while (size < LOTTO_COUNT) {
+                        add(LottoNumber(range.random()))
+                    }
+                }.toList()
+            )
         }
     }
 }
