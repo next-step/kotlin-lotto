@@ -12,7 +12,7 @@ class LottoIssuerTest : BehaviorSpec({
             val price = Money(14_000)
 
             Then("14개의 로또를 발급한다") {
-                val lottoNumbers = lottoIssuer.exchange(price, manualLottoNumbers)
+                val lottoNumbers = lottoIssuer.issue(price, manualLottoNumbers)
                 lottoNumbers.size shouldBe 14
             }
         }
@@ -21,7 +21,7 @@ class LottoIssuerTest : BehaviorSpec({
             val price = Money(13_333)
 
             Then("13개의 로또를 발급한다") {
-                val lottoNumbers = lottoIssuer.exchange(price, manualLottoNumbers)
+                val lottoNumbers = lottoIssuer.issue(price, manualLottoNumbers)
                 lottoNumbers.size shouldBe 13
             }
         }
