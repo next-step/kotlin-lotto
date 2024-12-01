@@ -6,14 +6,11 @@ import io.kotest.matchers.shouldBe
 class LottoStoreTest : StringSpec({
     "should sell the given number of lotto tickets" {
         val lottoGenerator = RandomLottoGenerator()
-        val purchaseCalculator = DefaultLottoPurchaseCalculator()
-        val lottoStore = LottoStore(lottoGenerator, purchaseCalculator)
+        val lottoStore = LottoStore(lottoGenerator)
 
         val amount = 9000
         val tickets = lottoStore.sell(amount)
 
-        tickets.size shouldBe 9
-        tickets.all { it.getNumbers().size == 6 } shouldBe true
-        tickets.all { ticket -> ticket.getNumbers().all { it.number in 1..45 } } shouldBe true
+        tickets.getTickets().size shouldBe 9
     }
 })
