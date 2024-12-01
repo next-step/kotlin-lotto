@@ -17,12 +17,12 @@ object InputView {
     }
 
     fun getManualLottoCount(): Int {
-        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        println("\n수동으로 구매할 로또 수를 입력해 주세요.")
         return readln().toInt()
     }
 
     fun getManualLottoNumbers(manualLottoCount: Int): List<String> {
-        println("수동으로 구매할 번호를 입력해 주세요.")
+        println("\n수동으로 구매할 번호를 입력해 주세요.")
         return List(manualLottoCount) { readln() }
     }
 }

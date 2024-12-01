@@ -7,7 +7,7 @@ object OutputView {
     private const val PERCENT_SCALE = 100
 
     fun printLotto(manualLottoCount: Int, userLotto: List<LottoNumbers>) {
-        println("수동으로 ${manualLottoCount}장, 자동으로 ${userLotto.size - manualLottoCount}개를 구매했습니다.")
+        println("\n수동으로 ${manualLottoCount}장, 자동으로 ${userLotto.size - manualLottoCount}개를 구매했습니다.")
         userLotto.forEach { println("[${ it }]") }.also { println() }
     }
 
@@ -17,6 +17,7 @@ object OutputView {
     }
 
     private fun getHeader() = """
+                |
                 |당첨 통계
                 |---------
                 """.trimMargin()
