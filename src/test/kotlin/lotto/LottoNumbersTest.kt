@@ -45,10 +45,22 @@ class LottoNumbersTest : StringSpec({
         val bonusNumber = LottoNumber(2)
 
         // Act:
-        val result = bonusNumber in userLotto.numbers
+        val result = userLotto.isMatchBonus(bonusNumber)
 
         // Assert:
         result shouldBe true
+    }
+
+    "보너스 번호가 로또 번호에 포함되어 있지 않으면 false를 반환한다" {
+        // Arrange:
+        val userLotto = LottoNumbers.created(listOf(1, 2, 3, 4, 5, 6))
+        val bonusNumber = LottoNumber(10)
+
+        // Act:
+        val result = userLotto.isMatchBonus(bonusNumber)
+
+        // Assert:
+        result shouldBe false
     }
 
     "주어진 범위만큼 로또 번호를 생성하되 중복되지 않는다." {
@@ -61,5 +73,16 @@ class LottoNumbersTest : StringSpec({
         // Assert:
         lottoNumbers.numbers.size shouldBe 6
         lottoNumbers.numbers.toSet().size shouldBe 6
+    }
+
+    "로또 번호를 정렬하여 문자열로 반환한다" {
+        // Arrange:
+        val lottoNumbers = LottoNumbers.created(listOf(6, 5, 4, 3, 2, 1))
+
+        // Act:
+        val result = lottoNumbers.toString()
+
+        // Assert:
+        result shouldBe "1, 2, 3, 4, 5, 6"
     }
 })

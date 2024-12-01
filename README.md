@@ -18,7 +18,7 @@
 - [x] LottoNumbers의 countMatch를 O(n^2)에서 O(n)으로 개선
 - [x] 코틀린헤더를 코틀린 관습에 맞게 변경
   - [x] WinningNumbers
-- [ ] LottoNumbersTest 테스트 코드 추가
+- [x] LottoNumbersTest 테스트 커버리지 100% 적용
 
 ### 기능 구현 사항
 
@@ -54,7 +54,7 @@
 - [x] LottoNumber의 random을 외부에서 주입받도록 분리
 - [x] 외부로 노출할 필요없는 프로퍼티 private으로 변경
 - [x] StringBuilder 대신 StringTemplate 사용하도록 변경
-- [ ] LottoNumbers.countMatch를 O(n^2)에서 O(n)으로 개선
+- [x] LottoNumbers.countMatch를 O(n^2)에서 O(n)으로 개선
 
 
 ### 셀프 피드백
