@@ -1,7 +1,6 @@
 package lotto.view
 
 import lotto.domain.LottoTickets
-import lotto.domain.StatisticsFormatter
 import lotto.domain.WinningStatistics
 
 object ResultView {
