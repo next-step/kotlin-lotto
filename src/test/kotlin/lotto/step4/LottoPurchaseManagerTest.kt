@@ -30,7 +30,7 @@ class LottoPurchaseManagerTest : FunSpec({
         val lottoPurchaseManager = LottoPurchaseManager(LottoNumberPicker())
         forAll(testCases) { money, expected ->
             // then
-            lottoPurchaseManager.purchase(money).size shouldBe expected
+            lottoPurchaseManager.purchase(money).size() shouldBe expected
         }
     }
 
@@ -53,7 +53,7 @@ class LottoPurchaseManagerTest : FunSpec({
         val lottoPurchaseManager = LottoPurchaseManager(LottoNumberPicker())
         forAll(testCases) { money ->
             // then
-            lottoPurchaseManager.purchase(money).forEach {
+            lottoPurchaseManager.purchase(money).getAll().forEach {
                 it.numbers.distinct().size shouldBe 6
             }
         }

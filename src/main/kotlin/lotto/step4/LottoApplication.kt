@@ -14,7 +14,7 @@ fun main() {
     val autoPurchaseMoney = AutoLottoPurchasableMoneyCalculator.calculateMoney(money, manualPurchaseCount)
     val autoPurchasedLottos = LottoPurchaseManager(LottoNumberPicker()).purchase(autoPurchaseMoney)
     OutputView.printPurchaseResult(manualLottos = manualPurchasedLottos, autoLottos = autoPurchasedLottos)
-    val totalPurchasedLottos = manualPurchasedLottos + autoPurchasedLottos
+    val totalPurchasedLottos = manualPurchasedLottos.add(autoPurchasedLottos)
 
     val lastWeekWinningNumbers = InputView.getLastWeekWinningNumbers()
     val bonusNumber = InputView.getBonusNumber()

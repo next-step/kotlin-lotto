@@ -3,6 +3,7 @@ package lotto.step4.view
 import lotto.step4.domain.InputValidator
 import lotto.step4.domain.Lotto
 import lotto.step4.domain.LottoNumber
+import lotto.step4.domain.Lottos
 import lotto.step4.domain.Money
 
 object InputView {
@@ -75,9 +76,9 @@ object InputView {
         }
     }
 
-    fun getManualPurchaseNumbers(count: Long): List<Lotto> {
+    fun getManualPurchaseNumbers(count: Long): Lottos {
         println("수동으로 구매할 번호를 입력해 주세요.")
-        return (1..count).map { readValidManualLotto() }
+        return Lottos((1..count).map { readValidManualLotto() })
     }
 
     private fun readValidManualLotto(): Lotto {

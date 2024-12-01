@@ -3,19 +3,18 @@ package lotto.step4.domain
 class LottoGame {
     fun execute(
         lastWeekWinningNumbers: Set<LottoNumber>,
-        lottos: List<Lotto>,
+        lottos: Lottos,
         bonusNumber: LottoNumber,
     ): WinningStatistics {
-        val rankMap =
-            RankClassifier.classify(
-                lottos = lottos,
+        val ranks =
+            lottos.matchWinningNumbers(
                 winningNumbers = lastWeekWinningNumbers,
                 bonusNumber = bonusNumber,
             )
-        val profit = LottoProfitManager.computeProfit(rankMap = rankMap)
+        val profit = ranks.profit()
 
         return WinningStatistics(
-            rankMap = rankMap,
+            ranks = ranks,
             profit = profit,
         )
     }

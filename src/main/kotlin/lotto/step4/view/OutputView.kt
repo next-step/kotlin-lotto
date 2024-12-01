@@ -1,17 +1,18 @@
 package lotto.step4.view
 
-import lotto.step4.domain.Lotto
 import lotto.step4.domain.LottoNumber
+import lotto.step4.domain.Lottos
 import lotto.step4.domain.Rank
+import lotto.step4.domain.Ranks
 import lotto.step4.domain.WinningStatistics
 
 object OutputView {
     fun printPurchaseResult(
-        manualLottos: List<Lotto>,
-        autoLottos: List<Lotto>,
+        manualLottos: Lottos,
+        autoLottos: Lottos,
     ) {
-        println("수동으로 ${manualLottos.size}장, 자동으로 ${autoLottos.size}개를 구매했습니다.")
-        manualLottos.plus(autoLottos).forEach {
+        println("수동으로 ${manualLottos.size()}장, 자동으로 ${autoLottos.size()}개를 구매했습니다.")
+        manualLottos.add(autoLottos).getAll().forEach {
             this.printLottoNumbers(it.numbers)
         }
     }
@@ -19,11 +20,7 @@ object OutputView {
     fun printStatistics(winningStatistics: WinningStatistics) {
         println("당첨 통계")
         println("---------")
-        this.printMatchCount(rank = Rank.FIFTH, rankMap = winningStatistics.rankMap)
-        this.printMatchCount(rank = Rank.FOURTH, rankMap = winningStatistics.rankMap)
-        this.printMatchCount(rank = Rank.THIRD, rankMap = winningStatistics.rankMap)
-        this.printMatchCount(rank = Rank.SECOND, rankMap = winningStatistics.rankMap)
-        this.printMatchCount(rank = Rank.FIRST, rankMap = winningStatistics.rankMap)
+        printMatchCount(winningStatistics.ranks)
         println("총 수익률은 ${winningStatistics.profit}입니다.")
     }
 
@@ -31,14 +28,22 @@ object OutputView {
         println(lottoNumbers.joinToString(", ", "[", "]"))
     }
 
-    private fun printMatchCount(
+    private fun printMatchCount(ranks: Ranks) {
+        ranks.asMap()
+            .filterNot { (rank, _) -> rank == Rank.MISS } // MISS 제외
+            .forEach { (rank, count) ->
+                println(formatRankOutput(rank, count))
+            }
+    }
+
+    private fun formatRankOutput(
         rank: Rank,
-        rankMap: Map<Rank, Long>,
-    ) {
-        if (rank.hasBonusNumber) {
-            println("${rank.matchCount}개 일치, 보너스 볼 일치(${rank.winningAmount}원)- ${rankMap[rank] ?: 0}개")
+        count: Long,
+    ): String {
+        return if (rank.hasBonusNumber) {
+            "${rank.matchCount}개 일치, 보너스 볼 일치(${rank.winningAmount}원)- ${count}개"
         } else {
-            println("${rank.matchCount}개 일치 (${rank.winningAmount}원)- ${rankMap[rank] ?: 0}개")
+            "${rank.matchCount}개 일치 (${rank.winningAmount}원)- ${count}개"
         }
     }
 }
