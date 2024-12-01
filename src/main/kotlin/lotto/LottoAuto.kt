@@ -2,6 +2,7 @@ package lotto
 
 import lotto.model.Lotto
 import lotto.model.LottoMatchPrize
+import lotto.model.LottoPurchase
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -21,11 +22,11 @@ class LottoAuto {
         calculateProfit(matchedLottoNumberCounts, purchaseAmount)
     }
 
-    private fun purchaseLottos(): Pair<Int, Int> {
+    private fun purchaseLottos(): LottoPurchase {
         val input = inputView.getPurchasAmountInput()
         val (purchaseAmount, purchasedLottoCount) = lottoAutoController.countPurchasedLotto(input)
         resultView.renderPurchaseLottoCountOutput(purchasedLottoCount)
-        return purchaseAmount to purchasedLottoCount
+        return LottoPurchase(purchaseAmount, purchasedLottoCount)
     }
 
     private fun diplayLottoNumber(purchasedLottoCount: Int): List<Lotto> {
