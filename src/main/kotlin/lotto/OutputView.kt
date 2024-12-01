@@ -6,8 +6,8 @@ object OutputView {
     private const val PRINT_VALID_MATCH_COUNT = 3
     private const val PERCENT_SCALE = 100
 
-    fun printLotto(userLotto: List<LottoNumbers>) {
-        println("${userLotto.size}개를 구매했습니다.")
+    fun printLotto(manualLottoCount: Int, userLotto: List<LottoNumbers>) {
+        println("수동으로 ${manualLottoCount}장, 자동으로 ${userLotto.size - manualLottoCount}개를 구매했습니다.")
         userLotto.forEach { println("[${ it }]") }.also { println() }
     }
 
