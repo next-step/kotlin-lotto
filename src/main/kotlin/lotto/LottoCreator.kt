@@ -7,7 +7,7 @@ import lotto.util.LottoNumberGenerator
 import lotto.util.RandomLottoNumberGenerator
 
 class LottoCreator(private val lottoNumberGenerator: LottoNumberGenerator = RandomLottoNumberGenerator()) {
-    fun createLottos(count: Int): List<Lotto> {
+    fun createAutoLottos(count: Int): List<Lotto> {
         return List(count) { createSingleLotto() }
     }
 
@@ -21,5 +21,9 @@ class LottoCreator(private val lottoNumberGenerator: LottoNumberGenerator = Rand
 
     private fun createSingleLotto(): Lotto {
         return Lotto(lottoNumberGenerator.generate())
+    }
+
+    fun createManualLottos(manualLottoNumbers: List<Set<LottoNumber>>): List<Lotto> {
+        return manualLottoNumbers.map { Lotto(it) }
     }
 }

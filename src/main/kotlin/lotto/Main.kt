@@ -9,8 +9,11 @@ fun main() {
 
     // 주문 생성
     val amount = InputView.getAmount()
-    val order = lottoShop.makeOrder(amount)
-    ResultView.printCreatedLottos(order.lottos)
+    val manualLottoCount = InputView.getManualLottoCount()
+    val manualLottoNumbers = InputView.getManualLottoNumbers(manualLottoCount)
+    val manualLottos = lottoCreator.createManualLottos(manualLottoNumbers)
+    val order = lottoShop.makeOrder(amount, manualLottoCount, manualLottos)
+    ResultView.printCreatedLottos(order)
 
     // 당첨번호 및 보너스번호 생성
     val winNumberInput = InputView.getWinNumberInput()

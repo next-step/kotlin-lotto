@@ -10,7 +10,7 @@ class WinningLotto(
 
     fun extractWinningResult(order: Order): WinningResult {
         val lottoRanks =
-            order.lottos.map { this.matchLotto(it) }
+            (order.autoLottos + order.manualLottos).map { this.matchLotto(it) }
                 .groupingBy { it }
                 .eachCount()
         return WinningResult.from(lottoRanks, order.amount)

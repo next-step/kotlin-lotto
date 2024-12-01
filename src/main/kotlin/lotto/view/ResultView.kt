@@ -1,14 +1,15 @@
 package lotto.view
 
-import lotto.domain.Lotto
 import lotto.domain.LottoStatistics
+import lotto.domain.Order
 import lotto.domain.Rank
 import lotto.domain.WinningResult
 
 object ResultView {
-    fun printCreatedLottos(lottos: List<Lotto>) {
-        println("${lottos.size}개를 구매했습니다.")
-        lottos.forEach { println(it.numbers) }
+    fun printCreatedLottos(order: Order) {
+        println("수동으로 ${order.manualLottos.size}, 자동으로 ${order.autoLottos.size}개를 구매했습니다.")
+        order.manualLottos.forEach { println(it.numbers) }
+        order.autoLottos.forEach { println(it.numbers) }
         println()
     }
 

@@ -10,27 +10,11 @@ import lotto.domain.Order
 
 class OrderTest : StringSpec({
     "주문이 생성되면 전달된 금액에 맞는 로또를 소지한다." {
-        val lottoNumbers =
-            setOf(
-                LottoNumber.getNumber(1),
-                LottoNumber.getNumber(2),
-                LottoNumber.getNumber(3),
-                LottoNumber.getNumber(4),
-                LottoNumber.getNumber(5),
-                LottoNumber.getNumber(6),
-            )
-        val lottos =
-            listOf(
-                Lotto(lottoNumbers),
-                Lotto(lottoNumbers),
-                Lotto(lottoNumbers),
-                Lotto(lottoNumbers),
-                Lotto(lottoNumbers),
-            )
+        val lottos = (1..5).map { createLotto(1, 2, 3, 4, 5, 6) }
 
         val order = Order(5000, lottos)
 
-        order.lottos.size shouldBe 5
+        order.autoLottos.size shouldBe 5
     }
 
     "주문 생성 시 전달된 금액과 로또의 수량이 맞지 않을 경우 예외를 반환한다." {

@@ -1,12 +1,17 @@
 package lotto
 
+import lotto.domain.Lotto
 import lotto.domain.Order
 
 class LottoShop(private val lottoCreator: LottoCreator) {
-    fun makeOrder(amount: Int): Order {
+    fun makeOrder(
+        amount: Int,
+        manualCount: Int = 0,
+        manualLottos: List<Lotto> = listOf(),
+    ): Order {
         validateAmountIsPositive(amount)
         val lottoCounts = calculateLottoCounts(amount)
-        return Order(amount, lottoCreator.createLottos(lottoCounts))
+        return Order(amount, lottoCreator.createAutoLottos(lottoCounts - manualCount), manualLottos)
     }
 
     private fun validateAmountIsPositive(amount: Int) {
