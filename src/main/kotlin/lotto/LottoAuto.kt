@@ -24,9 +24,9 @@ class LottoAuto {
 
     private fun purchaseLottos(): LottoPurchase {
         val input = inputView.getPurchasAmountInput()
-        val (purchaseAmount, purchasedLottoCount) = lottoAutoController.countPurchasedLotto(input)
-        resultView.renderPurchaseLottoCountOutput(purchasedLottoCount)
-        return LottoPurchase(purchaseAmount, purchasedLottoCount)
+        val lottoPurchase = lottoAutoController.countPurchasedLotto(input)
+        resultView.renderPurchaseLottoCountOutput(lottoPurchase.purchaseAmount)
+        return lottoPurchase
     }
 
     private fun diplayLottoNumber(purchasedLottoCount: Int): List<Lotto> {
