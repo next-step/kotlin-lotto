@@ -35,9 +35,9 @@ class LottoSystem {
     private fun calculatePrizeAmount(matchedLottoNumberCounts: Map<Int, Int>): Int {
         var totalPrizeAmount = 0
         for ((matchCount, count) in matchedLottoNumberCounts) {
-            val lottoMatch = LottoMatch.fromMatchCount(matchCount)
-            if (lottoMatch != null) {
-                totalPrizeAmount += lottoMatch.prizeAmount * count
+            val lottoMatchPrize = LottoMatchPrize.fromMatchCount(matchCount)
+            if (lottoMatchPrize != null) {
+                totalPrizeAmount += lottoMatchPrize.prizeAmount * count
             }
         }
         return totalPrizeAmount
