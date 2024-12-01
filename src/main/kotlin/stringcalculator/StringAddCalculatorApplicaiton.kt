@@ -1,8 +1,10 @@
 package stringcalculator
 
 fun main() {
-    val input = InputView("Enter input: ").getInputMessage()
+    val inputView = InputView()
+    val resultView = ResultView()
     val calculator = StringAddCalculator()
-    val result = calculator.calculate(input)
-    ResultView("Result: $result").render()
+    val expressionInput = inputView.getExpressionInput()
+    val result = calculator.calculate(expressionInput)
+    resultView.renderResult(result)
 }
