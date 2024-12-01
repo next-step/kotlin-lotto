@@ -10,11 +10,6 @@ data class LottoTicket(private val generateLottoNumbers: () -> Set<Int>) {
         }
     }
 
-    fun checkLottoWinnerNumbersMatchPayout(winnerNumbers: LottoWinnerNumbers): LottoNumberMatchPayout {
-        val matchCount = lottoNumbers.intersect(winnerNumbers.winnerNumbers).size
-        return LottoNumberMatchPayout.byMatchCount(matchCount)
-    }
-
     companion object {
         const val LOTTO_NUMBER_MIN_VALUE: Int = 1
         const val LOTTO_NUMBER_MAX_VALUE: Int = 45

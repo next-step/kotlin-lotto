@@ -25,7 +25,7 @@ object LottoController {
         purchasedLottoTickets: PurchasedLottoTickets,
         lottoWinnerNumbers: LottoWinnerNumbers,
     ) {
-        val purchasedLottoResults = purchasedLottoTickets.resultLottoPayout(lottoWinnerNumbers = lottoWinnerNumbers)
+        val purchasedLottoResults = lottoWinnerNumbers.resultLottoPayout(purchasedLottoTickets)
         return LottoPayoutView.displayWinningStatistics(purchasedLottoResults = purchasedLottoResults)
     }
 }
