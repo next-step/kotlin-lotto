@@ -19,13 +19,26 @@ class LottoMarketTest {
     ) {
         val list = List(0) { List(6) { LottoNumber(it) } }
 
-        LottoMarket.purchase(amount, list).size shouldBe count
+        val purchaseAmount = LottoPurchaseCount(amount, list.size)
+        LottoMarket.purchase(purchaseAmount, list).size shouldBe count
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["", "-1000"])
-    fun `잘못된 파라미터 입력 시 Exception을 테스트한다`(amount: String) {
+    @ValueSource(strings = ["", "ㅈㄷㄹ"])
+    fun `숫자가 아닌 문자열 입력 시 Exception을 테스트한다`(amount: String) {
         val list = List(0) { List(6) { LottoNumber(it) } }
-        shouldThrow<RuntimeException> { LottoMarket.purchase(amount, list) }
+
+        val purchaseAmount = LottoPurchaseCount(amount, list.size)
+
+        shouldThrow<NumberFormatException> { LottoMarket.purchase(purchaseAmount, list) }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["-1000"])
+    fun `잘못된 숫자 입력 시 Exception을 테스트한다`(amount: String) {
+        val list = List(0) { List(6) { LottoNumber(it) } }
+        shouldThrow<IllegalArgumentException> {
+            val purchaseAmount = LottoPurchaseCount(amount, list.size)
+            LottoMarket.purchase(purchaseAmount, list) }
     }
 }

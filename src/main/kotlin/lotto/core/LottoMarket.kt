@@ -4,27 +4,19 @@ import lotto.core.constant.LottoConstants
 
 object LottoMarket {
     fun purchase(
-        purchaseAmount: String,
+        purchaseAmount: LottoPurchaseCount,
         manualLottoNumbers: List<List<LottoNumber>>,
     ): Lottos {
-        val purchasableCount = calculatePurchasableCount(purchaseAmount)
-        val lottos = issueLottos(purchasableCount, manualLottoNumbers)
+        val lottos = issueLottos(purchaseAmount, manualLottoNumbers)
         return Lottos(lottos)
     }
 
-    private fun calculatePurchasableCount(purchaseAmount: String): Int {
-        val amount = purchaseAmount.toIntOrNull() ?: throw IllegalArgumentException("잘못된 금액이 입력되었습니다.")
-        return amount / LottoConstants.LOTTO_PRICE
-    }
-
     private fun issueLottos(
-        totalCount: Int,
+        purchaseAmount: LottoPurchaseCount,
         manualLottoNumbers: List<List<LottoNumber>>,
     ): List<Lotto> {
-        require(totalCount >= manualLottoNumbers.size) { "수동 로또 개수가 잘못입력되었습니다." }
-
         val manualLottos = manualLottoNumbers.indices.map { Lotto(manualLottoNumbers[it]) }
-        val autoLottos = List(totalCount - manualLottos.size) { Lotto(generateNumbers()) }
+        val autoLottos = List(purchaseAmount.autoLottoCount) { Lotto(generateNumbers()) }
 
         return manualLottos + autoLottos
     }

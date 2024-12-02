@@ -1,5 +1,6 @@
 package lotto.presentation
 
+import lotto.core.LottoPurchaseCount
 import lotto.core.LottoResult
 import lotto.core.Lottos
 import lotto.core.WinningRank
@@ -7,10 +8,10 @@ import lotto.core.WinningRank
 object ResultView {
     fun printLottos(
         lottos: Lottos,
-        manualLottoCount: Int,
+        lottoPurchaseCount: LottoPurchaseCount,
     ) {
         val stringBuffer = StringBuffer()
-        stringBuffer.append(String.format(STR_PURCHASED_COUNT, manualLottoCount, lottos.size - manualLottoCount))
+        stringBuffer.append(String.format(STR_PURCHASED_COUNT, lottoPurchaseCount.manualLottoCount, lottoPurchaseCount.autoLottoCount))
         stringBuffer.append(STR_NEW_LINE)
 
         lottos.forEach {
@@ -55,9 +56,9 @@ object ResultView {
         count: Int,
         stringBuffer: StringBuffer,
     ) {
-        stringBuffer.append(rank.winningCount.first)
+        stringBuffer.append(rank.winningCount)
         stringBuffer.append(STR_MATCH)
-        if (rank.winningCount.second) {
+        if (rank.matchBonus) {
             stringBuffer.append(STR_MATCH_BONUS_BALL)
         }
         stringBuffer.append(STR_LEFT_PARENTHESIS)
