@@ -1,5 +1,6 @@
 package calculator
 
+import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -24,30 +25,36 @@ class UnparsedExpressionTest {
     fun `입력값을 쉽표 구분자로 분리 할 수 있다`() {
         val expression = UnparsedExpression("1,2,3,4")
         val textTokens = expression.splitText()
-        textTokens.findToken()[0] shouldBe PositiveNumber.of("1")
-        textTokens.findToken()[1] shouldBe PositiveNumber.of("2")
-        textTokens.findToken()[2] shouldBe PositiveNumber.of("3")
-        textTokens.findToken()[3] shouldBe PositiveNumber.of("4")
+        textTokens.shouldContainExactly(
+            PositiveNumber.of("1"),
+            PositiveNumber.of("2"),
+            PositiveNumber.of("3"),
+            PositiveNumber.of("4"),
+        )
     }
 
     @Test
     fun `입력값을 콜론 구분자로 분리 할 수 있다 `() {
         val expression = UnparsedExpression("11:22:33:44")
         val textTokens = expression.splitText()
-        textTokens.findToken()[0] shouldBe PositiveNumber.of("11")
-        textTokens.findToken()[1] shouldBe PositiveNumber.of("22")
-        textTokens.findToken()[2] shouldBe PositiveNumber.of("33")
-        textTokens.findToken()[3] shouldBe PositiveNumber.of("44")
+        textTokens.shouldContainExactly(
+            PositiveNumber.of("11"),
+            PositiveNumber.of("22"),
+            PositiveNumber.of("33"),
+            PositiveNumber.of("44"),
+        )
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["//@\n1@2@3", "//;\n1;2;3"])
-    fun `커스텀 구분자로 분리할수 있다3`(text: String) {
+    fun `커스텀 구분자로 분리할수 있다`(text: String) {
         val expression = UnparsedExpression(text)
         val textTokens = expression.splitText()
-        textTokens.findToken()[0] shouldBe PositiveNumber.of("1")
-        textTokens.findToken()[1] shouldBe PositiveNumber.of("2")
-        textTokens.findToken()[2] shouldBe PositiveNumber.of("3")
+        textTokens.shouldContainExactly(
+            PositiveNumber.of("1"),
+            PositiveNumber.of("2"),
+            PositiveNumber.of("3"),
+        )
     }
 
     @ParameterizedTest
@@ -58,7 +65,21 @@ class UnparsedExpressionTest {
     ) {
         val expression = UnparsedExpression(text)
         val textTokens = expression.splitText()
-        textTokens.findToken()[0] shouldBe PositiveNumber.of(result)
+        textTokens.shouldContainExactly(PositiveNumber.of(result))
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = [ "//>\n1>2,3:4>5", "//&\n1,2&3&4:5" ])
+    fun `커스텀 구분자와 default 구분자를 함께 입력하면 숫자를 분리 할 수있다`(text: String) {
+        val expression = UnparsedExpression(text)
+        val textTokens = expression.splitText()
+        textTokens.shouldContainExactly(
+            PositiveNumber.of("1"),
+            PositiveNumber.of("2"),
+            PositiveNumber.of("3"),
+            PositiveNumber.of("4"),
+            PositiveNumber.of("5"),
+        )
     }
 
     companion object {

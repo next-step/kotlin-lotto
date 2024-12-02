@@ -1,39 +1,32 @@
 package calculator
 
 class UnparsedExpression(
-    var text: String? = null,
+    private val input: String?,
 ) {
-    init {
-        if (text.isNullOrEmpty() || text.isNullOrBlank()) {
-            text = "0"
-        }
-    }
+    val text: String
+        get() = input?.takeIf { it.isNotBlank() } ?: "0"
 
     fun splitText(): TextTokens {
-        val value = requireNotNull(text) { "입력값을 확인하세요" }
-        val textTokens = splitByCustomDelimiter()
-        if (textTokens.isNotEmpty()) {
-            return addTextTokens(textTokens)
-        }
-        val tokens = value.split(DEFAULT_DELIMITER.toRegex())
-        return addTextTokens(tokens)
+        val customTokens = splitByCustomDelimiter(text)
+        val allTokens =
+            customTokens.flatMap { token ->
+                token.split(DEFAULT_DELIMITER.toRegex())
+            }
+        return addTextTokens(allTokens.filter { it.isNotBlank() }.distinct())
     }
 
     private fun addTextTokens(textTokens: List<String>): TextTokens {
-        val tokens = TextTokens()
-        for (text in textTokens) {
-            tokens.addToken(text)
-        }
-        return tokens
+        val numbers = textTokens.map { PositiveNumber.of(it) }
+        return TextTokens(numbers)
     }
 
-    private fun splitByCustomDelimiter(): List<String> {
-        val result = text?.let { Regex(CUSTOM_DELIMITER).find(it) }
-        result?.let {
+    private fun splitByCustomDelimiter(text: String): List<String> {
+        val matchResult = Regex(CUSTOM_DELIMITER).find(text)
+        return matchResult?.let {
             val customDelimiter = it.groupValues[1]
-            return it.groupValues[2].split(customDelimiter)
-        }
-        return emptyList()
+            val customText = it.groupValues[2]
+            customText.split(customDelimiter)
+        } ?: listOf(text)
     }
 
     companion object {

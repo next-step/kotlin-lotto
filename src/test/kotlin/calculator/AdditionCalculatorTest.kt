@@ -24,7 +24,8 @@ class AdditionCalculatorTest {
                 Arguments.arguments("1,2,3,4,5,6,7,8,9,10", 55),
                 Arguments.arguments("1:2:3:4:5:6:7:8:9:10", 55),
                 Arguments.arguments("//^\n10^20^30", 60),
-                Arguments.arguments("//#\n2#4#8#16", 30),
+                Arguments.arguments("//#\n20#40#80#60", 200),
+                Arguments.arguments("//*\n20*40,80:60", 200),
             )
     }
 }
