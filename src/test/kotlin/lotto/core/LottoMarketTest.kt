@@ -28,9 +28,10 @@ class LottoMarketTest {
     fun `숫자가 아닌 문자열 입력 시 Exception을 테스트한다`(amount: String) {
         val list = List(0) { List(6) { LottoNumber(it) } }
 
-        val purchaseAmount = LottoPurchaseCount(amount, list.size)
-
-        shouldThrow<NumberFormatException> { LottoMarket.purchase(purchaseAmount, list) }
+        shouldThrow<NumberFormatException> {
+            val purchaseAmount = LottoPurchaseCount(amount, list.size)
+            LottoMarket.purchase(purchaseAmount, list)
+        }
     }
 
     @ParameterizedTest
@@ -39,6 +40,7 @@ class LottoMarketTest {
         val list = List(0) { List(6) { LottoNumber(it) } }
         shouldThrow<IllegalArgumentException> {
             val purchaseAmount = LottoPurchaseCount(amount, list.size)
-            LottoMarket.purchase(purchaseAmount, list) }
+            LottoMarket.purchase(purchaseAmount, list)
+        }
     }
 }
