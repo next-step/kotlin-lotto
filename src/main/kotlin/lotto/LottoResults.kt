@@ -16,7 +16,7 @@ data class LottoResults(
         return LottoResults(results)
     }
 
-    fun computeProfitRate(price: Price): Double {
-        return _results.sumOf { it.sum() }.toDouble() / price.value
+    fun computeProfitRate(money: Money): Double {
+        return _results.sumOf { it.sum() }.toDouble() / money.value
     }
 }
