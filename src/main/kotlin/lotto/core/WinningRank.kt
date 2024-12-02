@@ -1,12 +1,12 @@
 package lotto.core
 
-enum class WinningRank(val winningCount: Pair<Int, Boolean>, val winningAmount: Int) {
-    NOTHING(0 to false, 0),
-    FIFTH(3 to false, 5_000),
-    FORTH(4 to false, 50_000),
-    THIRD(5 to false, 1_500_000),
-    SECOND(5 to true, 30_000_000),
-    FIRST(6 to false, 2_000_000_000),
+enum class WinningRank(val winningCount: Int, val matchBonus: Boolean, val winningAmount: Int) {
+    NOTHING(0, false, 0),
+    FIFTH(3, false, 5_000),
+    FORTH(4, false, 50_000),
+    THIRD(5, false, 1_500_000),
+    SECOND(5, true, 30_000_000),
+    FIRST(6, false, 2_000_000_000),
     ;
 
     companion object {
@@ -16,7 +16,17 @@ enum class WinningRank(val winningCount: Pair<Int, Boolean>, val winningAmount: 
             winningCount: Int,
             matchBonus: Boolean,
         ): WinningRank {
-            return RANK_BY_WINNING_COUNT[winningCount to matchBonus] ?: NOTHING
+            var ranks = entries.filter { it.winningCount == winningCount }
+            if (ranks.isEmpty()) {
+                return NOTHING
+            }
+
+            if (ranks.size == 1) {
+                return ranks[0]
+            }
+
+            ranks = ranks.filter { it.matchBonus == matchBonus }
+            return if (ranks.size > 0) ranks[0] else NOTHING
         }
     }
 
