@@ -10,6 +10,12 @@ data class Lottos(
         lottos.add(lotto)
     }
 
+    fun addAllLotto(lottos: Lottos) {
+        lottos.lottos.forEach {
+            addLotto(it)
+        }
+    }
+
     fun lottoCount(): Int {
         return lottos.size
     }
