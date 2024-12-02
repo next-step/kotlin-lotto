@@ -26,7 +26,7 @@ object InputView {
         println("수동으로 구매할 로또 수를 입력해주세요.")
         val number = readlnOrNull() ?: throw RuntimeException(LottoConstants.ERROR_INVALID_INPUT)
 
-        val manualLottoCount = number.replace(" ", "").toIntOrNull() ?: throw RuntimeException(LottoConstants.ERROR_INVALID_INPUT)
+        val manualLottoCount = number.trim().toIntOrNull() ?: throw RuntimeException(LottoConstants.ERROR_INVALID_INPUT)
 
         return manualLottoCount
     }
