@@ -8,7 +8,7 @@ object LottoIssuer {
         money: Money,
         manualNumbers: List<String>
     ): List<LottoNumbers> {
-        val manualLottoMoney = manualNumbers.size * LOTTO_MONEY
+        val manualLottoMoney = Money(manualNumbers.size * LOTTO_MONEY)
         val remainingMoney = money - manualLottoMoney
         val autoLottoCount = remainingMoney.value / LOTTO_MONEY
 
