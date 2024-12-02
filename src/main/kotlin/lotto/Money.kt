@@ -6,7 +6,7 @@ value class Money(val value: Int) {
         require(value >= 0) { "음수는 입력할 수 없습니다." }
     }
 
-    fun minus(value: Int): Money {
+    operator fun minus(value: Int): Money {
         return Money(this.value - value)
     }
 }

@@ -9,7 +9,7 @@ object LottoIssuer {
         manualNumbers: List<String>
     ): List<LottoNumbers> {
         val manualLottoMoney = manualNumbers.size * LOTTO_MONEY
-        val remainingMoney = money.minus(manualLottoMoney)
+        val remainingMoney = money - manualLottoMoney
         val autoLottoCount = remainingMoney.value / LOTTO_MONEY
 
         val autoLottoNumbers = List(autoLottoCount) { LottoNumbers.generate(LOTTO_RANGE) }

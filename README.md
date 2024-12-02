@@ -6,8 +6,8 @@
 
 - [x] toList 제거 
   - public operator fun <T> Collection<T>.plus(elements: Iterable<T>): List<T> {...}
-- [ ] manualLottoCount 변수명 변경
-- [ ] 연산자 오버로딩 사용
+- [x] manualLottoCount 변수명 변경
+- [x] Money.minus 연산자 오버로딩으로 변경
 - [ ] Money.minus 메서드 테스트 추가
 
 ## 기능 구현 사항
