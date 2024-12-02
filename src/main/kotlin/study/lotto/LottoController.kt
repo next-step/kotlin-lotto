@@ -33,7 +33,7 @@ class LottoController(
 
         playGame(lottos, winLotto, bonus)
         resultView.printWinLotto(this.lottoStats)
-        resultView.printProfit(lottoOperator.getProfitLotto(this.lottoStats, money))
+        resultView.printProfit(lottoOperator.profitLotto(this.lottoStats, money))
     }
 
     private fun inputSettingsFromMoney(): Int {
@@ -41,7 +41,7 @@ class LottoController(
         val manualCount = inputView.inputBuyManualCount(money)
         lottos.addAllLotto(inputView.inputManualLotto(manualCount))
 
-        val autoCount = lottoOperator.getBuyLottoCount(money) - manualCount
+        val autoCount = lottoOperator.boughtLottoCount(money) - manualCount
         lottos.addAllLotto(lottoOperator.buyLotto(autoCount))
         resultView.printLottoCount(manualCount, autoCount)
         resultView.printLotto(lottos)

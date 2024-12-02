@@ -37,10 +37,10 @@ class LottoOperatorTest : StringSpec({
     }
     "로또 당첨 수익률 테스트 14000원 구매" {
         val winLottoStatSet = LottoStats(mutableSetOf(LottoStat(Rank.FOURTH, 1)))
-        lottoOperator.getProfitLotto(winLottoStatSet, 14000) shouldBe 0.35
+        lottoOperator.profitLotto(winLottoStatSet, 14000) shouldBe 0.35
     }
     "로또 당첨 수익률 테스트 5000원 구매" {
         val winLottoStatSet = LottoStats(mutableSetOf(LottoStat(Rank.FOURTH, 1)))
-        lottoOperator.getProfitLotto(winLottoStatSet, 5000) shouldBe 1.0
+        lottoOperator.profitLotto(winLottoStatSet, 5000) shouldBe 1.0
     }
 })

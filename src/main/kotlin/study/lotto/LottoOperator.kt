@@ -10,7 +10,7 @@ import kotlin.math.floor
  * @author 이상준
  */
 class LottoOperator {
-    fun getBuyLottoCount(money: Int): Int {
+    fun boughtLottoCount(money: Int): Int {
         return money / 1000
     }
 
@@ -24,7 +24,7 @@ class LottoOperator {
         }.let { return it }
     }
 
-    fun getProfitLotto(
+    fun profitLotto(
         lottoStats: LottoStats,
         money: Int,
     ): Double {
