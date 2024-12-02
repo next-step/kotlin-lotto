@@ -4,7 +4,7 @@
 
 ## 피드백 - 1
 
-- [ ] toList 제거 
+- [x] toList 제거 
   - public operator fun <T> Collection<T>.plus(elements: Iterable<T>): List<T> {...}
 - [ ] manualLottoCount 변수명 변경
 - [ ] 연산자 오버로딩 사용
