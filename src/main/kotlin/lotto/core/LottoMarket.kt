@@ -16,7 +16,7 @@ object LottoMarket {
         manualLottoNumbers: List<List<LottoNumber>>,
     ): List<Lotto> {
         val manualLottos = manualLottoNumbers.indices.map { Lotto(manualLottoNumbers[it]) }
-        val autoLottos = List(purchaseAmount.autoLottoCount) { Lotto(generateNumbers()) }
+        val autoLottos = List(purchaseAmount.autoLottoCount()) { Lotto(generateNumbers()) }
 
         return manualLottos + autoLottos
     }

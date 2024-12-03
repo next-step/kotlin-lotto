@@ -11,7 +11,7 @@ object ResultView {
         lottoPurchaseCount: LottoPurchaseCount,
     ) {
         val stringBuffer = StringBuffer()
-        stringBuffer.append(String.format(STR_PURCHASED_COUNT, lottoPurchaseCount.manualLottoCount, lottoPurchaseCount.autoLottoCount))
+        stringBuffer.append(String.format(STR_PURCHASED_COUNT, lottoPurchaseCount.manualLottoCount, lottoPurchaseCount.autoLottoCount()))
         stringBuffer.append(STR_NEW_LINE)
 
         lottos.forEach {
