@@ -3,12 +3,13 @@ package lotto.domain
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-class LottoCalculator {
+object LottoCalculator {
     fun calculateLottoCount(
         totalPurchaseAmount: BigDecimal,
         pricePerAmount: BigDecimal
     ): Int {
         require(pricePerAmount > BigDecimal.ZERO) { "invalid pricePerAmount : $pricePerAmount" }
+        require(totalPurchaseAmount > pricePerAmount) { "1 Lotto costs $pricePerAmount. Please enter amount larger than $pricePerAmount." }
         return totalPurchaseAmount.divide(pricePerAmount).toInt()
     }
 

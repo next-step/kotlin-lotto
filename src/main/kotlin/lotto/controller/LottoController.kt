@@ -10,12 +10,11 @@ import java.math.BigDecimal
 
 class LottoController {
     fun start() {
-        val totalPurchaseAmount = InputView.readTotalPurchaseAmountAsInt().toBigDecimal()
+        val totalPurchaseAmount = InputView.readTotalPurchaseAmountAsBigDecimal()
 
-        val calculator = LottoCalculator()
-        val totalLottoCount = calculator.calculateLottoCount(
+        val totalLottoCount = LottoCalculator.calculateLottoCount(
             totalPurchaseAmount = totalPurchaseAmount,
-            pricePerAmount = BigDecimal(1000)
+            pricePerAmount = LOTTO_UNIT_PRICE
         )
         // 총 구매 로또 개수
         ResultView.printTotalPurchaseCount(totalLottoCount)
@@ -32,10 +31,14 @@ class LottoController {
         )
         ResultView.printLottoResult(resultMap = result.resultMap)
         ResultView.printProfitRate(
-            profitRate = calculator.calculateProfitRate(
+            profitRate = LottoCalculator.calculateProfitRate(
                 result.getTotalProfit(),
                 totalPurchaseAmount,
             )
         )
+    }
+
+    companion object {
+        private val LOTTO_UNIT_PRICE = BigDecimal(1000)
     }
 }

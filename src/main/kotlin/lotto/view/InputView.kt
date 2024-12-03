@@ -1,8 +1,10 @@
 package lotto.view
 
+import java.math.BigDecimal
+
 object InputView {
-    fun readTotalPurchaseAmountAsInt(): Int {
-        return readlnOrNull()?.trim()?.toIntOrNull() ?: 0
+    fun readTotalPurchaseAmountAsBigDecimal(): BigDecimal {
+        return readlnOrNull()?.trim()?.toBigDecimalOrNull() ?: BigDecimal.ZERO
     }
 
     fun readWinningLotto(promptMessage: String): List<Int> {
