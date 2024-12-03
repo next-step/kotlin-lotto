@@ -20,6 +20,6 @@ class TicketCountTest : StringSpec({
             shouldThrow<IllegalArgumentException> {
                 TicketCount(-1)
             }
-        exception.message shouldBe "수동으로 구매할 티켓 수는 0 이상이어야 합니다."
+        exception.message shouldBe "티켓 수는 0 이상이어야 합니다."
     }
 })

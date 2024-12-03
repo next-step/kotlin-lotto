@@ -8,8 +8,8 @@ object ResultView {
     fun printPurchaseInfo(
         tickets: LottoTickets,
         manualCount: TicketCount,
-        autoCount: TicketCount,
     ) {
+        val autoCount = TicketCount(tickets.size() - manualCount.getValue())
         println("수동으로 ${manualCount.getValue()}장, 자동으로 ${autoCount.getValue()}개를 구매했습니다.")
         tickets.getTickets().forEach { println(it.getNumbers()) }
     }

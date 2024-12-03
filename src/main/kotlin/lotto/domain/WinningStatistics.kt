@@ -1,10 +1,7 @@
 package lotto.domain
 
-class WinningStatistics(tickets: LottoTickets, private val winningLotto: WinningLotto) {
-    private val statistics: Map<WinningCategory, Int> =
-        tickets.getTickets()
-            .groupBy { winningLotto.determineCategory(it) }
-            .mapValues { it.value.size }
+class WinningStatistics(winningCategories: List<WinningCategory>) {
+    private val statistics: Map<WinningCategory, Int> = winningCategories.groupingBy { it }.eachCount()
 
     fun getStatistics(): Map<WinningCategory, Int> = statistics
 
