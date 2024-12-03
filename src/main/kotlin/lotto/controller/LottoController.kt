@@ -32,6 +32,7 @@ object LottoController {
         val result =
             LottoResult(
                 winningLotto = Lotto(winningNumbers),
+                bonusLottoNumber = bonusLottoNumber,
                 myLottoList = myLottoList,
             )
         ResultView.printLottoResult(resultMap = result.resultMap)

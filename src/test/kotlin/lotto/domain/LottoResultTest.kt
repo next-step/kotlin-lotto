@@ -46,6 +46,6 @@ private fun fakeLottoResult(): LottoResult {
             // 6 matches
             Lotto(listOf(1, 2, 3, 4, 5, 6)),
         )
-    val lottoResult = LottoResult(winningLotto, myLottoList)
+    val lottoResult = LottoResult(winningLotto, bonusLottoNumber = 8, myLottoList) // TODO - 보너스 숫자 관련 테스트 수정
     return lottoResult
 }
