@@ -16,7 +16,7 @@ enum class Rank(val prizeMoney: BigDecimal, val matchingNumberCount: Int) {
                 ?: throw IllegalArgumentException("invalid count $count")
         }
 
-        fun getPlacesFromLowest(): List<Rank> =
+        fun getRanksFromLowest(): List<Rank> =
             listOf(
                 FIFTH,
                 FOURTH,
