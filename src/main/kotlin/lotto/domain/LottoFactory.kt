@@ -11,12 +11,8 @@ class LottoFactory(
     fun createLottoList(): List<Lotto> {
         return List(totalLottoCount) {
             numberGenerator
-                .getNumbers(LOTTO_NUMBER_SIZE)
+                .getNumbers(Lotto.MIN_LOTTO_COUNT)
                 .let { Lotto(it) }
         }
-    }
-
-    companion object {
-        private const val LOTTO_NUMBER_SIZE = 6
     }
 }
