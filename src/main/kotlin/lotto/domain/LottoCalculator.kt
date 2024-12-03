@@ -6,7 +6,7 @@ import java.math.RoundingMode
 object LottoCalculator {
     fun calculateLottoCount(
         totalPurchaseAmount: BigDecimal,
-        pricePerAmount: BigDecimal
+        pricePerAmount: BigDecimal,
     ): Int {
         require(pricePerAmount > BigDecimal.ZERO) { "invalid pricePerAmount : $pricePerAmount" }
         require(totalPurchaseAmount > pricePerAmount) { "1 Lotto costs $pricePerAmount. Please enter amount larger than $pricePerAmount." }
@@ -15,7 +15,7 @@ object LottoCalculator {
 
     fun calculateProfitRate(
         totalProfit: BigDecimal,
-        totalPurchaseAmount: BigDecimal
+        totalPurchaseAmount: BigDecimal,
     ): BigDecimal {
         require(totalPurchaseAmount > BigDecimal.ZERO) { "invalid totalPurchaseAmount : $totalPurchaseAmount" }
         if (totalProfit == BigDecimal.ZERO) return BigDecimal.ZERO

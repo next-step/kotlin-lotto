@@ -11,10 +11,11 @@ class LottoFactoryTest : StringSpec({
         val totalLottoCount = 5
         val expectedLottoNumbers = listOf(1, 2, 3, 4, 5, 6)
         val fakeNumberGenerator = FakeRandomNumberGenerator(expectedLottoNumbers)
-        val lottoFactory = LottoFactory(
-            totalLottoCount = totalLottoCount,
-            numberGenerator = fakeNumberGenerator
-        )
+        val lottoFactory =
+            LottoFactory(
+                totalLottoCount = totalLottoCount,
+                numberGenerator = fakeNumberGenerator,
+            )
 
         // When
         val lottoList = lottoFactory.createLottoList()
@@ -30,10 +31,11 @@ class LottoFactoryTest : StringSpec({
         // Given
         val expectedLottoNumbers = listOf(1, 2, 3, 4, 5, 6)
         val fakeNumberGenerator = FakeRandomNumberGenerator(expectedLottoNumbers)
-        val lottoFactory = LottoFactory(
-            totalLottoCount = 5, // 임의값
-            numberGenerator = fakeNumberGenerator
-        )
+        val lottoFactory =
+            LottoFactory(
+                totalLottoCount = 5, // 임의값
+                numberGenerator = fakeNumberGenerator,
+            )
 
         // When
         val lottoList = lottoFactory.createLottoList()
