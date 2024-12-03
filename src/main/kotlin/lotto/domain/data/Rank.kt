@@ -2,7 +2,7 @@ package lotto.domain.data
 
 import java.math.BigDecimal
 
-enum class LottoWinPlace(val prizeMoney: BigDecimal, val matchingNumberCount: Int) {
+enum class Rank(val prizeMoney: BigDecimal, val matchingNumberCount: Int) {
     FIRST(BigDecimal(2_000_000_000), 6),
     THIRD(BigDecimal(1_500_000), 5),
     SECOND(BigDecimal(30_000_000), 5),
@@ -11,12 +11,12 @@ enum class LottoWinPlace(val prizeMoney: BigDecimal, val matchingNumberCount: In
     ;
 
     companion object {
-        fun fromCount(count: Int): LottoWinPlace {
+        fun fromCount(count: Int): Rank {
             return entries.find { count == it.matchingNumberCount }
                 ?: throw IllegalArgumentException("invalid count $count")
         }
 
-        fun getPlacesFromLowest(): List<LottoWinPlace> =
+        fun getPlacesFromLowest(): List<Rank> =
             listOf(
                 FIFTH,
                 FOURTH,

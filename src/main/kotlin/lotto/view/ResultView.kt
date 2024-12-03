@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.domain.data.Lotto
-import lotto.domain.data.LottoWinPlace
+import lotto.domain.data.Rank
 import java.math.BigDecimal
 
 object ResultView {
@@ -13,10 +13,10 @@ object ResultView {
         list.forEach { println(it) }
     }
 
-    fun printLottoResult(resultMap: Map<LottoWinPlace, Int>) {
+    fun printLottoResult(resultMap: Map<Rank, Int>) {
         println("\n당첨 통계\n---------")
-        LottoWinPlace.getPlacesFromLowest().forEach { winPlace ->
-            println("${winPlace.matchingNumberCount}개 일치 (${winPlace.prizeMoney}원) - ${resultMap[winPlace]}")
+        Rank.getPlacesFromLowest().forEach { rank ->
+            println("${rank.matchingNumberCount}개 일치 (${rank.prizeMoney}원) - ${resultMap[rank]}")
         }
     }
 

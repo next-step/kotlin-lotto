@@ -20,7 +20,7 @@
 
 ### 3단계 로또 2등 기능구현 목록 
 - InputView 에서 보너스 로또 번호를 받도록 수정한다 
-- LottoWinPlace 에 보너스 로또에 대한 정보를 추가함 
+- ~~LottoWinPlace~~ Rank 에 보너스 로또에 대한 정보를 추가함 
 - 보너스 로또 번호를 LottoResult 를 만드는 과정에 추가함
 - 보너스 로또 까지 출력될 수 있도록 ResultView 를 수정함 
 - 테스트 코드를 추가함 

@@ -3,7 +3,7 @@ package lotto.domain
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.data.Lotto
-import lotto.domain.data.LottoWinPlace
+import lotto.domain.data.Rank
 
 class LottoResultTest : StringSpec({
     "로또 등수와 결과 카운트 검증" {
@@ -14,10 +14,10 @@ class LottoResultTest : StringSpec({
         val results = lottoResult.resultMap
 
         // Then
-        results[LottoWinPlace.FIRST] shouldBe 1
-        results[LottoWinPlace.SECOND] shouldBe 1
-        results[LottoWinPlace.THIRD] shouldBe 1
-        results[LottoWinPlace.FOURTH] shouldBe 1
+        results[Rank.FIRST] shouldBe 1
+        results[Rank.SECOND] shouldBe 1
+        results[Rank.THIRD] shouldBe 1
+        results[Rank.FOURTH] shouldBe 1
     }
 
     "getTotalProfit() 결과 검증" {
@@ -28,7 +28,7 @@ class LottoResultTest : StringSpec({
         val profit = lottoResult.getTotalProfit()
 
         // then
-        val totalMoney = LottoWinPlace.entries.sumOf { it.prizeMoney }
+        val totalMoney = Rank.entries.sumOf { it.prizeMoney }
         profit shouldBe totalMoney
     }
 })
