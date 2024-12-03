@@ -1,18 +1,22 @@
 package lotto.domain
 
-class Lotto(
-    val lottoNumbers: List<Int>,
+data class Lotto(
+    val lottoNumbers: LottoNumbers,
 ) {
     init {
-        require(lottoNumbers.size == 6) { IllegalArgumentException::class.java }
+        require(lottoNumbers.numbers.size == LottoNumbers.LOTTO_NUMBER_COUNT) { IllegalArgumentException::class.java }
     }
 
-    fun matchLotto(winnerNumbers: List<Int>): LottoRank? {
-        val matchingNumbers = lottoNumbers.count { winnerNumbers.contains(it) }
-        return LottoRank.from(matchingNumbers)
+    fun matchLotto(
+        winnerNumbers: List<Int>,
+        bonusNumber: Int,
+    ): LottoRank {
+        val matchingNumbers = lottoNumbers.numbers.count { winnerNumbers.contains(it) }
+        val matchingBonus = lottoNumbers.numbers.contains(bonusNumber)
+        return LottoRank.from(matchingNumbers, matchingBonus)
     }
 
     companion object {
-        fun from(numbers: List<Int>) = Lotto(numbers)
+        const val LOTTO_PRICE = 1000
     }
 }
