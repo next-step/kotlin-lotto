@@ -6,21 +6,20 @@ import java.math.BigDecimal
 
 class LottoResult(
     private val winningLotto: Lotto,
-    private val myLottoList: List<Lotto>,
+    myLottoList: List<Lotto>,
 ) {
-    private val resultMap = LottoWinPlace.entries.associateWith { 0 }.toMutableMap()
+    val resultMap: Map<LottoWinPlace, Int>
 
-    fun getResults(): Map<LottoWinPlace, Int> {
-        countMatchesPerList(
-            target = winningLotto.value,
-            list = myLottoList.map { it.value },
-        )
-            .filter { matchCount -> matchCount >= MIN_MATCHING_COUNT }
-            .forEach { matchCount ->
-                var count = resultMap.getOrElse(LottoWinPlace.fromCount(matchCount)) { 0 }
-                resultMap[LottoWinPlace.fromCount(matchCount)] = ++count
+    init {
+        resultMap = LottoWinPlace.entries.associateWith { 0 }.toMutableMap()
+        myLottoList.forEach { lotto ->
+            val matchCount = lotto.countMatchesOf(winningLotto)
+            if (matchCount >= MIN_MATCHING_COUNT) {
+                val winPlace = LottoWinPlace.fromCount(matchCount)
+                var winCount = resultMap.getOrDefault(winPlace, 0)
+                resultMap[winPlace] = ++winCount
             }
-        return resultMap
+        }
     }
 
     fun getTotalProfit(): BigDecimal {
@@ -29,11 +28,8 @@ class LottoResult(
             .fold(BigDecimal.ZERO, BigDecimal::add)
     }
 
-    private fun countMatchesPerList(
-        target: List<Int>,
-        list: List<List<Int>>,
-    ): List<Int> {
-        return list.map { it.count { number -> target.contains(number) } }
+    private fun Lotto.countMatchesOf(lotto: Lotto): Int {
+        return this.value.count { lotto.value.contains(it) }
     }
 
     companion object {

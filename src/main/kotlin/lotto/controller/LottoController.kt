@@ -30,7 +30,7 @@ class LottoController {
             winningLotto = Lotto(winningNumbers),
             myLottoList = myLottoList,
         )
-        ResultView.printLottoResult(resultMap = result.getResults())
+        ResultView.printLottoResult(resultMap = result.resultMap)
         ResultView.printProfitRate(
             profitRate = calculator.calculateProfitRate(
                 result.getTotalProfit(),
