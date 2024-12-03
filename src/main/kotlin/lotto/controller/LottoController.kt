@@ -28,6 +28,7 @@ object LottoController {
 
         // 결과 출력
         val winningNumbers = InputView.readWinningLotto(InputView.ENTER_LAST_WINNING_NUMBER)
+        val bonusLottoNumber = InputView.readBonusLotto(InputView.ENTER_BONUS_BALL)
         val result =
             LottoResult(
                 winningLotto = Lotto(winningNumbers),
