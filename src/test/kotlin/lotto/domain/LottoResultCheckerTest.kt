@@ -5,12 +5,13 @@ import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 
 class LottoResultCheckerTest : FreeSpec({
-    "구매한 로또 목록과 당첨 번호를 비교해서 등수 별 개수를 기록한다" {
+    "구매한 로또 목록과 당첨 번호, 보너스 번호를 비교해서 등수 별 개수를 기록한다" {
         val firstPrizeLotto = Lotto(1, 2, 3, 4, 5, 6)
         val userLottos =
             UserLottos(
                 listOf(
                     firstPrizeLotto,
+                    Lotto(1, 2, 3, 4, 5, 7),
                     Lotto(1, 2, 3, 4, 5, 45),
                     Lotto(1, 2, 3, 4, 44, 45),
                     Lotto(1, 2, 3, 43, 44, 45),
@@ -19,7 +20,7 @@ class LottoResultCheckerTest : FreeSpec({
                     Lotto(40, 41, 42, 43, 44, 45),
                 ),
             )
-        val winningLotto = WinningLotto(firstPrizeLotto)
+        val winningLotto = WinningLotto(firstPrizeLotto, LottoNumber(7))
 
         val lottoResults = LottoResultChecker.check(userLottos, winningLotto)
 
@@ -28,6 +29,7 @@ class LottoResultCheckerTest : FreeSpec({
             lottoResults.getWinningLottoCountBy(LottoRank.SECOND) shouldBe 1
             lottoResults.getWinningLottoCountBy(LottoRank.THIRD) shouldBe 1
             lottoResults.getWinningLottoCountBy(LottoRank.FORTH) shouldBe 1
+            lottoResults.getWinningLottoCountBy(LottoRank.FIFTH) shouldBe 1
         }
     }
 })
