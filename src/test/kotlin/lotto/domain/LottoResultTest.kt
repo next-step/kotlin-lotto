@@ -37,10 +37,14 @@ private fun fakeLottoResult(): LottoResult {
     val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
     val myLottoList =
         listOf(
-            Lotto(listOf(1, 2, 3, 400, 500, 600)), // 3 matches
-            Lotto(listOf(1, 2, 3, 4, 500, 600)), // 4 matches
-            Lotto(listOf(1, 2, 3, 4, 5, 600)), // 5 matches
-            Lotto(listOf(1, 2, 3, 4, 5, 6)), // 6 matches
+            // 3 matches
+            Lotto(listOf(1, 2, 3, 400, 500, 600)),
+            // 4 matches
+            Lotto(listOf(1, 2, 3, 4, 500, 600)),
+            // 5 matches
+            Lotto(listOf(1, 2, 3, 4, 5, 600)),
+            // 6 matches
+            Lotto(listOf(1, 2, 3, 4, 5, 6)),
         )
     val lottoResult = LottoResult(winningLotto, myLottoList)
     return lottoResult

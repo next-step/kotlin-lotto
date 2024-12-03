@@ -33,7 +33,7 @@ class LottoFactoryTest : StringSpec({
         val fakeNumberGenerator = FakeRandomNumberGenerator(expectedLottoNumbers)
         val lottoFactory =
             LottoFactory(
-                totalLottoCount = 5, // 임의값
+                totalLottoCount = 5,
                 numberGenerator = fakeNumberGenerator,
             )
 
