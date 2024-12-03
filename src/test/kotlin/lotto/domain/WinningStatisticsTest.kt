@@ -1,29 +1,55 @@
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.PurchaseAmount
 import lotto.domain.WinningCategory
 import lotto.domain.WinningStatistics
 
 class WinningStatisticsTest : StringSpec({
-    "should calculate total prize from statistics" {
-        val statistics =
-            mapOf(
-                WinningCategory.FIFTH to 2,
-                WinningCategory.FOURTH to 1,
-                WinningCategory.SECOND to 1,
+
+    "should evaluate tickets and calculate correct statistics" {
+        val winningCategories =
+            listOf(
+                WinningCategory.FOURTH,
+                WinningCategory.THIRD,
+                WinningCategory.SECOND,
+                WinningCategory.FIRST,
+                WinningCategory.NONE,
             )
-        val winningStatistics = WinningStatistics(statistics)
-        val totalPrize = winningStatistics.calculateTotalPrize()
-        totalPrize shouldBe (5000 * 2 + 50000 * 1 + 30000000 * 1)
+
+        val statistics = WinningStatistics(winningCategories)
+        val result = statistics.getStatistics()
+
+        result[WinningCategory.FOURTH] shouldBe 1
+        result[WinningCategory.THIRD] shouldBe 1
+        result[WinningCategory.SECOND] shouldBe 1
+        result[WinningCategory.FIRST] shouldBe 1
+        result[WinningCategory.NONE] shouldBe 1
     }
 
-    "should return statistics as is" {
-        val statistics =
-            mapOf(
-                WinningCategory.THIRD to 3,
-                WinningCategory.FIRST to 1,
+    "should calculate total prize from statistics" {
+        val winningCategories =
+            listOf(
+                WinningCategory.FOURTH,
+                WinningCategory.SECOND,
+                WinningCategory.SECOND,
             )
-        val winningStatistics = WinningStatistics(statistics)
-        val result = winningStatistics.getStatistics()
-        result shouldBe statistics
+
+        val statistics = WinningStatistics(winningCategories)
+        val totalPrize = statistics.calculateTotalPrize()
+
+        totalPrize shouldBe (50_000 * 1 + 30_000_000 * 2)
+    }
+
+    "should calculate profit rate correctly" {
+        val winningCategories =
+            listOf(
+                WinningCategory.FOURTH,
+                WinningCategory.SECOND,
+            )
+
+        val statistics = WinningStatistics(winningCategories)
+        val profitRate = statistics.calculateProfitRate(PurchaseAmount(2_000))
+
+        profitRate shouldBe ((50_000 + 30_000_000).toDouble() / 2000)
     }
 })
