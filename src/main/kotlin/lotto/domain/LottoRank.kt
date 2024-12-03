@@ -12,5 +12,10 @@ enum class LottoRank(
 
     companion object {
         fun from(matchCount: Int) = LottoRank.entries.find { it.matchCount == matchCount }
+
+        fun associateWithCount(count: (LottoRank) -> Int) =
+            LottoRank.entries.associateWith { rank ->
+                count(rank)
+            }
     }
 }
