@@ -6,7 +6,7 @@ import lotto.domain.data.Lotto
 import lotto.domain.data.LottoWinPlace
 
 class LottoResultTest : StringSpec({
-    "getResults() 결과 검증" {
+    "로또 등수와 결과 카운트 검증" {
         // Given
         val lottoResult = fakeLottoResult()
 
