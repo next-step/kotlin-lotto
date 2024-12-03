@@ -11,13 +11,15 @@ fun main() {
     val randomNumberListGenerator = RandomLottoNumberListGenerator()
     val amount = InputView.purchaseAmount()
 
-    val userLottos = Cashier.purchaseLotto(amount, randomNumberListGenerator)
-    OutputView.printPurchaseResult(userLottos)
+    val cashier = Cashier(amount, randomNumberListGenerator)
+    val lottos = cashier.purchaseLotto()
+
+    OutputView.printPurchaseResult(lottos)
 
     val winningNumbers = InputView.winningNumbers()
     val winningLotto = Lotto.createLotto(winningNumbers)
 
-    val statisticsList = Statistics.of(userLottos, winningLotto)
+    val statisticsList = Statistics.of(lottos, winningLotto)
     val earningRatio = Statistics.calculateEarningRatio(statisticsList, amount)
     OutputView.printLottoStatistics(statisticsList, earningRatio)
 }
