@@ -4,10 +4,17 @@ import lotto.core.LottoNumber
 import lotto.core.constant.LottoConstants
 
 object InputView {
-    fun inputPurchaseAmount(): String {
+    fun inputPurchaseCount(): Int {
         println(GUIDE_INPUT_PURCHASE_AMOUNT)
+        val purchaseAmount = readlnOrNull() ?: throw RuntimeException(LottoConstants.ERROR_INVALID_INPUT)
 
-        return readlnOrNull() ?: throw RuntimeException(LottoConstants.ERROR_INVALID_INPUT)
+        return calculatePurchasableCount(purchaseAmount)
+    }
+
+    private fun calculatePurchasableCount(purchaseAmount: String): Int {
+        val amount = purchaseAmount.toIntOrNull() ?: throw NumberFormatException(LottoConstants.ERROR_INVALID_INPUT)
+        require(amount > 0) { "잘못된 금액이 입력되었습니다." }
+        return amount / LottoConstants.LOTTO_PRICE
     }
 
     fun inputWinningNumbers(): List<LottoNumber> {
