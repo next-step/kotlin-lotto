@@ -1,28 +1,22 @@
 package lotto.core
 
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
-import org.junit.jupiter.params.provider.ValueSource
 
 class LottoMarketTest {
     @ParameterizedTest
     @CsvSource(
-        "'500', 0",
-        "'1500', 1",
-        "'2000', 2",
+        "1, 1",
+        "3, 3",
     )
     fun `로또 구매를 테스트한다`(
-        amount: String,
-        count: Int,
+        totalCount: Int,
+        manualCount: Int,
     ) {
-        LottoMarket.purchase(amount).size shouldBe count
-    }
+        val list = List(manualCount) { (1..6).map(::LottoNumber) }
 
-    @ParameterizedTest
-    @ValueSource(strings = ["", "-1000"])
-    fun `잘못된 파라미터 입력 시 Exception을 테스트한다`(amount: String) {
-        shouldThrow<RuntimeException> { LottoMarket.purchase(amount) }
+        val purchaseAmount = LottoPurchaseCount(totalCount, manualCount)
+        LottoMarket.purchase(purchaseAmount, list).size shouldBe totalCount
     }
 }
