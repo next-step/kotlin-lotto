@@ -20,7 +20,7 @@ object ResultView {
         println(TEXT_RESULT_PURCHASE_NUMBER.format(lottos.size))
         lottos.forEach { lotto ->
             println(
-                lotto.lottoNumbers.joinToString(
+                lotto.lottoNumbers.numbers.joinToString(
                     separator = LOTTO_NUMBER_SEPARATOR,
                     prefix = LOTTO_NUMBER_PREFIX,
                     postfix = LOTTO_NUMBER_POSTFIX,

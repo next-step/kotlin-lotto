@@ -1,11 +1,10 @@
 package lotto.domain.lottonumber
 
-class RandomLottoNumbersGenerator : LottoNumbersGenerator {
-    override fun generate(): List<Int> = LOTTO_NUMBER_RANGE.shuffled().subList(START_INDEX, LOTTO_NUMBER_COUNT).sorted()
+import lotto.domain.LottoNumbers
+import lotto.domain.LottoNumbers.Companion.LOTTO_NUMBER_COUNT
+import lotto.domain.LottoNumbers.Companion.LOTTO_NUMBER_RANGE
+import lotto.domain.LottoNumbers.Companion.START_INDEX
 
-    companion object {
-        private const val START_INDEX = 0
-        private const val LOTTO_NUMBER_COUNT = 6
-        private val LOTTO_NUMBER_RANGE = 1..45
-    }
+class RandomLottoNumbersGenerator : LottoNumbersGenerator {
+    override fun generate(): LottoNumbers = LottoNumbers(LOTTO_NUMBER_RANGE.shuffled().subList(START_INDEX, LOTTO_NUMBER_COUNT).sorted())
 }
