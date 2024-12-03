@@ -4,7 +4,7 @@ data class Lotto(
     val lottoNumbers: LottoNumbers,
 ) {
     init {
-        require(lottoNumbers.numbers.size == 6) { IllegalArgumentException::class.java }
+        require(lottoNumbers.numbers.size == LottoNumbers.LOTTO_NUMBER_COUNT) { IllegalArgumentException::class.java }
     }
 
     fun matchLotto(winnerNumbers: List<Int>): LottoRank {
