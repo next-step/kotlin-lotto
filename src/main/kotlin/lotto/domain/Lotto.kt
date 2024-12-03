@@ -7,7 +7,7 @@ data class Lotto(
         require(lottoNumbers.numbers.size == 6) { IllegalArgumentException::class.java }
     }
 
-    fun matchLotto(winnerNumbers: List<Int>): LottoRank? {
+    fun matchLotto(winnerNumbers: List<Int>): LottoRank {
         val matchingNumbers = lottoNumbers.numbers.count { winnerNumbers.contains(it) }
         return LottoRank.from(matchingNumbers)
     }

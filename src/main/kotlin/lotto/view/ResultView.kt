@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.Lotto
+import lotto.domain.LottoRank
 
 object ResultView {
     private const val TEXT_DASH_REPEAT_COUNT = 9
@@ -41,7 +42,7 @@ object ResultView {
     private fun printLottoRanks(lottoResult: LottoResult) {
         println(TEXT_RESULT_LOTTO)
         println(TEXT_DASH.repeat(TEXT_DASH_REPEAT_COUNT))
-        lottoResult.rankCounts.forEach { (prize, count) ->
+        lottoResult.rankCounts.filter { it.key != LottoRank.UNRANKED }.forEach { (prize, count) ->
             println(TEXT_PRIZE_RESULT.format(prize.matchCount, prize.money, count))
         }
     }
