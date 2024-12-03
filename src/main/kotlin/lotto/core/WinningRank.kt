@@ -16,17 +16,13 @@ enum class WinningRank(val winningCount: Int, val matchBonus: Boolean, val winni
             winningCount: Int,
             matchBonus: Boolean,
         ): WinningRank {
-            var ranks = entries.filter { it.winningCount == winningCount }
-            if (ranks.isEmpty()) {
-                return NOTHING
-            }
+            val ranks = entries.filter { it.winningCount == winningCount }
 
-            if (ranks.size == 1) {
-                return ranks[0]
+            return when (ranks.size) {
+                0 -> NOTHING
+                1 -> ranks.first()
+                else -> ranks.firstOrNull { it.matchBonus == matchBonus } ?: NOTHING
             }
-
-            ranks = ranks.filter { it.matchBonus == matchBonus }
-            return if (ranks.size > 0) ranks[0] else NOTHING
         }
     }
 
