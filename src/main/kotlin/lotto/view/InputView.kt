@@ -1,14 +1,14 @@
 package lotto.view
 
 class InputView {
-    fun getPurchasAmountInput() = getIntput(PURCHASE_AMOUNT)
+    fun getPurchasAmountInput() = getIntput(PURCHASE_AMOUNT) ?: throw RuntimeException("금액을 입력되지 않았습니다.")
 
-    fun getWinningNumberInput() = getIntput(WINNING_NUMBER)
+    fun getWinningNumberInput() = getIntput(WINNING_NUMBER) ?: throw RuntimeException("우승 번호가 입력되지 않았습니다.")
 
-    private fun getIntput(message: String): String {
+    private fun getIntput(message: String): String? {
         println(message)
         val input = readlnOrNull()?.trim()
-        if (input.isNullOrEmpty()) throw RuntimeException("금액을 입력되지 않았습니다.")
+        if (input.isNullOrEmpty()) return null
         return input
     }
 

@@ -1,37 +1,39 @@
 package lotto
 
 import lotto.model.Lotto
+import lotto.model.LottoMatchResults
 import lotto.model.LottoPurchase
-import lotto.model.LottoSystem
-import lotto.util.StringParser
+import lotto.model.Lottos
 
 class LottoAutoController {
-    private val lottoSystem = LottoSystem()
-
     fun countPurchasedLotto(input: String): LottoPurchase {
-        val purchaseAmount = StringParser.convertToInt(input)
-        if (purchaseAmount <= 0) throw RuntimeException("금액은 양수입니다.")
-        val lottoCount = lottoSystem.calculateLottoCount(purchaseAmount = purchaseAmount)
+        val purchaseAmount = input.convertToInt()
+        val lottoCount = Lotto.count(purchaseAmount)
         return LottoPurchase(purchaseAmount, lottoCount)
     }
 
-    fun generateLottos(lottoCount: Int): List<Lotto> = List(lottoCount) { Lotto() }
+    fun generateLottos(lottoCount: Int): Lottos = Lottos.from(List(lottoCount) { Lotto.fromAuto() })
 
     fun matchLottoNumbers(
         input: String,
-        lottos: List<Lotto>,
-    ): Map<Int, Int> {
-        val winningNumbers = StringParser.convertToInts(input)
-        val matchedLottoNumberCounts = lottoSystem.countLottosByMatchingNumbers(winningNumbers, lottos)
-        return matchedLottoNumberCounts
+        lottos: Lottos,
+    ): LottoMatchResults {
+        val winningNumbers = input.convertToInts()
+        return lottos.countMatchingLottoNumbers(Lotto.from(winningNumbers))
     }
 
     fun calculateReturnRate(
-        matchedLottoNumberCounts: Map<Int, Int>,
+        lottoMatchResults: LottoMatchResults,
         purchaseAmount: Int,
-    ): Double =
-        lottoSystem.calculateReturnRate(
-            matchedLottoNumberCounts,
-            purchaseAmount,
-        )
+    ): Double = lottoMatchResults.calculateReturnRate(purchaseAmount)
+
+    private fun String.convertToInt(): Int = this.toIntOrNull() ?: throw RuntimeException("숫자로 입력하지 않았습니다.")
+
+    private fun String.convertToInts(): List<Int> =
+        this.split(",")
+            .map { it.trim() }
+            .filter { it.isNotEmpty() }
+            .map {
+                it.toIntOrNull() ?: throw NumberFormatException("숫자로 입력하지 않았습니다.")
+            }
 }

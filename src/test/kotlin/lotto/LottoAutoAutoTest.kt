@@ -1,11 +1,13 @@
 package lotto
 
 import lotto.model.Lotto
-import lotto.model.LottoSystem
+import lotto.model.LottoMatchResult
+import lotto.model.LottoMatchResults
+import lotto.model.LottoPrize
+import lotto.model.Lottos
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -74,10 +76,10 @@ class LottoAutoAutoTest {
     @DisplayName(value = "로또 번호는 각기 다른 숫자로 이루어진 6개의 숫자가 오름차순으로 정렬되어야 한다.")
     @Test
     fun generateLottoNumbers() {
-        val lotto = lottoAutoController.generateLottos(1).first()
+        val lotto = lottoAutoController.generateLottos(1).getLottos().first()
 
-        assertThat(lotto.numbers.size).isEqualTo(6)
-        assertThat(lotto.numbers).isSorted
+        assertThat(lotto.getNumbers().size).isEqualTo(6)
+        assertThat(lotto.getNumbers().map { it.num }).isSorted
     }
 
     @DisplayName("지난 주 당첨 번호는 6개의 숫자로 이루어져 있지 않다면 예외가 발생한다.")
@@ -90,44 +92,47 @@ class LottoAutoAutoTest {
         ],
     )
     fun validWinningNumbers(winningNumbersInput: String) {
-        assertThatThrownBy { lottoAutoController.matchLottoNumbers(winningNumbersInput, listOf(Lotto())) }
+        assertThatThrownBy {
+            lottoAutoController.matchLottoNumbers(
+                winningNumbersInput,
+                Lottos.from(listOf(Lotto.fromAuto())),
+            )
+        }
             .isInstanceOf(RuntimeException::class.java)
-            .hasMessage("당첨 번호는 6개의 숫자로 이루어져야 합니다.")
+            .hasMessage("중복되지 않는 로또 번호 6개를 입력해주세요")
     }
 
     @Test
     @DisplayName("당첨금 계산은 일치하는 번호가 3개일 때부터다.")
     fun testMatchLottoNumbers() {
-        val lottoSystem = LottoSystem()
         val input = listOf(1, 2, 3, 4, 5, 6)
         val lottos =
-            listOf(
-                // 3개 일치
-                Lotto(listOf(1, 2, 3, 7, 8, 9)),
-                // 3개 일치
-                Lotto(listOf(4, 5, 6, 10, 11, 12)),
-                // 2개 일치
-                Lotto(listOf(1, 2, 7, 8, 9, 10)),
-                // 0개 일치
-                Lotto(listOf(13, 14, 15, 16, 17, 18)),
+            Lottos.from(
+                listOf(
+                    // 3개 일치
+                    Lotto.from(listOf(1, 2, 3, 7, 8, 9)),
+                    // 3개 일치
+                    Lotto.from(listOf(4, 5, 6, 10, 11, 12)),
+                    // 2개 일치
+                    Lotto.from(listOf(1, 2, 7, 8, 9, 10)),
+                    // 0개 일치
+                    Lotto.from(listOf(13, 14, 15, 16, 17, 18)),
+                ),
             )
 
-        val resultMap = lottoSystem.countLottosByMatchingNumbers(input, lottos)
+        val matchResult = lottos.countMatchingLottoNumbers(Lotto.from(input))
 
-        assertEquals(2, resultMap[3], "3개 일치하는 로또는 2개여야 합니다.")
-        assertFalse(resultMap.containsKey(2), "2개 일치하는 로또는 당첨금 계산에 포함되지 않아야 합니다.")
-        assertFalse(resultMap.containsKey(0), "0개 일치하는 로또는 당첨금 계산에 포함되지 않아야 합니다.")
-        assertEquals(1, resultMap.size, "당첨금 계산에 포함되는 매칭 개수는 1개여야 합니다.")
+        assertEquals(2, matchResult.findMatchCount(LottoPrize.THREE), "3개 일치하는 로또는 2개여야 합니다.")
     }
 
     @Test
     @DisplayName("수익률은 소수점 둘째 자리까지만 계산한다.")
     fun calculateRate() {
-        val lottoSystem = LottoSystem()
         val purchaseAmount = 3000 // 구매 금액
-        val prizeAmount = mapOf(3 to 1, 4 to 1, 5 to 1)
+        val prizeAmount =
+            listOf(LottoMatchResult(LottoPrize.THREE, 1), LottoMatchResult(LottoPrize.FOUR, 1), LottoMatchResult(LottoPrize.FIVE, 1))
 
-        val returnRate = lottoSystem.calculateReturnRate(prizeAmount, purchaseAmount)
+        val returnRate = LottoMatchResults.from(prizeAmount).calculateReturnRate(purchaseAmount)
 
         assertEquals(68.33, returnRate, "수익률은 소수점 둘째 자리까지 계산되어야 합니다.")
     }
