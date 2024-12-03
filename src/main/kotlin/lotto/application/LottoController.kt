@@ -8,10 +8,10 @@ import lotto.presentation.ResultView
 
 object LottoController {
     fun start() {
-        val purchaseAmount = InputView.inputPurchaseAmount()
+        val purchaseCount = InputView.inputPurchaseCount()
         val manualLottoCount = InputView.inputManualLottoCount()
         val manualLottoNumbers = InputView.inputManualLottoNumbers(manualLottoCount)
-        val lottoPurchaseCount = LottoPurchaseCount(purchaseAmount, manualLottoCount)
+        val lottoPurchaseCount = LottoPurchaseCount(purchaseCount, manualLottoCount)
 
         val lottos = LottoMarket.purchase(lottoPurchaseCount, manualLottoNumbers)
 
