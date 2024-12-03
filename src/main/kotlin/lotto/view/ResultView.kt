@@ -16,7 +16,11 @@ object ResultView {
     fun printLottoResult(resultMap: Map<Rank, Int>) {
         println("\n당첨 통계\n---------")
         Rank.getRanksFromLowest().forEach { rank ->
-            println("${rank.matchingNumberCount}개 일치 (${rank.prizeMoney}원) - ${resultMap[rank]}")
+            if (rank == Rank.SECOND) {
+                println("${rank.matchingNumberCount}개 일치, 보너스볼 일치(${rank.prizeMoney}원) - ${resultMap[rank]}")
+            } else {
+                println("${rank.matchingNumberCount}개 일치 (${rank.prizeMoney}원) - ${resultMap[rank]}")
+            }
         }
     }
 
