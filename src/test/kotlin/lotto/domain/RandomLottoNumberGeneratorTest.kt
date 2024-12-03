@@ -10,7 +10,7 @@ class RandomLottoNumberGeneratorTest : FreeSpec({
 
         numbers shouldHaveSize 6
         numbers.forEach { number ->
-            number shouldBeInRange Lotto.MIN_LOTTO_NUMBER..Lotto.MAX_LOTTO_NUMBER
+            number.value shouldBeInRange LottoNumber.MIN_LOTTO_NUMBER..LottoNumber.MAX_LOTTO_NUMBER
         }
     }
 })
