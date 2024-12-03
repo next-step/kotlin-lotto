@@ -1,11 +1,11 @@
 package lotto
 
 import io.kotest.matchers.shouldBe
-import lotto.domain.LottoPurchaseManager.purchaseLotto
+import lotto.domain.LottoVendor.purchaseLotto
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-class LottoPurchaseManagerTest {
+class LottoVendorTest {
     @ValueSource(ints = [14000, 8000, 0, 500, 1000])
     @ParameterizedTest
     fun `구입 금액에 따라 로또 번호 묶음을 생성할 수 있다`(amount: Int) {

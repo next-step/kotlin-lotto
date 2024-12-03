@@ -23,30 +23,37 @@ class LottoTest {
     }
 
     @Test
-    fun `번호 3개가 일치하면 4등이다`() {
+    fun `번호 3개가 일치하면 5등이다`() {
         val lottoNumbers = LottoNumbers(listOf(3, 6, 13, 24, 25, 26))
         val lotto = Lotto(lottoNumbers)
-        lotto.matchLotto(winnerNumbers) shouldBe LottoRank.FOURTH
+        lotto.matchLotto(winnerNumbers, 1) shouldBe LottoRank.FIFTH
     }
 
     @Test
-    fun `번호 4개가 일치하면 3등이다`() {
+    fun `번호 4개가 일치하면 4등이다`() {
         val lottoNumbers = LottoNumbers(listOf(3, 6, 13, 15, 25, 26))
         val lotto = Lotto(lottoNumbers)
-        lotto.matchLotto(winnerNumbers) shouldBe LottoRank.THIRD
+        lotto.matchLotto(winnerNumbers, 1) shouldBe LottoRank.FOURTH
     }
 
     @Test
-    fun `번호 5개가 일치하면 2등이다`() {
+    fun `번호 5개가 일치하면 3등이다`() {
         val lottoNumbers = LottoNumbers(listOf(3, 6, 13, 15, 16, 26))
         val lotto = Lotto(lottoNumbers)
-        lotto.matchLotto(winnerNumbers) shouldBe LottoRank.SECOND
+        lotto.matchLotto(winnerNumbers, 1) shouldBe LottoRank.THIRD
+    }
+
+    @Test
+    fun `번호 5개가 일치하고 보너스 넘버가 일치하면 2등이다`() {
+        val lottoNumbers = LottoNumbers(listOf(3, 6, 13, 15, 16, 26))
+        val lotto = Lotto(lottoNumbers)
+        lotto.matchLotto(winnerNumbers, 26) shouldBe LottoRank.SECOND
     }
 
     @Test
     fun `번호 6개가 일치하면 1등이다`() {
         val lottoNumbers = LottoNumbers(listOf(3, 6, 13, 15, 16, 22))
         val lotto = Lotto(lottoNumbers)
-        lotto.matchLotto(winnerNumbers) shouldBe LottoRank.FIRST
+        lotto.matchLotto(winnerNumbers, 26) shouldBe LottoRank.FIRST
     }
 }
