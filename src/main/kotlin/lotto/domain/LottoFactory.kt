@@ -6,11 +6,11 @@ import lotto.util.RandomNumberGenerator
 
 class LottoFactory(
     private val totalLottoCount: Int,
-    private val randomNumberGenerator: NumberGenerator = RandomNumberGenerator(),
+    private val numberGenerator: NumberGenerator = RandomNumberGenerator(),
 ) {
     fun createLottoList(): List<Lotto> {
         return List(totalLottoCount) {
-            randomNumberGenerator
+            numberGenerator
                 .getNumbers(LOTTO_NUMBER_SIZE)
                 .let { Lotto(it) }
         }
