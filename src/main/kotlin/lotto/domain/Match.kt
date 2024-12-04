@@ -1,36 +1,22 @@
 package lotto.domain
 
-import lotto.constant.FIFTH_RANK
-import lotto.constant.FIRST_RANK
-import lotto.constant.FOURTH_RANK
-import lotto.constant.MATCH_COUNT_FIVE
-import lotto.constant.MATCH_COUNT_FOUR
-import lotto.constant.MATCH_COUNT_SIX
-import lotto.constant.MATCH_COUNT_THREE
-import lotto.constant.NO_RANK
-import lotto.constant.THIRD_RANK
-
-class Match {
-    companion object {
-        fun lottoNumber(
-            userLotto: Lotto,
-            winningLotto: Lotto,
-        ): Int {
-            val lottoNumbers: Set<LottoNumber> = userLotto.lottoNumbers
-            val winningLottoNumbers: Set<LottoNumber> = winningLotto.lottoNumbers
-
-            val matchCount = lottoNumbers.intersect(winningLottoNumbers).size
-            return rank(matchCount)
+class Match(private val matchCount: Int, private val isMatchedBonusBall: Boolean) {
+    fun rank(): LottoRank {
+        if (matchCount == 6) {
+            return LottoRank.FIRST
         }
-
-        private fun rank(matchCount: Int): Int {
-            return when (matchCount) {
-                MATCH_COUNT_SIX -> FIRST_RANK
-                MATCH_COUNT_FIVE -> THIRD_RANK
-                MATCH_COUNT_FOUR -> FOURTH_RANK
-                MATCH_COUNT_THREE -> FIFTH_RANK
-                else -> NO_RANK
-            }
+        if (matchCount == 5 && isMatchedBonusBall) {
+            return LottoRank.SECOND
         }
+        if (matchCount == 5) {
+            return LottoRank.THIRD
+        }
+        if (matchCount == 4) {
+            return LottoRank.FOURTH
+        }
+        if (matchCount == 3) {
+            return LottoRank.FIFTH
+        }
+        return LottoRank.NONE
     }
 }

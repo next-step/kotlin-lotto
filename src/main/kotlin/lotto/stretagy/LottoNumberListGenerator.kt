@@ -1,5 +1,7 @@
 package lotto.stretagy
 
+import lotto.domain.LottoNumber
+
 interface LottoNumberListGenerator {
-    fun generate(): List<Int>
+    fun generate(): Set<LottoNumber>
 }

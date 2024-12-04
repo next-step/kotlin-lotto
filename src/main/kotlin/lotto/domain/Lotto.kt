@@ -1,11 +1,27 @@
 package lotto.domain
 
-class Lotto private constructor(val lottoNumbers: Set<LottoNumber>) {
-    companion object {
-        fun createLotto(numbers: List<Int>): Lotto {
-            val lottoNumbers = numbers.map { LottoNumber.from(it) }.toSet()
+import lotto.constant.REQUIRED_LOTTO_SIZE
 
-            return Lotto(lottoNumbers)
+class Lotto(val lottoNumbers: Set<LottoNumber>) {
+    constructor(vararg numbers: Int) : this(numbers.map(::LottoNumber).toSet())
+
+    init {
+        require(lottoNumbers.size == REQUIRED_LOTTO_SIZE) {
+            ERROR_WRONG_NUMBER_COUNT
         }
+    }
+
+    fun getIntersectSize(winningLotto: Lotto): Int {
+        val lottoNumbers: Set<LottoNumber> = lottoNumbers
+        val winningLottoNumbers: Set<LottoNumber> = winningLotto.lottoNumbers
+        return lottoNumbers.intersect(winningLottoNumbers).size
+    }
+
+    fun isMatchedBonusBall(bonusBall: LottoNumber): Boolean {
+        return lottoNumbers.contains(bonusBall)
+    }
+
+    companion object {
+        private const val ERROR_WRONG_NUMBER_COUNT = "정확히 6개의 숫자를 입력해야 합니다."
     }
 }

@@ -2,51 +2,61 @@ package lotto.domain
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
+import lotto.fixture.fakeBonusNumber
+import lotto.fixture.fakeFirstRankLotto
+import lotto.fixture.fakeSecondRankLotto
+import lotto.fixture.fakeWinningLotto
+import lotto.fixture.noRankLotto
 
 class StatisticsTest : DescribeSpec({
-    describe("Statistics test") {
-        context("사용자가 구매한 로또 번호가 1등부터 5등까지 당첨 개수를 계산한다") {
-            it("1등 3개, 3등 1개") {
-                val winningLotto = Lotto.createLotto(listOf(1, 2, 3, 4, 5, 6))
-                val userLottos =
-                    listOf(
-                        Lotto.createLotto(listOf(1, 2, 3, 4, 5, 6)),
-                        Lotto.createLotto(listOf(1, 2, 3, 4, 5, 6)),
-                        Lotto.createLotto(listOf(1, 2, 3, 4, 5, 6)),
-                        Lotto.createLotto(listOf(1, 2, 3, 4, 5, 7)),
-                    )
+    lateinit var winningLotto: WinningLotto
+    beforeTest { winningLotto = WinningLotto(fakeWinningLotto(), fakeBonusNumber()) }
 
-                val actual: List<Statistics> = Statistics.of(userLottos, winningLotto)
+    describe("로또 결과를 집계한다") {
+        it("당첨되지 않은 경우") {
+            val lottos =
+                listOf(
+                    noRankLotto(),
+                    noRankLotto(),
+                    noRankLotto(),
+                )
 
-                actual[0].rank shouldBe 5
-                actual[0].matchCount shouldBe 0
-
-                actual[1].rank shouldBe 4
-                actual[1].matchCount shouldBe 0
-
-                actual[2].rank shouldBe 3
-                actual[2].matchCount shouldBe 1
-
-                actual[3].rank shouldBe 2
-                actual[3].matchCount shouldBe 0
-
-                actual[4].rank shouldBe 1
-                actual[4].matchCount shouldBe 3
-            }
+            val sut = Statistics(winningLotto, lottos)
+            val actual = sut.lottoResultGroupByRank()
+            actual.size shouldBe 5
         }
     }
 
-    describe("earningsRatio test") {
-        it("Integer Overflow 발생하지 않도록 헨들링") {
-            val statistics = Statistics(rank = 1, matchCount = 2)
-            val actual = statistics.earnings()
-            actual shouldBe 4_000_000_000
+    describe("로또의 수익률을 계산한다") {
+        context("사용자의 로또가 모두 당첨로또인 경우") {
+            it("상금을 더한다") {
+                val lottos =
+                    listOf(
+                        fakeFirstRankLotto(),
+                        fakeSecondRankLotto(),
+                    )
+                val price = lottos.size * 1000
+
+                val sut = Statistics(winningLotto, lottos)
+                val actual = sut.calculateEarningRatio(price)
+                actual shouldBe 1015000.0
+            }
         }
 
-        it("3등 3장") {
-            val statistics = Statistics(rank = 3, matchCount = 3)
-            val actual = statistics.earnings()
-            actual shouldBe 150000
+        context("사용자의 로또가 일부만 당첨로또인 경우") {
+            it("상금을 더한다") {
+                val lottos =
+                    listOf(
+                        fakeFirstRankLotto(),
+                        fakeSecondRankLotto(),
+                        noRankLotto(),
+                    )
+                val price = lottos.size * 1000
+
+                val sut = Statistics(winningLotto, lottos)
+                val actual = sut.calculateEarningRatio(price)
+                actual shouldBe 676666.66
+            }
         }
     }
 })

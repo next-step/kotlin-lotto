@@ -1,56 +1,45 @@
 package lotto.domain
 
-import lotto.constant.FIFTH_RANK
-import lotto.constant.FIRST_RANK
-import lotto.constant.FOURTH_RANK
-import lotto.constant.SECOND_RANK
-import lotto.constant.THIRD_RANK
+import kotlin.math.floor
 
-data class Statistics(val rank: Int, val matchCount: Int) {
-    fun earnings(): Long {
-        return earningPriceByRanking() * matchCount
+data class Statistics(private val winningLotto: WinningLotto, private val lottos: List<Lotto>) {
+    fun lottoResultGroupByRank(): Map<LottoRank, Int> {
+        val initialRanks =
+            LottoRank.entries
+                .filter { it.matchCount in MINIMUM_MATCH_COUNT..MAXIMUM_MATCH_COUNT }
+                .associateWith { 0 }
+
+        val actualRanks =
+            lottos.map { winningLotto.getUserRank(it) }
+                .filter { it.matchCount in MINIMUM_MATCH_COUNT..MAXIMUM_MATCH_COUNT }
+                .groupingBy { it }
+                .eachCount()
+
+        return initialRanks + actualRanks
     }
 
-    private fun earningPriceByRanking(): Long =
-        when (rank) {
-            FIRST_RANK -> FIRST_RANK_EARNING
-            SECOND_RANK -> SECOND_RANK_EARNING
-            THIRD_RANK -> THIRD_RANK_EARNING
-            FOURTH_RANK -> FOURTH_RANK_EARNING
-            FIFTH_RANK -> FIFTH_RANK_EARNING
-            else -> NO_RANK_EARNING
+    fun calculateEarningRatio(price: Int): Double {
+        val ratio =
+            lottoResultGroupByRank()
+                .map { (rank, count) -> rank.calculatePrize(count) }
+                .sum().toDouble() / price
+
+        return floor(ratio * 100) / 100
+    }
+
+    fun getProfitStatus(earningRatio: Double): String =
+        when {
+            earningRatio > EARNING_RATIO_THRESHOLD -> PROFIT_MESSAGE
+            earningRatio == EARNING_RATIO_THRESHOLD -> BREAK_EVEN_MESSAGE
+            else -> LOSS_MESSAGE
         }
 
     companion object {
-        private const val FIRST_RANK_EARNING = 2_000_000_000L
-        private const val SECOND_RANK_EARNING = 1_500_000L
-        private const val THIRD_RANK_EARNING = 50_000L
-        private const val FOURTH_RANK_EARNING = 5_000L
-        private const val FIFTH_RANK_EARNING = 0L
-        private const val NO_RANK_EARNING = 0L
-
-        fun of(
-            userLottos: List<Lotto>,
-            winningLotto: Lotto,
-        ): List<Statistics> {
-            val groupByRanking: Map<Int, List<Lotto>> =
-                (FIFTH_RANK downTo FIRST_RANK).associateWith { emptyList<Lotto>() } +
-                    userLottos.groupBy { Match.lottoNumber(it, winningLotto) }
-
-            val statistics: List<Statistics> =
-                groupByRanking.map { Statistics(it.key, it.value.size) }.sortedByDescending { it.rank }
-            return getRankedLottos(statistics)
-        }
-
-        fun calculateEarningRatio(
-            statisticsList: List<Statistics>,
-            amount: Int,
-        ): Double {
-            return statisticsList.sumOf { it.earnings() }.toDouble() / amount
-        }
-
-        private fun getRankedLottos(statisticsList: List<Statistics>): List<Statistics> {
-            return statisticsList.filter { it.rank in FIRST_RANK..FIFTH_RANK && it.rank != SECOND_RANK }
-        }
+        private const val MINIMUM_MATCH_COUNT = 3
+        private const val MAXIMUM_MATCH_COUNT = 6
+        private const val EARNING_RATIO_THRESHOLD = 1.0
+        private const val PROFIT_MESSAGE = "이익"
+        private const val BREAK_EVEN_MESSAGE = "본전"
+        private const val LOSS_MESSAGE = "손해"
     }
 }
