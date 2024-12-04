@@ -9,10 +9,25 @@ import lotto.fixture.fakeWinningLotto
 import lotto.fixture.noRankLotto
 
 class StatisticsTest : DescribeSpec({
-    describe("로또의 수익률을 계산한다") {
-        lateinit var winningLotto: WinningLotto
-        beforeTest { winningLotto = WinningLotto(fakeWinningLotto(), fakeBonusNumber()) }
+    lateinit var winningLotto: WinningLotto
+    beforeTest { winningLotto = WinningLotto(fakeWinningLotto(), fakeBonusNumber()) }
 
+    describe("로또 결과를 집계한다") {
+        it("당첨되지 않은 경우") {
+            val lottos =
+                listOf(
+                    noRankLotto(),
+                    noRankLotto(),
+                    noRankLotto(),
+                )
+
+            val sut = Statistics(winningLotto, lottos)
+            val actual = sut.lottoResultGroupByRank()
+            actual.size shouldBe 5
+        }
+    }
+
+    describe("로또의 수익률을 계산한다") {
         context("사용자의 로또가 모두 당첨로또인 경우") {
             it("상금을 더한다") {
                 val lottos =

@@ -4,10 +4,18 @@ import kotlin.math.floor
 
 data class Statistics(private val winningLotto: WinningLotto, private val lottos: List<Lotto>) {
     fun lottoResultGroupByRank(): Map<LottoRank, Int> {
-        return lottos.map { winningLotto.getUserRank(it) }
-            .filter { it != LottoRank.NONE }
-            .groupingBy { it }
-            .eachCount()
+        val initialRanks =
+            LottoRank.entries
+                .filter { it.matchCount in 3..6 }
+                .associateWith { 0 }
+
+        val actualRanks =
+            lottos.map { winningLotto.getUserRank(it) }
+                .filter { it.matchCount in 3..6 }
+                .groupingBy { it }
+                .eachCount()
+
+        return initialRanks + actualRanks
     }
 
     fun calculateEarningRatio(price: Int): Double {
