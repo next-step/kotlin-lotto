@@ -28,7 +28,7 @@ class MatchTest : DescribeSpec({
 
             it("5등") {
                 val actual = Match(3, true).rank()
-                actual shouldBe 3
+                actual shouldBe 5
             }
 
             it("낙첨") {

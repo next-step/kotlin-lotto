@@ -15,7 +15,7 @@ class Match(private val matchCount: Int, private val isMatchedBonusBall: Boolean
             return 4
         }
         if (matchCount == 3) {
-            return 3
+            return 5
         }
         return 0
     }
