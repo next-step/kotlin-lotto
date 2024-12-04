@@ -1,11 +1,11 @@
 package lotto.view
 
-import lotto.BonusNumber
-import lotto.BoughtLotto
-import lotto.Lotto
-import lotto.LottoCost
-import lotto.LottoNumber
-import lotto.WinningLotto
+import lotto.domain.BonusNumber
+import lotto.domain.BoughtLotto
+import lotto.domain.Lotto
+import lotto.domain.LottoCost
+import lotto.domain.LottoNumber
+import lotto.domain.WinningLotto
 
 class InputView {
     fun input(): BoughtLotto {

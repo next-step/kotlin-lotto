@@ -2,6 +2,8 @@ package lotto
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.LottoResult
+import lotto.domain.Reward
 
 class LottoResultTest : StringSpec({
     "로또의 수익률을 계산한다." {

@@ -2,6 +2,9 @@ package lotto
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.BonusNumber
+import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 
 class BonusNumberTest : StringSpec({
     "보너스 볼을 생성한다." {

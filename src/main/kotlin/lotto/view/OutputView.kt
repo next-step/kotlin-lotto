@@ -1,7 +1,7 @@
 package lotto.view
 
-import lotto.LottoResult
-import lotto.Reward
+import lotto.domain.LottoResult
+import lotto.domain.Reward
 
 class OutputView {
     fun printResult(lottoResult: LottoResult) {

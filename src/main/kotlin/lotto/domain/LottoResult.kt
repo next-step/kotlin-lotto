@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 data class LottoResult(
     private val rewards: Map<Reward, Int>,

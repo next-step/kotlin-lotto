@@ -3,6 +3,7 @@ package lotto
 import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.Lotto
 
 class LottoTest : StringSpec({
 

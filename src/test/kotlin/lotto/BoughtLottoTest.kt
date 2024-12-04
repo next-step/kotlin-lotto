@@ -2,6 +2,13 @@ package lotto
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.BonusNumber
+import lotto.domain.BoughtLotto
+import lotto.domain.Lotto
+import lotto.domain.LottoNumber
+import lotto.domain.LottoResult
+import lotto.domain.Reward
+import lotto.domain.WinningLotto
 
 class BoughtLottoTest : StringSpec({
     "구입한 로또에 대한 결과를 계산한다." {
