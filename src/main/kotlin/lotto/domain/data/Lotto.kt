@@ -10,3 +10,11 @@ value class Lotto(val value: List<Int>) {
         const val MIN_LOTTO_COUNT = 6
     }
 }
+
+fun Lotto.countMatchesOf(lotto: Lotto): Int {
+    return this.value.count { lotto.value.contains(it) }
+}
+
+fun Lotto.containsAny(number: Int): Boolean {
+    return this.value.any { number == it }
+}
