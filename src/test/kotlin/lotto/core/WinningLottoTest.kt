@@ -11,10 +11,10 @@ class WinningLottoTest {
     @MethodSource("provideParameters")
     fun `생성자에 잘못된 값 전달 시 오류를 확인한다`(
         numberList: List<LottoNumber>,
-        bonusNumber: LottoNumber,
+        bonusNumber: Int,
     ) {
         shouldThrow<IllegalArgumentException> {
-            WinningLotto(numberList, bonusNumber)
+            WinningLotto(numberList, LottoNumber(bonusNumber))
         }
     }
 
@@ -22,9 +22,9 @@ class WinningLottoTest {
         @JvmStatic
         fun provideParameters(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(transformLottoNumbers(listOf(1)), LottoNumber(1)),
-                Arguments.of(transformLottoNumbers(listOf(1, 2, 3)), LottoNumber(1)),
-                Arguments.of(transformLottoNumbers(listOf(1, 2, 3, 4, 5, 45, 3)), LottoNumber(45)),
+                Arguments.of(transformLottoNumbers(listOf(1)), 1),
+                Arguments.of(transformLottoNumbers(listOf(1, 2, 3)), 1),
+                Arguments.of(transformLottoNumbers(listOf(1, 2, 3, 4, 5, 45, 3)), 45),
             )
         }
 

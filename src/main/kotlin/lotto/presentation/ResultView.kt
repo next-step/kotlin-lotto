@@ -1,16 +1,19 @@
 package lotto.presentation
 
+import lotto.core.LottoPurchaseCount
 import lotto.core.LottoResult
 import lotto.core.Lottos
 import lotto.core.WinningRank
 
 object ResultView {
-    fun printLottos(lottos: Lottos) {
+    fun printLottos(
+        lottos: Lottos,
+        lottoPurchaseCount: LottoPurchaseCount,
+    ) {
         val stringBuffer = StringBuffer()
-
-        stringBuffer.append(lottos.size)
-        stringBuffer.append(STR_PURCHASED_COUNT)
+        stringBuffer.append(String.format(STR_PURCHASED_COUNT, lottoPurchaseCount.manualLottoCount, lottoPurchaseCount.autoLottoCount()))
         stringBuffer.append(STR_NEW_LINE)
+
         lottos.forEach {
             stringBuffer.append(it.numbers.joinToString(",", "[", "]"))
             stringBuffer.append(STR_NEW_LINE)
@@ -53,9 +56,9 @@ object ResultView {
         count: Int,
         stringBuffer: StringBuffer,
     ) {
-        stringBuffer.append(rank.winningCount.first)
+        stringBuffer.append(rank.winningCount)
         stringBuffer.append(STR_MATCH)
-        if (rank.winningCount.second) {
+        if (rank.matchBonus) {
             stringBuffer.append(STR_MATCH_BONUS_BALL)
         }
         stringBuffer.append(STR_LEFT_PARENTHESIS)
@@ -66,7 +69,7 @@ object ResultView {
         stringBuffer.append(STR_NEW_LINE)
     }
 
-    private const val STR_PURCHASED_COUNT = "개를 구매하였습니다."
+    private const val STR_PURCHASED_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다."
     private const val STR_NEW_LINE = "\n"
     private const val STR_WINNING_STATISTICS = "당첨 통계"
     private const val STR_SEPARATOR = "---------"

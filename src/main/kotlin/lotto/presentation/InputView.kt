@@ -1,24 +1,51 @@
 package lotto.presentation
 
 import lotto.core.LottoNumber
+import lotto.core.constant.LottoConstants
 
 object InputView {
-    fun inputPurchaseAmount(): String {
+    fun inputPurchaseCount(): Int {
         println(GUIDE_INPUT_PURCHASE_AMOUNT)
+        val purchaseAmount = readlnOrNull() ?: throw RuntimeException(LottoConstants.ERROR_INVALID_INPUT)
 
-        return readlnOrNull() ?: throw RuntimeException(ERROR_INVALID_INPUT)
+        return calculatePurchasableCount(purchaseAmount)
+    }
+
+    private fun calculatePurchasableCount(purchaseAmount: String): Int {
+        val amount = purchaseAmount.toIntOrNull() ?: throw NumberFormatException(LottoConstants.ERROR_INVALID_INPUT)
+        require(amount > 0) { "잘못된 금액이 입력되었습니다." }
+        return amount / LottoConstants.LOTTO_PRICE
     }
 
     fun inputWinningNumbers(): List<LottoNumber> {
         println(GUIDE_INPUT_LAST_WINNING_NUMBER)
 
-        return splitNumbers(readlnOrNull() ?: throw RuntimeException(ERROR_INVALID_INPUT))
+        return inputLottoNumbers()
     }
 
     fun inputBonusNumber(): LottoNumber {
         println(GUIDE_INPUT_BONUS_NUMBER)
-        val number = readlnOrNull() ?: throw RuntimeException(ERROR_INVALID_INPUT)
-        return LottoNumber(number.toIntOrNull() ?: throw RuntimeException(ERROR_INVALID_INPUT))
+        val number = readlnOrNull() ?: throw RuntimeException(LottoConstants.ERROR_INVALID_INPUT)
+        return LottoNumber(number.trim().toIntOrNull() ?: throw RuntimeException(LottoConstants.ERROR_INVALID_INPUT))
+    }
+
+    fun inputManualLottoCount(): Int {
+        println("수동으로 구매할 로또 수를 입력해주세요.")
+        val number = readlnOrNull() ?: throw RuntimeException(LottoConstants.ERROR_INVALID_INPUT)
+
+        val manualLottoCount = number.trim().toIntOrNull() ?: throw RuntimeException(LottoConstants.ERROR_INVALID_INPUT)
+
+        return manualLottoCount
+    }
+
+    fun inputManualLottoNumbers(manualLottoCount: Int): List<List<LottoNumber>> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+
+        return (1..manualLottoCount).map { inputLottoNumbers() }
+    }
+
+    private fun inputLottoNumbers(): List<LottoNumber> {
+        return splitNumbers(readlnOrNull() ?: throw RuntimeException(LottoConstants.ERROR_INVALID_INPUT))
     }
 
     private fun splitNumbers(winningNumbers: String): List<LottoNumber> {
@@ -30,13 +57,13 @@ object InputView {
 
     private fun transformNumbers(numberList: List<String>): List<LottoNumber> {
         return numberList.map {
-            LottoNumber(it.trim().toIntOrNull() ?: throw NumberFormatException("숫자가 아닙니다."))
+            LottoNumber(it.trim().toIntOrNull() ?: throw NumberFormatException(LottoConstants.ERROR_NOT_NUMBER))
         }
     }
 
     private fun checkDuplicates(list: List<LottoNumber>) {
         if (list.size != list.toSet().size) {
-            throw IllegalArgumentException("중복된 숫자가 있습니다.")
+            throw IllegalArgumentException(LottoConstants.ERROR_DUPLICATE_NUMBER)
         }
     }
 
@@ -44,5 +71,4 @@ object InputView {
     private const val GUIDE_INPUT_LAST_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요."
     private const val GUIDE_INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요."
     private const val DELIMITER = ","
-    private const val ERROR_INVALID_INPUT = "잘못된 값이 입력되었습니다."
 }

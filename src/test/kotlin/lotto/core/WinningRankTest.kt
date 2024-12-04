@@ -21,14 +21,19 @@ class WinningRankTest {
         @JvmStatic
         fun provideParameters(): Stream<Arguments> {
             return Stream.of(
+                Arguments.of(0, true, WinningRank.NOTHING),
                 Arguments.of(0, false, WinningRank.NOTHING),
+                Arguments.of(1, true, WinningRank.NOTHING),
                 Arguments.of(1, false, WinningRank.NOTHING),
+                Arguments.of(2, true, WinningRank.NOTHING),
                 Arguments.of(2, false, WinningRank.NOTHING),
-                Arguments.of(3, false, WinningRank.FIFTH),
+                Arguments.of(3, true, WinningRank.FIFTH),
                 Arguments.of(4, false, WinningRank.FORTH),
+                Arguments.of(4, true, WinningRank.FORTH),
                 Arguments.of(5, false, WinningRank.THIRD),
                 Arguments.of(5, true, WinningRank.SECOND),
                 Arguments.of(6, false, WinningRank.FIRST),
+                Arguments.of(6, true, WinningRank.FIRST),
             )
         }
     }

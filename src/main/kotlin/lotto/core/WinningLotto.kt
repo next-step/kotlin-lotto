@@ -6,7 +6,7 @@ class WinningLotto(private val lotto: Lotto, private val bonusNumber: LottoNumbe
     constructor(numbers: List<LottoNumber>, bonusNumber: LottoNumber) : this(Lotto(numbers), bonusNumber)
 
     init {
-        require(!lotto.contains(bonusNumber)) { LottoConstants.ERROR_INVALID_BONUS_NUMBER }
+        require(bonusNumber !in lotto) { LottoConstants.ERROR_INVALID_BONUS_NUMBER }
     }
 
     fun checkWinningState(lotto: Lotto): WinningRank {
