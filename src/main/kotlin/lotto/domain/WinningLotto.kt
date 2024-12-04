@@ -6,4 +6,10 @@ data class WinningLotto(private val winningLotto: Lotto, private val bonusBall: 
         val isMatchedBonusBall = userLotto.isMatchedBonusBall(bonusBall)
         return Match(matchCount, isMatchedBonusBall).rank()
     }
+
+    fun getUserRank2(userLotto: Lotto): LottoRank {
+        val matchCount = userLotto.getIntersectSize(this.winningLotto)
+        val isMatchedBonusBall = userLotto.isMatchedBonusBall(bonusBall)
+        return Match(matchCount, isMatchedBonusBall).rank2()
+    }
 }

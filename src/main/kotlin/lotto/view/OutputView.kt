@@ -1,7 +1,6 @@
 package lotto.view
 
 import lotto.domain.Lotto
-import lotto.domain.Statistics
 
 class OutputView {
     companion object {
@@ -28,21 +27,6 @@ class OutputView {
                 println(it.lottoNumbers)
             }
             println()
-        }
-
-        fun printLottoStatistics(
-            statisticsList: List<Statistics>,
-            earningRatio: Double,
-        ) {
-            println(LOTTO_STATISTICS_TITLE)
-            println(LOTTO_STATISTICS_SEPARATOR)
-            statisticsList.forEach { printLottoResult(it) }
-
-            println(EARNING_RATIO_MESSAGE.format(earningRatio, getProfitStatus(earningRatio)))
-        }
-
-        private fun printLottoResult(statistics: Statistics) {
-            println("${rankWithMatchCount(statistics.rank)} - ${statistics.matchCount}개")
         }
 
         private fun rankWithMatchCount(rank: Int): String =

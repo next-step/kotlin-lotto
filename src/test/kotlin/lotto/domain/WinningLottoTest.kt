@@ -16,47 +16,47 @@ class WinningLottoTest : DescribeSpec({
         describe("사용자 로또 등수를 리턴한다.") {
             it("모두 일치하는 경우") {
                 val userLotto = Lotto(1, 2, 3, 4, 5, 6)
-                val actual = sut.getUserRank(userLotto)
-                actual shouldBe 1
+                val actual = sut.getUserRank2(userLotto)
+                actual shouldBe LottoRank.FIRST
             }
 
             context("5개 일치 + 보너스볼") {
                 it("should be 2") {
                     val userLotto = Lotto(1, 2, 3, 4, 5, 10)
-                    val actual = sut.getUserRank(userLotto)
-                    actual shouldBe 2
+                    val actual = sut.getUserRank2(userLotto)
+                    actual shouldBe LottoRank.SECOND
                 }
             }
 
             context("5개 일치") {
                 it("should be 3") {
                     val userLotto = Lotto(1, 2, 3, 4, 5, 11)
-                    val actual = sut.getUserRank(userLotto)
-                    actual shouldBe 3
+                    val actual = sut.getUserRank2(userLotto)
+                    actual shouldBe LottoRank.THIRD
                 }
             }
 
             context("4개 일치 + 보너스볼") {
                 it("should be 4") {
                     val userLotto = Lotto(1, 2, 3, 4, 10, 11)
-                    val actual = sut.getUserRank(userLotto)
-                    actual shouldBe 4
+                    val actual = sut.getUserRank2(userLotto)
+                    actual shouldBe LottoRank.FOURTH
                 }
             }
 
             context("4개 일치") {
                 it("should be 4") {
                     val userLotto = Lotto(1, 2, 3, 4, 11, 12)
-                    val actual = sut.getUserRank(userLotto)
-                    actual shouldBe 4
+                    val actual = sut.getUserRank2(userLotto)
+                    actual shouldBe LottoRank.FOURTH
                 }
             }
 
             context("3개 일치") {
                 it("should be 5") {
                     val userLotto = Lotto(1, 2, 3, 11, 12, 13)
-                    val actual = sut.getUserRank(userLotto)
-                    actual shouldBe 5
+                    val actual = sut.getUserRank2(userLotto)
+                    actual shouldBe LottoRank.FIFTH
                 }
             }
         }

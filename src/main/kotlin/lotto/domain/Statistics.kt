@@ -1,9 +1,9 @@
 package lotto.domain
 
 data class Statistics(private val winningLotto: WinningLotto, private val lottos: List<Lotto>) {
-    fun groupByLottoRank(): List<LottoRankWithCount> {
-        return lottos.groupBy { winningLotto.getUserRank(it) }.map { LottoRankWithCount(it.key, it.value.size) }
-            .filter { it.rank != NOT_PRIZED_RANK }.sortedByDescending { it.rank }
+    fun calculateLottoRank(): Map<LottoRank, Int> {
+        val ranks = lottos.map { winningLotto.getUserRank(it) }
+        return mapOf()
     }
 
     companion object {
