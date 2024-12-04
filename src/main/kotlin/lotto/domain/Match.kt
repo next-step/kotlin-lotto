@@ -10,27 +10,25 @@ import lotto.constant.MATCH_COUNT_THREE
 import lotto.constant.NO_RANK
 import lotto.constant.THIRD_RANK
 
-class Match {
-    companion object {
-        fun lottoNumber(
-            userLotto: Lotto,
-            winningLotto: Lotto,
-        ): Int {
-            val lottoNumbers: Set<LottoNumber> = userLotto.lottoNumbers
-            val winningLottoNumbers: Set<LottoNumber> = winningLotto.lottoNumbers
+object Match {
+    fun lottoNumber(
+        userLotto: Lotto,
+        winningLotto: Lotto,
+    ): Int {
+        val lottoNumbers: Set<LottoNumber> = userLotto.lottoNumbers
+        val winningLottoNumbers: Set<LottoNumber> = winningLotto.lottoNumbers
 
-            val matchCount = lottoNumbers.intersect(winningLottoNumbers).size
-            return rank(matchCount)
-        }
+        val matchCount = lottoNumbers.intersect(winningLottoNumbers).size
+        return rank(matchCount)
+    }
 
-        private fun rank(matchCount: Int): Int {
-            return when (matchCount) {
-                MATCH_COUNT_SIX -> FIRST_RANK
-                MATCH_COUNT_FIVE -> THIRD_RANK
-                MATCH_COUNT_FOUR -> FOURTH_RANK
-                MATCH_COUNT_THREE -> FIFTH_RANK
-                else -> NO_RANK
-            }
+    private fun rank(matchCount: Int): Int {
+        return when (matchCount) {
+            MATCH_COUNT_SIX -> FIRST_RANK
+            MATCH_COUNT_FIVE -> THIRD_RANK
+            MATCH_COUNT_FOUR -> FOURTH_RANK
+            MATCH_COUNT_THREE -> FIFTH_RANK
+            else -> NO_RANK
         }
     }
 }
