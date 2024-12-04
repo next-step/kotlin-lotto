@@ -6,12 +6,12 @@ data class Statistics(private val winningLotto: WinningLotto, private val lottos
     fun lottoResultGroupByRank(): Map<LottoRank, Int> {
         val initialRanks =
             LottoRank.entries
-                .filter { it.matchCount in 3..6 }
+                .filter { it.matchCount in MINIMUM_MATCH_COUNT..MAXIMUM_MATCH_COUNT }
                 .associateWith { 0 }
 
         val actualRanks =
             lottos.map { winningLotto.getUserRank(it) }
-                .filter { it.matchCount in 3..6 }
+                .filter { it.matchCount in MINIMUM_MATCH_COUNT..MAXIMUM_MATCH_COUNT }
                 .groupingBy { it }
                 .eachCount()
 
@@ -35,6 +35,8 @@ data class Statistics(private val winningLotto: WinningLotto, private val lottos
         }
 
     companion object {
+        private const val MINIMUM_MATCH_COUNT = 3
+        private const val MAXIMUM_MATCH_COUNT = 6
         private const val EARNING_RATIO_THRESHOLD = 1.0
         private const val PROFIT_MESSAGE = "이익"
         private const val BREAK_EVEN_MESSAGE = "본전"
