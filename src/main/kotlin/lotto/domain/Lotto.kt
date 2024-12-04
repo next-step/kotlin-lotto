@@ -1,7 +1,15 @@
 package lotto.domain
 
+import lotto.constant.REQUIRED_LOTTO_SIZE
+
 class Lotto(val lottoNumbers: Set<LottoNumber>) {
     constructor(vararg numbers: Int) : this(numbers.map(::LottoNumber).toSet())
+
+    init {
+        require(lottoNumbers.size == REQUIRED_LOTTO_SIZE) {
+            ERROR_WRONG_NUMBER_COUNT
+        }
+    }
 
     fun getIntersectSize(winningLotto: Lotto): Int {
         val lottoNumbers: Set<LottoNumber> = lottoNumbers
