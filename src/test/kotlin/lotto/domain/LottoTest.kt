@@ -40,6 +40,41 @@ class LottoTest : DescribeSpec({
         }
     }
 
+    describe("사용자의 로또 번호와 당첨번호 일치 개수를 계산한다.") {
+        lateinit var winningLotto: Lotto
+        beforeTest { winningLotto = Lotto(1, 2, 3, 4, 5, 6) }
+
+        it("6개 일치") {
+            val lotto = Lotto(1, 2, 3, 4, 5, 6)
+            val actual = lotto.getIntersectSize(winningLotto)
+            actual shouldBe 6
+        }
+
+        it("5개 일치") {
+            val lotto = Lotto(1, 2, 3, 4, 5, 7)
+            val actual = lotto.getIntersectSize(winningLotto)
+            actual shouldBe 5
+        }
+
+        it("4개 일치") {
+            val lotto = Lotto(1, 2, 3, 4, 7, 8)
+            val actual = lotto.getIntersectSize(winningLotto)
+            actual shouldBe 4
+        }
+
+        it("3개 일치") {
+            val lotto = Lotto(1, 2, 3, 11, 12, 13)
+            val actual = lotto.getIntersectSize(winningLotto)
+            actual shouldBe 3
+        }
+
+        it("2개 일치") {
+            val lotto = Lotto(1, 2, 11, 12, 13, 14)
+            val actual = lotto.getIntersectSize(winningLotto)
+            actual shouldBe 2
+        }
+    }
+
     describe("보너스볼 일치 여부") {
         context("사용자의 로또번호에 보너스볼이 포함되어 있는 경우") {
             it("should be true") {
