@@ -1,5 +1,7 @@
 package lotto.domain
 
+const val LOTTO_PRICE = 1000
+
 private val LOTTO_NUMBER_RANGE = 1..45
 private const val LOTTO_NUMBER_SIZE = 6
 

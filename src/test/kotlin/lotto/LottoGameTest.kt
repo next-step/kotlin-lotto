@@ -4,6 +4,7 @@ import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.BoughtMoney
+import lotto.domain.ManualLottoAmount
 
 class LottoGameTest : DescribeSpec({
 
@@ -45,6 +46,48 @@ class LottoGameTest : DescribeSpec({
         it("수동 로또 수가 숫자가 아니면 예외를 반환한다.") {
             shouldThrowWithMessage<IllegalArgumentException>("수동으로 구매할 로또 수는 숫자만 입력 가능합니다.") {
                 sut.parseInputManualLottoAmount("abc")
+            }
+        }
+    }
+
+    describe("로또 생성") {
+        it("구입 금액과 수동 생성 로또 번호를 받아 로또를 생성한다.") {
+            val actual = sut.generateLottos(
+                boughtMoney = BoughtMoney(10000),
+                manualLottoAmount = ManualLottoAmount(2),
+                inputManualLottoNumbers = listOf("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12")
+            )
+
+            actual.size shouldBe 10
+        }
+
+        it("수동 로또를 구매했는데 구매한 수량만큼 수동 구매 로또 번호가 없다면 예외를 반환한다.") {
+            shouldThrowWithMessage<IllegalArgumentException>("구매한 수동 로또 수만큼 수동 로또 번호 입력이 필요합니다.") {
+                sut.generateLottos(
+                    boughtMoney = BoughtMoney(10000),
+                    manualLottoAmount = ManualLottoAmount(2),
+                    inputManualLottoNumbers = listOf()
+                )
+            }
+        }
+
+        it("수동 로또를 구매했는데 누락된 로또 번호가 있다면 예외를 반환한다.") {
+            shouldThrowWithMessage<IllegalArgumentException>("수동 로또 번호는 입력은 필수입니다.") {
+                sut.generateLottos(
+                    boughtMoney = BoughtMoney(10000),
+                    manualLottoAmount = ManualLottoAmount(2),
+                    inputManualLottoNumbers = listOf(null, "7, 8, 9, 10, 11, abc")
+                )
+            }
+        }
+
+        it("수동 로또를 구매했는데 숫자가 아닌 로또 번호가 있다면 예외를 반환한다.") {
+            shouldThrowWithMessage<IllegalArgumentException>("수동 로또 번호는 숫자만 입력 가능합니다.") {
+                sut.generateLottos(
+                    boughtMoney = BoughtMoney(10000),
+                    manualLottoAmount = ManualLottoAmount(1),
+                    inputManualLottoNumbers = listOf("7, 8, 9, 10, 11, abc")
+                )
             }
         }
     }
