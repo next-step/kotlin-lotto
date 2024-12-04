@@ -35,7 +35,7 @@ data class Statistics(val rank: Int, val matchCount: Int) {
         ): List<Statistics> {
             val groupByRanking: Map<Int, List<Lotto>> =
                 (FIFTH_RANK downTo FIRST_RANK).associateWith { emptyList<Lotto>() } +
-                    userLottos.groupBy { Match.lottoNumber(it, winningLotto) }
+                    userLottos.groupBy { it.getIntersectSize(winningLotto) }
 
             val statistics: List<Statistics> =
                 groupByRanking.map { Statistics(it.key, it.value.size) }.sortedByDescending { it.rank }

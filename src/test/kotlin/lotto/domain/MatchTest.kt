@@ -5,7 +5,6 @@ import io.kotest.matchers.shouldBe
 import lotto.strategy.FifthRankLottoNumberGenerator
 import lotto.strategy.FirstRankLottoLottoNumberGenerator
 import lotto.strategy.FourRankLottoNumberGenerator
-import lotto.strategy.NoRankLottoNumberGenerator
 import lotto.strategy.ThirdRankLottoNumberGenerator
 import lotto.strategy.WinningLottoNumberListGenerator
 
@@ -18,58 +17,34 @@ class MatchTest : DescribeSpec({
             winningLotto = Lotto.createLotto(lottoNumbers)
         }
 
-        context("6자리가 모두 일치하는 경우") {
-            it("should be 1") {
+        context("우승 로또와 사용자 로또를 비교해서 일치하는 개수를 리턴한다.") {
+            it("6자리가 모두 일치하는 경우") {
                 val userLottoNumbers = FirstRankLottoLottoNumberGenerator().generate()
-                val userLotto = Lotto.createLotto(userLottoNumbers)
-
-                val actual = Match.lottoNumber(userLotto, winningLotto)
-
-                actual shouldBe 1
+                val sut = Lotto.createLotto(userLottoNumbers)
+                val actual = sut.getIntersectSize(winningLotto)
+                actual shouldBe 6
             }
-        }
 
-        context("5자리가 일치하는 경우") {
-            it("should be 2") {
+            it("5자리 일치") {
                 val userLottoNumbers = ThirdRankLottoNumberGenerator().generate()
-                val userLotto = Lotto.createLotto(userLottoNumbers)
-
-                val actual = Match.lottoNumber(userLotto, winningLotto)
-
-                actual shouldBe 3
+                val sut = Lotto.createLotto(userLottoNumbers)
+                val actual = sut.getIntersectSize(winningLotto)
+                actual shouldBe 5
             }
-        }
 
-        context("4자리가 일치하는 경우") {
-            it("should be 4") {
+            it("4자리 일치") {
                 val userLottoNumbers = FourRankLottoNumberGenerator().generate()
-                val userLotto = Lotto.createLotto(userLottoNumbers)
-
-                val actual = Match.lottoNumber(userLotto, winningLotto)
+                val sut = Lotto.createLotto(userLottoNumbers)
+                val actual = sut.getIntersectSize(winningLotto)
 
                 actual shouldBe 4
             }
-        }
 
-        context("3자리가 일치하는 경우") {
-            it("should be 5") {
+            it("3자리 일치") {
                 val userLottoNumbers = FifthRankLottoNumberGenerator().generate()
-                val userLotto = Lotto.createLotto(userLottoNumbers)
-
-                val actual = Match.lottoNumber(userLotto, winningLotto)
-
-                actual shouldBe 5
-            }
-        }
-
-        context("3자리 미만인 경우") {
-            it("should be 0") {
-                val userLottoNumbers = NoRankLottoNumberGenerator().generate()
-                val userLotto = Lotto.createLotto(userLottoNumbers)
-
-                val actual = Match.lottoNumber(userLotto, winningLotto)
-
-                actual shouldBe 0
+                val sut = Lotto.createLotto(userLottoNumbers)
+                val actual = sut.getIntersectSize(winningLotto)
+                actual shouldBe 3
             }
         }
     }
