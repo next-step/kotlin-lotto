@@ -1,5 +1,8 @@
 package lotto.domain
 
+import lotto.constant.MAXIMUM_NUMBER
+import lotto.constant.MINIMUM_NUMBER
+
 @JvmInline
 value class LottoNumber(val number: Int) {
     init {
@@ -9,8 +12,6 @@ value class LottoNumber(val number: Int) {
     }
 
     companion object {
-        private const val MINIMUM_NUMBER = 1
-        private const val MAXIMUM_NUMBER = 45
         private const val CANNOT_CREATE_LOTTO_NUMBER_MESSAGE = "Lotto number must be between %s and %s."
     }
 }
