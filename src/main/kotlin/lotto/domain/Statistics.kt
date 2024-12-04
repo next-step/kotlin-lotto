@@ -1,12 +1,35 @@
 package lotto.domain
 
+import kotlin.math.floor
+
 data class Statistics(private val winningLotto: WinningLotto, private val lottos: List<Lotto>) {
-    fun calculateLottoRank(): Map<LottoRank, Int> {
-        val ranks = lottos.map { winningLotto.getUserRank(it) }
-        return mapOf()
+    fun lottoResultGroupByRank(): Map<LottoRank, Int> {
+        return lottos.map { winningLotto.getUserRank(it) }
+            .filter { it != LottoRank.NONE }
+            .groupingBy { it }
+            .eachCount()
     }
 
+    fun calculateEarningRatio(price: Int): Double {
+        val ratio =
+            lottoResultGroupByRank()
+                .map { (rank, count) -> rank.calculatePrize(count) }
+                .sum().toDouble() / price
+
+        return floor(ratio * 100) / 100
+    }
+
+    fun getProfitStatus(earningRatio: Double): String =
+        when {
+            earningRatio > EARNING_RATIO_THRESHOLD -> PROFIT_MESSAGE
+            earningRatio == EARNING_RATIO_THRESHOLD -> BREAK_EVEN_MESSAGE
+            else -> LOSS_MESSAGE
+        }
+
     companion object {
-        private const val NOT_PRIZED_RANK = 0
+        private const val EARNING_RATIO_THRESHOLD = 1.0
+        private const val PROFIT_MESSAGE = "이익"
+        private const val BREAK_EVEN_MESSAGE = "본전"
+        private const val LOSS_MESSAGE = "손해"
     }
 }
