@@ -1,8 +1,15 @@
 package lotto.domain
 
 class LottoStore(private val lottoGenerator: LottoGenerator) {
-    fun sell(amount: Int): LottoTickets {
-        require(amount >= LOTTO_PRICE) { "Insufficient amount to buy lotto tickets." }
+    fun sell(
+        manualTickets: LottoTickets,
+        autoTicketAmount: PurchaseAmount,
+    ): LottoTickets {
+        val autoTickets = generateAutoTickets(autoTicketAmount.getValue())
+        return LottoTickets.combine(manualTickets.getTickets(), autoTickets.getTickets())
+    }
+
+    private fun generateAutoTickets(amount: Int): LottoTickets {
         val ticketCount = amount / LOTTO_PRICE
         val tickets = List(ticketCount) { lottoGenerator.generateTicket() }
         return LottoTickets(tickets)

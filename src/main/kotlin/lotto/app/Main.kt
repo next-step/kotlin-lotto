@@ -1,24 +1,42 @@
 package lotto.app
 
 import lotto.domain.Lotto
-import lotto.domain.LottoMatcher
 import lotto.domain.LottoNumber
 import lotto.domain.LottoStore
+import lotto.domain.LottoTickets
+import lotto.domain.PurchaseAmount
 import lotto.domain.RandomLottoGenerator
+import lotto.domain.TicketCount
+import lotto.domain.WinningLotto
+import lotto.domain.WinningStatistics
 import lotto.view.InputView
 import lotto.view.ResultView
 
 fun main() {
-    val purchaseAmount = InputView.getPurchaseAmount()
+    val purchaseAmount = PurchaseAmount(InputView.getPurchaseAmount())
+    val manualCount = TicketCount(InputView.getManualTicketCount())
+    val manualLottoInputs = InputView.getManualLottoNumbers(manualCount.getValue())
+
     val lottoStore = LottoStore(RandomLottoGenerator())
-    val tickets = lottoStore.sell(purchaseAmount)
-    ResultView.printPurchaseInfo(tickets)
+    val tickets =
+        lottoStore.sell(
+            LottoTickets(manualLottoInputs.map { Lotto.of(it.split(",").map { n -> n.trim().toInt() }) }),
+            purchaseAmount.calculateAutoTicketAmount(manualCount),
+        )
 
-    val winningLotto = Lotto.of(InputView.getWinningNumbers())
-    val bonusNumber = LottoNumber.of(InputView.getBonusNumber())
-    val lottoMatcher = LottoMatcher(winningLotto, bonusNumber)
+    ResultView.printPurchaseInfo(tickets, manualCount)
 
-    val winningStatistics = lottoMatcher.evaluateTickets(tickets)
-    val profitRate = winningStatistics.calculateProfitRate(purchaseAmount)
-    ResultView.printStatistics(winningStatistics, profitRate)
+    val winningNumbers = InputView.getWinningNumbers()
+    val bonusNumber = InputView.getBonusNumber()
+    val winningLotto =
+        WinningLotto(
+            Lotto.of(winningNumbers.split(",").map { it.trim().toInt() }),
+            LottoNumber.of(bonusNumber),
+        )
+
+    val winningCategories = winningLotto.evaluateTickets(tickets)
+    val statistics = WinningStatistics(winningCategories)
+    val profitRate = statistics.calculateProfitRate(purchaseAmount)
+
+    ResultView.printStatistics(statistics, profitRate)
 }
