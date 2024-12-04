@@ -5,13 +5,21 @@ data class StringCalculator(val totalNumber: Int) {
 
     companion object {
         fun calculate(input: String): StringCalculator {
+            var delimiter = "[,:]"
+            var text = input
             val result = Regex("//(.)\\n(.*)").find(input)
             result?.let {
-                val customDelimiter = it.groupValues[1]
-                val customInput = it.groupValues[2]
-                return StringCalculator(splitString(customInput, customDelimiter))
+                delimiter = it.groupValues[1]
+                text = it.groupValues[2]
             }
-            return StringCalculator(splitString(input, "[,:]"))
+            validate(text, delimiter)
+            return StringCalculator(splitString(input, delimiter))
+        }
+
+        private fun validate(input: String, delimiter: String) {
+            if (Regex("^(?!$delimiter$)(.*[^0-9].*)").containsMatchIn(input)) {
+                throw RuntimeException()
+            }
         }
 
         private fun splitString(

@@ -23,4 +23,14 @@ class StringCalculatorTest {
     ) {
         assertThat(StringCalculator.calculate(inputString)).isEqualTo(StringCalculator(expacted))
     }
+
+    @ParameterizedTest
+    @DisplayName(value = "음수 및 숫자 아닌값은 에러처리한다.")
+    @CsvSource(value = ["'-1:2',3", "'//_\n1_3',4"])
+    fun SplitfailTest(
+        inputString: String,
+        expacted: Int,
+    ) {
+        assertThat(StringCalculator.calculate(inputString)).isEqualTo(StringCalculator(expacted))
+    }
 }
