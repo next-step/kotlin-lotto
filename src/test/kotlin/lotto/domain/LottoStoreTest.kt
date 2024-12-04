@@ -15,13 +15,11 @@ class LottoStoreTest : StringSpec({
                     Lotto.of(listOf(7, 8, 9, 10, 11, 12)),
                 ),
             )
-        val autoTicketAmount = PurchaseAmount(6000).calculateAutoTicketAmount(TicketCount(manualTickets.size()))
-        val combinedTickets =
-            lottoStore.sell(autoTicketAmount).let { autoTickets ->
-                LottoTickets.combine(manualTickets.getTickets(), autoTickets.getTickets())
-            }
+        val autoTicketAmount = PurchaseAmount(6000)
 
-        combinedTickets.size() shouldBe 6
+        val combinedTickets = lottoStore.sell(manualTickets, autoTicketAmount)
+
+        combinedTickets.size() shouldBe 8
         combinedTickets.getTickets().take(2) shouldBe manualTickets.getTickets()
         combinedTickets.getTickets().drop(2).all { it.getNumbers().size == 6 } shouldBe true
     }

@@ -7,7 +7,7 @@ class WinningLotto(private val winningLotto: Lotto, private val bonusNumber: Lot
         }
     }
 
-    fun determineCategory(ticket: Lotto): WinningCategory {
+    private fun determineCategory(ticket: Lotto): WinningCategory {
         val matchCount = ticket.countMatchingNumbers(winningLotto)
         val matchBonus = ticket.hasNumber(bonusNumber)
         return WinningCategory.fromMatchCount(matchCount, matchBonus)

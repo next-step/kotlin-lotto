@@ -1,8 +1,12 @@
 package lotto.domain
 
 class LottoStore(private val lottoGenerator: LottoGenerator) {
-    fun sell(autoTicketAmount: PurchaseAmount): LottoTickets {
-        return generateAutoTickets(autoTicketAmount.getValue())
+    fun sell(
+        manualTickets: LottoTickets,
+        autoTicketAmount: PurchaseAmount,
+    ): LottoTickets {
+        val autoTickets = generateAutoTickets(autoTicketAmount.getValue())
+        return LottoTickets.combine(manualTickets.getTickets(), autoTickets.getTickets())
     }
 
     private fun generateAutoTickets(amount: Int): LottoTickets {
