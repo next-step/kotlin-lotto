@@ -7,13 +7,13 @@ class StatisticsTest : DescribeSpec({
     describe("Statistics test") {
         context("사용자가 구매한 로또 번호가 1등부터 5등까지 당첨 개수를 계산한다") {
             it("1등 3개, 3등 1개") {
-                val winningLotto = Lotto.createLotto(listOf(1, 2, 3, 4, 5, 6))
+                val winningLotto = Lotto(1, 2, 3, 4, 5, 6)
                 val userLottos =
                     listOf(
-                        Lotto.createLotto(listOf(1, 2, 3, 4, 5, 6)),
-                        Lotto.createLotto(listOf(1, 2, 3, 4, 5, 6)),
-                        Lotto.createLotto(listOf(1, 2, 3, 4, 5, 6)),
-                        Lotto.createLotto(listOf(1, 2, 3, 4, 5, 7)),
+                        Lotto(1, 2, 3, 4, 5, 6),
+                        Lotto(1, 2, 3, 4, 5, 6),
+                        Lotto(1, 2, 3, 4, 5, 6),
+                        Lotto(1, 2, 3, 4, 5, 7),
                     )
 
                 val actual: List<Statistics> = Statistics.of(userLottos, winningLotto)

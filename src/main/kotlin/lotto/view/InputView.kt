@@ -16,12 +16,13 @@ class InputView {
                 ?: throw IllegalArgumentException(ERROR_INVALID_NUMBER)
         }
 
-        fun winningNumbers(): List<Int> {
+        fun winningNumbers(): Set<Int> {
             println(WINNING_NUMBER_INPUT_MESSAGE)
             return readln().replace(REPLACEMENT_SOURCE, REPLACEMENT_TARGET)
                 .split(WINNING_NUMBER_DELIMITERS)
                 .also { require(it.size == 6) { ERROR_WRONG_NUMBER_COUNT } }
                 .map { it.toIntOrNull() ?: throw IllegalArgumentException(ERROR_INVALID_NUMBER) }
+                .toSet()
         }
     }
 }

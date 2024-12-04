@@ -2,6 +2,7 @@ package lotto
 
 import lotto.domain.Cashier
 import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 import lotto.domain.Statistics
 import lotto.stretagy.RandomLottoNumberListGenerator
 import lotto.view.InputView
@@ -16,8 +17,8 @@ fun main() {
 
     OutputView.printPurchaseResult(lottos)
 
-    val winningNumbers = InputView.winningNumbers()
-    val winningLotto = Lotto.createLotto(winningNumbers)
+    val winningNumbers = InputView.winningNumbers().map(::LottoNumber).toSet()
+    val winningLotto = Lotto(winningNumbers)
 
     val statisticsList = Statistics.of(lottos, winningLotto)
     val earningRatio = Statistics.calculateEarningRatio(statisticsList, amount)

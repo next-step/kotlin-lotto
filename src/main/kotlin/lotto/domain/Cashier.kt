@@ -9,7 +9,7 @@ class Cashier(
     fun purchaseLotto(): List<Lotto> {
         require(amount >= LOTTO_PRICE)
         val numberOfLotto = calculateNumberOfLotto(amount)
-        return List(numberOfLotto) { Lotto.createLotto(lottoNumberListGenerator.generate()) }
+        return List(numberOfLotto) { Lotto(lottoNumberListGenerator.generate()) }
     }
 
     companion object {
