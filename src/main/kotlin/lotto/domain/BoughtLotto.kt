@@ -15,10 +15,8 @@ class BoughtLotto(
         return LottoResult(initialRewards + rewards)
     }
 
-    private fun initializeRewards(): EnumMap<Reward, Int> {
-        val initialRewards = EnumMap<Reward, Int>(Reward::class.java)
+    private fun initializeRewards(): EnumMap<Reward, Int> =
         Reward.entries
-            .forEach { initialRewards[it] = 0 }
-        return initialRewards
-    }
+            .associateWith { 0 }
+            .toMap(EnumMap<Reward, Int>(Reward::class.java))
 }
