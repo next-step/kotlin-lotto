@@ -2,6 +2,7 @@ package lotto
 
 import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.core.spec.style.StringSpec
+import lotto.domain.LottoNumber
 
 class LottoNumberTest : StringSpec({
     "로또 번호를 생성한다." {
