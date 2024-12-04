@@ -12,3 +12,4 @@ const val MATCH_COUNT_SIX = 6
 const val MATCH_COUNT_FIVE = 5
 const val MATCH_COUNT_FOUR = 4
 const val MATCH_COUNT_THREE = 3
+const val NUMBER_OF_SELECT = 6
