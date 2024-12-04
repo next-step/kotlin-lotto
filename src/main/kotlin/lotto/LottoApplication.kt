@@ -3,7 +3,9 @@ package lotto
 import lotto.domain.Cashier
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
+import lotto.domain.LottoRank
 import lotto.domain.Statistics
+import lotto.domain.WinningLotto
 import lotto.stretagy.RandomLottoNumberListGenerator
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -18,9 +20,13 @@ fun main() {
     OutputView.printPurchaseResult(lottos)
 
     val winningNumbers = InputView.winningNumbers().map(::LottoNumber).toSet()
-    val winningLotto = Lotto(winningNumbers)
+    val bonusBall = LottoNumber(InputView.bonusBall())
+    val winningLotto = WinningLotto(Lotto(winningNumbers), bonusBall)
 
-    val statisticsList = Statistics.of(lottos, winningLotto)
-    val earningRatio = Statistics.calculateEarningRatio(statisticsList, amount)
-    OutputView.printLottoStatistics(statisticsList, earningRatio)
+    val statistics = Statistics(winningLotto, lottos)
+    val lottoResult: Map<LottoRank, Int> = statistics.lottoResultGroupByRank()
+    val earningRatio = statistics.calculateEarningRatio(amount)
+    val earningResult = statistics.getProfitStatus(earningRatio)
+
+    OutputView.printLottoResult(lottoResult, earningRatio, earningResult)
 }
