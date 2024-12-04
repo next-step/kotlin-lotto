@@ -4,49 +4,77 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 
 class StatisticsTest : DescribeSpec({
-    describe("Statistics test") {
-        context("사용자가 구매한 로또 번호가 1등부터 5등까지 당첨 개수를 계산한다") {
-            it("1등 3개, 3등 1개") {
-                val winningLotto = Lotto(1, 2, 3, 4, 5, 6)
-                val userLottos =
+    describe("사용자의 당첨 로또를 집계한다") {
+        lateinit var winningLotto: WinningLotto
+        beforeTest { winningLotto = WinningLotto(Lotto(1, 2, 3, 4, 5, 6), LottoNumber(10)) }
+
+        context("당첨된 경우") {
+            it("1등") {
+                val sut = Statistics(winningLotto, listOf(Lotto(1, 2, 3, 4, 5, 6)))
+                val actual = sut.groupByLottoRank()
+                actual.size shouldBe 1
+                actual[0].rank shouldBe 1
+                actual[0].count shouldBe 1
+            }
+
+            it("5등 여러장 당첨된 경우") {
+                val lottos =
                     listOf(
-                        Lotto(1, 2, 3, 4, 5, 6),
-                        Lotto(1, 2, 3, 4, 5, 6),
-                        Lotto(1, 2, 3, 4, 5, 6),
-                        Lotto(1, 2, 3, 4, 5, 7),
+                        Lotto(1, 2, 3, 14, 15, 16),
+                        Lotto(11, 12, 13, 4, 5, 6),
+                        Lotto(1, 22, 33, 44, 5, 6),
+                        Lotto(1, 22, 23, 24, 5, 6),
                     )
 
-                val actual: List<Statistics> = Statistics.of(userLottos, winningLotto)
+                val sut = Statistics(winningLotto, lottos)
+                val actual = sut.groupByLottoRank()
 
+                actual.size shouldBe 1
                 actual[0].rank shouldBe 5
-                actual[0].matchCount shouldBe 0
-
-                actual[1].rank shouldBe 4
-                actual[1].matchCount shouldBe 0
-
-                actual[2].rank shouldBe 3
-                actual[2].matchCount shouldBe 1
-
-                actual[3].rank shouldBe 2
-                actual[3].matchCount shouldBe 0
-
-                actual[4].rank shouldBe 1
-                actual[4].matchCount shouldBe 3
+                actual[0].count shouldBe 4
             }
         }
-    }
 
-    describe("earningsRatio test") {
-        it("Integer Overflow 발생하지 않도록 헨들링") {
-            val statistics = Statistics(rank = 1, matchCount = 2)
-            val actual = statistics.earnings()
-            actual shouldBe 4_000_000_000
+        context("낙첨인 경우") {
+            it("집계하지 않는다") {
+                val sut = Statistics(winningLotto, listOf(Lotto(11, 12, 13, 14, 15, 16)))
+                val actual = sut.groupByLottoRank()
+                actual.size shouldBe 0
+            }
         }
 
-        it("3등 3장") {
-            val statistics = Statistics(rank = 3, matchCount = 3)
-            val actual = statistics.earnings()
-            actual shouldBe 150000
+        context("전체 로또중에 일부만 당첨된 경우") {
+            it("당첨된 로또를 등수 내림차순으로 집계한다") {
+                val lottos =
+                    listOf(
+                        Lotto(1, 22, 33, 44, 5, 6),
+                        Lotto(1, 22, 23, 24, 5, 6),
+                        Lotto(1, 2, 3, 24, 25, 6),
+                        Lotto(1, 2, 3, 4, 15, 16),
+                        Lotto(1, 2, 33, 34, 5, 6),
+                        Lotto(1, 2, 3, 4, 5, 10),
+                        Lotto(1, 2, 3, 4, 5, 6),
+                        Lotto(11, 12, 13, 14, 15, 6),
+                    )
+                        .shuffled()
+
+                val sut = Statistics(winningLotto, lottos)
+                val actual = sut.groupByLottoRank()
+                println(actual)
+
+                actual.size shouldBe 4
+                actual[0].rank shouldBe 5 // crack
+                actual[0].count shouldBe 2
+
+                actual[1].rank shouldBe 4
+                actual[1].count shouldBe 3
+
+                actual[2].rank shouldBe 2
+                actual[2].count shouldBe 1
+
+                actual[3].rank shouldBe 1
+                actual[3].count shouldBe 1
+            }
         }
     }
 })
