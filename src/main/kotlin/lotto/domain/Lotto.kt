@@ -17,6 +17,10 @@ class Lotto(val lottoNumbers: Set<LottoNumber>) {
         return lottoNumbers.intersect(winningLottoNumbers).size
     }
 
+    fun isMatchedBonusBall(bonusBall: LottoNumber): Boolean {
+        return lottoNumbers.contains(bonusBall)
+    }
+
     companion object {
         private const val ERROR_WRONG_NUMBER_COUNT = "정확히 6개의 숫자를 입력해야 합니다."
     }

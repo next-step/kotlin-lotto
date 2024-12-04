@@ -39,4 +39,22 @@ class LottoTest : DescribeSpec({
             }
         }
     }
+
+    describe("보너스볼 일치 여부") {
+        context("사용자의 로또번호에 보너스볼이 포함되어 있는 경우") {
+            it("should be true") {
+                val lotto = Lotto(1, 2, 3, 4, 5, 6)
+                val actual = lotto.isMatchedBonusBall(LottoNumber(1))
+                actual shouldBe true
+            }
+        }
+
+        context("사용자의 로또번호에 보너스볼이 포함되어 있지 않은 경우") {
+            it("should be false") {
+                val lotto = Lotto(1, 2, 3, 4, 5, 6)
+                val actual = lotto.isMatchedBonusBall(LottoNumber(10))
+                actual shouldBe false
+            }
+        }
+    }
 })
