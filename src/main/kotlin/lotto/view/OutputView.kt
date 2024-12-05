@@ -2,6 +2,7 @@ package lotto.view
 
 import lotto.domain.Lotto
 import lotto.domain.LottoRank
+import lotto.domain.ProfitStatus
 
 class OutputView {
     fun printPurchaseResult(purchasedLottos: List<Lotto>) {
@@ -19,14 +20,14 @@ class OutputView {
     fun printLottoResult(
         lottoResult: Map<LottoRank, Int>,
         earningRatio: Double,
-        profitStatus: String,
+        profitStatus: ProfitStatus,
     ) {
         println(LOTTO_STATISTICS_TITLE)
         println(LOTTO_STATISTICS_SEPARATOR)
         lottoResult.forEach { (lottoRank, count) ->
             println(MATCH_COUNT_MESSAGE.format(lottoRank.matchCount, lottoRank.prize, count))
         }
-        println(EARNING_RATIO_MESSAGE.format(earningRatio, profitStatus))
+        println(EARNING_RATIO_MESSAGE.format(earningRatio, profitStatus.message))
     }
 
     companion object {

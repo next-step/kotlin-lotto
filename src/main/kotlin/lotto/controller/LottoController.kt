@@ -5,6 +5,7 @@ import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.LottoRank
 import lotto.domain.LottoTicket
+import lotto.domain.ProfitStatus
 import lotto.domain.Statistics
 import lotto.domain.WinningLotto
 import lotto.stretagy.RandomLottoNumberListGenerator
@@ -46,7 +47,7 @@ class LottoController(private val inputView: InputView, private val outputView: 
         val statistics = Statistics(winningLotto, lottos.tickets)
         val lottoResult: Map<LottoRank, Int> = statistics.lottoResultGroupByRank()
         val earningRatio = statistics.calculateEarningRatio(amount)
-        val earningResult = statistics.getProfitStatus(earningRatio)
+        val earningResult = ProfitStatus.of(earningRatio)
 
         outputView.printLottoResult(lottoResult, earningRatio, earningResult)
     }
