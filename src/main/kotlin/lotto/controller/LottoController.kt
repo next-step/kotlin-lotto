@@ -8,7 +8,9 @@ import lotto.view.InputView
 import lotto.view.ResultView
 import java.math.BigDecimal
 
-class LottoController {
+object LottoController {
+    private val LOTTO_UNIT_PRICE = BigDecimal(1000)
+
     fun start() {
         val totalPurchaseAmount = InputView.readTotalPurchaseAmountAsBigDecimal()
 
@@ -39,9 +41,5 @@ class LottoController {
                     totalPurchaseAmount,
                 ),
         )
-    }
-
-    companion object {
-        private val LOTTO_UNIT_PRICE = BigDecimal(1000)
     }
 }
