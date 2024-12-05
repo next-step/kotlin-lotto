@@ -12,7 +12,7 @@ fun main() {
     val manualLottoCount = InputView.getManualLottoCount()
     val manualLottoNumbers = InputView.getManualLottoNumbers(manualLottoCount)
     val manualLottos = lottoCreator.createManualLottos(manualLottoNumbers)
-    val order = lottoShop.makeOrder(amount, manualLottoCount, manualLottos)
+    val order = lottoShop.makeOrder(amount, manualLottos)
     ResultView.printCreatedLottos(order)
 
     // 당첨번호 및 보너스번호 생성

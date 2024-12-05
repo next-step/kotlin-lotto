@@ -19,7 +19,7 @@ class LottoShopTest : StringSpec({
     "수동으로 구매할 로또의 개수와 로또 번호를 입력받으면 해당 요청에 대한 주문을 생성해야한다." {
         val lottoShop = LottoShop(LottoCreator(FixedLottoNumberGenerator()))
         val manualLottoNumbers = listOf(createLotto(1, 2, 3, 4, 5, 6), createLotto(5, 6, 7, 8, 9, 1))
-        val order = lottoShop.makeOrder(4000, 2, manualLottoNumbers)
+        val order = lottoShop.makeOrder(4000, manualLottoNumbers)
 
         assertSoftly {
             order.amount shouldBe 4000

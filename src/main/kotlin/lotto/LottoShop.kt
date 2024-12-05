@@ -6,12 +6,11 @@ import lotto.domain.Order
 class LottoShop(private val lottoCreator: LottoCreator) {
     fun makeOrder(
         amount: Int,
-        manualCount: Int = 0,
         manualLottos: List<Lotto> = listOf(),
     ): Order {
         validateAmountIsPositive(amount)
         val lottoCounts = calculateLottoCounts(amount)
-        return Order(amount, lottoCreator.createAutoLottos(lottoCounts - manualCount), manualLottos)
+        return Order(amount, lottoCreator.createAutoLottos(lottoCounts - manualLottos.size), manualLottos)
     }
 
     private fun validateAmountIsPositive(amount: Int) {
