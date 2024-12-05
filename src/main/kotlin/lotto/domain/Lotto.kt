@@ -1,6 +1,6 @@
 package lotto.domain
 
-class Lotto(val numbers: Set<LottoNumber>) {
+class Lotto private constructor(val numbers: Set<LottoNumber>) {
     init {
         validateSize(numbers)
     }
@@ -24,5 +24,9 @@ class Lotto(val numbers: Set<LottoNumber>) {
 
     companion object {
         private const val LOTTO_SIZE = 6
+
+        fun from(numbers: Set<LottoNumber>): Lotto {
+            return Lotto(numbers)
+        }
     }
 }

@@ -15,15 +15,16 @@ class LottoCreator(private val lottoNumberGenerator: LottoNumberGenerator = Rand
         winningNumbers: Set<Int>,
         bonusNumber: Int,
     ): WinningLotto {
-        val winningLotto = Lotto(winningNumbers.map { LottoNumber.getNumber(it) }.toSet())
+        val winningLottoNumbers = winningNumbers.map { LottoNumber.getNumber(it) }.toSet()
+        val winningLotto = Lotto.from(winningLottoNumbers)
         return WinningLotto(winningLotto, LottoNumber.getNumber(bonusNumber))
     }
 
     private fun createSingleLotto(): Lotto {
-        return Lotto(lottoNumberGenerator.generate())
+        return Lotto.from(lottoNumberGenerator.generate())
     }
 
     fun createManualLottos(manualLottoNumbers: List<Set<LottoNumber>>): List<Lotto> {
-        return manualLottoNumbers.map { Lotto(it) }
+        return manualLottoNumbers.map { Lotto.from(it) }
     }
 }

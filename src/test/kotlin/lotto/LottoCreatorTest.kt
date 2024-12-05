@@ -26,7 +26,7 @@ class LottoCreatorTest : StringSpec({
 
         val result = lottoCreator.createWinningLotto(setOf(1, 2, 3, 4, 5, 6), 7)
 
-        result.winningNumbers shouldBe Lotto(FixedLottoNumberGenerator().generate())
+        result.winningNumbers shouldBe Lotto.from(FixedLottoNumberGenerator().generate())
         result.bonusNumber shouldBe LottoNumber.getNumber(7)
     }
 })

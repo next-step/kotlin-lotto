@@ -20,7 +20,7 @@ class OrderTest : StringSpec({
     "주문 생성 시 전달된 금액과 로또의 수량이 맞지 않을 경우 예외를 반환한다." {
 
         assertSoftly {
-            shouldThrow<IllegalArgumentException> { Order(10000, listOf(Lotto(setOf(LottoNumber.getNumber(1))))) }
+            shouldThrow<IllegalArgumentException> { Order(10000, listOf(Lotto.from(setOf(LottoNumber.getNumber(1))))) }
             shouldThrow<IllegalArgumentException> {
                 Order(
                     10000,
