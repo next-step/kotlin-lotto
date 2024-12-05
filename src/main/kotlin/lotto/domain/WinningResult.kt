@@ -20,15 +20,10 @@ class WinningResult private constructor(
 
     companion object {
         fun from(
-            lottoRanks: Map<Rank, Int>,
+            analyzedResult: List<LottoStatistics>,
             amount: Int,
         ): WinningResult {
-            val ranks =
-                Rank.entries
-                    .filter { it !== Rank.MISS }
-                    .map { LottoStatistics(lottoRanks[it] ?: 0, it) }
-                    .sortedBy { it.rank.prizeAmount }
-            return WinningResult(ranks, amount)
+            return WinningResult(analyzedResult, amount)
         }
     }
 }

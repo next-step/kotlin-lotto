@@ -1,7 +1,7 @@
 package lotto.domain
 
 enum class Rank(
-    val matchCount: Int,
+    val expectedMatchCount: Int,
     val prizeAmount: Int,
     private val match: (Int, Boolean) -> Boolean,
 ) {

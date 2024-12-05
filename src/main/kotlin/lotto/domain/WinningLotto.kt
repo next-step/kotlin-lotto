@@ -8,12 +8,8 @@ class WinningLotto(
         validateDuplicate()
     }
 
-    fun extractWinningResult(order: Order): WinningResult {
-        val lottoRanks =
-            (order.autoLottos + order.manualLottos).map { this.matchLotto(it) }
-                .groupingBy { it }
-                .eachCount()
-        return WinningResult.from(lottoRanks, order.amount)
+    fun match(order: Order): List<Rank> {
+        return (order.autoLottos + order.manualLottos).map { this.matchLotto(it) }
     }
 
     private fun matchLotto(targetLotto: Lotto): Rank {

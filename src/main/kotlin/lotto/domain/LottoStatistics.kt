@@ -1,10 +1,10 @@
 package lotto.domain
 
 data class LottoStatistics(
-    val totalMatchCount: Int,
+    val lottoMatchCount: Int,
     val rank: Rank,
 ) {
     fun getTotalPrizeMoney(): Int {
-        return this.rank.prizeAmount * totalMatchCount
+        return this.rank.prizeAmount * lottoMatchCount
     }
 }

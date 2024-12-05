@@ -24,9 +24,9 @@ object ResultView {
 
     private fun printLottoResult(statistic: LottoStatistics) {
         if (statistic.rank == Rank.SECOND) {
-            println("${statistic.rank.matchCount}개 일치, 보너스 볼 일치 (${statistic.rank.prizeAmount}원) - ${statistic.totalMatchCount}")
+            println("${statistic.rank.expectedMatchCount}개 일치, 보너스 볼 일치 (${statistic.rank.prizeAmount}원) - ${statistic.lottoMatchCount}")
         } else {
-            println("${statistic.rank.matchCount}개 일치 (${statistic.rank.prizeAmount}원) - ${statistic.totalMatchCount}")
+            println("${statistic.rank.expectedMatchCount}개 일치 (${statistic.rank.prizeAmount}원) - ${statistic.lottoMatchCount}")
         }
     }
 }
