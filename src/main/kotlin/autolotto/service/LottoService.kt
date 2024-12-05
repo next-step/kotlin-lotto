@@ -1,5 +1,6 @@
 package autolotto.service
 
+import autolotto.domain.WinningLottoNumber
 import autolotto.entity.Lotto
 import autolotto.enums.prize.Prize
 import autolotto.repository.LottoRepository
@@ -19,29 +20,51 @@ class LottoService(private val lottoRepository: LottoRepository) {
             .toSet()
     }
 
-    fun getResult(winnersNumbers: List<Int>): Map<Prize, Int> {
+    fun getResult(winningLottoNumber: WinningLottoNumber): Map<Prize, Int> {
         val resultMap =
             mutableMapOf(
                 Prize.THREE to 0,
                 Prize.FOUR to 0,
                 Prize.FIVE to 0,
+                Prize.BONUS to 0,
                 Prize.SIX to 0,
             )
         val lottos = lottoRepository.findAll()
-        val comparisonWinningNumbers =
-            lottos.map { lotto -> comparisonWinningNumbers(lotto, winnersNumbers) }
-                .groupBy { it }.mapValues { it.value.size }.toMutableMap()
-        resultMap.forEach { (key, value) ->
-            resultMap[key] = (comparisonWinningNumbers[key.matchCount] ?: 0) + value
+
+        // 각 로또 번호와 당첨 번호 비교
+        val comparisonResults =
+            lottos.map { lotto ->
+                comparisonWinningNumbers(lotto, winningLottoNumber)
+            }
+
+        val groupByMatchCount =
+            comparisonResults.groupBy { it }.mapValues { it.value.size }.toMutableMap()
+
+        val bonusCount =
+            lottos.count { lotto ->
+                comparisonWinningNumbers(lotto, winningLottoNumber) == 5 &&
+                    winningLottoNumber.isHasBonusNumber(lotto)
+            }
+
+        groupByMatchCount.forEach { (matchCount, count) ->
+            val prize =
+                Prize.fromMatchCount(
+                    matchCount,
+                    matchCount == BONUS_MATCHED_COUNT && bonusCount > NOT_MATCHED_BONUS_COUNT,
+                )
+            prize?.let {
+                resultMap[it] = resultMap[it]!! + count
+            }
         }
+
         return resultMap
     }
 
     private fun comparisonWinningNumbers(
         lotto: Lotto,
-        winnersNumbers: List<Int>,
+        winningLottoNumber: WinningLottoNumber,
     ): Int {
-        val matchedNumbers = lotto.getNumbers().filter { winnersNumbers.contains(it) }
+        val matchedNumbers = lotto.getNumbers().filter { winningLottoNumber.isHasWinningNumber(it) }
         return matchedNumbers.count()
     }
 
@@ -49,5 +72,7 @@ class LottoService(private val lottoRepository: LottoRepository) {
         private const val MIN_LOTTO_NUMBER = 1
         private const val MAX_LOTTO_NUMBER = 45
         private const val LOTTO_TAKE_NUMBER = 6
+        private const val BONUS_MATCHED_COUNT = 5
+        private const val NOT_MATCHED_BONUS_COUNT = 0
     }
 }
