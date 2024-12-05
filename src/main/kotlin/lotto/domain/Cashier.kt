@@ -12,6 +12,14 @@ class Cashier(
         return List(numberOfLotto) { Lotto(lottoNumberListGenerator.generate()) }
     }
 
+    fun purchaseLotto2(): LottoTicket {
+        require(amount >= LOTTO_PRICE)
+        val numberOfLotto = calculateNumberOfLotto(amount)
+        return LottoTicket(
+            List(numberOfLotto) { Lotto(lottoNumberListGenerator.generate()) },
+        )
+    }
+
     companion object {
         private const val LOTTO_PRICE = 1000
 

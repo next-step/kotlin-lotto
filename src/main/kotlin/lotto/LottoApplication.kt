@@ -15,15 +15,15 @@ fun main() {
     val amount = InputView.purchaseAmount()
 
     val cashier = Cashier(amount, randomNumberListGenerator)
-    val lottos = cashier.purchaseLotto()
+    val lottos = cashier.purchaseLotto2()
 
-    OutputView.printPurchaseResult(lottos)
+    OutputView.printPurchaseResult(lottos.tickets)
 
     val winningNumbers = InputView.winningNumbers().map(::LottoNumber).toSet()
     val bonusBall = LottoNumber(InputView.bonusBall())
     val winningLotto = WinningLotto(Lotto(winningNumbers), bonusBall)
 
-    val statistics = Statistics(winningLotto, lottos)
+    val statistics = Statistics(winningLotto, lottos.tickets)
     val lottoResult: Map<LottoRank, Int> = statistics.lottoResultGroupByRank()
     val earningRatio = statistics.calculateEarningRatio(amount)
     val earningResult = statistics.getProfitStatus(earningRatio)
