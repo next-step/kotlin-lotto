@@ -15,6 +15,6 @@ class LottoStat(
     }
 
     companion object {
-        const val DEFAULT_COUNT = 0
+        private const val DEFAULT_COUNT = 0
     }
 }
