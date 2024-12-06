@@ -4,6 +4,7 @@ import lotto.domain.LottoCalculator
 import lotto.domain.LottoFactory
 import lotto.domain.LottoResult
 import lotto.domain.data.Lotto
+import lotto.domain.data.LottoNumber
 import lotto.view.InputView
 import lotto.view.ResultView
 import java.math.BigDecimal
@@ -14,11 +15,10 @@ object LottoController {
     fun start() {
         val totalPurchaseAmount = InputView.readTotalPurchaseAmountAsBigDecimal()
 
-        val totalLottoCount =
-            LottoCalculator.calculateLottoCount(
-                totalPurchaseAmount = totalPurchaseAmount,
-                pricePerAmount = LOTTO_UNIT_PRICE,
-            )
+        val totalLottoCount = LottoCalculator.calculateLottoCount(
+            totalPurchaseAmount = totalPurchaseAmount,
+            pricePerAmount = LOTTO_UNIT_PRICE,
+        )
         // 총 구매 로또 개수
         ResultView.printTotalPurchaseCount(totalLottoCount)
 
@@ -27,21 +27,24 @@ object LottoController {
         ResultView.printLottoNumbers(myLottoList)
 
         // 결과 출력
-        val winningNumbers = InputView.readWinningLotto(InputView.ENTER_LAST_WINNING_NUMBER)
-        val bonusLottoNumber = InputView.readBonusLotto(InputView.ENTER_BONUS_BALL)
-        val result =
-            LottoResult(
-                winningLotto = Lotto(winningNumbers),
-                bonusLottoNumber = bonusLottoNumber,
-                myLottoList = myLottoList,
-            )
+        val result = getLottoResult(myLottoList)
         ResultView.printLottoResult(resultMap = result.resultMap)
         ResultView.printProfitRate(
-            profitRate =
-                LottoCalculator.calculateProfitRate(
-                    result.getTotalProfit(),
-                    totalPurchaseAmount,
-                ),
+            profitRate = LottoCalculator.calculateProfitRate(
+                result.getTotalProfit(),
+                totalPurchaseAmount,
+            ),
         )
+    }
+
+    private fun getLottoResult(myLottoList: List<Lotto>): LottoResult {
+        val winningNumbers = InputView.readWinningLotto(InputView.ENTER_LAST_WINNING_NUMBER)
+        val bonusLottoNumber = InputView.readBonusLotto(InputView.ENTER_BONUS_BALL)
+        val result = LottoResult(
+            winningLotto = LottoFactory.fromList(winningNumbers),
+            bonusLottoNumber = LottoNumber(bonusLottoNumber),
+            myLottoList = myLottoList,
+        )
+        return result
     }
 }

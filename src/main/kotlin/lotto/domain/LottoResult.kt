@@ -1,12 +1,13 @@
 package lotto.domain
 
 import lotto.domain.data.Lotto
+import lotto.domain.data.LottoNumber
 import lotto.domain.data.Rank
 import java.math.BigDecimal
 
 class LottoResult(
     private val winningLotto: Lotto,
-    private val bonusLottoNumber: Int,
+    private val bonusLottoNumber: LottoNumber,
     myLottoList: List<Lotto>,
 ) {
     val resultMap: Map<Rank, Int>
@@ -14,14 +15,20 @@ class LottoResult(
     init {
         resultMap = Rank.entries.associateWith { 0 }.toMutableMap()
         myLottoList.forEach { lotto ->
-            val matchCount = lotto.countMatchesOf(winningLotto)
-            if (matchCount >= MIN_MATCHING_COUNT) {
-                val isBonus = matchCount == BONUS_MATCHING_COUNT && lotto.containsAny(bonusLottoNumber)
-                val rank = Rank.fromCount(matchCount, isBonus)
-                var winCount = resultMap.getOrDefault(rank, 0)
-                resultMap[rank] = ++winCount
+            getRank(lotto)?.let { rank ->
+                var rankCount = resultMap.getOrDefault(rank, 0)
+                resultMap[rank] = ++rankCount
             }
         }
+    }
+
+    private fun getRank(lotto: Lotto): Rank? {
+        val matchCount = lotto.countMatchesOf(winningLotto)
+        if (matchCount >= MIN_MATCHING_COUNT) {
+            val isBonus = lotto.containsAny(bonusLottoNumber)
+            return Rank.fromCount(matchCount, isBonus)
+        }
+        return null
     }
 
     fun getTotalProfit(): BigDecimal {
@@ -32,6 +39,5 @@ class LottoResult(
 
     companion object {
         private const val MIN_MATCHING_COUNT = 3
-        private const val BONUS_MATCHING_COUNT = 5
     }
 }
