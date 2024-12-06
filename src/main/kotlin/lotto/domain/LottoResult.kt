@@ -2,8 +2,6 @@ package lotto.domain
 
 import lotto.domain.data.Lotto
 import lotto.domain.data.Rank
-import lotto.domain.data.countMatchesOf
-import lotto.domain.data.containsAny
 import java.math.BigDecimal
 
 class LottoResult(
