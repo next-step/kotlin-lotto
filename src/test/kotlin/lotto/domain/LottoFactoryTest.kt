@@ -3,6 +3,7 @@ package lotto.domain
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
+import lotto.domain.data.LottoNumber
 import lotto.util.NumberGenerator
 
 class LottoFactoryTest : StringSpec({
@@ -23,7 +24,7 @@ class LottoFactoryTest : StringSpec({
         // Then
         lottoList shouldHaveSize totalLottoCount
         lottoList.forEach { lotto ->
-            lotto.value shouldBe expectedLottoNumbers
+            lotto.value shouldBe expectedLottoNumbers.map { LottoNumber(it) }
         }
     }
 
@@ -41,7 +42,7 @@ class LottoFactoryTest : StringSpec({
         val lottoList = lottoFactory.createLottoList()
 
         // Then
-        lottoList.forEach { lotto -> lotto.value shouldBe expectedLottoNumbers }
+        lottoList.forEach { lotto -> lotto.value shouldBe expectedLottoNumbers.map { LottoNumber(it) } }
     }
 })
 
