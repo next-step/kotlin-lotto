@@ -18,4 +18,3 @@ value class Lotto(val value: List<Int>) {
         const val MIN_LOTTO_COUNT = 6
     }
 }
-
