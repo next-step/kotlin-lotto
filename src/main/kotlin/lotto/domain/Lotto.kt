@@ -1,26 +1,18 @@
 package lotto.domain
 
-class Lotto(private val lottoNumberGenerator: LottoNumberGenerator? = null, vararg lottoNumber: Int) {
-    init {
-        require(!(lottoNumberGenerator == null && lottoNumber.isEmpty())) { LOTTO_PARAMETERS_ERROR_MESSAGE }
-    }
-
-    val lottoNumbers: Set<LottoNumber> =
-        if (lottoNumber.isNotEmpty()) {
-            getByManual(lottoNumber)
-        } else {
-            getByAuto()
-        }
+class Lotto(private val lottoNumberGenerator: LottoNumberGenerator) {
+    var lottoNumbers: Set<LottoNumber> = getByAuto()
+        private set
 
     private fun getByAuto(): Set<LottoNumber> {
         lottoNumberGenerator ?: return setOf()
         return buildSet { while (size < 6) add(LottoNumber.get(lottoNumberGenerator.generateLottoNumber())) }
     }
 
-    private fun getByManual(lottoNumber: IntArray): Set<LottoNumber> {
+    fun setLottoByManual(vararg lottoNumber: Int) {
         require(lottoNumber.size == LOTTO_NUMBER_COUNT) { LOTTO_NUMBER_COUNT_EXCEPTION_MESSAGE }
         require(lottoNumber.distinct().size == LOTTO_NUMBER_COUNT) { LOTTO_NUMBER_DISTINCT_MESSAGE }
-        return lottoNumber.map { LottoNumber.get(it) }.toSet()
+        lottoNumbers = lottoNumber.map { LottoNumber.get(it) }.toSet()
     }
 
     fun match(winningNumber: List<LottoNumber>): MatchingResult? =
@@ -30,6 +22,5 @@ class Lotto(private val lottoNumberGenerator: LottoNumberGenerator? = null, vara
         private const val LOTTO_NUMBER_COUNT = 6
         private const val LOTTO_NUMBER_COUNT_EXCEPTION_MESSAGE = "로또 초기화시 입력된 로또 번호가 6개가 아닙니다."
         private const val LOTTO_NUMBER_DISTINCT_MESSAGE = "로또 초기화시 입력된 로또 번호에 중복이 있습니다."
-        private const val LOTTO_PARAMETERS_ERROR_MESSAGE = "로또 생성시 필요한 매개변수를 잘못입력하셨습니다."
     }
 }

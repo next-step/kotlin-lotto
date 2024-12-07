@@ -49,6 +49,7 @@ class LottoBunchTest : StringSpec({
     }
 }) {
     private companion object {
-        fun getLottoBunch(numbers: List<List<Int>>): LottoBunch = LottoBunch(numbers.map { Lotto(null, *it.toIntArray()) })
+        fun getLottoBunch(numbers: List<List<Int>>): LottoBunch =
+            LottoBunch(numbers.map { Lotto(RandomGenerator).apply { setLottoByManual(*it.toIntArray()) } })
     }
 }

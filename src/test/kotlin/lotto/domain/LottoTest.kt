@@ -14,9 +14,13 @@ class LottoTest : StringSpec({
     }
 
     "로또를 직접 초기화할때 중복되지 않은 6개의 숫자를 입력해야한다." {
-        listOf(listOf(1, 2, 3, 4), listOf(1, 1, 2, 3, 4, 5)).forAll { numberList ->
+        listOf(
+            listOf(1, 2, 3, 4),
+            listOf(1, 1, 2, 3, 4, 5),
+            listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+        ).forAll { numberList ->
             shouldThrowAny {
-                Lotto(null, *numberList.toIntArray())
+                Lotto(RandomGenerator).setLottoByManual(*numberList.toIntArray())
             }
         }
     }
@@ -35,7 +39,8 @@ class LottoTest : StringSpec({
             Pair(listOf(1, 2, 3, 4, 5, 45), MatchingResult.MATCHED_FIVE),
             Pair(listOf(1, 2, 3, 4, 5, 6), MatchingResult.MATCHED_SIX),
         ).forAll { (winningNumbers, matchingResult) ->
-            Lotto(null, 1, 2, 3, 4, 5, 6).match(winningNumbers.map { LottoNumber.get(it) }) shouldBe matchingResult
+            Lotto(RandomGenerator).apply { setLottoByManual(1, 2, 3, 4, 5, 6) }
+                .match(winningNumbers.map { LottoNumber.get(it) }) shouldBe matchingResult
         }
     }
 })
