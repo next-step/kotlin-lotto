@@ -10,7 +10,10 @@ enum class LottoRank(val matchCount: Int, val requiresBonusNumber: Boolean, val 
     ;
 
     companion object {
-        fun determineRank(matchCount: Int, containsBonusNumber: Boolean): LottoRank {
+        fun determineRank(
+            matchCount: Int,
+            containsBonusNumber: Boolean,
+        ): LottoRank {
             if (matchCount == 5 && containsBonusNumber) {
                 return SECOND
             }

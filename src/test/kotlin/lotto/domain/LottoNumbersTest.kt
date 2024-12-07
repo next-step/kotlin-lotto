@@ -2,8 +2,6 @@ package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
-import io.kotest.core.spec.style.FunSpec
-import io.kotest.matchers.shouldBe
 
 class LottoNumbersTest : FreeSpec({
     "유효하지 않은 번호 개수를 입력하면 예외를 발생시킨다" - {

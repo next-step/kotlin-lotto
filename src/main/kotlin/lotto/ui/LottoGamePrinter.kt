@@ -39,7 +39,9 @@ object LottoGamePrinter {
 
         sortedLottoRanks.forEach { lottoRank ->
             val winningLottoCount = lottoResults.getWinningLottoCountBy(lottoRank)
-            println("${lottoRank.matchCount}개 일치${getBonusNumberMessageOrEmpty(lottoRank)} (${lottoRank.prizeAmount}원) - ${winningLottoCount}개")
+            println(
+                "${lottoRank.matchCount}개 일치${getBonusNumberMessageOrEmpty(lottoRank)} (${lottoRank.prizeAmount}원) - ${winningLottoCount}개",
+            )
         }
 
         println("총 수익률은 ${"%.2f".format(profitRate)}입니다.")

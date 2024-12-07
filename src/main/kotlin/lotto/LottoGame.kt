@@ -1,6 +1,10 @@
 package lotto
 
-import lotto.domain.*
+import lotto.domain.LottoNumbers
+import lotto.domain.LottoProfitRateCalculator
+import lotto.domain.LottoResultChecker
+import lotto.domain.LottoStore
+import lotto.domain.WinningLotto
 import lotto.ui.LottoGamePrinter
 import lotto.ui.LottoGameReader
 

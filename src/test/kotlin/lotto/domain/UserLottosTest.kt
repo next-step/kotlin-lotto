@@ -24,16 +24,17 @@ class UserLottosTest : FreeSpec({
 
         val result = userLottos.match(winningLotto)
 
-        result shouldBe listOf(
-            MatchResult(6, false),
-            MatchResult(5, true),
-            MatchResult(5, false),
-            MatchResult(4, false),
-            MatchResult(3, false),
-            MatchResult(2, false),
-            MatchResult(1, false),
-            MatchResult(0, false),
-        )
+        result shouldBe
+            listOf(
+                MatchResult(6, false),
+                MatchResult(5, true),
+                MatchResult(5, false),
+                MatchResult(4, false),
+                MatchResult(3, false),
+                MatchResult(2, false),
+                MatchResult(1, false),
+                MatchResult(0, false),
+            )
     }
 
     "로또 구매 개수에 따라 구매 금액을 계산한다" - {
