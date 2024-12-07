@@ -13,5 +13,9 @@ value class LottoNumber(val number: Int) {
 
     companion object {
         private const val CANNOT_CREATE_LOTTO_NUMBER_MESSAGE = "Lotto number must be between %s and %s."
+
+        fun of(numbers: Set<Int>): Set<LottoNumber> {
+            return numbers.map { LottoNumber(it) }.toSet()
+        }
     }
 }
