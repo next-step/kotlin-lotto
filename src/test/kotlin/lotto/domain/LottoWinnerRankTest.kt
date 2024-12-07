@@ -28,6 +28,12 @@ class LottoWinnerRankTest {
             Arguments.of(4, true, LottoWinnerRank.FOURTH),
             Arguments.of(3, false, LottoWinnerRank.FIFTH),
             Arguments.of(3, true, LottoWinnerRank.FIFTH),
+            Arguments.of(2, false, LottoWinnerRank.MISS),
+            Arguments.of(2, true, LottoWinnerRank.MISS),
+            Arguments.of(1, false, LottoWinnerRank.MISS),
+            Arguments.of(1, true, LottoWinnerRank.MISS),
+            Arguments.of(0, false, LottoWinnerRank.MISS),
+            Arguments.of(0, true, LottoWinnerRank.MISS),
         )
     }
 }
