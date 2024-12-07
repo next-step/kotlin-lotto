@@ -1,8 +1,6 @@
 package lotto.domain
 
 data class LottoNumbers(private val numbers: Set<LottoNumber>) {
-    constructor(vararg numbers: Int) : this(numbers.map { number -> LottoNumber.of(number) }.toSet())
-
     init {
         require(numbers.size == LOTTO_NUMBER_COUNT) { INVALID_LOTTO_NUMBER_COUNT_MESSAGE }
     }

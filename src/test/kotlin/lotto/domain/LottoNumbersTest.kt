@@ -3,6 +3,7 @@ package lotto.domain
 import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.matchers.equals.shouldBeEqual
 import lotto.domain.LottoNumbers.Companion.INVALID_LOTTO_NUMBER_COUNT_MESSAGE
+import lotto.util.createLottoNumbers
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
@@ -15,10 +16,10 @@ class LottoNumbersTest {
     @Test
     fun `로또 번호가 6개로 이루어지지 않으면 에러가 발생한다`() {
         shouldThrowWithMessage<IllegalArgumentException>(message = INVALID_LOTTO_NUMBER_COUNT_MESSAGE) {
-            LottoNumbers(1, 2, 3, 4, 5)
+            createLottoNumbers(1, 2, 3, 4, 5)
         }
         shouldThrowWithMessage<IllegalArgumentException>(message = INVALID_LOTTO_NUMBER_COUNT_MESSAGE) {
-            LottoNumbers(1, 2, 3, 4, 5, 6, 7)
+            createLottoNumbers(1, 2, 3, 4, 5, 6, 7)
         }
     }
 
@@ -34,13 +35,13 @@ class LottoNumbersTest {
 
     fun `LottoNumbers, 매칭 테스트 LottoNumbers, 매칭 결과 제공`(): Stream<Arguments> {
         return Stream.of(
-            Arguments.of(LottoNumbers(1, 2, 3, 4, 5, 6), LottoNumbers(7, 8, 9, 10, 11, 12), 0),
-            Arguments.of(LottoNumbers(1, 2, 3, 4, 5, 6), LottoNumbers(6, 7, 8, 9, 10, 11), 1),
-            Arguments.of(LottoNumbers(1, 2, 3, 4, 5, 6), LottoNumbers(5, 6, 7, 8, 9, 10), 2),
-            Arguments.of(LottoNumbers(1, 2, 3, 4, 5, 6), LottoNumbers(4, 5, 6, 7, 8, 9), 3),
-            Arguments.of(LottoNumbers(1, 2, 3, 4, 5, 6), LottoNumbers(3, 4, 5, 6, 7, 8), 4),
-            Arguments.of(LottoNumbers(1, 2, 3, 4, 5, 6), LottoNumbers(2, 3, 4, 5, 6, 7), 5),
-            Arguments.of(LottoNumbers(1, 2, 3, 4, 5, 6), LottoNumbers(1, 2, 3, 4, 5, 6), 6),
+            Arguments.of(createLottoNumbers(1, 2, 3, 4, 5, 6), createLottoNumbers(7, 8, 9, 10, 11, 12), 0),
+            Arguments.of(createLottoNumbers(1, 2, 3, 4, 5, 6), createLottoNumbers(6, 7, 8, 9, 10, 11), 1),
+            Arguments.of(createLottoNumbers(1, 2, 3, 4, 5, 6), createLottoNumbers(5, 6, 7, 8, 9, 10), 2),
+            Arguments.of(createLottoNumbers(1, 2, 3, 4, 5, 6), createLottoNumbers(4, 5, 6, 7, 8, 9), 3),
+            Arguments.of(createLottoNumbers(1, 2, 3, 4, 5, 6), createLottoNumbers(3, 4, 5, 6, 7, 8), 4),
+            Arguments.of(createLottoNumbers(1, 2, 3, 4, 5, 6), createLottoNumbers(2, 3, 4, 5, 6, 7), 5),
+            Arguments.of(createLottoNumbers(1, 2, 3, 4, 5, 6), createLottoNumbers(1, 2, 3, 4, 5, 6), 6),
         )
     }
 }

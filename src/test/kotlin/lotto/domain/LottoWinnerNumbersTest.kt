@@ -5,6 +5,7 @@ import io.kotest.matchers.equals.shouldBeEqual
 import lotto.domain.LottoNumber.Companion.INVALID_LOTTO_NUMBER_MESSAGE
 import lotto.domain.LottoNumbers.Companion.INVALID_LOTTO_NUMBER_COUNT_MESSAGE
 import lotto.domain.LottoWinnerNumbers.Companion.INVALID_WINNER_NUMBERS_MESSAGE
+import lotto.util.createLottoNumbers
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
@@ -17,21 +18,21 @@ class LottoWinnerNumbersTest {
     @Test
     fun `로또 당첨 번호가 1부터 45사이의 숫자가 아닐 경우 에러가 발생한다`() {
         shouldThrowWithMessage<IllegalArgumentException>(message = INVALID_LOTTO_NUMBER_MESSAGE) {
-            LottoWinnerNumbers(LottoNumbers(1, 2, 3, 4, 5, 46), LottoNumber.of(7))
+            LottoWinnerNumbers(createLottoNumbers(1, 2, 3, 4, 5, 46), LottoNumber.of(7))
         }
     }
 
     @Test
     fun `로또 당첨 번호가 6개가 아닐 경우 에러가 발생한다`() {
         shouldThrowWithMessage<IllegalArgumentException>(message = INVALID_LOTTO_NUMBER_COUNT_MESSAGE) {
-            LottoWinnerNumbers(LottoNumbers(1, 2, 3, 4, 5, 6, 7), LottoNumber.of(8))
+            LottoWinnerNumbers(createLottoNumbers(1, 2, 3, 4, 5, 6, 7), LottoNumber.of(8))
         }
     }
 
     @Test
     fun `당첨 번호와 보너스 번호가 중복되면 에러가 발생한다`() {
         shouldThrowWithMessage<IllegalArgumentException>(message = INVALID_WINNER_NUMBERS_MESSAGE) {
-            LottoWinnerNumbers(LottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber.of(1))
+            LottoWinnerNumbers(createLottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber.of(1))
         }
     }
 
