@@ -11,5 +11,10 @@ enum class MatchingResult(val prizeAmount: Int, val matchNumber: Int) {
         private val matchNumberToMatchResultMap = entries.associateBy { it.matchNumber }
 
         fun fromMatchNumber(matchNumber: Int): MatchingResult? = matchNumberToMatchResultMap[matchNumber]
+
+        fun getMatchLottoResult(matchResults: List<MatchingResult>): Map<MatchingResult, Int> =
+            entries.associateWith { matchResult ->
+                matchResults.count { it == matchResult }
+            }
     }
 }
