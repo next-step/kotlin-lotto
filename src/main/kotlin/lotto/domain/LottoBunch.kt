@@ -16,10 +16,10 @@ class LottoBunch(val value: List<Lotto>) {
         purchaseAmount: Int,
     ): Double {
         val matchResults: Map<MatchingResult, Int> = getMatchLottoResult(winningNumbers)
-        var totalPrize = 0
-        matchResults.forEach { (matchingResult, winCount) ->
-            totalPrize += (matchingResult.prizeAmount * winCount)
-        }
+        val totalPrize =
+            matchResults.entries.fold(0) { acc, (matchingResult, winCount) ->
+                acc + (matchingResult.prizeAmount * winCount)
+            }
         return totalPrize.toDouble() / purchaseAmount
     }
 }
