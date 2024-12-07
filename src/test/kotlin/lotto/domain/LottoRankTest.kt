@@ -6,24 +6,34 @@ import io.kotest.matchers.shouldBe
 
 class LottoRankTest : FreeSpec({
     "from 테스트" - {
-        "matchCount에 맞는 LottoRank를 반환한다" - {
+        "matchCount와 containsBonusNumber 값을 이용해 LottoRank를 결정한다" - {
             mapOf(
-                6 to LottoRank.FIRST,
-                5 to LottoRank.SECOND,
-                4 to LottoRank.THIRD,
-                3 to LottoRank.FORTH,
-            ).forEach { (matchCount, expectedRank) ->
-                "입력값: $matchCount, expectedRank: $expectedRank" {
-                    LottoRank.from(matchCount) shouldBe expectedRank
+                Pair(6, false) to LottoRank.FIRST,
+                Pair(5, true) to LottoRank.SECOND,
+                Pair(5, false) to LottoRank.THIRD,
+                Pair(4, true) to LottoRank.FORTH,
+                Pair(3, true) to LottoRank.FIFTH,
+            ).forEach { (conditionPair, expectedRank) ->
+                val matchCount = conditionPair.first
+                val containsBonusNumber = conditionPair.second
+
+                "입력값: matchCount=$matchCount, containsBonusNumber=$containsBonusNumber, expectedRank: $expectedRank" {
+                    LottoRank.determineRank(matchCount, containsBonusNumber) shouldBe expectedRank
                 }
             }
         }
 
-        "일치하는 matchCount가 없으면 예외를 발생시킨다" - {
-            listOf(2, 7)
-                .forEach { matchCount ->
-                    "입력값: $matchCount" {
-                        shouldThrow<InvalidMatchCountException> { LottoRank.from(matchCount) }
+        "일치하는 조건이 아닌 경우 예외를 발생시킨다" - {
+            listOf(
+                Pair(0, false),
+                Pair(0, true),
+                Pair(2, true),
+                Pair(2, false),
+                Pair(7, true),
+                Pair(7, false),
+            ).forEach { (matchCount, containsBonusNumber) ->
+                "입력값: matchCount=$matchCount, containsBonusNumber=$containsBonusNumber" {
+                        shouldThrow<InvalidLottoRankConditionException> { LottoRank.determineRank(matchCount, true) }
                     }
                 }
         }
