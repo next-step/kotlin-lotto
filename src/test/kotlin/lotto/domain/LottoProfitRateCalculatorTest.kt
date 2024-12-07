@@ -13,9 +13,8 @@ class LottoProfitRateCalculatorTest : FreeSpec({
                     Lotto(1, 2, 3, 43, 44, 45),
                 ),
             )
-        val winningLotto = WinningLotto(Lotto(1, 2, 3, 4, 5, 6), LottoNumber(7))
+        val lottoResults = LottoResults(listOf(LottoRank.FIFTH, LottoRank.FIFTH))
 
-        val lottoResults = LottoResultChecker.check(userLottos = twoOfForthLotto, winningLotto = winningLotto)
         val profitRate: Double = LottoProfitRateCalculator.calculate(twoOfForthLotto, lottoResults)
 
         profitRate shouldBe (5.0 plusOrMinus 0.0001)

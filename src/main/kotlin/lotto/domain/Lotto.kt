@@ -19,7 +19,7 @@ class Lotto(private val numbers: Set<LottoNumber>) {
         return numbers.count { number -> other.contains(number) }
     }
 
-    private fun contains(number: LottoNumber): Boolean {
+    fun contains(number: LottoNumber): Boolean {
         return number in numbers
     }
 

@@ -20,9 +20,10 @@ class LottoResultCheckerTest : FreeSpec({
                     Lotto(40, 41, 42, 43, 44, 45),
                 ),
             )
-        val winningLotto = WinningLotto(firstPrizeLotto, LottoNumber(7))
+        val bonusNumber = LottoNumber(7)
+        val winningLotto = WinningLotto(firstPrizeLotto, bonusNumber)
 
-        val lottoResults = LottoResultChecker.check(userLottos, winningLotto)
+        val lottoResults = LottoResultChecker.check(userLottos, winningLotto, bonusNumber)
 
         assertSoftly {
             lottoResults.getWinningLottoCountBy(LottoRank.FIRST) shouldBe 1
