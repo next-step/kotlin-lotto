@@ -8,11 +8,11 @@ class LottosTest : FreeSpec({
         val userLottos =
             UserLottos(
                 listOf(
-                    Lotto(setOf(1, 2, 3, 4, 5, 6)),
-                    Lotto(setOf(1, 2, 3, 4, 5, 6)),
-                    Lotto(setOf(1, 2, 3, 4, 5, 6)),
-                    Lotto(setOf(1, 2, 3, 4, 5, 6)),
-                    Lotto(setOf(1, 2, 3, 4, 5, 6)),
+                    Lotto(1, 2, 3, 4, 5, 6),
+                    Lotto(1, 2, 3, 4, 5, 6),
+                    Lotto(1, 2, 3, 4, 5, 6),
+                    Lotto(1, 2, 3, 4, 5, 6),
+                    Lotto(1, 2, 3, 4, 5, 6),
                 ),
             )
 

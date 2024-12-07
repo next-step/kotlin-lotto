@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.LottoNumbers
 import lotto.domain.LottoProfitRateCalculator
 import lotto.domain.LottoResultChecker
 import lotto.domain.LottoStore
@@ -14,7 +15,8 @@ fun main() {
     LottoGamePrinter.printPurchaseMessage(lottos)
 
     val winningLottoNumbers = LottoGameReader.readWinningLottoNumbers()
-    val winningLotto = WinningLotto(winningLottoNumbers)
+    val bonusNumber = LottoGameReader.readBonusNumber()
+    val winningLotto = WinningLotto(LottoNumbers(winningLottoNumbers), bonusNumber)
 
     val lottoResults = LottoResultChecker.check(lottos, winningLotto)
     val profitRate = LottoProfitRateCalculator.calculate(lottos, lottoResults)

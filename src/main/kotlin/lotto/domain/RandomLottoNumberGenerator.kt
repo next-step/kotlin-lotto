@@ -1,11 +1,14 @@
 package lotto.domain
 
 object RandomLottoNumberGenerator {
-    private val lottoNumbers = (Lotto.MIN_LOTTO_NUMBER..Lotto.MAX_LOTTO_NUMBER).toList()
+    private val lottoNumbers =
+        (LottoNumber.MIN_LOTTO_NUMBER..LottoNumber.MAX_LOTTO_NUMBER)
+            .map { number -> LottoNumber(number) }
+            .toList()
 
-    fun generate(): Set<Int> {
+    fun generate(): Set<LottoNumber> {
         return lottoNumbers.shuffled()
-            .take(Lotto.NUMBER_COUNT)
+            .take(LottoNumbers.NUMBER_COUNT)
             .toSet()
     }
 }
