@@ -11,7 +11,8 @@ fun main() {
     LottoGamePrinter.printPurchaseMessage(lottos)
 
     val winningLottoNumbers = LottoGameReader.readWinningLottoNumbers()
-    val winningLotto = WinningLotto(Lotto(winningLottoNumbers), LottoNumber(7))
+    val bonusNumber = LottoGameReader.readBonusNumber()
+    val winningLotto = WinningLotto(Lotto(winningLottoNumbers), bonusNumber)
 
     val lottoResults = LottoResultChecker.check(lottos, winningLotto)
     val profitRate = LottoProfitRateCalculator.calculate(lottos, lottoResults)

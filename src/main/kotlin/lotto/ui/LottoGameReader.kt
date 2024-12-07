@@ -10,11 +10,17 @@ object LottoGameReader {
     }
 
     fun readWinningLottoNumbers(): Set<LottoNumber> {
-        println("지난 주 당첨 번호를 입력해 주세요.")
+        LottoGamePrinter.printWinningLottoNumberMessage()
         return ConsoleReader.readLine().split(",")
             .map { str -> convertToNumber(str) }
             .map { number -> LottoNumber(number) }
             .toSet()
+    }
+
+    fun readBonusNumber(): LottoNumber {
+        LottoGamePrinter.printBonusNumberMessage()
+        val str = ConsoleReader.readLine()
+        return LottoNumber(convertToNumber(str))
     }
 
     private fun convertToNumber(str: String): Int {

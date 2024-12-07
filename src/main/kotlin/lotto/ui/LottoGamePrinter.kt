@@ -14,6 +14,14 @@ object LottoGamePrinter {
         println(userLottos)
     }
 
+    fun printWinningLottoNumberMessage() {
+        println("지난 주 당첨 번호를 입력해 주세요.")
+    }
+
+    fun printBonusNumberMessage() {
+        println("보너스 번호를 입력해 주세요.")
+    }
+
     fun printWinningStatistics(
         lottoResults: LottoResults,
         profitRate: Double,
@@ -26,13 +34,21 @@ object LottoGamePrinter {
         )
         val sortedLottoRanks =
             LottoRank.entries
+                .filter { lottoRank -> lottoRank != LottoRank.UNRANKED }
                 .sortedBy { lottoRank -> lottoRank.prizeAmount }
 
         sortedLottoRanks.forEach { lottoRank ->
             val winningLottoCount = lottoResults.getWinningLottoCountBy(lottoRank)
-            println("${lottoRank.matchCount}개 일치 (${lottoRank.prizeAmount}원) - ${winningLottoCount}개")
+            println("${lottoRank.matchCount}개 일치${getBonusNumberMessageOrEmpty(lottoRank)} (${lottoRank.prizeAmount}원) - ${winningLottoCount}개")
         }
 
         println("총 수익률은 ${"%.2f".format(profitRate)}입니다.")
+    }
+
+    private fun getBonusNumberMessageOrEmpty(lottoRank: LottoRank): String {
+        if (lottoRank.requiresBonusNumber) {
+            return ", 보너스 번호 일치"
+        }
+        return ""
     }
 }
