@@ -6,7 +6,7 @@ class Cashier(
     private val amount: Int,
     private val lottoNumberListGenerator: LottoNumberListGenerator,
 ) {
-    fun purchaseLotto(): LottoTicket {
+    fun purchaseAutoLottos(): LottoTicket {
         require(amount >= LOTTO_PRICE)
         val numberOfLotto = calculateNumberOfLotto(amount)
         return LottoTicket(

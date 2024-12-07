@@ -15,11 +15,11 @@ import lotto.view.OutputView
 class LottoController(private val inputView: InputView, private val outputView: OutputView) {
     fun start() {
         val amount = inputView.purchaseAmount()
-        val manualLottoCount = inputView.manualLottoCount()
-
-        val manualLottos = inputView.manualLottos(manualLottoCount)
-
         val cashier = createCashier(amount)
+
+        val manualLottoCount = inputView.manualLottoCount()
+        val manualLottoNumbers = inputView.manualLottos(manualLottoCount)
+        val manualLottos = cashier.purchaseManualLottos(manualLottoNumbers)
 
         val lottos = purchaseLottos(cashier)
         outputView.printPurchaseResult(lottos.tickets)
@@ -34,7 +34,7 @@ class LottoController(private val inputView: InputView, private val outputView: 
     }
 
     private fun purchaseLottos(cashier: Cashier): LottoTicket {
-        return cashier.purchaseLotto2()
+        return cashier.purchaseAutoLottos()
     }
 
     private fun inputWinningLotto(): WinningLotto {
