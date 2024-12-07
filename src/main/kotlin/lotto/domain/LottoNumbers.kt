@@ -15,6 +15,10 @@ class LottoNumbers(private val numbers: Set<LottoNumber>) : Collection<LottoNumb
 
     private fun isInvalidCount() = numbers.size != NUMBER_COUNT
 
+    override fun toString(): String {
+        return numbers.toString()
+    }
+
     companion object {
         const val NUMBER_COUNT = 6
     }
