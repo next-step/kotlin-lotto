@@ -6,11 +6,11 @@ import io.kotest.matchers.shouldBe
 
 class LottoResultCheckerTest : FreeSpec({
     "구매한 로또 목록과 당첨 번호, 보너스 번호를 비교해서 등수 별 개수를 기록한다" {
-        val firstPrizeLotto = Lotto(1, 2, 3, 4, 5, 6)
+        val firstPrizeLottoNumbers = LottoNumbers(1, 2, 3, 4, 5, 6)
         val userLottos =
             UserLottos(
                 listOf(
-                    firstPrizeLotto,
+                    Lotto(firstPrizeLottoNumbers),
                     Lotto(1, 2, 3, 4, 5, 7),
                     Lotto(1, 2, 3, 4, 5, 45),
                     Lotto(1, 2, 3, 4, 44, 45),
@@ -21,7 +21,7 @@ class LottoResultCheckerTest : FreeSpec({
                 ),
             )
         val bonusNumber = LottoNumber(7)
-        val winningLotto = WinningLotto(firstPrizeLotto, bonusNumber)
+        val winningLotto = WinningLotto(firstPrizeLottoNumbers, bonusNumber)
 
         val lottoResults = LottoResultChecker.check(userLottos, winningLotto)
 

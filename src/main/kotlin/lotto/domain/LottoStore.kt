@@ -8,7 +8,7 @@ object LottoStore {
         val lottos =
             (1..theNumberOfLotto).map {
                 val lottoNumbers = RandomLottoNumberGenerator.generate()
-                Lotto(lottoNumbers)
+                Lotto(LottoNumbers(lottoNumbers))
             }
 
         return UserLottos(lottos = lottos)

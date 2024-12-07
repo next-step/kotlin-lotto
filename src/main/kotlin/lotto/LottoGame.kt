@@ -12,7 +12,7 @@ fun main() {
 
     val winningLottoNumbers = LottoGameReader.readWinningLottoNumbers()
     val bonusNumber = LottoGameReader.readBonusNumber()
-    val winningLotto = WinningLotto(Lotto(winningLottoNumbers), bonusNumber)
+    val winningLotto = WinningLotto(LottoNumbers(winningLottoNumbers), bonusNumber)
 
     val lottoResults = LottoResultChecker.check(lottos, winningLotto)
     val profitRate = LottoProfitRateCalculator.calculate(lottos, lottoResults)

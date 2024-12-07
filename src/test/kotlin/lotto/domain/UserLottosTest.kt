@@ -5,11 +5,11 @@ import io.kotest.matchers.shouldBe
 
 class UserLottosTest : FreeSpec({
     "WinningLotto 와 BonusNumber를 받아 모든 Lotto의 matchCount, containsBonusNumber 결과를 반환한다" {
-        val firstPrizeLotto = Lotto(1, 2, 3, 4, 5, 6)
+        val firstPrizeLottoNumbers = LottoNumbers(1, 2, 3, 4, 5, 6)
         val userLottos =
             UserLottos(
                 listOf(
-                    firstPrizeLotto,
+                    Lotto(firstPrizeLottoNumbers),
                     Lotto(1, 2, 3, 4, 5, 7),
                     Lotto(1, 2, 3, 4, 5, 45),
                     Lotto(1, 2, 3, 4, 44, 45),
@@ -20,7 +20,7 @@ class UserLottosTest : FreeSpec({
                 ),
             )
         val bonusNumber = LottoNumber(7)
-        val winningLotto = WinningLotto(firstPrizeLotto, bonusNumber)
+        val winningLotto = WinningLotto(firstPrizeLottoNumbers, bonusNumber)
 
         val result = userLottos.match(winningLotto)
 

@@ -7,7 +7,7 @@ object RandomLottoNumberGenerator {
 
     fun generate(): Set<LottoNumber> {
         return lottoNumbers.shuffled()
-            .take(Lotto.NUMBER_COUNT)
+            .take(LottoNumbers.NUMBER_COUNT)
             .toSet()
     }
 }

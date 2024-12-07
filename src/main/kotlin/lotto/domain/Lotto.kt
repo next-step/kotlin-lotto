@@ -1,22 +1,10 @@
 package lotto.domain
 
-class Lotto(private val numbers: Set<LottoNumber>) {
-    constructor(vararg numbers: Int) : this(numbers.map { number -> LottoNumber(number) }.toSet())
+class Lotto(private val numbers: LottoNumbers) {
+    constructor(vararg numbers: Int) : this(LottoNumbers(*numbers))
 
-    init {
-        validateLottoNumberCount()
-    }
-
-    private fun validateLottoNumberCount() {
-        if (isInvalidCount()) {
-            throw InvalidLottoNumberCountException(numbers)
-        }
-    }
-
-    private fun isInvalidCount() = numbers.size != NUMBER_COUNT
-
-    fun calculateMatchCount(other: Lotto): Int {
-        return numbers.count { number -> other.contains(number) }
+    fun calculateMatchCount(otherLottoNumbers: LottoNumbers): Int {
+        return numbers.count { number -> number in otherLottoNumbers }
     }
 
     fun contains(number: LottoNumber): Boolean {
@@ -28,7 +16,6 @@ class Lotto(private val numbers: Set<LottoNumber>) {
     }
 
     companion object {
-        const val NUMBER_COUNT = 6
         const val MIN_AMOUNT_UNIT = 1000
     }
 }
