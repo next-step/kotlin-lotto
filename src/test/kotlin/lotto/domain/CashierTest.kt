@@ -16,13 +16,13 @@ class CashierTest : DescribeSpec({
 
         it("1000원 짜리 로또를 구매한다") {
             val sut = Cashier(3000, FirstRankLottoLottoNumberGenerator())
-            val actual = sut.purchaseLotto2()
+            val actual = sut.purchaseLotto()
             actual.tickets.size shouldBe 3
         }
 
         it("100원 단위는 내림처리 한다.") {
             val sut = Cashier(3500, FirstRankLottoLottoNumberGenerator())
-            val actual = sut.purchaseLotto2()
+            val actual = sut.purchaseLotto()
             actual.tickets.size shouldBe 3
         }
     }
