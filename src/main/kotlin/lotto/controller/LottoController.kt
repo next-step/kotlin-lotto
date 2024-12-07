@@ -17,6 +17,8 @@ class LottoController(private val inputView: InputView, private val outputView: 
         val amount = inputView.purchaseAmount()
         val manualLottoCount = inputView.manualLottoCount()
 
+        val manualLottos = inputView.manualLottos(manualLottoCount)
+
         val cashier = createCashier(amount)
 
         val lottos = purchaseLottos(cashier)

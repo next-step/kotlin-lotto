@@ -13,9 +13,9 @@ class InputView {
             ?: throw IllegalArgumentException(ERROR_INVALID_NUMBER)
     }
 
-    fun manualLottos(): List<String> {
+    fun manualLottos(manualLottoCount: Int): List<Set<Int>> {
         println(MANUAL_LOTTO_INPUT_MESSAGE)
-        return emptyList()
+        return List(manualLottoCount) { inputLottoNumbers() }
     }
 
     fun winningNumbers(): Set<Int> {
