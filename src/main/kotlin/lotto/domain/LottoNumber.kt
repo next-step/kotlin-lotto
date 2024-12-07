@@ -1,6 +1,7 @@
 package lotto.domain
 
-class LottoNumber private constructor(val number: Int) {
+@JvmInline
+value class LottoNumber private constructor(val number: Int) {
     init {
         require(number in LOTTO_NUMBER_MIN_VALUE..LOTTO_NUMBER_MAX_VALUE) { INVALID_LOTTO_NUMBER_MESSAGE }
     }
