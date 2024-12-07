@@ -9,7 +9,7 @@ import lotto.domain.generateLottoNumbers
 
 object LottoController {
     fun purchaseLotto(): PurchasedLottoTickets {
-        val amountPaid: Int = PurchaseLottoView.inputPurchaseCost()
+        val amountPaid = PurchaseLottoView.inputPurchaseCost()
 
         val purchasedLottoTickets =
             LottoTicketIssuer.issueTickets(amountPaid = amountPaid, generateLottoNumbers = { generateLottoNumbers() })
@@ -20,9 +20,9 @@ object LottoController {
     }
 
     fun createWinningLottoNumbers(): LottoWinnerNumbers {
-        val inputLottoNumber: Set<Int> = WinnerLottoNumberView.inputWinningLottoNumbers()
-        val lottoNumbers: LottoNumbers = LottoNumbers(inputLottoNumber.map { LottoNumber.of(it) }.toSet())
-        val inputBonusNumber: Int = WinnerLottoNumberView.inputBonusNumber()
+        val inputLottoNumbers = WinnerLottoNumberView.inputWinningLottoNumbers()
+        val lottoNumbers = LottoNumbers(inputLottoNumbers.map { LottoNumber.of(it) }.toSet())
+        val inputBonusNumber = WinnerLottoNumberView.inputBonusNumber()
         return LottoWinnerNumbers(lottoNumbers = lottoNumbers, bonusNumber = LottoNumber.of(inputBonusNumber))
     }
 

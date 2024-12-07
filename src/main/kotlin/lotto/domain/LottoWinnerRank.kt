@@ -1,6 +1,6 @@
 package lotto.domain
 
-enum class LottoWinnerRank(val countOfMatch: Int, val bonusCheck: Boolean, val winningMoney: Int) {
+enum class LottoWinnerRank(val matchCount: Int, val bonusCheck: Boolean, val winningMoney: Int) {
     FIRST(6, false, 2_000_000_000),
     SECOND(5, true, 30_000_000),
     THIRD(5, false, 1_500_000),
@@ -10,24 +10,24 @@ enum class LottoWinnerRank(val countOfMatch: Int, val bonusCheck: Boolean, val w
     ;
 
     companion object {
-        fun valueOf(
-            countOfMatch: Int,
+        fun getRankByMatches(
+            matchCount: Int,
             bonusCheck: Boolean,
         ): LottoWinnerRank {
-            if (countOfMatch < FIFTH.countOfMatch) {
+            if (matchCount < FIFTH.matchCount) {
                 return MISS
             }
 
-            if (countOfMatch == SECOND.countOfMatch && bonusCheck == SECOND.bonusCheck) {
+            if (matchCount == SECOND.matchCount && bonusCheck == SECOND.bonusCheck) {
                 return SECOND
             }
 
-            if (countOfMatch == THIRD.countOfMatch && bonusCheck == THIRD.bonusCheck) {
+            if (matchCount == THIRD.matchCount && bonusCheck == THIRD.bonusCheck) {
                 return THIRD
             }
 
             val findLottoWinnerRank =
-                LottoWinnerRank.entries.find { it.countOfMatch == countOfMatch }
+                LottoWinnerRank.entries.find { it.matchCount == matchCount }
 
             requireNotNull(findLottoWinnerRank) { INVALID_MATCH_COUNT_MESSAGE }
             return findLottoWinnerRank

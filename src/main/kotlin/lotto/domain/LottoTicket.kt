@@ -6,6 +6,6 @@ data class LottoTicket(private val generateLottoNumbers: () -> Set<Int>) {
     fun checkLottoWinnerRank(lottoWinnerNumbers: LottoWinnerNumbers): LottoWinnerRank {
         val matchCount = lottoNumbers.checkLottoNumbersMatch(lottoWinnerNumbers.lottoNumbers)
         val bonusCheck = lottoNumbers.contains(lottoWinnerNumbers.bonusNumber)
-        return LottoWinnerRank.valueOf(countOfMatch = matchCount, bonusCheck = bonusCheck)
+        return LottoWinnerRank.getRankByMatches(matchCount = matchCount, bonusCheck = bonusCheck)
     }
 }
