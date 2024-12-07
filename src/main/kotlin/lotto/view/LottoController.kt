@@ -1,33 +1,36 @@
 package lotto.view
 
-import lotto.domain.LottoNumberChecker
+import lotto.domain.LottoNumber
+import lotto.domain.LottoNumbers
 import lotto.domain.LottoTicketIssuer
 import lotto.domain.LottoWinnerNumbers
 import lotto.domain.PurchasedLottoTickets
+import lotto.domain.generateLottoNumbers
 
 object LottoController {
-    fun lottoPurchased(): PurchasedLottoTickets {
-        val purchasedLottoTickets =
-            LottoTicketIssuer
-                .issueTickets(amountPaid = PurchaseLottoView.view(), lottoNumberGenerator = { lottoNumberGenerator() })
+    fun purchaseLotto(): PurchasedLottoTickets {
+        val amountPaid = PurchaseLottoView.inputPurchaseCost()
 
-        PurchaseLottoResultView.view(purchasedLottoTickets = purchasedLottoTickets)
+        val purchasedLottoTickets =
+            LottoTicketIssuer.issueTickets(amountPaid = amountPaid, generateLottoNumbers = { generateLottoNumbers() })
+
+        PurchaseLottoResultView.displayPurchaseLottoResults(purchasedLottoTickets = purchasedLottoTickets)
+
         return purchasedLottoTickets
     }
 
-    fun lottoWinnerNumber(): LottoWinnerNumbers {
-        return LottoWinnerNumbers(inputWinnerNumbersCommand = WinnerLottoNumberView.view())
+    fun createWinningLottoNumbers(): LottoWinnerNumbers {
+        val inputLottoNumbers = WinnerLottoNumberView.inputWinningLottoNumbers()
+        val lottoNumbers = LottoNumbers(inputLottoNumbers.map { LottoNumber.of(it) }.toSet())
+        val inputBonusNumber = WinnerLottoNumberView.inputBonusNumber()
+        return LottoWinnerNumbers(lottoNumbers = lottoNumbers, bonusNumber = LottoNumber.of(inputBonusNumber))
     }
 
-    fun payoutResult(
-        purchasedLottoResults: PurchasedLottoTickets,
+    fun resultPayout(
+        purchasedLottoTickets: PurchasedLottoTickets,
         lottoWinnerNumbers: LottoWinnerNumbers,
     ) {
-        return LottoPayoutView.view(
-            LottoNumberChecker.purchasedLottoTicketsNumberCheck(
-                purchasedLottoTickets = purchasedLottoResults,
-                winnerNumbers = lottoWinnerNumbers,
-            ),
-        )
+        val purchasedLottoResults = lottoWinnerNumbers.resultLottoPayout(purchasedLottoTickets)
+        return LottoPayoutView.displayWinningStatistics(purchasedLottoResults = purchasedLottoResults)
     }
 }

@@ -1,38 +1,37 @@
 package lotto.domain
 
-import lotto.domain.LottoNumberMatchPayout.FIVE_NUMBER_MATCH
-import lotto.domain.LottoNumberMatchPayout.FOUR_NUMBER_MATCH
-import lotto.domain.LottoNumberMatchPayout.SIX_NUMBER_MATCH
-import lotto.domain.LottoNumberMatchPayout.THREE_NUMBER_MATCH
 import lotto.domain.LottoTicketIssuer.DEFAULT_LOTTO_PRICE
 import lotto.domain.PurchasedLottoTickets.Companion.INVALID_PURCHASED_COUNT_MESSAGE
 import lotto.domain.PurchasedLottoTickets.Companion.PURCHASED_COUNT_MIN_VALUE
 
 data class PurchasedLottoResults(
     val purchasedCount: Int,
-    val threeNumberMatchCount: Int,
-    val fourNumberMatchCount: Int,
-    val fiveNumberMatchCount: Int,
-    val sixNumberMatchCount: Int,
+    val firstRankCount: Int,
+    val secondRankCount: Int,
+    val thirdRankCount: Int,
+    val fourthRankCount: Int,
+    val fifthRankCount: Int,
 ) {
     init {
         require(purchasedCount >= PURCHASED_COUNT_MIN_VALUE) { INVALID_PURCHASED_COUNT_MESSAGE }
-        require(threeNumberMatchCount >= LOTTO_MATCH_COUNT_MIN_VALUE) { INVALID_LOTTO_MATCH_COUNT_MESSAGE }
-        require(fourNumberMatchCount >= LOTTO_MATCH_COUNT_MIN_VALUE) { INVALID_LOTTO_MATCH_COUNT_MESSAGE }
-        require(fiveNumberMatchCount >= LOTTO_MATCH_COUNT_MIN_VALUE) { INVALID_LOTTO_MATCH_COUNT_MESSAGE }
-        require(sixNumberMatchCount >= LOTTO_MATCH_COUNT_MIN_VALUE) { INVALID_LOTTO_MATCH_COUNT_MESSAGE }
+        require(firstRankCount >= LOTTO_MATCH_COUNT_MIN_VALUE) { INVALID_LOTTO_MATCH_COUNT_MESSAGE }
+        require(secondRankCount >= LOTTO_MATCH_COUNT_MIN_VALUE) { INVALID_LOTTO_MATCH_COUNT_MESSAGE }
+        require(thirdRankCount >= LOTTO_MATCH_COUNT_MIN_VALUE) { INVALID_LOTTO_MATCH_COUNT_MESSAGE }
+        require(fourthRankCount >= LOTTO_MATCH_COUNT_MIN_VALUE) { INVALID_LOTTO_MATCH_COUNT_MESSAGE }
+        require(fifthRankCount >= LOTTO_MATCH_COUNT_MIN_VALUE) { INVALID_LOTTO_MATCH_COUNT_MESSAGE }
         require(
             purchasedCount >=
-                threeNumberMatchCount + fourNumberMatchCount + fiveNumberMatchCount + sixNumberMatchCount,
+                firstRankCount + secondRankCount + thirdRankCount + fourthRankCount + fifthRankCount,
         ) { INVALID_PURCHASED_COUNT_LOTTO_MATCH_COUNT_MESSAGE }
     }
 
     fun getProfitMargin(): Double {
         val totalPayout =
-            threeNumberMatchCount * LottoNumberMatchPayout.matchCountToPayout(THREE_NUMBER_MATCH) +
-                fourNumberMatchCount * LottoNumberMatchPayout.matchCountToPayout(FOUR_NUMBER_MATCH) +
-                fiveNumberMatchCount * LottoNumberMatchPayout.matchCountToPayout(FIVE_NUMBER_MATCH) +
-                sixNumberMatchCount * LottoNumberMatchPayout.matchCountToPayout(SIX_NUMBER_MATCH)
+            firstRankCount * LottoWinnerRank.FIRST.winningMoney +
+                secondRankCount * LottoWinnerRank.SECOND.winningMoney +
+                thirdRankCount * LottoWinnerRank.THIRD.winningMoney +
+                fourthRankCount * LottoWinnerRank.FOURTH.winningMoney +
+                fifthRankCount * LottoWinnerRank.FIFTH.winningMoney
 
         return totalPayout.toDouble() / (purchasedCount * DEFAULT_LOTTO_PRICE).toDouble()
     }

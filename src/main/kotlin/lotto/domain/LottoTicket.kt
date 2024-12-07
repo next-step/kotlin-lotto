@@ -1,16 +1,11 @@
 package lotto.domain
 
-class LottoTicket(lottoNumberGenerator: () -> Set<Int>) {
-    val lottoNumbers = lottoNumberGenerator()
+data class LottoTicket(private val generateLottoNumbers: () -> Set<Int>) {
+    val lottoNumbers = LottoNumbers(generateLottoNumbers().map { LottoNumber.of(it) }.toSet())
 
-    init {
-        require(lottoNumbers.size == LOTTO_NUMBER_COUNT) { INVALID_LOTTO_NUMBER_COUNT_MESSAGE }
-    }
-
-    companion object {
-        const val LOTTO_NUMBER_MIN_VALUE: Int = 1
-        const val LOTTO_NUMBER_MAX_VALUE: Int = 45
-        const val LOTTO_NUMBER_COUNT: Int = 6
-        const val INVALID_LOTTO_NUMBER_COUNT_MESSAGE: String = "자동 생성된 로또 번호가 6개가 아닙니다"
+    fun checkLottoWinnerRank(lottoWinnerNumbers: LottoWinnerNumbers): LottoWinnerRank {
+        val matchCount = lottoNumbers.checkLottoNumbersMatch(lottoWinnerNumbers.lottoNumbers)
+        val bonusCheck = lottoNumbers.contains(lottoWinnerNumbers.bonusNumber)
+        return LottoWinnerRank.getRankByMatches(matchCount = matchCount, bonusCheck = bonusCheck)
     }
 }
