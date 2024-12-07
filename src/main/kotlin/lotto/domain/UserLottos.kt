@@ -1,10 +1,10 @@
 package lotto.domain
 
 class UserLottos(private val lottos: List<Lotto>) {
-    fun match(winningLotto: WinningLotto, bonusNumber: LottoNumber): List<MatchResult> {
+    fun match(winningLotto: WinningLotto): List<MatchResult> {
         return lottos.map { lotto ->
             val matchCount = winningLotto.calculateMatchCount(lotto)
-            val containsBonusNumber = lotto.contains(bonusNumber)
+            val containsBonusNumber = winningLotto.containsBonusNumberIn(lotto)
             MatchResult(matchCount, containsBonusNumber)
         }
     }

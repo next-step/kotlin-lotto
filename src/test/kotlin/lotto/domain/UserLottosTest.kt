@@ -1,7 +1,6 @@
 package lotto.domain
 
 import io.kotest.core.spec.style.FreeSpec
-import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
 class UserLottosTest : FreeSpec({
@@ -23,7 +22,7 @@ class UserLottosTest : FreeSpec({
         val bonusNumber = LottoNumber(7)
         val winningLotto = WinningLotto(firstPrizeLotto, bonusNumber)
 
-        val result = userLottos.match(winningLotto, bonusNumber)
+        val result = userLottos.match(winningLotto)
 
         result shouldBe listOf(
             MatchResult(6, false),

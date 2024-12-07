@@ -23,7 +23,7 @@ class LottoResultCheckerTest : FreeSpec({
         val bonusNumber = LottoNumber(7)
         val winningLotto = WinningLotto(firstPrizeLotto, bonusNumber)
 
-        val lottoResults = LottoResultChecker.check(userLottos, winningLotto, bonusNumber)
+        val lottoResults = LottoResultChecker.check(userLottos, winningLotto)
 
         assertSoftly {
             lottoResults.getWinningLottoCountBy(LottoRank.FIRST) shouldBe 1
