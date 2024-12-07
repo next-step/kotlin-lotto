@@ -7,6 +7,12 @@ class InputView {
             ?: throw IllegalArgumentException(ERROR_INVALID_NUMBER)
     }
 
+    fun manualLottoCount(): Int {
+        println(MANUAL_LOTTO_COUNT_MESSAGE)
+        return readln().toIntOrNull()
+            ?: throw IllegalArgumentException(ERROR_INVALID_NUMBER)
+    }
+
     fun winningNumbers(): Set<Int> {
         println(WINNING_NUMBER_INPUT_MESSAGE)
         return readln().replace(REPLACEMENT_SOURCE, REPLACEMENT_TARGET)
@@ -24,6 +30,7 @@ class InputView {
 
     companion object {
         private const val PURCHASE_INFORMATION_MESSAGE = "구입금액을 입력해 주세요."
+        private const val MANUAL_LOTTO_COUNT_MESSAGE = "구입금액을 입력해 주세요."
         private const val WINNING_NUMBER_DELIMITERS = ","
         private const val REPLACEMENT_SOURCE = " "
         private const val REPLACEMENT_TARGET = ""
