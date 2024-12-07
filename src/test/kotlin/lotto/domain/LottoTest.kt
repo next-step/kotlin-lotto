@@ -7,9 +7,20 @@ import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
 
 class LottoTest : StringSpec({
+    lateinit var sequentialNumberGenerator: LottoNumberGenerator
+
+    beforeTest {
+        sequentialNumberGenerator =
+            object : LottoNumberGenerator {
+                val lottoNumberRanger = (1..45).toMutableList()
+
+                override fun generateLottoNumber(): Int = lottoNumberRanger.removeFirst()
+            }
+    }
+
     "로또를 발급한다." {
         shouldNotThrowAny {
-            Lotto(RandomGenerator)
+            Lotto(sequentialNumberGenerator)
         }
     }
 
@@ -20,13 +31,13 @@ class LottoTest : StringSpec({
             listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
         ).forAll { numberList ->
             shouldThrowAny {
-                Lotto(RandomGenerator).setLottoByManual(*numberList.toIntArray())
+                Lotto(sequentialNumberGenerator).setLottoByManual(*numberList.toIntArray())
             }
         }
     }
 
     "발급된 로또의 로또번호 갯수는 6개이다." {
-        Lotto(RandomGenerator).lottoNumbers.size shouldBe 6
+        Lotto(sequentialNumberGenerator).lottoNumbers.size shouldBe 6
     }
 
     "각 로또의 번호를 매칭하여 결과를 도출한다." {
@@ -39,7 +50,7 @@ class LottoTest : StringSpec({
             Pair(listOf(1, 2, 3, 4, 5, 45), MatchingResult.MATCHED_FIVE),
             Pair(listOf(1, 2, 3, 4, 5, 6), MatchingResult.MATCHED_SIX),
         ).forAll { (winningNumbers, matchingResult) ->
-            Lotto(RandomGenerator).apply { setLottoByManual(1, 2, 3, 4, 5, 6) }
+            Lotto(sequentialNumberGenerator).apply { setLottoByManual(1, 2, 3, 4, 5, 6) }
                 .match(winningNumbers.map { LottoNumber.get(it) }) shouldBe matchingResult
         }
     }
