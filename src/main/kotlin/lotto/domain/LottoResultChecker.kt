@@ -6,11 +6,10 @@ object LottoResultChecker {
         winningLotto: WinningLotto,
     ): LottoResults {
         val matchCounts = userLottos.calculateMatchCountEach(winningLotto)
+        val containsBonusNumber = true  // fixme
 
-        val ranksAcquiredByUser =
-            matchCounts.filter { matchCount -> LottoRank.isInTheRank(matchCount) }
-                .map { matchCount -> LottoRank.from(matchCount) }
-
+        val ranksAcquiredByUser = matchCounts.map { matchCount -> LottoRank.determineRank(matchCount, containsBonusNumber) }
         return LottoResults(ranksAcquiredByUser)
     }
 }
+

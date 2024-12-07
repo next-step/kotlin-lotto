@@ -1,6 +1,5 @@
 package lotto.domain
 
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 
@@ -23,7 +22,7 @@ class LottoRankTest : FreeSpec({
             }
         }
 
-        "일치하는 조건이 아닌 경우 예외를 발생시킨다" - {
+        "일치하는 조건이 아닌 경우 UNRANKED 를 반환한다" - {
             listOf(
                 Pair(0, false),
                 Pair(0, true),
@@ -33,29 +32,9 @@ class LottoRankTest : FreeSpec({
                 Pair(7, false),
             ).forEach { (matchCount, containsBonusNumber) ->
                 "입력값: matchCount=$matchCount, containsBonusNumber=$containsBonusNumber" {
-                        shouldThrow<InvalidLottoRankConditionException> { LottoRank.determineRank(matchCount, true) }
-                    }
+                    LottoRank.determineRank(matchCount, containsBonusNumber) shouldBe LottoRank.UNRANKED
                 }
-        }
-    }
-
-    "isInTheRank 테스트" - {
-        "matchCount가 FORTH 이상 FIRST이하인 경우 true를 반환한다" - {
-            listOf(4, 5, 6)
-                .forEach { matchCount ->
-                    "입력값: $matchCount" {
-                        LottoRank.isInTheRank(matchCount) shouldBe true
-                    }
-                }
-        }
-
-        "matchCount가 FORTH 미만인 경우 false를 반환한다" - {
-            listOf(0, 1, 2)
-                .forEach { matchCount ->
-                    "입력값: $matchCount" {
-                        LottoRank.isInTheRank(matchCount) shouldBe false
-                    }
-                }
+            }
         }
     }
 })
