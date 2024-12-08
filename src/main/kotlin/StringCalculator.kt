@@ -13,11 +13,11 @@ data class StringCalculator(val totalNumber: Int) {
                 text = it.groupValues[2]
             }
             validate(text, delimiter)
-            return StringCalculator(splitString(input, delimiter))
+            return StringCalculator(splitString(text, delimiter))
         }
 
         private fun validate(input: String, delimiter: String) {
-            if (Regex("^(?!$delimiter$)(.*[^0-9].*)").containsMatchIn(input)) {
+            if (Regex("[^:,\\d\\n$delimiter//]").containsMatchIn(input)) {
                 throw RuntimeException()
             }
         }
