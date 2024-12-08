@@ -11,7 +11,7 @@ enum class Rank(val prizeMoney: BigDecimal, val matchingNumberCount: Int) {
     ;
 
     companion object {
-        fun fromCount(
+        fun fromMatchCount(
             count: Int,
             isMatchBonus: Boolean,
         ): Rank {

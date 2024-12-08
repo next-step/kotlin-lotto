@@ -26,7 +26,7 @@ class LottoResult(
         val matchCount = lotto.countMatchesOf(winningLotto)
         if (matchCount >= MIN_MATCHING_COUNT) {
             val isBonus = lotto.containsAny(bonusLottoNumber)
-            return Rank.fromCount(matchCount, isBonus)
+            return Rank.fromMatchCount(matchCount, isBonus)
         }
         return null
     }
