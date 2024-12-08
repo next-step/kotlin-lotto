@@ -3,7 +3,8 @@ package lotto.controller
 import lotto.domain.LottoCalculator
 import lotto.domain.LottoFactory
 import lotto.domain.LottoResult
-import lotto.domain.data.Lotto
+import lotto.domain.model.Lotto
+import lotto.domain.model.LottoNumber
 import lotto.view.InputView
 import lotto.view.ResultView
 import java.math.BigDecimal
@@ -27,12 +28,7 @@ object LottoController {
         ResultView.printLottoNumbers(myLottoList)
 
         // 결과 출력
-        val winningNumbers = InputView.readWinningLotto(InputView.ENTER_LAST_WINNING_NUMBER)
-        val result =
-            LottoResult(
-                winningLotto = Lotto(winningNumbers),
-                myLottoList = myLottoList,
-            )
+        val result = getLottoResult(myLottoList)
         ResultView.printLottoResult(resultMap = result.resultMap)
         ResultView.printProfitRate(
             profitRate =
@@ -41,5 +37,17 @@ object LottoController {
                     totalPurchaseAmount,
                 ),
         )
+    }
+
+    private fun getLottoResult(myLottoList: List<Lotto>): LottoResult {
+        val winningNumbers = InputView.readWinningLotto(InputView.ENTER_LAST_WINNING_NUMBER)
+        val bonusLottoNumber = InputView.readBonusLotto(InputView.ENTER_BONUS_BALL)
+        val result =
+            LottoResult(
+                winningLotto = LottoFactory.fromList(winningNumbers),
+                bonusLottoNumber = LottoNumber(bonusLottoNumber),
+                myLottoList = myLottoList,
+            )
+        return result
     }
 }
