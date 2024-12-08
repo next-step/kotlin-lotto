@@ -9,8 +9,8 @@ data class LottoNumbers(private val numbers: Set<LottoNumber>) {
         return numbers.contains(lottoNumber)
     }
 
-    override fun toString(): String {
-        return numbers.joinToString(", ") { it.number.toString() }
+    fun getNumbers(): List<Int> {
+        return numbers.map { it.number }
     }
 
     fun checkLottoNumbersMatch(lottoNumbers: LottoNumbers): Int {
