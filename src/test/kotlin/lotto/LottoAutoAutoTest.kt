@@ -1,10 +1,6 @@
 package lotto
 
-import lotto.model.Lotto
-import lotto.model.LottoMatchResult
-import lotto.model.LottoMatchResults
-import lotto.model.LottoPrize
-import lotto.model.Lottos
+import lotto.model.*
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -35,16 +31,15 @@ class LottoAutoAutoTest {
         input: String,
         expectedCount: Int,
     ) {
-        val (purchaseAmount, purchasedLottoCount) = lottoAutoController.countPurchasedLotto(input)
-        assertThat(purchaseAmount).isGreaterThan(0)
-        assertThat(purchasedLottoCount).isEqualTo(expectedCount)
+        val lottos = lottoAutoController.buyLottos(input)
+        assertThat(lottos.getLottos().size).isEqualTo(expectedCount)
     }
 
     @DisplayName("구입 금액이 0이거나 음수면 예외가 발생한다.")
     @ParameterizedTest(name = "{index} => input: ''{0}''")
     @ValueSource(strings = ["0", "-1000"])
     fun checkPurchaseAmount2(input: String) {
-        assertThatThrownBy { lottoAutoController.countPurchasedLotto(input) }
+        assertThatThrownBy { lottoAutoController.buyLottos(input) }
             .isInstanceOf(RuntimeException::class.java)
             .hasMessage("금액은 양수입니다.")
     }
@@ -53,7 +48,7 @@ class LottoAutoAutoTest {
     @ParameterizedTest(name = "{index} => input: ''{0}''")
     @ValueSource(strings = ["abc", "-1dd"])
     fun checkPurchaseAmount3(input: String) {
-        assertThatThrownBy { lottoAutoController.countPurchasedLotto(input) }
+        assertThatThrownBy { lottoAutoController.buyLottos(input) }
             .isInstanceOf(RuntimeException::class.java)
             .hasMessage("숫자로 입력하지 않았습니다.")
     }
@@ -69,14 +64,14 @@ class LottoAutoAutoTest {
         input: String,
         expected: Int,
     ) {
-        val (purchaseAmount, purchasedLottoCount) = lottoAutoController.countPurchasedLotto(input)
-        assertThat(purchasedLottoCount).isEqualTo(expected)
+        val lottos = lottoAutoController.buyLottos(input)
+        assertThat(lottos.getLottos().size).isEqualTo(expected)
     }
 
     @DisplayName(value = "로또 번호는 각기 다른 숫자로 이루어진 6개의 숫자가 오름차순으로 정렬되어야 한다.")
     @Test
     fun generateLottoNumbers() {
-        val lotto = lottoAutoController.generateLottos(1).getLottos().first()
+        val lotto = lottoAutoController.buyLottos("1000").getLottos().first()
 
         assertThat(lotto.getNumbers().size).isEqualTo(6)
         assertThat(lotto.getNumbers().map { it.num }).isSorted
@@ -95,7 +90,7 @@ class LottoAutoAutoTest {
         assertThatThrownBy {
             lottoAutoController.matchLottoNumbers(
                 winningNumbersInput,
-                Lottos.from(listOf(Lotto.fromAuto())),
+                Lottos.fromCountInAuto(1),
             )
         }
             .isInstanceOf(RuntimeException::class.java)
