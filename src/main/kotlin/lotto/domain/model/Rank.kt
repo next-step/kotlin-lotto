@@ -3,11 +3,11 @@ package lotto.domain.model
 import java.math.BigDecimal
 
 enum class Rank(val prizeMoney: BigDecimal, val matchingNumberCount: Int) {
-    FIRST(BigDecimal(2_000_000_000), 6),
-    SECOND(BigDecimal(30_000_000), 5),
-    THIRD(BigDecimal(1_500_000), 5),
-    FOURTH(BigDecimal(50_000), 4),
-    FIFTH(BigDecimal(5_000), 3),
+    FIRST(BigDecimal.valueOf(2_000_000_000), 6),
+    SECOND(BigDecimal.valueOf(30_000_000), 5),
+    THIRD(BigDecimal.valueOf(1_500_000), 5),
+    FOURTH(BigDecimal.valueOf(50_000), 4),
+    FIFTH(BigDecimal.valueOf(5_000), 3),
     ;
 
     companion object {
