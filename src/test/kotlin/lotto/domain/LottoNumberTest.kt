@@ -1,7 +1,7 @@
 package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrowWithMessage
-import io.kotest.matchers.equals.shouldBeEqual
+import io.kotest.matchers.equality.shouldBeEqualToComparingFields
 import lotto.domain.LottoNumber.Companion.INVALID_LOTTO_NUMBER_MESSAGE
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -20,6 +20,6 @@ class LottoNumberTest {
     fun `로또 번호는 value class로 관리된다`(number: Int) {
         val lottoNumberInstance1 = LottoNumber.of(number)
         val lottoNumberInstance2 = LottoNumber.of(number)
-        lottoNumberInstance1 shouldBeEqual lottoNumberInstance2
+        lottoNumberInstance1 shouldBeEqualToComparingFields lottoNumberInstance2
     }
 }
