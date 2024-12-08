@@ -11,7 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 
-class LottoAutoAutoTest {
+class LottoAutoControllerTest {
     private lateinit var lottoAutoController: LottoAutoController
 
     @BeforeEach
@@ -73,8 +73,8 @@ class LottoAutoAutoTest {
     fun generateLottoNumbers() {
         val lotto = lottoAutoController.buyLottos("1000").getLottos().first()
 
-        assertThat(lotto.getNumbers().size).isEqualTo(6)
-        assertThat(lotto.getNumbers().map { it.num }).isSorted
+        assertThat(lotto.numbers.size).isEqualTo(6)
+        assertThat(lotto.numbers.map { it.num }).isSorted
     }
 
     @DisplayName("지난 주 당첨 번호는 6개의 숫자로 이루어져 있지 않다면 예외가 발생한다.")
@@ -82,7 +82,7 @@ class LottoAutoAutoTest {
     @ValueSource(
         strings = [
             "1,2,3,4,5,6,7",
-            "10,20,30,40,50,60,1,2,3",
+            "10,20,30,40,41,42,1,2,3",
             "7,14,21,28,35",
         ],
     )
@@ -90,17 +90,18 @@ class LottoAutoAutoTest {
         assertThatThrownBy {
             lottoAutoController.matchLottoNumbers(
                 winningNumbersInput,
+                "8",
                 Lottos.fromCountInAuto(1),
             )
         }
             .isInstanceOf(RuntimeException::class.java)
-            .hasMessage("중복되지 않는 로또 번호 6개를 입력해주세요")
+            .hasMessage("당첨 로또 번호는 정확히 6개여야 합니다.")
     }
 
     @Test
     @DisplayName("당첨금 계산은 일치하는 번호가 3개일 때부터다.")
     fun testMatchLottoNumbers() {
-        val input = listOf(1, 2, 3, 4, 5, 6)
+        val input = listOf(1, 2, 3, 4, 5, 6) to 7
         val lottos =
             Lottos.from(
                 listOf(
@@ -115,7 +116,7 @@ class LottoAutoAutoTest {
                 ),
             )
 
-        val matchResult = lottos.countMatchingLottoNumbers(Lotto.from(input))
+        val matchResult = lottos.countMatchingLottoNumbers(WinningNumbers.from(input.first, input.second))
 
         assertEquals(2, matchResult.findMatchCount(LottoPrize.THREE), "3개 일치하는 로또는 2개여야 합니다.")
     }

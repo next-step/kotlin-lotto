@@ -11,8 +11,17 @@ class ResultView {
         prizeCount: Int,
         prizeAmount: Int,
         matchingCount: Int,
+        hasBonus: Boolean,
     ) {
-        render("${prizeCount}개 일치 (${prizeAmount}원)- ${matchingCount}개")
+        render(
+            "${prizeCount}개 일치${
+                if (hasBonus) {
+                    ", 보너스 볼 일치"
+                } else {
+                    " "
+                }
+            }(${prizeAmount}원)- ${matchingCount}개",
+        )
     }
 
     fun renderLottoProfit(rate: Double) {

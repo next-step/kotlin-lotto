@@ -3,6 +3,7 @@ package lotto
 import lotto.model.Lotto
 import lotto.model.LottoMatchResults
 import lotto.model.Lottos
+import lotto.model.WinningNumbers
 
 class LottoAutoController {
     fun buyLottos(purchaseAmountInput: String): Lottos {
@@ -20,11 +21,15 @@ class LottoAutoController {
     private fun generateLottos(lottoCount: Int): Lottos = Lottos.fromCountInAuto(lottoCount)
 
     fun matchLottoNumbers(
-        input: String,
+        winningNumberInput: String,
+        bonusNumberInput: String,
         lottos: Lottos,
     ): LottoMatchResults {
-        val winningNumbers = input.convertToInts()
-        return lottos.countMatchingLottoNumbers(Lotto.from(winningNumbers))
+        val winningNumbers = winningNumberInput.convertToInts()
+        val bonusNumber = bonusNumberInput.convertToInt()
+        return lottos.countMatchingLottoNumbers(
+            WinningNumbers.from(winningNumbers, bonusNumber),
+        )
     }
 
     fun calculateReturnRate(

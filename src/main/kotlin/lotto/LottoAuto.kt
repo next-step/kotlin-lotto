@@ -15,7 +15,7 @@ class LottoAuto {
     fun start() {
         val (purchaseAmountInput, lottos) = initLottos()
 
-        val matchedLottoNumberCounts = checkLottoNumbers(lottos)
+        val matchedLottoNumberCounts = calculateLottoMatchResults(lottos)
 
         calculateProfit(matchedLottoNumberCounts, purchaseAmountInput)
     }
@@ -25,21 +25,24 @@ class LottoAuto {
         val lottos = lottoAutoController.buyLottos(purchaseAmountInput)
         resultView.renderPurchaseLottoCountOutput(lottos.getLottos().size)
         lottos.getLottos().forEach { lotto ->
-            resultView.renderPurchaseLottoNumbersOutput(lotto.getNumbers().map { it.num })
+            resultView.renderPurchaseLottoNumbersOutput(lotto.numbers.map { it.num })
         }
         return Pair(purchaseAmountInput, lottos)
     }
 
-    private fun checkLottoNumbers(lottos: Lottos): LottoMatchResults {
+    private fun calculateLottoMatchResults(lottos: Lottos): LottoMatchResults {
         val winningNumberInput = inputView.getWinningNumberInput()
+        val bonusNumberInput = inputView.getBonusNumberInput()
+        val matchResults = lottoAutoController.matchLottoNumbers(winningNumberInput, bonusNumberInput, lottos)
+
         resultView.renderResultOutput()
-        val matchResults = lottoAutoController.matchLottoNumbers(winningNumberInput, lottos)
         for (lottoPrize in LottoPrize.getLottoPrizes()) {
             val matchCount = matchResults.findMatchCount(lottoPrize)
             resultView.renderLottoMatchResultOutput(
                 lottoPrize.matchCount,
                 lottoPrize.prizeAmount,
                 matchCount,
+                lottoPrize.hasBonus,
             )
         }
         return matchResults

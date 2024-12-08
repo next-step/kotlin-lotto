@@ -12,7 +12,7 @@ class LottoTest {
     fun `6개의 고유 번호로 이루어져 있다`() {
         val lottoNumbers = listOf(1, 2, 3, 4, 5, 6)
         val lotto = Lotto.from(lottoNumbers)
-        lotto.getNumbers().map { it.num } shouldBe lottoNumbers.sorted()
+        lotto.numbers.map { it.num } shouldBe lottoNumbers.sorted()
     }
 
     @Test
@@ -28,7 +28,7 @@ class LottoTest {
     @Test
     fun `자동 생성된 로또는 6개의 고유한 번호를 가진다`() {
         val lotto = Lotto.fromAuto()
-        val numbers = lotto.getNumbers()
+        val numbers = lotto.numbers
         numbers.map { it.num }.distinct() shouldHaveSize 6
     }
 
