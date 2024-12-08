@@ -3,12 +3,12 @@ package lotto.domain
 object LottoTicketIssuer {
     fun issueTickets(
         amountPaid: Int,
-        lottoNumberGenerator: () -> Set<Int>,
+        generateLottoNumbers: () -> Set<Int>,
     ): PurchasedLottoTickets {
         checkAmountPaid(amountPaid)
         return PurchasedLottoTickets(
             purchasedCount = (amountPaid / DEFAULT_LOTTO_PRICE),
-            lottoNumberGenerator = lottoNumberGenerator,
+            generateLottoNumbers = generateLottoNumbers,
         )
     }
 
