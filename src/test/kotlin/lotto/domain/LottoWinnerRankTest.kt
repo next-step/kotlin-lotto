@@ -1,10 +1,12 @@
 package lotto.domain
 
+import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.matchers.equals.shouldBeEqual
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.ValueSource
 import java.util.stream.Stream
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -35,5 +37,13 @@ class LottoWinnerRankTest {
             Arguments.of(0, false, LottoWinnerRank.MISS),
             Arguments.of(0, true, LottoWinnerRank.MISS),
         )
+    }
+
+    @ValueSource(ints = [7, -1])
+    @ParameterizedTest
+    fun `번호 매칭 카운트 범위를 벗어나면 에러가 발생한다`(matchCount: Int) {
+        shouldThrowWithMessage<IllegalArgumentException>(message = "로또 번호 매칭 카운트에 매칭되는 범위를 벗어났습니다") {
+            LottoWinnerRank.getRankByMatches(matchCount = matchCount, bonusCheck = true)
+        }
     }
 }

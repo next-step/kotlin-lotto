@@ -14,7 +14,7 @@ enum class LottoWinnerRank(val matchCount: Int, val bonusCheck: Boolean, val win
             matchCount: Int,
             bonusCheck: Boolean,
         ): LottoWinnerRank {
-            if (matchCount < FIFTH.matchCount) {
+            if (matchCount >= 0 && matchCount < FIFTH.matchCount) {
                 return MISS
             }
 
@@ -33,6 +33,6 @@ enum class LottoWinnerRank(val matchCount: Int, val bonusCheck: Boolean, val win
             return findLottoWinnerRank
         }
 
-        const val INVALID_MATCH_COUNT_MESSAGE: String = "로또 번호 매칭 카운트에 매칭되는 범위를 벗어났습니다"
+        private const val INVALID_MATCH_COUNT_MESSAGE: String = "로또 번호 매칭 카운트에 매칭되는 범위를 벗어났습니다"
     }
 }
