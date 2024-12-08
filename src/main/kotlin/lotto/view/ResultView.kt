@@ -1,7 +1,7 @@
 package lotto.view
 
-import lotto.domain.data.Lotto
-import lotto.domain.data.Rank
+import lotto.domain.model.Lotto
+import lotto.domain.model.Rank
 import java.math.BigDecimal
 
 object ResultView {

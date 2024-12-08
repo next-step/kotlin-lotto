@@ -1,7 +1,7 @@
 package lotto.domain
 
-import lotto.domain.data.Lotto
-import lotto.domain.data.LottoNumber
+import lotto.domain.model.Lotto
+import lotto.domain.model.LottoNumber
 import lotto.util.NumberGenerator
 import lotto.util.RandomNumberGenerator
 

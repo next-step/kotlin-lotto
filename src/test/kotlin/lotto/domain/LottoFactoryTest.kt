@@ -3,7 +3,7 @@ package lotto.domain
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
-import lotto.domain.data.LottoNumber
+import lotto.domain.model.LottoNumber
 import lotto.util.NumberGenerator
 
 class LottoFactoryTest : StringSpec({

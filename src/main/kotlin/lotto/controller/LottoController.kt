@@ -3,8 +3,8 @@ package lotto.controller
 import lotto.domain.LottoCalculator
 import lotto.domain.LottoFactory
 import lotto.domain.LottoResult
-import lotto.domain.data.Lotto
-import lotto.domain.data.LottoNumber
+import lotto.domain.model.Lotto
+import lotto.domain.model.LottoNumber
 import lotto.view.InputView
 import lotto.view.ResultView
 import java.math.BigDecimal

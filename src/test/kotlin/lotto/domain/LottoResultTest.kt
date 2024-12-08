@@ -2,9 +2,9 @@ package lotto.domain
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.data.Lotto
-import lotto.domain.data.LottoNumber
-import lotto.domain.data.Rank
+import lotto.domain.model.Lotto
+import lotto.domain.model.LottoNumber
+import lotto.domain.model.Rank
 
 class LottoResultTest : StringSpec({
     "로또 등수와 결과 카운트 검증" {
