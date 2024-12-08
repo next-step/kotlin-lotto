@@ -15,7 +15,7 @@ enum class Rank(val prizeMoney: BigDecimal, val matchingNumberCount: Int) {
             count: Int,
             isMatchBonus: Boolean,
         ): Rank {
-            return if (isMatchBonus) {
+            return if (isMatchBonus && count == 5) {
                 SECOND
             } else if (count == 5) {
                 THIRD
