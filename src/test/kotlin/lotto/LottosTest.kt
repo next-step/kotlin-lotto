@@ -1,16 +1,16 @@
 package lotto
 
-import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import lotto.model.Lotto
 import lotto.model.LottoMatchResult
 import lotto.model.LottoMatchResults
 import lotto.model.LottoPrize
 import lotto.model.Lottos
+import org.junit.jupiter.api.Test
 
-class LottosTest : StringSpec({
-
-    "당첨 번호와 비교하여 계산한다." {
+class LottosTest {
+    @Test
+    fun `당첨 번호와 비교하여 계산한다`() {
         val winningLotto = Lotto.from(listOf(1, 2, 3, 4, 5, 6))
 
         val lotto1 = Lotto.from(listOf(1, 2, 3, 4, 5, 6)) // 6개 일치
@@ -33,4 +33,4 @@ class LottosTest : StringSpec({
 
         lottos.countMatchingLottoNumbers(winningLotto).totalPrizeAmount shouldBe expectedResults.totalPrizeAmount
     }
-})
+}

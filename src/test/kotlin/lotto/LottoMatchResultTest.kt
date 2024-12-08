@@ -1,15 +1,16 @@
 package lotto
 
 import io.kotest.assertions.throwables.shouldThrow
-import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import lotto.model.LottoMatchResult
 import lotto.model.LottoMatchResults
 import lotto.model.LottoPrize
 import lotto.util.MathCalculator
+import org.junit.jupiter.api.Test
 
-class LottoMatchResultTest : StringSpec({
-    "수익률 계산을 올바르게 한다." {
+class LottoMatchResultTest {
+    @Test
+    fun `수익률 계산을 올바르게 한다`() {
         val matchResults =
             listOf(
                 // 2 * 5,000 = 10,000
@@ -26,7 +27,8 @@ class LottoMatchResultTest : StringSpec({
         lottoMatchResults.calculateReturnRate(purchaseAmount) shouldBe expectedReturnRate
     }
 
-    "메서드에서 구매 금액이 0일 경우 예외를 던진다" {
+    @Test
+    fun `메서드에서 구매 금액이 0일 경우 예외를 던진다`() {
         val matchResults =
             listOf(
                 LottoMatchResult(LottoPrize.THREE, 2),
@@ -38,7 +40,8 @@ class LottoMatchResultTest : StringSpec({
         }.message shouldBe "분모는 0이 될 수 없습니다."
     }
 
-    "LottoMatchResults에 해당하는 LottoPrize가 없으면 findMatchCount는 0을 반환해야 한다" {
+    @Test
+    fun `LottoMatchResults에 해당하는 LottoPrize가 없으면 findMatchCount는 0을 반환해야 한다`() {
         val matchResults =
             listOf(
                 LottoMatchResult(LottoPrize.THREE, 2),
@@ -47,4 +50,4 @@ class LottoMatchResultTest : StringSpec({
 
         lottoMatchResults.findMatchCount(LottoPrize.FIVE) shouldBe 0
     }
-})
+}
