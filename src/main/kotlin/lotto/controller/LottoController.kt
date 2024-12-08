@@ -1,4 +1,4 @@
-package lotto.view
+package lotto.controller
 
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
@@ -6,6 +6,10 @@ import lotto.domain.LottoTicketIssuer
 import lotto.domain.LottoWinnerNumbers
 import lotto.domain.PurchasedLottoTickets
 import lotto.domain.generateLottoNumbers
+import lotto.view.LottoPayoutView
+import lotto.view.PurchaseLottoResultView
+import lotto.view.PurchaseLottoView
+import lotto.view.WinnerLottoNumberView
 
 object LottoController {
     fun purchaseLotto(): PurchasedLottoTickets {
