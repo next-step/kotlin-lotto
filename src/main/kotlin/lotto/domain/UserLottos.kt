@@ -1,9 +1,11 @@
 package lotto.domain
 
 class UserLottos(private val lottos: List<Lotto>) {
-    fun calculateMatchCountEach(winningLotto: WinningLotto): List<Int> {
+    fun match(winningLotto: WinningLotto): List<MatchResult> {
         return lottos.map { lotto ->
-            winningLotto.calculateMatchCount(lotto)
+            val matchCount = winningLotto.calculateMatchCount(lotto)
+            val containsBonusNumber = winningLotto.containsBonusNumberIn(lotto)
+            MatchResult(matchCount, containsBonusNumber)
         }
     }
 

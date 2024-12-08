@@ -1,9 +1,17 @@
 package lotto.domain
 
-class WinningLotto(numbers: Set<Int>) {
-    private val lotto = Lotto(numbers)
+class WinningLotto(private val lottoNumbers: LottoNumbers, private val bonusNumber: LottoNumber) {
+    init {
+        if (bonusNumber in lottoNumbers) {
+            throw WinningLottoNumbersAndBonusNumberDuplicationException(lottoNumbers, bonusNumber)
+        }
+    }
 
     fun calculateMatchCount(userLotto: Lotto): Int {
-        return lotto.calculateMatchCount(userLotto)
+        return userLotto.calculateMatchCount(lottoNumbers)
+    }
+
+    fun containsBonusNumberIn(lotto: Lotto): Boolean {
+        return lotto.contains(bonusNumber)
     }
 }
