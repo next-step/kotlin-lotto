@@ -50,10 +50,11 @@ private fun fakeLottoResult(): LottoResult {
             // 6 matches
             Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }),
         )
-    val lottoResult = LottoResult(
-        winningLotto = winningLotto,
-        bonusLottoNumber = LottoNumber(800),
-        myLottoList = myLottoList
-    )
+    val lottoResult =
+        LottoResult(
+            winningLotto = winningLotto,
+            bonusLottoNumber = LottoNumber(800),
+            myLottoList = myLottoList,
+        )
     return lottoResult
 }

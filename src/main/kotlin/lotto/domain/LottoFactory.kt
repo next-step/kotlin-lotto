@@ -15,7 +15,6 @@ class LottoFactory(
                 .getNumbers(Lotto.LOTTO_COUNT)
                 .let { list -> Lotto(list.map { LottoNumber.from(it) }) }
         }
-
     }
 
     companion object {
