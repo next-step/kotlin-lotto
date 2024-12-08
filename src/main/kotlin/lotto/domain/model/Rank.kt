@@ -12,16 +12,16 @@ enum class Rank(val prizeMoney: BigDecimal, val matchingNumberCount: Int) {
 
     companion object {
         fun fromMatchCount(
-            count: Int,
+            matchCount: Int,
             isMatchBonus: Boolean,
         ): Rank {
-            return if (isMatchBonus && count == 5) {
+            return if (isMatchBonus && matchCount == 5) {
                 SECOND
-            } else if (count == 5) {
+            } else if (matchCount == 5) {
                 THIRD
             } else {
-                entries.find { count == it.matchingNumberCount }
-                    ?: throw IllegalArgumentException("invalid count $count")
+                entries.find { matchCount == it.matchingNumberCount }
+                    ?: throw IllegalArgumentException("invalid count $matchCount")
             }
         }
 
