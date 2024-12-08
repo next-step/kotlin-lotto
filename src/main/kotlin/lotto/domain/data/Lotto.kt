@@ -3,7 +3,7 @@ package lotto.domain.data
 @JvmInline
 value class Lotto(val value: List<LottoNumber>) {
     init {
-        require(value.size == MIN_LOTTO_COUNT) { "Number of values must be $MIN_LOTTO_COUNT but was ${value.size}" }
+        require(value.size == LOTTO_COUNT) { "Number of values must be $LOTTO_COUNT but was ${value.size}" }
     }
 
     fun countMatchesOf(lotto: Lotto): Int {
@@ -15,7 +15,7 @@ value class Lotto(val value: List<LottoNumber>) {
     }
 
     companion object {
-        const val MIN_LOTTO_COUNT = 6
+        const val LOTTO_COUNT = 6
     }
 }
 

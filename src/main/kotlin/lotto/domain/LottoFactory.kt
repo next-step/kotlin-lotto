@@ -12,7 +12,7 @@ class LottoFactory(
     fun createLottoList(): List<Lotto> {
         return List(totalLottoCount) {
             numberGenerator
-                .getNumbers(Lotto.MIN_LOTTO_COUNT)
+                .getNumbers(Lotto.LOTTO_COUNT)
                 .let { list -> Lotto(list.map { LottoNumber.from(it) }) }
         }
 
