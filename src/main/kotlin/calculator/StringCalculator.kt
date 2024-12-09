@@ -8,19 +8,24 @@ data class StringCalculator(val totalNumber: Int) {
                 return 0
             }
 
-            if (input.length==1 && input.all {it.isDigit()} ) {
+            if (input.length == 1 && input.all { it.isDigit() }) {
                 return input.toInt()
             }
 
+            val (delimiter, text) = parseDelimiterAndText(input)
+            validate(text, delimiter)
+            return splitString(text, delimiter)
+        }
+
+        private fun parseDelimiterAndText(input: String?): Pair<String, String?> {
             var delimiter = "[,:]"
             var text = input
-            val result = Regex("//(.)\n(.*)").find(text)
+            val result = text?.let { Regex("//(.)\n(.*)").find(it) }
             result?.let {
                 delimiter = it.groupValues[1]
                 text = it.groupValues[2]
             }
-            validate(text, delimiter)
-            return splitString(text, delimiter)
+            return Pair(delimiter, text)
         }
 
         private fun validate(input: String?, delimiter: String) {
