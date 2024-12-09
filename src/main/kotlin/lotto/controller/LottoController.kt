@@ -5,6 +5,7 @@ import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.LottoRank
 import lotto.domain.LottoTicket
+import lotto.domain.ManualLotto
 import lotto.domain.ProfitStatus
 import lotto.domain.Statistics
 import lotto.domain.WinningLotto
@@ -15,26 +16,27 @@ import lotto.view.OutputView
 class LottoController(private val inputView: InputView, private val outputView: OutputView) {
     fun start() {
         val amount = inputView.purchaseAmount()
-        val cashier = createCashier(amount)
 
         val manualLottoCount = inputView.manualLottoCount()
         val manualLottoNumbers = inputView.manualLottos(manualLottoCount)
-        val manualLottos = cashier.purchaseManualLottos(manualLottoNumbers)
+        val manualLotto = ManualLotto(manualLottoNumbers)
 
-        val lottos = purchaseLottos(cashier)
+        val cashier = createCashier(amount, manualLotto)
+        val manualLottos = cashier.purchaseManualLottos()
+
+        val lottos = cashier.purchaseAutoLottos()
         outputView.printPurchaseResult(lottos.tickets)
 
         val winningLotto = inputWinningLotto()
         calculateAndPrintStatistics(winningLotto, lottos, amount)
     }
 
-    private fun createCashier(amount: Int): Cashier {
+    private fun createCashier(
+        amount: Int,
+        manualLotto: ManualLotto,
+    ): Cashier {
         val randomNumberListGenerator = RandomLottoNumberListGenerator()
-        return Cashier(amount, randomNumberListGenerator)
-    }
-
-    private fun purchaseLottos(cashier: Cashier): LottoTicket {
-        return cashier.purchaseAutoLottos()
+        return Cashier(amount, randomNumberListGenerator, manualLotto)
     }
 
     private fun inputWinningLotto(): WinningLotto {

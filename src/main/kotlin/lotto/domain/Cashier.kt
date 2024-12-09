@@ -5,7 +5,21 @@ import lotto.stretagy.LottoNumberListGenerator
 class Cashier(
     private val amount: Int,
     private val lottoNumberListGenerator: LottoNumberListGenerator,
+    private val manualLotto: ManualLotto,
 ) {
+    constructor(amount: Int, lottoNumberListGenerator: LottoNumberListGenerator) : this(
+        amount,
+        lottoNumberListGenerator,
+        ManualLotto(emptyList()),
+    )
+
+    init {
+        val availablePurchaseLottoNumber = amount / LOTTO_PRICE
+        require(amount >= 1000 && availablePurchaseLottoNumber >= manualLotto.numberOfManualLottos()) {
+            INVALID_MONEY
+        }
+    }
+
     fun purchaseAutoLottos(): LottoTicket {
         require(amount >= LOTTO_PRICE)
         val numberOfLotto = calculateNumberOfLotto(amount)
@@ -14,23 +28,14 @@ class Cashier(
         )
     }
 
-    fun purchaseManualLottos(manualLottoNumbers: List<Set<Int>>): LottoTicket {
-        val availablePurchaseLottoNumber = amount / LOTTO_PRICE
-        require(manualLottoNumbers.size == availablePurchaseLottoNumber) {
-            INVALID_MONEY
-        }
-
-        val lottos =
-            manualLottoNumbers.map {
-                LottoNumber.of(it)
-            }.map { Lotto(it) }.toList()
-
+    fun purchaseManualLottos(): LottoTicket {
+        val lottos = manualLotto.toLotto()
         return LottoTicket(lottos)
     }
 
     companion object {
         private const val LOTTO_PRICE = 1000
-        private const val INVALID_MONEY = "수동 로또 개수와 금액이 일치하지 않습니다."
+        private const val INVALID_MONEY = "금액이 부족합니다."
 
         private fun calculateNumberOfLotto(amount: Int): Int {
             return amount / LOTTO_PRICE

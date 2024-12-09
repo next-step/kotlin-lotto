@@ -4,14 +4,12 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import lotto.strategy.FirstRankLottoLottoNumberGenerator
-import org.junit.jupiter.api.assertThrows
 
 class CashierTest : DescribeSpec({
     describe("입력한 금액만큼 로또를 구매한다") {
         it("1000원 보다 적은 경우 throw exception") {
-            val sut = Cashier(999, FirstRankLottoLottoNumberGenerator())
-            assertThrows<IllegalArgumentException> {
-                sut.purchaseAutoLottos()
+            shouldThrow<IllegalArgumentException> {
+                Cashier(999, FirstRankLottoLottoNumberGenerator())
             }
         }
 
@@ -26,14 +24,15 @@ class CashierTest : DescribeSpec({
             val actual = sut.purchaseAutoLottos()
             actual.tickets.size shouldBe 3
         }
+
+        context("수동로또를 구매하고 남은 차액만큼 자동 로또를 구매한다") {
+            val sut = Cashier(999, FirstRankLottoLottoNumberGenerator())
+            it("차액이 남은경우 자동로또를 생성한다") {
+            }
+        }
     }
 
     describe("수동 로또를 구매한다.") {
-        lateinit var sut: Cashier
-        beforeTest {
-            sut = Cashier(2000, FirstRankLottoLottoNumberGenerator())
-        }
-
         context("입력한 금액보다 수동로또 개수 많은경우") {
             it("throw exception") {
                 val manualLottoNumbers =
@@ -45,26 +44,24 @@ class CashierTest : DescribeSpec({
 
                 val exception =
                     shouldThrow<IllegalArgumentException> {
-                        sut.purchaseManualLottos(manualLottoNumbers)
+                        Cashier(2000, FirstRankLottoLottoNumberGenerator(), ManualLotto(manualLottoNumbers))
                     }
 
-                exception.message shouldBe "수동 로또 개수와 금액이 일치하지 않습니다."
+                exception.message shouldBe "금액이 부족합니다."
             }
         }
 
         context("입력한 금액보다 수동로또 개수가 적은경우") {
-            it("throw exception") {
+            it("수동로또 개수만 리턴한다.") {
                 val manualLottoNumbers =
                     listOf(
                         setOf(1, 2, 3, 4, 5, 6),
                     )
 
-                val exception =
-                    shouldThrow<IllegalArgumentException> {
-                        sut.purchaseManualLottos(manualLottoNumbers)
-                    }
+                val sut = Cashier(2000, FirstRankLottoLottoNumberGenerator(), ManualLotto(manualLottoNumbers))
+                val actual = sut.purchaseManualLottos()
 
-                exception.message shouldBe "수동 로또 개수와 금액이 일치하지 않습니다."
+                actual.tickets.size shouldBe 1
             }
         }
 
@@ -76,7 +73,9 @@ class CashierTest : DescribeSpec({
                         setOf(1, 2, 3, 4, 5, 6),
                     )
 
-                val actual = sut.purchaseManualLottos(manualLottoNumbers)
+                val sut = Cashier(2000, FirstRankLottoLottoNumberGenerator(), ManualLotto(manualLottoNumbers))
+
+                val actual = sut.purchaseManualLottos()
 
                 actual.tickets.size shouldBe manualLottoNumbers.size
             }
