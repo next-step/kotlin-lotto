@@ -32,15 +32,15 @@ class Cashier(
         return LottoTicket(lottos)
     }
 
+    private fun calculateNumberOfLotto(
+        amount: Int,
+        numberOfManualLottos: Int,
+    ): Int {
+        return amount / LOTTO_PRICE - numberOfManualLottos
+    }
+
     companion object {
         private const val LOTTO_PRICE = 1000
         private const val INVALID_MONEY = "금액이 부족합니다."
-
-        private fun calculateNumberOfLotto(
-            amount: Int,
-            numberOfManualLottos: Int,
-        ): Int {
-            return amount / LOTTO_PRICE - numberOfManualLottos
-        }
     }
 }
