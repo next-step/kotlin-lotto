@@ -1,35 +1,40 @@
 package lotto.domain
 
-import lotto.domain.data.Lotto
-import lotto.domain.data.LottoWinPlace
+import lotto.domain.model.Lotto
+import lotto.domain.model.LottoNumber
+import lotto.domain.model.Rank
 import java.math.BigDecimal
 
 class LottoResult(
     private val winningLotto: Lotto,
+    private val bonusLottoNumber: LottoNumber,
     myLottoList: List<Lotto>,
 ) {
-    val resultMap: Map<LottoWinPlace, Int>
+    val resultMap: Map<Rank, Int>
 
     init {
-        resultMap = LottoWinPlace.entries.associateWith { 0 }.toMutableMap()
+        resultMap = Rank.entries.associateWith { 0 }.toMutableMap()
         myLottoList.forEach { lotto ->
-            val matchCount = lotto.countMatchesOf(winningLotto)
-            if (matchCount >= MIN_MATCHING_COUNT) {
-                val winPlace = LottoWinPlace.fromCount(matchCount)
-                var winCount = resultMap.getOrDefault(winPlace, 0)
-                resultMap[winPlace] = ++winCount
+            getRank(lotto)?.let { rank ->
+                var rankCount = resultMap.getOrDefault(rank, 0)
+                resultMap[rank] = ++rankCount
             }
         }
+    }
+
+    private fun getRank(lotto: Lotto): Rank? {
+        val matchCount = lotto.countMatchesOf(winningLotto)
+        if (matchCount >= MIN_MATCHING_COUNT) {
+            val isBonus = lotto.containsAny(bonusLottoNumber)
+            return Rank.fromMatchCount(matchCount, isBonus)
+        }
+        return null
     }
 
     fun getTotalProfit(): BigDecimal {
         return resultMap
             .map { it.key.prizeMoney * it.value.toBigDecimal() }
             .fold(BigDecimal.ZERO, BigDecimal::add)
-    }
-
-    private fun Lotto.countMatchesOf(lotto: Lotto): Int {
-        return this.value.count { lotto.value.contains(it) }
     }
 
     companion object {
