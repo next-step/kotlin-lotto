@@ -1,7 +1,9 @@
 package lotto.application
 
-import lotto.view.LottoController
+import lotto.controller.LottoController
 
 fun main() {
-    LottoController.payoutResult(LottoController.lottoPurchased(), LottoController.lottoWinnerNumber())
+    val purchasedLottoTickets = LottoController.purchaseLotto()
+    val lottoWinnerNumbers = LottoController.createWinningLottoNumbers()
+    LottoController.resultPayout(purchasedLottoTickets = purchasedLottoTickets, lottoWinnerNumbers = lottoWinnerNumbers)
 }
