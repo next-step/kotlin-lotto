@@ -2,6 +2,7 @@ package lotto
 
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
+import lotto.domain.LottoPrice
 import lotto.service.LottoService
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -15,8 +16,13 @@ class LottoGameTest {
 
     @ParameterizedTest
     @CsvSource("1000", "2000", "3000")
-    fun `구매한 로또 만큼 랜덤한 번호를 생성한다`() {
-        LottoService().purchase(1000).forEach {
+    fun `구매한 로또 만큼 랜덤한 번호를 생성한다`(money: Int) {
+        val lottoPrice = LottoPrice(money)
+        val lottos = LottoService().purchase(lottoPrice)
+
+        assertThat(lottos.size).isEqualTo(lottoPrice.calculatePurchaseCount())
+
+        lottos.forEach {
             assertThat(it.numbers.distinct().size).isEqualTo(6)
         }
     }
