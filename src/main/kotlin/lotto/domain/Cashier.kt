@@ -21,8 +21,7 @@ class Cashier(
     }
 
     fun purchaseAutoLottos(): LottoTicket {
-        require(amount >= LOTTO_PRICE)
-        val numberOfLotto = calculateNumberOfLotto(amount)
+        val numberOfLotto = calculateNumberOfLotto(amount, manualLotto.numberOfManualLottos())
         return LottoTicket(
             List(numberOfLotto) { Lotto(lottoNumberListGenerator.generate()) },
         )
@@ -37,8 +36,11 @@ class Cashier(
         private const val LOTTO_PRICE = 1000
         private const val INVALID_MONEY = "금액이 부족합니다."
 
-        private fun calculateNumberOfLotto(amount: Int): Int {
-            return amount / LOTTO_PRICE
+        private fun calculateNumberOfLotto(
+            amount: Int,
+            numberOfManualLottos: Int,
+        ): Int {
+            return amount / LOTTO_PRICE - numberOfManualLottos
         }
     }
 }

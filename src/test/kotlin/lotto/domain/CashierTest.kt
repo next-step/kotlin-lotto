@@ -26,8 +26,16 @@ class CashierTest : DescribeSpec({
         }
 
         context("수동로또를 구매하고 남은 차액만큼 자동 로또를 구매한다") {
-            val sut = Cashier(999, FirstRankLottoLottoNumberGenerator())
+            val manualLottoNumbers =
+                listOf(
+                    setOf(1, 2, 3, 4, 5, 6),
+                    setOf(1, 2, 3, 4, 5, 6),
+                    setOf(1, 2, 3, 4, 5, 6),
+                )
+            val sut = Cashier(10000, FirstRankLottoLottoNumberGenerator(), ManualLotto(manualLottoNumbers))
             it("차액이 남은경우 자동로또를 생성한다") {
+                val actual = sut.purchaseAutoLottos()
+                actual.tickets.size shouldBe 7
             }
         }
     }
