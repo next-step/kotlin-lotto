@@ -17,8 +17,8 @@ class StringAddCalculator {
         while (tokenIterator.hasNext()) {
             calculator.add(tokenIterator.next().toInt())
         }
-        println("계산 결과 : ${calculator.sumResult}")
-        return calculator.sumResult
+        println("계산 결과 : ${calculator.getResult()}")
+        return calculator.getResult()
     }
 }
 
