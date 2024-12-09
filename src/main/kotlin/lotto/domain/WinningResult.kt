@@ -1,4 +1,4 @@
-import lotto.Rank
+package lotto.domain
 
 class WinningResult(private val winningStatistics: Map<Int, Int>) {
     fun calculateTotalPrize(): Int {

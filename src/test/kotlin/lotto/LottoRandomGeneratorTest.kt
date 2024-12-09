@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.LottoRandomGenerator
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.RepeatedTest
 

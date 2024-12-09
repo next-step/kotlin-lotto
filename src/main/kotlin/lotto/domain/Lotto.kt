@@ -1,6 +1,6 @@
-package lotto
+package lotto.domain
 
-import lotto.LottoConstants.LOTTO_SIZE
+import lotto.domain.LottoConstants.LOTTO_SIZE
 
 class Lotto(val numbers: List<LottoNumber>) {
     init {

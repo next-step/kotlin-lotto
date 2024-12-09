@@ -1,5 +1,8 @@
 package lotto
 
+import lotto.domain.Lotto
+import lotto.domain.LottoNumber
+import lotto.service.LottoService
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -13,7 +16,7 @@ class LottoGameTest {
     @ParameterizedTest
     @CsvSource("1000", "2000", "3000")
     fun `구매한 로또 만큼 랜덤한 번호를 생성한다`() {
-        LottoGame().purchase(1000).forEach {
+        LottoService().purchase(1000).forEach {
             assertThat(it.numbers.distinct().size).isEqualTo(6)
         }
     }
@@ -42,7 +45,7 @@ class LottoGameTest {
         )
         val winningNumbers = Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6))
 
-        val winningResult = LottoGame().calculateWinningResult(tickets, winningNumbers)
+        val winningResult = LottoService().calculateWinningResult(tickets, winningNumbers)
 
         assertThat(winningResult.getWinningCount(2)).isEqualTo(0)
         assertThat(winningResult.getWinningCount(1)).isEqualTo(0)
@@ -62,7 +65,7 @@ class LottoGameTest {
         )
         val winningNumbers = Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6))
 
-        val winningResult = LottoGame().calculateWinningResult(tickets, winningNumbers)
+        val winningResult = LottoService().calculateWinningResult(tickets, winningNumbers)
 
         assertThat(winningResult.getWinningCount(6)).isEqualTo(2)
         assertThat(winningResult.getWinningCount(5)).isEqualTo(1)
@@ -76,7 +79,7 @@ class LottoGameTest {
         )
         val winningNumbers = Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6))
 
-        val winningResult = LottoGame().calculateWinningResult(tickets, winningNumbers)
+        val winningResult = LottoService().calculateWinningResult(tickets, winningNumbers)
 
         assertThat(winningResult.getWinningCount(3)).isEqualTo(0)
         assertThat(winningResult.getWinningCount(4)).isEqualTo(0)
@@ -93,7 +96,7 @@ class LottoGameTest {
         )
         val winningNumbers = Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6))
 
-        val winningResult = LottoGame().calculateWinningResult(tickets, winningNumbers)
+        val winningResult = LottoService().calculateWinningResult(tickets, winningNumbers)
 
         assertThat(winningResult.getWinningCount(6)).isEqualTo(1)
         assertThat(winningResult.getWinningCount(5)).isEqualTo(1)

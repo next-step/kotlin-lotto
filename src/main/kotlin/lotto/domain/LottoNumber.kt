@@ -1,7 +1,7 @@
-package lotto
+package lotto.domain
 
-import lotto.LottoConstants.MAX_LOTTO_NUMBER
-import lotto.LottoConstants.MIN_LOTTO_NUMBER
+import lotto.domain.LottoConstants.MAX_LOTTO_NUMBER
+import lotto.domain.LottoConstants.MIN_LOTTO_NUMBER
 
 @JvmInline
 value class LottoNumber(val number: Int) {

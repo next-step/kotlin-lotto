@@ -1,8 +1,8 @@
 package lotto.view
 
-import WinningResult
-import lotto.Lotto
-import lotto.Rank
+import lotto.domain.Lotto
+import lotto.domain.Rank
+import lotto.domain.WinningResult
 
 class ResultView {
     fun printPurchaseResult(lottos: List<Lotto>) {

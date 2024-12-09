@@ -1,14 +1,16 @@
-package lotto
+package lotto.service
 
-import WinningResult
-import lotto.LottoConstants.LOTTO_PRICE
+import lotto.domain.Lotto
+import lotto.domain.LottoConstants.LOTTO_PRICE
+import lotto.domain.LottoRandomGenerator
+import lotto.domain.WinningResult
 
-class LottoGame {
+class LottoService {
     fun purchase(paidMoney: Int): List<Lotto> {
         val purchaseTime = paidMoney / LOTTO_PRICE
         require(paidMoney >= LOTTO_PRICE) { "로또 구입 금액은 1000원 이상이어야 합니다." }
 
-        return (1.rangeTo(purchaseTime)).map { LottoRandomGenerator().randomGenerate() }
+        return (1..purchaseTime).map { LottoRandomGenerator.randomGenerate() }
     }
 
     fun calculateWinningResult(

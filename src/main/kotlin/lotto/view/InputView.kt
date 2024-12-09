@@ -1,7 +1,7 @@
 package lotto.view
 
-import lotto.Lotto
-import lotto.LottoNumber
+import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 
 class InputView {
     fun readPurchaseAmount(): Int {
