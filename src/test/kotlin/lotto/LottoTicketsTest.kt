@@ -21,4 +21,3 @@ class LottoTicketsTest {
         lottoTickets.tickets.size shouldBe 5
     }
 }
-

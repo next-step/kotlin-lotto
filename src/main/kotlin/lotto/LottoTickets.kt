@@ -17,7 +17,7 @@ class LottoTickets(lottoTickets: List<LottoTicket>) : Iterable<LottoTicket> {
     companion object {
         fun purchase(amount: Int): LottoTickets {
             val quantity = amount / 1000
-            var lottoTickets = ArrayList<LottoTicket>()
+            val lottoTickets = ArrayList<LottoTicket>()
             repeat(quantity) {
                 lottoTickets.add(LottoTicket.generateLottoNumber())
             }
