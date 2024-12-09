@@ -15,7 +15,7 @@ class Cashier(
 
     init {
         val availablePurchaseLottoNumber = amount / LOTTO_PRICE
-        require(amount >= 1000 && availablePurchaseLottoNumber >= manualLotto.numberOfManualLottos()) {
+        require(amount >= LOTTO_PRICE && availablePurchaseLottoNumber >= manualLotto.numberOfManualLottos()) {
             INVALID_MONEY
         }
     }
