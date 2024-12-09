@@ -21,7 +21,6 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @NullAndEmptySource
     fun emptyOrNull(text: String?) {
-        println("계산 입력 : $text is NULL? = ${text == null}")
         assertThat(calculator.add(text)).isZero()
     }
 

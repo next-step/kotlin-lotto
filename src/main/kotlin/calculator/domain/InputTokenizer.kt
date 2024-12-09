@@ -5,7 +5,6 @@ class InputTokenizer(inputString: String?) {
     private val tokens: List<String>
 
     init {
-        println("input = $inputString")
         if (inputString.isNullOrBlank()) {
             delimiter = DEFAULT_DELIMITER
             tokens = emptyList()
