@@ -1,6 +1,6 @@
 package lotto.application
 
-import lotto.view.LottoController
+import lotto.controller.LottoController
 
 fun main() {
     val purchasedLottoTickets = LottoController.purchaseLotto()

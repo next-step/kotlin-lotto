@@ -11,6 +11,15 @@ object WinnerLottoNumberView {
         return splitInputWinnerNumbers
     }
 
+    fun inputBonusNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        val inputBonusNumberCommand: String? = readlnOrNull()
+        requireNotNull(inputBonusNumberCommand) { INVALID_NULL_OR_BLANK_BONUS_NUMBERS_MESSAGE }
+        val inputBonusNumber = inputBonusNumberCommand.toIntOrNull()
+        requireNotNull(inputBonusNumber) { INVALID_BONUS_NUMBERS_MESSAGE }
+        return inputBonusNumber
+    }
+
     private fun splitInputWinnerNumbersCommand(inputWinnerNumbersCommand: String): Set<Int> {
         require(inputWinnerNumbersCommand.isNotBlank()) { INVALID_BLANK_WINNER_NUMBERS_MESSAGE }
         require(inputWinnerNumbersCommand.contains(WINNER_NUMBERS_DELIMITER)) {
@@ -34,6 +43,8 @@ object WinnerLottoNumberView {
     }
 
     const val INVALID_NULL_OR_BLANK_WINNER_NUMBERS_MESSAGE: String = "입력된 로또 당첨 번호가 없습니다"
+    const val INVALID_NULL_OR_BLANK_BONUS_NUMBERS_MESSAGE: String = "입력된 보너스 번호가 없습니다"
+    const val INVALID_BONUS_NUMBERS_MESSAGE: String = "입력된 보너스 번호가 올바르지 않습니다"
     const val INVALID_BLANK_WINNER_NUMBERS_MESSAGE: String = "입력된 로또 당첨 번호가 공백입니다"
     const val INVALID_DELIMITER_WINNER_NUMBERS_MESSAGE: String = "로또 당첨 번호 구분자가 올바르지 않습니다"
     const val WINNER_NUMBERS_DELIMITER: String = ","

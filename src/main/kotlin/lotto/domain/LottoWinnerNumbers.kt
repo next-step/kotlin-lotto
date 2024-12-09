@@ -1,66 +1,28 @@
 package lotto.domain
 
-import lotto.domain.LottoTicket.Companion.INVALID_WINNER_NUMBERS_RANGE_MESSAGE
-import lotto.domain.LottoTicket.Companion.LOTTO_NUMBER_COUNT
-import lotto.domain.LottoTicket.Companion.LOTTO_NUMBER_MAX_VALUE
-import lotto.domain.LottoTicket.Companion.LOTTO_NUMBER_MIN_VALUE
-
-data class LottoWinnerNumbers(val winnerNumbers: Set<Int>) {
+data class LottoWinnerNumbers(val lottoNumbers: LottoNumbers, val bonusNumber: LottoNumber) {
     init {
-        require(winnerNumbers.size == LOTTO_NUMBER_COUNT) { INVALID_WINNER_NUMBERS_COUNT_MESSAGE }
-        require((LOTTO_NUMBER_MIN_VALUE..LOTTO_NUMBER_MAX_VALUE).toSet().containsAll(winnerNumbers)) {
-            INVALID_WINNER_NUMBERS_RANGE_MESSAGE
-        }
+        require(!lottoNumbers.contains(bonusNumber)) { INVALID_WINNER_NUMBERS_MESSAGE }
     }
 
     fun resultLottoPayout(purchasedLottoTickets: PurchasedLottoTickets): PurchasedLottoResults {
-        val threeNumberMatchs = mutableListOf<LottoTicket>()
-        val fourNumberMatchs = mutableListOf<LottoTicket>()
-        val fiveNumberMatchs = mutableListOf<LottoTicket>()
-        val sixNumberMatchs = mutableListOf<LottoTicket>()
-
-        purchasedLottoTickets.purchasedLottoTickets.forEach { lottoTicket ->
-            numberMatchApply(
-                lottoTicket = lottoTicket,
-                threeNumberMatchs = threeNumberMatchs,
-                fourNumberMatchs = fourNumberMatchs,
-                fiveNumberMatchs = fiveNumberMatchs,
-                sixNumberMatchs = sixNumberMatchs,
-            )
-        }
+        val rankCounts: Map<LottoWinnerRank, Int> =
+            purchasedLottoTickets.purchasedLottoTickets
+                .map { lottoTicket -> lottoTicket.checkLottoWinnerRank(this) }
+                .groupingBy { it }
+                .eachCount()
 
         return PurchasedLottoResults(
             purchasedCount = purchasedLottoTickets.purchasedCount,
-            threeNumberMatchCount = threeNumberMatchs.size,
-            fourNumberMatchCount = fourNumberMatchs.size,
-            fiveNumberMatchCount = fiveNumberMatchs.size,
-            sixNumberMatchCount = sixNumberMatchs.size,
+            firstRankCount = rankCounts[LottoWinnerRank.FIRST] ?: 0,
+            secondRankCount = rankCounts[LottoWinnerRank.SECOND] ?: 0,
+            thirdRankCount = rankCounts[LottoWinnerRank.THIRD] ?: 0,
+            fourthRankCount = rankCounts[LottoWinnerRank.FOURTH] ?: 0,
+            fifthRankCount = rankCounts[LottoWinnerRank.FIFTH] ?: 0,
         )
     }
 
-    private fun numberMatchApply(
-        lottoTicket: LottoTicket,
-        threeNumberMatchs: MutableList<LottoTicket>,
-        fourNumberMatchs: MutableList<LottoTicket>,
-        fiveNumberMatchs: MutableList<LottoTicket>,
-        sixNumberMatchs: MutableList<LottoTicket>,
-    ) {
-        val lottoNumberMatchPayout = checkLottoWinnerNumbersMatchPayout(lottoTicket)
-
-        when (lottoNumberMatchPayout) {
-            LottoNumberMatchPayout.THREE_NUMBER_MATCH -> threeNumberMatchs.add(lottoTicket)
-            LottoNumberMatchPayout.FOUR_NUMBER_MATCH -> fourNumberMatchs.add(lottoTicket)
-            LottoNumberMatchPayout.FIVE_NUMBER_MATCH -> fiveNumberMatchs.add(lottoTicket)
-            LottoNumberMatchPayout.SIX_NUMBER_MATCH -> sixNumberMatchs.add(lottoTicket)
-            else -> return
-        }
-    }
-
-    private fun checkLottoWinnerNumbersMatchPayout(lottoTicket: LottoTicket,): LottoNumberMatchPayout {
-        val matchCount = lottoTicket.lottoNumbers.intersect(winnerNumbers).size
-        return LottoNumberMatchPayout.byMatchCount(matchCount)
-    }
     companion object {
-        const val INVALID_WINNER_NUMBERS_COUNT_MESSAGE: String = "로또 당첨 번호 개수는 6개여야 합니다"
+        const val INVALID_WINNER_NUMBERS_MESSAGE: String = "당첨 번호와 보너스 번호는 중복될 수 없습니다."
     }
 }

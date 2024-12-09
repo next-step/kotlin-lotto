@@ -1,8 +1,8 @@
 package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrowWithMessage
-import lotto.domain.LottoTicket.Companion.INVALID_LOTTO_NUMBER_COUNT_MESSAGE
-import lotto.domain.LottoTicket.Companion.INVALID_WINNER_NUMBERS_RANGE_MESSAGE
+import lotto.domain.LottoNumber.Companion.INVALID_LOTTO_NUMBER_MESSAGE
+import lotto.domain.LottoNumbers.Companion.INVALID_LOTTO_NUMBER_COUNT_MESSAGE
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -30,7 +30,7 @@ class LottoTicketTest {
     @MethodSource("1미만 46 이상의 숫자가 있는 로또 번호 제공")
     @ParameterizedTest
     fun `로또 번호는 1부터 45사이의 숫자가 아니면 에러가 발생한다`(numberSet: Set<Int>) {
-        shouldThrowWithMessage<IllegalArgumentException>(message = INVALID_WINNER_NUMBERS_RANGE_MESSAGE) {
+        shouldThrowWithMessage<IllegalArgumentException>(message = INVALID_LOTTO_NUMBER_MESSAGE) {
             LottoTicket(generateLottoNumbers = { numberSet })
         }
     }
