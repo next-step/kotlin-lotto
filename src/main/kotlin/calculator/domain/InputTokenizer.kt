@@ -1,22 +1,31 @@
 package calculator.domain
 
 class InputTokenizer(inputString: String?) {
-    private val delimiter: String
-    private val tokens: List<String>
+    private lateinit var delimiter: String
+    private lateinit var tokens: List<String>
+
 
     init {
         if (inputString.isNullOrBlank()) {
-            delimiter = DEFAULT_DELIMITER
-            tokens = emptyList()
+            initDefaultDelimiter()
         } else {
-            val result = Regex(DELIMITER_FILTER_EXPRESS).find(inputString)
-            if (result?.groupValues?.size == 3) { // 커스텀 구분자
-                delimiter = result.groupValues[1]
-                tokens = result.groupValues[2].split(delimiter)
-            } else {
-                delimiter = DEFAULT_DELIMITER
-                tokens = inputString.split(delimiter.toRegex())
-            }
+            initCustomDelimiter(inputString)
+        }
+    }
+
+    private fun initDefaultDelimiter() {
+        delimiter = DEFAULT_DELIMITER
+        tokens = emptyList()
+    }
+
+    private fun initCustomDelimiter(inputString: String) {
+        val result = Regex(DELIMITER_FILTER_EXPRESS).find(inputString)
+        if (result?.groupValues?.size == 3) { // 커스텀 구분자
+            delimiter = result.groupValues[1]
+            tokens = result.groupValues[2].split(delimiter)
+        } else {
+            delimiter = DEFAULT_DELIMITER
+            tokens = inputString.split(delimiter.toRegex())
         }
     }
 
