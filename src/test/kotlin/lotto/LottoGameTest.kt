@@ -43,12 +43,11 @@ class LottoGameTest {
 
     @Test
     fun `3개 미만으로 일치하는 경우는 당첨 통계에서 제외된다`() {
-        val tickets = listOf(
-            // 2개 맞춤
-            Lotto(createLottoNumbers(1, 2, 45, 44, 43, 42)),
-            // 1개 맞춤
-            Lotto(createLottoNumbers(1, 13, 45, 44, 43, 42))
-        )
+        val tickets =
+            listOf(
+                Lotto(createLottoNumbers(1, 2, 45, 44, 43, 42)),
+                Lotto(createLottoNumbers(1, 13, 45, 44, 43, 42)),
+            )
         val winningNumbers = Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6))
 
         val winningResult = LottoService().calculateWinningResult(tickets, winningNumbers)
@@ -59,16 +58,13 @@ class LottoGameTest {
 
     @Test
     fun `각 매칭 개수별 당첨 횟수를 체크한다`() {
-        val tickets = listOf(
-            // 6개 맞춤
-            Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6)),
-            // 6개 맞춤
-            Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6)),
-            // 5개 맞춤
-            Lotto(createLottoNumbers(1, 2, 3, 4, 5, 7)),
-            // 4개 맞춤
-            Lotto(createLottoNumbers(1, 2, 3, 4, 7, 8))
-        )
+        val tickets =
+            listOf(
+                Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6)),
+                Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6)),
+                Lotto(createLottoNumbers(1, 2, 3, 4, 5, 7)),
+                Lotto(createLottoNumbers(1, 2, 3, 4, 7, 8)),
+            )
         val winningNumbers = Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6))
 
         val winningResult = LottoService().calculateWinningResult(tickets, winningNumbers)
@@ -80,9 +76,10 @@ class LottoGameTest {
 
     @Test
     fun `당첨번호와 일치하는 번호가 없는 경우 빈 결과를 반환한다`() {
-        val tickets = listOf(
-            Lotto(createLottoNumbers(11, 22, 23, 24, 25, 26))
-        )
+        val tickets =
+            listOf(
+                Lotto(createLottoNumbers(11, 22, 23, 24, 25, 26)),
+            )
         val winningNumbers = Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6))
 
         val winningResult = LottoService().calculateWinningResult(tickets, winningNumbers)
@@ -95,11 +92,12 @@ class LottoGameTest {
 
     @Test
     fun `1등 2등 3등의 로또를 정상적으로 체크한다`() {
-        val tickets = listOf(
-            Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6)),
-            Lotto(createLottoNumbers(1, 2, 3, 4, 5, 7)),
-            Lotto(createLottoNumbers(1, 2, 3, 4, 7, 8))
-        )
+        val tickets =
+            listOf(
+                Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6)),
+                Lotto(createLottoNumbers(1, 2, 3, 4, 5, 7)),
+                Lotto(createLottoNumbers(1, 2, 3, 4, 7, 8)),
+            )
         val winningNumbers = Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6))
 
         val winningResult = LottoService().calculateWinningResult(tickets, winningNumbers)
