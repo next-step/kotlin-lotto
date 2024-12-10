@@ -12,6 +12,6 @@ class WinningResult(private val winningStatistics: Map<Int, Int>) {
     }
 
     fun getWinningCount(matchCount: Int): Int {
-        return winningStatistics.getOrDefault(matchCount, 0)
+        return winningStatistics[matchCount] ?: 0
     }
 }
