@@ -3,8 +3,8 @@ package lotto
 import lotto.domain.LottoNumber
 import lotto.util.LottoNumberGenerator
 
-class FixedLottoNumberGenerator : LottoNumberGenerator {
+class FixedLottoNumberGenerator(private val lottoNumbers: List<Int>) : LottoNumberGenerator {
     override fun generate(): Set<LottoNumber> {
-        return (1..6).map { LottoNumber.getNumber(it) }.toSet()
+        return lottoNumbers.map { LottoNumber.getNumber(it) }.toSet()
     }
 }
