@@ -1,6 +1,7 @@
 package autolotto.view
 
 import autolotto.domain.Amount
+import autolotto.domain.LottoNumber
 import autolotto.domain.WinningLottoNumber
 
 object InputView {
@@ -20,7 +21,7 @@ object InputView {
         println("보너스 번호를 입력해 주세요.")
         val bonusNumber: Int =
             readlnOrNull()?.toIntOrNull() ?: throw RuntimeException("보너스 번호는 숫자를 입력해주세요")
-        return WinningLottoNumber(splitWinningNumbers(input), bonusNumber)
+        return WinningLottoNumber(LottoNumber(splitWinningNumbers(input)), bonusNumber)
     }
 
     private fun splitWinningNumbers(input: String): Set<Int> {

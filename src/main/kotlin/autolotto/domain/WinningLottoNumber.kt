@@ -2,19 +2,22 @@ package autolotto.domain
 
 import autolotto.entity.Lotto
 
-class WinningLottoNumber(private val winningNumbers: Set<Int>, private val bonusNumber: Int) {
+class WinningLottoNumber(private val winningNumbers: LottoNumber, val bonusNumber: Int) {
     init {
-        require(this.winningNumbers.size == WINNING_NUMBER_LENGTH) { "당첨 번호는 6개를 입력해야합니다." }
-        require(bonusNumber in MIN_BONUS_NUMBER..MAX_BONUS_NUMBER) { "보너스는 번호는 1부터 45까지의 숫자중 하나여야합니다." }
-        require(!this.winningNumbers.contains(this.bonusNumber)) { "보너스번호는 당첨번호와 다른 숫자를 입력해야합니다." }
+        require(bonusNumber in MIN_BONUS_NUMBER..MAX_BONUS_NUMBER) {
+            "보너스 번호는 1~45 사이여야 합니다."
+        }
+        require(winningNumbers.getNumbers().contains(bonusNumber).not()) {
+            "보너스 번호는 당첨 번호와 달라야 합니다."
+        }
     }
 
-    fun isHasWinningNumber(number: Int): Boolean {
-        return this.winningNumbers.contains(number)
+    fun hasWinningNumber(number: Int): Boolean {
+        return winningNumbers.hasNumber(number)
     }
 
-    fun isHasBonusNumber(lotto: Lotto): Boolean {
-        return lotto.getNumbers().contains(this.bonusNumber)
+    fun hasBonusNumber(lotto: Lotto): Boolean {
+        return lotto.hasNumber(bonusNumber)
     }
 
     companion object {

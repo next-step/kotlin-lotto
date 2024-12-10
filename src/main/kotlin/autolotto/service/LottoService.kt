@@ -1,5 +1,6 @@
 package autolotto.service
 
+import autolotto.domain.LottoNumber
 import autolotto.domain.WinningLottoNumber
 import autolotto.entity.Lotto
 import autolotto.enums.prize.Prize
@@ -13,11 +14,13 @@ class LottoService(private val lottoRepository: LottoRepository) {
         return lottoRepository.findAll()
     }
 
-    private fun generateLottoNumbers(): Set<Int> {
-        return (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER)
-            .shuffled()
-            .take(LOTTO_TAKE_NUMBER)
-            .toSet()
+    private fun generateLottoNumbers(): LottoNumber {
+        val lottoNumbers =
+            (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER)
+                .shuffled()
+                .take(LOTTO_TAKE_NUMBER)
+                .toSet()
+        return LottoNumber(lottoNumbers)
     }
 
     fun getResult(winningLottoNumber: WinningLottoNumber): Map<Prize, Int> {
@@ -31,7 +34,6 @@ class LottoService(private val lottoRepository: LottoRepository) {
             )
         val lottos = lottoRepository.findAll()
 
-        // 각 로또 번호와 당첨 번호 비교
         val comparisonResults =
             lottos.map { lotto ->
                 comparisonWinningNumbers(lotto, winningLottoNumber)
@@ -43,7 +45,7 @@ class LottoService(private val lottoRepository: LottoRepository) {
         val bonusCount =
             lottos.count { lotto ->
                 comparisonWinningNumbers(lotto, winningLottoNumber) == 5 &&
-                    winningLottoNumber.isHasBonusNumber(lotto)
+                    winningLottoNumber.hasBonusNumber(lotto)
             }
 
         groupByMatchCount.forEach { (matchCount, count) ->
@@ -64,7 +66,7 @@ class LottoService(private val lottoRepository: LottoRepository) {
         lotto: Lotto,
         winningLottoNumber: WinningLottoNumber,
     ): Int {
-        val matchedNumbers = lotto.getNumbers().filter { winningLottoNumber.isHasWinningNumber(it) }
+        val matchedNumbers = lotto.getNumbers().filter { winningLottoNumber.hasWinningNumber(it) }
         return matchedNumbers.count()
     }
 
