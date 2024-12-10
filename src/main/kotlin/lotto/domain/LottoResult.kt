@@ -1,8 +1,5 @@
 package lotto.domain
 
-import lotto.domain.model.Lotto
-import lotto.domain.model.LottoNumber
-import lotto.domain.model.Rank
 import java.math.BigDecimal
 
 class LottoResult(
