@@ -1,24 +1,10 @@
 package calculator.domain
 
-class InputTokenizer(inputString: String?) {
-    private lateinit var delimiter: String
-    private lateinit var tokens: List<String>
-
+class InputTokenizer(inputString: String) {
+    private var delimiter: String
+    private var tokens: List<String>
 
     init {
-        if (inputString.isNullOrBlank()) {
-            initDefaultDelimiter()
-        } else {
-            initCustomDelimiter(inputString)
-        }
-    }
-
-    private fun initDefaultDelimiter() {
-        delimiter = DEFAULT_DELIMITER
-        tokens = emptyList()
-    }
-
-    private fun initCustomDelimiter(inputString: String) {
         val result = Regex(DELIMITER_FILTER_EXPRESS).find(inputString)
         if (result?.groupValues?.size == 3) { // 커스텀 구분자
             delimiter = result.groupValues[1]
@@ -29,8 +15,9 @@ class InputTokenizer(inputString: String?) {
         }
     }
 
-    fun getDelimiter() = delimiter
 
+    fun getDelimiter() = delimiter
+    fun getTokenSize() = tokens.size
     fun getTokensIterator() = tokens.iterator()
 
     companion object {

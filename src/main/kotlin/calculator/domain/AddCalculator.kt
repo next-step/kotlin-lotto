@@ -8,10 +8,11 @@ data class SumResult(val sumNumber: Int) {
 
 class AddCalculator {
     var sumResult = SumResult(0)
-    private set
+        private set
 
-    fun add(input: Int): AddCalculator {
-        if (input < 0) throw RuntimeException("음수를 입력할 수 없어요.")
+    fun add(input: Int?): AddCalculator {
+        if (input == null) return this
+        if (input < 0) throw RuntimeException("자연수로 입력해 주세요.")
         sumResult = sumResult.add(input)
         return this
     }

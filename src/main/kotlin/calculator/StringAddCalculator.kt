@@ -11,11 +11,15 @@ class StringAddCalculator {
         println("계산 결과 : $sumResult")
     }
 
-    fun add(userInput: String? = ""): Int {
-        val tokenIterator = InputTokenizer(userInput).getTokensIterator()
+    fun add(userInput: String?): Int {
+        val tokenizer = InputTokenizer(userInput?: "0")
+        val tokenIterator = tokenizer.getTokensIterator()
+
+        println("token size = ${tokenizer.getTokenSize()}")
+
         val calculator = AddCalculator()
         while (tokenIterator.hasNext()) {
-            calculator.add(tokenIterator.next().toInt())
+            calculator.add(tokenIterator.next().toIntOrNull())
         }
         println("계산 결과 : ${calculator.getResult()}")
         return calculator.getResult()
