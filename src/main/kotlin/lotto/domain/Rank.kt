@@ -14,14 +14,13 @@ enum class Rank(val prizeMoney: BigDecimal, val matchingNumberCount: Int) {
         fun fromMatchCount(
             matchCount: Int,
             isMatchBonus: Boolean,
-        ): Rank {
+        ): Rank? {
             return if (isMatchBonus && matchCount == 5) {
                 SECOND
             } else if (matchCount == 5) {
                 THIRD
             } else {
                 entries.find { matchCount == it.matchingNumberCount }
-                    ?: throw IllegalArgumentException("invalid count $matchCount")
             }
         }
 
