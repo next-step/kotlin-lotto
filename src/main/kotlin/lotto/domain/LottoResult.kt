@@ -2,12 +2,12 @@ package lotto.domain
 
 import kotlin.math.roundToInt
 
-class LottoResult {
+class LottoResult(tickets: List<LottoTicket>, win: LottoTicket, used: Int = 0) {
     var first: Int = 0
     var second: Int = 0
     var third: Int = 0
     var fourth: Int = 0
-    private var totalCount: Int = 0
+    private var totalCount: Int = used
 
     /*
         3 / 4 / 5 / 6
@@ -24,8 +24,8 @@ class LottoResult {
         if (returnRate > 1) "이익" else "손해"
     }
 
-    constructor(lottos: List<LottoTicket>, win: LottoTicket, used: Int = 0) {
-        lottos.forEach {
+    init {
+        tickets.forEach {
             when (win.correctNumberCount(it)) {
                 6 -> first++
                 5 -> second++
@@ -33,7 +33,6 @@ class LottoResult {
                 3 -> fourth++
             }
         }
-        this.totalCount = used
     }
 
     companion object {

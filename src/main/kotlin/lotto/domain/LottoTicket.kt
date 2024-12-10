@@ -6,9 +6,6 @@ class LottoTicket {
     private val lottoNumbers = mutableListOf<LottoNumber>()
 
     // 중복된 번호를 입력 할 수 없다
-    constructor(vararg elements: LottoNumber) {
-        lottoNumbers.addAll(elements)
-    }
     constructor(vararg elements: Int) {
         elements.mapTo(
             lottoNumbers,
@@ -57,17 +54,6 @@ class LottoTicket {
     }
 
     companion object {
-        // 숫자 리스트를 통해 로또 티켓 생성
-        fun generateTickets(arrayTicketNumbers: List<List<Int>>): List<LottoTicket> {
-            val tickets = mutableListOf<LottoTicket>()
-
-            arrayTicketNumbers.forEach {
-                tickets.add(LottoTicket(it))
-            }
-
-            return tickets.toList()
-        }
-
         fun generateLottoTickets(count: Int): List<LottoTicket> {
             val tickets = mutableListOf<LottoTicket>()
             while (tickets.size < count) {
