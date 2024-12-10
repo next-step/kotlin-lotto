@@ -14,7 +14,7 @@ class OrderTest : StringSpec({
 
         val order = Order(5000, lottos)
 
-        order.autoLottos.size shouldBe 5
+        order.lottos.size shouldBe 5
     }
 
     "주문 생성 시 전달된 금액과 로또의 수량이 맞지 않을 경우 예외를 반환한다." {

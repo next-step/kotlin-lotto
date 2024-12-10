@@ -10,7 +10,8 @@ class LottoShop(private val lottoCreator: LottoCreator) {
     ): Order {
         validateAmountIsPositive(amount)
         val lottoCounts = calculateLottoCounts(amount)
-        return Order(amount, lottoCreator.createAutoLottos(lottoCounts - manualLottos.size), manualLottos)
+        val autoLottos = lottoCreator.createAutoLottos(lottoCounts - manualLottos.size)
+        return Order(amount, autoLottos + manualLottos)
     }
 
     private fun validateAmountIsPositive(amount: Int) {

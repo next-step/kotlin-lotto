@@ -6,10 +6,12 @@ import lotto.domain.Rank
 import lotto.domain.WinningResult
 
 object ResultView {
-    fun printCreatedLottos(order: Order) {
-        println("수동으로 ${order.manualLottos.size}, 자동으로 ${order.autoLottos.size}개를 구매했습니다.")
-        order.manualLottos.forEach { println(it.numbers) }
-        order.autoLottos.forEach { println(it.numbers) }
+    fun printCreatedLottos(
+        order: Order,
+        manualLottoCount: Int,
+    ) {
+        println("수동으로 $manualLottoCount 개, 자동으로 ${order.lottos.size - manualLottoCount} 개를 구매했습니다.")
+        order.lottos.forEach { println(it.numbers) }
         println()
     }
 

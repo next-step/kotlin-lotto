@@ -9,7 +9,7 @@ class WinningLotto(
     }
 
     fun match(order: Order): List<Rank> {
-        return (order.autoLottos + order.manualLottos).map { this.matchLotto(it) }
+        return order.lottos.map { this.matchLotto(it) }
     }
 
     private fun matchLotto(targetLotto: Lotto): Rank {
