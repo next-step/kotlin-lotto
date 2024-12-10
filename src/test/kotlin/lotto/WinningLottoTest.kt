@@ -15,6 +15,7 @@ class WinningLottoTest : StringSpec({
 
         val result = winningLotto.match(order)
 
-        result.count { it == Rank.FIFTH } shouldBe 1
+        val analyze = result.analyze()
+        analyze.find { it.rank == Rank.FIFTH }!!.lottoMatchCount shouldBe 1
     }
 })

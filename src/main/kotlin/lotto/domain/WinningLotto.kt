@@ -8,8 +8,8 @@ class WinningLotto(
         validateDuplicate()
     }
 
-    fun match(order: Order): List<Rank> {
-        return order.lottos.map { this.matchLotto(it) }
+    fun match(order: Order): MatchResult {
+        return MatchResult(order.lottos.map { this.matchLotto(it) })
     }
 
     private fun matchLotto(targetLotto: Lotto): Rank {

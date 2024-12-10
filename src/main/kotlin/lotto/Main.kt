@@ -23,6 +23,5 @@ fun main() {
 
     // 결과 출력
     val matchResult = winningLotto.match(order)
-    val analyzedResult = LottoRankAnalyzer.analyze(matchResult)
-    ResultView.printResult(WinningResult.from(analyzedResult, amount))
+    ResultView.printResult(WinningResult.from(matchResult.analyze(), amount))
 }
