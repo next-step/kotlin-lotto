@@ -1,6 +1,5 @@
-package lotto.domain.model
+package lotto.domain
 
-import lotto.domain.Rank
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
