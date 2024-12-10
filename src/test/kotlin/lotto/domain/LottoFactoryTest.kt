@@ -4,6 +4,7 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import lotto.util.NumberGenerator
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertThrows
 
 class LottoFactoryTest : StringSpec({
@@ -50,7 +51,7 @@ class LottoFactoryTest : StringSpec({
     "{given} 정수 리스트, size=6, {when} LottoFactory.fromList() {then} Lotto 생성" {
         val list = listOf(1, 2, 3, 4, 5, 6)
         val result = LottoFactory.fromList(list)
-        // assertTrue(result is Lotto) FIXME : this check is useless ?
+        assertThat(result.value).containsExactlyElementsOf(list.map { LottoNumber(it) })
     }
 
     "{given} 정수 리스트, size=10, {when} LottoFactory.fromList() {then} IllegalArgumentException 발생" {
