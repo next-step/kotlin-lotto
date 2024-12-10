@@ -10,20 +10,22 @@ class InputTokenizerTest {
     @ParameterizedTest
     @ValueSource(
         strings = [
-            "1;2;3",
+            "1:2:3",
             "1,2,3",
+            "1,2:3",
         ],
     )
     fun `문자열 입력 테스트-기본 구분자 사용`(input: String) {
         val tokenizer = InputTokenizer(input)
-        tokenizer.getDelimiter() shouldBe ",|:"
+        tokenizer.getTokens().size shouldBe 3
     }
 
     @Test
     fun `커스텀 구분자 테스트`() {
         val tokenizer = InputTokenizer("//;\n1;2;3")
-        tokenizer.getDelimiter() shouldBe ";"
-        tokenizer.getTokensIterator().next() shouldBe "1"
+
+        tokenizer.getTokens().size shouldBe 3
+        tokenizer.getTokens()[0] shouldBe "1"
     }
 
     @ParameterizedTest
@@ -37,7 +39,7 @@ class InputTokenizerTest {
         delimiter: String,
     ) {
         val tokenizer = InputTokenizer(input)
-        tokenizer.getDelimiter() shouldBe delimiter
+        tokenizer.getTokens().size shouldBe 3
     }
 
     @ParameterizedTest
@@ -51,6 +53,6 @@ class InputTokenizerTest {
         number: Int,
     ) {
         val tokenizer = InputTokenizer(input)
-        tokenizer.getTokensIterator().next().toInt() shouldBe number
+        tokenizer.getTokens()[0].toIntOrNull() shouldBe number
     }
 }

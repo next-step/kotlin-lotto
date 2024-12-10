@@ -9,7 +9,7 @@ class AddCalculatorTest {
     fun `더하기 입력 테스트`() {
         val calculator = AddCalculator()
         calculator.add(5).add(5).add(5)
-        calculator.sumResult shouldBe 15
+        calculator.getResult() shouldBe 15
     }
 
     @Test

@@ -15,10 +15,7 @@ class InputTokenizer(inputString: String) {
         }
     }
 
-
-    fun getDelimiter() = delimiter
-    fun getTokenSize() = tokens.size
-    fun getTokensIterator() = tokens.iterator()
+    fun getTokens() = tokens.toList()
 
     companion object {
         private const val DEFAULT_DELIMITER = ",|:"
