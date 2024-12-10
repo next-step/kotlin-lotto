@@ -4,6 +4,7 @@ import lotto.controller.GeneratorRandomNumbers
 
 class LottoTicket {
     private val lottoNumbers = mutableListOf<LottoNumber>()
+
     // 중복된 번호를 입력 할 수 없다
     constructor(vararg elements: LottoNumber) {
         lottoNumbers.addAll(elements)
@@ -27,7 +28,7 @@ class LottoTicket {
     fun correctNumberCount(ticket: LottoTicket): Int {
         var numberCount = 0
         lottoNumbers.forEach {
-            if (ticket.lottoNumbers.contains(it)){
+            if (ticket.lottoNumbers.contains(it)) {
                 numberCount++
             }
         }
@@ -39,7 +40,7 @@ class LottoTicket {
         return lottoNumbers.joinToString(
             separator = ", ",
             prefix = "[",
-            postfix = "]"
+            postfix = "]",
         )
     }
 
