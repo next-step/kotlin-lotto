@@ -23,9 +23,12 @@ class LottoController(private val inputView: InputView, private val outputView: 
 
         val cashier = createCashier(amount, manualLotto)
         val manualLottos = cashier.purchaseManualLottos()
+        outputView.printPurchaseResult(manualLottos.tickets)
 
-        val lottos = cashier.purchaseAutoLottos()
-        outputView.printPurchaseResult(lottos.tickets)
+        val autoLottos = cashier.purchaseAutoLottos()
+        outputView.printPurchaseResult(autoLottos.tickets)
+
+        val lottos = cashier.flatLottos(autoLottos, manualLottos)
 
         val winningLotto = inputWinningLotto()
         calculateAndPrintStatistics(winningLotto, lottos, amount)
