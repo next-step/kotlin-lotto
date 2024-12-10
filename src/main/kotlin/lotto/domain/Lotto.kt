@@ -2,7 +2,7 @@ package lotto.domain
 
 import lotto.constant.REQUIRED_LOTTO_SIZE
 
-class Lotto(val lottoNumbers: Set<LottoNumber>) {
+data class Lotto(val lottoNumbers: Set<LottoNumber>) {
     constructor(vararg numbers: Int) : this(numbers.map(::LottoNumber).toSet())
 
     init {
