@@ -28,10 +28,7 @@ class LottoTickets(lottoTickets: List<LottoTicket>) : Collection<LottoTicket> by
         fun purchase(amount: Int): LottoTickets {
             require(amount >= LOTTO_TICKET_PRICE) { "구입금액은 1000원 이상이여야 합니다" }
             val quantity = amount / LOTTO_TICKET_PRICE
-            val lottoTickets = ArrayList<LottoTicket>()
-            repeat(quantity) {
-                lottoTickets.add(LottoTicket.generateLottoNumber())
-            }
+            val lottoTickets = List(quantity) { LottoTicket.generateLottoNumber() }
             return LottoTickets(lottoTickets)
         }
     }
