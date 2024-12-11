@@ -1,14 +1,9 @@
 package lotto.domain
 
 class LottoTickets(lottoTickets: List<LottoTicket>) : Collection<LottoTicket> by lottoTickets {
-    private val _tickets: List<LottoTicket>
+    private val _tickets: List<LottoTicket> = lottoTickets
     val tickets: List<LottoTicket>
         get() = _tickets
-
-    init {
-        require(lottoTickets.isNotEmpty()) { "로또 티켓은 한장 이상 구입해야 합니다" }
-        _tickets = lottoTickets
-    }
 
     fun calculateLottoRank(winningLotto: WinningLotto): LottoResults {
         val rankCount =
@@ -28,9 +23,10 @@ class LottoTickets(lottoTickets: List<LottoTicket>) : Collection<LottoTicket> by
     }
 
     companion object {
-        const val LOTTO_TICKET_PRICE = 1000
+        private const val LOTTO_TICKET_PRICE = 1000
 
         fun purchase(amount: Int): LottoTickets {
+            require(amount >= LOTTO_TICKET_PRICE) { "구입금액은 1000원 이상이여야 합니다" }
             val quantity = amount / LOTTO_TICKET_PRICE
             val lottoTickets = ArrayList<LottoTicket>()
             repeat(quantity) {

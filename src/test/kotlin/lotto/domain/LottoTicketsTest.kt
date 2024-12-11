@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test
 
 class LottoTicketsTest {
     @Test
-    fun `로또 티켓은 한장 이상 구입 해야 한다`() {
+    fun `로또 티켓은 구입금액은 1_000원 이상이여야 한다`() {
         shouldThrow<IllegalArgumentException> {
-            LottoTickets(listOf())
+            LottoTickets.purchase(900)
         }.also {
-            it.message shouldBe "로또 티켓은 한장 이상 구입해야 합니다"
+            it.message shouldBe "구입금액은 1000원 이상이여야 합니다"
         }
     }
 
