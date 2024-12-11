@@ -53,3 +53,11 @@
 
 ### 요구사항
 1. 2등을 위해 추가 번호를 하나 더 추첨하고 당첨 통계도 반영한다.
+
+### Feedback
+1. Lotto - LottoNumbers 로직 개선 - 메시지 보내기
+2. 하나의 로또번호와 관련된 일급 컬렉션
+3. 중복된 로또 번호가 나오지 않도록 수정
+4. ResultView - Lotto, LottoNumbers 로직 개선 - 메시지 보내기
+5. LottoRank - 변경사항을 쉽게 인지할 수 있도록 enum 비교를 exhausitive하게 개선
+6. LottoRank - from 네이밍 개선
