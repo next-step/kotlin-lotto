@@ -6,9 +6,9 @@ import lotto.domain.LottoTickets
 
 object OutputView {
     fun printPurchaseResult(lottoTickets: LottoTickets) {
-        val ticketCount = lottoTickets.tickets.size
+        val ticketCount = lottoTickets.size
         println(message = "$ticketCount 개를 구매했습니다.")
-        for (lottoTicket in lottoTickets.tickets) {
+        for (lottoTicket in lottoTickets) {
             println(lottoTicket.lottoNumbers)
         }
     }

@@ -1,6 +1,7 @@
 package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -31,7 +32,7 @@ class LottoTicketTest {
     @Test
     fun `로또 티켓을 생성하면 6개의 번호가 들어있다`() {
         val lottoTicket = LottoTicket.generateLottoNumber()
-        lottoTicket.lottoNumbers.size shouldBe 6
+        lottoTicket shouldHaveSize 6
     }
 
     companion object {

@@ -1,13 +1,9 @@
 package lotto.domain
 
-class LottoTickets(lottoTickets: List<LottoTicket>) : Collection<LottoTicket> by lottoTickets {
-    private val _tickets: List<LottoTicket> = lottoTickets
-    val tickets: List<LottoTicket>
-        get() = _tickets
-
+class LottoTickets(private val lottoTickets: List<LottoTicket>) : Collection<LottoTicket> by lottoTickets {
     fun calculateLottoRank(winningLotto: WinningLotto): LottoResults {
         val rankCount =
-            tickets
+            lottoTickets
                 .map { lotto -> lotto.calculateRank(winningLotto) }
                 .groupingBy { it }
                 .eachCount()
