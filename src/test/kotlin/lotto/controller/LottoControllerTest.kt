@@ -11,7 +11,7 @@ class LottoControllerTest {
     @Test
     fun `구입 금액을 입력하면 로또 티켓이 천원당 1장으로 여러개의 로또 티켓이 발급된다`() {
         val lottoTickets = LottoController.purchaseLotto(10000)
-        lottoTickets.count() shouldBe 10
+        lottoTickets.size shouldBe 10
     }
 
     @Test

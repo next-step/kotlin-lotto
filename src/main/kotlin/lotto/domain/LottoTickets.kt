@@ -27,10 +27,6 @@ class LottoTickets(lottoTickets: List<LottoTicket>) : Collection<LottoTicket> by
         return LottoResults(result)
     }
 
-    fun count(): Int {
-        return tickets.size
-    }
-
     companion object {
         const val LOTTO_TICKET_PRICE = 1000
 
