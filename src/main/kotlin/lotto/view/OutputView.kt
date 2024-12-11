@@ -19,9 +19,8 @@ object OutputView {
     ) {
         println("당첨 통계")
         println("---------")
-        results.getResults()
+        results.findAllSortedByMatchCount()
             .filter { it.rank != LottoRank.BLANK_PLACE }
-            .sortedBy { it.rank.matchCount }
             .forEach { result ->
                 println("${result.rank.matchCount}개 일치 (${result.rank.prize}원)- ${result.count}개")
             }

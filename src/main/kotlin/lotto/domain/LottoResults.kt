@@ -10,5 +10,5 @@ data class LottoResults(private val results: List<LottoResult>) {
         return results.associate { it.rank to it.count }
     }
 
-    fun getResults(): List<LottoResult> = results
+    fun findAllSortedByMatchCount(): List<LottoResult> = results.sortedByDescending { it.rank.matchCount }
 }

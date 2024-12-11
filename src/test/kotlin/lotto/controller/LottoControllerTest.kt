@@ -19,7 +19,7 @@ class LottoControllerTest {
         val lottoTickets = LottoTickets(listOf(LottoTicket(listOf(1, 2, 3, 4, 5, 6))))
         val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6))
         val lottoResults = LottoController.calculateLottoRank(lottoTickets, winningLotto)
-        lottoResults.getResults()
+        lottoResults.findAllSortedByMatchCount()
             .sortedByDescending { it.count }
             .take(1)
             .map {
