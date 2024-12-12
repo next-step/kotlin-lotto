@@ -1,13 +1,13 @@
 package lotto.view
 
-import lotto.domain.Lotto
+import PurchasedLottos
 import lotto.domain.Rank
 import lotto.domain.WinningResult
 
 class ResultView {
-    fun printPurchaseResult(lottos: List<Lotto>) {
-        println("${lottos.size}개를 구매했습니다.")
-        lottos.forEach { println(it.sortedList()) }
+    fun printPurchaseResult(purchasedLottos: PurchasedLottos) {
+        println("${purchasedLottos.size()}개를 구매했습니다.")
+        purchasedLottos.lottos.forEach { println(it) }
     }
 
     fun printWinningStatistics(winningResult: WinningResult) {
