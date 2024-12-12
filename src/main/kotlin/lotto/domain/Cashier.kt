@@ -5,18 +5,16 @@ import lotto.stretagy.LottoNumberListGenerator
 class Cashier(
     private val amount: Int,
     private val lottoNumberListGenerator: LottoNumberListGenerator,
-    private val manualLotto: ManualLotto,
+    private val manualLotto: ManualLotto = ManualLotto(emptyList()),
 ) {
-    constructor(amount: Int, lottoNumberListGenerator: LottoNumberListGenerator) : this(
-        amount,
-        lottoNumberListGenerator,
-        ManualLotto(emptyList()),
-    )
-
     init {
+        require(amount >= LOTTO_PRICE) {
+            INSUFFICIENT_FUNDS
+        }
+
         val availablePurchaseLottoNumber = amount / LOTTO_PRICE
-        require(amount >= LOTTO_PRICE && availablePurchaseLottoNumber >= manualLotto.numberOfManualLottos()) {
-            INVALID_MONEY
+        require(availablePurchaseLottoNumber >= manualLotto.numberOfManualLottos()) {
+            NO_BALANCE_FOR_MANUAL_LOTTO
         }
     }
 
@@ -45,6 +43,7 @@ class Cashier(
 
     companion object {
         private const val LOTTO_PRICE = 1000
-        private const val INVALID_MONEY = "금액이 부족합니다."
+        private const val INSUFFICIENT_FUNDS = "금액이 부족합니다."
+        private const val NO_BALANCE_FOR_MANUAL_LOTTO = "수동로또를 구매할 잔액이 남지 않았습니다."
     }
 }
