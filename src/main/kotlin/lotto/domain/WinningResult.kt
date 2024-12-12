@@ -3,7 +3,7 @@ package lotto.domain
 class WinningResult(private val winningStatistics: Map<Rank, Int>) {
     fun calculateTotalPrize(): Int {
         return winningStatistics.entries.sumOf { (rank, count) ->
-            rank.matchCount * count
+            rank.prize * count
         }
     }
 
@@ -11,7 +11,7 @@ class WinningResult(private val winningStatistics: Map<Rank, Int>) {
         return calculateTotalPrize().toDouble() / purchaseAmount
     }
 
-    fun getWinningCount(matchCount: Int): Int {
-        return winningStatistics[Rank.from(matchCount)] ?: 0
+    fun getWinningCount(rank: Rank): Int {
+        return winningStatistics[rank] ?: 0
     }
 }

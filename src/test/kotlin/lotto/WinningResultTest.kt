@@ -26,9 +26,8 @@ class WinningResultTest {
     fun `당첨 갯수와 당첨금 수를 반환한다`() {
         val winningStatistics = mapOf(Rank.FOURTH to 1, Rank.THIRD to 2)
         val winningResult = WinningResult(winningStatistics)
-        assertThat(winningResult.getWinningCount(3)).isEqualTo(1)
-        assertThat(winningResult.getWinningCount(4)).isEqualTo(2)
-        assertThat(winningResult.getWinningCount(5)).isEqualTo(0)
+        assertThat(winningResult.getWinningCount(Rank.FOURTH)).isEqualTo(1)
+        assertThat(winningResult.getWinningCount(Rank.THIRD)).isEqualTo(2)
     }
 
     @Test
@@ -41,7 +40,7 @@ class WinningResultTest {
             )
         val winningResult = WinningResult(winningStatistics)
         val prize = winningResult.calculateTotalPrize()
-        val expectedPrize = (5000 * 2) + (50000 * 1) + (1500000 * 1)
+        val expectedPrize = (5_000 * 2) + (50_000 * 1) + (30_000_000 * 1)
         assertThat(prize).isEqualTo(expectedPrize)
     }
 

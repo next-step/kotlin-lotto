@@ -2,6 +2,7 @@ package lotto.service
 
 import PurchasedLottos
 import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 import lotto.domain.LottoPrice
 import lotto.domain.LottoRandomGenerator
 import lotto.domain.Rank
@@ -17,9 +18,10 @@ class LottoService {
     fun checkWinning(
         lottos: PurchasedLottos,
         winningNumbers: Lotto,
+        bonusBall: LottoNumber,
     ): WinningResult {
         val winningStatistics =
-            lottos.matchNumber(winningNumbers)
+            lottos.matchNumber(winningNumbers, bonusBall)
                 .filterKeys { it != Rank.NONE }
 
         return WinningResult(winningStatistics)

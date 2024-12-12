@@ -1,4 +1,5 @@
 import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 import lotto.domain.Rank
 
 class PurchasedLottos(private val tickets: List<Lotto>) {
@@ -12,10 +13,14 @@ class PurchasedLottos(private val tickets: List<Lotto>) {
     val lottos: List<Lotto>
         get() = tickets.toList()
 
-    fun matchNumber(winningNumber: Lotto): Map<Rank, Int> {
+    fun matchNumber(
+        winningNumber: Lotto,
+        bonusBall: LottoNumber,
+    ): Map<Rank, Int> {
         return tickets
-            .map { it.match(winningNumber) }
-            .groupBy { Rank.from(it) }
+            .map { it.match(winningNumber, bonusBall) }
+            .map { (matchCount, matchBonus) -> Rank.from(matchCount, matchBonus) }
+            .groupBy { it }
             .mapValues { it.value.size }
     }
 }
