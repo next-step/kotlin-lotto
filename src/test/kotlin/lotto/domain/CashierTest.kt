@@ -55,7 +55,7 @@ class CashierTest : DescribeSpec({
                         Cashier(2000, FirstRankLottoLottoNumberGenerator(), ManualLotto(manualLottoNumbers))
                     }
 
-                exception.message shouldBe "금액이 부족합니다."
+                exception.message shouldBe "수동로또를 구매할 잔액이 남지 않았습니다."
             }
         }
 
