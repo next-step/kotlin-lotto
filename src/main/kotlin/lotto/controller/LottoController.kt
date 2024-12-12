@@ -11,7 +11,8 @@ fun main() {
     ResultView().printPurchaseResult(lottos)
 
     val winningNumbers = InputView().readWinningNumbers()
-    val winningResult = LottoService().checkWinning(lottos, winningNumbers)
+    val bonusBall = InputView().readBonusBall(winningNumbers) // 보너스볼 입력 추가
+    val winningResult = LottoService().checkWinning(lottos, winningNumbers, bonusBall) // 보너스볼 전달
 
     ResultView().printWinningStatistics(winningResult)
     ResultView().printProfitRate(winningResult.calculateProfitRate(purchaseAmount))

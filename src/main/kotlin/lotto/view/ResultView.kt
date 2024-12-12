@@ -14,7 +14,7 @@ class ResultView {
         Rank.entries
             .filter { it != Rank.NONE }
             .forEach { rank ->
-                val count = winningResult.getWinningCount(rank.matchCount)
+                val count = winningResult.getWinningCount(rank)
                 println("${rank.matchCount}개 일치 (${rank.prize}원) - ${count}개")
             }
     }

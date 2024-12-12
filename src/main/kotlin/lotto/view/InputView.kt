@@ -21,4 +21,12 @@ class InputView {
             throw IllegalArgumentException("올바른 당첨 번호를 입력해주세요.")
         }
     }
+
+    fun readBonusBall(winningNumbers: Lotto): LottoNumber {
+        println("보너스 볼을 입력해 주세요.")
+        val bonusBall = readln().trim().toInt()
+        val bonusBallNumber = LottoNumber(bonusBall)
+        require(!winningNumbers.numbers.contains(bonusBallNumber)) { "보너스 볼은 당첨 번호와 중복될 수 없습니다." }
+        return bonusBallNumber
+    }
 }
