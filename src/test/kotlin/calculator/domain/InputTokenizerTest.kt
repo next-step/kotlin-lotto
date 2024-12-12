@@ -25,7 +25,7 @@ class InputTokenizerTest {
         val tokenizer = InputTokenizer("//;\n1;2;3")
 
         tokenizer.getTokens().size shouldBe 3
-        tokenizer.getTokens()[0] shouldBe "1"
+        tokenizer.getTokens()[0] shouldBe 1
     }
 
     @ParameterizedTest
@@ -53,6 +53,6 @@ class InputTokenizerTest {
         number: Int,
     ) {
         val tokenizer = InputTokenizer(input)
-        tokenizer.getTokens()[0].toIntOrNull() shouldBe number
+        tokenizer.getTokens()[0] shouldBe number
     }
 }
