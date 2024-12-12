@@ -1,5 +1,8 @@
 package autolotto.service
 
+import autolotto.constants.LottoConstants.LOTTO_TAKE_NUMBER
+import autolotto.constants.LottoConstants.MAX_LOTTO_NUMBER
+import autolotto.constants.LottoConstants.MIN_LOTTO_NUMBER
 import autolotto.domain.LottoNumber
 import autolotto.domain.WinningLottoNumber
 import autolotto.entity.Lotto
@@ -45,9 +48,4 @@ class LottoService(private val lottoRepository: LottoRepository) {
         return resultMap
     }
 
-    companion object {
-        private const val MIN_LOTTO_NUMBER = 1
-        private const val MAX_LOTTO_NUMBER = 45
-        private const val LOTTO_TAKE_NUMBER = 6
-    }
 }
