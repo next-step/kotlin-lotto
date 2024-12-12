@@ -1,4 +1,5 @@
 import lotto.domain.Lotto
+import lotto.domain.Rank
 
 class PurchasedLottos(private val tickets: List<Lotto>) {
     // Lottos 라는 객체는 구입한 로또들의 집합.
@@ -11,10 +12,10 @@ class PurchasedLottos(private val tickets: List<Lotto>) {
     val lottos: List<Lotto>
         get() = tickets.toList()
 
-    fun matchNumber(winningNumber: Lotto): Map<Int, Int> {
+    fun matchNumber(winningNumber: Lotto): Map<Rank, Int> {
         return tickets
             .map { it.match(winningNumber) }
-            .groupBy { it }
+            .groupBy { Rank.from(it) }
             .mapValues { it.value.size }
     }
 }

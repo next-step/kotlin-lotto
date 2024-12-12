@@ -4,6 +4,7 @@ import PurchasedLottos
 import lotto.domain.Lotto
 import lotto.domain.LottoPrice
 import lotto.domain.LottoRandomGenerator
+import lotto.domain.Rank
 import lotto.domain.WinningResult
 
 class LottoService {
@@ -19,7 +20,7 @@ class LottoService {
     ): WinningResult {
         val winningStatistics =
             lottos.matchNumber(winningNumbers)
-                .filterKeys { it >= 3 }
+                .filterKeys { it != Rank.NONE }
 
         return WinningResult(winningStatistics)
     }

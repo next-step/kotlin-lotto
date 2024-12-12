@@ -10,7 +10,13 @@ enum class Rank(val matchCount: Int, val prize: Int) {
 
     companion object {
         fun from(matchCount: Int): Rank {
-            return entries.find { it.matchCount == matchCount } ?: NONE
+            return when (matchCount) {
+                6 -> FIRST
+                5 -> SECOND
+                4 -> THIRD
+                3 -> FOURTH
+                else -> NONE
+            }
         }
     }
 }

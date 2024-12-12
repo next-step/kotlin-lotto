@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.Rank
 import lotto.domain.WinningResult
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -7,7 +8,7 @@ import org.junit.jupiter.api.Test
 class WinningResultTest {
     @Test
     fun `번호 3개 일치시 당첨금은 5000원이다`() {
-        val winningStatistics = mapOf(3 to 1)
+        val winningStatistics = mapOf(Rank.FOURTH to 1)
         val winningResult = WinningResult(winningStatistics)
         val prize = winningResult.calculateTotalPrize()
         assertThat(prize).isEqualTo(5000)
@@ -15,7 +16,7 @@ class WinningResultTest {
 
     @Test
     fun `당첨되지 않은 경우 당첨금은 0원이다`() {
-        val winningStatistics = mapOf(2 to 1)
+        val winningStatistics = mapOf(Rank.NONE to 1)
         val winningResult = WinningResult(winningStatistics)
         val prize = winningResult.calculateTotalPrize()
         assertThat(prize).isEqualTo(0)
@@ -23,7 +24,7 @@ class WinningResultTest {
 
     @Test
     fun `당첨 갯수와 당첨금 수를 반환한다`() {
-        val winningStatistics = mapOf(3 to 1, 4 to 2)
+        val winningStatistics = mapOf(Rank.FOURTH to 1, Rank.THIRD to 2)
         val winningResult = WinningResult(winningStatistics)
         assertThat(winningResult.getWinningCount(3)).isEqualTo(1)
         assertThat(winningResult.getWinningCount(4)).isEqualTo(2)
@@ -34,9 +35,9 @@ class WinningResultTest {
     fun `총 당첨금을 계산한다`() {
         val winningStatistics =
             mapOf(
-                3 to 2,
-                4 to 1,
-                5 to 1,
+                Rank.FOURTH to 2,
+                Rank.THIRD to 1,
+                Rank.SECOND to 1,
             )
         val winningResult = WinningResult(winningStatistics)
         val prize = winningResult.calculateTotalPrize()
@@ -46,8 +47,8 @@ class WinningResultTest {
 
     @Test
     fun `수익률을 계산한다`() {
-        val winningStatistics = mapOf(3 to 1) // 5,000원
-        val purchaseAmount = 10000 // 10장 구매
+        val winningStatistics = mapOf(Rank.FOURTH to 1)
+        val purchaseAmount = 10000
         val winningResult = WinningResult(winningStatistics)
         val profitRate = winningResult.calculateProfitRate(purchaseAmount)
         assertThat(profitRate).isEqualTo(0.5)
