@@ -25,7 +25,7 @@ class LottoResultTest : StringSpec({
         val lottoResultNoMatch = LottoResult(
             winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }),
             bonusLottoNumber = LottoNumber(7),
-            myLottoList = listOf(
+            myLottos = listOf(
                 Lotto(listOf(8, 9, 10, 11, 12, 13).map { LottoNumber(it) })
             )
         )
@@ -66,7 +66,7 @@ private fun fakeLottoResult(): LottoResult {
         LottoResult(
             winningLotto = winningLotto,
             bonusLottoNumber = LottoNumber(800),
-            myLottoList = myLottoList,
+            myLottos = myLottoList,
         )
     return lottoResult
 }

@@ -27,12 +27,12 @@ object InputView {
     }
 
     fun readManualLottoList(count: Int): List<List<Int>> {
-        val manualLottoNumberList = mutableListOf<List<Int>>()
+        val manualLottoNumbers = mutableListOf<List<Int>>()
         println(ENTER_MANUAL_LOTTO)
         repeat(count) {
-            manualLottoNumberList.add(readManualLotto())
+            manualLottoNumbers.add(readManualLotto())
         }
-        return manualLottoNumberList
+        return manualLottoNumbers
     }
 
     private fun readManualLotto(): List<Int> {

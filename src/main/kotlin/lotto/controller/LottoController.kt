@@ -46,7 +46,7 @@ object LottoController {
             LottoResult(
                 winningLotto = LottoFactory.fromList(winningNumbers),
                 bonusLottoNumber = LottoNumber(bonusLottoNumber),
-                myLottoList = myLottoList,
+                myLottos = myLottoList,
             )
         return result
     }
