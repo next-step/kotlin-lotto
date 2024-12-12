@@ -4,25 +4,25 @@ import java.math.BigDecimal
 
 object InputView {
     fun readTotalPurchaseAmountAsBigDecimal(): BigDecimal {
-        return readlnOrNull()?.trim()?.toBigDecimalOrNull() ?: BigDecimal.ZERO
+        return readlnOrNull()?.trim()?.toBigDecimal() ?: throw IllegalStateException("유효한 원화 형식이 아닙니다")
     }
 
     fun readWinningLotto(): List<Int> {
         println(ENTER_LAST_WINNING_NUMBER)
-        val winningLotto = readlnOrNull()?.split(",")?.map { it.trim().toIntOrNull() ?: 0 }
+        val winningLotto = readlnOrNull()?.split(",")?.map { it.trim().toInt() }
         require(winningLotto?.size == LOTTO_SIZE) { "Lotto size must be 6" }
         return winningLotto ?: throw IllegalStateException("Separate Lotto numbers by comma (,)")
     }
 
     fun readBonusLotto(): Int {
         println(ENTER_BONUS_BALL)
-        val bonusLottoNumber = readlnOrNull()?.trim()?.toIntOrNull() ?: 0 // single number
+        val bonusLottoNumber = readlnOrNull()?.trim()?.toInt() ?: throw IllegalStateException("정수를 입력해 주세요")
         return bonusLottoNumber
     }
 
     fun readManualLottoCount(): Int {
         println(ENTER_MANUAL_LOTTO_COUNT)
-        val manualLottoCount = readlnOrNull()?.trim()?.toIntOrNull() ?: 0
+        val manualLottoCount = readlnOrNull()?.trim()?.toInt() ?: throw IllegalStateException("정수를 입력해 주세요")
         return manualLottoCount
     }
 
@@ -39,7 +39,7 @@ object InputView {
         val input =
             readlnOrNull()?.trim()
                 ?.split(INPUT_SEPARATOR_COMMA)
-                ?.map { it.trim().toIntOrNull() ?: 0 }
+                ?.map { it.trim().toInt() }
                 ?: throw IllegalStateException("Separate Lotto numbers by comma (,)")
         return input
     }
