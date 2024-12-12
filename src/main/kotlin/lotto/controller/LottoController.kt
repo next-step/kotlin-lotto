@@ -1,5 +1,6 @@
 package lotto.controller
 
+import lotto.domain.Amount
 import lotto.domain.Cashier
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
@@ -21,7 +22,7 @@ class LottoController(private val inputView: InputView, private val outputView: 
         val manualLottoNumbers = inputView.manualLottos(manualLottoCount)
         val manualLotto = ManualLotto(manualLottoNumbers)
 
-        val cashier = createCashier(amount, manualLotto)
+        val cashier = createCashier(Amount(amount), manualLotto)
         val manualLottos = cashier.purchaseManualLottos()
         outputView.printPurchaseResult(manualLottos.tickets)
 
@@ -35,7 +36,7 @@ class LottoController(private val inputView: InputView, private val outputView: 
     }
 
     private fun createCashier(
-        amount: Int,
+        amount: Amount,
         manualLotto: ManualLotto,
     ): Cashier {
         val randomNumberListGenerator = RandomLottoNumberListGenerator()

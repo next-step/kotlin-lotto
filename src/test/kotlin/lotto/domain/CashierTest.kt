@@ -9,18 +9,18 @@ class CashierTest : DescribeSpec({
     describe("입력한 금액만큼 로또를 구매한다") {
         it("1000원 보다 적은 경우 throw exception") {
             shouldThrow<IllegalArgumentException> {
-                Cashier(999, FirstRankLottoLottoNumberGenerator())
+                Cashier(Amount(999), FirstRankLottoLottoNumberGenerator())
             }
         }
 
         it("1000원 짜리 로또를 구매한다") {
-            val sut = Cashier(3000, FirstRankLottoLottoNumberGenerator())
+            val sut = Cashier(Amount(3000), FirstRankLottoLottoNumberGenerator())
             val actual = sut.purchaseAutoLottos()
             actual.tickets.size shouldBe 3
         }
 
         it("100원 단위는 내림처리 한다.") {
-            val sut = Cashier(3500, FirstRankLottoLottoNumberGenerator())
+            val sut = Cashier(Amount(3500), FirstRankLottoLottoNumberGenerator())
             val actual = sut.purchaseAutoLottos()
             actual.tickets.size shouldBe 3
         }
@@ -32,7 +32,7 @@ class CashierTest : DescribeSpec({
                     setOf(1, 2, 3, 4, 5, 6),
                     setOf(1, 2, 3, 4, 5, 6),
                 )
-            val sut = Cashier(10000, FirstRankLottoLottoNumberGenerator(), ManualLotto(manualLottoNumbers))
+            val sut = Cashier(Amount(10000), FirstRankLottoLottoNumberGenerator(), ManualLotto(manualLottoNumbers))
             it("차액이 남은경우 자동로또를 생성한다") {
                 val actual = sut.purchaseAutoLottos()
                 actual.tickets.size shouldBe 7
@@ -52,7 +52,7 @@ class CashierTest : DescribeSpec({
 
                 val exception =
                     shouldThrow<IllegalArgumentException> {
-                        Cashier(2000, FirstRankLottoLottoNumberGenerator(), ManualLotto(manualLottoNumbers))
+                        Cashier(Amount(2000), FirstRankLottoLottoNumberGenerator(), ManualLotto(manualLottoNumbers))
                     }
 
                 exception.message shouldBe "수동로또를 구매할 잔액이 남지 않았습니다."
@@ -66,7 +66,7 @@ class CashierTest : DescribeSpec({
                         setOf(1, 2, 3, 4, 5, 6),
                     )
 
-                val sut = Cashier(2000, FirstRankLottoLottoNumberGenerator(), ManualLotto(manualLottoNumbers))
+                val sut = Cashier(Amount(2000), FirstRankLottoLottoNumberGenerator(), ManualLotto(manualLottoNumbers))
                 val actual = sut.purchaseManualLottos()
 
                 actual.tickets.size shouldBe 1
@@ -81,7 +81,7 @@ class CashierTest : DescribeSpec({
                         setOf(1, 2, 3, 4, 5, 6),
                     )
 
-                val sut = Cashier(2000, FirstRankLottoLottoNumberGenerator(), ManualLotto(manualLottoNumbers))
+                val sut = Cashier(Amount(2000), FirstRankLottoLottoNumberGenerator(), ManualLotto(manualLottoNumbers))
 
                 val actual = sut.purchaseManualLottos()
 
