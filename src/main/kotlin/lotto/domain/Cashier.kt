@@ -26,7 +26,11 @@ class Cashier(
     }
 
     fun purchaseManualLottos(): LottoTicket {
-        val lottos = manualLotto.toLotto()
+        val lottos =
+            manualLotto.manualLottoNumbers.map {
+                it.map(::LottoNumber).toSet()
+            }.map { Lotto(it) }
+
         return LottoTicket(lottos)
     }
 
