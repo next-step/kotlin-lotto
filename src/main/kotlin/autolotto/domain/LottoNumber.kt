@@ -12,6 +12,10 @@ class LottoNumber(private val numbers: Set<Int>) {
         return this.numbers.contains(number)
     }
 
+    fun hasNotNumber(number: Int): Boolean {
+        return this.numbers.contains(number).not()
+    }
+
     companion object {
         private const val LOTTO_NUMBERS_MAX_SIZE = 6
         private const val LOTTO_MIN_NUMBER = 1

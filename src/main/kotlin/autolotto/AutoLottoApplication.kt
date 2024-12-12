@@ -10,9 +10,9 @@ private val autoLottoController: AutoLottoController =
 
 fun main() {
     val amount = InputView.getLottoPurchaseAmount()
-    InputView.printLottoGameCount(amount.getLottoGameCount())
+    InputView.printLottoGameCount(amount.lottoGameCount)
 
-    val createLottoInfo = autoLottoController.start(amount.getLottoGameCount())
+    val createLottoInfo = autoLottoController.start(amount.lottoGameCount)
     OutPutView.printLottoInfo(createLottoInfo)
 
     val winnerNumbers = InputView.getWinningNumber()
