@@ -37,10 +37,6 @@ class Cashier(
         return amount / LOTTO_PRICE - numberOfManualLottos
     }
 
-    fun flatLottos(vararg ticket: LottoTicket): LottoTicket {
-        return LottoTicket(ticket.flatMap { it.tickets })
-    }
-
     companion object {
         private const val LOTTO_PRICE = 1000
         private const val INSUFFICIENT_FUNDS = "금액이 부족합니다."
