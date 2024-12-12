@@ -1,10 +1,8 @@
 package lotto.domain
 
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.collections.shouldContainOnly
 import io.kotest.matchers.shouldBe
-import lotto.domain.model.Lotto
-import lotto.domain.model.LottoNumber
-import lotto.domain.model.Rank
 
 class LottoResultTest : StringSpec({
     "로또 등수와 결과 카운트 검증" {
@@ -20,6 +18,20 @@ class LottoResultTest : StringSpec({
         results[Rank.THIRD] shouldBe 1
         results[Rank.FOURTH] shouldBe 1
         results[Rank.FIFTH] shouldBe 1
+    }
+
+    "일치하는 로또 번호가 없다면 resultMap 의 값들은 0 이다" {
+        // Given
+        val lottoResultNoMatch = LottoResult(
+            winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }),
+            bonusLottoNumber = LottoNumber(7),
+            myLottos = listOf(
+                Lotto(listOf(8, 9, 10, 11, 12, 13).map { LottoNumber(it) })
+            )
+        )
+        //when & then
+        val results = lottoResultNoMatch.resultMap
+        results.values.shouldContainOnly(0)
     }
 
     "getTotalProfit() 결과 검증" {
@@ -54,7 +66,7 @@ private fun fakeLottoResult(): LottoResult {
         LottoResult(
             winningLotto = winningLotto,
             bonusLottoNumber = LottoNumber(800),
-            myLottoList = myLottoList,
+            myLottos = myLottoList,
         )
     return lottoResult
 }

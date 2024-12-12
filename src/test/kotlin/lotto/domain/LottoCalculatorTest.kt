@@ -48,12 +48,21 @@ class LottoCalculatorTest {
     }
 
     @Test
-    fun `{given} 총 구매 금액이 0원일 경우 {when} calculateTotalProfit()  {then} IllegalArgumentException 발생`() {
+    fun `{given} 총 구매 금액이 0원일 경우 {when} calculateProfitRate()  {then} IllegalArgumentException 발생`() {
         assertThrows<IllegalArgumentException> {
             LottoCalculator.calculateProfitRate(
                 totalProfit = BigDecimal(10000),
                 totalPurchaseAmount = BigDecimal.ZERO,
             )
         }
+    }
+
+    @Test
+    fun `{given} 총 수익이 0인 경우 {when} calculateProfitRate() {then} BigDecimal ZERO 반환`() {
+        val profitRate = LottoCalculator.calculateProfitRate(
+            totalProfit = BigDecimal.ZERO,
+            totalPurchaseAmount = BigDecimal(10000),
+        )
+        assertEquals(BigDecimal.ZERO, profitRate)
     }
 }
