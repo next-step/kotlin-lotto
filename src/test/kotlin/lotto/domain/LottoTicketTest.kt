@@ -1,16 +1,9 @@
 package lotto.domain
 
-import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
 class LottoTicketTest {
-    @Test
-    fun `로또 티켓을 한장 생성한다`() {
-        val ticket = LottoTicket(1, 2, 3, 4, 5, 6)
-        ticket.equals(listOf(1, 2, 3, 4, 5, 6)).shouldBeTrue()
-    }
-
     @Test
     fun `로또 티켓을 한장 랜덤 생성한다`() {
         val tickets = LottoTicket.generateLottoTickets(1)

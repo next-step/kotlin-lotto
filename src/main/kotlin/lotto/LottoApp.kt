@@ -9,24 +9,16 @@ class LottoApp
 
 fun main() {
     val inputView = InputView()
+    val resultView = ResultView()
+
     val count = inputView.inputUser()
     val tickets = LottoTicket.generateLottoTickets(count)
-    println("${tickets.size}개를 구매했습니다.")
-    println(
-        tickets.joinToString(
-            separator = "\n",
-            prefix = "",
-            postfix = "",
-        ),
-    )
+    resultView.printBuyTickets(tickets)
 
     val winNumbers = inputView.inputWinNumbers()
     val winTicket = LottoTicket(winNumbers)
-
-    println(winTicket)
+    resultView.printTicket(winTicket)
 
     val lottoResult = LottoResult(tickets, winTicket, count)
-
-    val resultView = ResultView()
     resultView.printResult(lottoResult)
 }

@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.domain.LottoResult.RateResultString.LOSS
+import lotto.domain.LottoResult.RateResultString.WIN
 import kotlin.math.roundToInt
 
 class LottoResult(tickets: List<LottoTicket>, win: LottoTicket, used: Int = 0) {
@@ -20,9 +22,8 @@ class LottoResult(tickets: List<LottoTicket>, win: LottoTicket, used: Int = 0) {
         (totalPrize * 100.0 / (totalCount * TICKET_PRICE)).roundToInt() / 100.0
     }
 
-    val rateString by lazy {
-        if (returnRate > 1) "이익" else "손해"
-    }
+    val rateResultString: String
+        get() = if (returnRate > 1) WIN.koreanText else LOSS.koreanText
 
     init {
         tickets.forEach {
@@ -35,10 +36,15 @@ class LottoResult(tickets: List<LottoTicket>, win: LottoTicket, used: Int = 0) {
         }
     }
 
+    private enum class RateResultString(val koreanText: String) {
+        WIN("이익"),
+        LOSS("손해"),
+    }
+
     companion object {
-        const val TICKET_PRICE = 1000
-        const val FIRST_PRIZE = 2000000 * TICKET_PRICE
-        const val SECOND_PRIZE = 1500 * TICKET_PRICE
+        const val TICKET_PRICE = 1_000
+        const val FIRST_PRIZE = 2_000_000 * TICKET_PRICE
+        const val SECOND_PRIZE = 1_500 * TICKET_PRICE
         const val THIRD_PRIZE = 50 * TICKET_PRICE
         const val FOURTH_PRIZE = 5 * TICKET_PRICE
     }
