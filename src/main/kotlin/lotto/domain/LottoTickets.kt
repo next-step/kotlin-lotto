@@ -1,4 +1,3 @@
 package lotto.domain
 
-class LottoTickets {
-}
+data class LottoTickets(val lottoTickets: List<LottoTicket>)
