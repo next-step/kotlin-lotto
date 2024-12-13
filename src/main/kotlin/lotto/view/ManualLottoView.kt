@@ -1,10 +1,9 @@
-package lotto.view.util
+package lotto.view
 
 import lotto.domain.LottoNumbers
-import lotto.domain.LottoTicket
-import lotto.domain.LottoTicket2
+import lotto.domain.LottoTicket.ManualLottoTicket
 import lotto.domain.LottoTickets
-import lotto.view.WinnerLottoNumberView
+import lotto.view.util.splitInputNumbersCommand
 
 object ManualLottoView {
     fun inputManualLottoCount(maxPurchaseLottoCount: Int): Int {
@@ -26,7 +25,7 @@ object ManualLottoView {
         val lottoNumbersList = mutableListOf<LottoNumbers>()
         repeat(manualLottoCount) { lottoNumbersList.add(inputManualLottoNumbers()) }
 
-        val lottoTickets = lottoNumbersList.map { LottoTicket2(it) }
+        val lottoTickets = lottoNumbersList.map { ManualLottoTicket(it) }
 
         return LottoTickets(lottoTickets)
     }
