@@ -15,4 +15,14 @@ class LottoNumberTest {
             it.message shouldBe "로또 번호는 1보다 적거나 45보다 클 수 없습니다"
         }
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = [0, -10, 46, 100])
+    fun `로또 번호는 1부터 45사의의 숫자가 아니면 예외가 발생한다`(number: Int) {
+        shouldThrow<IllegalArgumentException> {
+            LottoNumber.from(number)
+        }.also {
+            it.message shouldBe "유효하지 않은 번호입니다"
+        }
+    }
 }
