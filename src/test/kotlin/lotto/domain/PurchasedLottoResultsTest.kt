@@ -3,7 +3,6 @@ package lotto.domain
 import io.kotest.assertions.throwables.shouldThrowWithMessage
 import lotto.domain.PurchasedLottoResults.Companion.INVALID_LOTTO_MATCH_COUNT_MESSAGE
 import lotto.domain.PurchasedLottoResults.Companion.INVALID_PURCHASED_COUNT_LOTTO_MATCH_COUNT_MESSAGE
-import lotto.domain.PurchasedLottoTickets.Companion.INVALID_PURCHASED_COUNT_MESSAGE
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
@@ -13,7 +12,7 @@ import org.junit.jupiter.params.provider.CsvSource
 class PurchasedLottoResultsTest {
     @Test
     fun `로또 구매 개수가 1개 미만 일 경우 에러가 발생한다`() {
-        shouldThrowWithMessage<IllegalArgumentException>(message = INVALID_PURCHASED_COUNT_MESSAGE) {
+        shouldThrowWithMessage<IllegalArgumentException>(message = "구입한 로또 개수가 올바르지 않습니다") {
             PurchasedLottoResults(
                 purchasedCount = 0,
                 firstRankCount = 0,
