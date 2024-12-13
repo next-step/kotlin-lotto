@@ -1,15 +1,13 @@
 package lotto.domain
 
-object LottoTicketIssuer {
-    fun issueTickets(
-        amountPaid: Int,
-        generateLottoNumbers: () -> Set<Int>,
-    ): PurchasedLottoTickets {
+object LottoTicketIssuer2 {
+    fun issueTickets(lottoTicket: LottoTicket): PurchasedLottoTickets2 {
+        return PurchasedLottoTickets2()
+    }
+
+    fun getMaxPurchasedLottoTicketCount(amountPaid: Int): Int {
         checkAmountPaid(amountPaid)
-        return PurchasedLottoTickets(
-            purchasedCount = (amountPaid / DEFAULT_LOTTO_PRICE),
-            generateLottoNumbers = generateLottoNumbers,
-        )
+        return amountPaid / DEFAULT_LOTTO_PRICE
     }
 
     private fun checkAmountPaid(amountPaid: Int) {

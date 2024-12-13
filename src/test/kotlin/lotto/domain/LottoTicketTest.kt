@@ -1,8 +1,9 @@
 package lotto.domain
 
-import io.kotest.assertions.throwables.shouldThrowWithMessage
-import lotto.domain.LottoNumber.Companion.INVALID_LOTTO_NUMBER_MESSAGE
-import lotto.domain.LottoNumbers.Companion.INVALID_LOTTO_NUMBER_COUNT_MESSAGE
+import io.kotest.matchers.equals.shouldBeEqual
+import lotto.domain.LottoTicket.AutoLottoTicket
+import lotto.domain.LottoTicket.ManualLottoTicket
+import lotto.util.createLottoNumbers
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -11,35 +12,58 @@ import java.util.stream.Stream
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class LottoTicketTest {
-    @MethodSource("7개 이상, 또는 6개 미만의 숫자 제공")
+    @MethodSource("구매한 로또의 번호, 당첨 번호, 매칭 결과 제공")
     @ParameterizedTest
-    fun `로또 번호는 숫자 6개가 아니면 에러가 발생한다`(numberSet: Set<Int>) {
-        shouldThrowWithMessage<IllegalArgumentException>(message = INVALID_LOTTO_NUMBER_COUNT_MESSAGE) {
-            LottoTicket(generateLottoNumbers = { numberSet })
-        }
+    fun `당첨 번호를 토대로 몇 등 인지 확인 할 수 있다`(
+        lottoTicket: LottoTicket,
+        lottoWinnerNumbers: LottoWinnerNumbers,
+        lottoWinnerRank: LottoWinnerRank,
+    ) {
+        lottoTicket.checkLottoWinnerRank(lottoWinnerNumbers) shouldBeEqual lottoWinnerRank
     }
 
-    fun `7개 이상, 또는 6개 미만의 숫자 제공`(): Stream<Arguments> {
+    fun `구매한 로또의 번호, 당첨 번호, 매칭 결과 제공`(): Stream<Arguments> {
         return Stream.of(
-            Arguments.of(setOf(5, 11, 15, 16, 17, 18, 19)),
-            Arguments.of(setOf(4, 5, 6, 7)),
-            Arguments.of(setOf(15, 16, 17, 18, 19)),
-        )
-    }
-
-    @MethodSource("1미만 46 이상의 숫자가 있는 로또 번호 제공")
-    @ParameterizedTest
-    fun `로또 번호는 1부터 45사이의 숫자가 아니면 에러가 발생한다`(numberSet: Set<Int>) {
-        shouldThrowWithMessage<IllegalArgumentException>(message = INVALID_LOTTO_NUMBER_MESSAGE) {
-            LottoTicket(generateLottoNumbers = { numberSet })
-        }
-    }
-
-    fun `1미만 46 이상의 숫자가 있는 로또 번호 제공`(): Stream<Arguments> {
-        return Stream.of(
-            Arguments.of(setOf(0, 11, 15, 1, 2, 3)),
-            Arguments.of(setOf(14, 15, 46, 7, 4, 5)),
-            Arguments.of(setOf(15, 16, 17, 18, -3, 1)),
+            Arguments.of(
+                ManualLottoTicket(createLottoNumbers(1, 2, 3, 4, 5, 6)),
+                LottoWinnerNumbers(createLottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber.of(7)),
+                LottoWinnerRank.FIRST,
+            ),
+            Arguments.of(
+                ManualLottoTicket(createLottoNumbers(1, 2, 3, 4, 5, 6)),
+                LottoWinnerNumbers(createLottoNumbers(1, 2, 3, 4, 5, 7), LottoNumber.of(6)),
+                LottoWinnerRank.SECOND,
+            ),
+            Arguments.of(
+                AutoLottoTicket { createLottoNumbers(1, 2, 3, 4, 5, 6) },
+                LottoWinnerNumbers(createLottoNumbers(1, 2, 3, 4, 5, 8), LottoNumber.of(7)),
+                LottoWinnerRank.THIRD,
+            ),
+            Arguments.of(
+                ManualLottoTicket(createLottoNumbers(1, 2, 3, 4, 5, 6)),
+                LottoWinnerNumbers(createLottoNumbers(1, 2, 3, 4, 8, 9), LottoNumber.of(7)),
+                LottoWinnerRank.FOURTH,
+            ),
+            Arguments.of(
+                AutoLottoTicket { createLottoNumbers(1, 2, 3, 4, 5, 6) },
+                LottoWinnerNumbers(createLottoNumbers(1, 2, 3, 8, 9, 10), LottoNumber.of(7)),
+                LottoWinnerRank.FIFTH,
+            ),
+            Arguments.of(
+                ManualLottoTicket(createLottoNumbers(1, 2, 3, 4, 5, 6)),
+                LottoWinnerNumbers(createLottoNumbers(1, 2, 8, 9, 10, 11), LottoNumber.of(7)),
+                LottoWinnerRank.MISS,
+            ),
+            Arguments.of(
+                AutoLottoTicket { createLottoNumbers(1, 2, 3, 4, 5, 6) },
+                LottoWinnerNumbers(createLottoNumbers(1, 8, 9, 10, 11, 12), LottoNumber.of(7)),
+                LottoWinnerRank.MISS,
+            ),
+            Arguments.of(
+                ManualLottoTicket(createLottoNumbers(1, 2, 3, 4, 5, 6)),
+                LottoWinnerNumbers(createLottoNumbers(8, 9, 10, 11, 12, 13), LottoNumber.of(7)),
+                LottoWinnerRank.MISS,
+            ),
         )
     }
 }
