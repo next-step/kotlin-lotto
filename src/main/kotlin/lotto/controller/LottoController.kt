@@ -1,40 +1,59 @@
 package lotto.controller
 
-import lotto.domain.LottoNumber
-import lotto.domain.LottoNumbers
-import lotto.domain.LottoTicketIssuer
+import lotto.domain.AutoLottoIssuer
+import lotto.domain.LottoNumberGenerator
+import lotto.domain.LottoPurchaseCalculator
+import lotto.domain.LottoTickets
 import lotto.domain.LottoWinnerNumbers
-import lotto.domain.PurchasedLottoTickets
-import lotto.domain.generateLottoNumbers
 import lotto.view.LottoPayoutView
-import lotto.view.PurchaseLottoResultView
+import lotto.view.ManualLottoView
 import lotto.view.PurchaseLottoView
 import lotto.view.WinnerLottoNumberView
 
 object LottoController {
-    fun purchaseLotto(): PurchasedLottoTickets {
+    fun getMaxPurchaseLottoCountFromPayment(): Int {
         val amountPaid = PurchaseLottoView.inputPurchaseCost()
+        return LottoPurchaseCalculator.getMaxPurchasedLottoTicketCount(amountPaid)
+    }
 
-        val purchasedLottoTickets =
-            LottoTicketIssuer.issueTickets(amountPaid = amountPaid, generateLottoNumbers = { generateLottoNumbers() })
+    fun purchaseManualLotto(maxPurchaseLottoCount: Int): LottoTickets {
+        val manualLottoCount = ManualLottoView.inputManualLottoCount(maxPurchaseLottoCount)
+        return ManualLottoView.repeatInputManualLottoNumbers(manualLottoCount)
+    }
 
-        PurchaseLottoResultView.displayPurchaseLottoResults(purchasedLottoTickets = purchasedLottoTickets)
+    fun createAutoLotto(
+        maxPurchaseLottoCount: Int,
+        manualLottoTickets: LottoTickets,
+    ): LottoTickets {
+        val autoLottoCount = maxPurchaseLottoCount - manualLottoTickets.lottoTickets.size
 
-        return purchasedLottoTickets
+        val autoLottoTickets =
+            AutoLottoIssuer.issueAutoLottoTickets(autoLottoCount) {
+                LottoNumberGenerator.generateAutoLottoNumbers()
+            }
+
+        PurchaseLottoView.displayPurchasedLottosView(
+            manualLottoTickets = manualLottoTickets,
+            autoLottoTickets = autoLottoTickets,
+        )
+
+        val combinedManualLottoAndAutoLotto = manualLottoTickets.lottoTickets.plus(autoLottoTickets.lottoTickets)
+
+        return LottoTickets(combinedManualLottoAndAutoLotto)
     }
 
     fun createWinningLottoNumbers(): LottoWinnerNumbers {
         val inputLottoNumbers = WinnerLottoNumberView.inputWinningLottoNumbers()
-        val lottoNumbers = LottoNumbers(inputLottoNumbers.map { LottoNumber.of(it) }.toSet())
         val inputBonusNumber = WinnerLottoNumberView.inputBonusNumber()
-        return LottoWinnerNumbers(lottoNumbers = lottoNumbers, bonusNumber = LottoNumber.of(inputBonusNumber))
+
+        return LottoWinnerNumbers(lottoNumbers = inputLottoNumbers, bonusNumber = inputBonusNumber)
     }
 
     fun resultPayout(
-        purchasedLottoTickets: PurchasedLottoTickets,
+        lottoTickets: LottoTickets,
         lottoWinnerNumbers: LottoWinnerNumbers,
     ) {
-        val purchasedLottoResults = lottoWinnerNumbers.resultLottoPayout(purchasedLottoTickets)
+        val purchasedLottoResults = lottoWinnerNumbers.resultLottoPayout(lottoTickets)
         return LottoPayoutView.displayWinningStatistics(purchasedLottoResults = purchasedLottoResults)
     }
 }
