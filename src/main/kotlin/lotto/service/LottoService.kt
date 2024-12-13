@@ -1,6 +1,6 @@
 package lotto.service
 
-import PurchasedLottos
+import Lottos
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.LottoPrice
@@ -9,14 +9,14 @@ import lotto.domain.Rank
 import lotto.domain.WinningResult
 
 class LottoService {
-    fun purchase(price: LottoPrice): PurchasedLottos {
+    fun purchase(price: LottoPrice): Lottos {
         val purchaseCount = price.calculatePurchaseCount()
         val tickets = (1..purchaseCount).map { LottoRandomGenerator.randomGenerate() }
-        return PurchasedLottos(tickets)
+        return Lottos(tickets)
     }
 
     fun checkWinning(
-        lottos: PurchasedLottos,
+        lottos: Lottos,
         winningNumbers: Lotto,
         bonusBall: LottoNumber,
     ): WinningResult {

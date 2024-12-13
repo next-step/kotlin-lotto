@@ -1,6 +1,6 @@
 package lotto
 
-import PurchasedLottos
+import Lottos
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.LottoPrice
@@ -47,8 +47,8 @@ class LottoGameTest {
 
     @Test
     fun `3개 미만으로 일치하는 경우는 당첨 통계에서 제외된다`() {
-        val purchasedLottos =
-            PurchasedLottos(
+        val lottos =
+            Lottos(
                 listOf(
                     Lotto(createLottoNumbers(1, 2, 45, 44, 43, 42)),
                     Lotto(createLottoNumbers(1, 13, 45, 44, 43, 42)),
@@ -58,15 +58,15 @@ class LottoGameTest {
         val winningNumbers = Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6))
         val bonusNumber = LottoNumber(7)
 
-        val winningResult = LottoService().checkWinning(purchasedLottos, winningNumbers, bonusNumber)
+        val winningResult = LottoService().checkWinning(lottos, winningNumbers, bonusNumber)
 
         assertThat(winningResult.getWinningCount(Rank.NONE)).isEqualTo(0)
     }
 
     @Test
     fun `각 매칭 개수별 당첨 횟수를 체크한다`() {
-        val purchasedLottos =
-            PurchasedLottos(
+        val lottos =
+            Lottos(
                 listOf(
                     Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6)),
                     Lotto(createLottoNumbers(1, 2, 3, 4, 5, 7)),
@@ -77,7 +77,7 @@ class LottoGameTest {
         val winningNumbers = Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6))
         val bonusNumber = LottoNumber(7)
 
-        val winningResult = LottoService().checkWinning(purchasedLottos, winningNumbers, bonusNumber)
+        val winningResult = LottoService().checkWinning(lottos, winningNumbers, bonusNumber)
 
         assertThat(winningResult.getWinningCount(Rank.FIRST)).isEqualTo(1)
         assertThat(winningResult.getWinningCount(Rank.SECOND)).isEqualTo(1)
@@ -87,8 +87,8 @@ class LottoGameTest {
 
     @Test
     fun `당첨번호와 일치하는 번호가 없는 경우 빈 결과를 반환한다`() {
-        val purchasedLottos =
-            PurchasedLottos(
+        val lottos =
+            Lottos(
                 listOf(
                     Lotto(createLottoNumbers(11, 22, 23, 24, 25, 26)),
                 ),
@@ -96,7 +96,7 @@ class LottoGameTest {
         val winningNumbers = Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6))
         val bonusNumber = LottoNumber(7)
 
-        val winningResult = LottoService().checkWinning(purchasedLottos, winningNumbers, bonusNumber)
+        val winningResult = LottoService().checkWinning(lottos, winningNumbers, bonusNumber)
 
         assertThat(winningResult.getWinningCount(Rank.FIFTH)).isEqualTo(0)
         assertThat(winningResult.getWinningCount(Rank.FOURTH)).isEqualTo(0)
@@ -107,8 +107,8 @@ class LottoGameTest {
 
     @Test
     fun `1등 2등 3등의 로또를 정상적으로 체크한다`() {
-        val purchasedLottos =
-            PurchasedLottos(
+        val lottos =
+            Lottos(
                 listOf(
                     Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6)),
                     Lotto(createLottoNumbers(1, 2, 3, 4, 5, 7)),
@@ -118,7 +118,7 @@ class LottoGameTest {
         val winningNumbers = Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6))
         val bonusNumber = LottoNumber(7)
 
-        val winningResult = LottoService().checkWinning(purchasedLottos, winningNumbers, bonusNumber)
+        val winningResult = LottoService().checkWinning(lottos, winningNumbers, bonusNumber)
 
         assertThat(winningResult.getWinningCount(Rank.FIRST)).isEqualTo(1)
         assertThat(winningResult.getWinningCount(Rank.SECOND)).isEqualTo(1)
