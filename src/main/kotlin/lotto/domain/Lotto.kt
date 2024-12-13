@@ -11,9 +11,9 @@ class Lotto(val numbers: List<LottoNumber>) {
     fun match(
         winningNumber: Lotto,
         bonusBall: LottoNumber,
-    ): MatchResult {
+    ): Rank {
         val matchCount = this.numbers.count { winningNumber.numbers.contains(it) }
         val matchBonus = this.numbers.contains(bonusBall)
-        return MatchResult(matchCount, matchBonus)
+        return Rank.from(matchCount, matchBonus)
     }
 }
