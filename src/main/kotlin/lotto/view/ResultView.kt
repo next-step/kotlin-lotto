@@ -6,7 +6,7 @@ import lotto.domain.WinningResult
 
 class ResultView {
     fun printPurchaseResult(lottos: Lottos) {
-        println("${lottos.size()}개를 구매했습니다.")
+        println("${lottos.size}개를 구매했습니다.")
         lottos.lottos.forEach { println(it) }
     }
 

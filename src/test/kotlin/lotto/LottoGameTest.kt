@@ -22,7 +22,7 @@ class LottoGameTest {
         val lottoPrice = LottoPrice(money)
         val purchasedLottos = LottoService().purchase(lottoPrice)
 
-        assertThat(purchasedLottos.size()).isEqualTo(lottoPrice.calculatePurchaseCount())
+        assertThat(purchasedLottos.size).isEqualTo(lottoPrice.calculatePurchaseCount())
 
         purchasedLottos.lottos.forEach {
             assertThat(it.numbers.distinct().size).isEqualTo(6)

@@ -7,7 +7,8 @@ class Lottos(private val tickets: List<Lotto>) {
         require(tickets.isNotEmpty()) { "로또는 최소 1개 이상 구매해야 합니다." }
     }
 
-    fun size(): Int = tickets.size
+    val size: Int
+        get() = tickets.size
 
     val lottos: List<Lotto>
         get() = tickets.toList()
