@@ -1,10 +1,6 @@
 package lotto.domain
 
-object LottoTicketIssuer2 {
-    fun issueTickets(lottoTicket: LottoTicket): PurchasedLottoTickets2 {
-        return PurchasedLottoTickets2()
-    }
-
+object LottoPurchaseCalculator {
     fun getMaxPurchasedLottoTicketCount(amountPaid: Int): Int {
         checkAmountPaid(amountPaid)
         return amountPaid / DEFAULT_LOTTO_PRICE
@@ -17,6 +13,6 @@ object LottoTicketIssuer2 {
 
     const val DEFAULT_LOTTO_PRICE: Int = 1000
     private const val CHECK_SURPLUS: Int = 0
-    const val INVALID_MIN_COST_LOTTO_PAID_MESSAGE: String = "로또 구입 비용은 최소 1,000원 이상 이어야 합니다"
-    const val INVALID_THOUSAND_UNIT_LOTTO_PAID_MESSAGE: String = "로또 구입 비용은 1,000원 단위로 지불해야 합니다"
+    private const val INVALID_MIN_COST_LOTTO_PAID_MESSAGE: String = "로또 구입 비용은 최소 1,000원 이상 이어야 합니다"
+    private const val INVALID_THOUSAND_UNIT_LOTTO_PAID_MESSAGE: String = "로또 구입 비용은 1,000원 단위로 지불해야 합니다"
 }
