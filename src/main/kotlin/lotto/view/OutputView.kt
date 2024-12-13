@@ -9,7 +9,7 @@ object OutputView {
         val ticketCount = lottoTickets.size
         println(message = "$ticketCount 개를 구매했습니다.")
         for (lottoTicket in lottoTickets) {
-            println(lottoTicket.lottoNumbers)
+            println(lottoTicket)
         }
     }
 
@@ -28,13 +28,7 @@ object OutputView {
         val totalPrize = results.totalPrize()
         val rateOfReturn = totalPrize.toDouble() / amount
         println("총 수익률은 %.2f 입니다.".format(rateOfReturn))
-//        val rankCounts = results.countByRank()
-//        LottoRank.entries.forEach { rank ->
-//            val count = rankCounts[rank] ?: 0
-//            println("${rank.matchCount} 개 일치 (${rank.prize}원)- ${count}개")
-//        }
-//        val reteOfReturn = results.totalPrize() / amount
-//        print("총 수익률은 ${reteOfReturn}입니다.")
+
         if (rateOfReturn < 1) {
             println("기준이 1이기 때문에 결과적으로 손해라는 의미임)")
         }

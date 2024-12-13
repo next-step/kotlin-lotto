@@ -27,12 +27,12 @@ class LottoTicketsTest {
         val lottoTickets =
             LottoTickets(
                 listOf(
-                    LottoTicket(listOf(1, 2, 3, 4, 5, 7)),
-                    LottoTicket(listOf(1, 2, 3, 4, 5, 9)),
-                    LottoTicket(listOf(1, 2, 3, 4, 8, 9)),
+                    LottoTicket.from(setOf(1, 2, 3, 4, 5, 7)),
+                    LottoTicket.from(setOf(1, 2, 3, 4, 5, 9)),
+                    LottoTicket.from(setOf(1, 2, 3, 4, 8, 9)),
                 ),
             )
-        val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = LottoTicket.from(setOf(1, 2, 3, 4, 5, 6))
         val lottoResults = lottoTickets.calculateLottoRank(winningLotto)
         val sortedResults = lottoResults.findAllSortedByMatchCount()
         sortedResults[0].rank shouldBe LottoRank.FIRST_PLACE
