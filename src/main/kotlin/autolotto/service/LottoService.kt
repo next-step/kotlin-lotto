@@ -3,6 +3,7 @@ package autolotto.service
 import autolotto.constants.LottoConstants.LOTTO_TAKE_NUMBER
 import autolotto.constants.LottoConstants.MAX_LOTTO_NUMBER
 import autolotto.constants.LottoConstants.MIN_LOTTO_NUMBER
+import autolotto.domain.LottoMatchResult
 import autolotto.domain.LottoNumber
 import autolotto.domain.WinningLottoNumber
 import autolotto.entity.Lotto
@@ -29,6 +30,11 @@ class LottoService(private val lottoRepository: LottoRepository) {
     fun getResult(winningLottoNumber: WinningLottoNumber): Map<Prize, Int> {
         val lottos = lottoRepository.findAll()
 
+        val matchResults =
+            lottos.map { lotto ->
+                lotto.compareWithWinningNumbers(winningLottoNumber)
+            }
+
         val resultMap =
             mutableMapOf(
                 Prize.THREE to 0,
@@ -38,14 +44,19 @@ class LottoService(private val lottoRepository: LottoRepository) {
                 Prize.SIX to 0,
             )
 
-        lottos.forEach { lotto ->
-            val (matchCount, hasBonus) = lotto.compareWithWinningNumbers(winningLottoNumber)
-            Prize.fromMatchCount(matchCount, hasBonus)?.let { prize ->
-                resultMap[prize] = resultMap.getOrDefault(prize, 0) + 1
-            }
+        matchResults.forEach { result ->
+            toPrize(result, resultMap)
         }
 
         return resultMap
     }
 
+    private fun toPrize(
+        result: LottoMatchResult,
+        resultMap: MutableMap<Prize, Int>,
+    ) {
+        result.toPrize()?.let { prize ->
+            resultMap[prize] = resultMap.getOrDefault(prize, 0) + 1
+        }
+    }
 }
