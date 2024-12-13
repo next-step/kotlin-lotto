@@ -5,15 +5,15 @@ data class LottoWinnerNumbers(val lottoNumbers: LottoNumbers, val bonusNumber: L
         require(!lottoNumbers.contains(bonusNumber)) { INVALID_WINNER_NUMBERS_MESSAGE }
     }
 
-    fun resultLottoPayout(purchasedLottoTickets: PurchasedLottoTickets): PurchasedLottoResults {
+    fun resultLottoPayout(lottoTickets: LottoTickets): PurchasedLottoResults {
         val rankCounts: Map<LottoWinnerRank, Int> =
-            purchasedLottoTickets.purchasedLottoTickets
+            lottoTickets.lottoTickets
                 .map { lottoTicket -> lottoTicket.checkLottoWinnerRank(this) }
                 .groupingBy { it }
                 .eachCount()
 
         return PurchasedLottoResults(
-            purchasedCount = purchasedLottoTickets.purchasedCount,
+            purchasedCount = lottoTickets.lottoTickets.size,
             firstRankCount = rankCounts[LottoWinnerRank.FIRST] ?: 0,
             secondRankCount = rankCounts[LottoWinnerRank.SECOND] ?: 0,
             thirdRankCount = rankCounts[LottoWinnerRank.THIRD] ?: 0,

@@ -4,6 +4,7 @@ import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.matchers.equals.shouldBeEqual
 import lotto.domain.LottoNumber.Companion.INVALID_LOTTO_NUMBER_MESSAGE
 import lotto.domain.LottoNumbers.Companion.INVALID_LOTTO_NUMBER_COUNT_MESSAGE
+import lotto.domain.LottoTicket.ManualLottoTicket
 import lotto.domain.LottoWinnerNumbers.Companion.INVALID_WINNER_NUMBERS_MESSAGE
 import lotto.util.createLottoNumbers
 import org.junit.jupiter.api.Test
@@ -36,13 +37,12 @@ class LottoWinnerNumbersTest {
         }
     }
 
-    @MethodSource("구매한 로또의 번호 및 당첨 번호, 매칭 결과 및 수익률 제공")
+    @MethodSource("당첨 로또 번호, 보너스 번호, 구매한 로또 티켓, 매칭 결과 및 수익률 제공")
     @ParameterizedTest
-    fun `구매한 로또 번호가 당첨 번호와 몇개가 일치하는지와 수익률 등 결과 확인 (3개부터)`(
-        purchasedCount: Int,
-        lottoNumbers: Set<Int>,
-        winnerNumbers: Set<Int>,
+    fun `구매한 로또 번호가 당첨 번호와 몇개가 일치하는지와 수익률 등 결과 확인`(
+        winnerNumbers: LottoNumbers,
         bonusNumber: Int,
+        purchasedLottoTickets: LottoTickets,
         firstRankCount: Int,
         secondRankCount: Int,
         thirdRankCount: Int,
@@ -50,15 +50,7 @@ class LottoWinnerNumbersTest {
         fifthRankCount: Int,
         profitMargin: Double,
     ) {
-        val purchasedLottoTickets =
-            PurchasedLottoTickets(purchasedCount = purchasedCount, generateLottoNumbers = { lottoNumbers })
-
-        val lottoWinnerNumbers =
-            LottoWinnerNumbers(
-                lottoNumbers = LottoNumbers(winnerNumbers.map { LottoNumber.of(it) }.toSet()),
-                bonusNumber = LottoNumber.of(bonusNumber),
-            )
-
+        val lottoWinnerNumbers = LottoWinnerNumbers(winnerNumbers, LottoNumber.of(bonusNumber))
         val purchasedLottoResults = lottoWinnerNumbers.resultLottoPayout(purchasedLottoTickets)
 
         purchasedLottoResults.firstRankCount shouldBeEqual firstRankCount
@@ -69,16 +61,96 @@ class LottoWinnerNumbersTest {
         purchasedLottoResults.getProfitMargin() shouldBeEqual profitMargin
     }
 
-    fun `구매한 로또의 번호 및 당첨 번호, 매칭 결과 및 수익률 제공`(): Stream<Arguments> {
+    fun `당첨 로또 번호, 보너스 번호, 구매한 로또 티켓, 매칭 결과 및 수익률 제공`(): Stream<Arguments> {
         return Stream.of(
-            Arguments.of(5, setOf(1, 2, 3, 4, 5, 6), setOf(11, 15, 16, 17, 18, 19), 3, 0, 0, 0, 0, 0, 0.0),
-            Arguments.of(25, setOf(1, 2, 3, 4, 5, 6), setOf(4, 15, 16, 17, 18, 19), 7, 0, 0, 0, 0, 0, 0.0),
-            Arguments.of(35, setOf(1, 2, 3, 4, 5, 6), setOf(4, 5, 16, 17, 18, 19), 20, 0, 0, 0, 0, 0, 0.0),
-            Arguments.of(5, setOf(1, 2, 3, 4, 5, 6), setOf(4, 5, 6, 7, 8, 9), 21, 0, 0, 0, 0, 5, 5.0),
-            Arguments.of(8, setOf(11, 12, 13, 14, 15, 16), setOf(13, 14, 15, 16, 17, 18), 22, 0, 0, 0, 8, 0, 50.0),
-            Arguments.of(3, setOf(21, 22, 23, 24, 25, 26), setOf(21, 22, 23, 24, 25, 1), 2, 0, 0, 3, 0, 0, 1500.0),
-            Arguments.of(3, setOf(21, 22, 23, 24, 25, 26), setOf(21, 22, 23, 24, 25, 1), 26, 0, 3, 0, 0, 0, 30000.0),
-            Arguments.of(1, setOf(31, 32, 33, 34, 35, 41), setOf(31, 32, 33, 34, 35, 41), 9, 1, 0, 0, 0, 0, 2000000.0),
+            Arguments.of(
+                createLottoNumbers(1, 2, 3, 4, 5, 6),
+                7,
+                LottoTickets(listOf(ManualLottoTicket(createLottoNumbers(1, 2, 3, 4, 5, 6)))),
+                1,
+                0,
+                0,
+                0,
+                0,
+                2000000.0,
+            ),
+            Arguments.of(
+                createLottoNumbers(1, 2, 3, 4, 5, 6),
+                7,
+                LottoTickets(listOf(ManualLottoTicket(createLottoNumbers(1, 2, 3, 4, 5, 7)))),
+                0,
+                1,
+                0,
+                0,
+                0,
+                30000.0,
+            ),
+            Arguments.of(
+                createLottoNumbers(1, 2, 3, 4, 5, 6),
+                7,
+                LottoTickets(listOf(ManualLottoTicket(createLottoNumbers(1, 2, 3, 4, 5, 8)))),
+                0,
+                0,
+                1,
+                0,
+                0,
+                1500.0,
+            ),
+            Arguments.of(
+                createLottoNumbers(1, 2, 3, 4, 5, 6),
+                7,
+                LottoTickets(listOf(ManualLottoTicket(createLottoNumbers(1, 2, 3, 4, 8, 9)))),
+                0,
+                0,
+                0,
+                1,
+                0,
+                50.0,
+            ),
+            Arguments.of(
+                createLottoNumbers(1, 2, 3, 4, 5, 6),
+                7,
+                LottoTickets(listOf(ManualLottoTicket(createLottoNumbers(1, 2, 3, 8, 9, 10)))),
+                0,
+                0,
+                0,
+                0,
+                1,
+                5.0,
+            ),
+            Arguments.of(
+                createLottoNumbers(1, 2, 3, 4, 5, 6),
+                7,
+                LottoTickets(listOf(ManualLottoTicket(createLottoNumbers(1, 2, 8, 9, 10, 11)))),
+                0,
+                0,
+                0,
+                0,
+                0,
+                0.0,
+            ),
+            Arguments.of(
+                createLottoNumbers(1, 2, 3, 4, 5, 6),
+                7,
+                LottoTickets(listOf(ManualLottoTicket(createLottoNumbers(1, 8, 9, 10, 11, 12)))),
+                0,
+                0,
+                0,
+                0,
+                0,
+                0.0,
+            ),
+            Arguments.of(
+                createLottoNumbers(1, 2, 3, 4, 5, 6),
+                7,
+                LottoTickets(listOf(ManualLottoTicket(createLottoNumbers(8, 9, 10, 11, 12, 13)))),
+                0,
+                0,
+                0,
+                0,
+                0,
+                0.0,
+            ),
         )
     }
 }
