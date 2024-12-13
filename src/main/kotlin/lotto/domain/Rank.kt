@@ -14,14 +14,10 @@ enum class Rank(val matchCount: Int, val prize: Int, val hasBonus: Boolean = fal
             matchCount: Int,
             matchBonus: Boolean = false,
         ): Rank {
-            return when {
-                matchCount == 6 -> FIRST
-                matchCount == 5 && matchBonus -> SECOND
-                matchCount == 5 -> THIRD
-                matchCount == 4 -> FOURTH
-                matchCount == 3 -> FIFTH
-                else -> NONE
-            }
+            return entries.firstOrNull { rank ->
+                rank.matchCount == matchCount &&
+                    (rank.hasBonus == matchBonus || rank.matchCount != SECOND.matchCount)
+            } ?: NONE
         }
     }
 }
