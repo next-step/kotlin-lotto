@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 class GeneratorRandomNumbersTest {
     @Test
     fun `로또 티켓을 한장 랜덤 생성한다`() {
-        val tickets = GeneratorRandomNumbers.generateNumbers(1)
-        tickets.size shouldBe 1
+        val tickets = GeneratorRandomNumbers.generateNumbers()
+        tickets.size shouldBe 6
     }
 }

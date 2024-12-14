@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.controller.GeneratorLottoNumbers
 import lotto.controller.GeneratorRandomNumbers
 
 class LottoTicket {
@@ -46,10 +47,13 @@ class LottoTicket {
     }
 
     companion object {
-        fun generateLottoTickets(count: Int): List<LottoTicket> {
+        fun generateLottoTickets(
+            count: Int,
+            numberGenerator: GeneratorLottoNumbers = GeneratorRandomNumbers,
+        ): List<LottoTicket> {
             val tickets = mutableListOf<LottoTicket>()
             while (tickets.size < count) {
-                tickets.add(LottoTicket(GeneratorRandomNumbers.generateNumbers(6)))
+                tickets.add(LottoTicket(numberGenerator.generateNumbers()))
             }
             return tickets.toList()
         }
