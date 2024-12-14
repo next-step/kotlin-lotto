@@ -7,7 +7,6 @@ class LottoTicketTest {
     @Test
     fun `로또 티켓을 한장 랜덤 생성한다`() {
         val tickets = LottoTicket.generateLottoTickets(1)
-        println(tickets)
         tickets.size shouldBe 1
     }
 
@@ -15,7 +14,6 @@ class LottoTicketTest {
     fun `1등 확인`() {
         val ticket = LottoTicket(1, 2, 3, 4, 5, 6)
         val winner = LottoTicket(1, 2, 3, 4, 5, 6)
-        println("$ticket, $winner")
         winner.correctNumberCount(ticket) shouldBe 6
     }
 
@@ -23,7 +21,6 @@ class LottoTicketTest {
     fun `3등 확인`() {
         val ticket = LottoTicket(1, 2, 3, 4, 7, 8)
         val winner = LottoTicket(1, 2, 3, 4, 5, 6)
-        println("$ticket, $winner")
         winner.correctNumberCount(ticket) shouldBe 4
     }
 }
