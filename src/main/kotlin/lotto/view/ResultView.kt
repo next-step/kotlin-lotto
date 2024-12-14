@@ -1,20 +1,20 @@
 package lotto.view
 
-import lotto.domain.Lotto
+import Lottos
 import lotto.domain.Rank
 import lotto.domain.WinningResult
 
 class ResultView {
-    fun printPurchaseResult(lottos: List<Lotto>) {
+    fun printPurchaseResult(lottos: Lottos) {
         println("${lottos.size}개를 구매했습니다.")
-        lottos.forEach { println(it.sortedList()) }
+        lottos.lottos.forEach { println(it) }
     }
 
     fun printWinningStatistics(winningResult: WinningResult) {
         Rank.entries
             .filter { it != Rank.NONE }
             .forEach { rank ->
-                val count = winningResult.getWinningCount(rank.matchCount)
+                val count = winningResult.getWinningCount(rank)
                 println("${rank.matchCount}개 일치 (${rank.prize}원) - ${count}개")
             }
     }

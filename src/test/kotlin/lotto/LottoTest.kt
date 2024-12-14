@@ -2,7 +2,6 @@ package lotto
 
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -30,12 +29,5 @@ class LottoTest {
         assertThrows<IllegalArgumentException> {
             Lotto(createLottoNumbers(0, 1, 2, 3, 4, 5))
         }
-    }
-
-    @Test
-    fun `당첨 번호와 일치하는 개수를 반환한다`() {
-        val lotto = Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6))
-        val winningLotto = Lotto(createLottoNumbers(1, 2, 3, 7, 8, 9))
-        assertEquals(3, lotto.match(winningLotto))
     }
 }

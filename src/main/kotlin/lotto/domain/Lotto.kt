@@ -8,9 +8,12 @@ class Lotto(val numbers: List<LottoNumber>) {
         require(numbers.distinct().size == LOTTO_SIZE) { "로또 번호는 중복될 수 없습니다." }
     }
 
-    fun match(other: Lotto): Int {
-        return numbers.count { other.numbers.contains(it) }
+    fun match(
+        winningNumber: Lotto,
+        bonusBall: LottoNumber,
+    ): Rank {
+        val matchCount = this.numbers.count { winningNumber.numbers.contains(it) }
+        val matchBonus = this.numbers.contains(bonusBall)
+        return Rank.from(matchCount, matchBonus)
     }
-
-    fun sortedList(): List<LottoNumber> = numbers.sortedBy { it.number }
 }

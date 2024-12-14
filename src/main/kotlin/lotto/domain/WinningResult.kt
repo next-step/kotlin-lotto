@@ -1,26 +1,21 @@
 package lotto.domain
 
-class WinningResult(private val winningStatistics: Map<Int, Int>) {
+class WinningResult(private val winningStatistics: Map<Rank, Int>) {
+    companion object {
+        private const val NO_WINNING_COUNT = 0
+    }
+
     fun calculateTotalPrize(): Int {
-        return winningStatistics.entries.sumOf { (matchCount, count) ->
-            calculatePrizeForMatch(matchCount, count)
+        return winningStatistics.entries.sumOf { (rank, count) ->
+            rank.prize * count
         }
     }
 
-    private fun calculatePrizeForMatch(
-        matchCount: Int,
-        count: Int,
-    ): Int {
-        val rank = Rank.from(matchCount)
-        return rank.prize * count
-    }
-
-    // 손익률 계산
     fun calculateProfitRate(purchaseAmount: Int): Double {
         return calculateTotalPrize().toDouble() / purchaseAmount
     }
 
-    fun getWinningCount(matchCount: Int): Int {
-        return winningStatistics.getOrDefault(matchCount, 0)
+    fun getWinningCount(rank: Rank): Int {
+        return winningStatistics[rank] ?: NO_WINNING_COUNT
     }
 }
