@@ -4,7 +4,6 @@ import lotto.domain.LottoNumber
 
 fun main1() {
     val lottoNumber = LottoNumber(1)
-    val create = LottoNumber.create(1)
 
     // 생성자로 생성할땐 어떻게 될까
     val duration = Duration(1000)

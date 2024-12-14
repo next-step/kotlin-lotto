@@ -1,6 +1,6 @@
 package lotto.domain
 
-class UserLottos(private val lottos: List<Lotto>) {
+class UserLottos(internal val lottos: List<Lotto>) {
     fun match(winningLotto: WinningLotto): List<MatchResult> {
         return lottos.map { lotto ->
             val matchCount = winningLotto.calculateMatchCount(lotto)
