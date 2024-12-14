@@ -11,8 +11,9 @@ import lotto.ui.LottoGameReader
 fun main() {
     val amount = LottoGameReader.readAmount()
 
-    val lottos = LottoStore.buy(amount)
-    LottoGamePrinter.printPurchaseMessage(lottos)
+    val manualLottos = LottoGameReader.readManualLottos()
+    val lottos = LottoStore.buy(manualLottos, amount)
+    LottoGamePrinter.printPurchaseMessage(manualLottos, lottos)
 
     val winningLottoNumbers = LottoGameReader.readWinningLottoNumbers()
     val bonusNumber = LottoGameReader.readBonusNumber()
