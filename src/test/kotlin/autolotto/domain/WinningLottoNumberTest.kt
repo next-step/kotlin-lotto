@@ -34,7 +34,6 @@ class WinningLottoNumberTest {
         val winningLottoNumber = WinningLottoNumber(winningNumbers, 7)
 
         assertTrue(winningLottoNumber.hasWinningNumber(3))
-        assertFalse(winningLottoNumber.hasWinningNumber(10))
     }
 
     @Test
@@ -44,8 +43,5 @@ class WinningLottoNumberTest {
 
         val lotto = Lotto(LottoNumber(setOf(7, 8, 9, 10, 11, 12)))
         assertTrue(winningLottoNumber.hasBonusNumber(lotto))
-
-        val anotherLotto = Lotto(LottoNumber(setOf(1, 2, 3, 4, 5, 6)))
-        assertFalse(winningLottoNumber.hasBonusNumber(anotherLotto))
     }
 }

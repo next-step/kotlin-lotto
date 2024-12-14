@@ -1,10 +1,10 @@
 package autolotto.service
 
-import autolotto.constants.LottoConstants.LOTTO_TAKE_NUMBER
-import autolotto.constants.LottoConstants.MAX_LOTTO_NUMBER
-import autolotto.constants.LottoConstants.MIN_LOTTO_NUMBER
 import autolotto.domain.LottoMatchResult
 import autolotto.domain.LottoNumber
+import autolotto.domain.LottoNumber.Companion.LOTTO_TAKE_NUMBER
+import autolotto.domain.LottoNumber.Companion.MAX_LOTTO_NUMBER
+import autolotto.domain.LottoNumber.Companion.MIN_LOTTO_NUMBER
 import autolotto.domain.WinningLottoNumber
 import autolotto.entity.Lotto
 import autolotto.enums.prize.Prize

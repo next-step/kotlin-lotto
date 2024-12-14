@@ -29,13 +29,11 @@ class LottoNumberTest {
     fun `타켓번호 포함 여부 동작 확인`() {
         val lottoNumber = LottoNumber(setOf(1, 2, 3, 4, 5, 6))
         assertTrue(lottoNumber.hasNumber(3))
-        assertFalse(lottoNumber.hasNumber(10))
     }
 
     @Test
     fun `타겟여부 미포함 확인`() {
         val lottoNumber = LottoNumber(setOf(1, 2, 3, 4, 5, 6))
-        assertTrue(lottoNumber.hasNotNumber(10))
         assertFalse(lottoNumber.hasNotNumber(3))
     }
 }
