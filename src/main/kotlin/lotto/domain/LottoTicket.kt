@@ -15,9 +15,20 @@ class LottoTicket(private val numbers: Set<LottoNumber>) : Collection<LottoNumbe
         return LottoRank.getRank(matchCount)
     }
 
+    fun calculateRank2(winningLotto: WinningLotto): LottoRank {
+        val matchCount = winningLotto.calculateMatchCount(numbers)
+        val isMatchedBonus = winningLotto.isMatchedBonusNumber(numbers)
+        return LottoRank.getRank(matchCount)
+    }
+
     fun calculateMatchCount(winningLotto: LottoTicket): Int {
         return numbers.intersect(winningLotto).size
     }
+
+//    fun calculateMatchCount2(winningLotto: WinningLotto): Int {
+//        return winningLotto.calculateMatchCount(numbers)
+////        return numbers.intersect(winningLotto.).size
+//    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

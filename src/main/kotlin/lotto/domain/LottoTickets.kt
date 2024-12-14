@@ -18,6 +18,23 @@ class LottoTickets(private val lottoTickets: List<LottoTicket>) : Collection<Lot
         return LottoResults(result)
     }
 
+    fun calculateLottoRank2(winningLotto: WinningLotto): LottoResults {
+        val rankCount =
+            lottoTickets
+                .map { lotto -> lotto.calculateRank2(winningLotto) }
+                .groupingBy { it }
+                .eachCount()
+
+        val result =
+            LottoRank.entries.map { rank ->
+                LottoResult(
+                    rank,
+                    rankCount[rank] ?: 0,
+                )
+            }
+        return LottoResults(result)
+    }
+
     companion object {
         private const val LOTTO_TICKET_PRICE = 1000
 
