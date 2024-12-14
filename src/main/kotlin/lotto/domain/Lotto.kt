@@ -14,8 +14,4 @@ class Lotto(private val numbers: LottoNumbers) {
     override fun toString(): String {
         return numbers.toString()
     }
-
-    companion object {
-        const val MIN_AMOUNT_UNIT = 1000
-    }
 }

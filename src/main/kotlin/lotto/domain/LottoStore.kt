@@ -1,9 +1,7 @@
 package lotto.domain
 
 object LottoStore {
-    fun buy(manualLottos: ManualLottos, amount: Int): UserLottos {
-        if (isValidAmount(amount)) throw NotEnoughMoneyException(amount)
-
+    fun buy(manualLottos: ManualLottos, amount: Amount): UserLottos {
         val theNumberOfLotto = calculateCountForRandomBuy(amount, manualLottos)
         val randomLottos =
             (1..theNumberOfLotto).map {
@@ -15,10 +13,8 @@ object LottoStore {
         return UserLottos(lottos = lottos)
     }
 
-    private fun calculateCountForRandomBuy(amount: Int, manualLottos: ManualLottos): Int {
-        val manualBuyAmount = manualLottos.size * Lotto.MIN_AMOUNT_UNIT
-        return (amount - manualBuyAmount) / Lotto.MIN_AMOUNT_UNIT
+    private fun calculateCountForRandomBuy(amount: Amount, manualLottos: ManualLottos): Int {
+        val totalPurchasableLottoCount = amount.calculatePurchasableLottoCount()
+        return totalPurchasableLottoCount - manualLottos.size
     }
-
-    private fun isValidAmount(money: Int) = money % Lotto.MIN_AMOUNT_UNIT != 0
 }

@@ -10,7 +10,7 @@ class UserLottos(internal val lottos: List<Lotto>) {
     }
 
     fun calculatePurchaseAmount(): Long {
-        return (lottos.size * Lotto.MIN_AMOUNT_UNIT).toLong()
+        return (lottos.size * Amount.MIN_UNIT).toLong()
     }
 
     fun getPurchaseLottoCount(): Int {
