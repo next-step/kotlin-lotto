@@ -1,5 +1,6 @@
 package autolotto.controller
 
+import autolotto.domain.WinningLottoNumber
 import autolotto.entity.Lotto
 import autolotto.enums.prize.Prize
 import autolotto.service.LottoService
@@ -9,8 +10,7 @@ class AutoLottoController(private val lottoService: LottoService) {
         return lottoService.start(gameCount)
     }
 
-    // 값 반환시 아예 값을 지정해서 반환하도록
-    fun getResult(winnersNumbers: List<Int>): Map<Prize, Int> {
-        return lottoService.getResult(winnersNumbers)
+    fun getResult(winningLottoNumber: WinningLottoNumber): Map<Prize, Int> {
+        return lottoService.getResult(winningLottoNumber)
     }
 }

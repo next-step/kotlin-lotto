@@ -1,42 +1,30 @@
 package autolotto.view
 
+import autolotto.domain.Amount
+import autolotto.domain.LottoNumber
+import autolotto.domain.WinningLottoNumber
+
 object InputView {
-    private const val LOTTO_AMOUNT = 1000
-
-    fun getLottoGameCount(amount: Int): Int {
-        return amount / LOTTO_AMOUNT
+    fun printLottoGameCount(gameCount: Int) {
+        println("${gameCount}개를 구매했습니다.")
     }
 
-    fun printLottoGameCount(amount: Int) {
-        println("${getLottoGameCount(amount)}개를 구매했습니다.")
-    }
-
-    fun getLottoPurchaseAmount(): Int {
+    fun getLottoPurchaseAmount(): Amount {
         println("구입금액을 입력해 주세요.")
-        val input: Int = readLine()?.toIntOrNull() ?: throw RuntimeException("0 이 아닌 숫자를 입력해주세요")
-        positiveNumber(input)
-        lottoAmountValid(input)
-        return input
+        val input: Int = readlnOrNull()?.toIntOrNull() ?: throw RuntimeException("숫자를 입력해주세요")
+        return Amount(input)
     }
 
-    fun getWinningNumber(): List<Int> {
+    fun getWinningNumber(): WinningLottoNumber {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        val input: String? = readLine()
-        if (input.isNullOrEmpty()) {
-            throw RuntimeException("당청번호를 입력해주세요.")
-        }
-        return splitWinningNumbers(input)
+        val input: String = readlnOrNull() ?: throw RuntimeException("당첨 번호를 입력해주세요")
+        println("보너스 번호를 입력해 주세요.")
+        val bonusNumber: Int =
+            readlnOrNull()?.toIntOrNull() ?: throw RuntimeException("보너스 번호는 숫자를 입력해주세요")
+        return WinningLottoNumber(LottoNumber(splitWinningNumbers(input)), bonusNumber)
     }
 
-    private fun splitWinningNumbers(input: String): List<Int> {
-        return input.split(",").map { e -> e.trim().toInt() }
-    }
-
-    private fun positiveNumber(input: Int) {
-        require(input >= 0) { "양수가 아닙니다. input=$input" }
-    }
-
-    private fun lottoAmountValid(input: Int) {
-        require(input >= LOTTO_AMOUNT && input % LOTTO_AMOUNT == 0) { "돈은 ${LOTTO_AMOUNT}원 단위로만 입력 가능합니다." }
+    private fun splitWinningNumbers(input: String): Set<Int> {
+        return input.split(",").map { e -> e.trim().toInt() }.toSet()
     }
 }

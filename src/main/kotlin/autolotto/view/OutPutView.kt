@@ -5,6 +5,8 @@ import autolotto.entity.Lotto
 import autolotto.enums.prize.Prize
 
 object OutPutView {
+    private const val BONUS_CONDITION_NAME = "BONUS"
+
     fun printLottoInfo(lottos: List<Lotto>) {
         repeat(lottos.size) {
             printLotto(lottos[it])
@@ -32,7 +34,16 @@ object OutPutView {
 
     private fun printLottoResult(lottoResultResponse: Map<Prize, Int>) {
         lottoResultResponse.forEach { (prize, count) ->
-            println("${prize.matchCount}개 일치 (${prize.prizeMoney}원) - ${count}개")
+            println(
+                "${prize.matchCount}개 일치${if (prize.name.equals(
+                        BONUS_CONDITION_NAME,
+                    )
+                ) {
+                    ", 보너스 볼 일치"
+                } else {
+                    ""
+                }} (${prize.prizeMoney}원) - ${count}개",
+            )
         }
     }
 }

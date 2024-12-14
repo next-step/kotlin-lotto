@@ -10,7 +10,7 @@ class AutoLottoConfiguration {
     }
 
     fun lottoService(): LottoService {
-        return LottoService(LottoRepository())
+        return LottoService(lottoRepository())
     }
 
     fun lottoRepository(): LottoRepository {

@@ -1,16 +1,19 @@
 package autolotto.entity
 
-class Lotto(private val lottoNumbers: Set<Int>) {
-    init {
-        require(lottoNumbers.size == LOTTO_NUMBERS_MAX_SIZE) { "로또 번호는 6개여야 합니다." }
-        require(lottoNumbers.all { it in LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER }) { "로또 번호는 1~45 사이여야 합니다." }
+import autolotto.domain.LottoMatchResult
+import autolotto.domain.LottoNumber
+import autolotto.domain.WinningLottoNumber
+
+class Lotto(private val lottoNumbers: LottoNumber) {
+    fun getNumbers(): Set<Int> = lottoNumbers.getNumbers()
+
+    fun hasNumber(bonusNumber: Int): Boolean {
+        return this.lottoNumbers.hasNumber(bonusNumber)
     }
 
-    fun getNumbers(): Set<Int> = lottoNumbers
-
-    companion object {
-        private const val LOTTO_NUMBERS_MAX_SIZE = 6
-        private const val LOTTO_MIN_NUMBER = 1
-        private const val LOTTO_MAX_NUMBER = 45
+    fun compareWithWinningNumbers(winningLottoNumber: WinningLottoNumber): LottoMatchResult {
+        val matchCount = this.getNumbers().count { winningLottoNumber.hasWinningNumber(it) }
+        val hasBonus = winningLottoNumber.hasBonusNumber(this)
+        return LottoMatchResult(matchCount, hasBonus)
     }
 }

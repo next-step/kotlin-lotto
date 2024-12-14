@@ -1,5 +1,11 @@
 package autolotto.service
 
+import autolotto.constants.LottoConstants.LOTTO_TAKE_NUMBER
+import autolotto.constants.LottoConstants.MAX_LOTTO_NUMBER
+import autolotto.constants.LottoConstants.MIN_LOTTO_NUMBER
+import autolotto.domain.LottoMatchResult
+import autolotto.domain.LottoNumber
+import autolotto.domain.WinningLottoNumber
 import autolotto.entity.Lotto
 import autolotto.enums.prize.Prize
 import autolotto.repository.LottoRepository
@@ -12,42 +18,45 @@ class LottoService(private val lottoRepository: LottoRepository) {
         return lottoRepository.findAll()
     }
 
-    private fun generateLottoNumbers(): Set<Int> {
-        return (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER)
-            .shuffled()
-            .take(LOTTO_TAKE_NUMBER)
-            .toSet()
+    private fun generateLottoNumbers(): LottoNumber {
+        val lottoNumbers =
+            (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER)
+                .shuffled()
+                .take(LOTTO_TAKE_NUMBER)
+                .toSet()
+        return LottoNumber(lottoNumbers)
     }
 
-    fun getResult(winnersNumbers: List<Int>): Map<Prize, Int> {
+    fun getResult(winningLottoNumber: WinningLottoNumber): Map<Prize, Int> {
+        val lottos = lottoRepository.findAll()
+
+        val matchResults =
+            lottos.map { lotto ->
+                lotto.compareWithWinningNumbers(winningLottoNumber)
+            }
+
         val resultMap =
             mutableMapOf(
                 Prize.THREE to 0,
                 Prize.FOUR to 0,
                 Prize.FIVE to 0,
+                Prize.BONUS to 0,
                 Prize.SIX to 0,
             )
-        val lottos = lottoRepository.findAll()
-        val comparisonWinningNumbers =
-            lottos.map { lotto -> comparisonWinningNumbers(lotto, winnersNumbers) }
-                .groupBy { it }.mapValues { it.value.size }.toMutableMap()
-        resultMap.forEach { (key, value) ->
-            resultMap[key] = (comparisonWinningNumbers[key.matchCount] ?: 0) + value
+
+        matchResults.forEach { result ->
+            toPrize(result, resultMap)
         }
+
         return resultMap
     }
 
-    private fun comparisonWinningNumbers(
-        lotto: Lotto,
-        winnersNumbers: List<Int>,
-    ): Int {
-        val matchedNumbers = lotto.getNumbers().filter { winnersNumbers.contains(it) }
-        return matchedNumbers.count()
-    }
-
-    companion object {
-        private const val MIN_LOTTO_NUMBER = 1
-        private const val MAX_LOTTO_NUMBER = 45
-        private const val LOTTO_TAKE_NUMBER = 6
+    private fun toPrize(
+        result: LottoMatchResult,
+        resultMap: MutableMap<Prize, Int>,
+    ) {
+        result.toPrize()?.let { prize ->
+            resultMap[prize] = resultMap.getOrDefault(prize, 0) + 1
+        }
     }
 }
