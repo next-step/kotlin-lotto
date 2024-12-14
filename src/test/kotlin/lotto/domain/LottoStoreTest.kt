@@ -5,11 +5,10 @@ import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.collections.shouldContainInOrder
 import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.string.shouldStartWith
 
 class LottoStoreTest : FreeSpec({
     "입력된 금액에 따라 로또를 여러장 구매한다" {
-        val amount = 14000
+        val amount = Amount(14000)
 
         val lottos = LottoStore.buy(ManualLottos(listOf()), amount)
 
@@ -17,7 +16,7 @@ class LottoStoreTest : FreeSpec({
     }
 
     "수동과 자동을 섞어서 입력된 금액의 개수만큼 구매한다" {
-        val amount = 14000
+        val amount = Amount(14000)
         val lottos = listOf(
             Lotto(LottoNumbers(1, 2, 3, 4, 5, 6)),
             Lotto(LottoNumbers(1, 2, 3, 4, 5, 6)),
@@ -32,7 +31,7 @@ class LottoStoreTest : FreeSpec({
     }
 
     "수동을 입력 금액만큼 구매할 수 있다" {
-        val amount = 3000
+        val amount = Amount(3000)
         val lottos = listOf(
             Lotto(LottoNumbers(1, 2, 3, 4, 5, 6)),
             Lotto(LottoNumbers(1, 2, 3, 4, 5, 6)),
@@ -44,14 +43,5 @@ class LottoStoreTest : FreeSpec({
 
         userLottos.getPurchaseLottoCount() shouldBe 3
         userLottos.lottos shouldBeEqual lottos
-    }
-
-    "입력된 금액이 1천원 단위가 아니면 예외를 발생시킨다" - {
-        listOf(999, 1001, 1010, 1100, 1111)
-            .forEach { money ->
-                "입력값: $money" {
-                    shouldThrow<NotEnoughMoneyException> { LottoStore.buy(ManualLottos(listOf()), money) }
-                }
-            }
     }
 })
