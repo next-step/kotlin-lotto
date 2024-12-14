@@ -1,51 +1,89 @@
 package lotto.ui
 
+import lotto.common.RetryHandler
+import lotto.domain.Amount
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.ManualLottos
+import lotto.main
 
 object LottoGameReader {
-    fun readAmount(): Int {
-        LottoGamePrinter.printAmountMessage()
-        val str = ConsoleReader.readLine()
-        return convertToNumber(str)
+    fun readAmount(): Amount {
+        return RetryHandler.retryIfFail(
+            mainAction = {
+                LottoGamePrinter.printAmountMessage()
+                val str = ConsoleReader.readLine()
+                Amount(convertToNumber(str))
+            },
+            retryAction = {
+                readAmount()
+            }
+        )
     }
 
-    fun readWinningLottoNumbers(): Set<LottoNumber> {
-        LottoGamePrinter.printWinningLottoNumberMessage()
-        return readLottoNumbers()
+    fun readWinningLottoNumbers(): LottoNumbers {
+        return RetryHandler.retryIfFail(
+            mainAction = {
+                LottoGamePrinter.printWinningLottoNumberMessage()
+                readLottoNumbers()
+            },
+            retryAction = {
+                readWinningLottoNumbers()
+            }
+        )
     }
 
     fun readBonusNumber(): LottoNumber {
-        LottoGamePrinter.printBonusNumberMessage()
-        val str = ConsoleReader.readLine()
-        return LottoNumber(convertToNumber(str))
+        return RetryHandler.retryIfFail(
+            mainAction = {
+                LottoGamePrinter.printBonusNumberMessage()
+                val str = ConsoleReader.readLine()
+                LottoNumber(convertToNumber(str))
+            },
+            retryAction = {
+                readBonusNumber()
+            }
+        )
     }
 
-    fun readManualLottos(): ManualLottos {
-        val manualCount = readManualCount()
-
-        LottoGamePrinter.printManualNumbersMessage()
-        val lottos = (1..manualCount).map {
-            Lotto(LottoNumbers(readLottoNumbers()))
-        }
-
-        return ManualLottos(lottos)
+    fun readManualCount(): Int {
+        return RetryHandler.retryIfFail(
+            mainAction = {
+                LottoGamePrinter.printManualCountMessage()
+                val str = ConsoleReader.readLine()
+                convertToNumber(str)
+            },
+            retryAction = {
+                readManualCount()
+            }
+        )
     }
 
-    private fun readLottoNumbers(): Set<LottoNumber> {
-        return ConsoleReader.readLine()
+    fun readManualLottos(manualCount: Int): ManualLottos {
+        return RetryHandler.retryIfFail(
+            mainAction = {
+                LottoGamePrinter.printManualNumbersMessage()
+                val lottos = (1..manualCount).map {
+                    Lotto(readLottoNumbers())
+                }
+
+                ManualLottos(lottos)
+            },
+            retryAction = {
+                readManualLottos(manualCount)
+            }
+        )
+    }
+
+    private fun readLottoNumbers(): LottoNumbers {
+        val lottoNumbers = ConsoleReader.readLine()
             .split(",")
             .map { str -> convertToNumber(str) }
             .map { number -> LottoNumber(number) }
             .toSet()
-    }
 
-    private fun readManualCount(): Int {
-        LottoGamePrinter.printManualCountMessage()
-        val str = ConsoleReader.readLine()
-        return convertToNumber(str)
+        return LottoNumbers(lottoNumbers)
     }
 
     private fun convertToNumber(str: String): Int {
