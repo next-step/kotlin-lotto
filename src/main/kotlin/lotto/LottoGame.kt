@@ -39,7 +39,7 @@ private fun readManualCount(amount: Amount): Int {
         },
         retryAction = {
             readManualCount(amount)
-        }
+        },
     )
 }
 
@@ -52,6 +52,6 @@ private fun createWinningLotto(): WinningLotto {
         },
         retryAction = {
             createWinningLotto()
-        }
+        },
     )
 }

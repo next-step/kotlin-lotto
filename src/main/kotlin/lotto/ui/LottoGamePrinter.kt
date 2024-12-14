@@ -10,7 +10,10 @@ object LottoGamePrinter {
         println("구입금액을 입력해 주세요.")
     }
 
-    fun printPurchaseMessage(manualLottos: ManualLottos, userLottos: UserLottos) {
+    fun printPurchaseMessage(
+        manualLottos: ManualLottos,
+        userLottos: UserLottos,
+    ) {
         val manualLottosCount = manualLottos.size
         val totalPurchaseCount = userLottos.getPurchaseLottoCount()
 

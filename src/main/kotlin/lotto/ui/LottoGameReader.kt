@@ -6,7 +6,6 @@ import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.ManualLottos
-import lotto.main
 
 object LottoGameReader {
     fun readAmount(): Amount {
@@ -18,7 +17,7 @@ object LottoGameReader {
             },
             retryAction = {
                 readAmount()
-            }
+            },
         )
     }
 
@@ -30,7 +29,7 @@ object LottoGameReader {
             },
             retryAction = {
                 readWinningLottoNumbers()
-            }
+            },
         )
     }
 
@@ -43,7 +42,7 @@ object LottoGameReader {
             },
             retryAction = {
                 readBonusNumber()
-            }
+            },
         )
     }
 
@@ -56,7 +55,7 @@ object LottoGameReader {
             },
             retryAction = {
                 readManualCount()
-            }
+            },
         )
     }
 
@@ -64,24 +63,26 @@ object LottoGameReader {
         return RetryHandler.retryIfFail(
             mainAction = {
                 LottoGamePrinter.printManualNumbersMessage()
-                val lottos = (1..manualCount).map {
-                    Lotto(readLottoNumbers())
-                }
+                val lottos =
+                    (1..manualCount).map {
+                        Lotto(readLottoNumbers())
+                    }
 
                 ManualLottos(lottos)
             },
             retryAction = {
                 readManualLottos(manualCount)
-            }
+            },
         )
     }
 
     private fun readLottoNumbers(): LottoNumbers {
-        val lottoNumbers = ConsoleReader.readLine()
-            .split(",")
-            .map { str -> convertToNumber(str) }
-            .map { number -> LottoNumber(number) }
-            .toSet()
+        val lottoNumbers =
+            ConsoleReader.readLine()
+                .split(",")
+                .map { str -> convertToNumber(str) }
+                .map { number -> LottoNumber(number) }
+                .toSet()
 
         return LottoNumbers(lottoNumbers)
     }
