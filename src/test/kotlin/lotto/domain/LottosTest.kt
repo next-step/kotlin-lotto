@@ -18,6 +18,6 @@ class LottosTest : FreeSpec({
 
         val purchaseAmount = userLottos.calculatePurchaseAmount()
 
-        purchaseAmount shouldBe 5 * Lotto.MIN_AMOUNT_UNIT
+        purchaseAmount shouldBe LottoAmount.fromLottoCount(5)
     }
 })
