@@ -1,8 +1,8 @@
 package lotto.ui
 
 import lotto.common.RetryHandler
-import lotto.domain.LottoAmount
 import lotto.domain.Lotto
+import lotto.domain.LottoAmount
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.ManualLottos
