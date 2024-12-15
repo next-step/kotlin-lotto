@@ -20,7 +20,10 @@ fun main() {
     val winningNumbers = inputView.getWinningNumbers() ?: return
     val winningLottoNumbers = winningNumbers.map { LottoNumber.get(it) }
 
+    val bonusNumber = inputView.getBonusNumber() ?: return
+    val bonusLottoNumber = LottoNumber.get(bonusNumber)
+
     resultView.showResultInterface()
-    // resultView.showMatchLottoResult(lottoBunch.getMatchLottoResult(winningLottoNumbers))
-    // resultView.showYield(lottoBunch.getYield(winningLottoNumbers, purchaseAmount))
+    resultView.showMatchLottoResult(lottoBunch.getMatchLottoResult(winningLottoNumbers, bonusLottoNumber))
+    resultView.showYield(lottoBunch.getYield(winningLottoNumbers, bonusLottoNumber, purchaseAmount))
 }
