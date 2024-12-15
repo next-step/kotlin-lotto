@@ -1,27 +1,10 @@
 package lotto.domain
 
 class LottoTickets(private val lottoTickets: List<LottoTicket>) : Collection<LottoTicket> by lottoTickets {
-    fun calculateLottoRank(winningLotto: LottoTicket): LottoResults {
+    fun calculateLottoRank(winningLotto: WinningLotto): LottoResults {
         val rankCount =
             lottoTickets
                 .map { lotto -> lotto.calculateRank(winningLotto) }
-                .groupingBy { it }
-                .eachCount()
-
-        val result =
-            LottoRank.entries.map { rank ->
-                LottoResult(
-                    rank,
-                    rankCount[rank] ?: 0,
-                )
-            }
-        return LottoResults(result)
-    }
-
-    fun calculateLottoRank2(winningLotto: WinningLotto): LottoResults {
-        val rankCount =
-            lottoTickets
-                .map { lotto -> lotto.calculateRank2(winningLotto) }
                 .groupingBy { it }
                 .eachCount()
 

@@ -1,7 +1,5 @@
 package lotto.view
 
-import lotto.domain.BonusNumber
-import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
 import lotto.domain.WinningLotto
 

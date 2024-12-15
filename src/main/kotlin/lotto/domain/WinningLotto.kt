@@ -7,12 +7,8 @@ class WinningLotto(
     private val bonusNumber: BonusNumber
 
     init {
-        val num = number.toIntOrNull() ?: throw IllegalArgumentException("보너스 번호가 유효하지 않습니다 ")
-        bonusNumber = BonusNumber.of(this.winningLotto, LottoNumber.from(num))
-    }
-
-    fun calculateRank(lottoTicket: LottoTicket): LottoRank {
-        return lottoTicket.calculateRank(winningLotto)
+        val intNumber = number.toIntOrNull() ?: throw IllegalArgumentException("보너스 번호가 유효하지 않습니다")
+        bonusNumber = BonusNumber.of(this.winningLotto, LottoNumber.from(intNumber))
     }
 
     fun calculateMatchCount(numbers: Set<LottoNumber>): Int {

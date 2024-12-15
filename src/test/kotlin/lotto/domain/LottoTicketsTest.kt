@@ -32,14 +32,20 @@ class LottoTicketsTest {
                     LottoTicket.from(setOf(1, 2, 3, 4, 8, 9)),
                 ),
             )
-        val winningLotto = LottoTicket.from(setOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = WinningLotto(LottoTicket.from(setOf(1, 2, 3, 4, 5, 6)), "7")
         val lottoResults = lottoTickets.calculateLottoRank(winningLotto)
-        val sortedResults = lottoResults.findAllSortedByMatchCount()
-        sortedResults[0].rank shouldBe LottoRank.FIRST_PLACE
+        val sortedResults = lottoResults.findAllSortedByPrize()
+        sortedResults[0].rank shouldBe LottoRank.BLANK_PLACE
         sortedResults[0].count shouldBe 0
-        sortedResults[1].rank shouldBe LottoRank.SECOND_PLACE
-        sortedResults[1].count shouldBe 2
-        sortedResults[2].rank shouldBe LottoRank.THIRD_PLACE
+        sortedResults[1].rank shouldBe LottoRank.FIFTH_PLACE
+        sortedResults[1].count shouldBe 0
+        sortedResults[2].rank shouldBe LottoRank.FOURTH_PLACE
         sortedResults[2].count shouldBe 1
+        sortedResults[3].rank shouldBe LottoRank.THIRD_PLACE
+        sortedResults[3].count shouldBe 1
+        sortedResults[4].rank shouldBe LottoRank.SECOND_PLACE
+        sortedResults[4].count shouldBe 1
+        sortedResults[5].rank shouldBe LottoRank.FIRST_PLACE
+        sortedResults[5].count shouldBe 0
     }
 }
