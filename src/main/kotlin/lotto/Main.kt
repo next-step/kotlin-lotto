@@ -21,6 +21,6 @@ fun main() {
     val winningLottoNumbers = winningNumbers.map { LottoNumber.get(it) }
 
     resultView.showResultInterface()
-    resultView.showMatchLottoResult(lottoBunch.getMatchLottoResult(winningLottoNumbers))
-    resultView.showYield(lottoBunch.getYield(winningLottoNumbers, purchaseAmount))
+    // resultView.showMatchLottoResult(lottoBunch.getMatchLottoResult(winningLottoNumbers))
+    // resultView.showYield(lottoBunch.getYield(winningLottoNumbers, purchaseAmount))
 }

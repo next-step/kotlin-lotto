@@ -1,16 +1,36 @@
 package lotto.domain
 
-enum class MatchingResult(val prizeAmount: Int, val matchNumber: Int) {
-    MATCHED_THREE(5_000, 3),
-    MATCHED_FOUR(50_000, 4),
-    MATCHED_FIVE(1_500_000, 5),
-    MATCHED_SIX(2_000_000_000, 6), ;
+typealias MatchValues = Pair<Int, BonusMatchResult>
+
+enum class MatchingResult(val prizeAmount: Int, val matchNumber: Int, val bonusMatchResult: BonusMatchResult) {
+    MATCHED_THREE(5_000, 3, BonusMatchResult.NO_EFFECT),
+    MATCHED_FOUR(50_000, 4, BonusMatchResult.NO_EFFECT),
+    MATCHED_FIVE(1_500_000, 5, BonusMatchResult.NOT_MATCH),
+    MATCHED_FIVE_WITH_BONUS(30_000_000, 5, BonusMatchResult.MATCH),
+    MATCHED_SIX(2_000_000_000, 6, BonusMatchResult.NO_EFFECT), ;
 
     companion object {
-        private const val MATCH_NUMBER_TRANSFER_ERROR_MESSAGE = "로또 결과 이넘값 변환 오류가 발생하였습니다."
-        private val matchNumberToMatchResultMap = entries.associateBy { it.matchNumber }
+        private const val RELATED_BONUS_MATCH_NUMBER = 5
+        private val matchValuesToMatchResultMap =
+            entries.associateBy { result ->
+                MatchValues(result.matchNumber, result.bonusMatchResult)
+            }
 
-        fun fromMatchNumber(matchNumber: Int): MatchingResult? = matchNumberToMatchResultMap[matchNumber]
+        fun getResult(
+            matchNumber: Int,
+            isBonusMatched: Boolean,
+        ): MatchingResult? {
+            val bonusMatchResult = getBonusMatchResult(matchNumber, isBonusMatched)
+            return matchValuesToMatchResultMap[MatchValues(matchNumber, bonusMatchResult)]
+        }
+
+        private fun getBonusMatchResult(
+            matchNumber: Int,
+            isBonusMatched: Boolean,
+        ): BonusMatchResult {
+            if (matchNumber != RELATED_BONUS_MATCH_NUMBER) return BonusMatchResult.NO_EFFECT
+            return if (isBonusMatched) BonusMatchResult.MATCH else BonusMatchResult.NOT_MATCH
+        }
 
         fun getMatchLottoResult(matchResults: List<MatchingResult>): Map<MatchingResult, Int> =
             entries.associateWith { matchResult ->
