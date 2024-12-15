@@ -42,10 +42,9 @@ class WinningLottoNumberTest {
         val winningLottoNumber = WinningLottoNumber(winningNumbers, 7)
         val lottoNumber = LottoNumber(setOf(7, 8, 9, 10, 11, 12))
 
-        val lotto = Lotto(listOf(LottoInfo(lottoNumber)), listOf(LottoInfo(lottoNumber)))
+        val lotto = Lotto(mutableListOf(LottoInfo(lottoNumber)), mutableListOf(LottoInfo(lottoNumber)))
         lotto.getTotalLottoInfos().forEach {
             assertTrue(winningLottoNumber.hasBonusNumber(it))
         }
-
     }
 }

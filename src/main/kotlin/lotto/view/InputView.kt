@@ -33,9 +33,12 @@ object InputView {
         return readlnOrNull()?.toIntOrNull() ?: throw RuntimeException("숫자를 입력해주세요")
     }
 
-    fun getLottoManualNumbers(manualCount: Int): List<LottoNumber> {
-        println("수동으로 구매할 번호를 입력해 주세요.")
+    fun getLottoManualNumbers(manualCount: Int): MutableList<LottoNumber> {
         val lottoNumbersList = mutableListOf<LottoNumber>()
+        if (manualCount < 1) {
+            return lottoNumbersList
+        }
+        println("수동으로 구매할 번호를 입력해 주세요.")
         repeat(manualCount) {
             val input: String = readlnOrNull() ?: throw RuntimeException("구매할 로또 번호를 입력해주세요")
             val numbers = splitWinningNumbers(input)

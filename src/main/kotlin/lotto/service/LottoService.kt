@@ -17,7 +17,7 @@ class LottoService(private val lottoRepository: LottoRepository) {
         amount: Amount,
         lottoManualNumbers: List<LottoNumber>,
     ): Lotto {
-        val manualLotto = lottoManualNumbers.map { LottoInfo(it) }
+        val manualLotto = lottoManualNumbers.map { LottoInfo(it) }.toMutableList()
         val autoLotto = mutableListOf<LottoInfo>()
         repeat(amount.lottoGameCount) {
             autoLotto.add(LottoInfo(generateLottoNumbers()))

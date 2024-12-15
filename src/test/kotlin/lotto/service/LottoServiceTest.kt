@@ -23,7 +23,7 @@ class LottoServiceTest {
                 LottoNumber(setOf(1, 2, 3, 7, 8, 9)),
                 LottoNumber(setOf(1, 2, 17, 14, 15, 16)),
                 LottoNumber(setOf(7, 8, 17, 9, 15, 30)),
-            )
+            ),
         )
         val lotto = lottoRepository.findAll()
         val totalLottoInfo = lotto.getTotalLottoInfos()
@@ -41,7 +41,7 @@ class LottoServiceTest {
                 LottoNumber(setOf(1, 2, 3, 7, 8, 9)),
                 LottoNumber(setOf(1, 2, 17, 14, 15, 16)),
                 LottoNumber(setOf(7, 8, 17, 9, 15, 30)),
-            )
+            ),
         )
         val winningLottoNumber = WinningLottoNumber(LottoNumber(setOf(7, 8, 9, 17, 14, 15)), 30)
         val result = service.getResult(winningLottoNumber)
