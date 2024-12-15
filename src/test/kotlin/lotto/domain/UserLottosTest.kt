@@ -39,8 +39,8 @@ class UserLottosTest : FreeSpec({
 
     "로또 구매 개수에 따라 구매 금액을 계산한다" - {
         listOf(
-            listOf(Lotto(1, 2, 3, 4, 5, 6), Lotto(1, 2, 3, 4, 5, 6)) to 2000,
-            listOf(Lotto(1, 2, 3, 4, 5, 6), Lotto(1, 2, 3, 4, 5, 6), Lotto(1, 2, 3, 4, 5, 6)) to 3000,
+            listOf(Lotto(1, 2, 3, 4, 5, 6), Lotto(1, 2, 3, 4, 5, 6)) to LottoAmount(2000),
+            listOf(Lotto(1, 2, 3, 4, 5, 6), Lotto(1, 2, 3, 4, 5, 6), Lotto(1, 2, 3, 4, 5, 6)) to LottoAmount(3000),
         ).forEach { lottosAndExpectedAmount ->
             val lottos = lottosAndExpectedAmount.first
             val expectedAmount = lottosAndExpectedAmount.second

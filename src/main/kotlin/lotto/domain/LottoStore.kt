@@ -3,9 +3,9 @@ package lotto.domain
 object LottoStore {
     fun buy(
         manualLottos: ManualLottos,
-        amount: Amount,
+        lottoAmount: LottoAmount,
     ): UserLottos {
-        val theNumberOfLotto = calculateCountForRandomBuy(amount, manualLottos)
+        val theNumberOfLotto = calculateCountForRandomBuy(lottoAmount, manualLottos)
         val randomLottos =
             (1..theNumberOfLotto).map {
                 val lottoNumbers = RandomLottoNumberGenerator.generate()
@@ -17,10 +17,10 @@ object LottoStore {
     }
 
     private fun calculateCountForRandomBuy(
-        amount: Amount,
+        lottoAmount: LottoAmount,
         manualLottos: ManualLottos,
-    ): Int {
-        val totalPurchasableLottoCount = amount.calculatePurchasableLottoCount()
+    ): Long {
+        val totalPurchasableLottoCount = lottoAmount.calculatePurchasableLottoCount()
         return totalPurchasableLottoCount - manualLottos.size
     }
 }

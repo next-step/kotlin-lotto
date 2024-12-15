@@ -1,7 +1,7 @@
 package lotto
 
 import lotto.common.RetryHandler
-import lotto.domain.Amount
+import lotto.domain.LottoAmount
 import lotto.domain.LottoProfitRateCalculator
 import lotto.domain.LottoResultChecker
 import lotto.domain.LottoStore
@@ -22,23 +22,23 @@ fun main() {
     LottoGamePrinter.printWinningStatistics(lottoResults, profitRate)
 }
 
-private fun buyLottos(amount: Amount): UserLottos {
-    val manualCount = readManualCount(amount)
+private fun buyLottos(lottoAmount: LottoAmount): UserLottos {
+    val manualCount = readManualCount(lottoAmount)
     val manualLottos = LottoGameReader.readManualLottos(manualCount)
-    val lottos = LottoStore.buy(manualLottos, amount)
+    val lottos = LottoStore.buy(manualLottos, lottoAmount)
     LottoGamePrinter.printPurchaseMessage(manualLottos, lottos)
     return lottos
 }
 
-private fun readManualCount(amount: Amount): Int {
+private fun readManualCount(lottoAmount: LottoAmount): Int {
     return RetryHandler.retryIfFail(
         mainAction = {
             val manualCount = LottoGameReader.readManualCount()
-            amount.validatePurchasable(manualCount)
+            lottoAmount.validatePurchasable(manualCount)
             manualCount
         },
         retryAction = {
-            readManualCount(amount)
+            readManualCount(lottoAmount)
         },
     )
 }

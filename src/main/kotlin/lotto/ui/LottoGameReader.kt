@@ -1,19 +1,19 @@
 package lotto.ui
 
 import lotto.common.RetryHandler
-import lotto.domain.Amount
+import lotto.domain.LottoAmount
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.ManualLottos
 
 object LottoGameReader {
-    fun readAmount(): Amount {
+    fun readAmount(): LottoAmount {
         return RetryHandler.retryIfFail(
             mainAction = {
                 LottoGamePrinter.printAmountMessage()
                 val str = ConsoleReader.readLine()
-                Amount(convertToNumber(str))
+                LottoAmount(convertToNumber(str).toLong())
             },
             retryAction = {
                 readAmount()

@@ -7,6 +7,6 @@ object LottoProfitRateCalculator {
     ): Double {
         val purchaseAmount = userLottos.calculatePurchaseAmount()
         val prizeAmount = lottoResults.calculateTotalPrizeAmount()
-        return (prizeAmount / purchaseAmount.toDouble())
+        return prizeAmount / purchaseAmount
     }
 }
