@@ -1,22 +1,48 @@
 package lotto.domain
 
 class Lotto(private val lottoNumberGenerator: LottoNumberGenerator) {
-    var lottoNumbers: Set<LottoNumber> = getByAuto()
+    var lottoNumbers: Set<LottoNumber>
+        private set
+    var bonusNumber: LottoNumber
         private set
 
-    private fun getByAuto(): Set<LottoNumber> {
-        lottoNumberGenerator ?: return setOf()
-        return buildSet { while (size < 6) add(LottoNumber.get(lottoNumberGenerator.generateLottoNumber())) }
+    init {
+        getByAuto().run {
+            lottoNumbers = first
+            bonusNumber = second
+        }
     }
 
-    fun setLottoByManual(vararg lottoNumber: Int) {
+    private fun getByAuto(): Pair<Set<LottoNumber>, LottoNumber> {
+        val normal = buildSet { while (size < 6) add(LottoNumber.get(lottoNumberGenerator.generateLottoNumber())) }
+        val bonus = getBonus(normal)
+        return Pair(normal, bonus)
+    }
+
+    private fun getBonus(normal: Set<LottoNumber>): LottoNumber {
+        while (true) {
+            val stepNumber = LottoNumber.get(lottoNumberGenerator.generateLottoNumber())
+            if (stepNumber !in normal) return stepNumber
+        }
+    }
+
+    fun setLottoByManual(
+        bonus: Int,
+        vararg lottoNumber: Int,
+    ) {
         require(lottoNumber.size == LOTTO_NUMBER_COUNT) { LOTTO_NUMBER_COUNT_EXCEPTION_MESSAGE }
         require(lottoNumber.distinct().size == LOTTO_NUMBER_COUNT) { LOTTO_NUMBER_DISTINCT_MESSAGE }
+        require(bonus !in lottoNumber) { LOTTO_NUMBER_DISTINCT_MESSAGE }
         lottoNumbers = lottoNumber.map { LottoNumber.get(it) }.toSet()
+        bonusNumber = LottoNumber.get(bonus)
     }
 
-    fun match(winningNumber: List<LottoNumber>): MatchingResult? =
-        MatchingResult.fromMatchNumber(lottoNumbers.intersect(winningNumber).size)
+    fun match(
+        winningNumber: List<LottoNumber>,
+        bonusNumber: LottoNumber,
+    ): MatchingResult? {
+        return MatchingResult.getResult(lottoNumbers.intersect(winningNumber).size, bonusNumber == this.bonusNumber)
+    }
 
     companion object {
         private const val LOTTO_NUMBER_COUNT = 6
