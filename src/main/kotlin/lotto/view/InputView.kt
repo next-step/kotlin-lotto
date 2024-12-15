@@ -27,4 +27,21 @@ object InputView {
     private fun splitWinningNumbers(input: String): Set<Int> {
         return input.split(",").map { e -> e.trim().toInt() }.toSet()
     }
+
+    fun getLottoManualCount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        return readlnOrNull()?.toIntOrNull() ?: throw RuntimeException("숫자를 입력해주세요")
+    }
+
+    fun getLottoManualNumbers(manualCount: Int): List<LottoNumber> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        val lottoNumbersList = mutableListOf<LottoNumber>()
+        repeat(manualCount) {
+            val input: String = readlnOrNull() ?: throw RuntimeException("구매할 로또 번호를 입력해주세요")
+            val numbers = splitWinningNumbers(input)
+            val lottoNumber = LottoNumber(numbers)
+            lottoNumbersList.add(lottoNumber)
+        }
+        return lottoNumbersList
+    }
 }

@@ -1,5 +1,6 @@
 package lotto.service
 
+import lotto.domain.Amount
 import lotto.domain.LottoMatchResult
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumber.Companion.LOTTO_TAKE_NUMBER
@@ -7,14 +8,21 @@ import lotto.domain.LottoNumber.Companion.MAX_LOTTO_NUMBER
 import lotto.domain.LottoNumber.Companion.MIN_LOTTO_NUMBER
 import lotto.domain.WinningLottoNumber
 import lotto.entity.Lotto
+import lotto.entity.LottoInfo
 import lotto.enums.prize.Prize
 import lotto.repository.LottoRepository
 
 class LottoService(private val lottoRepository: LottoRepository) {
-    fun start(gameCount: Int): List<Lotto> {
-        repeat(gameCount) {
-            lottoRepository.save(Lotto(generateLottoNumbers()))
+    fun start(
+        amount: Amount,
+        lottoManualNumbers: List<LottoNumber>,
+    ): Lotto {
+        val manualLotto = lottoManualNumbers.map { LottoInfo(it) }
+        val autoLotto = mutableListOf<LottoInfo>()
+        repeat(amount.lottoGameCount) {
+            autoLotto.add(LottoInfo(generateLottoNumbers()))
         }
+        lottoRepository.save(Lotto(manualLotto, autoLotto))
         return lottoRepository.findAll()
     }
 
@@ -28,11 +36,11 @@ class LottoService(private val lottoRepository: LottoRepository) {
     }
 
     fun getResult(winningLottoNumber: WinningLottoNumber): Map<Prize, Int> {
-        val lottos = lottoRepository.findAll()
-
+        val lotto = lottoRepository.findAll()
+        val lottoInfos = lotto.getTotalLottoInfos()
         val matchResults =
-            lottos.map { lotto ->
-                lotto.compareWithWinningNumbers(winningLottoNumber)
+            lottoInfos.map { lottoInfo ->
+                lottoInfo.compareWithWinningNumbers(winningLottoNumber)
             }
 
         val resultMap =

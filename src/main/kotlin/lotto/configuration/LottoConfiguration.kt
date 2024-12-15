@@ -4,8 +4,8 @@ import lotto.controller.LottoController
 import lotto.repository.LottoRepository
 import lotto.service.LottoService
 
-class AutoLottoConfiguration {
-    fun autoLottoController(): LottoController {
+class LottoConfiguration {
+    fun LottoController(): LottoController {
         return LottoController(lottoService())
     }
 

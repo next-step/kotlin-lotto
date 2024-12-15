@@ -1,6 +1,7 @@
 package lotto.domain
 
 import lotto.entity.Lotto
+import lotto.entity.LottoInfo
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -39,8 +40,12 @@ class WinningLottoNumberTest {
     fun `보너스번호 포함 여부 확인`() {
         val winningNumbers = LottoNumber(setOf(1, 2, 3, 4, 5, 6))
         val winningLottoNumber = WinningLottoNumber(winningNumbers, 7)
+        val lottoNumber = LottoNumber(setOf(7, 8, 9, 10, 11, 12))
 
-        val lotto = Lotto(LottoNumber(setOf(7, 8, 9, 10, 11, 12)))
-        assertTrue(winningLottoNumber.hasBonusNumber(lotto))
+        val lotto = Lotto(listOf(LottoInfo(lottoNumber)), listOf(LottoInfo(lottoNumber)))
+        lotto.getTotalLottoInfos().forEach {
+            assertTrue(winningLottoNumber.hasBonusNumber(it))
+        }
+
     }
 }

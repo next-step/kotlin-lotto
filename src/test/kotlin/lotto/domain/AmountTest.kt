@@ -28,4 +28,15 @@ class AmountTest {
         val amount = Amount(5000)
         assertEquals(5, amount.lottoGameCount)
     }
+
+    @Test
+    fun `수동 게임 은 전체 개임 수를 초과할수 없다`() {
+        val amount = Amount(5000)
+
+        val exception =
+            assertThrows<IllegalArgumentException> {
+                amount.setManualCount(6)
+            }
+        assertEquals("수동 게임은 전체 게임 수를 초과할 수 없습니다.", exception.message)
+    }
 }

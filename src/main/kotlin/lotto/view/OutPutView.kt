@@ -2,19 +2,23 @@ package lotto.view
 
 import lotto.calculator.LottoCalculator
 import lotto.entity.Lotto
+import lotto.entity.LottoInfo
 import lotto.enums.prize.Prize
 
 object OutPutView {
     private const val BONUS_CONDITION_NAME = "BONUS"
 
-    fun printLottoInfo(lottos: List<Lotto>) {
-        repeat(lottos.size) {
-            printLotto(lottos[it])
-        }
+    fun printLottoInfo(lotto: Lotto) {
+        val manualInfo = lotto.manualLotto
+        val autoInfo = lotto.autoLotto
+
+        println("수동으로 ${manualInfo.size}장 자동으로  ${autoInfo.size}개를 구매했습니다.")
+        manualInfo.forEach { printLotto(it) }
+        autoInfo.forEach { printLotto(it) }
     }
 
-    fun printLotto(lotto: Lotto) {
-        for (number in lotto.getNumbers()) {
+    fun printLotto(lottoInfo: LottoInfo) {
+        for (number in lottoInfo.getNumbers()) {
             print("$number ")
         }
         println()
@@ -35,14 +39,16 @@ object OutPutView {
     private fun printLottoResult(lottoResultResponse: Map<Prize, Int>) {
         lottoResultResponse.forEach { (prize, count) ->
             println(
-                "${prize.matchCount}개 일치${if (prize.name.equals(
-                        BONUS_CONDITION_NAME,
-                    )
-                ) {
-                    ", 보너스 볼 일치"
-                } else {
-                    ""
-                }} (${prize.prizeMoney}원) - ${count}개",
+                "${prize.matchCount}개 일치${
+                    if (prize.name.equals(
+                            BONUS_CONDITION_NAME,
+                        )
+                    ) {
+                        ", 보너스 볼 일치"
+                    } else {
+                        ""
+                    }
+                } (${prize.prizeMoney}원) - ${count}개",
             )
         }
     }

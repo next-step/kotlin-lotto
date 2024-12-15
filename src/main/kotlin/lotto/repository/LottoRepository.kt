@@ -3,13 +3,13 @@ package lotto.repository
 import lotto.entity.Lotto
 
 class LottoRepository {
-    private val lottoGames: MutableList<Lotto> = mutableListOf()
+    private lateinit var lotto: Lotto
 
     fun save(lotto: Lotto) {
-        this.lottoGames.add(lotto)
+        this.lotto = lotto
     }
 
-    fun findAll(): List<Lotto> {
-        return this.lottoGames.toList()
+    fun findAll(): Lotto {
+        return this.lotto
     }
 }
