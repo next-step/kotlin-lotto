@@ -1,11 +1,17 @@
 package lotto.domain
 
 data class LottoNumbers(
-    val numbers: List<Int>,
+    val numbers: Set<LottoNumber>,
 ) {
+    init {
+        require(numbers.size == LOTTO_NUMBER_COUNT) { IllegalArgumentException::class.java }
+    }
+
+    fun contains(number: LottoNumber): Boolean = numbers.contains(number)
+
     companion object {
-        const val START_INDEX = 0
         const val LOTTO_NUMBER_COUNT = 6
-        val LOTTO_NUMBER_RANGE = 1..45
+
+        fun from(values: List<Int>): LottoNumbers = LottoNumbers(values.map { LottoNumber.from(it) }.toSet())
     }
 }

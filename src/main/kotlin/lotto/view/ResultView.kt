@@ -27,7 +27,9 @@ object ResultView {
                     separator = LOTTO_NUMBER_SEPARATOR,
                     prefix = LOTTO_NUMBER_PREFIX,
                     postfix = LOTTO_NUMBER_POSTFIX,
-                ),
+                ) { value ->
+                    value.toString()
+                },
             )
         }
         println()

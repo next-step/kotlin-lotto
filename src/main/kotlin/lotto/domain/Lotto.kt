@@ -3,16 +3,12 @@ package lotto.domain
 data class Lotto(
     val lottoNumbers: LottoNumbers,
 ) {
-    init {
-        require(lottoNumbers.numbers.size == LottoNumbers.LOTTO_NUMBER_COUNT) { IllegalArgumentException::class.java }
-    }
-
     fun matchLotto(
-        winnerNumbers: List<Int>,
-        bonusNumber: Int,
+        winnerNumbers: LottoNumbers,
+        bonusNumber: LottoNumber,
     ): LottoRank {
         val matchingNumbers = lottoNumbers.numbers.count { winnerNumbers.contains(it) }
-        val matchingBonus = lottoNumbers.numbers.contains(bonusNumber)
+        val matchingBonus = lottoNumbers.contains(bonusNumber)
         return LottoRank.from(matchingNumbers, matchingBonus)
     }
 
