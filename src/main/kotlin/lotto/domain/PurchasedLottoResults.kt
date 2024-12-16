@@ -1,8 +1,6 @@
 package lotto.domain
 
-import lotto.domain.LottoTicketIssuer.DEFAULT_LOTTO_PRICE
-import lotto.domain.PurchasedLottoTickets.Companion.INVALID_PURCHASED_COUNT_MESSAGE
-import lotto.domain.PurchasedLottoTickets.Companion.PURCHASED_COUNT_MIN_VALUE
+import lotto.domain.LottoPurchaseCalculator.DEFAULT_LOTTO_PRICE
 
 data class PurchasedLottoResults(
     val purchasedCount: Int,
@@ -38,6 +36,8 @@ data class PurchasedLottoResults(
 
     companion object {
         const val LOTTO_MATCH_COUNT_MIN_VALUE: Int = 0
+        const val PURCHASED_COUNT_MIN_VALUE: Int = 1
+        const val INVALID_PURCHASED_COUNT_MESSAGE: String = "구입한 로또 개수가 올바르지 않습니다"
         const val INVALID_LOTTO_MATCH_COUNT_MESSAGE: String = "로또 당첨 번호 매치 결과는 0 이상 이어야합니다"
         const val INVALID_PURCHASED_COUNT_LOTTO_MATCH_COUNT_MESSAGE: String = "당첨된 내역의 합이 구매한 개수보다 많을 수 없습니다"
     }
