@@ -27,4 +27,8 @@ class LottoGame(private val lottoRepository: LottoRepository) {
                 .toSet()
         return LottoNumber(lottoNumbers)
     }
+
+    fun getLottoGameResult(lottoGameResult: Lotto, winnerNumbers: WinningLottoNumber): LottoGameResult {
+        return LottoGameResult(lottoGameResult, winnerNumbers)
+    }
 }

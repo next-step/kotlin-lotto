@@ -5,11 +5,7 @@ import lotto.enums.prize.Prize
 
 class LottoGameResult(val lotto: Lotto, val winningLottoNumber: WinningLottoNumber) {
     fun getResult(): Map<Prize, Int> {
-        val lottoInfos = lotto.getTotalLottoInfos()
-        val matchResults =
-            lottoInfos.map { lottoInfo ->
-                lottoInfo.compareWithWinningNumbers(winningLottoNumber)
-            }
+        val matchResults = lotto.compareAllWithWinningNumbers(winningLottoNumber)
 
         val resultMap =
             mutableMapOf(
