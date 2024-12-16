@@ -1,9 +1,11 @@
 package lotto.domain
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
+import kotlin.test.Test
 
 class WinningLottoTest {
     @ParameterizedTest
@@ -12,9 +14,20 @@ class WinningLottoTest {
         numbers: Set<LottoNumber>,
         matchCount: Int,
     ) {
-        val winningLotto = WinningLotto(LottoTicket.from(setOf(1, 2, 3, 4, 5, 6)), "7")
+        val winningLotto = WinningLotto(LottoTicket.from(setOf(1, 2, 3, 4, 5, 6)), LottoNumber.from(7))
         val count = winningLotto.calculateMatchCount(numbers)
         count shouldBe matchCount
+    }
+
+    @Test
+    fun `보너스 번호는 로또 티켓의 번호와 중복될 수 없다`() {
+        val lottoTicket = LottoTicket.from(setOf(1, 2, 3, 4, 5, 6))
+        val bonusNumber = LottoNumber(6)
+        shouldThrow<IllegalArgumentException> {
+            WinningLotto(lottoTicket, bonusNumber)
+        }.also {
+            it.message shouldBe "보너스 번호는 로또 티켓의 번호와 중복될 수 없습니다"
+        }
     }
 
     companion object {

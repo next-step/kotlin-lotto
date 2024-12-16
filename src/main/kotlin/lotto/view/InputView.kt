@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
 import lotto.domain.WinningLotto
 
@@ -15,9 +16,8 @@ object InputView {
         val winningLottoNumbers: String = readln()
         val numbers = winningLottoNumbers.split(",").map { it.toInt() }.toSet()
 
-        val lottoTicket = LottoTicket.from(numbers)
         println("보너스 볼을 입력해 주세요.")
-        val number: String = readln()
-        return WinningLotto(lottoTicket, number)
+        val bonusNumber: String = readln()
+        return WinningLotto(LottoTicket.from(numbers), LottoNumber.from(bonusNumber))
     }
 }

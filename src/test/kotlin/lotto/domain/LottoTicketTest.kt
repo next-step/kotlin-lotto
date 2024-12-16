@@ -44,7 +44,7 @@ class LottoTicketTest {
 
     @Test
     fun `로또 티켓의 번호가 6개 모두 일치하면 1등이다 `() {
-        val winningLotto = WinningLotto(LottoTicket.from(setOf(1, 2, 3, 4, 5, 6)), "7")
+        val winningLotto = WinningLotto(LottoTicket.from(setOf(1, 2, 3, 4, 5, 6)), LottoNumber.from(7))
         val lottoTicket = LottoTicket.from(setOf(1, 2, 3, 4, 5, 6))
         val rank = lottoTicket.calculateRank(winningLotto)
         rank shouldBe LottoRank.FIRST_PLACE
@@ -53,7 +53,7 @@ class LottoTicketTest {
 
     @Test
     fun `로또 티켓의 번호가 5개 일치하고 보너스 번호가 일치하면 2등이다 `() {
-        val winningLotto = WinningLotto(LottoTicket.from(setOf(1, 2, 3, 4, 5, 6)), "7")
+        val winningLotto = WinningLotto(LottoTicket.from(setOf(1, 2, 3, 4, 5, 6)), LottoNumber.from(7))
         val lottoTicket = LottoTicket.from(setOf(1, 2, 3, 4, 5, 7))
         val rank = lottoTicket.calculateRank(winningLotto)
         rank shouldBe LottoRank.SECOND_PLACE
@@ -62,7 +62,7 @@ class LottoTicketTest {
 
     @Test
     fun `로또 티켓의 번호가 5개 일치하고 보너스 번호가 일치하지 않으면 3등이다 `() {
-        val winningLotto = WinningLotto(LottoTicket.from(setOf(1, 2, 3, 4, 5, 6)), "7")
+        val winningLotto = WinningLotto(LottoTicket.from(setOf(1, 2, 3, 4, 5, 6)), LottoNumber.from(7))
         val lottoTicket = LottoTicket.from(setOf(1, 2, 3, 4, 5, 9))
         val rank = lottoTicket.calculateRank(winningLotto)
         rank shouldBe LottoRank.THIRD_PLACE
@@ -71,7 +71,7 @@ class LottoTicketTest {
 
     @Test
     fun `로또 티켓의 번호가 4개 일치하면 3등이다 `() {
-        val winningLotto = WinningLotto(LottoTicket.from(setOf(1, 2, 3, 4, 5, 6)), "7")
+        val winningLotto = WinningLotto(LottoTicket.from(setOf(1, 2, 3, 4, 5, 6)), LottoNumber.from(7))
         val lottoTicket = LottoTicket.from(setOf(1, 2, 3, 4, 15, 16))
         val rank = lottoTicket.calculateRank(winningLotto)
         rank shouldBe LottoRank.FOURTH_PLACE
@@ -80,7 +80,7 @@ class LottoTicketTest {
 
     @Test
     fun `로또 티켓의 번호가 3개 일치하면 4등이다 `() {
-        val winningLotto = WinningLotto(LottoTicket.from(setOf(1, 2, 3, 4, 5, 6)), "7")
+        val winningLotto = WinningLotto(LottoTicket.from(setOf(1, 2, 3, 4, 5, 6)), LottoNumber.from(7))
         val lottoTicket = LottoTicket.from(setOf(1, 2, 3, 14, 15, 16))
         val rank = lottoTicket.calculateRank(winningLotto)
         rank shouldBe LottoRank.FIFTH_PLACE
@@ -89,7 +89,7 @@ class LottoTicketTest {
 
     @Test
     fun `로또 티켓의 번호가 2개 일치하면 꽝이다 `() {
-        val winningLotto = WinningLotto(LottoTicket.from(setOf(1, 2, 3, 4, 5, 6)), "7")
+        val winningLotto = WinningLotto(LottoTicket.from(setOf(1, 2, 3, 4, 5, 6)), LottoNumber.from(7))
         val lottoTicket = LottoTicket.from(setOf(1, 2, 13, 14, 15, 16))
         val rank = lottoTicket.calculateRank(winningLotto)
         rank shouldBe LottoRank.BLANK_PLACE
@@ -98,7 +98,7 @@ class LottoTicketTest {
 
     @Test
     fun `로또 티켓의 번호가 1개 일치하면 꽝이다 `() {
-        val winningLotto = WinningLotto(LottoTicket.from(setOf(1, 2, 3, 4, 5, 6)), "7")
+        val winningLotto = WinningLotto(LottoTicket.from(setOf(1, 2, 3, 4, 5, 6)), LottoNumber.from(7))
         val lottoTicket = LottoTicket.from(setOf(1, 12, 13, 14, 15, 16))
         val rank = lottoTicket.calculateRank(winningLotto)
         rank shouldBe LottoRank.BLANK_PLACE
@@ -107,7 +107,7 @@ class LottoTicketTest {
 
     @Test
     fun `로로또 티켓의 번호가 하나도 일치하지 않으면 꽝이다 `() {
-        val winningLotto = WinningLotto(LottoTicket.from(setOf(1, 2, 3, 4, 5, 6)), "7")
+        val winningLotto = WinningLotto(LottoTicket.from(setOf(1, 2, 3, 4, 5, 6)), LottoNumber.from(7))
         val lottoTicket = LottoTicket.from(setOf(11, 12, 13, 14, 15, 16))
         val rank = lottoTicket.calculateRank(winningLotto)
         rank shouldBe LottoRank.BLANK_PLACE

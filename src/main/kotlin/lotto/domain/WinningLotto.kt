@@ -2,13 +2,10 @@ package lotto.domain
 
 class WinningLotto(
     private val winningLotto: LottoTicket,
-    number: String,
+    private val bonusNumber: LottoNumber,
 ) {
-    private val bonusNumber: BonusNumber
-
     init {
-        val intNumber = number.toIntOrNull() ?: throw IllegalArgumentException("보너스 번호가 유효하지 않습니다")
-        bonusNumber = BonusNumber.of(this.winningLotto, LottoNumber.from(intNumber))
+        require(!winningLotto.contains(bonusNumber)) { "보너스 번호는 로또 티켓의 번호와 중복될 수 없습니다" }
     }
 
     fun calculateMatchCount(numbers: Set<LottoNumber>): Int {
@@ -16,6 +13,6 @@ class WinningLotto(
     }
 
     fun isMatchedBonusNumber(numbers: Set<LottoNumber>): Boolean {
-        return bonusNumber.isMatched(numbers)
+        return numbers.contains(bonusNumber)
     }
 }
