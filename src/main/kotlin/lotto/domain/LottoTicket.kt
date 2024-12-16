@@ -11,7 +11,7 @@ sealed class LottoTicket {
 
     class ManualLottoTicket(override val lottoNumbers: LottoNumbers) : LottoTicket()
 
-    class AutoLottoTicket(private val generateLottoNumbers: () -> LottoNumbers) : LottoTicket() {
+    class AutoLottoTicket(generateLottoNumbers: () -> LottoNumbers) : LottoTicket() {
         override val lottoNumbers: LottoNumbers = generateLottoNumbers()
     }
 }
