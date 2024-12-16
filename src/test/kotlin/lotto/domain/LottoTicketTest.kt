@@ -11,21 +11,21 @@ class LottoTicketTest {
                 listOf(1, 2, 3, 4, 5, 6)
             }
 
-        val winner = LottoTicket(1, 2, 3, 4, 5, 6)
+        val winner = LottoTicket(listOf(1, 2, 3, 4, 5, 6))
         winner.correctNumberCount(tickets[0]) shouldBe 6
     }
 
     @Test
     fun `1등 확인`() {
-        val ticket = LottoTicket(1, 2, 3, 4, 5, 6)
-        val winner = LottoTicket(1, 2, 3, 4, 5, 6)
+        val ticket = LottoTicket(listOf(1, 2, 3, 4, 5, 6))
+        val winner = LottoTicket(listOf(1, 2, 3, 4, 5, 6))
         winner.correctNumberCount(ticket) shouldBe 6
     }
 
     @Test
     fun `3등 확인`() {
-        val ticket = LottoTicket(1, 2, 3, 4, 7, 8)
-        val winner = LottoTicket(1, 2, 3, 4, 5, 6)
+        val ticket = LottoTicket(listOf(1, 2, 3, 4, 7, 8))
+        val winner = LottoTicket(listOf(1, 2, 3, 4, 5, 6))
         winner.correctNumberCount(ticket) shouldBe 4
     }
 }

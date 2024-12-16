@@ -3,17 +3,8 @@ package lotto.domain
 import lotto.controller.GeneratorLottoNumbers
 import lotto.controller.GeneratorRandomNumbers
 
-class LottoTicket {
-    private val lottoNumbers: List<LottoNumber>
-
-    // 중복된 번호를 입력 할 수 없다
-    constructor(vararg elements: Int) {
-        lottoNumbers = elements.map { LottoNumber.from(it) }
-    }
-
-    constructor(elements: List<Int>) {
-        lottoNumbers = elements.map { LottoNumber.from(it) }
-    }
+class LottoTicket(elements: List<Int>) {
+    private val lottoNumbers: List<LottoNumber> = elements.map { LottoNumber.from(it) }
 
     fun correctNumberCount(ticket: LottoTicket): Int {
         var numberCount = 0
@@ -22,7 +13,6 @@ class LottoTicket {
                 numberCount++
             }
         }
-        println("$ticket equal number count $numberCount")
         return numberCount
     }
 
