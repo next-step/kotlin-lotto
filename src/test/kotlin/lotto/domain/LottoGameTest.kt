@@ -1,22 +1,19 @@
-package lotto.service
+package lotto.domain
 
 import io.kotest.matchers.shouldBe
-import lotto.domain.Amount
-import lotto.domain.LottoNumber
-import lotto.domain.WinningLottoNumber
 import lotto.enums.prize.Prize
 import lotto.repository.LottoRepository
 import org.junit.jupiter.api.Test
 
-class LottoServiceTest {
+class LottoGameTest {
     val lottoRepository: LottoRepository = LottoRepository()
-    val service: LottoService = LottoService(lottoRepository)
+    val lottoGame: LottoGame = LottoGame(lottoRepository)
 
     @Test
     fun `lotto 값 생성 시 중복되는 숫자가 없어야한다`() {
-        val amount = Amount(5000)
-        amount.setManualCount(5)
-        service.start(
+        val amount = Amount(5000, 5)
+
+        lottoGame.start(
             amount,
             listOf(
                 LottoNumber(setOf(15, 14, 17, 9, 3, 6)),
@@ -32,9 +29,8 @@ class LottoServiceTest {
 
     @Test
     fun `당첨번호에 따른 당첨등수 보너스 포함 산정 테스트`() {
-        val amount = Amount(5000)
-        amount.setManualCount(5)
-        service.start(
+        val amount = Amount(5000, 5)
+        val lottoInfo = lottoGame.start(
             amount,
             listOf(
                 LottoNumber(setOf(15, 14, 17, 9, 3, 6)),
@@ -44,7 +40,7 @@ class LottoServiceTest {
             ),
         )
         val winningLottoNumber = WinningLottoNumber(LottoNumber(setOf(7, 8, 9, 17, 14, 15)), 30)
-        val result = service.getResult(winningLottoNumber)
+        val result = LottoGameResult(lottoInfo, winningLottoNumber).getResult()
 
         result.get(Prize.THREE) shouldBe 2
         result.get(Prize.FOUR) shouldBe 1

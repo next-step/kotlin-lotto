@@ -1,7 +1,5 @@
 package lotto.domain
 
-import lotto.entity.LottoInfo
-
 class WinningLottoNumber(private val winningNumbers: LottoNumber, val bonusNumber: Int) {
     init {
         require(bonusNumber in MIN_BONUS_NUMBER..MAX_BONUS_NUMBER) {
@@ -16,8 +14,8 @@ class WinningLottoNumber(private val winningNumbers: LottoNumber, val bonusNumbe
         return winningNumbers.hasNumber(number)
     }
 
-    fun hasBonusNumber(lottoInfo: LottoInfo): Boolean {
-        return lottoInfo.hasNumber(bonusNumber)
+    fun hasBonusNumber(lottoNumber: LottoNumber): Boolean {
+        return lottoNumber.hasNumber(bonusNumber)
     }
 
     companion object {

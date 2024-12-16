@@ -1,8 +1,8 @@
 package lotto.view
 
 import lotto.calculator.LottoCalculator
+import lotto.domain.LottoNumber
 import lotto.entity.Lotto
-import lotto.entity.LottoInfo
 import lotto.enums.prize.Prize
 
 object OutPutView {
@@ -17,8 +17,8 @@ object OutPutView {
         autoInfo.forEach { printLotto(it) }
     }
 
-    fun printLotto(lottoInfo: LottoInfo) {
-        for (number in lottoInfo.getNumbers()) {
+    fun printLotto(lottoNumber: LottoNumber) {
+        for (number in lottoNumber.getNumbers()) {
             print("$number ")
         }
         println()

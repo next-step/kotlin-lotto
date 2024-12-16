@@ -1,18 +1,14 @@
 package lotto.view
 
-import lotto.domain.Amount
 import lotto.domain.LottoNumber
 import lotto.domain.WinningLottoNumber
 
 object InputView {
-    fun printLottoGameCount(gameCount: Int) {
-        println("${gameCount}개를 구매했습니다.")
-    }
+    private const val MIN_LOTTO_MANUAL_COUNT = 1
 
-    fun getLottoPurchaseAmount(): Amount {
+    fun getLottoPurchaseAmount(): Int {
         println("구입금액을 입력해 주세요.")
-        val input: Int = readlnOrNull()?.toIntOrNull() ?: throw RuntimeException("숫자를 입력해주세요")
-        return Amount(input)
+        return readlnOrNull()?.toIntOrNull() ?: throw RuntimeException("숫자를 입력해주세요")
     }
 
     fun getWinningNumber(): WinningLottoNumber {
@@ -35,7 +31,7 @@ object InputView {
 
     fun getLottoManualNumbers(manualCount: Int): MutableList<LottoNumber> {
         val lottoNumbersList = mutableListOf<LottoNumber>()
-        if (manualCount < 1) {
+        if (manualCount < MIN_LOTTO_MANUAL_COUNT) {
             return lottoNumbersList
         }
         println("수동으로 구매할 번호를 입력해 주세요.")

@@ -1,7 +1,9 @@
 package lotto.entity
 
-class Lotto(val manualLotto: MutableList<LottoInfo>, val autoLotto: MutableList<LottoInfo>) {
-    fun getTotalLottoInfos(): List<LottoInfo> {
+import lotto.domain.LottoNumber
+
+class Lotto(val manualLotto: MutableList<LottoNumber>, val autoLotto: MutableList<LottoNumber>) {
+    fun getTotalLottoInfos(): List<LottoNumber> {
         return manualLotto + autoLotto
     }
 }

@@ -16,6 +16,12 @@ class LottoNumber(private val numbers: Set<Int>) {
         return this.numbers.contains(number).not()
     }
 
+    fun compareWithWinningNumbers(winningLottoNumber: WinningLottoNumber): LottoMatchResult {
+        val matchCount = this.getNumbers().count { winningLottoNumber.hasWinningNumber(it) }
+        val hasBonus = winningLottoNumber.hasBonusNumber(this)
+        return LottoMatchResult(matchCount, hasBonus)
+    }
+
     companion object {
         const val MIN_LOTTO_NUMBER = 1
         const val MAX_LOTTO_NUMBER = 45
