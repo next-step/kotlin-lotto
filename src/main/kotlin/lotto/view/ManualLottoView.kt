@@ -22,8 +22,7 @@ object ManualLottoView {
     fun repeatInputManualLottoNumbers(manualLottoCount: Int): LottoTickets {
         println("\n수동으로 구매할 번호를 입력해 주세요.")
 
-        val lottoNumbersList = mutableListOf<LottoNumbers>()
-        repeat(manualLottoCount) { lottoNumbersList.add(inputManualLottoNumbers()) }
+        val lottoNumbersList = List(manualLottoCount) { inputManualLottoNumbers() }
 
         val lottoTickets = lottoNumbersList.map { ManualLottoTicket(it) }
 
