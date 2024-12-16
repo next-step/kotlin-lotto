@@ -1,6 +1,5 @@
 package calculator
 
-import calculator.domain.AddCalculator
 import calculator.domain.InputTokenizer
 
 class StringAddCalculator {
@@ -11,14 +10,17 @@ class StringAddCalculator {
         println("계산 결과 : $sumResult")
     }
 
-    fun add(userInput: String? = ""): Int {
-        val tokenIterator = InputTokenizer(userInput).getTokensIterator()
-        val calculator = AddCalculator()
-        while (tokenIterator.hasNext()) {
-            calculator.add(tokenIterator.next().toInt())
-        }
-        println("계산 결과 : ${calculator.getResult()}")
-        return calculator.getResult()
+    fun add(userInput: String?): Int {
+        val tokenizer = InputTokenizer(userInput ?: "0")
+        val hasMinus =
+            tokenizer.getTokens().any {
+                it < 0
+            }
+        if (hasMinus) throw RuntimeException("자연수로 입력해 주세요.")
+        val result = tokenizer.getTokens().sum()
+
+        println("계산 결과 : $result")
+        return result
     }
 }
 
