@@ -4,6 +4,10 @@ import lotto.controller.GeneratorLottoNumbers
 import lotto.controller.GeneratorRandomNumbers
 
 data class LottoTicket(private val lottoNumbers: List<LottoNumber>) {
+    init {
+        require(lottoNumbers.size == 6)
+    }
+
     fun correctNumberCount(ticket: LottoTicket): Int {
         var numberCount = 0
         lottoNumbers.forEach {

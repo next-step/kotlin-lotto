@@ -17,7 +17,7 @@ class LottoNumberTest {
     }
 
     @ParameterizedTest
-    @ValueSource (ints = [60, 0, -10, 100])
+    @ValueSource(ints = [60, 0, -10, 100])
     fun `생성할 수 없는 로또 번호를 테스트한다`(value: Int) {
         assertThatExceptionOfType(IllegalArgumentException::class.java).isThrownBy {
             LottoNumber.from(value)

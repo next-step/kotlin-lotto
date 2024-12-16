@@ -98,7 +98,7 @@ class LottoResultTest {
             )
         }
 
-        fun makeLottoTicket(vararg elements: Int): LottoTicket {
+        private fun makeLottoTicket(vararg elements: Int): LottoTicket {
             return LottoTicket(elements.map { LottoNumber.from(it) })
         }
     }
