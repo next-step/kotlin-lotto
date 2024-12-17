@@ -27,11 +27,10 @@ data class LottoTicket(private val lottoNumbers: List<LottoNumber>) {
             count: Int,
             numberGenerator: GeneratorLottoNumbers = GeneratorRandomNumbers,
         ): List<LottoTicket> {
-            val tickets = mutableListOf<LottoTicket>()
-            while (tickets.size < count) {
-                tickets.add(LottoTicket(numberGenerator.generateNumbers()))
+            return buildList {
+                for (index in 1..count)
+                    add(LottoTicket(numberGenerator.generateNumbers()))
             }
-            return tickets.toList()
         }
     }
 }
