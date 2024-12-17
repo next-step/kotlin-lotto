@@ -31,7 +31,7 @@
 3. 지난 주 당첨 번호를 입력받는다.
 4. 당첨 통계를 출력한다.
 
-### Feedback
+### Feedback-1
 1. CalculatorStringSplitter - 자료형 제외하여 네이밍 수정
 2. LottoPurchaseController 네이밍 수정 
 3. Lotto 클래스 개선
@@ -41,3 +41,23 @@
 7. 3개부터 시작해서 6개일치하면 당첨금이 얼마인지 테스트 
 8. '로또 총 수익률을 구할 수 있다' 구체적으로 수정
 
+### Feedback-2
+1. LottoRank, LottoResult 개선
+2. Lotto 클래스 개선
+3. LottoRank 매칭되는 번호 없는 경우 추가
+4. Lotto 숫자 6 상수화
+5. LottoPurchaseManager 네이밍 수정
+
+
+## step-3
+
+### 요구사항
+1. 2등을 위해 추가 번호를 하나 더 추첨하고 당첨 통계도 반영한다.
+
+### Feedback
+1. Lotto - LottoNumbers 로직 개선 - 메시지 보내기
+2. 하나의 로또번호와 관련된 일급 컬렉션
+3. 중복된 로또 번호가 나오지 않도록 수정
+4. ResultView - Lotto, LottoNumbers 로직 개선 - 메시지 보내기
+5. LottoRank - 변경사항을 쉽게 인지할 수 있도록 enum 비교를 exhausitive하게 개선
+6. LottoRank - from 네이밍 개선

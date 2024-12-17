@@ -1,18 +1,27 @@
 package lotto.domain
 
-class Lotto(
-    val lottoNumbers: List<Int>,
+data class Lotto(
+    private val lottoNumbers: LottoNumbers,
 ) {
-    init {
-        require(lottoNumbers.size == 6) { IllegalArgumentException::class.java }
-    }
+    fun joinToLottoNumbersString(
+        separator: CharSequence = LOTTO_NUMBERS_SEPARATOR,
+        prefix: CharSequence = LOTTO_NUMBERS_PREFIX,
+        postfix: CharSequence = LOTTO_NUMBERS_POSTFIX,
+    ): String = lottoNumbers.numbers.joinToString(separator, prefix, postfix)
 
-    fun matchLotto(winnerNumbers: List<Int>): LottoRank? {
-        val matchingNumbers = lottoNumbers.count { winnerNumbers.contains(it) }
-        return LottoRank.from(matchingNumbers)
+    fun matchLotto(
+        winnerNumbers: LottoNumbers,
+        bonusNumber: LottoNumber,
+    ): LottoRank {
+        val matchingNumbers = lottoNumbers.countMatches(winnerNumbers)
+        val matchingBonus = lottoNumbers.contains(bonusNumber)
+        return LottoRank.findByMatchCountAndBonus(matchingNumbers, matchingBonus)
     }
 
     companion object {
-        fun from(numbers: List<Int>) = Lotto(numbers)
+        const val LOTTO_PRICE = 1000
+        private const val LOTTO_NUMBERS_SEPARATOR = ", "
+        private const val LOTTO_NUMBERS_PREFIX = ""
+        private const val LOTTO_NUMBERS_POSTFIX = ""
     }
 }
