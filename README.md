@@ -65,8 +65,10 @@
   - 우승 티켓
   - 로직 : 당첨 금액 및 수익비를 확인 (검증)
   - 1/2/3/4 등 확인 한다 [v]
-- GeneratorLottoNumber
-  - 1~45 숫자 중 번호 생성
+- GeneratorLottoNumbers
+  - 1~45 숫자를 섞는다
+  - 6개의 번호를 추출한다
+  - 필요한(6) 숫자의 갯수를 가진 로또 티켓을 생성한다[v]
 - InputVIew
   - 구입 금액과 우승번호를 입력한다
 - ResultView

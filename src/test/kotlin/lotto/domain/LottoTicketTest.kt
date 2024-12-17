@@ -4,8 +4,6 @@ import io.kotest.matchers.shouldBe
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.ValueSource
 
 class LottoTicketTest {
     @Test
@@ -31,16 +29,6 @@ class LottoTicketTest {
         }
     }
 
-    @ParameterizedTest
-    @ValueSource(ints = [1,100,10000])
-    fun `여러 로또 티켓 생성 확인`(count: Int) {
-        val tickets =
-            LottoTicket.generateLottoTickets(count) {
-                listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.from(it) }
-            }
-        tickets.size shouldBe count
-    }
-
     @Test
     fun `비교 - 같은 번호 6개 확인`() {
         val ticket = LottoTicket(makeLottoNumbers(1, 2, 3, 4, 5, 6))
@@ -54,8 +42,9 @@ class LottoTicketTest {
     }
 
     companion object {
-        val DEFAULT_NUMBERS = makeLottoNumbers(1,2,3,4,5,6)
+        val DEFAULT_NUMBERS = makeLottoNumbers(1, 2, 3, 4, 5, 6)
         val DEFAULT_LOTTO_TICKET = LottoTicket(DEFAULT_NUMBERS)
+
         fun makeLottoNumbers(vararg elements: Int): List<LottoNumber> {
             return elements.map { LottoNumber.from(it) }
         }

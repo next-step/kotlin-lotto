@@ -1,5 +1,6 @@
 package lotto.controller
 
+import lotto.domain.GeneratorLottoNumbers
 import lotto.domain.LottoNumber
 import lotto.domain.LottoResult
 import lotto.domain.LottoTicket
@@ -12,7 +13,7 @@ class LottoApp {
 
     fun startLotto() {
         val count = inputView.inputUser()
-        val tickets = LottoTicket.generateLottoTickets(count)
+        val tickets = GeneratorLottoNumbers().generateRandomLottoTickets(count)
         resultView.printBuyTickets(tickets)
 
         val winNumbers = inputView.inputWinNumbers()

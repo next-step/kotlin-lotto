@@ -1,11 +1,8 @@
 package lotto.domain
 
-import lotto.controller.GeneratorLottoNumbers
-import lotto.controller.GeneratorRandomNumbers
-
 data class LottoTicket(private val lottoNumbers: List<LottoNumber>) {
     init {
-        require(lottoNumbers.size == 6) { "로또 티켓은 6개의 번호가 필요해요."}
+        require(lottoNumbers.size == COUNT_OF_NUMBERS) { "로또 티켓은 ${COUNT_OF_NUMBERS}개의 번호가 필요해요." }
     }
 
     fun correctNumberCount(ticket: LottoTicket): Int {
@@ -23,14 +20,6 @@ data class LottoTicket(private val lottoNumbers: List<LottoNumber>) {
     }
 
     companion object {
-        fun generateLottoTickets(
-            count: Int,
-            numberGenerator: GeneratorLottoNumbers = GeneratorRandomNumbers,
-        ): List<LottoTicket> {
-            return buildList {
-                for (index in 1..count)
-                    add(LottoTicket(numberGenerator.generateNumbers()))
-            }
-        }
+        const val COUNT_OF_NUMBERS = 6
     }
 }
