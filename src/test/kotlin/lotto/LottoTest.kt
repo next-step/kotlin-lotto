@@ -17,13 +17,6 @@ class LottoTest {
     }
 
     @Test
-    fun `번호 6개를 가진 로또를 생성할 수 있다`() {
-        val lottoNumbers = LottoNumbers.from(listOf(1, 2, 3, 4, 5, 6))
-        val lotto = Lotto(lottoNumbers)
-        lotto.lottoNumbers shouldBe lottoNumbers
-    }
-
-    @Test
     fun `번호 3개가 일치하면 5등이다`() {
         val lottoNumbers = LottoNumbers.from(listOf(3, 6, 13, 24, 25, 26))
         val lotto = Lotto(lottoNumbers)

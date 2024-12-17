@@ -7,7 +7,7 @@ data class Lotto(
         winnerNumbers: LottoNumbers,
         bonusNumber: LottoNumber,
     ): LottoRank {
-        val matchingNumbers = lottoNumbers.numbers.count { winnerNumbers.contains(it) }
+        val matchingNumbers = lottoNumbers.countMatches(winnerNumbers)
         val matchingBonus = lottoNumbers.contains(bonusNumber)
         return LottoRank.from(matchingNumbers, matchingBonus)
     }

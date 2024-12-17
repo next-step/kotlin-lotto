@@ -1,6 +1,6 @@
 package lotto.domain
 
-data class LottoNumbers(
+class LottoNumbers private constructor(
     val numbers: Set<LottoNumber>,
 ) {
     init {
@@ -8,6 +8,8 @@ data class LottoNumbers(
     }
 
     fun contains(number: LottoNumber): Boolean = numbers.contains(number)
+
+    fun countMatches(other: LottoNumbers): Int = numbers.count { other.contains(it) }
 
     companion object {
         const val LOTTO_NUMBER_COUNT = 6
