@@ -2,19 +2,34 @@ package lotto.controller
 
 import lotto.domain.Amount
 import lotto.domain.LottoGame
-import lotto.domain.LottoGameResult
 import lotto.domain.LottoNumber
-import lotto.domain.WinningLottoNumber
 import lotto.entity.Lotto
+import lotto.view.InputView
+import lotto.view.OutPutView
 
 class LottoController(private val lottoGame: LottoGame) {
-    fun start(
-        amount: Amount,
-        lottoManualNumbers: MutableList<LottoNumber>,
-    ): Lotto = lottoGame.start(amount, lottoManualNumbers)
+    fun gameStart() {
+        val amount = InputView.getAmount()
+        val lottoManualNumbers = InputView.getLottoManualNumbers(amount.manualCount)
+        val lottoInfo = createLottoInfo(amount, lottoManualNumbers)
+        OutPutView.printLottoInfo(lottoInfo)
 
-    fun getLottoGameResult(
-        lottoGameResult: Lotto,
-        winnerNumbers: WinningLottoNumber,
-    ): LottoGameResult = lottoGame.getLottoGameResult(lottoGameResult, winnerNumbers)
+        gameEnd(lottoInfo, amount.amount)
+    }
+
+    private fun gameEnd(
+        lottoInfo: Lotto,
+        amount: Int,
+    ) {
+        val winnerNumbers = InputView.getWinningNumber()
+        val lottoGameResult = lottoGame.getLottoGameResult(lottoInfo, winnerNumbers)
+        OutPutView.printLottoResults(lottoGameResult.getResult(), amount)
+    }
+
+    private fun createLottoInfo(
+        amount: Amount,
+        lottoManualNumbers: List<LottoNumber>,
+    ): Lotto {
+        return lottoGame.start(amount, lottoManualNumbers)
+    }
 }
