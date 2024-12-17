@@ -29,7 +29,7 @@ class LottoGameTest {
 
     @Test
     fun `당첨번호에 따른 당첨등수 보너스 포함 산정 테스트`() {
-        val amount = Amount(5000, 5)
+        val amount = Amount(5000, 4)
         val lottoInfo =
             lottoGame.start(
                 amount,
