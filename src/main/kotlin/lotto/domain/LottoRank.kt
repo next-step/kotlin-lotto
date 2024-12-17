@@ -16,13 +16,15 @@ enum class LottoRank(
         fun findByMatchCountAndBonus(
             matchCount: Int,
             matchBonus: Boolean,
-        ) = LottoRank.entries.find {
-            if (matchCount == SECOND.matchCount && matchBonus) {
-                it == SECOND
-            } else {
-                it.matchCount == matchCount
+        ): LottoRank =
+            when {
+                matchCount == FIRST.matchCount -> FIRST
+                matchCount == SECOND.matchCount && matchBonus -> SECOND
+                matchCount == THIRD.matchCount -> THIRD
+                matchCount == FOURTH.matchCount -> FOURTH
+                matchCount == FIFTH.matchCount -> FIFTH
+                else -> UNRANKED
             }
-        } ?: UNRANKED
 
         fun associateWithCount(count: (LottoRank) -> Int) =
             LottoRank.entries.associateWith { rank ->
