@@ -13,8 +13,9 @@ class LottoTest {
         val winningNumbers = LottoNumber(setOf(1, 2, 3, 7, 8, 9))
         val winningLottoNumber = WinningLottoNumber(winningNumbers, 6)
 
+        val totalLotto = lotto.manualLotto + lotto.manualLotto
         val result =
-            lotto.getTotalLottoInfos().map { it.compareWithWinningNumbers(winningLottoNumber) }
+            totalLotto.map { it.compareWithWinningNumbers(winningLottoNumber) }
 
         val matchCount = result.map { it.matchCount }.sum()
 

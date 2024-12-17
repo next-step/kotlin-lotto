@@ -8,6 +8,7 @@ import lotto.view.InputView
 import lotto.view.OutPutView
 
 private val lottoController = LottoController(LottoGame(LottoRepository()))
+
 fun main() {
     val purchaseAmount = InputView.getLottoPurchaseAmount()
     val manualCount = InputView.getLottoManualCount()
