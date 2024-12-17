@@ -23,13 +23,11 @@ object ResultView {
         println(TEXT_RESULT_PURCHASE_NUMBER.format(lottos.size))
         lottos.forEach { lotto ->
             println(
-                lotto.lottoNumbers.numbers.joinToString(
+                lotto.joinToLottoNumbersString(
                     separator = LOTTO_NUMBER_SEPARATOR,
                     prefix = LOTTO_NUMBER_PREFIX,
                     postfix = LOTTO_NUMBER_POSTFIX,
-                ) { value ->
-                    value.toString()
-                },
+                ),
             )
         }
         println()
