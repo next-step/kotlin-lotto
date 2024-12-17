@@ -11,6 +11,11 @@ class LottoGame(private val lottoRepository: LottoRepository) {
         amount: Amount,
         lottoManualNumbers: List<LottoNumber>,
     ): Lotto {
+        require(lottoManualNumbers.size == amount.manualCount) {
+            "수동으로 입력한 로또 번호의 개수가 수동 구매 개수와 일치하지 않습니다. " +
+                    "필요한 개수: ${amount.manualCount}, 입력된 개수: ${lottoManualNumbers.size}"
+        }
+
         val autoLotto = mutableListOf<LottoNumber>()
         repeat(amount.lottoGameCount) {
             autoLotto.add(generateLottoNumbers())
