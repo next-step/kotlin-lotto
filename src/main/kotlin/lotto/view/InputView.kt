@@ -16,4 +16,10 @@ class InputView {
         val numbers = winString.split(",")
         return numbers.map { it.toIntOrNull() ?: -1 }.toList()
     }
+
+    fun inputBonusNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        val bonusNumber = readln().toIntOrNull() ?: -1
+        return bonusNumber
+    }
 }

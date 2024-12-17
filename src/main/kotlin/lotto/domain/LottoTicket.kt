@@ -1,8 +1,12 @@
 package lotto.domain
 
-data class LottoTicket(private val lottoNumbers: List<LottoNumber>) {
+class LottoTicket(numbers: List<LottoNumber>) {
+    val lottoNumbers: List<LottoNumber>
+        get() = field.toList()
+
     init {
-        require(lottoNumbers.size == COUNT_OF_NUMBERS) { "로또 티켓은 ${COUNT_OF_NUMBERS}개의 번호가 필요해요." }
+        require(numbers.size == COUNT_OF_NUMBERS) { "로또 티켓은 ${COUNT_OF_NUMBERS}개의 번호가 필요해요." }
+        lottoNumbers = numbers.toList()
     }
 
     fun correctNumberCount(ticket: LottoTicket): Int {

@@ -4,6 +4,7 @@ import lotto.domain.GeneratorLottoNumbers
 import lotto.domain.LottoNumber
 import lotto.domain.LottoResult
 import lotto.domain.LottoTicket
+import lotto.domain.LottoWinner
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -20,7 +21,9 @@ class LottoApp {
         val winTicket = LottoTicket(winNumbers.map { LottoNumber(it) })
         resultView.printTicket(winTicket)
 
-        val lottoResult = LottoResult(tickets, winTicket, count)
+        val bonusNumber = inputView.inputBonusNumber()
+
+        val lottoResult = LottoResult(tickets, LottoWinner(winTicket, LottoNumber(bonusNumber)), count)
         resultView.printResult(lottoResult)
     }
 }
