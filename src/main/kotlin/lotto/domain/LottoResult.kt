@@ -1,7 +1,7 @@
 package lotto.domain
 
-import lotto.domain.LottoResult.RateResultString.LOSS
-import lotto.domain.LottoResult.RateResultString.WIN
+import lotto.domain.LottoResult.RateResult.LOSS
+import lotto.domain.LottoResult.RateResult.WIN
 import kotlin.math.roundToInt
 
 class LottoResult(tickets: List<LottoTicket>, win: LottoTicket, used: Int = 0) {
@@ -22,8 +22,8 @@ class LottoResult(tickets: List<LottoTicket>, win: LottoTicket, used: Int = 0) {
         (totalPrize * 100.0 / (totalCount * TICKET_PRICE)).roundToInt() / 100.0
     }
 
-    val rateResultString: String
-        get() = if (returnRate > 1) WIN.koreanText else LOSS.koreanText
+    val rateResult: RateResult
+        get() = if (returnRate > 1) WIN else LOSS
 
     init {
         tickets.forEach {
@@ -36,7 +36,7 @@ class LottoResult(tickets: List<LottoTicket>, win: LottoTicket, used: Int = 0) {
         }
     }
 
-    private enum class RateResultString(val koreanText: String) {
+    enum class RateResult(val koreanText: String) {
         WIN("이익"),
         LOSS("손해"),
     }
