@@ -4,6 +4,9 @@ import io.kotest.matchers.shouldBe
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.params.provider.ValueSource
 
 class LottoTicketTest {
     @Test
@@ -16,43 +19,44 @@ class LottoTicketTest {
     }
 
     @Test
-    fun `클래스 생성자 실패 테스트`() {
+    fun `클래스 생성자 실패 테스트-5개번호`() {
         assertThatExceptionOfType(IllegalArgumentException::class.java).isThrownBy {
-            LottoTicket(
-                makeLottoNumbers(1, 2, 3, 4, 5, 6, 7),
-            )
-            LottoTicket(
-                makeLottoNumbers(1, 2, 3, 4, 5),
-            )
+            LottoTicket(DEFAULT_NUMBERS.take(5))
         }
     }
 
     @Test
-    fun `생성 확인`() {
+    fun `클래스 생성자 실패 테스트-7개번호`() {
+        assertThatExceptionOfType(IllegalArgumentException::class.java).isThrownBy {
+            LottoTicket(DEFAULT_NUMBERS + LottoNumber(7))
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = [1,100,10000])
+    fun `여러 로또 티켓 생성 확인`(count: Int) {
         val tickets =
-            LottoTicket.generateLottoTickets(1) {
+            LottoTicket.generateLottoTickets(count) {
                 listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.from(it) }
             }
-
-        val winner = LottoTicket(makeLottoNumbers(1, 2, 3, 4, 5, 6))
-        winner.correctNumberCount(tickets[0]) shouldBe 6
+        tickets.size shouldBe count
     }
 
     @Test
-    fun `1등 확인`() {
+    fun `비교 - 같은 번호 6개 확인`() {
         val ticket = LottoTicket(makeLottoNumbers(1, 2, 3, 4, 5, 6))
-        val winner = LottoTicket(makeLottoNumbers(1, 2, 3, 4, 5, 6))
-        winner.correctNumberCount(ticket) shouldBe 6
+        DEFAULT_LOTTO_TICKET.correctNumberCount(ticket) shouldBe 6
     }
 
     @Test
-    fun `3등 확인`() {
+    fun `비교 - 같은 번호 4개 확인`() {
         val ticket = LottoTicket(makeLottoNumbers(1, 2, 3, 4, 7, 8))
-        val winner = LottoTicket(makeLottoNumbers(1, 2, 3, 4, 5, 6))
-        winner.correctNumberCount(ticket) shouldBe 4
+        DEFAULT_LOTTO_TICKET.correctNumberCount(ticket) shouldBe 4
     }
 
     companion object {
+        val DEFAULT_NUMBERS = makeLottoNumbers(1,2,3,4,5,6)
+        val DEFAULT_LOTTO_TICKET = LottoTicket(DEFAULT_NUMBERS)
         fun makeLottoNumbers(vararg elements: Int): List<LottoNumber> {
             return elements.map { LottoNumber.from(it) }
         }
