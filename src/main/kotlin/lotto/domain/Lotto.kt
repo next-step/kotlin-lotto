@@ -15,7 +15,7 @@ data class Lotto(
     ): LottoRank {
         val matchingNumbers = lottoNumbers.countMatches(winnerNumbers)
         val matchingBonus = lottoNumbers.contains(bonusNumber)
-        return LottoRank.from(matchingNumbers, matchingBonus)
+        return LottoRank.findByMatchCountAndBonus(matchingNumbers, matchingBonus)
     }
 
     companion object {

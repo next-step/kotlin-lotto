@@ -13,7 +13,7 @@ enum class LottoRank(
     ;
 
     companion object {
-        fun from(
+        fun findByMatchCountAndBonus(
             matchCount: Int,
             matchBonus: Boolean,
         ) = LottoRank.entries.find {
