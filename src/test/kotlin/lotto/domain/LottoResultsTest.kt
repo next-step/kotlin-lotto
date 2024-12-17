@@ -21,8 +21,8 @@ class LottoResultsTest {
         fun providedDuplicationNumbers() =
             listOf(
                 Arguments.arguments(LottoResult(LottoRank.FIRST_PLACE, 1), 2_000_000_000),
-                Arguments.arguments(LottoResult(LottoRank.SECOND_PLACE, 3), 4_500_000),
-                Arguments.arguments(LottoResult(LottoRank.THIRD_PLACE, 4), 200_000),
+                Arguments.arguments(LottoResult(LottoRank.SECOND_PLACE, 3), 90_000_000),
+                Arguments.arguments(LottoResult(LottoRank.THIRD_PLACE, 4), 6_000_000),
             )
     }
 }

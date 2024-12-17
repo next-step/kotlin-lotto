@@ -1,8 +1,8 @@
 package lotto.controller
 
 import lotto.domain.LottoResults
-import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
+import lotto.domain.WinningLotto
 
 object LottoController {
     fun purchaseLotto(amount: Int): LottoTickets {
@@ -11,7 +11,7 @@ object LottoController {
 
     fun calculateLottoRank(
         lottoTickets: LottoTickets,
-        winningLotto: LottoTicket,
+        winningLotto: WinningLotto,
     ): LottoResults {
         return lottoTickets.calculateLottoRank(winningLotto)
     }
