@@ -30,7 +30,7 @@ data class LottoTicket(private val numbers: Set<LottoNumber>) : Collection<Lotto
         }
 
         fun from(numbers: Set<Int>): LottoTicket {
-            return LottoTicket(numbers.map { LottoNumber(it) }.toSet())
+            return LottoTicket(numbers.map { LottoNumber.from(it) }.toSet())
         }
     }
 }
