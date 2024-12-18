@@ -10,7 +10,7 @@ object OutputView {
         val ticketCount = lottoTickets.size
         println(message = "$ticketCount 개를 구매했습니다.")
         for (lottoTicket in lottoTickets) {
-            println(lottoTicket.map { it.number })
+            println(lottoTicket.map { it.getNumber() })
         }
     }
 
