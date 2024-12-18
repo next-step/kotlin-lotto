@@ -16,7 +16,7 @@ class LottoCreatorTest : StringSpec({
 
     "입력된 숫자를 가진 수동 로또를 생성할 수 있다." {
         val lottoCreator = LottoCreator(FixedLottoNumberGenerator(listOf(1, 2, 3, 4, 5, 6)))
-        val manualLottos = lottoCreator.createManualLottos(listOf(createLottoNumberSet(1, 2, 3, 4, 5, 6)))
+        val manualLottos = lottoCreator.createManualLottos(listOf(setOf(1, 2, 3, 4, 5, 6)))
 
         manualLottos[0].numbers shouldBe createLottoNumberSet(1, 2, 3, 4, 5, 6)
     }

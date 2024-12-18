@@ -24,7 +24,7 @@ class LottoCreator(private val lottoNumberGenerator: LottoNumberGenerator = Rand
         return Lotto.from(lottoNumberGenerator.generate())
     }
 
-    fun createManualLottos(manualLottoNumbers: List<Set<LottoNumber>>): List<Lotto> {
-        return manualLottoNumbers.map { Lotto.from(it) }
+    fun createManualLottos(manualLottoNumbers: List<Set<Int>>): List<Lotto> {
+        return manualLottoNumbers.map { numbers -> Lotto.from(numbers.map { LottoNumber.getNumber(it) }.toSet()) }
     }
 }

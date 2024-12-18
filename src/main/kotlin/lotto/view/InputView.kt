@@ -1,6 +1,5 @@
 package lotto.view
 
-import lotto.domain.LottoNumber
 import lotto.util.NumberSplitter
 
 object InputView {
@@ -14,8 +13,8 @@ object InputView {
         return getNumberInput()
     }
 
-    fun getManualLottoNumbers(count: Int): List<Set<LottoNumber>> {
-        return (1..count).map { getLottoNumbers().map { LottoNumber.getNumber(it) }.toSet() }
+    fun getManualLottoNumbers(count: Int): List<Set<Int>> {
+        return (1..count).map { getLottoNumbers() }
     }
 
     fun getWinNumberInput(): Set<Int> {
