@@ -4,11 +4,16 @@ import lotto.domain.LottoRank
 import lotto.domain.LottoResult
 import lotto.domain.LottoResults
 import lotto.domain.LottoTickets
+import lotto.dto.PurchaseDetail
 
 object OutputView {
-    fun printPurchaseResult(lottoTickets: LottoTickets) {
-        val ticketCount = lottoTickets.size
-        println(message = "$ticketCount 개를 구매했습니다.")
+    fun printPurchaseResult(
+        lottoTickets: LottoTickets,
+        purchasedDetail: PurchaseDetail,
+    ) {
+        val manualLottoQuantity = purchasedDetail.manualLottoQuantity
+        val autoLottoQuantity = purchasedDetail.autoLottoQuantity
+        println("수동으로 ${manualLottoQuantity}장, 자동으로 ${autoLottoQuantity}개를 구매했습니다.")
         for (lottoTicket in lottoTickets) {
             println(lottoTicket.map { it.getNumber() })
         }

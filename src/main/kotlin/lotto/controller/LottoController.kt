@@ -1,18 +1,17 @@
 package lotto.controller
 
-import lotto.domain.LottoResults
 import lotto.domain.LottoTickets
-import lotto.domain.WinningLotto
+import lotto.view.InputView
+import lotto.view.OutputView
 
 object LottoController {
-    fun purchaseLotto(amount: Int): LottoTickets {
-        return LottoTickets.purchase(amount)
-    }
-
-    fun calculateLottoRank(
-        lottoTickets: LottoTickets,
-        winningLotto: WinningLotto,
-    ): LottoResults {
-        return lottoTickets.calculateLottoRank(winningLotto)
+    fun startLottoGame() {
+        val purchasedDetail = InputView.getPurchaseDetail()
+        val autoLottoTickets = LottoTickets.generateAutoLottoTickets(purchasedDetail.autoLottoQuantity)
+        val lottoTickets = LottoTickets(purchasedDetail.manualLottoTickets + autoLottoTickets)
+        OutputView.printPurchaseResult(lottoTickets, purchasedDetail)
+        val winningLotto = InputView.getUserWinningLotto()
+        val lottoResults = lottoTickets.calculateLottoRank(winningLotto)
+        OutputView.printResults(lottoResults, purchasedDetail.purchaseAmount)
     }
 }
