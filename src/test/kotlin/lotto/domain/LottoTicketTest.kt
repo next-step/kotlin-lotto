@@ -16,43 +16,35 @@ class LottoTicketTest {
     }
 
     @Test
-    fun `클래스 생성자 실패 테스트`() {
+    fun `클래스 생성자 실패 테스트-5개번호`() {
         assertThatExceptionOfType(IllegalArgumentException::class.java).isThrownBy {
-            LottoTicket(
-                makeLottoNumbers(1, 2, 3, 4, 5, 6, 7),
-            )
-            LottoTicket(
-                makeLottoNumbers(1, 2, 3, 4, 5),
-            )
+            LottoTicket(DEFAULT_NUMBERS.take(5))
         }
     }
 
     @Test
-    fun `생성 확인`() {
-        val tickets =
-            LottoTicket.generateLottoTickets(1) {
-                listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.from(it) }
-            }
-
-        val winner = LottoTicket(makeLottoNumbers(1, 2, 3, 4, 5, 6))
-        winner.correctNumberCount(tickets[0]) shouldBe 6
+    fun `클래스 생성자 실패 테스트-7개번호`() {
+        assertThatExceptionOfType(IllegalArgumentException::class.java).isThrownBy {
+            LottoTicket(DEFAULT_NUMBERS + LottoNumber(7))
+        }
     }
 
     @Test
-    fun `1등 확인`() {
+    fun `비교 - 같은 번호 6개 확인`() {
         val ticket = LottoTicket(makeLottoNumbers(1, 2, 3, 4, 5, 6))
-        val winner = LottoTicket(makeLottoNumbers(1, 2, 3, 4, 5, 6))
-        winner.correctNumberCount(ticket) shouldBe 6
+        DEFAULT_LOTTO_TICKET.correctNumberCount(ticket) shouldBe 6
     }
 
     @Test
-    fun `3등 확인`() {
+    fun `비교 - 같은 번호 4개 확인`() {
         val ticket = LottoTicket(makeLottoNumbers(1, 2, 3, 4, 7, 8))
-        val winner = LottoTicket(makeLottoNumbers(1, 2, 3, 4, 5, 6))
-        winner.correctNumberCount(ticket) shouldBe 4
+        DEFAULT_LOTTO_TICKET.correctNumberCount(ticket) shouldBe 4
     }
 
     companion object {
+        val DEFAULT_NUMBERS = makeLottoNumbers(1, 2, 3, 4, 5, 6)
+        val DEFAULT_LOTTO_TICKET = LottoTicket(DEFAULT_NUMBERS)
+
         fun makeLottoNumbers(vararg elements: Int): List<LottoNumber> {
             return elements.map { LottoNumber.from(it) }
         }
