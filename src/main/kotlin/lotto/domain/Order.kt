@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.const.LottoConst.UNIT_OF_AMOUNT
+import lotto.LottoShop.Companion.UNIT_OF_AMOUNT
 
 data class Order(
     val amount: Int,

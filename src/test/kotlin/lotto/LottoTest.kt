@@ -17,9 +17,9 @@ class LottoTest : StringSpec({
 
     "한장의 로또는 6개 미만 혹은 6개 초과된 숫자가 전달될 경우 예외를 반환한다." {
         assertSoftly {
-            shouldThrow<IllegalArgumentException> { Lotto(setOf()) }
-            shouldThrow<IllegalArgumentException> { Lotto(setOf(LottoNumber(1))) }
-            shouldThrow<IllegalArgumentException> { Lotto((1..7).map { LottoNumber(it) }.toSet()) }
+            shouldThrow<IllegalArgumentException> { Lotto.from(setOf()) }
+            shouldThrow<IllegalArgumentException> { Lotto.from(setOf(LottoNumber.getNumber(1))) }
+            shouldThrow<IllegalArgumentException> { Lotto.from((1..7).map { LottoNumber.getNumber(it) }.toSet()) }
         }
     }
 })

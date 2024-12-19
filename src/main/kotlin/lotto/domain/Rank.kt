@@ -1,7 +1,7 @@
 package lotto.domain
 
 enum class Rank(
-    val matchCount: Int,
+    val expectedMatchCount: Int,
     val prizeAmount: Int,
     private val match: (Int, Boolean) -> Boolean,
 ) {
@@ -17,8 +17,7 @@ enum class Rank(
             matchCount: Int,
             isBonusMatch: Boolean = false,
         ): Rank {
-            return entries.firstOrNull { it.match(matchCount, isBonusMatch) }
-                ?: throw RuntimeException("일치하는 숫자의 개수에 해당하는 상품이 존재하지 않습니다.")
+            return entries.firstOrNull { it.match(matchCount, isBonusMatch) } ?: MISS
         }
     }
 }

@@ -3,24 +3,19 @@ package lotto
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.LottoNumber
+import lotto.domain.Order
+import lotto.domain.Rank
 import lotto.domain.WinningLotto
 
 class WinningLottoTest : StringSpec({
-    "일치하는 로또번호의 개수를 확인할 수 있다." {
-        val lotto = createLotto(1, 2, 3, 4, 5, 6)
-        val bonusNumber = LottoNumber(7)
+    "당첨됨 로또의 개수를 제공한다." {
+        val lotto = createLotto(1, 2, 3, 7, 8, 9)
+        val order = Order(1000, listOf(lotto))
+        val winningLotto = WinningLotto(createLotto(1, 2, 3, 4, 5, 6), LottoNumber.getNumber(7))
 
-        val winningLotto = WinningLotto(lotto, bonusNumber)
+        val result = winningLotto.match(order)
 
-        winningLotto.countMatchingNumbers(lotto) shouldBe 6
-    }
-
-    "보너스 번호의 일치 여부를 확인할 수 있다." {
-        val lotto = createLotto(1, 2, 3, 4, 5, 6)
-        val bonusNumber = LottoNumber(7)
-
-        val winningLotto = WinningLotto(lotto, bonusNumber)
-
-        winningLotto.matchBonusNumber(lotto) shouldBe false
+        val analyze = result.analyze()
+        analyze.find { it.rank == Rank.FIFTH }!!.lottoMatchCount shouldBe 1
     }
 })
