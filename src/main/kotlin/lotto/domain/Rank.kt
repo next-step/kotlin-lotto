@@ -18,7 +18,7 @@ enum class Rank(val countOfMatch: Int, private val winningMoney: Int) {
             countOfMatch: Int,
             matchBonus: Boolean,
         ): Rank {
-            return entries.toTypedArray().find {
+            return entries.find {
                 countOfMatch == it.countOfMatch &&
                     ((it != SECOND) || matchBonus)
             } ?: MISS

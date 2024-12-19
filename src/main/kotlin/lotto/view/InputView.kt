@@ -19,7 +19,7 @@ class InputView {
 
     fun inputBonusNumber(): Int {
         println("보너스 볼을 입력해 주세요.")
-        val bonusNumber = readln().toIntOrNull() ?: -1
+        val bonusNumber = readln().toIntOrNull() ?: throw IllegalArgumentException("숫자로 입력해 주세요")
         return bonusNumber
     }
 }

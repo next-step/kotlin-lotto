@@ -14,7 +14,7 @@ class LottoApp {
 
     fun startLotto() {
         val count = inputView.inputUser()
-        val tickets = GeneratorLottoNumbers().generateRandomLottoTickets(count)
+        val tickets = GeneratorLottoNumbers.generateRandomLottoTickets(count)
         resultView.printBuyTickets(tickets)
 
         val winNumbers = inputView.inputWinNumbers()

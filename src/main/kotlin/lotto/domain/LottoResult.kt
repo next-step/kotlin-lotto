@@ -13,7 +13,7 @@ class LottoResult(tickets: List<LottoTicket>, win: LottoWinner, used: Int = 0) {
     private var totalCount: Int = used
 
     private val totalPrize by lazy {
-        Rank.FIRST.prize(first) + Rank.SECOND.prize(second) + Rank.THIRD.prize(third) + Rank.FOURTH.prize(fourth)
+        Rank.FIRST.prize(first) + Rank.SECOND.prize(second) + Rank.THIRD.prize(third) + Rank.FOURTH.prize(fourth) + Rank.FIFTH.prize(fifth)
     }
     val returnRate by lazy {
         (totalPrize * 100.0 / (totalCount * TICKET_PRICE)).roundToInt() / 100.0
