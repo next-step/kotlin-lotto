@@ -1,6 +1,8 @@
 package lotto.domain
 
-data class LottoNumber(val number: Int) {
+data class LottoNumber(private val number: Int) {
+    fun getNumber() = number
+
     companion object {
         const val LOTTO_MIN_NUMBER = 1
         const val LOTTO_MAX_NUMBER = 45

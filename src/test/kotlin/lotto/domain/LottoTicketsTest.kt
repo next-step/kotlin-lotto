@@ -1,24 +1,19 @@
 package lotto.domain
 
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
 class LottoTicketsTest {
     @Test
-    fun `로또 티켓은 구입금액은 1_000원 이상이여야 한다`() {
-        shouldThrow<IllegalArgumentException> {
-            LottoTickets.purchase(900)
-        }.also {
-            it.message shouldBe "구입금액은 1000원 이상이여야 합니다"
-        }
+    fun `자동 로또 티켓은 구입 수량이 0개이상이여야 발급되는 로또 티켓은 0개이다`() {
+        val autoLottoTickets = LottoTickets.generateAutoLottoTickets(0)
+        autoLottoTickets.size shouldBe 0
     }
 
     @Test
-    fun `로또 티켓을 구입 금액에 맞게 발급한다`() {
-        val amount = 5_000
-        val lottoTickets = LottoTickets.purchase(amount)
+    fun `로또 티켓을 구입 수량에 맞게 발급한다`() {
+        val lottoTickets = LottoTickets.generateAutoLottoTickets(5)
         lottoTickets shouldHaveSize 5
     }
 
