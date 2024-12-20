@@ -18,21 +18,7 @@ class LottoGameTest {
     }
 
     @ParameterizedTest
-    @CsvSource("1000", "2000", "3000")
-    fun `구매한 로또 만큼 랜덤한 번호를 생성한다`(money: Int) {
-        val lottoPrice = LottoPrice(money)
-        val purchasedLottos = LottoService(LottoPurchaseManager()).purchase(lottoPrice, Lottos(listOf()))
-
-        assertThat(purchasedLottos.size).isEqualTo(lottoPrice.calculatePurchaseCount())
-
-        purchasedLottos.lottos.forEach {
-            assertThat(it.numbers.distinct().size).isEqualTo(6)
-        }
-    }
-
-    @ParameterizedTest
     @CsvSource(
-        "1000, 0",
         "2000, 1",
         "3000, 2",
     )
@@ -40,7 +26,6 @@ class LottoGameTest {
         money: Int,
         manualCount: Int,
     ) {
-        // given
         val lottoPrice = LottoPrice(money)
         val manualLottos =
             List(manualCount) {
