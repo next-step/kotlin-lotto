@@ -23,4 +23,8 @@ class Lottos(private val tickets: List<Lotto>) {
                 it
             }.eachCount()
     }
+
+    companion object {
+        fun from(lottos: List<Lotto>): Lottos = Lottos(lottos)
+    }
 }
