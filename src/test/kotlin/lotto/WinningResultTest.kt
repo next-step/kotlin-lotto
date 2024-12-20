@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.LottoPrice
 import lotto.domain.Rank
 import lotto.domain.WinningResult
 import org.assertj.core.api.Assertions.assertThat
@@ -47,7 +48,7 @@ class WinningResultTest {
     @Test
     fun `수익률을 계산한다`() {
         val winningStatistics = mapOf(Rank.FOURTH to 1)
-        val purchaseAmount = 10000
+        val purchaseAmount = LottoPrice(10000)
         val winningResult = WinningResult(winningStatistics)
         val profitRate = winningResult.calculateProfitRate(purchaseAmount)
         assertThat(profitRate).isEqualTo(0.5)

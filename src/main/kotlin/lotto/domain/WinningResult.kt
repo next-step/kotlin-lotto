@@ -11,8 +11,8 @@ class WinningResult(private val winningStatistics: Map<Rank, Int>) {
         }
     }
 
-    fun calculateProfitRate(purchaseAmount: Int): Double {
-        return calculateTotalPrize().toDouble() / purchaseAmount
+    fun calculateProfitRate(purchaseAmount: LottoPrice): Double {
+        return calculateTotalPrize().toDouble() / purchaseAmount.value
     }
 
     fun getWinningCount(rank: Rank): Int {
