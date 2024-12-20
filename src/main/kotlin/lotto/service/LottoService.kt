@@ -11,7 +11,7 @@ import lotto.domain.WinningResult
 class LottoService(private val purchaseManager: LottoPurchaseManager) {
     fun purchase(
         price: LottoPrice,
-        manualLottos: List<Lotto> = emptyList(),
+        manualLottos: Lottos,
     ): Lottos {
         return purchaseManager.purchase(price, manualLottos)
     }
