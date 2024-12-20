@@ -1,6 +1,8 @@
 package lotto.view
 
+import lotto.domain.LottoNumber
 import lotto.domain.LottoResult.Companion.TICKET_PRICE
+import lotto.domain.LottoTicket
 
 class InputView {
     fun inputUser(): Int {
@@ -19,7 +21,25 @@ class InputView {
 
     fun inputBonusNumber(): Int {
         println("보너스 볼을 입력해 주세요.")
-        val bonusNumber = readln().toIntOrNull() ?: throw IllegalArgumentException("숫자로 입력해 주세요")
+        val bonusNumber = readInt()
         return bonusNumber
+    }
+
+    fun inputManualTickets(): List<LottoTicket> {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        val count = readInt()
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        val lottoTickets =
+            List(count) {
+                val winString = readln().replace(" ", "")
+                val numbers = winString.split(",")
+                LottoTicket(numbers.map { LottoNumber(it.toInt()) })
+            }
+
+        return lottoTickets
+    }
+
+    private fun readInt(): Int {
+        return readln().toIntOrNull() ?: throw IllegalArgumentException("숫자로 입력해 주세요")
     }
 }

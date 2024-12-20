@@ -14,8 +14,14 @@ class LottoApp {
 
     fun startLotto() {
         val count = inputView.inputUser()
-        val tickets = GeneratorLottoNumbers.generateRandomLottoTickets(count)
-        resultView.printBuyTickets(tickets)
+        val manualTickets = inputView.inputManualTickets()
+        val autoTicketCount = count - manualTickets.size
+        val tickets = GeneratorLottoNumbers.generateRandomLottoTickets(autoTicketCount)
+        resultView.printBuyTickets(
+            manualTickets.size,
+            autoTicketCount,
+            manualTickets + tickets,
+        )
 
         val winNumbers = inputView.inputWinNumbers()
         val winTicket = LottoTicket(winNumbers.map { LottoNumber(it) })
