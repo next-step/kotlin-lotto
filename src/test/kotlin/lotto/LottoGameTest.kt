@@ -4,6 +4,7 @@ import Lottos
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.LottoPrice
+import lotto.domain.LottoPurchaseManager
 import lotto.domain.Rank
 import lotto.service.LottoService
 import org.assertj.core.api.Assertions.assertThat
@@ -20,7 +21,7 @@ class LottoGameTest {
     @CsvSource("1000", "2000", "3000")
     fun `구매한 로또 만큼 랜덤한 번호를 생성한다`(money: Int) {
         val lottoPrice = LottoPrice(money)
-        val purchasedLottos = LottoService().purchase(lottoPrice)
+        val purchasedLottos = LottoService(LottoPurchaseManager()).purchase(lottoPrice)
 
         assertThat(purchasedLottos.size).isEqualTo(lottoPrice.calculatePurchaseCount())
 
@@ -58,7 +59,7 @@ class LottoGameTest {
         val winningNumbers = Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6))
         val bonusNumber = LottoNumber(7)
 
-        val winningResult = LottoService().checkWinning(lottos, winningNumbers, bonusNumber)
+        val winningResult = LottoService(LottoPurchaseManager()).checkWinning(lottos, winningNumbers, bonusNumber)
 
         assertThat(winningResult.getWinningCount(Rank.NONE)).isEqualTo(0)
     }
@@ -77,7 +78,7 @@ class LottoGameTest {
         val winningNumbers = Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6))
         val bonusNumber = LottoNumber(7)
 
-        val winningResult = LottoService().checkWinning(lottos, winningNumbers, bonusNumber)
+        val winningResult = LottoService(LottoPurchaseManager()).checkWinning(lottos, winningNumbers, bonusNumber)
 
         assertThat(winningResult.getWinningCount(Rank.FIRST)).isEqualTo(1)
         assertThat(winningResult.getWinningCount(Rank.SECOND)).isEqualTo(1)
@@ -96,7 +97,7 @@ class LottoGameTest {
         val winningNumbers = Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6))
         val bonusNumber = LottoNumber(7)
 
-        val winningResult = LottoService().checkWinning(lottos, winningNumbers, bonusNumber)
+        val winningResult = LottoService(LottoPurchaseManager()).checkWinning(lottos, winningNumbers, bonusNumber)
 
         assertThat(winningResult.getWinningCount(Rank.FIFTH)).isEqualTo(0)
         assertThat(winningResult.getWinningCount(Rank.FOURTH)).isEqualTo(0)
@@ -118,7 +119,7 @@ class LottoGameTest {
         val winningNumbers = Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6))
         val bonusNumber = LottoNumber(7)
 
-        val winningResult = LottoService().checkWinning(lottos, winningNumbers, bonusNumber)
+        val winningResult = LottoService(LottoPurchaseManager()).checkWinning(lottos, winningNumbers, bonusNumber)
 
         assertThat(winningResult.getWinningCount(Rank.FIRST)).isEqualTo(1)
         assertThat(winningResult.getWinningCount(Rank.SECOND)).isEqualTo(1)
