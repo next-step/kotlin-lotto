@@ -1,8 +1,8 @@
 package lotto.view
 
 import lotto.domain.LottoNumber
-import lotto.domain.LottoResult.Companion.TICKET_PRICE
 import lotto.domain.LottoTicket
+import lotto.domain.LottoTicket.Companion.TICKET_PRICE
 
 class InputView {
     fun inputUser(): Int {
