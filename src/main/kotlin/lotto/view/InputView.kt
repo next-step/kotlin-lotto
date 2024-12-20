@@ -29,4 +29,20 @@ class InputView {
         require(!winningNumbers.numbers.contains(bonusBallNumber)) { "보너스 볼은 당첨 번호와 중복될 수 없습니다." }
         return bonusBallNumber
     }
+
+    fun readManualLottoCount(): Int {
+        println("\n수동으로 구매할 로또 수를 입력해 주세요.")
+        return readln().toInt()
+    }
+
+    fun readManualLottoNumbers(count: Int): List<Lotto> {
+        println("\n수동으로 구매할 번호를 입력해 주세요.")
+        return (1..count).map {
+            val numbers =
+                readln().split(",")
+                    .map { it.trim().toInt() }
+                    .map { LottoNumber(it) }
+            Lotto(numbers)
+        }
+    }
 }
