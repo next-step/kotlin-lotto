@@ -19,7 +19,8 @@ class Lottos(private val tickets: List<Lotto>) {
     ): Map<Rank, Int> {
         return tickets
             .map { it.match(winningNumber, bonusBall) }
-            .groupBy { it }
-            .mapValues { it.value.size }
+            .groupingBy {
+                it
+            }.eachCount()
     }
 }
