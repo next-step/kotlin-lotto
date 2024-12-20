@@ -24,6 +24,10 @@ class Lottos(private val tickets: List<Lotto>) {
             }.eachCount()
     }
 
+    operator fun plus(lotto: Lottos): List<Lotto> {
+        return tickets + lotto.tickets
+    }
+
     companion object {
         fun from(lottos: List<Lotto>): Lottos = Lottos(lottos)
     }
