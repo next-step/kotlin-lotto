@@ -5,9 +5,13 @@ import lotto.domain.Rank
 import lotto.domain.WinningResult
 
 class ResultView {
-    fun printPurchaseResult(lottos: Lottos) {
-        println("${lottos.size}개를 구매했습니다.")
-        lottos.lottos.forEach { println(it) }
+    fun printPurchaseResult(
+        manualCount: Int,
+        lottos: Lottos,
+    ) {
+        val autoCount = lottos.size - manualCount
+        println("\n수동으로 ${manualCount}장, 자동으로 ${autoCount}장을 구매했습니다.")
+        lottos.lottos.forEach { println(it.numbers.map { num -> num.number }) }
     }
 
     fun printWinningStatistics(winningResult: WinningResult) {
