@@ -21,5 +21,6 @@ class LottoTicket(val lottoNumbers: List<LottoNumber>) {
 
     companion object {
         const val COUNT_OF_NUMBERS_IN_LOTTO_TICKET = 6
+        const val TICKET_PRICE = 1_000
     }
 }
