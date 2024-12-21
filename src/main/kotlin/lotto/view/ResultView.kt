@@ -4,7 +4,7 @@ import lotto.domain.LottoResult
 import lotto.domain.LottoTicket
 import lotto.domain.Rank
 
-class ResultView {
+object ResultView {
     fun printBuyTickets(
         manualCount: Int,
         autoCount: Int,

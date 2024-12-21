@@ -9,28 +9,27 @@ import lotto.view.InputView
 import lotto.view.ResultView
 
 class LottoApp {
-    private val inputView = InputView()
-    private val resultView = ResultView()
-
     fun startLotto() {
-        val count = inputView.inputUser()
-        val manualTickets = inputView.inputManualTickets()
+        val count = InputView.inputUser()
+        val manualTickets = InputView.inputManualTickets()
         val autoTicketCount = count - manualTickets.size
-        val tickets = GeneratorLottoNumbers.generateRandomLottoTickets(autoTicketCount)
-        resultView.printBuyTickets(
+        val autoTickets = GeneratorLottoNumbers.generateRandomLottoTickets(autoTicketCount)
+        val totalTickets = manualTickets + autoTickets
+
+        ResultView.printBuyTickets(
             manualTickets.size,
             autoTicketCount,
-            manualTickets + tickets,
+            totalTickets,
         )
 
-        val winNumbers = inputView.inputWinNumbers()
+        val winNumbers = InputView.inputWinNumbers()
         val winTicket = LottoTicket(winNumbers.map { LottoNumber(it) })
-        resultView.printTicket(winTicket)
+        ResultView.printTicket(winTicket)
 
-        val bonusNumber = inputView.inputBonusNumber()
+        val bonusNumber = InputView.inputBonusNumber()
 
-        val lottoResult = LottoResult(tickets, LottoWinner(winTicket, LottoNumber(bonusNumber)), count)
-        resultView.printResult(lottoResult)
+        val lottoResult = LottoResult(totalTickets, LottoWinner(winTicket, LottoNumber(bonusNumber)), count)
+        ResultView.printResult(lottoResult)
     }
 }
 

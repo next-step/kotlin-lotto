@@ -4,7 +4,7 @@ import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
 import lotto.domain.LottoTicket.Companion.TICKET_PRICE
 
-class InputView {
+object InputView {
     fun inputUser(): Int {
         println("구입금액을 입력해 주세요.")
         val totalAmount = readln().toIntOrNull()
