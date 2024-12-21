@@ -2,6 +2,7 @@ package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -112,6 +113,15 @@ class LottoTicketTest {
         val rank = lottoTicket.calculateRank(winningLotto)
         rank shouldBe LottoRank.BLANK_PLACE
         rank.prize shouldBe 0
+    }
+
+    @Test
+    fun `같은 숫자와 콤마 구분자로 된 문자열로 생성된 로또 티켓은 동일하다`() {
+        val numbers = "1,2,3,4,5,6"
+        val lottoTicket = LottoTicket.makeLottoTicket(numbers)
+        val number2 = "1,2,3,4,5,6"
+        val lottoTicket2 = LottoTicket.makeLottoTicket(number2)
+        lottoTicket shouldBeEqual lottoTicket2
     }
 
     companion object {

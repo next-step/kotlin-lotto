@@ -19,13 +19,21 @@ class LottoTickets(private val lottoTickets: List<LottoTicket>) : Collection<Lot
     }
 
     companion object {
-        private const val LOTTO_TICKET_PRICE = 1000
+        const val LOTTO_TICKET_PRICE = 1000
 
         fun purchase(amount: Int): LottoTickets {
             require(amount >= LOTTO_TICKET_PRICE) { "구입금액은 ${LOTTO_TICKET_PRICE}원 이상이여야 합니다" }
             val quantity = amount / LOTTO_TICKET_PRICE
             val lottoTickets = List(quantity) { LottoTicket.generateLottoNumber() }
             return LottoTickets(lottoTickets)
+        }
+
+        fun generateAutoLottoTickets(autoLottoQuantity: Int): LottoTickets {
+            if (autoLottoQuantity > 0) {
+                val lottoTickets = List(autoLottoQuantity) { LottoTicket.generateLottoNumber() }
+                return LottoTickets(lottoTickets)
+            }
+            return LottoTickets(listOf())
         }
     }
 }

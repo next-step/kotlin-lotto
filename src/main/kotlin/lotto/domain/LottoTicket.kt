@@ -18,6 +18,7 @@ data class LottoTicket(private val numbers: Set<LottoNumber>) : Collection<Lotto
 
     companion object {
         const val LOTTO_TICKET_SIZE = 6
+        private const val DELIMITER = ","
 
         fun generateLottoNumber(): LottoTicket {
             val lottoNumbers =
@@ -27,6 +28,13 @@ data class LottoTicket(private val numbers: Set<LottoNumber>) : Collection<Lotto
                     .map { LottoNumber.from(it) }
                     .toSet()
             return LottoTicket(lottoNumbers)
+        }
+
+        fun makeLottoTicket(line: String): LottoTicket {
+            val numbers =
+                line.split(DELIMITER)
+                    .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("로또 번호는 숫자여야 합니다.") }
+            return from(numbers.toSet())
         }
 
         fun from(numbers: Set<Int>): LottoTicket {
