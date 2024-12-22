@@ -3,7 +3,7 @@ package calculator.model.input
 object InputValidator {
     fun validateNumbers(numbers: List<Int>) {
         numbers.forEach { number ->
-            if (number < 0) throw IllegalArgumentException("음수는 계산할 수 없습니다.")
+            if (number == InputParser.NON_NUMERIC_DEFAULT_VALUE) throw IllegalArgumentException("음수는 계산할 수 없습니다.")
         }
     }
 

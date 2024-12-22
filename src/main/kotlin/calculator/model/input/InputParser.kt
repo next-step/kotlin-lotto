@@ -1,7 +1,14 @@
 package calculator.model.input
 
 object InputParser {
+    const val NON_NUMERIC_DEFAULT_VALUE = -1
     private val DEFAULT_DELIMITERS = arrayOf(",", ":")
+    private val customDelimiterRegex: Regex by lazy {
+        Regex("//(.)\n(.*)")
+    }
+    private val nonNumericCharacterRegex: Regex by lazy {
+        Regex("-?\\d+")
+    }
 
     fun parse(input: String?): List<Int> {
         if (input.isNullOrEmpty()) return listOf(0)
@@ -15,14 +22,14 @@ object InputParser {
         return numbers
     }
 
-    private fun extractDelimiterAndNumbers(input: String): Pair<String?, String> {
-        val result = Regex("//(.)\n(.*)").find(input)
+    private fun extractDelimiterAndNumbers(input: String): DelimiterAndNumbers {
+        val result = customDelimiterRegex.find(input)
         return if (result != null) {
             val customDelimiter = result.groupValues[1]
             val numbers = result.groupValues[2]
-            customDelimiter to numbers
+            DelimiterAndNumbers(customDelimiter, numbers)
         } else {
-            null to input
+            DelimiterAndNumbers(null, input)
         }
     }
 
@@ -41,12 +48,12 @@ object InputParser {
 
     private fun parseNonNegativeNumbers(tokens: List<String>): List<Int> {
         return tokens.map { token ->
-            token.toIntOrNull() ?: -1
+            token.toIntOrNull() ?: NON_NUMERIC_DEFAULT_VALUE
         }
     }
 
     private fun extractNonNumericCharacters(input: String): List<String> {
-        return input.replace(Regex("-?\\d+"), "").trim()
+        return input.replace(nonNumericCharacterRegex, "").trim()
             .map { "$it" }
     }
 }
