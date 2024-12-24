@@ -30,17 +30,6 @@ class LottoTest {
     }
 
     @Test
-    internal fun `로또 번호는 6개 이다`() {
-        LottoVendingMachine.buyLotto(1000).first().lottoNumbers.size shouldBe 6
-    }
-
-    @Test
-    internal fun `로또 번호는 오름차순 이다`() {
-        val numbers = LottoVendingMachine.buyLotto(1000).first().lottoNumbers
-        numbers shouldBe numbers.sortedBy { it.number }
-    }
-
-    @Test
     internal fun `로또 당첨 금액`() {
         Prize.First.money shouldBe 2_000_000_000
         Prize.Second.money shouldBe 1_500_000
@@ -99,5 +88,19 @@ class LottoTest {
         lottoResult.getThirdPrize().size shouldBe 0
         lottoResult.getFourthPrize().size shouldBe 1
         lottoResult.getNonePrize().size shouldBe 13
+    }
+
+    @Test
+    internal fun `로또 번호는 6개 이다`() {
+        val lottoNumbersSize = Lotto().lottoNumbers.size
+
+        lottoNumbersSize shouldBe 6
+    }
+
+    @Test
+    internal fun `로또 번호는 오름차순 이다`() {
+        val lottoNumbers = Lotto().lottoNumbers
+
+        lottoNumbers shouldBe lottoNumbers.sortedBy { it.number }
     }
 }
