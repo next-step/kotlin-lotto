@@ -19,9 +19,9 @@ class LottoApplication(
         outputView.showLotto(lotto)
 
         outputView.showInputWinningNumbersMessage()
-        val winningNumbers = inputView.inputWinningNumbers()
+        val winningNumbers: List<Int> = inputView.inputWinningNumbers()
 
-        val lottoResult = LottoLotteryMachine.draw(Lotto(winningNumbers), lotto)
+        val lottoResult = LottoLotteryMachine.draw(Lotto(*winningNumbers.toIntArray()), lotto)
         outputView.showResult(lottoResult, money)
     }
 

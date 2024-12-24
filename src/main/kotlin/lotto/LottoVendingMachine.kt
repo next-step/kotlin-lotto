@@ -11,6 +11,6 @@ object LottoVendingMachine {
             "구매 금액은 1000 보다 커야 함"
         }
 
-        return List(money / LOTTO_PRICE) { Lotto.makeLotto() }
+        return List(money / LOTTO_PRICE) { Lotto() }
     }
 }
