@@ -26,10 +26,10 @@ class OutputView {
     fun showResult(lottoResult: LottoResult, money: Int) {
         println("당첨 통계")
         println("---------")
-        println("3개 일치 (${Prize.Fourth.money}원) - ${lottoResult.getFourthPrize().size}개")
-        println("4개 일치 (${Prize.Third.money}원) - ${lottoResult.getThirdPrize().size}개")
-        println("5개 일치 (${Prize.Second.money}원) - ${lottoResult.getSecondPrize().size}개")
-        println("6개 일치 (${Prize.First.money}원) - ${lottoResult.getFirstPrize().size}개")
+        println("3개 일치 (${Prize.FOURTH.money}원) - ${lottoResult.getFourthPrize().size}개")
+        println("4개 일치 (${Prize.THIRD.money}원) - ${lottoResult.getThirdPrize().size}개")
+        println("5개 일치 (${Prize.SECOND.money}원) - ${lottoResult.getSecondPrize().size}개")
+        println("6개 일치 (${Prize.FIRST.money}원) - ${lottoResult.getFirstPrize().size}개")
 
         val rateOfReturn = lottoResult.getTotalPrizeMoney().toDouble() / money
         println(String.format("총 수익률은 %.2f입니다.", rateOfReturn))

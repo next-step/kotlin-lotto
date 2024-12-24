@@ -31,22 +31,22 @@ class LottoTest {
 
     @Test
     internal fun `로또 당첨 금액`() {
-        Prize.First.money shouldBe 2_000_000_000
-        Prize.Second.money shouldBe 1_500_000
-        Prize.Third.money shouldBe 50_000
-        Prize.Fourth.money shouldBe 5_000
-        Prize.None.money shouldBe 0
+        Prize.FIRST.money shouldBe 2_000_000_000
+        Prize.SECOND.money shouldBe 1_500_000
+        Prize.THIRD.money shouldBe 50_000
+        Prize.FOURTH.money shouldBe 5_000
+        Prize.NONE.money shouldBe 0
     }
 
     @Test
     internal fun `일치하는 개수에 맞는 등수`() {
-        Prize.from(6) shouldBe Prize.First
-        Prize.from(5) shouldBe Prize.Second
-        Prize.from(4) shouldBe Prize.Third
-        Prize.from(3) shouldBe Prize.Fourth
-        Prize.from(2) shouldBe Prize.None
-        Prize.from(1) shouldBe Prize.None
-        Prize.from(0) shouldBe Prize.None
+        Prize.from(6) shouldBe Prize.FIRST
+        Prize.from(5) shouldBe Prize.SECOND
+        Prize.from(4) shouldBe Prize.THIRD
+        Prize.from(3) shouldBe Prize.FOURTH
+        Prize.from(2) shouldBe Prize.NONE
+        Prize.from(1) shouldBe Prize.NONE
+        Prize.from(0) shouldBe Prize.NONE
     }
 
     @Test

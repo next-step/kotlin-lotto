@@ -12,23 +12,23 @@ class LottoResult {
     }
 
     fun getFirstPrize(): List<Prize> {
-        return prizeList.filter { it == Prize.First }
+        return prizeList.filter { it == Prize.FIRST }
     }
 
     fun getSecondPrize(): List<Prize> {
-        return prizeList.filter { it == Prize.Second }
+        return prizeList.filter { it == Prize.SECOND }
     }
 
     fun getThirdPrize(): List<Prize> {
-        return prizeList.filter { it == Prize.Third }
+        return prizeList.filter { it == Prize.THIRD }
     }
 
     fun getFourthPrize(): List<Prize> {
-        return prizeList.filter { it == Prize.Fourth }
+        return prizeList.filter { it == Prize.FOURTH }
     }
 
     fun getNonePrize(): List<Prize> {
-        return prizeList.filter { it == Prize.None }
+        return prizeList.filter { it == Prize.NONE }
     }
 
 }
