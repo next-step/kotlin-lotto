@@ -1,5 +1,6 @@
 package lotto
 
+import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
@@ -20,6 +21,9 @@ class LottoVendingMachineTest {
     internal fun `로또 구매 금액은 1000이상이어야 한다`() {
         shouldThrow<IllegalArgumentException> {
             LottoVendingMachine.buyLotto(999)
+        }
+        shouldNotThrow<IllegalArgumentException> {
+            LottoVendingMachine.buyLotto(1000)
         }
     }
 
