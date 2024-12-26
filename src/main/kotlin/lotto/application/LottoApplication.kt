@@ -1,7 +1,7 @@
 package lotto.application
 
 import lotto.Lotto
-import lotto.LottoLotteryMachine
+import lotto.LottoResult
 import lotto.LottoVendingMachine
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -21,7 +21,10 @@ class LottoApplication(
         outputView.showInputWinningNumbersMessage()
         val winningNumbers: List<Int> = inputView.inputWinningNumbers()
 
-        val lottoResult = LottoLotteryMachine.draw(Lotto(*winningNumbers.toIntArray()), lotto)
+        val lottoResult= LottoResult.makeLottoResult(
+            winningLotto = Lotto(*winningNumbers.toIntArray()),
+            lottos = lotto,
+        )
         outputView.showResult(lottoResult, money)
     }
 

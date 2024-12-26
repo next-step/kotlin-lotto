@@ -1,34 +1,31 @@
 package lotto
 
-class LottoResult {
-    private val prizeList = mutableListOf<Prize>()
+class LottoResult private constructor(private val result: Map<Prize, Int>) : Map<Prize, Int> by result {
+    private val totalPrizeMoney: Int
+        get() {
+            return result.map {
+                it.key.money * it.value
+            }.sum()
+        }
 
-    fun add(prize: Prize) {
-        prizeList.add(prize)
+    override fun get(key: Prize): Int {
+        return result[key] ?: 0
     }
 
-    fun getTotalPrizeMoney(): Int {
-        return prizeList.sumOf { it.money }
+    fun getRateOfReturn(money: Int): Float {
+        return totalPrizeMoney.toFloat() / money
     }
 
-    fun getFirstPrize(): List<Prize> {
-        return prizeList.filter { it == Prize.FIRST }
+    companion object {
+        fun makeLottoResult(
+            winningLotto: Lotto,
+            lottos: List<Lotto>,
+        ): LottoResult {
+            val result = lottos.groupingBy { lotto ->
+                val count = lotto.countMatch(winningLotto)
+                Prize.from(count)
+            }.eachCount()
+            return LottoResult(result)
+        }
     }
-
-    fun getSecondPrize(): List<Prize> {
-        return prizeList.filter { it == Prize.SECOND }
-    }
-
-    fun getThirdPrize(): List<Prize> {
-        return prizeList.filter { it == Prize.THIRD }
-    }
-
-    fun getFourthPrize(): List<Prize> {
-        return prizeList.filter { it == Prize.FOURTH }
-    }
-
-    fun getNonePrize(): List<Prize> {
-        return prizeList.filter { it == Prize.NONE }
-    }
-
 }
