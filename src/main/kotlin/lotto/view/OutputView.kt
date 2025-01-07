@@ -1,7 +1,7 @@
 package lotto.view
 
-import lotto.domain.Lotto
 import lotto.domain.LottoResult
+import lotto.domain.Lottos
 import lotto.domain.Prize
 
 class OutputView {
@@ -9,12 +9,12 @@ class OutputView {
         println("구입금액을 입력해 주세요.")
     }
 
-    fun showLottoCount(lotto: List<Lotto>) {
-        println("${lotto.size}개를 구매했습니다.")
+    fun showLottoCount(lottos: Lottos) {
+        println("${lottos.lottos.size}개를 구매했습니다.")
     }
 
-    fun showLotto(lotto: List<Lotto>) {
-        lotto.forEach {
+    fun showLotto(lottos: Lottos) {
+        lottos.lottos.forEach {
             println("[${it.lottoNumbers.map { lottoNumber -> lottoNumber.number }.joinToString(", ")}]")
         }
     }

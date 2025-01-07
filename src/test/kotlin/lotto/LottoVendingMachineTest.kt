@@ -29,7 +29,7 @@ class LottoVendingMachineTest {
 
     @Test
     internal fun `로또 한 장의 금액은 1000원 이다`() {
-        LottoVendingMachine.buyLotto(1000).size shouldBe 1
-        LottoVendingMachine.buyLotto(14000).size shouldBe 14
+        LottoVendingMachine.buyLotto(1000).lottos.size shouldBe 1
+        LottoVendingMachine.buyLotto(14000).lottos.size shouldBe 14
     }
 }

@@ -19,9 +19,9 @@ class LottoResult private constructor(private val result: Map<Prize, Int>) : Map
     companion object {
         fun makeLottoResult(
             winningLotto: Lotto,
-            lottos: List<Lotto>,
+            lottos: Lottos,
         ): LottoResult {
-            val result = lottos.groupingBy { lotto ->
+            val result = lottos.lottos.groupingBy { lotto ->
                 val count = lotto.countMatch(winningLotto)
                 Prize.from(count)
             }.eachCount()
