@@ -15,7 +15,7 @@ class OutputView {
 
     fun showLotto(lotto: List<Lotto>) {
         lotto.forEach {
-            println(it)
+            println("[${it.lottoNumbers.map { lottoNumber -> lottoNumber.number }.joinToString(", ")}]")
         }
     }
 

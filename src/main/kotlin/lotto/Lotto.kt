@@ -15,10 +15,6 @@ class Lotto private constructor(val lottoNumbers: Set<LottoNumber>) {
         return lottoNumbers.intersect(winningLotto.lottoNumbers).count()
     }
 
-    override fun toString(): String {
-        return "[${lottoNumbers.joinToString(", ")}]"
-    }
-
     companion object {
         private val LottoPreset = List(LottoNumber.END_LOTTO_NUMBER) { LottoNumber(it + 1) }
         private const val LOTTO_SIZE = 6
