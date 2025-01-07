@@ -1,10 +1,10 @@
 package lotto.domain
 
 class LottoResult private constructor(private val result: Map<Prize, Int>) : Map<Prize, Int> by result {
-    private val totalPrizeMoney: Int
+    private val totalPrizeMoney: Long
         get() {
             return result.map {
-                it.key.money * it.value
+                it.key.money.toLong() * it.value
             }.sum()
         }
 
