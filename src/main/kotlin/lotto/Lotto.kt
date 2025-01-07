@@ -8,7 +8,7 @@ class Lotto private constructor(val lottoNumbers: List<LottoNumber>) {
         require(lottoNumbersSize == lottoNumbers.toSet().size)
     }
 
-    constructor() : this((1..45).shuffled().take(6).sorted().map { LottoNumber(it) })
+    constructor() : this(LottoPreset.shuffled().take(6).sortedBy { it.number })
 
     constructor(vararg number: Int) : this(number.map { LottoNumber(it) })
 
@@ -21,6 +21,7 @@ class Lotto private constructor(val lottoNumbers: List<LottoNumber>) {
     }
 
     companion object {
+        private val LottoPreset = List(45) { LottoNumber(it + 1) }
         private const val LOTTO_SIZE = 6
     }
 }
