@@ -17,10 +17,10 @@ class LottoApplication(
         outputView.showLottoCount(lotto)
         outputView.showLotto(lotto)
 
-        val winningNumbers: List<Int> = inputView.inputWinningNumbers()
+        val winningLotto: Lotto = inputView.inputWinningNumbers()
 
         val lottoResult= LottoResult.makeLottoResult(
-            winningLotto = Lotto(*winningNumbers.toIntArray()),
+            winningLotto = winningLotto,
             lottos = lotto,
         )
         outputView.showResult(lottoResult, money)
