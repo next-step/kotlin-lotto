@@ -20,7 +20,7 @@ class OutputView {
         println("---------")
         Prize.entries
             .filter { it != Prize.NONE }
-            .sortedByDescending { it.count }
+            .reversed()
             .forEach { prize ->
                 val title = if (prize == Prize.SECOND) {
                     "${prize.count}개 일치, 보너스 볼 일치 (${prize.money}원)"
