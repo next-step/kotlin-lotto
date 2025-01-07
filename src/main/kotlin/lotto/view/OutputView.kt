@@ -22,7 +22,12 @@ class OutputView {
             .filter { it != Prize.NONE }
             .sortedByDescending { it.count }
             .forEach { prize ->
-                println("${prize.count}개 일치 (${prize.money}원) - ${lottoResult[prize]}개")
+                val title = if (prize == Prize.SECOND) {
+                    "${prize.count}개 일치, 보너스 볼 일치 (${prize.money}원)"
+                } else {
+                    "${prize.count}개 일치 (${prize.money}원)"
+                }
+                println("$title - ${lottoResult[prize]}개")
             }
 
         println(String.format("총 수익률은 %.2f입니다.", lottoResult.getRateOfReturn(money)))

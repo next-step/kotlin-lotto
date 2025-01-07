@@ -3,6 +3,7 @@ package lotto.application
 import lotto.domain.Lotto
 import lotto.domain.LottoResult
 import lotto.LottoVendingMachine
+import lotto.domain.LottoNumber
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -18,9 +19,11 @@ class LottoApplication(
         outputView.showLotto(lotto)
 
         val winningLotto: Lotto = inputView.inputWinningNumbers()
+        val bonusNumber: LottoNumber = inputView.inputBonusNumber()
 
         val lottoResult= LottoResult.makeLottoResult(
             winningLotto = winningLotto,
+            bonusLottoNumber = bonusNumber,
             lottos = lotto,
         )
         outputView.showResult(lottoResult, money)
