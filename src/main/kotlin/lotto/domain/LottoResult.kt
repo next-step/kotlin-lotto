@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class LottoResult private constructor(private val result: Map<Prize, Int>) : Map<Prize, Int> by result {
     private val totalPrizeMoney: Int

@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 enum class Prize(val money: Int, val count: Int) {
     FIRST(2_000_000_000, 6),

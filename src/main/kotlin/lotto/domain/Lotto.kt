@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class Lotto private constructor(val lottoNumbers: Set<LottoNumber>) {
 

@@ -1,7 +1,7 @@
 package lotto.application
 
-import lotto.Lotto
-import lotto.LottoResult
+import lotto.domain.Lotto
+import lotto.domain.LottoResult
 import lotto.LottoVendingMachine
 import lotto.view.InputView
 import lotto.view.OutputView

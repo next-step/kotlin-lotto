@@ -1,5 +1,7 @@
 package lotto
 
+import lotto.domain.Lotto
+
 object LottoVendingMachine {
     private const val LOTTO_PRICE = 1000
 

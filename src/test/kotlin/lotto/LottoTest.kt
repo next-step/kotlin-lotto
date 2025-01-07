@@ -1,6 +1,7 @@
 package lotto
 
 import io.kotest.matchers.shouldBe
+import lotto.domain.Lotto
 import org.junit.jupiter.api.Test
 
 class LottoTest {
