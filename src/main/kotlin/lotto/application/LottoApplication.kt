@@ -12,13 +12,11 @@ class LottoApplication(
 ) {
 
     fun run() {
-        outputView.showInputMoneyMessage()
         val money = inputView.inputMoney()
         val lotto = LottoVendingMachine.buyLotto(money)
         outputView.showLottoCount(lotto)
         outputView.showLotto(lotto)
 
-        outputView.showInputWinningNumbersMessage()
         val winningNumbers: List<Int> = inputView.inputWinningNumbers()
 
         val lottoResult= LottoResult.makeLottoResult(

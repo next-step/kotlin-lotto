@@ -5,10 +5,6 @@ import lotto.domain.Lottos
 import lotto.domain.Prize
 
 class OutputView {
-    fun showInputMoneyMessage() {
-        println("구입금액을 입력해 주세요.")
-    }
-
     fun showLottoCount(lottos: Lottos) {
         println("${lottos.lottos.size}개를 구매했습니다.")
     }
@@ -17,10 +13,6 @@ class OutputView {
         lottos.lottos.forEach {
             println("[${it.lottoNumbers.map { lottoNumber -> lottoNumber.number }.joinToString(", ")}]")
         }
-    }
-
-    fun showInputWinningNumbersMessage() {
-        println("지난 주 당첨 번호를 입력해 주세요.")
     }
 
     fun showResult(lottoResult: LottoResult, money: Int) {
