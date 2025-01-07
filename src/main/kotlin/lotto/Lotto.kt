@@ -20,7 +20,7 @@ class Lotto private constructor(val lottoNumbers: Set<LottoNumber>) {
     }
 
     companion object {
-        private val LottoPreset = List(45) { LottoNumber(it + 1) }
+        private val LottoPreset = List(LottoNumber.END_LOTTO_NUMBER) { LottoNumber(it + 1) }
         private const val LOTTO_SIZE = 6
     }
 }
