@@ -15,4 +15,13 @@ class PrizeTest {
         Prize.NONE.money shouldBe 0
     }
 
+    @Test
+    fun `당첨 개수`() {
+        Prize.FIRST.count shouldBe 6
+        Prize.SECOND.count shouldBe 5
+        Prize.THIRD.count shouldBe 5
+        Prize.FOURTH.count shouldBe 4
+        Prize.FIFTH.count shouldBe 3
+        Prize.NONE.count shouldBe 0
+    }
 }
