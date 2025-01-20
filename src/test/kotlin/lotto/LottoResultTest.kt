@@ -5,110 +5,57 @@ import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.Lottos
 import lotto.domain.Prize
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
 
 class LottoResultTest {
-
-    @Test
-    internal fun `6개가 일치하면 1등`() {
+    @ParameterizedTest
+    @MethodSource("provideLottoTestCases")
+    internal fun `로또 결과 테스트`(testCase: TestCase) {
         val winningLotto = Lotto(1, 2, 3, 4, 5, 6)
         val bonusLottoNumber = LottoNumber(7)
 
-        val lottos = Lottos(
-            listOf(Lotto(1, 2, 3, 4, 5, 6))
-        )
-
-        val lottoResult = lottos.getResult(
+        val lottoResult = testCase.lottos.getResult(
             winningLotto = winningLotto,
             bonusLottoNumber = bonusLottoNumber
         )
 
-        lottoResult[Prize.FIRST] shouldBe 1
+        lottoResult[testCase.expectedPrize] shouldBe 1
     }
 
-    @Test
-    internal fun `5개가 일치하고 보너스번호가 일치하면 2등`() {
-        val winningLotto = Lotto(1, 2, 3, 4, 5, 6)
-        val bonusLottoNumber = LottoNumber(7)
+    data class TestCase(
+        val lottos: Lottos,
+        val expectedPrize: Prize
+    )
 
-        val lottos = Lottos(
-            listOf(Lotto(1, 2, 3, 4, 5, 7))
+    companion object {
+        @JvmStatic
+        fun provideLottoTestCases() = listOf(
+            TestCase(
+                lottos = Lottos(listOf(Lotto(1, 2, 3, 4, 5, 6))),
+                expectedPrize = Prize.FIRST
+            ),
+            TestCase(
+                lottos = Lottos(listOf(Lotto(1, 2, 3, 4, 5, 7))),
+                expectedPrize = Prize.SECOND
+            ),
+            TestCase(
+                lottos = Lottos(listOf(Lotto(1, 2, 3, 4, 5, 8))),
+                expectedPrize = Prize.THIRD
+            ),
+            TestCase(
+                lottos = Lottos(listOf(Lotto(1, 2, 3, 4, 8, 9))),
+                expectedPrize = Prize.FOURTH
+            ),
+            TestCase(
+                lottos = Lottos(listOf(Lotto(1, 2, 3, 8, 9, 10))),
+                expectedPrize = Prize.FIFTH
+            ),
+            TestCase(
+                lottos = Lottos(listOf(Lotto(1, 2, 8, 9, 10, 11))),
+                expectedPrize = Prize.NONE
+            )
         )
-
-        val lottoResult = lottos.getResult(
-            winningLotto = winningLotto,
-            bonusLottoNumber = bonusLottoNumber
-        )
-
-        lottoResult[Prize.SECOND] shouldBe 1
-    }
-
-    @Test
-    internal fun `5개가 일치하면 3등`() {
-        val winningLotto = Lotto(1, 2, 3, 4, 5, 6)
-        val bonusLottoNumber = LottoNumber(7)
-
-        val lottos = Lottos(
-            listOf(Lotto(1, 2, 3, 4, 5, 8))
-        )
-
-        val lottoResult = lottos.getResult(
-            winningLotto = winningLotto,
-            bonusLottoNumber = bonusLottoNumber
-        )
-
-        lottoResult[Prize.THIRD] shouldBe 1
-    }
-
-    @Test
-    internal fun `4개가 일치하면 4등`() {
-        val winningLotto = Lotto(1, 2, 3, 4, 5, 6)
-        val bonusLottoNumber = LottoNumber(7)
-
-        val lottos = Lottos(
-            listOf(Lotto(1, 2, 3, 4, 8, 9))
-        )
-
-        val lottoResult = lottos.getResult(
-            winningLotto = winningLotto,
-            bonusLottoNumber = bonusLottoNumber
-        )
-
-        lottoResult[Prize.FOURTH] shouldBe 1
-    }
-
-    @Test
-    internal fun `3개가 일치하면 5등`() {
-        val winningLotto = Lotto(1, 2, 3, 4, 5, 6)
-        val bonusLottoNumber = LottoNumber(7)
-
-        val lottos = Lottos(
-            listOf(Lotto(1, 2, 3, 8, 9, 10))
-        )
-
-        val lottoResult = lottos.getResult(
-            winningLotto = winningLotto,
-            bonusLottoNumber = bonusLottoNumber
-        )
-
-        lottoResult[Prize.FIFTH] shouldBe 1
-    }
-
-    @Test
-    internal fun `2개 이하로 일치하면 당첨 없음`() {
-        val winningLotto = Lotto(1, 2, 3, 4, 5, 6)
-        val bonusLottoNumber = LottoNumber(7)
-
-        val lottos = Lottos(
-            listOf(Lotto(1, 2, 8, 9, 10, 11))
-        )
-
-        val lottoResult = lottos.getResult(
-            winningLotto = winningLotto,
-            bonusLottoNumber = bonusLottoNumber
-        )
-
-        lottoResult[Prize.NONE] shouldBe 1
     }
 
 }
