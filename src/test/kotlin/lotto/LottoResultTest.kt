@@ -3,7 +3,6 @@ package lotto
 import io.kotest.matchers.shouldBe
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
-import lotto.domain.LottoResult
 import lotto.domain.Lottos
 import lotto.domain.Prize
 import org.junit.jupiter.api.Test
@@ -19,10 +18,9 @@ class LottoResultTest {
             listOf(Lotto(1, 2, 3, 4, 5, 6))
         )
 
-        val lottoResult = LottoResult.makeLottoResult(
+        val lottoResult = lottos.getResult(
             winningLotto = winningLotto,
-            bonusLottoNumber = bonusLottoNumber,
-            lottos = lottos,
+            bonusLottoNumber = bonusLottoNumber
         )
 
         lottoResult[Prize.FIRST] shouldBe 1
@@ -37,10 +35,9 @@ class LottoResultTest {
             listOf(Lotto(1, 2, 3, 4, 5, 7))
         )
 
-        val lottoResult = LottoResult.makeLottoResult(
+        val lottoResult = lottos.getResult(
             winningLotto = winningLotto,
-            bonusLottoNumber = bonusLottoNumber,
-            lottos = lottos,
+            bonusLottoNumber = bonusLottoNumber
         )
 
         lottoResult[Prize.SECOND] shouldBe 1
@@ -55,10 +52,9 @@ class LottoResultTest {
             listOf(Lotto(1, 2, 3, 4, 5, 8))
         )
 
-        val lottoResult = LottoResult.makeLottoResult(
+        val lottoResult = lottos.getResult(
             winningLotto = winningLotto,
-            bonusLottoNumber = bonusLottoNumber,
-            lottos = lottos,
+            bonusLottoNumber = bonusLottoNumber
         )
 
         lottoResult[Prize.THIRD] shouldBe 1
@@ -73,10 +69,9 @@ class LottoResultTest {
             listOf(Lotto(1, 2, 3, 4, 8, 9))
         )
 
-        val lottoResult = LottoResult.makeLottoResult(
+        val lottoResult = lottos.getResult(
             winningLotto = winningLotto,
-            bonusLottoNumber = bonusLottoNumber,
-            lottos = lottos,
+            bonusLottoNumber = bonusLottoNumber
         )
 
         lottoResult[Prize.FOURTH] shouldBe 1
@@ -91,10 +86,9 @@ class LottoResultTest {
             listOf(Lotto(1, 2, 3, 8, 9, 10))
         )
 
-        val lottoResult = LottoResult.makeLottoResult(
+        val lottoResult = lottos.getResult(
             winningLotto = winningLotto,
-            bonusLottoNumber = bonusLottoNumber,
-            lottos = lottos,
+            bonusLottoNumber = bonusLottoNumber
         )
 
         lottoResult[Prize.FIFTH] shouldBe 1
@@ -106,13 +100,12 @@ class LottoResultTest {
         val bonusLottoNumber = LottoNumber(7)
 
         val lottos = Lottos(
-            listOf(Lotto(1, 2,8, 9, 10, 11))
+            listOf(Lotto(1, 2, 8, 9, 10, 11))
         )
 
-        val lottoResult = LottoResult.makeLottoResult(
+        val lottoResult = lottos.getResult(
             winningLotto = winningLotto,
-            bonusLottoNumber = bonusLottoNumber,
-            lottos = lottos,
+            bonusLottoNumber = bonusLottoNumber
         )
 
         lottoResult[Prize.NONE] shouldBe 1

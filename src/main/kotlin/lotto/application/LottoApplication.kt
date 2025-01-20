@@ -1,7 +1,6 @@
 package lotto.application
 
 import lotto.domain.Lotto
-import lotto.domain.LottoResult
 import lotto.domain.LottoNumber
 import lotto.domain.Lottos
 import lotto.view.InputView
@@ -21,10 +20,9 @@ class LottoApplication(
         val winningLotto: Lotto = inputView.inputWinningNumbers()
         val bonusNumber: LottoNumber = inputView.inputBonusNumber()
 
-        val lottoResult = LottoResult.makeLottoResult(
+        val lottoResult = lotto.getResult(
             winningLotto = winningLotto,
-            bonusLottoNumber = bonusNumber,
-            lottos = lotto,
+            bonusLottoNumber = bonusNumber
         )
         outputView.showResult(lottoResult, money)
     }
