@@ -7,12 +7,21 @@ class Lotto private constructor(val lottoNumbers: Set<LottoNumber>) {
         require(lottoNumbersSize == LOTTO_SIZE)
     }
 
-    constructor() : this(LottoPreset.shuffled().take(6).sortedBy { it.number }.toSet())
+    constructor() : this(
+        LottoPreset.shuffled()
+            .take(6)
+            .sortedBy { it.number }
+            .toSet()
+    )
 
-    constructor(vararg number: Int) : this(number.map(::LottoNumber).toSet())
+    constructor(vararg number: Int) : this(
+        number.map(::LottoNumber)
+            .toSet()
+    )
 
     fun countMatch(winningLotto: Lotto): Int {
-        return lottoNumbers.intersect(winningLotto.lottoNumbers).count()
+        return lottoNumbers.intersect(winningLotto.lottoNumbers)
+            .count()
     }
 
     operator fun contains(lottoNumber: LottoNumber): Boolean {

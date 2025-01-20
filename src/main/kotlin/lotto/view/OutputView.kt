@@ -6,13 +6,20 @@ import lotto.domain.Prize
 
 class OutputView {
     fun showLottoCount(lottos: Lottos) {
-        println("${lottos.lottos.size}개를 구매했습니다.")
+        val size = lottos.lottos
+            .size
+        println("${size}개를 구매했습니다.")
     }
 
     fun showLotto(lottos: Lottos) {
-        lottos.lottos.forEach {
-            println("[${it.lottoNumbers.map { lottoNumber -> lottoNumber.number }.joinToString(", ")}]")
-        }
+        lottos.lottos
+            .forEach {
+                println(
+                    "[${
+                        it.lottoNumbers.map { lottoNumber -> lottoNumber.number }
+                            .joinToString(", ")
+                    }]")
+            }
     }
 
     fun showResult(lottoResult: LottoResult, money: Int) {

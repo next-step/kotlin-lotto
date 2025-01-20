@@ -13,7 +13,11 @@ class InputView {
 
     fun inputWinningNumbers(): Lotto {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        val winningNumbers: List<Int> = readlnOrNull()?.split(",")?.map { it.trim().toInt() } ?: emptyList()
+        val winningNumbers: List<Int> = readlnOrNull()?.split(",")
+            ?.map {
+                it.trim()
+                    .toInt()
+            } ?: emptyList()
         return Lotto(*winningNumbers.toIntArray())
     }
 
