@@ -24,18 +24,7 @@ class LottoResult private constructor(private val result: Map<Prize, Int>) : Map
         ): LottoResult {
             val result = lottos.lottos.groupingBy { lotto ->
                 val matchCount = lotto.countMatch(winningLotto)
-                when (matchCount) {
-                    6 -> Prize.FIRST
-                    5 -> if (bonusLottoNumber in lotto.lottoNumbers) {
-                        Prize.SECOND
-                    } else {
-                        Prize.THIRD
-                    }
-
-                    4 -> Prize.FOURTH
-                    3 -> Prize.FIFTH
-                    else -> Prize.NONE
-                }
+                Prize.of(matchCount = matchCount, bonusLottoNumber = bonusLottoNumber, lotto = lotto)
             }.eachCount()
             return LottoResult(result)
         }

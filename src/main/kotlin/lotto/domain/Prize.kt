@@ -8,4 +8,14 @@ enum class Prize(val money: Int, val count: Int) {
     FIFTH(5_000, 3),
     NONE(0, 0),
     ;
+
+    companion object {
+        fun of(matchCount: Int, bonusLottoNumber: LottoNumber, lotto: Lotto) = when (matchCount) {
+            6 -> FIRST
+            5 -> if (bonusLottoNumber in lotto) SECOND else THIRD
+            4 -> FOURTH
+            3 -> FIFTH
+            else -> NONE
+        }
+    }
 }

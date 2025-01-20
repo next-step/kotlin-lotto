@@ -15,6 +15,10 @@ class Lotto private constructor(val lottoNumbers: Set<LottoNumber>) {
         return lottoNumbers.intersect(winningLotto.lottoNumbers).count()
     }
 
+    operator fun contains(lottoNumber: LottoNumber): Boolean {
+        return lottoNumber in lottoNumbers
+    }
+
     companion object {
         private val LottoPreset = List(LottoNumber.END_LOTTO_NUMBER) { LottoNumber(it + 1) }
         private const val LOTTO_SIZE = 6
