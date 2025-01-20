@@ -1,8 +1,12 @@
 package lotto
 
 import io.kotest.matchers.shouldBe
+import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 import lotto.domain.Prize
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
 
 class PrizeTest {
     @Test
@@ -24,4 +28,58 @@ class PrizeTest {
         Prize.FIFTH.count shouldBe 3
         Prize.NONE.count shouldBe 0
     }
+
+    @ParameterizedTest
+    @MethodSource("providePrizeTestCase")
+    fun `Prize 케이스`(testCase: TestCase) {
+        val prize = Prize.of(
+            matchCount = testCase.matchCount,
+            bonusLottoNumber = testCase.bonusLottoNumber,
+            lotto = Lotto(1, 2, 3, 4, 5, 6)
+        )
+        prize shouldBe testCase.expectedPrize
+    }
+
+    data class TestCase(
+        val matchCount: Int,
+        val bonusLottoNumber: LottoNumber,
+        val expectedPrize: Prize
+    )
+
+    companion object {
+        @JvmStatic
+        fun providePrizeTestCase() = listOf(
+            TestCase(
+                matchCount = 6,
+                bonusLottoNumber = LottoNumber(10),
+                expectedPrize = Prize.FIRST
+            ),
+            TestCase(
+                matchCount = 5,
+                bonusLottoNumber = LottoNumber(1),
+                expectedPrize = Prize.SECOND
+            ),
+            TestCase(
+                matchCount = 5,
+                bonusLottoNumber = LottoNumber(10),
+                expectedPrize = Prize.THIRD
+            ),
+            TestCase(
+                matchCount = 4,
+                bonusLottoNumber = LottoNumber(10),
+                expectedPrize = Prize.FOURTH
+            ),
+            TestCase(
+                matchCount = 3,
+                bonusLottoNumber = LottoNumber(10),
+                expectedPrize = Prize.FIFTH
+            ),
+            TestCase(
+                matchCount = 0,
+                bonusLottoNumber = LottoNumber(10),
+                expectedPrize = Prize.NONE
+            )
+        )
+    }
+
 }
