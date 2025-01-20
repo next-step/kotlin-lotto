@@ -9,7 +9,7 @@ class Lotto private constructor(val lottoNumbers: Set<LottoNumber>) {
 
     constructor() : this(LottoPreset.shuffled().take(6).sortedBy { it.number }.toSet())
 
-    constructor(vararg number: Int) : this(number.map { LottoNumber(it) }.toSet())
+    constructor(vararg number: Int) : this(number.map(::LottoNumber).toSet())
 
     fun countMatch(winningLotto: Lotto): Int {
         return lottoNumbers.intersect(winningLotto.lottoNumbers).count()
