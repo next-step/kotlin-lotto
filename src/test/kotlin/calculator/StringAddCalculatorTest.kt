@@ -41,7 +41,7 @@ class StringAddCalculatorTest : FunSpec({
         calculator.add(actual) shouldBe 6
     }
 
-    context("support custom delimiters between // and \n") {
+    context("support custom delimiters between // and new line") {
         withData(
             "//;\n1;2;3" to 6,
             "1\n2//3" to 6,
