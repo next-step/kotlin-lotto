@@ -35,13 +35,13 @@ class StringAddCalculatorTest : FunSpec({
         calculator.add(actual) shouldBe 15
     }
 
-    test("rllows colon (:) as an additional delimiter") {
+    test("allows colon (:) as an additional delimiter") {
         val actual = "1,2:3"
 
         calculator.add(actual) shouldBe 6
     }
 
-    context("support custom delimiters between // and \\n") {
+    context("support custom delimiters between // and \n") {
         withData(
             "//;\n1;2;3" to 6,
             "1\n2//3" to 6,

@@ -2,18 +2,24 @@ package calculator
 
 class StringAddCalculator {
     fun add(text: String?): Int {
-        if (text.isNullOrBlank()) {
-            return 0
-        }
+        val numbers =
+            text?.takeIf { it.isNotBlank() }
+                ?.parseToNumbers()
+                ?: return 0
 
-        val numbers = text.split("[/;\n,:]".toRegex())
-            .filter { it.isNotBlank() }
-            .map { it.toInt() }
-
-        if (numbers.any { it < 0 }) {
-            throw RuntimeException("Number must be positive or zero")
+        check(numbers.none { it < 0 }) {
+            "Number must be positive or zero"
         }
 
         return numbers.sum()
+    }
+
+    private fun String.parseToNumbers(): List<Int> =
+        this.split(DELIMITER.toRegex())
+            .filter { it.isNotBlank() }
+            .map { it.toInt() }
+
+    companion object {
+        private const val DELIMITER = "[/;\n,:]"
     }
 }
