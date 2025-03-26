@@ -55,4 +55,10 @@ class StringAddCalculatorTest : FunSpec({
             calculator.add("-1")
         }
     }
+
+    test("throw RuntimeException if not a number") {
+        shouldThrow<RuntimeException> {
+            calculator.add("1;ab")
+        }
+    }
 })

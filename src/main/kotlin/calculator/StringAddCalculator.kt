@@ -17,7 +17,9 @@ class StringAddCalculator {
     private fun String.parseToNumbers(): List<Int> =
         this.split(DELIMITER.toRegex())
             .filter { it.isNotBlank() }
-            .map { it.toInt() }
+            .map {
+                it.toIntOrNull() ?: throw IllegalArgumentException("Not a valid number")
+            }
 
     companion object {
         private const val DELIMITER = "[/;\n,:]"
