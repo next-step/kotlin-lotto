@@ -27,4 +27,10 @@ class StringAddCalculatorTest : FunSpec({
             calculator.add(actual) shouldBe expected
         }
     }
+
+    test("Returns the sum of two numbers separated by a comma") {
+        val actual = "1,2,3,4,5"
+
+        calculator.add(actual) shouldBe 15
+    }
 })
