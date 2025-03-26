@@ -1,5 +1,11 @@
 package calculator
 
 class StringAddCalculator {
-    fun add(text: String?) = 0
+    fun add(text: String?): Int {
+        if (text.isNullOrBlank()) {
+            return 0
+        }
+
+        return text.toInt()
+    }
 }

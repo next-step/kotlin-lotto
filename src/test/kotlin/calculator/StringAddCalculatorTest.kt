@@ -1,15 +1,30 @@
 package calculator
 
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.inspectors.forAll
+import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
 
 class StringAddCalculatorTest : FunSpec({
     val calculator by lazy { StringAddCalculator() }
 
-    test("Returns 0 when the input is null or empty") {
-        listOf(null, "", "   ").forAll {
-            calculator.add(it) shouldBe 0
+    context("Returns 0 when the input is null or empty") {
+        withData(
+            null to 0,
+            "" to 0,
+            "   " to 0,
+        ) { (actual, expected) ->
+            calculator.add(actual) shouldBe expected
+        }
+    }
+
+    context("Returns the number when a single number is provided") {
+        withData(
+            "1" to 1,
+            "11" to 11,
+            "100" to 100,
+            "7890" to 7890,
+        ) { (actual, expected) ->
+            calculator.add(actual) shouldBe expected
         }
     }
 })
