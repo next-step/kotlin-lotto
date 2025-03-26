@@ -39,4 +39,13 @@ class StringAddCalculatorTest : FunSpec({
 
         calculator.add(actual) shouldBe 6
     }
+
+    context("Support custom delimiters between // and \\n") {
+        withData(
+            "//;\n1;2;3" to 6,
+            "1\n2//3" to 6,
+        ) { (actual, expected) ->
+            calculator.add(actual) shouldBe expected
+        }
+    }
 })
