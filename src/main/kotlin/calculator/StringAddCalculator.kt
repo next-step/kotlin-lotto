@@ -6,8 +6,14 @@ class StringAddCalculator {
             return 0
         }
 
-        return text.split("[/;\n,:]".toRegex())
+        val numbers = text.split("[/;\n,:]".toRegex())
             .filter { it.isNotBlank() }
-            .sumOf { it.toInt() }
+            .map { it.toInt() }
+
+        if (numbers.any { it < 0 }) {
+            throw RuntimeException("Number must be positive or zero")
+        }
+
+        return numbers.sum()
     }
 }
