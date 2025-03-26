@@ -33,4 +33,10 @@ class StringAddCalculatorTest : FunSpec({
 
         calculator.add(actual) shouldBe 15
     }
+
+    test("Allows colon (:) as an additional delimiter") {
+        val actual = "1,2:3"
+
+        calculator.add(actual) shouldBe 6
+    }
 })

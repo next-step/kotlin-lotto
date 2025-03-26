@@ -6,7 +6,7 @@ class StringAddCalculator {
             return 0
         }
 
-        return text.split(',')
+        return text.split("[,:]".toRegex())
             .filter { it.isNotBlank() }
             .sumOf { it.toInt() }
     }
