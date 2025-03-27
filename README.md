@@ -24,6 +24,6 @@
 
 ## TDD 
 
-### Ticket
-- [ ] ticket should contain 6 numbers
-- [ ] should fail if numbers less or more then 6
+### 1. Ticket
+- [ ] 1.1. ticket should contain 6 numbers
+- [ ] 1.2. should fail if numbers less or more then 6
