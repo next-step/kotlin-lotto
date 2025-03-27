@@ -16,6 +16,11 @@ Input
 - [x] must enter amount in number
 - [ ] must enter lotto numbers in list of numbers with comma(,)
 
+Amount
+
+- [x] must be above 1,000, below 100,000
+- [ ] all decimals are discarded when divided by 1,000
+
 LottoNumber
 
 - [x] number must be between 1 and 45 (inclusive)
