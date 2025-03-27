@@ -13,12 +13,12 @@
 
 Input
 
-- [ ] must enter amount in number
+- [x] must enter amount in number
 - [ ] must enter lotto numbers in list of numbers with comma(,)
 
 LottoNumber
 
-- [ ] number must be between 1 and 45 (inclusive)
+- [x] number must be between 1 and 45 (inclusive)
 -
 
 Lotto
