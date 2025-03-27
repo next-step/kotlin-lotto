@@ -11,6 +11,7 @@
 7. Display result
 
 ## MVC
+
 ### Model
 1. Ticket
 2. Purchased Tickets
@@ -20,3 +21,9 @@
 2. Result View
 ### Controller
 1. Lotto Controller
+
+## TDD 
+
+### Ticket
+- [ ] ticket should contain 6 numbers
+- [ ] should fail if numbers less or more then 6
