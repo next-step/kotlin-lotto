@@ -1,6 +1,8 @@
 package lotto.model
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
@@ -11,6 +13,11 @@ class TicketModelModelTest {
     fun `ticket should contain 6 numbers`(numbers: List<Int>) {
         val ticket = TicketModel(numbers)
         assertThat(ticket.numbers).isEqualTo(numbers)
+    }
+
+    @Test
+    fun `should fail if numbers less or more then 6`() {
+        assertThrows<IllegalArgumentException> { TicketModel(listOf(1, 2, 3)) }
     }
 
     companion object {
