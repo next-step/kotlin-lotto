@@ -19,7 +19,6 @@ Input
 Amount
 
 - [x] must be above 1,000, below 100,000
-- [ ] all decimals are discarded when divided by 1,000
 
 LottoNumber
 
@@ -28,8 +27,12 @@ LottoNumber
 
 Lotto
 
-- [ ] one lotto costs 1000 KRW
 - [ ] must contain 6 numbers
+
+LottoMachine
+
+- [ ] create one lotto with amount of 1,000 KRW
+- [ ] all decimals are discarded when divided by 1,000
 
 WinningNumber
 
