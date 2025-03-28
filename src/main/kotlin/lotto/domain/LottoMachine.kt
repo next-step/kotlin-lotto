@@ -10,7 +10,7 @@ class LottoMachine {
         Lotto(
             (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER).shuffled()
                 .take(LOTTO_NUMBERS_SIZE)
-                .map(::LottoNumber),
+                .map(LottoNumber::from),
         )
 
     companion object {
