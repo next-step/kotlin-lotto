@@ -4,6 +4,7 @@ import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.inspectors.forAll
+import io.kotest.matchers.shouldBe
 
 class AmountTest : FunSpec({
     test("value must be above or equal to 1,000 and below or equal to 100,000") {
@@ -29,6 +30,22 @@ class AmountTest : FunSpec({
             shouldThrow<IllegalArgumentException> {
                 Amount(it)
             }
+        }
+    }
+
+    context("divide") {
+        val amount = Amount(10_000)
+
+        test("divide by zero does not throw exception") {
+            amount.divide(0) shouldBe 0
+        }
+
+        test("divide works as expected") {
+            amount.divide(1_000) shouldBe 10
+        }
+
+        test("divide discards all decimals") {
+            amount.divide(1_500) shouldBe 6
         }
     }
 })

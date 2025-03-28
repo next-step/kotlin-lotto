@@ -9,6 +9,11 @@ class Amount(
         }
     }
 
+    fun divide(amount: Int) =
+        runCatching {
+            value.div(amount)
+        }.getOrNull() ?: 0
+
     companion object {
         private const val MINIMUM_AMOUNT = 1_000
         private const val MAXIMUM_AMOUNT = 100_000
