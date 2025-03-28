@@ -31,7 +31,7 @@ Lotto
 
 LottoMachine
 
-- [ ] insert amount and create lotto which costs 1,000 KRW for each
+- [x] insert amount and create lotto which costs 1,000 KRW for each
 - [ ] all decimals are discarded when divided by 1,000
 
 WinningNumber
