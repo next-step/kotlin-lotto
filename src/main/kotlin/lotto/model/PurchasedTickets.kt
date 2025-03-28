@@ -1,6 +1,7 @@
 package lotto.model
 
-class PurchasedTickets(val amount: Int) {
+const val TICKET_PRICE = 1000;
 
-    val ticketCount = 5
+class PurchasedTickets(amount: Int) {
+    val ticketCount = amount/TICKET_PRICE
 }
