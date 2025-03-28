@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoNumber(
-    private val value: Int,
+    val value: Int,
 ) {
     init {
         require(value in MINIMUM_LOTTO_NUMBER..MAXIMUM_LOTTO_NUMBER) {
