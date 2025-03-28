@@ -8,15 +8,12 @@ class LottoMachine {
 
     private fun createAutoLotto() =
         Lotto(
-            (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER).shuffled()
+            LottoNumber.cached.shuffled()
                 .take(LOTTO_NUMBERS_SIZE)
                 .map(LottoNumber::from),
         )
 
     companion object {
-        private const val MIN_LOTTO_NUMBER = 1
-        private const val MAX_LOTTO_NUMBER = 45
-
         const val LOTTO_PRICE = 1_000
         private const val LOTTO_NUMBERS_SIZE = 6
     }
