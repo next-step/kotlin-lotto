@@ -11,6 +11,8 @@ fun main() {
 
     val lottoMachine = LottoMachine()
     val lottos = lottoMachine.createLottos(amount)
-
     OutputView.printLottos(lottos)
+
+    val winningNumbers = InputView.requestWinningNumbers()
+        .also { println("Winning numbers: $it") }
 }
