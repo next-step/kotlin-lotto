@@ -1,7 +1,10 @@
 package lotto.domain
 
+import java.math.BigDecimal
+import java.math.RoundingMode
+
 class Amount(
-    private val value: Int,
+    val value: BigDecimal,
 ) {
     init {
         require(value in MINIMUM_AMOUNT..MAXIMUM_AMOUNT) {
@@ -9,13 +12,15 @@ class Amount(
         }
     }
 
-    fun divide(amount: Int) =
+    constructor(value: Int) : this(BigDecimal(value))
+
+    fun divide(amount: Int): BigDecimal =
         runCatching {
-            value.div(amount)
-        }.getOrNull() ?: 0
+            value.divide(amount.toBigDecimal(), RoundingMode.DOWN)
+        }.getOrNull() ?: BigDecimal.ZERO
 
     companion object {
-        private const val MINIMUM_AMOUNT = 1_000
-        private const val MAXIMUM_AMOUNT = 100_000
+        private val MINIMUM_AMOUNT = BigDecimal(1_000)
+        private val MAXIMUM_AMOUNT = BigDecimal(100_000)
     }
 }

@@ -2,7 +2,7 @@ package lotto.domain
 
 class LottoMachine {
     fun createLottos(amount: Amount): List<Lotto> {
-        val number = amount.divide(LOTTO_PRICE)
+        val number = amount.divide(LOTTO_PRICE).toInt()
         return List(number) { createAutoLotto() }
     }
 

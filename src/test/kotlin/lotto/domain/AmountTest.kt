@@ -5,6 +5,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
+import java.math.BigDecimal
 
 class AmountTest : FunSpec({
     test("value must be above or equal to 1,000 and below or equal to 100,000") {
@@ -37,15 +38,16 @@ class AmountTest : FunSpec({
         val amount = Amount(10_000)
 
         test("divide by zero does not throw exception") {
-            amount.divide(0) shouldBe 0
+            amount.divide(0) shouldBe BigDecimal.ZERO
         }
 
         test("divide works as expected") {
-            amount.divide(1_000) shouldBe 10
+            amount.divide(1_000) shouldBe BigDecimal.TEN
         }
 
         test("divide discards all decimals") {
-            amount.divide(1_500) shouldBe 6
+            val divide = amount.divide(1_500)
+            divide shouldBe BigDecimal(6)
         }
     }
 })
