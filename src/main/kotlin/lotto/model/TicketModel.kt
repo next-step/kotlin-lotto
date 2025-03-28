@@ -8,4 +8,10 @@ class TicketModel(val numbers : List<Int>) {
             "Ticket should contain $TICKET_NUMBER_LENGTH numbers"
         }
     }
+
+    companion object {
+        fun generate(): TicketModel {
+            return TicketModel((1..45).shuffled().take(6))
+        }
+    }
 }
