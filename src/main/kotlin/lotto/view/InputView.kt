@@ -19,6 +19,5 @@ object InputView {
         return input.split(',')
             .filter { it.isNotBlank() }
             .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("Must only enter numbers.") }
-
     }
 }

@@ -1,9 +1,12 @@
 package lotto.domain
 
 class Lotto(
-    private val numbers: List<LottoNumber>,
+    lottoNumbers: List<LottoNumber>,
 ) {
-    val rawNumbers = numbers.map { it.value }
+    private val numbers = lottoNumbers.sorted()
+
+    val rawNumbers: List<Int>
+        get() = numbers.map { it.value }
 
     init {
         require(numbers.size == LOTTO_SIZE) { "Lotto must contain exactly 6 numbers." }
