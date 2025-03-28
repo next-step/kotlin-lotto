@@ -25,5 +25,10 @@
 ## TDD 
 
 ### 1. Ticket
-- [ ] 1.1. ticket should contain 6 numbers
-- [ ] 1.2. should fail if numbers less or more then 6
+- [x] 1.1. ticket should contain 6 numbers
+- [x] 1.2. should fail if numbers less or more then 6
+
+### 2. Purchased Ticket
+- [ ] 2.1. should generate correct number of tickets based on purchased amount
+- [ ] 2.2. should return empty list if purchased amount less that ticket price
+- [ ] 2.3. should fail if purchased amount is negative
