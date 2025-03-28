@@ -4,6 +4,7 @@ import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withData
+import io.kotest.matchers.collections.shouldContainAll
 
 class LottoTest : FunSpec({
     context("lotto must contain 6 numbers") {
@@ -40,5 +41,12 @@ class LottoTest : FunSpec({
                 }
             }
         }
+    }
+
+    test("get raw numbers") {
+        val expected = listOf(1, 2, 3, 4, 5, 6)
+        val lotto = Lotto.fromRawNumbers(expected)
+
+        lotto.rawNumbers shouldContainAll listOf(1, 2, 3, 4, 5, 6)
     }
 })
