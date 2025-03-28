@@ -4,7 +4,7 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 
 class Amount(
-    val value: BigDecimal,
+    private val value: BigDecimal,
 ) {
     init {
         require(value in MINIMUM_AMOUNT..MAXIMUM_AMOUNT) {
