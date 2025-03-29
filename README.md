@@ -11,11 +11,6 @@
 
 ## Lotto (Auto)
 
-Input
-
-- [x] must enter amount in number
-- [ ] must enter lotto numbers in list of numbers with comma(,)
-
 Amount
 
 - [x] must be above 1,000, below 100,000
@@ -23,17 +18,28 @@ Amount
 LottoNumber
 
 - [x] number must be between 1 and 45 (inclusive)
--
+- [x] numbers are cached
 
 Lotto
 
-- [ ] must contain 6 numbers
+- [x] must contain 6 numbers
+- [x] numbers must be sorted
 
 LottoMachine
 
 - [x] insert amount and create lotto which costs 1,000 KRW for each
-- [ ] all decimals are discarded when divided by 1,000
+- [x] all decimals are discarded when divided by 1,000
 
 WinningNumber
 
-- [ ] must contain 6 numbers
+- [x] must contain 6 numbers
+
+Prize
+
+- [x] enum for all prizes
+- [x] provides match count, prize value, and function matcher
+
+Lottery
+
+- [x] get prizes according to lottos and winning numbers
+- [x] calculate return rate
