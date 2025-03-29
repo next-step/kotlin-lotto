@@ -9,8 +9,8 @@
 
 ## Implementation
 ### String Calculator
-- [ ] return the sum of the numbers split by delimiters.
-    - [ ] comma can be used as delimiters (,)
+- [x] return the sum of the numbers split by delimiters.
+    - [x] comma can be used as delimiters (,)
     - [ ] colon can be used as delimiters (:)
     - [ ] a custom delimiter can be specified. A custom delimiter is defined between // and \n.
 - [ ] If the input contains non-numeric values or negative numbers, throw a RuntimeException.
