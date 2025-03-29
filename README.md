@@ -12,5 +12,5 @@
 - [x] return the sum of the numbers split by delimiters.
     - [x] comma can be used as delimiters (,)
     - [x] colon can be used as delimiters (:)
-    - [ ] a custom delimiter can be specified. A custom delimiter is defined between // and \n.
+    - [x] a custom delimiter can be specified. A custom delimiter is defined between // and \n.
 - [ ] If the input contains non-numeric values or negative numbers, throw a RuntimeException.
