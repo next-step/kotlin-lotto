@@ -2,8 +2,8 @@ package stringcalculator
 
 class StringCalculator {
     fun add(expression: String): Int {
-        val (numbers, delimiters) = parseExpression(expression)
-        return numbers.split(*delimiters)
+        val parsedExpression = parseExpression(expression)
+        return parsedExpression.numbers.split(*parsedExpression.delimiters)
             .map { it.trim() }
             .sumOf { it.toInt() }
     }
@@ -12,15 +12,15 @@ class StringCalculator {
         return map { it.toInt() }
     }
 
-    private fun parseExpression(expression: String): Pair<String, Array<String>> {
+    private fun parseExpression(expression: String): ParsedExpression {
         val regex = Regex(pattern = CUSTOM_DELIMITER_REGEX)
         val matchResult = regex.matchEntire(expression)
 
         return if (matchResult != null) {
             val (customDelimiter, content) = matchResult.destructured
-            content to arrayOf(customDelimiter) + DEFAULT_DELIMITERS
+            ParsedExpression(content, arrayOf(customDelimiter) + DEFAULT_DELIMITERS)
         } else {
-            expression to DEFAULT_DELIMITERS
+            ParsedExpression(expression, DEFAULT_DELIMITERS)
         }
     }
 
