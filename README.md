@@ -13,4 +13,4 @@
     - [x] comma can be used as delimiters (,)
     - [x] colon can be used as delimiters (:)
     - [x] a custom delimiter can be specified. A custom delimiter is defined between // and \n.
-- [ ] If the input contains non-numeric values or negative numbers, throw a RuntimeException.
+- [x] If the input contains non-numeric values or negative numbers, throw a RuntimeException.
