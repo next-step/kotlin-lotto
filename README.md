@@ -28,8 +28,8 @@
 - [x] Return how many numbers are matched in WinningLotto with other 
 
 ### Rank
-- [ ] enum class which means rank and has prize money
-- [ ] Return the rank by using match count
+- [x] enum class which means rank and has prize money
+- [x] Return the rank by using match count
 
 ### InputView
 - [ ] Get purchase amount
