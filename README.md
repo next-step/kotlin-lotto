@@ -17,7 +17,7 @@
 
 ### Lotto
 - First class collection of LottoNumber
-- [ ] Should have only 6 numbers of LottoNumber
+- [x] Should have only 6 numbers of LottoNumber
 - [ ] Return a number is in Lotto
 
 ### LottoMachine
