@@ -1,10 +1,12 @@
 package lotto
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.ValueSource
 import java.util.stream.Stream
 
 class LottoTest {
@@ -33,6 +35,20 @@ class LottoTest {
 
         // when && then
         assertThrows<IllegalArgumentException> { Lotto(lottoNumbers) }
+    }
+
+    @ValueSource(ints = [1, 2, 3, 4, 5, 6])
+    @ParameterizedTest
+    fun `Return whether it has certain number`(number: Int) {
+        // given
+        val lotto = (1..6).map { LottoNumber(it) }
+        val lottoNumber = LottoNumber(number)
+        val expected = true
+
+        // when
+        val actual = lotto.contains(lottoNumber)
+
+        assertThat(actual).isEqualTo(expected)
     }
 
     companion object {

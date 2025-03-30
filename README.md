@@ -18,7 +18,7 @@
 ### Lotto
 - First class collection of LottoNumber
 - [x] Should have only 6 numbers of LottoNumber
-- [ ] Return a number is in Lotto
+- [x] Return whether a number is in Lotto
 
 ### LottoMachine
 - [ ] Generate 6 numbers for Lotto
