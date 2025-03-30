@@ -33,7 +33,7 @@
 
 ### InputView
 - [x] Get purchase amount
-- [ ] Get winning numbers
+- [x] Get winning numbers
 
 ### ResultView
 - [ ] Display all the lotto generated
