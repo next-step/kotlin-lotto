@@ -21,7 +21,7 @@
 - [x] Return whether a number is in Lotto
 
 ### LottoMachine
-- [ ] Generate 6 numbers for Lotto
+- [x] Generate Lotto
 
 ### WinningLotto
 - [ ] Has one LottoNumber as a bonus number and one Lotto as a combination
