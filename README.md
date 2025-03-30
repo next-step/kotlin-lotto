@@ -12,8 +12,8 @@
 
 ### Implementation
 ### LottoNumber
-- [ ] Wrap the Int value of lotto number
-- [ ] Number should be in between 1 and 45
+- [x] Wrap the Int value of lotto number
+- [x] Number should be in between 1 and 45
 
 ### Lotto
 - First class collection of LottoNumber
