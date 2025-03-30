@@ -24,7 +24,7 @@
 - [x] Generate Lotto
 
 ### WinningLotto
-- [ ] Has one LottoNumber as a bonus number and one Lotto as a combination
+- [x] Has one LottoNumber as a bonus number and one Lotto as a combination
 - [ ] Return a different lotto has the bonus number
 - [ ] Return how many numbers are matched in WinningLotto with other 
 
