@@ -32,7 +32,7 @@
 - [x] Return the rank by using match count
 
 ### InputView
-- [ ] Get purchase amount
+- [x] Get purchase amount
 - [ ] Get winning numbers
 
 ### ResultView
