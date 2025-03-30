@@ -3,6 +3,10 @@ package lotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
+import java.util.stream.Stream
 
 class WinningLottoTest {
     @Test
@@ -47,5 +51,39 @@ class WinningLottoTest {
 
         // then
         assertThat(actual).isEqualTo(expected)
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideMatchNumbers")
+    fun `Return how many numbers are matched in WinningLotto with other`(
+        lottoNumbers: List<Int>,
+        matchCount: Int,
+    ) {
+        // given
+        val bonusNumber = LottoNumber(7)
+        val numbers = (1..6).map { LottoNumber(it) }
+        val winningLotto = WinningLotto(Lotto(numbers), bonusNumber)
+
+        val lotto = Lotto(lottoNumbers.map { LottoNumber(it) })
+
+        // when
+        val actual = winningLotto.matchCount(lotto)
+
+        // then
+        assertThat(actual).isEqualTo(matchCount)
+    }
+
+    companion object {
+        @JvmStatic
+        fun provideMatchNumbers(): Stream<Arguments> =
+            Stream.of(
+                Arguments.of(listOf(1, 2, 3, 4, 5, 6), 6),
+                Arguments.of(listOf(1, 2, 3, 4, 5, 7), 5),
+                Arguments.of(listOf(1, 2, 3, 4, 8, 7), 4),
+                Arguments.of(listOf(1, 2, 3, 9, 8, 7), 3),
+                Arguments.of(listOf(1, 2, 10, 9, 8, 7), 2),
+                Arguments.of(listOf(1, 11, 10, 9, 8, 7), 1),
+                Arguments.of(listOf(12, 11, 10, 9, 8, 7), 0),
+            )
     }
 }
