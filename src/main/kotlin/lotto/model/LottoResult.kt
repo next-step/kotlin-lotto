@@ -9,6 +9,15 @@ class LottoResult(private val winningNumbers: List<Int>, private val tickets: Li
     }
 
     fun totalPrize(): Int{
-        return 2_001_550_000
+        val prizeMap = mapOf(
+            3 to 5_000,
+            4 to 50_000,
+            5 to 1_500_000,
+            6 to 2_000_000_000
+        )
+
+        return calculateResult().entries.sumOf { (matchCount, count) ->
+            prizeMap[matchCount]?.times(count) ?: 0
+        }
     }
 }
