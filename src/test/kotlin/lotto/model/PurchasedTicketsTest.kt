@@ -7,7 +7,7 @@ class PurchasedTicketsTest {
 
     @Test
     fun `should calculate correct number of tickets based on purchased amount`() {
-        val tickets = PurchasedTickets(5000);
-        assertThat(tickets.ticketCount).isEqualTo(5)
+        val purchasedTickets = PurchasedTickets.buyTickets(5000)
+        assertThat(purchasedTickets.getTickets().size).isEqualTo(5)
     }
 }
