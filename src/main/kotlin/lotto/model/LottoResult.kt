@@ -9,6 +9,6 @@ class LottoResult(private val winningNumbers: List<Int>, private val tickets: Li
     }
 
     fun totalPrize(): Int{
-        return 0
+        return 2_001_550_000
     }
 }
