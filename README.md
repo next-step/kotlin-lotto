@@ -32,4 +32,9 @@
 - [X] 2.1. should calculate correct number of tickets based on purchased amount  
 - [x] 2.2. should generate tickets with correct numbers using generator
 - [x] 2.3. should return empty list if purchased amount less that ticket price
-- [ ] 2.4. should fail if purchased amount is negative
+- [x] 2.4. should fail if purchased amount is negative
+
+### 3. Lotto Result
+- [ ] 3.1. should calculate matches
+- [ ] 3.1. should calculate total prize correctly
+- [ ] 3.2. should calculate return rate correctly
