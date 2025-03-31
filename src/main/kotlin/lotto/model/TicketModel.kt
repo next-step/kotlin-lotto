@@ -10,8 +10,8 @@ class TicketModel(val numbers : List<Int>) {
     }
 
     companion object {
-        fun generate(): TicketModel {
-            return TicketModel((1..45).shuffled().take(6))
+        fun generate(generator: TicketNumberGenerator): TicketModel {
+            return TicketModel(generator.generateNumbers())
         }
     }
 }
