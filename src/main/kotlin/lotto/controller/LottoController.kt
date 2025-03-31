@@ -4,6 +4,7 @@ import lotto.model.LottoResult
 import lotto.model.PurchasedTickets
 import lotto.model.RandomTicketNumberGenerator
 import lotto.view.InputView
+import lotto.view.ResultView
 
 class LottoController {
 
@@ -12,10 +13,11 @@ class LottoController {
         fun run() {
             val purchasedAmount = InputView.readPurchaseAmount()
             val purchasedTickets = PurchasedTickets.buyTickets(purchasedAmount, generator)
-            println(purchasedTickets.getTickets())
+            ResultView.showTickets(purchasedTickets.getTickets())
+
             val winningNumbers = InputView.readWinningNumbers()
             val result = LottoResult(winningNumbers, purchasedTickets.getTickets())
-            println(result)
+            ResultView.showStatistics(result, purchasedAmount)
         }
     }
 }
