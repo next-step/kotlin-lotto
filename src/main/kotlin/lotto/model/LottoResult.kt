@@ -7,4 +7,8 @@ class LottoResult(private val winningNumbers: List<Int>, private val tickets: Li
         }
             .eachCount()
     }
+
+    fun totalPrize(): Int{
+        return 0
+    }
 }
