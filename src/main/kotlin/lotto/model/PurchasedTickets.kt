@@ -7,8 +7,9 @@ class PurchasedTickets(private val tickets: List<TicketModel>) {
 
     companion object {
         fun buyTickets(amount: Int, generator: TicketNumberGenerator): PurchasedTickets {
-            val ticketCount = amount/TICKET_PRICE
-            return PurchasedTickets( List(ticketCount) { TicketModel.generate(generator)} )
+            require(amount > 0)
+            val ticketCount = amount / TICKET_PRICE
+            return PurchasedTickets(List(ticketCount) { TicketModel.generate(generator) })
         }
     }
 }
