@@ -2,6 +2,7 @@ package lotto.model
 
 import org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.assertThrows
 
 class PurchasedTicketsTest {
     private val testGenerator = TestTicketNumberGenerator(listOf(1, 2, 3, 4, 5, 6))
@@ -22,6 +23,13 @@ class PurchasedTicketsTest {
     fun `should return empty list if purchased amount less that ticket price`() {
         val purchasedTickets = PurchasedTickets.buyTickets(999, testGenerator)
         assertThat(purchasedTickets.getTickets().size).isEqualTo(0)
+    }
+
+    @Test
+    fun `should fail if purchased amount is negative`() {
+        assertThrows<IllegalArgumentException> {
+            PurchasedTickets.buyTickets(-1, testGenerator)
+        }
     }
 
     class TestTicketNumberGenerator(private val fixedNumbers: List<Int>) : TicketNumberGenerator {
