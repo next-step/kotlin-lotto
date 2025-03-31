@@ -2,7 +2,9 @@ package lotto.model
 
 class LottoResult(private val winningNumbers: List<Int>, private val tickets: List<TicketModel>) {
     fun calculateResult(): Map<Int, Int> {
-        return mapOf(Pair(6,1))
+        return tickets.groupingBy { ticket ->
+            ticket.numbers.count { it in winningNumbers }
+        }
+            .eachCount()
     }
-
 }

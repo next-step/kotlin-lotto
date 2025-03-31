@@ -8,10 +8,10 @@ class LottoResultTest {
     fun `should calculate matches`() {
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
         val tickets = listOf(
-            TicketModel(listOf(1, 2, 3, 4, 5, 6))
+            TicketModel(listOf(1, 2, 3, 4, 5, 7))
         )
         val lottoResult = LottoResult(winningNumbers, tickets)
         val result = lottoResult.calculateResult()
-        assertThat(result[6]).isEqualTo(1)
+        assertThat(result[5]).isEqualTo(1)
     }
 }
