@@ -35,7 +35,7 @@
 - [x] 2.4. should fail if purchased amount is negative
 
 ### 3. Lotto Result
-- [ ] 3.1. should calculate matches
-- [ ] 3.1. should calculate total prize correctly
-- [ ] 3.2. should calculate return rate correctly
-- [ ] 3.4. should return empty map if matches less than 3
+- [x] 3.1. should calculate matches
+- [x] 3.1. should calculate total prize correctly
+- [x] 3.2. should calculate return rate correctly
+- [x] 3.4. should return empty map if matches less than 3
