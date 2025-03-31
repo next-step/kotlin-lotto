@@ -18,6 +18,12 @@ class PurchasedTicketsTest {
         assertThat(purchasedTickets.getTickets().first()).isEqualTo(TicketModel(listOf(1, 2, 3, 4, 5, 6)))
     }
 
+    @Test
+    fun `should return empty list if purchased amount less that ticket price`() {
+        val purchasedTickets = PurchasedTickets.buyTickets(999, testGenerator)
+        assertThat(purchasedTickets.getTickets().size).isEqualTo(0)
+    }
+
     class TestTicketNumberGenerator(private val fixedNumbers: List<Int>) : TicketNumberGenerator {
         override fun generateNumbers(): List<Int> = fixedNumbers
     }
