@@ -16,6 +16,17 @@ class LottoResultTest {
     }
 
     @Test
+    fun `should return empty map if matches less than 3`() {
+        val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
+        val tickets = listOf(
+            TicketModel(listOf(1, 2, 7, 8, 9, 10))
+        )
+        val lottoResult = LottoResult(winningNumbers, tickets)
+        val result = lottoResult.calculateResult()
+        assertThat(result).isEmpty()
+    }
+
+    @Test
     fun `should calculate total prize correctly`() {
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
         val tickets = listOf(

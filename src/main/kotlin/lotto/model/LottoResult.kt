@@ -1,11 +1,14 @@
 package lotto.model
 
+const val MINIMUM_MATCHES = 3
+
 class LottoResult(private val winningNumbers: List<Int>, private val tickets: List<TicketModel>) {
     fun calculateResult(): Map<Int, Int> {
         return tickets.groupingBy { ticket ->
             ticket.numbers.count { it in winningNumbers }
         }
             .eachCount()
+            .filterKeys { it >= MINIMUM_MATCHES }
     }
 
     fun totalPrize(): Int{
