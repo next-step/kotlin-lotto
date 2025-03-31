@@ -13,7 +13,7 @@ class PurchasedTicketsTest {
     }
 
     @Test
-    fun `should generate tickets based on purchased amount`() {
+    fun `should generate tickets with correct numbers using generator`() {
         val purchasedTickets = PurchasedTickets.buyTickets(1000, testGenerator)
         assertThat(purchasedTickets.getTickets().first()).isEqualTo(TicketModel(listOf(1, 2, 3, 4, 5, 6)))
     }
