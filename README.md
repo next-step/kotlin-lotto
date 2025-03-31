@@ -29,7 +29,7 @@
 - [x] 1.2. should fail if numbers less or more then 6
 
 ### 2. Purchased Ticket
-- [ ] 2.1. should calculate correct number of tickets based on purchased amount  
+- [X] 2.1. should calculate correct number of tickets based on purchased amount  
 - [ ] 2.2. should generate tickets based on purchased amount
 - [ ] 2.3. should return empty list if purchased amount less that ticket price
 - [ ] 2.4. should fail if purchased amount is negative
