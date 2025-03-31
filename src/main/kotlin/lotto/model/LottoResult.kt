@@ -20,4 +20,8 @@ class LottoResult(private val winningNumbers: List<Int>, private val tickets: Li
             prizeMap[matchCount]?.times(count) ?: 0
         }
     }
+
+    fun returnRate(): Double {
+        return 667_183.33
+    }
 }

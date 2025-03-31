@@ -27,4 +27,17 @@ class LottoResultTest {
         val lottoResult = LottoResult(winningNumbers, tickets)
         assertThat(lottoResult.totalPrize()).isEqualTo(2_001_550_000)
     }
+
+    @Test
+    fun `should calculate return rate correctly`() {
+        val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
+        val tickets = listOf(
+            TicketModel(listOf(1, 2, 3, 4, 5, 6)),
+            TicketModel(listOf(1, 2, 3, 4, 5, 7)),
+            TicketModel(listOf(1, 2, 3, 4, 7, 8)),
+
+            )
+        val lottoResult = LottoResult(winningNumbers, tickets)
+        assertThat(lottoResult.returnRate()).isEqualTo(667_183.33)
+    }
 }
