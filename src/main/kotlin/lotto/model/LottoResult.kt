@@ -21,7 +21,7 @@ class LottoResult(private val winningNumbers: List<Int>, private val tickets: Li
         }
     }
 
-    fun returnRate(): Double {
-        return 667_183.33
+    fun returnRate(purchaseAmount: Int): Double {
+        return if (purchaseAmount == 0) 0.0 else totalPrize().toDouble() / purchaseAmount
     }
 }

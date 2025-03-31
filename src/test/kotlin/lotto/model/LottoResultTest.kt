@@ -38,6 +38,7 @@ class LottoResultTest {
 
             )
         val lottoResult = LottoResult(winningNumbers, tickets)
-        assertThat(lottoResult.returnRate()).isEqualTo(667_183.33)
+        val purchasedAmount = 3000
+        assertThat(lottoResult.returnRate(purchasedAmount)).isEqualTo(667_183.3333333334)
     }
 }
