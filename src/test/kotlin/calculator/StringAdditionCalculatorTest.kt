@@ -20,6 +20,13 @@ class StringAdditionCalculatorTest {
     }
 
     @Test
+    fun `when input is a single number should return the number`() {
+        val result = StringAdditionCalculator.add("5")
+
+        result shouldBe 5
+    }
+
+    @Test
     fun `when input has numbers separated by default delimiters should add numbers`() {
         val result = StringAdditionCalculator.add("1,2:3")
 
