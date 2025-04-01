@@ -1,5 +1,6 @@
 package calculator
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
@@ -16,5 +17,22 @@ class StringAdditionCalculatorTest {
         val result = StringAdditionCalculator.add("   ")
 
         result shouldBe 0
+    }
+
+    @Test
+    fun `when input has numbers separated by default delimiters should add numbers`() {
+        val result = StringAdditionCalculator.add("1,2:3")
+
+        result shouldBe 6
+    }
+
+    @Test
+    fun `when input has nun-numeric values should throw exception`() {
+        shouldThrow<RuntimeException> { StringAdditionCalculator.add("1,%:3") }
+    }
+
+    @Test
+    fun `when input has negative numbers should throw exception`() {
+        shouldThrow<RuntimeException> { StringAdditionCalculator.add("1,-2:3") }
     }
 }
