@@ -35,4 +35,11 @@ class StringAdditionCalculatorTest {
     fun `when input has negative numbers should throw exception`() {
         shouldThrow<RuntimeException> { StringAdditionCalculator.add("1,-2:3") }
     }
+
+    @Test
+    fun `when input has custom delimiter should split numbers`() {
+        val result = StringAdditionCalculator.add("//?\n1?2:3")
+
+        result shouldBe 6
+    }
 }
