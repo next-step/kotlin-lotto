@@ -42,4 +42,9 @@ class StringAdditionCalculatorTest {
 
         result shouldBe 6
     }
+
+    @Test
+    fun `when custom delimiter is not in the start of the input should throw exception`() {
+        shouldThrow<RuntimeException> { StringAdditionCalculator.add("1?2:3//?\n") }
+    }
 }

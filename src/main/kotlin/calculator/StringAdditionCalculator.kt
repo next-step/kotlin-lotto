@@ -1,7 +1,7 @@
 package calculator
 
 object StringAdditionCalculator {
-    private const val CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)"
+    private const val CUSTOM_DELIMITER_PATTERN = "^//(.)\n(.*)"
 
     private val delimiters = arrayOf(",", ":")
 
