@@ -8,8 +8,8 @@ class WinningStatisticsTest {
     @Test
     fun `Return profit rate 50 when cost is 1000 and rank is third`() {
         // given
-        val profitCalculator = WinningStatistics()
-        profitCalculator.addRank(Rank.THIRD)
+        val rankCount = mutableMapOf(Rank.THIRD to 1)
+        val profitCalculator = WinningStatistics(rankCount)
         val cost = 1000.0
         val expected = 50.0
 
@@ -23,13 +23,13 @@ class WinningStatisticsTest {
     @Test
     fun `Return the count by rank`() {
         // given
-        val profitCalculator = WinningStatistics()
-        profitCalculator.addRank(Rank.FIRST)
-        profitCalculator.addRank(Rank.SECOND)
-        profitCalculator.addRank(Rank.SECOND)
-        profitCalculator.addRank(Rank.THIRD)
-        profitCalculator.addRank(Rank.THIRD)
-        profitCalculator.addRank(Rank.THIRD)
+        val rankCount =
+            mutableMapOf(
+                Rank.THIRD to 3,
+                Rank.SECOND to 2,
+                Rank.FIRST to 1,
+            )
+        val profitCalculator = WinningStatistics(rankCount)
 
         // when && then
         assertAll(
