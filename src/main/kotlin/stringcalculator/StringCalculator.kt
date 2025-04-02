@@ -16,12 +16,10 @@ class StringCalculator {
         val regex = Regex(pattern = CUSTOM_DELIMITER_REGEX)
         val matchResult = regex.matchEntire(expression)
 
-        return if (matchResult != null) {
+        return matchResult?.let {
             val (customDelimiter, content) = matchResult.destructured
             ParsedExpression(content, arrayOf(customDelimiter) + DEFAULT_DELIMITERS)
-        } else {
-            ParsedExpression(expression, DEFAULT_DELIMITERS)
-        }
+        } ?: ParsedExpression(expression, DEFAULT_DELIMITERS)
     }
 
     companion object {
