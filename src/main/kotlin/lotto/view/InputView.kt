@@ -1,9 +1,9 @@
 package lotto.view
 
 class InputView {
-    fun getPurchaseAmount(): Int {
+    fun getPurchaseAmount(): Double {
         println(GUIDE_PURCHASE_AMOUNT)
-        return readln().toInt()
+        return readln().toDouble()
     }
 
     fun getWinningNumbers(): List<Int> {

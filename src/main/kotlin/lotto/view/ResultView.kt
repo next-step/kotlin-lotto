@@ -25,7 +25,7 @@ class ResultView {
     }
 
     companion object {
-        private const val MESSAGE_PROFIT = "Total return rate is %d"
+        private const val MESSAGE_PROFIT = "Total return rate is %f"
         private const val MESSAGE_RANK_INFO = "Matches (%d KRW) - %d Tickets"
     }
 }
