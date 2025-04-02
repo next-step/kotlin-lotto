@@ -16,6 +16,8 @@ class Lotto(
 
     fun compareMatches(lotto: Lotto) = numbers.count { it in lotto.numbers }
 
+    fun contains(bonusNumber: LottoNumber) = numbers.contains(bonusNumber)
+
     companion object {
         private const val LOTTO_SIZE = 6
     }

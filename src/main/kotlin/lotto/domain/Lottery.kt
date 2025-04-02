@@ -6,10 +6,11 @@ import java.math.BigDecimal
 class Lottery(
     lottos: List<Lotto>,
     winningLotto: Lotto,
+    bonusNumber: LottoNumber,
 ) {
     private val prizes: List<Prize> =
         lottos.map { lotto ->
-            Prize.calculate(winningLotto.compareMatches(lotto))
+            Prize.calculate(winningLotto.compareMatches(lotto), lotto.contains(bonusNumber))
         }
 
     val result =

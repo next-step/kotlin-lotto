@@ -7,15 +7,17 @@ import io.kotest.matchers.shouldBe
 class PrizeTest : FunSpec({
     context("prize calculation") {
         withData(
-            6 to Prize.FIRST,
-            5 to Prize.SECOND,
-            4 to Prize.THIRD,
-            3 to Prize.FOURTH,
-            2 to Prize.NONE,
-            1 to Prize.NONE,
-            0 to Prize.NONE,
-        ) { (matchCount, expected) ->
-            Prize.calculate(matchCount) shouldBe expected
+            (6 to false) to Prize.FIRST,
+            (5 to true) to Prize.SECOND,
+            (5 to false) to Prize.THIRD,
+            (4 to false) to Prize.FOURTH,
+            (3 to false) to Prize.FIFTH,
+            (2 to false) to Prize.NONE,
+            (1 to false) to Prize.NONE,
+            (0 to false) to Prize.NONE,
+        ) { (countWithHasBonus, expected) ->
+            val (matchCount, hasBonus) = countWithHasBonus
+            Prize.calculate(matchCount, hasBonus) shouldBe expected
         }
     }
 })

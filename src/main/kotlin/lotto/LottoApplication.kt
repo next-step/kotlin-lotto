@@ -4,6 +4,7 @@ import lotto.domain.Amount
 import lotto.domain.Lottery
 import lotto.domain.Lotto
 import lotto.domain.LottoMachine
+import lotto.domain.LottoNumber
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -18,6 +19,9 @@ fun main() {
     val winningNumbers = InputView.requestWinningNumbers()
     val winningLotto = Lotto(*winningNumbers.toIntArray())
 
-    val lottery = Lottery(lottos, winningLotto)
+    val rawBonusNumber = InputView.requestBonusNumber()
+    val bonusNumber = LottoNumber.from(rawBonusNumber)
+
+    val lottery = Lottery(lottos, winningLotto, bonusNumber)
     OutputView.printWinningStatistics(lottery)
 }
