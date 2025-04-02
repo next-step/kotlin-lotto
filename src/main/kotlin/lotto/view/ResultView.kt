@@ -7,9 +7,17 @@ import lotto.WinningStatistics
 class ResultView {
     fun printWinningStatistics(winningStatistics: WinningStatistics) {
         println(GUIDE_STATISTICS)
-        Rank.entries.forEach { rank ->
-            val count = winningStatistics.countBy(rank)
-            println(GUIDE_RANK_INFO.format(rank.prize, count))
+        Rank.entries.reversed().forEach { rank ->
+            printLottoResult(rank, winningStatistics.countBy(rank))
+        }
+    }
+
+    private fun printLottoResult(
+        rank: Rank,
+        count: Int,
+    ) {
+        if (rank != Rank.MISS) {
+            println(GUIDE_RANK_INFO.format(rank.matchCount, rank.prize, count))
         }
     }
 
@@ -27,7 +35,7 @@ class ResultView {
 
     companion object {
         private const val GUIDE_PROFIT = "Total return rate is %f"
-        private const val GUIDE_RANK_INFO = "Matches (%d KRW) - %d Tickets"
+        private const val GUIDE_RANK_INFO = "%d Matches (%,d KRW) - %d Tickets"
         private const val GUIDE_STATISTICS = "Winning Statistics \n------------------"
     }
 }
