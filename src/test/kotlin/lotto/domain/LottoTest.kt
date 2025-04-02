@@ -27,7 +27,7 @@ class LottoTest : FunSpec({
 
         test("with raw numbers") {
             shouldNotThrowAny {
-                Lotto.fromRawNumbers(listOf(1, 2, 3, 4, 5, 6))
+                Lotto(1, 2, 3, 4, 5, 6)
             }
         }
 
@@ -39,7 +39,7 @@ class LottoTest : FunSpec({
                 listOf(1, 2, 3, 4, 5, 6, 7, 8),
             ) {
                 shouldThrow<IllegalArgumentException> {
-                    Lotto.fromRawNumbers(it)
+                    Lotto(*it.toIntArray())
                 }
             }
         }
@@ -47,14 +47,14 @@ class LottoTest : FunSpec({
 
     test("get raw numbers") {
         val expected = listOf(1, 2, 3, 4, 5, 6)
-        val lotto = Lotto.fromRawNumbers(expected)
+        val lotto = Lotto(*expected.toIntArray())
 
         lotto.rawNumbers shouldContainAll listOf(1, 2, 3, 4, 5, 6)
     }
 
     test("lotto numbers are sorted after creation") {
         val lottoNumbers = listOf(1, 5, 2, 11, 6, 3)
-        val lotto = Lotto.fromRawNumbers(lottoNumbers)
+        val lotto = Lotto(*lottoNumbers.toIntArray())
         val expected = lottoNumbers.sorted()
 
         lotto.rawNumbers shouldContainExactly expected
@@ -70,8 +70,8 @@ class LottoTest : FunSpec({
             listOf(1, 41, 42, 43, 44, 45) to 1,
             listOf(40, 41, 42, 43, 44, 45) to 0,
         ) { (numbers, matchCount) ->
-            val lotto = Lotto.fromRawNumbers(numbers)
-            val winningLotto = Lotto.fromRawNumbers(listOf(1, 2, 3, 4, 5, 6))
+            val lotto = Lotto(*numbers.toIntArray())
+            val winningLotto = Lotto(1, 2, 3, 4, 5, 6)
 
             lotto.compareMatches(winningLotto) shouldBe matchCount
         }

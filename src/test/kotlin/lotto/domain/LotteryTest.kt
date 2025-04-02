@@ -8,12 +8,12 @@ class LotteryTest : FunSpec({
     context("Lottery") {
         val lottos =
             listOf(
-                Lotto.fromRawNumbers(listOf(1, 2, 3, 4, 5, 6)),
-                Lotto.fromRawNumbers(listOf(1, 2, 3, 4, 5, 7)),
-                Lotto.fromRawNumbers(listOf(1, 2, 3, 4, 7, 8)),
-                Lotto.fromRawNumbers(listOf(40, 41, 42, 43, 44, 45)),
+                Lotto(1, 2, 3, 4, 5, 6),
+                Lotto(1, 2, 3, 4, 5, 7),
+                Lotto(1, 2, 3, 4, 7, 8),
+                Lotto(40, 41, 42, 43, 44, 45),
             )
-        val winningLotto = Lotto.fromRawNumbers(listOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = Lotto(1, 2, 3, 4, 5, 6)
 
         val lottery = Lottery(lottos, winningLotto)
 

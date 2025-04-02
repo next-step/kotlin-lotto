@@ -16,7 +16,7 @@ fun main() {
     OutputView.printLottos(lottos)
 
     val winningNumbers = InputView.requestWinningNumbers()
-    val winningLotto = Lotto.fromRawNumbers(winningNumbers)
+    val winningLotto = Lotto(*winningNumbers.toIntArray())
 
     val lottery = Lottery(lottos, winningLotto)
     OutputView.printWinningStatistics(lottery)

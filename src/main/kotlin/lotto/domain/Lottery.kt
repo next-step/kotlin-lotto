@@ -4,8 +4,8 @@ import lotto.domain.LottoMachine.Companion.LOTTO_PRICE
 import java.math.BigDecimal
 
 class Lottery(
-    private val lottos: List<Lotto>,
-    private val winningLotto: Lotto,
+    lottos: List<Lotto>,
+    winningLotto: Lotto,
 ) {
     private val prizes: List<Prize> =
         lottos.map { lotto ->
