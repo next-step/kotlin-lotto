@@ -41,7 +41,7 @@
 - [ ] Display total return rate
 
 ### WinningStatistics
-- [ ] Store the count for each rank
+- [x] Store the count for each rank
 - [ ] Calculate profit
 
 ---
