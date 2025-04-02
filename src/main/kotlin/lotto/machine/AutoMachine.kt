@@ -5,6 +5,10 @@ import lotto.LottoNumber
 
 class AutoMachine {
     fun generate(count: Int): List<Lotto> {
-        return List(count) { Lotto((1..45).map { LottoNumber(it) }.shuffled().take(6)) }
+        return List(count) { Lotto(LottoNumber.all().shuffled().take(LOTTO_NUMBER_COUNT)) }
+    }
+
+    companion object {
+        private const val LOTTO_NUMBER_COUNT = 6
     }
 }

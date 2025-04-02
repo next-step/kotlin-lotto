@@ -15,12 +15,12 @@ class LottoTest {
         // given
         val numbers =
             listOf(
-                LottoNumber(1),
-                LottoNumber(2),
-                LottoNumber(3),
-                LottoNumber(4),
-                LottoNumber(5),
-                LottoNumber(6),
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6),
             )
 
         // when && then
@@ -31,7 +31,7 @@ class LottoTest {
     @MethodSource("provideInvalidSizeNumbers")
     fun `Throw IllegalArgument exception when Lotto doesn't have 6 LottoNumbers`(numbers: List<Int>) {
         // given
-        val lottoNumbers = numbers.map { LottoNumber(it) }
+        val lottoNumbers = numbers.map { LottoNumber.of(it) }
 
         // when && then
         assertThrows<IllegalArgumentException> { Lotto(lottoNumbers) }
@@ -41,8 +41,8 @@ class LottoTest {
     @ParameterizedTest
     fun `Return whether it has certain number`(number: Int) {
         // given
-        val lotto = (1..6).map { LottoNumber(it) }
-        val lottoNumber = LottoNumber(number)
+        val lotto = (1..6).map { LottoNumber.of(it) }
+        val lottoNumber = LottoNumber.of(number)
         val expected = true
 
         // when

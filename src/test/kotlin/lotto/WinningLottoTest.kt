@@ -12,7 +12,7 @@ class WinningLottoTest {
     @Test
     fun `WinningLotto should have a lotto and a lotto number as a bonus number`() {
         // given
-        val lottoNumbers = (1..6).map { LottoNumber(it) }
+        val lottoNumbers = (1..6).map { LottoNumber.of(it) }
 
         // when && then
         assertDoesNotThrow { WinningLotto(Lotto(lottoNumbers)) }
@@ -25,10 +25,10 @@ class WinningLottoTest {
         matchCount: Int,
     ) {
         // given
-        val numbers = (1..6).map { LottoNumber(it) }
+        val numbers = (1..6).map { LottoNumber.of(it) }
         val winningLotto = WinningLotto(Lotto(numbers))
 
-        val lotto = Lotto(lottoNumbers.map { LottoNumber(it) })
+        val lotto = Lotto(lottoNumbers.map { LottoNumber.of(it) })
 
         // when
         val actual = winningLotto.matchCount(lotto)

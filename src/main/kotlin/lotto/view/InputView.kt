@@ -13,7 +13,7 @@ class InputView {
     fun getWinningNumbers(): WinningLotto {
         println(GUIDE_WINNING_NUMBER)
         val numbers = readln().split(DELIMITER)
-        return WinningLotto(Lotto(numbers.map { LottoNumber(it.trim().toInt()) }))
+        return WinningLotto(Lotto(numbers.map { LottoNumber.of(it.trim().toInt()) }))
     }
 
     companion object {

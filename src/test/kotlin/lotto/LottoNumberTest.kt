@@ -10,13 +10,13 @@ class LottoNumberTest {
     @ParameterizedTest
     fun `Return LottoNumber when number is in between 1 and 45`(number: Int) {
         // given && when && then
-        assertDoesNotThrow { LottoNumber(number) }
+        assertDoesNotThrow { LottoNumber.of(number) }
     }
 
     @ValueSource(ints = [-1, 0, 46])
     @ParameterizedTest
     fun `Throw IllegalArgumentException when number is not in between 1 and 45`(number: Int) {
         // given && when && then
-        assertThrows<IllegalArgumentException> { LottoNumber(number) }
+        assertThrows<IllegalArgumentException> { LottoNumber.of(number) }
     }
 }
