@@ -37,7 +37,7 @@
 
 ### ResultView
 - [x] Display all the lotto generated
-- [ ] Display Winning Statistics
+- [x] Display Winning Statistics
 - [x] Display total return rate
 
 ### WinningStatistics
