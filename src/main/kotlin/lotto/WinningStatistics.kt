@@ -1,18 +1,12 @@
 package lotto
 
-class WinningStatistics {
-    private val rankCount = Rank.entries.associateWith { DEFAULT }.toMutableMap()
-
-    fun addRank(rank: Rank) {
-        rankCount[rank] = rankCount[rank]?.plus(1) ?: DEFAULT
-    }
-
+class WinningStatistics(private val rankCount: Map<Rank, Int>) {
     fun calculateProfit(cost: Double): Double {
         return rankCount.entries.sumOf { (rank, count) -> rank.prize * count } / cost
     }
 
     fun countBy(rank: Rank): Int {
-        return rankCount[rank] ?: 0
+        return rankCount[rank] ?: DEFAULT
     }
 
     companion object {

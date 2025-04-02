@@ -6,7 +6,6 @@ import lotto.view.ResultView
 
 class LottoController(private val inputView: InputView, private val resultView: ResultView) {
     fun run() {
-        val winningStatistics = WinningStatistics()
         val amount = inputView.getPurchaseAmount()
         val ticketCount = (amount / TICKET_COST).toInt()
         val winningLotto = WinningLotto(Lotto(inputView.getWinningNumbers().map { LottoNumber(it) }))
@@ -14,11 +13,13 @@ class LottoController(private val inputView: InputView, private val resultView: 
         val lottos = AutoMachine().generate(ticketCount)
         resultView.printLottos(lottos)
 
+        val rankCount = Rank.entries.associateWith { DEFAULT }.toMutableMap()
         lottos.forEach {
             val matchCount = winningLotto.matchCount(it)
             val rank = Rank.valueOf(matchCount)
-            winningStatistics.addRank(rank)
+            rankCount[rank] = rankCount[rank]?.plus(PLUS) ?: PLUS
         }
+        val winningStatistics = WinningStatistics(rankCount)
 
         resultView.printWinningStatistics(winningStatistics)
         resultView.printProfit(winningStatistics.calculateProfit(amount))
@@ -26,5 +27,7 @@ class LottoController(private val inputView: InputView, private val resultView: 
 
     companion object {
         private const val TICKET_COST = 1000
+        private const val DEFAULT = 0
+        private const val PLUS = 1
     }
 }
