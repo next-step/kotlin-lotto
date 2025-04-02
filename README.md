@@ -40,6 +40,10 @@
 - [ ] Display Winning Statistics
 - [ ] Display total return rate
 
+### WinningStatistics
+- [ ] Store the count for each rank
+- [ ] Calculate profit
+
 ---
 
 ## Step 1 String Addition Calculator
