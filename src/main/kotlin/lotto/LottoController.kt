@@ -13,16 +13,23 @@ class LottoController(private val inputView: InputView, private val resultView: 
         val lottos = AutoMachine().generate(ticketCount)
         resultView.printLottos(lottos)
 
+        val winningStatistics = getWinningStatistics(lottos, winningLotto)
+
+        resultView.printWinningStatistics(winningStatistics)
+        resultView.printProfit(winningStatistics.calculateProfit(amount))
+    }
+
+    private fun getWinningStatistics(
+        lottos: List<Lotto>,
+        winningLotto: WinningLotto,
+    ): WinningStatistics {
         val rankCount = Rank.entries.associateWith { DEFAULT }.toMutableMap()
         lottos.forEach {
             val matchCount = winningLotto.matchCount(it)
             val rank = Rank.valueOf(matchCount)
             rankCount[rank] = rankCount[rank]?.plus(PLUS) ?: PLUS
         }
-        val winningStatistics = WinningStatistics(rankCount)
-
-        resultView.printWinningStatistics(winningStatistics)
-        resultView.printProfit(winningStatistics.calculateProfit(amount))
+        return WinningStatistics(rankCount)
     }
 
     companion object {
