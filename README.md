@@ -43,6 +43,7 @@
 ### WinningStatistics
 - [x] Store the count for each rank
 - [x] Calculate profit
+- [x] Return the count by rank
 
 ---
 

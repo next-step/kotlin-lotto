@@ -11,6 +11,10 @@ class WinningStatistics {
         return rankCount.entries.sumOf { (rank, count) -> rank.prize * count } / cost
     }
 
+    fun countBy(rank: Rank): Int {
+        return rankCount[rank] ?: 0
+    }
+
     companion object {
         private const val DEFAULT = 0
     }
