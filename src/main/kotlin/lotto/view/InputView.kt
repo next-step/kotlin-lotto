@@ -20,4 +20,13 @@ object InputView {
             .filter { it.isNotBlank() }
             .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("Must only enter numbers.") }
     }
+
+    fun requestBonusNumber(): Int {
+        println("Please enter the bonus number.")
+        val input =
+            readlnOrNull()
+                ?: throw IllegalArgumentException("No numbers were entered.")
+
+        return input.toIntOrNull() ?: throw IllegalArgumentException("Must only enter one number.")
+    }
 }
