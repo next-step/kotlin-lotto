@@ -3,7 +3,8 @@ package lotto.domain
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-class Amount(
+@JvmInline
+value class Amount(
     private val value: BigDecimal,
 ) {
     init {
