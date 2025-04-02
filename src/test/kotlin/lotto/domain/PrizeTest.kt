@@ -11,6 +11,7 @@ class PrizeTest : FunSpec({
             (5 to true) to Prize.SECOND,
             (5 to false) to Prize.THIRD,
             (4 to false) to Prize.FOURTH,
+            (4 to true) to Prize.FOURTH,
             (3 to false) to Prize.FIFTH,
             (2 to false) to Prize.NONE,
             (1 to false) to Prize.NONE,
