@@ -22,7 +22,7 @@ class ResultView {
     }
 
     private fun printLotto(lotto: Lotto) {
-        println(lotto.lottoNumbers.map { it.value })
+        println(lotto.lottoNumbers.map { it.value }.sorted())
     }
 
     companion object {
