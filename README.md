@@ -31,10 +31,9 @@
 - [x] Return whether a number is in Lotto
 
 ### LottoMachine
-- [ ] AutoMachine
-  - [ ] Generate Lotto
-- [ ] ManualMachine
-  - [ ] Generate Lotto
+- [ ] LottoMachine interface
+- [x] AutoMachine
+  - [x] Generate Lotto
 
 ### WinningLotto
 - [x] Has one Lotto as a combination
@@ -52,6 +51,7 @@
 - [x] Get purchase amount
 - [x] Get winning numbers
 - [x] Get bonus number
+- [x] Get 
 
 ### ResultView
 - [x] Display all the lotto generated
