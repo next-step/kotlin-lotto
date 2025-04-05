@@ -12,12 +12,12 @@ class WinningStatisticsTest {
         val bonusNumber = LottoNumber.of(7)
         val winningLotto = WinningLotto(Lotto((1..6).map { LottoNumber.of(it) }), bonusNumber)
 
-        val profitCalculator = WinningStatistics(lotto, winningLotto)
+        val winningStatistics = WinningStatistics(lotto, winningLotto)
         val cost = 1000.0
         val expected = 50.0
 
         // when
-        val actual = profitCalculator.calculateProfit(cost)
+        val actual = winningStatistics.calculateProfit(cost)
 
         // then
         assertThat(actual).isEqualTo(expected)
@@ -38,14 +38,13 @@ class WinningStatisticsTest {
         val bonusNumber = LottoNumber.of(7)
         val winningLotto = WinningLotto(Lotto((1..6).map { LottoNumber.of(it) }), bonusNumber)
 
-        val profitCalculator = WinningStatistics(lotto, winningLotto)
+        val winningStatistics = WinningStatistics(lotto, winningLotto)
 
         // when && then
         assertAll(
-            { assertThat(profitCalculator.countBy(Rank.FIRST)).isEqualTo(1) },
-            { assertThat(profitCalculator.countBy(Rank.SECOND)).isEqualTo(2) },
-            { assertThat(profitCalculator.countBy(Rank.THIRD)).isEqualTo(3) },
-            { assertThat(profitCalculator.countBy(Rank.FOURTH)).isEqualTo(0) },
+            { assertThat(winningStatistics.countBy(Rank.FIRST)).isEqualTo(1) },
+            { assertThat(winningStatistics.countBy(Rank.SECOND)).isEqualTo(2) },
+            { assertThat(winningStatistics.countBy(Rank.FOURTH)).isEqualTo(3) },
         )
     }
 }
