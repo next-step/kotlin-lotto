@@ -1,4 +1,14 @@
 # kotlin-lotto
+
+## Step 3
+### Programming Requirements
+- Implement all features using TDD, with corresponding unit tests (excluding UI code such as System.out and System.in).
+- Use an Enum class to model the prize ranks.
+- Use a First-Class Collection to encapsulate collections meaningfully.
+- Keep indentation depth to a maximum of 1 (do not exceed 2 levels).
+  - For example, a while loop containing an if statement results in depth of 2 and should be avoided.
+- Ensure each function or method does only one thing.
+
 ## Step 2 
 ### Programming Requirements
 - All features must be implemented using TDD, and each must have corresponding unit tests (excluding UI logic).
@@ -21,19 +31,25 @@
 - [x] Return whether a number is in Lotto
 
 ### LottoMachine
-- [x] Generate Lotto
+- [ ] AutoMachine
+  - [ ] Generate Lotto
+- [ ] ManualMachine
+  - [ ] Generate Lotto
 
 ### WinningLotto
 - [x] Has one Lotto as a combination
-- [x] Return how many numbers are matched in WinningLotto with other 
+- [x] Return how many numbers are matched in WinningLotto with other
+- [ ] Has a bonus number
 
 ### Rank
 - [x] enum class which means rank and has prize money
 - [x] Return the rank by using match count
+  - [ ] Check bonus number
 
 ### InputView
 - [x] Get purchase amount
 - [x] Get winning numbers
+- [ ] Get bonus number
 
 ### ResultView
 - [x] Display all the lotto generated
