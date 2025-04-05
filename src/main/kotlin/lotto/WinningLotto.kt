@@ -5,6 +5,10 @@ class WinningLotto(private val lotto: Lotto, private val bonusNumber: LottoNumbe
         require(!lotto.contains(bonusNumber)) { ERROR_BONUS_NUMBER }
     }
 
+    fun containBonusNumber(lotto: Lotto): Boolean {
+        return lotto.contains(bonusNumber)
+    }
+
     fun matchCount(other: Lotto): Int {
         return other.lottoNumbers.count { lotto.contains(it) }
     }

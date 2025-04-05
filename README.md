@@ -41,11 +41,12 @@
 - [x] Return how many numbers are matched in WinningLotto with other
 - [x] Has a bonus number
   - [x] Not included in Lotto numbers
+- [x] Return boolean whether other lotto contain bonus number 
 
 ### Rank
 - [x] enum class which means rank and has prize money
 - [x] Return the rank by using match count
-  - [ ] Check bonus number
+  - [x] Check bonus number
 
 ### InputView
 - [x] Get purchase amount

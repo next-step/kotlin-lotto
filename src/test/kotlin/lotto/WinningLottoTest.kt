@@ -30,6 +30,22 @@ class WinningLottoTest {
         assertThrows<IllegalArgumentException> { WinningLotto(Lotto(lottoNumbers), bonusNumber) }
     }
 
+    @Test
+    fun `Return true when lotto has bonus number`() {
+        // given
+        val lotto = Lotto((7..12).map { LottoNumber.of(it) })
+        val lottoNumbers = (1..6).map { LottoNumber.of(it) }
+        val bonusNumber = LottoNumber.of(7)
+        val winningLotto = WinningLotto(Lotto(lottoNumbers), bonusNumber)
+        val expected = true
+
+        // when
+        val actual = winningLotto.containBonusNumber(lotto)
+
+        // then
+        assertThat(actual).isEqualTo(expected)
+    }
+
     @ParameterizedTest
     @MethodSource("provideMatchNumbers")
     fun `Return how many numbers are matched in WinningLotto with other`(

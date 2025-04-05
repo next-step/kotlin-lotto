@@ -4,9 +4,9 @@ class WinningStatistics(lottos: List<Lotto>, winningLotto: WinningLotto) {
     private val rankCount = Rank.entries.associateWith { DEFAULT }.toMutableMap()
 
     init {
-        lottos.forEach {
-            val matchCount = winningLotto.matchCount(it)
-            val rank = Rank.valueOf(matchCount)
+        lottos.forEach { lotto ->
+            val matchCount = winningLotto.matchCount(lotto)
+            val rank = Rank.valueOf(matchCount, winningLotto.containBonusNumber(lotto))
             rankCount[rank] = rankCount[rank]?.plus(PLUS) ?: PLUS
         }
     }
