@@ -56,6 +56,7 @@
 ### ResultView
 - [x] Display all the lotto generated
 - [x] Display Winning Statistics
+  - [x] Display bonus ball info
 - [x] Display total return rate
 
 ### WinningStatistics

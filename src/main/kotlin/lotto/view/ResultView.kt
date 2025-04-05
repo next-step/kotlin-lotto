@@ -17,7 +17,8 @@ class ResultView {
         count: Int,
     ) {
         if (rank != Rank.MISS) {
-            println(GUIDE_RANK_INFO.format(rank.matchCount, rank.prize, count))
+            val bonusText = if (rank == Rank.SECOND) GUIDE_MATCH_BONUS else ""
+            println(GUIDE_RANK_INFO.format(rank.matchCount, bonusText, rank.prize, count))
         }
     }
 
@@ -35,7 +36,8 @@ class ResultView {
 
     companion object {
         private const val GUIDE_PROFIT = "Total return rate is %f"
-        private const val GUIDE_RANK_INFO = "%d Matches (%,d KRW) - %d Tickets"
+        private const val GUIDE_RANK_INFO = "%d Matches%s (%,d KRW) - %d Tickets"
         private const val GUIDE_STATISTICS = "Winning Statistics \n------------------"
+        private const val GUIDE_MATCH_BONUS = " + Bonus Ball"
     }
 }
