@@ -39,7 +39,8 @@
 ### WinningLotto
 - [x] Has one Lotto as a combination
 - [x] Return how many numbers are matched in WinningLotto with other
-- [ ] Has a bonus number
+- [x] Has a bonus number
+  - [x] Not included in Lotto numbers
 
 ### Rank
 - [x] enum class which means rank and has prize money
@@ -49,7 +50,7 @@
 ### InputView
 - [x] Get purchase amount
 - [x] Get winning numbers
-- [ ] Get bonus number
+- [x] Get bonus number
 
 ### ResultView
 - [x] Display all the lotto generated

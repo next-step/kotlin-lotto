@@ -9,7 +9,8 @@ class WinningStatisticsTest {
     fun `Return profit rate 50 when cost is 1000 and rank is third`() {
         // given
         val lotto = listOf(Lotto((3..8).map { LottoNumber.of(it) }))
-        val winningLotto = WinningLotto(Lotto((1..6).map { LottoNumber.of(it) }))
+        val bonusNumber = LottoNumber.of(7)
+        val winningLotto = WinningLotto(Lotto((1..6).map { LottoNumber.of(it) }), bonusNumber)
 
         val profitCalculator = WinningStatistics(lotto, winningLotto)
         val cost = 1000.0
@@ -34,7 +35,8 @@ class WinningStatisticsTest {
                 Lotto((3..8).map { LottoNumber.of(it) }),
                 Lotto((3..8).map { LottoNumber.of(it) }),
             )
-        val winningLotto = WinningLotto(Lotto((1..6).map { LottoNumber.of(it) }))
+        val bonusNumber = LottoNumber.of(7)
+        val winningLotto = WinningLotto(Lotto((1..6).map { LottoNumber.of(it) }), bonusNumber)
 
         val profitCalculator = WinningStatistics(lotto, winningLotto)
 

@@ -12,13 +12,20 @@ class InputView {
 
     fun getWinningNumbers(): WinningLotto {
         println(GUIDE_WINNING_NUMBER)
-        val numbers = readln().split(DELIMITER)
-        return WinningLotto(Lotto(numbers.map { LottoNumber.of(it.trim().toInt()) }))
+        val numbers = readln().split(DELIMITER).map { LottoNumber.of(it.trim().toInt()) }
+        val bonusNumber = getBonusNumber()
+        return WinningLotto(Lotto(numbers), bonusNumber)
+    }
+
+    private fun getBonusNumber(): LottoNumber {
+        println(GUIDE_BONUS_NUMBER)
+        return LottoNumber.of(readln().toInt())
     }
 
     companion object {
         private const val GUIDE_PURCHASE_AMOUNT = "Please enter the purchase amount."
         private const val GUIDE_WINNING_NUMBER = "Please enter last week's winning numbers"
+        private const val GUIDE_BONUS_NUMBER = "Please enter the bonus number"
         private const val DELIMITER = ","
     }
 }

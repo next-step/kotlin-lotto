@@ -3,6 +3,7 @@ package lotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -13,9 +14,20 @@ class WinningLottoTest {
     fun `WinningLotto should have a lotto and a lotto number as a bonus number`() {
         // given
         val lottoNumbers = (1..6).map { LottoNumber.of(it) }
+        val bonusNumber = LottoNumber.of(7)
 
         // when && then
-        assertDoesNotThrow { WinningLotto(Lotto(lottoNumbers)) }
+        assertDoesNotThrow { WinningLotto(Lotto(lottoNumbers), bonusNumber) }
+    }
+
+    @Test
+    fun `Throw exception when winning lotto has bonus number`() {
+        // given
+        val lottoNumbers = (1..6).map { LottoNumber.of(it) }
+        val bonusNumber = LottoNumber.of(6)
+
+        // when && then
+        assertThrows<IllegalArgumentException> { WinningLotto(Lotto(lottoNumbers), bonusNumber) }
     }
 
     @ParameterizedTest
@@ -26,7 +38,8 @@ class WinningLottoTest {
     ) {
         // given
         val numbers = (1..6).map { LottoNumber.of(it) }
-        val winningLotto = WinningLotto(Lotto(numbers))
+        val bonusNumber = LottoNumber.of(7)
+        val winningLotto = WinningLotto(Lotto(numbers), bonusNumber)
 
         val lotto = Lotto(lottoNumbers.map { LottoNumber.of(it) })
 
