@@ -31,7 +31,7 @@
 - [x] Return whether a number is in Lotto
 
 ### LottoMachine
-- [ ] LottoMachine interface
+- [x] LottoMachine interface
 - [x] AutoMachine
   - [x] Generate Lotto
 
