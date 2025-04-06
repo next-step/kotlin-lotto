@@ -11,12 +11,14 @@ object OutputView {
             println("[${it.rawNumbers.joinToString()}]")
         }
     }
+
     fun printWinningStatistics(lottery: Lottery) {
-        val result = buildString {
-            append("\nWinning Statistics\n------------------\n")
-            appendPrizes(lottery)
-            append("Total return rate is %.2f (A rate below 1 means a loss)".format(lottery.returnRate))
-        }
+        val result =
+            buildString {
+                append("\nWinning Statistics\n------------------\n")
+                appendPrizes(lottery)
+                append("Total return rate is %.2f (A rate below 1 means a loss)".format(lottery.returnRate))
+            }
 
         println(result)
     }
