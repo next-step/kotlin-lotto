@@ -9,7 +9,7 @@
 
 ## Step2 - Lotto (Auto)
 
-- [ ] Enter the purchase amount
+- [x] Enter the purchase amount
 - [ ] Count the amount of ticket I purchased
 - [ ] Generate tickets (6 numbers per ticket) and print out them
 - [ ] Enter the last week's winning number
