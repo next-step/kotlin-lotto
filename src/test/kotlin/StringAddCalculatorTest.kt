@@ -1,8 +1,8 @@
 import calculator.StringAddCalculator
-import io.kotest.core.spec.style.Test
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullAndEmptySource
@@ -19,8 +19,8 @@ class StringAddCalculatorTest {
     @DisplayName("Returns 0 when the input is null or empty")
     @ParameterizedTest
     @NullAndEmptySource
-    fun emptyOrNull(text: String) {
-        assertThat(calculator.add(text)).isEqualTo(0)
+    fun emptyOrNull(text: String?) {
+        assertThat(calculator.add(text)).isZero()
     }
 
     @DisplayName("Returns the number when a single number is provided")
@@ -54,6 +54,6 @@ class StringAddCalculatorTest {
     @DisplayName("Throws RuntimeException for negative numbers")
     @Test
     fun negative() {
-        assertThrows<RuntimeException> { calculator.add("-1") }
+        assertThrows<IllegalArgumentException> { calculator.add("-1") }
     }
 }
