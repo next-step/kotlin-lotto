@@ -12,7 +12,7 @@ fun main() {
     controller.compareToWinningNumbers(tickets)
 }
 
-class LottoController(val inputView: InputView, val resultView: ResultView) {
+class LottoController(private val inputView: InputView, private val resultView: ResultView) {
     fun purchase() : Tickets {
         val purchaseAmount = inputView.enterPurchaseAmount()
         val tickets = LottoShop().purchase(purchaseAmount)

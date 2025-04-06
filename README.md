@@ -15,4 +15,4 @@
 - [x] Enter the last week's winning number
 - [x] Compare winning number and number of all tickets to find matches
 - [x] Print winning statistics and return rate
-- [ ] Check edge case and fix errors
+- [x] Check edge case and fix errors

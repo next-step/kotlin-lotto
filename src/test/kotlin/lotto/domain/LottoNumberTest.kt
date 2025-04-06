@@ -21,6 +21,4 @@ class LottoNumberTest {
             LottoNumber(number)
         }
     }
-
-
 }

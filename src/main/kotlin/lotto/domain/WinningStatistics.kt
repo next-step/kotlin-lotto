@@ -21,18 +21,18 @@ class WinningStatistics(private val matchesCount: MutableMap<Int, Int> = mutable
     }
 
     fun setRate(amountOfTicket: Int) {
-        val amountOfPurchase = amountOfTicket * AMOUNT_OF_NUMBER_FOR_TICKET
+        val amountOfPurchase = amountOfTicket * PRICE_FOR_ONT_TICKET
         val returnPrice = calculateReturnPrice()
-        this.rate = (returnPrice.toDouble() / amountOfPurchase) * 100
+        this.rate = "%.2f".format(returnPrice.toDouble() / amountOfPurchase).toDouble()
     }
 
-    private fun calculateReturnPrice(): Int {
+    private fun calculateReturnPrice(): Long {
         var sum: Long = 0
         for ((matches, count) in matchesCount) {
             val prize = matchesPrice[matches] ?: 0
-            sum += prize * count
+            sum += (prize * count)
         }
-        return sum.toInt()
+        return sum
     }
 
     fun getRate(): Double {

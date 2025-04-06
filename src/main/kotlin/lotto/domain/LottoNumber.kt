@@ -5,7 +5,7 @@ import kotlin.random.Random
 private const val MIN_NUMBER = 1
 private const val MAX_NUMBER = 45
 
-class LottoNumber(val number: Int) {
+data class LottoNumber(val number: Int) {
     constructor() : this(generateRandomNumber())
 
     companion object {
