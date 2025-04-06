@@ -9,12 +9,12 @@ class StringAddCalculator {
 
 
     private fun parseInput(input: String): List<Int> {
-        val result = Regex("//(.)\n(.*)").find(input)
+        val result = Regex(CUSTOM_DELIMITER_PATTERN).find(input)
         val tokens = if (result != null) {
             val customDelimiter = result.groupValues[1]
             result.groupValues[2].split(customDelimiter)
         } else {
-            input.split("[,:]".toRegex())
+            input.split(DEFAULT_DELIMITER_PATTERN.toRegex())
         }
         return tokens.toInts()
     }
@@ -28,5 +28,10 @@ class StringAddCalculator {
         }
 
 
+    }
+
+    companion object {
+        const val CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)"
+        const val DEFAULT_DELIMITER_PATTERN = "[,:]"
     }
 }
