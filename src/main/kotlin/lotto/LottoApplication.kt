@@ -11,6 +11,8 @@ import lotto.view.OutputView
 fun main() {
     val purchaseAmount = InputView.requestPurchaseAmount()
     val amount = Amount(purchaseAmount.toBigDecimal())
+    val manualLottos = InputView.requestManualLottoNumbers()
+    println(manualLottos)
 
     val lottoMachine = LottoMachine()
     val lottos = lottoMachine.createLottos(amount)
