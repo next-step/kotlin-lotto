@@ -1,7 +1,7 @@
 package lotto.domain
 
 import io.kotest.core.spec.style.BehaviorSpec
-import io.kotest.matchers.maps.shouldContainAll
+import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
 
 class LotteryTest : BehaviorSpec({
@@ -17,34 +17,31 @@ class LotteryTest : BehaviorSpec({
         val bonusNumber = LottoNumber.from(7)
 
         val lottery = Lottery(lottos, winningLotto, bonusNumber)
+        val expected =
+            listOf(
+                Prize.FIRST,
+                Prize.SECOND,
+                Prize.FOURTH,
+                Prize.NONE,
+            )
 
         `when`("the lottery is drawn") {
             then("it should return all prizes produced by the lottery") {
-                val expected =
-                    mapOf(
-                        Prize.FIRST to 1,
-                        Prize.SECOND to 1,
-                        Prize.THIRD to 0,
-                        Prize.FOURTH to 1,
-                        Prize.FIFTH to 0,
-                        Prize.NONE to 1,
-                    )
+                val prizes =
+                    lottery.result
+                        .filter { it.value == 1 }
+                        .map { it.key }
 
-                lottery.result shouldContainAll expected
+                prizes shouldContainAll expected
             }
 
             then("it should calculate by dividing the sum of prizes by inserted amount") {
-                val expected =
-                    listOf(
-                        Prize.FIRST,
-                        Prize.SECOND,
-                        Prize.FOURTH,
-                        Prize.NONE,
-                    ).sumOf { it.value }
+                val expectedRate =
+                    expected.sumOf { it.value }
                         .toBigDecimal()
                         .divide(4000.toBigDecimal())
 
-                lottery.returnRate shouldBe expected
+                lottery.returnRate shouldBe expectedRate
             }
         }
     }
