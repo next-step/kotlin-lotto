@@ -7,6 +7,9 @@ class InputView {
     }
 
     fun enterWinningNumbers() : List<Int> {
-        return listOf()
+        println("\nPlease enter last week’s winning numbers.")
+        val input = readlnOrNull() ?: throw IllegalArgumentException("Please enter a valid numbers.")
+        return input.split(",").map { it.trim().toIntOrNull()
+            ?: throw IllegalArgumentException("Please enter a valid numbers.") }
     }
 }

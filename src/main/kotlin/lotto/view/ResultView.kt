@@ -1,14 +1,27 @@
 package lotto.view
 
+import lotto.domain.Ticket
 import lotto.domain.Tickets
-import lotto.domain.WinningStatiistics
+import lotto.domain.WinningStatistics
 
 class ResultView {
     fun printTickets(tickets: Tickets) {
-        TODO("Not yet implemented")
+        println("You have purchased ${tickets.size()}")
+        for (ticket in tickets.tickets) {
+            printTicket(ticket)
+        }
     }
 
-    fun printWinningStatistics(winningStatistics: WinningStatiistics) {
-        TODO("Not yet implemented")
+    private fun printTicket(ticket: Ticket) {
+        println(ticket.lottoNumber.map { it.number }
+            .joinToString(", ", "[", "]"))
+    }
+
+    fun printWinningStatistics(winningStatistics: WinningStatistics) {
+        println("\nWinning Statistics\n------------------")
+        for(entry in WinningStatistics.matchesPrice) {
+            println("${entry.key} Matches (${entry.value} KRW) - ${winningStatistics.get(entry.key)} ticket")
+        }
+        println("Total return rate is ${winningStatistics.getRate()} (A rate below 1 means a loss)")
     }
 }

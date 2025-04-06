@@ -12,6 +12,7 @@
 - [x] Enter the purchase amount
 - [x] Count the amount of ticket I purchased
 - [x] Generate tickets (6 numbers per ticket) and print out them
-- [ ] Enter the last week's winning number
-- [ ] Compare winning number and number of all tickets to find matches
-- [ ] Print winning statistics and return rate
+- [x] Enter the last week's winning number
+- [x] Compare winning number and number of all tickets to find matches
+- [x] Print winning statistics and return rate
+- [ ] Check edge case and fix errors

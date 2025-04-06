@@ -1,5 +1,7 @@
 package lotto.controller
 
-class WinningNumbers(enterWinningNumbers: List<Int>) {
+import lotto.domain.LottoNumber
 
+class WinningNumbers(val numbers: Set<LottoNumber>) {
+    constructor(input: List<Int>) : this(input.map { LottoNumber(it) }.toSet())
 }
