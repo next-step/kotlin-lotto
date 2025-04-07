@@ -12,7 +12,7 @@ class LottoMachineTest : FunSpec({
             Amount(5_500) to 5,
             Amount(10_000) to 10,
         ) { (amount, expected) ->
-            val actual = LottoMachine().createLottos(amount)
+            val actual = LottoMachine().createLottos(amount, emptyList())
 
             actual.size shouldBe expected
         }
