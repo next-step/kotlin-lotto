@@ -1,7 +1,6 @@
 package lotto.domain
 
 import lotto.domain.LottoMachine.Companion.LOTTO_PRICE
-import java.math.BigDecimal
 
 class Lottery(
     lottos: List<Lotto>,
@@ -18,8 +17,6 @@ class Lottery(
             prizes.count { prize -> it == prize }
         }
 
-    val returnRate: BigDecimal =
-        prizes.sumOf { it.value }
-            .toBigDecimal()
-            .divide(lottos.size.times(LOTTO_PRICE).toBigDecimal())
+    val returnRate: Double =
+        prizes.sumOf { it.value }.toDouble() / (lottos.size * LOTTO_PRICE)
 }

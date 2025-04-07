@@ -36,10 +36,7 @@ class LotteryTest : BehaviorSpec({
             }
 
             then("it should calculate by dividing the sum of prizes by inserted amount") {
-                val expectedRate =
-                    expected.sumOf { it.value }
-                        .toBigDecimal()
-                        .divide(4000.toBigDecimal())
+                val expectedRate = expected.sumOf { it.value } / 4_000.toDouble()
 
                 lottery.returnRate shouldBe expectedRate
             }
