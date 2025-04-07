@@ -1,13 +1,13 @@
 package lotto.view
 
 import lotto.domain.Lottery
-import lotto.domain.Lotto
+import lotto.domain.Lottos
 import lotto.domain.Prize
 
 object OutputView {
-    fun printLottos(lottos: List<Lotto>) {
+    fun printLottos(lottos: Lottos) {
         println("You have purchased ${lottos.size} tickets.")
-        lottos.forEach {
+        lottos.values.forEach {
             println("[${it.rawNumbers.joinToString()}]")
         }
     }

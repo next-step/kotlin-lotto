@@ -44,7 +44,7 @@ class LottoMachineTest : FunSpec({
 
             assertSoftly {
                 actual.size shouldBe expected
-                actual.map { it.rawNumbers } shouldContainAll manualLottoNumbers
+                actual.values.map { it.rawNumbers } shouldContainAll manualLottoNumbers
             }
         }
     }

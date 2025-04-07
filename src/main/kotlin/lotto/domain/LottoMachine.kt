@@ -4,32 +4,33 @@ class LottoMachine {
     fun createLottos(
         amount: Amount,
         manualLottoNumbers: List<List<Int>> = emptyList(),
-    ): List<Lotto> {
+    ): Lottos {
         val manualLottos = createManualLottos(amount, manualLottoNumbers)
         val autoLottos = createAutoLottos(amount)
         return manualLottos + autoLottos
     }
 
-    private fun createAutoLottos(amount: Amount): List<Lotto> {
-        val numberOfAutoLottos = amount.countPurchasable(LOTTO_PRICE)
-        amount.spend(numberOfAutoLottos * LOTTO_PRICE)
-
-        return List(numberOfAutoLottos) {
-            Lotto(
-                LottoNumber.cached.shuffled()
-                    .take(LOTTO_NUMBERS_SIZE)
-                    .map(LottoNumber::from),
-            )
-        }
-    }
-
     private fun createManualLottos(
         amount: Amount,
         manualLottoNumbers: List<List<Int>>,
-    ): List<Lotto> {
+    ): Lottos {
         amount.spend((LOTTO_PRICE * manualLottoNumbers.size))
-        val manualLottos = manualLottoNumbers.map { Lotto(*it.toIntArray()) }
-        return manualLottos
+        return manualLottoNumbers.toLottos()
+    }
+
+    private fun createAutoLottos(amount: Amount): Lottos {
+        val numberOfAutoLottos = amount.countPurchasable(LOTTO_PRICE)
+        amount.spend(numberOfAutoLottos * LOTTO_PRICE)
+
+        return Lottos(
+            List(numberOfAutoLottos) {
+                Lotto(
+                    LottoNumber.cached.shuffled()
+                        .take(LOTTO_NUMBERS_SIZE)
+                        .map(LottoNumber::from),
+                )
+            },
+        )
     }
 
     companion object {

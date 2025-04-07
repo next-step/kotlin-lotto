@@ -7,11 +7,13 @@ import io.kotest.matchers.shouldBe
 class LotteryTest : BehaviorSpec({
     given("four lottos and one winning lotto") {
         val lottos =
-            listOf(
-                Lotto(1, 2, 3, 4, 5, 6),
-                Lotto(1, 2, 3, 4, 5, 7),
-                Lotto(1, 2, 3, 4, 7, 8),
-                Lotto(40, 41, 42, 43, 44, 45),
+            Lottos(
+                listOf(
+                    Lotto(1, 2, 3, 4, 5, 6),
+                    Lotto(1, 2, 3, 4, 5, 7),
+                    Lotto(1, 2, 3, 4, 7, 8),
+                    Lotto(40, 41, 42, 43, 44, 45),
+                ),
             )
         val winningLotto = Lotto(1, 2, 3, 4, 5, 6)
         val bonusNumber = LottoNumber.from(7)

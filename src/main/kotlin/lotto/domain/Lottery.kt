@@ -3,14 +3,14 @@ package lotto.domain
 import lotto.domain.LottoMachine.Companion.LOTTO_PRICE
 
 class Lottery(
-    lottos: List<Lotto>,
+    lottos: Lottos,
     winningLotto: Lotto,
     bonusNumber: LottoNumber,
 ) {
     private val prizes: List<Prize> =
-        lottos.map { lotto ->
-            Prize.calculate(winningLotto.compareMatches(lotto), lotto.contains(bonusNumber))
-        }
+        lottos
+            .compareAllTo(winningLotto)
+            .map { Prize.calculate(it.value, it.key.contains(bonusNumber)) }
 
     val result =
         Prize.entries.associateWith {
