@@ -3,17 +3,10 @@ package lotto.domain
 import lotto.controller.WinningNumbers
 
 class WinningStatisticsCalculator {
-    fun calculate(winningNumbers: WinningNumbers, tickets: Tickets): WinningStatistics {
+    fun calculate(winningNumbers: WinningNumbers, tickets: Tickets): Pair<WinningStatistics, Double> {
         val statistics = WinningStatistics()
-        for (ticket in tickets.tickets) {
-            val matches = checkMatches(winningNumbers, ticket)
-            statistics.add(matches)
-        }
-        statistics.setRate(tickets.size())
-        return statistics
-    }
-
-    private fun checkMatches(winningNumbers: WinningNumbers, ticket: Ticket): Int{
-        return winningNumbers.numbers.intersect(ticket.lottoNumber).size
+        tickets.checkMatches(winningNumbers, statistics)
+        val rate = statistics.yieldRate(tickets.size())
+        return Pair(statistics, rate)
     }
 }

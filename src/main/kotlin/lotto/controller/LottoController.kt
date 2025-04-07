@@ -22,7 +22,7 @@ class LottoController(private val inputView: InputView, private val resultView: 
 
     fun compareToWinningNumbers(tickets: Tickets) {
         val winningNumbers = WinningNumbers(inputView.enterWinningNumbers())
-        val winningStatistics = WinningStatisticsCalculator().calculate(winningNumbers, tickets)
-        resultView.printWinningStatistics(winningStatistics)
+        val (winningStatistics, rate) = WinningStatisticsCalculator().calculate(winningNumbers, tickets)
+        resultView.printWinningStatistics(winningStatistics, rate)
     }
 }

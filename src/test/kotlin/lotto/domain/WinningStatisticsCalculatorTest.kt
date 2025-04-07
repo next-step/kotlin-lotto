@@ -15,13 +15,13 @@ class WinningStatisticsCalculatorTest {
                 Ticket(listOf(13, 14, 15, 16, 17, 18))
             )
         )
-        val winningStatistics = WinningStatisticsCalculator().calculate(winningNumbers, tickets)
+        val (winningStatistics, rate) = WinningStatisticsCalculator().calculate(winningNumbers, tickets)
         assertThat(winningStatistics.get(1)).isEqualTo(0)
         assertThat(winningStatistics.get(2)).isEqualTo(0)
         assertThat(winningStatistics.get(3)).isEqualTo(1)
         assertThat(winningStatistics.get(4)).isEqualTo(0)
         assertThat(winningStatistics.get(5)).isEqualTo(0)
         assertThat(winningStatistics.get(6)).isEqualTo(1)
-        assertThat(winningStatistics.getRate()).isEqualTo(666_666_8.33)
+        assertThat(rate).isEqualTo(666_666_8.33)
     }
 }

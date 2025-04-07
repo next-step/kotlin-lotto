@@ -17,11 +17,11 @@ class ResultView {
             .joinToString(", ", "[", "]"))
     }
 
-    fun printWinningStatistics(winningStatistics: WinningStatistics) {
+    fun printWinningStatistics(winningStatistics: WinningStatistics, rate: Double) {
         println("\nWinning Statistics\n------------------")
         for(entry in WinningStatistics.matchesPrice) {
             println("${entry.key} Matches (${entry.value} KRW) - ${winningStatistics.get(entry.key)} ticket")
         }
-        println("Total return rate is ${winningStatistics.getRate()} (A rate below 1 means a loss)")
+        println("Total return rate is $rate (A rate below 1 means a loss)")
     }
 }
