@@ -44,4 +44,20 @@ class AmountTest : FunSpec({
             }
         }
     }
+
+    context("spend") {
+        test("deduct given amount from balance") {
+            listOf(1_000, 2_000, 5_000, 100_000).forAll {
+                shouldNotThrowAny {
+                    Amount(100_000).spend(it)
+                }
+            }
+        }
+
+        test("should throw exception if spend amount is greater than given value") {
+            shouldThrow<IllegalStateException> {
+                Amount(1_000).spend(1_001)
+            }
+        }
+    }
 })
