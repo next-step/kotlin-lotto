@@ -1,7 +1,9 @@
 package lotto.domain
 
+import io.kotest.assertions.assertSoftly
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withData
+import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
 
 class LottoMachineTest : FunSpec({
@@ -15,6 +17,35 @@ class LottoMachineTest : FunSpec({
             val actual = LottoMachine().createLottos(amount, emptyList())
 
             actual.size shouldBe expected
+        }
+    }
+
+    context("create lotto according to amount and manual lottos") {
+        withData(
+            listOf(
+                Triple(
+                    Amount(2_000),
+                    listOf(listOf(1, 2, 3, 4, 5, 6)),
+                    2,
+                ),
+                Triple(
+                    Amount(3_000),
+                    listOf(listOf(1, 2, 3, 4, 5, 6)),
+                    3,
+                ),
+                Triple(
+                    Amount(10_000),
+                    listOf(listOf(1, 2, 3, 4, 5, 6), listOf(2, 5, 8, 11, 25, 44)),
+                    10,
+                ),
+            ),
+        ) { (amount, manualLottoNumbers, expected) ->
+            val actual = LottoMachine().createLottos(amount, manualLottoNumbers)
+
+            assertSoftly {
+                actual.size shouldBe expected
+                actual.map { it.rawNumbers } shouldContainAll manualLottoNumbers
+            }
         }
     }
 })

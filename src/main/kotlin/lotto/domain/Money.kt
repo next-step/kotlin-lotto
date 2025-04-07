@@ -31,8 +31,6 @@ value class Money(
         return Money(this.value - value)
     }
 
-    infix operator fun compareTo(amount: BigDecimal) = value.compareTo(amount)
-
     override fun compareTo(other: Money) = value.compareTo(other.value)
 
     companion object {
