@@ -1,7 +1,7 @@
 package lotto.domain
 
 class Lotto(
-    lottoNumbers: List<LottoNumber>,
+    lottoNumbers: Set<LottoNumber>,
 ) {
     private val numbers = lottoNumbers.sorted()
 
@@ -12,7 +12,8 @@ class Lotto(
         require(numbers.size == LOTTO_SIZE) { "Lotto must contain exactly 6 numbers." }
     }
 
-    constructor(vararg numbers: Int) : this(numbers.map(LottoNumber.Companion::from))
+    constructor(numbers: List<LottoNumber>) : this(numbers.toSet())
+    constructor(vararg numbers: Int) : this(numbers.map(LottoNumber.Companion::from).toSet())
 
     fun compareMatches(lotto: Lotto) = numbers.count { it in lotto.numbers }
 

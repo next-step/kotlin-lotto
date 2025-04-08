@@ -43,6 +43,12 @@ class LottoTest : FunSpec({
                 }
             }
         }
+
+        test("should throw exception when numbers are duplicated") {
+            shouldThrow<IllegalArgumentException> {
+                Lotto(1, 2, 3, 4, 5, 5)
+            }
+        }
     }
 
     test("get raw numbers") {

@@ -24,6 +24,7 @@ Lotto
 
 - [x] must contain 6 numbers
 - [x] numbers must be sorted
+- [x] numbers must be unique
 
 LottoMachine
 
