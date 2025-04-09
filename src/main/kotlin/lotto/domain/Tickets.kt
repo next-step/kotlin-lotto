@@ -8,15 +8,22 @@ class Tickets(val tickets: List<Ticket>) {
 
     constructor(amountOfTicket: Int) : this(generateTickets(amountOfTicket))
 
-    fun checkMatches(winningNumbers: WinningNumbers, statistics: WinningStatistics) {
+    fun checkMatches(winningNumbers: WinningNumbers): WinningStatistics {
+        val statistics = WinningStatistics()
         for (ticket in tickets) {
             val matches = checkMatches(winningNumbers, ticket)
-            statistics.add(matches)
+            val bonusMatches = checkBonusMatches(winningNumbers, ticket)
+            statistics.add(matches, bonusMatches)
         }
+        return statistics
     }
 
     private fun checkMatches(winningNumbers: WinningNumbers, ticket: Ticket): Int{
         return winningNumbers.numbers.intersect(ticket.lottoNumber).size
+    }
+
+    private fun checkBonusMatches(winningNumbers: WinningNumbers, ticket: Ticket): Boolean {
+        return ticket.contains(winningNumbers.bonusNumber)
     }
 
     companion object {

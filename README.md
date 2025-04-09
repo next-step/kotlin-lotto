@@ -20,6 +20,6 @@
 ## Step3 - Lotto (Second Prize)
 
 - [x] Enter bonus number for second prize
-- [ ] Calculate winning statistics considering bonus number
-- [ ] Calculate rate considering bonus number
+- [x] Calculate winning statistics considering bonus number
+- [x] Calculate rate considering bonus number
 - [ ] Check edge case and fix errors
