@@ -12,4 +12,10 @@ class InputView {
         return input.split(",").map { it.trim().toIntOrNull()
             ?: throw IllegalArgumentException("Please enter a valid numbers.") }
     }
+
+    fun enterBonusNumber(): Int {
+        println("Please enter the bonus number.")
+        val input = readlnOrNull() ?: throw IllegalArgumentException("Please enter a valid number.")
+        return input.toIntOrNull() ?: throw java.lang.IllegalArgumentException("Please enter a valid number.")
+    }
 }
