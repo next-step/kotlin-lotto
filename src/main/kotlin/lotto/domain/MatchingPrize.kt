@@ -1,7 +1,5 @@
 package lotto.domain
 
-import java.lang.IllegalArgumentException
-
 enum class MatchPrize(val matchCount: Int, val usingBonus: Boolean, val price: Long) {
     FIRST(6, false, 20_000_000_000),
     SECOND(5, true,30_000_000),

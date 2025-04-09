@@ -22,4 +22,4 @@
 - [x] Enter bonus number for second prize
 - [x] Calculate winning statistics considering bonus number
 - [x] Calculate rate considering bonus number
-- [ ] Check edge case and fix errors
+- [x] Check edge case and fix errors

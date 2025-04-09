@@ -8,6 +8,6 @@ class LottoShopTest {
     fun `purchase success`() {
         val purchaseAmount = 15000
         val tickets = LottoShop().purchase(purchaseAmount)
-        assertThat(tickets.size()).isEqualTo(15)
+        assertThat(tickets.size).isEqualTo(15)
     }
 }

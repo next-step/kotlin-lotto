@@ -1,6 +1,6 @@
 package lotto.domain
 
-class WinningStatistics(val prizesCount: MutableMap<MatchPrize, Int> = mutableMapOf()) {
+class WinningStatistics(private val prizesCount: MutableMap<MatchPrize, Int> = mutableMapOf()) {
     fun add(matches: Int, bonusMatches: Boolean) {
         val prize = MatchPrize.prizeFor(matches, bonusMatches) ?: return
         prizesCount[prize] = (prizesCount[prize] ?: 0) + 1
