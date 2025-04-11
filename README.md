@@ -59,7 +59,7 @@
 - [x] Get winning numbers
 - [x] Get bonus number
 - [x] Get the number of manual tickets
-- [ ] Get manual lotto numbers 
+- [x] Get manual lotto numbers 
 
 ### ResultView
 - [x] Display all the lotto generated

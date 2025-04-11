@@ -12,7 +12,7 @@ class InputView {
 
     fun getWinningNumbers(): WinningLotto {
         println(GUIDE_WINNING_NUMBER)
-        val numbers = readln().split(DELIMITER).map { LottoNumber.of(it.trim().toInt()) }
+        val numbers = getLottoNumbers().map { LottoNumber.of(it) }
         val bonusNumber = getBonusNumber()
         return WinningLotto(Lotto(numbers), bonusNumber)
     }
@@ -20,6 +20,10 @@ class InputView {
     fun getManualTicketCount(): Int {
         println(GUIDE_MANUAL_TICKET_COUNT)
         return readln().toInt()
+    }
+
+    fun getLottoNumbers(): List<Int> {
+        return readln().split(DELIMITER).map { it.trim().toInt() }
     }
 
     private fun getBonusNumber(): LottoNumber {
