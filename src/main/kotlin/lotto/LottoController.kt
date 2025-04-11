@@ -8,6 +8,8 @@ class LottoController(private val inputView: InputView, private val resultView: 
     fun run() {
         val amount = inputView.getPurchaseAmount()
         val ticketCount = (amount / TICKET_COST).toInt()
+
+        val manualTicketCount = inputView.getManualTicketCount()
         val winningLotto = inputView.getWinningNumbers()
 
         val lottos = AutoMachine().generate(ticketCount)

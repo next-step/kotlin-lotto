@@ -72,6 +72,9 @@
 - [x] Calculate profit
 - [x] Return the count by rank
 
+### LottoStore
+- [x] Return lotto from lotto machine
+
 ---
 
 ## Step 1 String Addition Calculator
