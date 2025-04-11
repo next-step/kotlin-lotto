@@ -75,6 +75,11 @@
 ### LottoStore
 - [x] Return lotto from lotto machine
 
+### Order
+- [x] Has money
+- [x] Has manual lotto ticket numbers
+- [x] Has manual lotto numbers
+
 ---
 
 ## Step 1 String Addition Calculator
