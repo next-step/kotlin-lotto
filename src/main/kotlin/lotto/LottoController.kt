@@ -22,7 +22,6 @@ class LottoController(private val inputView: InputView, private val resultView: 
         val winningLotto = inputView.getWinningNumbers()
         val winningStatistics = WinningStatistics(lottos, winningLotto)
 
-        resultView.printWinningStatistics(winningStatistics)
-        resultView.printProfit(winningStatistics.calculateProfit(amount))
+        resultView.printWinningStatistics(amount, winningStatistics)
     }
 }

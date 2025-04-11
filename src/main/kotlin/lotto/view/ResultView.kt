@@ -6,11 +6,15 @@ import lotto.Rank
 import lotto.WinningStatistics
 
 class ResultView {
-    fun printWinningStatistics(winningStatistics: WinningStatistics) {
+    fun printWinningStatistics(
+        amount: Int,
+        winningStatistics: WinningStatistics,
+    ) {
         println(GUIDE_STATISTICS)
         Rank.entries.reversed().forEach { rank ->
             printLottoResult(rank, winningStatistics.countBy(rank))
         }
+        printProfit(winningStatistics.calculateProfit(amount))
     }
 
     private fun printLottoResult(
@@ -23,7 +27,7 @@ class ResultView {
         }
     }
 
-    fun printProfit(profit: Double) {
+    private fun printProfit(profit: Double) {
         println(GUIDE_PROFIT.format(profit))
     }
 
