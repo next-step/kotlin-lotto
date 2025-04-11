@@ -58,7 +58,7 @@
 - [x] Get purchase amount
 - [x] Get winning numbers
 - [x] Get bonus number
-- [ ] Get the number of manual tickets
+- [x] Get the number of manual tickets
 - [ ] Get manual lotto numbers 
 
 ### ResultView
