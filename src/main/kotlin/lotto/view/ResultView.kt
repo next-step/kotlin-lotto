@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.Lotto
+import lotto.Order
 import lotto.Rank
 import lotto.WinningStatistics
 
@@ -26,7 +27,11 @@ class ResultView {
         println(GUIDE_PROFIT.format(profit))
     }
 
-    fun printLottos(lottos: List<Lotto>) {
+    fun printLottos(
+        order: Order,
+        lottos: List<Lotto>,
+    ) {
+        println(GUIDE_LOTTO_NUMBERS.format(order.manualTicketNumber, order.autoTicketNumber))
         lottos.forEach { printLotto(it) }
     }
 
@@ -39,5 +44,6 @@ class ResultView {
         private const val GUIDE_RANK_INFO = "%d Matches%s (%,d KRW) - %d Tickets"
         private const val GUIDE_STATISTICS = "Winning Statistics \n------------------"
         private const val GUIDE_MATCH_BONUS = " + Bonus Ball"
+        private const val GUIDE_LOTTO_NUMBERS = "Purchased %d manual and %d automatic tickets"
     }
 }

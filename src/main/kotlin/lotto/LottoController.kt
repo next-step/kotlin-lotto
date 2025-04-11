@@ -17,7 +17,7 @@ class LottoController(private val inputView: InputView, private val resultView: 
         val order = Order(amount, manualTicketCount, manualLottoNumbers)
 
         val lottos = lottoStore.sell(order, ManualMachine()) + lottoStore.sell(order, AutoMachine())
-        resultView.printLottos(lottos)
+        resultView.printLottos(order, lottos)
 
         val winningLotto = inputView.getWinningNumbers()
         val winningStatistics = WinningStatistics(lottos, winningLotto)
