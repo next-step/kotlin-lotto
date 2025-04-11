@@ -39,8 +39,8 @@
 - [x] LottoMachine interface
 - [x] AutoMachine
   - [x] Generate Lotto
-- [ ] ManualMachine
-  - [ ] Generate Lotto
+- [x] ManualMachine
+  - [x] Generate Lotto
 
 ### WinningLotto
 - [x] Has one Lotto as a combination
