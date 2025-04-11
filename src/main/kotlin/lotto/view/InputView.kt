@@ -5,9 +5,9 @@ import lotto.LottoNumber
 import lotto.WinningLotto
 
 class InputView {
-    fun getPurchaseAmount(): Double {
+    fun getPurchaseAmount(): Int {
         println(GUIDE_PURCHASE_AMOUNT)
-        return readln().toDouble()
+        return readln().toInt()
     }
 
     fun getWinningNumbers(): WinningLotto {

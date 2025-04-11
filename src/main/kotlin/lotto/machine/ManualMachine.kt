@@ -1,9 +1,11 @@
 package lotto.machine
 
 import lotto.Lotto
+import lotto.LottoNumber
+import lotto.Order
 
-class ManualMachine(private val lotts: List<Lotto>) : LottoMachine {
-    override fun generate(count: Int): List<Lotto> {
-        return lotts
+class ManualMachine : LottoMachine {
+    override fun generate(order: Order): List<Lotto> {
+        return order.lottoNumbers.map { lottoNumbers -> Lotto(lottoNumbers.map { LottoNumber.of(it) }) }
     }
 }

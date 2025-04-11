@@ -4,9 +4,9 @@ import lotto.machine.LottoMachine
 
 class LottoStore {
     fun sell(
-        count: Int,
+        order: Order,
         machine: LottoMachine,
     ): List<Lotto> {
-        return machine.generate(count)
+        return machine.generate(order)
     }
 }

@@ -11,8 +11,8 @@ class WinningStatistics(lottos: List<Lotto>, winningLotto: WinningLotto) {
         }
     }
 
-    fun calculateProfit(cost: Double): Double {
-        return rankCount.entries.sumOf { (rank, count) -> rank.prize * count } / cost
+    fun calculateProfit(cost: Int): Double {
+        return rankCount.entries.sumOf { (rank, count) -> rank.prize * count } / cost.toDouble()
     }
 
     fun countBy(rank: Rank): Int {

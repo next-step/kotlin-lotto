@@ -13,7 +13,7 @@ class WinningStatisticsTest {
         val winningLotto = WinningLotto(Lotto((1..6).map { LottoNumber.of(it) }), bonusNumber)
 
         val winningStatistics = WinningStatistics(lotto, winningLotto)
-        val cost = 1000.0
+        val cost = 1000
         val expected = 50.0
 
         // when

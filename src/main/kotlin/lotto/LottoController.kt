@@ -11,8 +11,9 @@ class LottoController(private val inputView: InputView, private val resultView: 
 
         val manualTicketCount = inputView.getManualTicketCount()
         val winningLotto = inputView.getWinningNumbers()
+        val order = Order(amount, manualTicketCount, listOf())
 
-        val lottos = AutoMachine().generate(ticketCount)
+        val lottos = AutoMachine().generate(order)
         resultView.printLottos(lottos)
 
         val winningStatistics = WinningStatistics(lottos, winningLotto)
