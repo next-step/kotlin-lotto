@@ -1,12 +1,24 @@
 package lotto.domain
 
+import lotto.controller.WinningNumbers
+
 class Ticket(val lottoNumber: Set<LottoNumber>) {
     constructor() : this(generateLottoNumber())
 
+    init {
+        require(lottoNumber.size == 6) {
+            throw IllegalArgumentException("Please enter $AMOUNT_OF_NUMBER_FOR_TICKET numbers")
+        }
+    }
+
     constructor(input: List<Int>) : this(input.map { LottoNumber(it) }.toSet())
 
-    fun contains(bonusNumber: LottoNumber): Boolean {
-        return lottoNumber.contains(bonusNumber)
+    fun checkMatches(winningNumbers: WinningNumbers): Int {
+        return winningNumbers.numbers.intersect(lottoNumber).size
+    }
+
+    fun checkBonusMatches(winningNumbers: WinningNumbers): Boolean {
+        return lottoNumber.contains(winningNumbers.bonusNumber)
     }
 
     companion object {

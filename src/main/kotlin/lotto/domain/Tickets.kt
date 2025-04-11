@@ -12,19 +12,11 @@ class Tickets(val tickets: List<Ticket>) {
     fun checkMatches(winningNumbers: WinningNumbers): WinningStatistics {
         val statistics = WinningStatistics()
         for (ticket in tickets) {
-            val matches = checkMatches(winningNumbers, ticket)
-            val bonusMatches = checkBonusMatches(winningNumbers, ticket)
+            val matches = ticket.checkMatches(winningNumbers)
+            val bonusMatches = ticket.checkBonusMatches(winningNumbers)
             statistics.add(matches, bonusMatches)
         }
         return statistics
-    }
-
-    private fun checkMatches(winningNumbers: WinningNumbers, ticket: Ticket): Int{
-        return winningNumbers.numbers.intersect(ticket.lottoNumber).size
-    }
-
-    private fun checkBonusMatches(winningNumbers: WinningNumbers, ticket: Ticket): Boolean {
-        return ticket.contains(winningNumbers.bonusNumber)
     }
 
     companion object {

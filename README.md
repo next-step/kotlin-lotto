@@ -29,4 +29,4 @@
 - [x] Enter number of manual tickets to purchase
 - [x] Enter numbers of each manual ticket
 - [x] Generate automatic tickets except manual tickets
-- [ ] Check edge case and fix errors
+- [x] Check edge case and fix errors

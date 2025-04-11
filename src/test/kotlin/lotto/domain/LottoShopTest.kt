@@ -14,11 +14,13 @@ class LottoShopTest {
     @Test
     fun `purchase with mutable tickets`() {
         val purchaseAmount = 15000
-        val tickets = LottoShop().purchase(purchaseAmount, listOf(
-            Ticket(listOf(1,2,3,4,5,6)),
-            Ticket(listOf(1,2,3,4,5,6)),
-            Ticket(listOf(1,2,3,4,5,6))
-        ))
+        val tickets = LottoShop().purchase(
+            purchaseAmount, listOf(
+                Ticket(listOf(1, 2, 3, 4, 5, 6)),
+                Ticket(listOf(1, 2, 3, 4, 5, 6)),
+                Ticket(listOf(1, 2, 3, 4, 5, 6))
+            )
+        )
         assertThat(tickets.size).isEqualTo(15)
     }
 }
