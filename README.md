@@ -1,5 +1,10 @@
 # kotlin-lotto
 
+## Step 4
+### Programming Requirements
+- Allow users to manually enter Lotto numbers in addition to automatically generated ones.
+- Accept input for the purchase amount, the number of manually generated tickets, and their respective numbers.
+
 ## Step 3
 ### Programming Requirements
 - Implement all features using TDD, with corresponding unit tests (excluding UI code such as System.out and System.in).
@@ -34,6 +39,8 @@
 - [x] LottoMachine interface
 - [x] AutoMachine
   - [x] Generate Lotto
+- [ ] ManualMachine
+  - [ ] Generate Lotto
 
 ### WinningLotto
 - [x] Has one Lotto as a combination
@@ -51,7 +58,8 @@
 - [x] Get purchase amount
 - [x] Get winning numbers
 - [x] Get bonus number
-- [x] Get 
+- [ ] Get the number of manual tickets
+- [ ] Get manual lotto numbers 
 
 ### ResultView
 - [x] Display all the lotto generated
