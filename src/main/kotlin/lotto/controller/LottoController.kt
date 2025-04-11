@@ -13,10 +13,11 @@ fun main() {
 }
 
 class LottoController(private val inputView: InputView, private val resultView: ResultView) {
-    fun purchase() : Tickets {
+    fun purchase(): Tickets {
         val purchaseAmount = inputView.enterPurchaseAmount()
-        val tickets = LottoShop().purchase(purchaseAmount)
-        resultView.printTickets(tickets)
+        val manualTickets = inputView.enterManualTickets()
+        val tickets = LottoShop().purchase(purchaseAmount, manualTickets)
+        resultView.printTickets(tickets, manualTickets.size, tickets.size - manualTickets.size)
         return tickets
     }
 
