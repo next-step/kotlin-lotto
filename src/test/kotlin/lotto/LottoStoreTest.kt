@@ -18,10 +18,12 @@ class LottoStoreTest {
         assertThat(actual.size).isEqualTo(expected)
     }
 
-    private class FakeMachine: LottoMachine {
-        private val lotto = List(10) {
-            Lotto((1..6).map { LottoNumber.of(it) })
-        }
+    private class FakeMachine : LottoMachine {
+        private val lotto =
+            List(10) {
+                Lotto((1..6).map { LottoNumber.of(it) })
+            }
+
         override fun generate(count: Int): List<Lotto> {
             return lotto.subList(0, count)
         }
