@@ -6,8 +6,8 @@ import lotto.domain.Tickets
 import lotto.domain.WinningStatistics
 
 class ResultView {
-    fun printTickets(tickets: Tickets) {
-        println("You have purchased ${tickets.size}")
+    fun printTickets(tickets: Tickets, numberOfManualTickets: Int, numberOfRandomTickets: Int) {
+        println("\nPurchased $numberOfManualTickets and $numberOfRandomTickets automatic tickets.")
         for (ticket in tickets.tickets) {
             printTicket(ticket)
         }
