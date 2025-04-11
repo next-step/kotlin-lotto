@@ -22,7 +22,12 @@ class InputView {
         return readln().toInt()
     }
 
-    fun getLottoNumbers(): List<Int> {
+    fun getManualLottosNumbers(): List<Int> {
+        println(GUIDE_MANUAL_LOTTO_NUMBER)
+        return getLottoNumbers()
+    }
+
+    private fun getLottoNumbers(): List<Int> {
         return readln().split(DELIMITER).map { it.trim().toInt() }
     }
 
@@ -36,6 +41,7 @@ class InputView {
         private const val GUIDE_WINNING_NUMBER = "Please enter last week's winning numbers"
         private const val GUIDE_BONUS_NUMBER = "Please enter the bonus number"
         private const val GUIDE_MANUAL_TICKET_COUNT = "Enter the number of manual tickets to purchase."
+        private const val GUIDE_MANUAL_LOTTO_NUMBER = "Enter the numbers for manual tickets."
         private const val DELIMITER = ","
     }
 }

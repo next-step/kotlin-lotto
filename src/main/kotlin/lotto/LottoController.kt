@@ -1,29 +1,28 @@
 package lotto
 
 import lotto.machine.AutoMachine
+import lotto.machine.ManualMachine
 import lotto.view.InputView
 import lotto.view.ResultView
 
 class LottoController(private val inputView: InputView, private val resultView: ResultView) {
     fun run() {
+        val lottoStore = LottoStore()
+
         val amount = inputView.getPurchaseAmount()
-        val ticketCount = (amount / TICKET_COST).toInt()
 
         val manualTicketCount = inputView.getManualTicketCount()
-        val winningLotto = inputView.getWinningNumbers()
-        val order = Order(amount, manualTicketCount, listOf())
+        val manualLottoNumbers = List(manualTicketCount) { inputView.getManualLottosNumbers() }
 
-        val lottos = AutoMachine().generate(order)
+        val order = Order(amount, manualTicketCount, manualLottoNumbers)
+
+        val lottos = lottoStore.sell(order, ManualMachine()) + lottoStore.sell(order, AutoMachine())
         resultView.printLottos(lottos)
 
+        val winningLotto = inputView.getWinningNumbers()
         val winningStatistics = WinningStatistics(lottos, winningLotto)
 
         resultView.printWinningStatistics(winningStatistics)
         resultView.printProfit(winningStatistics.calculateProfit(amount))
-    }
-
-    companion object {
-        private const val TICKET_COST = 1000
-        private const val DEFAULT = 0
     }
 }
