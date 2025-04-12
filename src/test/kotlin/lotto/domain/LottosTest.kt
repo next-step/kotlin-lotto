@@ -3,6 +3,7 @@ package lotto.domain
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import lotto.RawLottoNumbers
 
 class LottosTest : FunSpec({
     context("create") {
@@ -19,10 +20,12 @@ class LottosTest : FunSpec({
 
         test("create with raw lotto numbers") {
             shouldNotThrowAny {
-                listOf(
-                    listOf(1, 2, 3, 4, 5, 6),
-                    listOf(2, 3, 4, 5, 6, 7),
-                ).toLottos()
+                val rawNumbers =
+                    listOf(
+                        listOf(1, 2, 3, 4, 5, 6),
+                        listOf(2, 3, 4, 5, 6, 7),
+                    )
+                RawLottoNumbers(rawNumbers).toLottos()
             }
         }
     }

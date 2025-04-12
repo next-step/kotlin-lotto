@@ -1,9 +1,11 @@
 package lotto.domain
 
+import lotto.RawLottoNumbers
+
 class LottoMachine {
     fun createLottos(
         amount: Amount,
-        manualLottoNumbers: List<List<Int>> = emptyList(),
+        manualLottoNumbers: RawLottoNumbers = RawLottoNumbers(),
     ): Lottos {
         val leftAmount = amount.spend(LOTTO_PRICE * manualLottoNumbers.size)
         val manualLottos = manualLottoNumbers.toLottos()
@@ -13,7 +15,6 @@ class LottoMachine {
 
     private fun createAutoLottos(amount: Amount): Lottos {
         val numberOfAutoLottos = amount.countPurchasable(LOTTO_PRICE)
-        amount.spend(numberOfAutoLottos * LOTTO_PRICE)
 
         return Lottos(
             List(numberOfAutoLottos) {

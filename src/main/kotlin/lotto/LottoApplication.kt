@@ -14,7 +14,7 @@ fun main() {
     val manualLottos = InputView.requestManualLottoNumbers()
 
     val lottoMachine = LottoMachine()
-    val lottos = lottoMachine.createLottos(amount, manualLottos)
+    val lottos = lottoMachine.createLottos(amount, RawLottoNumbers(manualLottos))
     OutputView.printLottos(lottos)
 
     val winningNumbers = InputView.requestWinningNumbers()

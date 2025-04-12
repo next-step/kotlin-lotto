@@ -14,5 +14,3 @@ class Lottos(_values: List<Lotto>) {
         return this
     }
 }
-
-fun List<List<Int>>.toLottos(): Lottos = Lottos(this.map { Lotto(*it.toIntArray()) })

@@ -5,6 +5,7 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withData
 import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
+import lotto.RawLottoNumbers
 
 class LottoMachineTest : FunSpec({
     context("create lottos according to amount") {
@@ -14,7 +15,7 @@ class LottoMachineTest : FunSpec({
             Amount(5_500) to 5,
             Amount(10_000) to 10,
         ) { (amount, expected) ->
-            val actual = LottoMachine().createLottos(amount, emptyList())
+            val actual = LottoMachine().createLottos(amount)
 
             actual.size shouldBe expected
         }
@@ -40,7 +41,7 @@ class LottoMachineTest : FunSpec({
                 ),
             ),
         ) { (amount, manualLottoNumbers, expected) ->
-            val actual = LottoMachine().createLottos(amount, manualLottoNumbers)
+            val actual = LottoMachine().createLottos(amount, RawLottoNumbers(manualLottoNumbers))
 
             assertSoftly {
                 actual.size shouldBe expected
