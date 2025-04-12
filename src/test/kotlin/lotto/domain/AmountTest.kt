@@ -20,10 +20,10 @@ class AmountTest : FunSpec({
         }
     }
 
-    test("throw exception if value is less than 1,000 or above 100,000") {
+    test("throw exception if value is less than 0 or above 100,000") {
         listOf(
-            998,
-            999,
+            -2,
+            -1,
             100_001,
             100_002,
         ).forAll {

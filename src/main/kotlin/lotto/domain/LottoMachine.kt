@@ -5,17 +5,10 @@ class LottoMachine {
         amount: Amount,
         manualLottoNumbers: List<List<Int>> = emptyList(),
     ): Lottos {
-        val manualLottos = createManualLottos(amount, manualLottoNumbers)
-        val autoLottos = createAutoLottos(amount)
+        val leftAmount = amount.spend(LOTTO_PRICE * manualLottoNumbers.size)
+        val manualLottos = manualLottoNumbers.toLottos()
+        val autoLottos = createAutoLottos(leftAmount)
         return manualLottos + autoLottos
-    }
-
-    private fun createManualLottos(
-        amount: Amount,
-        manualLottoNumbers: List<List<Int>>,
-    ): Lottos {
-        amount.spend((LOTTO_PRICE * manualLottoNumbers.size))
-        return manualLottoNumbers.toLottos()
     }
 
     private fun createAutoLottos(amount: Amount): Lottos {
