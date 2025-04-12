@@ -11,7 +11,7 @@ class Amount(
 
     constructor(value: Int) : this(Money(value))
 
-    fun countPurchasable(amount: Int) = (money / amount.toBigDecimal()).toInt()
+    fun countPurchasable(amount: Int) = money.getAffordableQuantity(amount.toBigDecimal())
 
     fun spend(amount: Int): Amount {
         return Amount(money - amount.toBigDecimal())

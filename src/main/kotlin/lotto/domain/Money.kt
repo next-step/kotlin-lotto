@@ -15,14 +15,13 @@ value class Money(
 
     constructor(value: Int) : this(BigDecimal(value))
 
-    fun toInt() = value.toInt()
-
-    infix operator fun div(value: BigDecimal): Money =
-        Money(
+    fun getAffordableQuantity(value: BigDecimal): Int {
+        val quantity =
             runCatching {
                 this.value.divide(value, RoundingMode.DOWN)
-            }.getOrNull() ?: BigDecimal.ZERO,
-        )
+            }.getOrNull() ?: BigDecimal.ZERO
+        return quantity.toInt()
+    }
 
     infix operator fun minus(value: BigDecimal): Money {
         check(this.value >= value) {

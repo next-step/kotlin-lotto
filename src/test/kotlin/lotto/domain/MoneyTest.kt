@@ -26,17 +26,17 @@ class MoneyTest : FunSpec({
         }
     }
 
-    context("divide") {
+    context("getAffordableQuantity") {
         test("divide by zero does not throw exception") {
-            Money(1_000) / BigDecimal(0) shouldBe Money(0)
+            Money(1_000).getAffordableQuantity(BigDecimal(0)) shouldBe 0
         }
 
         test("performs as expected") {
-            Money(10_000) / BigDecimal(2) shouldBe Money(5_000)
+            Money(10_000).getAffordableQuantity(BigDecimal(2)) shouldBe 5_000
         }
 
         test("performs with rounding down") {
-            Money(10_000) / BigDecimal(3) shouldBe Money(3_333)
+            Money(10_000).getAffordableQuantity(BigDecimal(3)) shouldBe 3_333
         }
     }
 
