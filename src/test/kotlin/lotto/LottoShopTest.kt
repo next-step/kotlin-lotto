@@ -37,9 +37,9 @@ class LottoShopTest : BehaviorSpec({
         val lottoShop = LottoShop()
 
         When("1000 단위 O [1000]") {
-            val lottoCount = lottoShop.buyLotto(Money("1000"))
+            val lotto = lottoShop.buyLotto(Money("1000"))
             Then("로또 1장이 나온다") {
-                lottoCount shouldBe 1
+                lotto.size shouldBe 1
             }
         }
     }
@@ -48,9 +48,9 @@ class LottoShopTest : BehaviorSpec({
         val lottoShop = LottoShop()
 
         When("1000 단위 O [2000]") {
-            val lottoCount = lottoShop.buyLotto(Money("2000"))
+            val lotto = lottoShop.buyLotto(Money("2000"))
             Then("로또 2장이 나온다") {
-                lottoCount shouldBe 2
+                lotto.size shouldBe 2
             }
         }
     }

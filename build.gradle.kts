@@ -7,7 +7,7 @@ group = "camp.nextstep.edu"
 version = "1.0-SNAPSHOT"
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(17)
 }
 
 repositories {
