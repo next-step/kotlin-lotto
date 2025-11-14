@@ -7,4 +7,6 @@ data class Amount(val amount: Int) {
     fun calculatePurchaseLottoCount() = amount / LOTTO_PRICE
 
     fun calculateChange() = amount % LOTTO_PRICE
+
+    fun calculatePurchaseAmount() = calculatePurchaseLottoCount() * LOTTO_PRICE
 }
