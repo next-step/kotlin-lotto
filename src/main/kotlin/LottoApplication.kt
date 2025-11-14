@@ -18,4 +18,5 @@ fun main() {
         OutputView.printLotto(generateAutomaticLotto)
     }
 
+    val winningNumbers = InputView.inputWinningNumbers()
 }
