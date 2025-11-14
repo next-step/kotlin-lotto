@@ -12,5 +12,4 @@ class Money {
         }
         this.price = price.toInt()
     }
-
 }
