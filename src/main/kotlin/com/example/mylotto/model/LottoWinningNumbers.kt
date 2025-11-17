@@ -1,9 +1,14 @@
 package com.example.mylotto.model
 
 class LottoWinningNumbers private constructor(
-    private val numbers: Set<LottoNumber>,
+    val numbers: Set<LottoNumber>,
 ) {
-    constructor(numberList: List<LottoNumber>) : this(
-        numberList.toSet(),
-    )
+    companion object {
+        fun of(numberList: List<LottoNumber>): LottoWinningNumbers {
+            require(numberList.size == 6) { "There must be exactly 6 winning numbers." }
+            val set = numberList.toSet()
+            require(set.size == 6) { "There must be no duplicates." }
+            return LottoWinningNumbers(set)
+        }
+    }
 }
