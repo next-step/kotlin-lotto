@@ -16,6 +16,15 @@ enum class Rank(
         fun valueOf(
             countOfMatch: Int,
             matchBonus: Boolean,
-        ): Rank = Rank.FIRST
+        ): Rank {
+            return when {
+                countOfMatch == 6 -> FIRST
+                countOfMatch == 5 && matchBonus -> SECOND
+                countOfMatch == 5 -> THIRD
+                countOfMatch == 4 -> FOURTH
+                countOfMatch == 3 -> FIFTH
+                else -> MISS
+            }
+        }
     }
 }
