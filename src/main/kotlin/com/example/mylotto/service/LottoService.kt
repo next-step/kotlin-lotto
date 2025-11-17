@@ -21,6 +21,6 @@ class LottoService {
         winningNumbers: LottoWinningNumbers,
     ): Rank {
         val matchedCount = lottoTicket.numbers.intersect(winningNumbers.numbers).size
-        return Rank.valueOf(matchedCount, false)
+        return Rank.valueOf(matchedCount)
     }
 }
