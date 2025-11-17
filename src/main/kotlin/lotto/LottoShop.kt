@@ -2,7 +2,7 @@ package lotto
 
 class LottoShop {
     companion object {
-        private const val LOTTO_UNIT_PRICE = 1000
+        const val LOTTO_UNIT_PRICE = 1000
     }
 
     fun buyLotto(money: Money): List<Lotto> {

@@ -1,0 +1,41 @@
+package lotto
+
+import java.util.EnumMap
+
+class LottoResult(val winLotto: WinLotto, val lottos: List<Lotto>) {
+    val matchMap: EnumMap<Rank, Int> = EnumMap(Rank::class.java)
+    var rateOfReturn = 0.0
+
+    fun process() {
+        match()
+        rateOfReturn()
+    }
+
+    private fun rateOfReturn() {
+        val totalMoney = lottos.size * LottoShop.LOTTO_UNIT_PRICE
+        val winningMoney = matchMap.entries.sumOf { entry -> entry.key.winningMoney * entry.value }
+        rateOfReturn = winningMoney.toDouble() / totalMoney.toDouble()
+    }
+
+    private fun match() {
+        lottos.forEach { lotto ->
+            val rank = Rank.valueOf(winLotto.numbers.intersect(lotto.numbers.toSet()).size)
+            matchMap[rank] = matchMap.getOrDefault(rank, 0) + 1
+        }
+    }
+
+    fun printResult() {
+        println(
+"""
+당첨 통계
+${Rank.entries.filter { it != Rank.MISS }
+                .sorted()
+                .reversed()
+                .joinToString("\n") { "${it.countOfMatch}개 일치 (${it.winningMoney}원)- ${matchMap.getOrDefault(it, 0)}개" }}
+총 수익률은 %.2f 입니다."
+"""
+                .trimIndent()
+                .format(rateOfReturn),
+        )
+    }
+}
