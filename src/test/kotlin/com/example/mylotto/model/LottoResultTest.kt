@@ -1,7 +1,25 @@
 package com.example.mylotto.model
 
-import io.kotest.core.spec.style.FunSpec
+import com.example.mylotto.enum.Rank
+import io.kotest.core.spec.style.BehaviorSpec
+import io.kotest.matchers.shouldBe
 
 class LottoResultTest :
-    FunSpec({
+    BehaviorSpec({
+        given("a list of ranks") {
+            val ranks = listOf(Rank.FIRST, Rank.SECOND, Rank.SECOND, Rank.THIRD, Rank.THIRD, Rank.THIRD)
+
+            `when`("a LottoResult is created") {
+                val lottoResult = LottoResult(ranks)
+
+                then("the rank count map should correctly group counts") {
+                    val rankCounts = lottoResult.rankCountMap
+
+                    rankCounts[Rank.FIRST].shouldBe(1)
+                    rankCounts[Rank.SECOND].shouldBe(2)
+                    rankCounts[Rank.THIRD].shouldBe(3)
+                    rankCounts[Rank.FOURTH].shouldBe(null)
+                }
+            }
+        }
     })
