@@ -2,9 +2,9 @@ package presentation
 
 class InputView {
     companion object {
-        fun inputPurchaseAmount(): String {
+        fun inputPurchaseAmount(): Int {
             println("구입금액을 입력해 주세요.")
-            return readln()
+            return readln().toInt()
         }
 
         fun inputWinningNumbers(): List<Int> {
