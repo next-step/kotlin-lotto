@@ -1,57 +1,30 @@
 package lotto
 
 import io.kotest.assertions.throwables.shouldThrow
-import io.kotest.core.spec.style.BehaviorSpec
+import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 
-class LottoShopTest : BehaviorSpec({
-    Given("1. 로또샵") {
+class LottoShopTest : FreeSpec({
+
+    "로또 구매 테스트" - {
         val lottoShop = LottoShop()
 
-        When("1000 단위 X [999]") {
+        "1000원 단위가 아닐 때 (999원) 예외 발생" {
             val exception =
                 shouldThrow<IllegalArgumentException> {
                     lottoShop.buyLotto(Money("999"))
                 }
-            Then("예외가 나온다") {
-                exception.message shouldBe "1000원 단위로 입력안됨"
-            }
+            exception.message shouldBe "1000원 단위로 입력안됨"
         }
-    }
 
-    Given("2. 로또샵") {
-        val lottoShop = LottoShop()
-
-        When("1000 단위 X [998]") {
-            val exception =
-                shouldThrow<IllegalArgumentException> {
-                    lottoShop.buyLotto(Money("998"))
-                }
-            Then("예외가 나온다") {
-                exception.message shouldBe "1000원 단위로 입력안됨"
-            }
-        }
-    }
-
-    Given("3. 로또샵") {
-        val lottoShop = LottoShop()
-
-        When("1000 단위 O [1000]") {
+        "1000원 단위일 때 (1000원) 로또 1장 구매됨" {
             val lotto = lottoShop.buyLotto(Money("1000"))
-            Then("로또 1장이 나온다") {
-                lotto.size shouldBe 1
-            }
+            lotto.size shouldBe 1
         }
-    }
 
-    Given("4. 로또샵") {
-        val lottoShop = LottoShop()
-
-        When("1000 단위 O [2000]") {
+        "1000원 단위일 때 (2000원) 로또 2장 구매됨" {
             val lotto = lottoShop.buyLotto(Money("2000"))
-            Then("로또 2장이 나온다") {
-                lotto.size shouldBe 2
-            }
+            lotto.size shouldBe 2
         }
     }
 })
