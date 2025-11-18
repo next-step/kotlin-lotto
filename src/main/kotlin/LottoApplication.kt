@@ -21,11 +21,12 @@ fun main() {
     }
 
     val winningNumbers = InputView.inputWinningNumbers()
-    val result: Map<LottoWinningType, Int> = lottos.lottos.groupingBy { LottoWinningType.getLottoWinningType(winningNumbers, it) }
-        .eachCount()
-        .withDefault { 0 }
+    val result: Map<LottoWinningType, Int> =
+        lottos.lottos
+            .groupingBy { LottoWinningType.getLottoWinningType(winningNumbers, it) }
+            .eachCount()
+            .withDefault { 0 }
 
     val profitCalculator = ProfitCalculator(result, amount.calculatePurchaseAmount())
     OutputView.printResult(profitCalculator)
-
 }

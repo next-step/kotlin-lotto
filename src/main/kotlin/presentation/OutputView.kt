@@ -5,13 +5,15 @@ import domain.ProfitCalculator
 import util.round
 
 class OutputView {
-
     companion object {
-        fun printLottoCount(purchaseLottoCount: Int, change: Int) {
+        fun printLottoCount(
+            purchaseLottoCount: Int,
+            change: Int,
+        ) {
             println("$purchaseLottoCount 개를 구매했습니다. 거스름돈은 $change 입니다. 가져가세요.")
         }
 
-        fun printLotto(lotto: List<Int>) {
+        fun printLotto(lotto: Set<Int>) {
             println(lotto)
         }
 
@@ -30,7 +32,7 @@ class OutputView {
                    5개 일치 (1500000원)- $secondCount 개
                    6개 일치 (2000000000원)- $firstCount 개
                    총 수익률은 ${profitCalculator.calculateProfit().round(2)} 입니다. 
-                """
+                """,
             )
         }
     }
