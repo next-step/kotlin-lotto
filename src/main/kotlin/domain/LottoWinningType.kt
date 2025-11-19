@@ -9,15 +9,4 @@ enum class LottoWinningType(
     THIRD(50000, 4),
     FOURTH(5000, 3),
     NONE(0, null),
-    ;
-
-    companion object {
-        fun getLottoWinningType(
-            winningNumbers: Set<Int>,
-            lottoNumbers: Set<Int>,
-        ): LottoWinningType {
-            val matchingCount = winningNumbers.intersect(lottoNumbers).count()
-            return entries.find { it.matchingCount == matchingCount } ?: NONE
-        }
-    }
 }

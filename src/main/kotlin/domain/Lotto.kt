@@ -1,5 +1,7 @@
 package domain
 
+import domain.LottoWinningType.NONE
+
 data class Lotto(
     val numbers: Set<Int>,
 ) {
@@ -13,7 +15,10 @@ data class Lotto(
         }
     }
 
-    fun determineWinningType(winningNumbers: Set<Int>): LottoWinningType = LottoWinningType.getLottoWinningType(winningNumbers, numbers)
+    fun determineWinningType(winningNumbers: Set<Int>): LottoWinningType {
+        val matchingCount = winningNumbers.intersect(numbers).count()
+        return LottoWinningType.entries.find { it.matchingCount == matchingCount } ?: NONE
+    }
 
     companion object {
         const val MIN_NUMBER = 1
