@@ -1,5 +1,6 @@
 package presentation
 
+import domain.Lotto
 import domain.LottoWinningType
 import domain.WinningResult
 import util.round
@@ -13,8 +14,8 @@ class OutputView {
             println("$purchaseLottoCount 개를 구매했습니다. 거스름돈은 $change 입니다. 가져가세요.")
         }
 
-        fun printLotto(lotto: Set<Int>) {
-            println(lotto)
+        fun printLotto(lotto: Lotto) {
+            println(lotto.numbers)
         }
 
         fun printResult(winningResult: WinningResult) {

@@ -12,7 +12,8 @@ class LottoShufflerTest {
         val automaticLotto = LottoShuffler.generateAutomaticLotto()
 
         // then
-        assertThat(automaticLotto).hasSize(6)
-        assertThat(automaticLotto.filter { it > 45 || it < 1 }).hasSize(0)
+        assertThat(automaticLotto).isNotNull
+        assertThat(automaticLotto.numbers).hasSize(6)
+        assertThat(automaticLotto.numbers.filter { it > Lotto.MAX_NUMBER || it < Lotto.MIN_NUMBER }).hasSize(0)
     }
 }

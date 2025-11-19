@@ -10,7 +10,7 @@ fun main() {
     val purchaseLottoCount = amount.calculatePurchaseLottoCount()
     OutputView.printLottoCount(purchaseLottoCount, amount.calculateChange())
 
-    val lottos = lottoService.generateLottos(purchaseLottoCount)
+    val lottos = lottoService.purchaseAutomaticLottoTicket(purchaseLottoCount)
     lottos.lottos.forEach {
         OutputView.printLotto(it)
     }

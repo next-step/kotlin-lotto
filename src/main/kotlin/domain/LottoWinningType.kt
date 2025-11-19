@@ -1,6 +1,9 @@
 package domain
 
-enum class LottoWinningType(val priceMoney: Int, val matchingCount: Int?) {
+enum class LottoWinningType(
+    val priceMoney: Int,
+    val matchingCount: Int?,
+) {
     FIRST(2000000000, 6),
     SECOND(1500000, 5),
     THIRD(50000, 4),
@@ -10,10 +13,10 @@ enum class LottoWinningType(val priceMoney: Int, val matchingCount: Int?) {
 
     companion object {
         fun getLottoWinningType(
-            winningNumbers: List<Int>,
-            lotto: Set<Int>,
+            winningNumbers: Set<Int>,
+            lottoNumbers: Set<Int>,
         ): LottoWinningType {
-            val matchingCount = winningNumbers.intersect(lotto).count()
+            val matchingCount = winningNumbers.intersect(lottoNumbers).count()
             return entries.find { it.matchingCount == matchingCount } ?: NONE
         }
     }
