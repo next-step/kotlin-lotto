@@ -6,7 +6,7 @@ class Lotto(input: List<Int>) {
     init {
         input.forEach {
             if (!(MINIMUM_LOTTO_NUMBER..MAXIMUM_LOTTO_NUMBER).contains(it)) {
-                throw IllegalArgumentException("1부터 45까지의 숫자를 입력하세요")
+                throw IllegalArgumentException("${MINIMUM_LOTTO_NUMBER}부터 ${MAXIMUM_LOTTO_NUMBER}까지의 숫자를 입력하세요")
             }
         }
     }
