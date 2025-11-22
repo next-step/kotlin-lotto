@@ -4,8 +4,7 @@ class InputView {
     fun readPurchaseAmount(): Long {
         println("구입금액을 입력해 주세요.")
         val amount = readlnOrNull()?.toLongOrNull()
-        require(amount != null)
-        return amount
+        return requireNotNull(amount)
     }
 
     fun readWinningNumbers(): List<Int> {
@@ -14,7 +13,6 @@ class InputView {
             readlnOrNull()
                 ?.split(",")
                 ?.mapNotNull { it.trim().toIntOrNull() }
-        require(numbers != null)
-        return numbers
+        return requireNotNull(numbers)
     }
 }

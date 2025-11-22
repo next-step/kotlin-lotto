@@ -15,9 +15,13 @@ class ResultView {
     }
 
     fun displayWinningStatistics(result: LottoResult) {
-        println()
-        println("당첨 통계")
-        println("---------")
+        println(
+            """
+            
+            당첨 통계
+            ---------
+            """.trimIndent(),
+        )
 
         Rank.entries
             .filter { it != Rank.MISS }
