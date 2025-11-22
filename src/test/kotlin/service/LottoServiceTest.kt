@@ -1,7 +1,8 @@
 package service
 
+import domain.Lotto
+import domain.LottoTicket
 import domain.LottoWinningType
-import domain.Lottos
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -9,27 +10,27 @@ class LottoServiceTest {
     private val lottoService = LottoService()
 
     @Test
-    fun generateLottosTest() {
+    fun generateLottoTicketTest() {
         // given
         val purchaseLottoCount = 5
 
         // when
-        val generatedLottos = lottoService.generateLottos(purchaseLottoCount)
+        val generatedLottos = lottoService.generateLottoTicket(purchaseLottoCount)
 
         // then
         assertThat(generatedLottos).isNotNull()
-        assertThat(generatedLottos.lottos).hasSize(purchaseLottoCount)
+        assertThat(generatedLottos.lottoTicket).hasSize(purchaseLottoCount)
     }
 
     @Test
     fun getWinningResultTest() {
         // given
-        val lottos = Lottos(mutableSetOf(setOf(1, 2, 3, 4, 5, 6)))
+        val lottoTicket = LottoTicket(listOf(Lotto(setOf(1, 2, 3, 4, 5, 6))))
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
         val purchaseLottoAmount = 1000
 
         // when
-        val winningResult = lottoService.getWinningResult(lottos, winningNumbers, purchaseLottoAmount)
+        val winningResult = lottoService.getWinningResult(lottoTicket, winningNumbers, purchaseLottoAmount)
 
         // then
         assertThat(winningResult).isNotNull()
