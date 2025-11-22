@@ -8,12 +8,7 @@ import domain.WinningResult
 
 class LottoService(private val profitCalculator: ProfitCalculator = ProfitCalculator()) {
     fun generateLottos(purchaseLottoCount: Int): Lottos {
-        val lottos = Lottos()
-        repeat(purchaseLottoCount) {
-            val generateAutomaticLotto = LottoShuffler.generateAutomaticLotto()
-            lottos.addLotto(generateAutomaticLotto)
-        }
-        return lottos
+        return Lottos(List(purchaseLottoCount) { LottoShuffler.generateAutomaticLotto() })
     }
 
     fun getWinningResult(
