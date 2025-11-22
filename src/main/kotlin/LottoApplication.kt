@@ -7,14 +7,13 @@ val lottoService = LottoService()
 
 fun main() {
     val amount = Amount(InputView.inputPurchaseAmount())
-    val purchaseLottoCount = amount.calculatePurchaseLottoCount()
-    OutputView.printLottoCount(purchaseLottoCount, amount.calculateChange())
+    OutputView.printLottoCount(amount)
 
-    val lottoTicket = lottoService.generateLottoTicket(purchaseLottoCount)
+    val lottoTicket = lottoService.generateLottoTicket(amount.getPurchaseLottoCount())
     lottoTicket.lottoTicket.forEach {
         OutputView.printLotto(it.lotto)
     }
 
-    val winningResult = lottoService.getWinningResult(lottoTicket, InputView.inputWinningNumbers(), amount.calculatePurchaseAmount())
+    val winningResult = lottoService.getWinningResult(lottoTicket, InputView.inputWinningNumbers(), amount.getPurchaseAmount())
     OutputView.printResult(winningResult)
 }

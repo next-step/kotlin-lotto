@@ -1,20 +1,18 @@
 package presentation
 
+import domain.Amount
 import domain.LottoWinningType
 import domain.WinningResult
 import util.round
 
 class OutputView {
     companion object {
-        fun printLottoCount(
-            purchaseLottoCount: Int,
-            change: Int,
-        ) {
-            if (change == 0) {
-                println("$purchaseLottoCount 개를 구매했습니다.")
+        fun printLottoCount(amount: Amount) {
+            if (amount.getChange() == 0) {
+                println("${amount.getPurchaseLottoCount()} 개를 구매했습니다.")
                 return
             }
-            println("$purchaseLottoCount 개를 구매했습니다. 거스름돈은 $change 입니다. 가져가세요.")
+            println("${amount.getPurchaseLottoCount()} 개를 구매했습니다. 거스름돈은 ${amount.getChange()}입니다. 가져가세요.")
         }
 
         fun printLotto(lotto: Set<Int>) {
