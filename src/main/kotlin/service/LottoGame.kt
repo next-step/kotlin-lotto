@@ -31,6 +31,6 @@ class LottoGame(private val profitCalculator: ProfitCalculator = ProfitCalculato
         lotto: Set<Int>,
     ): LottoWinningType {
         val matchingCount = winningNumbers.intersect(lotto).count()
-        return LottoWinningType.getLottoWinningTypeByMatchingCount(matchingCount)
+        return LottoWinningType.fromMatchCount(matchingCount)
     }
 }
