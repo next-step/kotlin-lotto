@@ -6,8 +6,8 @@ import domain.LottoWinningType
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class LottoServiceTest {
-    private val lottoService = LottoService()
+class LottoGameTest {
+    private val lottoGame = LottoGame()
 
     @Test
     fun generateLottoTicketTest() {
@@ -15,7 +15,7 @@ class LottoServiceTest {
         val purchaseLottoCount = 5
 
         // when
-        val generatedLottos = lottoService.generateLottoTicket(purchaseLottoCount)
+        val generatedLottos = lottoGame.generateLottoTicket(purchaseLottoCount)
 
         // then
         assertThat(generatedLottos).isNotNull()
@@ -30,7 +30,7 @@ class LottoServiceTest {
         val purchaseLottoAmount = 1000
 
         // when
-        val winningResult = lottoService.getWinningResult(lottoTicket, winningNumbers, purchaseLottoAmount)
+        val winningResult = lottoGame.getWinningResult(lottoTicket, winningNumbers, purchaseLottoAmount)
 
         // then
         assertThat(winningResult).isNotNull()

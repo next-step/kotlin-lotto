@@ -9,11 +9,7 @@ enum class LottoWinningType(val priceMoney: Int, val matchingCount: Int?) {
     ;
 
     companion object {
-        fun getLottoWinningType(
-            winningNumbers: List<Int>,
-            lotto: Set<Int>,
-        ): LottoWinningType {
-            val matchingCount = winningNumbers.intersect(lotto).count()
+        fun getLottoWinningTypeByMatchingCount(matchingCount: Int?): LottoWinningType {
             return entries.find { it.matchingCount == matchingCount } ?: NONE
         }
     }
