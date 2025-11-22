@@ -12,7 +12,7 @@ fun main() {
 
     val lottos = lottoService.generateLottos(purchaseLottoCount)
     lottos.lottos.forEach {
-        OutputView.printLotto(it)
+        OutputView.printLotto(it.lotto)
     }
 
     val winningResult = lottoService.getWinningResult(lottos, InputView.inputWinningNumbers(), amount.calculatePurchaseAmount())

@@ -23,7 +23,7 @@ class LottoService(private val profitCalculator: ProfitCalculator = ProfitCalcul
     ): WinningResult {
         val result =
             lottos.lottos
-                .groupingBy { LottoWinningType.getLottoWinningType(winningNumbers, it) }
+                .groupingBy { LottoWinningType.getLottoWinningType(winningNumbers, it.lotto) }
                 .eachCount()
                 .withDefault { 0 }
         val profit = profitCalculator.calculateProfit(result, purchaseLottoAmount)

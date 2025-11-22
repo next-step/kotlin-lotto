@@ -1,7 +1,7 @@
 package domain
 
-class Lottos(val lottos: MutableSet<Set<Int>> = mutableSetOf()) {
+class Lottos(val lottos: MutableSet<Lotto> = mutableSetOf()) {
     fun addLotto(lotto: Set<Int>) {
-        this.lottos.add(lotto)
+        this.lottos.add(Lotto(lotto))
     }
 }
