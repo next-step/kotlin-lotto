@@ -10,7 +10,7 @@ fun buyLotto(): List<Lotto> {
     val moneyInput = readln()
     try {
         val money = Money(moneyInput)
-        val buyLotto = LottoShop().buyLotto(money)
+        val buyLotto = LottoShop().sellLotto(money)
         println("${buyLotto.size}개를 구매했습니다.")
         buyLotto.forEach {
             println(it.numbers)

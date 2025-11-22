@@ -5,7 +5,7 @@ class LottoShop {
         const val LOTTO_UNIT_PRICE = 1000
     }
 
-    fun buyLotto(money: Money): List<Lotto> {
+    fun sellLotto(money: Money): List<Lotto> {
         if (money.price % LOTTO_UNIT_PRICE != 0) {
             throw IllegalArgumentException("${LOTTO_UNIT_PRICE}원 단위로 입력안됨")
         }
