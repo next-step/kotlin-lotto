@@ -10,6 +10,10 @@ class OutputView {
             purchaseLottoCount: Int,
             change: Int,
         ) {
+            if (change == 0) {
+                println("$purchaseLottoCount 개를 구매했습니다.")
+                return
+            }
             println("$purchaseLottoCount 개를 구매했습니다. 거스름돈은 $change 입니다. 가져가세요.")
         }
 
