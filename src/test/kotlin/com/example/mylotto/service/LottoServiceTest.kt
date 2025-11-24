@@ -14,16 +14,16 @@ class LottoServiceTest :
     BehaviorSpec({
         val lottoService = LottoService()
 
-        given("a purchase amount") {
-            `when`("it is 5000 won") {
-                then("it should generate 5 lotto tickets") {
+        Given("a purchase amount") {
+            When("it is 5000 won") {
+                Then("it should generate 5 lotto tickets") {
                     val tickets = lottoService.generateLottoTickets(5000)
                     tickets.size.shouldBe(5)
                 }
             }
 
-            `when`("it is not a multiple of 1000") {
-                then("it should throw an exception") {
+            When("it is not a multiple of 1000") {
+                Then("it should throw an exception") {
                     shouldThrow<IllegalArgumentException> {
                         lottoService.generateLottoTickets(1500)
                     }
@@ -31,9 +31,9 @@ class LottoServiceTest :
             }
         }
 
-        given("a lotto ticket and winning numbers") {
-            `when`("matching a single ticket") {
-                then("it should calculate the correct rank for each ticket") {
+        Given("a lotto ticket and winning numbers") {
+            When("matching a single ticket") {
+                Then("it should calculate the correct rank for each ticket") {
                     forAll(
                         row(
                             setOf(3, 11, 15, 29, 35, 44),

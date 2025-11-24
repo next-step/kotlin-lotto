@@ -6,13 +6,13 @@ import io.kotest.matchers.shouldBe
 
 class LottoResultTest :
     BehaviorSpec({
-        given("a list of ranks") {
+        Given("a list of ranks") {
             val ranks = listOf(Rank.FIRST, Rank.THIRD, Rank.THIRD, Rank.THIRD)
 
-            `when`("a LottoResult is created") {
+            When("a LottoResult is created") {
                 val lottoResult = LottoResult.of(ranks)
 
-                then("the rank count map should correctly group counts") {
+                Then("the rank count map should correctly group counts") {
                     val rankCounts = lottoResult.rankCountMap
 
                     rankCounts[Rank.FIRST].shouldBe(1)
