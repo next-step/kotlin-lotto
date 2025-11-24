@@ -67,6 +67,7 @@
     - check -> 객체 상태에 대한 검증. 실패 시 IllegalStateException 발생
     - error -> 무조건 예외를 발생시킴. 주로 도달할 수 없는 코드에 사용
     - assert -> 디버깅 목적으로 사용. JVM 옵션 -ea(Enable Assertions)가 활성화된 경우에만 동작
+  - List를 생성자로 받을 수 있다.
 
 ## 논의 필요한 것
 - 타입 선언 생각 가능한데 어디까지할지?
