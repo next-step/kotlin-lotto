@@ -19,6 +19,11 @@ class LottoResultTest :
                     rankCounts[Rank.THIRD].shouldBe(3)
                     rankCounts[Rank.FOURTH].shouldBe(null)
                 }
+
+                Then("the profit rate should be calculated correctly") {
+                    val expectedProfitRate = 501125
+                    lottoResult.profitRate.shouldBe(expectedProfitRate)
+                }
             }
         }
     })
