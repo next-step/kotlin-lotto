@@ -8,7 +8,7 @@ class WinLotto {
 
         val splitted = splitToSix(input)
 
-        splitted.forEach { if (!it.matches("^\\d+$".toRegex())) throw IllegalArgumentException("올바른 숫자를 입력하세요") }
+        splitted.forEach { if (!it.matches("^\\d+$".toRegex())) throw IllegalArgumentException("올바른 숫자를 입력하세요 (입력 : $it)") }
 
         val numbers = splitted.map { it.toInt() }
         this.winLotto = Lotto(numbers)
@@ -16,8 +16,8 @@ class WinLotto {
 
     private fun splitToSix(input: String): List<String> {
         val splitted = input.trim().split(" ")
-        if (splitted.distinct().size != 6) {
-            throw IllegalArgumentException("6개의 서로 다른 숫자를 입력하세요")
+        if (splitted.distinct().size != Lotto.LOTTO_NUMBER_COUNT) {
+            throw IllegalArgumentException("$Lotto.LOTTO_NUMBER_COUNT 개의 서로 다른 숫자를 입력하세요")
         }
         return splitted
     }
