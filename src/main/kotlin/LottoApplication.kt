@@ -8,11 +8,12 @@ val lottoService = LottoService()
 fun main() {
     val amount = InputView.inputPurchaseAmount()
     val purchaseManualLottoCount = InputView.inputPurchaseManualLotto()
-    val lottoPurchaseInfo = LottoPurchaseInfo(amount, purchaseManualLottoCount)
+    val manualLottos = InputView.inputManualLottoNumbers(purchaseManualLottoCount)
+
+    val lottoPurchaseInfo = LottoPurchaseInfo(amount, manualLottos)
 
     OutputView.printLottoCount(lottoPurchaseInfo)
-
-    val lottos = lottoService.purchaseAutomaticLottoTicket(lottoPurchaseInfo.calculateAutoLottoCount())
+    val lottos = lottoService.purchaseLottoTicket(lottoPurchaseInfo)
     lottos.lottos.forEach {
         OutputView.printLotto(it)
     }

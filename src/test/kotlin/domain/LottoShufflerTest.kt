@@ -14,6 +14,6 @@ class LottoShufflerTest {
         // then
         assertThat(automaticLotto).isNotNull
         assertThat(automaticLotto.numbers).hasSize(6)
-        assertThat(automaticLotto.numbers.filter { it > Lotto.MAX_NUMBER || it < Lotto.MIN_NUMBER }).hasSize(0)
+        assertThat(automaticLotto.numbers.filter { it.number > LottoNumber.MAX_NUMBER || it.number < LottoNumber.MIN_NUMBER }).hasSize(0)
     }
 }

@@ -1,6 +1,8 @@
 package service
 
+import domain.LOTTO_PRICE
 import domain.Lotto
+import domain.LottoPurchaseInfo
 import domain.LottoTicket
 import domain.LottoWinningType
 import org.assertj.core.api.Assertions.assertThat
@@ -10,12 +12,13 @@ class LottoServiceTest {
     private val lottoService = LottoService()
 
     @Test
-    fun purchaseAutomaticLottoTicketTest() {
+    fun purchaseLottoTicketTest() {
         // given
         val purchaseLottoCount = 5
+        val purchaseInfo = LottoPurchaseInfo(purchaseLottoCount * LOTTO_PRICE, emptyList())
 
         // when
-        val generatedLottos = lottoService.purchaseAutomaticLottoTicket(purchaseLottoCount)
+        val generatedLottos = lottoService.purchaseLottoTicket(purchaseInfo)
 
         // then
         assertThat(generatedLottos).isNotNull()
@@ -25,8 +28,14 @@ class LottoServiceTest {
     @Test
     fun getWinningResultTest() {
         // given
-        val lottoTicket = LottoTicket(List(1) { Lotto(setOf(1, 2, 3, 4, 5, 6)) })
-        val winningNumbers = setOf(1, 2, 3, 4, 5, 6)
+        val lottoTicket =
+            LottoTicket(
+                List(1) {
+                    Lotto.fromNumbers(1, 2, 3, 4, 5, 6)
+                },
+            )
+        val winningNumbers = Lotto.fromNumbers(1, 2, 3, 4, 5, 6)
+
         val purchaseLottoAmount = 1000
 
         // when
