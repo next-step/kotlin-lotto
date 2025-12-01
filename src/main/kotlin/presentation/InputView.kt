@@ -9,6 +9,11 @@ class InputView {
             return readln().toInt()
         }
 
+        fun inputPurchaseManualLotto(): Int {
+            println("수동으로 구매할 로또 수를 입력해 주세요.")
+            return readln().toInt()
+        }
+
         fun inputWinningNumbers(): Set<Int> {
             println("지난 주 당첨번호를 입력해 주세요.")
             val inputWinningNumbers = readln().split(",").map { it.trim().toInt() }

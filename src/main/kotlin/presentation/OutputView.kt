@@ -1,17 +1,18 @@
 package presentation
 
 import domain.Lotto
+import domain.LottoPurchaseInfo
 import domain.LottoWinningType
 import domain.WinningResult
 import util.round
 
 class OutputView {
     companion object {
-        fun printLottoCount(
-            purchaseLottoCount: Int,
-            change: Int,
-        ) {
-            println("$purchaseLottoCount 개를 구매했습니다. 거스름돈은 $change 입니다. 가져가세요.")
+        fun printLottoCount(lottoPurchaseInfo: LottoPurchaseInfo) {
+            println(
+                "수동으로 ${lottoPurchaseInfo.manualLottoCount}장, 자동으로 ${lottoPurchaseInfo.calculateAutoLottoCount()}개를 구매했습니다. " +
+                    "거스름돈은 ${lottoPurchaseInfo.calculateChange()}입니다. 가져가세요.",
+            )
         }
 
         fun printLotto(lotto: Lotto) {
