@@ -13,6 +13,6 @@ class LottoShufflerTest {
 
         // then
         assertThat(automaticLotto.lotto).hasSize(6)
-        assertThat(automaticLotto.lotto.filter { it > 45 || it < 1 }).hasSize(0)
+        assertThat(automaticLotto.lotto.filter { it.number > 45 || it.number < 1 }).hasSize(0)
     }
 }

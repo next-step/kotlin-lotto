@@ -2,7 +2,7 @@ package domain
 
 class LottoShuffler {
     companion object {
-        private val lotto: Set<Int> = (1..45).toSet()
+        private val lotto: Set<LottoNumber> = (1..45).map { LottoNumber(it) }.toSet()
 
         fun generateAutomaticLotto(): Lotto =
             Lotto(

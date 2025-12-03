@@ -1,5 +1,6 @@
 package service
 
+import domain.LottoNumber
 import domain.LottoShuffler
 import domain.LottoTicket
 import domain.LottoWinningType
@@ -13,7 +14,7 @@ class LottoGame(private val profitCalculator: ProfitCalculator = ProfitCalculato
 
     fun getWinningResult(
         lottoTicket: LottoTicket,
-        winningNumbers: List<Int>,
+        winningNumbers: List<LottoNumber>,
         purchaseLottoAmount: Int,
     ): WinningResult {
         val result =
@@ -27,8 +28,8 @@ class LottoGame(private val profitCalculator: ProfitCalculator = ProfitCalculato
     }
 
     private fun getLottoWinningType(
-        winningNumbers: List<Int>,
-        lotto: Set<Int>,
+        winningNumbers: List<LottoNumber>,
+        lotto: Set<LottoNumber>,
     ): LottoWinningType {
         val matchingCount = winningNumbers.intersect(lotto).count()
         return LottoWinningType.fromMatchCount(matchingCount)

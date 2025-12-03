@@ -1,6 +1,7 @@
 package service
 
 import domain.Lotto
+import domain.LottoNumber
 import domain.LottoTicket
 import domain.LottoWinningType
 import org.assertj.core.api.Assertions.assertThat
@@ -25,8 +26,11 @@ class LottoGameTest {
     @Test
     fun getWinningResultTest() {
         // given
-        val lottoTicket = LottoTicket(listOf(Lotto(setOf(1, 2, 3, 4, 5, 6))))
-        val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
+        val lottoTicket =
+            LottoTicket(
+                listOf(Lotto(setOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6)))),
+            )
+        val winningNumbers = listOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6))
         val purchaseLottoAmount = 1000
 
         // when
