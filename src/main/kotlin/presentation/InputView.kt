@@ -14,6 +14,11 @@ class InputView {
             return manualLottoCount
         }
 
+        fun inputManualLottoNumbers(): List<Int> {
+            println("수동으로 구매할 번호를 입력해 주세요.")
+            return readln().split(",").map { it.trim().toInt() }
+        }
+
         fun inputWinningNumbers(): List<Int> {
             println("지난 주 당첨번호를 입력해 주세요.")
             val winningNumbers = readln().split(",").map { it.trim().toInt() }

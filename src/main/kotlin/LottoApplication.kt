@@ -1,4 +1,5 @@
 import domain.Amount
+import domain.Lotto
 import domain.LottoNumber
 import presentation.InputView
 import presentation.OutputView
@@ -9,6 +10,14 @@ val lottoGame = LottoGame()
 fun main() {
     val amount = Amount(InputView.inputPurchaseAmount())
     val manualLottoCount = InputView.inputManualLottoCount(amount.getPurchaseLottoCount())
+    val manualLottos: List<Lotto> =
+        List(manualLottoCount) {
+            Lotto(
+                InputView.inputManualLottoNumbers()
+                    .map(::LottoNumber)
+                    .toSet(),
+            )
+        }
 
     val lottoTicket = lottoGame.generateLottoTicket(amount.getPurchaseLottoCount())
     lottoTicket.lottoTicket.forEach {
