@@ -10,10 +10,10 @@ class LottoPurchaseInfoTest {
     fun successCase() {
         val lottoPurchaseInfo = LottoPurchaseInfo(14123, listOf(Lotto.fromNumbers(1, 2, 3, 4, 5, 6)))
 
-        assertThat(lottoPurchaseInfo.calculatePurchaseLottoCount()).isEqualTo(14)
-        assertThat(lottoPurchaseInfo.calculateChange()).isEqualTo(123)
-        assertThat(lottoPurchaseInfo.calculatePurchaseAmount()).isEqualTo(14000)
-        assertThat(lottoPurchaseInfo.calculateAutoLottoCount()).isEqualTo(13)
+        assertThat(lottoPurchaseInfo.purchaseLottoCount).isEqualTo(14)
+        assertThat(lottoPurchaseInfo.change).isEqualTo(123)
+        assertThat(lottoPurchaseInfo.purchaseAmount).isEqualTo(14000)
+        assertThat(lottoPurchaseInfo.autoLottoCount).isEqualTo(13)
     }
 
     @Test

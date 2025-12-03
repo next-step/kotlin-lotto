@@ -1,9 +1,8 @@
 package service
 
-import domain.lotto.Lotto
-import domain.lotto.LottoNumber
 import domain.lotto.LottoTicket
 import domain.purchase.LottoPurchaseInfo
+import domain.winning.WinningLotto
 import domain.winning.WinningResult
 
 class LottoService(
@@ -12,19 +11,18 @@ class LottoService(
 ) {
     fun purchaseLottoTicket(lottoPurchaseInfo: LottoPurchaseInfo): LottoTicket {
         val automaticLotto =
-            List(lottoPurchaseInfo.calculateAutoLottoCount()) { automaticLottoGenerateService.generateAutomaticLotto() }
+            List(lottoPurchaseInfo.autoLottoCount) { automaticLottoGenerateService.generateAutomaticLotto() }
         return LottoTicket(lottoPurchaseInfo.manualLottoNumbers + automaticLotto)
     }
 
     fun getWinningResult(
         lottoTicket: LottoTicket,
-        winningLotto: Lotto,
-        bonusNumber: LottoNumber,
+        winningLotto: WinningLotto,
         purchaseLottoAmount: Int,
     ): WinningResult {
         val winningCountMap =
             lottoTicket.lottos
-                .map { it.determineWinningType(winningLotto, bonusNumber) }
+                .map { winningLotto.determineWinningType(it) }
                 .groupingBy { it }
                 .eachCount()
                 .withDefault { 0 }

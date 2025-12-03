@@ -1,5 +1,6 @@
 import domain.lotto.LottoNumber
 import domain.purchase.LottoPurchaseInfo
+import domain.winning.WinningLotto
 import presentation.InputView
 import presentation.OutputView
 import service.AutomaticLottoGenerateService
@@ -14,21 +15,20 @@ fun main() {
     val manualLottos = InputView.inputManualLottoNumbers(purchaseManualLottoCount)
 
     val lottoPurchaseInfo = LottoPurchaseInfo(amount, manualLottos)
-
     OutputView.printLottoCount(lottoPurchaseInfo)
-    val lottos = lottoService.purchaseLottoTicket(lottoPurchaseInfo)
-    lottos.lottos.forEach {
+
+    val lottoTicket = lottoService.purchaseLottoTicket(lottoPurchaseInfo)
+    lottoTicket.lottos.forEach {
         OutputView.printLotto(it)
     }
 
-    val winningLotto = InputView.inputWinningNumbers()
+    val winningLottoNumbers = InputView.inputWinningNumbers()
     val bonusNumber = InputView.inputBonusNumber()
     val winningResult =
         lottoService.getWinningResult(
-            lottos,
-            winningLotto,
-            LottoNumber(bonusNumber),
-            lottoPurchaseInfo.calculatePurchaseAmount(),
+            lottoTicket,
+            WinningLotto(winningLottoNumbers, LottoNumber(bonusNumber)),
+            lottoPurchaseInfo.purchaseLottoCount,
         )
     OutputView.printResult(winningResult)
 }

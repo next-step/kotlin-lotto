@@ -6,6 +6,7 @@ import domain.lotto.LottoTicket
 import domain.purchase.LOTTO_PRICE
 import domain.purchase.LottoPurchaseInfo
 import domain.winning.LottoWinningType
+import domain.winning.WinningLotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -36,12 +37,12 @@ class LottoServiceTest {
                     Lotto.fromNumbers(1, 2, 3, 4, 5, 7),
                 ),
             )
-        val winningNumbers = Lotto.fromNumbers(1, 2, 3, 4, 5, 6)
+        val winningLottoNumbers = Lotto.fromNumbers(1, 2, 3, 4, 5, 6)
         val bonusNumber = LottoNumber(7)
         val purchaseLottoAmount = 2000
 
         // when
-        val winningResult = lottoService.getWinningResult(lottoTicket, winningNumbers, bonusNumber, purchaseLottoAmount)
+        val winningResult = lottoService.getWinningResult(lottoTicket, WinningLotto(winningLottoNumbers, bonusNumber), purchaseLottoAmount)
 
         // then
         assertThat(winningResult).isNotNull()
