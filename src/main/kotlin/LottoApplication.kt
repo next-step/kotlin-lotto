@@ -1,9 +1,12 @@
-import domain.LottoPurchaseInfo
+import domain.lotto.LottoNumber
+import domain.purchase.LottoPurchaseInfo
 import presentation.InputView
 import presentation.OutputView
+import service.AutomaticLottoGenerateService
 import service.LottoService
+import service.ProfitCalculator
 
-val lottoService = LottoService()
+val lottoService = LottoService(ProfitCalculator(), AutomaticLottoGenerateService())
 
 fun main() {
     val amount = InputView.inputPurchaseAmount()
@@ -18,6 +21,14 @@ fun main() {
         OutputView.printLotto(it)
     }
 
-    val winningResult = lottoService.getWinningResult(lottos, InputView.inputWinningNumbers(), lottoPurchaseInfo.calculatePurchaseAmount())
+    val winningLotto = InputView.inputWinningNumbers()
+    val bonusNumber = InputView.inputBonusNumber()
+    val winningResult =
+        lottoService.getWinningResult(
+            lottos,
+            winningLotto,
+            LottoNumber(bonusNumber),
+            lottoPurchaseInfo.calculatePurchaseAmount(),
+        )
     OutputView.printResult(winningResult)
 }

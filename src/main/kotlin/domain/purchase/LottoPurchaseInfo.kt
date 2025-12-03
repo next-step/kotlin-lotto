@@ -1,4 +1,6 @@
-package domain
+package domain.purchase
+
+import domain.lotto.Lotto
 
 const val LOTTO_PRICE = 1000
 

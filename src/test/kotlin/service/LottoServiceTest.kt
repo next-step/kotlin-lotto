@@ -1,15 +1,16 @@
 package service
 
-import domain.LOTTO_PRICE
-import domain.Lotto
-import domain.LottoPurchaseInfo
-import domain.LottoTicket
-import domain.LottoWinningType
+import domain.lotto.Lotto
+import domain.lotto.LottoNumber
+import domain.lotto.LottoTicket
+import domain.purchase.LOTTO_PRICE
+import domain.purchase.LottoPurchaseInfo
+import domain.winning.LottoWinningType
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class LottoServiceTest {
-    private val lottoService = LottoService()
+    private val lottoService = LottoService(ProfitCalculator(), AutomaticLottoGenerateService())
 
     @Test
     fun purchaseLottoTicketTest() {
@@ -30,24 +31,28 @@ class LottoServiceTest {
         // given
         val lottoTicket =
             LottoTicket(
-                List(1) {
-                    Lotto.fromNumbers(1, 2, 3, 4, 5, 6)
-                },
+                listOf(
+                    Lotto.fromNumbers(1, 2, 3, 4, 5, 6),
+                    Lotto.fromNumbers(1, 2, 3, 4, 5, 7),
+                ),
             )
         val winningNumbers = Lotto.fromNumbers(1, 2, 3, 4, 5, 6)
-
-        val purchaseLottoAmount = 1000
+        val bonusNumber = LottoNumber(7)
+        val purchaseLottoAmount = 2000
 
         // when
-        val winningResult = lottoService.getWinningResult(lottoTicket, winningNumbers, purchaseLottoAmount)
+        val winningResult = lottoService.getWinningResult(lottoTicket, winningNumbers, bonusNumber, purchaseLottoAmount)
 
         // then
         assertThat(winningResult).isNotNull()
         assertThat(winningResult.result[LottoWinningType.FIRST]).isEqualTo(1)
+        assertThat(winningResult.result[LottoWinningType.SECOND_WITH_BONUS]).isEqualTo(1)
         assertThat(winningResult.result[LottoWinningType.SECOND]).isNull()
         assertThat(winningResult.result[LottoWinningType.THIRD]).isNull()
         assertThat(winningResult.result[LottoWinningType.FOURTH]).isNull()
         assertThat(winningResult.result[LottoWinningType.NONE]).isNull()
-        assertThat(winningResult.profit).isEqualTo(LottoWinningType.FIRST.priceMoney / purchaseLottoAmount.toDouble())
+        assertThat(
+            winningResult.profit,
+        ).isEqualTo((LottoWinningType.FIRST.priceMoney + LottoWinningType.SECOND_WITH_BONUS.priceMoney) / purchaseLottoAmount.toDouble())
     }
 }

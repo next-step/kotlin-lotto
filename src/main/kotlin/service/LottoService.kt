@@ -1,28 +1,30 @@
 package service
 
-import domain.Lotto
-import domain.LottoPurchaseInfo
-import domain.LottoShuffler
-import domain.LottoTicket
-import domain.ProfitCalculator
-import domain.WinningResult
+import domain.lotto.Lotto
+import domain.lotto.LottoNumber
+import domain.lotto.LottoTicket
+import domain.purchase.LottoPurchaseInfo
+import domain.winning.WinningResult
 
 class LottoService(
-    private val profitCalculator: ProfitCalculator = ProfitCalculator(),
+    private val profitCalculator: ProfitCalculator,
+    private val automaticLottoGenerateService: AutomaticLottoGenerateService,
 ) {
     fun purchaseLottoTicket(lottoPurchaseInfo: LottoPurchaseInfo): LottoTicket {
-        val automaticLotto = List(lottoPurchaseInfo.calculateAutoLottoCount()) { LottoShuffler.generateAutomaticLotto() }
+        val automaticLotto =
+            List(lottoPurchaseInfo.calculateAutoLottoCount()) { automaticLottoGenerateService.generateAutomaticLotto() }
         return LottoTicket(lottoPurchaseInfo.manualLottoNumbers + automaticLotto)
     }
 
     fun getWinningResult(
         lottoTicket: LottoTicket,
         winningLotto: Lotto,
+        bonusNumber: LottoNumber,
         purchaseLottoAmount: Int,
     ): WinningResult {
         val winningCountMap =
             lottoTicket.lottos
-                .map { it.determineWinningType(winningLotto) }
+                .map { it.determineWinningType(winningLotto, bonusNumber) }
                 .groupingBy { it }
                 .eachCount()
                 .withDefault { 0 }

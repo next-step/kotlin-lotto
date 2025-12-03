@@ -1,4 +1,6 @@
-package domain
+package service
+
+import domain.winning.LottoWinningType
 
 class ProfitCalculator {
     fun calculateProfit(

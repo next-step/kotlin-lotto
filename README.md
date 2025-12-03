@@ -71,22 +71,6 @@
 - 일급 컬렉션을 쓴다.
 
 ## 학습한 것
-- 🔥 companion object란?
- - 클래스 내부에 딱 1개만 둘 수 있는 특별한 object
- - 이 안에 선언된 멤버는 클래스명으로 바로 접근 가능
- - Java에서 말하는 static 멤버처럼 동작하지만, 사실은 companion object 내부의 함수와 변수는 클래스 로딩 시 생성되는 싱글톤 객체
-- 🔥is 는 타입체크 연산자이다.
-  - 메서드명이 is 로 되어있으면 이스케이프(`) 해줘야한다.
-- 🔥객체 생성 시 인자에 대한 유효성 검사를 하고 싶은 경우 다음과 같은 방법을 이용할 수 있다.
-  - 주 생성자에 대한 검증은 init 블록으로 처리
-  - 보조 생성자에 대한 검증은 constructor 블록 내에서 처리
-  - 검증 방법
-    - require -> 입력값에 대한 검증. 실패 시 IllegalArgumentException 발생
-    - check -> 객체 상태에 대한 검증. 실패 시 IllegalStateException 발생
-    - error -> 무조건 예외를 발생시킴. 주로 도달할 수 없는 코드에 사용
-    - assert -> 디버깅 목적으로 사용. JVM 옵션 -ea(Enable Assertions)가 활성화된 경우에만 동작
-
-## 논의 필요한 것
-- 타입 선언 생각 가능한데 어디까지할지?
-  - 변수?
-  - 함수?
+- 함수를 타입으로 사용할 수 있다.
+ - `fun process(val mapper: (Int) -> String) { ... }`
+ - 자바에서 Function, Consumer 등 함수형 인터페이스를 사용하던 것과 달리 람다 표현을 바로 타입으로 이용 가능
