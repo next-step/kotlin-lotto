@@ -9,18 +9,24 @@ fun buyLotto(): List<Lotto> {
     println("구입금액을 입력해 주세요.")
     val moneyInput = readln()
     try {
-        val money = Money(moneyInput)
-        val buyLotto = LottoShop().buyLotto(money)
-        println("${buyLotto.size}개를 구매했습니다.")
-        buyLotto.forEach {
+        val lottoMoney = LottoMoney(moneyInput)
+        val manualLottos = buyManualLottos()
+        val autoLottos = LottoShop().buyLotto(lottoMoney, manualLottos)
+        println("${autoLottos.size}개를 구매했습니다.")
+        autoLottos.forEach {
             println(it.numbers)
         }
-        return buyLotto
+        return autoLottos
     } catch (e: IllegalArgumentException) {
         println(e.message)
         buyLotto()
     }
     return listOf()
+}
+
+fun buyManualLottos(): List<String> {
+    println("수동으로 구매할 로또 수를 입력해주세요.")
+    return readln().toInt().downTo(1).map { readln() }.toList()
 }
 
 fun showLottoResult(lottos: List<Lotto>) {

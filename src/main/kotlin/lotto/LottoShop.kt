@@ -1,19 +1,11 @@
 package lotto
 
 class LottoShop {
-    companion object {
-        const val LOTTO_UNIT_PRICE = 1000
-    }
 
-    fun buyLotto(money: Money): List<Lotto> {
-        if (money.price % LOTTO_UNIT_PRICE != 0) {
-            throw IllegalArgumentException("${LOTTO_UNIT_PRICE}원 단위로 입력안됨")
-        }
+    fun buyLotto(lottoMoney: LottoMoney, manualLottoNumbers: List<String>): List<Lotto> {
+        val lottoCount = lottoMoney.price / LottoMoney.LOTTO_UNIT_PRICE
+        val autoLottoCount = lottoCount - manualLottoNumbers.size
 
-        val lottoCount = money.price / LOTTO_UNIT_PRICE
-
-        return lottoCount.downTo(1).map {
-            Lotto()
-        }
+        return autoLottoCount.downTo(1).map { Lotto.ofAuto() }
     }
 }
