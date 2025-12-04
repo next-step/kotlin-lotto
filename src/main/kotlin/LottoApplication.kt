@@ -10,6 +10,7 @@ val lottoGame = LottoGame()
 fun main() {
     val amount = Amount(InputView.inputPurchaseAmount())
     val manualLottoCount = InputView.inputManualLottoCount(amount.getPurchaseLottoCount())
+    OutputView.printManualLottoInput()
     val manualLottos: List<Lotto> =
         List(manualLottoCount) {
             Lotto(
@@ -19,7 +20,8 @@ fun main() {
             )
         }
 
-    val lottoTicket = lottoGame.generateLottoTicket(amount.getPurchaseLottoCount())
+    val lottoTicket = lottoGame.generateLottoTicket(amount.getPurchaseLottoCount(), manualLottos)
+    OutputView.printLottoCount(amount.getPurchaseLottoCount() - manualLottoCount, manualLottoCount)
     lottoTicket.lottoTicket.forEach {
         OutputView.printLotto(it.lotto)
     }

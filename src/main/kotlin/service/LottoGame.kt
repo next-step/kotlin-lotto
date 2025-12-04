@@ -1,5 +1,6 @@
 package service
 
+import domain.Lotto
 import domain.LottoNumber
 import domain.LottoShuffler
 import domain.LottoTicket
@@ -8,8 +9,12 @@ import domain.ProfitCalculator
 import domain.WinningResult
 
 class LottoGame(private val profitCalculator: ProfitCalculator = ProfitCalculator()) {
-    fun generateLottoTicket(purchaseLottoCount: Int): LottoTicket {
-        return LottoTicket(List(purchaseLottoCount) { LottoShuffler.generateAutomaticLotto() })
+    fun generateLottoTicket(
+        purchaseLottoCount: Int,
+        manualLottos: List<Lotto>,
+    ): LottoTicket {
+        val automaticLottos = List(purchaseLottoCount - manualLottos.size) { LottoShuffler.generateAutomaticLotto() }
+        return LottoTicket(manualLottos + automaticLottos)
     }
 
     fun getWinningResult(

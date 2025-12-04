@@ -15,7 +15,6 @@ class InputView {
         }
 
         fun inputManualLottoNumbers(): List<Int> {
-            println("수동으로 구매할 번호를 입력해 주세요.")
             return readln().split(",").map { it.trim().toInt() }
         }
 

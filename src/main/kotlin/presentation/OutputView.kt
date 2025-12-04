@@ -7,6 +7,17 @@ import util.round
 
 class OutputView {
     companion object {
+        fun printManualLottoInput() {
+            println("수동으로 구매할 번호를 입력해 주세요.")
+        }
+
+        fun printLottoCount(
+            manualLottoCount: Int,
+            automaticLottoCount: Int,
+        ) {
+            println("수동으로 $manualLottoCount 장, 자동으로 $automaticLottoCount 개를 구매했습니다.")
+        }
+
         fun printLotto(lotto: Set<LottoNumber>) {
             println(lotto.map { it.number }.toList())
         }
