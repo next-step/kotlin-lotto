@@ -25,5 +25,10 @@ class InputView {
             require(winningNumbers.all { it in 1..45 }) { "당첨번호는 1~45 사이의 숫자여야 합니다." }
             return winningNumbers
         }
+
+        fun inputBonusBallNumber(): Int {
+            println("보너스 볼을 입력해 주세요.")
+            return readln().toInt()
+        }
     }
 }

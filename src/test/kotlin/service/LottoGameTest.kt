@@ -50,9 +50,10 @@ class LottoGameTest {
             )
         val winningNumbers = listOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6))
         val purchaseLottoAmount = 1000
+        val bonusBall = LottoNumber(7)
 
         // when
-        val winningResult = lottoGame.getWinningResult(lottoTicket, winningNumbers, purchaseLottoAmount)
+        val winningResult = lottoGame.getWinningResult(lottoTicket, winningNumbers, bonusBall, purchaseLottoAmount)
 
         // then
         assertThat(winningResult).isNotNull()

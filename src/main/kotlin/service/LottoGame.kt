@@ -20,8 +20,11 @@ class LottoGame(private val profitCalculator: ProfitCalculator = ProfitCalculato
     fun getWinningResult(
         lottoTicket: LottoTicket,
         winningNumbers: List<LottoNumber>,
+        bonusBall: LottoNumber,
         purchaseLottoAmount: Int,
     ): WinningResult {
+        require(!winningNumbers.contains(bonusBall)) { "보너스 볼은 당첨 번호에 포함되면 안됩니다." }
+
         val result =
             lottoTicket.lottoTicket
                 .groupingBy { getLottoWinningType(winningNumbers, it.lotto) }

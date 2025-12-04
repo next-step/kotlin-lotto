@@ -26,10 +26,13 @@ fun main() {
         OutputView.printLotto(it.lotto)
     }
 
+    val winningNumbers = InputView.inputWinningNumbers().map { LottoNumber(it) }.toList()
+    val bonusBall = LottoNumber(InputView.inputBonusBallNumber())
     val winningResult =
         lottoGame.getWinningResult(
             lottoTicket,
-            InputView.inputWinningNumbers().map { LottoNumber(it) }.toList(),
+            winningNumbers,
+            bonusBall,
             amount.getPurchaseAmount(),
         )
     OutputView.printResult(winningResult)
