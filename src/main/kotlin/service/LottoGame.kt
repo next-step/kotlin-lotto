@@ -27,7 +27,7 @@ class LottoGame(private val profitCalculator: ProfitCalculator = ProfitCalculato
 
         val result =
             lottoTicket.lottoTicket
-                .groupingBy { getLottoWinningType(winningNumbers, it.lotto) }
+                .groupingBy { getLottoWinningType(winningNumbers, it.lotto, bonusBall) }
                 .eachCount()
                 .withDefault { 0 }
         val profit = profitCalculator.calculateProfit(result, purchaseLottoAmount)
@@ -38,8 +38,10 @@ class LottoGame(private val profitCalculator: ProfitCalculator = ProfitCalculato
     private fun getLottoWinningType(
         winningNumbers: List<LottoNumber>,
         lotto: Set<LottoNumber>,
+        bonusBall: LottoNumber,
     ): LottoWinningType {
         val matchingCount = winningNumbers.intersect(lotto).count()
-        return LottoWinningType.fromMatchCount(matchingCount)
+        val hasBonus = lotto.contains(bonusBall)
+        return LottoWinningType.fromMatchCount(matchingCount, hasBonus)
     }
 }

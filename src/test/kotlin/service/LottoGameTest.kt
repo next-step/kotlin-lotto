@@ -56,12 +56,43 @@ class LottoGameTest {
         val winningResult = lottoGame.getWinningResult(lottoTicket, winningNumbers, bonusBall, purchaseLottoAmount)
 
         // then
-        assertThat(winningResult).isNotNull()
         assertThat(winningResult.result[LottoWinningType.FIRST]).isEqualTo(1)
-        assertThat(winningResult.result[LottoWinningType.SECOND]).isNull()
-        assertThat(winningResult.result[LottoWinningType.THIRD]).isNull()
-        assertThat(winningResult.result[LottoWinningType.FOURTH]).isNull()
-        assertThat(winningResult.result[LottoWinningType.NONE]).isNull()
         assertThat(winningResult.profit).isEqualTo(LottoWinningType.FIRST.priceMoney / purchaseLottoAmount.toDouble())
+    }
+
+    @Test
+    fun getWinningResultWithBonusBallTest() {
+        // given
+        val lottoTicket =
+            LottoTicket(
+                listOf(Lotto(setOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(7)))),
+            )
+        val winningNumbers = listOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6))
+        val bonusBall = LottoNumber(7)
+        val purchaseLottoAmount = 1000
+
+        // when
+        val winningResult = lottoGame.getWinningResult(lottoTicket, winningNumbers, bonusBall, purchaseLottoAmount)
+
+        // then
+        assertThat(winningResult.result[LottoWinningType.SECOND]).isEqualTo(1)
+    }
+
+    @Test
+    fun getWinningResultFifthTest() {
+        // given
+        val lottoTicket =
+            LottoTicket(
+                listOf(Lotto(setOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(10), LottoNumber(11), LottoNumber(12)))),
+            )
+        val winningNumbers = listOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6))
+        val bonusBall = LottoNumber(7)
+        val purchaseLottoAmount = 1000
+
+        // when
+        val winningResult = lottoGame.getWinningResult(lottoTicket, winningNumbers, bonusBall, purchaseLottoAmount)
+
+        // then
+        assertThat(winningResult.result[LottoWinningType.FIFTH]).isEqualTo(1)
     }
 }
