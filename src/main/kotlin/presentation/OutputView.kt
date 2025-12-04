@@ -29,14 +29,16 @@ class OutputView {
             val secondCount = result[LottoWinningType.SECOND] ?: 0
             val thirdCount = result[LottoWinningType.THIRD] ?: 0
             val fourthCount = result[LottoWinningType.FOURTH] ?: 0
+            val fifthCount = result[LottoWinningType.FIFTH] ?: 0
             println(
                 """
                 당첨 통계
                 ---------
-                3개 일치 (5000원)- $fourthCount 개
-                4개 일치 (50000원)- $thirdCount 개
-                5개 일치 (1500000원)- $secondCount 개
-                6개 일치 (2000000000원)- $firstCount 개
+                3개 일치 (5,000원)- $fifthCount 개
+                4개 일치 (50,000원)- $fourthCount 개
+                5개 일치 (1,500,000원)- $thirdCount 개
+                5개 일치,보너스볼 일치 (30,000,000원)- $secondCount 개
+                6개 일치 (2,000,000,000원)- $firstCount 개
                 총 수익률은 ${winningResult.profit.round(2)} 입니다. 
                 """.trimIndent(),
             )
