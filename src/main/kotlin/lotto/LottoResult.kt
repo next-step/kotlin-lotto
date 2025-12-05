@@ -2,7 +2,7 @@ package lotto
 
 import java.util.EnumMap
 
-class LottoResult(val winLotto: WinLotto, val lottos: List<Lotto>) {
+class LottoResult(val winLotto: WinLotto, val lottoTicket: LottoTicket) {
     val matchMap: EnumMap<Rank, Int> = EnumMap(Rank::class.java)
     var rateOfReturn = 0.0
 
@@ -12,26 +12,35 @@ class LottoResult(val winLotto: WinLotto, val lottos: List<Lotto>) {
     }
 
     private fun rateOfReturn() {
-        val totalMoney = lottos.size * LottoShop.LOTTO_UNIT_PRICE
+        val totalMoney = lottoTicket.money
         val winningMoney = matchMap.entries.sumOf { entry -> entry.key.winningMoney * entry.value }
-        rateOfReturn = winningMoney.toDouble() / totalMoney.toDouble()
+        rateOfReturn = winningMoney.toDouble() / totalMoney.price
     }
 
     private fun match() {
-        lottos.forEach { lotto ->
-            val rank = Rank.valueOf(winLotto.matchCount(lotto))
+        val lottos: List<Lotto> = lottoTicket.lottos
+
+        lottos.forEach {
+            val matchCount = winLotto.matchCount(it)
+            val rank = Rank.valueOf(matchCount)
             matchMap[rank] = matchMap.getOrDefault(rank, 0) + 1
         }
     }
 
     fun printResult() {
         println(
-"""
+            """
 당첨 통계
-${Rank.entries.filter { it != Rank.MISS }
-                .sorted()
-                .reversed()
-                .joinToString("\n") { "${it.countOfMatch}개 일치 (${it.winningMoney}원)- ${matchMap.getOrDefault(it, 0)}개" }}
+${
+                Rank.entries.filter { it != Rank.MISS }
+                    .sorted()
+                    .reversed()
+                    .joinToString("\n") {
+                        "${it.countOfMatch}개 일치 (${it.winningMoney}원)- ${
+                            matchMap.getOrDefault(it, 0)
+                        }개"
+                    }
+            }
 총 수익률은 %.2f 입니다."
 """
                 .trimIndent()
