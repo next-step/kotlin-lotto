@@ -10,12 +10,12 @@ class LottoWinningNumbersTest :
             shouldNotThrowAny {
                 LottoWinningNumbers.of(
                     listOf(
-                        LottoNumber(3),
-                        LottoNumber(11),
-                        LottoNumber(15),
-                        LottoNumber(29),
-                        LottoNumber(35),
-                        LottoNumber(44),
+                        LottoNumber.of(3),
+                        LottoNumber.of(11),
+                        LottoNumber.of(15),
+                        LottoNumber.of(29),
+                        LottoNumber.of(35),
+                        LottoNumber.of(44),
                     ),
                 )
             }
@@ -25,12 +25,12 @@ class LottoWinningNumbersTest :
             shouldThrow<IllegalArgumentException> {
                 LottoWinningNumbers.of(
                     listOf(
-                        LottoNumber(1),
-                        LottoNumber(2),
-                        LottoNumber(3),
-                        LottoNumber(4),
-                        LottoNumber(5),
-                        LottoNumber(5),
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(5),
                     ),
                 )
             }
@@ -40,24 +40,24 @@ class LottoWinningNumbersTest :
             shouldThrow<IllegalArgumentException> {
                 LottoWinningNumbers.of(
                     listOf(
-                        LottoNumber(1),
-                        LottoNumber(2),
-                        LottoNumber(3),
-                        LottoNumber(4),
-                        LottoNumber(5),
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
                     ),
                 )
             }
             shouldThrow<IllegalArgumentException> {
                 LottoWinningNumbers.of(
                     listOf(
-                        LottoNumber(1),
-                        LottoNumber(2),
-                        LottoNumber(3),
-                        LottoNumber(4),
-                        LottoNumber(5),
-                        LottoNumber(6),
-                        LottoNumber(7),
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6),
+                        LottoNumber.of(7),
                     ),
                 )
             }

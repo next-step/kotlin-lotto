@@ -28,18 +28,18 @@ fun doLotto() {
             resultView.displayPurchasedTickets(lottoTickets)
             break
         } catch (e: Exception) {
-            println("다시 입력해주세요")
+            inputView.printErrorMessage()
         }
     }
 
     while (true) {
         try {
-            val winningNumbers: LottoWinningNumbers = LottoWinningNumbers.of(inputView.readWinningNumbers().map(::LottoNumber))
+            val winningNumbers: LottoWinningNumbers = LottoWinningNumbers.of(inputView.readWinningNumbers().map(LottoNumber::of))
             val result = LottoResult.of(lottoTickets.map { ticket -> lottoService.matchLottoTicket(ticket, winningNumbers) })
             resultView.displayWinningStatistics(result)
             break
         } catch (e: Exception) {
-            println("다시 입력해주세요")
+            inputView.printErrorMessage()
         }
     }
 

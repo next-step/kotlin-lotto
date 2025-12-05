@@ -61,8 +61,8 @@ class LottoServiceTest :
                             Rank.MISS,
                         ),
                     ) { ticketNumbers, winningNumbers, expectedRank ->
-                        val testTicket = LottoTicket(ticketNumbers.map { LottoNumber(it) }.toSet())
-                        val testWinningNumbers = LottoWinningNumbers.of(winningNumbers.map { LottoNumber(it) })
+                        val testTicket = LottoTicket(ticketNumbers.map(LottoNumber::of).toSet())
+                        val testWinningNumbers = LottoWinningNumbers.of(winningNumbers.map(LottoNumber::of))
 
                         lottoService.matchLottoTicket(testTicket, testWinningNumbers).shouldBe(expectedRank)
                     }

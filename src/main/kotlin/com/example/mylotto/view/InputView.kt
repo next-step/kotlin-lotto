@@ -15,4 +15,8 @@ class InputView {
                 ?.mapNotNull { it.trim().toIntOrNull() }
         return requireNotNull(numbers)
     }
+
+    fun printErrorMessage() {
+        println("잘못된 입력입니다. 다시 시도해주세요.")
+    }
 }

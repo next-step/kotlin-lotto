@@ -10,7 +10,7 @@ class LottoTicket(
             .shuffled()
             .take(LottoConstant.LOTTO_NUMBER_SIZE)
             .sorted()
-            .map { LottoNumber(it) }
+            .map(LottoNumber::of)
             .toSet(),
     )
 }
