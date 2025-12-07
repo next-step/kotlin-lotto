@@ -11,17 +11,17 @@ class LottoResult(val winLotto: WinLotto, val lottos: List<Lotto>) {
         rateOfReturn()
     }
 
-    private fun rateOfReturn() {
-        val totalMoney = lottos.size * LottoMoney.LOTTO_UNIT_PRICE
-        val winningMoney = matchMap.entries.sumOf { entry -> entry.key.winningMoney * entry.value }
-        rateOfReturn = winningMoney.toDouble() / totalMoney.toDouble()
-    }
-
     private fun match() {
         lottos.forEach { lotto ->
             val rank = Rank.valueOf(winLotto.matchCount(lotto))
             matchMap[rank] = matchMap.getOrDefault(rank, 0) + 1
         }
+    }
+
+    private fun rateOfReturn() {
+        val totalMoney = lottos.size * LottoMoney.LOTTO_UNIT_PRICE
+        val winningMoney = matchMap.entries.sumOf { entry -> entry.key.winningMoney * entry.value }
+        rateOfReturn = winningMoney.toDouble() / totalMoney.toDouble()
     }
 
     fun printResult() {

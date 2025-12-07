@@ -1,17 +1,13 @@
 package lotto
 
-
 class Lotto(val numbers: List<Int>) {
-
     companion object {
         const val MINIMUM_LOTTO_NUMBER = 1
         const val MAXIMUM_LOTTO_NUMBER = 45
         const val LOTTO_NUMBER_COUNT = 6
 
         fun ofAuto(): Lotto {
-            val numbers = (MINIMUM_LOTTO_NUMBER..MAXIMUM_LOTTO_NUMBER).toList()
-                .shuffled()
-                .take(LOTTO_NUMBER_COUNT)
+            val numbers = (MINIMUM_LOTTO_NUMBER..MAXIMUM_LOTTO_NUMBER).toList().shuffled().take(LOTTO_NUMBER_COUNT)
             return Lotto(numbers)
         }
 
@@ -32,10 +28,8 @@ class Lotto(val numbers: List<Int>) {
     init {
         numbers.forEach {
             if (!(MINIMUM_LOTTO_NUMBER..MAXIMUM_LOTTO_NUMBER).contains(it)) {
-                throw IllegalArgumentException("1부터 45까지의 숫자를 입력하세요")
+                throw IllegalArgumentException("${MINIMUM_LOTTO_NUMBER}부터 ${MAXIMUM_LOTTO_NUMBER}까지의 숫자를 입력하세요")
             }
         }
     }
-
-
 }
