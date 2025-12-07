@@ -8,7 +8,7 @@ class LottoResultTest : FreeSpec({
         val winLotto = WinLotto("1, 2, 3, 4, 5, 6", "7")
 
         "당첨된 숫자가 하나도 없는 경우 MISS 1개 나오고 수익률은 0 이다." {
-            val lottos = listOf(Lotto(listOf(7, 8, 9, 10, 11, 12)))
+            val lottos = listOf(Lotto.ofManual("7, 8, 9, 10, 11, 12"))
             val lottoResult = LottoResult(winLotto, lottos)
 
             // when
@@ -20,7 +20,7 @@ class LottoResultTest : FreeSpec({
         }
 
         "1등에 당첨된 경우 FIRST 1개 나오고 수익률은 2000000.0 이다" {
-            val lottos = listOf(Lotto(listOf(1, 2, 3, 4, 5, 6)))
+            val lottos = listOf(Lotto.ofManual("1, 2, 3, 4, 5, 6"))
             val lottoResult = LottoResult(winLotto, lottos)
 
             // when
@@ -32,7 +32,7 @@ class LottoResultTest : FreeSpec({
         }
 
         "1등에 당첨되었고, 로또를 2장 산 경우 FIRST 1개, MISS 1개 나오고 수익률은 1000000.0 이다" {
-            val lottos = listOf(Lotto(listOf(1, 2, 3, 4, 5, 6)), Lotto(listOf(2, 5, 10, 11, 12, 13)))
+            val lottos = listOf(Lotto.ofManual("1, 2, 3, 4, 5, 6"), Lotto.ofManual("2, 5, 10, 11, 12, 13"))
             val lottoResult = LottoResult(winLotto, lottos)
 
             // when
