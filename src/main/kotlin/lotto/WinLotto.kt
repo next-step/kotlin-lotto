@@ -19,6 +19,10 @@ class WinLotto {
         return winLotto.numbers.intersect(lotto.numbers.toSet()).size
     }
 
+    fun matchBonusBall(lotto: Lotto): Boolean {
+        return lotto.numbers.contains(bonusBall)
+    }
+
     private fun validateBonusBall(bonusBall: String): Int {
         if (bonusBall.toInt() !in MINIMUM_LOTTO_NUMBER..MAXIMUM_LOTTO_NUMBER) {
             throw IllegalArgumentException("${MINIMUM_LOTTO_NUMBER}부터 ${MAXIMUM_LOTTO_NUMBER}까지의 숫자를 입력하세요")

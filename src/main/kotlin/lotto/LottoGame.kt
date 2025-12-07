@@ -36,9 +36,9 @@ fun showLottoResult(lottos: List<Lotto>) {
     println("지난 주 당첨 번호를 입력해 주세요.")
     val winLottoInput = readln()
     println("보너스 볼을 입력해 주세요.")
-    val bonusBall = readln()
+    val bonusBallInput = readln()
     try {
-        val winLotto = WinLotto(winLottoInput, bonusBall)
+        val winLotto = WinLotto(winLottoInput, bonusBallInput)
         val lottoResult = LottoResult(winLotto, lottos)
         lottoResult.process()
         lottoResult.printResult()

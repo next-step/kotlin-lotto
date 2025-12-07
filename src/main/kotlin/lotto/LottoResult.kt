@@ -13,7 +13,7 @@ class LottoResult(val winLotto: WinLotto, val lottos: List<Lotto>) {
 
     private fun match() {
         lottos.forEach { lotto ->
-            val rank = Rank.valueOf(winLotto.matchCount(lotto))
+            val rank = Rank.valueOf(winLotto.matchCount(lotto), winLotto.matchBonusBall(lotto))
             matchMap[rank] = matchMap.getOrDefault(rank, 0) + 1
         }
     }
