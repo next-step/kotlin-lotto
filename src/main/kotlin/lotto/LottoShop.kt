@@ -6,6 +6,11 @@ class LottoShop {
         val lottoCount = lottoMoney.price / LottoMoney.LOTTO_UNIT_PRICE
         val autoLottoCount = lottoCount - manualLottoNumbers.size
 
-        return autoLottoCount.downTo(1).map { Lotto.ofAuto() }
+        val manualLottos = manualLottoNumbers.stream()
+            .map { Lotto.ofManual(it) }
+            .toList()
+        val autoLottos = autoLottoCount.downTo(1).map { Lotto.ofAuto() }
+
+        return manualLottos + autoLottos
     }
 }

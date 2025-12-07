@@ -14,22 +14,22 @@ class LottoTest : FreeSpec({
     }
     "수동 로또 생성 시 문자가 포함된 경우 예외 발생" {
         val exception =
-            shouldThrow<IllegalArgumentException> { Lotto.ofManual("1 2 3 4 5 육") }
+            shouldThrow<IllegalArgumentException> { Lotto.ofManual("1, 2, 3, 4, 5, 육") }
         exception.message shouldContain "올바른 숫자를 입력하세요"
     }
     "수동 로또 생성 시  1보다 작거나 45보다 큰 숫자가 포함된 경우 예외 발생" {
         val exception =
-            shouldThrow<IllegalArgumentException> { Lotto.ofManual("0 2 3 4 5 46") }
+            shouldThrow<IllegalArgumentException> { Lotto.ofManual("0, 2, 3, 4, 5, 46") }
         exception.message shouldBe "1부터 45까지의 숫자를 입력하세요"
     }
     "수동 로또 생성 시 5개의 숫자를 입력하는 경우 예외 발생" {
         val exception =
-            shouldThrow<IllegalArgumentException> { Lotto.ofManual("2 4 6 8 10") }
+            shouldThrow<IllegalArgumentException> { Lotto.ofManual("2, 4, 6, 8, 10") }
         exception.message shouldBe "6개의 서로 다른 숫자를 입력하세요"
     }
     "수동 로또 생성 시 6개 숫자 간 중복이 있는 경우" {
         val exception =
-            shouldThrow<IllegalArgumentException> { Lotto.ofManual("2 4 6 8 10 2") }
+            shouldThrow<IllegalArgumentException> { Lotto.ofManual("2, 4, 6, 8, 10, 2") }
         exception.message shouldBe "6개의 서로 다른 숫자를 입력하세요"
     }
 })

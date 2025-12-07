@@ -16,7 +16,7 @@ class Lotto(val numbers: List<Int>) {
         }
 
         fun ofManual(numbers: String): Lotto {
-            val splitted = numbers.trim().split(" ")
+            val splitted = numbers.trim().split(",").map { it.trim() }
             if (splitted.distinct().size != LOTTO_NUMBER_COUNT) {
                 throw IllegalArgumentException("${LOTTO_NUMBER_COUNT}개의 서로 다른 숫자를 입력하세요")
             }
