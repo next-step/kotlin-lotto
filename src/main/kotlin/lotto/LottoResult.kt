@@ -2,7 +2,11 @@ package lotto
 
 import java.util.EnumMap
 
-class LottoResult(val winLotto: WinLotto, val lottoTicket: LottoTicket) {
+class LottoResult(
+    val winLotto: WinLotto,
+    private val bonusBallLotto: BonusBallLotto,
+    val lottoTicket: LottoTicket,
+) {
     val matchMap: EnumMap<Rank, Int> = EnumMap(Rank::class.java)
     var rateOfReturn = 0.0
 
@@ -18,11 +22,10 @@ class LottoResult(val winLotto: WinLotto, val lottoTicket: LottoTicket) {
     }
 
     private fun match() {
-        val lottos: List<Lotto> = lottoTicket.lottos
-
-        lottos.forEach {
-            val matchCount = winLotto.matchCount(it)
-            val rank = Rank.valueOf(matchCount)
+        lottoTicket.lottos.forEach { lotto ->
+            val matchCount = winLotto.matchCount(lotto)
+            val hasBonus = bonusBallLotto.matches(lotto)
+            val rank = Rank.valueOf(matchCount, hasBonus)
             matchMap[rank] = matchMap.getOrDefault(rank, 0) + 1
         }
     }

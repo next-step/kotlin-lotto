@@ -7,6 +7,8 @@ data class LottoNumber(val number: Int) {
         }
     }
 
+    constructor(number: String) : this(number.toInt())
+
     companion object {
         const val MINIMUM = 1
         const val MAXIMUM = 45

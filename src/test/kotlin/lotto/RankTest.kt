@@ -13,4 +13,12 @@ class RankTest : FreeSpec({
         val rank = Rank.valueOf(2)
         rank shouldBe Rank.MISS
     }
+    "5개가 일치하고 보너스 번호가 있으면 2등이 나온다." {
+        val rank = Rank.valueOf(5, hasBonus = true)
+        rank shouldBe Rank.SECOND
+    }
+    "5개가 일치하고 보너스 번호가 없으면 3등이 나온다." {
+        val rank = Rank.valueOf(5, hasBonus = false)
+        rank shouldBe Rank.THIRD
+    }
 })

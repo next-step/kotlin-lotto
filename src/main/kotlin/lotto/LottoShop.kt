@@ -9,7 +9,7 @@ class LottoShop private constructor() {
             require(money.price % LOTTO_UNIT_PRICE == 0) { ERROR_MESSAGE_INVALID_UNIT }
 
             val lottoCount = money.price / LOTTO_UNIT_PRICE
-            return LottoTicket(money, List(lottoCount) { Lotto() })
+            return LottoTicket(money, List(lottoCount) { Lotto.createRandom() })
         }
     }
 }

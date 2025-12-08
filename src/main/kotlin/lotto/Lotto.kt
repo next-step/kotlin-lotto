@@ -1,17 +1,17 @@
 package lotto
 
-class Lotto(input: List<LottoNumber>) {
-    val numbers = input
-
-    constructor() : this(
-        (LottoNumber.MINIMUM..LottoNumber.MAXIMUM)
-            .toList()
-            .shuffled()
-            .take(LOTTO_NUMBER_COUNT)
-            .map { LottoNumber(it) },
-    )
-
+data class Lotto(val numbers: List<LottoNumber>) {
     companion object {
         private const val LOTTO_NUMBER_COUNT = 6
+
+        fun createRandom(): Lotto {
+            return Lotto(
+                (LottoNumber.MINIMUM..LottoNumber.MAXIMUM)
+                    .toList()
+                    .shuffled()
+                    .take(LOTTO_NUMBER_COUNT)
+                    .map { LottoNumber(it) },
+            )
+        }
     }
 }

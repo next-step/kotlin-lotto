@@ -18,13 +18,12 @@ fun buyLotto(): LottoTicket {
 fun showLottoResult(lottoTicket: LottoTicket) {
     println("지난 주 당첨 번호를 입력해 주세요.")
     val winLottoInput = readln()
-    try {
-        val winLotto = WinLotto(winLottoInput)
-        val lottoResult = LottoResult(winLotto, lottoTicket)
-        lottoResult.process()
-        lottoResult.printResult()
-    } catch (e: IllegalArgumentException) {
-        println(e.message)
-        showLottoResult(lottoTicket)
-    }
+    val winLotto = WinLotto(winLottoInput)
+
+    println("보너스 볼을 입력해 주세요.")
+    val bonusBallInput = readln()
+    val bonusBallLotto = BonusBallLotto(winLotto, LottoNumber(bonusBallInput))
+    val lottoResult = LottoResult(winLotto, bonusBallLotto, lottoTicket)
+    lottoResult.process()
+    lottoResult.printResult()
 }
