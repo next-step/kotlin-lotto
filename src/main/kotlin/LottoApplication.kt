@@ -21,7 +21,7 @@ fun main() {
     OutputView.printLottoCount(amount.getPurchaseLottoCount() - manualLottoCount, manualLottoCount)
     lottoTicket.lottoTicket.forEach { OutputView.printLotto(it.lotto) }
 
-    val winningNumbers = InputView.inputWinningNumbers().map { LottoNumber(it) }.toList()
+    val winningNumbers = Lotto(InputView.inputWinningNumbers().map { LottoNumber(it) }.toSet())
     val bonusBall = LottoNumber(InputView.inputBonusBallNumber())
     val winningResult = lottoGame.getWinningResult(lottoTicket, winningNumbers, bonusBall, amount.getPurchaseAmount())
     OutputView.printResult(winningResult)

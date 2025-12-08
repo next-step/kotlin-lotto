@@ -19,15 +19,15 @@ class LottoGame(private val profitCalculator: ProfitCalculator = ProfitCalculato
 
     fun getWinningResult(
         lottoTicket: LottoTicket,
-        winningNumbers: List<LottoNumber>,
+        winningNumbers: Lotto,
         bonusBall: LottoNumber,
         purchaseLottoAmount: Int,
     ): WinningResult {
-        require(!winningNumbers.contains(bonusBall)) { "보너스 볼은 당첨 번호에 포함되면 안됩니다." }
+        require(!winningNumbers.isContain(bonusBall)) { "보너스 볼은 당첨 번호에 포함되면 안됩니다." }
 
         val result =
             lottoTicket.lottoTicket
-                .groupingBy { getLottoWinningType(winningNumbers, it.lotto, bonusBall) }
+                .groupingBy { getLottoWinningType(winningNumbers, it, bonusBall) }
                 .eachCount()
                 .withDefault { 0 }
         val profit = profitCalculator.calculateProfit(result, purchaseLottoAmount)
@@ -36,12 +36,12 @@ class LottoGame(private val profitCalculator: ProfitCalculator = ProfitCalculato
     }
 
     private fun getLottoWinningType(
-        winningNumbers: List<LottoNumber>,
-        lotto: Set<LottoNumber>,
+        winningNumbers: Lotto,
+        lotto: Lotto,
         bonusBall: LottoNumber,
     ): LottoWinningType {
-        val matchingCount = winningNumbers.intersect(lotto).count()
-        val hasBonus = lotto.contains(bonusBall)
+        val matchingCount = winningNumbers.matchCount(lotto)
+        val hasBonus = lotto.isContain(bonusBall)
         return LottoWinningType.fromMatchCount(matchingCount, hasBonus)
     }
 }

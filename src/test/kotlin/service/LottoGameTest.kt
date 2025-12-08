@@ -48,7 +48,7 @@ class LottoGameTest {
             LottoTicket(
                 listOf(Lotto(setOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6)))),
             )
-        val winningNumbers = listOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6))
+        val winningNumbers = Lotto(setOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6)))
         val purchaseLottoAmount = 1000
         val bonusBall = LottoNumber(7)
 
@@ -67,7 +67,7 @@ class LottoGameTest {
             LottoTicket(
                 listOf(Lotto(setOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(7)))),
             )
-        val winningNumbers = listOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6))
+        val winningNumbers = Lotto(setOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6)))
         val bonusBall = LottoNumber(7)
         val purchaseLottoAmount = 1000
 
@@ -85,7 +85,7 @@ class LottoGameTest {
             LottoTicket(
                 listOf(Lotto(setOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(10), LottoNumber(11), LottoNumber(12)))),
             )
-        val winningNumbers = listOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6))
+        val winningNumbers = Lotto(setOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6)))
         val bonusBall = LottoNumber(7)
         val purchaseLottoAmount = 1000
 
