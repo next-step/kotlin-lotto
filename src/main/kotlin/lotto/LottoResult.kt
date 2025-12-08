@@ -39,7 +39,12 @@ ${
                     .sorted()
                     .reversed()
                     .joinToString("\n") {
-                        "${it.countOfMatch}개 일치 (${it.winningMoney}원)- ${
+                        val matchDescription =
+                            when (it) {
+                                Rank.SECOND -> "${it.countOfMatch}개 일치, 보너스 볼 일치"
+                                else -> "${it.countOfMatch}개 일치"
+                            }
+                        "$matchDescription (${it.winningMoney}원)- ${
                             matchMap.getOrDefault(it, 0)
                         }개"
                     }

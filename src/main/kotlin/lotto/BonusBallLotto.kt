@@ -13,4 +13,17 @@ class BonusBallLotto(
     fun matches(lotto: Lotto): Boolean {
         return bonusNumber in lotto.numbers
     }
+
+    companion object {
+        fun read(winLotto: WinLotto): BonusBallLotto {
+            while (true) {
+                try {
+                    println("보너스 볼을 입력해 주세요.")
+                    return BonusBallLotto(winLotto, LottoNumber(readln()))
+                } catch (e: IllegalArgumentException) {
+                    println(e.message)
+                }
+            }
+        }
+    }
 }

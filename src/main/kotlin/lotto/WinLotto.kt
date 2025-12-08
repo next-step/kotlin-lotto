@@ -25,4 +25,17 @@ class WinLotto {
     fun matchCount(lotto: Lotto): Int {
         return winLotto.numbers.intersect(lotto.numbers.toSet()).size
     }
+
+    companion object {
+        fun read(): WinLotto {
+            while (true) {
+                try {
+                    println("지난 주 당첨 번호를 입력해 주세요.")
+                    return WinLotto(readln())
+                } catch (e: IllegalArgumentException) {
+                    println(e.message)
+                }
+            }
+        }
+    }
 }
