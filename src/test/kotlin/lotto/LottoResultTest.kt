@@ -24,6 +24,7 @@ class LottoResultTest : FreeSpec({
                             ),
                         ),
                     ),
+                    emptyList(),
                 )
             val lottoResult = LottoResult(winLotto, bonusBallLotto, lottoTicket)
 
@@ -51,6 +52,7 @@ class LottoResultTest : FreeSpec({
                             ),
                         ),
                     ),
+                    emptyList(),
                 )
             val lottoResult = LottoResult(winLotto, bonusBallLotto, lottoTicket)
 
@@ -88,6 +90,7 @@ class LottoResultTest : FreeSpec({
                             ),
                         ),
                     ),
+                    emptyList(),
                 )
             val lottoResult = LottoResult(winLotto, bonusBallLotto, lottoTicket)
 

@@ -20,4 +20,9 @@ data class Lotto(val numbers: List<LottoNumber>) {
             )
         }
     }
+
+    fun print() {
+        val numberList = numbers.map { it.number }.sorted()
+        println(numberList.joinToString(", ", "[", "]"))
+    }
 }

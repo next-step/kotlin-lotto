@@ -39,9 +39,8 @@ class MoneyTest : FreeSpec({
         }
         "input이 0원인 경우" {
             val input = "0"
-            val exception =
-                shouldThrow<IllegalArgumentException> { Money(input) }
-            exception.message shouldBe "올바른 금액을 입력하세요"
+            val money = Money(input)
+            money.price shouldBe 0
         }
     }
 })

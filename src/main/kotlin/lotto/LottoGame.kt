@@ -6,23 +6,20 @@ fun main() {
 }
 
 fun buyLotto(): LottoTicket {
-    println("구입금액을 입력해 주세요.")
-    val moneyInput = readln()
-    val money = Money(moneyInput)
-    val lottoTicket = LottoShop.sellLotto(money)
-    println("${lottoTicket.count()}개를 구매했습니다.")
-    println(lottoTicket.lottos)
+    val money = Money.read()
+    val manualCount = ManualCount.read(money)
+    val manualLottoOrder = ManualLottoOrder.create(manualCount)
+    val lottoTicket = LottoShop.sellLotto(money, manualLottoOrder)
+    lottoTicket.print()
     return lottoTicket
 }
 
 fun showLottoResult(lottoTicket: LottoTicket) {
     println("지난 주 당첨 번호를 입력해 주세요.")
-    val winLottoInput = readln()
-    val winLotto = WinLotto(winLottoInput)
+    val winLotto = WinLotto(readln())
 
     println("보너스 볼을 입력해 주세요.")
-    val bonusBallInput = readln()
-    val bonusBallLotto = BonusBallLotto(winLotto, LottoNumber(bonusBallInput))
+    val bonusBallLotto = BonusBallLotto(winLotto, LottoNumber(readln()))
     val lottoResult = LottoResult(winLotto, bonusBallLotto, lottoTicket)
     lottoResult.process()
     lottoResult.printResult()
