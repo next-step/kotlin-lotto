@@ -10,7 +10,7 @@ class WinLotto {
 
         splitted.forEach { if (!it.matches("^\\d+$".toRegex())) throw IllegalArgumentException("올바른 숫자를 입력하세요") }
 
-        val numbers = splitted.map { it.toInt() }
+        val numbers = splitted.map { LottoNumber(it.toInt()) }
         this.winLotto = Lotto(numbers)
     }
 
