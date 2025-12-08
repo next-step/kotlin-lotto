@@ -20,8 +20,8 @@ class LottoResult(val winLotto: WinLotto, val lottos: List<Lotto>) {
 
     private fun rateOfReturn() {
         val totalMoney = lottos.size * LottoMoney.LOTTO_UNIT_PRICE
-        val winningMoney = matchMap.entries.sumOf { entry -> entry.key.winningMoney * entry.value }
-        rateOfReturn = winningMoney.toDouble() / totalMoney.toDouble()
+        val winningMoney = matchMap.entries.sumOf { (rank, count) -> rank.winningMoney * count }
+        rateOfReturn = winningMoney.toDouble() / totalMoney
     }
 
     fun printResult() {
