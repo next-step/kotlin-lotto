@@ -1,9 +1,8 @@
 package com.example.mylotto
 
 import com.example.mylotto.model.LottoNumber
+import com.example.mylotto.model.LottoNumbers
 import com.example.mylotto.model.LottoResult
-import com.example.mylotto.model.LottoTicket
-import com.example.mylotto.model.LottoWinningNumbers
 import com.example.mylotto.service.LottoService
 import com.example.mylotto.view.InputView
 import com.example.mylotto.view.ResultView
@@ -19,29 +18,40 @@ fun doLotto() {
     val inputView = InputView()
     val resultView = ResultView()
 
-    var lottoTickets: List<LottoTicket>
+    val purchaseAmount = retryInput { inputView.readPurchaseAmount() }
+    val manualCount = retryInput { inputView.readManualCount() }
+    val manualLottoNumbers =
+        retryInput {
+            inputView.readManualLottoTickets(manualCount).map {
+                LottoNumbers.of(it.map(::LottoNumber))
+            }
+        }
+    val autoLottoNumbers = lottoService.generateAutoLottoNumbers(purchaseAmount, manualCount)
 
+    resultView.displayPurchasedTickets(manualLottoNumbers, autoLottoNumbers)
+
+    val winningNumbers = retryInput { LottoNumbers.of(inputView.readWinningNumbers().map(::LottoNumber)) }
+    val bonusNumber = retryInput { inputView.readBonusNumber() }
+
+    val result =
+        LottoResult.of(
+            (autoLottoNumbers + manualLottoNumbers).map { lottoNumbers ->
+                lottoService.matchLottoTicket(
+                    lottoNumbers,
+                    winningNumbers,
+                    bonusNumber,
+                )
+            },
+        )
+    resultView.displayWinningStatistics(result)
+}
+
+fun <T> retryInput(prompt: () -> T): T {
     while (true) {
         try {
-            val purchaseAmount = inputView.readPurchaseAmount()
-            lottoTickets = lottoService.generateLottoTickets(purchaseAmount)
-            resultView.displayPurchasedTickets(lottoTickets)
-            break
-        } catch (e: Exception) {
+            return prompt()
+        } catch (_: Exception) {
             println("다시 입력해주세요")
         }
     }
-
-    while (true) {
-        try {
-            val winningNumbers: LottoWinningNumbers = LottoWinningNumbers.of(inputView.readWinningNumbers().map(::LottoNumber))
-            val result = LottoResult.of(lottoTickets.map { ticket -> lottoService.matchLottoTicket(ticket, winningNumbers) })
-            resultView.displayWinningStatistics(result)
-            break
-        } catch (e: Exception) {
-            println("다시 입력해주세요")
-        }
-    }
-
-    println()
 }

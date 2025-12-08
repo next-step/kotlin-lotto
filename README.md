@@ -1,4 +1,4 @@
-# kotlin-lotto
+# kotlin-lotto 1단계
 
 ## 기능 목록
 ### 메인 애플리케이션 진입점
@@ -67,3 +67,24 @@
 - domain 객체 및 service 로직 작성
 - view 로직 구현
 - application 구현
+
+
+
+# kotlin-lotto 2단계
+
+## 기능목록
+### 수동 구매 로또 수 입력
+ - InputView
+ - Input 로직 구현
+
+### 수동으로 구매할 로또 번호 입력
+ - InputView
+ - 수동 구매 로또 수 만큼 반복해서 입력 로직 구현
+
+### 수동으로 구매한 수를 제외한 수만큼 자동으로 구매
+ - 자동 구매 로또 수 계산 로직
+
+### 보너스볼 입력
+ - 보너스볼 입력
+ - Rank SECOND 추가
+

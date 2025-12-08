@@ -2,8 +2,7 @@ package com.example.mylotto.service
 
 import com.example.mylotto.enum.Rank
 import com.example.mylotto.model.LottoNumber
-import com.example.mylotto.model.LottoTicket
-import com.example.mylotto.model.LottoWinningNumbers
+import com.example.mylotto.model.LottoNumbers
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.blocking.forAll
@@ -15,18 +14,30 @@ class LottoServiceTest :
         val lottoService = LottoService()
 
         Given("a purchase amount") {
-            When("it is 5000 won") {
-                Then("it should generate 5 lotto tickets") {
-                    val tickets = lottoService.generateLottoTickets(5000)
-                    tickets.size.shouldBe(5)
+            When("it is 5000 won and manual count is 2") {
+                Then("it should generate 3 auto lotto tickets") {
+                    val tickets = lottoService.generateAutoLottoNumbers(5000, 2)
+                    tickets.size.shouldBe(3)
                 }
             }
 
             When("it is not a multiple of 1000") {
                 Then("it should throw an exception") {
-                    shouldThrow<IllegalArgumentException> {
-                        lottoService.generateLottoTickets(1500)
-                    }
+                    val exception =
+                        shouldThrow<IllegalArgumentException> {
+                            lottoService.generateAutoLottoNumbers(1500, 1)
+                        }
+                    exception.message.shouldBe("Purchase amount must be a positive multiple of 1000.")
+                }
+            }
+
+            When("it is not valid amount and count") {
+                Then("it should throw an exception") {
+                    val exception =
+                        shouldThrow<IllegalArgumentException> {
+                            lottoService.generateAutoLottoNumbers(2000, 3)
+                        }
+                    exception.message.shouldBe("Total purchase count must be equal or bigger than manual count.")
                 }
             }
         }
@@ -38,33 +49,46 @@ class LottoServiceTest :
                         row(
                             setOf(3, 11, 15, 29, 35, 44),
                             listOf(3, 11, 15, 29, 35, 44),
+                            1,
                             Rank.FIRST,
+                        ),
+                        row(
+                            setOf(3, 11, 15, 29, 35, 44),
+                            listOf(3, 11, 15, 29, 35, 43),
+                            44,
+                            Rank.SECOND,
                         ),
                         row(
                             setOf(3, 11, 15, 29, 35, 7),
                             listOf(3, 11, 15, 29, 35, 44),
+                            1,
                             Rank.THIRD,
                         ),
                         row(
                             setOf(3, 11, 15, 29, 10, 7),
                             listOf(3, 11, 15, 29, 35, 44),
+                            1,
                             Rank.FOURTH,
                         ),
                         row(
                             setOf(3, 11, 15, 6, 10, 7),
                             listOf(3, 11, 15, 29, 35, 44),
+                            1,
                             Rank.FIFTH,
                         ),
                         row(
                             setOf(1, 2, 4, 6, 8, 10),
                             listOf(3, 11, 15, 29, 35, 44),
+                            1,
                             Rank.MISS,
                         ),
-                    ) { ticketNumbers, winningNumbers, expectedRank ->
-                        val testTicket = LottoTicket(ticketNumbers.map { LottoNumber(it) }.toSet())
-                        val testWinningNumbers = LottoWinningNumbers.of(winningNumbers.map { LottoNumber(it) })
+                    ) { lottoNumbers, winningNumbers, bonusNumber, expectedRank ->
+                        val testLottoNumbers = LottoNumbers.of(lottoNumbers.map { LottoNumber(it) }.toList())
+                        val testWinningNumbers = LottoNumbers.of(winningNumbers.map { LottoNumber(it) })
 
-                        lottoService.matchLottoTicket(testTicket, testWinningNumbers).shouldBe(expectedRank)
+                        lottoService
+                            .matchLottoTicket(testLottoNumbers, testWinningNumbers, bonusNumber)
+                            .shouldBe(expectedRank)
                     }
                 }
             }

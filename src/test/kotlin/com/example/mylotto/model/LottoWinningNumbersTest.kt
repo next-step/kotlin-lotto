@@ -8,7 +8,7 @@ class LottoWinningNumbersTest :
     FunSpec({
         test("success") {
             shouldNotThrowAny {
-                LottoWinningNumbers.of(
+                LottoNumbers.of(
                     listOf(
                         LottoNumber(3),
                         LottoNumber(11),
@@ -23,7 +23,7 @@ class LottoWinningNumbersTest :
 
         test("winning numbers should not contain duplicates") {
             shouldThrow<IllegalArgumentException> {
-                LottoWinningNumbers.of(
+                LottoNumbers.of(
                     listOf(
                         LottoNumber(1),
                         LottoNumber(2),
@@ -38,7 +38,7 @@ class LottoWinningNumbersTest :
 
         test("winning numbers should contain exactly 6 numbers") {
             shouldThrow<IllegalArgumentException> {
-                LottoWinningNumbers.of(
+                LottoNumbers.of(
                     listOf(
                         LottoNumber(1),
                         LottoNumber(2),
@@ -49,7 +49,7 @@ class LottoWinningNumbersTest :
                 )
             }
             shouldThrow<IllegalArgumentException> {
-                LottoWinningNumbers.of(
+                LottoNumbers.of(
                     listOf(
                         LottoNumber(1),
                         LottoNumber(2),
