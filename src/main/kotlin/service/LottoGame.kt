@@ -42,6 +42,6 @@ class LottoGame(private val profitCalculator: ProfitCalculator = ProfitCalculato
     ): LottoWinningType {
         val matchingCount = winningNumbers.matchCount(lotto)
         val hasBonus = lotto.isContain(bonusBall)
-        return LottoWinningType.fromMatchCount(matchingCount, hasBonus)
+        return LottoWinningType.from(matchingCount, hasBonus)
     }
 }
