@@ -17,6 +17,7 @@ class LottoWinningNumbersTest :
                         LottoNumber.of(35),
                         LottoNumber.of(44),
                     ),
+                    LottoNumber.of(6),
                 )
             }
         }
@@ -32,6 +33,23 @@ class LottoWinningNumbersTest :
                         LottoNumber.of(5),
                         LottoNumber.of(5),
                     ),
+                    LottoNumber.of(7),
+                )
+            }
+        }
+
+        test("winning numbers should not contain duplicates - with bonus number") {
+            shouldThrow<IllegalArgumentException> {
+                LottoWinningNumbers.of(
+                    listOf(
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6),
+                    ),
+                    LottoNumber.of(6),
                 )
             }
         }
@@ -46,6 +64,7 @@ class LottoWinningNumbersTest :
                         LottoNumber.of(4),
                         LottoNumber.of(5),
                     ),
+                    LottoNumber.of(6),
                 )
             }
             shouldThrow<IllegalArgumentException> {
@@ -59,6 +78,7 @@ class LottoWinningNumbersTest :
                         LottoNumber.of(6),
                         LottoNumber.of(7),
                     ),
+                    LottoNumber.of(8),
                 )
             }
         }

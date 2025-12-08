@@ -16,6 +16,7 @@ class LottoResultTest :
                     val rankCounts = lottoResult.rankCountMap
 
                     rankCounts[Rank.FIRST].shouldBe(1)
+                    rankCounts[Rank.SECOND].shouldBe(null)
                     rankCounts[Rank.THIRD].shouldBe(3)
                     rankCounts[Rank.FOURTH].shouldBe(null)
                 }

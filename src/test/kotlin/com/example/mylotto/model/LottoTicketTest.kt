@@ -5,7 +5,7 @@ import io.kotest.matchers.shouldBe
 class LottoTicketTest :
     FunSpec({
         test("success") {
-            val newTicket = LottoTicket()
+            val newTicket = LottoTicket.ofAutomatic()
             newTicket.numbers.size.shouldBe(6)
         }
     })
