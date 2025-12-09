@@ -1,6 +1,7 @@
 package lotto
 
-data class LottoNumber(val number: Int) {
+@JvmInline
+value class LottoNumber(val number: Int) {
     init {
         require(number in MINIMUM..MAXIMUM) {
             "${MINIMUM}부터 ${MAXIMUM}까지의 숫자를 입력하세요"
