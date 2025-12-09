@@ -43,7 +43,7 @@ class ManualLottoOrderInputViewTest : FreeSpec({
             val exception =
                 shouldThrow<IllegalArgumentException> { ManualLottoOrderInputView.process(ManualCount(Money(2000), 2), input) }
             // then
-            exception.message shouldBe "1번째 줄: 올바른 로또 번호를 입력하세요"
+            exception.message shouldBe "1번째 줄: 올바른 로또번호를 입력하세요"
         }
         "input에 숫자만 있는 경우" {
             // given

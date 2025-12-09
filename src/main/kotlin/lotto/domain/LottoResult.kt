@@ -3,7 +3,7 @@ package lotto.domain
 import java.util.EnumMap
 
 class LottoResult(
-    val winLotto: WinLotto,
+    val winLotto: Lotto,
     private val bonusBallLotto: BonusBallLotto,
     val lottoTicket: LottoTicket,
 ) {
@@ -23,11 +23,15 @@ class LottoResult(
 
     private fun match() {
         lottoTicket.lottos.forEach { lotto ->
-            val matchCount = winLotto.matchCount(lotto)
+            val matchCount = matchCount(lotto)
             val hasBonus = bonusBallLotto.matches(lotto)
             val rank = Rank.valueOf(matchCount, hasBonus)
             matchMap[rank] = matchMap.getOrDefault(rank, 0) + 1
         }
+    }
+
+    fun matchCount(lotto: Lotto): Int {
+        return winLotto.numbers.intersect(lotto.numbers.toSet()).size
     }
 
     fun printResult() {

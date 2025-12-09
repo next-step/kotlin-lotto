@@ -5,7 +5,17 @@ import io.kotest.matchers.shouldBe
 
 class LottoResultTest : FreeSpec({
     "로또 당첨 결과 및 수익률 테스트" - {
-        val winLotto = WinLotto("1 2 3 4 5 6")
+        val winLotto =
+            Lotto(
+                listOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5),
+                    LottoNumber(6),
+                ),
+            )
         val bonusBallLotto = BonusBallLotto(winLotto, LottoNumber(7))
 
         "당첨된 숫자가 하나도 없는 경우 MISS 1개 나오고 수익률은 0 이다." {

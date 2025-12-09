@@ -1,10 +1,10 @@
 package lotto.input
 
+import lotto.LottoMessageConst.Companion.ERROR_MESSAGE_EMPTY
 import lotto.domain.Money
 
 class MoneyInputView() {
     companion object {
-        private const val ERROR_MESSAGE_EMPTY = "뭐라도 입력하세요"
         private const val ERROR_MESSAGE_INVALID = "올바른 금액을 입력하세요"
 
         fun process(input: String?): Money {

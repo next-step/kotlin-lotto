@@ -1,5 +1,6 @@
 package lotto.input
 
+import lotto.LottoMessageConst.Companion.ERROR_MESSAGE_LOTTO_NUMBER_INVALID
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.ManualCount
@@ -7,8 +8,6 @@ import lotto.domain.ManualLottoOrder
 
 class ManualLottoOrderInputView {
     companion object {
-        private const val ERROR_MESSAGE_INVALID = "올바른 로또 번호를 입력하세요"
-
         fun process(
             manualCount: ManualCount,
             input: String?,
@@ -50,7 +49,7 @@ class ManualLottoOrderInputView {
                             .map { LottoNumber(it) }
                     Lotto(numbers)
                 } catch (e: Exception) {
-                    throw IllegalArgumentException("${index + 1}번째 줄: $ERROR_MESSAGE_INVALID", e)
+                    throw IllegalArgumentException("${index + 1}번째 줄: $ERROR_MESSAGE_LOTTO_NUMBER_INVALID", e)
                 }
             }
         }

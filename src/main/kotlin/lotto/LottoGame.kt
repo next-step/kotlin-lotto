@@ -4,10 +4,10 @@ import lotto.domain.BonusBallLotto
 import lotto.domain.LottoResult
 import lotto.domain.LottoShop
 import lotto.domain.LottoTicket
-import lotto.domain.WinLotto
 import lotto.input.ManualCountInputView
 import lotto.input.ManualLottoOrderInputView
 import lotto.input.MoneyInputView
+import lotto.input.WinLottoInputView
 
 fun main() {
     val lottoTicket = buyLotto()
@@ -24,7 +24,7 @@ fun buyLotto(): LottoTicket {
 }
 
 fun showLottoResult(lottoTicket: LottoTicket) {
-    val winLotto = WinLotto.read()
+    val winLotto = WinLottoInputView.process()
     val bonusBallLotto = BonusBallLotto.read(winLotto)
     val lottoResult = LottoResult(winLotto, bonusBallLotto, lottoTicket)
     lottoResult.process()
