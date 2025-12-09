@@ -9,7 +9,7 @@ class ResultView {
         manualLottoNumbers: List<LottoNumbers>,
         autoLottoNumbers: List<LottoNumbers>,
     ) {
-        println("수동으로 ${manualLottoNumbers.size}장, 자동으로 ${manualLottoNumbers.size}개를 구매했습니다.")
+        println("수동으로 ${manualLottoNumbers.size}장, 자동으로 ${autoLottoNumbers.size}개를 구매했습니다.")
         (manualLottoNumbers + autoLottoNumbers).forEach { ticket ->
             println(ticket.numbers.joinToString(prefix = "[", postfix = "]") { it.number.toString() })
         }
