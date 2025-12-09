@@ -7,7 +7,7 @@ fun main() {
 
 fun buyLotto(): LottoTicket {
     val money = MoneyInputView.process()
-    val manualCount = ManualCount.read(money)
+    val manualCount = ManualCountInputView.process(money)
     val manualLottoOrder = ManualLottoOrder.create(manualCount)
     val lottoTicket = LottoShop.sellLotto(money, manualLottoOrder)
     lottoTicket.print()
