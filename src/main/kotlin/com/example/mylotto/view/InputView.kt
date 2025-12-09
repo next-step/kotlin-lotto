@@ -32,7 +32,7 @@ class InputView {
         repeat(count) {
             tryUntilSuccess {
                 val numbers = readInts().map(LottoNumber::of).toSet()
-                ret.add(LottoTicket.ofManual(numbers))
+                ret.add(LottoTicket.of(numbers))
             }
         }
         return ret
@@ -62,7 +62,7 @@ class InputView {
                 action()
                 break
             } catch (e: Exception) {
-                println("잘못된 입력입니다. 다시 시도해주세요.")
+                println("잘못된 입력입니다. 다시 시도해주세요. 오류: ${e.message}")
             }
         }
     }

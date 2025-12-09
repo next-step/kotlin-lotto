@@ -37,7 +37,7 @@ class LottoServiceTest :
                 then("ticket count should match the order") {
                     val manualTickets =
                         listOf(
-                            LottoTicket.ofManual(
+                            LottoTicket.of(
                                 setOf(
                                     LottoNumber.of(1),
                                     LottoNumber.of(2),
@@ -47,7 +47,7 @@ class LottoServiceTest :
                                     LottoNumber.of(6),
                                 ),
                             ),
-                            LottoTicket.ofManual(
+                            LottoTicket.of(
                                 setOf(
                                     LottoNumber.of(7),
                                     LottoNumber.of(8),
@@ -110,7 +110,7 @@ class LottoServiceTest :
                             Rank.MISS,
                         ),
                     ) { ticketNumbers, winningNumbers, bonusNumber, expectedRank ->
-                        val testTicket = LottoTicket.ofManual(ticketNumbers.map(LottoNumber::of).toSet())
+                        val testTicket = LottoTicket.of(ticketNumbers.map(LottoNumber::of).toSet())
                         val testWinningNumbers = LottoWinningNumbers.of(winningNumbers.map(LottoNumber::of), LottoNumber.of(bonusNumber))
 
                         lottoService.matchLottoTicket(testTicket, testWinningNumbers).shouldBe(expectedRank)

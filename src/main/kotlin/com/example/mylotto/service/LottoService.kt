@@ -16,10 +16,7 @@ class LottoService {
 
     fun generateLottoTickets(order: LottoTicketOrder): List<LottoTicket> {
         val manualTickets = order.manualTickets
-        val automaticTickets =
-            (1..order.automaticCount).map {
-                LottoTicket.ofAutomatic()
-            }
+        val automaticTickets = List(order.automaticCount) { LottoTicket.ofAutomatic() }
         return manualTickets + automaticTickets
     }
 
