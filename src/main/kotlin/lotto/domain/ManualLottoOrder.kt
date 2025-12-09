@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class ManualLottoOrder(manualCount: ManualCount, val lottos: List<Lotto>) {
     val usedMoney: Money

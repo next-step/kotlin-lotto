@@ -1,4 +1,7 @@
-package lotto
+package lotto.input
+
+import lotto.domain.ManualCount
+import lotto.domain.Money
 
 class ManualCountInputView() {
     companion object {

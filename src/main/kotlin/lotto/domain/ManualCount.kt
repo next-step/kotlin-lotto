@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class ManualCount(val money: Money, val count: Int) {
     init {

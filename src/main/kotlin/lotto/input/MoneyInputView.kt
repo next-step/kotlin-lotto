@@ -1,4 +1,6 @@
-package lotto
+package lotto.input
+
+import lotto.domain.Money
 
 class MoneyInputView() {
     companion object {

@@ -1,10 +1,11 @@
-package lotto
+package lotto.input
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.Money
 
-class MoneyInputViewTest : FreeSpec({
+class ManualCountInputViewTest : FreeSpec({
 
     "Money 객체의 유효성 검증 테스트" - {
         "input이 null" {
@@ -12,7 +13,7 @@ class MoneyInputViewTest : FreeSpec({
             val input = null
             // when
             val exception =
-                shouldThrow<IllegalArgumentException> { MoneyInputView.process(input) }
+                shouldThrow<IllegalArgumentException> { ManualCountInputView.process(Money(1000), input) }
             // then
             exception.message shouldBe "뭐라도 입력하세요"
         }
@@ -21,7 +22,7 @@ class MoneyInputViewTest : FreeSpec({
             val input = ""
             // when
             val exception =
-                shouldThrow<IllegalArgumentException> { MoneyInputView.process(input) }
+                shouldThrow<IllegalArgumentException> { ManualCountInputView.process(Money(1000), input) }
             // then
             exception.message shouldBe "뭐라도 입력하세요"
         }
@@ -30,7 +31,7 @@ class MoneyInputViewTest : FreeSpec({
             val input = " "
             // when
             val exception =
-                shouldThrow<IllegalArgumentException> { MoneyInputView.process(input) }
+                shouldThrow<IllegalArgumentException> { ManualCountInputView.process(Money(1000), input) }
             // then
             exception.message shouldBe "뭐라도 입력하세요"
         }
@@ -39,17 +40,17 @@ class MoneyInputViewTest : FreeSpec({
             val input = "10000원"
             // when
             val exception =
-                shouldThrow<IllegalArgumentException> { MoneyInputView.process(input) }
+                shouldThrow<IllegalArgumentException> { ManualCountInputView.process(Money(1000), input) }
             // then
-            exception.message shouldBe "올바른 금액을 입력하세요"
+            exception.message shouldBe "올바른 수동 구매수를 입력하세요"
         }
         "input에 숫자만 있는 경우" {
             // given
-            val input = "10000"
+            val input = "1"
             // when
-            val money = MoneyInputView.process(input)
+            val manualCount = ManualCountInputView.process(Money(1000), input)
             // then
-            money.price shouldBe 10000
+            manualCount.count shouldBe 1
         }
     }
 })

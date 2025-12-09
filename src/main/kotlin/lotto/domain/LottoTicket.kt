@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class LottoTicket(val money: Money, val manualLotto: List<Lotto>, val autoLotto: List<Lotto>) {
     val lottos: List<Lotto> = manualLotto + autoLotto

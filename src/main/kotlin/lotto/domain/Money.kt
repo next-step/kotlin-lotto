@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class Money(val price: Int) {
     init {

@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class WinLotto {
     val winLotto: Lotto
