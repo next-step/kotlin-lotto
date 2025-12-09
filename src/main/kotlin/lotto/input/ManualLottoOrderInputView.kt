@@ -41,16 +41,27 @@ class ManualLottoOrderInputView {
 
             return lines.mapIndexed { index, line ->
                 try {
+                    val trimmed = line.trim()
+                    validateOnlyDigits(trimmed)
+
                     val numbers =
                         line
                             .trim()
                             .split(" ")
                             .filter { it.isNotBlank() }
+                            .map { it.toInt() }
                             .map { LottoNumber(it) }
                     Lotto(numbers)
                 } catch (e: Exception) {
                     throw IllegalArgumentException("${index + 1}번째 줄: $ERROR_MESSAGE_LOTTO_NUMBER_INVALID", e)
                 }
+            }
+        }
+
+        private fun validateOnlyDigits(input: String) {
+            val withoutSpaces = input.replace(" ", "")
+            require(withoutSpaces.all { it.isDigit() }) {
+                ERROR_MESSAGE_LOTTO_NUMBER_INVALID
             }
         }
     }

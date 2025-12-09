@@ -6,8 +6,8 @@ import io.kotest.matchers.shouldBe
 
 class MoneyInputViewTest : FreeSpec({
 
-    "Money 객체의 유효성 검증 테스트" - {
-        "input이 null" {
+    "구입 금액 입력 검증" - {
+        "null 입력 시 예외 발생" {
             // given
             val input = null
             // when
@@ -16,7 +16,7 @@ class MoneyInputViewTest : FreeSpec({
             // then
             exception.message shouldBe "뭐라도 입력하세요"
         }
-        "input이 빈 문자열" {
+        "빈 문자열 입력 시 예외 발생" {
             // given
             val input = ""
             // when
@@ -25,7 +25,7 @@ class MoneyInputViewTest : FreeSpec({
             // then
             exception.message shouldBe "뭐라도 입력하세요"
         }
-        "input이 스페이스바 문자열" {
+        "스페이스바만 입력 시 예외 발생" {
             // given
             val input = " "
             // when
@@ -34,7 +34,7 @@ class MoneyInputViewTest : FreeSpec({
             // then
             exception.message shouldBe "뭐라도 입력하세요"
         }
-        "input에 문자가 포함된 경우" {
+        "문자가 포함된 입력 시 예외 발생" {
             // given
             val input = "10000원"
             // when
@@ -43,7 +43,7 @@ class MoneyInputViewTest : FreeSpec({
             // then
             exception.message shouldBe "올바른 금액을 입력하세요"
         }
-        "input에 숫자만 있는 경우" {
+        "올바른 숫자 입력 시 정상 처리" {
             // given
             val input = "10000"
             // when

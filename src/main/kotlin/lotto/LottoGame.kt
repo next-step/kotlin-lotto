@@ -1,13 +1,14 @@
 package lotto
 
-import lotto.domain.BonusBallLotto
 import lotto.domain.LottoResult
 import lotto.domain.LottoShop
 import lotto.domain.LottoTicket
+import lotto.input.BonusBallInputView
 import lotto.input.ManualCountInputView
 import lotto.input.ManualLottoOrderInputView
 import lotto.input.MoneyInputView
 import lotto.input.WinLottoInputView
+import lotto.output.LottoResultOutputView
 
 fun main() {
     val lottoTicket = buyLotto()
@@ -25,8 +26,7 @@ fun buyLotto(): LottoTicket {
 
 fun showLottoResult(lottoTicket: LottoTicket) {
     val winLotto = WinLottoInputView.process()
-    val bonusBallLotto = BonusBallLotto.read(winLotto)
-    val lottoResult = LottoResult(winLotto, bonusBallLotto, lottoTicket)
-    lottoResult.process()
-    lottoResult.printResult()
+    val bonusBall = BonusBallInputView.process(winLotto)
+    val lottoResult = LottoResult(winLotto, bonusBall, lottoTicket)
+    LottoResultOutputView.print(lottoResult)
 }

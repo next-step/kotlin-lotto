@@ -7,7 +7,7 @@ import lotto.domain.Money
 
 class ManualCountInputViewTest : FreeSpec({
 
-    "Money 객체의 유효성 검증 테스트" - {
+    "수동 구매 개수 입력 검증" - {
         "input이 null" {
             // given
             val input = null

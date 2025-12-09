@@ -4,13 +4,13 @@ import java.util.EnumMap
 
 class LottoResult(
     val winLotto: Lotto,
-    private val bonusBallLotto: BonusBallLotto,
+    private val bonusBall: BonusBall,
     val lottoTicket: LottoTicket,
 ) {
     val matchMap: EnumMap<Rank, Int> = EnumMap(Rank::class.java)
     var rateOfReturn = 0.0
 
-    fun process() {
+    init {
         match()
         rateOfReturn()
     }
@@ -24,39 +24,13 @@ class LottoResult(
     private fun match() {
         lottoTicket.lottos.forEach { lotto ->
             val matchCount = matchCount(lotto)
-            val hasBonus = bonusBallLotto.matches(lotto)
+            val hasBonus = bonusBall.matches(lotto)
             val rank = Rank.valueOf(matchCount, hasBonus)
             matchMap[rank] = matchMap.getOrDefault(rank, 0) + 1
         }
     }
 
-    fun matchCount(lotto: Lotto): Int {
+    private fun matchCount(lotto: Lotto): Int {
         return winLotto.numbers.intersect(lotto.numbers.toSet()).size
-    }
-
-    fun printResult() {
-        println(
-            """
-당첨 통계
-${
-                Rank.entries.filter { it != Rank.MISS }
-                    .sorted()
-                    .reversed()
-                    .joinToString("\n") {
-                        val matchDescription =
-                            when (it) {
-                                Rank.SECOND -> "${it.countOfMatch}개 일치, 보너스 볼 일치"
-                                else -> "${it.countOfMatch}개 일치"
-                            }
-                        "$matchDescription (${it.winningMoney}원)- ${
-                            matchMap.getOrDefault(it, 0)
-                        }개"
-                    }
-            }
-총 수익률은 %.2f 입니다."
-"""
-                .trimIndent()
-                .format(rateOfReturn),
-        )
     }
 }

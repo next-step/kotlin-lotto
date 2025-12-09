@@ -16,7 +16,7 @@ class LottoResultTest : FreeSpec({
                     LottoNumber(6),
                 ),
             )
-        val bonusBallLotto = BonusBallLotto(winLotto, LottoNumber(7))
+        val bonusBall = BonusBall(winLotto, LottoNumber(7))
 
         "당첨된 숫자가 하나도 없는 경우 MISS 1개 나오고 수익률은 0 이다." {
             val lottoTicket =
@@ -36,10 +36,9 @@ class LottoResultTest : FreeSpec({
                     ),
                     emptyList(),
                 )
-            val lottoResult = LottoResult(winLotto, bonusBallLotto, lottoTicket)
 
             // when
-            lottoResult.process()
+            val lottoResult = LottoResult(winLotto, bonusBall, lottoTicket)
 
             // then
             lottoResult.matchMap shouldBe mapOf(Pair(Rank.MISS, 1))
@@ -64,10 +63,9 @@ class LottoResultTest : FreeSpec({
                     ),
                     emptyList(),
                 )
-            val lottoResult = LottoResult(winLotto, bonusBallLotto, lottoTicket)
 
             // when
-            lottoResult.process()
+            val lottoResult = LottoResult(winLotto, bonusBall, lottoTicket)
 
             // then
             lottoResult.matchMap shouldBe mapOf(Pair(Rank.FIRST, 1))
@@ -102,10 +100,9 @@ class LottoResultTest : FreeSpec({
                     ),
                     emptyList(),
                 )
-            val lottoResult = LottoResult(winLotto, bonusBallLotto, lottoTicket)
 
             // when
-            lottoResult.process()
+            val lottoResult = LottoResult(winLotto, bonusBall, lottoTicket)
 
             // then
             lottoResult.matchMap shouldBe mapOf(Pair(Rank.FIRST, 1), Pair(Rank.MISS, 1))

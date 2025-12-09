@@ -44,6 +44,7 @@ class WinLottoInputView {
             return input
                 .split(" ")
                 .filter { it.isNotBlank() }
+                .map { it.toInt() }
                 .map { LottoNumber(it) }
         }
     }
