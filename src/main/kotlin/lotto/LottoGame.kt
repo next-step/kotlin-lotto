@@ -4,9 +4,9 @@ import lotto.domain.BonusBallLotto
 import lotto.domain.LottoResult
 import lotto.domain.LottoShop
 import lotto.domain.LottoTicket
-import lotto.domain.ManualLottoOrder
 import lotto.domain.WinLotto
 import lotto.input.ManualCountInputView
+import lotto.input.ManualLottoOrderInputView
 import lotto.input.MoneyInputView
 
 fun main() {
@@ -17,7 +17,7 @@ fun main() {
 fun buyLotto(): LottoTicket {
     val money = MoneyInputView.process()
     val manualCount = ManualCountInputView.process(money)
-    val manualLottoOrder = ManualLottoOrder.create(manualCount)
+    val manualLottoOrder = ManualLottoOrderInputView.process(manualCount)
     val lottoTicket = LottoShop.sellLotto(money, manualLottoOrder)
     lottoTicket.print()
     return lottoTicket
